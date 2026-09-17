@@ -1,179 +1,173 @@
 # Publication strategy
 
-This document records the decision between a patent and an academic paper, the
-evidence behind it, and a concrete submission plan.
+Where this work can realistically be published, what each venue needs, and what
+to do first. Written after the external audit in
+`docs/RESEARCH_AUDIT_2026-09-17.md` and the corrections that followed it, so the
+claims below are the corrected ones.
+
+Journal details were checked against publisher and index pages in September 2026.
+Scopes, fees, and metrics change: re-check each one before submitting.
 
 ---
 
 ## 1. Patent or paper?
 
-**Recommendation: paper. Do not pursue a patent.**
+**Paper. Do not pursue a patent.**
 
-### Why a patent is the wrong instrument here
+Section 3(k) of the Indian Patents Act excludes "a computer programme per se" and
+"algorithms"; a type system is squarely both. The CRI Guidelines 2025 gate
+eligibility on technical effect on an underlying technical system, which a
+developer-facing static analysis is poorly placed to show. *Ferid Allani v. Union
+of India* confirms there is no absolute bar, but that grant took 19 years.
 
-**Section 3(k) hits this work twice.** The Indian Patents Act excludes "a
-mathematical method or business method or a **computer programme per se** or
-**algorithms**." A type system that derives a bound and a label assignment is
-both a computer programme and an algorithm. This is not a borderline case that
-careful drafting rescues; it is the centre of the exclusion.
-
-**The technical-effect gateway is hard to clear for a static analysis.** The CRI
-Guidelines 2025 (issued 29 July 2025) make *technical effect* — a concrete,
-measurable improvement to an underlying technical system — the test, and require
-examiners to identify the core problem, map the solution, and judge whether the
-effect is genuinely technical or "merely functional and administrative." The
-beneficiary of OrchLang's analysis is the *developer*, who learns something
-before deployment. No hardware behaves differently. That is the hardest possible
-posture.
-
-An argument exists — the analysis demonstrably prevents real token expenditure
-and real data exfiltration, which are effects on a technical system — and
-*Ferid Allani v. Union of India* (Delhi HC 2019; IPAB grant 20 July 2020)
-confirms there is no absolute bar. But Allani's patent took **19 years** from
-provisional filing to grant.
-
-**The economics are bad.** Even a smooth prosecution runs 4–6 years and, with
-attorney fees, ₹1–2 lakh. A rejection under 3(k) is the modal outcome for a
-claim of this shape.
-
-**It delays and constrains the thing that actually has value.** For a student,
-publication is the currency: it is citable, it supports applications, and it
-takes months rather than years.
-
-### If a patent is nonetheless wanted later
-
-File a provisional *before* any public disclosure, and draft claims around a
-**system** that measurably reduces resource consumption and prevents credential
-transmission — not around the type system itself. Note that publishing first
-does not destroy Indian novelty if a provisional is on file first, so the
-sequence matters: provisional, then arXiv. Given the analysis above, we judge
-this a poor use of time and money, but the ordering is the thing to get right if
-the decision is revisited.
+If a patent is ever reconsidered, file a provisional **before** any public
+disclosure — including an arXiv preprint.
 
 ---
 
-## 2. What the paper claims
+## 2. What the paper can honestly claim
 
-A one-line statement of novelty, which the prior-art survey in `PAPER.md` §12
-supports:
+**Claimed:**
 
-> The first compiled source DSL whose type system certifies, before any model is
-> invoked, both a token-cost bound and a two-axis information-flow property, and
-> which detects secret-dependent cost channels that neither analysis finds
-> alone.
+1. **A negative result.** Comparing the two branches' certified upper bounds does
+   not establish that a secret leaves the bill unchanged. Counterexample in
+   `examples/invalid/equal_bounds.orch`; measured at 225 differing bills in 425
+   paired runs.
+2. **A repair for opaque stochastic calls.** Classical relational cost analysis
+   assumes an operation's cost is a known function of its input. An LLM call's
+   output length is the provider's choice, so no numeric potential exists.
+   Billing signatures compare structure instead, under an oracle coupling.
+3. **A working compiler and a reproducible evaluation**, including componentwise
+   bound checks and a paired relational experiment.
 
-The strongest defensible claims, in order:
+**Not claimed:**
 
-1. **The cost channel (`E236`).** A genuinely new defect class, and the best
-   argument for unifying the two analyses. This is the paper's most original
-   idea and should lead the pitch.
-2. **Sound structural cost bounds, with the flat rule measured as unsound.**
-   0 violations in 4,600 runs vs 13.5% for the obvious rule is a clean,
-   quantified result.
-3. **Static two-axis flow typing for LLM workflows.** Every comparable system is
-   a runtime monitor.
-4. **The guaranteed/estimated split.** A small idea that reviewers tend to like,
-   because it is honest about where the guarantee stops.
-
-**Explicitly not claimed:** prompt-template placeholder checking. It is
-commodity (promptml, promptctl, type-safe-prompt). The paper disclaims it.
+- That combining information-flow and resource analysis is new — Ngo et al.
+  (IEEE S&P 2017) and RelCost (POPL 2017) precede it.
+- That token-count leakage is a new defect class — *Time Will Tell* and the
+  USENIX token-length attacks establish it for single calls.
+- Prompt-template placeholder checking, which is commodity.
 
 ---
 
-## 3. Where to submit
+## 3. How publishing in this field works
 
-Ranked by expected value for an undergraduate first paper.
+In programming languages and security, **the most prestigious venues are
+conferences** (PLDI, POPL, OOPSLA, IEEE S&P, CCS), not journals. Two consequences
+matter here:
 
-### Step 0 — arXiv preprint (do this first, immediately)
+- **PACMPL is a journal.** *Proceedings of the ACM on Programming Languages* is a
+  Gold Open Access journal that publishes the OOPSLA, POPL, PLDI, and ICFP papers.
+  It is the top journal target in this area, and it is reviewed like a top
+  conference.
+- **The most natural journal route runs through a workshop.** SOAP 2026 (at PLDI)
+  invited selected accepted papers to extend them for a special issue of *STTT*.
+  A workshop paper followed by the extended journal version is a well-trodden,
+  realistic path for work at this stage.
 
-cs.PL primary, cs.CR and cs.SE cross-list. Free, same-day, establishes priority,
-and citable while under review. There is no reason to delay this.
+---
 
-### Tier 1 — best fit, realistic
+## 4. Candidate journals
 
-| Venue | Why it fits | Timing |
+### Tier A — fits the work as it stands
+
+| Journal | Why it fits | What it needs from this work |
 |---|---|---|
-| **ACM SAC** — Software Verification and Testing, or Programming Languages track | Full paper, archival, ~25% acceptance, explicitly welcomes applied PL work with real artifacts. The evaluation is strong enough to compete. | Deadlines typically Sep–Oct for the following spring |
-| **SOAP** (State of the Art in Program Analysis), co-located with PLDI | Exactly this topic — a new static analysis with a real implementation. Workshop acceptance rates are friendly and the audience is the right one. | Spring deadline, June workshop |
-| **ACM SIGPLAN Student Research Competition** (PLDI / SPLASH / POPL) | Built for undergraduate work. The cost-channel result presents extremely well in a poster/talk format. | Varies by host conference |
+| **Science of Computer Programming** (Elsevier) — **Software Track** | The Software Track publishes *Original Software Publications*: useful software in programming languages and software development. OrchLang is exactly that. | A mature, documented, tested artifact — which exists. The shortest route to a peer-reviewed, indexed publication. |
+| **Journal of Systems and Software** (Elsevier) — **New Ideas and Trends Papers** | A short-paper format for a single new idea in an emerging area. Full validation is not required; preliminary results are welcome, and publication is fast. | Frame around LLM-workflow engineering: the negative result plus billing signatures as one new idea. |
+| **International Journal on Software Tools for Technology Transfer** (Springer) — via the **SOAP → STTT** route | STTT covers semantics-based tools for development and verification, with programming languages and software engineering among its foci. | Submit to SOAP first; if accepted and invited, extend for the special issue. |
 
-### Tier 2 — credible, broader
+### Tier B — realistic after one or two more pieces of work
 
-| Venue | Notes |
+| Journal | Why it fits | Gap to close first |
+|---|---|---|
+| **STTT**, regular submission | As above, without a workshop invitation. | Its scope emphasises applying tools to realistic systems — port at least one real LangChain or LangGraph workflow. |
+| **Science of Computer Programming**, research track | Broad programming-languages and software-methodology scope. | Complete semantics and a fuller proof than the current sketches. |
+| **International Journal of Information Security** (Springer) | Scope covers theory, applications, and implementations of security. It has published static information-flow work and, in 2026, LLM prompt-injection work — both halves of this paper. | An independent security benchmark; the current one is author-written. |
+| **Journal of Computer Security** | Language-based and information-flow security are within its scope. It has moved from IOS Press to SAGE — confirm the current submission system. | Precise attacker model and a stronger noninterference argument. |
+
+### Tier C — stretch, needs substantial new results
+
+| Journal | What would be required |
 |---|---|
-| **ICSE NIER / FSE IVR / ASE NIER** | Short "new ideas" tracks. The cost-channel finding is precisely a new-idea contribution. Competitive but the right shape. |
-| **IEEE COMPSAC** | Broad, archival, realistic acceptance, well-indexed. |
-| **LLM4Code / AIware** and similar ICSE-colocated workshops | Topical match with the LLM-engineering audience. |
+| **PACMPL** (OOPSLA issue) | Mechanised proofs, tokenizer-portable bounds, real-workflow case studies, comparison with a classical constant-resource baseline. |
+| **ACM Transactions on Privacy and Security**, **IEEE Transactions on Dependable and Secure Computing** | A substantial security advance beyond Ngo et al., with an independent attack evaluation. |
+| **ACM TOSEM**, **IEEE TSE** | A large empirical study on real workflows. |
 
-### Tier 3 — security framing
+### Use with care
 
-The work maps directly onto OWASP LLM01 (Prompt Injection) and LLM07 (System
-Prompt Leakage). A reframed version emphasising the injection results suits
-workshops at **ACSAC** or **CCS**. Only pursue this if the PL framing stalls;
-do not submit both simultaneously.
-
-### Avoid
-
-Predatory or unindexed venues, and low-quality "international journals" that
-solicit by email. This work is good enough not to need them, and publishing
-there actively damages its value.
+| Venue | Issue |
+|---|---|
+| **Computers & Security** (Elsevier) | Its scope explicitly excludes work on the security of AI/ML systems such as LLMs. This paper concerns the orchestration program rather than the model, but a submission framed around LLMs risks desk rejection. |
+| **Information Processing Letters** (Elsevier) | Short, but its stated focus is theoretical computer science — algorithms, complexity, formal languages. An applied PL paper with an empirical evaluation is a weak fit. |
+| **IEEE Access** | In scope and fast, but charges a substantial article processing charge and carries less weight in this community. Reasonable only if the institution needs a quick Scopus-indexed publication. |
+| **Journal of Open Source Software** | Free, open review, publishes research software — a good home for the artifact itself. But its process has impeded Web of Science inclusion, so it may not satisfy an institutional indexing requirement. Pursue alongside a paper, not instead of one. |
 
 ---
 
-## 4. Before submitting
+## 5. Institutional rules to check first
 
-Ordered by how much each improves acceptance odds per unit of effort.
+**UGC-CARE no longer exists as an approval list.** UGC discontinued it on
+11 February 2025. In its place are suggestive parameters, and each institution
+sets its own journal-evaluation mechanism. Ask the department which indexing it
+recognises — usually Scopus and/or Web of Science — before choosing among the
+journals above.
 
-**High value**
+**Avoid predatory journals.** Warning signs: an unsolicited email inviting a
+submission; a promised acceptance or review in days; a fee requested before
+review; a vague "international journal of engineering and technology" title
+covering every subject; an impact factor that is not from Clarivate; and an
+editorial board you cannot verify. Every journal in Tiers A–C is published by
+Elsevier, Springer, SAGE, ACM, or IEEE — confirm the submission link on the
+publisher's own website, never from an email.
 
-1. **Port an independent security benchmark.** The author-written suite is the
-   paper's most serious weakness (§11) and the first thing a reviewer will
-   attack. Translating a subset of an existing injection corpus such as
-   AgentDojo into OrchLang would convert the weakest section into a strong one.
-2. **Mechanize Theorem 1** in Coq, Lean, or Agda. The cost algebra is small
-   enough that this is genuinely tractable, and "mechanized soundness" changes
-   how the whole paper reads.
-3. **Reformat to the target template** (ACM `acmart` or IEEE conference) and cut
-   to the page limit. The current draft is longer than most limits allow; §7 and
-   §12 compress well.
-
-**Medium value**
-
-4. **A case study on a real workflow.** Port one published LangChain or
-   LangGraph pipeline to OrchLang and report what the analysis says about it.
-   Even one convincing example blunts the "synthetic corpus" criticism.
-5. **Figures.** The lattice, the derivation tree for a branch/retry workflow,
-   and the injection propagation path. Reviewers read figures first.
-6. **Resolve the citation placeholders.** Several references are cited by arXiv
-   ID with incomplete author lists; fill these in from the actual papers before
-   submission.
-
-**Lower value, worth doing**
-
-7. Mention the ~6 ms figure carefully — it is dominated by process startup, and a
-   reviewer may ask. Measure in-process analysis time separately.
-8. Add a short "language design rationale" appendix; the three commitments in §3
-   are a defensible contribution on their own.
+**Do not submit one paper to two journals at once.** Dual submission is a
+publication-ethics violation at every publisher listed here.
 
 ---
 
-## 5. Honest assessment
+## 6. Recommended sequence
 
-The work is real. It compiles, it is tested (83 assertions), the evaluation is
-reproducible from a generator and a harness, and the prior-art position holds up
-to scrutiny: the cost column and the flow column of the related-work table are
-near-disjoint, and everything in the flow column runs at execution time.
+1. **Confirm the institution's indexing requirement.**
+2. **Post an arXiv preprint** (cs.PL, cross-listed to cs.CR). The claims are now
+   corrected, so the audit's advice against posting early no longer applies.
+   Check the target journal's preprint policy first.
+3. **Submit the compiler to the SCP Software Track.** It is the fastest
+   peer-reviewed outcome and publishes the artifact in its own right.
+4. **In parallel, submit the research paper** — the negative result plus billing
+   signatures — as a **JSS New Ideas and Trends Paper**, *or* to **SOAP** aiming
+   for the STTT special issue. Choose one; they target the same contribution.
+5. **Close the gaps for Tier B:** an independent security benchmark, one real
+   workflow case study, and fuller semantics.
+6. **Treat PACMPL as the long-term target**, once the proofs are mechanised and
+   the tokenizer-portability gap is closed.
 
-The cost-channel result is the part that makes this publishable rather than
-merely competent, because it is a finding rather than an implementation — a
-defect class that exists only because two analyses were put in the same type
-system.
+---
 
-The honest weaknesses are the author-written security benchmark, the synthetic
-cost corpus, and the unmechanized proofs. All three are stated plainly in §11
-rather than hidden, which is the right call: reviewers punish concealed
-limitations far more than acknowledged ones.
+## 7. What most improves the odds, in order
 
-Realistic expectation: **a good chance at a workshop or SAC on the current
-draft**, and a credible shot at a NIER/short track. With items 1 and 2 from §4
-done, it would be competitive for a stronger venue.
+1. **An independent benchmark.** The author-written security suite is the first
+   thing any reviewer will question. Port a subset of an existing prompt-injection
+   corpus such as AgentDojo.
+2. **One real workflow.** Port a published LangChain or LangGraph pipeline and
+   report what the analysis finds. This also answers STTT's emphasis on realistic
+   systems.
+3. **Tokenizer-portable bounds.** The clearest correctness gap left: one model's
+   output cap is reused as another model's input bound.
+4. **Mechanised proofs.** The cost algebra and signature equality are small enough
+   for Coq or Lean.
+5. **A certificate checker.** Until one exists, the certificate is a report.
+
+---
+
+## 8. Honest assessment
+
+The artifact is solid: a warning-free compiler, 95 tests, and an evaluation that
+fails loudly. The research contribution is real but narrow — an application of
+relational cost reasoning to a setting its classical assumptions do not cover,
+plus a documented negative result.
+
+That makes it **a good fit now for a software-track or short new-ideas journal
+paper**, and for the workshop-to-journal route. It is **not yet ready for a top
+journal**, and polishing the prose will not change that; the gaps in section 7
+will.
