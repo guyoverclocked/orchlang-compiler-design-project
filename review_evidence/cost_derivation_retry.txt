@@ -1,5 +1,6 @@
 ResilientExtract:
-  token bound   3330 / budget 3400  (guaranteed 2100 + estimated 1230 @ 4 chars/token)
+  token bound   3330 / budget 3400
+  components    output <= 2100, input <= 1230 @ 4 chars/token
   labels        0 secret, 0 untrusted
   derivation for ResilientExtract:
       retry  bound 3  => 0 tokens

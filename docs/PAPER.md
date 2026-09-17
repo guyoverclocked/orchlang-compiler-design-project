@@ -1,4 +1,4 @@
-# OrchLang: Certifying Token Cost and Information Flow for LLM Workflows Before Execution
+# Beyond Equal Caps: Relational Token-Cost Contracts for LLM Workflows
 
 **Nambi Rajan M** (24BAI0072)
 Vellore Institute of Technology
@@ -7,744 +7,607 @@ Vellore Institute of Technology
 
 ## Abstract
 
-LLM workflows fail expensively in two recurring ways: they spend more than their
-operator intended, and they let data move where it should not — a secret into a
-prompt, or text from a retrieved document into a privileged tool call. Today
-these are treated as separate problems by separate machinery, and almost all of
-that machinery runs at execution time: taint-tracking interpreters, reference
-monitors, and budget wrappers that discover a violation only once tokens have
-been spent and effects have fired.
+A workflow that calls a language model can leak a secret through its bill. If a
+secret decides which branch runs, and the branches consume different numbers of
+tokens, then whoever sees the invoice learns the secret — even though no secret
+value ever reaches a prompt, an output, or a tool.
 
-We argue that both properties are consequences of a workflow's *structure*, and
-that a language designed for the purpose can decide both before anything runs.
-We present OrchLang, a small statically typed DSL for LLM workflows whose
-compiler derives, from source alone, (i) an upper bound on the tokens any
-execution can consume and (ii) a two-axis information-flow property covering
-secret confidentiality and untrusted-input integrity. Both judgements are made
-over the same program by the same type system, and both are written into a
-machine-checkable JSON certificate.
+Relational cost analysis and resource-aware noninterference already address this
+class of problem for conventional programs, where the cost of each operation is
+a known function of its input. LLM workflows break that assumption: the number
+of output tokens a call consumes is chosen by the provider, not by the program,
+so no numeric potential can be assigned to a call site and the usual
+potential-comparison machinery does not apply.
 
-Deriving them together is not merely an engineering convenience. It exposes a
-defect neither analysis can see alone: a branch whose guard is secret and whose
-arms cost different amounts leaks the guard through the token bill, with no
-value crossing any boundary. We report this as a first-class error.
+We report two things. First, a *negative result with a counterexample*: the
+natural rule for this setting — accept a secret-guarded branch when both arms
+have equal certified upper bounds — is unsound, and we exhibit a workflow it
+accepts whose bill nevertheless moves with the secret in 225 of 425 paired
+executions. Second, a rule that works: abstract each arm to a **billing
+signature** recording, in order, which model is called and a symbolic term for
+its input size, where the terms range only over quantities that provably agree
+across the two compared executions. Under a coupling of the model oracle,
+signature equality implies that the per-model billing vector is independent of
+the secret.
 
-On a generated benchmark of 23 cost workflows executed under 200 seeds each
-(4,600 executions), the certified bound was never exceeded, while the flat
-"sum every call's `max_tokens`" rule — the rule the first version of this
-compiler used, and the obvious thing to reach for — was exceeded on 13.5% of
-executions and is unsound on 8 of 23 workflows, every one of them containing a
-bounded retry. The bound's median slack over peak observed consumption is
-1.23×. On a paired security suite of 26 workflows in which each unsafe workflow
-has a safe counterpart differing by a single edit, the analysis rejects 13 of 13
-unsafe and accepts 13 of 13 safe workflows. Analysis takes roughly 6 ms per
-workflow.
+We implement this in OrchLang, a small statically typed DSL whose compiler also
+derives a conventional worst-case token bound and a two-axis information-flow
+property. On a generated benchmark, the certified bound is never exceeded in
+4,600 executions — checked componentwise, not only in total — while a flat
+per-call sum is exceeded on 13.8% of them and a control-flow-aware variant on
+14.0%. On a paired relational benchmark, seven accepted workflows show identical
+bills across 2,975 comparisons that vary only the secret, and all seven rejected
+workflows have a concrete leaking witness.
+
+We do not claim that combining information flow with resource analysis is new,
+that leakage through token counts is a new defect class, or that the analysis is
+complete. We state precisely what is new: the treatment of opaque stochastic
+calls, for which structural comparison replaces numeric comparison.
 
 ---
 
 ## 1. Introduction
 
-A workflow that calls a language model is a program, and like any program it can
-be wrong before it is run. Two kinds of wrongness dominate incident reports.
-The first is cost: a retry loop that fans out, a branch that selects an
-expensive model, an input that turns out to be a 200-page PDF. The second is
-flow: an API key interpolated into a prompt, or — the case that has attracted
-the most attention — text retrieved from an untrusted source being treated as an
-instruction and used to drive a tool.
-
-Both are, in the end, questions about program structure. *How many model calls
-can this program make, and how large can each be?* *Which values can reach which
-positions?* These are the questions static analysis has answered for other
-resources and other flows for forty years. Yet the tools built for LLM workflows
-almost uniformly answer them at run time.
-
-Consider the three families of existing work.
-
-**Workflow DSLs.** LMQL [1], SGLang [2], DSPy [3], APPL [4], and PDL [5] make
-LLM programs easier to write and often cheaper to execute. None of them
-certifies a cost bound or a flow property before execution. LMQL reports 26–85%
-*runtime* cost savings from constraint-guided decoding — a different claim from
-a bound.
-
-**Injection and leakage defences.** CaMeL [6] executes a restricted Python
-subset in a custom interpreter that maintains a dynamic data-flow graph and
-checks capabilities at each tool call. The f-secure architecture [7] filters
-untrusted input through a runtime security monitor. AgentFlow [8] pairs a
-runtime reference monitor with a bounded SMT check over policy fragments.
-NeuroTaint [9] and GIF [10] track taint during execution. All of them are
-runtime mechanisms, and all pay runtime cost for it.
-
-**Budget enforcement.** The most directly comparable work catalogues 63
-production budget-overrun incidents and mitigates them with a Rust crate that
-makes a budget an affine value, so the borrow checker prevents double-spending
-and post-delegation use [11]. This genuinely moves a class of error to compile
-time, but the mechanism is ownership of a *runtime* budget object in a host
-language, not inference of a bound from workflow structure; the authors note
-that binary-level soundness remains open. Elsewhere, budget algebras with
-conservation theorems govern multi-agent routing at run time [12].
-
-Static verification of agent workflows exists — Agentproof [13] extracts graphs
-from LangGraph, CrewAI, AutoGen and ADK and checks structural properties and
-temporal safety policies compiled to automata — but it checks topology, not
-types, resources, or information flow.
-
-Meanwhile the classical apparatus for exactly these two problems is mature and
-unused here. Information-flow type systems date to Denning [14] and were given
-soundness by Volpano *et al.* [15], scaled to a real language by Jif [16], and
-surveyed by Sabelfeld and Myers [17]. Automatic Amortized Resource Analysis
-(AARA) [18, 19] infers resource bounds as a typing problem. We found no work
-applying resource typing to LLM token consumption.
-
-**This paper.** We close that gap with a language rather than a wrapper. The
-central design claim is that a *small, purpose-built* source language makes both
-properties decidable, where a general-purpose host language does not: bounded
-repetition is syntactic, lengths the compiler cannot see must be declared, and
-the only outward effect is an explicit `emit`.
-
-Our contributions:
-
-1. **OrchLang**, a statically typed DSL for LLM workflows whose grammar is
-   shaped by three commitments that make static certification possible rather
-   than merely convenient (§3).
-
-2. **A two-axis information-flow type system** over
-   `(Public ≤ Secret) × (Trusted ≤ Untrusted)` with a program-counter label for
-   implicit flows, an *injection-propagation rule* that taints model output
-   derived from untrusted input transitively, and declassification and
-   endorsement that require written justifications recorded in the certificate
-   (§4).
-
-3. **A structural token-cost analysis** that is inductive over control flow —
-   a branch costs its more expensive arm, a retry multiplies its body — and that
-   deliberately separates a *guaranteed* component (provider-enforced output
-   caps, needing no tokenization assumption) from an *estimated* component
-   (input tokens, sound relative to an assumption the certificate records) (§5).
-
-4. **The secret-dependent cost channel**, a defect visible only when both
-   judgements are made over the same program, reported as a first-class error
-   (§6).
-
-5. **An evaluation** with a generated benchmark, an offline mock runtime that
-   makes the bound falsifiable, and a paired security suite that measures false
-   positives directly (§10).
-
----
-
-## 2. A motivating example
+Consider a workflow that answers support tickets and, when the customer is on
+the enterprise plan, escalates by calling a larger model:
 
 ```orchlang
-workflow ResearchDigest budget 2400 {
-  input query:    text max_tokens 100;
-  input web_page: text untrusted max_tokens 600;
-  secret API_KEY: text max_tokens 16;
-
-  model reader = mock("offline-reader") max_tokens 500;
-  tool  publish(body: text);
-
-  prompt digest(page: text) -> text = "Summarise the retrieved page: {page}";
-
-  retry 3 {
-    let digest_text: text = call digest(web_page) using reader;
-    emit publish(digest_text);
-  }
-
-  output query;
-}
-```
-
-This is nine lines of workflow and it is wrong in two independent ways. The
-compiler reports the first immediately:
-
-```text
-13:18: error [E233] untrusted value reaches tool 'publish'; model output derived
-       from untrusted input must be endorsed before it can drive an external
-       effect
-```
-
-`web_page` is untrusted, so `digest_text` is untrusted by the propagation rule
-of §4.2, so handing it to a tool gives an attacker who controls the retrieved
-page influence over a privileged effect. A runtime taint system catches this
-when it happens; we reject it before deployment. To proceed, the author must
-write down why it is safe:
-
-```orchlang
-endorse(digest_text) as vetted: text because "schema validated offline";
-emit publish(vetted);
-```
-
-which is then recorded verbatim in the certificate. With that edit the program
-type checks, and the second problem surfaces:
-
-```text
-1:1: error [E260] certified token bound 3327 (guaranteed 1500 + estimated 1827)
-     exceeds workflow budget 2400
-```
-
-The retry is the reason. A single attempt costs 500 output tokens plus 609 input
-tokens; the block permits three, so the bound is `3 × 1109 = 3327`, over a budget
-of 2400. A flat sum over syntactic call sites sees one call and reports 1109 —
-comfortably inside budget, and wrong. §10 measures how often that gap is
-realised in practice.
-
-Note also what the two halves of the bound say. 1500 of it is
-provider-enforced output and holds unconditionally; 1827 is input tokens and
-holds relative to the recorded four-characters-per-token assumption. The author
-can see at a glance that most of the overrun is on the assumption-bearing side,
-and that tightening the input bound on `web_page` — not switching models — is
-the fix.
-
-**What no existing tool would report at all.** Suppose the author instead writes
-
-```orchlang
-if ALERT {                                   // a secret boolean
-  let a: text = call step(src) using large;  // 900 output tokens
+if is_enterprise {                            // a secret
+  let reply = call escalate(ticket) using large;   // 900 output tokens
 } else {
-  let b: text = call step(src) using small;  // 150 output tokens
+  let reply = call acknowledge(ticket) using small; // 150 output tokens
 }
 ```
 
-No value crosses any boundary. No tool is invoked. Every taint checker we know
-of accepts this. The monthly bill still reveals the secret. §6 is about this
-case.
+No secret value reaches a prompt. No secret is returned. No tool is invoked.
+An information-flow type system with a program-counter label will accept this,
+because nothing observable at a sink depends on the secret. But the monthly
+invoice does: a month with many enterprise customers costs visibly more than one
+without, and the invoice is itemised per model.
+
+### 1.1 Why the classical answer does not transfer
+
+This is a resource side channel, and the literature on resource side channels is
+mature. Ngo, Dehesa-Azuara, Fredrikson and Hoffmann [1] formalise
+*resource-aware noninterference* by combining information-flow typing with
+automatic amortized resource analysis, and can certify programs that violate a
+constant-resource requirement as long as the violation leaks nothing. Çiçek,
+Barthe, Gaboardi, Garg and Hoffmann [2] give RelCost, a relational refinement
+type system that bounds the *difference* in cost between two executions,
+explicitly motivated by side-channel reasoning.
+
+Both rest on an assumption that LLM workflows violate. In AARA and in RelCost,
+the cost of an operation is a known function of its input: a list traversal
+costs its length, an arithmetic operation costs one. A potential can therefore be
+attached to a value and discharged as the program runs.
+
+An LLM call has no such function. The workflow asks for at most `max_tokens`
+output; how many arrive is decided by the provider's sampling. Two executions of
+the *same* program on the *same* inputs already differ in cost. So:
+
+- a numeric potential cannot be assigned to a call site, because the cost is not
+  determined by the program state; and
+- "constant resource" is the wrong property, because no LLM workflow has
+  constant resource consumption in the classical sense.
+
+The question has to be reformulated. Not "is the cost constant?" but "**does the
+secret change the bill, holding the model's behaviour fixed?**"
+
+### 1.2 What this paper contributes
+
+**A negative result.** The natural rule — compare the two arms' certified upper
+bounds and accept when they are equal — is unsound. §3 gives a counterexample
+and §7 measures it: the rule accepts a workflow whose bill differs in 225 of 425
+paired executions.
+
+This is not a strawman. It is the rule an earlier version of this compiler
+implemented and claimed a theorem for, and it is what a reader who knows only
+about worst-case bounds would reach for. Equal maxima say nothing about equal
+costs when the maxima are not attained.
+
+**A rule that works.** Because costs cannot be compared numerically, compare
+structure instead. Each branch arm is abstracted to a **billing signature**: an
+ordered record of which model is called and a symbolic term for its input size,
+where the terms are built only from constants, variables bound outside the
+branch, and the results of earlier calls in the same signature. Under a coupling
+of the model oracle, equal signatures imply equal billing vectors (§4, §6).
+
+**An implementation and a reproducible evaluation** (§5, §7), including a paired
+experiment that enumerates every secret value under a fixed seed and fixed public
+inputs, and a soundness check that is performed componentwise rather than only on
+totals.
+
+**What we do not claim.** Combining flow and resource analysis is not new [1].
+Relational cost reasoning is not new [2]. Leakage through LLM token counts is not
+new: *Time Will Tell* [3] recovers input properties from output token counts and
+timing on production models, and token-length side channels are established at
+USENIX Security [4]. Our setting — a compiler deciding, before deployment,
+whether a multi-step workflow's *bill* is secret-independent — is adjacent to
+those, not a discovery of the defect class.
 
 ---
 
-## 3. The language
+## 2. The language, in one page
 
-OrchLang describes a workflow as a sequence of declarations and statements
-inside a declared token budget. The full grammar is in
-`docs/LANGUAGE_SPEC.md`; here we state only the three commitments that exist to
-make the analysis possible.
+OrchLang describes a workflow as declarations and statements inside a token
+budget. Three commitments exist specifically to make the analyses decidable.
 
 **Repetition is bounded syntactically.** `retry n { … }` carries a literal `n`.
-There is no general loop and no recursion. An unbounded loop makes the cost
-bound infinite and the analysis worthless, so the language does not offer one.
-This is a real restriction on expressiveness, and we accept it deliberately:
-the overwhelmingly common repetition pattern in production LLM workflows is a
-bounded retry, which is also the shape that most often causes overruns [11].
+There is no general loop and no recursion.
 
-**Lengths the compiler cannot see must be declared.** An input's length is not
-knowable from source. If an input reaches a prompt without a declared
-`max_tokens`, the compiler reports `E261` and derives no bound at all. The
-alternative — picking a default and calling the result a bound — would produce a
-number that means nothing.
+**Lengths the compiler cannot see must be declared.** An input feeding a prompt
+must carry `max_tokens`, or the compiler reports `E261` and derives no bound at
+all rather than guessing one.
 
 **Leaving the lattice requires saying why.** `declassify` and `endorse` are the
-only ways to relax a label, and both demand a string justification that is
-copied verbatim into the certificate. Real workflows need escape hatches;
-requiring a justification means a reviewer can enumerate every one of them.
+only ways to relax a label, and both demand a written justification recorded in
+the certificate.
 
-A fourth property matters for §4: `emit` is the only construct with an outward
-effect. Confining effects to one syntactic form is what makes "which values can
-reach the outside world" a question with a finite answer.
-
----
-
-## 4. Information-flow typing
-
-### 4.1 Labels
-
-Every value carries a label from the product lattice
-
-```
-L  =  Confidentiality × Integrity  =  {Public ≤ Secret} × {Trusted ≤ Untrusted}
-```
-
-ordered componentwise, with `Public/Trusted` as bottom. The two axes are the
-standard confidentiality and integrity duals [17]; what is specific here is what
-each axis is *for*. Confidentiality keeps credentials out of prompts, outputs,
-and effects. Integrity keeps text that an attacker may have authored from
-becoming an instruction that fires an effect — which is precisely the structure
-of indirect prompt injection.
-
-### 4.2 The injection-propagation rule
-
-The rule that does the work is the one for a model call:
-
-```
-Γ; pc ⊢ aᵢ : Tᵢ, ℓᵢ        for i ∈ 1..n
-──────────────────────────────────────────────────────────
-Γ; pc ⊢ call p(a₁..aₙ) using m  :  ret(p),  pc ⊔ ℓ₁ ⊔ … ⊔ ℓₙ
-```
-
-A model's answer is labelled with the join of everything that reached its
-prompt. A model given only trusted input yields a trusted answer; a model given
-anything untrusted yields an untrusted answer, and so does every model
-downstream. Injection therefore cannot be laundered by chaining calls: in our
-benchmark, `InjectionTransitive` passes untrusted text through two model calls
-before reaching a tool and is still rejected.
-
-This mirrors the propagation CaMeL performs dynamically [6], obtained instead as
-a typing rule with no runtime component.
-
-### 4.3 The program-counter label and implicit flows
-
-Inside `if c { A } else { B }`, the label of `c` joins `pc` in both arms. Values
-produced in an arm inherit `pc`, and effects performed in an arm are checked
-against it. A tool invoked under a secret `pc` is rejected (`E234`) because the
-*occurrence* of the effect reveals the guard, even though no secret value is
-passed. Under an untrusted `pc` it is rejected too (`E235`): an injected value
-should not decide whether a privileged effect fires.
-
-Relabelling does not launder `pc`. Our `SecretGuardedLaundered` case endorses a
-value *inside* a secret-guarded branch and emits it; it is still rejected,
-because `pc` joins into the result of the reclassification.
-
-### 4.4 Sinks and outputs
-
-An emitted argument must be `Public/Trusted`, and `pc` must be `Public/Trusted`.
-
-Returning an untrusted value through `output` is *permitted*. This is a
-deliberate asymmetry: the caller of a workflow receives data, not instructions,
-so untrusted output is the normal case for a summarisation workflow and
-rejecting it would make the system unusable. Returning a secret is not
-permitted. Our benchmark checks both directions of this distinction
-(`UntrustedToOutputOnly` must be accepted; `SecretAsOutput` must not).
-
-### 4.5 Declassification and endorsement
-
-`declassify` lowers confidentiality; `endorse` raises integrity. Both are
-trusted: the compiler records them and makes them visible, and does not verify
-that a justification is true. This is the standard position — declassification
-is an inherently extra-logical act [20] — and we take the pragmatic line that
-the useful guarantee is *enumeration*: a reviewer reading a certificate sees
-every point at which the lattice was overridden and the stated reason.
+Information flow uses the product lattice
+`(Public ≤ Secret) × (Trusted ≤ Untrusted)`. A model's answer is labelled with
+the join of everything reaching its prompt, so text from an untrusted document
+stays untrusted through any number of calls. A program-counter label catches
+implicit flows. `emit` is the only outward effect. Full rules are in
+`docs/LANGUAGE_SPEC.md`; this paper concerns the resource dimension.
 
 ---
 
-## 5. Cost analysis
+## 3. The negative result
 
-### 5.1 The algebra
-
-The bound is a pair `⟨guaranteed, estimated⟩` derived by structural induction:
-
-```
-C(ε)                      = ⟨0, 0⟩
-C(s ; B)                  = C(s) ⊕ C(B)                    componentwise sum
-C(if c { A } else { B })  = C(A) ⊔ C(B)                    costlier arm
-C(retry n { A })          = n ⊗ C(A)                       componentwise scaling
-C(let y = call p(a…) using m)
-                          = ⟨ maxTokens(m), τ(tmpl(p)) + Σᵢ bound(aᵢ) ⟩
-C(_)                      = ⟨0, 0⟩
-```
-
-All arithmetic saturates rather than wrapping, so overflow still yields an
-over-approximation.
-
-The two rules that distinguish this from a flat sum are `⊔` and `⊗`. A branch
-costs its more expensive arm, not both — a flat sum is *over*-conservative here,
-which is merely wasteful. A retry multiplies — a flat sum is *under*-conservative
-here, which is unsound, and §10 measures exactly how often.
-
-### 5.2 Why the bound has two components
-
-The components rest on different foundations, and collapsing them would hide
-that.
-
-The **guaranteed** component counts output tokens. Providers enforce
-`max_tokens` themselves, so this half holds without assuming anything about
-tokenization.
-
-The **estimated** component counts input tokens: the prompt template plus the
-declared bounds of the arguments substituted into it. It depends on a
-tokenization function τ, which the compiler takes as an explicit parameter
-`--chars-per-token` (default 4, the common rule of thumb for English prose). At
-1 it is unconditionally sound for any tokenizer emitting at most one token per
-character; larger values are tighter but sound only relative to the stated
-assumption. The value used is recorded in the certificate.
-
-We consider this separation a contribution in its own right. A single number
-would let a reader believe the whole bound is as solid as its strongest half.
-Reporting `guaranteed 2100 + estimated 1230 @ 4 chars/token` says exactly how
-much rests on an assumption, and our test suite pins the property that changing
-the assumption moves only the second component.
-
-A monetary figure is derived where models declare `cost_per_token`. It is
-reported, not certified; the guarantee is stated over tokens.
-
-### 5.3 Requirements
-
-`require tokens(x) op n` is discharged against the derived bound of `x` and must
-hold for every value `x` can take, i.e. every count in `[0, bound(x)]`. An upper
-bound can discharge only an upper-bound comparison, so `<` and `<=` are
-checkable, `>=` only against zero, and `>`, `==`, `!=` are reported as
-undecidable (`E264`) rather than silently accepted.
-
-We note this because the construct existed in the previous version of this
-compiler, where it was parsed, lowered into the IR, printed — and never checked.
-`require tokens(x) <= 5` against a 600-token model passed. A construct that
-looks like a safety check and is inert is worse than no construct.
-
----
-
-## 6. The cost channel
-
-Consider a branch whose guard is secret and whose arms cost different amounts.
-No value crosses any boundary. No tool is invoked. Every taint analysis accepts
-it. And the token bill differs depending on which arm ran, so anyone who can see
-the bill learns the guard.
+Here is a workflow the equal-bounds rule accepts:
 
 ```orchlang
-if ALERT {                                   // secret
-  let a: text = call step(src) using large;  // 900 output tokens
-} else {
-  let b: text = call step(src) using small;  // 150 output tokens
+workflow EqualBounds budget 1000 {
+  secret s: text max_tokens 1;
+  input  x: text max_tokens 100;
+  input  y: text max_tokens 100;
+  model  m = mock("m") max_tokens 10;
+  prompt p(t: text) -> text = "{t}";
+
+  if tokens(s) == 0 {
+    let a: text = call p(x) using m;
+  } else {
+    let b: text = call p(y) using m;
+  }
+  output "done";
 }
 ```
 
-Neither analysis finds this alone. The label system does not know what an arm
-costs; the cost analysis does not know the guard is a secret. The check is one
-line of reasoning over both judgements:
+Both arms call the same model with one argument whose declared cap is 100. Both
+arms therefore certify at exactly 111 tokens. The rule sees equality and accepts.
+
+But `x` and `y` are different values. Their *actual* lengths need not agree, and
+both are within their declared caps. Fix `|x| = 14` and `|y| = 52`, fix the
+oracle so both calls return zero output tokens, and the two executions consume
+15 and 53 tokens. The secret chose which.
+
+The error is elementary once stated: an upper bound constrains the maximum, and
+two quantities with the same maximum are not thereby equal. It survived because
+the bound was the only number available, so it was the number that got compared.
+
+This is the shape of the problem. Any rule that compares *numbers derived from
+caps* will make this mistake, because the caps are not what gets billed.
+
+---
+
+## 4. Billing signatures
+
+### 4.1 The observation
+
+Define the observation of an execution as the **billing vector**: for each
+model `m`, the total input tokens, output tokens, and call count charged to `m`.
 
 ```
-guard label ⊒ Secret   ∧   C(A).total ≠ C(B).total   ⟹   E236
+Obs(e)  =  { m ↦ (in_m, out_m, calls_m) }
 ```
 
-The same shape with an untrusted guard means an injected value is choosing how
-much the workflow spends; we report that as a warning (`W237`) rather than an
-error, since it is a denial-of-service concern rather than a disclosure.
+This is what an itemised invoice shows. A scalar total is the wrong observation:
+two runs can agree on total tokens while charging different models at different
+prices, and the prices are public.
 
-A workflow fixes an `E236` by balancing the arms, hoisting the expensive call
-out of the branch, or declassifying the guard with a justification.
+### 4.2 The coupling
 
-This is the clearest argument we have for deriving the two properties together
-rather than composing two separate tools: the composition finds defects the
-components cannot.
+A **model oracle** ω determines, for each model and each call index, how many
+output tokens come back (bounded by that model's `max_tokens`) and whether a
+retry attempt succeeded. Two executions are compared under the *same* ω.
 
----
+This is the standard device for relational reasoning about randomised systems,
+and it is the only way to ask a meaningful question here. Without it, the bill
+varies run to run for reasons that have nothing to do with the secret. With it,
+the question is exactly: *given that the model behaved the same way, did the
+secret change what we paid?*
 
-## 7. What is proved, and what is not
+### 4.3 The abstraction
 
-We define a big-step semantics `⟨B, σ⟩ ⇓ ⟨σ', κ, ε⟩` where `σ` maps names to
-values with token counts, `κ` counts tokens consumed, and `ε` is the sequence of
-tool effects with their arguments. The model is abstract, constrained by two
-assumptions:
+A **size term** is built only from quantities that agree across the two compared
+executions:
 
-- **(A1)** a call to model `m` returns at most `maxTokens(m)` output tokens;
-- **(A2)** an input honours its declared `max_tokens`, and `τ` bounds the
-  tokenizer.
+```
+Term ::= const(n)                  literals and template text
+       | outer(x)                  a variable bound outside the branch
+       | result(k)                 the k-th prior call in this signature
+```
 
-**Theorem 1 (Cost soundness).** If `⊢ W : ⟨g, e⟩` and `⟨W, σ⟩ ⇓ ⟨σ', κ, ε⟩`
-under (A1) and (A2), then `κ ≤ g + e`.
+`outer(x)` agrees because public inputs are equal by hypothesis. `result(k)`
+agrees because the k-th call to a model returns the same answer under the shared
+oracle. Positional reference matters: the two arms bind different names to
+corresponding calls, so names cannot be compared, but positions can.
 
-*Proof sketch.* Induction on the derivation. The empty block consumes nothing.
-Sequencing follows from additivity of `⊕`. For a branch, exactly one arm
-executes and `C(A) ⊔ C(B)` dominates each. For `retry n`, the semantics executes
-the body at most `n` times and `n ⊗ C(A)` dominates `k` executions for any
-`k ≤ n`. For a call, (A1) bounds the output component and (A2) the input
-component. Saturation preserves the inequality since the saturated value
-dominates every representable total. ∎
+A **signature** is a sequence of nodes:
 
-Dropping (A1) alone invalidates the guaranteed component; dropping (A2) alone
-invalidates only the estimated component. This is exactly why the bound is
-reported as a pair.
+```
+Node ::= Call(model, Term)
+       | Retry(n, Signature)
+       | Branch(publicGuard, Signature, Signature)
+```
 
-**Theorem 2 (Effect non-interference).** Let `W` be well-typed with no
-declassification. Then for any two stores `σ₁, σ₂` agreeing on all
-non-`Secret` bindings, if `⟨W, σ₁⟩ ⇓ ⟨_, κ₁, ε₁⟩` and `⟨W, σ₂⟩ ⇓ ⟨_, κ₂, ε₂⟩`
-then `ε₁ = ε₂` and the returned output values agree.
+The rules:
 
-*Proof sketch.* By induction, every value whose label is `Public` is computed
-without joining a `Secret` label, hence depends only on non-secret bindings.
-`emit` requires `Public/Trusted` arguments and a `Public/Trusted` pc, so the
-effect sequence is determined by non-secret data; `output` requires `Public`. ∎
+- A `let` bound to a call appends `Call(m, τ(template) + Σ terms)`.
+- `retry n { B }` appends `Retry(n, Sig(B))`.
+- A branch on a **public** guard appends `Branch(g, Sig(A), Sig(B))` — the arms
+  need not match, because both executions see the same public data and take the
+  same arm.
+- A branch on a **secret** guard is checked recursively; if its arms agree, the
+  common signature is spliced in, which is what makes the analysis compositional.
+- An argument whose label is `Secret` makes the signature **undefined**, and an
+  undefined signature is rejected.
 
-**Theorem 2′ (with `E236`).** Under the same hypotheses, if `W` additionally
-passes the cost-channel check then `κ₁ = κ₂` whenever the two executions differ
-only in secret bindings and make the same model-level choices.
+The rule: **at a secret-guarded branch, both arms' signatures must be defined and
+equal.**
 
-We state plainly what is *not* claimed.
+On the §3 counterexample the arms yield `m(in = 1 + |x|)` and `m(in = 1 + |y|)`.
+These differ, and the compiler says so in those terms.
 
-- These are pen-and-paper proofs over a reference semantics. They are not
-  mechanized, and the C++ implementation is not verified against them. §10's
-  RQ1 is a differential check of the implementation against the semantics, not
-  a proof.
-- Theorem 2 is termination-insensitive and covers the effect and output
-  channels. Wall-clock timing is not modelled. Theorem 2′ closes the token-count
-  channel only under the stated condition.
-- Nothing is proved about what a model *says*. The guarantees concern where
-  output may flow and how much of it there can be.
-- Declassification voids Theorem 2 by construction; the certificate's role is to
-  make every such site visible.
+### 4.4 Incompleteness, stated plainly
 
----
+The rule rejects safe programs. Two arms that read different variables which
+happen always to have equal length are rejected, because the compiler has no
+reason to believe they do. Making that judgement would need length refinements
+on types, which the language does not have.
 
-## 8. The certificate
-
-`orchc certify` emits JSON containing: the derived bound and both components;
-the tokenization assumption relied upon; the derivation that produced the bound;
-the final label of every binding; every reclassification with its written
-justification; and every sink the analysis cleared.
-
-The design intent is that the certificate outlives the compiler invocation. A
-runtime can enforce the same number the compiler derived; a reviewer can read
-the escape hatches without reading the source; a CI job can diff a certificate
-across commits and fail when a bound grows or a new declassification appears.
-This is a lighter-weight relative of proof-carrying certificates for LLM
-pipelines [21], which certify semantic rather than resource and flow properties.
+A second incompleteness is a consequence of the program-counter rule rather than
+of this analysis: chaining calls inside a secret-guarded arm is rejected, because
+the intermediate result inherits the secret pc and a secret may not reach a
+prompt. That rejection is sound but stronger than necessary — the intermediate
+value's *content* depends only on public data, and its *existence* is exactly
+what the relational obligation already covers. Letting the relational judgement
+discharge part of the unary one is the most promising next step (§9).
 
 ---
 
-## 9. Implementation
+## 5. Implementation
 
-`orchc` is 4,561 lines of hand-written C++17 with no third-party dependencies
-and no parser generator: a location-tracking lexer, a
-recursive-descent parser with statement-level error recovery, a scoped symbol
-table, the flow-typing and cost passes, a region-annotated IR with a dependency
-cycle check, the certificate emitter, and an offline mock runtime. It builds
-warning-free under `-Wall -Wextra -pedantic`, and a further 1,140 lines carry 83
-regression tests.
+`orchc` is hand-written C++17, no parser generator and no third-party
+dependencies: a location-tracking lexer, a recursive-descent parser with
+statement-level recovery, a scoped symbol table, the flow-typing pass, the cost
+pass, the relational pass, a region-annotated IR, a certificate emitter, and a
+deterministic offline mock runtime. It builds warning-free under
+`-Wall -Wextra -pedantic` and carries 95 regression tests.
 
-The flow and cost passes are separate modules sharing a symbol table. Call-site
-facts are recorded during typing and keyed by AST node, which lets the cost pass
-be a pure structural walk needing no symbol lookups — and lets the cost-channel
-check of §6 read guard labels the typing pass recorded.
+The flow pass records, for each call site, the model, the template size, and for
+each argument whether it is a literal (with its size), a variable (with its
+name), or secret. The relational pass reads those records, so it is a pure
+structural walk. The same separation lets the cost pass avoid symbol lookups.
 
----
+### 5.1 The unary bound, and a correction
 
-## 10. Evaluation
+Alongside the relational property the compiler derives a conventional worst-case
+bound by structural induction: a branch costs its more expensive arm, a retry
+multiplies its body, calls add. It is reported in two components — output tokens,
+which providers cap themselves, and input tokens, which depend on a declared
+characters-per-token assumption recorded in the certificate.
 
-Benchmarks are generated by `bench/generate.py`; results are reproduced by
-`python bench/evaluate.py` and stored in `bench/results/`.
+An audit found that the branch rule took the larger arm's *pair* whole. That
+bounds the total but not each component: a certificate reporting one output token
+admitted an execution producing twenty, because the other arm dominated that
+component while losing on the total. The compiler now maximises each component
+separately and tracks the total alongside, with the invariant
+`total ≤ guaranteed + estimated`. The gap between them is the price of reporting
+a faithful split instead of a single number, and the certificate shows both.
 
-The **cost suite** is 23 workflows varying chain length (1–5), branch arity
-(1–4), branch nesting, retry bounds (2–6), nested retries, retry-in-branch and
-branch-in-retry, and input width (200/800/2000 tokens).
+### 5.2 The runtime exists to falsify the claim
 
-The **security suite** is 26 workflows in 13 *pairs*. Each unsafe workflow has a
-safe counterpart differing by exactly one edit — an added endorsement, a
-declassification, a moved effect, a balanced arm. Pairing is what makes the
-false-positive number meaningful: a checker cannot score well by rejecting
-everything.
+`orchc run` executes a workflow against a seeded generator that respects each
+model's declared cap and each input's declared bound, and reports the billing
+vector. `--pin name=value` fixes an input or secret's length, which is what makes
+the relational claim testable: run twice under one seed, change only the secret,
+compare bills.
 
-To make the bound falsifiable we built an offline mock runtime (`orchc run`).
-It executes a workflow against a seeded splitmix64 generator that respects each
-model's declared `max_tokens` and each input's declared bound, and counts tokens
-actually consumed. Retry attempts stop at the first success.
-
-### RQ1: Is the certified bound ever exceeded?
-
-**No — 0 violations in 4,600 executions** (23 workflows × 200 seeds).
-
-We are explicit about what this does and does not show. The mock honours (A1)
-and (A2) because those are the language's contract, so RQ1 is a *differential
-check of the analyser against the reference semantics*, not evidence that a
-given provider honours its own caps. It would have caught an off-by-one in the
-retry scaling or a missed branch arm; it cannot validate the assumptions
-themselves.
-
-### RQ2: Is the flat rule sound?
-
-**No.** The rule "sum each syntactic call's `max_tokens`" — used by the previous
-version of this compiler, and the obvious thing to reach for — was exceeded on
-**621 of 4,600 executions (13.5%)** and is unsound on **8 of 23 workflows**.
-Every one of the eight contains a retry:
-
-| workflow | certified | flat | peak observed | flat violated |
-|---|---|---|---|---|
-| retry_2 | 556 | 278 | 542 | 43/200 |
-| retry_3 | 834 | 278 | 693 | 59/200 |
-| retry_4 | 1112 | 278 | 875 | 63/200 |
-| retry_5 | 1390 | 278 | 1144 | 63/200 |
-| retry_6 | 1668 | 278 | 1144 | 63/200 |
-| retry_nested_2x2 | 1112 | 278 | 901 | 102/200 |
-| retry_nested_2x3 | 1668 | 278 | 1298 | 111/200 |
-| retry_nested_3x3 | 2502 | 278 | 1363 | 117/200 |
-
-This is a lower bound on the flat rule's unsoundness: `branch_in_retry`
-(certified 2462, flat 1284) is unsound in principle but was not violated within
-200 seeds.
-
-### RQ3: How tight is the bound?
-
-Median slack over peak observed consumption is **1.23×** (min 1.02×, max
-3.01×). Chains are tightest (1.02–1.17×) since little is over-approximated.
-Branches are loosest (1.98–3.01×) because the bound charges the expensive arm
-every time. For context, [11] reports 4–6× for a static estimator.
-
-### RQ4: Does the flow analysis separate safe from unsafe?
-
-**13/13 unsafe rejected, 13/13 safe accepted** — precision 1.000, recall 1.000,
-covering direct injection, transitive injection through two model calls,
-injection inside branches and retries, secrets to prompts, outputs and tools,
-implicit flows, laundered implicit flows, untrusted-guarded effects, and the
-cost channel.
-
-We do not present this as a general accuracy claim. The suite was written by the
-author, from the shapes the analysis was designed to catch. Pairing guards
-against trivial over-rejection; it does not eliminate designer bias. §11
-addresses this.
-
-### RQ5: What does the analysis cost?
-
-**~6 ms per workflow**, including process startup, for 36 certifications in
-0.23 s. The analyses are linear in program size; no constraint solver is
-involved. At run time the cost is zero, which is the structural advantage over
-every runtime monitor discussed in §1.
+This is a differential check of the implementation against the language's
+semantics. It is not evidence that a provider honours its own caps — that
+assumption is stated, not tested.
 
 ---
 
-## 11. Threats to validity
+## 6. What is proved, and what is not
 
-**The security benchmark is author-written.** This is the most serious threat.
-The unsafe workflows are instances of shapes we designed for. We mitigate with
-pairing — every false-positive opportunity is a workflow one edit away from an
-unsafe one — but an independent benchmark (an AgentDojo-style corpus ported to
-OrchLang) would be far stronger, and we have not done it.
+Let `⟨W, σ⟩ ⇓_ω ⟨κ, β, ε⟩` denote execution of `W` in store `σ` under oracle `ω`,
+yielding total tokens `κ`, billing vector `β`, and effect sequence `ε`. Write
+`σ = σ_P ⊎ σ_S` for the public and secret parts.
 
-**RQ1 is not independent of the specification.** As noted, the mock implements
-the same assumptions the analysis relies on. A provider that silently exceeds
-`max_tokens`, or a tokenizer worse than the declared ratio, breaks the bound;
-neither is tested here.
+**Assumptions.** (A1) a call to model `m` returns at most `maxTokens(m)` output
+tokens; (A2) inputs honour their declared bounds and `τ` bounds the tokenizer;
+(A3) `ω` is shared between the two compared executions.
 
-**Expressiveness is restricted.** No general loops, recursion, arithmetic,
-higher-order prompts, or dynamic model selection. Whether the analysis survives
-those extensions is open; bounded repetition is exactly what makes it decidable.
+**Theorem 1 (Unary bound).** If `⊢ W : ⟨g, e, t⟩` then under (A1) and (A2), for
+any execution, output tokens `≤ g`, input tokens `≤ e`, and `κ ≤ t`.
 
-**The corpus is synthetic.** Workflows are generated from templates, not drawn
-from production systems. The cost suite's shapes were chosen to stress control
-flow, which is where the flat rule fails — an argument that the suite is fair on
-that question, not that it is representative.
+*Proof sketch.* Induction over the derivation. Sequencing adds; a branch executes
+one arm and each component's maximum dominates it; `retry n` runs its body at most
+`n` times. (A1) bounds the output component of a call and (A2) the input
+component. Saturation preserves the inequality for successfully certified
+programs; saturated bounds are rejected by `E266` rather than trusted. ∎
 
-**Proofs are not mechanized**, and the implementation is not verified against
-them.
+**Theorem 2 (Billing noninterference).** Let `W` be well-typed, contain no
+declassification, and pass the relational check. Then for any `σ_P`, any
+`σ_S¹, σ_S²`, and any `ω`, if `⟨W, σ_P ⊎ σ_S^i⟩ ⇓_ω ⟨κ_i, β_i, ε_i⟩` then
+`β_1 = β_2` (and hence `κ_1 = κ_2`).
 
-**Single-implementation results.** All numbers come from one compiler on one
-platform (GCC 16, Windows).
+*Proof sketch.* Induction on the signature. A `Call` node bills
+`(term, oracle(m, k))`; the term's constants are literal, its `outer(x)` are
+equal because `σ_P` is shared, and its `result(j)` are equal because `ω` is
+shared and the two executions have made the same `j` prior calls by the induction
+hypothesis. A `Branch` on a public guard takes the same arm in both, since the
+guard reads only public data. A `Retry` node runs its body under the same oracle
+outcomes, so the same number of attempts occur. At a secret-guarded branch the
+two arms have equal signatures by the check, so whichever arm each execution
+takes, the sequence of billing events is the same. ∎
 
----
+**Theorem 3 (Effect noninterference).** Under the same hypotheses the effect
+sequence and the returned output agree, by the program-counter discipline: `emit`
+requires `Public/Trusted` arguments and a `Public/Trusted` pc, and `output`
+requires `Public`.
 
-## 12. Related work
+### What is not claimed
 
-| System | Form | Static? | Cost bound | Secrets | Injection/integrity |
-|---|---|---|---|---|---|
-| LMQL [1] | query language | partial (decoding constraints) | no (runtime savings) | no | no |
-| SGLang [2] | structured programs + runtime | no | no | no | no |
-| DSPy [3] | declarative modules + optimizer | signatures only | no | no | no |
-| APPL [4] / PDL [5] | prompt languages | host types | no | no | no |
-| Agentproof [13] | extracted graphs + LTL | yes | no | no | no |
-| CaMeL [6] | interpreter + capabilities | no (dynamic) | no | yes | yes |
-| f-secure [7] | system architecture | no | no | yes | yes |
-| AgentFlow [8] | policy + monitor (+bounded SMT) | partial | no | yes | yes |
-| NeuroTaint [9], GIF [10] | runtime taint | no | no | yes | yes |
-| Token Budgets [11] | Rust affine types | compile-time ownership | runtime cap, not inferred | no | no |
-| Budget algebras [12] | multi-agent contracts | no | runtime conservation | no | no |
-| AARA [18, 19] | resource type system | yes | yes (not for LLM tokens) | no | no |
-| **OrchLang** | **source DSL + type system** | **yes** | **yes, inferred** | **yes** | **yes** |
-
-Two observations. First, the columns are near-disjoint: work that does cost does
-not do flow, and vice versa. Second, everything in the flow column is a runtime
-mechanism. OrchLang is, to our knowledge, the first system to place both in a
-compiler's type system and emit a single certificate — and §6 shows that the
-combination is more than the sum.
-
-Prompt-template placeholder checking, which OrchLang also performs, is *not* a
-contribution: it is commodity, available in promptml (Rust), promptctl (Python),
-type-safe-prompt (TypeScript), and others. We mention it only to disclaim it.
+- **These are pen-and-paper proofs over a reference semantics.** They are not
+  mechanized, and the C++ implementation is not verified against them. The
+  experiments in §7 are differential evidence, not proof.
+- **Relative to the coupling.** Theorem 2 says the secret does not change the
+  bill *given the model behaves the same way*. It says nothing about a provider
+  whose sampling itself correlates with the secret.
+- **Relative to declassification.** A declassified value is treated as public by
+  assumption. The compiler records every such site; it does not verify one.
+- **Timing is not modelled.** Wall-clock latency is a separate channel, and the
+  one *Time Will Tell* [3] actually exploits.
+- **Sound, not complete.** §4.4 lists the programs rejected unnecessarily.
+- **The tokenizer assumption is real.** A token bound under one model's tokenizer
+  is not a bound under another's; §9 treats this as future work rather than
+  pretending `max_tokens` is portable.
 
 ---
 
-## 13. Conclusion and future work
+## 7. Evaluation
 
-Cost and information flow in LLM workflows are structural properties, and a
-language designed for the purpose can certify both before anything runs.
-OrchLang derives a token bound that was never exceeded in 4,600 executions where
-the obvious flat rule was exceeded 13.5% of the time, and a two-axis flow
-property that separates a paired safety benchmark perfectly — at roughly 6 ms
-per workflow and zero runtime cost.
+Benchmarks are generated by `bench/generate.py` and results reproduced by
+`python bench/evaluate.py`, which exits nonzero if any assertion fails.
 
-The result we find most interesting is the one we did not set out to find: a
-secret-guarded branch with unbalanced arms leaks through the bill, and only a
-system holding both judgements at once can see it.
+The harness was rewritten after an audit found the previous one could hide
+failures: it skipped workflows that failed to certify, counted *any* nonzero exit
+as a security success — so a parse error scored as a caught leak — and returned
+success even when violations were recorded. It now requires every workflow to
+certify, requires every rejection to cite the diagnostic family it was supposed
+to raise, and fails loudly.
 
-The most valuable next steps are, in order: mechanizing Theorems 1 and 2; an
-independent security benchmark ported from an existing injection corpus;
-extending the cost algebra to data-dependent repetition, where AARA's potential
-method [18] is the obvious tool; and a runtime that enforces the emitted
-certificate, closing the loop between what the compiler proved and what the
-deployment does.
+### E1: Is the unary bound exceeded? — no, componentwise
+
+23 cost workflows × 200 seeds = 4,600 executions. **Zero violations of the
+total, zero of the output component, and zero of the input component.** The
+componentwise check matters: checking only totals is what let the split bug
+through.
+
+### E2: Do simpler rules hold? — no
+
+| Rule | Violated |
+|---|---|
+| Flat sum over syntactic call sites | **636 / 4,600 (13.8%)** |
+| Control-flow-aware (larger arm, retry charged once) | **644 / 4,600 (14.0%)** |
+
+The control-flow-aware rule is *slightly worse*, which is the informative part:
+taking the larger branch arm tightens the bound, and tightening an unsound bound
+makes it fail more often. Branch-awareness alone does not rescue the rule.
+Retries do the damage — every violated workflow contains one.
+
+### E3: How tight, and is the benchmark honest?
+
+Median slack over peak observed consumption is **1.11×** (range 1.02–1.84×).
+
+This number is lower than the 1.23× an earlier draft reported, and the reason is
+a correction rather than an improvement. The generated branch guards were
+`tokens(head) <= 150` where `head` came from a model capped at 150 — always true,
+so the expensive arm never ran and the slack was being measured through dead
+code. Guards now sit at half the cap, both arms are reachable, and the harness
+reports the number of distinct execution paths observed per workflow alongside
+the slack. Zero branch workflows now have a dead arm.
+
+### E4: Does an accepted workflow really have a secret-independent bill?
+
+For each accepted relational workflow, the harness fixes the seed and the public
+inputs, enumerates every combination of secret values (a boolean and a
+nine-valued length), and compares billing vectors.
+
+**7 accepted workflows, 2,975 paired comparisons, 0 differing bills.**
+
+### E5: Are the rejections real, or is the analysis just strict?
+
+For each rejected workflow the harness searches for a witness: two secret values
+whose bills differ.
+
+**7 of 7 rejected workflows have a concrete witness**, none rejected without one.
+`DifferentArgument` — the §3 counterexample — differs in 225 of 425 comparisons.
+
+| Workflow | Comparisons | Bills differ |
+|---|---|---|
+| DifferentArgument | 425 | 225 |
+| DifferentModel | 425 | 225 |
+| ExtraCall | 425 | 225 |
+| CallInOneArmOnly | 425 | 225 |
+| DifferentLiteralLength | 425 | 225 |
+| DifferentInnerPublicGuard | 425 | 126 |
+| DifferentRetryBound | 425 | 81 |
+
+### E6: Flow policy conformance
+
+The paired security suite: **13 of 13 unsafe rejected for a flow reason, 13 of 13
+safe accepted.**
+
+We describe this as *policy conformance*, not injection robustness. Each safe
+variant differs from its unsafe partner by a trusted `endorse` or `declassify`,
+which the compiler records rather than verifies. The suite shows the compiler
+enforces the policy it is given; it does not show that an application resists
+adversarial text.
+
+### E7: Analysis cost
+
+36 workflows certified in 0.44 s, about 12 ms each **including process startup**.
+This is not an isolated measurement of analyser time and should not be read as
+one. The analyses are linear in program size and no solver is involved.
+
+---
+
+## 8. Related work
+
+| Work | Setting | Costs known? | Relation to this paper |
+|---|---|---|---|
+| Ngo et al., S&P'17 [1] | Resource-aware noninterference via AARA | yes, per operation | The foundation. We cannot use its potential method because LLM call costs are not program-determined. |
+| RelCost, POPL'17 [2] | Relational cost bounds, side-channel motivated | yes | Bounds cost *differences* numerically; we compare structure because numbers are unavailable. |
+| Time Will Tell [3] | Output-token-count and timing leakage, single call | — | Establishes the attack. We address a compiler-side guarantee at workflow-billing granularity. |
+| Token-length side channels [4] | Encrypted-traffic token-length attacks | — | Same channel family, network observer. |
+| CaMeL [5] | Dual-LLM planner, custom interpreter, capabilities at tool calls | — | Runtime data/control separation, not string scanning. No resource reasoning. |
+| FIDES [6] | Planner with dynamic confidentiality/integrity labels and controlled release | — | Closest flow comparator; runtime; evaluated on AgentDojo. No resource reasoning. |
+| AgentFlow [7] | Policy language, runtime monitor **plus a bounded SMT verifier** | — | Partly static; policy-level, not a source type system. No resource reasoning. |
+| NeuroTaint [8] | **Offline auditing of execution traces** | — | Post-hoc rather than pre-execution; a different point in the lifecycle from either runtime monitoring or source analysis. |
+| Agentproof [9] | Static verification of extracted workflow graphs | — | Static, but checks topology and temporal policies, not types or resources. |
+| Token Budgets [10] | Affine-typed Rust budget with runtime caps | — | Compile-time *bookkeeping integrity*; the cap itself is enforced at run time. Its 4–6× reservation slack is not comparable to our bound/observed-peak ratio on a different corpus. |
+| AARA [11, 12] | Amortized resource typing | yes | Not applied to LLM tokens; the potential method needs known costs. |
+
+An earlier draft of this paper described NeuroTaint as a runtime mechanism and
+characterised the injection-defence literature as string scanning. Both are
+wrong, and the corrected descriptions are above. We also withdraw the claim that
+a defect of this kind is visible "only" to a unified compiler: separate analyses
+can share facts, and the implementation here does exactly that across two
+modules.
+
+We did not find an existing system that decides, from source, whether a
+multi-step LLM workflow's billing vector is secret-independent. That is a gap,
+not a guarantee of significance: combining known ideas inside a narrow new
+language can be useful without being a major theoretical advance, and we position
+this as an application and tool contribution built on [1] and [2].
+
+---
+
+## 9. Limitations and future work
+
+**Token bounds are not portable across tokenizers.** The compiler reuses one
+model's output cap as a later model's input bound. A string of at most *N* tokens
+under model A may exceed *N* under model B. The language has no tokenizer
+identity and no conversion contract. This is the most concrete correctness gap
+remaining, and closing it — units on resource facts, conversion contracts,
+byte-level fallbacks, explicit request-envelope overhead — is a well-defined next
+project.
+
+**`std::string::size()` measures bytes** while the option is documented in
+characters. For ASCII these coincide; for anything else they do not.
+
+**The proofs are not mechanized.** The cost algebra and signature equality are
+small enough that a Coq or Lean development is tractable and would change how the
+work reads.
+
+**The relational rule could be less strict.** Letting a discharged relational
+obligation relax the program-counter rule inside the branch would admit chained
+calls in secret arms (§4.4) — the single most useful expressiveness gain.
+
+**The corpus is synthetic and the security labels are ours.** An independent
+benchmark, ported from an existing injection corpus, would address the most
+serious threat to the evaluation.
+
+**The certificate is a report, not a proof.** It is JSON emitted by the compiler.
+There is no independent checker, no binding hash tying it to a source revision,
+and no runtime that consumes it. Calling it machine-checkable would require
+writing the small trusted checker that rejects forged or stale evidence.
+
+---
+
+## 10. Conclusion
+
+Asking "what is the maximum this workflow can cost?" is not the same as asking
+"can a secret change what it costs?", and the first question's answer does not
+settle the second. Comparing upper bounds looks like it should work and does not,
+for a reason that is obvious once written down and was not obvious in code.
+
+For LLM workflows the usual repair is unavailable, because a call's cost is the
+provider's choice rather than the program's. Comparing the *structure* of the
+billing — which model, and an input size expressed only in quantities that
+provably agree — recovers a usable rule, and it is decidable by syntactic
+comparison.
+
+The compiler that implements it derives a conventional bound that held in 4,600
+executions where two simpler rules did not, and a relational property that held
+across 2,975 paired comparisons while every rejection it made had a concrete
+leaking witness. The remaining gaps — tokenizer portability, mechanization, an
+independent corpus, a real certificate checker — are named rather than hidden.
 
 ---
 
 ## References
 
-[1] L. Beurer-Kellner, M. Fischer, M. Vechev. *Prompting Is Programming: A Query
-Language for Large Language Models.* PLDI 2023 / PACMPL 7(PLDI). arXiv:2212.06094.
+[1] V. C. Ngo, M. Dehesa-Azuara, M. Fredrikson, J. Hoffmann. *Verifying and
+Synthesizing Constant-Resource Implementations with Types.* IEEE S&P 2017.
+arXiv:1801.01896.
 
-[2] L. Zheng *et al.* *SGLang: Efficient Execution of Structured Language Model
-Programs.* arXiv:2312.07104.
+[2] E. Çiçek, G. Barthe, M. Gaboardi, D. Garg, J. Hoffmann. *Relational Cost
+Analysis.* POPL 2017.
 
-[3] O. Khattab *et al.* *DSPy: Compiling Declarative Language Model Calls into
-Self-Improving Pipelines.* ICLR 2024. arXiv:2310.03714.
+[3] *Time Will Tell: Timing Side Channels via Output Token Count in Large
+Language Models.* arXiv:2412.15431.
 
-[4] H. Dong *et al.* *APPL: A Prompt Programming Language for Harmonious
-Integration of Programs and Large Language Model Prompts.* ACL 2025.
-arXiv:2406.13161.
+[4] R. Weiss et al. *What Was Your Prompt? A Remote Keylogging Attack on AI
+Assistants.* USENIX Security 2024.
 
-[5] M. Vaziri *et al.* *PDL: A Declarative Prompt Programming Language.*
-arXiv:2410.19135.
+[5] E. Debenedetti et al. *Defeating Prompt Injections by Design (CaMeL).*
+arXiv:2503.18813.
 
-[6] E. Debenedetti *et al.* *Defeating Prompt Injections by Design (CaMeL).*
-Google DeepMind. arXiv:2503.18813.
+[6] *FIDES: Information-Flow Control for AI Agents.* arXiv:2505.23643.
 
-[7] *System-Level Defense against Indirect Prompt Injection Attacks: An
-Information Flow Control Perspective.* arXiv:2409.19091.
-
-[8] *AgentFlow: A Flow-Centric Policy Language and Framework for Securing LLM
+[7] *AgentFlow: A Flow-Centric Policy Language and Framework for Securing LLM
 Agent Systems.* arXiv:2608.22868.
 
-[9] *Ghost in the Agent: Redefining Information Flow Tracking for LLM Agents.*
+[8] *Ghost in the Agent: Redefining Information Flow Tracking for LLM Agents.*
 arXiv:2604.23374.
 
-[10] *GIF: Locally Sound Geometric Information Flow Control for LLMs.*
-arXiv:2606.23277.
+[9] *Agentproof: Static Verification of Agent Workflow Graphs.* arXiv:2603.20356.
 
-[11] *Token Budgets: An Empirical Catalog of 63 LLM-Agent Budget-Overrun
+[10] *Token Budgets: An Empirical Catalog of 63 LLM-Agent Budget-Overrun
 Incidents, with an Affine-Typed Rust Mitigation as a Case Study.*
 arXiv:2606.04056.
 
-[12] *Retrieval-Conditioned Topology Selection with Provable Budget Conservation
-for Multi-Agent Code Generation.* arXiv:2605.05657.
-
-[13] *Agentproof: Static Verification of Agent Workflow Graphs.*
-arXiv:2603.20356.
-
-[14] D. E. Denning, P. J. Denning. *Certification of Programs for Secure
-Information Flow.* CACM 20(7), 1977.
-
-[15] D. Volpano, C. Irvine, G. Smith. *A Sound Type System for Secure Flow
-Analysis.* Journal of Computer Security 4(2–3), 1996.
-
-[16] A. C. Myers. *JFlow: Practical Mostly-Static Information Flow Control.*
-POPL 1999.
-
-[17] A. Sabelfeld, A. C. Myers. *Language-Based Information-Flow Security.* IEEE
-JSAC 21(1), 2003.
-
-[18] J. Hoffmann, K. Aehlig, M. Hofmann. *Multivariate Amortized Resource
+[11] J. Hoffmann, K. Aehlig, M. Hofmann. *Multivariate Amortized Resource
 Analysis.* ACM TOPLAS 34(3), 2012.
 
-[19] D. M. Kahn, J. Hoffmann. *Exponential Automatic Amortized Resource
+[12] D. M. Kahn, J. Hoffmann. *Exponential Automatic Amortized Resource
 Analysis.* FoSSaCS 2020.
 
-[20] A. Sabelfeld, D. Sands. *Dimensions and Principles of Declassification.*
+[13] D. Volpano, G. Smith, C. Irvine. *A Sound Type System for Secure Flow
+Analysis.* Journal of Computer Security 4(2–3), 1996.
+
+[14] A. Sabelfeld, A. C. Myers. *Language-Based Information-Flow Security.*
+IEEE JSAC 21(1), 2003.
+
+[15] A. Sabelfeld, D. Sands. *Dimensions and Principles of Declassification.*
 CSFW 2005.
-
-[21] *Proof-Carrying Certificates for LLM Pipelines: A Trust-Boundary
-Architecture.* arXiv:2605.16407.
-
-[22] OWASP. *Top 10 for Large Language Model Applications*, 2025. (LLM01 Prompt
-Injection; LLM07 System Prompt Leakage.)
 
 ---
 
 ## Artifact
 
-Compiler, benchmark generator, evaluation harness, and results:
 `https://github.com/guyoverclocked/orchlang-compiler-design-project`
 
 ```sh
-make check                  # build, 83 tests, example corpus
+make check                  # build, 95 tests, example corpus
 python bench/generate.py    # regenerate the benchmark
-python bench/evaluate.py    # reproduce every number in §10
+python bench/evaluate.py    # reproduce every number in §7; exits nonzero on failure
 ```
+
+The audit that produced the negative result in §3, with its reproduction
+scripts, is preserved under `audit/2026-09-17/`.

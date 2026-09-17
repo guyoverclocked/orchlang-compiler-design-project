@@ -6,14 +6,16 @@ OrchLang describes LLM workflows that can be checked completely before anything
 runs. The compiler answers two questions about a workflow without contacting a
 model, reading a key, or touching a network:
 
-1. **What is the most this workflow can cost?** A certified upper bound on the
+1. **What is the most this workflow can cost?** A worst-case upper bound on the
    tokens it can consume on any execution.
 2. **Where can data go?** Whether a secret can reach a prompt, an output, or an
    external effect, and whether data derived from an untrusted source can drive
    an external effect.
+3. **Can a secret change the bill?** Whether the per-model billing vector is
+   independent of every secret, which is a *relational* question about two
+   executions rather than a property of one.
 
-Both answers are produced by one type system over one program, and both are
-written into a machine-checkable certificate.
+All three are written into an analysis report the compiler emits as JSON.
 
 ## Design commitments
 
@@ -165,7 +167,15 @@ C(anything else)           = ⟨0, 0⟩
 All arithmetic saturates rather than wrapping, so an overflow yields a bound
 that is still an over-approximation.
 
-### Why the bound has two components
+### Why the bound has two components, and how a branch combines them
+
+At a branch each component is maximised **separately**, and the total is tracked
+alongside. Taking the larger arm's pair whole would bound the total but not each
+half, because the losing arm can dominate one component; a certificate claiming
+one output token once admitted an execution producing twenty. The invariant is
+`total <= guaranteed + estimated`, and the gap is the price of a faithful split.
+
+
 
 The two components are reported separately because they rest on different
 foundations.
@@ -186,21 +196,47 @@ much of the number rests on an assumption.
 A monetary figure is derived from `cost_per_token` where models declare one. It
 is reported, not certified: the guarantee is stated over token counts.
 
-### The cost channel
+### The relational obligation on secret-guarded branches
 
-A branch can leak its guard without any value crossing a boundary. If the arms
-cost different amounts, the token bill differs, and whoever sees the bill learns
-which arm ran. When the guard is secret this is a leak, and `E236` reports it;
-when the guard is untrusted, an injected value is choosing how much the workflow
-spends, and `W237` says so.
+A branch can leak its guard without any value crossing a boundary: if the arms
+bill differently, the invoice differs, and whoever reads it learns which arm ran.
 
-Neither analysis finds this alone. The label system does not know what an arm
-costs; the cost analysis does not know that the guard is a secret. The check
-exists only because both judgements are made over the same program, and it is
-the clearest argument for deriving them together rather than in separate tools.
+The obvious rule -- accept when both arms have equal certified upper bounds -- is
+unsound, because an upper bound constrains a maximum and two quantities with the
+same maximum need not be equal. `examples/invalid/equal_bounds.orch` is a
+workflow that rule accepts and whose bill nonetheless moves with the secret.
 
-A workflow fixes an `E236` by making the arms cost the same, by moving the
-expensive call out of the branch, or by declassifying the guard and saying why.
+Numbers cannot be compared here at all, because a call's output length is chosen
+by the provider rather than the program. So the compiler compares *structure*.
+Each arm is abstracted to a **billing signature**: an ordered record of which
+model is called and a symbolic term for its input size, where the term is built
+only from
+
+- constants, from the template and from literal arguments;
+- `|x|` for a variable bound outside the branch, equal because public inputs are
+  fixed; and
+- the result of an earlier call in the same signature, referred to *by position*
+  and equal because the k-th call returns the same answer under a shared model
+  oracle.
+
+A branch on a public guard keeps both arms, since both executions see the same
+public data and take the same one. A nested secret-guarded branch whose arms
+already agree contributes that common signature, which makes the analysis
+compositional. An argument whose label is secret makes the signature undefined.
+
+At a secret-guarded branch, both signatures must be defined and equal, or `E236`
+reports which events differ.
+
+The rule is sound and deliberately incomplete: two arms reading different
+variables that happen always to have equal length are rejected, because the
+compiler has no reason to believe they do.
+
+### Spend influence
+
+`W237` is a warning, not a secrecy claim: when an *untrusted*-guarded branch has
+arms of differing bounds, an injected value is choosing how much the workflow
+spends. That is a denial-of-service concern, so it is surfaced rather than
+rejected.
 
 ### Requirements
 
@@ -234,8 +270,8 @@ reported as undecidable rather than silently accepted.
 | `E234` | An effect may not be guarded by a secret condition |
 | `E235` | An effect may not be guarded by an untrusted condition |
 | `W236` | A reclassification that changes nothing (warning) |
-| `E236` | A secret-guarded branch whose arms cost different amounts |
-| `W237` | An untrusted-guarded branch whose arms cost different amounts (warning) |
+| `E236` | A secret-guarded branch whose arms have unequal billing signatures |
+| `W237` | An untrusted-guarded branch whose arms bound differently (warning) |
 | `E241` | The model in a `using` clause must be declared |
 | `E242` | The tool in an `emit` statement must be declared |
 | `E243` | Emit arity must match the tool's parameter count |

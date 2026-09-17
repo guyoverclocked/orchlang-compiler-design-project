@@ -18,6 +18,18 @@ PASS parser invalid call argument
 PASS parser unexpected statement
 PASS AST printer
 PASS secret-dependent cost is rejected
+PASS equal bounds with different arguments rejected
+PASS extra call in one arm rejected
+PASS differing retry bounds rejected
+PASS matching retry bounds accepted
+PASS chaining inside secret arm rejected conservatively
+PASS public guard inside secret arm allowed
+PASS differing public sub-branch rejected
+PASS branch bounds each component separately
+PASS literal accounting agrees with runtime
+PASS runtime respects block scope
+PASS accepted workflow has secret-independent billing
+PASS rejected workflow actually leaks
 PASS balanced arms under secret accepted
 PASS public guard with unequal arms fine
 PASS untrusted guard on unequal arms warns
@@ -81,4 +93,4 @@ PASS IR valid lowering
 PASS IR refuses invalid program
 PASS IR dependency cycle detector
 PASS IR JSON export
-Passed 83/83 tests.
+Passed 95/95 tests.

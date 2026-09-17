@@ -1,41 +1,67 @@
 OrchLang evaluation
 ===================
 
-RQ1/RQ2/RQ3  certified bound vs observed execution (23 workflows, 4600 runs)
+E1-E3  certified bound versus observed execution
+       (23 workflows, 4600 executions; "paths" counts distinct model-sets
+        observed, so 1 means a branch arm never ran)
 
-workflow          certified  guaranteed  estimated  flat  peak_actual  mean_actual  slack_vs_peak  certified_violations  flat_violations
-----------------  ---------  ----------  ---------  ----  -----------  -----------  -------------  --------------------  ---------------
-branch_1          1006       750         256        1284  508          283.0        1.98           0                     0              
-branch_2          1734       1350        384        2290  764          426.2        2.27           0                     0              
-branch_3          2462       1950        512        3296  1011         569.6        2.44           0                     0              
-branch_4          3190       2550        640        4302  1187         711.3        2.69           0                     0              
-branch_in_retry   2462       1950        512        1284  817          395.2        3.01           0                     0              
-branch_nested     1734       1350        384        3746  686          421.3        2.53           0                     0              
-chain_1           278        150         128        278   273          147.9        1.02           0                     0              
-chain_2           586        300         286        586   539          306.9        1.09           0                     0              
-chain_3           894        450         444        894   812          461.1        1.1            0                     0              
-chain_4           1202       600         602        1202  1085         617.7        1.11           0                     0              
-chain_5           1510       750         760        1510  1288         775.3        1.17           0                     0              
-retry_2           556        300         256        278   542          210.8        1.03           0                     43             
-retry_3           834        450         384        278   693          241.1        1.2            0                     59             
-retry_4           1112       600         512        278   875          257.2        1.27           0                     63             
-retry_5           1390       750         640        278   1144         264.6        1.22           0                     63             
-retry_6           1668       900         768        278   1144         266.1        1.46           0                     63             
-retry_in_branch   1112       600         512        1284  817          395.2        1.36           0                     0              
-retry_nested_2x2  1112       600         512        278   901          322.8        1.23           0                     102            
-retry_nested_2x3  1668       900         768        278   1298         381.8        1.29           0                     111            
-retry_nested_3x3  2502       1350        1152       278   1363         441.5        1.84           0                     117            
-wide_input_200    666        300         366        666   600          327.1        1.11           0                     0              
-wide_input_2000   2466       300         2166       2466  2339         1265.2       1.05           0                     0              
-wide_input_800    1266       300         966        1266  1158         637.7        1.09           0                     0              
+workflow          certified  out<=  in<=  flat  cfa   peak  slack  paths  cert_viol  comp_viol  flat_viol  cfa_viol
+----------------  ---------  -----  ----  ----  ----  ----  -----  -----  ---------  ---------  ---------  --------
+branch_1          1006       750    256   1284  1006  935   1.08   2      0          0          0          0       
+branch_2          1734       1350   384   2290  1734  1558  1.11   2      0          0          0          0       
+branch_3          2462       1950   512   3296  2462  2229  1.1    2      0          0          0          0       
+branch_4          3190       2550   640   4302  3190  2905  1.1    2      0          0          0          0       
+branch_in_retry   2462       1950   512   1284  1006  2005  1.23   2      0          0          15         23      
+branch_nested     1734       1350   384   3746  2462  1445  1.2    2      0          0          0          0       
+chain_1           278        150    128   278   278   273   1.02   1      0          0          0          0       
+chain_2           586        300    286   586   586   539   1.09   1      0          0          0          0       
+chain_3           894        450    444   894   894   812   1.1    1      0          0          0          0       
+chain_4           1202       600    602   1202  1202  1085  1.11   1      0          0          0          0       
+chain_5           1510       750    760   1510  1510  1288  1.17   1      0          0          0          0       
+retry_2           556        300    256   278   278   542   1.03   1      0          0          43         43      
+retry_3           834        450    384   278   278   693   1.2    1      0          0          59         59      
+retry_4           1112       600    512   278   278   875   1.27   1      0          0          63         63      
+retry_5           1390       750    640   278   278   1144  1.22   1      0          0          63         63      
+retry_6           1668       900    768   278   278   1144  1.46   1      0          0          63         63      
+retry_in_branch   1112       750    512   1284  1284  947   1.17   2      0          0          0          0       
+retry_nested_2x2  1112       600    512   278   278   901   1.23   1      0          0          102        102     
+retry_nested_2x3  1668       900    768   278   278   1298  1.29   1      0          0          111        111     
+retry_nested_3x3  2502       1350   1152  278   278   1363  1.84   1      0          0          117        117     
+wide_input_200    666        300    366   666   666   600   1.11   1      0          0          0          0       
+wide_input_2000   2466       300    2166  2466  2466  2339  1.05   1      0          0          0          0       
+wide_input_800    1266       300    966   1266  1266  1158  1.09   1      0          0          0          0       
 
-  certified bound exceeded : 0 of 4600 runs
-  flat bound exceeded      : 621 of 4600 runs (13.5%)
-  workflows where the flat bound is unsound: 8 of 23
-    retry_2, retry_3, retry_4, retry_5, retry_6, retry_nested_2x2, retry_nested_2x3, retry_nested_3x3
-  slack vs peak observed: median 1.23x, min 1.02x, max 3.01x
+  certified total exceeded        : 0 of 4600
+  certified output component      : 0 of 4600
+  certified input component       : 0 of 4600
+  flat per-call sum exceeded      : 636 of 4600 (13.8%)
+  control-flow-aware rule exceeded: 644 of 4600 (14.0%)
+  slack vs peak observed          : median 1.11x, range 1.02-1.84x
+  branch workflows with a dead arm: 0
 
-RQ4  information-flow analysis on the paired security suite
+E4-E5  relational obligation: does the secret move the bill?
+
+workflow                   expected  verdict  comparisons  bills_differ  witness                                         
+-------------------------  --------  -------  -----------  ------------  ------------------------------------------------
+EmptyBothArms              accept    accept   425          0                                                             
+MatchingInnerPublicGuard   accept    accept   425          0                                                             
+SameCallBothArms           accept    accept   425          0                                                             
+SameLiteral                accept    accept   425          0                                                             
+SameModelBothArms          accept    accept   425          0                                                             
+SameRetryBound             accept    accept   425          0                                                             
+TwoCallsBothArms           accept    accept   425          0                                                             
+CallInOneArmOnly           reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
+DifferentArgument          reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
+DifferentInnerPublicGuard  reject    reject   425          126           {"flag": "false", "s": "0"} vs {"flag": "true", 
+DifferentLiteralLength     reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
+DifferentModel             reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
+DifferentRetryBound        reject    reject   425          81            {"flag": "false", "s": "0"} vs {"flag": "true", 
+ExtraCall                  reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
+
+  accepted workflows: 2975 paired comparisons, 0 showed a different bill
+  rejected workflows: 7 had a concrete leaking witness, 0 had none
+
+E6  flow policy conformance on the paired security suite
 
 workflow                     expected  verdict  codes    
 ---------------------------  --------  -------  ---------
@@ -66,13 +92,17 @@ TrustedOnlyToSink            accept    accept
 UnguardedEffect              accept    accept            
 UntrustedToOutputOnly        accept    accept            
 
-  unsafe rejected (true positive) : 13
-  unsafe accepted (false negative): 0
-  safe accepted   (true negative) : 13
-  safe rejected   (false positive): 0
-  recall    1.000
-  precision 1.000
+  unsafe rejected for a flow reason : 13
+  unsafe accepted or wrong reason   : 0
+  safe accepted                     : 13
+  safe rejected                     : 0
+
+  This measures conformance to the declared policy, not robustness to
+  adversarial text: the safe variants differ from the unsafe ones by a
+  trusted endorsement or declassification, which the compiler records
+  rather than verifies.
 
 Analysis cost
 
-  36 workflows certified in 0.23 s (6.4 ms each, including process startup)
+  36 workflows certified in 0.44 s (12.4 ms each, including process startup;
+  this is not an isolated measurement of analyser time)

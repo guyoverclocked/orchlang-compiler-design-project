@@ -1,5 +1,6 @@
 TieredTriage:
-  token bound   1639 / budget 2000  (guaranteed 1020 + estimated 619 @ 4 chars/token)
+  token bound   1639 / budget 2000
+  components    output <= 1020, input <= 620 @ 4 chars/token  (sum 1640 exceeds the total bound; the two maxima fall on different branches)
   labels        0 secret, 0 untrusted
   derivation for TieredTriage:
       call  severity = triage via small [out<=120, in<=8+300]  => 428 tokens
