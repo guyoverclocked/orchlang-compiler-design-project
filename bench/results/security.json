@@ -1,0 +1,158 @@
+[
+  {
+    "workflow": "InjectionInBranch",
+    "expected": "reject",
+    "verdict": "reject",
+    "codes": "E233 E235"
+  },
+  {
+    "workflow": "InjectionInRetry",
+    "expected": "reject",
+    "verdict": "reject",
+    "codes": "E233"
+  },
+  {
+    "workflow": "InjectionToSink",
+    "expected": "reject",
+    "verdict": "reject",
+    "codes": "E233"
+  },
+  {
+    "workflow": "InjectionTransitive",
+    "expected": "reject",
+    "verdict": "reject",
+    "codes": "E233"
+  },
+  {
+    "workflow": "MixedTrustToSink",
+    "expected": "reject",
+    "verdict": "reject",
+    "codes": "E233"
+  },
+  {
+    "workflow": "SecretAsOutput",
+    "expected": "reject",
+    "verdict": "reject",
+    "codes": "E231"
+  },
+  {
+    "workflow": "SecretCostChannel",
+    "expected": "reject",
+    "verdict": "reject",
+    "codes": "E236"
+  },
+  {
+    "workflow": "SecretGuardedEffect",
+    "expected": "reject",
+    "verdict": "reject",
+    "codes": "E234"
+  },
+  {
+    "workflow": "SecretGuardedLaundered",
+    "expected": "reject",
+    "verdict": "reject",
+    "codes": "E234 W236"
+  },
+  {
+    "workflow": "SecretToPrompt",
+    "expected": "reject",
+    "verdict": "reject",
+    "codes": "E230 E231"
+  },
+  {
+    "workflow": "SecretToSink",
+    "expected": "reject",
+    "verdict": "reject",
+    "codes": "E232"
+  },
+  {
+    "workflow": "UntrustedGuardedEffect",
+    "expected": "reject",
+    "verdict": "reject",
+    "codes": "E235"
+  },
+  {
+    "workflow": "UntrustedToSinkNoEndorse",
+    "expected": "reject",
+    "verdict": "reject",
+    "codes": "E233"
+  },
+  {
+    "workflow": "BalancedCostArms",
+    "expected": "accept",
+    "verdict": "accept",
+    "codes": ""
+  },
+  {
+    "workflow": "EffectOutsideSecretBranch",
+    "expected": "accept",
+    "verdict": "accept",
+    "codes": ""
+  },
+  {
+    "workflow": "InjectionEndorsed",
+    "expected": "accept",
+    "verdict": "accept",
+    "codes": ""
+  },
+  {
+    "workflow": "InjectionInBranchEndorsed",
+    "expected": "accept",
+    "verdict": "accept",
+    "codes": ""
+  },
+  {
+    "workflow": "InjectionInRetryEndorsed",
+    "expected": "accept",
+    "verdict": "accept",
+    "codes": ""
+  },
+  {
+    "workflow": "InjectionTransitiveEndorsed",
+    "expected": "accept",
+    "verdict": "accept",
+    "codes": ""
+  },
+  {
+    "workflow": "SecretAsOutputDeclassified",
+    "expected": "accept",
+    "verdict": "accept",
+    "codes": ""
+  },
+  {
+    "workflow": "SecretToPromptDeclassified",
+    "expected": "accept",
+    "verdict": "accept",
+    "codes": ""
+  },
+  {
+    "workflow": "SecretToSinkDeclassified",
+    "expected": "accept",
+    "verdict": "accept",
+    "codes": ""
+  },
+  {
+    "workflow": "TrustedGuardedEffect",
+    "expected": "accept",
+    "verdict": "accept",
+    "codes": ""
+  },
+  {
+    "workflow": "TrustedOnlyToSink",
+    "expected": "accept",
+    "verdict": "accept",
+    "codes": ""
+  },
+  {
+    "workflow": "UnguardedEffect",
+    "expected": "accept",
+    "verdict": "accept",
+    "codes": ""
+  },
+  {
+    "workflow": "UntrustedToOutputOnly",
+    "expected": "accept",
+    "verdict": "accept",
+    "codes": ""
+  }
+]

@@ -1,0 +1,114 @@
+[
+  {
+    "workflow": "EmptyBothArms",
+    "expected": "accept",
+    "verdict": "accept",
+    "comparisons": 425,
+    "bills_differ": 0,
+    "witness": ""
+  },
+  {
+    "workflow": "MatchingInnerPublicGuard",
+    "expected": "accept",
+    "verdict": "accept",
+    "comparisons": 425,
+    "bills_differ": 0,
+    "witness": ""
+  },
+  {
+    "workflow": "SameCallBothArms",
+    "expected": "accept",
+    "verdict": "accept",
+    "comparisons": 425,
+    "bills_differ": 0,
+    "witness": ""
+  },
+  {
+    "workflow": "SameLiteral",
+    "expected": "accept",
+    "verdict": "accept",
+    "comparisons": 425,
+    "bills_differ": 0,
+    "witness": ""
+  },
+  {
+    "workflow": "SameModelBothArms",
+    "expected": "accept",
+    "verdict": "accept",
+    "comparisons": 425,
+    "bills_differ": 0,
+    "witness": ""
+  },
+  {
+    "workflow": "SameRetryBound",
+    "expected": "accept",
+    "verdict": "accept",
+    "comparisons": 425,
+    "bills_differ": 0,
+    "witness": ""
+  },
+  {
+    "workflow": "TwoCallsBothArms",
+    "expected": "accept",
+    "verdict": "accept",
+    "comparisons": 425,
+    "bills_differ": 0,
+    "witness": ""
+  },
+  {
+    "workflow": "CallInOneArmOnly",
+    "expected": "reject",
+    "verdict": "reject",
+    "comparisons": 425,
+    "bills_differ": 225,
+    "witness": "{\"flag\": \"false\", \"s\": \"0\"} vs {\"flag\": \"true\", "
+  },
+  {
+    "workflow": "DifferentArgument",
+    "expected": "reject",
+    "verdict": "reject",
+    "comparisons": 425,
+    "bills_differ": 225,
+    "witness": "{\"flag\": \"false\", \"s\": \"0\"} vs {\"flag\": \"true\", "
+  },
+  {
+    "workflow": "DifferentInnerPublicGuard",
+    "expected": "reject",
+    "verdict": "reject",
+    "comparisons": 425,
+    "bills_differ": 126,
+    "witness": "{\"flag\": \"false\", \"s\": \"0\"} vs {\"flag\": \"true\", "
+  },
+  {
+    "workflow": "DifferentLiteralLength",
+    "expected": "reject",
+    "verdict": "reject",
+    "comparisons": 425,
+    "bills_differ": 225,
+    "witness": "{\"flag\": \"false\", \"s\": \"0\"} vs {\"flag\": \"true\", "
+  },
+  {
+    "workflow": "DifferentModel",
+    "expected": "reject",
+    "verdict": "reject",
+    "comparisons": 425,
+    "bills_differ": 225,
+    "witness": "{\"flag\": \"false\", \"s\": \"0\"} vs {\"flag\": \"true\", "
+  },
+  {
+    "workflow": "DifferentRetryBound",
+    "expected": "reject",
+    "verdict": "reject",
+    "comparisons": 425,
+    "bills_differ": 81,
+    "witness": "{\"flag\": \"false\", \"s\": \"0\"} vs {\"flag\": \"true\", "
+  },
+  {
+    "workflow": "ExtraCall",
+    "expected": "reject",
+    "verdict": "reject",
+    "comparisons": 425,
+    "bills_differ": 225,
+    "witness": "{\"flag\": \"false\", \"s\": \"0\"} vs {\"flag\": \"true\", "
+  }
+]
