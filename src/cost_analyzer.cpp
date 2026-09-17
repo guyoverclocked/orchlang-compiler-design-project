@@ -7,26 +7,33 @@ namespace orchlang {
 
 namespace {
 
-// Sequential composition: costs add.
+// Sequential composition: every component adds.
 CostBound sequence(const CostBound& left, const CostBound& right) {
     CostBound combined;
     combined.guaranteed = addTokens(left.guaranteed, right.guaranteed);
     combined.estimated = addTokens(left.estimated, right.estimated);
+    combined.totalTokens = addTokens(left.totalTokens, right.totalTokens);
     combined.money = left.money + right.money;
     combined.moneyComplete = left.moneyComplete && right.moneyComplete;
     combined.defined = left.defined && right.defined;
     return combined;
 }
 
-// Choice: the bound is whichever arm costs more in total.  Taking that arm's
-// components whole, rather than the componentwise maximum, keeps the reported
-// split faithful to a single real execution path while still dominating both.
+// Choice: exactly one arm runs, so each fact is maximised on its own.
+//
+// The total takes the larger arm's total, which is the tightest sound bound on
+// the sum.  Each component takes its own maximum across arms, which is the
+// tightest sound bound on that component.  These maxima can come from different
+// arms; that is why componentSum() can exceed total().
 CostBound choice(const CostBound& left, const CostBound& right) {
-    CostBound chosen = left.total() >= right.total() ? left : right;
-    chosen.money = left.money >= right.money ? left.money : right.money;
-    chosen.moneyComplete = left.moneyComplete && right.moneyComplete;
-    chosen.defined = left.defined && right.defined;
-    return chosen;
+    CostBound combined;
+    combined.guaranteed = maxTokens(left.guaranteed, right.guaranteed);
+    combined.estimated = maxTokens(left.estimated, right.estimated);
+    combined.totalTokens = maxTokens(left.totalTokens, right.totalTokens);
+    combined.money = left.money >= right.money ? left.money : right.money;
+    combined.moneyComplete = left.moneyComplete && right.moneyComplete;
+    combined.defined = left.defined && right.defined;
+    return combined;
 }
 
 // Bounded repetition: the body may run up to `factor` times.
@@ -34,6 +41,7 @@ CostBound repeat(const CostBound& body, std::size_t factor) {
     CostBound scaled;
     scaled.guaranteed = multiplyTokens(body.guaranteed, factor);
     scaled.estimated = multiplyTokens(body.estimated, factor);
+    scaled.totalTokens = multiplyTokens(body.totalTokens, factor);
     scaled.money = body.money * static_cast<double>(factor);
     scaled.moneyComplete = body.moneyComplete;
     scaled.defined = body.defined;
@@ -52,42 +60,34 @@ private:
     CostBound statement(const Stmt& node, int depth);
     void record(int depth, std::string rule, std::string detail, const CostBound& bound,
                 const SourceLocation& location);
-    void checkCostChannel(const IfStmt& branch, const CostBound& thenBound,
-                          const CostBound& elseBound);
+    void checkSpendInfluence(const IfStmt& branch, const CostBound& thenBound,
+                             const CostBound& elseBound);
 
     const SemanticResult& semantic_;
     std::vector<DerivationStep>& derivation_;
     DiagnosticBag& diagnostics_;
 };
 
-// A branch whose arms cost different amounts and whose guard is not public
-// leaks the guard through the bill, even when no value crosses a boundary.
-// Neither analysis can see this on its own: the label system does not know what
-// an arm costs, and the cost analysis does not know what the guard is.
-void Deriver::checkCostChannel(const IfStmt& branch, const CostBound& thenBound,
-                               const CostBound& elseBound) {
+// An untrusted guard whose arms cost different amounts means an injected value
+// chooses how much the workflow spends.  This is a spend-influence observation,
+// not a secrecy claim: the secrecy obligation is discharged by the relational
+// analysis in relational.cpp, which compares billing structure rather than
+// upper bounds.
+void Deriver::checkSpendInfluence(const IfStmt& branch, const CostBound& thenBound,
+                                  const CostBound& elseBound) {
     const auto guard = semantic_.guardLabels.find(&branch);
     if (guard == semantic_.guardLabels.end()) {
         return;
     }
-    if (thenBound.total() == elseBound.total()) {
+    if (thenBound.total() == elseBound.total() || !guard->second.isUntrusted()) {
         return;
     }
-    if (guard->second.isSecret()) {
-        std::ostringstream message;
-        message << "the arms of this branch cost different amounts (" << thenBound.total()
-                << " vs " << elseBound.total()
-                << " tokens) and the branch is guarded by a secret, so the token bill reveals "
-                   "the secret";
-        diagnostics_.error("E236", branch.location, message.str());
-    } else if (guard->second.isUntrusted()) {
-        std::ostringstream message;
-        message << "the arms of this branch cost different amounts (" << thenBound.total()
-                << " vs " << elseBound.total()
-                << " tokens) and the branch is guarded by untrusted data, so an injected value "
-                   "chooses how much this workflow spends";
-        diagnostics_.warning("W237", branch.location, message.str());
-    }
+    std::ostringstream message;
+    message << "the arms of this branch bound at " << thenBound.total() << " and "
+            << elseBound.total()
+            << " tokens and the branch is guarded by untrusted data, so an injected value "
+               "chooses how much this workflow spends";
+    diagnostics_.warning("W237", branch.location, message.str());
 }
 
 void Deriver::record(int depth, std::string rule, std::string detail, const CostBound& bound,
@@ -112,6 +112,7 @@ CostBound Deriver::statement(const Stmt& node, int depth) {
             const CallSiteFacts& site = found->second;
             bound.guaranteed = site.modelMaxTokens;
             bound.estimated = addTokens(site.promptTemplateTokens, site.argumentTokens);
+            bound.totalTokens = addTokens(bound.guaranteed, bound.estimated);
             bound.defined = site.argumentBoundsKnown;
             if (site.hasUnitPrice) {
                 bound.money = static_cast<double>(addTokens(bound.guaranteed, bound.estimated)) *
@@ -134,7 +135,7 @@ CostBound Deriver::statement(const Stmt& node, int depth) {
             const CostBound elseBound =
                 branch.hasElse ? block(branch.elseBranch, depth + 1) : CostBound{};
             const CostBound bound = choice(thenBound, elseBound);
-            checkCostChannel(branch, thenBound, elseBound);
+            checkSpendInfluence(branch, thenBound, elseBound);
 
             std::ostringstream detail;
             detail << "max(then=" << thenBound.total() << ", else=" << elseBound.total() << ')';

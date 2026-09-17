@@ -81,7 +81,8 @@ const WorkflowCost* costOf(const CostResult& cost, const std::string& workflow) 
 }  // namespace
 
 std::string printCertificate(const Program& program, const SemanticResult& semantic,
-                             const CostResult& cost, const ProgramIR& ir) {
+                             const CostResult& cost, const ProgramIR& ir,
+                             const RelationalResult& relational) {
     std::ostringstream out;
     out << "{\n";
     out << "  \"format\": \"orchlang-safety-certificate\",\n";
@@ -109,6 +110,7 @@ std::string printCertificate(const Program& program, const SemanticResult& seman
             out << "\"guaranteed_tokens\": " << workflowCost->bound.guaranteed
                 << ", \"estimated_tokens\": " << workflowCost->bound.estimated
                 << ", \"total_tokens\": " << workflowCost->bound.total()
+                << ", \"component_sum_tokens\": " << workflowCost->bound.componentSum()
                 << ", \"within_budget\": " << (workflowCost->withinBudget() ? "true" : "false")
                 << ", \"defined\": " << (workflowCost->bound.defined ? "true" : "false")
                 << ", \"cost\": " << money(workflowCost->bound.money)
@@ -168,6 +170,23 @@ std::string printCertificate(const Program& program, const SemanticResult& seman
         }
         out << "      ],\n";
 
+        out << "      \"relational_obligations\": [\n";
+        std::vector<const RelationalObligation*> obligations;
+        for (const RelationalObligation& obligation : relational.obligations) {
+            if (obligation.workflow == workflow->name) {
+                obligations.push_back(&obligation);
+            }
+        }
+        for (std::size_t index2 = 0; index2 < obligations.size(); ++index2) {
+            const RelationalObligation& entry = *obligations[index2];
+            out << "        {\"guard\": " << quoted(entry.guard)
+                << ", \"discharged\": " << (entry.discharged ? "true" : "false")
+                << ", \"detail\": " << quoted(entry.detail)
+                << ", \"line\": " << entry.location.line << "}"
+                << (index2 + 1 == obligations.size() ? "" : ",") << '\n';
+        }
+        out << "      ],\n";
+
         out << "      \"sinks\": [\n";
         std::vector<const IRNode*> sinks;
         for (const WorkflowIR& lowered : ir.workflows) {
@@ -199,9 +218,15 @@ std::string printCertificateSummary(const CostResult& cost, const SemanticResult
     for (const WorkflowCost& workflow : cost.workflows) {
         out << workflow.name << ":\n";
         out << "  token bound   " << workflow.bound.total() << " / budget " << workflow.budget
-            << "  (guaranteed " << workflow.bound.guaranteed << " + estimated "
+            << "\n";
+        out << "  components    output <= " << workflow.bound.guaranteed << ", input <= "
             << workflow.bound.estimated << " @ " << semantic.options.charsPerToken
-            << " chars/token)\n";
+            << " chars/token";
+        if (workflow.bound.componentSum() != workflow.bound.total()) {
+            out << "  (sum " << workflow.bound.componentSum()
+                << " exceeds the total bound; the two maxima fall on different branches)";
+        }
+        out << '\n';
         if (workflow.bound.money > 0.0) {
             out << "  cost bound    " << money(workflow.bound.money)
                 << (workflow.bound.moneyComplete ? "" : "  (partial: some models declare no price)")

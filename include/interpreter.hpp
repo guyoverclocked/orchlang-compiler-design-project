@@ -20,6 +20,7 @@
 
 #include <cstdint>
 #include <cstddef>
+#include <map>
 #include <string>
 #include <vector>
 
@@ -30,6 +31,29 @@ struct RunOptions {
     // Chance in [0,100] that one attempt inside a retry block fails and the
     // block tries again.  Models a transient failure or a rejected validation.
     unsigned retryFailurePercent{50};
+
+    // Pins the token length of named inputs and secrets instead of sampling
+    // them.  This is what makes the relational claim testable: run the same
+    // workflow twice under one seed, change only a secret's pinned length, and
+    // compare the bills.  Without it, every difference could be blamed on the
+    // sampler.
+    std::map<std::string, std::size_t> pinnedLengths;
+    // Pins the truth value of named boolean inputs and secrets.
+    std::map<std::string, bool> pinnedFlags;
+};
+
+// Tokens billed to one model, which is what an itemised provider bill shows.
+// Totals alone are not the right observation: two runs can agree on total
+// tokens while charging different models at different prices.
+struct ModelBilling {
+    std::size_t inputTokens{0};
+    std::size_t outputTokens{0};
+    std::size_t calls{0};
+
+    bool operator==(const ModelBilling& other) const {
+        return inputTokens == other.inputTokens && outputTokens == other.outputTokens &&
+               calls == other.calls;
+    }
 };
 
 struct CallTrace {
@@ -47,9 +71,14 @@ struct WorkflowRun {
     std::size_t calls{0};
     std::vector<CallTrace> trace;
     std::vector<std::string> effects;
+    // The observation the relational analysis is stated against.
+    std::map<std::string, ModelBilling> billing;
 
     std::size_t totalTokens() const { return inputTokens + outputTokens; }
 };
+
+// True when two executions are indistinguishable to someone reading the bill.
+bool sameBilling(const WorkflowRun& left, const WorkflowRun& right);
 
 struct RunResult {
     std::vector<WorkflowRun> workflows;

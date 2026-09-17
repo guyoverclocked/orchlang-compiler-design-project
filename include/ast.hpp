@@ -289,6 +289,16 @@ struct Program {
 };
 
 std::string expressionToString(const Expr& expression);
+
+// The text a value actually contributes when it is substituted into a prompt.
+//
+// This is deliberately separate from expressionToString, which renders source
+// syntax for diagnostics and adds quotation marks around strings.  Substituting
+// a string into a template inserts the string's *value*, not its source
+// spelling, and the analysis and the runtime must agree on that down to the
+// character or the certified bound does not describe the execution.  Audit
+// finding 3 was exactly this disagreement.
+std::string substitutedText(const Expr& expression);
 std::string printAst(const Program& program);
 
 }  // namespace orchlang

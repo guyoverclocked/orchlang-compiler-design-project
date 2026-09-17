@@ -1,0 +1,13 @@
+Audit date: 2026-09-17
+Branch: v2-static-certification
+Commit: fd9d8bc61fe4ac88c0dfcd7c8caf9b4887e0ce29
+Base: main (077dd06)
+Compiler: g++ 16.1.0 MinGW-W64 x86_64-ucrt-posix-seh, Brecht Sanders r4
+Flags: -std=c++17 -Wall -Wextra -pedantic -O2 -Iinclude
+Fresh audit/orchc.exe SHA256:
+794C153E6B9781EF814CAFDA6EBF35B39773A80440103CCF4122FD6CB61DE419
+Fresh executables are ignored by the repository's *.exe rule.
+Compiler source was not modified during this audit.
+The initial full harness output is reproduction.txt.
+The corrected component-aware audit probe output is probes.txt and findings.json.
+Paired input-injection methodology is documented in paired.cpp and the report.

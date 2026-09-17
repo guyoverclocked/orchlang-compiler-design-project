@@ -6,6 +6,7 @@
 #include "ir.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
+#include "relational.hpp"
 #include "semantic_analyzer.hpp"
 #include "symbol_table.hpp"
 
@@ -37,6 +38,8 @@ void printUsage(std::ostream& out) {
         << "                                 1 is unconditionally sound, larger is tighter)\n"
         << "         --seed <n>            seed for the offline mock runtime used by 'run'\n"
         << "         --retry-failure <p>   percentage chance one retry attempt fails (default 50)\n"
+        << "         --pin <name>=<n>      pin an input or secret's token length for 'run'\n"
+        << "         --pin <name>=true     pin a boolean input or secret for 'run'\n"
         << "Compatibility flags: --tokens, --check\n";
 }
 
@@ -93,6 +96,26 @@ bool collectArguments(int argc, char* argv[], Invocation& invocation) {
                 return false;
             }
             invocation.run.seed = std::strtoull(argv[++index], nullptr, 10);
+            continue;
+        }
+        if (argument == "--pin") {
+            // --pin name=tokens, or --pin name=true / --pin name=false
+            if (index + 1 >= argc) {
+                return false;
+            }
+            const std::string spec = argv[++index];
+            const std::size_t split = spec.find('=');
+            if (split == std::string::npos) {
+                return false;
+            }
+            const std::string name = spec.substr(0, split);
+            const std::string value = spec.substr(split + 1);
+            if (value == "true" || value == "false") {
+                invocation.run.pinnedFlags[name] = value == "true";
+            } else {
+                invocation.run.pinnedLengths[name] =
+                    static_cast<std::size_t>(std::strtoull(value.c_str(), nullptr, 10));
+            }
             continue;
         }
         if (argument == "--retry-failure") {
@@ -197,12 +220,24 @@ int main(int argc, char* argv[]) {
     CostResult cost = costAnalyzer.analyze(parsed.program, semantic);
     diagnostics.append(cost.diagnostics);
 
+    RelationalAnalyzer relationalAnalyzer;
+    RelationalResult relational = relationalAnalyzer.analyze(parsed.program, semantic);
+    diagnostics.append(relational.diagnostics);
+
     if (invocation.command == Command::Cost) {
         if (diagnostics.hasErrors()) {
             printDiagnostics(diagnostics);
             return 1;
         }
         std::cout << printCertificateSummary(cost, semantic);
+        if (!relational.obligations.empty()) {
+            std::cout << "  relational obligations:\n";
+            for (const RelationalObligation& obligation : relational.obligations) {
+                std::cout << "    " << (obligation.discharged ? "discharged" : "FAILED") << "  if "
+                          << obligation.guard << " (line " << obligation.location.line << "): "
+                          << obligation.detail << '\n';
+            }
+        }
         for (const WorkflowCost& workflow : cost.workflows) {
             std::cout << "  derivation for " << workflow.name << ":\n";
             for (const DerivationStep& step : workflow.derivation) {
@@ -233,7 +268,8 @@ int main(int argc, char* argv[]) {
         } else if (invocation.command == Command::IrJson) {
             std::cout << printIRJson(lowered.program);
         } else {
-            std::cout << printCertificate(parsed.program, semantic, cost, lowered.program);
+            std::cout << printCertificate(parsed.program, semantic, cost, lowered.program,
+                                          relational);
         }
         return 0;
     }

@@ -2,6 +2,7 @@
 #include "certificate.hpp"
 #include "cost_analyzer.hpp"
 #include "interpreter.hpp"
+#include "relational.hpp"
 #include "ir.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
@@ -35,6 +36,7 @@ struct Pipeline {
     ParseResult parsed;
     std::optional<SemanticResult> semantic;
     std::optional<CostResult> cost;
+    std::optional<RelationalResult> relational;
 };
 
 Pipeline compileSource(const std::string& source) {
@@ -42,13 +44,15 @@ Pipeline compileSource(const std::string& source) {
     LexResult lexed = lexer.scan();
     Parser parser(lexed.tokens);
     ParseResult parsed = parser.parse();
-    Pipeline result{std::move(lexed), std::move(parsed), std::nullopt, std::nullopt};
+    Pipeline result{std::move(lexed), std::move(parsed), std::nullopt, std::nullopt, std::nullopt};
     if (!result.lexed.diagnostics.hasErrors() && !result.parsed.diagnostics.hasErrors()) {
         SemanticAnalyzer analyzer;
         result.semantic = analyzer.analyze(result.parsed.program);
         if (result.semantic->success()) {
             CostAnalyzer costAnalyzer;
             result.cost = costAnalyzer.analyze(result.parsed.program, *result.semantic);
+            RelationalAnalyzer relationalAnalyzer;
+            result.relational = relationalAnalyzer.analyze(result.parsed.program, *result.semantic);
         }
     }
     return result;
@@ -82,7 +86,8 @@ bool hasCode(const DiagnosticBag& diagnostics, const std::string& code) {
 bool hasCode(const Pipeline& pipeline, const std::string& code) {
     return hasCode(pipeline.lexed.diagnostics, code) || hasCode(pipeline.parsed.diagnostics, code) ||
            (pipeline.semantic && hasCode(pipeline.semantic->diagnostics, code)) ||
-           (pipeline.cost && hasCode(pipeline.cost->diagnostics, code));
+           (pipeline.cost && hasCode(pipeline.cost->diagnostics, code)) ||
+           (pipeline.relational && hasCode(pipeline.relational->diagnostics, code));
 }
 
 void requireParsed(const Pipeline& pipeline) {
@@ -504,7 +509,8 @@ void testCertificateRecordsBoundAndLabels() {
     IRBuildResult lowered = lowerer.lower(pipeline.parsed.program, *pipeline.semantic);
     require(lowered.success(), "IR lowering should succeed");
     const std::string certificate =
-        printCertificate(pipeline.parsed.program, *pipeline.semantic, *pipeline.cost, lowered.program);
+        printCertificate(pipeline.parsed.program, *pipeline.semantic, *pipeline.cost, lowered.program,
+                         *pipeline.relational);
     require(certificate.find("orchlang-safety-certificate") != std::string::npos,
             "the certificate should name its format");
     require(certificate.find("\"chars_per_token\": 4") != std::string::npos,
@@ -633,9 +639,7 @@ void testRunRefusesIllTypedProgram() {
 }
 
 
-// ---------------------------------------------------------------------------
-// The cost side channel, which neither analysis can see on its own
-// ---------------------------------------------------------------------------
+// Relational resource analysis: does a secret change the bill?
 
 void testSecretDependentCostIsRejected() {
     Pipeline pipeline = compileSource(R"(workflow C budget 100000 {
@@ -652,25 +656,163 @@ void testSecretDependentCostIsRejected() {
   output src;
 })");
     require(hasCode(pipeline, "E236"),
-            "a secret-guarded branch whose arms cost differently leaks through the bill");
+            "arms that call different models bill differently under a secret guard");
+}
+
+// The counterexample that falsified the previous rule.  Both arms bound at the
+// same number, so comparing upper bounds accepted it; the arms read different
+// variables, so the bill really does move with the secret.
+void testEqualBoundsWithDifferentArgumentsIsRejected() {
+    Pipeline pipeline = compileSource(R"(workflow C budget 100000 {
+  secret s: text max_tokens 1;
+  input x: text max_tokens 100;
+  input y: text max_tokens 100;
+  model m = mock("m") max_tokens 10;
+  prompt p(t: text) -> text = "{t}";
+  if tokens(s) == 0 {
+    let a: text = call p(x) using m;
+  } else {
+    let b: text = call p(y) using m;
+  }
+  output "done";
+})");
+    require(hasCode(pipeline, "E236"),
+            "equal upper bounds must not be mistaken for equal cost");
 }
 
 void testBalancedArmsUnderSecretAreAccepted() {
     Pipeline pipeline = compileSource(R"(workflow C budget 100000 {
-  input src: text max_tokens 10;
-  secret alert: boolean max_tokens 1;
-  model small = mock("s") max_tokens 100;
-  prompt p(a: text) -> text = "{a}";
-  if alert {
-    let a: text = call p(src) using small;
+  secret s: text max_tokens 1;
+  input x: text max_tokens 100;
+  model m = mock("m") max_tokens 10;
+  prompt p(t: text) -> text = "{t}";
+  if tokens(s) == 0 {
+    let a: text = call p(x) using m;
   } else {
-    let b: text = call p(src) using small;
+    let b: text = call p(x) using m;
   }
-  output src;
+  output "done";
 })");
     requireSemanticallyValid(pipeline);
-    require(pipeline.cost.has_value() && pipeline.cost->success(),
-            "arms of equal cost leak nothing through the bill");
+    require(pipeline.relational.has_value() && pipeline.relational->success(),
+            "arms that bill identically are accepted");
+    require(pipeline.relational->obligations.size() == 1, "the obligation should be recorded");
+    require(pipeline.relational->obligations.front().discharged, "and discharged");
+}
+
+void testExtraCallInOneArmIsRejected() {
+    Pipeline pipeline = compileSource(R"(workflow C budget 100000 {
+  secret s: text max_tokens 1;
+  input x: text max_tokens 100;
+  model m = mock("m") max_tokens 10;
+  prompt p(t: text) -> text = "{t}";
+  if tokens(s) == 0 {
+    let a: text = call p(x) using m;
+    let b: text = call p(x) using m;
+  } else {
+    let c: text = call p(x) using m;
+  }
+  output "done";
+})");
+    require(hasCode(pipeline, "E236"), "a differing number of calls is observable");
+}
+
+void testDifferingRetryBoundsAreRejected() {
+    Pipeline pipeline = compileSource(R"(workflow C budget 100000 {
+  secret s: text max_tokens 1;
+  input x: text max_tokens 100;
+  model m = mock("m") max_tokens 10;
+  prompt p(t: text) -> text = "{t}";
+  if tokens(s) == 0 {
+    retry 2 { let a: text = call p(x) using m; }
+  } else {
+    retry 3 { let b: text = call p(x) using m; }
+  }
+  output "done";
+})");
+    require(hasCode(pipeline, "E236"), "a differing retry bound is observable");
+}
+
+void testMatchingRetryBoundsAreAccepted() {
+    Pipeline pipeline = compileSource(R"(workflow C budget 100000 {
+  secret s: text max_tokens 1;
+  input x: text max_tokens 100;
+  model m = mock("m") max_tokens 10;
+  prompt p(t: text) -> text = "{t}";
+  if tokens(s) == 0 {
+    retry 2 { let a: text = call p(x) using m; }
+  } else {
+    retry 2 { let b: text = call p(x) using m; }
+  }
+  output "done";
+})");
+    requireSemanticallyValid(pipeline);
+    require(pipeline.relational->success(), "matching retry structure bills identically");
+}
+
+// A known incompleteness, recorded rather than hidden.
+//
+// Chaining calls inside a secret-guarded arm is rejected, because the program
+// counter makes the intermediate result secret and a secret may not reach a
+// prompt.  The rejection is sound but stronger than necessary: the intermediate
+// value's *content* depends only on public data, and its *existence* is already
+// covered by the relational obligation on the enclosing branch.  Relaxing this
+// safely means letting the relational judgement discharge part of the unary
+// one, which is future work; until then the compiler says no.
+void testChainingInsideSecretArmIsRejectedConservatively() {
+    Pipeline pipeline = compileSource(R"(workflow C budget 100000 {
+  secret s: text max_tokens 1;
+  input x: text max_tokens 100;
+  model m = mock("m") max_tokens 10;
+  prompt p(t: text) -> text = "{t}";
+  if tokens(s) == 0 {
+    let a1: text = call p(x) using m;
+    let a2: text = call p(a1) using m;
+  } else {
+    let b1: text = call p(x) using m;
+    let b2: text = call p(b1) using m;
+  }
+  output "done";
+})");
+    require(hasCode(pipeline, "E230"),
+            "the program-counter rule taints an intermediate result inside a secret arm");
+}
+
+// A public guard inside a secret-guarded arm is fine: both executions see the
+// same public data and take the same inner arm.
+void testPublicGuardInsideSecretArmIsAllowed() {
+    Pipeline pipeline = compileSource(R"(workflow C budget 100000 {
+  secret s: text max_tokens 1;
+  input x: text max_tokens 100;
+  model m = mock("m") max_tokens 10;
+  prompt p(t: text) -> text = "{t}";
+  let head: text = call p(x) using m;
+  if tokens(s) == 0 {
+    if tokens(head) <= 5 { let a: text = call p(x) using m; }
+  } else {
+    if tokens(head) <= 5 { let b: text = call p(x) using m; }
+  }
+  output "done";
+})");
+    requireSemanticallyValid(pipeline);
+    require(pipeline.relational->success(), "matching public sub-branches bill identically");
+}
+
+void testDifferingPublicSubBranchIsRejected() {
+    Pipeline pipeline = compileSource(R"(workflow C budget 100000 {
+  secret s: text max_tokens 1;
+  input x: text max_tokens 100;
+  model m = mock("m") max_tokens 10;
+  prompt p(t: text) -> text = "{t}";
+  let head: text = call p(x) using m;
+  if tokens(s) == 0 {
+    if tokens(head) <= 5 { let a: text = call p(x) using m; }
+  } else {
+    if tokens(head) <= 7 { let b: text = call p(x) using m; }
+  }
+  output "done";
+})");
+    require(hasCode(pipeline, "E236"), "a differing inner guard changes when billing happens");
 }
 
 void testPublicGuardWithUnequalArmsIsFine() {
@@ -688,8 +830,7 @@ void testPublicGuardWithUnequalArmsIsFine() {
   output head;
 })");
     requireSemanticallyValid(pipeline);
-    require(pipeline.cost.has_value() && pipeline.cost->success(),
-            "a public guard may steer cost freely");
+    require(pipeline.relational->success(), "a public guard may steer cost freely");
 }
 
 void testUntrustedGuardOnUnequalArmsWarns() {
@@ -710,6 +851,159 @@ void testUntrustedGuardOnUnequalArmsWarns() {
             "untrusted data steering spend should at least be surfaced");
     require(pipeline.cost.has_value() && pipeline.cost->success(),
             "the warning should not reject the workflow");
+}
+
+// The componentwise bound must hold for each component on its own, which is
+// what audit finding 2 showed the old rule did not do.
+void testBranchBoundsEachComponentSeparately() {
+    Pipeline pipeline = compileSource(R"(workflow S budget 100000 {
+  input flag: boolean max_tokens 1;
+  input wide: text max_tokens 200;
+  input narrow: text max_tokens 0;
+  model small = mock("small") max_tokens 1;
+  model large = mock("large") max_tokens 100;
+  prompt p(x: text) -> text = "{x}";
+  if flag {
+    let a: text = call p(wide) using small;
+  } else {
+    let b: text = call p(narrow) using large;
+  }
+  output narrow;
+})");
+    requireSemanticallyValid(pipeline);
+    const WorkflowCost& cost = onlyCost(pipeline);
+    require(cost.bound.guaranteed >= 100, "the output component must dominate the larger arm's output");
+    require(cost.bound.estimated >= 201, "the input component must dominate the larger arm's input");
+    require(cost.bound.total() <= cost.bound.componentSum(),
+            "the total bound is at least as tight as the sum of the components");
+}
+
+// Audit finding 3: the analysis and the runtime must measure a literal the same
+// way, or the certified bound does not describe the execution.
+void testLiteralAccountingAgreesWithRuntime() {
+    const char* sources[] = {
+        R"(workflow L budget 100 { model m = mock("m") max_tokens 1; prompt p(x: text) -> text = "{x}"; let y: text = call p("") using m; output y; })",
+        R"(workflow L budget 100 { model m = mock("m") max_tokens 1; prompt p(x: boolean) -> text = "{x}"; let y: text = call p(false) using m; output y; })",
+        R"(workflow L budget 100 { model m = mock("m") max_tokens 1; prompt p(x: text) -> text = "{x}"; let y: text = call p("hello world") using m; output y; })",
+    };
+    for (const char* source : sources) {
+        Pipeline pipeline = compileSource(source);
+        requireSemanticallyValid(pipeline);
+        const CostBound bound = onlyCost(pipeline).bound;
+        for (std::uint64_t seed = 1; seed <= 50; ++seed) {
+            RunOptions options;
+            options.seed = seed;
+            Interpreter interpreter(options);
+            const RunResult result = interpreter.run(pipeline.parsed.program, *pipeline.semantic);
+            const WorkflowRun& run = result.workflows.front();
+            require(run.inputTokens <= bound.estimated,
+                    "the runtime must not consume more input tokens than were certified");
+            require(run.outputTokens <= bound.guaranteed,
+                    "the runtime must not consume more output tokens than were certified");
+            require(run.totalTokens() <= bound.total(), "nor more in total");
+        }
+    }
+}
+
+// Audit finding 4: a binding made inside a branch must not survive it at run
+// time, or the runtime charges one model while executing another.
+void testRuntimeRespectsBlockScope() {
+    Pipeline pipeline = compileSource(R"(workflow Shadow budget 100000 {
+  input flag: boolean max_tokens 1;
+  input src: text max_tokens 0;
+  model m = mock("outer") max_tokens 1;
+  prompt p(x: text) -> text = "{x}";
+  if flag {
+    model m = mock("inner") max_tokens 1000;
+  }
+  let y: text = call p(src) using m;
+  output y;
+})");
+    requireSemanticallyValid(pipeline);
+    const std::size_t bound = onlyCost(pipeline).bound.total();
+    for (std::uint64_t seed = 1; seed <= 100; ++seed) {
+        RunOptions options;
+        options.seed = seed;
+        Interpreter interpreter(options);
+        const RunResult result = interpreter.run(pipeline.parsed.program, *pipeline.semantic);
+        require(result.workflows.front().totalTokens() <= bound,
+                "a model shadowed inside a branch must not leak out of it");
+    }
+}
+
+// The relational claim itself: for an accepted workflow, changing only the
+// secret must not change the bill.
+void testAcceptedWorkflowHasSecretIndependentBilling() {
+    Pipeline pipeline = compileSource(R"(workflow C budget 100000 {
+  secret s: text max_tokens 8;
+  input x: text max_tokens 100;
+  model m = mock("m") max_tokens 10;
+  prompt p(t: text) -> text = "{t}";
+  if tokens(s) == 0 {
+    let a: text = call p(x) using m;
+  } else {
+    let b: text = call p(x) using m;
+  }
+  output "done";
+})");
+    requireSemanticallyValid(pipeline);
+    require(pipeline.relational->success(), "the workflow should be accepted");
+
+    for (std::uint64_t seed = 1; seed <= 40; ++seed) {
+        std::optional<WorkflowRun> reference;
+        for (std::size_t secretLength = 0; secretLength <= 8; ++secretLength) {
+            RunOptions options;
+            options.seed = seed;
+            options.pinnedLengths["x"] = 37;
+            options.pinnedLengths["s"] = secretLength;
+            Interpreter interpreter(options);
+            const RunResult result = interpreter.run(pipeline.parsed.program, *pipeline.semantic);
+            const WorkflowRun& run = result.workflows.front();
+            if (!reference) {
+                reference = run;
+            } else {
+                require(sameBilling(*reference, run),
+                        "changing only the secret must not change the bill");
+            }
+        }
+    }
+}
+
+// And the converse: a workflow the analysis rejects really is one where the
+// secret moves the bill, so the rejection is not spurious.
+void testRejectedWorkflowActuallyLeaks() {
+    Pipeline pipeline = compileSource(R"(workflow C budget 100000 {
+  secret s: text max_tokens 1;
+  input x: text max_tokens 100;
+  input y: text max_tokens 100;
+  model m = mock("m") max_tokens 10;
+  prompt p(t: text) -> text = "{t}";
+  if tokens(s) == 0 {
+    let a: text = call p(x) using m;
+  } else {
+    let b: text = call p(y) using m;
+  }
+  output "done";
+})");
+    require(hasCode(pipeline, "E236"), "the workflow should be rejected");
+
+    // Public inputs of different lengths, both within their declared bounds.
+    RunOptions base;
+    base.seed = 11;
+    base.pinnedLengths["x"] = 14;
+    base.pinnedLengths["y"] = 52;
+
+    RunOptions low = base;
+    low.pinnedLengths["s"] = 0;
+    RunOptions high = base;
+    high.pinnedLengths["s"] = 1;
+
+    Interpreter lowRun(low);
+    Interpreter highRun(high);
+    const RunResult first = lowRun.run(pipeline.parsed.program, *pipeline.semantic);
+    const RunResult second = highRun.run(pipeline.parsed.program, *pipeline.semantic);
+    require(!sameBilling(first.workflows.front(), second.workflows.front()),
+            "the rejected workflow really does leak through the bill");
 }
 
 void testLexerKeywordAndLocation() {
@@ -1060,6 +1354,18 @@ int main() {
         {"parser unexpected statement", testParserUnexpectedStatement},
         {"AST printer", testAstPrinter},
         {"secret-dependent cost is rejected", testSecretDependentCostIsRejected},
+        {"equal bounds with different arguments rejected", testEqualBoundsWithDifferentArgumentsIsRejected},
+        {"extra call in one arm rejected", testExtraCallInOneArmIsRejected},
+        {"differing retry bounds rejected", testDifferingRetryBoundsAreRejected},
+        {"matching retry bounds accepted", testMatchingRetryBoundsAreAccepted},
+        {"chaining inside secret arm rejected conservatively", testChainingInsideSecretArmIsRejectedConservatively},
+        {"public guard inside secret arm allowed", testPublicGuardInsideSecretArmIsAllowed},
+        {"differing public sub-branch rejected", testDifferingPublicSubBranchIsRejected},
+        {"branch bounds each component separately", testBranchBoundsEachComponentSeparately},
+        {"literal accounting agrees with runtime", testLiteralAccountingAgreesWithRuntime},
+        {"runtime respects block scope", testRuntimeRespectsBlockScope},
+        {"accepted workflow has secret-independent billing", testAcceptedWorkflowHasSecretIndependentBilling},
+        {"rejected workflow actually leaks", testRejectedWorkflowActuallyLeaks},
         {"balanced arms under secret accepted", testBalancedArmsUnderSecretAreAccepted},
         {"public guard with unequal arms fine", testPublicGuardWithUnequalArmsIsFine},
         {"untrusted guard on unequal arms warns", testUntrustedGuardOnUnequalArmsWarns},

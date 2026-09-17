@@ -11,6 +11,7 @@
 
 #include "cost_analyzer.hpp"
 #include "ir.hpp"
+#include "relational.hpp"
 #include "semantic_analyzer.hpp"
 
 #include <string>
@@ -18,7 +19,8 @@
 namespace orchlang {
 
 std::string printCertificate(const Program& program, const SemanticResult& semantic,
-                             const CostResult& cost, const ProgramIR& ir);
+                             const CostResult& cost, const ProgramIR& ir,
+                             const RelationalResult& relational);
 
 // A short human-readable summary of the same facts, for the terminal.
 std::string printCertificateSummary(const CostResult& cost, const SemanticResult& semantic);

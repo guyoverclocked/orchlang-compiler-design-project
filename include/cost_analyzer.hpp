@@ -27,9 +27,22 @@
 
 namespace orchlang {
 
+// Three separately sound facts about a workflow's token consumption.
+//
+// `guaranteed` and `estimated` are each an upper bound on their own component.
+// `total` is an upper bound on the sum.  They are tracked separately because at
+// a branch they are maximised differently: the tightest sound total is the
+// larger arm's total, while the tightest sound bound on each component is that
+// component's maximum across arms.  Taking one arm's pair whole -- which is what
+// this compiler did until audit finding 2 -- gives a correct total but does NOT
+// bound each component, because the losing arm can dominate one of them.
+//
+// The invariant is `total <= guaranteed + estimated`, and the gap is real: it
+// is the price of reporting a faithful split rather than a single number.
 struct CostBound {
     std::size_t guaranteed{0};
     std::size_t estimated{0};
+    std::size_t totalTokens{0};
     double money{0.0};
     // False when at least one selected model declared no price, so the
     // monetary figure is a partial total rather than a bound.
@@ -37,7 +50,10 @@ struct CostBound {
     // False when an argument reaching a prompt had no declared token bound.
     bool defined{true};
 
-    std::size_t total() const { return addTokens(guaranteed, estimated); }
+    std::size_t total() const { return totalTokens; }
+    // The sum of the componentwise bounds, which dominates total() and is what
+    // a reader gets if they add the two reported halves together.
+    std::size_t componentSum() const { return addTokens(guaranteed, estimated); }
 };
 
 // One line of the derivation, kept so the certificate can show its working.

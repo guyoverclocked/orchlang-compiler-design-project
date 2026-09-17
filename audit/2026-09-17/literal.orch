@@ -1,0 +1,6 @@
+workflow Literal budget 100 {
+ model m = mock("m") max_tokens 1;
+ prompt p(x: text) -> text = "{x}";
+ let y: text = call p("") using m;
+ output y;
+}

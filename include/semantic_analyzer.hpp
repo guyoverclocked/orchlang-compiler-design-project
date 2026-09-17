@@ -43,6 +43,16 @@ struct ReclassificationSite {
     SourceLocation location;
 };
 
+// One argument at a call site, as the relational analysis needs to see it: a
+// literal contributes a constant, a variable contributes its identity, and a
+// secret contributes nothing the analysis may rely on.
+struct ArgumentFact {
+    std::string name;
+    bool isLiteral{false};
+    bool isSecret{false};
+    std::size_t literalTokens{0};
+};
+
 // What one 'call' site contributes to a cost bound.  Recorded while the
 // symbol table is in scope so the cost analysis can be a pure structural walk.
 struct CallSiteFacts {
@@ -58,6 +68,7 @@ struct CallSiteFacts {
     bool argumentBoundsKnown{true};
     bool hasUnitPrice{false};
     double unitPrice{0.0};
+    std::vector<ArgumentFact> arguments;
 };
 
 struct WorkflowFacts {
@@ -76,9 +87,14 @@ struct SemanticResult {
     std::map<std::string, WorkflowFacts> workflowFacts;
     std::vector<ReclassificationSite> reclassifications;
     std::map<const CallExpr*, CallSiteFacts> callSites;
-    // Label of each branch guard, so the cost analysis can tell whether a
-    // difference in arm cost is observable to someone who only sees the bill.
+    // Program-counter label inside each branch: the guard joined with the
+    // enclosing context.  This is what decides whether an effect in the arm is
+    // an implicit flow.
     std::map<const IfStmt*, Label> guardLabels;
+    // The guard expression's own label, ignoring the enclosing context.  The
+    // relational analysis needs this one: a public guard inside a secret arm
+    // still sends both compared executions down the same path.
+    std::map<const IfStmt*, Label> guardOwnLabels;
     AnalysisOptions options;
 
     bool success() const { return !diagnostics.hasErrors(); }

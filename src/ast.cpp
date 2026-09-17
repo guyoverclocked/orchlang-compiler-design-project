@@ -43,6 +43,26 @@ std::string conditionToString(const Condition& condition) {
            std::to_string(condition.limit);
 }
 
+std::string substitutedText(const Expr& expression) {
+    switch (expression.kind()) {
+        case ExprKind::Identifier:
+            // An identifier's contribution is its runtime value, which is not
+            // known here; callers use the symbol's declared bound instead.
+            return std::string();
+        case ExprKind::StringLiteral:
+            return static_cast<const StringLiteralExpr&>(expression).value;
+        case ExprKind::IntegerLiteral:
+            return static_cast<const IntegerLiteralExpr&>(expression).value;
+        case ExprKind::DecimalLiteral:
+            return static_cast<const DecimalLiteralExpr&>(expression).value;
+        case ExprKind::BooleanLiteral:
+            return static_cast<const BooleanLiteralExpr&>(expression).value;
+        case ExprKind::Call:
+            return std::string();
+    }
+    return std::string();
+}
+
 std::string expressionToString(const Expr& expression) {
     switch (expression.kind()) {
         case ExprKind::Identifier:

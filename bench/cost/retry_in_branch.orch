@@ -4,7 +4,7 @@ workflow RetryInBranch budget 100000 {
   model large = mock("offline-large") max_tokens 600;
   prompt step(payload: text) -> text = "Process this payload: {payload}";
   let head: text = call step(source) using small;
-  if tokens(head) <= 150 {
+  if tokens(head) <= 75 {
     retry 3 {
       let a: text = call step(source) using small;
     }

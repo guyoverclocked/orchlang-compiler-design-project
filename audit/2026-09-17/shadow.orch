@@ -1,0 +1,11 @@
+workflow Shadow budget 10000 {
+ input flag: boolean max_tokens 1;
+ input src: text max_tokens 0;
+ model m = mock("outer") max_tokens 1;
+ prompt p(x: text) -> text = "{x}";
+ if flag {
+   model m = mock("inner") max_tokens 1000;
+ }
+ let y: text = call p(src) using m;
+ output y;
+}

@@ -7,6 +7,11 @@ Two suites are produced.
 nesting, retry bounds, and combinations of the three -- because the shape is
 exactly what separates a structural cost bound from a flat sum over call sites.
 
+``relational/`` pairs workflows whose secret-guarded branches bill identically
+with workflows whose branches do not, so the paired experiment can check both
+that accepted workflows really are secret-independent and that rejected ones
+really do leak.
+
 ``security/`` pairs each unsafe workflow with a safe counterpart that differs
 only in the one edit that makes it safe (an added endorsement, a declassifica-
 tion, a moved effect).  Pairing them this way means a detector cannot score well
@@ -65,8 +70,11 @@ def gen_cost():
     # Single branches with arms of differing cost: a flat sum over syntactic
     # call sites counts both arms, which no execution ever pays for.
     for arms in range(1, 5):
+        # The guard threshold sits at half the producing model's cap, so both
+        # arms are reachable.  A threshold at or above the cap makes the else
+        # arm dead and every slack measurement taken through it meaningless.
         body = '  let head: text = call step(source) using small;\n'
-        body += '  if tokens(head) <= 150 {\n'
+        body += '  if tokens(head) <= 75 {\n'
         for index in range(arms):
             body += '    let a%d: text = call step(source) using small;\n' % index
         body += '  } else {\n'
@@ -78,15 +86,15 @@ def gen_cost():
 
     # Nested branches: four leaf paths, only one of which runs.
     body = '  let head: text = call step(source) using small;\n'
-    body += '  if tokens(head) <= 150 {\n'
+    body += '  if tokens(head) <= 75 {\n'
     body += '    let x: text = call step(source) using small;\n'
-    body += '    if tokens(x) <= 150 {\n'
+    body += '    if tokens(x) <= 75 {\n'
     body += '      let x1: text = call step(source) using small;\n'
     body += '    } else {\n'
     body += '      let x2: text = call step(source) using large;\n'
     body += '    }\n  } else {\n'
     body += '    let y: text = call step(source) using large;\n'
-    body += '    if tokens(y) <= 150 {\n'
+    body += '    if tokens(y) <= 300 {\n'
     body += '      let y1: text = call step(source) using large;\n'
     body += '    } else {\n'
     body += '      let y2: text = call step(source) using large;\n'
@@ -111,7 +119,7 @@ def gen_cost():
 
     # Retry inside a branch, and a branch inside a retry.
     body = '  let head: text = call step(source) using small;\n'
-    body += '  if tokens(head) <= 150 {\n'
+    body += '  if tokens(head) <= 75 {\n'
     body += '    retry 3 {\n      let a: text = call step(source) using small;\n    }\n'
     body += '  } else {\n    let b: text = call step(source) using large;\n  }\n'
     body += '  output head;\n'
@@ -119,7 +127,7 @@ def gen_cost():
 
     body = '  let head: text = call step(source) using small;\n'
     body += '  retry 3 {\n'
-    body += '    if tokens(head) <= 150 {\n'
+    body += '    if tokens(head) <= 75 {\n'
     body += '      let a: text = call step(source) using small;\n'
     body += '    } else {\n'
     body += '      let b: text = call step(source) using large;\n'
@@ -282,12 +290,119 @@ def gen_security():
     return files
 
 
+RELATIONAL_PREAMBLE = """  secret s: text max_tokens 8;
+  secret flag: boolean max_tokens 1;
+  input x: text max_tokens 100;
+  input y: text max_tokens 100;
+  model m = mock("offline-m") max_tokens 60;
+  model n = mock("offline-n") max_tokens 400;
+  prompt step(payload: text) -> text = "Process this payload: {payload}";
+"""
+
+
+def gen_relational():
+    """Workflows whose secret-guarded branches either do or do not bill alike.
+
+    Every case is a secret-guarded branch, so the relational obligation is
+    always raised; the pairs differ only in whether it can be discharged.  That
+    is what lets the paired experiment measure both directions: an accepted
+    workflow must show identical bills under every secret, and a rejected one
+    must have at least one pair of secrets whose bills differ.
+    """
+    files = []
+
+    def rel(name, body, expect_accept):
+        directory = os.path.join(HERE, 'relational', 'accept' if expect_accept else 'reject')
+        return (directory, name,
+                workflow(name.replace('.orch', ''), 1000000, body, RELATIONAL_PREAMBLE))
+
+    # Identical arms: the canonical discharge.
+    files.append(rel('SameCallBothArms.orch',
+                     '  if flag {\n    let a: text = call step(x) using m;\n'
+                     '  } else {\n    let b: text = call step(x) using m;\n  }\n'
+                     '  output "done";\n', True))
+    # Different variable of the same declared bound: the counterexample that
+    # falsified comparing upper bounds.
+    files.append(rel('DifferentArgument.orch',
+                     '  if flag {\n    let a: text = call step(x) using m;\n'
+                     '  } else {\n    let b: text = call step(y) using m;\n  }\n'
+                     '  output "done";\n', False))
+
+    # Same shape, different model.
+    files.append(rel('SameModelBothArms.orch',
+                     '  if flag {\n    let a: text = call step(y) using n;\n'
+                     '  } else {\n    let b: text = call step(y) using n;\n  }\n'
+                     '  output "done";\n', True))
+    files.append(rel('DifferentModel.orch',
+                     '  if flag {\n    let a: text = call step(x) using n;\n'
+                     '  } else {\n    let b: text = call step(x) using m;\n  }\n'
+                     '  output "done";\n', False))
+
+    # Same number of calls versus a different number.
+    files.append(rel('TwoCallsBothArms.orch',
+                     '  if flag {\n    let a: text = call step(x) using m;\n'
+                     '    let a2: text = call step(y) using m;\n'
+                     '  } else {\n    let b: text = call step(x) using m;\n'
+                     '    let b2: text = call step(y) using m;\n  }\n'
+                     '  output "done";\n', True))
+    files.append(rel('ExtraCall.orch',
+                     '  if flag {\n    let a: text = call step(x) using m;\n'
+                     '    let a2: text = call step(x) using m;\n'
+                     '  } else {\n    let b: text = call step(x) using m;\n  }\n'
+                     '  output "done";\n', False))
+
+    # An empty arm bills nothing, which is observable.
+    files.append(rel('EmptyBothArms.orch',
+                     '  if flag {\n  } else {\n  }\n  output "done";\n', True))
+    files.append(rel('CallInOneArmOnly.orch',
+                     '  if flag {\n    let a: text = call step(x) using m;\n'
+                     '  } else {\n  }\n  output "done";\n', False))
+
+    # Retry structure must match too.
+    files.append(rel('SameRetryBound.orch',
+                     '  if flag {\n    retry 3 { let a: text = call step(x) using m; }\n'
+                     '  } else {\n    retry 3 { let b: text = call step(x) using m; }\n  }\n'
+                     '  output "done";\n', True))
+    files.append(rel('DifferentRetryBound.orch',
+                     '  if flag {\n    retry 2 { let a: text = call step(x) using m; }\n'
+                     '  } else {\n    retry 4 { let b: text = call step(x) using m; }\n  }\n'
+                     '  output "done";\n', False))
+
+    # A public guard inside both arms steers both executions identically.
+    files.append(rel('MatchingInnerPublicGuard.orch',
+                     '  let head: text = call step(x) using m;\n'
+                     '  if flag {\n    if tokens(head) <= 30 { let a: text = call step(x) using m; }\n'
+                     '  } else {\n    if tokens(head) <= 30 { let b: text = call step(x) using m; }\n'
+                     '  }\n  output "done";\n', True))
+    files.append(rel('DifferentInnerPublicGuard.orch',
+                     '  let head: text = call step(x) using m;\n'
+                     '  if flag {\n    if tokens(head) <= 10 { let a: text = call step(x) using m; }\n'
+                     '  } else {\n    if tokens(head) <= 50 { let b: text = call step(x) using m; }\n'
+                     '  }\n  output "done";\n', False))
+
+    # A literal argument of a different size moves the bill.
+    files.append(rel('SameLiteral.orch',
+                     '  if flag {\n    let a: text = call step("aaaa") using m;\n'
+                     '  } else {\n    let b: text = call step("bbbb") using m;\n  }\n'
+                     '  output "done";\n', True))
+    files.append(rel('DifferentLiteralLength.orch',
+                     '  if flag {\n    let a: text = call step("aaaa") using m;\n'
+                     '  } else {\n'
+                     '    let b: text = call step("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb") using m;\n  }\n'
+                     '  output "done";\n', False))
+
+    return files
+
+
 def main():
     written = 0
     for name, text in gen_cost():
         write(COST, name, text)
         written += 1
     for directory, name, text in gen_security():
+        write(directory, name, text)
+        written += 1
+    for directory, name, text in gen_relational():
         write(directory, name, text)
         written += 1
     print('generated %d benchmark workflows' % written)

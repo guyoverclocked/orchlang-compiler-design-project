@@ -121,23 +121,20 @@ ValueFacts Analyzer::inspect(const Expr& expression, const Context& context) {
             facts.tokenBound = symbol->tokenBound;
             return facts;
         }
-        case ExprKind::StringLiteral: {
-            const auto& literal = static_cast<const StringLiteralExpr&>(expression);
+        // Every literal is measured through substitutedText, the one function
+        // the runtime also uses, so the two can never drift apart.
+        case ExprKind::StringLiteral:
             return {{TypeKind::Text}, publicTrusted(), true,
-                    estimateTextTokens(literal.value, options_.charsPerToken)};
-        }
-        case ExprKind::IntegerLiteral: {
-            const auto& literal = static_cast<const IntegerLiteralExpr&>(expression);
+                    estimateTextTokens(substitutedText(expression), options_.charsPerToken)};
+        case ExprKind::IntegerLiteral:
             return {{TypeKind::Integer}, publicTrusted(), true,
-                    estimateTextTokens(literal.value, options_.charsPerToken)};
-        }
-        case ExprKind::DecimalLiteral: {
-            const auto& literal = static_cast<const DecimalLiteralExpr&>(expression);
+                    estimateTextTokens(substitutedText(expression), options_.charsPerToken)};
+        case ExprKind::DecimalLiteral:
             return {{TypeKind::Decimal}, publicTrusted(), true,
-                    estimateTextTokens(literal.value, options_.charsPerToken)};
-        }
+                    estimateTextTokens(substitutedText(expression), options_.charsPerToken)};
         case ExprKind::BooleanLiteral:
-            return {{TypeKind::Boolean}, publicTrusted(), true, 1};
+            return {{TypeKind::Boolean}, publicTrusted(), true,
+                    estimateTextTokens(substitutedText(expression), options_.charsPerToken)};
         case ExprKind::Call:
             // A call is only syntactically reachable as the right side of a let.
             return {};
@@ -314,12 +311,27 @@ ValueFacts Analyzer::inspectCall(const CallExpr& call, const Context& context) {
     if (prompt && prompt->prompt) {
         site.promptTemplateTokens = prompt->prompt->templateTokens;
     }
-    for (const ValueFacts& argument : arguments) {
+    for (std::size_t index = 0; index < arguments.size(); ++index) {
+        const ValueFacts& argument = arguments[index];
         if (argument.tokenBoundKnown) {
             site.argumentTokens = addTokens(site.argumentTokens, argument.tokenBound);
         } else {
             site.argumentBoundsKnown = false;
         }
+
+        ArgumentFact fact;
+        fact.isSecret = argument.label.isSecret();
+        if (index < call.arguments.size() && call.arguments[index]) {
+            const Expr& expression = *call.arguments[index];
+            if (expression.kind() == ExprKind::Identifier) {
+                fact.name = static_cast<const IdentifierExpr&>(expression).name;
+            } else {
+                fact.isLiteral = true;
+                fact.literalTokens =
+                    estimateTextTokens(substitutedText(expression), options_.charsPerToken);
+            }
+        }
+        site.arguments.push_back(std::move(fact));
     }
 
     ValueFacts facts;
@@ -500,6 +512,7 @@ void Analyzer::analyzeIf(const IfStmt& branch, const Context& context) {
     Context inner = context;
     inner.pc = join(context.pc, guardLabel);
     result_.guardLabels[&branch] = inner.pc;
+    result_.guardOwnLabels[&branch] = guardLabel;
 
     Context thenContext = inner;
     thenContext.scope = result_.symbols.createScope(

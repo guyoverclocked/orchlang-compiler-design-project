@@ -5,7 +5,7 @@ workflow BranchInRetry budget 100000 {
   prompt step(payload: text) -> text = "Process this payload: {payload}";
   let head: text = call step(source) using small;
   retry 3 {
-    if tokens(head) <= 150 {
+    if tokens(head) <= 75 {
       let a: text = call step(source) using small;
     } else {
       let b: text = call step(source) using large;

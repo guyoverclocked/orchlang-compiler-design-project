@@ -1,0 +1,84 @@
+PASS lexer keyword and location
+PASS lexer comment and identifier
+PASS lexer string escapes
+PASS lexer decimal and boolean
+PASS lexer bad character
+PASS lexer unterminated string
+PASS lexer lone bang
+PASS parser full statement forms
+PASS parser call structure
+PASS parser empty workflow
+PASS parser missing semicolon
+PASS parser multiple error recovery
+PASS parser missing closing brace
+PASS parser empty input
+PASS parser long identifier
+PASS parser integer overflow
+PASS parser invalid call argument
+PASS parser unexpected statement
+PASS AST printer
+PASS secret-dependent cost is rejected
+PASS balanced arms under secret accepted
+PASS public guard with unequal arms fine
+PASS untrusted guard on unequal arms warns
+PASS run is deterministic for a seed
+PASS run stays within certified bound
+PASS run respects declared retry bound
+PASS run takes exactly one branch arm
+PASS run refuses ill-typed program
+PASS parser parses branch
+PASS cost branch takes maximum
+PASS cost retry multiplies
+PASS cost retry overrun caught
+PASS cost separates guaranteed from estimated
+PASS cost assumption moves only estimated half
+PASS empty branch arm costs nothing
+PASS require violation reported
+PASS require satisfied by bound
+PASS require on unbounded subject
+PASS require lower bound undecidable
+PASS unbounded input reaching prompt rejected
+PASS label lattice join and order
+PASS untrusted input taints model output
+PASS untrusted value cannot reach sink
+PASS secret cannot reach sink
+PASS secret guarded effect is implicit flow
+PASS untrusted guarded effect rejected
+PASS declassification clears confidentiality
+PASS reclassification recorded with justification
+PASS empty justification rejected
+PASS pc label survives declassification
+PASS unknown tool reported
+PASS tool arity and types checked
+PASS clean sink accepted
+PASS branch binding does not escape
+PASS certificate records bound and labels
+PASS IR carries regions and repeat factors
+PASS saturating arithmetic never wraps
+PASS symbol table lookup
+PASS semantic valid program
+PASS semantic duplicate symbols
+PASS semantic undeclared identifier
+PASS semantic type mismatch
+PASS semantic unknown prompt
+PASS semantic prompt arity
+PASS semantic prompt argument type
+PASS semantic placeholder unknown
+PASS semantic placeholder missing
+PASS semantic placeholder duplicate
+PASS semantic unknown model
+PASS semantic secret prompt exposure
+PASS semantic secret output exposure
+PASS semantic budget exceeded
+PASS semantic missing output
+PASS semantic multiple outputs
+PASS semantic multiple diagnostics
+PASS semantic declaration before use
+PASS semantic unknown requirement subject
+PASS semantic zero budget
+PASS output literal expression
+PASS IR valid lowering
+PASS IR refuses invalid program
+PASS IR dependency cycle detector
+PASS IR JSON export
+Passed 83/83 tests.
