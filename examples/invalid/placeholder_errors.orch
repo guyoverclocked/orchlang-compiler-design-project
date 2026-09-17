@@ -1,0 +1,10 @@
+// Expected: E222 for unknown, duplicated, and missing prompt placeholders.
+workflow PlaceholderErrors budget 100 {
+  input message: text;
+  input category: text;
+  model local = mock("offline") max_tokens 40;
+  prompt classify(message: text, category: text) -> text =
+      "Classify {message} as {unknown}; repeat {message}";
+  let result: text = call classify(message, category) using local;
+  output result;
+}

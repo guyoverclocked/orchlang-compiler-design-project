@@ -1,0 +1,6 @@
+// Expected: L001 for the unsupported @ character.
+workflow LexicalErrors budget 20 {
+  input value: text;
+  @
+  output value;
+}

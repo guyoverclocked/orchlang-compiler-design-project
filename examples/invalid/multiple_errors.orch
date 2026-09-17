@@ -1,0 +1,13 @@
+// Expected: multiple E201, E202, E210, E221, E222, E223, E230, E241, and E271 diagnostics.
+workflow MultipleErrors budget 100 {
+  input title: integer;
+  input title: text;
+  secret API_KEY;
+  model small = mock("offline") max_tokens 80;
+  prompt write(message: text, unused: text) -> integer =
+      "Draft {message} {ghost} and again {message}";
+  let answer: text = call write(title, API_KEY, title) using missing_model;
+  require tokens(unknown_value) <= 10;
+  output API_KEY;
+  output answer;
+}

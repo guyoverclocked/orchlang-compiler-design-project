@@ -1,0 +1,13 @@
+workflow TwoStepAnswer budget 1800 {
+  input question: text;
+  model researcher = mock("offline-research") max_tokens 500;
+  model editor = mock("offline-editor") max_tokens 600;
+
+  prompt extract(query: text) -> text = "Extract useful facts for: {query}";
+  prompt refine(notes: text) -> text = "Turn these notes into a concise answer: {notes}";
+
+  let notes: text = call extract(question) using researcher;
+  let answer: text = call refine(notes) using editor;
+  require tokens(answer) <= 600;
+  output answer;
+}

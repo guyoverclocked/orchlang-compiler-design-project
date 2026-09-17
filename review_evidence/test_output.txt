@@ -1,0 +1,88 @@
+c++ -Iinclude -std=c++17 -Wall -Wextra -pedantic -O2 -MMD -MP -c tests/tests.cpp -o build/tests.o
+c++ -std=c++17 -Wall -Wextra -pedantic -O2 build/diagnostic.o build/ast.o build/lexer.o build/parser.o build/symbol_table.o build/semantic_analyzer.o build/ir.o build/tests.o -o orchlang_tests
+./orchlang_tests
+PASS lexer keyword and location
+PASS lexer comment and identifier
+PASS lexer string escapes
+PASS lexer decimal and boolean
+PASS lexer bad character
+PASS lexer unterminated string
+PASS lexer lone bang
+PASS parser full statement forms
+PASS parser call structure
+PASS parser empty workflow
+PASS parser missing semicolon
+PASS parser multiple error recovery
+PASS parser missing closing brace
+PASS parser empty input
+PASS parser long identifier
+PASS parser integer overflow
+PASS parser invalid call argument
+PASS parser unexpected statement
+PASS AST printer
+PASS symbol table lookup
+PASS semantic valid program
+PASS semantic duplicate symbols
+PASS semantic undeclared identifier
+PASS semantic type mismatch
+PASS semantic unknown prompt
+PASS semantic prompt arity
+PASS semantic prompt argument type
+PASS semantic placeholder unknown
+PASS semantic placeholder missing
+PASS semantic placeholder duplicate
+PASS semantic unknown model
+PASS semantic secret prompt exposure
+PASS semantic secret output exposure
+PASS semantic budget exceeded
+PASS semantic missing output
+PASS semantic multiple outputs
+PASS semantic multiple diagnostics
+PASS semantic declaration before use
+PASS semantic unknown requirement subject
+PASS semantic zero budget
+PASS output literal expression
+PASS IR valid lowering
+PASS IR refuses invalid program
+PASS IR dependency cycle detector
+PASS IR JSON export
+Passed 45/45 tests.
+Check succeeded: 1 workflow(s) passed lexical, syntax, and semantic analysis.
+  Summarization: declared token bound 800 / budget 1600
+Check succeeded: 1 workflow(s) passed lexical, syntax, and semantic analysis.
+  SupportTriage: declared token bound 600 / budget 2500
+Check succeeded: 1 workflow(s) passed lexical, syntax, and semantic analysis.
+  TwoStepAnswer: declared token bound 1100 / budget 1800
+Check succeeded: 1 workflow(s) passed lexical, syntax, and semantic analysis.
+  ZeroBudget: declared token bound 0 / budget 0
+Check succeeded: 1 workflow(s) passed lexical, syntax, and semantic analysis.
+  LongIdentifierWorkflow: declared token bound 0 / budget 0
+examples/invalid/budget_exceeded.orch:2:1: error [E260] declared maximum token use 600 exceeds workflow budget 500
+examples/invalid/duplicate_symbols.orch:4:3: error [E201] duplicate declaration 'ticket'; first declared at examples/invalid/duplicate_symbols.orch:3:3
+examples/invalid/lexical_errors.orch:4:3: error [L001] unexpected character '@'
+examples/invalid/lexical_errors.orch:4:3: error [P001] expected a workflow statement, found '@'
+examples/invalid/multiple_errors.orch:4:3: error [E201] duplicate declaration 'title'; first declared at examples/invalid/multiple_errors.orch:3:3
+examples/invalid/multiple_errors.orch:7:3: error [E222] placeholder '{ghost}' does not match a declared parameter of prompt 'write'
+examples/invalid/multiple_errors.orch:7:3: error [E222] placeholder '{message}' is duplicated in prompt 'write'
+examples/invalid/multiple_errors.orch:7:31: error [E222] prompt parameter 'unused' has no matching placeholder
+examples/invalid/multiple_errors.orch:9:40: error [E230] secret 'API_KEY' cannot be passed to a prompt call
+examples/invalid/multiple_errors.orch:9:22: error [E221] prompt 'write' expects 2 argument(s), but 3 were supplied
+examples/invalid/multiple_errors.orch:9:33: error [E223] argument 1 of prompt 'write' has type integer; expected text
+examples/invalid/multiple_errors.orch:9:22: error [E241] unknown model 'missing_model' in using clause
+examples/invalid/multiple_errors.orch:9:3: error [E210] cannot assign integer result to 'answer' declared as text
+examples/invalid/multiple_errors.orch:10:3: error [E202] use of undeclared identifier 'unknown_value'
+examples/invalid/multiple_errors.orch:11:10: error [E230] secret 'API_KEY' cannot be exposed as workflow output
+examples/invalid/multiple_errors.orch:2:1: error [E271] workflow 'MultipleErrors' has multiple output declarations
+examples/invalid/placeholder_errors.orch:6:3: error [E222] placeholder '{unknown}' does not match a declared parameter of prompt 'classify'
+examples/invalid/placeholder_errors.orch:6:3: error [E222] placeholder '{message}' is duplicated in prompt 'classify'
+examples/invalid/placeholder_errors.orch:6:34: error [E222] prompt parameter 'category' has no matching placeholder
+examples/invalid/secret_exposure.orch:6:36: error [E230] secret 'API_KEY' cannot be passed to a prompt call
+examples/invalid/secret_exposure.orch:7:10: error [E230] secret 'API_KEY' cannot be exposed as workflow output
+examples/invalid/syntax_errors.orch:4:3: error [P001] expected ';' after the input declaration, found 'output'
+examples/invalid/type_mismatch.orch:6:3: error [E210] cannot assign integer result to 'result' declared as text
+examples/invalid/unknown_names.orch:5:35: error [E202] use of undeclared identifier 'no_such_value'
+examples/invalid/unknown_names.orch:5:22: error [E220] unknown prompt 'missing' called from let statement
+examples/invalid/unknown_names.orch:5:22: error [E241] unknown model 'absent_model' in using clause
+examples/invalid/unknown_names.orch:6:3: error [E202] use of undeclared identifier 'not_declared'
+examples/invalid/unknown_names.orch:7:10: error [E202] use of undeclared identifier 'missing_output'
+examples/boundary/empty_workflow.orch:2:1: error [E270] workflow 'EmptyWorkflow' has no output declaration

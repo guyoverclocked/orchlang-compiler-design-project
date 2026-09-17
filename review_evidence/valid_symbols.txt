@@ -1,0 +1,8 @@
+Scope workflow:SupportTriage
+  secret API_KEY declared=examples/valid/support_triage.orch:3:3
+  local-result category : text declared=examples/valid/support_triage.orch:9:3
+  prompt classify : text (message:text) -> text declared=examples/valid/support_triage.orch:6:3
+  model fast provider=mock name=local-small max_tokens=600 declared=examples/valid/support_triage.orch:4:3
+  input ticket : text declared=examples/valid/support_triage.orch:2:3
+Scope workflow:SupportTriage::prompt:classify
+  prompt-parameter message : text declared=examples/valid/support_triage.orch:6:19

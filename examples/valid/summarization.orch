@@ -1,0 +1,11 @@
+workflow Summarization budget 1600 {
+  input article: text;
+  model concise = mock("offline-summary") max_tokens 800;
+
+  prompt summarize(document: text) -> text =
+      "Write a short factual summary of this document: {document}";
+
+  let summary: text = call summarize(article) using concise;
+  require tokens(summary) <= 800;
+  output summary;
+}

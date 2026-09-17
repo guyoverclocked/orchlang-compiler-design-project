@@ -1,0 +1,8 @@
+Workflow SupportTriage IR
+  [1] Input ticket : text deps=[]
+  [2] Secret API_KEY deps=[]
+  [3] Model fast deps=[] provider=mock name=local-small max_tokens=600
+  [4] Prompt classify : text deps=[] parameters=1
+  [5] Call category : text deps=[4, 3, 1] prompt=classify model=fast max_tokens=600
+  [6] Requirement tokens(category) : boolean deps=[5] operator=<= limit=600
+  [7] Output category : text deps=[5]

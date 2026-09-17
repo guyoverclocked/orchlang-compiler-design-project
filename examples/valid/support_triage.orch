@@ -1,0 +1,12 @@
+workflow SupportTriage budget 2500 {
+  input ticket: text;
+  secret API_KEY;
+  model fast = mock("local-small") max_tokens 600;
+
+  prompt classify(message: text) -> text =
+      "Classify the ticket as billing, technical, or other: {message}";
+
+  let category: text = call classify(ticket) using fast;
+  require tokens(category) <= 600;
+  output category;
+}
