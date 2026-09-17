@@ -1,73 +1,199 @@
-# OrchLang Review Demonstration Script
+# OrchLang Demonstration Script
 
-This rehearsal is designed for approximately six minutes and does not need internet access.
+About eight minutes. Nothing here needs internet access; the compiler makes no
+network requests at any point.
 
-## 0:00 to 0:35 Introduce the problem
+Run everything from the repository root after `make clean && make check`.
 
-Say: “OrchLang is a small statically typed language for LLM workflow descriptions. The compiler checks names, prompt templates, secret flow, model selection, and declared token limits before any request could execute. Today I will show the full Review 2 compiler path from tokens to IR.”
+---
 
-## 0:35 to 1:15 Build and test
+## 0:00 – 0:45  The problem
+
+Say: "LLM workflows fail expensively in two ways. They spend more than you
+meant, and they let data go where it shouldn't — a key into a prompt, or text
+from a web page into a tool call. Almost every tool that addresses these finds
+out at run time, once the tokens are gone and the effect has fired. OrchLang is
+a compiler that answers both questions from the source, before anything runs,
+and writes the answers into a certificate."
+
+---
+
+## 0:45 – 1:25  Build and test
 
 ```sh
-cd /Users/nambi/Documents/Codex/2026-09-16/files-mentioned-by-the-user-nambi/orchlang
 make clean && make check
 ```
 
-Expected result: the C++17 build completes with strict warnings enabled, `Passed 45/45 tests.` is printed, valid examples succeed, and each invalid example emits diagnostics while being confirmed as invalid by the Makefile.
+Expected: a strict C++17 build with `-Wall -Wextra -pedantic` and no warnings,
+`Passed 83/83 tests.`, the valid corpus accepted, every invalid example
+rejected, and a certificate emitted for each valid workflow.
 
-## 1:15 to 1:45 Show the language as tokens
+---
 
-```sh
-./orchc tokens examples/valid/support_triage.orch
-```
-
-Expected result: location-aware tokens such as `WORKFLOW`, `IDENTIFIER`, `BUDGET`, `PROMPT`, `CALL`, and `OUTPUT` are printed. Point out that `ticket`, `fast`, and `category` retain their original locations.
-
-## 1:45 to 2:25 Show the AST
+## 1:25 – 2:30  The headline: cost is structural, not a sum
 
 ```sh
-./orchc ast examples/valid/support_triage.orch
+./orchc cost examples/valid/branching_cost.orch
 ```
 
-Expected result: a tree beginning with `Workflow SupportTriage budget=2500`, then typed input, secret, model, prompt, let/call, requirement, and output nodes. State that AST ownership uses `std::unique_ptr`.
-
-## 2:25 to 3:05 Show the symbol table
+Expected: the derivation prints its working. Point at the last two lines —
+the branch's two arms cost 432 and 1211, and the bound takes the **maximum**,
+not the sum.
 
 ```sh
-./orchc symbols examples/valid/support_triage.orch
+./orchc cost examples/valid/bounded_retry.orch
 ```
 
-Expected result: the workflow scope includes input, secret, model, prompt, and local-result symbols. The prompt child scope shows `message : text`. Point out the model's provider, mock name, maximum tokens, and declaration locations.
+Expected: `retry-scale  3 x 1110  => 3330 tokens`. Say: "A flat sum over
+syntactic call sites reports 1110 here. The workflow can spend 3330. That is
+the direction that matters, because it is unsound — the benchmark shows it is
+violated on 13.5% of real executions."
 
-## 3:05 to 4:00 Show semantic diagnostics
+Point out the two components in the summary line: `guaranteed 2100 + estimated
+1230 @ 4 chars/token`. The guaranteed half is provider-enforced and assumes
+nothing; the estimated half is relative to a recorded tokenization assumption.
+
+---
+
+## 2:30 – 3:30  Indirect prompt injection is a type error
+
+```sh
+./orchc check examples/invalid/untrusted_sink.orch
+```
+
+Expected: `E233`. Say: "`web_page` is declared untrusted. The model's answer
+inherits that, because a model is only as trustworthy as what reached its
+prompt. So the answer cannot drive a tool."
+
+```sh
+./orchc check bench/security/unsafe/InjectionTransitive.orch
+```
+
+Expected: still `E233`, now through **two** model calls. Say: "Chaining calls
+does not launder it."
+
+```sh
+./orchc check bench/security/safe/InjectionTransitiveEndorsed.orch
+```
+
+Expected: accepted. The difference is one `endorse(...) because "..."` line.
+
+---
+
+## 3:30 – 4:15  Implicit flow
+
+```sh
+./orchc check examples/invalid/implicit_flow.orch
+```
+
+Expected: `E234`. Say: "No secret value is passed anywhere here. The secret only
+decides *whether* the tool fires — and that alone tells an observer one bit of
+the secret. The program-counter label catches it."
+
+Mention that `bench/security/unsafe/SecretGuardedLaundered.orch` tries to escape
+this by endorsing inside the branch, and is still rejected.
+
+---
+
+## 4:15 – 5:15  The cost channel — the most interesting result
+
+```sh
+./orchc check examples/invalid/cost_channel.orch
+```
+
+Expected: `E236`, reporting `955 vs 205 tokens`.
+
+Say: "This is the part worth remembering. No value crosses any boundary. No tool
+is called. Every taint checker in the literature accepts this program. But one
+arm costs 900 tokens and the other 150, and the guard is a secret — so anyone
+who can see the bill can read the secret.
+
+Neither analysis finds this alone. The label system doesn't know what an arm
+costs. The cost analysis doesn't know the guard is a secret. It is only visible
+because both judgements are made over the same program."
+
+```sh
+./orchc check examples/valid/balanced_cost_arms.orch
+```
+
+Expected: accepted — same shape, arms balanced, nothing leaks.
+
+---
+
+## 5:15 – 6:00  The certificate
+
+```sh
+./orchc certify examples/valid/untrusted_endorsed.orch
+```
+
+Expected: JSON carrying the bound and its two components, the tokenization
+assumption relied on, the derivation, the final label of every binding, the
+endorsement with its written justification, and the sink that was cleared.
+
+Trace one line: `web_page` is `untrusted`, `digest_text` is `untrusted`,
+`vetted` is `trusted`, and the reclassification entry says exactly why.
+
+---
+
+## 6:00 – 6:45  Front-end phases
+
+```sh
+./orchc tokens  examples/valid/support_triage.orch
+./orchc ast     examples/valid/untrusted_endorsed.orch
+./orchc symbols examples/valid/untrusted_endorsed.orch
+./orchc ir      examples/valid/branching_cost.orch
+```
+
+Expected: location-aware tokens; an AST with labels and declared bounds; a
+symbol table showing each symbol's label and token bound; IR nodes carrying
+region paths and repeat factors.
 
 ```sh
 ./orchc check examples/invalid/multiple_errors.orch
 ```
 
-Expected result: a non-zero status and several independent diagnostics, including duplicate name `E201`, template errors `E222`, secret exposure `E230`, call arity/type errors `E221`/`E223`, unknown model `E241`, and multiple output `E271`. Explain that the compiler deliberately continues when it can safely find another independent fault.
+Expected: a dozen independent diagnostics from one run — `E201`, `E202`, `E210`,
+`E221`, `E222`, `E223`, `E230`, `E231`, `E241`, `E261`, `E271`. Say that the
+parser synchronizes at statement boundaries rather than stopping at the first
+fault.
 
-## 4:00 to 4:35 Show syntax recovery
+---
 
-```sh
-./orchc check examples/invalid/syntax_errors.orch
-```
-
-Expected result: a non-zero status with `P001` identifying the missing semicolon. Say that parser recovery synchronizes at a statement boundary rather than crashing.
-
-## 4:35 to 5:25 Show the workflow IR
+## 6:45 – 7:30  The claim is falsifiable
 
 ```sh
-./orchc ir examples/valid/support_triage.orch
+./orchc cost examples/valid/bounded_retry.orch | head -2
+./orchc run  examples/valid/bounded_retry.orch --seed 1
+./orchc run  examples/valid/bounded_retry.orch --seed 2
 ```
 
-Expected result: numbered input, secret, model, prompt, call, requirement, and output nodes. The call node lists dependencies on the prompt, model, and input; it also prints `max_tokens=600`. Explain that the lowerer runs a defensive cycle detector before accepting IR.
+Expected: the certified bound is 3330; the runs consume well under it, and a
+different seed takes a different number of attempts.
 
-## 5:25 to 6:00 Summarize the boundary and remaining scope
+Say: "A bound nothing can test is a bound nothing can trust. The mock runtime
+executes the workflow against a seeded generator that respects each model's
+declared cap, and counts what was actually spent. The harness checks every run
+against the certificate."
+
+---
+
+## 7:30 – 8:00  Results and honesty
 
 ```sh
-./orchc check examples/boundary/zero_budget.orch
-./orchc ir-json examples/valid/two_step_workflow.orch
+cat bench/results/evaluation.txt
 ```
 
-Expected result: the zero-budget workflow succeeds because it contains no model call; the JSON view shows the two-step workflow's IR. Close with: “The completed Review 2 scope is the front end, AST, symbols, semantics, and IR. Phase 3 work is deliberately isolated and not claimed as complete: optimization, offline Python generation, and mock execution.”
+Point at four numbers:
+
+- certified bound exceeded: **0 of 4,600 runs**
+- flat rule exceeded: **621 of 4,600 (13.5%)**, unsound on 8 of 23 workflows
+- slack over peak observed: median **1.23×**
+- security suite: **13/13 unsafe rejected, 13/13 safe accepted**
+
+Close by naming the limitations rather than waiting to be asked: the security
+suite was written by the author (mitigated by pairing every unsafe workflow with
+a safe one differing by a single edit), the cost corpus is generated rather than
+harvested from production, the proofs in the paper are on paper rather than
+mechanized, and the mock runtime implements the same assumptions the analysis
+relies on — so it checks the implementation against the specification, not the
+specification against reality.

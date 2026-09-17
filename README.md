@@ -59,6 +59,22 @@ a secret leaks through *whether* an effect happened rather than through a value.
 `declassify` and `endorse` are the only escapes and both require a written
 justification that lands in the certificate.
 
+**The cost channel.** Putting both analyses in one type system finds a defect
+neither can see alone. Consider:
+
+```orchlang
+if ALERT {                                   // a secret boolean
+  let a: text = call step(src) using large;  // 900 output tokens
+} else {
+  let b: text = call step(src) using small;  // 150 output tokens
+}
+```
+
+No value crosses any boundary. No tool is invoked. Every taint checker accepts
+it. The token bill still reveals the secret. The label system does not know what
+an arm costs; the cost analysis does not know the guard is a secret; together
+they reject it (`E236`). This is the most interesting thing in the project.
+
 ## Results
 
 From `bench/results/evaluation.txt`, reproducible with `python bench/evaluate.py`:
@@ -68,7 +84,7 @@ From `bench/results/evaluation.txt`, reproducible with `python bench/evaluate.py
 | Is the certified bound ever exceeded? | **0 violations in 4,600 executions** |
 | Is the flat `Σ max_tokens` rule ever exceeded? | **621 of 4,600 runs (13.5%)**, unsound on 8 of 23 workflows |
 | How much slack does the bound carry? | median **1.23×** peak observed (range 1.02–3.01×) |
-| Does the flow analysis separate safe from unsafe? | **12/12 unsafe rejected, 12/12 safe accepted** |
+| Does the flow analysis separate safe from unsafe? | **13/13 unsafe rejected, 13/13 safe accepted** |
 | What does the analysis cost? | ~6 ms per workflow, including process startup |
 
 The security suite is *paired*: every unsafe workflow has a safe counterpart
@@ -82,7 +98,7 @@ make clean
 make check
 ```
 
-`make check` builds with `-std=c++17 -Wall -Wextra -pedantic`, runs 79
+`make check` builds with `-std=c++17 -Wall -Wextra -pedantic`, runs 83
 assertions, accepts every valid example, confirms every invalid example is
 rejected, and emits a certificate for each valid workflow.
 
@@ -141,7 +157,7 @@ stated, not tested.
 include/            Compiler data structures and module interfaces
 src/                Lexer, parser, AST, symbols, flow typing, cost analysis,
                     IR, certificate, mock runtime, CLI
-tests/tests.cpp     Standalone 79-test regression executable
+tests/tests.cpp     Standalone 83-test regression executable
 examples/           Valid, invalid, and boundary OrchLang programs
 bench/              Generated benchmark corpus and the evaluation harness
 docs/               Language specification and the paper
