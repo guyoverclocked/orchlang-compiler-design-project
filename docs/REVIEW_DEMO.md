@@ -9,12 +9,12 @@ Run everything from the repository root after `make clean && make check`.
 
 ## 0:00 – 0:45  The problem
 
-Say: "LLM workflows fail expensively in two ways. They spend more than you
-meant, and they let data go where it shouldn't — a key into a prompt, or text
-from a web page into a tool call. Almost every tool that addresses these finds
-out at run time, once the tokens are gone and the effect has fired. OrchLang is
-a compiler that answers both questions from the source, before anything runs,
-and writes the answers into a certificate."
+Say: "LLM workflows fail expensively in three ways. They spend more than you
+meant. They let data go where it shouldn't — a key into a prompt, or text from a
+web page into a tool call. And, more subtly, the *amount* they spend can itself
+reveal a secret. Almost every tool that addresses the first two finds out at run
+time, once the tokens are gone and the effect has fired. OrchLang answers all
+three from the source, before anything runs."
 
 ---
 
@@ -25,7 +25,7 @@ make clean && make check
 ```
 
 Expected: a strict C++17 build with `-Wall -Wextra -pedantic` and no warnings,
-`Passed 83/83 tests.`, the valid corpus accepted, every invalid example
+`Passed 95/95 tests.`, the valid corpus accepted, every invalid example
 rejected, and a certificate emitted for each valid workflow.
 
 ---
@@ -47,11 +47,12 @@ not the sum.
 Expected: `retry-scale  3 x 1110  => 3330 tokens`. Say: "A flat sum over
 syntactic call sites reports 1110 here. The workflow can spend 3330. That is
 the direction that matters, because it is unsound — the benchmark shows it is
-violated on 13.5% of real executions."
+violated on 13.8% of real executions."
 
-Point out the two components in the summary line: `guaranteed 2100 + estimated
-1230 @ 4 chars/token`. The guaranteed half is provider-enforced and assumes
-nothing; the estimated half is relative to a recorded tokenization assumption.
+Point out the components line: `output <= 2100, input <= 1230 @ 4 chars/token`.
+The output half is provider-enforced and assumes nothing; the input half is
+relative to a recorded tokenization assumption. Each is maximised separately at
+a branch, so each holds on its own.
 
 ---
 
@@ -95,28 +96,44 @@ this by endorsing inside the branch, and is still rejected.
 
 ---
 
-## 4:15 – 5:15  The cost channel — the most interesting result
+## 4:15 – 5:30  The bill leaks the secret — and my first answer was wrong
 
 ```sh
 ./orchc check examples/invalid/cost_channel.orch
 ```
 
-Expected: `E236`, reporting `955 vs 205 tokens`.
+Expected: `E236`, naming what each arm bills.
 
-Say: "This is the part worth remembering. No value crosses any boundary. No tool
-is called. Every taint checker in the literature accepts this program. But one
-arm costs 900 tokens and the other 150, and the guard is a secret — so anyone
-who can see the bill can read the secret.
+Say: "A secret decides which branch runs. One arm calls a big model, the other a
+small one. No value crosses any boundary, no tool is called, and every taint
+tracker accepts this program — but the invoice still tells you the secret."
 
-Neither analysis finds this alone. The label system doesn't know what an arm
-costs. The cost analysis doesn't know the guard is a secret. It is only visible
-because both judgements are made over the same program."
+Then the important part:
 
 ```sh
-./orchc check examples/valid/balanced_cost_arms.orch
+./orchc check examples/invalid/equal_bounds.orch
 ```
 
-Expected: accepted — same shape, arms balanced, nothing leaks.
+Expected: `E236`, reporting `then-arm bills [m(in=1 + |x|)]` against
+`else-arm bills [m(in=1 + |y|)]`.
+
+Say: "My first rule was to accept when both arms had the same certified upper
+bound. Here both arms call the same model with an argument capped at a hundred,
+so both bound at exactly 111, and that rule accepted this. But x and y are
+different strings with different real lengths. An upper bound tells you a
+maximum, not a value. An external audit built this counterexample and measured
+it: the bill differs in 225 of 425 paired runs. I withdrew the theorem.
+
+The repair cannot be a tighter number, because a call's output length is the
+provider's choice, not the program's. So the compiler compares structure — which
+model, in what order, and a symbolic input size that may only mention things
+that provably agree across the two runs. Here the terms differ: |x| against |y|."
+
+```sh
+./orchc check examples/valid/balanced_signature.orch
+```
+
+Expected: accepted. The only edit is that both arms now read the same variable.
 
 ---
 
@@ -185,15 +202,27 @@ cat bench/results/evaluation.txt
 
 Point at four numbers:
 
-- certified bound exceeded: **0 of 4,600 runs**
-- flat rule exceeded: **621 of 4,600 (13.5%)**, unsound on 8 of 23 workflows
-- slack over peak observed: median **1.23×**
+- certified bound exceeded, checked componentwise: **0 of 4,600 runs**
+- flat per-call sum exceeded: **636 of 4,600 (13.8%)**
+- control-flow-aware rule exceeded: **644 of 4,600 (14.0%)** — tightening an
+  unsound bound makes it fail *more* often; retries are what break it
+- slack over peak observed: median **1.11×**, with zero dead branch arms
+- accepted workflows with a secret-dependent bill: **0 of 2,975 comparisons**
+- rejected workflows with a real leaking witness: **7 of 7**
 - security suite: **13/13 unsafe rejected, 13/13 safe accepted**
 
-Close by naming the limitations rather than waiting to be asked: the security
-suite was written by the author (mitigated by pairing every unsafe workflow with
-a safe one differing by a single edit), the cost corpus is generated rather than
-harvested from production, the proofs in the paper are on paper rather than
-mechanized, and the mock runtime implements the same assumptions the analysis
-relies on — so it checks the implementation against the specification, not the
-specification against reality.
+Close by naming the limitations rather than waiting to be asked:
+
+- Combining flow and resource analysis is not new — Ngo et al. (IEEE S&P 2017)
+  and RelCost (POPL 2017) did it for conventional programs. What is specific
+  here is the opaque stochastic call, where numeric comparison is unavailable.
+- The relational guarantee is relative to a coupling: the secret does not change
+  the bill *given the model behaved the same way*.
+- Declassification is trusted; the compiler records it, it does not verify it.
+- Token bounds are not portable across tokenizers, which is the clearest
+  remaining gap.
+- The proofs are on paper, not mechanized, and the mock runtime implements the
+  same assumptions the analysis relies on — so it checks the implementation
+  against the specification, not the specification against reality.
+- The security suite was written by the author, mitigated but not eliminated by
+  pairing every unsafe workflow with a safe one differing by one edit.
