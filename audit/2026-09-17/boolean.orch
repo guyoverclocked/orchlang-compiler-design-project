@@ -1,0 +1,6 @@
+workflow Boolean budget 100 {
+ model m = mock("m") max_tokens 1;
+ prompt p(x: boolean) -> text = "{x}";
+ let y: text = call p(false) using m;
+ output y;
+}

@@ -2,6 +2,7 @@
 
 #include "ast.hpp"
 #include "diagnostic.hpp"
+#include "label.hpp"
 #include "semantic_analyzer.hpp"
 
 #include <string>
@@ -10,7 +11,20 @@
 
 namespace orchlang {
 
-enum class IRNodeKind { Input, Secret, Model, Prompt, Call, Requirement, Output };
+enum class IRNodeKind {
+    Input,
+    Secret,
+    Model,
+    Prompt,
+    Tool,
+    Call,
+    Requirement,
+    Emit,
+    Reclassify,
+    Branch,
+    Retry,
+    Output
+};
 
 std::string irNodeKindName(IRNodeKind kind);
 
@@ -22,6 +36,16 @@ struct IRNode {
     std::vector<int> dependencies;
     std::vector<std::pair<std::string, std::string>> attributes;
     SourceLocation location;
+
+    // Where this node sits in the workflow's control structure, as a path such
+    // as "root/then@7".  Nodes in different regions are ordered by the region
+    // tree rather than by their position in the flat list.
+    std::string region{"root"};
+    // Product of the repetition bounds of the enclosing retry blocks, so a
+    // reader can see how many times this node may run.
+    std::size_t repeatFactor{1};
+    // Security label carried by the value this node produces.
+    Label label{publicTrusted()};
 };
 
 struct WorkflowIR {

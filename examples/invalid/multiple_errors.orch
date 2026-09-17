@@ -1,7 +1,7 @@
 // Expected: multiple E201, E202, E210, E221, E222, E223, E230, E241, and E271 diagnostics.
 workflow MultipleErrors budget 100 {
-  input title: integer;
-  input title: text;
+  input title: integer max_tokens 20;
+  input title: text max_tokens 20;
   secret API_KEY;
   model small = mock("offline") max_tokens 80;
   prompt write(message: text, unused: text) -> integer =

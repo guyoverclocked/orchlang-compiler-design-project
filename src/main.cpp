@@ -1,30 +1,45 @@
 #include "ast.hpp"
+#include "certificate.hpp"
+#include "cost_analyzer.hpp"
 #include "diagnostic.hpp"
+#include "interpreter.hpp"
 #include "ir.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
+#include "relational.hpp"
 #include "semantic_analyzer.hpp"
 #include "symbol_table.hpp"
 
+#include <cstdlib>
 #include <fstream>
 #include <iostream>
 #include <sstream>
 #include <string>
+#include <vector>
 
 namespace orchlang {
 
 namespace {
 
-enum class Command { Tokens, Check, Ast, Symbols, Ir, IrJson, Invalid };
+enum class Command { Tokens, Check, Ast, Symbols, Ir, IrJson, Cost, Certify, Run, Invalid };
 
 struct Invocation {
     Command command{Command::Invalid};
     std::string path;
+    AnalysisOptions options;
+    RunOptions run;
 };
 
 void printUsage(std::ostream& out) {
-    out << "Usage: orchc <tokens|check|ast|symbols|ir|ir-json> <source.orch>\n"
+    out << "Usage: orchc <tokens|check|ast|symbols|ir|ir-json|cost|certify|run> <source.orch>\n"
         << "       orchc <source.orch>\n"
+        << "Options: --chars-per-token <n>   tokenization assumption for input tokens (default "
+        << defaultCharsPerToken() << ";\n"
+        << "                                 1 is unconditionally sound, larger is tighter)\n"
+        << "         --seed <n>            seed for the offline mock runtime used by 'run'\n"
+        << "         --retry-failure <p>   percentage chance one retry attempt fails (default 50)\n"
+        << "         --pin <name>=<n>      pin an input or secret's token length for 'run'\n"
+        << "         --pin <name>=true     pin a boolean input or secret for 'run'\n"
         << "Compatibility flags: --tokens, --check\n";
 }
 
@@ -35,6 +50,9 @@ Command parseCommand(const std::string& value) {
     if (value == "symbols") return Command::Symbols;
     if (value == "ir") return Command::Ir;
     if (value == "ir-json") return Command::IrJson;
+    if (value == "cost") return Command::Cost;
+    if (value == "certify") return Command::Certify;
+    if (value == "run") return Command::Run;
     return Command::Invalid;
 }
 
@@ -56,8 +74,75 @@ void printDiagnostics(const DiagnosticBag& diagnostics) {
     }
 }
 
-void appendDiagnostics(DiagnosticBag& destination, const DiagnosticBag& source) {
-    destination.append(source);
+// Pulls the option flags out of the argument list, leaving the positional
+// command and path behind.
+bool collectArguments(int argc, char* argv[], Invocation& invocation) {
+    std::vector<std::string> positional;
+    for (int index = 1; index < argc; ++index) {
+        const std::string argument = argv[index];
+        if (argument == "--chars-per-token") {
+            if (index + 1 >= argc) {
+                return false;
+            }
+            const long value = std::strtol(argv[++index], nullptr, 10);
+            if (value < 1) {
+                return false;
+            }
+            invocation.options.charsPerToken = static_cast<std::size_t>(value);
+            continue;
+        }
+        if (argument == "--seed") {
+            if (index + 1 >= argc) {
+                return false;
+            }
+            invocation.run.seed = std::strtoull(argv[++index], nullptr, 10);
+            continue;
+        }
+        if (argument == "--pin") {
+            // --pin name=tokens, or --pin name=true / --pin name=false
+            if (index + 1 >= argc) {
+                return false;
+            }
+            const std::string spec = argv[++index];
+            const std::size_t split = spec.find('=');
+            if (split == std::string::npos) {
+                return false;
+            }
+            const std::string name = spec.substr(0, split);
+            const std::string value = spec.substr(split + 1);
+            if (value == "true" || value == "false") {
+                invocation.run.pinnedFlags[name] = value == "true";
+            } else {
+                invocation.run.pinnedLengths[name] =
+                    static_cast<std::size_t>(std::strtoull(value.c_str(), nullptr, 10));
+            }
+            continue;
+        }
+        if (argument == "--retry-failure") {
+            if (index + 1 >= argc) {
+                return false;
+            }
+            const long value = std::strtol(argv[++index], nullptr, 10);
+            if (value < 0 || value > 100) {
+                return false;
+            }
+            invocation.run.retryFailurePercent = static_cast<unsigned>(value);
+            continue;
+        }
+        positional.push_back(argument);
+    }
+
+    if (positional.size() == 1) {
+        invocation.command = Command::Check;
+        invocation.path = positional[0];
+        return true;
+    }
+    if (positional.size() == 2) {
+        invocation.command = parseCommand(positional[0]);
+        invocation.path = positional[1];
+        return invocation.command != Command::Invalid;
+    }
+    return false;
 }
 
 }  // namespace
@@ -68,14 +153,7 @@ int main(int argc, char* argv[]) {
     using namespace orchlang;
 
     Invocation invocation;
-    if (argc == 2) {
-        invocation.command = Command::Check;
-        invocation.path = argv[1];
-    } else if (argc == 3) {
-        invocation.command = parseCommand(argv[1]);
-        invocation.path = argv[2];
-    }
-    if (invocation.command == Command::Invalid || invocation.path.empty()) {
+    if (!collectArguments(argc, argv, invocation) || invocation.path.empty()) {
         printUsage(std::cerr);
         return 2;
     }
@@ -97,16 +175,16 @@ int main(int argc, char* argv[]) {
     Parser parser(lexed.tokens);
     ParseResult parsed = parser.parse();
     DiagnosticBag diagnostics;
-    appendDiagnostics(diagnostics, lexed.diagnostics);
-    appendDiagnostics(diagnostics, parsed.diagnostics);
+    diagnostics.append(lexed.diagnostics);
+    diagnostics.append(parsed.diagnostics);
     if (diagnostics.hasErrors()) {
         printDiagnostics(diagnostics);
         return 1;
     }
 
-    SemanticAnalyzer analyzer;
+    SemanticAnalyzer analyzer(invocation.options);
     SemanticResult semantic = analyzer.analyze(parsed.program);
-    appendDiagnostics(diagnostics, semantic.diagnostics);
+    diagnostics.append(semantic.diagnostics);
 
     if (invocation.command == Command::Ast) {
         std::cout << printAst(parsed.program);
@@ -118,22 +196,55 @@ int main(int argc, char* argv[]) {
         printDiagnostics(diagnostics);
         return diagnostics.hasErrors() ? 1 : 0;
     }
-    if (invocation.command == Command::Ir || invocation.command == Command::IrJson) {
+
+    // Everything past this point needs a well-typed program: a cost bound or a
+    // certificate derived from an ill-typed workflow would mean nothing.
+    if (diagnostics.hasErrors()) {
+        printDiagnostics(diagnostics);
+        return 1;
+    }
+
+    if (invocation.command == Command::Run) {
+        Interpreter interpreter(invocation.run);
+        RunResult run = interpreter.run(parsed.program, semantic);
+        diagnostics.append(run.diagnostics);
         if (diagnostics.hasErrors()) {
             printDiagnostics(diagnostics);
             return 1;
         }
-        IRLowerer lowerer;
-        IRBuildResult lowered = lowerer.lower(parsed.program, semantic);
-        appendDiagnostics(diagnostics, lowered.diagnostics);
+        std::cout << printRun(run);
+        return 0;
+    }
+
+    CostAnalyzer costAnalyzer;
+    CostResult cost = costAnalyzer.analyze(parsed.program, semantic);
+    diagnostics.append(cost.diagnostics);
+
+    RelationalAnalyzer relationalAnalyzer;
+    RelationalResult relational = relationalAnalyzer.analyze(parsed.program, semantic);
+    diagnostics.append(relational.diagnostics);
+
+    if (invocation.command == Command::Cost) {
         if (diagnostics.hasErrors()) {
             printDiagnostics(diagnostics);
             return 1;
         }
-        if (invocation.command == Command::Ir) {
-            std::cout << printIR(lowered.program);
-        } else {
-            std::cout << printIRJson(lowered.program);
+        std::cout << printCertificateSummary(cost, semantic);
+        if (!relational.obligations.empty()) {
+            std::cout << "  relational obligations:\n";
+            for (const RelationalObligation& obligation : relational.obligations) {
+                std::cout << "    " << (obligation.discharged ? "discharged" : "FAILED") << "  if "
+                          << obligation.guard << " (line " << obligation.location.line << "): "
+                          << obligation.detail << '\n';
+            }
+        }
+        for (const WorkflowCost& workflow : cost.workflows) {
+            std::cout << "  derivation for " << workflow.name << ":\n";
+            for (const DerivationStep& step : workflow.derivation) {
+                std::cout << "    " << std::string(static_cast<std::size_t>(step.depth) * 2 + 2, ' ')
+                          << step.rule << "  " << step.detail << "  => " << step.bound.total()
+                          << " tokens\n";
+            }
         }
         return 0;
     }
@@ -142,16 +253,29 @@ int main(int argc, char* argv[]) {
         printDiagnostics(diagnostics);
         return 1;
     }
-    std::cout << "Check succeeded: " << parsed.program.workflows.size()
-              << " workflow(s) passed lexical, syntax, and semantic analysis.\n";
-    for (const auto& workflow : parsed.program.workflows) {
-        if (!workflow) {
-            continue;
+
+    if (invocation.command == Command::Ir || invocation.command == Command::IrJson ||
+        invocation.command == Command::Certify) {
+        IRLowerer lowerer;
+        IRBuildResult lowered = lowerer.lower(parsed.program, semantic);
+        diagnostics.append(lowered.diagnostics);
+        if (diagnostics.hasErrors()) {
+            printDiagnostics(diagnostics);
+            return 1;
         }
-        const auto total = semantic.declaredTokenTotals.find(workflow->name);
-        const std::size_t tokenTotal = total == semantic.declaredTokenTotals.end() ? 0 : total->second;
-        std::cout << "  " << workflow->name << ": declared token bound " << tokenTotal
-                  << " / budget " << workflow->budget << "\n";
+        if (invocation.command == Command::Ir) {
+            std::cout << printIR(lowered.program);
+        } else if (invocation.command == Command::IrJson) {
+            std::cout << printIRJson(lowered.program);
+        } else {
+            std::cout << printCertificate(parsed.program, semantic, cost, lowered.program,
+                                          relational);
+        }
+        return 0;
     }
+
+    std::cout << "Check succeeded: " << parsed.program.workflows.size()
+              << " workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\n";
+    std::cout << printCertificateSummary(cost, semantic);
     return 0;
 }

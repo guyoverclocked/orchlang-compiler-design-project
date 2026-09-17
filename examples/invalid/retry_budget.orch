@@ -1,0 +1,14 @@
+// Expected: E260 because three attempts at 700 output tokens exceed the budget
+// even though a single attempt would fit comfortably.
+workflow RetryOverrun budget 1000 {
+  input document: text max_tokens 100;
+  model extractor = mock("offline-extract") max_tokens 700;
+
+  prompt extract(source: text) -> text = "Extract from: {source}";
+
+  retry 3 {
+    let attempt: text = call extract(document) using extractor;
+  }
+
+  output document;
+}

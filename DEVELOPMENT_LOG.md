@@ -14,3 +14,67 @@
 - Ran `make sanitize` with AddressSanitizer and UndefinedBehaviorSanitizer. All 45 tests and the example corpus completed without sanitizer findings.
 - Rebuilt normally with `make clean && make check`, ran every command in `docs/REVIEW_DEMO.md`, verified valid commands returned 0, verified invalid examples returned non-zero, and confirmed missing-file and usage errors return status 2.
 - Searched the project for `TODO`, `FIXME`, fake-output markers, placeholder implementation markers, raw `new` allocations, and inconsistent project naming. No such implementation-quality markers were found.
+
+## 2026-09-17
+
+Reworked the project from a declarative checker into a language whose type
+system certifies two properties, after a prior-art survey established where the
+novelty actually lies.
+
+**Prior art.** Surveyed LLM workflow DSLs (LMQL, SGLang, DSPy, APPL, PDL),
+static agent verification (Agentproof), information-flow defences (CaMeL,
+f-secure, AgentFlow, NeuroTaint, GIF), budget enforcement (the 63-incident
+catalogue with its affine-typed Rust mitigation; budget algebras for multi-agent
+routing), and classical resource typing (AARA). Two findings shaped the work:
+the cost column and the flow column of that table are near-disjoint, and
+everything in the flow column is a runtime mechanism. Prompt-template
+placeholder checking turned out to be commodity (promptml, promptctl,
+type-safe-prompt), so it is explicitly disclaimed rather than claimed.
+
+**Patent assessment.** Concluded against filing. A type system is squarely
+within Section 3(k)'s exclusion of a computer programme per se and an algorithm,
+and the CRI Guidelines 2025 gate eligibility on technical effect on an
+underlying technical system, which a developer-facing static analysis is poorly
+placed to show. Ferid Allani confirms there is no absolute bar but took 19
+years. Recorded in docs/SUBMISSION_PLAN.md.
+
+**Defects found in the existing build.** `require tokens(x) <= n` was parsed,
+lowered into the IR, printed, and never checked: `require tokens(c) <= 5`
+against a 600-token model passed. The budget rule ignored input tokens entirely
+and summed over syntactic call sites. The secret check was shallow, and the
+grammar was too weak for an indirect flow to exist at all.
+
+**Language.** Added `if`/`else` and bounded `retry` so a cost bound is inductive
+rather than a sum; `tool` declarations and `emit`, giving the language one
+explicit sink; `untrusted` inputs and typed secrets; declared `max_tokens` on
+inputs and secrets, so the analysis is defined rather than guessed; and
+`declassify`/`endorse` with mandatory written justifications. Each block is its
+own scope.
+
+**Analyses.** Information-flow typing over
+(Public <= Secret) x (Trusted <= Untrusted), with a program-counter label for
+implicit flows and an injection-propagation rule that taints model output
+derived from untrusted input transitively. Structural cost analysis separating a
+guaranteed component (provider-enforced output caps) from an estimated one
+(input tokens, relative to a recorded tokenization assumption). `require` is now
+actually discharged, with undecidable comparisons reported rather than accepted.
+
+**The cost channel (E236).** A branch whose guard is secret and whose arms cost
+different amounts leaks the guard through the token bill with no value crossing
+any boundary. Neither analysis sees it alone. This is the project's most
+original result.
+
+**Evaluation.** Built an offline mock runtime so the bound is falsifiable, a
+generated benchmark of 23 cost workflows and 26 security workflows in
+safe/unsafe pairs, and a harness. The certified bound was not exceeded in 4,600
+executions; the flat rule the previous version used is exceeded on 13.5% of them
+and unsound on 8 of 23 workflows, every one containing a retry. Median slack
+1.23x. Security suite 13/13 and 13/13.
+
+**State.** 83 tests pass, warning-free under -Wall -Wextra -pedantic. Every
+command in docs/REVIEW_DEMO.md verified against the built compiler. Paper draft
+in docs/PAPER.md; submission strategy in docs/SUBMISSION_PLAN.md.
+
+**Toolchain note.** The local MinGW GCC 6.3 cannot build this (no <optional>).
+Installed WinLibs GCC 16.1.0 via winget; any GCC 7+, Clang 5+, or MSVC 2017+
+works.

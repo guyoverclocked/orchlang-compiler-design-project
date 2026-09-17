@@ -1,0 +1,21 @@
+// The motivating example from docs/PAPER.md section 2.
+// Expected: E233, because untrusted model output reaches a tool unendorsed.
+// Endorsing it then exposes E260: three retry attempts at 1109 tokens each
+// exceed the declared budget of 2400.
+workflow ResearchDigest budget 2400 {
+  input query:    text max_tokens 100;
+  input web_page: text untrusted max_tokens 600;
+  secret API_KEY: text max_tokens 16;
+
+  model reader = mock("offline-reader") max_tokens 500;
+  tool  publish(body: text);
+
+  prompt digest(page: text) -> text = "Summarise the retrieved page: {page}";
+
+  retry 3 {
+    let digest_text: text = call digest(web_page) using reader;
+    emit publish(digest_text);
+  }
+
+  output query;
+}

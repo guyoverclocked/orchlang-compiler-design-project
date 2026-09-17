@@ -1,0 +1,1 @@
+examples/invalid/equal_bounds.orch:17:2: error [E236] this branch is guarded by a secret and its two arms bill differently, so the bill reveals the secret; then-arm bills [m(in=1 + |x|)] and else-arm bills [m(in=1 + |y|)]

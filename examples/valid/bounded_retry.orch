@@ -1,0 +1,14 @@
+// A retry block multiplies its body's bound, which is exactly the overrun the
+// flat "sum the max_tokens" rule misses.
+workflow ResilientExtract budget 3400 {
+  input document: text max_tokens 400;
+  model extractor = mock("offline-extract") max_tokens 700;
+
+  prompt extract(source: text) -> text = "Extract the invoice total from: {source}";
+
+  retry 3 {
+    let attempt: text = call extract(document) using extractor;
+  }
+
+  output document;
+}

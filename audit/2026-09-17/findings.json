@@ -1,0 +1,284 @@
+[
+  {
+    "case": "literal",
+    "certify_exit": 0,
+    "errors": "",
+    "bound": {
+      "guaranteed_tokens": 1,
+      "estimated_tokens": 1,
+      "total_tokens": 2,
+      "within_budget": true,
+      "defined": true,
+      "cost": 0.0,
+      "cost_complete": false
+    },
+    "first_violation": {
+      "seed": 1,
+      "trace": "Literal:\n  calls          1\n  actual tokens  3  (input 2 + output 1)\n    y = p via m  in 2 out 1\n"
+    }
+  },
+  {
+    "case": "boolean",
+    "certify_exit": 0,
+    "errors": "",
+    "bound": {
+      "guaranteed_tokens": 1,
+      "estimated_tokens": 2,
+      "total_tokens": 3,
+      "within_budget": true,
+      "defined": true,
+      "cost": 0.0,
+      "cost_complete": false
+    },
+    "first_violation": {
+      "seed": 1,
+      "trace": "Boolean:\n  calls          1\n  actual tokens  4  (input 3 + output 1)\n    y = p via m  in 3 out 1\n"
+    }
+  },
+  {
+    "case": "split",
+    "certify_exit": 0,
+    "errors": "",
+    "bound": {
+      "guaranteed_tokens": 1,
+      "estimated_tokens": 201,
+      "total_tokens": 202,
+      "within_budget": true,
+      "defined": true,
+      "cost": 0.0,
+      "cost_complete": false
+    },
+    "first_violation": {
+      "seed": 2,
+      "trace": "Split:\n  calls          1\n  actual tokens  21  (input 1 + output 20)\n    b = p via large  in 1 out 20\n"
+    }
+  },
+  {
+    "case": "shadow",
+    "certify_exit": 0,
+    "errors": "",
+    "bound": {
+      "guaranteed_tokens": 1,
+      "estimated_tokens": 1,
+      "total_tokens": 2,
+      "within_budget": true,
+      "defined": true,
+      "cost": 0.0,
+      "cost_complete": false
+    },
+    "first_violation": {
+      "seed": 3,
+      "trace": "Shadow:\n  calls          1\n  actual tokens  348  (input 1 + output 347)\n    y = p via m  in 1 out 347\n"
+    }
+  },
+  {
+    "case": "equal_bounds",
+    "certify_exit": 0,
+    "errors": "",
+    "bound": {
+      "guaranteed_tokens": 10,
+      "estimated_tokens": 101,
+      "total_tokens": 111,
+      "within_budget": true,
+      "defined": true,
+      "cost": 0.0,
+      "cost_complete": false
+    }
+  },
+  {
+    "example_checks": [
+      {
+        "file": "examples\\valid\\balanced_cost_arms.orch",
+        "expected_accept": true,
+        "exit": 0,
+        "match": true
+      },
+      {
+        "file": "examples\\valid\\bounded_retry.orch",
+        "expected_accept": true,
+        "exit": 0,
+        "match": true
+      },
+      {
+        "file": "examples\\valid\\branching_cost.orch",
+        "expected_accept": true,
+        "exit": 0,
+        "match": true
+      },
+      {
+        "file": "examples\\valid\\declassified_secret.orch",
+        "expected_accept": true,
+        "exit": 0,
+        "match": true
+      },
+      {
+        "file": "examples\\valid\\summarization.orch",
+        "expected_accept": true,
+        "exit": 0,
+        "match": true
+      },
+      {
+        "file": "examples\\valid\\support_triage.orch",
+        "expected_accept": true,
+        "exit": 0,
+        "match": true
+      },
+      {
+        "file": "examples\\valid\\two_step_workflow.orch",
+        "expected_accept": true,
+        "exit": 0,
+        "match": true
+      },
+      {
+        "file": "examples\\valid\\untrusted_endorsed.orch",
+        "expected_accept": true,
+        "exit": 0,
+        "match": true
+      },
+      {
+        "file": "examples\\boundary\\zero_budget.orch",
+        "expected_accept": true,
+        "exit": 0,
+        "match": true
+      },
+      {
+        "file": "examples\\boundary\\long_identifier.orch",
+        "expected_accept": true,
+        "exit": 0,
+        "match": true
+      },
+      {
+        "file": "examples\\boundary\\retry_one.orch",
+        "expected_accept": true,
+        "exit": 0,
+        "match": true
+      },
+      {
+        "file": "examples\\boundary\\empty_branch.orch",
+        "expected_accept": true,
+        "exit": 0,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\budget_exceeded.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\cost_channel.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\duplicate_symbols.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\implicit_flow.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\lexical_errors.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\multiple_errors.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\paper_motivating.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\placeholder_errors.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\require_undecidable.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\require_violated.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\retry_budget.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\secret_exposure.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\secret_sink.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\syntax_errors.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\type_mismatch.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\unbounded_input.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\unknown_names.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\unknown_tool.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\invalid\\untrusted_sink.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      },
+      {
+        "file": "examples\\boundary\\empty_workflow.orch",
+        "expected_accept": false,
+        "exit": 1,
+        "match": true
+      }
+    ]
+  }
+]

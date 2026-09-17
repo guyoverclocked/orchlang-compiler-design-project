@@ -1,0 +1,21 @@
+// Expected: E236.  No value crosses a boundary here and no tool is called, yet
+// the workflow still leaks: it spends 900 tokens when the secret is set and 150
+// when it is not, so anyone who can see the bill can read the secret.
+// Neither analysis finds this alone -- the label system does not know what an
+// arm costs, and the cost analysis does not know the guard is a secret.
+workflow SecretCostChannel budget 100000 {
+  input src: text max_tokens 50;
+  secret ALERT: boolean max_tokens 1;
+  model small = mock("offline-small") max_tokens 150;
+  model large = mock("offline-large") max_tokens 900;
+
+  prompt step(payload: text) -> text = "Process: {payload}";
+
+  if ALERT {
+    let a: text = call step(src) using large;
+  } else {
+    let b: text = call step(src) using small;
+  }
+
+  output src;
+}

@@ -1,5 +1,5 @@
-workflow TwoStepAnswer budget 1800 {
-  input question: text;
+workflow TwoStepAnswer budget 1900 {
+  input question: text max_tokens 200;
   model researcher = mock("offline-research") max_tokens 500;
   model editor = mock("offline-editor") max_tokens 600;
 

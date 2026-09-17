@@ -7,3 +7,12 @@
 
 # Local operating-system metadata
 .DS_Store
+
+# local toolchain helper
+.envrc
+*.exe
+bench/results/*.json
+
+node_modules/
+package-lock.json
+package.json

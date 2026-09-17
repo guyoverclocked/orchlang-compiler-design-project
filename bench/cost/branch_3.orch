@@ -1,0 +1,17 @@
+workflow Branch3 budget 100000 {
+  input source: text max_tokens 120;
+  model small = mock("offline-small") max_tokens 150;
+  model large = mock("offline-large") max_tokens 600;
+  prompt step(payload: text) -> text = "Process this payload: {payload}";
+  let head: text = call step(source) using small;
+  if tokens(head) <= 75 {
+    let a0: text = call step(source) using small;
+    let a1: text = call step(source) using small;
+    let a2: text = call step(source) using small;
+  } else {
+    let b0: text = call step(source) using large;
+    let b1: text = call step(source) using large;
+    let b2: text = call step(source) using large;
+  }
+  output head;
+}

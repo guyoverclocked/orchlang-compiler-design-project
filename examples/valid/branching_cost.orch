@@ -1,0 +1,22 @@
+// The bound is the more expensive arm, not the sum of both.
+// escalate costs 900, the quick reply costs 120: the workflow is bounded by the
+// escalation path even though only one arm ever runs.
+workflow TieredTriage budget 2000 {
+  input ticket: text max_tokens 300;
+  model small = mock("offline-small") max_tokens 120;
+  model large = mock("offline-large") max_tokens 900;
+
+  prompt triage(message: text) -> text = "Triage this ticket: {message}";
+  prompt escalate(message: text) -> text = "Write a detailed escalation for: {message}";
+  prompt acknowledge(message: text) -> text = "Write a one-line acknowledgement for: {message}";
+
+  let severity: text = call triage(ticket) using small;
+
+  if tokens(severity) <= 120 {
+    let reply: text = call acknowledge(ticket) using small;
+  } else {
+    let reply: text = call escalate(ticket) using large;
+  }
+
+  output severity;
+}

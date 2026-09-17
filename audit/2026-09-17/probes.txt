@@ -1,0 +1,89 @@
+[
+  {
+    "case": "literal",
+    "certify_exit": 0,
+    "errors": "",
+    "bound": {
+      "guaranteed_tokens": 1,
+      "estimated_tokens": 1,
+      "total_tokens": 2,
+      "within_budget": true,
+      "defined": true,
+      "cost": 0.0,
+      "cost_complete": false
+    },
+    "first_violation": {
+      "seed": 1,
+      "trace": "Literal:\n  calls          1\n  actual tokens  3  (input 2 + output 1)\n    y = p via m  in 2 out 1\n"
+    }
+  },
+  {
+    "case": "boolean",
+    "certify_exit": 0,
+    "errors": "",
+    "bound": {
+      "guaranteed_tokens": 1,
+      "estimated_tokens": 2,
+      "total_tokens": 3,
+      "within_budget": true,
+      "defined": true,
+      "cost": 0.0,
+      "cost_complete": false
+    },
+    "first_violation": {
+      "seed": 1,
+      "trace": "Boolean:\n  calls          1\n  actual tokens  4  (input 3 + output 1)\n    y = p via m  in 3 out 1\n"
+    }
+  },
+  {
+    "case": "split",
+    "certify_exit": 0,
+    "errors": "",
+    "bound": {
+      "guaranteed_tokens": 1,
+      "estimated_tokens": 201,
+      "total_tokens": 202,
+      "within_budget": true,
+      "defined": true,
+      "cost": 0.0,
+      "cost_complete": false
+    },
+    "first_violation": {
+      "seed": 2,
+      "trace": "Split:\n  calls          1\n  actual tokens  21  (input 1 + output 20)\n    b = p via large  in 1 out 20\n"
+    }
+  },
+  {
+    "case": "shadow",
+    "certify_exit": 0,
+    "errors": "",
+    "bound": {
+      "guaranteed_tokens": 1,
+      "estimated_tokens": 1,
+      "total_tokens": 2,
+      "within_budget": true,
+      "defined": true,
+      "cost": 0.0,
+      "cost_complete": false
+    },
+    "first_violation": {
+      "seed": 3,
+      "trace": "Shadow:\n  calls          1\n  actual tokens  348  (input 1 + output 347)\n    y = p via m  in 1 out 347\n"
+    }
+  },
+  {
+    "case": "equal_bounds",
+    "certify_exit": 0,
+    "errors": "",
+    "bound": {
+      "guaranteed_tokens": 10,
+      "estimated_tokens": 101,
+      "total_tokens": 111,
+      "within_budget": true,
+      "defined": true,
+      "cost": 0.0,
+      "cost_complete": false
+    }
+  }
+]
+Example checks: 32 passed: 32

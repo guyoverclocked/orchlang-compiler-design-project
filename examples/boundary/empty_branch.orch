@@ -1,0 +1,16 @@
+// A branch with an empty arm still costs whatever the other arm costs.
+workflow EmptyArm budget 1200 {
+  input ticket: text max_tokens 100;
+  model small = mock("offline-small") max_tokens 300;
+
+  prompt triage(message: text) -> text = "Triage: {message}";
+
+  let severity: text = call triage(ticket) using small;
+
+  if tokens(severity) <= 300 {
+  } else {
+    let extra: text = call triage(ticket) using small;
+  }
+
+  output severity;
+}

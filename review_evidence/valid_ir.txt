@@ -1,8 +1,12 @@
-Workflow SupportTriage IR
-  [1] Input ticket : text deps=[]
-  [2] Secret API_KEY deps=[]
-  [3] Model fast deps=[] provider=mock name=local-small max_tokens=600
-  [4] Prompt classify : text deps=[] parameters=1
-  [5] Call category : text deps=[4, 3, 1] prompt=classify model=fast max_tokens=600
-  [6] Requirement tokens(category) : boolean deps=[5] operator=<= limit=600
-  [7] Output category : text deps=[5]
+Workflow TieredTriage IR
+  [1] Input ticket : text deps=[] label=public/trusted max_tokens=300
+  [2] Model small deps=[] label=public/trusted provider=mock name=offline-small max_tokens=120
+  [3] Model large deps=[] label=public/trusted provider=mock name=offline-large max_tokens=900
+  [4] Prompt triage : text deps=[] label=public/trusted parameters=1
+  [5] Prompt escalate : text deps=[] label=public/trusted parameters=1
+  [6] Prompt acknowledge : text deps=[] label=public/trusted parameters=1
+  [7] Call severity : text deps=[4, 2, 1] label=public/trusted prompt=triage model=small out_tokens=120 in_tokens=308
+  [8] Branch tokens(severity) <= 120 : boolean deps=[7] label=public/trusted guard=tokens(severity) <= 120 has_else=true
+  [9] Call reply : text deps=[6, 2, 1] label=public/trusted region=root/then@15 prompt=acknowledge model=small out_tokens=120 in_tokens=312
+  [10] Call reply : text deps=[5, 3, 1] label=public/trusted region=root/else@15 prompt=escalate model=large out_tokens=900 in_tokens=311
+  [11] Output severity : text deps=[7] label=public/trusted
