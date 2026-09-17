@@ -1,94 +1,164 @@
 # OrchLang
 
-## A Statically Typed Domain Specific Language Compiler for Safe and Cost Aware LLM Workflows
+## A statically typed DSL whose compiler certifies the cost and the information flow of an LLM workflow before it runs
 
-**Student:** Nambi Rajan M  
+**Student:** Nambi Rajan M
 **Registration number:** 24BAI0072
 
-OrchLang is an offline, educational compiler project for describing small LLM-oriented workflows. It accepts typed inputs, secrets, offline mock-model declarations, prompt templates, model calls, token requirements, and one output. The compiler detects workflow mistakes before any model request could run. It never contacts a network service, reads an API key, or requires a database.
+OrchLang is an offline compiler for a small language that describes LLM
+workflows. It answers two questions about a workflow without contacting a model,
+reading a key, or touching a network:
 
-This review build implements the Phase 1 front end and the core Phase 2 analysis pipeline in hand-written C++17. It does not use Flex, Bison, ANTLR, or an external parsing framework.
+- **What is the most this can cost?** A certified upper bound on the tokens any
+  execution can consume.
+- **Where can data go?** Whether a secret can reach a prompt, an output, or an
+  external effect, and whether data derived from an untrusted source can drive
+  an external effect.
 
-## Implemented compiler phases
+Both answers come from one type system over one program, and both are written
+into a machine-checkable JSON certificate.
 
-Phase 1 functionality:
+The compiler is hand-written C++17. It uses no Flex, Bison, ANTLR, or external
+parsing framework, and it has no third-party runtime dependencies.
 
-- Location-aware hand-written lexer with line comments, strings, numeric literals, keywords, and structured lexical diagnostics.
-- One-token-lookahead recursive-descent parser for all statement forms used in the supplied Phase 1 syntax.
-- Statement-level parser recovery at semicolons, closing braces, and the next statement keyword.
-- Token printing, diagnostic printing, valid/invalid examples, and a command-line compiler named `orchc`.
+## Why this is not the obvious thing
 
-Phase 2 functionality:
+The obvious way to bound a workflow's cost is to add up the `max_tokens` of
+every model call in the source. That rule is unsound, and the benchmark
+quantifies how unsound: it is **violated on 13.5% of executions**, across
+**8 of 23 workflows** — every workflow containing a retry. A retry block runs its
+body more than once, and a flat sum counts it once.
 
-- Owned AST using `std::unique_ptr`; no raw owning pointers or global mutable compiler state.
-- Printable symbol table with kinds, types, scopes, locations, model metadata, and prompt signatures.
-- Semantic checks for duplicate names, undeclared names, types, prompt arity and argument types, prompt placeholders, secret exposure, models, declared budgets, and outputs.
-- Typed workflow IR with dependencies, a textual viewer, a JSON viewer, and a defensive dependency-cycle detector.
-- 45 automated tests covering lexer, parser, AST, symbols, semantics, IR lowering, and recovery behavior. The first 18 lexer/parser checks provide more than the 12 Phase 1 smoke cases required for this review build.
+The obvious way to stop secrets and injected text from reaching tools is to scan
+strings at runtime. Every published defence in this space works that way, and
+pays for it in runtime overhead and coverage gaps. OrchLang makes it a typing
+judgement instead, so the answer is available before deployment and costs
+nothing at run time.
 
-## Repository structure
+## What the compiler checks
 
-```text
-orchlang/
-  include/                 Public compiler data structures and module interfaces
-  src/                     Lexer, parser, AST, symbols, semantics, IR, and CLI
-  tests/tests.cpp          Standalone 45-test regression executable
-  examples/                Valid, invalid, and boundary OrchLang programs
-  docs/                    Language specification and review materials
-  scripts/demo.sh          Rehearsal command sequence
-  review_evidence/         Outputs generated from actual compiler commands
-  Makefile                 C++17 build, tests, example checks, and sanitizer target
+**Cost.** The bound is derived by structural induction, so a branch costs its
+more expensive arm and a retry multiplies its body:
+
+```
+C(if c { A } else { B })  =  C(A) ⊔ C(B)
+C(retry n { A })          =  n ⊗ C(A)
 ```
 
-## Build and test
+It is reported in two parts. The **guaranteed** part counts output tokens, which
+providers cap themselves, so it assumes nothing about tokenization. The
+**estimated** part counts input tokens and is sound relative to a declared
+characters-per-token assumption, which the certificate records. Keeping them
+apart lets a reader see exactly how much of the number rests on an assumption.
 
-From this directory:
+**Information flow.** Labels live in the product lattice
+`(Public ≤ Secret) × (Trusted ≤ Untrusted)`. A model's answer inherits the join
+of everything that reached its prompt, so untrusted text stays untrusted through
+any number of model calls. A program-counter label catches implicit flows, where
+a secret leaks through *whether* an effect happened rather than through a value.
+`declassify` and `endorse` are the only escapes and both require a written
+justification that lands in the certificate.
+
+## Results
+
+From `bench/results/evaluation.txt`, reproducible with `python bench/evaluate.py`:
+
+| Question | Result |
+| --- | --- |
+| Is the certified bound ever exceeded? | **0 violations in 4,600 executions** |
+| Is the flat `Σ max_tokens` rule ever exceeded? | **621 of 4,600 runs (13.5%)**, unsound on 8 of 23 workflows |
+| How much slack does the bound carry? | median **1.23×** peak observed (range 1.02–3.01×) |
+| Does the flow analysis separate safe from unsafe? | **12/12 unsafe rejected, 12/12 safe accepted** |
+| What does the analysis cost? | ~6 ms per workflow, including process startup |
+
+The security suite is *paired*: every unsafe workflow has a safe counterpart
+differing by one edit (an added endorsement, a declassification, a moved
+effect). A checker cannot score well on it by rejecting everything.
+
+## Build and test
 
 ```sh
 make clean
 make check
 ```
 
-`make check` builds the compiler with `-std=c++17 -Wall -Wextra -pedantic`, runs all 45 assertions, accepts every valid example, and confirms that every invalid/boundary-invalid example exits unsuccessfully.
+`make check` builds with `-std=c++17 -Wall -Wextra -pedantic`, runs 79
+assertions, accepts every valid example, confirms every invalid example is
+rejected, and emits a certificate for each valid workflow.
 
-For an optional memory/undefined-behavior check on a toolchain that supports sanitizers:
-
-```sh
-make sanitize
-```
-
-Rebuild normally with `make clean && make check` after the sanitizer run.
+Requires a C++17 compiler. GCC 6 is too old (`std::optional`); GCC 7 or later,
+Clang 5 or later, or MSVC 2017 or later will work.
 
 ## Command-line use
 
 ```sh
-./orchc tokens examples/valid/support_triage.orch
-./orchc check examples/valid/support_triage.orch
-./orchc ast examples/valid/support_triage.orch
-./orchc symbols examples/valid/support_triage.orch
-./orchc ir examples/valid/support_triage.orch
-./orchc ir-json examples/valid/support_triage.orch
+./orchc check   examples/valid/untrusted_endorsed.orch   # type, flow, and cost
+./orchc cost    examples/valid/branching_cost.orch       # the bound, with its derivation
+./orchc certify examples/valid/untrusted_endorsed.orch   # the JSON safety certificate
+./orchc run     examples/valid/bounded_retry.orch --seed 7   # offline mock execution
+./orchc tokens  examples/valid/summarization.orch
+./orchc ast     examples/valid/summarization.orch
+./orchc symbols examples/valid/summarization.orch
+./orchc ir      examples/valid/branching_cost.orch
+./orchc ir-json examples/valid/branching_cost.orch
 ```
 
-The compatibility forms `./orchc --tokens file.orch`, `./orchc --check file.orch`, and `./orchc file.orch` are also accepted. Valid source returns status 0. Lexical, syntax, or semantic errors return status 1. Missing files and bad usage return status 2.
+Options: `--chars-per-token <n>` sets the tokenization assumption (1 is
+unconditionally sound, larger is tighter; default 4). `--seed <n>` and
+`--retry-failure <p>` control the mock runtime.
 
-For example, `check` on the supplied triage workflow reports:
+Valid source returns 0. Lexical, syntax, type, flow, or cost errors return 1.
+Missing files and bad usage return 2.
+
+A `cost` run shows its working:
 
 ```text
-Check succeeded: 1 workflow(s) passed lexical, syntax, and semantic analysis.
-  SupportTriage: declared token bound 600 / budget 2500
+TieredTriage:
+  token bound   1639 / budget 2000  (guaranteed 1020 + estimated 619 @ 4 chars/token)
+  derivation for TieredTriage:
+      call  severity = triage via small [out<=120, in<=8+300]  => 428 tokens
+      branch  tokens(severity) <= 120  => 0 tokens
+        call  reply = acknowledge via small [out<=120, in<=12+300]  => 432 tokens
+        call  reply = escalate via large [out<=900, in<=11+300]  => 1211 tokens
+      branch-max  max(then=432, else=1211)  => 1211 tokens
 ```
 
-## Review examples
+## The mock runtime
 
-- `examples/valid/` contains three semantically valid workflows.
-- `examples/invalid/` contains separate demonstrations of lexical, syntax, duplicate-name, unknown-name, type, placeholder, secret-flow, budget, and multi-error diagnostics.
-- `examples/boundary/` contains empty-workflow, zero-budget, and long-identifier cases.
+`orchc run` exists to make the compiler's claim falsifiable. A bound nothing can
+test is a bound nothing can trust. The runtime executes a workflow against a
+seeded generator that respects each model's declared `max_tokens`, counts the
+tokens actually consumed, and reports them, so the harness can check every
+execution against the certificate.
+
+It is a differential check of the analyser against the language's semantics, not
+evidence that a particular provider honours its own caps. That assumption is
+stated, not tested.
+
+## Repository structure
+
+```text
+include/            Compiler data structures and module interfaces
+src/                Lexer, parser, AST, symbols, flow typing, cost analysis,
+                    IR, certificate, mock runtime, CLI
+tests/tests.cpp     Standalone 79-test regression executable
+examples/           Valid, invalid, and boundary OrchLang programs
+bench/              Generated benchmark corpus and the evaluation harness
+docs/               Language specification and the paper
+Makefile            C++17 build, tests, and example checks
+```
 
 ## Known limitations
 
-This review build intentionally stops after the required Phase 2 compiler work. It does not generate Python, run a mock model, optimize IR, call a live provider, implement conditionals, or support arithmetic expressions. The budget check is a conservative declared upper bound: it adds each selected model's `max_tokens`; it does not predict actual API cost or exact token usage.
-
-## Future work
-
-The isolated Phase 3 candidates are an optimizer, readable offline Python generation, a deterministic mock runtime, and end-to-end execution of generated workflows. These are not represented as implemented in this repository.
+- Nothing is proven about what a model *says*, only about where its output may
+  flow and how much of it there can be.
+- The estimated half of the bound is relative to the declared tokenization
+  assumption, and is not a bound on adversarially chosen text above 1
+  character per token.
+- Declassification and endorsement are trusted. The compiler records them and
+  makes every one visible; it does not verify that a justification is true.
+- There is no general loop, no recursion, and no arithmetic, which is what keeps
+  the cost algebra decidable.
+- The security suite was written by the author. Pairing each unsafe workflow
+  with a minimally different safe one guards against trivial over-rejection, but
+  it is not an independent benchmark.

@@ -1,8 +1,10 @@
-Scope workflow:SupportTriage
-  secret API_KEY declared=examples/valid/support_triage.orch:3:3
-  local-result category : text declared=examples/valid/support_triage.orch:9:3
-  prompt classify : text (message:text) -> text declared=examples/valid/support_triage.orch:6:3
-  model fast provider=mock name=local-small max_tokens=600 declared=examples/valid/support_triage.orch:4:3
-  input ticket : text declared=examples/valid/support_triage.orch:2:3
-Scope workflow:SupportTriage::prompt:classify
-  prompt-parameter message : text declared=examples/valid/support_triage.orch:6:19
+Scope workflow:ResearchDigest
+  prompt digest : text (page:text) -> text template_tokens=9 label=public/trusted declared=examples/valid/untrusted_endorsed.orch:10:3
+  local-result digest_text : text label=public/untrusted token_bound=500 declared=examples/valid/untrusted_endorsed.orch:12:3
+  tool publish (body:text) sink label=public/trusted declared=examples/valid/untrusted_endorsed.orch:8:3
+  input query : text label=public/trusted token_bound=100 declared=examples/valid/untrusted_endorsed.orch:5:3
+  model reader provider=mock name=offline-reader max_tokens=500 label=public/trusted declared=examples/valid/untrusted_endorsed.orch:7:3
+  reclassified vetted : text label=public/trusted token_bound=500 declared=examples/valid/untrusted_endorsed.orch:13:3
+  input web_page : text label=public/untrusted token_bound=600 declared=examples/valid/untrusted_endorsed.orch:6:3
+Scope workflow:ResearchDigest::prompt:digest
+  prompt-parameter page : text label=public/trusted declared=examples/valid/untrusted_endorsed.orch:10:17

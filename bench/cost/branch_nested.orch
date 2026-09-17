@@ -1,0 +1,23 @@
+workflow BranchNested budget 100000 {
+  input source: text max_tokens 120;
+  model small = mock("offline-small") max_tokens 150;
+  model large = mock("offline-large") max_tokens 600;
+  prompt step(payload: text) -> text = "Process this payload: {payload}";
+  let head: text = call step(source) using small;
+  if tokens(head) <= 150 {
+    let x: text = call step(source) using small;
+    if tokens(x) <= 150 {
+      let x1: text = call step(source) using small;
+    } else {
+      let x2: text = call step(source) using large;
+    }
+  } else {
+    let y: text = call step(source) using large;
+    if tokens(y) <= 150 {
+      let y1: text = call step(source) using large;
+    } else {
+      let y2: text = call step(source) using large;
+    }
+  }
+  output head;
+}

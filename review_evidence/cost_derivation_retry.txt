@@ -1,0 +1,7 @@
+ResilientExtract:
+  token bound   3330 / budget 3400  (guaranteed 2100 + estimated 1230 @ 4 chars/token)
+  labels        0 secret, 0 untrusted
+  derivation for ResilientExtract:
+      retry  bound 3  => 0 tokens
+        call  attempt = extract via extractor [out<=700, in<=10+400]  => 1110 tokens
+      retry-scale  3 x 1110  => 3330 tokens

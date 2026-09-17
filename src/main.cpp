@@ -2,6 +2,7 @@
 #include "certificate.hpp"
 #include "cost_analyzer.hpp"
 #include "diagnostic.hpp"
+#include "interpreter.hpp"
 #include "ir.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
@@ -19,20 +20,23 @@ namespace orchlang {
 
 namespace {
 
-enum class Command { Tokens, Check, Ast, Symbols, Ir, IrJson, Cost, Certify, Invalid };
+enum class Command { Tokens, Check, Ast, Symbols, Ir, IrJson, Cost, Certify, Run, Invalid };
 
 struct Invocation {
     Command command{Command::Invalid};
     std::string path;
     AnalysisOptions options;
+    RunOptions run;
 };
 
 void printUsage(std::ostream& out) {
-    out << "Usage: orchc <tokens|check|ast|symbols|ir|ir-json|cost|certify> <source.orch>\n"
+    out << "Usage: orchc <tokens|check|ast|symbols|ir|ir-json|cost|certify|run> <source.orch>\n"
         << "       orchc <source.orch>\n"
         << "Options: --chars-per-token <n>   tokenization assumption for input tokens (default "
         << defaultCharsPerToken() << ";\n"
         << "                                 1 is unconditionally sound, larger is tighter)\n"
+        << "         --seed <n>            seed for the offline mock runtime used by 'run'\n"
+        << "         --retry-failure <p>   percentage chance one retry attempt fails (default 50)\n"
         << "Compatibility flags: --tokens, --check\n";
 }
 
@@ -45,6 +49,7 @@ Command parseCommand(const std::string& value) {
     if (value == "ir-json") return Command::IrJson;
     if (value == "cost") return Command::Cost;
     if (value == "certify") return Command::Certify;
+    if (value == "run") return Command::Run;
     return Command::Invalid;
 }
 
@@ -81,6 +86,24 @@ bool collectArguments(int argc, char* argv[], Invocation& invocation) {
                 return false;
             }
             invocation.options.charsPerToken = static_cast<std::size_t>(value);
+            continue;
+        }
+        if (argument == "--seed") {
+            if (index + 1 >= argc) {
+                return false;
+            }
+            invocation.run.seed = std::strtoull(argv[++index], nullptr, 10);
+            continue;
+        }
+        if (argument == "--retry-failure") {
+            if (index + 1 >= argc) {
+                return false;
+            }
+            const long value = std::strtol(argv[++index], nullptr, 10);
+            if (value < 0 || value > 100) {
+                return false;
+            }
+            invocation.run.retryFailurePercent = static_cast<unsigned>(value);
             continue;
         }
         positional.push_back(argument);
@@ -156,6 +179,18 @@ int main(int argc, char* argv[]) {
     if (diagnostics.hasErrors()) {
         printDiagnostics(diagnostics);
         return 1;
+    }
+
+    if (invocation.command == Command::Run) {
+        Interpreter interpreter(invocation.run);
+        RunResult run = interpreter.run(parsed.program, semantic);
+        diagnostics.append(run.diagnostics);
+        if (diagnostics.hasErrors()) {
+            printDiagnostics(diagnostics);
+            return 1;
+        }
+        std::cout << printRun(run);
+        return 0;
     }
 
     CostAnalyzer costAnalyzer;

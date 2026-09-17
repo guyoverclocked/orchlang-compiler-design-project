@@ -1,9 +1,11 @@
-Workflow SupportTriage budget=2500
-  Input ticket : text
-  Secret API_KEY
-  Model fast provider=mock name=local-small max_tokens=600
-  Prompt classify(message:text) -> text
-  Let category : text
-    Call classify(ticket) using fast
-  Require tokens(category) <= 600
-  Output category
+Workflow ResearchDigest budget=2400
+  Input query : text [public/trusted]
+  Input web_page : text [public/untrusted]
+  Model reader provider=mock name=offline-reader max_tokens=500
+  Tool publish(body:text)
+  Prompt digest(page:text) -> text
+  Let digest_text : text
+    Call digest(web_page) using reader
+  Endorse digest_text as vetted : text because "passed the offline schema and length validator"
+  Emit publish(vetted)
+  Output query

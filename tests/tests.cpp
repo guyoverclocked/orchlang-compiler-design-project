@@ -1,6 +1,7 @@
 #include "ast.hpp"
 #include "certificate.hpp"
 #include "cost_analyzer.hpp"
+#include "interpreter.hpp"
 #include "ir.hpp"
 #include "lexer.hpp"
 #include "parser.hpp"
@@ -546,6 +547,91 @@ void testSaturatingArithmeticNeverWraps() {
     require(maxTokens(3, 9) == 9, "the maximum should pick the larger bound");
 }
 
+
+// ---------------------------------------------------------------------------
+// The offline mock runtime, which is what makes the bound falsifiable
+// ---------------------------------------------------------------------------
+
+std::string retryProgram() {
+    return R"(workflow M budget 100000 {
+  input d: text max_tokens 40;
+  model m = mock("m") max_tokens 120;
+  prompt p(a: text) -> text = "{a}";
+  retry 4 { let attempt: text = call p(d) using m; }
+  output d;
+})";
+}
+
+RunResult runWith(const Pipeline& pipeline, std::uint64_t seed) {
+    RunOptions options;
+    options.seed = seed;
+    Interpreter interpreter(options);
+    return interpreter.run(pipeline.parsed.program, *pipeline.semantic);
+}
+
+void testRunIsDeterministicForASeed() {
+    Pipeline pipeline = compileSource(retryProgram());
+    requireSemanticallyValid(pipeline);
+    const RunResult first = runWith(pipeline, 12345);
+    const RunResult second = runWith(pipeline, 12345);
+    require(first.success() && second.success(), "both runs should succeed");
+    require(first.workflows.front().totalTokens() == second.workflows.front().totalTokens(),
+            "the same seed must replay the same execution");
+}
+
+void testRunStaysWithinCertifiedBound() {
+    Pipeline pipeline = compileSource(retryProgram());
+    requireSemanticallyValid(pipeline);
+    const std::size_t bound = onlyCost(pipeline).bound.total();
+    for (std::uint64_t seed = 1; seed <= 200; ++seed) {
+        const RunResult result = runWith(pipeline, seed);
+        require(result.success(), "the run should succeed");
+        require(result.workflows.front().totalTokens() <= bound,
+                "no execution may exceed the certified bound");
+    }
+}
+
+void testRunNeverExceedsDeclaredRetryBound() {
+    Pipeline pipeline = compileSource(retryProgram());
+    requireSemanticallyValid(pipeline);
+    for (std::uint64_t seed = 1; seed <= 100; ++seed) {
+        const RunResult result = runWith(pipeline, seed);
+        require(result.workflows.front().calls <= 4,
+                "a retry block may not run its body more often than its declared bound");
+        require(result.workflows.front().calls >= 1, "a retry block runs its body at least once");
+    }
+}
+
+void testRunTakesExactlyOneBranchArm() {
+    Pipeline pipeline = compileSource(R"(workflow B budget 100000 {
+  input d: text max_tokens 10;
+  model m = mock("m") max_tokens 100;
+  prompt p(a: text) -> text = "{a}";
+  let head: text = call p(d) using m;
+  if tokens(head) <= 50 {
+    let x: text = call p(d) using m;
+  } else {
+    let y: text = call p(d) using m;
+  }
+  output head;
+})");
+    requireSemanticallyValid(pipeline);
+    for (std::uint64_t seed = 1; seed <= 50; ++seed) {
+        const RunResult result = runWith(pipeline, seed);
+        require(result.workflows.front().calls == 2,
+                "exactly one arm of a branch should run, so the head call plus one arm");
+    }
+}
+
+void testRunRefusesIllTypedProgram() {
+    Pipeline pipeline = compileSource("workflow B budget 10 { secret k; output k; }");
+    require(pipeline.semantic.has_value(), "semantic analysis should run");
+    RunOptions options;
+    Interpreter interpreter(options);
+    const RunResult result = interpreter.run(pipeline.parsed.program, *pipeline.semantic);
+    require(!result.success(), "an ill-typed workflow must not be executed");
+}
+
 void testLexerKeywordAndLocation() {
     Pipeline pipeline = compileSource("workflow Demo budget 0 { output \"ok\"; }");
     require(!pipeline.lexed.diagnostics.hasErrors(), "keyword source should lex");
@@ -893,6 +979,11 @@ int main() {
         {"parser invalid call argument", testParserInvalidCallArgument},
         {"parser unexpected statement", testParserUnexpectedStatement},
         {"AST printer", testAstPrinter},
+        {"run is deterministic for a seed", testRunIsDeterministicForASeed},
+        {"run stays within certified bound", testRunStaysWithinCertifiedBound},
+        {"run respects declared retry bound", testRunNeverExceedsDeclaredRetryBound},
+        {"run takes exactly one branch arm", testRunTakesExactlyOneBranchArm},
+        {"run refuses ill-typed program", testRunRefusesIllTypedProgram},
         {"parser parses branch", testParserParsesBranch},
         {"cost branch takes maximum", testCostBranchTakesMaximum},
         {"cost retry multiplies", testCostRetryMultiplies},
