@@ -1,6 +1,6 @@
 // Expected: E210 because an integer prompt result is assigned to text.
 workflow TypeMismatch budget 100 {
-  input ticket: text;
+  input ticket: text max_tokens 50;
   model local = mock("offline") max_tokens 40;
   prompt count(message: text) -> integer = "Count the words in: {message}";
   let result: text = call count(ticket) using local;

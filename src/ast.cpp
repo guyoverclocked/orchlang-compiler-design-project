@@ -1,6 +1,7 @@
 #include "ast.hpp"
 
 #include <sstream>
+#include <string>
 
 namespace orchlang {
 
@@ -26,6 +27,20 @@ std::string comparisonOpName(ComparisonOp op) {
         case ComparisonOp::NotEqual: return "!=";
     }
     return "?";
+}
+
+std::string labelName(const Label& label) {
+    const std::string confidentiality = label.isSecret() ? "secret" : "public";
+    const std::string integrity = label.isUntrusted() ? "untrusted" : "trusted";
+    return confidentiality + "/" + integrity;
+}
+
+std::string conditionToString(const Condition& condition) {
+    if (condition.kind == ConditionKind::Flag) {
+        return condition.subjectName;
+    }
+    return "tokens(" + condition.subjectName + ") " + comparisonOpName(condition.op) + " " +
+           std::to_string(condition.limit);
 }
 
 std::string expressionToString(const Expr& expression) {
@@ -59,27 +74,46 @@ std::string expressionToString(const Expr& expression) {
 
 namespace {
 
-void printStatement(std::ostringstream& out, const Stmt& statement) {
+std::string indentOf(int depth) { return std::string(static_cast<std::size_t>(depth) * 2, ' '); }
+
+void printBlock(std::ostringstream& out, const Block& block, int depth);
+
+void printArguments(std::ostringstream& out, const std::vector<std::unique_ptr<Expr>>& arguments) {
+    for (std::size_t i = 0; i < arguments.size(); ++i) {
+        if (i != 0) {
+            out << ", ";
+        }
+        out << (arguments[i] ? expressionToString(*arguments[i]) : "<invalid>");
+    }
+}
+
+void printStatement(std::ostringstream& out, const Stmt& statement, int depth) {
+    const std::string pad = indentOf(depth);
     switch (statement.kind()) {
         case StmtKind::Input: {
             const auto& input = static_cast<const InputDecl&>(statement);
-            out << "  Input " << input.name << " : " << typeName(input.type) << '\n';
+            out << pad << "Input " << input.name << " : " << typeName(input.type) << " ["
+                << labelName(input.label) << "]\n";
             break;
         }
         case StmtKind::Secret: {
             const auto& secret = static_cast<const SecretDecl&>(statement);
-            out << "  Secret " << secret.name << '\n';
+            out << pad << "Secret " << secret.name << " : " << typeName(secret.type);
+            if (secret.hasTokenBound) {
+                out << " max_tokens=" << secret.tokenBound;
+            }
+            out << '\n';
             break;
         }
         case StmtKind::Model: {
             const auto& model = static_cast<const ModelDecl&>(statement);
-            out << "  Model " << model.name << " provider=" << model.provider
+            out << pad << "Model " << model.name << " provider=" << model.provider
                 << " name=" << model.modelName << " max_tokens=" << model.maxTokens << '\n';
             break;
         }
         case StmtKind::Prompt: {
             const auto& prompt = static_cast<const PromptDecl&>(statement);
-            out << "  Prompt " << prompt.name << '(';
+            out << pad << "Prompt " << prompt.name << '(';
             for (std::size_t i = 0; i < prompt.parameters.size(); ++i) {
                 if (i != 0) {
                     out << ", ";
@@ -89,31 +123,78 @@ void printStatement(std::ostringstream& out, const Stmt& statement) {
             out << ") -> " << typeName(prompt.returnType) << '\n';
             break;
         }
+        case StmtKind::Tool: {
+            const auto& tool = static_cast<const ToolDecl&>(statement);
+            out << pad << "Tool " << tool.name << '(';
+            for (std::size_t i = 0; i < tool.parameters.size(); ++i) {
+                if (i != 0) {
+                    out << ", ";
+                }
+                out << tool.parameters[i].name << ':' << typeName(tool.parameters[i].type);
+            }
+            out << ")\n";
+            break;
+        }
         case StmtKind::Let: {
             const auto& let = static_cast<const LetStmt&>(statement);
-            out << "  Let " << let.name << " : " << typeName(let.type) << '\n';
+            out << pad << "Let " << let.name << " : " << typeName(let.type) << '\n';
             if (let.call) {
-                out << "    Call " << let.call->promptName << '(';
-                for (std::size_t i = 0; i < let.call->arguments.size(); ++i) {
-                    if (i != 0) {
-                        out << ", ";
-                    }
-                    out << expressionToString(*let.call->arguments[i]);
-                }
+                out << pad << "  Call " << let.call->promptName << '(';
+                printArguments(out, let.call->arguments);
                 out << ") using " << let.call->modelName << '\n';
             }
             break;
         }
         case StmtKind::Require: {
             const auto& requirement = static_cast<const RequireStmt&>(statement);
-            out << "  Require tokens(" << requirement.subjectName << ") "
+            out << pad << "Require tokens(" << requirement.subjectName << ") "
                 << comparisonOpName(requirement.op) << ' ' << requirement.limit << '\n';
+            break;
+        }
+        case StmtKind::Emit: {
+            const auto& emit = static_cast<const EmitStmt&>(statement);
+            out << pad << "Emit " << emit.toolName << '(';
+            printArguments(out, emit.arguments);
+            out << ")\n";
+            break;
+        }
+        case StmtKind::If: {
+            const auto& branch = static_cast<const IfStmt&>(statement);
+            out << pad << "If " << conditionToString(branch.condition) << '\n';
+            out << pad << "  Then\n";
+            printBlock(out, branch.thenBranch, depth + 2);
+            if (branch.hasElse) {
+                out << pad << "  Else\n";
+                printBlock(out, branch.elseBranch, depth + 2);
+            }
+            break;
+        }
+        case StmtKind::Retry: {
+            const auto& retry = static_cast<const RetryStmt&>(statement);
+            out << pad << "Retry " << retry.bound << '\n';
+            printBlock(out, retry.body, depth + 1);
+            break;
+        }
+        case StmtKind::Reclassify: {
+            const auto& reclassify = static_cast<const ReclassifyStmt&>(statement);
+            out << pad << (reclassify.endorsement ? "Endorse " : "Declassify ") << reclassify.sourceName
+                << " as " << reclassify.name << " : " << typeName(reclassify.type) << " because \""
+                << reclassify.reason << "\"\n";
             break;
         }
         case StmtKind::Output: {
             const auto& output = static_cast<const OutputStmt&>(statement);
-            out << "  Output " << (output.value ? expressionToString(*output.value) : "<invalid>") << '\n';
+            out << pad << "Output " << (output.value ? expressionToString(*output.value) : "<invalid>")
+                << '\n';
             break;
+        }
+    }
+}
+
+void printBlock(std::ostringstream& out, const Block& block, int depth) {
+    for (const auto& statement : block) {
+        if (statement) {
+            printStatement(out, *statement, depth);
         }
     }
 }
@@ -127,11 +208,7 @@ std::string printAst(const Program& program) {
             continue;
         }
         out << "Workflow " << workflow->name << " budget=" << workflow->budget << '\n';
-        for (const auto& statement : workflow->statements) {
-            if (statement) {
-                printStatement(out, *statement);
-            }
-        }
+        printBlock(out, workflow->statements, 1);
     }
     return out.str();
 }

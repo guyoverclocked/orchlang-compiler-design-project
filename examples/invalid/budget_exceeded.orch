@@ -1,6 +1,6 @@
 // Expected: E260 because the declared call limit exceeds the workflow budget.
-workflow BudgetExceeded budget 500 {
-  input ticket: text;
+workflow BudgetExceeded budget 400 {
+  input ticket: text max_tokens 50;
   model expensive = mock("offline-large") max_tokens 600;
   prompt classify(message: text) -> text = "Classify: {message}";
   let result: text = call classify(ticket) using expensive;

@@ -14,6 +14,8 @@ std::string symbolKindName(SymbolKind kind) {
         case SymbolKind::Prompt: return "prompt";
         case SymbolKind::PromptParameter: return "prompt-parameter";
         case SymbolKind::LocalResult: return "local-result";
+        case SymbolKind::Tool: return "tool";
+        case SymbolKind::Reclassified: return "reclassified";
     }
     return "unknown";
 }
@@ -81,6 +83,19 @@ std::string signatureText(const PromptSignature& signature) {
     return out.str();
 }
 
+std::string toolSignatureText(const ToolSignature& signature) {
+    std::ostringstream out;
+    out << '(';
+    for (std::size_t i = 0; i < signature.parameters.size(); ++i) {
+        if (i != 0) {
+            out << ", ";
+        }
+        out << signature.parameters[i].name << ':' << typeName(signature.parameters[i].type);
+    }
+    out << ") sink";
+    return out.str();
+}
+
 }  // namespace
 
 std::string formatSymbolTable(const SymbolTable& table) {
@@ -102,7 +117,15 @@ std::string formatSymbolTable(const SymbolTable& table) {
                     << " max_tokens=" << symbol.model->maxTokens;
             }
             if (symbol.prompt) {
-                out << ' ' << signatureText(*symbol.prompt);
+                out << ' ' << signatureText(*symbol.prompt)
+                    << " template_tokens=" << symbol.prompt->templateTokens;
+            }
+            if (symbol.tool) {
+                out << ' ' << toolSignatureText(*symbol.tool);
+            }
+            out << " label=" << labelName(symbol.label);
+            if (symbol.tokenBoundKnown) {
+                out << " token_bound=" << symbol.tokenBound;
             }
             out << " declared=" << formatLocation(symbol.location) << '\n';
         }

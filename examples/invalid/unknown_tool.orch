@@ -1,0 +1,12 @@
+// Expected: E242 because the emitted tool was never declared.
+workflow MissingTool budget 900 {
+  input note: text max_tokens 50;
+  model local = mock("offline") max_tokens 100;
+
+  prompt echo(message: text) -> text = "Echo: {message}";
+
+  let copy: text = call echo(note) using local;
+  emit notify(copy);
+
+  output copy;
+}

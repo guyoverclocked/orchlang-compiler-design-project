@@ -1,0 +1,13 @@
+// A retry bound of 1 must cost exactly what the bare body costs.
+workflow SingleAttempt budget 850 {
+  input document: text max_tokens 100;
+  model extractor = mock("offline-extract") max_tokens 700;
+
+  prompt extract(source: text) -> text = "Extract from: {source}";
+
+  retry 1 {
+    let attempt: text = call extract(document) using extractor;
+  }
+
+  output document;
+}

@@ -4,7 +4,7 @@ CXXFLAGS ?= -std=c++17 -Wall -Wextra -pedantic -O2
 DEPFLAGS := -MMD -MP
 
 BUILD_DIR := build
-CORE_SOURCES := src/diagnostic.cpp src/ast.cpp src/lexer.cpp src/parser.cpp src/symbol_table.cpp src/semantic_analyzer.cpp src/ir.cpp
+CORE_SOURCES := src/diagnostic.cpp src/ast.cpp src/lexer.cpp src/parser.cpp src/symbol_table.cpp src/semantic_analyzer.cpp src/cost_analyzer.cpp src/ir.cpp src/certificate.cpp
 CORE_OBJECTS := $(CORE_SOURCES:src/%.cpp=$(BUILD_DIR)/%.o)
 MAIN_OBJECT := $(BUILD_DIR)/main.o
 TEST_OBJECT := $(BUILD_DIR)/tests.o
@@ -32,8 +32,10 @@ test: orchlang_tests
 	./orchlang_tests
 
 examples: orchc
-	@set -e; for file in examples/valid/*.orch examples/boundary/zero_budget.orch examples/boundary/long_identifier.orch; do ./orchc check "$$file"; done
-	@set -e; for file in examples/invalid/*.orch examples/boundary/empty_workflow.orch; do if ./orchc check "$$file"; then echo "expected invalid source to fail: $$file"; exit 1; fi; done
+	@set -e; for file in examples/valid/*.orch examples/boundary/zero_budget.orch examples/boundary/long_identifier.orch examples/boundary/retry_one.orch examples/boundary/empty_branch.orch; do ./orchc check "$$file" >/dev/null; done
+	@set -e; for file in examples/invalid/*.orch examples/boundary/empty_workflow.orch; do if ./orchc check "$$file" >/dev/null 2>&1; then echo "expected invalid source to fail: $$file"; exit 1; fi; done
+	@set -e; for file in examples/valid/*.orch; do ./orchc certify "$$file" >/dev/null; done
+	@echo "examples: valid corpus accepted, invalid corpus rejected, certificates emitted"
 
 check: all test examples
 

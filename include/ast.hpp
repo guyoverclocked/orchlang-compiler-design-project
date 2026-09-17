@@ -1,5 +1,6 @@
 #pragma once
 
+#include "label.hpp"
 #include "source_location.hpp"
 
 #include <cstddef>
@@ -91,7 +92,13 @@ struct CallExpr final : Expr {
 enum class ComparisonOp { Less, LessEqual, Greater, GreaterEqual, Equal, NotEqual };
 std::string comparisonOpName(ComparisonOp op);
 
-enum class StmtKind { Input, Secret, Model, Prompt, Let, Require, Output };
+enum class StmtKind { Input, Secret, Model, Prompt, Tool, Let, Require, Output, Emit, If, Retry, Reclassify };
+
+struct Stmt;
+
+// A statement sequence.  Workflow bodies, branch arms, and retry bodies are all
+// blocks, so the cost and label rules are defined once by structural induction.
+using Block = std::vector<std::unique_ptr<Stmt>>;
 
 struct Stmt {
     explicit Stmt(SourceLocation source) : location(std::move(source)) {}
@@ -102,20 +109,33 @@ struct Stmt {
 };
 
 struct InputDecl final : Stmt {
-    InputDecl(std::string declaredName, Type declaredType, SourceLocation source)
-        : Stmt(std::move(source)), name(std::move(declaredName)), type(declaredType) {}
+    InputDecl(std::string declaredName, Type declaredType, Label declaredLabel, SourceLocation source)
+        : Stmt(std::move(source)), name(std::move(declaredName)), type(declaredType),
+          label(declaredLabel) {}
     StmtKind kind() const override { return StmtKind::Input; }
 
     std::string name;
     Type type;
+    Label label{publicTrusted()};
+    // An input's length is not knowable from the source, so a workflow that
+    // feeds an input to a prompt must declare an upper bound for it.  Without
+    // one the input-token component of the cost bound would be unbounded, and
+    // the compiler says so rather than guessing.
+    bool hasTokenBound{false};
+    std::size_t tokenBound{0};
 };
 
 struct SecretDecl final : Stmt {
-    SecretDecl(std::string declaredName, SourceLocation source)
-        : Stmt(std::move(source)), name(std::move(declaredName)) {}
+    SecretDecl(std::string declaredName, Type declaredType, SourceLocation source)
+        : Stmt(std::move(source)), name(std::move(declaredName)), type(declaredType) {}
     StmtKind kind() const override { return StmtKind::Secret; }
 
     std::string name;
+    Type type;
+    // A secret only needs a bound if it is declassified and then used, but the
+    // declaration is the only place its length can be stated.
+    bool hasTokenBound{false};
+    std::size_t tokenBound{0};
 };
 
 struct ModelDecl final : Stmt {
@@ -129,6 +149,10 @@ struct ModelDecl final : Stmt {
     std::string provider;
     std::string modelName;
     std::size_t maxTokens{0};
+    // Optional published price per token.  Monetary figures are derived and
+    // reported; the certified safety property is stated over token counts.
+    bool hasUnitPrice{false};
+    double unitPrice{0.0};
 };
 
 struct PromptDecl final : Stmt {
@@ -167,6 +191,81 @@ struct RequireStmt final : Stmt {
     std::size_t limit{0};
 };
 
+// A declared external effect.  Emitting to a tool is the only way a workflow
+// can act on the outside world, so tools are the sinks the label rules guard.
+struct ToolDecl final : Stmt {
+    ToolDecl(std::string declaredName, std::vector<Parameter> declaredParameters, SourceLocation source)
+        : Stmt(std::move(source)), name(std::move(declaredName)), parameters(std::move(declaredParameters)) {}
+    StmtKind kind() const override { return StmtKind::Tool; }
+
+    std::string name;
+    std::vector<Parameter> parameters;
+};
+
+struct EmitStmt final : Stmt {
+    EmitStmt(std::string tool, std::vector<std::unique_ptr<Expr>> emitArguments, SourceLocation source)
+        : Stmt(std::move(source)), toolName(std::move(tool)), arguments(std::move(emitArguments)) {}
+    StmtKind kind() const override { return StmtKind::Emit; }
+
+    std::string toolName;
+    std::vector<std::unique_ptr<Expr>> arguments;
+};
+
+enum class ConditionKind { TokenBound, Flag };
+
+// The guard of an 'if'.  Both forms name an identifier, which is what the
+// analysis needs: the guard's label becomes the program-counter label of the
+// arms, which is how implicit flows are caught.
+struct Condition {
+    ConditionKind kind{ConditionKind::TokenBound};
+    std::string subjectName;
+    ComparisonOp op{ComparisonOp::LessEqual};
+    std::size_t limit{0};
+    SourceLocation location;
+};
+
+std::string conditionToString(const Condition& condition);
+
+struct IfStmt final : Stmt {
+    IfStmt(Condition guard, Block thenBlock, Block elseBlock, bool elsePresent, SourceLocation source)
+        : Stmt(std::move(source)), condition(std::move(guard)), thenBranch(std::move(thenBlock)),
+          elseBranch(std::move(elseBlock)), hasElse(elsePresent) {}
+    StmtKind kind() const override { return StmtKind::If; }
+
+    Condition condition;
+    Block thenBranch;
+    Block elseBranch;
+    bool hasElse{false};
+};
+
+// Bounded repetition.  The bound is syntactic and mandatory, which is what
+// keeps the cost analysis terminating and the derived bound finite.
+struct RetryStmt final : Stmt {
+    RetryStmt(std::size_t repetitionBound, Block repeatedBody, SourceLocation source)
+        : Stmt(std::move(source)), bound(repetitionBound), body(std::move(repeatedBody)) {}
+    StmtKind kind() const override { return StmtKind::Retry; }
+
+    std::size_t bound{0};
+    Block body;
+};
+
+// 'declassify' lowers confidentiality; 'endorse' raises integrity.  Both are
+// the deliberate escape hatches from the lattice, and both are recorded in the
+// emitted certificate so a reviewer sees every place the guarantee was relaxed.
+struct ReclassifyStmt final : Stmt {
+    ReclassifyStmt(bool isEndorsement, std::string source_, std::string declaredName, Type declaredType,
+                   std::string justification, SourceLocation location_)
+        : Stmt(std::move(location_)), endorsement(isEndorsement), sourceName(std::move(source_)),
+          name(std::move(declaredName)), type(declaredType), reason(std::move(justification)) {}
+    StmtKind kind() const override { return StmtKind::Reclassify; }
+
+    bool endorsement{false};
+    std::string sourceName;
+    std::string name;
+    Type type;
+    std::string reason;
+};
+
 struct OutputStmt final : Stmt {
     OutputStmt(std::unique_ptr<Expr> outputValue, SourceLocation source)
         : Stmt(std::move(source)), value(std::move(outputValue)) {}
@@ -182,7 +281,7 @@ struct WorkflowDecl {
     std::string name;
     std::size_t budget{0};
     SourceLocation location;
-    std::vector<std::unique_ptr<Stmt>> statements;
+    Block statements;
 };
 
 struct Program {

@@ -32,6 +32,7 @@ private:
 
     std::unique_ptr<WorkflowDecl> parseWorkflow();
     std::unique_ptr<Stmt> parseStatement();
+    bool parseBlock(Block& block);
     std::unique_ptr<InputDecl> parseInput();
     std::unique_ptr<SecretDecl> parseSecret();
     std::unique_ptr<ModelDecl> parseModel();
@@ -39,6 +40,13 @@ private:
     std::unique_ptr<LetStmt> parseLet();
     std::unique_ptr<RequireStmt> parseRequire();
     std::unique_ptr<OutputStmt> parseOutput();
+    std::unique_ptr<ToolDecl> parseTool();
+    std::unique_ptr<EmitStmt> parseEmit();
+    std::unique_ptr<IfStmt> parseIf();
+    std::unique_ptr<RetryStmt> parseRetry();
+    std::unique_ptr<ReclassifyStmt> parseReclassify(bool endorsement);
+    bool parseCondition(Condition& condition);
+    bool parseParameterList(std::vector<Parameter>& parameters);
     std::unique_ptr<CallExpr> parseCall();
     std::unique_ptr<Expr> parseExpression();
     bool parseType(Type& type);

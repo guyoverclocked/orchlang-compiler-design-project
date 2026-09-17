@@ -1,0 +1,18 @@
+// Expected: E234 because whether the tool fires depends on a secret, which
+// leaks one bit of the secret through the presence of the effect.
+workflow SecretGuardedEffect budget 1200 {
+  input note: text max_tokens 50;
+  secret ALERT_ENABLED: boolean;
+  model local = mock("offline") max_tokens 200;
+  tool notify(body: text);
+
+  prompt echo(message: text) -> text = "Echo: {message}";
+
+  let copy: text = call echo(note) using local;
+
+  if ALERT_ENABLED {
+    emit notify(copy);
+  }
+
+  output copy;
+}
