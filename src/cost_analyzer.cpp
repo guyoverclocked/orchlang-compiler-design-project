@@ -42,8 +42,9 @@ CostBound repeat(const CostBound& body, std::size_t factor) {
 
 class Deriver {
 public:
-    Deriver(const SemanticResult& semantic, std::vector<DerivationStep>& derivation)
-        : semantic_(semantic), derivation_(derivation) {}
+    Deriver(const SemanticResult& semantic, std::vector<DerivationStep>& derivation,
+            DiagnosticBag& diagnostics)
+        : semantic_(semantic), derivation_(derivation), diagnostics_(diagnostics) {}
 
     CostBound block(const Block& statements, int depth);
 
@@ -51,10 +52,43 @@ private:
     CostBound statement(const Stmt& node, int depth);
     void record(int depth, std::string rule, std::string detail, const CostBound& bound,
                 const SourceLocation& location);
+    void checkCostChannel(const IfStmt& branch, const CostBound& thenBound,
+                          const CostBound& elseBound);
 
     const SemanticResult& semantic_;
     std::vector<DerivationStep>& derivation_;
+    DiagnosticBag& diagnostics_;
 };
+
+// A branch whose arms cost different amounts and whose guard is not public
+// leaks the guard through the bill, even when no value crosses a boundary.
+// Neither analysis can see this on its own: the label system does not know what
+// an arm costs, and the cost analysis does not know what the guard is.
+void Deriver::checkCostChannel(const IfStmt& branch, const CostBound& thenBound,
+                               const CostBound& elseBound) {
+    const auto guard = semantic_.guardLabels.find(&branch);
+    if (guard == semantic_.guardLabels.end()) {
+        return;
+    }
+    if (thenBound.total() == elseBound.total()) {
+        return;
+    }
+    if (guard->second.isSecret()) {
+        std::ostringstream message;
+        message << "the arms of this branch cost different amounts (" << thenBound.total()
+                << " vs " << elseBound.total()
+                << " tokens) and the branch is guarded by a secret, so the token bill reveals "
+                   "the secret";
+        diagnostics_.error("E236", branch.location, message.str());
+    } else if (guard->second.isUntrusted()) {
+        std::ostringstream message;
+        message << "the arms of this branch cost different amounts (" << thenBound.total()
+                << " vs " << elseBound.total()
+                << " tokens) and the branch is guarded by untrusted data, so an injected value "
+                   "chooses how much this workflow spends";
+        diagnostics_.warning("W237", branch.location, message.str());
+    }
+}
 
 void Deriver::record(int depth, std::string rule, std::string detail, const CostBound& bound,
                      const SourceLocation& location) {
@@ -100,6 +134,7 @@ CostBound Deriver::statement(const Stmt& node, int depth) {
             const CostBound elseBound =
                 branch.hasElse ? block(branch.elseBranch, depth + 1) : CostBound{};
             const CostBound bound = choice(thenBound, elseBound);
+            checkCostChannel(branch, thenBound, elseBound);
 
             std::ostringstream detail;
             detail << "max(then=" << thenBound.total() << ", else=" << elseBound.total() << ')';
@@ -158,7 +193,7 @@ CostResult CostAnalyzer::analyze(const Program& program, const SemanticResult& s
         cost.name = workflow.name;
         cost.budget = workflow.budget;
 
-        Deriver deriver(semantic, cost.derivation);
+        Deriver deriver(semantic, cost.derivation, result.diagnostics);
         cost.bound = deriver.block(workflow.statements, 0);
 
         if (!cost.bound.defined) {

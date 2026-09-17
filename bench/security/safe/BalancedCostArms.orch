@@ -1,4 +1,4 @@
-workflow InjectionTransitiveEndorsed budget 100000 {
+workflow BalancedCostArms budget 100000 {
   input source: text max_tokens 120;
   input page: text untrusted max_tokens 300;
   secret API_KEY: text max_tokens 16;
@@ -7,9 +7,10 @@ workflow InjectionTransitiveEndorsed budget 100000 {
   model large = mock("offline-large") max_tokens 900;
   tool publish(body: text);
   prompt step(payload: text) -> text = "Process this payload: {payload}";
-  let first: text = call step(page) using small;
-  let second: text = call step(first) using small;
-  endorse(second) as vetted: text because "schema validated offline";
-  emit publish(vetted);
-  output second;
+  if ALERT {
+    let a: text = call step(source) using small;
+  } else {
+    let b: text = call step(source) using small;
+  }
+  output source;
 }

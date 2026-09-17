@@ -17,6 +17,10 @@ PASS parser integer overflow
 PASS parser invalid call argument
 PASS parser unexpected statement
 PASS AST printer
+PASS secret-dependent cost is rejected
+PASS balanced arms under secret accepted
+PASS public guard with unequal arms fine
+PASS untrusted guard on unequal arms warns
 PASS run is deterministic for a seed
 PASS run stays within certified bound
 PASS run respects declared retry bound
@@ -77,4 +81,4 @@ PASS IR valid lowering
 PASS IR refuses invalid program
 PASS IR dependency cycle detector
 PASS IR JSON export
-Passed 79/79 tests.
+Passed 83/83 tests.

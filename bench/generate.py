@@ -148,6 +148,7 @@ def gen_security():
   secret API_KEY: text max_tokens 16;
   secret ALERT: boolean max_tokens 1;
   model small = mock("offline-small") max_tokens 150;
+  model large = mock("offline-large") max_tokens 900;
   tool publish(body: text);
   prompt step(payload: text) -> text = "Process this payload: {payload}";
 '''
@@ -265,6 +266,18 @@ def gen_security():
     files.append(sec('UntrustedToOutputOnly.orch',
                      '  let summary: text = call step(page) using small;\n'
                      '  output summary;\n', False))
+
+    # 13. A cost side channel: no value crosses a boundary, but the arms of a
+    # secret-guarded branch cost different amounts, so the bill reveals the
+    # secret.  The safe counterpart runs the same model on both arms.
+    files.append(sec('SecretCostChannel.orch',
+                     '  if ALERT {\n    let a: text = call step(source) using large;\n'
+                     '  } else {\n    let b: text = call step(source) using small;\n  }\n'
+                     '  output source;\n', True))
+    files.append(sec('BalancedCostArms.orch',
+                     '  if ALERT {\n    let a: text = call step(source) using small;\n'
+                     '  } else {\n    let b: text = call step(source) using small;\n  }\n'
+                     '  output source;\n', False))
 
     return files
 

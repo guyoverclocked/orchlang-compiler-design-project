@@ -76,6 +76,9 @@ struct SemanticResult {
     std::map<std::string, WorkflowFacts> workflowFacts;
     std::vector<ReclassificationSite> reclassifications;
     std::map<const CallExpr*, CallSiteFacts> callSites;
+    // Label of each branch guard, so the cost analysis can tell whether a
+    // difference in arm cost is observable to someone who only sees the bill.
+    std::map<const IfStmt*, Label> guardLabels;
     AnalysisOptions options;
 
     bool success() const { return !diagnostics.hasErrors(); }

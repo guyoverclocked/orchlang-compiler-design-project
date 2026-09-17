@@ -632,6 +632,86 @@ void testRunRefusesIllTypedProgram() {
     require(!result.success(), "an ill-typed workflow must not be executed");
 }
 
+
+// ---------------------------------------------------------------------------
+// The cost side channel, which neither analysis can see on its own
+// ---------------------------------------------------------------------------
+
+void testSecretDependentCostIsRejected() {
+    Pipeline pipeline = compileSource(R"(workflow C budget 100000 {
+  input src: text max_tokens 10;
+  secret alert: boolean max_tokens 1;
+  model small = mock("s") max_tokens 100;
+  model large = mock("l") max_tokens 5000;
+  prompt p(a: text) -> text = "{a}";
+  if alert {
+    let a: text = call p(src) using large;
+  } else {
+    let b: text = call p(src) using small;
+  }
+  output src;
+})");
+    require(hasCode(pipeline, "E236"),
+            "a secret-guarded branch whose arms cost differently leaks through the bill");
+}
+
+void testBalancedArmsUnderSecretAreAccepted() {
+    Pipeline pipeline = compileSource(R"(workflow C budget 100000 {
+  input src: text max_tokens 10;
+  secret alert: boolean max_tokens 1;
+  model small = mock("s") max_tokens 100;
+  prompt p(a: text) -> text = "{a}";
+  if alert {
+    let a: text = call p(src) using small;
+  } else {
+    let b: text = call p(src) using small;
+  }
+  output src;
+})");
+    requireSemanticallyValid(pipeline);
+    require(pipeline.cost.has_value() && pipeline.cost->success(),
+            "arms of equal cost leak nothing through the bill");
+}
+
+void testPublicGuardWithUnequalArmsIsFine() {
+    Pipeline pipeline = compileSource(R"(workflow C budget 100000 {
+  input src: text max_tokens 10;
+  model small = mock("s") max_tokens 100;
+  model large = mock("l") max_tokens 5000;
+  prompt p(a: text) -> text = "{a}";
+  let head: text = call p(src) using small;
+  if tokens(head) <= 100 {
+    let a: text = call p(src) using large;
+  } else {
+    let b: text = call p(src) using small;
+  }
+  output head;
+})");
+    requireSemanticallyValid(pipeline);
+    require(pipeline.cost.has_value() && pipeline.cost->success(),
+            "a public guard may steer cost freely");
+}
+
+void testUntrustedGuardOnUnequalArmsWarns() {
+    Pipeline pipeline = compileSource(R"(workflow C budget 100000 {
+  input flag: boolean untrusted max_tokens 1;
+  input src: text max_tokens 10;
+  model small = mock("s") max_tokens 100;
+  model large = mock("l") max_tokens 5000;
+  prompt p(a: text) -> text = "{a}";
+  if flag {
+    let a: text = call p(src) using large;
+  } else {
+    let b: text = call p(src) using small;
+  }
+  output src;
+})");
+    require(hasCode(pipeline, "W237"),
+            "untrusted data steering spend should at least be surfaced");
+    require(pipeline.cost.has_value() && pipeline.cost->success(),
+            "the warning should not reject the workflow");
+}
+
 void testLexerKeywordAndLocation() {
     Pipeline pipeline = compileSource("workflow Demo budget 0 { output \"ok\"; }");
     require(!pipeline.lexed.diagnostics.hasErrors(), "keyword source should lex");
@@ -979,6 +1059,10 @@ int main() {
         {"parser invalid call argument", testParserInvalidCallArgument},
         {"parser unexpected statement", testParserUnexpectedStatement},
         {"AST printer", testAstPrinter},
+        {"secret-dependent cost is rejected", testSecretDependentCostIsRejected},
+        {"balanced arms under secret accepted", testBalancedArmsUnderSecretAreAccepted},
+        {"public guard with unequal arms fine", testPublicGuardWithUnequalArmsIsFine},
+        {"untrusted guard on unequal arms warns", testUntrustedGuardOnUnequalArmsWarns},
         {"run is deterministic for a seed", testRunIsDeterministicForASeed},
         {"run stays within certified bound", testRunStaysWithinCertifiedBound},
         {"run respects declared retry bound", testRunNeverExceedsDeclaredRetryBound},

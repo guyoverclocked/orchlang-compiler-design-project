@@ -186,6 +186,22 @@ much of the number rests on an assumption.
 A monetary figure is derived from `cost_per_token` where models declare one. It
 is reported, not certified: the guarantee is stated over token counts.
 
+### The cost channel
+
+A branch can leak its guard without any value crossing a boundary. If the arms
+cost different amounts, the token bill differs, and whoever sees the bill learns
+which arm ran. When the guard is secret this is a leak, and `E236` reports it;
+when the guard is untrusted, an injected value is choosing how much the workflow
+spends, and `W237` says so.
+
+Neither analysis finds this alone. The label system does not know what an arm
+costs; the cost analysis does not know that the guard is a secret. The check
+exists only because both judgements are made over the same program, and it is
+the clearest argument for deriving them together rather than in separate tools.
+
+A workflow fixes an `E236` by making the arms cost the same, by moving the
+expensive call out of the branch, or by declassifying the guard and saying why.
+
 ### Requirements
 
 `require tokens(x) op n` is discharged against the derived bound of `x`, and it
@@ -218,6 +234,8 @@ reported as undecidable rather than silently accepted.
 | `E234` | An effect may not be guarded by a secret condition |
 | `E235` | An effect may not be guarded by an untrusted condition |
 | `W236` | A reclassification that changes nothing (warning) |
+| `E236` | A secret-guarded branch whose arms cost different amounts |
+| `W237` | An untrusted-guarded branch whose arms cost different amounts (warning) |
 | `E241` | The model in a `using` clause must be declared |
 | `E242` | The tool in an `emit` statement must be declared |
 | `E243` | Emit arity must match the tool's parameter count |

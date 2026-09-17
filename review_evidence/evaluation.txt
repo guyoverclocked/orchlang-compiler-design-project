@@ -45,12 +45,14 @@ InjectionToSink              reject    reject   E233
 InjectionTransitive          reject    reject   E233     
 MixedTrustToSink             reject    reject   E233     
 SecretAsOutput               reject    reject   E231     
+SecretCostChannel            reject    reject   E236     
 SecretGuardedEffect          reject    reject   E234     
 SecretGuardedLaundered       reject    reject   E234 W236
 SecretToPrompt               reject    reject   E230 E231
 SecretToSink                 reject    reject   E232     
 UntrustedGuardedEffect       reject    reject   E235     
 UntrustedToSinkNoEndorse     reject    reject   E233     
+BalancedCostArms             accept    accept            
 EffectOutsideSecretBranch    accept    accept            
 InjectionEndorsed            accept    accept            
 InjectionInBranchEndorsed    accept    accept            
@@ -64,13 +66,13 @@ TrustedOnlyToSink            accept    accept
 UnguardedEffect              accept    accept            
 UntrustedToOutputOnly        accept    accept            
 
-  unsafe rejected (true positive) : 12
+  unsafe rejected (true positive) : 13
   unsafe accepted (false negative): 0
-  safe accepted   (true negative) : 12
+  safe accepted   (true negative) : 13
   safe rejected   (false positive): 0
   recall    1.000
   precision 1.000
 
 Analysis cost
 
-  35 workflows certified in 0.22 s (6.2 ms each, including process startup)
+  36 workflows certified in 0.23 s (6.4 ms each, including process startup)

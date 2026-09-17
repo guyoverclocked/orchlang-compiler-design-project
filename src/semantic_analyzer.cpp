@@ -499,6 +499,7 @@ void Analyzer::analyzeIf(const IfStmt& branch, const Context& context) {
     // label joins the program counter for both.
     Context inner = context;
     inner.pc = join(context.pc, guardLabel);
+    result_.guardLabels[&branch] = inner.pc;
 
     Context thenContext = inner;
     thenContext.scope = result_.symbols.createScope(
