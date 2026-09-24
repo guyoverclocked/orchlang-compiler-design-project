@@ -390,6 +390,9 @@ submission/       Phase 2 report and presentation, with their generators
 
 Worth reading, in order:
 
+0. **[docs/AGENT_BRIEF.md](docs/AGENT_BRIEF.md)** — if you are picking this project
+   up to continue it: the full handoff, the novelty assessment, the open problems,
+   and the reviewer attacks that still need answering
 1. **[docs/LANGUAGE_SPEC.md](docs/LANGUAGE_SPEC.md)** — the grammar and every rule
 2. **[docs/PAPER.md](docs/PAPER.md)** — the full write-up, claims and limitations
 3. **[docs/REVIEW_DEMO.md](docs/REVIEW_DEMO.md)** — a verified demo sequence
