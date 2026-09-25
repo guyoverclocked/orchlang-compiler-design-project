@@ -1,0 +1,22 @@
+[
+  {
+    "workflow": "EqualSizeLiteral",
+    "differs_under": "r50k_base",
+    "example": "[('offline-m', 6)] vs [('offline-m', 7)]"
+  },
+  {
+    "workflow": "EqualSizeTemplate",
+    "differs_under": "r50k_base cl100k_base o200k_base",
+    "example": "[('offline-m', 89)] vs [('offline-m', 88)]"
+  },
+  {
+    "workflow": "ShadowedModel",
+    "differs_under": "r50k_base cl100k_base o200k_base",
+    "example": "[('offline-other', 80)] vs [('offline-m', 80)]"
+  },
+  {
+    "workflow": "ShadowedPrompt",
+    "differs_under": "none",
+    "example": "[('offline-m', 75)] vs [('offline-m', 75)]"
+  }
+]

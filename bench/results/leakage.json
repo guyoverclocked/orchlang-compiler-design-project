@@ -1,0 +1,82 @@
+[
+  {
+    "workflow": "BalancedNoLeak",
+    "expected": "accept",
+    "verdict": "accept",
+    "budget": 0,
+    "classes": 1,
+    "bound_bits": 0,
+    "observed_max": 1,
+    "interval_bits": 7.67
+  },
+  {
+    "workflow": "ChainedEscalation",
+    "expected": "accept",
+    "verdict": "accept",
+    "budget": 1,
+    "classes": 2,
+    "bound_bits": 1,
+    "observed_max": 2,
+    "interval_bits": 9.89
+  },
+  {
+    "workflow": "FourIntervals",
+    "expected": "accept",
+    "verdict": "accept",
+    "budget": 2,
+    "classes": 4,
+    "bound_bits": 2,
+    "observed_max": 4,
+    "interval_bits": 9.13
+  },
+  {
+    "workflow": "OneBitTier",
+    "expected": "accept",
+    "verdict": "accept",
+    "budget": 1,
+    "classes": 2,
+    "bound_bits": 1,
+    "observed_max": 2,
+    "interval_bits": 8.42
+  },
+  {
+    "workflow": "TwoFlagsThreeClasses",
+    "expected": "accept",
+    "verdict": "accept",
+    "budget": 1.6,
+    "classes": 3,
+    "bound_bits": 1.585,
+    "observed_max": 3,
+    "interval_bits": 7.75
+  },
+  {
+    "workflow": "FourIntervalsOneBit",
+    "expected": "reject",
+    "verdict": "reject",
+    "budget": "-",
+    "classes": 4,
+    "bound_bits": 2.0,
+    "observed_max": 4,
+    "interval_bits": "-"
+  },
+  {
+    "workflow": "OneBitNoBudget",
+    "expected": "reject",
+    "verdict": "reject",
+    "budget": "-",
+    "classes": 2,
+    "bound_bits": 1.0,
+    "observed_max": 2,
+    "interval_bits": "-"
+  },
+  {
+    "workflow": "TwoFlagsBudgetTooSmall",
+    "expected": "reject",
+    "verdict": "reject",
+    "budget": "-",
+    "classes": 3,
+    "bound_bits": 1.585,
+    "observed_max": 3,
+    "interval_bits": "-"
+  }
+]

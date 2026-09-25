@@ -1,0 +1,232 @@
+[
+  {
+    "workflow": "branch_1_bytes",
+    "in_est": 256,
+    "in_guar": 1010,
+    "peak_in": 566,
+    "guar_slack": 1.78,
+    "guar_viol": 0,
+    "est_exceeded": 108,
+    "runs": 200
+  },
+  {
+    "workflow": "branch_2_bytes",
+    "in_est": 384,
+    "in_guar": 1515,
+    "peak_in": 972,
+    "guar_slack": 1.56,
+    "guar_viol": 0,
+    "est_exceeded": 96,
+    "runs": 200
+  },
+  {
+    "workflow": "branch_3_bytes",
+    "in_est": 512,
+    "in_guar": 2020,
+    "peak_in": 1176,
+    "guar_slack": 1.72,
+    "guar_viol": 0,
+    "est_exceeded": 110,
+    "runs": 200
+  },
+  {
+    "workflow": "branch_4_bytes",
+    "in_est": 640,
+    "in_guar": 2525,
+    "peak_in": 1370,
+    "guar_slack": 1.84,
+    "guar_viol": 0,
+    "est_exceeded": 94,
+    "runs": 200
+  },
+  {
+    "workflow": "branch_in_retry_bytes",
+    "in_est": 512,
+    "in_guar": 2020,
+    "peak_in": 1240,
+    "guar_slack": 1.63,
+    "guar_viol": 0,
+    "est_exceeded": 52,
+    "runs": 200
+  },
+  {
+    "workflow": "branch_nested_bytes",
+    "in_est": 384,
+    "in_guar": 1515,
+    "peak_in": 819,
+    "guar_slack": 1.85,
+    "guar_viol": 0,
+    "est_exceeded": 110,
+    "runs": 200
+  },
+  {
+    "workflow": "chain_1_bytes",
+    "in_est": 128,
+    "in_guar": 505,
+    "peak_in": 295,
+    "guar_slack": 1.71,
+    "guar_viol": 0,
+    "est_exceeded": 104,
+    "runs": 200
+  },
+  {
+    "workflow": "chain_2_bytes",
+    "in_est": 286,
+    "in_guar": 1430,
+    "peak_in": 741,
+    "guar_slack": 1.93,
+    "guar_viol": 0,
+    "est_exceeded": 144,
+    "runs": 200
+  },
+  {
+    "workflow": "chain_3_bytes",
+    "in_est": 444,
+    "in_guar": 2355,
+    "peak_in": 1243,
+    "guar_slack": 1.89,
+    "guar_viol": 0,
+    "est_exceeded": 168,
+    "runs": 200
+  },
+  {
+    "workflow": "chain_4_bytes",
+    "in_est": 602,
+    "in_guar": 3280,
+    "peak_in": 1645,
+    "guar_slack": 1.99,
+    "guar_viol": 0,
+    "est_exceeded": 172,
+    "runs": 200
+  },
+  {
+    "workflow": "chain_5_bytes",
+    "in_est": 760,
+    "in_guar": 4205,
+    "peak_in": 1788,
+    "guar_slack": 2.35,
+    "guar_viol": 0,
+    "est_exceeded": 177,
+    "runs": 200
+  },
+  {
+    "workflow": "retry_2_bytes",
+    "in_est": 256,
+    "in_guar": 1010,
+    "peak_in": 532,
+    "guar_slack": 1.9,
+    "guar_viol": 0,
+    "est_exceeded": 60,
+    "runs": 200
+  },
+  {
+    "workflow": "retry_3_bytes",
+    "in_est": 384,
+    "in_guar": 1515,
+    "peak_in": 819,
+    "guar_slack": 1.85,
+    "guar_viol": 0,
+    "est_exceeded": 40,
+    "runs": 200
+  },
+  {
+    "workflow": "retry_4_bytes",
+    "in_est": 512,
+    "in_guar": 2020,
+    "peak_in": 1028,
+    "guar_slack": 1.96,
+    "guar_viol": 0,
+    "est_exceeded": 29,
+    "runs": 200
+  },
+  {
+    "workflow": "retry_5_bytes",
+    "in_est": 640,
+    "in_guar": 2525,
+    "peak_in": 1500,
+    "guar_slack": 1.68,
+    "guar_viol": 0,
+    "est_exceeded": 21,
+    "runs": 200
+  },
+  {
+    "workflow": "retry_6_bytes",
+    "in_est": 768,
+    "in_guar": 3030,
+    "peak_in": 1746,
+    "guar_slack": 1.74,
+    "guar_viol": 0,
+    "est_exceeded": 12,
+    "runs": 200
+  },
+  {
+    "workflow": "retry_in_branch_bytes",
+    "in_est": 512,
+    "in_guar": 2020,
+    "peak_in": 1024,
+    "guar_slack": 1.97,
+    "guar_viol": 0,
+    "est_exceeded": 36,
+    "runs": 200
+  },
+  {
+    "workflow": "retry_nested_2x2_bytes",
+    "in_est": 512,
+    "in_guar": 2020,
+    "peak_in": 1100,
+    "guar_slack": 1.84,
+    "guar_viol": 0,
+    "est_exceeded": 38,
+    "runs": 200
+  },
+  {
+    "workflow": "retry_nested_2x3_bytes",
+    "in_est": 768,
+    "in_guar": 3030,
+    "peak_in": 1395,
+    "guar_slack": 2.17,
+    "guar_viol": 0,
+    "est_exceeded": 22,
+    "runs": 200
+  },
+  {
+    "workflow": "retry_nested_3x3_bytes",
+    "in_est": 1152,
+    "in_guar": 4545,
+    "peak_in": 1632,
+    "guar_slack": 2.78,
+    "guar_viol": 0,
+    "est_exceeded": 9,
+    "runs": 200
+  },
+  {
+    "workflow": "wide_input_2000_bytes",
+    "in_est": 286,
+    "in_guar": 1430,
+    "peak_in": 730,
+    "guar_slack": 1.96,
+    "guar_viol": 0,
+    "est_exceeded": 144,
+    "runs": 200
+  },
+  {
+    "workflow": "wide_input_200_bytes",
+    "in_est": 286,
+    "in_guar": 1430,
+    "peak_in": 778,
+    "guar_slack": 1.84,
+    "guar_viol": 0,
+    "est_exceeded": 137,
+    "runs": 200
+  },
+  {
+    "workflow": "wide_input_800_bytes",
+    "in_est": 286,
+    "in_guar": 1430,
+    "peak_in": 768,
+    "guar_slack": 1.86,
+    "guar_viol": 0,
+    "est_exceeded": 136,
+    "runs": 200
+  }
+]

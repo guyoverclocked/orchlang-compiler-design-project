@@ -1,0 +1,12 @@
+# Needed only for the measurements that use real tokenizers and a real model
+# (bench/tokenizers/measure.py, bench/provider/measure.py, and experiments E6,
+# E9 and E10 of bench/evaluate.py).  The compiler itself has no dependencies.
+#
+# The versions below are the ones the committed results were produced with.
+# torch is large; a CPU-only wheel is enough:
+#   pip install torch==2.5.1 --index-url https://download.pytorch.org/whl/cpu
+tiktoken==0.14.0
+tokenizers==0.23.2
+huggingface_hub==1.33.0
+transformers==4.46.3
+torch==2.5.1

@@ -1,0 +1,1806 @@
+{
+ "generated_by": "bench/tokenizers/measure.py",
+ "quick": false,
+ "python": "3.11.15",
+ "unicode_version": "14.0.0",
+ "corpora": {
+  "udhr2_sha256": "0796c314b09a930c989c6f9d93d226af9af13feccd88496e196c743dd266c7f3",
+  "udhr_languages": 388,
+  "code_files": [
+   "Lib/json/decoder.py",
+   "Lib/functools.py",
+   "Lib/textwrap.py",
+   "Lib/heapq.py",
+   "Lib/bisect.py",
+   "Lib/fractions.py",
+   "Lib/string.py",
+   "Lib/csv.py",
+   "Objects/listobject.c",
+   "Objects/boolobject.c",
+   "Modules/_bisectmodule.c",
+   "Include/object.h"
+  ],
+  "json_files": [
+   "cldr-localenames-full/main/ja/languages.json",
+   "cldr-localenames-full/main/ar/territories.json",
+   "cldr-localenames-full/main/hi/scripts.json",
+   "cldr-localenames-full/main/ru/languages.json",
+   "cldr-localenames-full/main/zh/territories.json",
+   "cldr-localenames-full/main/en/languages.json",
+   "cldr-numbers-full/main/th/numbers.json",
+   "cldr-dates-full/main/ko/ca-gregorian.json"
+  ]
+ },
+ "normalization": {
+  "unicode_version": "14.0.0",
+  "NFC": {
+   "max_bytes_ratio": 3.0,
+   "at": "U+1D160"
+  },
+  "NFD": {
+   "max_bytes_ratio": 3.0,
+   "at": "U+0390"
+  },
+  "NFKC": {
+   "max_bytes_ratio": 11.0,
+   "at": "U+FDFA"
+  }
+ },
+ "tokenizers": {
+  "cl100k_base": {
+   "revision": "tiktoken 0.14.0",
+   "family": "byte-level BPE",
+   "normalizer": null,
+   "special_tokens_added_per_request": 0,
+   "q1_code_points": {
+    "scalar_values_checked": 1112064,
+    "max_tokens_minus_bytes": 0,
+    "max_tokens_per_byte": 1.0,
+    "scalar_values_with_tokens_gt_bytes": 0,
+    "worst_examples": []
+   },
+   "q1_strings": {
+    "strings_checked": 495,
+    "max_tokens_minus_bytes": 0,
+    "max_tokens_per_byte": 1.0
+   },
+   "q2_q3_vocabulary": {
+    "vocabulary_entries": 100256,
+    "max_token_bytes": 128,
+    "longest_token": "                                        ",
+    "mean_token_bytes": 6.42,
+    "reencode_max_tokens_for_one_token": 3,
+    "reencode_worst_token": " ра�",
+    "tokens_that_reencode_to_more_than_one": 77
+   },
+   "q3_in_context": {
+    "reencode_max_tokens_for_one_token": 5,
+    "reencode_worst_token": "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+    "tokens_that_reencode_to_more_than_one": 4224
+   },
+   "q3_sequences": {
+    "sequences": 2050,
+    "sequence_length": 64,
+    "max_reencoded_tokens_per_generated_token": 3.016,
+    "worst_sequence": "repeat '無し�'"
+   },
+   "q4_concatenation": {
+    "pairs": 399486,
+    "max_defect": 5,
+    "pairs_with_positive_defect": 9044,
+    "worst_pair": [
+     ".unsqueeze",
+     "stackoverflow"
+    ]
+   },
+   "q5_estimate": {
+    "multilingual": {
+     "windows": 18272,
+     "chars_per_token": 2.01,
+     "bytes_per_token": 2.41,
+     "estimate_exceeded": 17860,
+     "estimate_exceeded_pct": 97.7,
+     "byte_estimate_exceeded_pct": 97.0,
+     "max_tokens_over_estimate": 11.78,
+     "max_tokens_over_byte_estimate": 3.99
+    },
+    "code": {
+     "windows": 1272,
+     "chars_per_token": 4.0,
+     "bytes_per_token": 4.0,
+     "estimate_exceeded": 581,
+     "estimate_exceeded_pct": 45.7,
+     "byte_estimate_exceeded_pct": 45.7,
+     "max_tokens_over_estimate": 1.77,
+     "max_tokens_over_byte_estimate": 1.77
+    },
+    "json": {
+     "windows": 407,
+     "chars_per_token": 2.52,
+     "bytes_per_token": 3.05,
+     "estimate_exceeded": 391,
+     "estimate_exceeded_pct": 96.1,
+     "byte_estimate_exceeded_pct": 91.4,
+     "max_tokens_over_estimate": 2.59,
+     "max_tokens_over_byte_estimate": 1.69
+    },
+    "adversarial": {
+     "windows": 87,
+     "chars_per_token": 0.39,
+     "bytes_per_token": 1.18,
+     "estimate_exceeded": 86,
+     "estimate_exceeded_pct": 98.9,
+     "byte_estimate_exceeded_pct": 97.7,
+     "max_tokens_over_estimate": 14.4,
+     "max_tokens_over_byte_estimate": 4.0
+    }
+   },
+   "q7_equal_length": {
+    "pairs": 49767,
+    "counts_differ": 43903,
+    "counts_differ_pct": 88.2,
+    "max_difference": 106
+   },
+   "seconds": 234.5
+  },
+  "o200k_base": {
+   "revision": "tiktoken 0.14.0",
+   "family": "byte-level BPE",
+   "normalizer": null,
+   "special_tokens_added_per_request": 0,
+   "q1_code_points": {
+    "scalar_values_checked": 1112064,
+    "max_tokens_minus_bytes": 0,
+    "max_tokens_per_byte": 1.0,
+    "scalar_values_with_tokens_gt_bytes": 0,
+    "worst_examples": []
+   },
+   "q1_strings": {
+    "strings_checked": 495,
+    "max_tokens_minus_bytes": 0,
+    "max_tokens_per_byte": 1.0
+   },
+   "q2_q3_vocabulary": {
+    "vocabulary_entries": 199998,
+    "max_token_bytes": 128,
+    "longest_token": "                                        ",
+    "mean_token_bytes": 6.99,
+    "reencode_max_tokens_for_one_token": 4,
+    "reencode_worst_token": " વર્�",
+    "tokens_that_reencode_to_more_than_one": 388
+   },
+   "q3_in_context": {
+    "reencode_max_tokens_for_one_token": 5,
+    "reencode_worst_token": "ોર્�",
+    "tokens_that_reencode_to_more_than_one": 8627
+   },
+   "q3_sequences": {
+    "sequences": 2050,
+    "sequence_length": 64,
+    "max_reencoded_tokens_per_generated_token": 4.0,
+    "worst_sequence": "repeat ' વર્�'"
+   },
+   "q4_concatenation": {
+    "pairs": 399514,
+    "max_defect": 5,
+    "pairs_with_positive_defect": 5898,
+    "worst_pair": [
+     " recuperação",
+     "startup"
+    ]
+   },
+   "q5_estimate": {
+    "multilingual": {
+     "windows": 18272,
+     "chars_per_token": 2.66,
+     "bytes_per_token": 3.2,
+     "estimate_exceeded": 16792,
+     "estimate_exceeded_pct": 91.9,
+     "byte_estimate_exceeded_pct": 78.9,
+     "max_tokens_over_estimate": 11.11,
+     "max_tokens_over_byte_estimate": 3.99
+    },
+    "code": {
+     "windows": 1272,
+     "chars_per_token": 3.95,
+     "bytes_per_token": 3.95,
+     "estimate_exceeded": 617,
+     "estimate_exceeded_pct": 48.5,
+     "byte_estimate_exceeded_pct": 48.5,
+     "max_tokens_over_estimate": 1.81,
+     "max_tokens_over_byte_estimate": 1.81
+    },
+    "json": {
+     "windows": 407,
+     "chars_per_token": 2.95,
+     "bytes_per_token": 3.57,
+     "estimate_exceeded": 379,
+     "estimate_exceeded_pct": 93.1,
+     "byte_estimate_exceeded_pct": 77.4,
+     "max_tokens_over_estimate": 1.88,
+     "max_tokens_over_byte_estimate": 1.44
+    },
+    "adversarial": {
+     "windows": 87,
+     "chars_per_token": 0.41,
+     "bytes_per_token": 1.23,
+     "estimate_exceeded": 85,
+     "estimate_exceeded_pct": 97.7,
+     "byte_estimate_exceeded_pct": 97.7,
+     "max_tokens_over_estimate": 14.3,
+     "max_tokens_over_byte_estimate": 3.86
+    }
+   },
+   "q7_equal_length": {
+    "pairs": 49767,
+    "counts_differ": 41843,
+    "counts_differ_pct": 84.1,
+    "max_difference": 102
+   },
+   "seconds": 239.7
+  },
+  "r50k_base": {
+   "revision": "tiktoken 0.14.0",
+   "family": "byte-level BPE",
+   "normalizer": null,
+   "special_tokens_added_per_request": 0,
+   "q1_code_points": {
+    "scalar_values_checked": 1112064,
+    "max_tokens_minus_bytes": 0,
+    "max_tokens_per_byte": 1.0,
+    "scalar_values_with_tokens_gt_bytes": 0,
+    "worst_examples": []
+   },
+   "q1_strings": {
+    "strings_checked": 495,
+    "max_tokens_minus_bytes": 0,
+    "max_tokens_per_byte": 1.0
+   },
+   "q2_q3_vocabulary": {
+    "vocabulary_entries": 50256,
+    "max_token_bytes": 128,
+    "longest_token": "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ",
+    "mean_token_bytes": 6.38,
+    "reencode_max_tokens_for_one_token": 3,
+    "reencode_worst_token": "�醒",
+    "tokens_that_reencode_to_more_than_one": 17
+   },
+   "q3_in_context": {
+    "reencode_max_tokens_for_one_token": 4,
+    "reencode_worst_token": "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯",
+    "tokens_that_reencode_to_more_than_one": 866
+   },
+   "q3_sequences": {
+    "sequences": 2050,
+    "sequence_length": 64,
+    "max_reencoded_tokens_per_generated_token": 3.0,
+    "worst_sequence": "repeat '��極'"
+   },
+   "q4_concatenation": {
+    "pairs": 399507,
+    "max_defect": 4,
+    "pairs_with_positive_defect": 6979,
+    "worst_pair": [
+     "                ",
+     "repair"
+    ]
+   },
+   "q5_estimate": {
+    "multilingual": {
+     "windows": 18272,
+     "chars_per_token": 1.44,
+     "bytes_per_token": 1.73,
+     "estimate_exceeded": 18243,
+     "estimate_exceeded_pct": 99.8,
+     "byte_estimate_exceeded_pct": 99.8,
+     "max_tokens_over_estimate": 11.83,
+     "max_tokens_over_byte_estimate": 4.0
+    },
+    "code": {
+     "windows": 1272,
+     "chars_per_token": 2.2,
+     "bytes_per_token": 2.2,
+     "estimate_exceeded": 1210,
+     "estimate_exceeded_pct": 95.1,
+     "byte_estimate_exceeded_pct": 95.1,
+     "max_tokens_over_estimate": 3.39,
+     "max_tokens_over_byte_estimate": 3.39
+    },
+    "json": {
+     "windows": 407,
+     "chars_per_token": 1.24,
+     "bytes_per_token": 1.5,
+     "estimate_exceeded": 407,
+     "estimate_exceeded_pct": 100.0,
+     "byte_estimate_exceeded_pct": 100.0,
+     "max_tokens_over_estimate": 4.8,
+     "max_tokens_over_byte_estimate": 3.5
+    },
+    "adversarial": {
+     "windows": 87,
+     "chars_per_token": 0.37,
+     "bytes_per_token": 1.13,
+     "estimate_exceeded": 86,
+     "estimate_exceeded_pct": 98.9,
+     "byte_estimate_exceeded_pct": 97.7,
+     "max_tokens_over_estimate": 14.6,
+     "max_tokens_over_byte_estimate": 4.0
+    }
+   },
+   "q7_equal_length": {
+    "pairs": 49780,
+    "counts_differ": 45544,
+    "counts_differ_pct": 91.5,
+    "max_difference": 104
+   },
+   "seconds": 217.6
+  },
+  "llama3": {
+   "revision": "unsloth/Llama-3.2-1B@9535bd9b1d1dea6acafbdc4813b728796aeb28da",
+   "family": "byte-level BPE",
+   "normalizer": null,
+   "special_tokens_added_per_request": 1,
+   "q1_code_points": {
+    "scalar_values_checked": 1112064,
+    "max_tokens_minus_bytes": 0,
+    "max_tokens_per_byte": 1.0,
+    "scalar_values_with_tokens_gt_bytes": 0,
+    "worst_examples": []
+   },
+   "q1_strings": {
+    "strings_checked": 495,
+    "max_tokens_minus_bytes": 0,
+    "max_tokens_per_byte": 1.0
+   },
+   "q2_q3_vocabulary": {
+    "vocabulary_entries": 128000,
+    "max_token_bytes": 128,
+    "longest_token": "                                        ",
+    "mean_token_bytes": 6.49,
+    "reencode_max_tokens_for_one_token": 3,
+    "reencode_worst_token": "�始化",
+    "tokens_that_reencode_to_more_than_one": 157
+   },
+   "q3_in_context": {
+    "reencode_max_tokens_for_one_token": 14,
+    "reencode_worst_token": ".:.:.:.:.:.:.:.:.:.:.:.:.:.:.:.:",
+    "tokens_that_reencode_to_more_than_one": 6328
+   },
+   "q3_sequences": {
+    "sequences": 2050,
+    "sequence_length": 64,
+    "max_reencoded_tokens_per_generated_token": 3.0,
+    "worst_sequence": "repeat '្�'"
+   },
+   "q4_concatenation": {
+    "pairs": 399496,
+    "max_defect": 6,
+    "pairs_with_positive_defect": 8182,
+    "worst_pair": [
+     ".StoredProcedure",
+     "recogn"
+    ]
+   },
+   "q5_estimate": {
+    "multilingual": {
+     "windows": 18272,
+     "chars_per_token": 2.14,
+     "bytes_per_token": 2.57,
+     "estimate_exceeded": 17784,
+     "estimate_exceeded_pct": 97.3,
+     "byte_estimate_exceeded_pct": 92.2,
+     "max_tokens_over_estimate": 11.78,
+     "max_tokens_over_byte_estimate": 3.98
+    },
+    "code": {
+     "windows": 1272,
+     "chars_per_token": 4.0,
+     "bytes_per_token": 4.0,
+     "estimate_exceeded": 581,
+     "estimate_exceeded_pct": 45.7,
+     "byte_estimate_exceeded_pct": 45.7,
+     "max_tokens_over_estimate": 1.77,
+     "max_tokens_over_byte_estimate": 1.77
+    },
+    "json": {
+     "windows": 407,
+     "chars_per_token": 2.89,
+     "bytes_per_token": 3.5,
+     "estimate_exceeded": 382,
+     "estimate_exceeded_pct": 93.9,
+     "byte_estimate_exceeded_pct": 85.0,
+     "max_tokens_over_estimate": 1.86,
+     "max_tokens_over_byte_estimate": 1.47
+    },
+    "adversarial": {
+     "windows": 87,
+     "chars_per_token": 0.4,
+     "bytes_per_token": 1.21,
+     "estimate_exceeded": 86,
+     "estimate_exceeded_pct": 98.9,
+     "byte_estimate_exceeded_pct": 97.7,
+     "max_tokens_over_estimate": 14.1,
+     "max_tokens_over_byte_estimate": 4.0
+    }
+   },
+   "q7_equal_length": {
+    "pairs": 49767,
+    "counts_differ": 43226,
+    "counts_differ_pct": 86.9,
+    "max_difference": 104
+   },
+   "seconds": 53.3
+  },
+  "qwen25": {
+   "revision": "Qwen/Qwen2.5-0.5B@060db6499f32faf8b98477b0a26969ef7d8b9987",
+   "family": "byte-level BPE",
+   "normalizer": "NFC",
+   "special_tokens_added_per_request": 0,
+   "q1_code_points": {
+    "scalar_values_checked": 1112064,
+    "max_tokens_minus_bytes": 3,
+    "max_tokens_per_byte": 2.0,
+    "scalar_values_with_tokens_gt_bytes": 38,
+    "worst_examples": [
+     {
+      "code_point": "U+0FB9",
+      "tokens": 6,
+      "bytes": 3
+     },
+     {
+      "code_point": "U+0FAC",
+      "tokens": 6,
+      "bytes": 3
+     },
+     {
+      "code_point": "U+0FA7",
+      "tokens": 6,
+      "bytes": 3
+     },
+     {
+      "code_point": "U+0FA2",
+      "tokens": 6,
+      "bytes": 3
+     },
+     {
+      "code_point": "U+0F9D",
+      "tokens": 6,
+      "bytes": 3
+     }
+    ]
+   },
+   "q1_strings": {
+    "strings_checked": 495,
+    "max_tokens_minus_bytes": 0,
+    "max_tokens_per_byte": 1.0
+   },
+   "q2_q3_vocabulary": {
+    "vocabulary_entries": 151643,
+    "max_token_bytes": 128,
+    "longest_token": "                                        ",
+    "mean_token_bytes": 6.44,
+    "reencode_max_tokens_for_one_token": 9,
+    "reencode_worst_token": "พรีเมียร์ลีก",
+    "tokens_that_reencode_to_more_than_one": 1840
+   },
+   "q3_in_context": {
+    "reencode_max_tokens_for_one_token": 9,
+    "reencode_worst_token": "พรีเมียร์ลีก",
+    "tokens_that_reencode_to_more_than_one": 29532
+   },
+   "q3_sequences": {
+    "sequences": 2050,
+    "sequence_length": 64,
+    "max_reencoded_tokens_per_generated_token": 9.0,
+    "worst_sequence": "repeat 'พรีเมียร์ลีก'"
+   },
+   "q4_concatenation": {
+    "pairs": 399507,
+    "max_defect": 5,
+    "pairs_with_positive_defect": 6867,
+    "worst_pair": [
+     " antibodies",
+     "toHaveBeenCalledTimes"
+    ]
+   },
+   "q5_estimate": {
+    "multilingual": {
+     "windows": 18272,
+     "chars_per_token": 2.23,
+     "bytes_per_token": 2.68,
+     "estimate_exceeded": 17805,
+     "estimate_exceeded_pct": 97.4,
+     "byte_estimate_exceeded_pct": 94.8,
+     "max_tokens_over_estimate": 9.37,
+     "max_tokens_over_byte_estimate": 3.81
+    },
+    "code": {
+     "windows": 1272,
+     "chars_per_token": 3.97,
+     "bytes_per_token": 3.97,
+     "estimate_exceeded": 591,
+     "estimate_exceeded_pct": 46.5,
+     "byte_estimate_exceeded_pct": 46.5,
+     "max_tokens_over_estimate": 1.92,
+     "max_tokens_over_byte_estimate": 1.92
+    },
+    "json": {
+     "windows": 407,
+     "chars_per_token": 2.8,
+     "bytes_per_token": 3.39,
+     "estimate_exceeded": 385,
+     "estimate_exceeded_pct": 94.6,
+     "byte_estimate_exceeded_pct": 90.2,
+     "max_tokens_over_estimate": 2.39,
+     "max_tokens_over_byte_estimate": 1.88
+    },
+    "adversarial": {
+     "windows": 87,
+     "chars_per_token": 0.5,
+     "bytes_per_token": 1.51,
+     "estimate_exceeded": 86,
+     "estimate_exceeded_pct": 98.9,
+     "byte_estimate_exceeded_pct": 97.7,
+     "max_tokens_over_estimate": 12.08,
+     "max_tokens_over_byte_estimate": 4.0
+    }
+   },
+   "q7_equal_length": {
+    "pairs": 49791,
+    "counts_differ": 43346,
+    "counts_differ_pct": 87.1,
+    "max_difference": 89
+   },
+   "seconds": 56.3
+  },
+  "deepseekv3": {
+   "revision": "deepseek-ai/DeepSeek-V3@e815299b0bcbac849fa540c768ef21845365c9eb",
+   "family": "byte-level BPE",
+   "normalizer": "Sequence",
+   "special_tokens_added_per_request": 0,
+   "q1_code_points": {
+    "scalar_values_checked": 1112064,
+    "max_tokens_minus_bytes": 0,
+    "max_tokens_per_byte": 1.0,
+    "scalar_values_with_tokens_gt_bytes": 0,
+    "worst_examples": []
+   },
+   "q1_strings": {
+    "strings_checked": 495,
+    "max_tokens_minus_bytes": 0,
+    "max_tokens_per_byte": 1.0
+   },
+   "q2_q3_vocabulary": {
+    "vocabulary_entries": 127997,
+    "max_token_bytes": 128,
+    "longest_token": "                                        ",
+    "mean_token_bytes": 6.53,
+    "reencode_max_tokens_for_one_token": 7,
+    "reencode_worst_token": "�ျေးရွာအုပ်စု",
+    "tokens_that_reencode_to_more_than_one": 513
+   },
+   "q3_in_context": {
+    "reencode_max_tokens_for_one_token": 6,
+    "reencode_worst_token": "�ျေးရွာအုပ်စု",
+    "tokens_that_reencode_to_more_than_one": 2753
+   },
+   "q3_sequences": {
+    "sequences": 2050,
+    "sequence_length": 64,
+    "max_reencoded_tokens_per_generated_token": 6.984,
+    "worst_sequence": "repeat '�ျေးရွာအုပ်စု'"
+   },
+   "q4_concatenation": {
+    "pairs": 399498,
+    "max_defect": 4,
+    "pairs_with_positive_defect": 4610,
+    "worst_pair": [
+     " sehingga",
+     "cipitation"
+    ]
+   },
+   "q5_estimate": {
+    "multilingual": {
+     "windows": 18272,
+     "chars_per_token": 2.33,
+     "bytes_per_token": 2.8,
+     "estimate_exceeded": 17619,
+     "estimate_exceeded_pct": 96.4,
+     "byte_estimate_exceeded_pct": 90.1,
+     "max_tokens_over_estimate": 11.06,
+     "max_tokens_over_byte_estimate": 3.98
+    },
+    "code": {
+     "windows": 1272,
+     "chars_per_token": 3.75,
+     "bytes_per_token": 3.75,
+     "estimate_exceeded": 730,
+     "estimate_exceeded_pct": 57.4,
+     "byte_estimate_exceeded_pct": 57.4,
+     "max_tokens_over_estimate": 1.88,
+     "max_tokens_over_byte_estimate": 1.88
+    },
+    "json": {
+     "windows": 407,
+     "chars_per_token": 2.88,
+     "bytes_per_token": 3.49,
+     "estimate_exceeded": 389,
+     "estimate_exceeded_pct": 95.6,
+     "byte_estimate_exceeded_pct": 87.0,
+     "max_tokens_over_estimate": 1.95,
+     "max_tokens_over_byte_estimate": 1.45
+    },
+    "adversarial": {
+     "windows": 87,
+     "chars_per_token": 0.4,
+     "bytes_per_token": 1.21,
+     "estimate_exceeded": 86,
+     "estimate_exceeded_pct": 98.9,
+     "byte_estimate_exceeded_pct": 98.9,
+     "max_tokens_over_estimate": 14.0,
+     "max_tokens_over_byte_estimate": 4.0
+    }
+   },
+   "q7_equal_length": {
+    "pairs": 49754,
+    "counts_differ": 42875,
+    "counts_differ_pct": 86.2,
+    "max_difference": 103
+   },
+   "seconds": 49.9
+  },
+  "olmo2": {
+   "revision": "allenai/OLMo-2-1124-7B@7df9a82518afdecae4e8c026b27adccc8c1f0032",
+   "family": "byte-level BPE",
+   "normalizer": null,
+   "special_tokens_added_per_request": 0,
+   "q1_code_points": {
+    "scalar_values_checked": 1112064,
+    "max_tokens_minus_bytes": 0,
+    "max_tokens_per_byte": 1.0,
+    "scalar_values_with_tokens_gt_bytes": 0,
+    "worst_examples": []
+   },
+   "q1_strings": {
+    "strings_checked": 495,
+    "max_tokens_minus_bytes": 0,
+    "max_tokens_per_byte": 1.0
+   },
+   "q2_q3_vocabulary": {
+    "vocabulary_entries": 100256,
+    "max_token_bytes": 128,
+    "longest_token": "                                        ",
+    "mean_token_bytes": 6.42,
+    "reencode_max_tokens_for_one_token": 3,
+    "reencode_worst_token": " ра�",
+    "tokens_that_reencode_to_more_than_one": 77
+   },
+   "q3_in_context": {
+    "reencode_max_tokens_for_one_token": 5,
+    "reencode_worst_token": "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+    "tokens_that_reencode_to_more_than_one": 4224
+   },
+   "q3_sequences": {
+    "sequences": 2050,
+    "sequence_length": 64,
+    "max_reencoded_tokens_per_generated_token": 3.016,
+    "worst_sequence": "repeat '無し�'"
+   },
+   "q4_concatenation": {
+    "pairs": 399518,
+    "max_defect": 5,
+    "pairs_with_positive_defect": 9008,
+    "worst_pair": [
+     "CppCodeGenWriteBarrier",
+     "authorized"
+    ]
+   },
+   "q5_estimate": {
+    "multilingual": {
+     "windows": 18272,
+     "chars_per_token": 2.01,
+     "bytes_per_token": 2.41,
+     "estimate_exceeded": 17860,
+     "estimate_exceeded_pct": 97.7,
+     "byte_estimate_exceeded_pct": 97.0,
+     "max_tokens_over_estimate": 11.78,
+     "max_tokens_over_byte_estimate": 3.99
+    },
+    "code": {
+     "windows": 1272,
+     "chars_per_token": 4.0,
+     "bytes_per_token": 4.0,
+     "estimate_exceeded": 581,
+     "estimate_exceeded_pct": 45.7,
+     "byte_estimate_exceeded_pct": 45.7,
+     "max_tokens_over_estimate": 1.77,
+     "max_tokens_over_byte_estimate": 1.77
+    },
+    "json": {
+     "windows": 407,
+     "chars_per_token": 2.52,
+     "bytes_per_token": 3.05,
+     "estimate_exceeded": 391,
+     "estimate_exceeded_pct": 96.1,
+     "byte_estimate_exceeded_pct": 91.4,
+     "max_tokens_over_estimate": 2.59,
+     "max_tokens_over_byte_estimate": 1.69
+    },
+    "adversarial": {
+     "windows": 87,
+     "chars_per_token": 0.39,
+     "bytes_per_token": 1.18,
+     "estimate_exceeded": 86,
+     "estimate_exceeded_pct": 98.9,
+     "byte_estimate_exceeded_pct": 97.7,
+     "max_tokens_over_estimate": 14.4,
+     "max_tokens_over_byte_estimate": 4.0
+    }
+   },
+   "q7_equal_length": {
+    "pairs": 49730,
+    "counts_differ": 43903,
+    "counts_differ_pct": 88.3,
+    "max_difference": 114
+   },
+   "seconds": 51.0
+  },
+  "gpt2": {
+   "revision": "openai-community/gpt2@607a30d783dfa663caf39e06633721c8d4cfcd7e",
+   "family": "byte-level BPE",
+   "normalizer": null,
+   "special_tokens_added_per_request": 0,
+   "q1_code_points": {
+    "scalar_values_checked": 1112064,
+    "max_tokens_minus_bytes": 0,
+    "max_tokens_per_byte": 1.0,
+    "scalar_values_with_tokens_gt_bytes": 0,
+    "worst_examples": []
+   },
+   "q1_strings": {
+    "strings_checked": 495,
+    "max_tokens_minus_bytes": 0,
+    "max_tokens_per_byte": 1.0
+   },
+   "q2_q3_vocabulary": {
+    "vocabulary_entries": 50256,
+    "max_token_bytes": 128,
+    "longest_token": "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ",
+    "mean_token_bytes": 6.38,
+    "reencode_max_tokens_for_one_token": 3,
+    "reencode_worst_token": "�醒",
+    "tokens_that_reencode_to_more_than_one": 17
+   },
+   "q3_in_context": {
+    "reencode_max_tokens_for_one_token": 4,
+    "reencode_worst_token": "¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯¯",
+    "tokens_that_reencode_to_more_than_one": 866
+   },
+   "q3_sequences": {
+    "sequences": 2050,
+    "sequence_length": 64,
+    "max_reencoded_tokens_per_generated_token": 3.0,
+    "worst_sequence": "repeat '��極'"
+   },
+   "q4_concatenation": {
+    "pairs": 399513,
+    "max_defect": 5,
+    "pairs_with_positive_defect": 6912,
+    "worst_pair": [
+     " Estimates",
+     "threatening"
+    ]
+   },
+   "q5_estimate": {
+    "multilingual": {
+     "windows": 18272,
+     "chars_per_token": 1.44,
+     "bytes_per_token": 1.73,
+     "estimate_exceeded": 18243,
+     "estimate_exceeded_pct": 99.8,
+     "byte_estimate_exceeded_pct": 99.8,
+     "max_tokens_over_estimate": 11.83,
+     "max_tokens_over_byte_estimate": 4.0
+    },
+    "code": {
+     "windows": 1272,
+     "chars_per_token": 2.2,
+     "bytes_per_token": 2.2,
+     "estimate_exceeded": 1210,
+     "estimate_exceeded_pct": 95.1,
+     "byte_estimate_exceeded_pct": 95.1,
+     "max_tokens_over_estimate": 3.39,
+     "max_tokens_over_byte_estimate": 3.39
+    },
+    "json": {
+     "windows": 407,
+     "chars_per_token": 1.24,
+     "bytes_per_token": 1.5,
+     "estimate_exceeded": 407,
+     "estimate_exceeded_pct": 100.0,
+     "byte_estimate_exceeded_pct": 100.0,
+     "max_tokens_over_estimate": 4.8,
+     "max_tokens_over_byte_estimate": 3.5
+    },
+    "adversarial": {
+     "windows": 87,
+     "chars_per_token": 0.37,
+     "bytes_per_token": 1.13,
+     "estimate_exceeded": 86,
+     "estimate_exceeded_pct": 98.9,
+     "byte_estimate_exceeded_pct": 97.7,
+     "max_tokens_over_estimate": 14.6,
+     "max_tokens_over_byte_estimate": 4.0
+    }
+   },
+   "q7_equal_length": {
+    "pairs": 49724,
+    "counts_differ": 45462,
+    "counts_differ_pct": 91.4,
+    "max_difference": 103
+   },
+   "seconds": 54.5
+  },
+  "llama2": {
+   "revision": "NousResearch/Llama-2-7b-hf@8efe6c9b93655b934e27bd9981e3ec13e55aee9d",
+   "family": "SentencePiece BPE, byte fallback",
+   "normalizer": "Sequence",
+   "special_tokens_added_per_request": 1,
+   "q1_code_points": {
+    "scalar_values_checked": 1112064,
+    "max_tokens_minus_bytes": 1,
+    "max_tokens_per_byte": 2.0,
+    "scalar_values_with_tokens_gt_bytes": 1109944,
+    "worst_examples": [
+     {
+      "code_point": "U+02DB",
+      "tokens": 3,
+      "bytes": 2
+     },
+     {
+      "code_point": "U+02D9",
+      "tokens": 3,
+      "bytes": 2
+     },
+     {
+      "code_point": "U+02D8",
+      "tokens": 3,
+      "bytes": 2
+     },
+     {
+      "code_point": "U+02D7",
+      "tokens": 3,
+      "bytes": 2
+     },
+     {
+      "code_point": "U+02D6",
+      "tokens": 3,
+      "bytes": 2
+     }
+    ]
+   },
+   "q1_strings": {
+    "strings_checked": 495,
+    "max_tokens_minus_bytes": 1,
+    "max_tokens_per_byte": 1.333
+   },
+   "q2_q3_vocabulary": {
+    "vocabulary_entries": 31997,
+    "max_token_bytes": 27,
+    "longest_token": " административ",
+    "mean_token_bytes": 5.52,
+    "reencode_max_tokens_for_one_token": 4,
+    "reencode_worst_token": "ategory",
+    "tokens_that_reencode_to_more_than_one": 26639
+   },
+   "q3_in_context": {
+    "reencode_max_tokens_for_one_token": 3,
+    "reencode_worst_token": "ategory",
+    "tokens_that_reencode_to_more_than_one": 559
+   },
+   "q3_sequences": {
+    "sequences": 2050,
+    "sequence_length": 64,
+    "max_reencoded_tokens_per_generated_token": 4.969,
+    "worst_sequence": "repeat 'ozzáférés'"
+   },
+   "q4_concatenation": {
+    "pairs": 399526,
+    "max_defect": 5,
+    "pairs_with_positive_defect": 5432,
+    "worst_pair": [
+     " Pennsylvania",
+     "sex"
+    ]
+   },
+   "q5_estimate": {
+    "multilingual": {
+     "windows": 18272,
+     "chars_per_token": 1.9,
+     "bytes_per_token": 2.28,
+     "estimate_exceeded": 18171,
+     "estimate_exceeded_pct": 99.4,
+     "byte_estimate_exceeded_pct": 97.7,
+     "max_tokens_over_estimate": 11.81,
+     "max_tokens_over_byte_estimate": 4.01
+    },
+    "code": {
+     "windows": 1272,
+     "chars_per_token": 3.12,
+     "bytes_per_token": 3.12,
+     "estimate_exceeded": 1069,
+     "estimate_exceeded_pct": 84.0,
+     "byte_estimate_exceeded_pct": 84.0,
+     "max_tokens_over_estimate": 2.08,
+     "max_tokens_over_byte_estimate": 2.08
+    },
+    "json": {
+     "windows": 407,
+     "chars_per_token": 2.25,
+     "bytes_per_token": 2.72,
+     "estimate_exceeded": 407,
+     "estimate_exceeded_pct": 100.0,
+     "byte_estimate_exceeded_pct": 99.5,
+     "max_tokens_over_estimate": 2.81,
+     "max_tokens_over_byte_estimate": 2.11
+    },
+    "adversarial": {
+     "windows": 87,
+     "chars_per_token": 0.36,
+     "bytes_per_token": 1.08,
+     "estimate_exceeded": 86,
+     "estimate_exceeded_pct": 98.9,
+     "byte_estimate_exceeded_pct": 98.9,
+     "max_tokens_over_estimate": 15.0,
+     "max_tokens_over_byte_estimate": 4.17
+    }
+   },
+   "q7_equal_length": {
+    "pairs": 49769,
+    "counts_differ": 43652,
+    "counts_differ_pct": 87.7,
+    "max_difference": 108
+   },
+   "seconds": 36.3
+  },
+  "mistral": {
+   "revision": "mistralai/Mistral-7B-v0.1@27d67f1b5f57dc0953326b2601d68371d40ea8da",
+   "family": "SentencePiece BPE, byte fallback",
+   "normalizer": null,
+   "special_tokens_added_per_request": 1,
+   "q1_code_points": {
+    "scalar_values_checked": 1112064,
+    "max_tokens_minus_bytes": 1,
+    "max_tokens_per_byte": 2.0,
+    "scalar_values_with_tokens_gt_bytes": 1108807,
+    "worst_examples": [
+     {
+      "code_point": "U+02EF",
+      "tokens": 3,
+      "bytes": 2
+     },
+     {
+      "code_point": "U+02EE",
+      "tokens": 3,
+      "bytes": 2
+     },
+     {
+      "code_point": "U+02ED",
+      "tokens": 3,
+      "bytes": 2
+     },
+     {
+      "code_point": "U+02EC",
+      "tokens": 3,
+      "bytes": 2
+     },
+     {
+      "code_point": "U+02EB",
+      "tokens": 3,
+      "bytes": 2
+     }
+    ]
+   },
+   "q1_strings": {
+    "strings_checked": 495,
+    "max_tokens_minus_bytes": 1,
+    "max_tokens_per_byte": 1.333
+   },
+   "q2_q3_vocabulary": {
+    "vocabulary_entries": 31997,
+    "max_token_bytes": 25,
+    "longest_token": " Становништво",
+    "mean_token_bytes": 5.36,
+    "reencode_max_tokens_for_one_token": 4,
+    "reencode_worst_token": "////////////////",
+    "tokens_that_reencode_to_more_than_one": 10899
+   },
+   "q3_in_context": {
+    "reencode_max_tokens_for_one_token": 3,
+    "reencode_worst_token": "////////////////",
+    "tokens_that_reencode_to_more_than_one": 519
+   },
+   "q3_sequences": {
+    "sequences": 2050,
+    "sequence_length": 64,
+    "max_reencoded_tokens_per_generated_token": 5.953,
+    "worst_sequence": "repeat 'pgfpathlineto'"
+   },
+   "q4_concatenation": {
+    "pairs": 399512,
+    "max_defect": 4,
+    "pairs_with_positive_defect": 5171,
+    "worst_pair": [
+     " datetime",
+     "maybe"
+    ]
+   },
+   "q5_estimate": {
+    "multilingual": {
+     "windows": 18272,
+     "chars_per_token": 1.9,
+     "bytes_per_token": 2.28,
+     "estimate_exceeded": 18201,
+     "estimate_exceeded_pct": 99.6,
+     "byte_estimate_exceeded_pct": 98.1,
+     "max_tokens_over_estimate": 11.19,
+     "max_tokens_over_byte_estimate": 4.01
+    },
+    "code": {
+     "windows": 1272,
+     "chars_per_token": 3.17,
+     "bytes_per_token": 3.17,
+     "estimate_exceeded": 1061,
+     "estimate_exceeded_pct": 83.4,
+     "byte_estimate_exceeded_pct": 83.4,
+     "max_tokens_over_estimate": 2.05,
+     "max_tokens_over_byte_estimate": 2.05
+    },
+    "json": {
+     "windows": 407,
+     "chars_per_token": 2.28,
+     "bytes_per_token": 2.76,
+     "estimate_exceeded": 407,
+     "estimate_exceeded_pct": 100.0,
+     "byte_estimate_exceeded_pct": 99.8,
+     "max_tokens_over_estimate": 2.59,
+     "max_tokens_over_byte_estimate": 2.11
+    },
+    "adversarial": {
+     "windows": 87,
+     "chars_per_token": 0.36,
+     "bytes_per_token": 1.08,
+     "estimate_exceeded": 86,
+     "estimate_exceeded_pct": 98.9,
+     "byte_estimate_exceeded_pct": 98.9,
+     "max_tokens_over_estimate": 15.0,
+     "max_tokens_over_byte_estimate": 4.17
+    }
+   },
+   "q7_equal_length": {
+    "pairs": 49724,
+    "counts_differ": 43641,
+    "counts_differ_pct": 87.8,
+    "max_difference": 98
+   },
+   "seconds": 33.2
+  },
+  "phi3": {
+   "revision": "microsoft/Phi-3-mini-4k-instruct@f39ac1d28e925b323eae81227eaba4464caced4e",
+   "family": "SentencePiece BPE, byte fallback",
+   "normalizer": "Sequence",
+   "special_tokens_added_per_request": 0,
+   "q1_code_points": {
+    "scalar_values_checked": 1112064,
+    "max_tokens_minus_bytes": 1,
+    "max_tokens_per_byte": 2.0,
+    "scalar_values_with_tokens_gt_bytes": 1109944,
+    "worst_examples": [
+     {
+      "code_point": "U+02DB",
+      "tokens": 3,
+      "bytes": 2
+     },
+     {
+      "code_point": "U+02D9",
+      "tokens": 3,
+      "bytes": 2
+     },
+     {
+      "code_point": "U+02D8",
+      "tokens": 3,
+      "bytes": 2
+     },
+     {
+      "code_point": "U+02D7",
+      "tokens": 3,
+      "bytes": 2
+     },
+     {
+      "code_point": "U+02D6",
+      "tokens": 3,
+      "bytes": 2
+     }
+    ]
+   },
+   "q1_strings": {
+    "strings_checked": 495,
+    "max_tokens_minus_bytes": 1,
+    "max_tokens_per_byte": 1.333
+   },
+   "q2_q3_vocabulary": {
+    "vocabulary_entries": 31997,
+    "max_token_bytes": 27,
+    "longest_token": " административ",
+    "mean_token_bytes": 5.52,
+    "reencode_max_tokens_for_one_token": 4,
+    "reencode_worst_token": "ategory",
+    "tokens_that_reencode_to_more_than_one": 26639
+   },
+   "q3_in_context": {
+    "reencode_max_tokens_for_one_token": 3,
+    "reencode_worst_token": "ategory",
+    "tokens_that_reencode_to_more_than_one": 559
+   },
+   "q3_sequences": {
+    "sequences": 2050,
+    "sequence_length": 64,
+    "max_reencoded_tokens_per_generated_token": 4.969,
+    "worst_sequence": "repeat 'ozzáférés'"
+   },
+   "q4_concatenation": {
+    "pairs": 399528,
+    "max_defect": 4,
+    "pairs_with_positive_defect": 5492,
+    "worst_pair": [
+     " Mediabestanden",
+     "type"
+    ]
+   },
+   "q5_estimate": {
+    "multilingual": {
+     "windows": 18272,
+     "chars_per_token": 1.9,
+     "bytes_per_token": 2.28,
+     "estimate_exceeded": 18171,
+     "estimate_exceeded_pct": 99.4,
+     "byte_estimate_exceeded_pct": 97.7,
+     "max_tokens_over_estimate": 11.81,
+     "max_tokens_over_byte_estimate": 4.01
+    },
+    "code": {
+     "windows": 1272,
+     "chars_per_token": 3.12,
+     "bytes_per_token": 3.12,
+     "estimate_exceeded": 1069,
+     "estimate_exceeded_pct": 84.0,
+     "byte_estimate_exceeded_pct": 84.0,
+     "max_tokens_over_estimate": 2.08,
+     "max_tokens_over_byte_estimate": 2.08
+    },
+    "json": {
+     "windows": 407,
+     "chars_per_token": 2.25,
+     "bytes_per_token": 2.72,
+     "estimate_exceeded": 407,
+     "estimate_exceeded_pct": 100.0,
+     "byte_estimate_exceeded_pct": 99.5,
+     "max_tokens_over_estimate": 2.81,
+     "max_tokens_over_byte_estimate": 2.11
+    },
+    "adversarial": {
+     "windows": 87,
+     "chars_per_token": 0.36,
+     "bytes_per_token": 1.08,
+     "estimate_exceeded": 86,
+     "estimate_exceeded_pct": 98.9,
+     "byte_estimate_exceeded_pct": 98.9,
+     "max_tokens_over_estimate": 15.0,
+     "max_tokens_over_byte_estimate": 4.17
+    }
+   },
+   "q7_equal_length": {
+    "pairs": 49748,
+    "counts_differ": 43791,
+    "counts_differ_pct": 88.0,
+    "max_difference": 109
+   },
+   "seconds": 35.1
+  },
+  "gemma2": {
+   "revision": "unsloth/gemma-2-2b@25319945f7fd83b8b903e12081777b7eef2ba993",
+   "family": "SentencePiece BPE, byte fallback",
+   "normalizer": "Replace",
+   "special_tokens_added_per_request": 1,
+   "q1_code_points": {
+    "scalar_values_checked": 1112064,
+    "max_tokens_minus_bytes": 0,
+    "max_tokens_per_byte": 1.0,
+    "scalar_values_with_tokens_gt_bytes": 0,
+    "worst_examples": []
+   },
+   "q1_strings": {
+    "strings_checked": 495,
+    "max_tokens_minus_bytes": 0,
+    "max_tokens_per_byte": 1.0
+   },
+   "q2_q3_vocabulary": {
+    "vocabulary_entries": 255751,
+    "max_token_bytes": 48,
+    "longest_token": "…………………………………………",
+    "mean_token_bytes": 6.55,
+    "reencode_max_tokens_for_one_token": 3,
+    "reencode_worst_token": " ссср",
+    "tokens_that_reencode_to_more_than_one": 1
+   },
+   "q3_in_context": {
+    "reencode_max_tokens_for_one_token": 5,
+    "reencode_worst_token": " görüntüleri",
+    "tokens_that_reencode_to_more_than_one": 75333
+   },
+   "q3_sequences": {
+    "sequences": 2050,
+    "sequence_length": 64,
+    "max_reencoded_tokens_per_generated_token": 2.984,
+    "worst_sequence": "repeat ' ссср'"
+   },
+   "q4_concatenation": {
+    "pairs": 399541,
+    "max_defect": 5,
+    "pairs_with_positive_defect": 8181,
+    "worst_pair": [
+     " ALCOHOL",
+     "LoginActivity"
+    ]
+   },
+   "q5_estimate": {
+    "multilingual": {
+     "windows": 18272,
+     "chars_per_token": 2.54,
+     "bytes_per_token": 3.05,
+     "estimate_exceeded": 17410,
+     "estimate_exceeded_pct": 95.3,
+     "byte_estimate_exceeded_pct": 86.9,
+     "max_tokens_over_estimate": 11.03,
+     "max_tokens_over_byte_estimate": 3.93
+    },
+    "code": {
+     "windows": 1272,
+     "chars_per_token": 3.43,
+     "bytes_per_token": 3.43,
+     "estimate_exceeded": 890,
+     "estimate_exceeded_pct": 70.0,
+     "byte_estimate_exceeded_pct": 70.0,
+     "max_tokens_over_estimate": 1.92,
+     "max_tokens_over_byte_estimate": 1.92
+    },
+    "json": {
+     "windows": 407,
+     "chars_per_token": 2.68,
+     "bytes_per_token": 3.24,
+     "estimate_exceeded": 407,
+     "estimate_exceeded_pct": 100.0,
+     "byte_estimate_exceeded_pct": 94.8,
+     "max_tokens_over_estimate": 2.11,
+     "max_tokens_over_byte_estimate": 2.11
+    },
+    "adversarial": {
+     "windows": 87,
+     "chars_per_token": 0.4,
+     "bytes_per_token": 1.2,
+     "estimate_exceeded": 85,
+     "estimate_exceeded_pct": 97.7,
+     "byte_estimate_exceeded_pct": 97.7,
+     "max_tokens_over_estimate": 14.3,
+     "max_tokens_over_byte_estimate": 4.0
+    }
+   },
+   "q7_equal_length": {
+    "pairs": 49764,
+    "counts_differ": 42293,
+    "counts_differ_pct": 85.0,
+    "max_difference": 95
+   },
+   "seconds": 42.5
+  },
+  "t5": {
+   "revision": "google-t5/t5-small@df1b051c49625cf57a3d0d8d3863ed4d13564fe4",
+   "family": "SentencePiece Unigram, no byte fallback",
+   "normalizer": "Precompiled",
+   "special_tokens_added_per_request": 1,
+   "q1_code_points": {
+    "scalar_values_checked": 1112064,
+    "max_tokens_minus_bytes": 5,
+    "max_tokens_per_byte": 2.667,
+    "scalar_values_with_tokens_gt_bytes": 84,
+    "worst_examples": [
+     {
+      "code_point": "U+FDFA",
+      "tokens": 8,
+      "bytes": 3
+     },
+     {
+      "code_point": "U+33D8",
+      "tokens": 5,
+      "bytes": 3
+     },
+     {
+      "code_point": "U+33C2",
+      "tokens": 5,
+      "bytes": 3
+     },
+     {
+      "code_point": "U+33AF",
+      "tokens": 5,
+      "bytes": 3
+     },
+     {
+      "code_point": "U+33A8",
+      "tokens": 5,
+      "bytes": 3
+     }
+    ]
+   },
+   "q1_strings": {
+    "strings_checked": 495,
+    "max_tokens_minus_bytes": 194,
+    "max_tokens_per_byte": 2.01
+   },
+   "q2_q3_vocabulary": {
+    "vocabulary_entries": 31997,
+    "max_token_bytes": 18,
+    "longest_token": " außergewöhnlich",
+    "mean_token_bytes": 6.92,
+    "reencode_max_tokens_for_one_token": 3,
+    "reencode_worst_token": "lase",
+    "tokens_that_reencode_to_more_than_one": 7772
+   },
+   "q3_in_context": {
+    "reencode_max_tokens_for_one_token": 3,
+    "reencode_worst_token": "lase",
+    "tokens_that_reencode_to_more_than_one": 7772
+   },
+   "q3_sequences": {
+    "sequences": 2050,
+    "sequence_length": 64,
+    "max_reencoded_tokens_per_generated_token": 1.031,
+    "worst_sequence": "random #80"
+   },
+   "q4_concatenation": {
+    "pairs": 399516,
+    "max_defect": 4,
+    "pairs_with_positive_defect": 3334,
+    "worst_pair": [
+     "s til som siste utvei å gjøre ",
+     "luttet å arbeide for sosialt f"
+    ]
+   },
+   "q5_estimate": {
+    "multilingual": {
+     "windows": 18272,
+     "chars_per_token": 1.98,
+     "bytes_per_token": 2.38,
+     "estimate_exceeded": 17166,
+     "estimate_exceeded_pct": 93.9,
+     "byte_estimate_exceeded_pct": 88.4,
+     "max_tokens_over_estimate": 3.81,
+     "max_tokens_over_byte_estimate": 3.26
+    },
+    "code": {
+     "windows": 1272,
+     "chars_per_token": 2.92,
+     "bytes_per_token": 2.92,
+     "estimate_exceeded": 1065,
+     "estimate_exceeded_pct": 83.7,
+     "byte_estimate_exceeded_pct": 83.7,
+     "max_tokens_over_estimate": 2.84,
+     "max_tokens_over_byte_estimate": 2.84
+    },
+    "json": {
+     "windows": 407,
+     "chars_per_token": 2.82,
+     "bytes_per_token": 3.41,
+     "estimate_exceeded": 396,
+     "estimate_exceeded_pct": 97.3,
+     "byte_estimate_exceeded_pct": 57.2,
+     "max_tokens_over_estimate": 2.16,
+     "max_tokens_over_byte_estimate": 1.83
+    },
+    "adversarial": {
+     "windows": 87,
+     "chars_per_token": 3.2,
+     "bytes_per_token": 9.67,
+     "estimate_exceeded": 36,
+     "estimate_exceeded_pct": 41.4,
+     "byte_estimate_exceeded_pct": 4.6,
+     "max_tokens_over_estimate": 24.12,
+     "max_tokens_over_byte_estimate": 8.04
+    }
+   },
+   "q7_equal_length": {
+    "pairs": 49756,
+    "counts_differ": 45951,
+    "counts_differ_pct": 92.4,
+    "max_difference": 33
+   },
+   "seconds": 59.1
+  },
+  "xlmr": {
+   "revision": "FacebookAI/xlm-roberta-base@e73636d4f797dec63c3081bb6ed5c7b0bb3f2089",
+   "family": "SentencePiece Unigram, no byte fallback",
+   "normalizer": "Precompiled",
+   "special_tokens_added_per_request": 2,
+   "q1_code_points": {
+    "scalar_values_checked": 1112064,
+    "max_tokens_minus_bytes": 3,
+    "max_tokens_per_byte": 2.0,
+    "scalar_values_with_tokens_gt_bytes": 46,
+    "worst_examples": [
+     {
+      "code_point": "U+331A",
+      "tokens": 6,
+      "bytes": 3
+     },
+     {
+      "code_point": "U+3356",
+      "tokens": 5,
+      "bytes": 3
+     },
+     {
+      "code_point": "U+334A",
+      "tokens": 5,
+      "bytes": 3
+     },
+     {
+      "code_point": "U+3336",
+      "tokens": 5,
+      "bytes": 3
+     },
+     {
+      "code_point": "U+3334",
+      "tokens": 5,
+      "bytes": 3
+     }
+    ]
+   },
+   "q1_strings": {
+    "strings_checked": 495,
+    "max_tokens_minus_bytes": 64,
+    "max_tokens_per_byte": 1.333
+   },
+   "q2_q3_vocabulary": {
+    "vocabulary_entries": 249997,
+    "max_token_bytes": 48,
+    "longest_token": "বিশ্ববিদ্যালয়ের",
+    "mean_token_bytes": 9.09,
+    "reencode_max_tokens_for_one_token": 3,
+    "reencode_worst_token": "aaa",
+    "tokens_that_reencode_to_more_than_one": 76325
+   },
+   "q3_in_context": {
+    "reencode_max_tokens_for_one_token": 3,
+    "reencode_worst_token": "aaa",
+    "tokens_that_reencode_to_more_than_one": 76325
+   },
+   "q3_sequences": {
+    "sequences": 2050,
+    "sequence_length": 64,
+    "max_reencoded_tokens_per_generated_token": 1.047,
+    "worst_sequence": "random #1309"
+   },
+   "q4_concatenation": {
+    "pairs": 399500,
+    "max_defect": 3,
+    "pairs_with_positive_defect": 1136,
+    "worst_pair": [
+     "*,\n                 max_lines=",
+     "subsequent_indent = subsequent"
+    ]
+   },
+   "q5_estimate": {
+    "multilingual": {
+     "windows": 18272,
+     "chars_per_token": 3.15,
+     "bytes_per_token": 3.78,
+     "estimate_exceeded": 14172,
+     "estimate_exceeded_pct": 77.6,
+     "byte_estimate_exceeded_pct": 67.0,
+     "max_tokens_over_estimate": 3.75,
+     "max_tokens_over_byte_estimate": 2.23
+    },
+    "code": {
+     "windows": 1272,
+     "chars_per_token": 3.28,
+     "bytes_per_token": 3.28,
+     "estimate_exceeded": 946,
+     "estimate_exceeded_pct": 74.4,
+     "byte_estimate_exceeded_pct": 74.4,
+     "max_tokens_over_estimate": 2.33,
+     "max_tokens_over_byte_estimate": 2.33
+    },
+    "json": {
+     "windows": 407,
+     "chars_per_token": 2.9,
+     "bytes_per_token": 3.51,
+     "estimate_exceeded": 388,
+     "estimate_exceeded_pct": 95.3,
+     "byte_estimate_exceeded_pct": 76.2,
+     "max_tokens_over_estimate": 1.89,
+     "max_tokens_over_byte_estimate": 1.7
+    },
+    "adversarial": {
+     "windows": 87,
+     "chars_per_token": 0.85,
+     "bytes_per_token": 2.58,
+     "estimate_exceeded": 60,
+     "estimate_exceeded_pct": 69.0,
+     "byte_estimate_exceeded_pct": 52.9,
+     "max_tokens_over_estimate": 16.0,
+     "max_tokens_over_byte_estimate": 5.33
+    }
+   },
+   "q7_equal_length": {
+    "pairs": 49762,
+    "counts_differ": 43041,
+    "counts_differ_pct": 86.5,
+    "max_difference": 31
+   },
+   "seconds": 65.3
+  }
+ },
+ "q6_cross": {
+  "cl100k_base->o200k_base": {
+   "max_tokens_for_one_source_token": 8,
+   "worst_source_token": ".DataGridViewColumnHeadersHeightSizeMode",
+   "corpus_median_ratio": 0.859,
+   "corpus_max_ratio": 1.084
+  },
+  "cl100k_base->llama3": {
+   "max_tokens_for_one_source_token": 3,
+   "worst_source_token": "�始化",
+   "corpus_median_ratio": 0.991,
+   "corpus_max_ratio": 1.0
+  },
+  "cl100k_base->qwen25": {
+   "max_tokens_for_one_source_token": 3,
+   "worst_source_token": "201",
+   "corpus_median_ratio": 0.997,
+   "corpus_max_ratio": 1.11
+  },
+  "cl100k_base->mistral": {
+   "max_tokens_for_one_source_token": 33,
+   "worst_source_token": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+   "corpus_median_ratio": 1.083,
+   "corpus_max_ratio": 1.439
+  },
+  "cl100k_base->gemma2": {
+   "max_tokens_for_one_source_token": 8,
+   "worst_source_token": "\r\n\r\n\r\n\r\n",
+   "corpus_median_ratio": 0.889,
+   "corpus_max_ratio": 1.237
+  },
+  "cl100k_base->t5": {
+   "max_tokens_for_one_source_token": 95,
+   "worst_source_token": "////////////////////////////////////////",
+   "corpus_median_ratio": 1.354,
+   "corpus_max_ratio": 1.753
+  },
+  "o200k_base->cl100k_base": {
+   "max_tokens_for_one_source_token": 32,
+   "worst_source_token": "□□□□□□□□□□□□□□□□",
+   "corpus_median_ratio": 1.165,
+   "corpus_max_ratio": 6.414
+  },
+  "o200k_base->llama3": {
+   "max_tokens_for_one_source_token": 29,
+   "worst_source_token": " მნიშვნელოვანია",
+   "corpus_median_ratio": 1.136,
+   "corpus_max_ratio": 6.414
+  },
+  "o200k_base->qwen25": {
+   "max_tokens_for_one_source_token": 21,
+   "worst_source_token": " વિદ્યાર્થીઓ",
+   "corpus_median_ratio": 1.132,
+   "corpus_max_ratio": 4.23
+  },
+  "o200k_base->mistral": {
+   "max_tokens_for_one_source_token": 36,
+   "worst_source_token": "തിരുവനന്തപുരം",
+   "corpus_median_ratio": 1.264,
+   "corpus_max_ratio": 6.441
+  },
+  "o200k_base->gemma2": {
+   "max_tokens_for_one_source_token": 16,
+   "worst_source_token": "□□□□□□□□□□□□□□□□",
+   "corpus_median_ratio": 1.041,
+   "corpus_max_ratio": 2.308
+  },
+  "o200k_base->t5": {
+   "max_tokens_for_one_source_token": 96,
+   "worst_source_token": "========================================",
+   "corpus_median_ratio": 1.574,
+   "corpus_max_ratio": 2.763
+  },
+  "llama3->cl100k_base": {
+   "max_tokens_for_one_source_token": 64,
+   "worst_source_token": "џџџџџџџџџџџџџџџџџџџџџџџџџџџџџџџџ",
+   "corpus_median_ratio": 1.01,
+   "corpus_max_ratio": 2.402
+  },
+  "llama3->o200k_base": {
+   "max_tokens_for_one_source_token": 32,
+   "worst_source_token": "џџџџџџџџџџџџџџџџџџџџџџџџџџџџџџџџ",
+   "corpus_median_ratio": 0.88,
+   "corpus_max_ratio": 1.17
+  },
+  "llama3->qwen25": {
+   "max_tokens_for_one_source_token": 32,
+   "worst_source_token": "џџџџџџџџџџџџџџџџџџџџџџџџџџџџџџџџ",
+   "corpus_median_ratio": 1.006,
+   "corpus_max_ratio": 2.245
+  },
+  "llama3->mistral": {
+   "max_tokens_for_one_source_token": 64,
+   "worst_source_token": "                                        ",
+   "corpus_median_ratio": 1.106,
+   "corpus_max_ratio": 3.071
+  },
+  "llama3->gemma2": {
+   "max_tokens_for_one_source_token": 32,
+   "worst_source_token": "џџџџџџџџџџџџџџџџџџџџџџџџџџџџџџџџ",
+   "corpus_median_ratio": 0.909,
+   "corpus_max_ratio": 1.303
+  },
+  "llama3->t5": {
+   "max_tokens_for_one_source_token": 95,
+   "worst_source_token": "////////////////////////////////////////",
+   "corpus_median_ratio": 1.384,
+   "corpus_max_ratio": 2.418
+  },
+  "qwen25->cl100k_base": {
+   "max_tokens_for_one_source_token": 15,
+   "worst_source_token": "มีประสิทธิภาพ",
+   "corpus_median_ratio": 1.003,
+   "corpus_max_ratio": 2.879
+  },
+  "qwen25->o200k_base": {
+   "max_tokens_for_one_source_token": 8,
+   "worst_source_token": ".DataGridViewColumnHeadersHeightSizeMode",
+   "corpus_median_ratio": 0.883,
+   "corpus_max_ratio": 2.317
+  },
+  "qwen25->llama3": {
+   "max_tokens_for_one_source_token": 11,
+   "worst_source_token": "טכנולוגיה",
+   "corpus_median_ratio": 0.994,
+   "corpus_max_ratio": 2.56
+  },
+  "qwen25->mistral": {
+   "max_tokens_for_one_source_token": 33,
+   "worst_source_token": "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n",
+   "corpus_median_ratio": 1.102,
+   "corpus_max_ratio": 3.004
+  },
+  "qwen25->gemma2": {
+   "max_tokens_for_one_source_token": 8,
+   "worst_source_token": "\r\n\r\n\r\n\r\n",
+   "corpus_median_ratio": 0.909,
+   "corpus_max_ratio": 1.948
+  },
+  "qwen25->t5": {
+   "max_tokens_for_one_source_token": 95,
+   "worst_source_token": "////////////////////////////////////////",
+   "corpus_median_ratio": 1.385,
+   "corpus_max_ratio": 3.198
+  },
+  "mistral->cl100k_base": {
+   "max_tokens_for_one_source_token": 9,
+   "worst_source_token": " Становништво",
+   "corpus_median_ratio": 0.923,
+   "corpus_max_ratio": 1.865
+  },
+  "mistral->o200k_base": {
+   "max_tokens_for_one_source_token": 6,
+   "worst_source_token": " Становништво",
+   "corpus_median_ratio": 0.791,
+   "corpus_max_ratio": 1.203
+  },
+  "mistral->llama3": {
+   "max_tokens_for_one_source_token": 5,
+   "worst_source_token": "pgfpathlineto",
+   "corpus_median_ratio": 0.904,
+   "corpus_max_ratio": 1.865
+  },
+  "mistral->qwen25": {
+   "max_tokens_for_one_source_token": 7,
+   "worst_source_token": " Становништво",
+   "corpus_median_ratio": 0.907,
+   "corpus_max_ratio": 1.125
+  },
+  "mistral->gemma2": {
+   "max_tokens_for_one_source_token": 4,
+   "worst_source_token": "\\+\\_\\",
+   "corpus_median_ratio": 0.824,
+   "corpus_max_ratio": 0.997
+  },
+  "mistral->t5": {
+   "max_tokens_for_one_source_token": 16,
+   "worst_source_token": "================",
+   "corpus_median_ratio": 1.256,
+   "corpus_max_ratio": 1.852
+  },
+  "gemma2->cl100k_base": {
+   "max_tokens_for_one_source_token": 26,
+   "worst_source_token": "ագրություններ",
+   "corpus_median_ratio": 1.125,
+   "corpus_max_ratio": 3.395
+  },
+  "gemma2->o200k_base": {
+   "max_tokens_for_one_source_token": 9,
+   "worst_source_token": "KURZBESCHREIBUNG",
+   "corpus_median_ratio": 0.961,
+   "corpus_max_ratio": 2.567
+  },
+  "gemma2->llama3": {
+   "max_tokens_for_one_source_token": 24,
+   "worst_source_token": "ագրություններ",
+   "corpus_median_ratio": 1.1,
+   "corpus_max_ratio": 3.055
+  },
+  "gemma2->qwen25": {
+   "max_tokens_for_one_source_token": 13,
+   "worst_source_token": "ագրություններ",
+   "corpus_median_ratio": 1.1,
+   "corpus_max_ratio": 2.452
+  },
+  "gemma2->mistral": {
+   "max_tokens_for_one_source_token": 17,
+   "worst_source_token": "　　　　　　　　　　　　　　　　",
+   "corpus_median_ratio": 1.214,
+   "corpus_max_ratio": 3.755
+  },
+  "gemma2->t5": {
+   "max_tokens_for_one_source_token": 17,
+   "worst_source_token": "%%%%%%%%%%%%%%%%",
+   "corpus_median_ratio": 1.51,
+   "corpus_max_ratio": 2.741
+  },
+  "t5->cl100k_base": {
+   "max_tokens_for_one_source_token": 7,
+   "worst_source_token": " îmbunătăț",
+   "corpus_median_ratio": 0.738,
+   "corpus_max_ratio": 101.5
+  },
+  "t5->o200k_base": {
+   "max_tokens_for_one_source_token": 6,
+   "worst_source_token": " învăţământ",
+   "corpus_median_ratio": 0.635,
+   "corpus_max_ratio": 71.0
+  },
+  "t5->llama3": {
+   "max_tokens_for_one_source_token": 7,
+   "worst_source_token": " îmbunătăț",
+   "corpus_median_ratio": 0.722,
+   "corpus_max_ratio": 101.5
+  },
+  "t5->qwen25": {
+   "max_tokens_for_one_source_token": 9,
+   "worst_source_token": " 2014-11-",
+   "corpus_median_ratio": 0.722,
+   "corpus_max_ratio": 64.0
+  },
+  "t5->mistral": {
+   "max_tokens_for_one_source_token": 9,
+   "worst_source_token": " 2014-11-",
+   "corpus_median_ratio": 0.796,
+   "corpus_max_ratio": 72.328
+  },
+  "t5->gemma2": {
+   "max_tokens_for_one_source_token": 9,
+   "worst_source_token": " 2014-11-",
+   "corpus_median_ratio": 0.662,
+   "corpus_max_ratio": 35.5
+  }
+ },
+ "seconds": 1387.0
+}

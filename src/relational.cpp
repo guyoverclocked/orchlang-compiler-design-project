@@ -153,9 +153,15 @@ std::string normalizedChildren(const Node& node, Observer observer, Remap& remap
         case NodeKind::Call:
             return callKey(node, remap);
         case NodeKind::Retry:
+            // Never reorder inside a retry body, for any observer.  Whether an
+            // attempt succeeds is decided on the attempt's transcript, and a
+            // validator may care about order ("the last response must parse"),
+            // so reordering there can change how many attempts are made, and
+            // with them the bill.  An earlier version of this function did
+            // reorder here; tests/tests.cpp has the counterexample.
             return "R" + std::to_string(node.bound) + "{" +
                    (node.children.empty() ? std::string()
-                                          : normalizedKey(node.children[0], observer, remap)) +
+                                          : normalizedKey(node.children[0], Observer::Trace, remap)) +
                    "}";
         case NodeKind::Branch:
             return "B(" + guardKey(node.guard, remap) + "){" +

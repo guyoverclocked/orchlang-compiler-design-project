@@ -1,0 +1,10 @@
+workflow Retry3Bytes budget 100000000 {
+  input source: text max_bytes 480;
+  model small = mock("offline-small") max_tokens 150 tokenizer mockbpe overhead 3 max_bytes 900;
+  model large = mock("offline-large") max_tokens 600 tokenizer mockbpe overhead 3 max_bytes 2400;
+  prompt step(payload: text) -> text = "Process this payload: {payload}";
+  retry 3 {
+    let attempt: text = call step(source) using small;
+  }
+  output source;
+}

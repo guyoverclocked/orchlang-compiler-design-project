@@ -1173,7 +1173,7 @@ void testShadowedPromptInArmIsADifferentRequest() {
     require(hasCode(pipeline, "E236"), "the same prompt name may denote different text");
 }
 
-void testShadowedInputInArmIsADifferentVariable() {
+void testInputDeclaredInsideArmIsRejected() {
     Pipeline pipeline = compileSource(R"(workflow C budget 100000 {
   secret flag: boolean max_tokens 1;
   input x: text max_tokens 30;
@@ -1187,8 +1187,8 @@ void testShadowedInputInArmIsADifferentVariable() {
   }
   output "done";
 })");
-    requireSemanticallyValid(pipeline);
-    require(hasCode(pipeline, "E236"), "the same variable name may denote a different binding");
+    require(hasCode(pipeline, "E203"),
+            "an input arrives before the workflow runs, so it is declared at the top level only");
 }
 
 // The runtime's invoice is keyed by the provider's model name, as a real one is.
@@ -1350,6 +1350,36 @@ void testReorderingIsInvisibleOnTheInvoice() {
     require(pipeline.relational->success(), "an invoice shows sums, not order");
     require(distinctObservations(pipeline, everySecret({"flag"}, {}), {{"x", 4}}, Observer::Bill) == 1,
             "and the invoices are identical");
+}
+
+// Found while writing the soundness argument for the observer lattice: an
+// earlier version reordered calls inside retry bodies too.  A retry attempt's
+// success is decided on its transcript, whose order a validator may depend on,
+// so reordering there changes the number of attempts and the invoice.  The
+// runtime showed it: 1 attempt against 3 under the same seed.
+void testCallsInsideRetryAreNeverReordered() {
+    Pipeline pipeline = compileSource(R"(workflow C budget 100000 observer bill {
+  secret flag: boolean max_tokens 1;
+  input x: text max_tokens 10;
+  model m1 = mock("alpha/one") max_tokens 20;
+  model m2 = mock("alpha/two") max_tokens 20;
+  prompt p(t: text) -> text = "{t}";
+  if flag {
+    retry 4 {
+      let a1: text = call p(x) using m1;
+      let a2: text = call p(x) using m2;
+    }
+  } else {
+    retry 4 {
+      let b2: text = call p(x) using m2;
+      let b1: text = call p(x) using m1;
+    }
+  }
+  output "done";
+})");
+    require(hasCode(pipeline, "E236"), "reordering inside a retry body can change the attempts");
+    require(distinctObservations(pipeline, everySecret({"flag"}, {}), {{"x", 4}}, Observer::Bill) > 1,
+            "and the invoice does change");
 }
 
 void testDependentCallsAreNotReorderedForTheBill() {
@@ -2134,7 +2164,7 @@ int main() {
         {"content: same text via different prompt names is one request", testSameTextThroughDifferentPromptNamesIsTheSameRequest},
         {"F3: shadowed model in arm is a different endpoint", testShadowedModelInArmIsADifferentEndpoint},
         {"F3: shadowed prompt in arm is a different request", testShadowedPromptInArmIsADifferentRequest},
-        {"F3: shadowed input in arm is a different variable", testShadowedInputInArmIsADifferentVariable},
+        {"E203: input declared inside an arm rejected", testInputDeclaredInsideArmIsRejected},
         {"F4: billing keyed by provider model name", testBillingIsKeyedByProviderModelName},
         {"OP-4: one-bit branch needs a budget", testOneBitBranchNeedsABudget},
         {"OP-4: thresholds on one secret count intervals", testThresholdsOnOneSecretCountIntervals},
@@ -2145,6 +2175,7 @@ int main() {
         {"OP-7: reordering within one provider visible to it", testReorderingWithinOneProviderIsVisibleToIt},
         {"OP-7: reordering invisible on the invoice", testReorderingIsInvisibleOnTheInvoice},
         {"OP-7: dependent calls not reordered for the bill", testDependentCallsAreNotReorderedForTheBill},
+        {"OP-7: calls inside retry are never reordered", testCallsInsideRetryAreNeverReordered},
         {"OP-3: guaranteed input built from bytes", testGuaranteedInputIsBuiltFromBytes},
         {"OP-3: unverified tokenizer gives no guarantee", testUnverifiedTokenizerGivesNoGuarantee},
         {"OP-3: unknown tokenizer is an error", testUnknownTokenizerIsAnError},

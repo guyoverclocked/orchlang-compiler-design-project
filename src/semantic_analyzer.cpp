@@ -135,6 +135,8 @@ private:
                           const std::string& tokenizer, bool hasByteBound, std::size_t byteBound,
                           const SourceLocation& location);
     int recordBinding(const Symbol* inserted, const CallExpr* producer, int aliasOf);
+    bool requireTopLevel(const std::string& kind, const std::string& name,
+                         const SourceLocation& location, const Context& context);
 
     SemanticResult& result_;
     AnalysisOptions options_;
@@ -304,7 +306,25 @@ int Analyzer::recordBinding(const Symbol* inserted, const CallExpr* producer, in
     return inserted->id;
 }
 
+// Inputs and secrets arrive from outside, before the workflow runs, so they are
+// declared once, at the top level.  A declaration inside a branch arm or a
+// retry body has no clear meaning: does the environment supply it only when
+// that arm runs, and is a second declaration of the same name the same value?
+// Rather than pick an answer silently, the language rejects the question.
+bool Analyzer::requireTopLevel(const std::string& kind, const std::string& name,
+                               const SourceLocation& location, const Context& context) {
+    const auto top = result_.workflowScopes.find(context.workflow);
+    if (top != result_.workflowScopes.end() && top->second != context.scope) {
+        result_.diagnostics.error("E203", location,
+                                  kind + " '" + name + "' must be declared at the top level of the "
+                                  "workflow, not inside a branch or a retry block");
+        return false;
+    }
+    return true;
+}
+
 void Analyzer::declareInput(const InputDecl& input, const Context& context) {
+    requireTopLevel("input", input.name, input.location, context);
     Symbol symbol{input.name,   SymbolKind::Input, input.type, "", input.location, std::nullopt,
                   std::nullopt, std::nullopt,      input.label};
     symbol.dataLabel = input.label;
@@ -314,6 +334,7 @@ void Analyzer::declareInput(const InputDecl& input, const Context& context) {
 }
 
 void Analyzer::declareSecret(const SecretDecl& secret, const Context& context) {
+    requireTopLevel("secret", secret.name, secret.location, context);
     Symbol symbol{secret.name,  SymbolKind::Secret, secret.type,
                   "",           secret.location,    std::nullopt,
                   std::nullopt, std::nullopt,       Label{Confidentiality::Secret, Integrity::Trusted}};

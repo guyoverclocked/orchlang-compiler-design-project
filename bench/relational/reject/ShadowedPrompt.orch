@@ -1,4 +1,4 @@
-workflow SameLiteral budget 1000000 {
+workflow ShadowedPrompt budget 1000000 {
   secret s: text max_tokens 8;
   secret flag: boolean max_tokens 1;
   input x: text max_tokens 100;
@@ -7,9 +7,10 @@ workflow SameLiteral budget 1000000 {
   model n = mock("offline-n") max_tokens 400;
   prompt step(payload: text) -> text = "Process this payload: {payload}";
   if flag {
-    let a: text = call step("aaaa") using m;
+    prompt step(payload: text) -> text = "Handle that payload: {payload}";
+    let a: text = call step(x) using m;
   } else {
-    let b: text = call step("aaaa") using m;
+    let b: text = call step(x) using m;
   }
   output "done";
 }

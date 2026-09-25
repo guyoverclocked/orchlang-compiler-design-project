@@ -1,0 +1,18 @@
+// F2. The motivating example after a developer pads one prompt to the other's
+// length.  Same model, same argument, same template size; different
+// instruction.  The v3 size rule accepts it.  On a real model (SmolLM2-135M),
+// requests of equal token length with these two kinds of instruction answer
+// in 3-25 and 96 tokens under the same seed (bench/results/provider.json).
+workflow EqualSizeTemplate budget 100000 {
+  secret enterprise: boolean max_tokens 1;
+  input ticket: text max_tokens 40;
+  model m = mock("offline-m") max_tokens 96;
+  prompt ack(t: text) -> text = "Acknowledge briefly: {t}";
+  prompt esc(t: text) -> text = "Escalate in detail!: {t}";
+  if enterprise {
+    let a: text = call esc(ticket) using m;
+  } else {
+    let b: text = call ack(ticket) using m;
+  }
+  output "done";
+}

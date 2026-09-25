@@ -1,67 +1,165 @@
 OrchLang evaluation
 ===================
 
-E1-E3  certified bound versus observed execution
+E0  audit counterexamples, still caught
+
+audit       case                 check                                     result
+----------  -------------------  ----------------------------------------  ------
+2026-09-17  literal              bound held in 200 runs                    ok    
+2026-09-17  boolean              bound held in 200 runs                    ok    
+2026-09-17  split                bound held in 200 runs                    ok    
+2026-09-17  shadow               bound held in 200 runs                    ok    
+2026-09-17  equal_bounds         rejected (E236), leaks under the runtime  ok    
+2026-09-25  equal_size_literal   rejected, leaks, sizes rule accepts       ok    
+2026-09-25  equal_size_template  rejected, leaks, sizes rule accepts       ok    
+2026-09-25  retry_reorder        rejected, leaks                           ok    
+2026-09-25  shadowed_model       rejected, leaks, sizes rule accepts       ok    
+2026-09-25  shadowed_prompt      rejected, leaks, sizes rule accepts       ok    
+
+E1-E3  certified bound versus observed execution, estimate model
        (23 workflows, 4600 executions; "paths" counts distinct model-sets
         observed, so 1 means a branch arm never ran)
 
 workflow          certified  out<=  in<=  flat  cfa   peak  slack  paths  cert_viol  comp_viol  flat_viol  cfa_viol
 ----------------  ---------  -----  ----  ----  ----  ----  -----  -----  ---------  ---------  ---------  --------
-branch_1          1006       750    256   1284  1006  935   1.08   2      0          0          0          0       
-branch_2          1734       1350   384   2290  1734  1558  1.11   2      0          0          0          0       
-branch_3          2462       1950   512   3296  2462  2229  1.1    2      0          0          0          0       
-branch_4          3190       2550   640   4302  3190  2905  1.1    2      0          0          0          0       
-branch_in_retry   2462       1950   512   1284  1006  2005  1.23   2      0          0          15         23      
-branch_nested     1734       1350   384   3746  2462  1445  1.2    2      0          0          0          0       
-chain_1           278        150    128   278   278   273   1.02   1      0          0          0          0       
-chain_2           586        300    286   586   586   539   1.09   1      0          0          0          0       
-chain_3           894        450    444   894   894   812   1.1    1      0          0          0          0       
-chain_4           1202       600    602   1202  1202  1085  1.11   1      0          0          0          0       
-chain_5           1510       750    760   1510  1510  1288  1.17   1      0          0          0          0       
-retry_2           556        300    256   278   278   542   1.03   1      0          0          43         43      
-retry_3           834        450    384   278   278   693   1.2    1      0          0          59         59      
-retry_4           1112       600    512   278   278   875   1.27   1      0          0          63         63      
-retry_5           1390       750    640   278   278   1144  1.22   1      0          0          63         63      
-retry_6           1668       900    768   278   278   1144  1.46   1      0          0          63         63      
-retry_in_branch   1112       750    512   1284  1284  947   1.17   2      0          0          0          0       
-retry_nested_2x2  1112       600    512   278   278   901   1.23   1      0          0          102        102     
-retry_nested_2x3  1668       900    768   278   278   1298  1.29   1      0          0          111        111     
-retry_nested_3x3  2502       1350   1152  278   278   1363  1.84   1      0          0          117        117     
-wide_input_200    666        300    366   666   666   600   1.11   1      0          0          0          0       
-wide_input_2000   2466       300    2166  2466  2466  2339  1.05   1      0          0          0          0       
-wide_input_800    1266       300    966   1266  1266  1158  1.09   1      0          0          0          0       
+branch_1          1006       750    256   1284  1006  900   1.12   2      0          0          0          0       
+branch_2          1734       1350   384   2290  1734  1483  1.17   2      0          0          0          0       
+branch_3          2462       1950   512   3296  2462  2233  1.1    2      0          0          0          0       
+branch_4          3190       2550   640   4302  3190  2884  1.11   2      0          0          0          0       
+branch_in_retry   2462       1950   512   1284  1006  1638  1.5    2      0          0          13         35      
+branch_nested     1734       1350   384   3746  2462  1515  1.14   2      0          0          0          0       
+chain_1           278        150    128   278   278   269   1.03   1      0          0          0          0       
+chain_2           586        300    286   586   586   560   1.05   1      0          0          0          0       
+chain_3           894        450    444   894   894   742   1.2    1      0          0          0          0       
+chain_4           1202       600    602   1202  1202  1051  1.14   1      0          0          0          0       
+chain_5           1510       750    760   1510  1510  1206  1.25   1      0          0          0          0       
+retry_2           556        300    256   278   278   479   1.16   1      0          0          50         50      
+retry_3           834        450    384   278   278   646   1.29   1      0          0          66         66      
+retry_4           1112       600    512   278   278   881   1.26   1      0          0          72         72      
+retry_5           1390       750    640   278   278   941   1.48   1      0          0          64         64      
+retry_6           1668       900    768   278   278   1079  1.55   1      0          0          64         64      
+retry_in_branch   1112       750    512   1284  1284  938   1.19   2      0          0          0          0       
+retry_nested_2x2  1112       600    512   278   278   809   1.37   1      0          0          107        107     
+retry_nested_2x3  1668       900    768   278   278   998   1.67   1      0          0          121        121     
+retry_nested_3x3  2502       1350   1152  278   278   1528  1.64   1      0          0          128        128     
+wide_input_200    666        300    366   666   666   581   1.15   1      0          0          0          0       
+wide_input_2000   2466       300    2166  2466  2466  2331  1.06   1      0          0          0          0       
+wide_input_800    1266       300    966   1266  1266  1097  1.15   1      0          0          0          0       
 
   certified total exceeded        : 0 of 4600
   certified output component      : 0 of 4600
   certified input component       : 0 of 4600
-  flat per-call sum exceeded      : 636 of 4600 (13.8%)
-  control-flow-aware rule exceeded: 644 of 4600 (14.0%)
-  slack vs peak observed          : median 1.11x, range 1.02-1.84x
+  flat per-call sum exceeded      : 685 of 4600 (14.9%)
+  control-flow-aware rule exceeded: 707 of 4600 (15.4%)
+  slack vs peak observed          : median 1.17x, range 1.03-1.67x
   branch workflows with a dead arm: 0
 
-E4-E5  relational obligation: does the secret move the bill?
+  This checks the implementation against its own estimate model; E4 checks
+  the guaranteed bound against a content-sensitive tokenizer.
 
-workflow                   expected  verdict  comparisons  bills_differ  witness                                         
--------------------------  --------  -------  -----------  ------------  ------------------------------------------------
-EmptyBothArms              accept    accept   425          0                                                             
-MatchingInnerPublicGuard   accept    accept   425          0                                                             
-SameCallBothArms           accept    accept   425          0                                                             
-SameLiteral                accept    accept   425          0                                                             
-SameModelBothArms          accept    accept   425          0                                                             
-SameRetryBound             accept    accept   425          0                                                             
-TwoCallsBothArms           accept    accept   425          0                                                             
-CallInOneArmOnly           reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
-DifferentArgument          reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
-DifferentInnerPublicGuard  reject    reject   425          126           {"flag": "false", "s": "0"} vs {"flag": "true", 
-DifferentLiteralLength     reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
-DifferentModel             reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
-DifferentRetryBound        reject    reject   425          81            {"flag": "false", "s": "0"} vs {"flag": "true", 
-ExtraCall                  reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
+E4  guaranteed input bound under real tokenization (content-sensitive
+    tokenizer, uniform and content-dependent providers)
 
-  accepted workflows: 2975 paired comparisons, 0 showed a different bill
-  rejected workflows: 7 had a concrete leaking witness, 0 had none
+workflow                in_est  in_guar  peak_in  guar_slack  guar_viol  est_exceeded  runs
+----------------------  ------  -------  -------  ----------  ---------  ------------  ----
+branch_1_bytes          256     1010     566      1.78        0          108           200 
+branch_2_bytes          384     1515     972      1.56        0          96            200 
+branch_3_bytes          512     2020     1176     1.72        0          110           200 
+branch_4_bytes          640     2525     1370     1.84        0          94            200 
+branch_in_retry_bytes   512     2020     1240     1.63        0          52            200 
+branch_nested_bytes     384     1515     819      1.85        0          110           200 
+chain_1_bytes           128     505      295      1.71        0          104           200 
+chain_2_bytes           286     1430     741      1.93        0          144           200 
+chain_3_bytes           444     2355     1243     1.89        0          168           200 
+chain_4_bytes           602     3280     1645     1.99        0          172           200 
+chain_5_bytes           760     4205     1788     2.35        0          177           200 
+retry_2_bytes           256     1010     532      1.9         0          60            200 
+retry_3_bytes           384     1515     819      1.85        0          40            200 
+retry_4_bytes           512     2020     1028     1.96        0          29            200 
+retry_5_bytes           640     2525     1500     1.68        0          21            200 
+retry_6_bytes           768     3030     1746     1.74        0          12            200 
+retry_in_branch_bytes   512     2020     1024     1.97        0          36            200 
+retry_nested_2x2_bytes  512     2020     1100     1.84        0          38            200 
+retry_nested_2x3_bytes  768     3030     1395     2.17        0          22            200 
+retry_nested_3x3_bytes  1152    4545     1632     2.78        0          9             200 
+wide_input_2000_bytes   286     1430     730      1.96        0          144           200 
+wide_input_200_bytes    286     1430     778      1.84        0          137           200 
+wide_input_800_bytes    286     1430     768      1.86        0          136           200 
 
-E6  flow policy conformance on the paired security suite
+  guaranteed input exceeded       : 0 of 4600
+  output bound exceeded           : 0 of 4600
+  estimated input exceeded        : 2019 of 4600 (43.9%) -- an estimate, not a bound
+  guaranteed slack vs peak input  : median 1.85x, range 1.56-2.78x
+
+E5  relational verdicts of three rules, and whether the secret moves what
+    the workflow's observer sees (10 seeds x every provider/coupling/
+    accounting mode x every secret value)
+
+workflow                   observer  bounds  sizes   content  leaks  old_harness_sees_it  witness_modes
+-------------------------  --------  ------  ------  -------  -----  -------------------  -------------
+CancellingBranches         trace     reject  reject  accept   no     -                    0            
+ChainBothArms              trace     accept  reject  accept   no     -                    0            
+EmptyBothArms              trace     accept  accept  accept   no     -                    0            
+MatchingInnerPublicGuard   trace     reject  accept  accept   no     -                    0            
+ReorderedForBill           bill      accept  reject  accept   no     -                    0            
+SameCallBothArms           trace     accept  accept  accept   no     -                    0            
+SameLiteral                trace     accept  accept  accept   no     -                    0            
+SameModelBothArms          trace     accept  accept  accept   no     -                    0            
+SameRetryBound             trace     accept  accept  accept   no     -                    0            
+SameTextDifferentPrompt    trace     accept  accept  accept   no     -                    0            
+TwoCallsBothArms           trace     accept  accept  accept   no     -                    0            
+CallInOneArmOnly           trace     reject  reject  reject   yes    yes                  12           
+ChainFedDifferentResult    trace     accept  reject  reject   yes    yes                  12           
+ChainLengthDiffers         trace     reject  reject  reject   yes    yes                  12           
+DifferentArgument          trace     accept  reject  reject   yes    no                   12           
+DifferentInnerPublicGuard  trace     reject  reject  reject   yes    yes                  12           
+DifferentLiteralLength     trace     reject  reject  reject   yes    yes                  12           
+DifferentModel             trace     reject  reject  reject   yes    yes                  12           
+DifferentRetryBound        trace     reject  reject  reject   yes    yes                  10           
+EqualSizeLiteral           trace     accept  accept  reject   yes    no                   12           
+EqualSizeTemplate          trace     accept  accept  reject   yes    no                   12           
+ExtraCall                  trace     reject  reject  reject   yes    yes                  12           
+ReorderedForTrace          trace     accept  reject  reject   yes    yes                  12           
+ShadowedModel              trace     reject  accept  reject   yes    yes                  12           
+ShadowedPrompt             trace     accept  accept  reject   yes    no                   12           
+
+  rule     accepted  of which leak  rejected  rejected without a witness
+  bounds         15              6        10                           2
+  sizes          12              4        13                           3
+  content        11              0        14                           0
+
+  content rule, accepted workflows: 21080 paired comparisons, 0 may differ
+  "old_harness_sees_it": whether the leak shows in the bill under the
+  uniform provider, global coupling and estimate accounting, which is all
+  the previous harness compared.
+
+E6  requests re-billed with real tokenizers (provider held fixed)
+
+workflow           differs_under                     example                                       
+-----------------  --------------------------------  ----------------------------------------------
+EqualSizeLiteral   r50k_base                         [('offline-m', 6)] vs [('offline-m', 7)]      
+EqualSizeTemplate  r50k_base cl100k_base o200k_base  [('offline-m', 89)] vs [('offline-m', 88)]    
+ShadowedModel      r50k_base cl100k_base o200k_base  [('offline-other', 80)] vs [('offline-m', 80)]
+ShadowedPrompt     none                              [('offline-m', 75)] vs [('offline-m', 75)]    
+
+E7  leakage bounds
+
+workflow                expected  verdict  budget  classes  bound_bits  observed_max  interval_bits
+----------------------  --------  -------  ------  -------  ----------  ------------  -------------
+BalancedNoLeak          accept    accept   0       1        0           1             7.67         
+ChainedEscalation       accept    accept   1       2        1           2             9.89         
+FourIntervals           accept    accept   2       4        2           4             9.13         
+OneBitTier              accept    accept   1       2        1           2             8.42         
+TwoFlagsThreeClasses    accept    accept   1.6     3        1.585       3             7.75         
+FourIntervalsOneBit     reject    reject   -       4        2.0         4             -            
+OneBitNoBudget          reject    reject   -       2        1.0         2             -            
+TwoFlagsBudgetTooSmall  reject    reject   -       3        1.585       3             -            
+
+  interval-counting bound (Ngo et al., Lemma 6-7) on the 11 workflows that
+  call a model and that the content rule proves leak nothing: 6.0 to 9.4
+  bits, where the certified bound is 0
+
+E8  flow policy conformance on the paired security suite
 
 workflow                     expected  verdict  codes    
 ---------------------------  --------  -------  ---------
@@ -73,7 +171,7 @@ MixedTrustToSink             reject    reject   E233
 SecretAsOutput               reject    reject   E231     
 SecretCostChannel            reject    reject   E236     
 SecretGuardedEffect          reject    reject   E234     
-SecretGuardedLaundered       reject    reject   E234 W236
+SecretGuardedLaundered       reject    reject   E234     
 SecretToPrompt               reject    reject   E230 E231
 SecretToSink                 reject    reject   E232     
 UntrustedGuardedEffect       reject    reject   E235     
@@ -102,7 +200,33 @@ UntrustedToOutputOnly        accept    accept
   trusted endorsement or declassification, which the compiler records
   rather than verifies.
 
+E9  tokenizer facts (bench/results/tokenizers.txt has the full table)
+
+  14 tokenizers, 388 UDHR languages, 12 code files, 8 JSON files
+  max concatenation defect tokens(u+v)-tokens(u)-tokens(v): 3 to 6
+  max re-encoded tokens per generated token, same tokenizer: 1.03 to 9.00
+  tokenizers with tokens > bytes on some code point: 6 (qwen25, llama2, mistral, phi3, t5, xlmr)
+  chars/4 estimate exceeded: 77.6-99.8% of multilingual windows, 45.7-95.1% of code windows
+  equal-length string pairs with different token counts: 84.1-92.4%
+  live: r50k_base('aaaa') = 1
+  live: r50k_base('bbbb') = 2
+  live: cl100k_base(' Attribute') = 1
+  live: cl100k_base('profiles') = 1
+  live: cl100k_base(' Attributeprofiles') = 6
+
+E10 a real model: output length versus request content
+
+  model HuggingFaceTB/SmolLM2-135M-Instruct (revision 12fd25f77366), 15 prompt pairs of equal token length,
+  4 seeds each, sampling on
+  pairs whose output lengths differed under a shared seed: 15 of 15
+  mean absolute output-length difference: 34.1 tokens
+  identical request and seed gave identical output: 6 of 6
+
+E11 ported real-world workflows (bench/real/)
+
+  none ported
+
 Analysis cost
 
-  36 workflows certified in 0.42 s (11.5 ms each, including process startup;
+  47 workflows certified in 0.11 s (2.4 ms each, including process startup;
   this is not an isolated measurement of analyser time)

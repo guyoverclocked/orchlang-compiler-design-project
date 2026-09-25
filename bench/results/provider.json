@@ -1,0 +1,506 @@
+{
+ "generated_by": "bench/provider/measure.py",
+ "model": "HuggingFaceTB/SmolLM2-135M-Instruct",
+ "revision": "12fd25f77366fa6b3b4b768ec3050bf629380bac",
+ "torch": "2.5.1+cpu",
+ "transformers": "4.46.3",
+ "python": "3.11.15",
+ "decoding": "greedy, and sampling at temperature 0.8, top_p 0.95 with the seed shared within a pair",
+ "summary": {
+  "pairs": 15,
+  "seeds": 4,
+  "max_new_tokens": 96,
+  "pairs_differing": 15,
+  "comparisons": 75,
+  "comparisons_differing": 66,
+  "mean_abs_difference": 34.12,
+  "instruction_pairs": 6,
+  "argument_pairs": 9,
+  "argument_pairs_differing": 9,
+  "determinism_trials": 6,
+  "determinism_identical": 6,
+  "seconds": 237.2
+ },
+ "pairs": [
+  {
+   "kind": "instruction",
+   "a": "Acknowledge this support ticket in one short sentence.\n\nTicket: My printer shows error 0x3F and will not print anything since this morning. Thanks. Thanks.",
+   "b": "Escalate this support ticket with a detailed step-by-step analysis.\n\nTicket: My printer shows error 0x3F and will not print anything since this morning.",
+   "tokens": 69,
+   "greedy": [
+    20,
+    96
+   ],
+   "sampled": [
+    [
+     1,
+     3,
+     96
+    ],
+    [
+     2,
+     25,
+     96
+    ],
+    [
+     3,
+     3,
+     96
+    ],
+    [
+     4,
+     5,
+     96
+    ]
+   ]
+  },
+  {
+   "kind": "instruction",
+   "a": "Acknowledge this support ticket in one short sentence.\n\nTicket: I was charged twice for the March invoice and need one charge refunded. Thanks. Thanks.",
+   "b": "Escalate this support ticket with a detailed step-by-step analysis.\n\nTicket: I was charged twice for the March invoice and need one charge refunded.",
+   "tokens": 66,
+   "greedy": [
+    6,
+    96
+   ],
+   "sampled": [
+    [
+     1,
+     3,
+     96
+    ],
+    [
+     2,
+     23,
+     96
+    ],
+    [
+     3,
+     3,
+     96
+    ],
+    [
+     4,
+     5,
+     96
+    ]
+   ]
+  },
+  {
+   "kind": "instruction",
+   "a": "Acknowledge this support ticket in one short sentence.\n\nTicket: The mobile app logs me out every time I switch to another application. Thanks. Thanks.",
+   "b": "Escalate this support ticket with a detailed step-by-step analysis.\n\nTicket: The mobile app logs me out every time I switch to another application.",
+   "tokens": 65,
+   "greedy": [
+    6,
+    96
+   ],
+   "sampled": [
+    [
+     1,
+     6,
+     96
+    ],
+    [
+     2,
+     13,
+     96
+    ],
+    [
+     3,
+     3,
+     96
+    ],
+    [
+     4,
+     5,
+     96
+    ]
+   ]
+  },
+  {
+   "kind": "instruction",
+   "a": "Reply with a one-line summary of the ticket.\n\nTicket: My printer shows error 0x3F and will not print anything since this morning. Thanks.",
+   "b": "Write a complete, friendly reply to the customer with all next steps.\n\nTicket: My printer shows error 0x3F and will not print anything since this morning.",
+   "tokens": 67,
+   "greedy": [
+    19,
+    64
+   ],
+   "sampled": [
+    [
+     1,
+     15,
+     37
+    ],
+    [
+     2,
+     34,
+     47
+    ],
+    [
+     3,
+     66,
+     96
+    ],
+    [
+     4,
+     28,
+     96
+    ]
+   ]
+  },
+  {
+   "kind": "instruction",
+   "a": "Reply with a one-line summary of the ticket.\n\nTicket: I was charged twice for the March invoice and need one charge refunded. Thanks.",
+   "b": "Write a complete, friendly reply to the customer with all next steps.\n\nTicket: I was charged twice for the March invoice and need one charge refunded.",
+   "tokens": 64,
+   "greedy": [
+    62,
+    96
+   ],
+   "sampled": [
+    [
+     1,
+     19,
+     90
+    ],
+    [
+     2,
+     10,
+     96
+    ],
+    [
+     3,
+     29,
+     25
+    ],
+    [
+     4,
+     31,
+     96
+    ]
+   ]
+  },
+  {
+   "kind": "instruction",
+   "a": "Reply with a one-line summary of the ticket.\n\nTicket: The mobile app logs me out every time I switch to another application. Thanks.",
+   "b": "Write a complete, friendly reply to the customer with all next steps.\n\nTicket: The mobile app logs me out every time I switch to another application.",
+   "tokens": 63,
+   "greedy": [
+    17,
+    60
+   ],
+   "sampled": [
+    [
+     1,
+     21,
+     96
+    ],
+    [
+     2,
+     56,
+     85
+    ],
+    [
+     3,
+     19,
+     47
+    ],
+    [
+     4,
+     24,
+     96
+    ]
+   ]
+  },
+  {
+   "kind": "argument",
+   "a": "Acknowledge this support ticket in one short sentence.\n\nTicket: My printer shows error 0x3F and will not print anything since this morning.",
+   "b": "Acknowledge this support ticket in one short sentence.\n\nTicket: Our team cannot see the shared dashboard after the latest update. Thanks. Thanks. Thanks.",
+   "tokens": 65,
+   "greedy": [
+    6,
+    5
+   ],
+   "sampled": [
+    [
+     1,
+     8,
+     3
+    ],
+    [
+     2,
+     11,
+     23
+    ],
+    [
+     3,
+     10,
+     5
+    ],
+    [
+     4,
+     5,
+     13
+    ]
+   ]
+  },
+  {
+   "kind": "argument",
+   "a": "Acknowledge this support ticket in one short sentence.\n\nTicket: I was charged twice for the March invoice and need one charge refunded. Thanks.",
+   "b": "Acknowledge this support ticket in one short sentence.\n\nTicket: Please change the delivery address on order 5521 to our new office.",
+   "tokens": 64,
+   "greedy": [
+    6,
+    21
+   ],
+   "sampled": [
+    [
+     1,
+     17,
+     14
+    ],
+    [
+     2,
+     24,
+     12
+    ],
+    [
+     3,
+     8,
+     27
+    ],
+    [
+     4,
+     5,
+     12
+    ]
+   ]
+  },
+  {
+   "kind": "argument",
+   "a": "Acknowledge this support ticket in one short sentence.\n\nTicket: The mobile app logs me out every time I switch to another application. Thanks.",
+   "b": "Acknowledge this support ticket in one short sentence.\n\nTicket: The export to CSV drops every row that contains a comma in the name field.",
+   "tokens": 63,
+   "greedy": [
+    6,
+    20
+   ],
+   "sampled": [
+    [
+     1,
+     10,
+     8
+    ],
+    [
+     2,
+     19,
+     12
+    ],
+    [
+     3,
+     8,
+     13
+    ],
+    [
+     4,
+     5,
+     5
+    ]
+   ]
+  },
+  {
+   "kind": "argument",
+   "a": "Classify this ticket as billing, technical or other. Answer with one word.\n\nTicket: My printer shows error 0x3F and will not print anything since this morning.",
+   "b": "Classify this ticket as billing, technical or other. Answer with one word.\n\nTicket: Our team cannot see the shared dashboard after the latest update. Thanks. Thanks. Thanks.",
+   "tokens": 69,
+   "greedy": [
+    8,
+    8
+   ],
+   "sampled": [
+    [
+     1,
+     96,
+     8
+    ],
+    [
+     2,
+     3,
+     3
+    ],
+    [
+     3,
+     31,
+     13
+    ],
+    [
+     4,
+     8,
+     7
+    ]
+   ]
+  },
+  {
+   "kind": "argument",
+   "a": "Classify this ticket as billing, technical or other. Answer with one word.\n\nTicket: I was charged twice for the March invoice and need one charge refunded. Thanks.",
+   "b": "Classify this ticket as billing, technical or other. Answer with one word.\n\nTicket: Please change the delivery address on order 5521 to our new office.",
+   "tokens": 68,
+   "greedy": [
+    8,
+    8
+   ],
+   "sampled": [
+    [
+     1,
+     48,
+     26
+    ],
+    [
+     2,
+     17,
+     3
+    ],
+    [
+     3,
+     23,
+     17
+    ],
+    [
+     4,
+     7,
+     8
+    ]
+   ]
+  },
+  {
+   "kind": "argument",
+   "a": "Classify this ticket as billing, technical or other. Answer with one word.\n\nTicket: The mobile app logs me out every time I switch to another application. Thanks.",
+   "b": "Classify this ticket as billing, technical or other. Answer with one word.\n\nTicket: The export to CSV drops every row that contains a comma in the name field.",
+   "tokens": 67,
+   "greedy": [
+    8,
+    8
+   ],
+   "sampled": [
+    [
+     1,
+     5,
+     5
+    ],
+    [
+     2,
+     3,
+     3
+    ],
+    [
+     3,
+     8,
+     3
+    ],
+    [
+     4,
+     7,
+     7
+    ]
+   ]
+  },
+  {
+   "kind": "argument",
+   "a": "Reply with a one-line summary of the ticket.\n\nTicket: My printer shows error 0x3F and will not print anything since this morning.",
+   "b": "Reply with a one-line summary of the ticket.\n\nTicket: Our team cannot see the shared dashboard after the latest update. Thanks. Thanks. Thanks.",
+   "tokens": 65,
+   "greedy": [
+    46,
+    5
+   ],
+   "sampled": [
+    [
+     1,
+     48,
+     5
+    ],
+    [
+     2,
+     44,
+     41
+    ],
+    [
+     3,
+     43,
+     17
+    ],
+    [
+     4,
+     23,
+     37
+    ]
+   ]
+  },
+  {
+   "kind": "argument",
+   "a": "Reply with a one-line summary of the ticket.\n\nTicket: I was charged twice for the March invoice and need one charge refunded. Thanks.",
+   "b": "Reply with a one-line summary of the ticket.\n\nTicket: Please change the delivery address on order 5521 to our new office.",
+   "tokens": 64,
+   "greedy": [
+    62,
+    18
+   ],
+   "sampled": [
+    [
+     1,
+     19,
+     23
+    ],
+    [
+     2,
+     10,
+     23
+    ],
+    [
+     3,
+     29,
+     11
+    ],
+    [
+     4,
+     31,
+     7
+    ]
+   ]
+  },
+  {
+   "kind": "argument",
+   "a": "Reply with a one-line summary of the ticket.\n\nTicket: The mobile app logs me out every time I switch to another application. Thanks.",
+   "b": "Reply with a one-line summary of the ticket.\n\nTicket: The export to CSV drops every row that contains a comma in the name field.",
+   "tokens": 63,
+   "greedy": [
+    17,
+    17
+   ],
+   "sampled": [
+    [
+     1,
+     21,
+     17
+    ],
+    [
+     2,
+     56,
+     16
+    ],
+    [
+     3,
+     19,
+     17
+    ],
+    [
+     4,
+     24,
+     7
+    ]
+   ]
+  }
+ ]
+}

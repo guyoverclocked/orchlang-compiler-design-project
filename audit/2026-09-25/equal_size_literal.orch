@@ -1,0 +1,14 @@
+// F1. Literals of equal estimated size, different text.  The v3 size rule
+// accepts this; "aaaa" is 1 token and "bbbb" 2 under r50k_base, and a
+// content-dependent provider answers the two requests differently.
+workflow EqualSizeLiteral budget 100000 {
+  secret flag: boolean max_tokens 1;
+  model m = mock("offline-m") max_tokens 60;
+  prompt step(payload: text) -> text = "Process this payload: {payload}";
+  if flag {
+    let a: text = call step("aaaa") using m;
+  } else {
+    let b: text = call step("bbbb") using m;
+  }
+  output "done";
+}

@@ -1,0 +1,78 @@
+Tokenizer facts behind a token bound
+====================================
+
+388 UDHR languages, 12 code files, 8 JSON files; Unicode 14.0.0
+
+tokenizer    family                          L    Q1 max(t-b)  Q1 strings  Q3 rho1  Q3 seq  Q4 defect  Q5 chars/4 fails ml/code/json  Q5 bytes/4 fails  Q7 differ
+-----------  ------------------------------  ---  -----------  ----------  -------  ------  ---------  -----------------------------  ----------------  ---------
+cl100k_base  byte-level BPE                  128  0            0           5        3.016   5          97.7/45.7/96.1%                97.0/45.7/91.4%   88.2%    
+o200k_base   byte-level BPE                  128  0            0           5        4.0     5          91.9/48.5/93.1%                78.9/48.5/77.4%   84.1%    
+r50k_base    byte-level BPE                  128  0            0           4        3.0     4          99.8/95.1/100.0%               99.8/95.1/100.0%  91.5%    
+llama3       byte-level BPE                  128  0            0           14       3.0     6          97.3/45.7/93.9%                92.2/45.7/85.0%   86.9%    
+qwen25       byte-level BPE                  128  3            0           9        9.0     5          97.4/46.5/94.6%                94.8/46.5/90.2%   87.1%    
+deepseekv3   byte-level BPE                  128  0            0           6        6.984   4          96.4/57.4/95.6%                90.1/57.4/87.0%   86.2%    
+olmo2        byte-level BPE                  128  0            0           5        3.016   5          97.7/45.7/96.1%                97.0/45.7/91.4%   88.3%    
+gpt2         byte-level BPE                  128  0            0           4        3.0     5          99.8/95.1/100.0%               99.8/95.1/100.0%  91.4%    
+llama2       SentencePiece BPE, byte fallba  27   1            1           3        4.969   5          99.4/84.0/100.0%               97.7/84.0/99.5%   87.7%    
+mistral      SentencePiece BPE, byte fallba  25   1            1           3        5.953   4          99.6/83.4/100.0%               98.1/83.4/99.8%   87.8%    
+phi3         SentencePiece BPE, byte fallba  27   1            1           3        4.969   4          99.4/84.0/100.0%               97.7/84.0/99.5%   88.0%    
+gemma2       SentencePiece BPE, byte fallba  48   0            0           5        2.984   5          95.3/70.0/100.0%               86.9/70.0/94.8%   85.0%    
+t5           SentencePiece Unigram, no byte  18   5            194         3        1.031   4          93.9/83.7/97.3%                88.4/83.7/57.2%   92.4%    
+xlmr         SentencePiece Unigram, no byte  48   3            64          3        1.047   3          77.6/74.4/95.3%                67.0/74.4/76.2%   86.5%    
+
+L = most bytes one token stands for; Q1 = max of tokens(s) - bytes(s) over every
+scalar value (then over adversarial and corpus strings); Q3 rho1 = most tokens one
+vocabulary entry re-encodes to, spliced after "Input: "; Q3 seq = most re-encoded
+tokens per generated token over random and repeated sequences, in the same
+context; Q4 = max tokens(u+v) - tokens(u) - tokens(v); Q5 = share of
+256-character windows where tokens > ceil(chars/4), and > ceil(bytes/4); Q7 =
+share of equal-character-length pairs with different token counts.
+
+Unicode normalisation, worst UTF-8 expansion of one code point:
+  NFC   x3.0 at U+1D160
+  NFD   x3.0 at U+0390
+  NFKC  x11.0 at U+FDFA
+
+Cross-tokenizer expansion (Q6): worst single source token, and corpus ratios
+  cl100k_base->gemma2        one token ->   8   corpus median x0.889  max x1.237
+  cl100k_base->llama3        one token ->   3   corpus median x0.991  max x1.0
+  cl100k_base->mistral       one token ->  33   corpus median x1.083  max x1.439
+  cl100k_base->o200k_base    one token ->   8   corpus median x0.859  max x1.084
+  cl100k_base->qwen25        one token ->   3   corpus median x0.997  max x1.11
+  cl100k_base->t5            one token ->  95   corpus median x1.354  max x1.753
+  gemma2->cl100k_base        one token ->  26   corpus median x1.125  max x3.395
+  gemma2->llama3             one token ->  24   corpus median x1.1    max x3.055
+  gemma2->mistral            one token ->  17   corpus median x1.214  max x3.755
+  gemma2->o200k_base         one token ->   9   corpus median x0.961  max x2.567
+  gemma2->qwen25             one token ->  13   corpus median x1.1    max x2.452
+  gemma2->t5                 one token ->  17   corpus median x1.51   max x2.741
+  llama3->cl100k_base        one token ->  64   corpus median x1.01   max x2.402
+  llama3->gemma2             one token ->  32   corpus median x0.909  max x1.303
+  llama3->mistral            one token ->  64   corpus median x1.106  max x3.071
+  llama3->o200k_base         one token ->  32   corpus median x0.88   max x1.17
+  llama3->qwen25             one token ->  32   corpus median x1.006  max x2.245
+  llama3->t5                 one token ->  95   corpus median x1.384  max x2.418
+  mistral->cl100k_base       one token ->   9   corpus median x0.923  max x1.865
+  mistral->gemma2            one token ->   4   corpus median x0.824  max x0.997
+  mistral->llama3            one token ->   5   corpus median x0.904  max x1.865
+  mistral->o200k_base        one token ->   6   corpus median x0.791  max x1.203
+  mistral->qwen25            one token ->   7   corpus median x0.907  max x1.125
+  mistral->t5                one token ->  16   corpus median x1.256  max x1.852
+  o200k_base->cl100k_base    one token ->  32   corpus median x1.165  max x6.414
+  o200k_base->gemma2         one token ->  16   corpus median x1.041  max x2.308
+  o200k_base->llama3         one token ->  29   corpus median x1.136  max x6.414
+  o200k_base->mistral        one token ->  36   corpus median x1.264  max x6.441
+  o200k_base->qwen25         one token ->  21   corpus median x1.132  max x4.23
+  o200k_base->t5             one token ->  96   corpus median x1.574  max x2.763
+  qwen25->cl100k_base        one token ->  15   corpus median x1.003  max x2.879
+  qwen25->gemma2             one token ->   8   corpus median x0.909  max x1.948
+  qwen25->llama3             one token ->  11   corpus median x0.994  max x2.56
+  qwen25->mistral            one token ->  33   corpus median x1.102  max x3.004
+  qwen25->o200k_base         one token ->   8   corpus median x0.883  max x2.317
+  qwen25->t5                 one token ->  95   corpus median x1.385  max x3.198
+  t5->cl100k_base            one token ->   7   corpus median x0.738  max x101.5
+  t5->gemma2                 one token ->   9   corpus median x0.662  max x35.5
+  t5->llama3                 one token ->   7   corpus median x0.722  max x101.5
+  t5->mistral                one token ->   9   corpus median x0.796  max x72.328
+  t5->o200k_base             one token ->   6   corpus median x0.635  max x71.0
+  t5->qwen25                 one token ->   9   corpus median x0.722  max x64.0

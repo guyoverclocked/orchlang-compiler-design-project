@@ -1,0 +1,23 @@
+workflow BranchNestedBytes budget 100000000 {
+  input source: text max_bytes 480;
+  model small = mock("offline-small") max_tokens 150 tokenizer mockbpe overhead 3 max_bytes 900;
+  model large = mock("offline-large") max_tokens 600 tokenizer mockbpe overhead 3 max_bytes 2400;
+  prompt step(payload: text) -> text = "Process this payload: {payload}";
+  let head: text = call step(source) using small;
+  if tokens(head) <= 75 {
+    let x: text = call step(source) using small;
+    if tokens(x) <= 75 {
+      let x1: text = call step(source) using small;
+    } else {
+      let x2: text = call step(source) using large;
+    }
+  } else {
+    let y: text = call step(source) using large;
+    if tokens(y) <= 300 {
+      let y1: text = call step(source) using large;
+    } else {
+      let y2: text = call step(source) using large;
+    }
+  }
+  output head;
+}

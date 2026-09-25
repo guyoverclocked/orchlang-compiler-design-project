@@ -1,0 +1,16 @@
+workflow OneBitTier budget 1000000 leaks 1 {
+  secret tier: text max_tokens 9;
+  secret enterprise: boolean max_tokens 1;
+  secret region: boolean max_tokens 1;
+  input ticket: text max_tokens 40;
+  model small = mock("offline-small") max_tokens 60;
+  model large = mock("offline-large") max_tokens 300;
+  prompt reply(t: text) -> text = "Reply to this ticket: {t}";
+  prompt review(t: text) -> text = "Review this reply: {t}";
+  if enterprise {
+    let a: text = call reply(ticket) using large;
+  } else {
+    let b: text = call reply(ticket) using small;
+  }
+  output "done";
+}

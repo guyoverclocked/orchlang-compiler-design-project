@@ -1,114 +1,252 @@
 [
   {
+    "workflow": "CancellingBranches",
+    "observer": "trace",
+    "bounds": "reject",
+    "sizes": "reject",
+    "content": "accept",
+    "leaks": "no",
+    "old_harness_sees_it": "-",
+    "witness_modes": 0
+  },
+  {
+    "workflow": "ChainBothArms",
+    "observer": "trace",
+    "bounds": "accept",
+    "sizes": "reject",
+    "content": "accept",
+    "leaks": "no",
+    "old_harness_sees_it": "-",
+    "witness_modes": 0
+  },
+  {
     "workflow": "EmptyBothArms",
-    "expected": "accept",
-    "verdict": "accept",
-    "comparisons": 425,
-    "bills_differ": 0,
-    "witness": ""
+    "observer": "trace",
+    "bounds": "accept",
+    "sizes": "accept",
+    "content": "accept",
+    "leaks": "no",
+    "old_harness_sees_it": "-",
+    "witness_modes": 0
   },
   {
     "workflow": "MatchingInnerPublicGuard",
-    "expected": "accept",
-    "verdict": "accept",
-    "comparisons": 425,
-    "bills_differ": 0,
-    "witness": ""
+    "observer": "trace",
+    "bounds": "reject",
+    "sizes": "accept",
+    "content": "accept",
+    "leaks": "no",
+    "old_harness_sees_it": "-",
+    "witness_modes": 0
+  },
+  {
+    "workflow": "ReorderedForBill",
+    "observer": "bill",
+    "bounds": "accept",
+    "sizes": "reject",
+    "content": "accept",
+    "leaks": "no",
+    "old_harness_sees_it": "-",
+    "witness_modes": 0
   },
   {
     "workflow": "SameCallBothArms",
-    "expected": "accept",
-    "verdict": "accept",
-    "comparisons": 425,
-    "bills_differ": 0,
-    "witness": ""
+    "observer": "trace",
+    "bounds": "accept",
+    "sizes": "accept",
+    "content": "accept",
+    "leaks": "no",
+    "old_harness_sees_it": "-",
+    "witness_modes": 0
   },
   {
     "workflow": "SameLiteral",
-    "expected": "accept",
-    "verdict": "accept",
-    "comparisons": 425,
-    "bills_differ": 0,
-    "witness": ""
+    "observer": "trace",
+    "bounds": "accept",
+    "sizes": "accept",
+    "content": "accept",
+    "leaks": "no",
+    "old_harness_sees_it": "-",
+    "witness_modes": 0
   },
   {
     "workflow": "SameModelBothArms",
-    "expected": "accept",
-    "verdict": "accept",
-    "comparisons": 425,
-    "bills_differ": 0,
-    "witness": ""
+    "observer": "trace",
+    "bounds": "accept",
+    "sizes": "accept",
+    "content": "accept",
+    "leaks": "no",
+    "old_harness_sees_it": "-",
+    "witness_modes": 0
   },
   {
     "workflow": "SameRetryBound",
-    "expected": "accept",
-    "verdict": "accept",
-    "comparisons": 425,
-    "bills_differ": 0,
-    "witness": ""
+    "observer": "trace",
+    "bounds": "accept",
+    "sizes": "accept",
+    "content": "accept",
+    "leaks": "no",
+    "old_harness_sees_it": "-",
+    "witness_modes": 0
+  },
+  {
+    "workflow": "SameTextDifferentPrompt",
+    "observer": "trace",
+    "bounds": "accept",
+    "sizes": "accept",
+    "content": "accept",
+    "leaks": "no",
+    "old_harness_sees_it": "-",
+    "witness_modes": 0
   },
   {
     "workflow": "TwoCallsBothArms",
-    "expected": "accept",
-    "verdict": "accept",
-    "comparisons": 425,
-    "bills_differ": 0,
-    "witness": ""
+    "observer": "trace",
+    "bounds": "accept",
+    "sizes": "accept",
+    "content": "accept",
+    "leaks": "no",
+    "old_harness_sees_it": "-",
+    "witness_modes": 0
   },
   {
     "workflow": "CallInOneArmOnly",
-    "expected": "reject",
-    "verdict": "reject",
-    "comparisons": 425,
-    "bills_differ": 225,
-    "witness": "{\"flag\": \"false\", \"s\": \"0\"} vs {\"flag\": \"true\", "
+    "observer": "trace",
+    "bounds": "reject",
+    "sizes": "reject",
+    "content": "reject",
+    "leaks": "yes",
+    "old_harness_sees_it": "yes",
+    "witness_modes": 12
+  },
+  {
+    "workflow": "ChainFedDifferentResult",
+    "observer": "trace",
+    "bounds": "accept",
+    "sizes": "reject",
+    "content": "reject",
+    "leaks": "yes",
+    "old_harness_sees_it": "yes",
+    "witness_modes": 12
+  },
+  {
+    "workflow": "ChainLengthDiffers",
+    "observer": "trace",
+    "bounds": "reject",
+    "sizes": "reject",
+    "content": "reject",
+    "leaks": "yes",
+    "old_harness_sees_it": "yes",
+    "witness_modes": 12
   },
   {
     "workflow": "DifferentArgument",
-    "expected": "reject",
-    "verdict": "reject",
-    "comparisons": 425,
-    "bills_differ": 225,
-    "witness": "{\"flag\": \"false\", \"s\": \"0\"} vs {\"flag\": \"true\", "
+    "observer": "trace",
+    "bounds": "accept",
+    "sizes": "reject",
+    "content": "reject",
+    "leaks": "yes",
+    "old_harness_sees_it": "no",
+    "witness_modes": 12
   },
   {
     "workflow": "DifferentInnerPublicGuard",
-    "expected": "reject",
-    "verdict": "reject",
-    "comparisons": 425,
-    "bills_differ": 126,
-    "witness": "{\"flag\": \"false\", \"s\": \"0\"} vs {\"flag\": \"true\", "
+    "observer": "trace",
+    "bounds": "reject",
+    "sizes": "reject",
+    "content": "reject",
+    "leaks": "yes",
+    "old_harness_sees_it": "yes",
+    "witness_modes": 12
   },
   {
     "workflow": "DifferentLiteralLength",
-    "expected": "reject",
-    "verdict": "reject",
-    "comparisons": 425,
-    "bills_differ": 225,
-    "witness": "{\"flag\": \"false\", \"s\": \"0\"} vs {\"flag\": \"true\", "
+    "observer": "trace",
+    "bounds": "reject",
+    "sizes": "reject",
+    "content": "reject",
+    "leaks": "yes",
+    "old_harness_sees_it": "yes",
+    "witness_modes": 12
   },
   {
     "workflow": "DifferentModel",
-    "expected": "reject",
-    "verdict": "reject",
-    "comparisons": 425,
-    "bills_differ": 225,
-    "witness": "{\"flag\": \"false\", \"s\": \"0\"} vs {\"flag\": \"true\", "
+    "observer": "trace",
+    "bounds": "reject",
+    "sizes": "reject",
+    "content": "reject",
+    "leaks": "yes",
+    "old_harness_sees_it": "yes",
+    "witness_modes": 12
   },
   {
     "workflow": "DifferentRetryBound",
-    "expected": "reject",
-    "verdict": "reject",
-    "comparisons": 425,
-    "bills_differ": 81,
-    "witness": "{\"flag\": \"false\", \"s\": \"0\"} vs {\"flag\": \"true\", "
+    "observer": "trace",
+    "bounds": "reject",
+    "sizes": "reject",
+    "content": "reject",
+    "leaks": "yes",
+    "old_harness_sees_it": "yes",
+    "witness_modes": 10
+  },
+  {
+    "workflow": "EqualSizeLiteral",
+    "observer": "trace",
+    "bounds": "accept",
+    "sizes": "accept",
+    "content": "reject",
+    "leaks": "yes",
+    "old_harness_sees_it": "no",
+    "witness_modes": 12
+  },
+  {
+    "workflow": "EqualSizeTemplate",
+    "observer": "trace",
+    "bounds": "accept",
+    "sizes": "accept",
+    "content": "reject",
+    "leaks": "yes",
+    "old_harness_sees_it": "no",
+    "witness_modes": 12
   },
   {
     "workflow": "ExtraCall",
-    "expected": "reject",
-    "verdict": "reject",
-    "comparisons": 425,
-    "bills_differ": 225,
-    "witness": "{\"flag\": \"false\", \"s\": \"0\"} vs {\"flag\": \"true\", "
+    "observer": "trace",
+    "bounds": "reject",
+    "sizes": "reject",
+    "content": "reject",
+    "leaks": "yes",
+    "old_harness_sees_it": "yes",
+    "witness_modes": 12
+  },
+  {
+    "workflow": "ReorderedForTrace",
+    "observer": "trace",
+    "bounds": "accept",
+    "sizes": "reject",
+    "content": "reject",
+    "leaks": "yes",
+    "old_harness_sees_it": "yes",
+    "witness_modes": 12
+  },
+  {
+    "workflow": "ShadowedModel",
+    "observer": "trace",
+    "bounds": "reject",
+    "sizes": "accept",
+    "content": "reject",
+    "leaks": "yes",
+    "old_harness_sees_it": "yes",
+    "witness_modes": 12
+  },
+  {
+    "workflow": "ShadowedPrompt",
+    "observer": "trace",
+    "bounds": "accept",
+    "sizes": "accept",
+    "content": "reject",
+    "leaks": "yes",
+    "old_harness_sees_it": "no",
+    "witness_modes": 12
   }
 ]

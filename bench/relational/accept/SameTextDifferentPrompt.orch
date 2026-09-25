@@ -1,4 +1,4 @@
-workflow SameLiteral budget 1000000 {
+workflow SameTextDifferentPrompt budget 1000000 {
   secret s: text max_tokens 8;
   secret flag: boolean max_tokens 1;
   input x: text max_tokens 100;
@@ -6,10 +6,12 @@ workflow SameLiteral budget 1000000 {
   model m = mock("offline-m") max_tokens 60;
   model n = mock("offline-n") max_tokens 400;
   prompt step(payload: text) -> text = "Process this payload: {payload}";
+  prompt first(t: text) -> text = "Summarise: {t}";
+  prompt second(u: text) -> text = "Summarise: {u}";
   if flag {
-    let a: text = call step("aaaa") using m;
+    let a: text = call first(x) using m;
   } else {
-    let b: text = call step("aaaa") using m;
+    let b: text = call second(x) using m;
   }
   output "done";
 }

@@ -1,0 +1,15 @@
+// F3. The same, for a prompt redeclared under the old name with different
+// text of the same estimated size.  The v3 size rule accepts this.
+workflow ShadowedPrompt budget 100000 {
+  secret flag: boolean max_tokens 1;
+  input x: text max_tokens 40;
+  model m = mock("offline-m") max_tokens 60;
+  prompt p(t: text) -> text = "Reply briefly: {t}";
+  if flag {
+    prompt p(t: text) -> text = "Reply at length {t}";
+    let a: text = call p(x) using m;
+  } else {
+    let b: text = call p(x) using m;
+  }
+  output "done";
+}

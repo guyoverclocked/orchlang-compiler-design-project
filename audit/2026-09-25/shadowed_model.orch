@@ -1,0 +1,16 @@
+// F3. The v3 size rule compared models by local name.  A model redeclared
+// inside one arm under the old name is a different endpoint, billed on a
+// different invoice line.  The v3 rule accepts this.
+workflow ShadowedModel budget 100000 {
+  secret flag: boolean max_tokens 1;
+  input x: text max_tokens 40;
+  model m = mock("offline-small") max_tokens 10;
+  prompt p(t: text) -> text = "{t}";
+  if flag {
+    model m = mock("offline-large") max_tokens 1000;
+    let a: text = call p(x) using m;
+  } else {
+    let b: text = call p(x) using m;
+  }
+  output "done";
+}

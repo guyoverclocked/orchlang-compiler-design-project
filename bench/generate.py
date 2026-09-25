@@ -1,16 +1,26 @@
 #!/usr/bin/env python3
 """Generate the OrchLang benchmark corpus.
 
-Two suites are produced.
+Five suites are produced.
 
 ``cost/`` varies the control-flow shape of a workflow -- chain length, branch
 nesting, retry bounds, and combinations of the three -- because the shape is
 exactly what separates a structural cost bound from a flat sum over call sites.
 
-``relational/`` pairs workflows whose secret-guarded branches bill identically
-with workflows whose branches do not, so the paired experiment can check both
-that accepted workflows really are secret-independent and that rejected ones
-really do leak.
+``cost_bytes/`` repeats the cost shapes with byte-bounded inputs and models
+that name a tokenizer, so the guaranteed input bound is defined and can be
+checked against a content-sensitive tokenizer rather than the analysis's own
+estimate.
+
+``relational/`` pairs workflows whose secret-guarded branches send identical
+requests with workflows whose branches do not, so the paired experiment can
+check both that accepted workflows really are secret-independent and that
+rejected ones really do leak.  Each case names what it tests; several are the
+counterexamples that refuted the two withdrawn relational rules.
+
+``leakage/`` gives workflows a declared leakage budget in bits, some within it
+and some over it, so the quantitative bound can be checked against the number
+of observations an execution can actually produce.
 
 ``security/`` pairs each unsafe workflow with a safe counterpart that differs
 only in the one edit that makes it safe (an added endorsement, a declassifica-
@@ -39,9 +49,26 @@ def preamble(inbound=120, small=150, large=600):
     return PREAMBLE.format(inbound=inbound, small=small, large=large)
 
 
-def workflow(name, budget, body, extra_preamble=None):
-    head = 'workflow %s budget %d {\n' % (name, budget)
+def workflow(name, budget, body, extra_preamble=None, options=''):
+    head = 'workflow %s budget %d%s {\n' % (name, budget, options)
     return head + (extra_preamble if extra_preamble is not None else preamble()) + body + '}\n'
+
+
+# Every directory this script writes, so stale files from an older corpus are
+# removed rather than silently evaluated.
+MANAGED = ['cost', 'cost_bytes', os.path.join('relational', 'accept'),
+           os.path.join('relational', 'reject'), os.path.join('leakage', 'accept'),
+           os.path.join('leakage', 'reject'), os.path.join('security', 'safe'),
+           os.path.join('security', 'unsafe')]
+
+
+def clean():
+    for relative in MANAGED:
+        directory = os.path.join(HERE, relative)
+        if os.path.isdir(directory):
+            for name in os.listdir(directory):
+                if name.endswith('.orch'):
+                    os.remove(os.path.join(directory, name))
 
 
 def write(directory, name, text):
@@ -380,10 +407,18 @@ def gen_relational():
                      '  } else {\n    if tokens(head) <= 50 { let b: text = call step(x) using m; }\n'
                      '  }\n  output "done";\n', False))
 
-    # A literal argument of a different size moves the bill.
-    files.append(rel('SameLiteral.orch',
+    # Literals of equal size but different text.  The withdrawn size rule
+    # accepted this as "SameLiteral"; a content-dependent provider, or a real
+    # tokenizer ("aaaa" is 1 token and "bbbb" is 2 under r50k_base), bills the
+    # two arms differently.  It moved from accept/ to reject/ on 2026-09-25.
+    files.append(rel('EqualSizeLiteral.orch',
                      '  if flag {\n    let a: text = call step("aaaa") using m;\n'
                      '  } else {\n    let b: text = call step("bbbb") using m;\n  }\n'
+                     '  output "done";\n', False))
+    # Identical literal text is the identical request.
+    files.append(rel('SameLiteral.orch',
+                     '  if flag {\n    let a: text = call step("aaaa") using m;\n'
+                     '  } else {\n    let b: text = call step("aaaa") using m;\n  }\n'
                      '  output "done";\n', True))
     files.append(rel('DifferentLiteralLength.orch',
                      '  if flag {\n    let a: text = call step("aaaa") using m;\n'
@@ -391,13 +426,182 @@ def gen_relational():
                      '    let b: text = call step("bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb") using m;\n  }\n'
                      '  output "done";\n', False))
 
+    # Templates of equal size giving different instructions: the motivating
+    # example after a developer pads one prompt to the other's length.
+    templates = RELATIONAL_PREAMBLE + (
+        '  prompt ack(t: text) -> text = "Acknowledge briefly: {t}";\n'
+        '  prompt esc(t: text) -> text = "Escalate in detail!: {t}";\n')
+    files.append((os.path.join(HERE, 'relational', 'reject'), 'EqualSizeTemplate.orch',
+                  workflow('EqualSizeTemplate', 1000000,
+                           '  if flag {\n    let a: text = call esc(x) using m;\n'
+                           '  } else {\n    let b: text = call ack(x) using m;\n  }\n'
+                           '  output "done";\n', templates)))
+    # The same text reached through two differently named prompts.
+    same_text = RELATIONAL_PREAMBLE + (
+        '  prompt first(t: text) -> text = "Summarise: {t}";\n'
+        '  prompt second(u: text) -> text = "Summarise: {u}";\n')
+    files.append((os.path.join(HERE, 'relational', 'accept'), 'SameTextDifferentPrompt.orch',
+                  workflow('SameTextDifferentPrompt', 1000000,
+                           '  if flag {\n    let a: text = call first(x) using m;\n'
+                           '  } else {\n    let b: text = call second(x) using m;\n  }\n'
+                           '  output "done";\n', same_text)))
+
+    # Declarations shadowed inside one arm under the old name.  The withdrawn
+    # size rule compared names and accepted both.  (An input redeclared inside
+    # an arm was a third case, but whether it leaks depends on how an
+    # environment supplies two declarations of one name; the language now
+    # rejects inputs outside the top level, E203.)
+    files.append(rel('ShadowedModel.orch',
+                     '  if flag {\n    model m = mock("offline-other") max_tokens 400;\n'
+                     '    let a: text = call step(x) using m;\n'
+                     '  } else {\n    let b: text = call step(x) using m;\n  }\n'
+                     '  output "done";\n', False))
+    files.append(rel('ShadowedPrompt.orch',
+                     '  if flag {\n'
+                     '    prompt step(payload: text) -> text = "Handle that payload: {payload}";\n'
+                     '    let a: text = call step(x) using m;\n'
+                     '  } else {\n    let b: text = call step(x) using m;\n  }\n'
+                     '  output "done";\n', False))
+
+    # Chained calls inside the arms (open problem OP-1).  Accepted when the
+    # chains send the same requests; rejected when the chain's length or its
+    # data flow depends on the secret.
+    files.append(rel('ChainBothArms.orch',
+                     '  if flag {\n    let a1: text = call step(x) using m;\n'
+                     '    let a2: text = call step(a1) using m;\n'
+                     '  } else {\n    let b1: text = call step(x) using m;\n'
+                     '    let b2: text = call step(b1) using m;\n  }\n'
+                     '  output "done";\n', True))
+    files.append(rel('ChainLengthDiffers.orch',
+                     '  if flag {\n    let a1: text = call step(x) using m;\n'
+                     '    let a2: text = call step(a1) using m;\n'
+                     '  } else {\n    let b1: text = call step(x) using m;\n  }\n'
+                     '  output "done";\n', False))
+    files.append(rel('ChainFedDifferentResult.orch',
+                     '  if flag {\n    let a1: text = call step(x) using m;\n'
+                     '    let a2: text = call step(y) using m;\n'
+                     '    let a3: text = call step(a1) using m;\n'
+                     '  } else {\n    let b1: text = call step(x) using m;\n'
+                     '    let b2: text = call step(y) using m;\n'
+                     '    let b3: text = call step(b2) using m;\n  }\n'
+                     '  output "done";\n', False))
+
+    # Two branches on one secret whose differences cancel: neither is balanced
+    # on its own, but every secret sends the same requests.
+    files.append(rel('CancellingBranches.orch',
+                     '  if flag {\n    let a: text = call step(x) using m;\n  }\n'
+                     '  if flag {\n  } else {\n    let b: text = call step(x) using m;\n  }\n'
+                     '  output "done";\n', True))
+
+    # Reordering: invisible on an itemised invoice, visible in a request log.
+    reorder = ('  if flag {\n    let a1: text = call step(x) using m;\n'
+               '    let a2: text = call step(x) using n;\n'
+               '  } else {\n    let b2: text = call step(x) using n;\n'
+               '    let b1: text = call step(x) using m;\n  }\n  output "done";\n')
+    files.append((os.path.join(HERE, 'relational', 'reject'), 'ReorderedForTrace.orch',
+                  workflow('ReorderedForTrace', 1000000, reorder, RELATIONAL_PREAMBLE)))
+    files.append((os.path.join(HERE, 'relational', 'accept'), 'ReorderedForBill.orch',
+                  workflow('ReorderedForBill', 1000000, reorder, RELATIONAL_PREAMBLE,
+                           ' observer bill')))
+
+    return files
+
+
+COST_BYTES_PREAMBLE = '''  input source: text max_bytes 480;
+  model small = mock("offline-small") max_tokens 150 tokenizer mockbpe overhead 3 max_bytes 900;
+  model large = mock("offline-large") max_tokens 600 tokenizer mockbpe overhead 3 max_bytes 2400;
+  prompt step(payload: text) -> text = "Process this payload: {payload}";
+'''
+
+
+def gen_cost_bytes():
+    """The cost shapes again, with a bound that holds for a real tokenizer.
+
+    Inputs are declared in bytes and the models name the runtime's
+    content-sensitive tokenizer, so the compiler derives a guaranteed input
+    bound through that tokenizer's contract, and the harness can check it
+    against the tokenizer rather than against the analysis's own estimate.
+    """
+    marker = 'prompt step(payload: text) -> text = "Process this payload: {payload}";\n'
+    files = []
+    for name, text in gen_cost():
+        body = text.split(marker, 1)[1].rsplit('}', 1)[0]
+        workflow_name = text.split()[1] + 'Bytes'
+        files.append((name.replace('.orch', '_bytes.orch'),
+                      workflow(workflow_name, 100000000, body, COST_BYTES_PREAMBLE)))
+    return files
+
+
+LEAKAGE_PREAMBLE = '''  secret tier: text max_tokens 9;
+  secret enterprise: boolean max_tokens 1;
+  secret region: boolean max_tokens 1;
+  input ticket: text max_tokens 40;
+  model small = mock("offline-small") max_tokens 60;
+  model large = mock("offline-large") max_tokens 300;
+  prompt reply(t: text) -> text = "Reply to this ticket: {t}";
+  prompt review(t: text) -> text = "Review this reply: {t}";
+'''
+
+
+def gen_leakage():
+    """Workflows with a declared leakage budget.
+
+    Each accepted workflow's bound must dominate the number of distinct
+    observations any execution produces; each rejected one needs more bits
+    than it declares.
+    """
+    files = []
+
+    def leak(name, options, body, within):
+        directory = os.path.join(HERE, 'leakage', 'accept' if within else 'reject')
+        return (directory, name,
+                workflow(name.replace('.orch', ''), 1000000, body, LEAKAGE_PREAMBLE, options))
+
+    one_bit = ('  if enterprise {\n    let a: text = call reply(ticket) using large;\n'
+               '  } else {\n    let b: text = call reply(ticket) using small;\n  }\n'
+               '  output "done";\n')
+    files.append(leak('OneBitTier.orch', ' leaks 1', one_bit, True))
+    files.append(leak('OneBitNoBudget.orch', '', one_bit, False))
+
+    intervals = ('  if tokens(tier) <= 2 {\n    let a: text = call reply(ticket) using small;\n  }\n'
+                 '  if tokens(tier) <= 5 {\n    let b: text = call review(ticket) using small;\n  }\n'
+                 '  if tokens(tier) <= 7 {\n    let c: text = call reply(ticket) using large;\n  }\n'
+                 '  output "done";\n')
+    files.append(leak('FourIntervals.orch', ' leaks 2', intervals, True))
+    files.append(leak('FourIntervalsOneBit.orch', ' leaks 1', intervals, False))
+
+    two_flags = ('  if enterprise {\n    let a: text = call reply(ticket) using small;\n  }\n'
+                 '  if region {\n    let b: text = call reply(ticket) using small;\n  }\n'
+                 '  output "done";\n')
+    files.append(leak('TwoFlagsThreeClasses.orch', ' leaks 1.6', two_flags, True))
+    files.append(leak('TwoFlagsBudgetTooSmall.orch', ' leaks 1.5', two_flags, False))
+
+    chained = ('  if enterprise {\n    let a1: text = call reply(ticket) using large;\n'
+               '    let a2: text = call review(a1) using large;\n'
+               '  } else {\n    let b1: text = call reply(ticket) using small;\n  }\n'
+               '  output "done";\n')
+    files.append(leak('ChainedEscalation.orch', ' leaks 1', chained, True))
+
+    balanced = ('  if enterprise {\n    let a: text = call reply(ticket) using small;\n'
+                '  } else {\n    let b: text = call reply(ticket) using small;\n  }\n'
+                '  if tokens(tier) <= 4 {\n    let c: text = call review(ticket) using small;\n'
+                '  } else {\n    let d: text = call review(ticket) using small;\n  }\n'
+                '  output "done";\n')
+    files.append(leak('BalancedNoLeak.orch', '', balanced, True))
     return files
 
 
 def main():
+    clean()
     written = 0
     for name, text in gen_cost():
         write(COST, name, text)
+        written += 1
+    for name, text in gen_cost_bytes():
+        write(os.path.join(HERE, 'cost_bytes'), name, text)
+        written += 1
+    for directory, name, text in gen_leakage():
+        write(directory, name, text)
         written += 1
     for directory, name, text in gen_security():
         write(directory, name, text)
