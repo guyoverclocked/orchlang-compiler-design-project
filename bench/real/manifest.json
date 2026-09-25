@@ -478,7 +478,8 @@
      "W237"
     ],
     "bounded_in_source": true,
-    "guaranteed_input_expected": true
+    "guaranteed_input_expected": true,
+    "expected_warnings_accepted_variant": []
    },
    "adaptations": [
     "A4"
@@ -1101,7 +1102,8 @@
      "W237"
     ],
     "bounded_in_source": true,
-    "guaranteed_input_expected": true
+    "guaranteed_input_expected": true,
+    "expected_warnings_accepted_variant": []
    },
    "adaptations": [],
    "notes": "The event is computed from the (trusted) address inside the arm taken when rating and price qualify, so that arm costs a call."

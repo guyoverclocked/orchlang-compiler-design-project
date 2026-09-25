@@ -1,0 +1,47 @@
+// Port of the "route" workflow (Example 3) of patterns/agents/basic_workflows.ipynb,
+// anthropics/anthropic-cookbook@813fbeec03cdedfda7808529438d1c7af71f26eb (id ac-route).
+// See bench/real/PROTOCOL.md.
+//
+// route(input, routes): one selector call whose answer names one of four
+// teams, then that team's prompt.  The templates below are the exact requests
+// the source builds (obtained by running its route() with a recording stub).
+// The ticket is written by a customer, so it is untrusted (label rule U).
+// claude-sonnet-4-6, max_tokens=4096 (util.py), no published tokenizer.
+//
+// Adaptation A2: OrchLang cannot branch on a categorical answer, so the one
+// selector call becomes a cascade of up to three yes/no calls, each sending the
+// selector prompt verbatim.  Every path of the port sends at least what the
+// source sends, so its bound is still a bound for the source.  A1: the
+// selector's reasoning is not extracted.  A6: the chosen team's reply is bound
+// inside a branch, so the port outputs the first decision instead.
+workflow AcRoute budget 1000000000 {
+  input ticket: text untrusted max_bytes 8192;
+  model claude = mock("anthropic/claude-sonnet-4-6") max_tokens 4096;
+  prompt select(ticket: text) -> boolean =
+      "Analyze the input and select the most appropriate support team from these options: ['billing', 'technical', 'account', 'product']\n    First explain your reasoning, then provide your selection in this XML format:\n\n    <reasoning>\n    Brief explanation of why this ticket should be routed to a specific team.\n    Consider key terms, user intent, and urgency level.\n    </reasoning>\n\n    <selection>\n    The chosen team name\n    </selection>\n\n    Input: {ticket}";
+  prompt billing(ticket: text) -> text =
+      "You are a billing support specialist. Follow these guidelines:\n    1. Always start with \"Billing Support Response:\"\n    2. First acknowledge the specific billing issue\n    3. Explain any charges or discrepancies clearly\n    4. List concrete next steps with timeline\n    5. End with payment options if relevant\n\n    Keep responses professional but friendly.\n\n    Input: \nInput: {ticket}";
+  prompt technical(ticket: text) -> text =
+      "You are a technical support engineer. Follow these guidelines:\n    1. Always start with \"Technical Support Response:\"\n    2. List exact steps to resolve the issue\n    3. Include system requirements if relevant\n    4. Provide workarounds for common problems\n    5. End with escalation path if needed\n\n    Use clear, numbered steps and technical details.\n\n    Input: \nInput: {ticket}";
+  prompt account(ticket: text) -> text =
+      "You are an account security specialist. Follow these guidelines:\n    1. Always start with \"Account Support Response:\"\n    2. Prioritize account security and verification\n    3. Provide clear steps for account recovery/changes\n    4. Include security tips and warnings\n    5. Set clear expectations for resolution time\n\n    Maintain a serious, security-focused tone.\n\n    Input: \nInput: {ticket}";
+  prompt product(ticket: text) -> text =
+      "You are a product specialist. Follow these guidelines:\n    1. Always start with \"Product Support Response:\"\n    2. Focus on feature education and best practices\n    3. Include specific examples of usage\n    4. Link to relevant documentation sections\n    5. Suggest related features that might help\n\n    Be educational and encouraging in tone.\n\n    Input: \nInput: {ticket}";
+  let is_billing: boolean = call select(ticket) using claude;
+  if is_billing {
+    let reply_billing: text = call billing(ticket) using claude;
+  } else {
+    let is_technical: boolean = call select(ticket) using claude;
+    if is_technical {
+      let reply_technical: text = call technical(ticket) using claude;
+    } else {
+      let is_account: boolean = call select(ticket) using claude;
+      if is_account {
+        let reply_account: text = call account(ticket) using claude;
+      } else {
+        let reply_product: text = call product(ticket) using claude;
+      }
+    }
+  }
+  output is_billing;
+}

@@ -1,0 +1,38 @@
+// Port of anthropics/anthropic-cookbook@813fbeec03cdedfda7808529438d1c7af71f26eb,
+// patterns/agents/evaluator_optimizer.ipynb (id ac-evaluator-optimizer).  See
+// bench/real/PROTOCOL.md.
+//
+// loop(task, evaluator_prompt, generator_prompt): generate, then evaluate and
+// regenerate until the evaluation says PASS, each new generation seeing every
+// earlier result and the latest feedback.  The templates are the exact requests
+// the source builds (obtained by running its loop() with a recording stub).
+// claude-sonnet-4-6, max_tokens=4096 (util.py), no published tokenizer.
+//
+// The source's loop is `while True`: it has no bound, and so no worst-case
+// cost.  The port imposes three generate/evaluate rounds (manifest.json,
+// imposed_bound); its certificate holds only for runs that stop by then.
+// Adaptations: A1 (thoughts and feedback are not extracted: whole responses are
+// passed on); A3 (the PASS exit is dropped: all three rounds always run).
+workflow AcEvaluatorOptimizer budget 1000000000 {
+  input task: text max_bytes 8192;
+  model claude = mock("anthropic/claude-sonnet-4-6") max_tokens 4096;
+  prompt generate1(task: text) -> text =
+      "\nYour goal is to complete the task based on <user input>. If there are feedback\nfrom your previous generations, you should reflect on them to improve your solution\n\nOutput your answer concisely in the following format:\n\n<thoughts>\n[Your understanding of the task and feedback and how you plan to improve]\n</thoughts>\n\n<response>\n[Your code implementation here]\n</response>\n\nTask: {task}";
+  prompt evaluate1(task: text, response1: text) -> text =
+      "\nEvaluate this following code implementation for:\n1. code correctness\n2. time complexity\n3. style and best practices\n\nYou should be evaluating only and not attemping to solve the task.\nOnly output \"PASS\" if all criteria are met and you have no further suggestions for improvements.\nOutput your evaluation concisely in the following format.\n\n<evaluation>PASS, NEEDS_IMPROVEMENT, or FAIL</evaluation>\n<feedback>\nWhat needs improvement and why.\n</feedback>\n\nOriginal task: {task}\nContent to evaluate: {response1}";
+  prompt generate2(response1: text, evaluation1: text, task: text) -> text =
+      "\nYour goal is to complete the task based on <user input>. If there are feedback\nfrom your previous generations, you should reflect on them to improve your solution\n\nOutput your answer concisely in the following format:\n\n<thoughts>\n[Your understanding of the task and feedback and how you plan to improve]\n</thoughts>\n\n<response>\n[Your code implementation here]\n</response>\n\nPrevious attempts:\n- {response1}\n\nFeedback: {evaluation1}\nTask: {task}";
+  prompt evaluate2(task: text, response2: text) -> text =
+      "\nEvaluate this following code implementation for:\n1. code correctness\n2. time complexity\n3. style and best practices\n\nYou should be evaluating only and not attemping to solve the task.\nOnly output \"PASS\" if all criteria are met and you have no further suggestions for improvements.\nOutput your evaluation concisely in the following format.\n\n<evaluation>PASS, NEEDS_IMPROVEMENT, or FAIL</evaluation>\n<feedback>\nWhat needs improvement and why.\n</feedback>\n\nOriginal task: {task}\nContent to evaluate: {response2}";
+  prompt generate3(response1: text, response2: text, evaluation2: text, task: text) -> text =
+      "\nYour goal is to complete the task based on <user input>. If there are feedback\nfrom your previous generations, you should reflect on them to improve your solution\n\nOutput your answer concisely in the following format:\n\n<thoughts>\n[Your understanding of the task and feedback and how you plan to improve]\n</thoughts>\n\n<response>\n[Your code implementation here]\n</response>\n\nPrevious attempts:\n- {response1}\n- {response2}\n\nFeedback: {evaluation2}\nTask: {task}";
+  prompt evaluate3(task: text, response3: text) -> text =
+      "\nEvaluate this following code implementation for:\n1. code correctness\n2. time complexity\n3. style and best practices\n\nYou should be evaluating only and not attemping to solve the task.\nOnly output \"PASS\" if all criteria are met and you have no further suggestions for improvements.\nOutput your evaluation concisely in the following format.\n\n<evaluation>PASS, NEEDS_IMPROVEMENT, or FAIL</evaluation>\n<feedback>\nWhat needs improvement and why.\n</feedback>\n\nOriginal task: {task}\nContent to evaluate: {response3}";
+  let response1: text = call generate1(task) using claude;
+  let evaluation1: text = call evaluate1(task, response1) using claude;
+  let response2: text = call generate2(response1, evaluation1, task) using claude;
+  let evaluation2: text = call evaluate2(task, response2) using claude;
+  let response3: text = call generate3(response1, response2, evaluation2, task) using claude;
+  let evaluation3: text = call evaluate3(task, response3) using claude;
+  output response3;
+}

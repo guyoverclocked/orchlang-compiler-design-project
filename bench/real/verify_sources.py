@@ -114,7 +114,11 @@ def literals(path):
 
 
 def uncovered(piece, strings):
-    """Stretches of piece not covered by long prefixes found in strings."""
+    """Stretches of piece not covered by source strings: a covering run is a
+    prefix of 20 characters or more found in some source string, or a whole
+    source string (a dictionary key the source joins into a prompt at run time,
+    say) of at least three characters."""
+    whole = sorted({s for s in strings if len(s) >= 3}, key=len, reverse=True)
     gaps, gap, index = [], [], 0
     while index < len(piece):
         low, high = 0, len(piece) - index
@@ -125,6 +129,14 @@ def uncovered(piece, strings):
                 low = mid
             else:
                 high = mid - 1
+        if low < min(MIN_RUN, len(piece) - index):
+            exact = next((len(w) for w in whole if piece.startswith(w, index)), 0)
+            if exact:
+                if gap:
+                    gaps.append(''.join(gap))
+                    gap = []
+                index += exact
+                continue
         if low >= min(MIN_RUN, len(piece) - index) and low > 0:
             if gap:
                 gaps.append(''.join(gap))

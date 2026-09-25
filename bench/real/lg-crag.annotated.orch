@@ -1,0 +1,84 @@
+// Annotated variant (PROTOCOL.md P10): the fewest endorsements that let the
+// source's intended behaviour through.  Each marks a value an attacker who
+// controls untrusted content can steer, and the effect it then reaches.
+//
+// Port of langchain-ai/langgraph@23961cff61a42b52525f3b20b4094d8d2fba1744,
+// docs/docs/tutorials/rag/langgraph_crag.ipynb (id lg-crag).  See
+// bench/real/PROTOCOL.md.
+//
+// retrieve -> grade_documents -> (generate | transform_query -> web_search ->
+// generate).  The retriever returns four documents (the vector store's default
+// k); each is graded by a yes/no call to gpt-4o-mini with structured output (the
+// schema is appended as JSON, P4).  If any is graded irrelevant, the question is
+// rewritten (gpt-3.5-turbo-0125), sent to web search, and the answer is
+// generated from the documents and the search results; otherwise it is
+// generated from the documents (gpt-3.5-turbo, LangChain Hub rlm/rag-prompt).
+// "Any irrelevant" is compiled to nested branches, the search arm repeated.
+// ChatOpenAI sends no caps: each model's maximum output applies.
+//
+// Documents and search results are web content, so untrusted.  The splitter's
+// chunk size of 250 tokens is not a bound on a chunk: it adds token counts of
+// pieces, which do not add (docs/FORMAL_MODEL.md section 7), so each document,
+// as either its grader or the generator receives it, is bounded at 8192 bytes by
+// assumption (P6).  The generator receives the documents as the Python repr of
+// a list, which the port writes as "[doc1, ..., doc4]".
+//
+// The search request carries the rewritten question out of the workflow and is
+// sent only when a grade, computed from untrusted documents, says so: an effect
+// under an untrusted guard (E235 in the label).  Adaptations: A4 (irrelevant
+// documents are not filtered out of the generation); A6 (the answer is bound
+// inside a branch, so the port outputs the first grade).
+workflow LgCragAnnotated budget 1000000000 {
+  input question: text max_bytes 8192;
+  input doc1: text untrusted max_bytes 8192;
+  input doc2: text untrusted max_bytes 8192;
+  input doc3: text untrusted max_bytes 8192;
+  input doc4: text untrusted max_bytes 8192;
+  input web: text untrusted max_bytes 8192;
+  model grader = mock("openai/gpt-4o-mini") max_tokens 16384 tokenizer o200k_base overhead 9;
+  model generator = mock("openai/gpt-3.5-turbo") max_tokens 4096 tokenizer cl100k_base overhead 6;
+  model rewriter = mock("openai/gpt-3.5-turbo-0125") max_tokens 4096 tokenizer cl100k_base overhead 9;
+  tool web_search(query: text);
+  prompt grade(document: text, question: text) -> boolean =
+      "You are a grader assessing relevance of a retrieved document to a user question. \n \n    If the document contains keyword(s) or semantic meaning related to the question, grade it as relevant. \n\n    Give a binary score 'yes' or 'no' score to indicate whether the document is relevant to the question.\n\nRetrieved document: \n\n {document} \n\n User question: {question}\n\n{{\"type\": \"function\", \"function\": {{\"name\": \"GradeDocuments\", \"description\": \"Binary score for relevance check on retrieved documents.\", \"parameters\": {{\"properties\": {{\"binary_score\": {{\"description\": \"Documents are relevant to the question, 'yes' or 'no'\", \"type\": \"string\"}}}}, \"required\": [\"binary_score\"], \"type\": \"object\"}}}}}}";
+  prompt generate(question: text, doc1: text, doc2: text, doc3: text, doc4: text) -> text =
+      "You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. Use three sentences maximum and keep the answer concise.\nQuestion: {question} \nContext: [{doc1}, {doc2}, {doc3}, {doc4}] \nAnswer:";
+  prompt rewrite(question: text) -> text =
+      "You a question re-writer that converts an input question to a better version that is optimized \n \n     for web search. Look at the input and try to reason about the underlying semantic intent / meaning.\n\nHere is the initial question: \n\n {question} \n Formulate an improved question.";
+  prompt generate_web(better: text, doc1: text, doc2: text, doc3: text, doc4: text, web: text) -> text =
+      "You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. Use three sentences maximum and keep the answer concise.\nQuestion: {better} \nContext: [{doc1}, {doc2}, {doc3}, {doc4}, {web}] \nAnswer:";
+  let relevant1: boolean = call grade(doc1, question) using grader;
+  endorse(relevant1) as relevant1_ok: boolean because "the tutorial trusts the grader; a planted document decides whether the question is sent to web search";
+  let relevant2: boolean = call grade(doc2, question) using grader;
+  endorse(relevant2) as relevant2_ok: boolean because "the tutorial trusts the grader; a planted document decides whether the question is sent to web search";
+  let relevant3: boolean = call grade(doc3, question) using grader;
+  endorse(relevant3) as relevant3_ok: boolean because "the tutorial trusts the grader; a planted document decides whether the question is sent to web search";
+  let relevant4: boolean = call grade(doc4, question) using grader;
+  endorse(relevant4) as relevant4_ok: boolean because "the tutorial trusts the grader; a planted document decides whether the question is sent to web search";
+  if relevant1_ok {
+    if relevant2_ok {
+      if relevant3_ok {
+        if relevant4_ok {
+          let generation: text = call generate(question, doc1, doc2, doc3, doc4) using generator;
+        } else {
+          let better: text = call rewrite(question) using rewriter;
+          emit web_search(better);
+          let generation_web: text = call generate_web(better, doc1, doc2, doc3, doc4, web) using generator;
+        }
+      } else {
+        let better: text = call rewrite(question) using rewriter;
+        emit web_search(better);
+        let generation_web: text = call generate_web(better, doc1, doc2, doc3, doc4, web) using generator;
+      }
+    } else {
+      let better: text = call rewrite(question) using rewriter;
+      emit web_search(better);
+      let generation_web: text = call generate_web(better, doc1, doc2, doc3, doc4, web) using generator;
+    }
+  } else {
+    let better: text = call rewrite(question) using rewriter;
+    emit web_search(better);
+    let generation_web: text = call generate_web(better, doc1, doc2, doc3, doc4, web) using generator;
+  }
+  output relevant1;
+}

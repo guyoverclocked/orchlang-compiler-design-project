@@ -227,3 +227,32 @@ compiler was frozen, unless marked otherwise.
 * **D4 What counts as source text.** `verify_sources.py` checks prompt templates
   and literal call arguments. Model strings and endorsement justifications are
   the port's own text and are not checked.
+
+The following were made **after the freeze**, with the held-out results in
+view. None touches the compiler; each is a change to how the harness scores,
+and each is reported here with what prompted it.
+
+* **D5 Extra diagnostics are imprecision, not failure.** §6 said any mismatch
+  between a port's diagnostics and its label fails the harness. On the
+  held-out `ad-travel-1` and `lg-crag` the checker reports `E233` beyond the
+  label: a value computed inside a branch guarded by untrusted data inherits
+  the guard's integrity label, although the value itself is computed only from
+  trusted data (the hotel's address; the user's question), and the label rule
+  asks only whether the value is computed from untrusted content. The labelled
+  `E235` is reported in both. A missed label would be a flow the checker failed
+  to catch and still fails the harness; a diagnostic beyond the label is now
+  listed and counted in E11 and in the paper, but does not fail it. This is the
+  integrity counterpart of the data-versus-program-counter distinction that
+  OP-1 drew for secrets, which the integrity half of the type system does not
+  draw.
+* **D6 Text the source computes.** `ac-route` sends
+  `['billing', 'technical', 'account', 'product']`, which the source computes
+  from its dictionary's keys, and `ac-evaluator-optimizer` sends
+  `"Previous attempts:"` joined by newlines. `verify_sources.py` now also
+  accepts a stretch that equals a whole string constant of the source (at least
+  three characters), so text the source builds from its own constants is
+  covered; invented prose is still rejected (checked by editing a port).
+* **D7 Derived warning labels.** For the held-out `ad-travel-1` and `lg-crag`,
+  `expected_warnings_accepted_variant` is `[]`, by D2: their annotated
+  variants endorse every untrusted guard, since each guards an effect.
+

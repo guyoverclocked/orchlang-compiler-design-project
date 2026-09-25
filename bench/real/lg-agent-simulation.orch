@@ -1,0 +1,44 @@
+// Port of langchain-ai/langgraph@23961cff61a42b52525f3b20b4094d8d2fba1744,
+// docs/docs/tutorials/chatbot-simulation-evaluation/agent-simulation-evaluation.ipynb
+// (id lg-agent-simulation).  See bench/real/PROTOCOL.md.
+//
+// chat_bot -> user -> (end | chat_bot ...), starting from an empty
+// conversation and ending once it holds more than six messages: four chat-bot
+// and four simulated-user calls, each seeing the whole conversation so far.
+// The chat bot calls gpt-3.5-turbo through the openai client and the simulated
+// user is ChatOpenAI(), whose default model (langchain-openai 1.1.7) is also
+// gpt-3.5-turbo; neither sends a cap, so 4096, the model's maximum, applies.
+// The simulated user's instructions are a constant of the tutorial.
+//
+// Adaptation A3: the simulation also stops when the simulated user answers
+// exactly "FINISHED"; OrchLang cannot test a response's text, so the port
+// always runs to the message limit, which only over-approximates.
+// overhead: a system message and at most seven others, 3 x 8 + 3 (P4).
+workflow LgAgentSimulation budget 1000000000 {
+  model gpt35 = mock("openai/gpt-3.5-turbo") max_tokens 4096 tokenizer cl100k_base overhead 27;
+  prompt bot1() -> text =
+      "You are a customer support agent for an airline.";
+  prompt user1(m1: text) -> text =
+      "You are a customer of an airline company. You are interacting with a user who is a customer support person. \nYour name is Harrison. You are trying to get a refund for the trip you took to Alaska. You want them to give you ALL the money back. This trip happened 5 years ago.\n\nWhen you are finished with the conversation, respond with a single word 'FINISHED'\n\n{m1}";
+  prompt bot2(m1: text, m2: text) -> text =
+      "You are a customer support agent for an airline.\n\n{m1}\n\n{m2}";
+  prompt user2(m1: text, m2: text, m3: text) -> text =
+      "You are a customer of an airline company. You are interacting with a user who is a customer support person. \nYour name is Harrison. You are trying to get a refund for the trip you took to Alaska. You want them to give you ALL the money back. This trip happened 5 years ago.\n\nWhen you are finished with the conversation, respond with a single word 'FINISHED'\n\n{m1}\n\n{m2}\n\n{m3}";
+  prompt bot3(m1: text, m2: text, m3: text, m4: text) -> text =
+      "You are a customer support agent for an airline.\n\n{m1}\n\n{m2}\n\n{m3}\n\n{m4}";
+  prompt user3(m1: text, m2: text, m3: text, m4: text, m5: text) -> text =
+      "You are a customer of an airline company. You are interacting with a user who is a customer support person. \nYour name is Harrison. You are trying to get a refund for the trip you took to Alaska. You want them to give you ALL the money back. This trip happened 5 years ago.\n\nWhen you are finished with the conversation, respond with a single word 'FINISHED'\n\n{m1}\n\n{m2}\n\n{m3}\n\n{m4}\n\n{m5}";
+  prompt bot4(m1: text, m2: text, m3: text, m4: text, m5: text, m6: text) -> text =
+      "You are a customer support agent for an airline.\n\n{m1}\n\n{m2}\n\n{m3}\n\n{m4}\n\n{m5}\n\n{m6}";
+  prompt user4(m1: text, m2: text, m3: text, m4: text, m5: text, m6: text, m7: text) -> text =
+      "You are a customer of an airline company. You are interacting with a user who is a customer support person. \nYour name is Harrison. You are trying to get a refund for the trip you took to Alaska. You want them to give you ALL the money back. This trip happened 5 years ago.\n\nWhen you are finished with the conversation, respond with a single word 'FINISHED'\n\n{m1}\n\n{m2}\n\n{m3}\n\n{m4}\n\n{m5}\n\n{m6}\n\n{m7}";
+  let m1: text = call bot1() using gpt35;
+  let m2: text = call user1(m1) using gpt35;
+  let m3: text = call bot2(m1, m2) using gpt35;
+  let m4: text = call user2(m1, m2, m3) using gpt35;
+  let m5: text = call bot3(m1, m2, m3, m4) using gpt35;
+  let m6: text = call user3(m1, m2, m3, m4, m5) using gpt35;
+  let m7: text = call bot4(m1, m2, m3, m4, m5, m6) using gpt35;
+  let m8: text = call user4(m1, m2, m3, m4, m5, m6, m7) using gpt35;
+  output m8;
+}

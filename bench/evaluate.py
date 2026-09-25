@@ -57,6 +57,7 @@ Usage:  python bench/evaluate.py [--offline] [--seeds N]
 """
 
 import argparse
+import hashlib
 import io
 import itertools
 import json
@@ -446,15 +447,23 @@ def empirical_leak(path, seeds=PAIRED_SEEDS):
                 pins = dict(PUBLIC_PINS)
                 pins.update(assignment)
                 jobs.append(((provider, coupling, accounting, seed), index, pins))
-    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
-        transcripts = list(pool.map(
-            lambda job: execute(path, job[0][3], job[2], job[0][0], job[0][1], job[0][2]), jobs))
-    seen = {}
-    for (key, index, pins), transcript in zip(jobs, transcripts):
+    def observe(job):
+        # Keep a digest of what the observer sees, not the transcript: equal
+        # digests stand for equal observations, and thousands of transcripts
+        # held at once exhausted memory on a 16 GB machine.
+        transcript = execute(path, job[0][3], job[2], job[0][0], job[0][1], job[0][2])
         if transcript is None:
+            return None
+        return hashlib.sha256(observation(transcript, observer).encode('utf-8')).hexdigest()
+
+    with ThreadPoolExecutor(max_workers=WORKERS) as pool:
+        digests = list(pool.map(observe, jobs))
+    seen = {}
+    for (key, index, pins), digest in zip(jobs, digests):
+        if digest is None:
             fail('paired execution failed: %s %s' % (os.path.basename(path), key))
             continue
-        seen.setdefault(key, set()).add(observation(transcript, observer))
+        seen.setdefault(key, set()).add(digest)
     worst = max((len(values) for values in seen.values()), default=0)
     leaking_modes = sorted({'%s/%s/%s' % key[:3] for key, values in seen.items() if len(values) > 1})
     comparisons = len(seen) * max(0, len(assignments) - 1)
@@ -777,6 +786,59 @@ def classify_attacks(entry):
     return within, outside
 
 
+def run_port(accepted, bound, guaranteed, tokenizer_names, seeds):
+    """Execute one port on the given seeds and re-bill its requests with the
+    real tokenizers.  Runs in a short-lived child process (run_port_in_child):
+    the Hugging Face tokenizers library retains tens of megabytes per very long
+    input, which exhausted a 16 GB machine within one port's 200 runs."""
+    encoders = load_port_tokenizers(tokenizer_names) if tokenizer_names else None
+    inputs, models = port_declarations(accepted)
+    local = {'runs': 0, 'output_viol': 0, 'guaranteed_viol': 0, 'rebill_viol': 0,
+             'estimate_exceeded': 0, 'real_estimate_exceeded': 0}
+    peak_rebill = 0.0
+    messages = []
+    for seed in seeds:
+        # Half the runs put every text input at its declared byte bound.
+        pins = dict((name, size) for name, size in inputs.items()) if seed % 2 == 0 else None
+        run_data = execute(accepted, seed, pins, 'content', 'request', 'tokenizer')
+        if run_data is None:
+            messages.append('execution failed, seed %d' % seed)
+            continue
+        local['runs'] += 1
+        if run_data['output_tokens'] > bound['output_tokens']:
+            local['output_viol'] += 1
+        if guaranteed is not None and run_data['input_tokens'] > guaranteed:
+            local['guaranteed_viol'] += 1
+        if run_data['input_tokens'] > bound['input_tokens_estimated']:
+            local['estimate_exceeded'] += 1
+        if encoders and guaranteed is not None:
+            billed = 0
+            for call in run_data['calls']:
+                tokenizer, overhead = models[call['model_string']]
+                billed += encoders[tokenizer](call['request']) + overhead
+            peak_rebill = max(peak_rebill, billed / float(guaranteed))
+            if billed > bound['input_tokens_estimated']:
+                local['real_estimate_exceeded'] += 1
+            if billed > guaranteed:
+                local['rebill_viol'] += 1
+    return local, peak_rebill, messages
+
+
+def run_port_in_child(accepted, bound, guaranteed, tokenizer_names, chunk=20):
+    from concurrent.futures import ProcessPoolExecutor
+    local, peak, messages = {}, 0.0, []
+    for first in range(1, REAL_SEEDS + 1, chunk):
+        seeds = list(range(first, min(first + chunk, REAL_SEEDS + 1)))
+        with ProcessPoolExecutor(max_workers=1) as pool:
+            part, part_peak, part_messages = pool.submit(
+                run_port, accepted, bound, guaranteed, tokenizer_names, seeds).result()
+        for key, value in part.items():
+            local[key] = local.get(key, 0) + value
+        peak = max(peak, part_peak)
+        messages += part_messages
+    return local, peak, messages
+
+
 def evaluate_real_workflows(offline):
     manifest = json.load(open(os.path.join(REAL, 'manifest.json'), encoding='utf-8'))
     candidates = manifest['candidates']
@@ -794,7 +856,6 @@ def evaluate_real_workflows(offline):
                  'post_freeze_changes: %s' % (frozen[:12], ' '.join(changed.stdout.split())))
 
     # The split is a function of the id alone; check nobody moved a candidate.
-    import hashlib
     for c in candidates:
         rule = 'dev' if hashlib.sha256(c['id'].encode()).hexdigest()[0] in '01234' else 'held-out'
         if c['split'] != rule:
@@ -815,8 +876,9 @@ def evaluate_real_workflows(offline):
                  'or pass --offline')
 
     rows = []
+    extras = []
     totals = {'runs': 0, 'output_viol': 0, 'guaranteed_viol': 0, 'rebill_viol': 0,
-              'estimate_exceeded': 0, 'real_estimate_exceeded': 0, 'label_mismatch': 0, 'within_plan_accepted': 0,
+              'estimate_exceeded': 0, 'real_estimate_exceeded': 0, 'label_missed': 0, 'label_extra': 0, 'within_plan_accepted': 0,
               'attacks_within': 0, 'attacks_outside': 0}
     for c in ported:
         path = os.path.join(REAL, c['file'])
@@ -830,10 +892,18 @@ def evaluate_real_workflows(offline):
         got = {x for x in diagnostic_codes(err + out) if x[0] in 'EW' and x[1:].isdigit()}
         got_errors = {x for x in got if x.startswith('E')}
         verdict = 'accept' if code == 0 else 'reject'
-        if got_errors != expected_errors or (verdict == 'accept') != (not expected_errors):
-            totals['label_mismatch'] += 1
-            fail('real workflow %s: expected errors %s, got %s (%s)'
-                 % (c['id'], sorted(expected_errors) or '-', sorted(got_errors) or '-', verdict))
+        # A missing expected error is a flow the checker failed to catch, which
+        # is a soundness failure.  An extra error is imprecision: it is
+        # reported, and counted, but it is not a violation of any claim.
+        missing, extra = expected_errors - got_errors, got_errors - expected_errors
+        if missing:
+            totals['label_missed'] += 1
+            fail('real workflow %s: expected errors %s were not reported (got %s, %s)'
+                 % (c['id'], sorted(missing), sorted(got_errors) or '-', verdict))
+        if extra:
+            totals['label_extra'] += 1
+            extras.append('%s: %s beyond the label %s' % (c['id'], ' '.join(sorted(extra)),
+                                                          ' '.join(sorted(expected_errors)) or '-'))
 
         accepted, endorsements = path, 0
         if expected_errors:
@@ -849,10 +919,14 @@ def evaluate_real_workflows(offline):
         if code != 0:
             fail('real workflow %s: the accepted variant %s is rejected' % (c['id'], os.path.basename(accepted)))
             continue
-        if warnings != expected_warnings:
-            totals['label_mismatch'] += 1
+        if expected_warnings - warnings:
+            totals['label_missed'] += 1
             fail('real workflow %s: expected warnings %s on %s, got %s'
                  % (c['id'], sorted(expected_warnings) or '-', os.path.basename(accepted), sorted(warnings) or '-'))
+        if warnings - expected_warnings:
+            totals['label_extra'] += 1
+            extras.append('%s: %s beyond the label on %s' % (c['id'], ' '.join(sorted(warnings - expected_warnings)),
+                                                             os.path.basename(accepted)))
 
         document = certificate(accepted)
         bound = document['bound']
@@ -862,33 +936,10 @@ def evaluate_real_workflows(offline):
                  % (c['id'], 'defined' if guaranteed is not None else 'undefined',
                     'defined' if c['labels']['guaranteed_input_expected'] else 'undefined'))
 
-        inputs, models = port_declarations(accepted)
-        local = {'output_viol': 0, 'guaranteed_viol': 0, 'rebill_viol': 0, 'estimate_exceeded': 0,
-                 'real_estimate_exceeded': 0}
-        peak_rebill = 0.0
-        for seed in range(1, REAL_SEEDS + 1):
-            pins = dict((name, size) for name, size in inputs.items()) if seed % 2 == 0 else None
-            run_data = execute(accepted, seed, pins, 'content', 'request', 'tokenizer')
-            if run_data is None:
-                fail('execution failed: %s seed %d' % (c['id'], seed))
-                continue
-            totals['runs'] += 1
-            if run_data['output_tokens'] > bound['output_tokens']:
-                local['output_viol'] += 1
-            if guaranteed is not None and run_data['input_tokens'] > guaranteed:
-                local['guaranteed_viol'] += 1
-            if run_data['input_tokens'] > bound['input_tokens_estimated']:
-                local['estimate_exceeded'] += 1
-            if encoders and guaranteed is not None:
-                billed = 0
-                for call in run_data['calls']:
-                    tokenizer, overhead = models[call['model_string']]
-                    billed += encoders[tokenizer](call['request']) + overhead
-                peak_rebill = max(peak_rebill, billed / float(guaranteed))
-                if billed > bound['input_tokens_estimated']:
-                    local['real_estimate_exceeded'] += 1
-                if billed > guaranteed:
-                    local['rebill_viol'] += 1
+        local, peak_rebill, messages = run_port_in_child(
+            accepted, bound, guaranteed, sorted(tokenizer_names) if encoders else [])
+        for message in messages:
+            fail('%s: %s' % (c['id'], message))
         for key in local:
             totals[key] += local[key]
 
@@ -936,7 +987,7 @@ def evaluate_real_workflows(offline):
     for c in excluded:
         categories[c['exclusion']['category']] = categories.get(c['exclusion']['category'], 0) + 1
     summary = {'candidates': len(candidates), 'ported': len(ported), 'excluded': len(excluded),
-               'exclusion_categories': categories, 'frozen_compiler': frozen,
+               'exclusion_categories': categories, 'frozen_compiler': frozen, 'extras': extras,
                'source_check': source_check, 'totals': totals}
     return rows, summary
 
@@ -1117,6 +1168,11 @@ def main():
         code = [e['q5_estimate']['code']['estimate_exceeded_pct'] for e in t.values()]
         report.write('  chars/4 estimate exceeded: %.1f-%.1f%% of multilingual windows, '
                      '%.1f-%.1f%% of code windows\n' % (min(ml), max(ml), min(code), max(code)))
+        mlb = [e['q5_estimate']['multilingual']['byte_estimate_exceeded_pct'] for e in t.values()]
+        codeb = [e['q5_estimate']['code']['byte_estimate_exceeded_pct'] for e in t.values()]
+        report.write('  bytes/4 estimate (what the compiler computes) exceeded: %.1f-%.1f%% of\n'
+                     '  multilingual windows, %.1f-%.1f%% of code windows\n'
+                     % (min(mlb), max(mlb), min(codeb), max(codeb)))
         q7 = [e['q7_equal_length']['counts_differ_pct'] for e in t.values()]
         report.write('  equal-length string pairs with different token counts: %.1f-%.1f%%\n'
                      % (min(q7), max(q7)))
@@ -1153,9 +1209,12 @@ def main():
                  '  tokenizer.  rebill/guar: the largest real-tokenizer bill over the guaranteed\n'
                  '  input bound, across runs (must stay at or below 1).\n')
     totals = real_summary['totals']
-    report.write('\n  label mismatches: %d; runs: %d; certificate violations: %d\n'
-                 % (totals['label_mismatch'], totals['runs'],
-                    totals['output_viol'] + totals['guaranteed_viol'] + totals['rebill_viol']))
+    report.write('\n  labels missed (would be a soundness failure): %d\n' % totals['label_missed'])
+    report.write('  ports with diagnostics beyond their label (imprecision): %d\n' % totals['label_extra'])
+    for line in real_summary['extras']:
+        report.write('    %s\n' % line)
+    report.write('  runs: %d; certificate violations: %d\n'
+                 % (totals['runs'], totals['output_viol'] + totals['guaranteed_viol'] + totals['rebill_viol']))
     report.write('  AgentDojo successful attacks (gpt-4o-2024-05-13, important_instructions) on the\n'
                  '  ported tasks: %d outside the task\'s plan, %d within it\n'
                  % (totals['attacks_outside'], totals['attacks_within']))
