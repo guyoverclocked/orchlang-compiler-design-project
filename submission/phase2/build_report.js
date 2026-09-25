@@ -192,7 +192,7 @@ body.push(bullet('What is the most this workflow can cost? Output tokens, and in
 body.push(bullet('Where can data go? Whether secret content can reach a prompt, an output or a tool, and whether untrusted text can drive a tool.'));
 body.push(bullet('What do the requests reveal? Whether the requests the workflow sends, and so the bill, the provider\'s logs and the network traffic, are independent of its secrets; and if not, how many bits they can reveal.'));
 body.push(p('The third question is where the work since the first Phase 2 submission lies. The first rule for it (compare the arms\' worst-case costs) was refuted by an external audit. The rule that replaced it (compare the sizes of the requests) was refuted by our own audit, with real tokenizers and a real model. A theorem, checked in Coq, now explains why every rule that compares sizes must fail, and the compiler compares the requests\' content instead.', { after: 160 }));
-body.push(p('Current state: a warning-free strict build, 137 passing tests, four theorems mechanised in Coq with no axioms, a synthetic evaluation, measurements on fourteen real tokenizers and one real model, and thirty real workflows ported from LangGraph, the Anthropic cookbook and AgentDojo under a protocol fixed before porting. No certified bound was exceeded in any experiment.', { bold: true }));
+body.push(p('Current state: a warning-free strict build, 137 passing tests, a lemma and three theorems mechanised in Coq with no axioms, a synthetic evaluation, measurements on fourteen real tokenizers and one real model, and thirty real workflows ported from LangGraph, the Anthropic cookbook and AgentDojo under a protocol fixed before porting. No certified bound was exceeded in any experiment.', { bold: true }));
 
 // ---------- rubric map ----------
 body.push(h1('Evidence against the Phase 2 rubric'));
@@ -202,7 +202,7 @@ body.push(table(
   ['Criterion', 'Marks', 'Evidence', 'Section'],
   [
     ['Implementation Progress', '7', 'Lexer, parser, AST, symbol table with binding identities, semantic and flow analysis, cost analysis with tokenizer contracts, relational analysis with leakage bounds, IR, certificate, offline runtime, CLI', '3, 4'],
-    ['Technical Correctness', '5', 'Warning-free strict build; 137 tests; Coq proofs of four theorems; every counterexample from two audits is a regression test', '6, 7'],
+    ['Technical Correctness', '5', 'Warning-free strict build; 137 tests; Coq proofs of a lemma and three theorems; every counterexample from two audits is a regression test', '6, 7'],
     ['Compiler Concept Application', '4', 'Lexical analysis, recursive-descent parsing with recovery, AST ownership, scoping, type checking, data-flow analysis, resource analysis, relational analysis, graph algorithms on the IR', '4'],
     ['Code Quality', '3', 'One responsibility per module; unique_ptr AST ownership; stable diagnostic codes with source locations; generated tokenizer contract table', '5'],
     ['Testing', '3', 'Unit tests, example corpus, generated suites, measurement scripts, real-workflow corpus; a harness that exits nonzero on any violation', '6'],
@@ -356,6 +356,8 @@ body.push(table(
     ['Rejected workflows with a concrete leaking witness', '14 of 14'],
     ['Leaking workflows accepted by the withdrawn rules', 'equal bounds 6, equal sizes 4'],
     ['Real workflows: certificate violations, with real-tokenizer re-billing', '0 of 6,000 runs'],
+    ['Real workflows: labelled flow errors missed / reported beyond the label', '0 / 2'],
+    ['AgentDojo recorded successful attacks that stayed within the fixed plan', '0 of 88'],
   ],
   { align: AlignmentType.RIGHT, monoCols: [1] }
 ));
@@ -388,8 +390,9 @@ body.push(h1('8  Scope and limitations'));
 body.push(bullet('Combining information flow with resource analysis is not new (Ngo et al.), nor relational cost analysis (RelCost), nor leakage through LLM token counts and traffic sizes.'));
 body.push(bullet('None of the thirty real workflows has a secret, so the relational analysis has not yet met one outside the synthetic suites.'));
 body.push(bullet('Declassification is trusted and all or nothing: data sent to a provider becomes public to every observer.'));
+body.push(bullet('On the AgentDojo tasks, every recorded successful attack made calls outside the fixed plan, so the plan, not the checker, stops them; the checker marks where untrusted data could still steer the planned calls.'));
 body.push(bullet('The integrity check over-reports: on two held-out real workflows it flagged a value computed under an untrusted condition from trusted data.'));
-body.push(bullet('The guaranteed token bound rests on measured contracts and is loose (up to 25x the estimate) unless a model declares a byte cap.'));
+body.push(bullet('The guaranteed token bound rests on measured contracts and is loose (4x the estimate on the real workflows, up to 128x where a request carries earlier answers) unless a model declares a byte cap.'));
 body.push(bullet('The Coq proofs cover a core calculus, not the C++; the certificate has no independent checker yet.'));
 
 // ---------- 9 demo ----------

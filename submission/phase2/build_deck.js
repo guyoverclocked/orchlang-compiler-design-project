@@ -676,7 +676,7 @@ function footer(s, text) {
     row(s, i + 1, o[0], o[1], y, { w: 11.3, bh: 0.45 });
     y += 0.8;
   });
-  s.addNotes('I ported thirty real workflows under a protocol I fixed in advance: labels first, then development ports, then the compiler frozen, then held-out ports checked once. No bound was exceeded, no labelled flow error was missed, and the checker over-reported twice. And none of the sources had a secret, so the analysis this talk is about found nothing to check on real code. I say that plainly because it is the most important limitation.');
+  s.addNotes('I ported thirty real workflows under a protocol I fixed in advance: labels first, then development ports, then the compiler frozen, then held-out ports checked once. No bound was exceeded, no labelled flow error was missed, and the checker over-reported twice. AgentDojo publishes its recorded attacks: all 88 that succeeded on these tasks made calls outside the fixed plan, so it is the plan, not my checker, that stops them; the checker marks where an attacker could still steer the planned calls. And none of the sources had a secret, so the analysis this talk is about found nothing to check on real code. I say that plainly because it is the most important limitation.');
 }
 
 // ================================================ 17 THE AUDITS ==============
@@ -730,7 +730,7 @@ function footer(s, text) {
     ['Token-count leakage is not new', 'Established for single calls by prior attack work. This is about how a workflow\'s branches feed it.'],
     ['The side channel has not met a real secret', 'None of the thirty real workflows had one.'],
     ['Declassification is trusted, and all or nothing', 'Data sent to a provider becomes public to every observer.'],
-    ['The guaranteed token bound is loose', 'Up to 25x the estimate, unless a model declares a byte cap.'],
+    ['The guaranteed token bound is loose', '4x the estimate on real workflows, up to 128x when requests carry earlier answers, unless a model declares a byte cap.'],
     ['The proofs cover a core calculus, not the C++', 'And the certificate has no independent checker yet.'],
   ];
   let y = 1.5;

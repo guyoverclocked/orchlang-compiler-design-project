@@ -114,6 +114,15 @@ the held-out split, and a cross-check against AgentDojo's recorded attacks. The
 harness runs in bounded memory (re-billing in short-lived child processes,
 because the tokenizers library retains memory on long inputs).
 
+**Real workflows, results.** In 6,000 runs of the 30 ports, with real-tokenizer
+re-billing, no certificate was exceeded. Every labelled flow error was reported;
+two held-out ports got an extra `E233` from the integrity program-counter rule.
+AgentDojo's 88 recorded successful attacks on the ported tasks all left the
+fixed plan, so the plan, not the checker, stops them. No port has a secret. The
+guaranteed input bound is 4 times the estimate on the AgentDojo ports and 19 to
+128 times on the LangGraph chains; an earlier draft said "up to 25×", from one
+development port, and was corrected when the full run printed every port.
+
 **Language.** `{{` and `}}` are literal braces in templates (found porting a real
 prompt with a JSON schema).
 

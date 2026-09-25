@@ -344,8 +344,9 @@ worked from.
 - **`declassify` and `endorse` are trusted**, and declassification is all or
   nothing: data sent to a provider becomes public to every observer.
 - **The guaranteed token bound rests on measured tokenizer contracts** and on a
-  bound on how many bytes a token decodes to, which makes it loose (up to 25× the
-  estimate) unless models declare a byte cap.
+  bound on how many bytes a token decodes to, which makes it loose (4× the
+  estimate on the real workflows, up to 128× where a request carries earlier
+  answers) unless models declare a byte cap.
 - **The Coq proofs cover a core calculus**, not the C++ implementation.
 - **The certificate is a report**; nothing re-checks it independently yet.
 

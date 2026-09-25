@@ -1047,6 +1047,17 @@ def main():
     for path in timed:
         run(['certify', path])
     elapsed = time.time() - start
+    # The real ports are the largest programs in the repository.
+    real_timed = []
+    for row in real[0]:
+        path = os.path.join(REAL, row['workflow'] + '.orch')
+        annotated = path[:-5] + '.annotated.orch'
+        real_timed.append(annotated if os.path.exists(annotated) else path)
+    real_times = []
+    for path in real_timed:
+        start = time.time()
+        run(['certify', path])
+        real_times.append((time.time() - start, path))
 
     report = io.StringIO()
     report.write('OrchLang evaluation\n===================\n\n')
@@ -1226,6 +1237,13 @@ def main():
     report.write('  %d workflows certified in %.2f s (%.1f ms each, including process startup;\n'
                  '  this is not an isolated measurement of analyser time)\n'
                  % (len(timed), elapsed, 1000.0 * elapsed / len(timed)))
+    if real_times:
+        slowest, slowest_path = max(real_times)
+        lines = [sum(1 for _ in io.open(path, encoding='utf-8')) for _, path in real_times]
+        report.write('  %d real ports (accepted variants, %d to %d lines) certified in %.2f s;\n'
+                     '  slowest %.1f ms (%s)\n'
+                     % (len(real_times), min(lines), max(lines), sum(t for t, _ in real_times),
+                        1000.0 * slowest, os.path.basename(slowest_path)))
 
     if failures:
         report.write('\nFAILURES (%d)\n\n' % len(failures))

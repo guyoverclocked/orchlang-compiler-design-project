@@ -591,7 +591,8 @@ which the exhaustive per-code-point measurement checks but cannot prove.
 
 The price of soundness is `λ`. A response of 4,096 tokens may decode to 512 KiB,
 and a chain of calls compounds it: on the real workflows the guaranteed bound
-exceeds the estimate by up to 25× (§9.6). A client-side byte cap (`max_bytes`)
+is 4 times the estimate where requests carry only inputs, and up to 128 times
+where they carry earlier responses (§9.6). A client-side byte cap (`max_bytes`)
 on the model is the practical remedy, and the language supports it.
 
 ---
@@ -727,7 +728,98 @@ function of content, not size, as Theorem 6 assumes a provider may make it.
 
 ### 9.6 RQ6: real workflows
 
-TODO-E11
+**Corpus and protocol.** The candidates are every workflow defined by the agent
+pattern notebooks of the Anthropic cookbook (7), every LangGraph tutorial
+notebook (25), and the first five user tasks of each AgentDojo v1 suite (20),
+each source pinned to a commit. The protocol (`bench/real/PROTOCOL.md`), the
+candidate list, the split and every label were committed before any port was
+written. Labels are properties of the source, derived by fixed rules: content
+from outside the workflow's trust boundary is untrusted, and for AgentDojo a
+tool response is untrusted exactly when AgentDojo's own canary injections reach
+it; a secret is data the source itself calls confidential. The expected
+diagnostics follow from the labels (`E233` when untrusted content reaches an
+effect's argument, `E235` when it decides whether an effect runs, `W237` for an
+untrusted branch with unequal arm costs). A candidate belongs to the development
+split if the first hex digit of the SHA-256 of its identifier is 0–4 (15
+candidates) and to the held-out split otherwise (37). Development ports were
+written first; the compiler was then frozen, and the 22 held-out ports were
+checked once against it. The harness fails if the compiler has changed since
+the freeze without a declared reason, if a candidate is in the wrong split, if a
+labelled diagnostic is missing, or if a stretch of prompt text of at least 20
+characters does not occur in the pinned source.
+
+**Expressiveness.** 30 candidates were ported and 22 excluded, each with a
+category fixed in advance (`bench/real/EXCLUSIONS.md`): the model chooses which
+node, tool or agent runs next (9), interactive input, concurrency or timing (4),
+duplicates differing only in model backend (4), cyclic graphs with more than one
+back edge (2), model-chosen reads (1), data-dependent iteration (1) and
+multimodal input (1). All 20 AgentDojo tasks were ported, as their ground-truth
+plans executed as fixed workflows (plan-then-execute), not as AgentDojo's
+tool-calling agent; 4 of 7 cookbook workflows and 6 of 25 LangGraph tutorials
+were. Seven ports needed an adaptation the language forces (for example, passing
+a whole response where the source extracts a field, or dropping an early exit
+decided by a response), each recorded with whether the certified bound still
+bounds the source. Five self-correction loops had to be unrolled, because a
+`retry` body cannot see its earlier attempts. Porting also forced one change to
+the language, during the development split: prompt templates could not contain
+literal braces, so no JSON schema or code could be written verbatim, and `{{`
+and `}}` were added as escapes.
+
+**Agreement with the labels.** Fifteen ports are labelled with an error and
+fifteen without. Every labelled error was reported, every port labelled clean
+was accepted, and the one warning expected on an accepted port (`W237` on
+`ac-route`) was reported. Three further `W237` labels fall on untrusted guards
+of effects, which the annotated variants must endorse, and an endorsed guard
+no longer warns; the protocol derives those variants' expected warnings
+accordingly.
+Two held-out ports, `lg-crag` and `ad-travel-1`, received an `E233` beyond their
+labelled `E235`: a value computed only from trusted data, inside an arm whose
+guard is untrusted, inherits the guard's integrity label. This is the integrity
+counterpart of the program-counter imprecision that §5.6 removes for
+confidentiality, and it is a false positive against the label rule. The harness
+was changed after the freeze to report such extra diagnostics as imprecision
+rather than fail on them; that deviation, and the two others made after the
+freeze, are recorded in the protocol with what prompted them. The fifteen
+rejected ports are accepted after 28 endorsements in total: one or two per
+AgentDojo task, four for `lg-crag` and eight for `lg-code-assistant`, each
+marking where the source lets untrusted content decide an effect.
+
+**The AgentDojo cross-check.** AgentDojo publishes its recorded attack runs. On
+the 20 ported tasks, the `important_instructions` attack succeeded against
+`gpt-4o-2024-05-13` 88 times. Every one of the 88 made a tool call the task's
+plan does not contain, or more calls to a planned effect than the plan makes;
+none stayed within the plan. The harness would have failed on a within-plan
+success against a task the checker accepts, and there was none to fail on. So it
+is the fixed plan, not the checker, that excludes every recorded attack. The
+checker's contribution is different: in 13 of the 20 tasks it marks where
+untrusted content can still steer a planned effect's arguments or decide whether
+it runs (in `ad-banking-0`, the amount and recipient of a payment come from a
+file an attacker can write), which the recorded attacks did not target.
+
+**Bounds.** All 30 accepted variants are certified. The guaranteed input bound is
+defined for 24 and undefined for the six that call a Claude model, whose
+tokenizer is unpublished, matching the label in all 30. Each port ran 200 times
+under the content-dependent provider and the content-sensitive tokenizer, half
+of the runs with every text input at its declared byte bound: in the 6,000 runs,
+neither the output bound nor the guaranteed input bound was exceeded. Re-billing
+every run's requests with the port's real tokenizer (`o200k_base`,
+`cl100k_base` or Mistral's) never exceeded the guaranteed bound either; the
+largest real bill was 0.24 of it. The guarantee is loose: it is 4.0 times the
+estimate on every AgentDojo port, whose requests carry only inputs (κ = 1
+against the estimate's four bytes per token), and 19 to 128 times on the four
+LangGraph ports with a guarantee, whose later requests carry earlier responses
+and pay `λ` bytes per response token (25 for Mistral, 128 for the tiktoken
+encodings). The estimate is not a bound: the content-sensitive tokenizer
+exceeded it in 28–100% of each port's runs; the real tokenizers exceeded it in
+none of the AgentDojo runs and in 3.5–41% of the runs of those four LangGraph
+ports. Because the runtime writes inputs and responses from a fixed word list
+that includes non-English and invented words, these rates describe the mock
+text, not a deployment.
+
+**The relational analysis.** No candidate has a secret, so no port declares one;
+`E236` and `W238` never fired, and every certificate reports a leakage of zero
+bits trivially. On real workflows the relational analysis has, so far, verified
+nothing.
 
 ### 9.7 Analysis cost
 
@@ -851,8 +943,10 @@ runs next. OrchLang's fixed shape is what makes its analyses decidable; a type
 system for agent loops would need bounds on the model's choices, which is a
 different paper.
 
-**The guaranteed bound is loose** by the factor `λ`, up to 25× the estimate on
-real workflows, unless models declare client-side byte caps.
+**The guaranteed bound is loose.** On real workflows it is 4 times the estimate
+where requests carry only inputs and up to 128 times where they carry earlier
+responses, which pay `λ` bytes per token, unless models declare client-side
+byte caps.
 
 **The certificate is not independently checked.** A small checker that re-derives
 the bound from the certificate and the source, with tampering tests, would make

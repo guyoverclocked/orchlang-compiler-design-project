@@ -161,8 +161,9 @@ tokenizer."
 
 Expected: `input <= 702913 @ 4 chars/token` as the estimate and
 `guaranteed input <= 17262535`. Say: "The guarantee is 25 times the estimate,
-because nothing stops a Mistral token from decoding to 25 bytes. A client-side byte
-cap on the model closes that gap; the language supports one."
+because nothing stops a Mistral token from decoding to 25 bytes. For GPT models
+it is 128 bytes, and one real workflow's guarantee is 128 times its estimate. A
+client-side byte cap on the model closes that gap; the language supports one."
 
 ---
 

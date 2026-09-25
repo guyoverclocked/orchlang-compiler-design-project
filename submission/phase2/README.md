@@ -43,7 +43,7 @@ npm run deck
 | Criterion | Marks | Where it is demonstrated |
 | --- | --- | --- |
 | Implementation Progress | 7 | Report §3–4, deck slides 10–13 |
-| Technical Correctness | 5 | Report §6–7, deck slides 14–17; 137 tests, four Coq theorems, both audits' counterexamples as regressions |
+| Technical Correctness | 5 | Report §6–7, deck slides 14–17; 137 tests, a lemma and three theorems in Coq, both audits' counterexamples as regressions |
 | Compiler Concept Application | 4 | Report §4.1 (Table 3), deck slides 12–13 |
 | Code Quality | 3 | Report §5 |
 | Testing | 3 | Report §6 (Tables 4–5), deck slides 14–16 |
