@@ -1,0 +1,51 @@
+$ orchc check case_studies/07_billing_side_channel/fixed.orch
+Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.
+HrAssistantUniformBill:
+  token bound   3515 / budget 20000
+  components    output <= 1200, input <= 2315 @ 4 chars/token
+  labels        3 secret, 0 untrusted
+[exit 0]
+
+$ orchc certify case_studies/07_billing_side_channel/fixed.orch
+{
+  "format": "orchlang-safety-certificate",
+  "version": 1,
+  "assumptions": {
+    "chars_per_token": 4,
+    "note": "The guaranteed component needs no tokenization assumption; the estimated component is sound only if the deployed tokenizer emits at most one token per chars_per_token characters."
+  },
+  "workflows": [
+    {
+      "name": "HrAssistantUniformBill",
+      "budget_tokens": 20000,
+      "bound": {"guaranteed_tokens": 1200, "estimated_tokens": 2315, "total_tokens": 3515, "component_sum_tokens": 3515, "within_budget": true, "defined": true, "cost": 0.000000, "cost_complete": false},
+      "derivation": [
+        {"depth": 0, "rule": "branch", "detail": "on_improvement_plan", "guaranteed_tokens": 0, "estimated_tokens": 0, "line": 18},
+        {"depth": 1, "rule": "call", "detail": "detailed = careful via large [out<=1200, in<=15+2300]", "guaranteed_tokens": 1200, "estimated_tokens": 2315, "line": 19},
+        {"depth": 1, "rule": "call", "detail": "brief = general via large [out<=1200, in<=15+2300]", "guaranteed_tokens": 1200, "estimated_tokens": 2315, "line": 21},
+        {"depth": 0, "rule": "branch-max", "detail": "max(then=3515, else=3515)", "guaranteed_tokens": 1200, "estimated_tokens": 2315, "line": 18}
+      ],
+      "bindings": [
+        {"scope": "workflow:HrAssistantUniformBill", "name": "careful", "kind": "prompt", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:HrAssistantUniformBill", "name": "general", "kind": "prompt", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:HrAssistantUniformBill", "name": "handbook", "kind": "input", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": 2000},
+        {"scope": "workflow:HrAssistantUniformBill", "name": "large", "kind": "model", "type": "<unknown>", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:HrAssistantUniformBill", "name": "on_improvement_plan", "kind": "secret", "type": "boolean", "confidentiality": "secret", "integrity": "trusted", "token_bound": 1},
+        {"scope": "workflow:HrAssistantUniformBill", "name": "question", "kind": "input", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": 300},
+        {"scope": "workflow:HrAssistantUniformBill::prompt:careful", "name": "policy", "kind": "prompt-parameter", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:HrAssistantUniformBill::prompt:careful", "name": "q", "kind": "prompt-parameter", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:HrAssistantUniformBill::prompt:general", "name": "policy", "kind": "prompt-parameter", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:HrAssistantUniformBill::prompt:general", "name": "q", "kind": "prompt-parameter", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:HrAssistantUniformBill::then@18", "name": "detailed", "kind": "local-result", "type": "text", "confidentiality": "secret", "integrity": "trusted", "token_bound": 1200},
+        {"scope": "workflow:HrAssistantUniformBill::else@18", "name": "brief", "kind": "local-result", "type": "text", "confidentiality": "secret", "integrity": "trusted", "token_bound": 1200}
+      ],
+      "reclassifications": [
+      ],
+      "relational_obligations": [
+        {"guard": "on_improvement_plan", "discharged": true, "detail": "both arms bill large(in=15 + |handbook| + |question|)", "line": 18}
+      ],
+      "sinks": [
+      ]
+    }
+  ]
+}

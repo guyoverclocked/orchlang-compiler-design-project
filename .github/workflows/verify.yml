@@ -1,0 +1,41 @@
+# Independent, public evidence that OrchLang works: every push rebuilds the
+# compiler from a clean checkout on Linux and macOS and runs ./verify.sh, which
+# fails unless the tests, sanitizers, benchmark, live demo and case studies all
+# reproduce the committed results.  Each run uploads its EVIDENCE.txt.
+name: verify
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    name: verify (${{ matrix.os }})
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - name: Toolchain
+        run: |
+          uname -a
+          c++ --version
+          make --version | head -n 1
+          python3 --version
+      - name: Verify
+        run: ./verify.sh
+      - name: Evidence
+        if: always()
+        run: cat verification/EVIDENCE.txt || true
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: verification-${{ matrix.os }}
+          path: verification/

@@ -1,0 +1,22 @@
+// Case study 4, vulnerable: LangChain LLMMathChain, CVE-2023-29374 (GHSA-fprp-p869-w6q2).
+// "In LangChain through 0.0.131, the LLMMathChain chain allows prompt injection
+// attacks that can execute arbitrary code via the Python exec method."
+// The same pattern in PALChain is CVE-2023-36258.
+//
+// The chain asks a model to turn the user's maths question into Python, then
+// runs whatever comes back.  A question that says "ignore that and write
+// os.system(...)" is executed.
+//
+// In a public-facing app the question is typed by whoever is on the other end,
+// so it is untrusted.  Running code is the most external effect there is.
+workflow MathChain budget 5000 {
+  input question: text untrusted max_tokens 300;
+  model llm = mock("llm") max_tokens 400;
+  tool python_exec(code: text);
+
+  prompt to_code(q: text) -> text = "Translate this maths problem into Python: {q}";
+
+  let code: text = call to_code(question) using llm;
+  emit python_exec(code);
+  output code;
+}

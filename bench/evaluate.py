@@ -47,7 +47,9 @@ import time
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
-RESULTS = os.path.join(HERE, 'results')
+# Overridable so `make verify` can reproduce the results without overwriting
+# the committed ones, then compare the two.
+RESULTS = os.environ.get('ORCHLANG_RESULTS_DIR', os.path.join(HERE, 'results'))
 ORCHC = os.path.join(ROOT, 'orchc.exe' if os.name == 'nt' else 'orchc')
 
 SEEDS = 200

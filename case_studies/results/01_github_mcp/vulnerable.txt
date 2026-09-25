@@ -1,0 +1,3 @@
+$ orchc check case_studies/01_github_mcp/vulnerable.orch
+case_studies/01_github_mcp/vulnerable.orch:25:26: error [E233] untrusted value reaches tool 'open_pull_request'; model output derived from untrusted input must be endorsed before it can drive an external effect
+[exit 1]

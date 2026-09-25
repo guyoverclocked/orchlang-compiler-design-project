@@ -1,0 +1,323 @@
+{
+  "cases": [
+    {
+      "files": [
+        {
+          "codes": [
+            "E233"
+          ],
+          "diagnostics": [
+            "case_studies/01_github_mcp/vulnerable.orch:25:26: error [E233] untrusted value reaches tool 'open_pull_request'; model output derived from untrusted input must be endorsed before it can drive an external effect"
+          ],
+          "exit": 1,
+          "file": "case_studies/01_github_mcp/vulnerable.orch",
+          "role": "vulnerable",
+          "sha256": "0ed8db6106a2c7d6754fb6caf754c228114b427e94f60bd8f29853b7de6762ae"
+        },
+        {
+          "budget_tokens": 20000,
+          "certified_tokens": 6715,
+          "codes": [],
+          "escape_hatches": [
+            {
+              "justification": "the developer lets their own agent read their private repositories",
+              "operation": "declassify",
+              "source": "private_repo"
+            },
+            {
+              "justification": "a maintainer reads the diff before the pull request is opened",
+              "operation": "endorse",
+              "source": "patch"
+            }
+          ],
+          "exit": 0,
+          "file": "case_studies/01_github_mcp/fixed.orch",
+          "role": "fixed",
+          "sha256": "571a3bc2635dcdc138ce15a505155e129c3f0509d3d2bc55afbea64c10a11ad0"
+        }
+      ],
+      "id": "01_github_mcp",
+      "incident": "Invariant Labs, 26 May 2025",
+      "source": "https://invariantlabs.ai/blog/mcp-github-vulnerability",
+      "title": "GitHub MCP toxic agent flow"
+    },
+    {
+      "files": [
+        {
+          "codes": [
+            "E233"
+          ],
+          "diagnostics": [
+            "case_studies/02_supabase_mcp/vulnerable.orch:22:16: error [E233] untrusted value reaches tool 'run_sql'; model output derived from untrusted input must be endorsed before it can drive an external effect"
+          ],
+          "exit": 1,
+          "file": "case_studies/02_supabase_mcp/vulnerable.orch",
+          "role": "vulnerable",
+          "sha256": "514d016876b86aafb54218bb1214f9242ca07f1f1296771cf6744812da7b647c"
+        },
+        {
+          "budget_tokens": 20000,
+          "certified_tokens": 1820,
+          "codes": [],
+          "escape_hatches": [],
+          "exit": 0,
+          "file": "case_studies/02_supabase_mcp/fixed.orch",
+          "role": "fixed",
+          "sha256": "51e6c455b61e998cbbe589b308b32e47dd83e3e50bce302279cef0d2981f495a"
+        }
+      ],
+      "id": "02_supabase_mcp",
+      "incident": "General Analysis, 8 July 2025",
+      "source": "https://generalanalysis.com/blog/supabase-mcp-blog",
+      "title": "Supabase MCP support-ticket leak"
+    },
+    {
+      "files": [
+        {
+          "codes": [
+            "E233"
+          ],
+          "diagnostics": [
+            "case_studies/03_echoleak/vulnerable.orch:26:27: error [E233] untrusted value reaches tool 'render_with_images'; model output derived from untrusted input must be endorsed before it can drive an external effect"
+          ],
+          "exit": 1,
+          "file": "case_studies/03_echoleak/vulnerable.orch",
+          "role": "vulnerable",
+          "sha256": "d8cb9b12b35fdf892bfcbff2c87c86e24a72a3a722fa9e294ac2b203e4e59f3c"
+        },
+        {
+          "budget_tokens": 20000,
+          "certified_tokens": 6216,
+          "codes": [],
+          "escape_hatches": [
+            {
+              "justification": "the user's assistant may read the user's own files",
+              "operation": "declassify",
+              "source": "internal_files"
+            }
+          ],
+          "exit": 0,
+          "file": "case_studies/03_echoleak/fixed.orch",
+          "role": "fixed",
+          "sha256": "ef8bae8c473873bea6f3ddddff9bd270c55afb95dcb3986672035ee8cf607f62"
+        },
+        {
+          "budget_tokens": 20000,
+          "certified_tokens": 6216,
+          "codes": [],
+          "escape_hatches": [
+            {
+              "justification": "the user's assistant may read the user's own files",
+              "operation": "declassify",
+              "source": "internal_files"
+            }
+          ],
+          "exit": 0,
+          "file": "case_studies/03_echoleak/limitation_rendering_undeclared.orch",
+          "role": "limitation",
+          "sha256": "68e1994298a491cd8b8d147f9822816fb7e7dff95612dc02ae82c3eb118a0340"
+        }
+      ],
+      "id": "03_echoleak",
+      "incident": "Aim Security, June 2025; arXiv:2509.10540",
+      "source": "https://arxiv.org/abs/2509.10540",
+      "title": "EchoLeak zero-click exfiltration, CVE-2025-32711"
+    },
+    {
+      "files": [
+        {
+          "codes": [
+            "E233"
+          ],
+          "diagnostics": [
+            "case_studies/04_langchain_exec/vulnerable.orch:20:20: error [E233] untrusted value reaches tool 'python_exec'; model output derived from untrusted input must be endorsed before it can drive an external effect"
+          ],
+          "exit": 1,
+          "file": "case_studies/04_langchain_exec/vulnerable.orch",
+          "role": "vulnerable",
+          "sha256": "57cf61062e18c159b0b9c4e9078e0636f5587a686db6eb1cb9defda64b808ae0"
+        },
+        {
+          "budget_tokens": 5000,
+          "certified_tokens": 716,
+          "codes": [],
+          "escape_hatches": [
+            {
+              "justification": "accepted only if it parses as digits, operators and parentheses",
+              "operation": "endorse",
+              "source": "expression"
+            }
+          ],
+          "exit": 0,
+          "file": "case_studies/04_langchain_exec/fixed.orch",
+          "role": "fixed",
+          "sha256": "2dee218cddc5d198ea5a5ea467155900233daf699a2adf44a976d36653353db7"
+        },
+        {
+          "budget_tokens": 5000,
+          "certified_tokens": 712,
+          "codes": [],
+          "escape_hatches": [],
+          "exit": 0,
+          "file": "case_studies/04_langchain_exec/limitation_trusted_input.orch",
+          "role": "limitation",
+          "sha256": "2779715e4ad41db7ccb35f354bf19fd25db462567f56898b435c75029f2ecbe5"
+        }
+      ],
+      "id": "04_langchain_exec",
+      "incident": "GHSA-fprp-p869-w6q2, April 2023",
+      "source": "https://osv.dev/vulnerability/GHSA-fprp-p869-w6q2",
+      "title": "LangChain LLMMathChain code execution, CVE-2023-29374"
+    },
+    {
+      "files": [
+        {
+          "codes": [
+            "E230",
+            "E231"
+          ],
+          "diagnostics": [
+            "case_studies/05_credentials_in_prompt/vulnerable.orch:19:33: error [E230] secret value cannot be passed to prompt 'system'; use 'declassify' with a written justification if this is intended",
+            "case_studies/05_credentials_in_prompt/vulnerable.orch:20:10: error [E231] secret value cannot be exposed as workflow output"
+          ],
+          "exit": 1,
+          "file": "case_studies/05_credentials_in_prompt/vulnerable.orch",
+          "role": "vulnerable",
+          "sha256": "500184319edd0d8834159ce29a2f20aa5065a553da3b0ea5c9f8f21816a16ce9"
+        },
+        {
+          "budget_tokens": 10000,
+          "certified_tokens": 1125,
+          "codes": [],
+          "escape_hatches": [],
+          "exit": 0,
+          "file": "case_studies/05_credentials_in_prompt/fixed.orch",
+          "role": "fixed",
+          "sha256": "d800827350234456cd7ce655e2bbc4804da814098096fc4ac5dc4e8ee9c0c06b"
+        }
+      ],
+      "id": "05_credentials_in_prompt",
+      "incident": "OWASP LLM07:2025 example scenario",
+      "source": "https://genai.owasp.org/llmrisk/llm072025-system-prompt-leakage/",
+      "title": "Credential in the system prompt"
+    },
+    {
+      "experiment": {
+        "budget": 16000,
+        "fixed": {
+          "certified_tokens": 12876,
+          "max_observed": 10888,
+          "median_observed": 4271,
+          "runs_over_budget": 0,
+          "runs_over_certified_bound": 0,
+          "runs_over_hand_added_estimate": 76
+        },
+        "hand_added_estimate": 5225,
+        "seeds": 200,
+        "vulnerable": {
+          "certified_tokens": 30604,
+          "max_observed": 18540,
+          "median_observed": 4940,
+          "runs_over_budget": 3,
+          "runs_over_certified_bound": 0,
+          "runs_over_hand_added_estimate": 95
+        }
+      },
+      "files": [
+        {
+          "codes": [
+            "E260"
+          ],
+          "diagnostics": [
+            "case_studies/06_retry_overrun/vulnerable.orch:12:1: error [E260] certified token bound 30604 (guaranteed 6400 + estimated 24204) exceeds workflow budget 16000"
+          ],
+          "exit": 1,
+          "file": "case_studies/06_retry_overrun/vulnerable.orch",
+          "role": "vulnerable",
+          "sha256": "a9058873e378ccfc679f3519601f48cc4c63b795e6b81f4784a3dab60619d39f"
+        },
+        {
+          "budget_tokens": 16000,
+          "certified_tokens": 12876,
+          "codes": [],
+          "escape_hatches": [],
+          "exit": 0,
+          "file": "case_studies/06_retry_overrun/fixed.orch",
+          "role": "fixed",
+          "sha256": "c9799fc99c0757d51a7d17f58ff58c07dcce725a22be557a3e01028bf5345f63"
+        }
+      ],
+      "id": "06_retry_overrun",
+      "incident": "Token Budgets catalogue, arXiv:2606.04056 (retry-loop cluster)",
+      "source": "https://arxiv.org/abs/2606.04056",
+      "title": "Retry loop budget overrun"
+    },
+    {
+      "experiment": {
+        "fixed": {
+          "pairs": 25,
+          "pairs_with_different_bill": 0,
+          "witness": null
+        },
+        "public_pins": {
+          "handbook": 1500,
+          "question": 120
+        },
+        "secret": "on_improvement_plan",
+        "seeds": 25,
+        "vulnerable": {
+          "pairs": 25,
+          "pairs_with_different_bill": 25,
+          "witness": {
+            "secret_false": {
+              "small": [
+                1,
+                125,
+                265
+              ]
+            },
+            "secret_true": {
+              "large": [
+                1,
+                1635,
+                35
+              ]
+            },
+            "seed": 1
+          }
+        }
+      },
+      "files": [
+        {
+          "codes": [
+            "E236"
+          ],
+          "diagnostics": [
+            "case_studies/07_billing_side_channel/vulnerable.orch:29:3: error [E236] this branch is guarded by a secret and its two arms bill differently, so the bill reveals the secret; then-arm bills [large(in=15 + |handbook| + |question|)] and else-arm bills [small(in=5 + |question|)]"
+          ],
+          "exit": 1,
+          "file": "case_studies/07_billing_side_channel/vulnerable.orch",
+          "role": "vulnerable",
+          "sha256": "ea223a17977258009564186fefe3a846867197770f57723c15126c320335cb5c"
+        },
+        {
+          "budget_tokens": 20000,
+          "certified_tokens": 3515,
+          "codes": [],
+          "escape_hatches": [],
+          "exit": 0,
+          "file": "case_studies/07_billing_side_channel/fixed.orch",
+          "role": "fixed",
+          "sha256": "59f54354478e54dd3afaa10a536f2cc7d5d086aa7f0e3cb35ac706e6fac29517"
+        }
+      ],
+      "id": "07_billing_side_channel",
+      "incident": "Grounded in USENIX Security 2024, arXiv:2412.15431, arXiv:2511.03675",
+      "source": "https://arxiv.org/abs/2511.03675",
+      "title": "Bill reveals a confidential flag (constructed scenario)"
+    }
+  ],
+  "failures": [],
+  "format": "orchlang-case-study-results",
+  "version": 1
+}

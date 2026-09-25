@@ -302,6 +302,26 @@ A scripted, offline live demo ships with the repository. On a MacBook:
 **[DEMO.md](DEMO.md)** is the presenter's guide: setup, a pre-talk checklist,
 what to say in each of the 13 scenes, likely questions, and troubleshooting.
 
+### Checking that it all works
+
+```sh
+./verify.sh         # or: make verify
+```
+
+This builds from clean with `-Werror`, runs the tests, sanitizers, benchmark,
+demo rehearsal and case studies, and checks that every committed result
+reproduces exactly. It writes `verification/EVIDENCE.txt` with the commit, the
+toolchain, and SHA-256 digests. GitHub Actions runs the same script on Linux and
+macOS on every push.
+
+### Real incidents
+
+**[docs/CASE_STUDY.md](docs/CASE_STUDY.md)** models seven real-world failures
+in OrchLang, with citations, and shows the compiler rejecting each vulnerable
+workflow and accepting its repair: the GitHub and Supabase MCP prompt-injection
+leaks, EchoLeak (CVE-2025-32711), LangChain's CVE-2023-29374, a credential in a
+system prompt, a retry-loop budget overrun, and a billing side channel.
+
 ---
 
 ## Every command
@@ -394,6 +414,8 @@ Branch-awareness isn't the missing piece — retries are.
 ```
 src/ include/     the compiler — 5,340 lines of C++17, 12 sources + 15 headers
 demo.sh DEMO.md   the scripted live demo and its presenter's guide
+verify.sh         end-to-end verification, also run by CI on Linux and macOS
+case_studies/     seven real incidents modelled in OrchLang, with a checker
 tests/            95 assertions
 examples/         34 programs: valid, invalid, boundary
 bench/            corpus generator, evaluation harness, and results
@@ -410,7 +432,8 @@ Worth reading, in order:
 1. **[docs/LANGUAGE_SPEC.md](docs/LANGUAGE_SPEC.md)** — the grammar and every rule
 2. **[docs/PAPER.md](docs/PAPER.md)** — the full write-up, claims and limitations
 3. **[DEMO.md](DEMO.md)** — the live demo, scene by scene, verified by `./demo.sh check`
-4. **[audit/2026-09-17/](audit/2026-09-17/)** — the review that found the bug above
+4. **[docs/CASE_STUDY.md](docs/CASE_STUDY.md)** — seven real incidents, and what the compiler says about each
+5. **[audit/2026-09-17/](audit/2026-09-17/)** — the review that found the bug above
 
 ---
 

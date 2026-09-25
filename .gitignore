@@ -16,3 +16,9 @@
 # package.json is tracked so `npm install` alone is enough.
 node_modules/
 package-lock.json
+
+# Output of ./verify.sh: logs and EVIDENCE.txt from the last local run.
+/verification/
+
+# Python bytecode from the benchmark and case-study scripts.
+__pycache__/

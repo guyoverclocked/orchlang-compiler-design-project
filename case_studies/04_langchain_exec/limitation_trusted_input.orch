@@ -1,0 +1,17 @@
+// Case study 4, limitation: the vulnerable chain with its input mislabelled.
+//
+// Identical to vulnerable.orch except that the question is declared as a
+// trusted input.  OrchLang accepts it.  Labels are declarations: the compiler
+// enforces what follows from them, and cannot know that text typed by a
+// stranger was declared trusted.  This file keeps that boundary visible.
+workflow MathChainMislabelled budget 5000 {
+  input question: text max_tokens 300;
+  model llm = mock("llm") max_tokens 400;
+  tool python_exec(code: text);
+
+  prompt to_code(q: text) -> text = "Translate this maths problem into Python: {q}";
+
+  let code: text = call to_code(question) using llm;
+  emit python_exec(code);
+  output code;
+}

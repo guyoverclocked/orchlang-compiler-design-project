@@ -1,0 +1,16 @@
+// Case study 5, fixed: the credential never enters the workflow.
+//
+// The key belongs to the payments service, which authenticates on its own; the
+// model never sees it, so no reply can contain it.  This is the OWASP guidance:
+// "Sensitive data such as credentials, connection strings, etc. should not be
+// contained within the system prompt language."
+workflow BillingSupportBotNoKey budget 10000 {
+  input customer_message: text max_tokens 500;
+  model assistant = mock("assistant") max_tokens 600;
+
+  prompt system(message: text) -> text =
+      "You are the billing assistant. Refunds are issued by the payments service. Customer says: {message}";
+
+  let reply: text = call system(customer_message) using assistant;
+  output reply;
+}

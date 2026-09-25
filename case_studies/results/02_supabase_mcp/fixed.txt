@@ -1,0 +1,40 @@
+$ orchc check case_studies/02_supabase_mcp/fixed.orch
+Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.
+SupportTicketAgentDraftOnly:
+  token bound   1820 / budget 20000
+  components    output <= 800, input <= 1020 @ 4 chars/token
+  labels        0 secret, 2 untrusted
+[exit 0]
+
+$ orchc certify case_studies/02_supabase_mcp/fixed.orch
+{
+  "format": "orchlang-safety-certificate",
+  "version": 1,
+  "assumptions": {
+    "chars_per_token": 4,
+    "note": "The guaranteed component needs no tokenization assumption; the estimated component is sound only if the deployed tokenizer emits at most one token per chars_per_token characters."
+  },
+  "workflows": [
+    {
+      "name": "SupportTicketAgentDraftOnly",
+      "budget_tokens": 20000,
+      "bound": {"guaranteed_tokens": 800, "estimated_tokens": 1020, "total_tokens": 1820, "component_sum_tokens": 1820, "within_budget": true, "defined": true, "cost": 0.000000, "cost_complete": false},
+      "derivation": [
+        {"depth": 0, "rule": "call", "detail": "sql = review via agent [out<=800, in<=20+1000]", "guaranteed_tokens": 800, "estimated_tokens": 1020, "line": 15}
+      ],
+      "bindings": [
+        {"scope": "workflow:SupportTicketAgentDraftOnly", "name": "agent", "kind": "model", "type": "<unknown>", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:SupportTicketAgentDraftOnly", "name": "review", "kind": "prompt", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:SupportTicketAgentDraftOnly", "name": "sql", "kind": "local-result", "type": "text", "confidentiality": "public", "integrity": "untrusted", "token_bound": 800},
+        {"scope": "workflow:SupportTicketAgentDraftOnly", "name": "ticket_message", "kind": "input", "type": "text", "confidentiality": "public", "integrity": "untrusted", "token_bound": 1000},
+        {"scope": "workflow:SupportTicketAgentDraftOnly::prompt:review", "name": "message", "kind": "prompt-parameter", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null}
+      ],
+      "reclassifications": [
+      ],
+      "relational_obligations": [
+      ],
+      "sinks": [
+      ]
+    }
+  ]
+}

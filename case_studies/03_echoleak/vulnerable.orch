@@ -1,0 +1,28 @@
+// Case study 3, vulnerable: EchoLeak, CVE-2025-32711 (Microsoft 365 Copilot, CVSS 9.3).
+// Aim Security, June 2025; Reddy and Gujral, arXiv:2509.10540.
+//
+// An attacker sends the victim an ordinary-looking email containing hidden
+// instructions.  Later the victim asks their assistant a question; the
+// assistant retrieves that email together with the victim's internal files and
+// is steered into writing an image reference whose URL carries the file
+// contents.  The client fetches the image automatically, so the data leaves
+// with no click at all.
+//
+// Email from outside is untrusted.  The assistant is meant to read the user's
+// own files, which is the declassify.  Auto-fetching an image in the answer is
+// an outbound request, so rendering is declared as a tool.
+workflow MailAssistant budget 20000 {
+  input user_question: text max_tokens 200;
+  input inbound_email: text untrusted max_tokens 2000;
+  secret internal_files: text max_tokens 3000;
+  model assistant = mock("assistant") max_tokens 1000;
+  tool render_with_images(markdown: text);
+
+  prompt answer(question: text, mail: text, files: text) -> text =
+      "Question: {question} Recent mail: {mail} Relevant files: {files}";
+
+  declassify(internal_files) as file_context: text because "the user's assistant may read the user's own files";
+  let reply: text = call answer(user_question, inbound_email, file_context) using assistant;
+  emit render_with_images(reply);
+  output reply;
+}

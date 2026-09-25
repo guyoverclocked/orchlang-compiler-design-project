@@ -1,0 +1,28 @@
+// Case study 6, vulnerable: a retry loop that spends far more than it appears to.
+// Khan, "Token Budgets", arXiv:2606.04056 (2026): of 63 catalogued production
+// budget-overrun incidents across 21 agent frameworks, the largest cluster,
+// retry loops, holds 27 incidents across 12 frameworks.  OWASP LLM10:2025
+// Unbounded Consumption calls the financial form "Denial of Wallet".
+//
+// An invoice-extraction agent reads a long document with a large model, then
+// asks a small model to validate the extraction, retrying the validation up to
+// three times and the whole attempt up to four times.  The developer adds up
+// the two calls in the source (about 5,200 tokens), allows three times that
+// for safety, and sets the budget to 16,000.
+workflow InvoiceExtractor budget 16000 {
+  input document: text max_tokens 3000;
+  model extractor = mock("large") max_tokens 1000;
+  model checker = mock("small") max_tokens 200;
+
+  prompt extract(doc: text) -> text = "Extract every line item and total from: {doc}";
+  prompt validate(draft: text) -> text = "Check this extraction for arithmetic errors: {draft}";
+
+  retry 4 {
+    let draft: text = call extract(document) using extractor;
+    retry 3 {
+      let verdict: text = call validate(draft) using checker;
+    }
+  }
+
+  output document;
+}

@@ -1,0 +1,3 @@
+$ orchc check case_studies/02_supabase_mcp/vulnerable.orch
+case_studies/02_supabase_mcp/vulnerable.orch:22:16: error [E233] untrusted value reaches tool 'run_sql'; model output derived from untrusted input must be endorsed before it can drive an external effect
+[exit 1]

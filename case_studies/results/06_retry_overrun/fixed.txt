@@ -1,0 +1,49 @@
+$ orchc check case_studies/06_retry_overrun/fixed.orch
+Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.
+InvoiceExtractorBounded:
+  token bound   12876 / budget 16000
+  components    output <= 2800, input <= 10076 @ 4 chars/token
+  labels        0 secret, 0 untrusted
+[exit 0]
+
+$ orchc certify case_studies/06_retry_overrun/fixed.orch
+{
+  "format": "orchlang-safety-certificate",
+  "version": 1,
+  "assumptions": {
+    "chars_per_token": 4,
+    "note": "The guaranteed component needs no tokenization assumption; the estimated component is sound only if the deployed tokenizer emits at most one token per chars_per_token characters."
+  },
+  "workflows": [
+    {
+      "name": "InvoiceExtractorBounded",
+      "budget_tokens": 16000,
+      "bound": {"guaranteed_tokens": 2800, "estimated_tokens": 10076, "total_tokens": 12876, "component_sum_tokens": 12876, "within_budget": true, "defined": true, "cost": 0.000000, "cost_complete": false},
+      "derivation": [
+        {"depth": 0, "rule": "retry", "detail": "bound 2", "guaranteed_tokens": 0, "estimated_tokens": 0, "line": 15},
+        {"depth": 1, "rule": "call", "detail": "draft = extract via extractor [out<=1000, in<=12+3000]", "guaranteed_tokens": 1000, "estimated_tokens": 3012, "line": 16},
+        {"depth": 1, "rule": "retry", "detail": "bound 2", "guaranteed_tokens": 0, "estimated_tokens": 0, "line": 17},
+        {"depth": 2, "rule": "call", "detail": "verdict = validate via checker [out<=200, in<=13+1000]", "guaranteed_tokens": 200, "estimated_tokens": 1013, "line": 18},
+        {"depth": 1, "rule": "retry-scale", "detail": "2 x 1213", "guaranteed_tokens": 400, "estimated_tokens": 2026, "line": 17},
+        {"depth": 0, "rule": "retry-scale", "detail": "2 x 6438", "guaranteed_tokens": 2800, "estimated_tokens": 10076, "line": 15}
+      ],
+      "bindings": [
+        {"scope": "workflow:InvoiceExtractorBounded", "name": "checker", "kind": "model", "type": "<unknown>", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:InvoiceExtractorBounded", "name": "document", "kind": "input", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": 3000},
+        {"scope": "workflow:InvoiceExtractorBounded", "name": "extract", "kind": "prompt", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:InvoiceExtractorBounded", "name": "extractor", "kind": "model", "type": "<unknown>", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:InvoiceExtractorBounded", "name": "validate", "kind": "prompt", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:InvoiceExtractorBounded::prompt:extract", "name": "doc", "kind": "prompt-parameter", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:InvoiceExtractorBounded::prompt:validate", "name": "draft", "kind": "prompt-parameter", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:InvoiceExtractorBounded::retry@15", "name": "draft", "kind": "local-result", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": 1000},
+        {"scope": "workflow:InvoiceExtractorBounded::retry@17", "name": "verdict", "kind": "local-result", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": 200}
+      ],
+      "reclassifications": [
+      ],
+      "relational_obligations": [
+      ],
+      "sinks": [
+      ]
+    }
+  ]
+}

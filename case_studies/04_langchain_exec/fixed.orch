@@ -1,0 +1,21 @@
+// Case study 4, fixed: LangChain LLMMathChain, CVE-2023-29374.
+//
+// The model's output reaches the evaluator only through a declared validation
+// step, written down as an endorsement with its reason.  LangChain's own fix
+// replaced exec with the numexpr expression evaluator.  That evaluator later
+// received its own code-execution CVE (CVE-2023-39631), which is exactly why
+// OrchLang records the reason instead of trusting it silently: the
+// certificate tells an auditor which assumption to re-check when a validator
+// turns out to be weaker than claimed.
+workflow MathChainValidated budget 5000 {
+  input question: text untrusted max_tokens 300;
+  model llm = mock("llm") max_tokens 400;
+  tool evaluate_arithmetic(expression: text);
+
+  prompt to_code(q: text) -> text = "Translate this maths problem into an arithmetic expression: {q}";
+
+  let expression: text = call to_code(question) using llm;
+  endorse(expression) as checked_expression: text because "accepted only if it parses as digits, operators and parentheses";
+  emit evaluate_arithmetic(checked_expression);
+  output expression;
+}

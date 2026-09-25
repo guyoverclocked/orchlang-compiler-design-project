@@ -1,0 +1,4 @@
+$ orchc check case_studies/05_credentials_in_prompt/vulnerable.orch
+case_studies/05_credentials_in_prompt/vulnerable.orch:19:33: error [E230] secret value cannot be passed to prompt 'system'; use 'declassify' with a written justification if this is intended
+case_studies/05_credentials_in_prompt/vulnerable.orch:20:10: error [E231] secret value cannot be exposed as workflow output
+[exit 1]

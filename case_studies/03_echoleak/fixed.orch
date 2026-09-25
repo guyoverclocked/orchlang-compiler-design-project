@@ -1,0 +1,19 @@
+// Case study 3, fixed: EchoLeak, CVE-2025-32711.
+//
+// The answer is returned as data and rendered without fetching anything, so an
+// injected image URL is inert text.  OrchLang allows an untrusted value to be
+// returned, because the caller receives data, not an instruction.  It refuses
+// to let that value drive an outbound request.
+workflow MailAssistantNoAutoFetch budget 20000 {
+  input user_question: text max_tokens 200;
+  input inbound_email: text untrusted max_tokens 2000;
+  secret internal_files: text max_tokens 3000;
+  model assistant = mock("assistant") max_tokens 1000;
+
+  prompt answer(question: text, mail: text, files: text) -> text =
+      "Question: {question} Recent mail: {mail} Relevant files: {files}";
+
+  declassify(internal_files) as file_context: text because "the user's assistant may read the user's own files";
+  let reply: text = call answer(user_question, inbound_email, file_context) using assistant;
+  output reply;
+}

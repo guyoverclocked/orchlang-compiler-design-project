@@ -1,0 +1,3 @@
+$ orchc check case_studies/06_retry_overrun/vulnerable.orch
+case_studies/06_retry_overrun/vulnerable.orch:12:1: error [E260] certified token bound 30604 (guaranteed 6400 + estimated 24204) exceeds workflow budget 16000
+[exit 1]

@@ -1,0 +1,3 @@
+$ orchc check case_studies/07_billing_side_channel/vulnerable.orch
+case_studies/07_billing_side_channel/vulnerable.orch:29:3: error [E236] this branch is guarded by a secret and its two arms bill differently, so the bill reveals the secret; then-arm bills [large(in=15 + |handbook| + |question|)] and else-arm bills [small(in=5 + |question|)]
+[exit 1]

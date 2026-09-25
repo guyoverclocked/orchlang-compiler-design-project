@@ -1,0 +1,59 @@
+OrchLang case studies
+=====================
+
+01_github_mcp  GitHub MCP toxic agent flow
+    incident: Invariant Labs, 26 May 2025
+    source:   https://invariantlabs.ai/blog/mcp-github-vulnerability
+    ok   vulnerable vulnerable.orch                          rejected E233
+    ok   fixed      fixed.orch                               accepted bound 6715
+
+02_supabase_mcp  Supabase MCP support-ticket leak
+    incident: General Analysis, 8 July 2025
+    source:   https://generalanalysis.com/blog/supabase-mcp-blog
+    ok   vulnerable vulnerable.orch                          rejected E233
+    ok   fixed      fixed.orch                               accepted bound 1820
+
+03_echoleak  EchoLeak zero-click exfiltration, CVE-2025-32711
+    incident: Aim Security, June 2025; arXiv:2509.10540
+    source:   https://arxiv.org/abs/2509.10540
+    ok   vulnerable vulnerable.orch                          rejected E233
+    ok   fixed      fixed.orch                               accepted bound 6216
+    ok   limitation limitation_rendering_undeclared.orch     accepted bound 6216
+
+04_langchain_exec  LangChain LLMMathChain code execution, CVE-2023-29374
+    incident: GHSA-fprp-p869-w6q2, April 2023
+    source:   https://osv.dev/vulnerability/GHSA-fprp-p869-w6q2
+    ok   vulnerable vulnerable.orch                          rejected E233
+    ok   fixed      fixed.orch                               accepted bound 716
+    ok   limitation limitation_trusted_input.orch            accepted bound 712
+
+05_credentials_in_prompt  Credential in the system prompt
+    incident: OWASP LLM07:2025 example scenario
+    source:   https://genai.owasp.org/llmrisk/llm072025-system-prompt-leakage/
+    ok   vulnerable vulnerable.orch                          rejected E230 E231
+    ok   fixed      fixed.orch                               accepted bound 1125
+
+06_retry_overrun  Retry loop budget overrun
+    incident: Token Budgets catalogue, arXiv:2606.04056 (retry-loop cluster)
+    source:   https://arxiv.org/abs/2606.04056
+    ok   vulnerable vulnerable.orch                          rejected E260
+    ok   fixed      fixed.orch                               accepted bound 12876
+    cost experiment, 200 seeds each; hand-added estimate 5225 tokens, budget 16000
+      vulnerable certified  30604  max  18540  median   4940  over estimate  95  over budget   3  over certified 0
+      fixed      certified  12876  max  10888  median   4271  over estimate  76  over budget   0  over certified 0
+
+07_billing_side_channel  Bill reveals a confidential flag (constructed scenario)
+    incident: Grounded in USENIX Security 2024, arXiv:2412.15431, arXiv:2511.03675
+    source:   https://arxiv.org/abs/2511.03675
+    ok   vulnerable vulnerable.orch                          rejected E236
+    ok   fixed      fixed.orch                               accepted bound 3515
+    paired billing experiment, 25 seeds, public inputs pinned, secret flipped
+      vulnerable bill changed with the secret in 25 of 25 pairs
+      fixed      bill changed with the secret in 0 of 25 pairs
+      witness, seed 1: secret false bills {small: 1 call, 125 in, 265 out}; secret true bills {large: 1 call, 1635 in, 35 out}
+
+Summary
+    vulnerable workflows rejected with the expected codes: 7 of 7
+    fixed workflows accepted with a certificate:           7 of 7
+    limitation files accepted, as documented:              2 of 2
+    expectation failures:                                  0

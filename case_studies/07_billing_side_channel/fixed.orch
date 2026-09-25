@@ -1,0 +1,25 @@
+// Case study 7, fixed: both arms bill identically.
+//
+// Both branches call the same model with the same inputs, through prompts of
+// the same length, so the two arms have identical billing signatures and the
+// bill is the same whichever runs.  This is the workflow-level counterpart of
+// the padding mitigation providers deployed after Whisper Leak (Microsoft
+// Security Blog, 7 November 2025): make the observable size independent of the
+// secret.  It spends more on the common case; that is the price of not leaking.
+workflow HrAssistantUniformBill budget 20000 {
+  input question: text max_tokens 300;
+  input handbook: text max_tokens 2000;
+  secret on_improvement_plan: boolean max_tokens 1;
+  model large = mock("large") max_tokens 1200;
+
+  prompt careful(q: text, policy: text) -> text = "Answer carefully under this policy: {policy} Question: {q}";
+  prompt general(q: text, policy: text) -> text = "Answer in general terms per policy: {policy} Question: {q}";
+
+  if on_improvement_plan {
+    let detailed: text = call careful(question, handbook) using large;
+  } else {
+    let brief: text = call general(question, handbook) using large;
+  }
+
+  output "answered";
+}

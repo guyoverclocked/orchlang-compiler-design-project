@@ -1,0 +1,20 @@
+// Case study 3, limitation: the same vulnerable assistant, modelled carelessly.
+//
+// Here the developer treats rendering as plain output and does not declare the
+// automatic image fetch as an effect.  OrchLang accepts this workflow, because
+// returning an untrusted value is allowed.  Its guarantee covers only the
+// effects the workflow declares; an undeclared side channel in the client is
+// invisible to it.  This file is kept to make that boundary concrete.
+workflow MailAssistantRenderingUndeclared budget 20000 {
+  input user_question: text max_tokens 200;
+  input inbound_email: text untrusted max_tokens 2000;
+  secret internal_files: text max_tokens 3000;
+  model assistant = mock("assistant") max_tokens 1000;
+
+  prompt answer(question: text, mail: text, files: text) -> text =
+      "Question: {question} Recent mail: {mail} Relevant files: {files}";
+
+  declassify(internal_files) as file_context: text because "the user's assistant may read the user's own files";
+  let reply: text = call answer(user_question, inbound_email, file_context) using assistant;
+  output reply;
+}

@@ -1,0 +1,45 @@
+$ orchc check case_studies/04_langchain_exec/fixed.orch
+Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.
+MathChainValidated:
+  token bound   716 / budget 5000
+  components    output <= 400, input <= 316 @ 4 chars/token
+  labels        0 secret, 2 untrusted
+  escape hatches 0 declassify, 1 endorse (each justified in the certificate)
+[exit 0]
+
+$ orchc certify case_studies/04_langchain_exec/fixed.orch
+{
+  "format": "orchlang-safety-certificate",
+  "version": 1,
+  "assumptions": {
+    "chars_per_token": 4,
+    "note": "The guaranteed component needs no tokenization assumption; the estimated component is sound only if the deployed tokenizer emits at most one token per chars_per_token characters."
+  },
+  "workflows": [
+    {
+      "name": "MathChainValidated",
+      "budget_tokens": 5000,
+      "bound": {"guaranteed_tokens": 400, "estimated_tokens": 316, "total_tokens": 716, "component_sum_tokens": 716, "within_budget": true, "defined": true, "cost": 0.000000, "cost_complete": false},
+      "derivation": [
+        {"depth": 0, "rule": "call", "detail": "expression = to_code via llm [out<=400, in<=16+300]", "guaranteed_tokens": 400, "estimated_tokens": 316, "line": 17}
+      ],
+      "bindings": [
+        {"scope": "workflow:MathChainValidated", "name": "checked_expression", "kind": "reclassified", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": 400},
+        {"scope": "workflow:MathChainValidated", "name": "evaluate_arithmetic", "kind": "tool", "type": "<unknown>", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:MathChainValidated", "name": "expression", "kind": "local-result", "type": "text", "confidentiality": "public", "integrity": "untrusted", "token_bound": 400},
+        {"scope": "workflow:MathChainValidated", "name": "llm", "kind": "model", "type": "<unknown>", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:MathChainValidated", "name": "question", "kind": "input", "type": "text", "confidentiality": "public", "integrity": "untrusted", "token_bound": 300},
+        {"scope": "workflow:MathChainValidated", "name": "to_code", "kind": "prompt", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:MathChainValidated::prompt:to_code", "name": "q", "kind": "prompt-parameter", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null}
+      ],
+      "reclassifications": [
+        {"operation": "endorse", "source": "expression", "result": "checked_expression", "from": "public/untrusted", "to": "public/trusted", "justification": "accepted only if it parses as digits, operators and parentheses", "line": 18}
+      ],
+      "relational_obligations": [
+      ],
+      "sinks": [
+        {"tool": "evaluate_arithmetic", "region": "root", "line": 19}
+      ]
+    }
+  ]
+}

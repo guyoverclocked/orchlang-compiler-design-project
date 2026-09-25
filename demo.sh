@@ -733,8 +733,10 @@ EOF
         bad_line "make" "not found"
         return 1
     fi
-    if ! command -v "${CXX:-c++}" >/dev/null 2>&1; then
-        bad_line "C++ compiler" "${CXX:-c++} not found"
+    # CXX may carry flags ("ccache g++", "clang++ -stdlib=libc++"); look up the command.
+    local cxx=${CXX:-c++}
+    if ! command -v "${cxx%% *}" >/dev/null 2>&1; then
+        bad_line "C++ compiler" "${cxx%% *} not found"
         return 1
     fi
     return 0
@@ -772,7 +774,7 @@ setup() {
     if [ "$os" = Darwin ]; then
         ok_line "Command Line Tools" "$(xcode-select -p)"
     fi
-    cxx_version=$("${CXX:-c++}" --version 2>/dev/null | grep -v -i '^configured with' | head -n 1)
+    cxx_version=$(${CXX:-c++} --version 2>/dev/null | grep -v -i '^configured with' | head -n 1)
     ok_line "C++ compiler" "${cxx_version:-${CXX:-c++}}"
     make_version=$(make --version 2>/dev/null | head -n 1)
     ok_line "make" "$make_version"

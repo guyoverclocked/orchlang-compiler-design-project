@@ -1,0 +1,47 @@
+$ orchc check case_studies/03_echoleak/fixed.orch
+Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.
+MailAssistantNoAutoFetch:
+  token bound   6216 / budget 20000
+  components    output <= 1000, input <= 5216 @ 4 chars/token
+  labels        1 secret, 2 untrusted
+  escape hatches 1 declassify, 0 endorse (each justified in the certificate)
+[exit 0]
+
+$ orchc certify case_studies/03_echoleak/fixed.orch
+{
+  "format": "orchlang-safety-certificate",
+  "version": 1,
+  "assumptions": {
+    "chars_per_token": 4,
+    "note": "The guaranteed component needs no tokenization assumption; the estimated component is sound only if the deployed tokenizer emits at most one token per chars_per_token characters."
+  },
+  "workflows": [
+    {
+      "name": "MailAssistantNoAutoFetch",
+      "budget_tokens": 20000,
+      "bound": {"guaranteed_tokens": 1000, "estimated_tokens": 5216, "total_tokens": 6216, "component_sum_tokens": 6216, "within_budget": true, "defined": true, "cost": 0.000000, "cost_complete": false},
+      "derivation": [
+        {"depth": 0, "rule": "call", "detail": "reply = answer via assistant [out<=1000, in<=16+5200]", "guaranteed_tokens": 1000, "estimated_tokens": 5216, "line": 17}
+      ],
+      "bindings": [
+        {"scope": "workflow:MailAssistantNoAutoFetch", "name": "answer", "kind": "prompt", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:MailAssistantNoAutoFetch", "name": "assistant", "kind": "model", "type": "<unknown>", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:MailAssistantNoAutoFetch", "name": "file_context", "kind": "reclassified", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": 3000},
+        {"scope": "workflow:MailAssistantNoAutoFetch", "name": "inbound_email", "kind": "input", "type": "text", "confidentiality": "public", "integrity": "untrusted", "token_bound": 2000},
+        {"scope": "workflow:MailAssistantNoAutoFetch", "name": "internal_files", "kind": "secret", "type": "text", "confidentiality": "secret", "integrity": "trusted", "token_bound": 3000},
+        {"scope": "workflow:MailAssistantNoAutoFetch", "name": "reply", "kind": "local-result", "type": "text", "confidentiality": "public", "integrity": "untrusted", "token_bound": 1000},
+        {"scope": "workflow:MailAssistantNoAutoFetch", "name": "user_question", "kind": "input", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": 200},
+        {"scope": "workflow:MailAssistantNoAutoFetch::prompt:answer", "name": "files", "kind": "prompt-parameter", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:MailAssistantNoAutoFetch::prompt:answer", "name": "mail", "kind": "prompt-parameter", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:MailAssistantNoAutoFetch::prompt:answer", "name": "question", "kind": "prompt-parameter", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null}
+      ],
+      "reclassifications": [
+        {"operation": "declassify", "source": "internal_files", "result": "file_context", "from": "secret/trusted", "to": "public/trusted", "justification": "the user's assistant may read the user's own files", "line": 16}
+      ],
+      "relational_obligations": [
+      ],
+      "sinks": [
+      ]
+    }
+  ]
+}

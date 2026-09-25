@@ -10,7 +10,7 @@ MAIN_OBJECT := $(BUILD_DIR)/main.o
 TEST_OBJECT := $(BUILD_DIR)/tests.o
 DEPS := $(CORE_OBJECTS:.o=.d) $(MAIN_OBJECT:.o=.d) $(TEST_OBJECT:.o=.d)
 
-.PHONY: all check test examples sanitize clean demo demo-setup demo-check bench
+.PHONY: all check test examples sanitize clean demo demo-setup demo-check bench verify
 
 all: orchc
 
@@ -59,5 +59,9 @@ demo-check:
 # Reproduces every number in bench/results; rewrites evaluation.txt in place.
 bench: orchc
 	python3 bench/evaluate.py
+
+# Everything, from clean, with evidence in verification/EVIDENCE.txt.
+verify:
+	@./verify.sh
 
 -include $(DEPS)

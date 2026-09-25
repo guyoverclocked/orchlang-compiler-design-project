@@ -1,0 +1,36 @@
+// Case study 7, vulnerable: the bill reveals a confidential flag.
+//
+// This scenario is constructed, not a reported incident.  It applies a
+// published attack family to a workflow: token counts are observable and they
+// reveal secrets.
+//   - Weiss et al., USENIX Security 2024: token lengths in streamed responses
+//     let a network observer reconstruct 27% of responses and infer the topic
+//     of 53%.
+//   - Zhang, Saileshwar and Lie, arXiv:2412.15431: the output token count alone
+//     recovers the input's class with over 70% precision, including on GPT-4o.
+//   - Microsoft, Whisper Leak, arXiv:2511.03675: packet sizes and timing of
+//     encrypted streaming responses reveal the prompt's topic across 28 LLMs.
+//
+// An HR assistant answers an employee's question.  If the employee is on a
+// confidential performance-improvement plan, it routes to a larger model with
+// the full policy handbook; otherwise to a small model.  No secret value goes
+// anywhere, but the per-request usage on the team's dashboard, or the size of
+// the streamed reply on the network, says which branch ran.
+workflow HrAssistant budget 20000 {
+  input question: text max_tokens 300;
+  input handbook: text max_tokens 2000;
+  secret on_improvement_plan: boolean max_tokens 1;
+  model small = mock("small") max_tokens 300;
+  model large = mock("large") max_tokens 1200;
+
+  prompt careful(q: text, policy: text) -> text = "Answer carefully under this policy: {policy} Question: {q}";
+  prompt quick(q: text) -> text = "Answer briefly: {q}";
+
+  if on_improvement_plan {
+    let detailed: text = call careful(question, handbook) using large;
+  } else {
+    let brief: text = call quick(question) using small;
+  }
+
+  output "answered";
+}

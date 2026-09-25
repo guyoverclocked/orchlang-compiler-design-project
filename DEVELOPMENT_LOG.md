@@ -103,3 +103,33 @@ Built a demo pipeline for presenting from a MacBook.
   one-true-awk that macOS ships. Seeded mock runs are byte-identical between
   libstdc++ and libc++ builds, because the runtime uses its own generator rather
   than `<random>` distributions. Not yet run on physical Mac hardware.
+
+Later the same day: a case study against real incidents, and end-to-end proof.
+
+- `docs/CASE_STUDY.md` models seven problems in OrchLang, each with a vulnerable
+  workflow and a repaired one under `case_studies/`. Six are documented
+  incidents or vulnerability classes: the GitHub MCP toxic agent flow, the
+  Supabase MCP ticket leak, EchoLeak (CVE-2025-32711), LangChain CVE-2023-29374,
+  OWASP LLM07's credential-in-prompt scenario, and the retry-loop cluster of the
+  Token Budgets catalogue. The seventh is a constructed billing side channel
+  grounded in three published token-count attacks. Every source was fetched and
+  checked; the CVE entries come from the official CVE record API.
+- All seven vulnerable workflows are rejected with exactly the expected codes,
+  and all seven repairs are accepted. The vulnerable retry agent overran its
+  budget in 3 of 200 seeded runs (the repair in none). The vulnerable router's
+  bill changed with the secret in 25 of 25 paired runs (the repair's in none).
+  Two `limitation_*.orch` files are accepted on purpose, to show what a
+  mislabelled input or an undeclared effect hides from the compiler.
+- `case_studies/verify.py` checks all of it, reusing the benchmark's driver, and
+  writes deterministic results that are committed.
+- `verify.sh` (`make verify`) proves the project works from a clean tree: a
+  strict build with `-Werror`, the tests, ASan and UBSan, benchmark
+  reproduction, the demo rehearsal, and case-study reproduction. It writes
+  `verification/EVIDENCE.txt` with SHA-256 digests. It passes with GCC 13 and
+  libstdc++, and with Clang 18 and libc++, and the committed results reproduce
+  byte for byte across the two. `.github/workflows/verify.yml` runs it on
+  Linux and macOS on every push.
+- `bench/evaluate.py` takes `ORCHLANG_RESULTS_DIR`, so verification can
+  reproduce the results without overwriting the committed ones.
+- Fixed `demo.sh`, which failed when `CXX` carried flags such as
+  `clang++ -stdlib=libc++`.

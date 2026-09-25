@@ -1,0 +1,21 @@
+// Case study 5, vulnerable: a credential placed in the system prompt.
+// OWASP LLM07:2025 System Prompt Leakage, example scenario: "An LLM has a
+// system prompt that contains a set of credentials used for a tool that it has
+// been given access to. The system prompt is leaked to an attacker, who then is
+// able to use these credentials for other purposes."
+// In the Slack AI incident (PromptArmor, August 2024) the stolen secret was an
+// API key.
+//
+// Anything placed in a prompt can be coaxed back out, so a reply written by a
+// model that saw the key must be treated as carrying the key.
+workflow BillingSupportBot budget 10000 {
+  input customer_message: text max_tokens 500;
+  secret PAYMENTS_API_KEY: text max_tokens 40;
+  model assistant = mock("assistant") max_tokens 600;
+
+  prompt system(key: text, message: text) -> text =
+      "You are the billing assistant. Use API key {key} when issuing refunds. Customer says: {message}";
+
+  let reply: text = call system(PAYMENTS_API_KEY, customer_message) using assistant;
+  output reply;
+}

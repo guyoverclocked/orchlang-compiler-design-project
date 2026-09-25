@@ -1,0 +1,23 @@
+// Case study 6, fixed: the same agent with a budget it can actually keep.
+//
+// Two changes, both driven by the certified bound rather than by adding up call
+// sites: the whole attempt is retried at most twice, and the validation at most
+// twice.  The compiler certifies the worst case before anything runs, and
+// the budget is now a promise the workflow cannot break.
+workflow InvoiceExtractorBounded budget 16000 {
+  input document: text max_tokens 3000;
+  model extractor = mock("large") max_tokens 1000;
+  model checker = mock("small") max_tokens 200;
+
+  prompt extract(doc: text) -> text = "Extract every line item and total from: {doc}";
+  prompt validate(draft: text) -> text = "Check this extraction for arithmetic errors: {draft}";
+
+  retry 2 {
+    let draft: text = call extract(document) using extractor;
+    retry 2 {
+      let verdict: text = call validate(draft) using checker;
+    }
+  }
+
+  output document;
+}

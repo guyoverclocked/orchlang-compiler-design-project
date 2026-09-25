@@ -1,0 +1,17 @@
+// Case study 2, fixed: the Supabase MCP support-ticket leak.
+// General Analysis, 8 July 2025: https://generalanalysis.com/blog/supabase-mcp-blog
+//
+// The agent drafts SQL for the developer and executes nothing.  This is the
+// OrchLang form of the mitigation the write-up recommends, running the MCP
+// server read-only: with no privileged tool in the workflow, text in a ticket
+// has nothing to drive.
+workflow SupportTicketAgentDraftOnly budget 20000 {
+  input ticket_message: text untrusted max_tokens 1000;
+  model agent = mock("ide-agent") max_tokens 800;
+
+  prompt review(message: text) -> text =
+      "Review this support ticket and draft the database queries it needs: {message}";
+
+  let sql: text = call review(ticket_message) using agent;
+  output sql;
+}

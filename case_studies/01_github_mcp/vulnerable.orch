@@ -1,0 +1,27 @@
+// Case study 1, vulnerable: the GitHub MCP "toxic agent flow".
+// Invariant Labs, 26 May 2025: https://invariantlabs.ai/blog/mcp-github-vulnerability
+//
+// A developer asks their coding agent to look at the open issues on one of
+// their PUBLIC repositories.  One issue, written by an attacker, tells the agent
+// to read the developer's PRIVATE repositories and put what it finds into a pull
+// request.  The agent is allowed to do all three things, so it does, and the
+// private data lands in a public pull request.
+//
+// Anyone can write an issue, so its text is untrusted.  The developer has
+// knowingly let their own agent read their private repositories, which is the
+// declassify below.  Opening a pull request on a public repository is an
+// external effect, so it is a tool.
+workflow IssueTriageAgent budget 20000 {
+  input issue_body: text untrusted max_tokens 1500;
+  secret private_repo: text max_tokens 4000;
+  model agent = mock("coding-agent") max_tokens 1200;
+  tool open_pull_request(body: text);
+
+  prompt resolve(issue: text, context: text) -> text =
+      "Resolve this issue: {issue} Repository context: {context}";
+
+  declassify(private_repo) as repo_context: text because "the developer lets their own agent read their private repositories";
+  let patch: text = call resolve(issue_body, repo_context) using agent;
+  emit open_pull_request(patch);
+  output patch;
+}
