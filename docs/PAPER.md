@@ -10,9 +10,9 @@ Vellore Institute of Technology
 A program that orchestrates calls to a large language model (LLM) can leak a
 secret without the secret reaching a prompt: if the secret decides which requests
 are sent, whoever sees the traffic or the bill can learn it. Resource-aware
-noninterference and relational cost analysis handle such channels when operation
-costs are functions of input sizes. We show that no such analysis works for LLM
-calls: any analysis that sees prompt text only through a size measure is either
+noninterference handles such channels by charging each operation a cost
+determined by its inputs' sizes. We show that this cannot work for LLM calls: any
+analysis that sees prompt text only through a size measure is either
 unsound for providers whose answers depend on content, or rejects a secret branch
 whose two arms are identical. The theorem is mechanised in Coq and explains two
 size-based rules we previously built, whose failures we measure with real
@@ -132,7 +132,7 @@ every such repair fails.
 
 3. **Token bounds that hold for real tokenizers** (§6). Measured on fourteen
    tokenizers, token counts are not subadditive (`tokens(u·v)` exceeds
-   `tokens(u) + tokens(v)` by up to 3–6), a response re-encodes to up to nine
+   `tokens(u) + tokens(v)` by as much as 3 to 6, depending on the tokenizer), a response re-encodes to up to nine
    tokens per generated token, and six tokenizers emit more tokens than bytes on
    some input. We build the guaranteed input bound from bytes, which add up, and
    convert once per request through per-tokenizer contracts
@@ -846,9 +846,10 @@ earlier attempts had to be unrolled in five of the thirty ports. A retry with an
 accumulator of declared byte growth would keep the bound finite.
 
 **Agents are out of scope by design.** Thirteen of the 22 exclusions are workflows
-whose model decides what runs next. OrchLang's fixed shape is what makes its
-analyses decidable; a type system for agent loops would need bounds on the
-model's choices, which is a different paper.
+whose shape is decided at run time, nine of them because the model chooses what
+runs next. OrchLang's fixed shape is what makes its analyses decidable; a type
+system for agent loops would need bounds on the model's choices, which is a
+different paper.
 
 **The guaranteed bound is loose** by the factor `λ`, up to 25× the estimate on
 real workflows, unless models declare client-side byte caps.

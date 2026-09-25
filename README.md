@@ -20,8 +20,8 @@ that reads it and reports what's wrong, without contacting any model and without
 an API key.** It is written from scratch in C++17 with no dependencies.
 
 The research write-up is [`docs/PAPER.md`](docs/PAPER.md); its theorems and proofs
-are in [`docs/FORMAL_MODEL.md`](docs/FORMAL_MODEL.md), four of them checked in Coq
-([`proofs/`](proofs/)).
+are in [`docs/FORMAL_MODEL.md`](docs/FORMAL_MODEL.md), four of them (Lemma 2 and
+Theorems 1, 5 and 6) checked in Coq ([`proofs/`](proofs/)).
 
 ---
 
@@ -212,8 +212,8 @@ protocol whose labels were committed before any port was written
 ([`PROTOCOL.md`](bench/real/PROTOCOL.md)). 22 more candidates were excluded, each
 with a reason ([`EXCLUSIONS.md`](bench/real/EXCLUSIONS.md)): mostly agents whose
 model decides what runs next, which a fixed-shape language cannot express by
-design. The prompts in the ports are checked against the sources, character for
-character.
+design. Every literal stretch of at least 20 characters in a port's prompts is
+checked against the pinned source.
 
 What happened: no certified bound was exceeded; the checker flagged every place
 where untrusted content decides an effect's arguments or whether it happens
