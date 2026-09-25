@@ -1,0 +1,3 @@
+$ orchc check case_studies/08_gemini_calendar/vulnerable.orch
+case_studies/08_gemini_calendar/vulnerable.orch:23:20: error [E233] untrusted value reaches tool 'home_device'; model output derived from untrusted input must be endorsed before it can drive an external effect
+[exit 1]

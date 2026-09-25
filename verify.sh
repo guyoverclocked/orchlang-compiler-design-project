@@ -200,7 +200,7 @@ begin "Case studies"
 mkdir -p "$OUT/case_studies"
 if ORCHLANG_CASE_RESULTS="$OUT/case_studies" python3 case_studies/verify.py >"$OUT/case_studies.log" 2>&1; then
     if diff -r case_studies/results "$OUT/case_studies" >"$OUT/case_studies.diff" 2>&1; then
-        pass "case studies: 7 incidents, verdicts and experiments reproduce case_studies/results byte for byte"
+        pass "case studies: every verdict and experiment reproduces case_studies/results byte for byte"
     else
         fail_step "case studies: reproduced results differ from the committed ones" "$OUT/case_studies.diff"
     fi

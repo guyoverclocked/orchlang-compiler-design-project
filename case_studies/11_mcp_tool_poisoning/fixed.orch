@@ -1,0 +1,22 @@
+// Case study 11, fixed: tool descriptions are pinned and reviewed.
+//
+// Invariant's recommended mitigations include "Tool and Package Pinning": use
+// hashes to verify a tool has not changed since it was approved.  In OrchLang
+// that approval is an endorsement of the descriptions themselves, before the
+// model sees them.  A description that changes after review no longer
+// matches the pin, so the recorded reason stops being true.  That is exactly
+// the claim an auditor re-checks.
+workflow ToolUsingAgentPinned budget 20000 {
+  input user_request: text max_tokens 300;
+  input tool_descriptions: text untrusted max_tokens 2000;
+  model agent = mock("agent") max_tokens 500;
+  tool invoke_tool(call_spec: text);
+
+  prompt choose(request: text, tools: text) -> text =
+      "Request: {request} Available tools: {tools} Which tool, with which arguments?";
+
+  endorse(tool_descriptions) as pinned_tools: text because "each description matches the hash pinned when a person reviewed it at install time";
+  let chosen: text = call choose(user_request, pinned_tools) using agent;
+  emit invoke_tool(chosen);
+  output chosen;
+}

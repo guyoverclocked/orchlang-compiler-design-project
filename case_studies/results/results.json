@@ -3,6 +3,7 @@
     {
       "files": [
         {
+          "as_expected": true,
           "codes": [
             "E233"
           ],
@@ -15,6 +16,7 @@
           "sha256": "0ed8db6106a2c7d6754fb6caf754c228114b427e94f60bd8f29853b7de6762ae"
         },
         {
+          "as_expected": true,
           "budget_tokens": 20000,
           "certified_tokens": 6715,
           "codes": [],
@@ -44,6 +46,7 @@
     {
       "files": [
         {
+          "as_expected": true,
           "codes": [
             "E233"
           ],
@@ -56,6 +59,7 @@
           "sha256": "514d016876b86aafb54218bb1214f9242ca07f1f1296771cf6744812da7b647c"
         },
         {
+          "as_expected": true,
           "budget_tokens": 20000,
           "certified_tokens": 1820,
           "codes": [],
@@ -74,6 +78,7 @@
     {
       "files": [
         {
+          "as_expected": true,
           "codes": [
             "E233"
           ],
@@ -86,6 +91,7 @@
           "sha256": "d8cb9b12b35fdf892bfcbff2c87c86e24a72a3a722fa9e294ac2b203e4e59f3c"
         },
         {
+          "as_expected": true,
           "budget_tokens": 20000,
           "certified_tokens": 6216,
           "codes": [],
@@ -102,6 +108,7 @@
           "sha256": "ef8bae8c473873bea6f3ddddff9bd270c55afb95dcb3986672035ee8cf607f62"
         },
         {
+          "as_expected": true,
           "budget_tokens": 20000,
           "certified_tokens": 6216,
           "codes": [],
@@ -126,6 +133,7 @@
     {
       "files": [
         {
+          "as_expected": true,
           "codes": [
             "E233"
           ],
@@ -138,6 +146,7 @@
           "sha256": "57cf61062e18c159b0b9c4e9078e0636f5587a686db6eb1cb9defda64b808ae0"
         },
         {
+          "as_expected": true,
           "budget_tokens": 5000,
           "certified_tokens": 716,
           "codes": [],
@@ -154,6 +163,7 @@
           "sha256": "2dee218cddc5d198ea5a5ea467155900233daf699a2adf44a976d36653353db7"
         },
         {
+          "as_expected": true,
           "budget_tokens": 5000,
           "certified_tokens": 712,
           "codes": [],
@@ -172,6 +182,7 @@
     {
       "files": [
         {
+          "as_expected": true,
           "codes": [
             "E230",
             "E231"
@@ -186,6 +197,7 @@
           "sha256": "500184319edd0d8834159ce29a2f20aa5065a553da3b0ea5c9f8f21816a16ce9"
         },
         {
+          "as_expected": true,
           "budget_tokens": 10000,
           "certified_tokens": 1125,
           "codes": [],
@@ -225,6 +237,7 @@
       },
       "files": [
         {
+          "as_expected": true,
           "codes": [
             "E260"
           ],
@@ -237,6 +250,7 @@
           "sha256": "a9058873e378ccfc679f3519601f48cc4c63b795e6b81f4784a3dab60619d39f"
         },
         {
+          "as_expected": true,
           "budget_tokens": 16000,
           "certified_tokens": 12876,
           "codes": [],
@@ -289,6 +303,7 @@
       },
       "files": [
         {
+          "as_expected": true,
           "codes": [
             "E236"
           ],
@@ -301,6 +316,7 @@
           "sha256": "ea223a17977258009564186fefe3a846867197770f57723c15126c320335cb5c"
         },
         {
+          "as_expected": true,
           "budget_tokens": 20000,
           "certified_tokens": 3515,
           "codes": [],
@@ -315,6 +331,189 @@
       "incident": "Grounded in USENIX Security 2024, arXiv:2412.15431, arXiv:2511.03675",
       "source": "https://arxiv.org/abs/2511.03675",
       "title": "Bill reveals a confidential flag (constructed scenario)"
+    },
+    {
+      "files": [
+        {
+          "as_expected": true,
+          "codes": [
+            "E233"
+          ],
+          "diagnostics": [
+            "case_studies/08_gemini_calendar/vulnerable.orch:23:20: error [E233] untrusted value reaches tool 'home_device'; model output derived from untrusted input must be endorsed before it can drive an external effect"
+          ],
+          "exit": 1,
+          "file": "case_studies/08_gemini_calendar/vulnerable.orch",
+          "role": "vulnerable",
+          "sha256": "d8bb1fda26dc299c45c4c44e695568fbaec2b6c458cb854427fb6403f5468f59"
+        },
+        {
+          "as_expected": true,
+          "budget_tokens": 20000,
+          "certified_tokens": 2817,
+          "codes": [],
+          "escape_hatches": [
+            {
+              "justification": "the user approves each device command on screen before it is sent",
+              "operation": "endorse",
+              "source": "action"
+            }
+          ],
+          "exit": 0,
+          "file": "case_studies/08_gemini_calendar/fixed.orch",
+          "role": "fixed",
+          "sha256": "ee645dbec127f471887057c72856935475fb45b4abd9d397b7ed929707acdc6c"
+        }
+      ],
+      "id": "08_gemini_calendar",
+      "incident": "SafeBreach, \"Invitation Is All You Need\", 6 August 2025",
+      "source": "https://www.safebreach.com/blog/invitation-is-all-you-need-hacking-gemini/",
+      "title": "Calendar invite drives smart-home devices through Gemini"
+    },
+    {
+      "files": [
+        {
+          "as_expected": true,
+          "codes": [
+            "E233"
+          ],
+          "diagnostics": [
+            "case_studies/09_agentforce_forcedleak/vulnerable.orch:27:20: error [E233] untrusted value reaches tool 'render_html'; model output derived from untrusted input must be endorsed before it can drive an external effect"
+          ],
+          "exit": 1,
+          "file": "case_studies/09_agentforce_forcedleak/vulnerable.orch",
+          "role": "vulnerable",
+          "sha256": "8bced52415e7dbabef7beeb0f39f2bc9d1781cbbeae64e5195ca4e01a33ac073"
+        },
+        {
+          "as_expected": true,
+          "budget_tokens": 40000,
+          "certified_tokens": 15712,
+          "codes": [],
+          "escape_hatches": [
+            {
+              "justification": "the agent may read the org's CRM records for its user",
+              "operation": "declassify",
+              "source": "crm_records"
+            },
+            {
+              "justification": "the renderer strips any URL not on the enforced Trusted URLs list, which is reviewed for lapsed domains",
+              "operation": "endorse",
+              "source": "reply"
+            }
+          ],
+          "exit": 0,
+          "file": "case_studies/09_agentforce_forcedleak/fixed.orch",
+          "role": "fixed",
+          "sha256": "55b973f2858957b9b5a387a30e74fc51be6936eea8f939cfb6d04dbbc1f12ad7"
+        }
+      ],
+      "id": "09_agentforce_forcedleak",
+      "incident": "Noma Security, 25 September 2025",
+      "source": "https://noma.security/blog/forcedleak-agent-risks-exposed-in-salesforce-agentforce",
+      "title": "ForcedLeak: Salesforce Agentforce CRM exfiltration (CVSS 9.4)"
+    },
+    {
+      "files": [
+        {
+          "as_expected": true,
+          "codes": [
+            "E233"
+          ],
+          "diagnostics": [
+            "case_studies/10_comet_browser/vulnerable.orch:24:23: error [E233] untrusted value reaches tool 'browser_action'; model output derived from untrusted input must be endorsed before it can drive an external effect"
+          ],
+          "exit": 1,
+          "file": "case_studies/10_comet_browser/vulnerable.orch",
+          "role": "vulnerable",
+          "sha256": "b933e232f0e22e8049a99a813b738c8b7fa5119cc25ae2759c970da1741f33f1"
+        },
+        {
+          "as_expected": true,
+          "budget_tokens": 30000,
+          "certified_tokens": 7821,
+          "codes": [],
+          "escape_hatches": [],
+          "exit": 0,
+          "file": "case_studies/10_comet_browser/fixed.orch",
+          "role": "fixed",
+          "sha256": "2af47533d69ba51ee6a4c57e1d1eec5877c11ae463a836d06fe9631b21db007a"
+        },
+        {
+          "as_expected": true,
+          "codes": [
+            "E233"
+          ],
+          "diagnostics": [
+            "case_studies/10_comet_browser/regression_summary_into_plan.orch:20:23: error [E233] untrusted value reaches tool 'browser_action'; model output derived from untrusted input must be endorsed before it can drive an external effect"
+          ],
+          "exit": 1,
+          "file": "case_studies/10_comet_browser/regression_summary_into_plan.orch",
+          "role": "vulnerable",
+          "sha256": "378d63529053f67a90c2f2a35421b921ad974f4e53c481750151247ac882ada5"
+        }
+      ],
+      "id": "10_comet_browser",
+      "incident": "Brave, 20 August 2025",
+      "source": "https://brave.com/blog/comet-prompt-injection/",
+      "title": "Perplexity Comet agentic browser hijacked by a Reddit comment"
+    },
+    {
+      "files": [
+        {
+          "as_expected": true,
+          "codes": [
+            "E233"
+          ],
+          "diagnostics": [
+            "case_studies/11_mcp_tool_poisoning/vulnerable.orch:23:20: error [E233] untrusted value reaches tool 'invoke_tool'; model output derived from untrusted input must be endorsed before it can drive an external effect"
+          ],
+          "exit": 1,
+          "file": "case_studies/11_mcp_tool_poisoning/vulnerable.orch",
+          "role": "vulnerable",
+          "sha256": "d21734a25110fda270d2355ecfd15b5ca25f65ac21a7dd2dcbb85f0c22ef41e5"
+        },
+        {
+          "as_expected": true,
+          "budget_tokens": 20000,
+          "certified_tokens": 2820,
+          "codes": [],
+          "escape_hatches": [
+            {
+              "justification": "each description matches the hash pinned when a person reviewed it at install time",
+              "operation": "endorse",
+              "source": "tool_descriptions"
+            }
+          ],
+          "exit": 0,
+          "file": "case_studies/11_mcp_tool_poisoning/fixed.orch",
+          "role": "fixed",
+          "sha256": "9a3e728a82b7484b01930a849172ef273a5fe6db760287353ee75917e14d32f0"
+        }
+      ],
+      "id": "11_mcp_tool_poisoning",
+      "incident": "Invariant Labs, 1 April 2025",
+      "source": "https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks",
+      "title": "MCP tool poisoning through a tool description"
+    },
+    {
+      "files": [
+        {
+          "as_expected": true,
+          "budget_tokens": 5000,
+          "certified_tokens": 915,
+          "codes": [],
+          "escape_hatches": [],
+          "exit": 0,
+          "file": "case_studies/12_dpd_chatbot/out_of_scope.orch",
+          "role": "out_of_scope",
+          "sha256": "c8f803da3ac6290e2d69c620e0474122cbb12f813e14cb3b284963ccf4df5529"
+        }
+      ],
+      "id": "12_dpd_chatbot",
+      "incident": "TIME, 20 January 2024",
+      "source": "https://time.com/6564726/ai-chatbot-dpd-curses-criticizes-company/",
+      "title": "DPD chatbot talked into swearing (out of scope)"
     }
   ],
   "failures": [],

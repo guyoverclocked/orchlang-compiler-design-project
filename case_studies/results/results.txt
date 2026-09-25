@@ -4,40 +4,40 @@ OrchLang case studies
 01_github_mcp  GitHub MCP toxic agent flow
     incident: Invariant Labs, 26 May 2025
     source:   https://invariantlabs.ai/blog/mcp-github-vulnerability
-    ok   vulnerable vulnerable.orch                          rejected E233
-    ok   fixed      fixed.orch                               accepted bound 6715
+    ok   vulnerable   vulnerable.orch                      rejected E233
+    ok   fixed        fixed.orch                           accepted bound 6715
 
 02_supabase_mcp  Supabase MCP support-ticket leak
     incident: General Analysis, 8 July 2025
     source:   https://generalanalysis.com/blog/supabase-mcp-blog
-    ok   vulnerable vulnerable.orch                          rejected E233
-    ok   fixed      fixed.orch                               accepted bound 1820
+    ok   vulnerable   vulnerable.orch                      rejected E233
+    ok   fixed        fixed.orch                           accepted bound 1820
 
 03_echoleak  EchoLeak zero-click exfiltration, CVE-2025-32711
     incident: Aim Security, June 2025; arXiv:2509.10540
     source:   https://arxiv.org/abs/2509.10540
-    ok   vulnerable vulnerable.orch                          rejected E233
-    ok   fixed      fixed.orch                               accepted bound 6216
-    ok   limitation limitation_rendering_undeclared.orch     accepted bound 6216
+    ok   vulnerable   vulnerable.orch                      rejected E233
+    ok   fixed        fixed.orch                           accepted bound 6216
+    ok   limitation   limitation_rendering_undeclared.orch accepted bound 6216
 
 04_langchain_exec  LangChain LLMMathChain code execution, CVE-2023-29374
     incident: GHSA-fprp-p869-w6q2, April 2023
     source:   https://osv.dev/vulnerability/GHSA-fprp-p869-w6q2
-    ok   vulnerable vulnerable.orch                          rejected E233
-    ok   fixed      fixed.orch                               accepted bound 716
-    ok   limitation limitation_trusted_input.orch            accepted bound 712
+    ok   vulnerable   vulnerable.orch                      rejected E233
+    ok   fixed        fixed.orch                           accepted bound 716
+    ok   limitation   limitation_trusted_input.orch        accepted bound 712
 
 05_credentials_in_prompt  Credential in the system prompt
     incident: OWASP LLM07:2025 example scenario
     source:   https://genai.owasp.org/llmrisk/llm072025-system-prompt-leakage/
-    ok   vulnerable vulnerable.orch                          rejected E230 E231
-    ok   fixed      fixed.orch                               accepted bound 1125
+    ok   vulnerable   vulnerable.orch                      rejected E230 E231
+    ok   fixed        fixed.orch                           accepted bound 1125
 
 06_retry_overrun  Retry loop budget overrun
     incident: Token Budgets catalogue, arXiv:2606.04056 (retry-loop cluster)
     source:   https://arxiv.org/abs/2606.04056
-    ok   vulnerable vulnerable.orch                          rejected E260
-    ok   fixed      fixed.orch                               accepted bound 12876
+    ok   vulnerable   vulnerable.orch                      rejected E260
+    ok   fixed        fixed.orch                           accepted bound 12876
     cost experiment, 200 seeds each; hand-added estimate 5225 tokens, budget 16000
       vulnerable certified  30604  max  18540  median   4940  over estimate  95  over budget   3  over certified 0
       fixed      certified  12876  max  10888  median   4271  over estimate  76  over budget   0  over certified 0
@@ -45,15 +45,46 @@ OrchLang case studies
 07_billing_side_channel  Bill reveals a confidential flag (constructed scenario)
     incident: Grounded in USENIX Security 2024, arXiv:2412.15431, arXiv:2511.03675
     source:   https://arxiv.org/abs/2511.03675
-    ok   vulnerable vulnerable.orch                          rejected E236
-    ok   fixed      fixed.orch                               accepted bound 3515
+    ok   vulnerable   vulnerable.orch                      rejected E236
+    ok   fixed        fixed.orch                           accepted bound 3515
     paired billing experiment, 25 seeds, public inputs pinned, secret flipped
       vulnerable bill changed with the secret in 25 of 25 pairs
       fixed      bill changed with the secret in 0 of 25 pairs
       witness, seed 1: secret false bills {small: 1 call, 125 in, 265 out}; secret true bills {large: 1 call, 1635 in, 35 out}
 
+08_gemini_calendar  Calendar invite drives smart-home devices through Gemini
+    incident: SafeBreach, "Invitation Is All You Need", 6 August 2025
+    source:   https://www.safebreach.com/blog/invitation-is-all-you-need-hacking-gemini/
+    ok   vulnerable   vulnerable.orch                      rejected E233
+    ok   fixed        fixed.orch                           accepted bound 2817
+
+09_agentforce_forcedleak  ForcedLeak: Salesforce Agentforce CRM exfiltration (CVSS 9.4)
+    incident: Noma Security, 25 September 2025
+    source:   https://noma.security/blog/forcedleak-agent-risks-exposed-in-salesforce-agentforce
+    ok   vulnerable   vulnerable.orch                      rejected E233
+    ok   fixed        fixed.orch                           accepted bound 15712
+
+10_comet_browser  Perplexity Comet agentic browser hijacked by a Reddit comment
+    incident: Brave, 20 August 2025
+    source:   https://brave.com/blog/comet-prompt-injection/
+    ok   vulnerable   vulnerable.orch                      rejected E233
+    ok   fixed        fixed.orch                           accepted bound 7821
+    ok   vulnerable   regression_summary_into_plan.orch    rejected E233
+
+11_mcp_tool_poisoning  MCP tool poisoning through a tool description
+    incident: Invariant Labs, 1 April 2025
+    source:   https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks
+    ok   vulnerable   vulnerable.orch                      rejected E233
+    ok   fixed        fixed.orch                           accepted bound 2820
+
+12_dpd_chatbot  DPD chatbot talked into swearing (out of scope)
+    incident: TIME, 20 January 2024
+    source:   https://time.com/6564726/ai-chatbot-dpd-curses-criticizes-company/
+    ok   out_of_scope out_of_scope.orch                    accepted bound 915
+
 Summary
-    vulnerable workflows rejected with the expected codes: 7 of 7
-    fixed workflows accepted with a certificate:           7 of 7
+    vulnerable workflows rejected with the expected codes: 12 of 12
+    fixed workflows accepted with a certificate:           11 of 11
     limitation files accepted, as documented:              2 of 2
+    out-of-scope files accepted, as documented:            1 of 1
     expectation failures:                                  0

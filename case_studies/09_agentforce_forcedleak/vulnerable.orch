@@ -1,0 +1,29 @@
+// Case study 9, vulnerable: ForcedLeak in Salesforce Agentforce (CVSS 9.4).
+// Noma Security (S. Levi), 25 September 2025:
+// https://noma.security/blog/forcedleak-agent-risks-exposed-in-salesforce-agentforce
+//
+// An attacker submits a public Web-to-Lead form whose 42,000-character
+// Description field hides instructions.  When an employee asks Agentforce
+// about the lead, the agent also follows the hidden instructions: it queries
+// CRM data and writes an <img> tag whose URL carries it.  The URL pointed at a
+// domain still on Salesforce's Content Security Policy allowlist, which had
+// expired and which the researchers bought for about five dollars.
+//
+// A public web form is untrusted.  The agent is meant to read the org's CRM
+// records (the declassify).  Rendering the reply loads its images, which is an
+// outbound request, so it is a tool.
+workflow LeadAssistant budget 40000 {
+  input employee_question: text max_tokens 200;
+  input lead_description: text untrusted max_tokens 10500;
+  secret crm_records: text max_tokens 4000;
+  model agent = mock("agent") max_tokens 1000;
+  tool render_html(html: text);
+
+  prompt answer(question: text, lead: text, records: text) -> text =
+      "Question: {question} Lead: {lead} CRM: {records}";
+
+  declassify(crm_records) as crm_context: text because "the agent may read the org's CRM records for its user";
+  let reply: text = call answer(employee_question, lead_description, crm_context) using agent;
+  emit render_html(reply);
+  output reply;
+}

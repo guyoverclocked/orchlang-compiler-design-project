@@ -1,0 +1,47 @@
+$ orchc check case_studies/11_mcp_tool_poisoning/fixed.orch
+Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.
+ToolUsingAgentPinned:
+  token bound   2820 / budget 20000
+  components    output <= 500, input <= 2320 @ 4 chars/token
+  labels        0 secret, 1 untrusted
+  escape hatches 0 declassify, 1 endorse (each justified in the certificate)
+[exit 0]
+
+$ orchc certify case_studies/11_mcp_tool_poisoning/fixed.orch
+{
+  "format": "orchlang-safety-certificate",
+  "version": 1,
+  "assumptions": {
+    "chars_per_token": 4,
+    "note": "The guaranteed component needs no tokenization assumption; the estimated component is sound only if the deployed tokenizer emits at most one token per chars_per_token characters."
+  },
+  "workflows": [
+    {
+      "name": "ToolUsingAgentPinned",
+      "budget_tokens": 20000,
+      "bound": {"guaranteed_tokens": 500, "estimated_tokens": 2320, "total_tokens": 2820, "component_sum_tokens": 2820, "within_budget": true, "defined": true, "cost": 0.000000, "cost_complete": false},
+      "derivation": [
+        {"depth": 0, "rule": "call", "detail": "chosen = choose via agent [out<=500, in<=20+2300]", "guaranteed_tokens": 500, "estimated_tokens": 2320, "line": 19}
+      ],
+      "bindings": [
+        {"scope": "workflow:ToolUsingAgentPinned", "name": "agent", "kind": "model", "type": "<unknown>", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:ToolUsingAgentPinned", "name": "choose", "kind": "prompt", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:ToolUsingAgentPinned", "name": "chosen", "kind": "local-result", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": 500},
+        {"scope": "workflow:ToolUsingAgentPinned", "name": "invoke_tool", "kind": "tool", "type": "<unknown>", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:ToolUsingAgentPinned", "name": "pinned_tools", "kind": "reclassified", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": 2000},
+        {"scope": "workflow:ToolUsingAgentPinned", "name": "tool_descriptions", "kind": "input", "type": "text", "confidentiality": "public", "integrity": "untrusted", "token_bound": 2000},
+        {"scope": "workflow:ToolUsingAgentPinned", "name": "user_request", "kind": "input", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": 300},
+        {"scope": "workflow:ToolUsingAgentPinned::prompt:choose", "name": "request", "kind": "prompt-parameter", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:ToolUsingAgentPinned::prompt:choose", "name": "tools", "kind": "prompt-parameter", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null}
+      ],
+      "reclassifications": [
+        {"operation": "endorse", "source": "tool_descriptions", "result": "pinned_tools", "from": "public/untrusted", "to": "public/trusted", "justification": "each description matches the hash pinned when a person reviewed it at install time", "line": 18}
+      ],
+      "relational_obligations": [
+      ],
+      "sinks": [
+        {"tool": "invoke_tool", "region": "root", "line": 20}
+      ]
+    }
+  ]
+}

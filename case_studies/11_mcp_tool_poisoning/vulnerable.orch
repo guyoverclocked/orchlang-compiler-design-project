@@ -1,0 +1,25 @@
+// Case study 11, vulnerable: an MCP tool-poisoning attack.
+// Invariant Labs (L. Beurer-Kellner, M. Fischer), 1 April 2025:
+// https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks
+//
+// A third-party MCP server offers an innocent-looking "add" tool.  Its
+// description, which the user never sees but the model reads, tells the model
+// to read ~/.cursor/mcp.json and ~/.ssh/id_rsa and pass them in a hidden
+// argument of the call.  In Cursor, the agent complied.
+//
+// Tool descriptions written by a third party are untrusted content that
+// happens to arrive through the tool list.  Invoking a tool with arguments the
+// model chose is an effect.
+workflow ToolUsingAgent budget 20000 {
+  input user_request: text max_tokens 300;
+  input tool_descriptions: text untrusted max_tokens 2000;
+  model agent = mock("agent") max_tokens 500;
+  tool invoke_tool(call_spec: text);
+
+  prompt choose(request: text, tools: text) -> text =
+      "Request: {request} Available tools: {tools} Which tool, with which arguments?";
+
+  let chosen: text = call choose(user_request, tool_descriptions) using agent;
+  emit invoke_tool(chosen);
+  output chosen;
+}

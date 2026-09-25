@@ -1,0 +1,21 @@
+// Case study 12, out of scope: the DPD customer-service chatbot.
+// TIME, 20 January 2024: https://time.com/6564726/ai-chatbot-dpd-curses-criticizes-company/
+//
+// A customer asked DPD's chatbot to swear, to write a poem about how useless
+// it was, and to criticise the company.  It did all three, calling DPD the
+// "worst delivery firm in the world", and DPD disabled the AI element.
+//
+// This is prompt injection whose harm is entirely in what the model *says*.
+// OrchLang accepts this workflow, correctly by its own rules: the customer's
+// untrusted text shapes a reply that is returned to that same customer, and it
+// drives no effect.  OrchLang constrains where text can flow and what it can
+// trigger, not what a model writes.  Output moderation is a different tool.
+workflow ParcelSupportChat budget 5000 {
+  input customer_message: text untrusted max_tokens 500;
+  model assistant = mock("assistant") max_tokens 400;
+
+  prompt support(message: text) -> text = "You are DPD's helpful parcel assistant. Customer: {message}";
+
+  let reply: text = call support(customer_message) using assistant;
+  output reply;
+}

@@ -45,8 +45,9 @@ RESULTS = os.environ.get('ORCHLANG_CASE_RESULTS', os.path.join(HERE, 'results'))
 COST_SEEDS = 200
 PAIRED_SEEDS = 25
 
-# role: vulnerable (must be rejected), fixed (must be accepted), or limitation
-# (accepted, and kept to show what the compiler cannot see).
+# role: vulnerable (must be rejected), fixed (must be accepted), limitation
+# (accepted, and kept to show what the compiler cannot see), or out_of_scope
+# (accepted, because the harm is one the compiler does not claim to address).
 CASES = [
     {
         'id': '01_github_mcp',
@@ -118,6 +119,56 @@ CASES = [
         'files': [
             ('vulnerable.orch', 'vulnerable', {'E236'}),
             ('fixed.orch', 'fixed', set()),
+        ],
+    },
+    {
+        'id': '08_gemini_calendar',
+        'title': 'Calendar invite drives smart-home devices through Gemini',
+        'incident': 'SafeBreach, "Invitation Is All You Need", 6 August 2025',
+        'source': 'https://www.safebreach.com/blog/invitation-is-all-you-need-hacking-gemini/',
+        'files': [
+            ('vulnerable.orch', 'vulnerable', {'E233'}),
+            ('fixed.orch', 'fixed', set()),
+        ],
+    },
+    {
+        'id': '09_agentforce_forcedleak',
+        'title': 'ForcedLeak: Salesforce Agentforce CRM exfiltration (CVSS 9.4)',
+        'incident': 'Noma Security, 25 September 2025',
+        'source': 'https://noma.security/blog/forcedleak-agent-risks-exposed-in-salesforce-agentforce',
+        'files': [
+            ('vulnerable.orch', 'vulnerable', {'E233'}),
+            ('fixed.orch', 'fixed', set()),
+        ],
+    },
+    {
+        'id': '10_comet_browser',
+        'title': 'Perplexity Comet agentic browser hijacked by a Reddit comment',
+        'incident': 'Brave, 20 August 2025',
+        'source': 'https://brave.com/blog/comet-prompt-injection/',
+        'files': [
+            ('vulnerable.orch', 'vulnerable', {'E233'}),
+            ('fixed.orch', 'fixed', set()),
+            ('regression_summary_into_plan.orch', 'vulnerable', {'E233'}),
+        ],
+    },
+    {
+        'id': '11_mcp_tool_poisoning',
+        'title': 'MCP tool poisoning through a tool description',
+        'incident': 'Invariant Labs, 1 April 2025',
+        'source': 'https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks',
+        'files': [
+            ('vulnerable.orch', 'vulnerable', {'E233'}),
+            ('fixed.orch', 'fixed', set()),
+        ],
+    },
+    {
+        'id': '12_dpd_chatbot',
+        'title': 'DPD chatbot talked into swearing (out of scope)',
+        'incident': 'TIME, 20 January 2024',
+        'source': 'https://time.com/6564726/ai-chatbot-dpd-curses-criticizes-company/',
+        'files': [
+            ('out_of_scope.orch', 'out_of_scope', set()),
         ],
     },
 ]
@@ -196,10 +247,11 @@ def check_file(case, name, role, expected_codes):
             transcript += '\n$ orchc certify %s\n%s' % (relative(path), cout)
 
     write(os.path.join(RESULTS, case['id'], name.replace('.orch', '.txt')), transcript)
+    entry['as_expected'] = ok
 
     verdict = 'rejected' if code == 1 else 'accepted' if code == 0 else 'exit %d' % code
     detail = ' '.join(sorted(codes)) if codes else 'bound %s' % entry.get('certified_tokens', '?')
-    say('    %-4s %-10s %-40s %-8s %s' % ('ok' if ok else 'FAIL', role, name, verdict, detail))
+    say('    %-4s %-12s %-36s %-8s %s' % ('ok' if ok else 'FAIL', role, name, verdict, detail))
     return entry
 
 
@@ -332,17 +384,17 @@ def main():
         summary['cases'].append(entry)
 
     files = [f for case in summary['cases'] for f in case['files']]
-    vulnerable = [f for f in files if f['role'] == 'vulnerable']
-    fixed = [f for f in files if f['role'] == 'fixed']
+
+    def tally(role):
+        chosen = [f for f in files if f['role'] == role]
+        return sum(1 for f in chosen if f['as_expected']), len(chosen)
+
     say('')
     say('Summary')
-    say('    vulnerable workflows rejected with the expected codes: %d of %d'
-        % (sum(1 for f in vulnerable if f['exit'] == 1), len(vulnerable)))
-    say('    fixed workflows accepted with a certificate:           %d of %d'
-        % (sum(1 for f in fixed if f['exit'] == 0), len(fixed)))
-    say('    limitation files accepted, as documented:              %d of %d'
-        % (sum(1 for f in files if f['role'] == 'limitation' and f['exit'] == 0),
-           sum(1 for f in files if f['role'] == 'limitation')))
+    say('    vulnerable workflows rejected with the expected codes: %d of %d' % tally('vulnerable'))
+    say('    fixed workflows accepted with a certificate:           %d of %d' % tally('fixed'))
+    say('    limitation files accepted, as documented:              %d of %d' % tally('limitation'))
+    say('    out-of-scope files accepted, as documented:            %d of %d' % tally('out_of_scope'))
     say('    expectation failures:                                  %d' % len(failures))
 
     summary['failures'] = failures

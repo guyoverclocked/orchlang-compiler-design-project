@@ -1,0 +1,47 @@
+$ orchc check case_studies/10_comet_browser/fixed.orch
+Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.
+BrowserAgentSeparated:
+  token bound   7821 / budget 30000
+  components    output <= 1600, input <= 6221 @ 4 chars/token
+  labels        0 secret, 2 untrusted
+[exit 0]
+
+$ orchc certify case_studies/10_comet_browser/fixed.orch
+{
+  "format": "orchlang-safety-certificate",
+  "version": 1,
+  "assumptions": {
+    "chars_per_token": 4,
+    "note": "The guaranteed component needs no tokenization assumption; the estimated component is sound only if the deployed tokenizer emits at most one token per chars_per_token characters."
+  },
+  "workflows": [
+    {
+      "name": "BrowserAgentSeparated",
+      "budget_tokens": 30000,
+      "bound": {"guaranteed_tokens": 1600, "estimated_tokens": 6221, "total_tokens": 7821, "component_sum_tokens": 7821, "within_budget": true, "defined": true, "cost": 0.000000, "cost_complete": false},
+      "derivation": [
+        {"depth": 0, "rule": "call", "detail": "steps = plan_steps via agent [out<=800, in<=11+200]", "guaranteed_tokens": 800, "estimated_tokens": 211, "line": 20},
+        {"depth": 0, "rule": "call", "detail": "summary = summarise via agent [out<=800, in<=10+6000]", "guaranteed_tokens": 800, "estimated_tokens": 6010, "line": 22}
+      ],
+      "bindings": [
+        {"scope": "workflow:BrowserAgentSeparated", "name": "agent", "kind": "model", "type": "<unknown>", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:BrowserAgentSeparated", "name": "browser_action", "kind": "tool", "type": "<unknown>", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:BrowserAgentSeparated", "name": "page_content", "kind": "input", "type": "text", "confidentiality": "public", "integrity": "untrusted", "token_bound": 6000},
+        {"scope": "workflow:BrowserAgentSeparated", "name": "plan_steps", "kind": "prompt", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:BrowserAgentSeparated", "name": "steps", "kind": "local-result", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": 800},
+        {"scope": "workflow:BrowserAgentSeparated", "name": "summarise", "kind": "prompt", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:BrowserAgentSeparated", "name": "summary", "kind": "local-result", "type": "text", "confidentiality": "public", "integrity": "untrusted", "token_bound": 800},
+        {"scope": "workflow:BrowserAgentSeparated", "name": "user_instruction", "kind": "input", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": 200},
+        {"scope": "workflow:BrowserAgentSeparated::prompt:plan_steps", "name": "instruction", "kind": "prompt-parameter", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:BrowserAgentSeparated::prompt:summarise", "name": "page", "kind": "prompt-parameter", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null}
+      ],
+      "reclassifications": [
+      ],
+      "relational_obligations": [
+      ],
+      "sinks": [
+        {"tool": "browser_action", "region": "root", "line": 21}
+      ]
+    }
+  ]
+}

@@ -133,3 +133,20 @@ Later the same day: a case study against real incidents, and end-to-end proof.
   reproduce the results without overwriting the committed ones.
 - Fixed `demo.sh`, which failed when `CXX` carried flags such as
   `clang++ -stdlib=libc++`.
+
+Prompt-injection survey (same day).
+
+- `docs/CASE_STUDY.md` section 4 surveys eleven prompt-injection incidents and
+  models four more: Gemini driven by a calendar invite (SafeBreach), ForcedLeak
+  in Salesforce Agentforce (Noma Security), the Perplexity Comet browser
+  (Brave), and MCP tool poisoning (Invariant Labs). Each vulnerable workflow is
+  rejected with `E233`, and each repair mirrors the vendor's own fix and is
+  accepted.
+- The Comet repair separates planning from reading and needs no escape hatch.
+  A plausible regression of it, one that lets the planner see the page
+  summary, is rejected.
+- The DPD chatbot (case 12) is accepted, and documented as out of scope: its
+  harm was in what the model said, not in what it did.
+- The first CI run (36088622594) passed every step on Ubuntu and on macOS 26.6
+  (Apple silicon, Apple clang 21, GNU Make 3.81), with identical digests. That
+  run is the first verification on real Mac hardware.

@@ -1,0 +1,26 @@
+// Case study 9, fixed: the renderer's URL policy is stated, and recorded.
+//
+// Salesforce's fix (8 September 2025) was "Trusted URLs Enforcement for
+// Agentforce & Einstein AI": agent output may only load URLs on an enforced
+// list.  In OrchLang the policy becomes an endorsement with its reason.
+//
+// This case is the reason OrchLang records the reason.  ForcedLeak got
+// through an allowlist that contained an expired domain.  The certificate
+// lists every workflow that relies on "only URLs on the trusted list", so when
+// a list entry lapses, an auditor knows exactly which workflows to re-examine.
+workflow LeadAssistantTrustedUrls budget 40000 {
+  input employee_question: text max_tokens 200;
+  input lead_description: text untrusted max_tokens 10500;
+  secret crm_records: text max_tokens 4000;
+  model agent = mock("agent") max_tokens 1000;
+  tool render_html(html: text);
+
+  prompt answer(question: text, lead: text, records: text) -> text =
+      "Question: {question} Lead: {lead} CRM: {records}";
+
+  declassify(crm_records) as crm_context: text because "the agent may read the org's CRM records for its user";
+  let reply: text = call answer(employee_question, lead_description, crm_context) using agent;
+  endorse(reply) as safe_reply: text because "the renderer strips any URL not on the enforced Trusted URLs list, which is reviewed for lapsed domains";
+  emit render_html(safe_reply);
+  output reply;
+}

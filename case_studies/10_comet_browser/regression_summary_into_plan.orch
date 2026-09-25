@@ -1,0 +1,22 @@
+// Case study 10, regression: someone "improves" the separated browser agent.
+//
+// A later edit lets the planner see the page summary, so that actions can
+// "take the page into account".  That quietly reopens the attack: the summary
+// was written by a model that read the page, so it carries the page's
+// untrusted label, and anything planned from it does too.  The compiler
+// rejects the edit, even though the page is two model calls away from the
+// action.
+workflow BrowserAgentRegressed budget 30000 {
+  input user_instruction: text max_tokens 200;
+  input page_content: text untrusted max_tokens 6000;
+  model agent = mock("agent") max_tokens 800;
+  tool browser_action(step: text);
+
+  prompt summarise(page: text) -> text = "Summarise this page for the user: {page}";
+  prompt plan_steps(instruction: text, context: text) -> text = "Plan the browser actions for: {instruction} Context: {context}";
+
+  let summary: text = call summarise(page_content) using agent;
+  let steps: text = call plan_steps(user_instruction, summary) using agent;
+  emit browser_action(steps);
+  output summary;
+}

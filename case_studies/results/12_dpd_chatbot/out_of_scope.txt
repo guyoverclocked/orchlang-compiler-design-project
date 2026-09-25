@@ -1,0 +1,40 @@
+$ orchc check case_studies/12_dpd_chatbot/out_of_scope.orch
+Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.
+ParcelSupportChat:
+  token bound   915 / budget 5000
+  components    output <= 400, input <= 515 @ 4 chars/token
+  labels        0 secret, 2 untrusted
+[exit 0]
+
+$ orchc certify case_studies/12_dpd_chatbot/out_of_scope.orch
+{
+  "format": "orchlang-safety-certificate",
+  "version": 1,
+  "assumptions": {
+    "chars_per_token": 4,
+    "note": "The guaranteed component needs no tokenization assumption; the estimated component is sound only if the deployed tokenizer emits at most one token per chars_per_token characters."
+  },
+  "workflows": [
+    {
+      "name": "ParcelSupportChat",
+      "budget_tokens": 5000,
+      "bound": {"guaranteed_tokens": 400, "estimated_tokens": 515, "total_tokens": 915, "component_sum_tokens": 915, "within_budget": true, "defined": true, "cost": 0.000000, "cost_complete": false},
+      "derivation": [
+        {"depth": 0, "rule": "call", "detail": "reply = support via assistant [out<=400, in<=15+500]", "guaranteed_tokens": 400, "estimated_tokens": 515, "line": 19}
+      ],
+      "bindings": [
+        {"scope": "workflow:ParcelSupportChat", "name": "assistant", "kind": "model", "type": "<unknown>", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:ParcelSupportChat", "name": "customer_message", "kind": "input", "type": "text", "confidentiality": "public", "integrity": "untrusted", "token_bound": 500},
+        {"scope": "workflow:ParcelSupportChat", "name": "reply", "kind": "local-result", "type": "text", "confidentiality": "public", "integrity": "untrusted", "token_bound": 400},
+        {"scope": "workflow:ParcelSupportChat", "name": "support", "kind": "prompt", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:ParcelSupportChat::prompt:support", "name": "message", "kind": "prompt-parameter", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null}
+      ],
+      "reclassifications": [
+      ],
+      "relational_obligations": [
+      ],
+      "sinks": [
+      ]
+    }
+  ]
+}

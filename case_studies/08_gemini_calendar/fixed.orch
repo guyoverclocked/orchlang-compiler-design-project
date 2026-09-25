@@ -1,0 +1,20 @@
+// Case study 8, fixed: a device acts only after the user confirms it.
+//
+// Google's response, per the SafeBreach write-up, included "enhanced user
+// confirmations for sensitive actions".  In OrchLang that confirmation is the
+// endorsement below: the one declared point where text influenced by a
+// stranger's invitation may become a device command, with the reason on record.
+workflow CalendarAssistantConfirmed budget 20000 {
+  input user_request: text max_tokens 200;
+  input calendar_events: text untrusted max_tokens 2000;
+  model assistant = mock("assistant") max_tokens 600;
+  tool home_device(command: text);
+
+  prompt plan(request: text, events: text) -> text =
+      "The user asks: {request} Their calendar: {events} Decide what to do.";
+
+  let action: text = call plan(user_request, calendar_events) using assistant;
+  endorse(action) as confirmed_action: text because "the user approves each device command on screen before it is sent";
+  emit home_device(confirmed_action);
+  output action;
+}

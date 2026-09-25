@@ -1,0 +1,3 @@
+$ orchc check case_studies/10_comet_browser/vulnerable.orch
+case_studies/10_comet_browser/vulnerable.orch:24:23: error [E233] untrusted value reaches tool 'browser_action'; model output derived from untrusted input must be endorsed before it can drive an external effect
+[exit 1]

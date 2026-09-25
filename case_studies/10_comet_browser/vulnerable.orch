@@ -1,0 +1,26 @@
+// Case study 10, vulnerable: indirect prompt injection in the Perplexity Comet
+// agentic browser.  Brave (A. Chaikin, S. K. Sahib), 20 August 2025:
+// https://brave.com/blog/comet-prompt-injection/
+//
+// The user asks Comet to summarise a Reddit thread.  A comment hides
+// instructions.  Comet opens the user's account page and reads their email
+// address, triggers a one-time passcode, opens Gmail to read it, and posts both
+// as a reply on Reddit.  Brave: Comet "feeds a part of the webpage directly to
+// its LLM without distinguishing between the user's instructions and untrusted
+// content from the webpage."
+//
+// The page is untrusted.  Every browser action (navigate, read, type, post) is
+// an effect.
+workflow BrowserAgent budget 30000 {
+  input user_instruction: text max_tokens 200;
+  input page_content: text untrusted max_tokens 6000;
+  model agent = mock("agent") max_tokens 800;
+  tool browser_action(step: text);
+
+  prompt act(instruction: text, page: text) -> text =
+      "Instruction: {instruction} Page: {page} Next browser action:";
+
+  let step: text = call act(user_instruction, page_content) using agent;
+  emit browser_action(step);
+  output step;
+}

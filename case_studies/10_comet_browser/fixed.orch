@@ -1,0 +1,24 @@
+// Case study 10, fixed: the page can be read, but it cannot steer.
+//
+// Brave's first recommendation: "The browser should clearly separate the
+// user's instructions from the website's contents."  Here the actions are
+// planned from the user's instruction alone, and the page goes only to a
+// summariser whose answer is returned, never acted on.
+//
+// Unlike the endorsement-based repairs, this one needs no trusted escape
+// hatch.  The compiler proves the separation: no value derived from the page
+// reaches browser_action, whatever the page says.
+workflow BrowserAgentSeparated budget 30000 {
+  input user_instruction: text max_tokens 200;
+  input page_content: text untrusted max_tokens 6000;
+  model agent = mock("agent") max_tokens 800;
+  tool browser_action(step: text);
+
+  prompt plan_steps(instruction: text) -> text = "Plan the browser actions for: {instruction}";
+  prompt summarise(page: text) -> text = "Summarise this page for the user: {page}";
+
+  let steps: text = call plan_steps(user_instruction) using agent;
+  emit browser_action(steps);
+  let summary: text = call summarise(page_content) using agent;
+  output summary;
+}

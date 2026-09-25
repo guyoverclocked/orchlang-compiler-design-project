@@ -9,19 +9,25 @@
 
 ## Summary
 
-We took seven problems from the record of real LLM applications and asked a
+We took twelve problems from the record of real LLM applications and asked a
 narrow, checkable question of each: *if the workflow had been written in
 OrchLang, with its inputs labelled honestly and its effects declared, would
 the compiler have refused to build it, and would it accept the repaired
 version?*
 
-Six are documented incidents or vulnerability classes: the GitHub MCP
-"toxic agent flow", the Supabase MCP ticket leak, EchoLeak
-(CVE-2025-32711, CVSS 9.3), LangChain's code-execution CVE-2023-29374, OWASP's
-credential-in-the-system-prompt scenario, and the retry-loop cluster of a
-published catalogue of 63 budget-overrun incidents. The seventh applies a
-published family of token-count side-channel attacks to a constructed workflow,
-and is labelled as constructed throughout.
+Eight are **prompt-injection attacks** on production systems: the GitHub and
+Supabase MCP servers, Microsoft 365 Copilot (EchoLeak, CVE-2025-32711, CVSS
+9.3), LangChain (CVE-2023-29374), Google Gemini, Salesforce Agentforce
+(ForcedLeak, CVSS 9.4), the Perplexity Comet browser, and MCP tool poisoning.
+Three more are:
+
+- OWASP's credential-in-the-system-prompt scenario;
+- the retry-loop cluster of a published catalogue of 63 budget overruns;
+- a billing side channel, constructed from published token-count attacks and
+  labelled as constructed throughout.
+
+The last is the DPD chatbot, a prompt injection OrchLang does **not** address,
+included to mark the boundary. Section 4 surveys prompt injection on its own.
 
 | # | Problem | OWASP LLM 2025 | Vulnerable workflow | Repaired workflow |
 |---|---|---|---|---|
@@ -32,13 +38,25 @@ and is labelled as constructed throughout.
 | 5 | Credential in the system prompt | LLM02, LLM07 | **rejected**, `E230` + `E231` | accepted, ≤ 1,125 tokens |
 | 6 | Retry-loop budget overrun | LLM10 | **rejected**, `E260` (30,604 > 16,000) | accepted, ≤ 12,876 tokens |
 | 7 | Bill reveals a secret *(constructed)* | LLM02 | **rejected**, `E236` | accepted, ≤ 3,515 tokens |
+| 8 | Gemini calendar invite drives smart home (2025) | LLM01, LLM06 | **rejected**, `E233` | accepted, ≤ 2,817 tokens |
+| 9 | ForcedLeak, Salesforce Agentforce (2025) | LLM01, LLM02 | **rejected**, `E233` | accepted, ≤ 15,712 tokens |
+| 10 | Perplexity Comet browser hijack (2025) | LLM01, LLM06 | **rejected**, `E233`; so is a regression | accepted with **no** escape hatch, ≤ 7,821 tokens |
+| 11 | MCP tool poisoning (2025) | LLM01, LLM03 | **rejected**, `E233` | accepted, ≤ 2,820 tokens |
+| 12 | DPD chatbot talked into swearing (2024) | LLM01 | accepted: **out of scope** | n/a |
 
-All seven vulnerable workflows were rejected with exactly the expected
-diagnostic codes, and all seven repairs were accepted. Two runtime experiments
-reproduce the harm. The vulnerable retry agent overran its budget in 3 of 200
-seeded runs (the repaired one in none), and the vulnerable router's bill changed
-with the secret in 25 of 25 paired runs (the repaired one's in none). Two
-further files show honestly where the guarantee ends.
+Every vulnerable workflow was rejected with exactly the expected diagnostic
+codes: twelve files across cases 1–11, including a plausible regression of
+case 10's repair. All eleven repairs were accepted.
+
+Two runtime experiments reproduce the harm:
+
+- the vulnerable retry agent overran its budget in 3 of 200 seeded runs, and
+  the repaired one in none;
+- the vulnerable router's bill changed with the secret in 25 of 25 paired
+  runs, and the repaired one's in none.
+
+Three further files, two limitations and case 12, show honestly where the
+guarantee ends.
 
 The project itself was verified end to end:
 
@@ -48,14 +66,15 @@ The project itself was verified end to end:
 - a 36-step demo rehearsal;
 - case-study results that reproduce byte for byte.
 
-It passed on GCC 13 with libstdc++ and on Clang 18 with libc++, and a GitHub
-Actions workflow repeats it on Linux and macOS on every push (section 6).
+It passed locally on GCC 13 with libstdc++ and on Clang 18 with libc++. It also
+passed on GitHub Actions on Ubuntu, and on **macOS 26.6 on Apple silicon with
+Apple clang 21**, with identical digests on every platform (section 7).
 
 **What this does *not* show.** None of these systems was written in OrchLang, and
 OrchLang would not have fixed them by existing. The claim is conditional:
 had these workflows been expressed in OrchLang, the compiler would have refused
-the dangerous wiring before anything ran. Section 5 lists the limits, including
-two that the case studies make executable.
+the dangerous wiring before anything ran. Sections 4.8 and 6 list the limits,
+including three that the case studies make executable.
 
 ---
 
@@ -121,9 +140,12 @@ under `case_studies/NN_name/`. Three rules kept the models honest:
 - where an experiment is possible on the offline mock runtime, it reproduces the
   harm in the vulnerable workflow and its absence in the repaired one.
 
-**Limitation files.** Two extra files are workflows the compiler *accepts* even
-though the real system would be vulnerable. They exist to make the boundary of
-the guarantee concrete (sections 3.3, 3.4 and 5).
+**Limitation and out-of-scope files.** Three files are workflows the compiler
+*accepts* on purpose. Two model a real vulnerable system in a way that hides
+the danger: an undeclared effect, and a mislabelled input. The third is a
+prompt injection whose harm lies in the reply itself, which OrchLang does not
+claim to address. They make the boundary of the guarantee concrete (sections
+3.3, 3.4, 4.6 and 6).
 
 ---
 
@@ -418,24 +440,232 @@ secret, over 25 seeds.
 
 ---
 
-## 4. What the case studies show
+## 4. Prompt injection in depth
 
-1. **One rule covers four incident reports.** Cases 1–4 span a coding agent, a
-   database agent, an enterprise assistant and a maths chain, in four products
-   (GitHub's MCP server, Supabase's MCP server, Microsoft 365 Copilot and
-   LangChain) reported between 2023 and 2025. All four fail on the same check,
-   `E233`: text from an untrusted source reaches an effect. The industry has not converged on how
-   to defend against prompt injection, but these incidents share a structure,
-   and that structure is visible in the source before anything runs.
+Prompt injection is first on OWASP's Top 10 for LLM Applications (LLM01) [1],
+and four of the incidents above are prompt-injection attacks. This section
+widens the survey to eleven incidents, models four more in OrchLang (cases
+8–11), and records one that OrchLang does not address (case 12).
+
+### 4.1 The survey
+
+| Incident | Reported | Untrusted text came from | Effect it drove | OrchLang verdict |
+|---|---|---|---|---|
+| GitHub MCP toxic agent flow [2] | May 2025 | a public issue | a pull request on a public repository | `E233` (case 1) |
+| Supabase MCP ticket leak [4] | Jul 2025 | a support ticket | SQL run with `service_role` | `E233` (case 2) |
+| EchoLeak, CVE-2025-32711 [5, 6] | Jun 2025 | an inbound email | an auto-fetched image URL | `E233` (case 3) |
+| LangChain, CVE-2023-29374 [8] | Apr 2023 | the user's question | Python `exec` | `E233` (case 4) |
+| Gemini calendar invite [20] | Aug 2025 | a calendar invitation's title | Google Home devices | `E233` (case 8) |
+| ForcedLeak, Salesforce Agentforce, CVSS 9.4 [21] | Sep 2025 | a public Web-to-Lead form | an image URL on an allowlisted domain | `E233` (case 9) |
+| Perplexity Comet browser [22] | Aug 2025 | a Reddit comment | navigating, reading Gmail, posting a reply | `E233` (case 10) |
+| MCP tool poisoning [23] | Apr 2025 | a third-party tool's description | a tool call with hidden arguments | `E233` (case 11) |
+| GitLab Duo [24] | May 2025 | a merge request, commit or comment | an `<img>` request carrying base64 source code | same shape as case 3: `E233` if the renderer is declared |
+| Slack AI [7] | Aug 2024 | a public channel message | a rendered link carrying an API key, *if clicked* | **not caught** unless link rendering is declared as an effect; the click is the user's |
+| DPD chatbot [25] | Jan 2024 | the customer's own message | none: the harm was the reply itself | **out of scope**, accepted (case 12) |
+
+**Eight of the eleven are prevented, all by one rule.** In each, text from a
+source anyone can write reached a model, and the model's answer then drove an
+effect: a pull request, a SQL query, a network fetch, code execution, a device
+command, a browser action, or a tool call. OrchLang labels a model's answer with
+the join of everything in its prompt, so that answer is untrusted, and an
+untrusted value may not reach a tool (`E233`). This holds however many model
+calls sit in between, and whatever the injected text says.
+
+The rule does not try to *detect* injections. EchoLeak got past Microsoft's
+dedicated injection classifier (XPIA) [6]. OrchLang instead assumes the model
+will be fooled and removes what being fooled can do. This is the "lethal
+trifecta" argument [3] turned into a type rule: when untrusted content is in
+the context, external effects are unavailable unless someone explicitly
+decides otherwise.
+
+### 4.2 Case 8: a calendar invite that opens the windows
+
+**What happened.** In "Invitation Is All You Need" (SafeBreach, 6 August 2025),
+Nassi, Cohen and Yair put instructions in the title of a Google Calendar
+invitation [20]. When the victim asked Gemini "what is on my calendar?", the
+assistant read the invite and followed it. The demonstrated effects include
+remotely controlling "a victim's home appliances (e.g., connected windows,
+boiler, lights)", starting Zoom calls, deleting events, and exfiltrating email.
+Google's response included "enhanced user confirmations for sensitive actions".
+
+**OrchLang.** `calendar_events` is untrusted and `home_device` is a tool:
+
+```
+case_studies/08_gemini_calendar/vulnerable.orch:23:20: error [E233] untrusted value reaches tool 'home_device'; ...
+```
+
+**Repaired** with Google's own mitigation, written as an endorsement:
+`endorse(action) … because "the user approves each device command on screen before it is sent"`.
+Accepted, ≤ 2,817 tokens.
+
+### 4.3 Case 9: ForcedLeak, and the allowlist that expired
+
+**What happened.** Noma Security's ForcedLeak (25 September 2025, CVSS 9.4)
+hid instructions in the Description field of a public Salesforce Web-to-Lead
+form [21]. When an employee asked Agentforce about the lead, the agent also
+queried CRM data and wrote an image tag whose URL carried it, pointing at
+`my-salesforce-cms.com`. That domain was on Salesforce's Content Security
+Policy allowlist, had expired, and was bought by the researchers for about five
+dollars. Salesforce's fix, on 8 September 2025, was "Trusted URLs Enforcement
+for Agentforce & Einstein AI".
+
+**OrchLang.** The form is untrusted, CRM access is declassified with a reason,
+and rendering that loads images is a tool:
+
+```
+case_studies/09_agentforce_forcedleak/vulnerable.orch:27:20: error [E233] untrusted value reaches tool 'render_html'; ...
+```
+
+**Repaired** by stating the URL policy as an endorsement, the form the vendor's
+fix takes. Accepted, ≤ 15,712 tokens.
+
+**Why this case matters.** ForcedLeak is an allowlist that went stale. An
+endorsement is exactly such a claim: "only URLs on the trusted list". The
+certificate records it by name, so when an entry lapses, an auditor can list
+every workflow that relied on it. Case 4 is the same lesson: LangChain's move
+to numexpr later became CVE-2023-39631.
+
+### 4.4 Case 10: an agentic browser, repaired without trusting anyone
+
+**What happened.** Brave showed on 20 August 2025 that a Reddit comment could
+hijack the Perplexity Comet browser [22]. Asked to summarise the thread, Comet
+followed hidden instructions:
+
+1. it opened the user's account page and read their email address;
+2. it triggered a one-time passcode;
+3. it opened Gmail and read the code;
+4. it posted both as a Reddit reply.
+
+Brave's diagnosis was that Comet "feeds a part of the webpage directly to its
+LLM without distinguishing between the user's instructions and untrusted
+content from the webpage". Its first recommendation is that the browser "should
+clearly separate the user's instructions from the website's contents".
+
+**OrchLang.**
+
+```
+case_studies/10_comet_browser/vulnerable.orch:24:23: error [E233] untrusted value reaches tool 'browser_action'; ...
+```
+
+**Repaired by separation, not by trust.** Browser actions are planned from the
+user's instruction alone. The page goes only to a summariser, whose answer is
+returned and never acted on:
+
+```orchlang
+let steps: text = call plan_steps(user_instruction) using agent;
+emit browser_action(steps);
+let summary: text = call summarise(page_content) using agent;
+output summary;
+```
+
+Accepted, ≤ 7,821 tokens, with **no escape hatch at all**. This is the only
+injection repair here that asks the reader to trust nothing. The compiler
+proves that no value derived from the page reaches `browser_action`. It is the
+principle behind CaMeL, whose design ensures "the untrusted data retrieved by
+the LLM can never impact the program flow" [26]. CaMeL enforces that at run time
+with its own interpreter; OrchLang checks it in the source, before anything
+runs.
+
+**The separation is enforced, not a convention.**
+`regression_summary_into_plan.orch` is a plausible later edit that lets the
+planner "take the page into account" by reading the summary. The compiler
+rejects it (`E233` at line 20), because the summary was written by a model that
+read the page. The page is two model calls away from the action, and the label
+still arrives.
+
+### 4.5 Case 11: an instruction hidden in a tool's own description
+
+**What happened.** Invariant Labs defined the tool poisoning attack on 1 April
+2025 as "malicious instructions … embedded within MCP tool descriptions that
+are invisible to users but visible to AI models" [23]. Their demonstration was
+an innocent-looking `add` tool whose description told the model to read
+`~/.cursor/mcp.json` and `~/.ssh/id_rsa` and pass them in a hidden argument. In
+Cursor, the agent complied. The mitigations they recommend include tool and
+package pinning.
+
+**OrchLang.** A description written by a third party is untrusted content that
+arrives through the tool list:
+
+```
+case_studies/11_mcp_tool_poisoning/vulnerable.orch:23:20: error [E233] untrusted value reaches tool 'invoke_tool'; ...
+```
+
+**Repaired** by vetting the *input* rather than the output:
+`endorse(tool_descriptions) … because "each description matches the hash pinned when a person reviewed it at install time"`.
+Accepted, ≤ 2,820 tokens. The recorded reason is Invariant's own mitigation, and
+it becomes false the moment a description changes after review. That is
+precisely what an auditor should re-check.
+
+### 4.6 Case 12: the DPD chatbot, out of scope
+
+**What happened.** In January 2024, a customer got the DPD parcel company's
+chatbot to swear, to write a poem about its own uselessness, and to call DPD
+the "worst delivery firm in the world". DPD disabled the AI element [25].
+
+**OrchLang accepts this workflow** (`out_of_scope.orch`). By its own rules it
+is right to: the customer's untrusted text shapes a reply that goes back to
+that same customer, and no effect is involved. The harm was entirely in what
+the model *said*, and OrchLang constrains where text flows and what it can
+trigger, not what a model writes. Output moderation is a different tool. The
+case is included so that the boundary is on record.
+
+### 4.7 Four ways to repair an injection, and what each asks you to trust
+
+| Repair | Cases | Escape hatch | What you must trust |
+|---|---|---|---|
+| Gate the effect with a recorded decision (`endorse` the output) | 1, 4, 8, 9 | yes | the reviewer, validator, confirmation or allowlist named in the reason; cases 4 and 9 show such claims can decay |
+| Remove the effect; return data instead | 2, 3 | no | nothing; the cost is less automation |
+| Separate planning from reading | 10 | **no** | nothing; the compiler proves the separation, and rejects the regression |
+| Vet the input (`endorse` the source) | 11 | yes | the pinning and the review behind it |
+
+In every case the choice is visible in the source and in the certificate. In a
+Python or YAML workflow it is usually invisible.
+
+### 4.8 What OrchLang does not prevent
+
+- **The manipulation itself.** The model is still fooled. OrchLang limits the
+  consequences to what the workflow allows.
+- **Harm carried in the reply.** Offensive text (case 12), misinformation, or a
+  convincing phishing message shown to the user, like Slack AI's fake "click
+  here to reauthenticate" link [7], are all returned text. OrchLang permits
+  returning untrusted text.
+- **Effects that are not declared.** A renderer that auto-fetches images, or a
+  chat client that unfurls links, must be declared as a tool, or it is
+  invisible (the case 3 limitation file). This covers GitLab Duo and Slack AI.
+- **Mislabelled sources.** Text a stranger controls must be declared
+  `untrusted` (the case 4 limitation file).
+- **Tools chosen at run time.** OrchLang describes a workflow whose effects are
+  fixed in the source. A general agent that picks from an open-ended tool set
+  at run time has to be modelled with a generic tool, as in cases 10 and 11.
+
+---
+
+## 5. What the case studies show
+
+1. **One rule covers eight incident reports.** Cases 1–4 and 8–11 span:
+   - a coding agent and a database agent (the GitHub and Supabase MCP servers);
+   - two enterprise assistants (Microsoft 365 Copilot and Salesforce
+     Agentforce);
+   - a maths chain (LangChain);
+   - a home assistant (Gemini);
+   - an agentic browser (Comet);
+   - third-party tool servers (MCP tool poisoning).
+
+   They were reported between 2023 and 2025, and all eight fail on the same
+   check, `E233`: text from an untrusted source reaches an effect. The industry
+   has not converged on how to defend against prompt injection, but these
+   incidents share a structure, and that structure is visible in the source
+   before anything runs.
 2. **The defence does not depend on stopping the model being fooled.** OrchLang
    assumes the model *will* follow injected instructions, and prevents the
    consequence rather than the manipulation. This is the same position as
    Willison's lethal trifecta: remove one leg, and here the leg removed is
    "untrusted content drives external communication" [3].
 3. **Repairs are small and reviewable.** Every repair changes between two and
-   six lines of code, comments aside. The three that rest on a human decision
-   (a `declassify` or an `endorse`, in cases 1, 3 and 4) record it with its
-   reason in the certificate.
+   six lines of code, comments aside. The six that rest on a human decision (a
+   `declassify` or an `endorse`, in cases 1, 3, 4, 8, 9 and 11) record it with
+   its reason in the certificate. Case 10's repair rests on none: the compiler
+   proves it.
 4. **The costly and subtle cases need arithmetic and relational reasoning.** A
    syntactic check cannot catch case 6 or case 7. The first needs the retry
    multiplication, and the second needs the billing-signature comparison, which
@@ -443,7 +673,7 @@ secret, over 25 seeds.
 
 ---
 
-## 5. Where the guarantee ends
+## 6. Where the guarantee ends
 
 These limits are stated here as carefully as the results.
 
@@ -464,6 +694,10 @@ These limits are stated here as carefully as the results.
   offline, seeded mock, which makes the same assumptions as the analysis. They
   show that the implementation matches its specification and that the harm is
   real under the model, not how often a real provider would trigger it.
+- **Harm carried in the reply is out of scope.** A prompt injection that only
+  changes what the model *says* is accepted (case 12, the DPD chatbot), and so
+  is a phishing message the model is tricked into showing the user. OrchLang
+  constrains flows and effects, not content.
 - **Case 7 is constructed** and grounded in published attacks, not a reported
   incident.
 - **Token bounds** depend on a declared characters-per-token assumption (4 by
@@ -471,9 +705,9 @@ These limits are stated here as carefully as the results.
 
 ---
 
-## 6. Verifiable proof that the project works
+## 7. Verifiable proof that the project works
 
-### 6.1 One command
+### 7.1 One command
 
 ```sh
 ./verify.sh          # or: make verify
@@ -493,20 +727,27 @@ of everything it checked.
 | 6 | Live-demo rehearsal (`./demo.sh check`) | PASS, 36/36 steps |
 | 7 | `case_studies/verify.py` compared with the committed `case_studies/results` | PASS, byte-identical |
 
-### 6.2 Where it has been run
+### 7.2 Where it has been run
 
 | Environment | Result |
 |---|---|
 | Linux x86-64, GCC 13.3 with libstdc++, GNU Make 4.3, Python 3.11 | all 7 steps PASS (about 64 s) |
 | Linux x86-64, Clang 18.1 with **libc++** (the macOS standard library), bash 3.2.57, BSD awk | steps 1–3 and 5–7 PASS; the committed results, generated with GCC, reproduce byte for byte |
-| GitHub Actions, `ubuntu-latest` and `macos-latest`, on every push | [.github/workflows/verify.yml](../.github/workflows/verify.yml); runs and their `EVIDENCE.txt` artifacts are public at <https://github.com/guyoverclocked/orchlang-compiler-design-project/actions/workflows/verify.yml> |
+| GitHub Actions `ubuntu-latest`: Linux 6.17 x86-64, GCC 13.3, GNU Make 4.3, Python 3.12 | all 7 steps PASS; first run [36088622594](https://github.com/guyoverclocked/orchlang-compiler-design-project/actions/runs/36088622594), on commit `4364b58` |
+| GitHub Actions `macos-latest`: **macOS 26.6.2 on Apple silicon (arm64), Apple clang 21.0, GNU Make 3.81**, Python 3.14 | all 7 steps PASS, including both sanitizers, in the same run; **every digest identical** to the Linux runs |
+
+The workflow is [.github/workflows/verify.yml](../.github/workflows/verify.yml).
+It runs on every push, and each run's `EVIDENCE.txt` is kept as a downloadable
+artifact at
+<https://github.com/guyoverclocked/orchlang-compiler-design-project/actions/workflows/verify.yml>.
+The first run predates cases 8–12, and later runs cover them.
 
 The mock runtime uses its own generator rather than `<random>` distributions,
 which differ between standard libraries. That is why the same seeds give the
 same executions on every platform, and why results can be compared byte for
 byte.
 
-### 6.3 The checks have teeth
+### 7.3 The checks have teeth
 
 Changing a single number in the committed case-study results ("25 of 25" to
 "24 of 25") makes `./verify.sh` fail and print the differing line. Each
@@ -516,7 +757,7 @@ if the vulnerable retry agent *stops* overrunning its budget, or if the leaking
 router *stops* leaking. The experiments therefore guard against the case
 studies silently losing their point.
 
-### 6.4 Digests at the time of writing
+### 7.4 Digests at the time of writing
 
 From `verification/EVIDENCE.txt`. A rerun on the same commit must print the same
 values.
@@ -526,13 +767,13 @@ compiler sources (src include tests)   91e867f1b5fac424ac5b493ad415f922d86b94cac
 example programs (examples)            1b6a01b61edb76a5edef21e38f607c602247c1541c87c8ad443b72e77ff489a8
 benchmark corpus (bench/*/*.orch)      ee6aa4dc318cfa664c046f90ef352bd5aea80c0ca943f66e6c76125ee4a0a517
 committed benchmark results            17d0a5cbb5c05562f51b77ac69a4960e8ba0c008defba0a14c0fa4dbff033c0b
-case-study workflows                   68a71ec0f32d0de49818d53dd4e82bedf08c607d7c5c375495117ba587256b52
-committed case-study results           d3c8a8a6d4ef3d2a884915209541efe7bb58c3f89c04df77550829f4039970a3
+case-study workflows                   d69541cdc9a996257137c4403c8a15b4fcd90226fef4d7a42e02932325e67f89
+committed case-study results           484c6b8bddc82e1615c3cdc6e993f9efee8c331019e8e4f4e7b6c2e134ad844f
 ```
 
 ---
 
-## 7. Reproducing a single case by hand
+## 8. Reproducing a single case by hand
 
 ```sh
 make
@@ -617,3 +858,22 @@ All accessed 25 September 2026.
 19. LangChain pull request #1119, "Patch LLMMathChain exec vulnerability,"
     closed unmerged on 9 May 2023 in favour of numexpr.
     <https://github.com/langchain-ai/langchain/pull/1119>
+20. O. Yair, B. Nassi and S. Cohen. "Invitation Is All You Need: Hacking
+    Gemini." SafeBreach, 6 August 2025.
+    <https://www.safebreach.com/blog/invitation-is-all-you-need-hacking-gemini/>
+21. S. Levi. "ForcedLeak: AI agent risks exposed in Salesforce Agentforce." Noma
+    Security, 25 September 2025. CVSS 9.4.
+    <https://noma.security/blog/forcedleak-agent-risks-exposed-in-salesforce-agentforce>
+22. A. Chaikin and S. K. Sahib. "Agentic Browser Security: Indirect Prompt
+    Injection in Perplexity Comet." Brave, 20 August 2025.
+    <https://brave.com/blog/comet-prompt-injection/>
+23. L. Beurer-Kellner and M. Fischer. "MCP Security Notification: Tool Poisoning
+    Attacks." Invariant Labs, 1 April 2025.
+    <https://invariantlabs.ai/blog/mcp-security-notification-tool-poisoning-attacks>
+24. O. Mayraz. "Remote Prompt Injection in GitLab Duo Leads to Source Code
+    Theft." Legit Security, 22 May 2025.
+    <https://www.legitsecurity.com/blog/remote-prompt-injection-in-gitlab-duo>
+25. TIME. Report on the DPD customer-service chatbot incident, 20 January 2024.
+    <https://time.com/6564726/ai-chatbot-dpd-curses-criticizes-company/>
+26. E. Debenedetti et al. "Defeating Prompt Injections by Design" (CaMeL).
+    arXiv:2503.18813, 24 March 2025. <https://arxiv.org/abs/2503.18813>

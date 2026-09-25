@@ -1,0 +1,25 @@
+// Case study 8, vulnerable: a calendar invite that controls the victim's home.
+// Nassi, Cohen and Yair, "Invitation Is All You Need", SafeBreach, 6 August 2025:
+// https://www.safebreach.com/blog/invitation-is-all-you-need-hacking-gemini/
+//
+// The attacker sends the victim a calendar invitation whose title carries
+// instructions.  When the victim asks Gemini "what is on my calendar?", the
+// assistant reads the invite, follows the instructions, and drives Google Home:
+// in the research, opening connected windows, turning on the boiler, and
+// switching lights.
+//
+// Anyone can send you an invitation, so its text is untrusted.  A smart-home
+// command is an external effect in the most literal sense.
+workflow CalendarAssistant budget 20000 {
+  input user_request: text max_tokens 200;
+  input calendar_events: text untrusted max_tokens 2000;
+  model assistant = mock("assistant") max_tokens 600;
+  tool home_device(command: text);
+
+  prompt plan(request: text, events: text) -> text =
+      "The user asks: {request} Their calendar: {events} Decide what to do.";
+
+  let action: text = call plan(user_request, calendar_events) using assistant;
+  emit home_device(action);
+  output action;
+}
