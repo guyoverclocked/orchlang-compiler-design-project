@@ -1,0 +1,26 @@
+// Port of the "chain" workflow (Example 1) of patterns/agents/basic_workflows.ipynb,
+// anthropics/anthropic-cookbook@813fbeec03cdedfda7808529438d1c7af71f26eb.  See
+// bench/real/PROTOCOL.md and manifest.json (id ac-chain).
+//
+// chain(input, prompts) calls llm_call(f"{prompt}\nInput: {result}") once per
+// prompt, feeding each result to the next; the four prompts are constants, so
+// the loop is unrolled.  llm_call uses claude-sonnet-4-6 with max_tokens=4096
+// (util.py).  Anthropic publishes no tokenizer for it, so no guaranteed input
+// bound can be certified.  The report is the caller's input (8192 bytes, P6).
+workflow AcChain budget 1000000000 {
+  input report: text max_bytes 8192;
+  model claude = mock("anthropic/claude-sonnet-4-6") max_tokens 4096;
+  prompt step1(result: text) -> text =
+      "Extract only the numerical values and their associated metrics from the text.\n    Format each as 'value: metric' on a new line.\n    Example format:\n    92: customer satisfaction\n    45%: revenue growth\nInput: {result}";
+  prompt step2(result: text) -> text =
+      "Convert all numerical values to percentages where possible.\n    If not a percentage or points, convert to decimal (e.g., 92 points -> 92%).\n    Keep one number per line.\n    Example format:\n    92%: customer satisfaction\n    45%: revenue growth\nInput: {result}";
+  prompt step3(result: text) -> text =
+      "Sort all lines in descending order by numerical value.\n    Keep the format 'value: metric' on each line.\n    Example:\n    92%: customer satisfaction\n    87%: employee satisfaction\nInput: {result}";
+  prompt step4(result: text) -> text =
+      "Format the sorted data as a markdown table with columns:\n    | Metric | Value |\n    |:--|--:|\n    | Customer Satisfaction | 92% |\nInput: {result}";
+  let r1: text = call step1(report) using claude;
+  let r2: text = call step2(r1) using claude;
+  let r3: text = call step3(r2) using claude;
+  let r4: text = call step4(r3) using claude;
+  output r4;
+}

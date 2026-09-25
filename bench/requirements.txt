@@ -1,6 +1,7 @@
 # Needed only for the measurements that use real tokenizers and a real model
 # (bench/tokenizers/measure.py, bench/provider/measure.py, and experiments E6,
-# E9 and E10 of bench/evaluate.py).  The compiler itself has no dependencies.
+# E9, E10 and E11 of bench/evaluate.py; E11 also reads the pinned sources with
+# pyyaml).  The compiler itself has no dependencies.
 #
 # The versions below are the ones the committed results were produced with.
 # torch is large; a CPU-only wheel is enough:
@@ -10,3 +11,4 @@ tokenizers==0.23.2
 huggingface_hub==1.33.0
 transformers==4.46.3
 torch==2.5.1
+pyyaml==6.0.1

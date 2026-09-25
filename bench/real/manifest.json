@@ -63,7 +63,9 @@
     "bounded_in_source": true,
     "guaranteed_input_expected": false
    },
-   "adaptations": []
+   "adaptations": [
+    "A6"
+   ]
   },
   {
    "id": "ac-route",
@@ -272,10 +274,12 @@
      "W237"
     ],
     "bounded_in_source": true,
-    "guaranteed_input_expected": false
+    "guaranteed_input_expected": false,
+    "expected_warnings_accepted_variant": []
    },
    "adaptations": [
-    "A1"
+    "A1",
+    "A6"
    ],
    "notes": "The graph as compiled: flag = \"do not reflect\", max_iterations = 3, and code_gen_chain is the Claude chain without the retry fallback (its last assignment). The structured-output schema is added to the template (P4)."
   },

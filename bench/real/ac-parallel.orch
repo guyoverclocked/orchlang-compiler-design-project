@@ -1,0 +1,17 @@
+// Port of the "parallel" workflow (Example 2) of patterns/agents/basic_workflows.ipynb,
+// anthropics/anthropic-cookbook@813fbeec03cdedfda7808529438d1c7af71f26eb (id ac-parallel).
+//
+// parallel(prompt, inputs) calls llm_call(f"{prompt}\nInput: {x}") for each of
+// four stakeholder descriptions, which are constants of the source: each is a
+// literal argument, so the whole request is static text.  Concurrency does not
+// change what is sent or billed.  claude-sonnet-4-6, max_tokens=4096 (util.py).
+workflow AcParallel budget 1000000000 {
+  model claude = mock("anthropic/claude-sonnet-4-6") max_tokens 4096;
+  prompt impact(x: text) -> text =
+      "Analyze how market changes will impact this stakeholder group.\n    Provide specific impacts and recommended actions.\n    Format with clear sections and priorities.\nInput: {x}";
+  let impact1: text = call impact("Customers:\n    - Price sensitive\n    - Want better tech\n    - Environmental concerns") using claude;
+  let impact2: text = call impact("Employees:\n    - Job security worries\n    - Need new skills\n    - Want clear direction") using claude;
+  let impact3: text = call impact("Investors:\n    - Expect growth\n    - Want cost control\n    - Risk concerns") using claude;
+  let impact4: text = call impact("Suppliers:\n    - Capacity constraints\n    - Price pressures\n    - Tech transitions") using claude;
+  output impact4;
+}

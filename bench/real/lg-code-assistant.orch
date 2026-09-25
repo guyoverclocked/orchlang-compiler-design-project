@@ -1,0 +1,54 @@
+// Port of langchain-ai/langgraph@23961cff61a42b52525f3b20b4094d8d2fba1744,
+// docs/docs/tutorials/code_assistant/langgraph_code_assistant.ipynb (id
+// lg-code-assistant).  See bench/real/PROTOCOL.md.
+//
+// The graph as compiled: generate -> check_code -> (end | generate), with
+// flag = "do not reflect" and max_iterations = 3, so at most three attempts.
+// code_gen_chain is the Claude chain without the retry fallback (its last
+// assignment in the notebook): claude-3-opus-20240229, whose ChatAnthropic
+// default max_tokens is 4096 (langchain-anthropic 1.3.1 model profile).
+//
+// check_code runs exec(imports) and, if that works, exec(imports + code) on
+// the model's answer: two effects.  Its verdict and error message are the
+// result of executing model-generated code written from web-scraped
+// documentation, so they are untrusted inputs (one per attempt).
+//
+// Adaptations (manifest.json): A1, the structured answer (prefix, imports,
+// code) is passed on whole; the tool schema is appended to the template as
+// JSON (P4); each attempt's conversation is concatenated in order.  The
+// workflow's result is the final generation, which OrchLang cannot return
+// from inside a branch, so the port outputs the first attempt (A6).
+workflow LgCodeAssistant budget 1000000000 {
+  input docs: text untrusted max_bytes 8192;
+  input question: text max_bytes 8192;
+  input imports_ok1: boolean untrusted;
+  input imports_ok2: boolean untrusted;
+  input imports_ok3: boolean untrusted;
+  input failed1: boolean untrusted;
+  input failed2: boolean untrusted;
+  input err1: text untrusted max_bytes 8192;
+  input err2: text untrusted max_bytes 8192;
+  model claude = mock("anthropic/claude-3-opus-20240229") max_tokens 4096;
+  tool exec_imports(source: text);
+  tool exec_code(source: text);
+  prompt gen1(docs: text, question: text) -> text =
+      "<instructions> You are a coding assistant with expertise in LCEL, LangChain expression language. \n \n    Here is the LCEL documentation:  \n ------- \n  {docs} \n ------- \n Answer the user  question based on the \n \n    above provided documentation. Ensure any code you provide can be executed with all required imports and variables \n\n    defined. Structure your answer: 1) a prefix describing the code solution, 2) the imports, 3) the functioning code block. \n\n    Invoke the code tool to structure the output correctly. </instructions> \n Here is the user question:\n\n{question}\n\n{{\"name\": \"code\", \"input_schema\": {{\"properties\": {{\"prefix\": {{\"description\": \"Description of the problem and approach\", \"type\": \"string\"}}, \"imports\": {{\"description\": \"Code block import statements\", \"type\": \"string\"}}, \"code\": {{\"description\": \"Code block not including import statements\", \"type\": \"string\"}}}}, \"required\": [\"prefix\", \"imports\", \"code\"], \"type\": \"object\"}}, \"description\": \"Schema for code solutions to questions about LCEL.\"}}";
+  prompt gen2(docs: text, question: text, sol1: text, err1: text) -> text =
+      "<instructions> You are a coding assistant with expertise in LCEL, LangChain expression language. \n \n    Here is the LCEL documentation:  \n ------- \n  {docs} \n ------- \n Answer the user  question based on the \n \n    above provided documentation. Ensure any code you provide can be executed with all required imports and variables \n\n    defined. Structure your answer: 1) a prefix describing the code solution, 2) the imports, 3) the functioning code block. \n\n    Invoke the code tool to structure the output correctly. </instructions> \n Here is the user question:\n\n{question}\n\n{sol1}\n\n{err1}\n\nNow, try again. Invoke the code tool to structure the output with a prefix, imports, and code block:\n\n{{\"name\": \"code\", \"input_schema\": {{\"properties\": {{\"prefix\": {{\"description\": \"Description of the problem and approach\", \"type\": \"string\"}}, \"imports\": {{\"description\": \"Code block import statements\", \"type\": \"string\"}}, \"code\": {{\"description\": \"Code block not including import statements\", \"type\": \"string\"}}}}, \"required\": [\"prefix\", \"imports\", \"code\"], \"type\": \"object\"}}, \"description\": \"Schema for code solutions to questions about LCEL.\"}}";
+  prompt gen3(docs: text, question: text, sol1: text, err1: text, sol2: text, err2: text) -> text =
+      "<instructions> You are a coding assistant with expertise in LCEL, LangChain expression language. \n \n    Here is the LCEL documentation:  \n ------- \n  {docs} \n ------- \n Answer the user  question based on the \n \n    above provided documentation. Ensure any code you provide can be executed with all required imports and variables \n\n    defined. Structure your answer: 1) a prefix describing the code solution, 2) the imports, 3) the functioning code block. \n\n    Invoke the code tool to structure the output correctly. </instructions> \n Here is the user question:\n\n{question}\n\n{sol1}\n\n{err1}\n\nNow, try again. Invoke the code tool to structure the output with a prefix, imports, and code block:\n\n{sol2}\n\n{err2}\n\nNow, try again. Invoke the code tool to structure the output with a prefix, imports, and code block:\n\n{{\"name\": \"code\", \"input_schema\": {{\"properties\": {{\"prefix\": {{\"description\": \"Description of the problem and approach\", \"type\": \"string\"}}, \"imports\": {{\"description\": \"Code block import statements\", \"type\": \"string\"}}, \"code\": {{\"description\": \"Code block not including import statements\", \"type\": \"string\"}}}}, \"required\": [\"prefix\", \"imports\", \"code\"], \"type\": \"object\"}}, \"description\": \"Schema for code solutions to questions about LCEL.\"}}";
+  let sol1: text = call gen1(docs, question) using claude;
+  emit exec_imports(sol1);
+  if imports_ok1 { emit exec_code(sol1); }
+  if failed1 {
+    let sol2: text = call gen2(docs, question, sol1, err1) using claude;
+    emit exec_imports(sol2);
+    if imports_ok2 { emit exec_code(sol2); }
+    if failed2 {
+      let sol3: text = call gen3(docs, question, sol1, err1, sol2, err2) using claude;
+      emit exec_imports(sol3);
+      if imports_ok3 { emit exec_code(sol3); }
+    }
+  }
+  output sol1;
+}

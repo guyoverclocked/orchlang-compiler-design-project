@@ -61,6 +61,12 @@ std::vector<TemplatePiece> templatePieces(const std::string& text,
     std::string pending;
     std::size_t index = 0;
     while (index < text.size()) {
+        if ((text[index] == '{' || text[index] == '}') && index + 1 < text.size() &&
+            text[index + 1] == text[index]) {
+            pending.push_back(text[index]);
+            index += 2;
+            continue;
+        }
         std::size_t matched = parameters.size();
         std::size_t closing = std::string::npos;
         if (text[index] == '{') {
@@ -213,6 +219,13 @@ void Analyzer::checkPlaceholders(const PromptDecl& prompt) {
     std::set<std::string> seen;
     const std::string& text = prompt.templateText;
     for (std::size_t index = 0; index < text.size(); ++index) {
+        // '{{' and '}}' are a literal brace, as in Python format strings, so
+        // that real prompts containing JSON or code can be written verbatim.
+        if ((text[index] == '{' || text[index] == '}') && index + 1 < text.size() &&
+            text[index + 1] == text[index]) {
+            ++index;
+            continue;
+        }
         if (text[index] == '}') {
             result_.diagnostics.error("E222", prompt.location,
                                       "unexpected '}' in prompt template for '" + prompt.name + "'");

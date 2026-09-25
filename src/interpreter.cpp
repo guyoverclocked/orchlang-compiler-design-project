@@ -330,6 +330,12 @@ void Machine::call(const LetStmt& let) {
     std::string request;
     const std::string& text = prompt->templateText;
     for (std::size_t index = 0; index < text.size();) {
+        if ((text[index] == '{' || text[index] == '}') && index + 1 < text.size() &&
+            text[index + 1] == text[index]) {
+            request.push_back(text[index]);
+            index += 2;
+            continue;
+        }
         bool substituted = false;
         if (text[index] == '{') {
             const std::size_t closing = text.find('}', index + 1);

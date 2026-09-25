@@ -141,6 +141,11 @@ guaranteed input bound undefined.
   * **A5** A call whose one structured response supplies both a decision and
     text is ported as a `boolean` call and a `text` call. Not cost-sound in
     general (adds a call); recorded.
+  * **A6** *(added during development, see §7)* A workflow has exactly one
+    output, bound outside every branch. A source that returns several values,
+    or a value computed inside a branch, outputs a stand-in (named in the
+    port's header). Outputs carry no cost and no effect, so bounds and the
+    effect checks are unchanged.
 * **P9 Plans, not agents.** An AgentDojo task is ported as its ground-truth
   plan executed as a fixed workflow: reads follow P5; one model call computes
   each run-time argument (of an effect or a read) from exactly the data the
@@ -199,4 +204,26 @@ checker did not flag.
 
 ## 7. Deviations
 
-None yet.
+Each deviation below was made during the development split, before the
+compiler was frozen, unless marked otherwise.
+
+* **D1 Literal braces.** A prompt template could not contain `{` or `}` other
+  than as a placeholder (E222), so a real prompt carrying JSON or code could
+  not be written verbatim. Found porting `lg-code-assistant`, whose tool schema
+  is JSON. `{{` and `}}` now denote a literal brace, as in Python format strings
+  and LangChain templates, in both the analysis and the runtime, with a
+  regression test (`testDoubledBracesAreLiteral`) checking that the two agree
+  on the bytes sent. This is lexical and does not change what the language can
+  compute.
+* **D2 Where warnings are compared.** `W237` comes from the cost analysis, which
+  runs only once the flow check passes, so it can never appear on a rejected
+  port. Warnings are therefore compared on the accepted variant (the port, or
+  its annotated variant). In an annotated variant a guard the annotation
+  endorses is trusted, so the `W237` rule is applied to that variant; the
+  result is recorded per port as `expected_warnings_accepted_variant` where it
+  differs from the source's label. Found on `lg-code-assistant`, whose
+  untrusted guards all guard effects and so must all be endorsed.
+* **D3 One output.** Adaptation A6 above.
+* **D4 What counts as source text.** `verify_sources.py` checks prompt templates
+  and literal call arguments. Model strings and endorsement justifications are
+  the port's own text and are not checked.

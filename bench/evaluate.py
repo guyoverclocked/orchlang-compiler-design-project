@@ -47,7 +47,9 @@ E9  Tokenizer facts, from bench/results/tokenizers.json (bench/tokenizers/
     measure.py), with the headline counterexamples re-verified live.
 E10 A real model: does output length depend on request content?  From
     bench/results/provider.json (bench/provider/measure.py).
-E11 Ported real-world workflows (bench/real/).
+E11 Real workflows (bench/real/): 52 candidates from three pinned sources,
+    ported under a fixed protocol; labels versus verdicts, certificates versus
+    execution and real-tokenizer re-billing, AgentDojo's recorded attacks.
 
 Usage:  python bench/evaluate.py [--offline] [--seeds N]
   --offline   skip E6, E9's live checks and E10's model, which need downloads;
@@ -60,6 +62,7 @@ import itertools
 import json
 import math
 import os
+import re
 import subprocess
 import sys
 import time
@@ -712,24 +715,230 @@ def evaluate_provider(offline):
 
 # ------------------------------------------------------------------ E11 ------
 
-def evaluate_real_workflows():
-    manifest = os.path.join(HERE, 'real', 'manifest.json')
-    if not os.path.exists(manifest):
+REAL = os.path.join(HERE, 'real')
+REAL_SEEDS = 200
+
+
+def port_declarations(path):
+    """Text inputs with byte bounds, and each model's tokenizer and overhead."""
+    text = io.open(path, encoding='utf-8').read()
+    inputs = {}
+    for match in re.finditer(r'^\s*input (\w+): text\b[^;]*?max_bytes (\d+)', text, re.M):
+        inputs[match.group(1)] = int(match.group(2))
+    models = {}
+    for match in re.finditer(r'^\s*model \w+ = mock\("([^"]+)"\)([^;]*);', text, re.M):
+        options = match.group(2)
+        tokenizer = re.search(r'tokenizer (\w+)', options)
+        overhead = re.search(r'overhead (\d+)', options)
+        models[match.group(1)] = (tokenizer.group(1) if tokenizer else None,
+                                  int(overhead.group(1)) if overhead else 0)
+    return inputs, models
+
+
+def load_port_tokenizers(names):
+    """Real tokenizers for re-billing a port's requests, by contract name."""
+    encoders = {}
+    try:
+        import tiktoken
+    except ImportError:
         return None
-    entries = json.load(open(manifest, encoding='utf-8'))
+    facts = json.load(open(os.path.join(RESULTS, 'tokenizers.json'), encoding='utf-8'))
+    facts = facts.get('tokenizers', facts)
+    for name in names:
+        if name in ('o200k_base', 'cl100k_base', 'r50k_base'):
+            encoder = tiktoken.get_encoding(name)
+            encoders[name] = (lambda e: lambda text: len(e.encode(text, disallowed_special=())))(encoder)
+        elif name in facts and '@' in facts[name].get('revision', ''):
+            try:
+                from transformers import AutoTokenizer
+            except ImportError:
+                return None
+            repo, revision = facts[name]['revision'].split('@')
+            tokenizer = AutoTokenizer.from_pretrained(
+                repo, revision=revision, cache_dir=os.path.join(HERE, '.cache', 'hf'))
+            encoders[name] = (lambda t: lambda text: len(t(text)['input_ids']))(tokenizer)
+    return encoders
+
+
+def classify_attacks(entry):
+    """AgentDojo's successful attacks on one task: within or outside its plan."""
+    plan = {}
+    for function in entry['plan']:
+        plan[function] = plan.get(function, 0) + 1
+    within, outside = [], []
+    for run_data in entry['runs']:
+        if not run_data['security']:
+            continue
+        counts = {}
+        for function in run_data['calls']:
+            counts[function] = counts.get(function, 0) + 1
+        fits = all(counts[f] <= plan.get(f, 0) for f in counts)
+        (within if fits else outside).append(run_data['injection_task'])
+    return within, outside
+
+
+def evaluate_real_workflows(offline):
+    manifest = json.load(open(os.path.join(REAL, 'manifest.json'), encoding='utf-8'))
+    candidates = manifest['candidates']
+    attacks = json.load(open(os.path.join(REAL, 'agentdojo_runs.json'), encoding='utf-8'))['tasks']
+    ported = [c for c in candidates if c['decision'] == 'port']
+    frozen = manifest.get('frozen_compiler')
+
+    # Held-out results are only meaningful against the frozen compiler: any
+    # later change to the analyser must be declared, with its reason.
+    if frozen:
+        changed = subprocess.run(['git', '-C', ROOT, 'diff', '--name-only', frozen, 'HEAD', '--',
+                                  'src', 'include'], capture_output=True, text=True)
+        if changed.returncode == 0 and changed.stdout.strip() and not manifest.get('post_freeze_changes'):
+            fail('the compiler changed after the freeze (%s) and manifest.json declares no '
+                 'post_freeze_changes: %s' % (frozen[:12], ' '.join(changed.stdout.split())))
+
+    # The split is a function of the id alone; check nobody moved a candidate.
+    import hashlib
+    for c in candidates:
+        rule = 'dev' if hashlib.sha256(c['id'].encode()).hexdigest()[0] in '01234' else 'held-out'
+        if c['split'] != rule:
+            fail('real workflow %s is in split %s, the rule says %s' % (c['id'], c['split'], rule))
+
+    tokenizer_names = set()
+    for c in ported:
+        for model in c['models'].values():
+            if model['tokenizer']:
+                tokenizer_names.add(model['tokenizer'])
+    encoders = None
+    if offline:
+        skipped.append('E11 real-tokenizer re-billing and source verification')
+    else:
+        encoders = load_port_tokenizers(sorted(tokenizer_names))
+        if encoders is None:
+            fail('E11 needs tiktoken and transformers (pip install -r bench/requirements.txt), '
+                 'or pass --offline')
+
     rows = []
-    for entry in entries['workflows']:
-        path = os.path.join(HERE, 'real', entry['file'])
+    totals = {'runs': 0, 'output_viol': 0, 'guaranteed_viol': 0, 'rebill_viol': 0,
+              'estimate_exceeded': 0, 'real_estimate_exceeded': 0, 'label_mismatch': 0, 'within_plan_accepted': 0,
+              'attacks_within': 0, 'attacks_outside': 0}
+    for c in ported:
+        path = os.path.join(REAL, c['file'])
+        annotated = path[:-5] + '.annotated.orch'
+        if not os.path.exists(path):
+            fail('real workflow %s: %s is missing' % (c['id'], c['file']))
+            continue
+        expected = set(c['labels']['expected'])
+        expected_errors = {code for code in expected if code.startswith('E')}
         code, out, err = run(['check', path])
-        codes = sorted(c for c in diagnostic_codes(err) if c[0] in 'EW')
+        got = {x for x in diagnostic_codes(err + out) if x[0] in 'EW' and x[1:].isdigit()}
+        got_errors = {x for x in got if x.startswith('E')}
         verdict = 'accept' if code == 0 else 'reject'
-        if verdict != entry['expected']:
-            fail('real workflow %s expected %s, got %s (%s)'
-                 % (entry['file'], entry['expected'], verdict, ' '.join(codes)))
-        rows.append({'workflow': entry['file'][:-5], 'split': entry['split'],
-                     'source': entry['source_short'], 'verdict': verdict,
-                     'codes': ' '.join(codes), 'escapes': entry.get('trusted_escapes', 0)})
-    return rows, entries
+        if got_errors != expected_errors or (verdict == 'accept') != (not expected_errors):
+            totals['label_mismatch'] += 1
+            fail('real workflow %s: expected errors %s, got %s (%s)'
+                 % (c['id'], sorted(expected_errors) or '-', sorted(got_errors) or '-', verdict))
+
+        accepted, endorsements = path, 0
+        if expected_errors:
+            if not os.path.exists(annotated):
+                fail('real workflow %s is rejected but has no annotated variant' % c['id'])
+                continue
+            accepted = annotated
+            endorsements = len(re.findall(r'^\s*(endorse|declassify)\(', io.open(annotated, encoding='utf-8').read(), re.M))
+        code, out, err = run(['check', accepted])
+        warnings = {x for x in diagnostic_codes(err + out) if x.startswith('W') and x[1:].isdigit()}
+        expected_warnings = set(c['labels'].get('expected_warnings_accepted_variant',
+                                                [x for x in expected if x.startswith('W')]))
+        if code != 0:
+            fail('real workflow %s: the accepted variant %s is rejected' % (c['id'], os.path.basename(accepted)))
+            continue
+        if warnings != expected_warnings:
+            totals['label_mismatch'] += 1
+            fail('real workflow %s: expected warnings %s on %s, got %s'
+                 % (c['id'], sorted(expected_warnings) or '-', os.path.basename(accepted), sorted(warnings) or '-'))
+
+        document = certificate(accepted)
+        bound = document['bound']
+        guaranteed = bound['input_tokens_guaranteed']
+        if (guaranteed is not None) != c['labels']['guaranteed_input_expected']:
+            fail('real workflow %s: guaranteed input bound %s, expected %s'
+                 % (c['id'], 'defined' if guaranteed is not None else 'undefined',
+                    'defined' if c['labels']['guaranteed_input_expected'] else 'undefined'))
+
+        inputs, models = port_declarations(accepted)
+        local = {'output_viol': 0, 'guaranteed_viol': 0, 'rebill_viol': 0, 'estimate_exceeded': 0,
+                 'real_estimate_exceeded': 0}
+        peak_rebill = 0.0
+        for seed in range(1, REAL_SEEDS + 1):
+            pins = dict((name, size) for name, size in inputs.items()) if seed % 2 == 0 else None
+            run_data = execute(accepted, seed, pins, 'content', 'request', 'tokenizer')
+            if run_data is None:
+                fail('execution failed: %s seed %d' % (c['id'], seed))
+                continue
+            totals['runs'] += 1
+            if run_data['output_tokens'] > bound['output_tokens']:
+                local['output_viol'] += 1
+            if guaranteed is not None and run_data['input_tokens'] > guaranteed:
+                local['guaranteed_viol'] += 1
+            if run_data['input_tokens'] > bound['input_tokens_estimated']:
+                local['estimate_exceeded'] += 1
+            if encoders and guaranteed is not None:
+                billed = 0
+                for call in run_data['calls']:
+                    tokenizer, overhead = models[call['model_string']]
+                    billed += encoders[tokenizer](call['request']) + overhead
+                peak_rebill = max(peak_rebill, billed / float(guaranteed))
+                if billed > bound['input_tokens_estimated']:
+                    local['real_estimate_exceeded'] += 1
+                if billed > guaranteed:
+                    local['rebill_viol'] += 1
+        for key in local:
+            totals[key] += local[key]
+
+        attack = ''
+        if c['id'] in attacks:
+            within, outside = classify_attacks(attacks[c['id']])
+            totals['attacks_within'] += len(within)
+            totals['attacks_outside'] += len(outside)
+            if within and not expected_errors:
+                totals['within_plan_accepted'] += 1
+                fail('real workflow %s: AgentDojo recorded a within-plan injection (%s) on a task '
+                     'the checker accepts' % (c['id'], ', '.join(within)))
+            attack = '%d/%d' % (len(within), len(within) + len(outside))
+
+        rows.append({
+            'workflow': c['id'], 'split': c['split'], 'verdict': verdict,
+            'errors': ' '.join(sorted(got_errors)) or '-', 'warnings': ' '.join(sorted(warnings)) or '-',
+            'endorse': endorsements, 'adapt': ' '.join(c['adaptations']) or '-',
+            'out<=': bound['output_tokens'], 'in_est<=': bound['input_tokens_estimated'],
+            'in_guar<=': guaranteed if guaranteed is not None else '-',
+            'est_exc%': round(100.0 * local['estimate_exceeded'] / REAL_SEEDS, 1),
+            'real_est_exc%': round(100.0 * local['real_estimate_exceeded'] / REAL_SEEDS, 1)
+            if encoders and guaranteed is not None else '-',
+            'rebill/guar': round(peak_rebill, 4) if peak_rebill else '-',
+            'viol': local['output_viol'] + local['guaranteed_viol'] + local['rebill_viol'],
+            'attacks_within/succ': attack or '-',
+        })
+
+    if totals['output_viol'] or totals['guaranteed_viol'] or totals['rebill_viol']:
+        fail('a real workflow exceeded its certificate (%d output, %d guaranteed input, '
+             '%d re-billed input)' % (totals['output_viol'], totals['guaranteed_viol'], totals['rebill_viol']))
+
+    source_check = None
+    if not offline:
+        if not os.path.isdir(os.path.join(HERE, '.cache', 'real')):
+            subprocess.run(['bash', os.path.join(REAL, 'fetch_sources.sh')], check=False)
+        completed = subprocess.run([sys.executable, os.path.join(REAL, 'verify_sources.py')],
+                                   capture_output=True, text=True)
+        source_check = completed.stdout.strip().split('\n')[-1]
+        if completed.returncode != 0:
+            fail('a port\'s prompt text is not the source\'s: %s' % source_check)
+
+    excluded = [c for c in candidates if c['decision'] == 'exclude']
+    categories = {}
+    for c in excluded:
+        categories[c['exclusion']['category']] = categories.get(c['exclusion']['category'], 0) + 1
+    summary = {'candidates': len(candidates), 'ported': len(ported), 'excluded': len(excluded),
+               'exclusion_categories': categories, 'frozen_compiler': frozen,
+               'source_check': source_check, 'totals': totals}
+    return rows, summary
 
 
 # ---------------------------------------------------------------- output -----
@@ -779,7 +988,7 @@ def main():
     tokenizer = evaluate_tokenizer_facts(args.offline)
     provider = evaluate_provider(args.offline)
     print('E11: ported real workflows ...')
-    real = evaluate_real_workflows()
+    real = evaluate_real_workflows(args.offline)
 
     print('timing ...')
     timed = orch_files('cost') + orch_files('security', 'safe') + orch_files('relational', 'accept')
@@ -930,14 +1139,29 @@ def main():
                      % (summary['determinism_identical'], summary['determinism_trials']))
     report.write('\n')
 
-    report.write('E11 ported real-world workflows (bench/real/)\n\n')
-    if real is None:
-        report.write('  none ported\n\n')
-    else:
-        rows, entries = real
-        report.write(table(rows, ['workflow', 'split', 'source', 'verdict', 'codes', 'escapes']))
-        report.write('\n  %d workflows ported; %d candidates excluded (bench/real/EXCLUSIONS.md)\n\n'
-                     % (len(rows), len(entries.get('excluded', []))))
+    report.write('E11 real workflows (bench/real/, protocol in bench/real/PROTOCOL.md)\n\n')
+    real_rows, real_summary = real
+    report.write('  %d candidates from three pinned sources: %d ported, %d excluded %s\n'
+                 % (real_summary['candidates'], real_summary['ported'], real_summary['excluded'],
+                    json.dumps(real_summary['exclusion_categories'], sort_keys=True)))
+    report.write('  compiler frozen for the held-out split at: %s\n\n' % real_summary['frozen_compiler'])
+    report.write(table(real_rows, ['workflow', 'split', 'verdict', 'errors', 'warnings', 'endorse',
+                                   'adapt', 'out<=', 'in_est<=', 'in_guar<=', 'est_exc%',
+                                   'real_est_exc%', 'rebill/guar', 'viol', 'attacks_within/succ']))
+    report.write('\n  est_exc%: runs whose input, billed by the runtime\'s content-sensitive mock\n'
+                 '  tokenizer, exceeded the estimate.  real_est_exc%: the same with the port\'s real\n'
+                 '  tokenizer.  rebill/guar: the largest real-tokenizer bill over the guaranteed\n'
+                 '  input bound, across runs (must stay at or below 1).\n')
+    totals = real_summary['totals']
+    report.write('\n  label mismatches: %d; runs: %d; certificate violations: %d\n'
+                 % (totals['label_mismatch'], totals['runs'],
+                    totals['output_viol'] + totals['guaranteed_viol'] + totals['rebill_viol']))
+    report.write('  AgentDojo successful attacks (gpt-4o-2024-05-13, important_instructions) on the\n'
+                 '  ported tasks: %d outside the task\'s plan, %d within it\n'
+                 % (totals['attacks_outside'], totals['attacks_within']))
+    if real_summary['source_check']:
+        report.write('  prompt text versus pinned sources: %s\n' % real_summary['source_check'])
+    report.write('\n')
 
     report.write('Analysis cost\n\n')
     report.write('  %d workflows certified in %.2f s (%.1f ms each, including process startup;\n'
@@ -953,7 +1177,8 @@ def main():
     io.open(os.path.join(RESULTS, 'evaluation.txt'), 'w', encoding='utf-8', newline='\n').write(text)
     for name, rows in (('cost', cost_rows), ('cost_bytes', bytes_rows),
                        ('relational', relational_rows), ('leakage', leakage_rows),
-                       ('security', security_rows), ('rebilling', rebill_rows or [])):
+                       ('security', security_rows), ('rebilling', rebill_rows or []),
+                       ('real', {'rows': real[0], 'summary': real[1]})):
         io.open(os.path.join(RESULTS, name + '.json'), 'w', encoding='utf-8', newline='\n').write(
             json.dumps(rows, indent=2) + '\n')
     print()

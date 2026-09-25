@@ -1,0 +1,42 @@
+// Port of langchain-ai/langgraph@23961cff61a42b52525f3b20b4094d8d2fba1744,
+// docs/docs/tutorials/reflection/reflection.ipynb (id lg-reflection).  See
+// bench/real/PROTOCOL.md.
+//
+// generate -> (reflect -> generate)* until the conversation holds more than
+// six messages: four generate calls and three reflect calls, each seeing the
+// whole conversation so far (the reflector sees it with roles swapped, which
+// changes the envelope, not the text).  Both use Mixtral-8x7B-Instruct on
+// Fireworks with max_tokens=32768, as the tutorial sets.  Mixtral's tokenizer
+// is byte-identical to the measured Mistral-7B-v0.1 one (manifest.json), so the
+// Mistral contract applies.
+//
+// overhead: the published Mixtral chat template adds 39 tokens around seven
+// alternating empty messages (measured with the pinned tokenizer), plus the
+// separator that merges the system message into the last user turn.  64 is
+// declared; that Fireworks serves the published template is an assumption.
+workflow LgReflection budget 1000000000 {
+  input request: text max_bytes 8192;
+  model mixtral = mock("fireworks/mixtral-8x7b-instruct") max_tokens 32768 tokenizer mistral overhead 64;
+  prompt generate1(request: text) -> text =
+      "You are an essay assistant tasked with writing excellent 5-paragraph essays. Generate the best essay possible for the user's request. If the user provides critique, respond with a revised version of your previous attempts.\n\n{request}";
+  prompt reflect1(request: text, essay1: text) -> text =
+      "You are a teacher grading an essay submission. Generate critique and recommendations for the user's submission. Provide detailed recommendations, including requests for length, depth, style, etc.\n\n{request}\n\n{essay1}";
+  prompt generate2(request: text, essay1: text, critique1: text) -> text =
+      "You are an essay assistant tasked with writing excellent 5-paragraph essays. Generate the best essay possible for the user's request. If the user provides critique, respond with a revised version of your previous attempts.\n\n{request}\n\n{essay1}\n\n{critique1}";
+  prompt reflect2(request: text, essay1: text, critique1: text, essay2: text) -> text =
+      "You are a teacher grading an essay submission. Generate critique and recommendations for the user's submission. Provide detailed recommendations, including requests for length, depth, style, etc.\n\n{request}\n\n{essay1}\n\n{critique1}\n\n{essay2}";
+  prompt generate3(request: text, essay1: text, critique1: text, essay2: text, critique2: text) -> text =
+      "You are an essay assistant tasked with writing excellent 5-paragraph essays. Generate the best essay possible for the user's request. If the user provides critique, respond with a revised version of your previous attempts.\n\n{request}\n\n{essay1}\n\n{critique1}\n\n{essay2}\n\n{critique2}";
+  prompt reflect3(request: text, essay1: text, critique1: text, essay2: text, critique2: text, essay3: text) -> text =
+      "You are a teacher grading an essay submission. Generate critique and recommendations for the user's submission. Provide detailed recommendations, including requests for length, depth, style, etc.\n\n{request}\n\n{essay1}\n\n{critique1}\n\n{essay2}\n\n{critique2}\n\n{essay3}";
+  prompt generate4(request: text, essay1: text, critique1: text, essay2: text, critique2: text, essay3: text, critique3: text) -> text =
+      "You are an essay assistant tasked with writing excellent 5-paragraph essays. Generate the best essay possible for the user's request. If the user provides critique, respond with a revised version of your previous attempts.\n\n{request}\n\n{essay1}\n\n{critique1}\n\n{essay2}\n\n{critique2}\n\n{essay3}\n\n{critique3}";
+  let essay1: text = call generate1(request) using mixtral;
+  let critique1: text = call reflect1(request, essay1) using mixtral;
+  let essay2: text = call generate2(request, essay1, critique1) using mixtral;
+  let critique2: text = call reflect2(request, essay1, critique1, essay2) using mixtral;
+  let essay3: text = call generate3(request, essay1, critique1, essay2, critique2) using mixtral;
+  let critique3: text = call reflect3(request, essay1, critique1, essay2, critique2, essay3) using mixtral;
+  let essay4: text = call generate4(request, essay1, critique1, essay2, critique2, essay3, critique3) using mixtral;
+  output essay4;
+}

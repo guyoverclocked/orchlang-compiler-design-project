@@ -2001,6 +2001,34 @@ void testSemanticPlaceholderDuplicate() {
     require(hasCode(pipeline, "E222"), "duplicate placeholder should report E222");
 }
 
+// A doubled brace is a literal brace, so a real prompt containing JSON can be
+// written verbatim.  The analysis and the runtime must agree on the text: the
+// template's static bytes, and the request actually sent.
+void testDoubledBracesAreLiteral() {
+    Pipeline pipeline = compileSource(R"(workflow B budget 100000 {
+  input a: text max_bytes 16;
+  model m = mock("m") max_tokens 4;
+  prompt p(a: text) -> text = "{{\"q\": {a}}} }}{{";
+  let r: text = call p(a) using m;
+  output r;
+})");
+    requireSemanticallyValid(pipeline);
+    require(pipeline.semantic->callSites.size() == 1, "one call site");
+    const CallSiteFacts& site = pipeline.semantic->callSites.begin()->second;
+    require(site.templateBytes == std::string("{\"q\": } }{").size(),
+            "the analysis must count a doubled brace as one byte");
+    const RunResult run = runWith(pipeline, 7);
+    require(run.success() && run.workflows.front().trace.size() == 1, "the run makes one call");
+    const std::string& request = run.workflows.front().trace.front().request;
+    require(request.size() >= 10 && request.compare(0, 6, "{\"q\": ") == 0 &&
+                request.compare(request.size() - 4, 4, "} }{") == 0,
+            "the runtime must send single braces around the argument, got: " + request);
+
+    Pipeline lone = compileSource(
+        "workflow H budget 0 { prompt p(a: text) -> text = \"{{a}\"; output \"ok\"; }");
+    require(hasCode(lone, "E222"), "a lone closing brace after an escaped one is still E222");
+}
+
 void testSemanticUnknownModel() {
     Pipeline pipeline = compileSource(
         "workflow M budget 0 { input x: text; prompt p(a: text) -> text = \"{a}\"; let r: text = call p(x) using no_model; output r; }");
@@ -2241,6 +2269,7 @@ int main() {
         {"semantic placeholder unknown", testSemanticPlaceholderUnknown},
         {"semantic placeholder missing", testSemanticPlaceholderMissing},
         {"semantic placeholder duplicate", testSemanticPlaceholderDuplicate},
+        {"doubled braces are literal", testDoubledBracesAreLiteral},
         {"semantic unknown model", testSemanticUnknownModel},
         {"semantic secret prompt exposure", testSemanticSecretCallExposure},
         {"semantic secret output exposure", testSemanticSecretOutputExposure},

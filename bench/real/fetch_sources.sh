@@ -23,7 +23,7 @@ fetch() {  # fetch <dir> <repo> <commit> [sparse path]
 
 fetch anthropic-cookbook anthropics/anthropic-cookbook 813fbeec03cdedfda7808529438d1c7af71f26eb patterns/agents/
 fetch langgraph langchain-ai/langgraph 23961cff61a42b52525f3b20b4094d8d2fba1744 docs/docs/tutorials/
-fetch agentdojo ethz-spylab/agentdojo 089ed468cf3ed0322acc66b0211f26d9d90dbf60
+fetch agentdojo ethz-spylab/agentdojo 089ed468cf3ed0322acc66b0211f26d9d90dbf60 "$(printf '/*\n!/runs/*\n/runs/gpt-4o-2024-05-13/\n')"
 
 # LangChain Hub prompts, by commit hash.
 mkdir -p "$cache/hub"
