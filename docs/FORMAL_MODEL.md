@@ -378,10 +378,14 @@ measured on 14 real tokenizers (`bench/results/tokenizers.json`) and are why
 the bound is built from bytes:
 
 1. Tokenization is not subadditive: `tokens(u·v)` exceeds `tokens(u) +
-   tokens(v)` by up to 4–6 in every tokenizer measured (`" Attribute"` and
-   `"profiles"` are one cl100k token each; `" Attributeprofiles"` is six).
+   tokens(v)` by up to 3–6, depending on the tokenizer, in every tokenizer
+   measured (`" Attribute"` and `"profiles"` are one cl100k token each;
+   `" Attributeprofiles"` is six).
 2. A response re-encodes to more tokens than were generated, under the same
-   tokenizer: up to 3–9 tokens per generated token.
+   tokenizer: a single vocabulary entry re-encodes to up to 3–9 tokens,
+   depending on the tokenizer, and over random generated sequences the
+   worst ratio of re-encoded to generated tokens ranges from 1.03 (T5) to 9
+   (Qwen2.5).
 3. `tokens ≤ bytes` fails for SentencePiece tokenizers (a dummy prefix no byte
    pays for), for NFC normalisation (Qwen2.5: U+0FAC is 3 bytes and 6 tokens),
    and badly for NFKC-like normalisation (T5: 194 more tokens than bytes on one

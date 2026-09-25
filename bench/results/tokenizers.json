@@ -67,6 +67,7 @@
    "q2_q3_vocabulary": {
     "vocabulary_entries": 100256,
     "max_token_bytes": 128,
+    "max_decoded_token_bytes": 128,
     "longest_token": "                                        ",
     "mean_token_bytes": 6.42,
     "reencode_max_tokens_for_one_token": 3,
@@ -141,7 +142,7 @@
     "counts_differ_pct": 88.2,
     "max_difference": 106
    },
-   "seconds": 234.5
+   "seconds": 227.0
   },
   "o200k_base": {
    "revision": "tiktoken 0.14.0",
@@ -163,6 +164,7 @@
    "q2_q3_vocabulary": {
     "vocabulary_entries": 199998,
     "max_token_bytes": 128,
+    "max_decoded_token_bytes": 128,
     "longest_token": "                                        ",
     "mean_token_bytes": 6.99,
     "reencode_max_tokens_for_one_token": 4,
@@ -237,7 +239,7 @@
     "counts_differ_pct": 84.1,
     "max_difference": 102
    },
-   "seconds": 239.7
+   "seconds": 238.0
   },
   "r50k_base": {
    "revision": "tiktoken 0.14.0",
@@ -259,6 +261,7 @@
    "q2_q3_vocabulary": {
     "vocabulary_entries": 50256,
     "max_token_bytes": 128,
+    "max_decoded_token_bytes": 128,
     "longest_token": "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ",
     "mean_token_bytes": 6.38,
     "reencode_max_tokens_for_one_token": 3,
@@ -333,7 +336,7 @@
     "counts_differ_pct": 91.5,
     "max_difference": 104
    },
-   "seconds": 217.6
+   "seconds": 212.0
   },
   "llama3": {
    "revision": "unsloth/Llama-3.2-1B@9535bd9b1d1dea6acafbdc4813b728796aeb28da",
@@ -355,6 +358,7 @@
    "q2_q3_vocabulary": {
     "vocabulary_entries": 128000,
     "max_token_bytes": 128,
+    "max_decoded_token_bytes": 128,
     "longest_token": "                                        ",
     "mean_token_bytes": 6.49,
     "reencode_max_tokens_for_one_token": 3,
@@ -429,7 +433,7 @@
     "counts_differ_pct": 86.9,
     "max_difference": 104
    },
-   "seconds": 53.3
+   "seconds": 50.7
   },
   "qwen25": {
    "revision": "Qwen/Qwen2.5-0.5B@060db6499f32faf8b98477b0a26969ef7d8b9987",
@@ -477,6 +481,7 @@
    "q2_q3_vocabulary": {
     "vocabulary_entries": 151643,
     "max_token_bytes": 128,
+    "max_decoded_token_bytes": 128,
     "longest_token": "                                        ",
     "mean_token_bytes": 6.44,
     "reencode_max_tokens_for_one_token": 9,
@@ -551,7 +556,7 @@
     "counts_differ_pct": 87.1,
     "max_difference": 89
    },
-   "seconds": 56.3
+   "seconds": 58.7
   },
   "deepseekv3": {
    "revision": "deepseek-ai/DeepSeek-V3@e815299b0bcbac849fa540c768ef21845365c9eb",
@@ -573,6 +578,7 @@
    "q2_q3_vocabulary": {
     "vocabulary_entries": 127997,
     "max_token_bytes": 128,
+    "max_decoded_token_bytes": 128,
     "longest_token": "                                        ",
     "mean_token_bytes": 6.53,
     "reencode_max_tokens_for_one_token": 7,
@@ -647,7 +653,7 @@
     "counts_differ_pct": 86.2,
     "max_difference": 103
    },
-   "seconds": 49.9
+   "seconds": 50.3
   },
   "olmo2": {
    "revision": "allenai/OLMo-2-1124-7B@7df9a82518afdecae4e8c026b27adccc8c1f0032",
@@ -669,6 +675,7 @@
    "q2_q3_vocabulary": {
     "vocabulary_entries": 100256,
     "max_token_bytes": 128,
+    "max_decoded_token_bytes": 128,
     "longest_token": "                                        ",
     "mean_token_bytes": 6.42,
     "reencode_max_tokens_for_one_token": 3,
@@ -743,7 +750,7 @@
     "counts_differ_pct": 88.3,
     "max_difference": 114
    },
-   "seconds": 51.0
+   "seconds": 50.5
   },
   "gpt2": {
    "revision": "openai-community/gpt2@607a30d783dfa663caf39e06633721c8d4cfcd7e",
@@ -765,6 +772,7 @@
    "q2_q3_vocabulary": {
     "vocabulary_entries": 50256,
     "max_token_bytes": 128,
+    "max_decoded_token_bytes": 128,
     "longest_token": "ÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂÃÂ",
     "mean_token_bytes": 6.38,
     "reencode_max_tokens_for_one_token": 3,
@@ -839,7 +847,7 @@
     "counts_differ_pct": 91.4,
     "max_difference": 103
    },
-   "seconds": 54.5
+   "seconds": 53.4
   },
   "llama2": {
    "revision": "NousResearch/Llama-2-7b-hf@8efe6c9b93655b934e27bd9981e3ec13e55aee9d",
@@ -887,6 +895,7 @@
    "q2_q3_vocabulary": {
     "vocabulary_entries": 31997,
     "max_token_bytes": 27,
+    "max_decoded_token_bytes": 27,
     "longest_token": " административ",
     "mean_token_bytes": 5.52,
     "reencode_max_tokens_for_one_token": 4,
@@ -961,7 +970,7 @@
     "counts_differ_pct": 87.7,
     "max_difference": 108
    },
-   "seconds": 36.3
+   "seconds": 37.1
   },
   "mistral": {
    "revision": "mistralai/Mistral-7B-v0.1@27d67f1b5f57dc0953326b2601d68371d40ea8da",
@@ -1009,6 +1018,7 @@
    "q2_q3_vocabulary": {
     "vocabulary_entries": 31997,
     "max_token_bytes": 25,
+    "max_decoded_token_bytes": 25,
     "longest_token": " Становништво",
     "mean_token_bytes": 5.36,
     "reencode_max_tokens_for_one_token": 4,
@@ -1083,7 +1093,7 @@
     "counts_differ_pct": 87.8,
     "max_difference": 98
    },
-   "seconds": 33.2
+   "seconds": 35.5
   },
   "phi3": {
    "revision": "microsoft/Phi-3-mini-4k-instruct@f39ac1d28e925b323eae81227eaba4464caced4e",
@@ -1131,6 +1141,7 @@
    "q2_q3_vocabulary": {
     "vocabulary_entries": 31997,
     "max_token_bytes": 27,
+    "max_decoded_token_bytes": 27,
     "longest_token": " административ",
     "mean_token_bytes": 5.52,
     "reencode_max_tokens_for_one_token": 4,
@@ -1205,7 +1216,7 @@
     "counts_differ_pct": 88.0,
     "max_difference": 109
    },
-   "seconds": 35.1
+   "seconds": 34.6
   },
   "gemma2": {
    "revision": "unsloth/gemma-2-2b@25319945f7fd83b8b903e12081777b7eef2ba993",
@@ -1227,6 +1238,7 @@
    "q2_q3_vocabulary": {
     "vocabulary_entries": 255751,
     "max_token_bytes": 48,
+    "max_decoded_token_bytes": 48,
     "longest_token": "…………………………………………",
     "mean_token_bytes": 6.55,
     "reencode_max_tokens_for_one_token": 3,
@@ -1301,7 +1313,7 @@
     "counts_differ_pct": 85.0,
     "max_difference": 95
    },
-   "seconds": 42.5
+   "seconds": 41.9
   },
   "t5": {
    "revision": "google-t5/t5-small@df1b051c49625cf57a3d0d8d3863ed4d13564fe4",
@@ -1349,6 +1361,7 @@
    "q2_q3_vocabulary": {
     "vocabulary_entries": 31997,
     "max_token_bytes": 18,
+    "max_decoded_token_bytes": 18,
     "longest_token": " außergewöhnlich",
     "mean_token_bytes": 6.92,
     "reencode_max_tokens_for_one_token": 3,
@@ -1423,7 +1436,7 @@
     "counts_differ_pct": 92.4,
     "max_difference": 33
    },
-   "seconds": 59.1
+   "seconds": 53.0
   },
   "xlmr": {
    "revision": "FacebookAI/xlm-roberta-base@e73636d4f797dec63c3081bb6ed5c7b0bb3f2089",
@@ -1471,6 +1484,7 @@
    "q2_q3_vocabulary": {
     "vocabulary_entries": 249997,
     "max_token_bytes": 48,
+    "max_decoded_token_bytes": 48,
     "longest_token": "বিশ্ববিদ্যালয়ের",
     "mean_token_bytes": 9.09,
     "reencode_max_tokens_for_one_token": 3,
@@ -1545,7 +1559,7 @@
     "counts_differ_pct": 86.5,
     "max_difference": 31
    },
-   "seconds": 65.3
+   "seconds": 63.9
   }
  },
  "q6_cross": {
@@ -1802,5 +1816,5 @@
    "corpus_max_ratio": 35.5
   }
  },
- "seconds": 1387.0
+ "seconds": 1366.8
 }
