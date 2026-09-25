@@ -279,7 +279,8 @@ runs 95 assertions, accepts every valid example, confirms every invalid example
 is rejected, and emits a report for each valid workflow.
 
 You need a C++17 compiler. **GCC 6 is too old** (no `<optional>`); GCC 7+,
-Clang 5+, or MSVC 2017+ all work.
+Clang 5+, or MSVC 2017+ all work. On a Mac, Apple's free Command Line Tools
+(`xcode-select --install`) are all you need.
 
 Then try it:
 
@@ -288,6 +289,18 @@ Then try it:
 ./orchc check examples/valid/balanced_signature.orch   # the fixed version
 ./orchc cost  examples/valid/branching_cost.orch       # a bound, with its working shown
 ```
+
+### Giving the demo
+
+A scripted, offline live demo ships with the repository. On a MacBook:
+
+```sh
+./demo.sh setup     # once: checks tools, builds, tests, rehearses every scene
+./demo.sh           # present: Enter runs each command, key lines highlighted
+```
+
+**[DEMO.md](DEMO.md)** is the presenter's guide: setup, a pre-talk checklist,
+what to say in each of the 13 scenes, likely questions, and troubleshooting.
 
 ---
 
@@ -354,8 +367,8 @@ you see exactly how much of the number rests on an assumption.
 | Harness executions | **7,575** | 4,600 bound checks + 2,975 paired relational comparisons |
 
 ```sh
-python bench/generate.py    # regenerate the benchmark corpus
-python bench/evaluate.py    # reproduce every number below (nonzero exit on failure)
+python3 bench/generate.py   # regenerate the benchmark corpus
+python3 bench/evaluate.py   # reproduce every number below (nonzero exit on failure)
 ```
 
 ### Results
@@ -380,11 +393,12 @@ Branch-awareness isn't the missing piece — retries are.
 
 ```
 src/ include/     the compiler — 5,340 lines of C++17, 12 sources + 15 headers
+demo.sh DEMO.md   the scripted live demo and its presenter's guide
 tests/            95 assertions
 examples/         34 programs: valid, invalid, boundary
 bench/            corpus generator, evaluation harness, and results
 audit/            the external audit, its counterexamples, and repro scripts
-docs/             language spec, the paper, demo script, submission plan
+docs/             language spec, the paper, submission plan
 submission/       Phase 2 report and presentation, with their generators
 ```
 
@@ -395,7 +409,7 @@ Worth reading, in order:
    and the reviewer attacks that still need answering
 1. **[docs/LANGUAGE_SPEC.md](docs/LANGUAGE_SPEC.md)** — the grammar and every rule
 2. **[docs/PAPER.md](docs/PAPER.md)** — the full write-up, claims and limitations
-3. **[docs/REVIEW_DEMO.md](docs/REVIEW_DEMO.md)** — a verified demo sequence
+3. **[DEMO.md](DEMO.md)** — the live demo, scene by scene, verified by `./demo.sh check`
 4. **[audit/2026-09-17/](audit/2026-09-17/)** — the review that found the bug above
 
 ---

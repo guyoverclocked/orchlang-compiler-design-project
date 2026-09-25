@@ -78,3 +78,28 @@ in docs/PAPER.md; submission strategy in docs/SUBMISSION_PLAN.md.
 **Toolchain note.** The local MinGW GCC 6.3 cannot build this (no <optional>).
 Installed WinLibs GCC 16.1.0 via winget; any GCC 7+, Clang 5+, or MSVC 2017+
 works.
+
+## 2026-09-25
+
+Built a demo pipeline for presenting from a MacBook.
+
+- `demo.sh` drives a 13-scene live demo from one scene list. `./demo.sh setup`
+  checks the toolchain (and opens Apple's Command Line Tools installer when they
+  are missing), builds from clean, runs the tests and the example corpus,
+  rehearses every step, and writes a plain-text transcript to
+  `build/demo-transcript.txt` as a fallback. `./demo.sh` presents: each command
+  runs on a key press, with the line that matters highlighted and a one-line
+  caption. Arrow keys and presentation clickers work. `./demo.sh check` reruns
+  all 36 steps and verifies their exit status and every number the captions
+  quote.
+- `DEMO.md` is the presenter's guide: setup, a pre-talk checklist, the script
+  scene by scene, likely questions, and troubleshooting. `docs/REVIEW_DEMO.md`
+  now points to it, and the old `scripts/demo.sh` is gone.
+- Added `make demo`, `demo-setup`, `demo-check` and `bench`. The README now says
+  `python3`, since macOS has no `python`.
+- Portability checks: the compiler builds with clang and libc++, the Mac's
+  toolchain, with zero warnings and 95/95 tests passing. The script runs under
+  bash 3.2.57 (built from source to match macOS's `/bin/bash`) and the
+  one-true-awk that macOS ships. Seeded mock runs are byte-identical between
+  libstdc++ and libc++ builds, because the runtime uses its own generator rather
+  than `<random>` distributions. Not yet run on physical Mac hardware.
