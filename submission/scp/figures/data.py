@@ -50,18 +50,22 @@ def tokenizers():
                              'reencode', 'tokens_minus_bytes'], rows)
 
 
+RULES = [('bounds', 'equal bounds (withdrawn)'), ('sizes', 'equal sizes (withdrawn)'),
+         ('content', 'equal requests (this paper)')]
+
+
 def relational():
     rows = load('relational.json')
     out = []
-    for rule in ('bounds', 'sizes', 'content'):
+    for rule, label in RULES:
         accepted = [r for r in rows if r[rule] == 'accept']
         rejected = [r for r in rows if r[rule] == 'reject']
-        out.append([rule,
+        out.append([label,
                     sum(1 for r in accepted if r['leaks'] == 'no'),
                     sum(1 for r in accepted if r['leaks'] == 'yes'),
                     sum(1 for r in rejected if r['leaks'] == 'yes'),
                     sum(1 for r in rejected if r['leaks'] == 'no')])
-    write('relational.csv', ['rule', 'accept_safe', 'accept_leaking', 'reject_leaking', 'reject_safe'], out)
+    write('relational.csv', ['label', 'accept_safe', 'accept_leaking', 'reject_leaking', 'reject_safe'], out)
 
 
 def real():

@@ -1,0 +1,21 @@
+\documentclass[border=2pt]{standalone}
+\input{common}
+\begin{document}
+\pgfplotstableread[col sep=comma]{data/relational.csv}\reltable
+\begin{tikzpicture}
+\begin{axis}[
+    xbar stacked, bar width=11pt, width=12.5cm, height=4.2cm,
+    xmin=0, xmax=25, xtick={0,5,10,15,20,25},
+    xlabel={workflows in the relational suite (25)},
+    ytick=data, yticklabels from table={\reltable}{label},
+    y dir=reverse, enlarge y limits=0.3,
+    legend columns=4, legend style={at={(0.5,1.04)}, anchor=south, /tikz/every even column/.append style={column sep=8pt}},
+    axis x line*=bottom, axis y line*=left, tick align=outside]
+  \addplot[fill=oigreen, draw=black!60] table[x=accept_safe, y expr=\coordindex] {\reltable};
+  \addplot[fill=oivermillion, draw=black!60, postaction={pattern=north east lines}] table[x=accept_leaking, y expr=\coordindex] {\reltable};
+  \addplot[fill=oisky, draw=black!60] table[x=reject_leaking, y expr=\coordindex] {\reltable};
+  \addplot[fill=white, draw=black!60, postaction={pattern=crosshatch dots, pattern color=black!50}] table[x=reject_safe, y expr=\coordindex] {\reltable};
+  \legend{{accepted, no leak},{accepted, leaks},{rejected, leaks},{rejected, no leak}}
+\end{axis}
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,22 @@
+\documentclass[border=2pt]{standalone}
+\input{common}
+\usepgfplotslibrary{groupplots}
+\begin{document}
+\pgfplotstableread[col sep=comma]{data/real.csv}\realtable
+\begin{tikzpicture}
+\begin{groupplot}[
+    group style={group size=1 by 2, vertical sep=10pt, xticklabels at=edge bottom},
+    width=13.5cm, height=4.3cm,
+    xtick=data, xticklabels from table={\realtable}{workflow},
+    xticklabel style={rotate=60, anchor=east, font=\scriptsize\ttfamily},
+    enlarge x limits=0.03, axis x line*=bottom, axis y line*=left, tick align=outside,
+    ymajorgrids, grid style={black!12}]
+  \nextgroupplot[ymode=log, ymin=1, ymax=300, ytick={1,4,10,30,100},
+      yticklabels={1,4,10,30,100}, ylabel={guarantee\\\(\div\) estimate}, ylabel style={align=center}]
+    \addplot[only marks, mark=*, mark size=2pt, color=oiblue] table[x expr=\coordindex, y=guar_over_est] {\realtable};
+  \nextgroupplot[ymin=0, ymax=0.3, ytick={0,0.1,0.2,0.3}, ylabel={largest real bill\\\(\div\) guarantee}, ylabel style={align=center},
+      yticklabel style={/pgf/number format/fixed}]
+    \addplot[only marks, mark=square*, mark size=1.8pt, color=oivermillion] table[x expr=\coordindex, y=rebill_over_guar] {\realtable};
+\end{groupplot}
+\end{tikzpicture}
+\end{document}

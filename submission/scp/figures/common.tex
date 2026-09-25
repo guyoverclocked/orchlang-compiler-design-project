@@ -1,0 +1,17 @@
+% Shared style for all figures: Latin Modern to match the manuscript, and the
+% Okabe-Ito colour-blind-safe palette.
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage{pgfplots}
+\usepackage{pgfplotstable}
+\pgfplotsset{compat=1.18}
+\usetikzlibrary{positioning,arrows.meta,fit,calc,backgrounds,patterns}
+\definecolor{oiblue}{HTML}{0072B2}
+\definecolor{oiorange}{HTML}{E69F00}
+\definecolor{oigreen}{HTML}{009E73}
+\definecolor{oivermillion}{HTML}{D55E00}
+\definecolor{oisky}{HTML}{56B4E9}
+\definecolor{oipurple}{HTML}{CC79A7}
+\definecolor{oigrey}{HTML}{999999}
+\pgfplotsset{every axis/.append style={font=\small, tick label style={font=\footnotesize},
+  label style={font=\small}, legend style={font=\footnotesize, draw=none}}}

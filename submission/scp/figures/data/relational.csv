@@ -1,4 +1,4 @@
-rule,accept_safe,accept_leaking,reject_leaking,reject_safe
-bounds,9,6,8,2
-sizes,8,4,10,3
-content,11,0,14,0
+label,accept_safe,accept_leaking,reject_leaking,reject_safe
+equal bounds (withdrawn),9,6,8,2
+equal sizes (withdrawn),8,4,10,3
+equal requests (this paper),11,0,14,0

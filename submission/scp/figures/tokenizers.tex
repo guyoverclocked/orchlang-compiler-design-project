@@ -1,0 +1,20 @@
+\documentclass[border=2pt]{standalone}
+\input{common}
+\begin{document}
+\pgfplotstableread[col sep=comma]{data/tokenizers.csv}\toktable
+\begin{tikzpicture}
+\begin{axis}[
+    xbar=0pt, bar width=4.2pt, width=12.5cm, height=8.4cm,
+    xmin=0, xmax=100, xtick={0,25,50,75,100},
+    xlabel={256-character windows whose token count exceeds \(\lceil \mathit{bytes}/4\rceil\) (\%)},
+    ytick=data, yticklabels from table={\toktable}{tokenizer},
+    y dir=reverse, enlarge y limits=0.04,
+    reverse legend, legend style={at={(0.5,1.02)}, anchor=south, /tikz/every even column/.append style={column sep=10pt}}, legend columns=2,
+    axis x line*=bottom, axis y line*=left, tick align=outside,
+    xmajorgrids, grid style={black!12}]
+  \addplot[fill=oiorange, draw=none] table[x=bytes4_code, y expr=\coordindex] {\toktable};
+  \addplot[fill=oiblue, draw=none] table[x=bytes4_multilingual, y expr=\coordindex] {\toktable};
+  \legend{{source code},{text in 388 languages}}
+\end{axis}
+\end{tikzpicture}
+\end{document}
