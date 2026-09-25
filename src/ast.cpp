@@ -17,6 +17,15 @@ std::string typeName(Type type) {
     return "<unknown>";
 }
 
+std::string observerName(Observer observer) {
+    switch (observer) {
+        case Observer::Trace: return "trace";
+        case Observer::Provider: return "provider";
+        case Observer::Bill: return "bill";
+    }
+    return "trace";
+}
+
 std::string comparisonOpName(ComparisonOp op) {
     switch (op) {
         case ComparisonOp::Less: return "<";
@@ -113,7 +122,14 @@ void printStatement(std::ostringstream& out, const Stmt& statement, int depth) {
         case StmtKind::Input: {
             const auto& input = static_cast<const InputDecl&>(statement);
             out << pad << "Input " << input.name << " : " << typeName(input.type) << " ["
-                << labelName(input.label) << "]\n";
+                << labelName(input.label) << "]";
+            if (input.hasByteBound) {
+                out << " max_bytes=" << input.byteBound;
+            }
+            if (!input.tokenizer.empty()) {
+                out << " tokenizer=" << input.tokenizer;
+            }
+            out << '\n';
             break;
         }
         case StmtKind::Secret: {
@@ -122,13 +138,26 @@ void printStatement(std::ostringstream& out, const Stmt& statement, int depth) {
             if (secret.hasTokenBound) {
                 out << " max_tokens=" << secret.tokenBound;
             }
+            if (secret.hasByteBound) {
+                out << " max_bytes=" << secret.byteBound;
+            }
             out << '\n';
             break;
         }
         case StmtKind::Model: {
             const auto& model = static_cast<const ModelDecl&>(statement);
             out << pad << "Model " << model.name << " provider=" << model.provider
-                << " name=" << model.modelName << " max_tokens=" << model.maxTokens << '\n';
+                << " name=" << model.modelName << " max_tokens=" << model.maxTokens;
+            if (!model.tokenizer.empty()) {
+                out << " tokenizer=" << model.tokenizer;
+            }
+            if (model.overhead != 0) {
+                out << " overhead=" << model.overhead;
+            }
+            if (model.hasByteCap) {
+                out << " max_bytes=" << model.byteCap;
+            }
+            out << '\n';
             break;
         }
         case StmtKind::Prompt: {
@@ -227,7 +256,14 @@ std::string printAst(const Program& program) {
         if (!workflow) {
             continue;
         }
-        out << "Workflow " << workflow->name << " budget=" << workflow->budget << '\n';
+        out << "Workflow " << workflow->name << " budget=" << workflow->budget;
+        if (workflow->hasLeakBudget) {
+            out << " leaks=" << workflow->leakBudgetBits;
+        }
+        if (workflow->observer != Observer::Trace) {
+            out << " observer=" << observerName(workflow->observer);
+        }
+        out << '\n';
         printBlock(out, workflow->statements, 1);
     }
     return out.str();

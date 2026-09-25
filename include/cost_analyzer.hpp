@@ -50,6 +50,24 @@ struct CostBound {
     // False when an argument reaching a prompt had no declared token bound.
     bool defined{true};
 
+    // Input tokens that hold for the real tokenizer, not an estimate: every
+    // request's bytes, through the called model's verified tokenizer contract,
+    // plus the tokens the tokenizer and the provider's envelope add.  Bytes add
+    // up under concatenation and token counts do not, which is why this is
+    // computed from bytes.  Undefined when some call's model names no verified
+    // tokenizer, or some argument has no byte bound; the reason says which.
+    bool inputGuaranteedDefined{true};
+    std::string inputGuaranteedReason;
+    std::size_t inputGuaranteed{0};
+    // Output plus guaranteed input, maximised per branch like totalTokens.
+    std::size_t totalGuaranteed{0};
+
+    // A lower bound on total tokens in the estimate unit: templates only, no
+    // output, one attempt per retry, the cheaper arm of each branch.  It exists
+    // for the interval-counting leakage baseline of Ngo et al., which needs
+    // both ends of the interval.
+    std::size_t lowerTotal{0};
+
     std::size_t total() const { return totalTokens; }
     // The sum of the componentwise bounds, which dominates total() and is what
     // a reader gets if they add the two reported halves together.
@@ -71,7 +89,13 @@ struct WorkflowCost {
     CostBound bound;
     std::vector<DerivationStep> derivation;
 
-    bool withinBudget() const { return bound.total() <= budget; }
+    // The budget is checked against the guaranteed total when one exists, and
+    // against the estimate otherwise; the certificate says which.
+    bool budgetGuaranteed() const { return bound.inputGuaranteedDefined; }
+    std::size_t budgetBasis() const {
+        return budgetGuaranteed() ? bound.totalGuaranteed : bound.total();
+    }
+    bool withinBudget() const { return budgetBasis() <= budget; }
 };
 
 struct CostResult {
@@ -86,5 +110,9 @@ class CostAnalyzer {
 public:
     CostResult analyze(const Program& program, const SemanticResult& semantic) const;
 };
+
+// The bound of one block on its own, with no diagnostics.  Used by the
+// withdrawn equal-bounds relational rule, which compared these per arm.
+CostBound boundOfBlock(const Block& block, const SemanticResult& semantic);
 
 }  // namespace orchlang

@@ -1,11 +1,21 @@
 #include "cost_analyzer.hpp"
 
+#include "tokenizer_contracts.hpp"
+
 #include <sstream>
 #include <string>
 
 namespace orchlang {
 
 namespace {
+
+// Undefinedness of the guaranteed input component propagates, keeping the
+// first reason so the certificate can say what is missing.
+void combineGuarantee(CostBound& combined, const CostBound& left, const CostBound& right) {
+    combined.inputGuaranteedDefined = left.inputGuaranteedDefined && right.inputGuaranteedDefined;
+    combined.inputGuaranteedReason =
+        !left.inputGuaranteedDefined ? left.inputGuaranteedReason : right.inputGuaranteedReason;
+}
 
 // Sequential composition: every component adds.
 CostBound sequence(const CostBound& left, const CostBound& right) {
@@ -16,6 +26,10 @@ CostBound sequence(const CostBound& left, const CostBound& right) {
     combined.money = left.money + right.money;
     combined.moneyComplete = left.moneyComplete && right.moneyComplete;
     combined.defined = left.defined && right.defined;
+    combineGuarantee(combined, left, right);
+    combined.inputGuaranteed = addTokens(left.inputGuaranteed, right.inputGuaranteed);
+    combined.totalGuaranteed = addTokens(left.totalGuaranteed, right.totalGuaranteed);
+    combined.lowerTotal = addTokens(left.lowerTotal, right.lowerTotal);
     return combined;
 }
 
@@ -33,10 +47,15 @@ CostBound choice(const CostBound& left, const CostBound& right) {
     combined.money = left.money >= right.money ? left.money : right.money;
     combined.moneyComplete = left.moneyComplete && right.moneyComplete;
     combined.defined = left.defined && right.defined;
+    combineGuarantee(combined, left, right);
+    combined.inputGuaranteed = maxTokens(left.inputGuaranteed, right.inputGuaranteed);
+    combined.totalGuaranteed = maxTokens(left.totalGuaranteed, right.totalGuaranteed);
+    combined.lowerTotal = left.lowerTotal < right.lowerTotal ? left.lowerTotal : right.lowerTotal;
     return combined;
 }
 
-// Bounded repetition: the body may run up to `factor` times.
+// Bounded repetition: the body may run up to `factor` times, and runs at
+// least once.
 CostBound repeat(const CostBound& body, std::size_t factor) {
     CostBound scaled;
     scaled.guaranteed = multiplyTokens(body.guaranteed, factor);
@@ -45,7 +64,48 @@ CostBound repeat(const CostBound& body, std::size_t factor) {
     scaled.money = body.money * static_cast<double>(factor);
     scaled.moneyComplete = body.moneyComplete;
     scaled.defined = body.defined;
+    scaled.inputGuaranteedDefined = body.inputGuaranteedDefined;
+    scaled.inputGuaranteedReason = body.inputGuaranteedReason;
+    scaled.inputGuaranteed = multiplyTokens(body.inputGuaranteed, factor);
+    scaled.totalGuaranteed = multiplyTokens(body.totalGuaranteed, factor);
+    scaled.lowerTotal = body.lowerTotal;
     return scaled;
+}
+
+// The guaranteed input tokens of one request, or the reason there are none.
+//
+// tokens(request) <= kappa * bytes(request) + sigma holds for every string
+// under a verified contract, and bytes(request) is the template's bytes plus
+// each argument's byte bound, because bytes add up under concatenation.  The
+// provider's envelope is added on top, as declared.
+void guaranteeInput(const CallSiteFacts& site, CostBound& bound) {
+    if (site.tokenizer.empty()) {
+        bound.inputGuaranteedDefined = false;
+        bound.inputGuaranteedReason = "model '" + site.modelName + "' names no tokenizer";
+        return;
+    }
+    const TokenizerContract* contract = findTokenizerContract(site.tokenizer);
+    if (!contract || !contract->verified) {
+        bound.inputGuaranteedDefined = false;
+        bound.inputGuaranteedReason =
+            "tokenizer '" + site.tokenizer + "' of model '" + site.modelName +
+            "' has no verified byte contract";
+        return;
+    }
+    std::size_t bytes = site.templateBytes;
+    for (const ArgumentFact& argument : site.arguments) {
+        if (!argument.byteBoundKnown) {
+            bound.inputGuaranteedDefined = false;
+            bound.inputGuaranteedReason =
+                "argument '" + (argument.name.empty() ? std::string("<literal>") : argument.name) +
+                "' of a call to '" + site.promptName + "' has no byte bound (declare 'max_bytes', "
+                "or 'max_tokens N tokenizer T' for a lossless T)";
+            return;
+        }
+        bytes = addTokens(bytes, argument.byteBound);
+    }
+    bound.inputGuaranteed =
+        addTokens(addTokens(multiplyTokens(bytes, contract->kappa), contract->sigma), site.overhead);
 }
 
 class Deriver {
@@ -114,6 +174,15 @@ CostBound Deriver::statement(const Stmt& node, int depth) {
             bound.estimated = addTokens(site.promptTemplateTokens, site.argumentTokens);
             bound.totalTokens = addTokens(bound.guaranteed, bound.estimated);
             bound.defined = site.argumentBoundsKnown;
+            for (const TemplatePiece& piece : site.pieces) {
+                if (!piece.isArgument) {
+                    bound.lowerTotal = addTokens(
+                        bound.lowerTotal,
+                        estimateTextTokens(piece.text, semantic_.options.charsPerToken));
+                }
+            }
+            guaranteeInput(site, bound);
+            bound.totalGuaranteed = addTokens(bound.guaranteed, bound.inputGuaranteed);
             if (site.hasUnitPrice) {
                 bound.money = static_cast<double>(addTokens(bound.guaranteed, bound.estimated)) *
                               site.unitPrice;
@@ -124,7 +193,12 @@ CostBound Deriver::statement(const Stmt& node, int depth) {
             std::ostringstream detail;
             detail << let.name << " = " << site.promptName << " via " << site.modelName
                    << " [out<=" << site.modelMaxTokens << ", in<=" << site.promptTemplateTokens << '+'
-                   << site.argumentTokens << ']';
+                   << site.argumentTokens;
+            if (bound.inputGuaranteedDefined) {
+                detail << ", in<=" << bound.inputGuaranteed << " guaranteed (" << site.tokenizer
+                       << ")";
+            }
+            detail << ']';
             record(depth, "call", detail.str(), bound, node.location);
             return bound;
         }
@@ -209,14 +283,28 @@ CostResult CostAnalyzer::analyze(const Program& program, const SemanticResult& s
                                          "declared repetition bounds");
         } else if (!cost.withinBudget()) {
             std::ostringstream message;
-            message << "certified token bound " << cost.bound.total() << " (guaranteed "
-                    << cost.bound.guaranteed << " + estimated " << cost.bound.estimated
-                    << ") exceeds workflow budget " << cost.budget;
+            if (cost.budgetGuaranteed()) {
+                message << "guaranteed token bound " << cost.bound.totalGuaranteed << " (output "
+                        << cost.bound.guaranteed << " + input " << cost.bound.inputGuaranteed
+                        << " through the declared tokenizer contracts) exceeds workflow budget "
+                        << cost.budget;
+            } else {
+                message << "certified token bound " << cost.bound.total() << " (guaranteed "
+                        << cost.bound.guaranteed << " + estimated " << cost.bound.estimated
+                        << ") exceeds workflow budget " << cost.budget;
+            }
             result.diagnostics.error("E260", workflow.location, message.str());
         }
         result.workflows.push_back(std::move(cost));
     }
     return result;
+}
+
+CostBound boundOfBlock(const Block& block, const SemanticResult& semantic) {
+    std::vector<DerivationStep> derivation;
+    DiagnosticBag discarded;
+    Deriver deriver(semantic, derivation, discarded);
+    return deriver.block(block, 0);
 }
 
 }  // namespace orchlang

@@ -28,18 +28,29 @@ struct Invocation {
     std::string path;
     AnalysisOptions options;
     RunOptions run;
+    RelationalOptions relational;
+    bool json{false};
 };
 
 void printUsage(std::ostream& out) {
     out << "Usage: orchc <tokens|check|ast|symbols|ir|ir-json|cost|certify|run> <source.orch>\n"
         << "       orchc <source.orch>\n"
-        << "Options: --chars-per-token <n>   tokenization assumption for input tokens (default "
-        << defaultCharsPerToken() << ";\n"
-        << "                                 1 is unconditionally sound, larger is tighter)\n"
-        << "         --seed <n>            seed for the offline mock runtime used by 'run'\n"
+        << "Options: --chars-per-token <n>   tokenization assumption for estimated input tokens\n"
+        << "                                 (default " << defaultCharsPerToken()
+        << "; an estimate, not a bound, for any real tokenizer)\n"
+        << "         --relational-rule <r> content (default); sizes or bounds reproduce the\n"
+        << "                                 withdrawn, unsound rules for evaluation only\n"
+        << "Runtime ('run'):\n"
+        << "         --seed <n>            seed for the offline mock provider\n"
         << "         --retry-failure <p>   percentage chance one retry attempt fails (default 50)\n"
-        << "         --pin <name>=<n>      pin an input or secret's token length for 'run'\n"
-        << "         --pin <name>=true     pin a boolean input or secret for 'run'\n"
+        << "         --pin <name>=<n>      pin an input or secret's length (words, or bytes for a\n"
+        << "                               byte-bounded value)\n"
+        << "         --pin <name>=true     pin a boolean input or secret\n"
+        << "         --provider <p>        uniform (default) or content: whether the mock's output\n"
+        << "                               length depends on what the request says\n"
+        << "         --coupling <c>        global (default), model or request\n"
+        << "         --accounting <a>      estimate (default) or tokenizer\n"
+        << "         --json                print the full call transcript as JSON\n"
         << "Compatibility flags: --tokens, --check\n";
 }
 
@@ -115,6 +126,55 @@ bool collectArguments(int argc, char* argv[], Invocation& invocation) {
             } else {
                 invocation.run.pinnedLengths[name] =
                     static_cast<std::size_t>(std::strtoull(value.c_str(), nullptr, 10));
+            }
+            continue;
+        }
+        if (argument == "--json") {
+            invocation.json = true;
+            continue;
+        }
+        if (argument == "--provider" || argument == "--coupling" || argument == "--accounting" ||
+            argument == "--relational-rule") {
+            if (index + 1 >= argc) {
+                return false;
+            }
+            const std::string value = argv[++index];
+            if (argument == "--provider") {
+                if (value == "uniform") {
+                    invocation.run.provider = ProviderMode::Uniform;
+                } else if (value == "content") {
+                    invocation.run.provider = ProviderMode::Content;
+                } else {
+                    return false;
+                }
+            } else if (argument == "--coupling") {
+                if (value == "global") {
+                    invocation.run.coupling = Coupling::Global;
+                } else if (value == "model") {
+                    invocation.run.coupling = Coupling::Model;
+                } else if (value == "request") {
+                    invocation.run.coupling = Coupling::Request;
+                } else {
+                    return false;
+                }
+            } else if (argument == "--accounting") {
+                if (value == "estimate") {
+                    invocation.run.accounting = Accounting::Estimate;
+                } else if (value == "tokenizer") {
+                    invocation.run.accounting = Accounting::Tokenizer;
+                } else {
+                    return false;
+                }
+            } else {
+                if (value == "content") {
+                    invocation.relational.rule = RelationalRule::Content;
+                } else if (value == "sizes") {
+                    invocation.relational.rule = RelationalRule::Sizes;
+                } else if (value == "bounds") {
+                    invocation.relational.rule = RelationalRule::Bounds;
+                } else {
+                    return false;
+                }
             }
             continue;
         }
@@ -212,7 +272,7 @@ int main(int argc, char* argv[]) {
             printDiagnostics(diagnostics);
             return 1;
         }
-        std::cout << printRun(run);
+        std::cout << (invocation.json ? printRunJson(run, invocation.run) : printRun(run));
         return 0;
     }
 
@@ -220,7 +280,7 @@ int main(int argc, char* argv[]) {
     CostResult cost = costAnalyzer.analyze(parsed.program, semantic);
     diagnostics.append(cost.diagnostics);
 
-    RelationalAnalyzer relationalAnalyzer;
+    RelationalAnalyzer relationalAnalyzer(invocation.relational);
     RelationalResult relational = relationalAnalyzer.analyze(parsed.program, semantic);
     diagnostics.append(relational.diagnostics);
 
@@ -229,7 +289,8 @@ int main(int argc, char* argv[]) {
             printDiagnostics(diagnostics);
             return 1;
         }
-        std::cout << printCertificateSummary(cost, semantic);
+        printDiagnostics(diagnostics);
+        std::cout << printCertificateSummary(cost, semantic, relational);
         if (!relational.obligations.empty()) {
             std::cout << "  relational obligations:\n";
             for (const RelationalObligation& obligation : relational.obligations) {
@@ -268,14 +329,18 @@ int main(int argc, char* argv[]) {
         } else if (invocation.command == Command::IrJson) {
             std::cout << printIRJson(lowered.program);
         } else {
-            std::cout << printCertificate(parsed.program, semantic, cost, lowered.program,
-                                          relational);
+            std::cout << printCertificate(parsed.program, source, semantic, cost, lowered.program,
+                                          relational, relationalRuleName(invocation.relational.rule));
         }
         return 0;
     }
 
+    // Warnings do not fail a check, but they are the analysis telling the
+    // author something, so they are shown.
+    printDiagnostics(diagnostics);
     std::cout << "Check succeeded: " << parsed.program.workflows.size()
-              << " workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\n";
-    std::cout << printCertificateSummary(cost, semantic);
+              << " workflow(s) passed lexical, syntax, type, information-flow, cost, and relational "
+                 "analysis.\n";
+    std::cout << printCertificateSummary(cost, semantic, relational);
     return 0;
 }

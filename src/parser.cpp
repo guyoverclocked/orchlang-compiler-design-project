@@ -44,6 +44,49 @@ bool Parser::match(TokenKind kind) {
     return true;
 }
 
+bool Parser::checkWord(const char* word) const {
+    return check(TokenKind::Identifier) && current().lexeme == word;
+}
+
+bool Parser::matchWord(const char* word) {
+    if (!checkWord(word)) {
+        return false;
+    }
+    advance();
+    return true;
+}
+
+bool Parser::parseLengthClauses(bool& hasTokenBound, std::size_t& tokenBound, std::string& tokenizer,
+                                bool& hasByteBound, std::size_t& byteBound) {
+    while (true) {
+        if (match(TokenKind::MaxTokens)) {
+            const Token* bound = consume(TokenKind::IntegerLiteral, "an integer after 'max_tokens'");
+            if (!bound || !parseUnsigned(*bound, tokenBound)) {
+                return false;
+            }
+            hasTokenBound = true;
+            continue;
+        }
+        if (matchWord("tokenizer")) {
+            const Token* name = consume(TokenKind::Identifier, "a tokenizer name after 'tokenizer'");
+            if (!name) {
+                return false;
+            }
+            tokenizer = name->lexeme;
+            continue;
+        }
+        if (matchWord("max_bytes")) {
+            const Token* bound = consume(TokenKind::IntegerLiteral, "an integer after 'max_bytes'");
+            if (!bound || !parseUnsigned(*bound, byteBound)) {
+                return false;
+            }
+            hasByteBound = true;
+            continue;
+        }
+        return true;
+    }
+}
+
 const Token* Parser::consume(TokenKind kind, const std::string& expectation) {
     if (!check(kind)) {
         report(current(), expectation);
@@ -200,14 +243,9 @@ std::unique_ptr<InputDecl> Parser::parseInput() {
         label.integrity = Integrity::Untrusted;
     }
     auto input = std::make_unique<InputDecl>(name->lexeme, type, label, start);
-    if (match(TokenKind::MaxTokens)) {
-        const Token* bound = consume(TokenKind::IntegerLiteral, "an integer after 'max_tokens'");
-        std::size_t value = 0;
-        if (!bound || !parseUnsigned(*bound, value)) {
-            return nullptr;
-        }
-        input->hasTokenBound = true;
-        input->tokenBound = value;
+    if (!parseLengthClauses(input->hasTokenBound, input->tokenBound, input->tokenizer,
+                            input->hasByteBound, input->byteBound)) {
+        return nullptr;
     }
     if (!consume(TokenKind::Semicolon, "';' after the input declaration")) {
         return nullptr;
@@ -226,14 +264,9 @@ std::unique_ptr<SecretDecl> Parser::parseSecret() {
         return nullptr;
     }
     auto secret = std::make_unique<SecretDecl>(name->lexeme, type, start);
-    if (match(TokenKind::MaxTokens)) {
-        const Token* bound = consume(TokenKind::IntegerLiteral, "an integer after 'max_tokens'");
-        std::size_t value = 0;
-        if (!bound || !parseUnsigned(*bound, value)) {
-            return nullptr;
-        }
-        secret->hasTokenBound = true;
-        secret->tokenBound = value;
+    if (!parseLengthClauses(secret->hasTokenBound, secret->tokenBound, secret->tokenizer,
+                            secret->hasByteBound, secret->byteBound)) {
+        return nullptr;
     }
     if (!consume(TokenKind::Semicolon, "';' after the secret declaration")) {
         return nullptr;
@@ -260,15 +293,42 @@ std::unique_ptr<ModelDecl> Parser::parseModel() {
         return nullptr;
     }
     auto model = std::make_unique<ModelDecl>(name->lexeme, "mock", modelName->lexeme, value, start);
-    if (match(TokenKind::CostPerToken)) {
-        const Token price = current();
-        if (price.kind != TokenKind::DecimalLiteral && price.kind != TokenKind::IntegerLiteral) {
-            report(price, "a numeric price after 'cost_per_token'");
-            return nullptr;
+    while (true) {
+        if (match(TokenKind::CostPerToken)) {
+            const Token price = current();
+            if (price.kind != TokenKind::DecimalLiteral && price.kind != TokenKind::IntegerLiteral) {
+                report(price, "a numeric price after 'cost_per_token'");
+                return nullptr;
+            }
+            advance();
+            model->hasUnitPrice = true;
+            model->unitPrice = std::strtod(price.lexeme.c_str(), nullptr);
+            continue;
         }
-        advance();
-        model->hasUnitPrice = true;
-        model->unitPrice = std::strtod(price.lexeme.c_str(), nullptr);
+        if (matchWord("tokenizer")) {
+            const Token* tokenizer = consume(TokenKind::Identifier, "a tokenizer name after 'tokenizer'");
+            if (!tokenizer) {
+                return nullptr;
+            }
+            model->tokenizer = tokenizer->lexeme;
+            continue;
+        }
+        if (matchWord("overhead")) {
+            const Token* overhead = consume(TokenKind::IntegerLiteral, "an integer after 'overhead'");
+            if (!overhead || !parseUnsigned(*overhead, model->overhead)) {
+                return nullptr;
+            }
+            continue;
+        }
+        if (matchWord("max_bytes")) {
+            const Token* cap = consume(TokenKind::IntegerLiteral, "an integer after 'max_bytes'");
+            if (!cap || !parseUnsigned(*cap, model->byteCap)) {
+                return nullptr;
+            }
+            model->hasByteCap = true;
+            continue;
+        }
+        break;
     }
     if (!consume(TokenKind::Semicolon, "';' after the model declaration")) {
         return nullptr;
@@ -561,12 +621,47 @@ std::unique_ptr<WorkflowDecl> Parser::parseWorkflow() {
     }
     const Token* budget = consume(TokenKind::IntegerLiteral, "an integer workflow budget");
     std::size_t budgetValue = 0;
-    if (!budget || !parseUnsigned(*budget, budgetValue) ||
-        !consume(TokenKind::LeftBrace, "'{' before workflow statements")) {
+    if (!budget || !parseUnsigned(*budget, budgetValue)) {
         return nullptr;
     }
 
     auto workflow = std::make_unique<WorkflowDecl>(name->lexeme, budgetValue, workflowToken->location);
+    while (true) {
+        if (matchWord("leaks")) {
+            const Token bits = current();
+            if (bits.kind != TokenKind::IntegerLiteral && bits.kind != TokenKind::DecimalLiteral) {
+                report(bits, "a number of bits after 'leaks'");
+                return nullptr;
+            }
+            advance();
+            workflow->leakBudgetBits = std::strtod(bits.lexeme.c_str(), nullptr);
+            workflow->hasLeakBudget = true;
+            continue;
+        }
+        if (matchWord("observer")) {
+            const Token* kind = consume(TokenKind::Identifier, "'trace', 'provider' or 'bill' after 'observer'");
+            if (!kind) {
+                return nullptr;
+            }
+            if (kind->lexeme == "trace") {
+                workflow->observer = Observer::Trace;
+            } else if (kind->lexeme == "provider") {
+                workflow->observer = Observer::Provider;
+            } else if (kind->lexeme == "bill") {
+                workflow->observer = Observer::Bill;
+            } else {
+                diagnostics_.error("P007", kind->location,
+                                   "unknown observer '" + kind->lexeme +
+                                       "'; expected 'trace', 'provider' or 'bill'");
+                return nullptr;
+            }
+            continue;
+        }
+        break;
+    }
+    if (!consume(TokenKind::LeftBrace, "'{' before workflow statements")) {
+        return nullptr;
+    }
     while (!atEnd() && !check(TokenKind::RightBrace)) {
         const std::size_t before = currentIndex_;
         std::unique_ptr<Stmt> statement = parseStatement();

@@ -1,5 +1,8 @@
 #include "certificate.hpp"
 
+#include "sha256.hpp"
+#include "tokenizer_contracts.hpp"
+
 #include <iomanip>
 #include <map>
 #include <sstream>
@@ -80,18 +83,40 @@ const WorkflowCost* costOf(const CostResult& cost, const std::string& workflow) 
 
 }  // namespace
 
-std::string printCertificate(const Program& program, const SemanticResult& semantic,
-                             const CostResult& cost, const ProgramIR& ir,
-                             const RelationalResult& relational) {
+std::string number(double value) {
+    std::ostringstream out;
+    out << std::setprecision(6) << value;
+    return out.str();
+}
+
+const LeakageReport* leakageOf(const RelationalResult& relational, const std::string& workflow) {
+    for (const LeakageReport& report : relational.leakage) {
+        if (report.workflow == workflow) {
+            return &report;
+        }
+    }
+    return nullptr;
+}
+
+std::string printCertificate(const Program& program, const std::string& source,
+                             const SemanticResult& semantic, const CostResult& cost,
+                             const ProgramIR& ir, const RelationalResult& relational,
+                             const std::string& relationalRule) {
     std::ostringstream out;
     out << "{\n";
     out << "  \"format\": \"orchlang-safety-certificate\",\n";
-    out << "  \"version\": 1,\n";
+    out << "  \"version\": 2,\n";
+    out << "  \"analysis\": " << quoted(kAnalysisVersion) << ",\n";
+    out << "  \"source_sha256\": " << quoted(sha256Hex(source)) << ",\n";
+    out << "  \"relational_rule\": " << quoted(relationalRule) << ",\n";
     out << "  \"assumptions\": {\n";
     out << "    \"chars_per_token\": " << semantic.options.charsPerToken << ",\n";
-    out << "    \"note\": \"The guaranteed component needs no tokenization assumption; the "
-           "estimated component is sound only if the deployed tokenizer emits at most one token "
-           "per chars_per_token characters.\"\n";
+    out << "    \"note\": \"output_tokens needs no tokenizer assumption. input_tokens_estimated is "
+           "an estimate at chars_per_token bytes per token and real tokenizers exceed it. "
+           "input_tokens_guaranteed holds for the named tokenizers through their contracts, "
+           "given the declared envelope overhead. The relational verdict needs no tokenizer "
+           "assumption; it is relative to a coupling of the provider's randomness and trusts "
+           "every declassification.\"\n";
     out << "  },\n";
     out << "  \"workflows\": [\n";
 
@@ -107,16 +132,53 @@ std::string printCertificate(const Program& program, const SemanticResult& seman
 
         out << "      \"bound\": {";
         if (workflowCost) {
-            out << "\"guaranteed_tokens\": " << workflowCost->bound.guaranteed
-                << ", \"estimated_tokens\": " << workflowCost->bound.estimated
-                << ", \"total_tokens\": " << workflowCost->bound.total()
-                << ", \"component_sum_tokens\": " << workflowCost->bound.componentSum()
+            const CostBound& bound = workflowCost->bound;
+            out << "\"guaranteed_tokens\": " << bound.guaranteed
+                << ", \"estimated_tokens\": " << bound.estimated
+                << ", \"total_tokens\": " << bound.total()
+                << ", \"component_sum_tokens\": " << bound.componentSum()
+                << ", \"output_tokens\": " << bound.guaranteed
+                << ", \"input_tokens_estimated\": " << bound.estimated
+                << ", \"input_tokens_guaranteed\": ";
+            if (bound.inputGuaranteedDefined) {
+                out << bound.inputGuaranteed << ", \"total_tokens_guaranteed\": "
+                    << bound.totalGuaranteed;
+            } else {
+                out << "null, \"total_tokens_guaranteed\": null, \"input_guarantee_missing\": "
+                    << quoted(bound.inputGuaranteedReason);
+            }
+            out << ", \"lower_total_tokens\": " << bound.lowerTotal
+                << ", \"budget_basis\": "
+                << quoted(workflowCost->budgetGuaranteed() ? "guaranteed" : "estimated")
                 << ", \"within_budget\": " << (workflowCost->withinBudget() ? "true" : "false")
-                << ", \"defined\": " << (workflowCost->bound.defined ? "true" : "false")
-                << ", \"cost\": " << money(workflowCost->bound.money)
-                << ", \"cost_complete\": " << (workflowCost->bound.moneyComplete ? "true" : "false");
+                << ", \"defined\": " << (bound.defined ? "true" : "false")
+                << ", \"cost\": " << money(bound.money)
+                << ", \"cost_complete\": " << (bound.moneyComplete ? "true" : "false");
         }
         out << "},\n";
+
+        out << "      \"leakage\": ";
+        if (const LeakageReport* report = leakageOf(relational, workflow->name)) {
+            out << "{\"observer\": " << quoted(report->observer)
+                << ", \"budget_bits\": " << number(report->budgetBits)
+                << ", \"bound_bits\": " << number(report->bits)
+                << ", \"classes\": " << report->classes
+                << ", \"outcome_vectors\": " << report->outcomeVectors
+                << ", \"enumerated\": " << (report->enumerated ? "true" : "false")
+                << ", \"within_budget\": " << (report->withinBudget ? "true" : "false")
+                << ", \"predicates\": [";
+            for (std::size_t p = 0; p < report->predicates.size(); ++p) {
+                out << (p == 0 ? "" : ", ") << quoted(report->predicates[p]);
+            }
+            out << "], \"class_signatures\": [";
+            for (std::size_t c = 0; c < report->classSignatures.size(); ++c) {
+                out << (c == 0 ? "" : ", ") << quoted(report->classSignatures[c]);
+            }
+            out << "]}";
+        } else {
+            out << "null";
+        }
+        out << ",\n";
 
         out << "      \"derivation\": [\n";
         if (workflowCost) {
@@ -182,6 +244,8 @@ std::string printCertificate(const Program& program, const SemanticResult& seman
             out << "        {\"guard\": " << quoted(entry.guard)
                 << ", \"discharged\": " << (entry.discharged ? "true" : "false")
                 << ", \"detail\": " << quoted(entry.detail)
+                << ", \"then\": " << quoted(entry.thenSignature)
+                << ", \"else\": " << quoted(entry.elseSignature)
                 << ", \"line\": " << entry.location.line << "}"
                 << (index2 + 1 == obligations.size() ? "" : ",") << '\n';
         }
@@ -213,7 +277,8 @@ std::string printCertificate(const Program& program, const SemanticResult& seman
     return out.str();
 }
 
-std::string printCertificateSummary(const CostResult& cost, const SemanticResult& semantic) {
+std::string printCertificateSummary(const CostResult& cost, const SemanticResult& semantic,
+                                    const RelationalResult& relational) {
     std::ostringstream out;
     for (const WorkflowCost& workflow : cost.workflows) {
         out << workflow.name << ":\n";
@@ -227,6 +292,20 @@ std::string printCertificateSummary(const CostResult& cost, const SemanticResult
                 << " exceeds the total bound; the two maxima fall on different branches)";
         }
         out << '\n';
+        if (workflow.bound.inputGuaranteedDefined) {
+            out << "  guaranteed    input <= " << workflow.bound.inputGuaranteed
+                << " through the declared tokenizer contracts; total <= "
+                << workflow.bound.totalGuaranteed << " (the budget is checked against this)\n";
+        } else {
+            out << "  guaranteed    none for input: " << workflow.bound.inputGuaranteedReason
+                << " (the budget is checked against the estimate)\n";
+        }
+        if (const LeakageReport* report = leakageOf(relational, workflow.name)) {
+            out << "  leakage       <= " << number(report->bits) << " bits to the " << report->observer
+                << " observer (" << report->classes << " class"
+                << (report->classes == 1 ? "" : "es") << "), budget " << number(report->budgetBits)
+                << '\n';
+        }
         if (workflow.bound.money > 0.0) {
             out << "  cost bound    " << money(workflow.bound.money)
                 << (workflow.bound.moneyComplete ? "" : "  (partial: some models declare no price)")

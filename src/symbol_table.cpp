@@ -42,11 +42,21 @@ bool SymbolTable::insert(std::size_t scopeIndex, Symbol symbol, const Symbol** e
         }
         return false;
     }
+    symbol.id = ++nextId_;
     target.symbols.emplace(symbol.name, std::move(symbol));
     if (existing) {
         *existing = nullptr;
     }
     return true;
+}
+
+std::string ModelMetadata::identity() const {
+    std::ostringstream out;
+    out << provider << ':' << modelName << " max_tokens=" << maxTokens;
+    if (hasByteCap) {
+        out << " max_bytes=" << byteCap;
+    }
+    return out.str();
 }
 
 const Symbol* SymbolTable::lookupLocal(std::size_t scopeIndex, const std::string& name) const {

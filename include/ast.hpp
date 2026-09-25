@@ -123,6 +123,15 @@ struct InputDecl final : Stmt {
     // the compiler says so rather than guessing.
     bool hasTokenBound{false};
     std::size_t tokenBound{0};
+    // The tokenizer a 'max_tokens' bound is counted under, if the author named
+    // one.  Without it the count is in the compiler's estimate unit, which no
+    // real tokenizer is obliged to respect.
+    std::string tokenizer;
+    // A bound in UTF-8 bytes.  Bytes are the one length unit that adds up under
+    // concatenation and means the same thing to every tokenizer, so it is the
+    // only kind of bound a guaranteed input-token figure can be built from.
+    bool hasByteBound{false};
+    std::size_t byteBound{0};
 };
 
 struct SecretDecl final : Stmt {
@@ -136,6 +145,9 @@ struct SecretDecl final : Stmt {
     // declaration is the only place its length can be stated.
     bool hasTokenBound{false};
     std::size_t tokenBound{0};
+    std::string tokenizer;
+    bool hasByteBound{false};
+    std::size_t byteBound{0};
 };
 
 struct ModelDecl final : Stmt {
@@ -153,6 +165,20 @@ struct ModelDecl final : Stmt {
     // reported; the certified safety property is stated over token counts.
     bool hasUnitPrice{false};
     double unitPrice{0.0};
+    // The tokenizer this model bills input under.  Naming one lets the compiler
+    // derive a guaranteed input bound from byte lengths, through that
+    // tokenizer's measured contract; without one only an estimate is possible.
+    std::string tokenizer;
+    // Tokens the provider adds to every request around the prompt text (chat
+    // roles, message delimiters).  Declared, because it is the provider's
+    // format and not the program's.
+    std::size_t overhead{0};
+    // Responses longer than this many UTF-8 bytes are cut to it by the client
+    // before the workflow sees them.  A token cap alone says almost nothing
+    // about a response's length in bytes, which is what a later prompt is
+    // billed on, so this is the only way to keep a chained bound tight.
+    bool hasByteCap{false};
+    std::size_t byteCap{0};
 };
 
 struct PromptDecl final : Stmt {
@@ -274,6 +300,22 @@ struct OutputStmt final : Stmt {
     std::unique_ptr<Expr> value;
 };
 
+// Who is assumed to watch the calls a workflow makes.  Each observer sees a
+// function of the call transcript, and each is coarser than the one before it,
+// so a workflow safe against one is safe against every observer after it.
+enum class Observer {
+    // Every request and response, in order: the provider's own logs, or a
+    // proxy that records traffic.
+    Trace,
+    // Each provider's own requests, in order, but not how calls to different
+    // providers interleave.
+    Provider,
+    // The itemised invoice: per model, input tokens, output tokens, and calls.
+    Bill,
+};
+
+std::string observerName(Observer observer);
+
 struct WorkflowDecl {
     WorkflowDecl(std::string declaredName, std::size_t declaredBudget, SourceLocation source)
         : name(std::move(declaredName)), budget(declaredBudget), location(std::move(source)) {}
@@ -282,6 +324,12 @@ struct WorkflowDecl {
     std::size_t budget{0};
     SourceLocation location;
     Block statements;
+    // How much the observer may learn about the secrets, in bits, per secret
+    // value.  Zero, the default, demands that the observation not depend on
+    // the secrets at all.
+    double leakBudgetBits{0.0};
+    bool hasLeakBudget{false};
+    Observer observer{Observer::Trace};
 };
 
 struct Program {

@@ -1,113 +1,84 @@
 #pragma once
 
-// Relational resource analysis: does a secret change the bill?
+// Relational resource analysis: can a secret change what an observer sees?
 //
-// WHY THIS REPLACES THE OLD RULE
+// HOW THIS GOT HERE
 //
-// The previous compiler accepted a secret-guarded branch whenever the two arms
-// had equal *upper bounds*, and claimed that established cost noninterference.
-// It does not, and the counterexample is short:
+// The first version of this compiler accepted a secret-guarded branch whenever
+// its two arms had equal certified upper bounds.  An external audit refuted
+// that with a two-line counterexample: equal maxima say nothing about equal
+// costs (examples/invalid/equal_bounds.orch).
 //
-//     secret s: text max_tokens 1;
-//     input x: text max_tokens 100;
-//     input y: text max_tokens 100;
-//     if tokens(s) == 0 { let a = call p(x) using m; }
-//     else              { let b = call p(y) using m; }
+// The repair compared "billing signatures": which model each arm calls, in
+// order, and a symbolic *size* for each request -- template tokens, literal
+// tokens, |x| for outer variables.  That was also unsound, for the same reason
+// one level down (docs/AUDIT_2026-09-25.md).  A provider's output length depends
+// on what a request *says*, not on how long it is: a small real model answers
+// "acknowledge briefly" in 12-16 tokens and "escalate in detail" in 64, from
+// prompts one token apart.  And a real tokenizer does not bill two strings of
+// equal estimated size equally: "aaaa" and "bbbb" are 1 and 2 tokens under
+// r50k_base.  Any rule that compares sizes compares something coarser than what
+// determines the bill.  The repair also compared models, prompts and variables
+// by local name, so a model redeclared inside one arm passed unnoticed.
 //
-// Both arms bound at the same number, so the old rule accepted it.  But x and y
-// are different values with different actual lengths, so the secret really does
-// move the bill.  Equal maxima say nothing about equal costs.
+// WHAT IS COMPARED NOW
 //
-// WHAT REPLACES IT
+// Requests, by content.  Each arm is abstracted to a sequence of symbolic
+// requests: the endpoint's identity (never its local name), the template text
+// and literal text exactly as sent, and, for the parts not known statically,
+// references that provably denote the same text in both compared executions:
 //
-// Costs here cannot be compared numerically at all, because a model call's
-// output length is chosen by the provider, not by the program.  So instead of
-// comparing numbers we compare *structure*: each arm is abstracted to a billing
-// signature recording, in order, which model is called and a symbolic term for
-// how large its input is.  Two arms are indistinguishable to someone reading the
-// bill when their signatures are identical.
+//   var(b)    a binding made outside the region compared, by identity, whose
+//             content is public, so it is equal because public inputs are;
+//   res(p)    the response to an earlier call in the region, by position,
+//             equal because the two executions made the same earlier requests
+//             and the provider's randomness is coupled.
 //
-// The symbolic terms refer only to things that provably agree across the two
-// executions being compared: constants, variables bound outside the branch
-// (fixed by hypothesis), and the results of earlier calls in the same signature
-// (fixed by the oracle coupling, since the k-th call to a model returns the same
-// answer in both runs).  A term that depends on a secret makes the signature
-// undefined, and an undefined signature is rejected.
+// Two arms with equal signatures send the provider identical requests in the
+// same order, and so receive identical responses under the coupling.
+// Everything any observer of the call transcript can see is then equal: the
+// invoice, under any tokenizer and any pricing; the provider's logs; even a
+// prompt cache's hit pattern.  No tokenizer assumption is needed at all.
 //
-// This is deliberately incomplete.  Two arms that always happen to cost the same
-// but read different variables are rejected, because the compiler has no reason
-// to believe those variables have equal length.
+// HOW MUCH, NOT JUST WHETHER
+//
+// The analysis resolves every secret guard to each combination of outcomes the
+// secrets allow and counts the distinct signatures that result.  If there are k,
+// the observation is a function of which of k classes the secret falls in plus
+// randomness independent of the secret, so no observer learns more than log2 k
+// bits about it (min-capacity), however many times the workflow runs and
+// whatever public inputs an adversary chooses.  A workflow declares how many
+// bits it may leak ('leaks b', default 0).
 
 #include "ast.hpp"
 #include "diagnostic.hpp"
 #include "semantic_analyzer.hpp"
 
 #include <cstddef>
-#include <memory>
 #include <string>
 #include <vector>
 
 namespace orchlang {
 
-// A symbolic term for the input size of one call, built only from quantities
-// that are equal across the two compared executions.
-struct SizeTerm {
-    // Tokens contributed by the template and by literal arguments.
-    std::size_t constant{0};
-    // Variables bound outside the branch under comparison, by name.  Sorted, so
-    // two terms compare equal exactly when they name the same variables.
-    std::vector<std::string> outer;
-    // Indices, within this arm's own signature, of earlier calls whose results
-    // are used as arguments.  Positional rather than by name, because the two
-    // arms bind different names to corresponding calls.
-    std::vector<std::size_t> priorResults;
-
-    bool operator==(const SizeTerm& other) const {
-        return constant == other.constant && outer == other.outer &&
-               priorResults == other.priorResults;
-    }
-    bool operator!=(const SizeTerm& other) const { return !(*this == other); }
-
-    std::string text() const;
+// Which relational rule to apply.  Only Content is sound.  The other two are
+// the withdrawn rules, kept so the evaluation can measure them on the same
+// programs; they are never the default and the certificate names the rule.
+enum class RelationalRule {
+    Content,
+    // Withdrawn 2026-09-25: symbolic sizes, models and variables by local name.
+    Sizes,
+    // Withdrawn 2026-09-17: equal certified upper bounds.
+    Bounds,
 };
 
-enum class SignatureNodeKind { Call, Retry, Branch };
+std::string relationalRuleName(RelationalRule rule);
 
-struct SignatureNode;
-using Signature = std::vector<SignatureNode>;
-
-struct SignatureNode {
-    SignatureNodeKind kind{SignatureNodeKind::Call};
-
-    // Call
-    std::string model;
-    SizeTerm inputSize;
-
-    // Retry
-    std::size_t repeatBound{0};
-
-    // Branch on a public guard: both executions take the same arm, so the two
-    // arms are kept separately rather than being required to match.
-    std::string guard;
-
-    // Retry body, or the two arms of a public branch.
-    std::vector<Signature> children;
-
-    SourceLocation location;
-
-    bool operator==(const SignatureNode& other) const;
-    bool operator!=(const SignatureNode& other) const { return !(*this == other); }
-};
-
-bool signaturesEqual(const Signature& left, const Signature& right);
-std::string signatureText(const Signature& signature);
-
-// Why a signature could not be built, which is itself a reason to reject.
-struct SignatureResult {
-    Signature signature;
-    bool defined{true};
-    std::string reason;
-    SourceLocation location;
+struct RelationalOptions {
+    RelationalRule rule{RelationalRule::Content};
+    // Most combinations of secret-guard outcomes enumerated exactly.  Beyond
+    // this the count of combinations itself is used as the class bound, which
+    // is sound and looser.
+    std::size_t maxOutcomeVectors{4096};
 };
 
 // One secret-guarded branch the analysis examined, kept so the certificate can
@@ -115,13 +86,39 @@ struct SignatureResult {
 struct RelationalObligation {
     std::string workflow;
     std::string guard;
+    // The two arms send identical requests, so this branch alone reveals
+    // nothing about its guard.
     bool discharged{false};
     std::string detail;
+    std::string thenSignature;
+    std::string elseSignature;
     SourceLocation location;
+};
+
+// The quantitative verdict for one workflow.
+struct LeakageReport {
+    std::string workflow;
+    std::string observer;
+    std::string rule;
+    double budgetBits{0.0};
+    // The distinct secret-dependent guard predicates, as written.
+    std::vector<std::string> predicates;
+    // Combinations of predicate outcomes the declared secrets allow.
+    std::size_t outcomeVectors{0};
+    bool enumerated{true};
+    // Distinct observable behaviours across those combinations; the leakage
+    // bound is log2 of this.
+    std::size_t classes{1};
+    double bits{0.0};
+    bool withinBudget{true};
+    // One canonical signature per class, the evidence an independent checker
+    // can recompute from the source.
+    std::vector<std::string> classSignatures;
 };
 
 struct RelationalResult {
     std::vector<RelationalObligation> obligations;
+    std::vector<LeakageReport> leakage;
     DiagnosticBag diagnostics;
 
     bool success() const { return !diagnostics.hasErrors(); }
@@ -129,7 +126,17 @@ struct RelationalResult {
 
 class RelationalAnalyzer {
 public:
+    RelationalAnalyzer() = default;
+    explicit RelationalAnalyzer(RelationalOptions options) : options_(options) {}
+
     RelationalResult analyze(const Program& program, const SemanticResult& semantic) const;
+
+private:
+    RelationalOptions options_;
 };
+
+// The withdrawn rules, as they were.  Evaluation baselines only.
+RelationalResult analyzeWithSizeRule(const Program& program, const SemanticResult& semantic);
+RelationalResult analyzeWithBoundsRule(const Program& program, const SemanticResult& semantic);
 
 }  // namespace orchlang

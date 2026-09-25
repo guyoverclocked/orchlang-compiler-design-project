@@ -25,6 +25,11 @@ private:
     bool atEnd() const;
     bool check(TokenKind kind) const;
     bool match(TokenKind kind);
+    // Contextual keywords are ordinary identifiers everywhere except in the one
+    // position that gives them meaning, so adding one cannot break a program
+    // that already uses the word as a name.
+    bool checkWord(const char* word) const;
+    bool matchWord(const char* word);
     const Token* consume(TokenKind kind, const std::string& expectation);
     void advance();
     void report(const Token& token, const std::string& expectation);
@@ -46,6 +51,10 @@ private:
     std::unique_ptr<RetryStmt> parseRetry();
     std::unique_ptr<ReclassifyStmt> parseReclassify(bool endorsement);
     bool parseCondition(Condition& condition);
+    // The optional length clauses shared by input and secret declarations:
+    // 'max_tokens N', 'tokenizer NAME', 'max_bytes N', in any order.
+    bool parseLengthClauses(bool& hasTokenBound, std::size_t& tokenBound, std::string& tokenizer,
+                            bool& hasByteBound, std::size_t& byteBound);
     bool parseParameterList(std::vector<Parameter>& parameters);
     std::unique_ptr<CallExpr> parseCall();
     std::unique_ptr<Expr> parseExpression();

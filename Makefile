@@ -4,7 +4,7 @@ CXXFLAGS ?= -std=c++17 -Wall -Wextra -pedantic -O2
 DEPFLAGS := -MMD -MP
 
 BUILD_DIR := build
-CORE_SOURCES := src/diagnostic.cpp src/ast.cpp src/lexer.cpp src/parser.cpp src/symbol_table.cpp src/semantic_analyzer.cpp src/cost_analyzer.cpp src/ir.cpp src/certificate.cpp src/relational.cpp src/interpreter.cpp
+CORE_SOURCES := src/diagnostic.cpp src/ast.cpp src/lexer.cpp src/parser.cpp src/symbol_table.cpp src/tokenizer_contracts.cpp src/sha256.cpp src/semantic_analyzer.cpp src/cost_analyzer.cpp src/ir.cpp src/certificate.cpp src/relational.cpp src/relational_baselines.cpp src/interpreter.cpp
 CORE_OBJECTS := $(CORE_SOURCES:src/%.cpp=$(BUILD_DIR)/%.o)
 MAIN_OBJECT := $(BUILD_DIR)/main.o
 TEST_OBJECT := $(BUILD_DIR)/tests.o

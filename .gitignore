@@ -16,3 +16,6 @@
 # package.json is tracked so `npm install` alone is enough.
 node_modules/
 package-lock.json
+
+# Downloaded tokenizers, corpora and models for the measurement scripts.
+bench/.cache/

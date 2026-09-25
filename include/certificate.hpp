@@ -18,11 +18,20 @@
 
 namespace orchlang {
 
-std::string printCertificate(const Program& program, const SemanticResult& semantic,
-                             const CostResult& cost, const ProgramIR& ir,
-                             const RelationalResult& relational);
+// `source` is the exact text analysed.  Its SHA-256 is written into the
+// certificate, so a checker can refuse a certificate presented for a different
+// program or a different revision of this one.
+std::string printCertificate(const Program& program, const std::string& source,
+                             const SemanticResult& semantic, const CostResult& cost,
+                             const ProgramIR& ir, const RelationalResult& relational,
+                             const std::string& relationalRule);
 
 // A short human-readable summary of the same facts, for the terminal.
-std::string printCertificateSummary(const CostResult& cost, const SemanticResult& semantic);
+std::string printCertificateSummary(const CostResult& cost, const SemanticResult& semantic,
+                                    const RelationalResult& relational);
+
+// The version of the analysis a certificate was produced by.  A checker
+// compares it, because the meaning of the certificate's fields is tied to it.
+constexpr const char* kAnalysisVersion = "orchlang-4";
 
 }  // namespace orchlang

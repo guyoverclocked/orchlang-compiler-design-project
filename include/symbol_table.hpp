@@ -21,6 +21,16 @@ struct ModelMetadata {
     std::size_t maxTokens{0};
     bool hasUnitPrice{false};
     double unitPrice{0.0};
+    std::string tokenizer;
+    std::size_t overhead{0};
+    bool hasByteCap{false};
+    std::size_t byteCap{0};
+
+    // What the endpoint is, independent of the name the program gives it.  Two
+    // declarations with the same identity send identical requests to the same
+    // place; two with the same local name need not (audit finding F3: a model
+    // redeclared inside a branch arm under an old name).
+    std::string identity() const;
 };
 
 struct PromptParameterInfo {
@@ -31,9 +41,12 @@ struct PromptParameterInfo {
 struct PromptSignature {
     std::vector<PromptParameterInfo> parameters;
     Type returnType;
-    // Static token cost of the template itself, excluding the substituted
-    // arguments.  Derived once at declaration and reused at every call site.
+    // Estimated token cost of the template as written, placeholders included.
+    // Derived once at declaration and reused at every call site.
     std::size_t templateTokens{0};
+    // The template itself.  Requests are compared by what they say, not by
+    // how big an estimate of them is.
+    std::string templateText;
 };
 
 struct ToolSignature {
@@ -49,13 +62,29 @@ struct Symbol {
     std::optional<ModelMetadata> model;
     std::optional<PromptSignature> prompt;
     std::optional<ToolSignature> tool;
-    // Security label carried by the value this symbol denotes.
+    // Security label carried by the value this symbol denotes, including the
+    // program counter at the point it was bound.
     Label label{publicTrusted()};
+    // The same label with the program counter's confidentiality left out: what
+    // the value's *content* depends on.  A result computed inside a
+    // secret-guarded arm from public arguments has public content even though
+    // its existence depends on the secret; the relational analysis is what
+    // accounts for existence (open problem OP-1).
+    Label dataLabel{publicTrusted()};
     // Static upper bound, in tokens, on the value this symbol denotes.
     // Only meaningful when tokenBoundKnown is set; an input with no declared
-    // bound, or a model or tool name, has no bound at all.
+    // bound, or a model or tool name, has no bound at all.  The unit is the
+    // compiler's estimate unit unless tokenizer names a real one.
     bool tokenBoundKnown{false};
     std::size_t tokenBound{0};
+    std::string tokenizer{};
+    // Static upper bound in UTF-8 bytes, the unit a guaranteed input bound is
+    // built from.
+    bool byteBoundKnown{false};
+    std::size_t byteBound{0};
+    // Unique across the whole program, assigned at declaration.  Later passes
+    // compare bindings by this, never by name.
+    int id{0};
 };
 
 struct Scope {
@@ -75,6 +104,7 @@ public:
 
 private:
     std::vector<Scope> scopes_;
+    int nextId_{0};
 };
 
 std::string formatSymbolTable(const SymbolTable& table);
