@@ -1,0 +1,6 @@
+Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, cost, and relational analysis.
+EqualSizeTemplate:
+  token bound   142 / budget 100000
+  components    output <= 96, input <= 46 @ 4 chars/token
+  guaranteed    none for input: model 'm' names no tokenizer (the budget is checked against the estimate)
+  labels        3 secret, 0 untrusted

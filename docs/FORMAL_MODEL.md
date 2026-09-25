@@ -472,6 +472,14 @@ content and hence as secret inside a secret branch, makes every call in a
 secret branch a secret-dependent cost, and constant-resource typing then
 rejects the branch outright; that is Proposition 7.
 
+RelCost [Çiçek et al. 2017] is not size-indexed in this sense: its relational
+refinements also record how much two runs' inputs differ, so a call can be given
+a zero cost difference exactly when its two requests are identical. That
+instantiation is sound under the coupling and amounts to comparing requests by
+content for a fixed pair of runs, which is §5's rule for the trace observer
+without the resolution over feasible outcome vectors, the coarser observers, or
+the leakage bound.
+
 Their *quantitative* bound fails differently. Lemma 6–7 of Ngo et al. bound
 leakage by `log2(u − l + 1)` for upper and lower cost bounds `u, l`. An LLM call
 may return anywhere from 0 to `cap` tokens, so `u − l ≥ cap` for any workflow

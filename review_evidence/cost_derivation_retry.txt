@@ -1,6 +1,8 @@
 ResilientExtract:
   token bound   3330 / budget 3400
   components    output <= 2100, input <= 1230 @ 4 chars/token
+  guaranteed    none for input: model 'extractor' names no tokenizer (the budget is checked against the estimate)
+  leakage       <= 0 bits to the trace observer (1 class), budget 0
   labels        0 secret, 0 untrusted
   derivation for ResilientExtract:
       retry  bound 3  => 0 tokens

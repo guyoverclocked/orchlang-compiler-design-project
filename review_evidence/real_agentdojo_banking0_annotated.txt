@@ -1,0 +1,8 @@
+Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, cost, and relational analysis.
+AdBanking0Annotated:
+  token bound   12558 / budget 1000000000
+  components    output <= 8192, input <= 4366 @ 4 chars/token
+  guaranteed    input <= 17474 through the declared tokenizer contracts; total <= 25666 (the budget is checked against this)
+  leakage       <= 0 bits to the trace observer (1 class), budget 0
+  labels        0 secret, 3 untrusted
+  escape hatches 0 declassify, 1 endorse (each justified in the certificate)

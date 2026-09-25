@@ -1,6 +1,8 @@
 TieredTriage:
   token bound   1639 / budget 2000
   components    output <= 1020, input <= 620 @ 4 chars/token  (sum 1640 exceeds the total bound; the two maxima fall on different branches)
+  guaranteed    none for input: model 'small' names no tokenizer (the budget is checked against the estimate)
+  leakage       <= 0 bits to the trace observer (1 class), budget 0
   labels        0 secret, 0 untrusted
   derivation for TieredTriage:
       call  severity = triage via small [out<=120, in<=8+300]  => 428 tokens

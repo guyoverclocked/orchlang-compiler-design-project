@@ -1,0 +1,8 @@
+bench/leakage/accept/OneBitTier.orch:1:1: warning [W238] workflow 'OneBitTier' may reveal up to 1 bits about its secrets to the trace (2 distinguishable behaviours), within its declared budget
+Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, cost, and relational analysis.
+OneBitTier:
+  token bound   347 / budget 1000000
+  components    output <= 300, input <= 47 @ 4 chars/token
+  guaranteed    none for input: model 'large' names no tokenizer (the budget is checked against the estimate)
+  leakage       <= 1 bits to the trace observer (2 classes), budget 1
+  labels        5 secret, 0 untrusted

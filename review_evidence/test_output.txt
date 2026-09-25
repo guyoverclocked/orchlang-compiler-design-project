@@ -22,7 +22,48 @@ PASS equal bounds with different arguments rejected
 PASS extra call in one arm rejected
 PASS differing retry bounds rejected
 PASS matching retry bounds accepted
-PASS chaining inside secret arm rejected conservatively
+PASS chaining inside secret arm accepted (OP-1)
+PASS OP-1: chain length depending on secret rejected
+PASS OP-1: chain fed a different prior result rejected
+PASS OP-1: chain fed outer variable instead of result rejected
+PASS OP-1: chain through a different model rejected
+PASS OP-1: pc-secret value still cannot be emitted
+PASS OP-1: pc-secret value still cannot be output
+PASS OP-1: pc-secret value cannot escape its arm
+PASS OP-1: declassify does not launder effects
+PASS OP-1: secret content still barred from prompts
+PASS OP-1: endorsed secret is still secret content
+PASS OP-1: guard on pc-secret result public when arms match
+PASS OP-1: guard on pc-secret result with different threshold rejected
+PASS OP-1: chain inside retry inside secret arm
+PASS OP-1: nested secret branch using pc-secret value
+PASS content: equal-size literals are different requests
+PASS content: equal-size templates are different requests
+PASS content: same text via different prompt names is one request
+PASS F3: shadowed model in arm is a different endpoint
+PASS F3: shadowed prompt in arm is a different request
+PASS E203: input declared inside an arm rejected
+PASS F4: billing keyed by provider model name
+PASS OP-4: one-bit branch needs a budget
+PASS OP-4: thresholds on one secret count intervals
+PASS OP-4: independent secrets multiply classes
+PASS OP-4: cancelling branches accepted globally
+PASS OP-7: reordering visible to trace observer
+PASS OP-7: reordering across providers invisible to each
+PASS OP-7: reordering within one provider visible to it
+PASS OP-7: reordering invisible on the invoice
+PASS OP-7: dependent calls not reordered for the bill
+PASS OP-7: calls inside retry are never reordered
+PASS OP-3: guaranteed input built from bytes
+PASS OP-3: unverified tokenizer gives no guarantee
+PASS OP-3: unknown tokenizer is an error
+PASS OP-3: estimate-unit input has no byte bound
+PASS OP-3: token bound under named tokenizer gives bytes
+PASS OP-3: chained call uses response byte bound
+PASS OP-3: guaranteed bound holds under real tokenization
+PASS OP-3: mock tokenizer is not subadditive
+PASS OP-11: SHA-256 matches standard vectors
+PASS withdrawn rules reproduced as baselines
 PASS public guard inside secret arm allowed
 PASS differing public sub-branch rejected
 PASS branch bounds each component separately
@@ -78,6 +119,7 @@ PASS semantic prompt argument type
 PASS semantic placeholder unknown
 PASS semantic placeholder missing
 PASS semantic placeholder duplicate
+PASS doubled braces are literal
 PASS semantic unknown model
 PASS semantic secret prompt exposure
 PASS semantic secret output exposure
@@ -93,4 +135,4 @@ PASS IR valid lowering
 PASS IR refuses invalid program
 PASS IR dependency cycle detector
 PASS IR JSON export
-Passed 95/95 tests.
+Passed 137/137 tests.
