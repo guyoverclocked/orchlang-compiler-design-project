@@ -403,33 +403,48 @@ are μ-indexed: the equal-bounds rule compared upper bounds computed from sizes,
 and the billing-signature rule compared symbolic sizes.
 
 Say `μ` has **fresh twins** if for every string `t` with `μ(t) > 0` and every
-finite set of strings `W`, some `t' ≠ t` with `μ(t') = μ(t)` occurs in no
-member of `W`, and no member of `W` occurs in `t'`. Every size measure used in
-practice has fresh twins (strings of a given size can be built from characters
-the program never uses).
+finite set of strings `W`, some `t'` with `μ(t') = μ(t)` contains a character
+that occurs in no member of `W`. Every size measure used in practice has fresh
+twins (strings of a given size can be built from characters the program never
+uses).
+
+An earlier draft of this definition asked only that `t'` occur in no member of
+`W` and no member of `W` occur in `t'`. That is not enough: a concatenation of
+members of `W` can contain `t'` across a boundary (`W = {ab}`, `t' = ba`,
+`abab`). The Coq proof needs the character form and uses it; the draft proof
+did not notice.
 
 ### Theorem 6 (sound size-indexed analyses reject identical arms)
 
 Let `μ` have fresh twins and let `A` be μ-indexed and sound for 𝒫 (every
-accepted program is bill-NI for every provider in 𝒫). Let `c` contain a
-secret-guarded branch, both of whose outcomes are feasible, whose then-arm
-unconditionally makes a call to a model with `cap > 0` whose request contains
-a text constant `t` with `μ(t) > 0`. Then `A(c)` is false — even if the two
-arms are identical.
+accepted program is bill-NI for every provider in 𝒫). Let `c` be a well-typed
+program (no request reads secret content, `E230`; no statement rebinds a
+secret) containing a secret-guarded branch, both of whose outcomes are
+feasible, whose then-arm unconditionally makes a call to a model with
+`cap > 0` whose request contains a text constant `t` with `μ(t) > 0`. Then
+`A(c)` is false — whatever the else-arm is, including a copy of the then-arm.
 
 *Proof.* Let `W` be the text constants of `c` and choose a fresh twin `t'` of
-`t`. Let `c'` be `c` with that occurrence of `t` replaced by `t'` in the
-then-arm only. `A(c') = A(c)` because `A` is μ-indexed. Let `Π*` answer
-`(ε, cap(m))` to any request containing `t'` and `(ε, 0)` otherwise, with a
-validator that always succeeds. Take public inputs equal to the empty string.
-Every request of `c'` is a concatenation of text constants from `W ∪ {t'}` and
-empty strings, so a request contains `t'` exactly when it comes from the
-modified call. Executions of `c'` whose secret takes the then-arm report
-`cap(m) > 0` output tokens for `m` from that call; executions taking the
-else-arm report 0 for every call containing no `t'`, and in the else arm no
-request contains `t'`. The difference in `m`'s output tokens differs between
-the two secrets, so `c'` is not bill-NI under `Π* ∈ 𝒫`. If `A(c)` held, `A(c')`
-would, contradicting soundness. ∎
+`t`, containing a character `★` that occurs in no member of `W`. Let `c'` be
+`c` with `t` replaced by `t'` in that call only. `A(c') = A(c)` because `A` is
+μ-indexed. Let `Π*` answer `(ε, cap(m))` to any request containing `★` and
+`(ε, 0)` otherwise, with a validator that always succeeds. Take public inputs
+equal to the empty string. Every request of `c'` is a concatenation of text
+constants from `W ∪ {t'}`, public inputs and responses (all empty); secrets
+never appear in requests. So a request contains `★` exactly when it includes
+`t'`, i.e. comes from the modified call. Executions of `c'` whose secret
+takes the then-arm report at least `cap(m) > 0` output tokens; executions
+taking the else-arm report none, since no request they make contains `★`.
+The bill differs between the two secrets, so `c'` is not bill-NI under
+`Π* ∈ 𝒫`. If `A(c)` held, `A(c')` would, contradicting soundness. ∎
+
+The proof uses only a deterministic provider and only the *total* output
+count, so the theorem holds for the weakest soundness notion in play: an
+analysis is caught even if it only claims that total output tokens do not
+depend on secrets, and only for providers with no randomness at all. This is
+the form mechanised in `proofs/OrchLang.v` (`size_blind`), where "unconditionally"
+is rendered as "the call is in the top-level sequence of the then-arm", which
+in the core calculus always executes.
 
 The theorem is the formal content of the audit's counterexample and of this
 project's own second mistake. It says more than "this rule is wrong": *no*
@@ -495,7 +510,19 @@ Theorem 4).
 
 ## 10. What is mechanised
 
-See `proofs/README.md` for the Coq development, which mechanises Lemma 2 and
-Theorem 1 for the core calculus of §1 over an abstract provider, keying
-scheme and observer, and the unary bound of Theorem 5 for the output component.
-Theorems 2, 3, 4 and 6 are pen-and-paper.
+`proofs/OrchLang.v` (Coq 8.18, no axioms; `make proofs`) mechanises, for the
+core calculus of §1 over an abstract provider, validator, keying scheme and
+observer:
+
+* Lemma 2, as soundness of a request-equivalence judgment (`equiv_sound`);
+* exactness of resolution by a store's own outcome vector (`resolve_exact`);
+* Theorem 1 (`request_trace_noninterference`, `observers_agree`);
+* Theorem 5, output and guaranteed input (`unary_bound`, `guaranteed_bound`),
+  with the tokenizer contract, the λ decoding bound and the provider's cap as
+  hypotheses;
+* Theorem 6 (`size_blind`), in the strengthened form above.
+
+Lemma 1, Theorems 2, 3 and 4, and Proposition 7 are pen-and-paper. The
+judgment of the Coq development is a relation; that equal signatures, as the
+implementation computes them, yield a derivation of it is argued in §5, not
+mechanised. `proofs/README.md` lists every modelling choice.

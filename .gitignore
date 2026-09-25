@@ -19,3 +19,11 @@ package-lock.json
 
 # Downloaded tokenizers, corpora and models for the measurement scripts.
 bench/.cache/
+
+# Coq build products.
+proofs/*.vo
+proofs/*.vok
+proofs/*.vos
+proofs/*.glob
+proofs/.*.aux
+.lia.cache

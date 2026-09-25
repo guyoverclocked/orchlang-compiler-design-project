@@ -10,7 +10,7 @@ MAIN_OBJECT := $(BUILD_DIR)/main.o
 TEST_OBJECT := $(BUILD_DIR)/tests.o
 DEPS := $(CORE_OBJECTS:.o=.d) $(MAIN_OBJECT:.o=.d) $(TEST_OBJECT:.o=.d)
 
-.PHONY: all check test examples sanitize clean
+.PHONY: all check test examples sanitize clean proofs
 
 all: orchc
 
@@ -43,7 +43,14 @@ sanitize:
 	$(MAKE) clean
 	$(MAKE) CXXFLAGS='-std=c++17 -Wall -Wextra -pedantic -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer' check
 
+# The Coq development (Coq 8.18; not needed by `check`).  Prints the axioms
+# each main theorem depends on, which must be none.
+proofs:
+	coqc -Q proofs OrchLang proofs/OrchLang.v
+	coqc -Q proofs OrchLang proofs/Assumptions.v
+
 clean:
 	rm -rf $(BUILD_DIR) orchc orchlang_tests
+	rm -f proofs/*.vo proofs/*.vok proofs/*.vos proofs/*.glob proofs/.*.aux .lia.cache
 
 -include $(DEPS)
