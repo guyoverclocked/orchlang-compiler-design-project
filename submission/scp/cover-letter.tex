@@ -1,0 +1,49 @@
+%% Cover letter for the submission to Science of Computer Programming.
+%% TODO(author): add the date, your e-mail address and, if you wish, suggested reviewers.
+\documentclass[11pt]{letter}
+\usepackage[a4paper,margin=2.5cm]{geometry}
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[hidelinks]{hyperref}
+\signature{Nambi Rajan M\\Vellore Institute of Technology, Vellore, India}
+\address{Nambi Rajan M\\Vellore Institute of Technology\\Vellore, Tamil Nadu, India}
+\begin{document}
+\begin{letter}{The Editors-in-Chief\\Science of Computer Programming}
+\opening{Dear Editors,}
+
+I submit the manuscript ``Compare the requests, not their sizes: Resource side channels
+and sound token bounds for LLM workflows'' for consideration as a research paper in
+\emph{Science of Computer Programming}.
+
+A program that calls a large language model can leak a secret without the secret reaching a
+prompt: if the secret decides which requests are sent, the bill and the network traffic can
+reveal it. The paper shows that no analysis that sees prompt text only through a size
+measure can be both sound and useful for such programs (a theorem mechanised in Coq); it
+replaces size comparison by a comparison of requests by content, with noninterference for
+every provider, tokenizer and observer of the transcript and a $\log_2 k$ bound on
+min-capacity; and it computes worst-case token bounds in bytes, converted through tokenizer
+contracts measured on fourteen tokenizers. Both analyses are implemented in a compiler for a
+small workflow language and evaluated on synthetic suites, one locally run model, and thirty
+workflows ported from public sources under a protocol fixed before porting.
+
+The work fits the journal's scope in programming languages, formal methods and program
+analysis, and it builds on lines of work the journal has published, among them static cost
+analysis of workflow languages (Ali, Lamo and Pun, SCP 225, 2023) and language-based
+information flow with declassification (Manzino and de Latorre, SCP 247, 2026). I am not
+aware of work in the journal on the analysis of LLM workflows.
+
+The manuscript reports its negative results plainly. Two earlier relational rules of mine
+were unsound, and the paper explains why; and none of the thirty real workflows has a
+secret, so the side-channel analysis has so far been exercised only on synthetic workflows.
+The compiler, the Coq development, the benchmarks, the real-workflow corpus and the
+evaluation harness are publicly available, and three commands reproduce every number in
+the paper.
+
+The manuscript is original, has not been published, and is not under consideration
+elsewhere. The use of generative AI in preparing the artifact and the manuscript is
+declared in the manuscript as the journal's policy requires. I have no competing interests
+to declare.
+
+\closing{Yours sincerely,}
+\end{letter}
+\end{document}

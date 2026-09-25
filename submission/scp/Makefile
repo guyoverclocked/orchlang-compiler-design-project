@@ -10,7 +10,7 @@
 
 FIGURES := $(patsubst figures/%.tex,fig-%.pdf,$(filter-out figures/common.tex,$(wildcard figures/*.tex)))
 
-.PHONY: all data check bundle clean
+.PHONY: all data check bundle examples clean
 
 all: main.pdf
 
@@ -28,11 +28,14 @@ data:
 check: main.pdf
 	python3 check.py
 
-bundle: main.pdf
-	rm -rf upload && mkdir upload
-	cp main.tex main.bbl references.bib elsarticle.cls elsarticle-num.bst $(FIGURES) upload/
-	cp main.pdf upload/manuscript.pdf
-	cp highlights.docx upload/ 2>/dev/null || true
+bundle: main.pdf highlights.docx
+	python3 bundle.py
+
+highlights.docx: highlights.txt build_highlights.js
+	cd ../.. && node submission/scp/build_highlights.js
+
+examples:
+	python3 examples/run.py
 
 clean:
 	latexmk -C main.tex > /dev/null 2>&1 || true
