@@ -1,0 +1,56 @@
+\section{Limitations and future work}\label{sec:conclusion}
+
+\paragraph{The relational analysis has not met a real secret} None of the 30 real
+workflows declares or implies a secret in its source's threat model, so the analysis
+that motivates this paper verified nothing on them. The pattern it targets, a branch on
+private data that is not itself sent to a model (a customer's tier, a risk flag, the
+verdict of a local detector of personal data), is plausible and easy to write, but we
+have not shown that deployed workflows contain it. Finding such workflows is the most
+important next step.
+
+\paragraph{Declassification is too coarse} Real workflows send private data to a
+provider, which in OrchLang requires declassifying it, which makes it public to every
+observer. A policy relative to observers, under which the provider may read content
+that the network and the bill may not reveal, would let the analysis reason about those
+workflows. \Cref{thm:ni,thm:leakage} would then need an equivalence of histories indexed
+by observer.
+
+\paragraph{Integrity over-reports} A value computed in an arm guarded by untrusted data
+is labelled untrusted even when it is computed only from trusted data. Separating data
+and program-counter labels for integrity, as \cref{sec:labels} does for confidentiality,
+would remove the two false positives of the held-out split.
+
+\paragraph{Retry cannot carry feedback} Self-correction loops that show the model its
+earlier attempts had to be unrolled in five of the thirty ports. A retry whose body can
+read an accumulator of declared byte growth would keep the bound finite and express
+these loops directly.
+
+\paragraph{Agents are out of scope by design} Thirteen of the 22 exclusions are workflows
+whose shape is decided at run time, nine of them because the model chooses what runs
+next. OrchLang's fixed shape is what makes its analyses decidable; a type system for
+agent loops would need bounds on the model's choices.
+
+\paragraph{The guaranteed bound is loose} On the real workflows it is four times the
+estimate where requests carry only inputs and up to 128 times where they carry earlier
+responses, unless models declare client-side byte caps.
+
+\paragraph{The certificate is not independently checked, and the implementation is not
+verified} A small checker that re-derives the bounds from the certificate and the source,
+tested against tampered certificates, would turn the certificate into evidence. The C++
+implementation is tested against the Coq model through the runtime, not verified against
+it.
+
+\section{Conclusion}\label{sec:conclusion-final}
+
+An analysis that compares LLM requests by anything coarser than their content cannot be
+sound against providers that answer content, unless it gives up on every secret branch.
+Comparing content gives noninterference that needs no assumption about providers,
+tokenizers or observers, and a leakage bound that counts request classes rather than
+noisy observations. Token bounds have to be built from the one measure that adds up,
+bytes, and converted through tokenizer contracts that measurements can refute. Both
+results are mechanised for a core calculus, implemented in a compiler, and tested by a
+harness that can fail. On 30 real workflows the bounds held and the flow checks found
+the places where untrusted content decides an effect, but the side channel we set out
+to close did not appear. Whether it matters in practice depends on whether deployed
+workflows branch on private data that they do not send to a model, and that question
+remains open.

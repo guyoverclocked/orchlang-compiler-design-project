@@ -1,0 +1,22 @@
+\begin{abstract}
+A program that orchestrates calls to a large language model (LLM) can leak a
+secret without the secret reaching a prompt: if the secret decides which
+requests are sent, whoever sees the network traffic or the bill can learn it.
+Resource-aware noninterference handles such channels by charging each operation
+a cost determined by input sizes. We show that this cannot work for LLM calls. Any analysis that sees prompt text only through a size measure is
+either unsound for providers whose answers depend on content, or rejects a
+secret-guarded branch whose two arms are identical. The theorem is mechanised in
+Coq and explains why two size-based rules of our own failed. We compare
+requests by content instead, resolving each secret branch by the outcomes its
+secret can realise. If every resolution sends the same requests, the workflow is
+noninterfering for every provider, tokenizer and observer of its transcript; if
+$k$ request classes remain, it leaks at most $\log_2 k$ bits of min-capacity.
+Because tokenization is not subadditive, we compute worst-case token bounds in
+bytes and convert them through contracts measured on fourteen tokenizers. Both
+analyses are implemented in OrchLang, a small workflow language, and evaluated on
+synthetic suites and on thirty workflows ported from
+LangGraph, the Anthropic cookbook and AgentDojo under a protocol fixed before
+porting. No certified bound was exceeded in 6,000 runs of the ported workflows.
+None of them has a secret, so the relational analysis has so far been exercised
+only on synthetic workflows.
+\end{abstract}

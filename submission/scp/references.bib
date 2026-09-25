@@ -1,0 +1,877 @@
+% Verified references (Crossref/arXiv/publisher records, 25 Sep 2026).
+% Part 1: references of the draft and artifacts; part 2: prior-art additions.
+
+% references.bib -- verified bibliography for
+% "Compare the Requests, Not Their Sizes" (docs/PAPER.md, docs/FORMAL_MODEL.md)
+% Target style: elsarticle-num.bst (Version 2.1, urlbst fields eprint/doi/url).
+% Every entry was checked on 2026-09-25 against the authoritative record named in
+% refs/REPORT.md (Crossref DOI record, publisher page, arXiv API, PMLR, USENIX,
+% NeurIPS proceedings, OpenReview, DataCite/Zenodo, unicode.org, PyPI, pinned clones).
+% Titles are sentence-cased by elsarticle-num; proper nouns and acronyms are braced.
+% archivePrefix/primaryClass are ignored by elsarticle-num but kept for other styles.
+
+% ======================================================================
+% A. Entries corresponding to the draft's reference list
+% ======================================================================
+
+@inproceedings{agat2000transforming,
+  author    = {Agat, Johan},
+  title     = {Transforming out Timing Leaks},
+  booktitle = {Proceedings of the 27th {ACM} {SIGPLAN-SIGACT} Symposium on Principles of Programming Languages ({POPL} '00)},
+  publisher = {ACM},
+  address   = {New York, NY, USA},
+  pages     = {40--53},
+  year      = {2000},
+  doi       = {10.1145/325694.325702}
+}
+
+@inproceedings{barthe2009formal,
+  author    = {Barthe, Gilles and Gr{\'e}goire, Benjamin and {Zanella B{\'e}guelin}, Santiago},
+  title     = {Formal Certification of Code-Based Cryptographic Proofs},
+  booktitle = {Proceedings of the 36th Annual {ACM} {SIGPLAN-SIGACT} Symposium on Principles of Programming Languages ({POPL} '09)},
+  publisher = {ACM},
+  address   = {New York, NY, USA},
+  pages     = {90--101},
+  year      = {2009},
+  doi       = {10.1145/1480881.1480894}
+}
+
+@inproceedings{barthe2017coupling,
+  author    = {Barthe, Gilles and Gr{\'e}goire, Benjamin and Hsu, Justin and Strub, Pierre-Yves},
+  title     = {Coupling Proofs Are Probabilistic Product Programs},
+  booktitle = {Proceedings of the 44th {ACM} {SIGPLAN} Symposium on Principles of Programming Languages ({POPL} '17)},
+  publisher = {ACM},
+  address   = {New York, NY, USA},
+  pages     = {161--174},
+  year      = {2017},
+  doi       = {10.1145/3009837.3009896}
+}
+
+@misc{beurerkellner2025design,
+  author        = {Beurer-Kellner, Luca and Buesser, Beat and Cre{\c{t}}u, Ana-Maria and Debenedetti, Edoardo and Dobos, Daniel and Fabian, Daniel and Fischer, Marc and Froelicher, David and Grosse, Kathrin and Naeff, Daniel and Ozoani, Ezinwanne and Paverd, Andrew and Tram{\`e}r, Florian and Volhejn, V{\'a}clav},
+  title         = {Design Patterns for Securing {LLM} Agents against Prompt Injections},
+  year          = {2025},
+  eprint        = {2506.08837},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  doi           = {10.48550/arXiv.2506.08837},
+  note          = {arXiv preprint (v3, 27 June 2025)}
+}
+
+@inproceedings{cicek2017relational,
+  author    = {{\c{C}}i{\c{c}}ek, Ezgi and Barthe, Gilles and Gaboardi, Marco and Garg, Deepak and Hoffmann, Jan},
+  title     = {Relational Cost Analysis},
+  booktitle = {Proceedings of the 44th {ACM} {SIGPLAN} Symposium on Principles of Programming Languages ({POPL} '17)},
+  publisher = {ACM},
+  address   = {New York, NY, USA},
+  pages     = {316--329},
+  year      = {2017},
+  doi       = {10.1145/3009837.3009858}
+}
+
+@misc{costa2025securing,
+  author        = {Costa, Manuel and K{\"o}pf, Boris and Kolluri, Aashish and Paverd, Andrew and Russinovich, Mark and Salem, Ahmed and Tople, Shruti and Wutschitz, Lukas and Zanella-B{\'e}guelin, Santiago},
+  title         = {Securing {AI} Agents with Information-Flow Control},
+  year          = {2025},
+  eprint        = {2505.23643},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  doi           = {10.48550/arXiv.2505.23643},
+  note          = {arXiv preprint (v2, 3 September 2025)}
+}
+
+@inproceedings{debenedetti2024agentdojo,
+  author    = {Debenedetti, Edoardo and Zhang, Jie and Balunovi{\'c}, Mislav and Beurer-Kellner, Luca and Fischer, Marc and Tram{\`e}r, Florian},
+  title     = {{AgentDojo}: A Dynamic Environment to Evaluate Prompt Injection Attacks and Defenses for {LLM} Agents},
+  booktitle = {Advances in Neural Information Processing Systems 37 ({NeurIPS} 2024), Datasets and Benchmarks Track},
+  publisher = {Neural Information Processing Systems Foundation, Inc.},
+  pages     = {82895--82920},
+  year      = {2024},
+  doi       = {10.52202/079017-2636},
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2024/hash/97091a5177d8dc64b1da8bf3e1f6fb54-Abstract-Datasets_and_Benchmarks_Track.html}
+}
+
+@inproceedings{debenedetti2026defeating,
+  author    = {Debenedetti, Edoardo and Shumailov, Ilia and Fan, Tianqi and Hayes, Jamie and Carlini, Nicholas and Fabian, Daniel and Kern, Christoph and Shi, Chongyang and Terzis, Andreas and Tram{\`e}r, Florian},
+  title     = {Defeating Prompt Injections by Design},
+  booktitle = {2026 {IEEE} Conference on Secure and Trustworthy Machine Learning ({SaTML})},
+  publisher = {IEEE},
+  pages     = {587--618},
+  year      = {2026},
+  doi       = {10.1109/SaTML68715.2026.00040},
+  note      = {Preprint: arXiv:2503.18813}
+}
+
+@inproceedings{doychev2013cacheaudit,
+  author    = {Doychev, Goran and Feld, Dominik and K{\"o}pf, Boris and Mauborgne, Laurent and Reineke, Jan},
+  title     = {{CacheAudit}: A Tool for the Static Analysis of Cache Side Channels},
+  booktitle = {Proceedings of the 22nd {USENIX} Security Symposium ({USENIX} Security 13)},
+  publisher = {USENIX Association},
+  address   = {Washington, D.C., USA},
+  pages     = {431--446},
+  year      = {2013},
+  url       = {https://www.usenix.org/conference/usenixsecurity13/technical-sessions/paper/doychev}
+}
+
+@article{doychev2015cacheaudit,
+  author  = {Doychev, Goran and K{\"o}pf, Boris and Mauborgne, Laurent and Reineke, Jan},
+  title   = {{CacheAudit}: A Tool for the Static Analysis of Cache Side Channels},
+  journal = {ACM Transactions on Information and System Security},
+  volume  = {18},
+  number  = {1},
+  pages   = {1--32},
+  year    = {2015},
+  doi     = {10.1145/2756550}
+}
+
+@inproceedings{espinoza2012min,
+  author    = {Espinoza, Barbara and Smith, Geoffrey},
+  title     = {Min-Entropy Leakage of Channels in Cascade},
+  booktitle = {Formal Aspects of Security and Trust: 8th International Workshop, {FAST} 2011, Leuven, Belgium, September 12--14, 2011, Revised Selected Papers},
+  editor    = {Barthe, Gilles and Datta, Anupam and Etalle, Sandro},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {7140},
+  publisher = {Springer},
+  address   = {Berlin, Heidelberg},
+  pages     = {70--84},
+  year      = {2012},
+  doi       = {10.1007/978-3-642-29420-4_5}
+}
+
+@inproceedings{greshake2023not,
+  author    = {Greshake, Kai and Abdelnabi, Sahar and Mishra, Shailesh and Endres, Christoph and Holz, Thorsten and Fritz, Mario},
+  title     = {Not What You've Signed Up For: Compromising Real-World {LLM}-Integrated Applications with Indirect Prompt Injection},
+  booktitle = {Proceedings of the 16th {ACM} Workshop on Artificial Intelligence and Security ({AISec} '23)},
+  publisher = {ACM},
+  address   = {New York, NY, USA},
+  pages     = {79--90},
+  year      = {2023},
+  doi       = {10.1145/3605764.3623985}
+}
+
+@inproceedings{gu2025auditing,
+  author    = {Gu, Chenchen and Li, Xiang Lisa and Kuditipudi, Rohith and Liang, Percy and Hashimoto, Tatsunori},
+  title     = {Auditing Prompt Caching in Language Model {APIs}},
+  booktitle = {Proceedings of the 42nd International Conference on Machine Learning ({ICML} 2025)},
+  series    = {Proceedings of Machine Learning Research},
+  volume    = {267},
+  publisher = {PMLR},
+  pages     = {20477--20496},
+  year      = {2025},
+  url       = {https://proceedings.mlr.press/v267/gu25b.html},
+  note      = {Preprint: arXiv:2502.07776}
+}
+
+@article{hoffmann2012multivariate,
+  author  = {Hoffmann, Jan and Aehlig, Klaus and Hofmann, Martin},
+  title   = {Multivariate Amortized Resource Analysis},
+  journal = {ACM Transactions on Programming Languages and Systems},
+  volume  = {34},
+  number  = {3},
+  pages   = {14:1--14:62},
+  year    = {2012},
+  doi     = {10.1145/2362389.2362393}
+}
+
+@inproceedings{kahn2020exponential,
+  author    = {Kahn, David M. and Hoffmann, Jan},
+  title     = {Exponential Automatic Amortized Resource Analysis},
+  booktitle = {Foundations of Software Science and Computation Structures: 23rd International Conference, {FOSSACS} 2020, Held as Part of the European Joint Conferences on Theory and Practice of Software, {ETAPS} 2020, Dublin, Ireland, April 25--30, 2020, Proceedings},
+  editor    = {Goubault-Larrecq, Jean and K{\"o}nig, Barbara},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {12077},
+  publisher = {Springer},
+  address   = {Cham},
+  pages     = {359--380},
+  year      = {2020},
+  doi       = {10.1007/978-3-030-45231-5_19}
+}
+
+@inproceedings{kopf2007information,
+  author    = {K{\"o}pf, Boris and Basin, David},
+  title     = {An Information-Theoretic Model for Adaptive Side-Channel Attacks},
+  booktitle = {Proceedings of the 14th {ACM} Conference on Computer and Communications Security ({CCS} '07)},
+  publisher = {ACM},
+  address   = {New York, NY, USA},
+  pages     = {286--296},
+  year      = {2007},
+  doi       = {10.1145/1315245.1315282}
+}
+
+@misc{mcdonald2025whisper,
+  author        = {McDonald, Geoff and {Bar Or}, Jonathan},
+  title         = {{Whisper Leak}: A Side-Channel Attack on Large Language Models},
+  year          = {2025},
+  eprint        = {2511.03675},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  doi           = {10.48550/arXiv.2511.03675},
+  note          = {arXiv preprint (v1, 5 November 2025)}
+}
+
+@inproceedings{molnar2006program,
+  author    = {Molnar, David and Piotrowski, Matt and Schultz, David and Wagner, David},
+  title     = {The Program Counter Security Model: Automatic Detection and Removal of Control-Flow Side Channel Attacks},
+  booktitle = {Information Security and Cryptology -- {ICISC} 2005: 8th International Conference, Seoul, Korea, December 1--2, 2005, Revised Selected Papers},
+  editor    = {Won, Dong Ho and Kim, Seungjoo},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {3935},
+  publisher = {Springer},
+  address   = {Berlin, Heidelberg},
+  pages     = {156--168},
+  year      = {2006},
+  doi       = {10.1007/11734727_14}
+}
+
+@inproceedings{ngo2017verifying,
+  author    = {Ngo, Van Chan and Dehesa-Azuara, Mario and Fredrikson, Matthew and Hoffmann, Jan},
+  title     = {Verifying and Synthesizing Constant-Resource Implementations with Types},
+  booktitle = {2017 {IEEE} Symposium on Security and Privacy ({SP})},
+  publisher = {IEEE},
+  pages     = {710--728},
+  year      = {2017},
+  doi       = {10.1109/SP.2017.53},
+  note      = {Extended version: arXiv:1801.01896}
+}
+
+@inproceedings{petrov2023language,
+  author    = {Petrov, Aleksandar and {La Malfa}, Emanuele and Torr, Philip and Bibi, Adel},
+  title     = {Language Model Tokenizers Introduce Unfairness Between Languages},
+  booktitle = {Advances in Neural Information Processing Systems 36 ({NeurIPS} 2023)},
+  publisher = {Neural Information Processing Systems Foundation, Inc.},
+  pages     = {36963--36990},
+  year      = {2023},
+  doi       = {10.52202/075280-1608},
+  url       = {https://proceedings.neurips.cc/paper_files/paper/2023/hash/74bb24dca8334adce292883b4b651eda-Abstract-Conference.html}
+}
+
+@article{sabelfeld2003language,
+  author  = {Sabelfeld, Andrei and Myers, Andrew C.},
+  title   = {Language-Based Information-Flow Security},
+  journal = {IEEE Journal on Selected Areas in Communications},
+  volume  = {21},
+  number  = {1},
+  pages   = {5--19},
+  year    = {2003},
+  doi     = {10.1109/JSAC.2002.806121}
+}
+
+@inproceedings{smith2009foundations,
+  author    = {Smith, Geoffrey},
+  title     = {On the Foundations of Quantitative Information Flow},
+  booktitle = {Foundations of Software Science and Computational Structures: 12th International Conference, {FOSSACS} 2009, Held as Part of the Joint European Conferences on Theory and Practice of Software, {ETAPS} 2009, York, {UK}, March 22--29, 2009, Proceedings},
+  editor    = {de Alfaro, Luca},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {5504},
+  publisher = {Springer},
+  address   = {Berlin, Heidelberg},
+  pages     = {288--302},
+  year      = {2009},
+  doi       = {10.1007/978-3-642-00596-1_21}
+}
+
+% Published author order is Volpano, Irvine, Smith (publisher record, dblp key
+% VolpanoIS96), although the paper is often cited as "Volpano, Smith, Irvine".
+@article{volpano1996sound,
+  author  = {Volpano, Dennis and Irvine, Cynthia and Smith, Geoffrey},
+  title   = {A Sound Type System for Secure Flow Analysis},
+  journal = {Journal of Computer Security},
+  volume  = {4},
+  number  = {2--3},
+  pages   = {167--187},
+  year    = {1996},
+  doi     = {10.3233/JCS-1996-42-304}
+}
+
+@inproceedings{weiss2024what,
+  author    = {Weiss, Roy and Ayzenshteyn, Daniel and Amit, Guy and Mirsky, Yisroel},
+  title     = {What Was Your Prompt? {A} Remote Keylogging Attack on {AI} Assistants},
+  booktitle = {Proceedings of the 33rd {USENIX} Security Symposium ({USENIX} Security 24)},
+  publisher = {USENIX Association},
+  address   = {Philadelphia, PA, USA},
+  pages     = {3367--3384},
+  year      = {2024},
+  url       = {https://www.usenix.org/conference/usenixsecurity24/presentation/weiss}
+}
+
+@misc{zhang2024time,
+  author        = {Zhang, Tianchen and Saileshwar, Gururaj and Lie, David},
+  title         = {Time Will Tell: Timing Side Channels via Output Token Count in Large Language Models},
+  year          = {2024},
+  eprint        = {2412.15431},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LG},
+  doi           = {10.48550/arXiv.2412.15431},
+  note          = {arXiv preprint (v1, 19 December 2024)}
+}
+
+% --- 2026 arXiv-only items (existence, ids, titles and authors confirmed via the
+% --- arXiv API on 2026-09-25; no peer-reviewed version found).
+% Family/given split of "Basavesh Ammanaghatta Shivakumar" is not stated in the
+% source; confirm with the authors if initials matter.
+@misc{ammanaghattashivakumar2026agentflow,
+  author        = {{Ammanaghatta Shivakumar}, Basavesh and Priya, Swarn and Gao, Peng},
+  title         = {{AgentFlow}: A Flow-Centric Policy Language and Framework for Securing {LLM} Agent Systems},
+  year          = {2026},
+  eprint        = {2608.22868},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  note          = {arXiv preprint (v1, 24 August 2026)}
+}
+
+@misc{cai2026ghost,
+  author        = {Cai, Yuandao and Tang, Wensheng and Wen, Cheng and Qin, Shengchao},
+  title         = {Ghost in the Agent: Redefining Information Flow Tracking for {LLM} Agents},
+  year          = {2026},
+  eprint        = {2604.23374},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CR},
+  doi           = {10.48550/arXiv.2604.23374},
+  note          = {arXiv preprint (v1, 25 April 2026)}
+}
+
+% "Vaisakh M A" is kept as printed on the paper (braced so it is not abbreviated).
+@misc{xavier2026agentproof,
+  author        = {Xavier, Melwin and {Vaisakh M A} and Jolly, Melveena and Xavier, Midhun},
+  title         = {{Agentproof}: Static Verification of Agent Workflow Graphs},
+  year          = {2026},
+  eprint        = {2603.20356},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.LO},
+  doi           = {10.48550/arXiv.2603.20356},
+  note          = {arXiv preprint (v1, 20 March 2026)}
+}
+
+@misc{khan2026token,
+  author        = {Khan, Sajjad},
+  title         = {{Token Budgets}: An Empirical Catalog of 63 {LLM}-Agent Budget-Overrun Incidents, with an Affine-Typed {Rust} Mitigation as a Case Study},
+  year          = {2026},
+  eprint        = {2606.04056},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.SE},
+  doi           = {10.48550/arXiv.2606.04056},
+  note          = {arXiv preprint (v1, 2 June 2026)}
+}
+
+% ======================================================================
+% B. Additions requested for the SCP submission
+% ======================================================================
+
+@article{ali2023cost,
+  author  = {Ali, Muhammad Rizwan and Lamo, Yngve and Pun, Violet Ka I},
+  title   = {Cost Analysis for a Resource Sensitive Workflow Modelling Language},
+  journal = {Science of Computer Programming},
+  volume  = {225},
+  pages   = {102896},
+  year    = {2023},
+  doi     = {10.1016/j.scico.2022.102896}
+}
+
+@article{manzino2026haskell,
+  author  = {Manzino, Cecilia and de Latorre, Gonzalo},
+  title   = {A {Haskell}-Embedded {DSL} for Secure Information-Flow},
+  journal = {Science of Computer Programming},
+  volume  = {247},
+  pages   = {103351},
+  year    = {2026},
+  doi     = {10.1016/j.scico.2025.103351}
+}
+
+% Foundational information-flow control
+@article{denning1976lattice,
+  author  = {Denning, Dorothy E.},
+  title   = {A Lattice Model of Secure Information Flow},
+  journal = {Communications of the ACM},
+  volume  = {19},
+  number  = {5},
+  pages   = {236--243},
+  year    = {1976},
+  doi     = {10.1145/360051.360056}
+}
+
+@article{denning1977certification,
+  author  = {Denning, Dorothy E. and Denning, Peter J.},
+  title   = {Certification of Programs for Secure Information Flow},
+  journal = {Communications of the ACM},
+  volume  = {20},
+  number  = {7},
+  pages   = {504--513},
+  year    = {1977},
+  doi     = {10.1145/359636.359712}
+}
+
+% Publisher metadata (IEEE/Crossref) records only the first page (11); the end
+% page 20 is the conventional range and could not be confirmed (see REPORT.md).
+@inproceedings{goguen1982security,
+  author    = {Goguen, Joseph A. and Meseguer, Jos{\'e}},
+  title     = {Security Policies and Security Models},
+  booktitle = {1982 {IEEE} Symposium on Security and Privacy},
+  publisher = {IEEE},
+  pages     = {11--20},
+  year      = {1982},
+  doi       = {10.1109/SP.1982.10014}
+}
+
+% Tokenizers, model and corpora used by the evaluation
+@misc{tiktoken,
+  author       = {{OpenAI}},
+  title        = {tiktoken: A Fast {BPE} Tokeniser for Use with {OpenAI}'s Models},
+  howpublished = {\url{https://github.com/openai/tiktoken}},
+  note         = {Software, version 0.14.0 (released 17 August 2026); encodings \texttt{r50k\_base}, \texttt{cl100k\_base}, \texttt{o200k\_base}},
+  year         = {2026}
+}
+
+@misc{hftokenizers,
+  author       = {{Hugging Face}},
+  title        = {Tokenizers: Fast State-of-the-Art Tokenizers Optimized for Research and Production},
+  howpublished = {\url{https://github.com/huggingface/tokenizers}},
+  note         = {Software, version 0.20.3 (released 5 November 2024), the version used in this study},
+  year         = {2024}
+}
+
+@inproceedings{wolf2020transformers,
+  author    = {Wolf, Thomas and Debut, Lysandre and Sanh, Victor and Chaumond, Julien and Delangue, Clement and Moi, Anthony and Cistac, Pierric and Rault, Tim and Louf, Remi and Funtowicz, Morgan and Davison, Joe and Shleifer, Sam and von Platen, Patrick and Ma, Clara and Jernite, Yacine and Plu, Julien and Xu, Canwen and {Le Scao}, Teven and Gugger, Sylvain and Drame, Mariama and Lhoest, Quentin and Rush, Alexander},
+  title     = {Transformers: State-of-the-Art Natural Language Processing},
+  booktitle = {Proceedings of the 2020 Conference on Empirical Methods in Natural Language Processing: System Demonstrations},
+  publisher = {Association for Computational Linguistics},
+  address   = {Online},
+  pages     = {38--45},
+  year      = {2020},
+  doi       = {10.18653/v1/2020.emnlp-demos.6},
+  note      = {Software version used: \texttt{transformers} 4.46.3}
+}
+
+% Peer-reviewed (COLM 2025) version; the arXiv v1 title ends "... of a Small
+% Language Model" and lists some authors in a different order.
+@inproceedings{allal2025smollm2,
+  author    = {{Ben Allal}, Loubna and Lozhkov, Anton and Bakouch, Elie and {Mart{\'\i}n Bl{\'a}zquez}, Gabriel and Penedo, Guilherme and Tunstall, Lewis and Marafioti, Andr{\'e}s and {Piqueres Lajar{\'\i}n}, Agust{\'\i}n and Kydl{\'\i}{\v{c}}ek, Hynek and Srivastav, Vaibhav and Lochner, Joshua and Fahlgren, Caleb and Nguyen, Xuan-Son and Burtenshaw, Ben and Fourrier, Cl{\'e}mentine and Zhao, Haojun and Larcher, Hugo and Morlon, Mathieu and Zakka, Cyril and Raffel, Colin and von Werra, Leandro and Wolf, Thomas},
+  title     = {{SmolLM2}: When Smol Goes Big --- Data-Centric Training of a Fully Open Small Language Model},
+  booktitle = {Second Conference on Language Modeling ({COLM} 2025)},
+  year      = {2025},
+  url       = {https://openreview.net/forum?id=3JiCl2A14H},
+  note      = {Preprint: arXiv:2502.02737}
+}
+
+@misc{smollm2instruct135m,
+  author       = {{Hugging Face}},
+  title        = {{SmolLM2-135M-Instruct}},
+  howpublished = {\url{https://huggingface.co/HuggingFaceTB/SmolLM2-135M-Instruct}},
+  note         = {Model weights and tokenizer, revision \texttt{12fd25f77366fa6b3b4b768ec3050bf629380bac} (last modified 22 September 2025); Apache-2.0},
+  year         = {2025}
+}
+
+@misc{udhr2corpus,
+  author       = {{NLTK Project}},
+  title        = {{Universal Declaration of Human Rights} Corpus ({Unicode} Version), {NLTK} Data Package \texttt{udhr2}},
+  howpublished = {\url{https://github.com/nltk/nltk_data/blob/550b6625bcef1f2abff2ff770a5a0d272c9c6b2a/packages/corpora/udhr2.zip}},
+  note         = {nltk\_data commit 550b6625bcef1f2abff2ff770a5a0d272c9c6b2a (1 July 2026), SHA-256 0796c314b09a930c989c6f9d93d226af9af13feccd88496e196c743dd266c7f3; 388 texts from the {Unicode} Consortium's ``{UDHR} in {Unicode}'' project (no longer hosted by the Consortium since January 2024); public domain},
+  year         = {2026}
+}
+
+@techreport{uax15,
+  author      = {Whistler, Ken},
+  title       = {Unicode Normalization Forms},
+  institution = {The Unicode Consortium},
+  type        = {Unicode Standard Annex},
+  number      = {\#15, Revision 58 (Unicode 18.0.0)},
+  year        = {2026},
+  month       = aug,
+  url         = {https://www.unicode.org/reports/tr15/tr15-58.html},
+  note        = {Edited by K. Whistler. The {NFC} expansion bound is stated in Section~9, ``Detecting Normalization Forms''}
+}
+
+@misc{coq818,
+  author       = {{The Coq Development Team}},
+  title        = {The {Coq} Proof Assistant, Version 8.18},
+  howpublished = {Zenodo},
+  year         = {2023},
+  month        = sep,
+  doi          = {10.5281/zenodo.11551177},
+  note         = {Release V8.18.0}
+}
+
+% Pinned sources of the real-workflow corpus (commits and dates from the pinned clones)
+@misc{agentdojorepo,
+  key          = {AgentDojo},
+  title        = {{AgentDojo} (source code and recorded runs)},
+  howpublished = {\url{https://github.com/ethz-spylab/agentdojo}},
+  note         = {Commit 089ed468cf3ed0322acc66b0211f26d9d90dbf60 (2 June 2026)},
+  year         = {2026}
+}
+
+@misc{langgraphrepo,
+  key          = {LangGraph},
+  title        = {{LangGraph}},
+  howpublished = {\url{https://github.com/langchain-ai/langgraph}},
+  note         = {Tutorial notebooks under \texttt{docs/docs/tutorials/}, commit 23961cff61a42b52525f3b20b4094d8d2fba1744 (9 January 2026)},
+  year         = {2026}
+}
+
+@misc{claudecookbooks,
+  author       = {{Anthropic}},
+  title        = {{Claude Cookbooks} (formerly {Anthropic Cookbook})},
+  howpublished = {\url{https://github.com/anthropics/claude-cookbooks}},
+  note         = {Agent pattern notebooks under \texttt{patterns/agents/}, commit 813fbeec03cdedfda7808529438d1c7af71f26eb (24 September 2026); repository formerly \texttt{anthropics/anthropic-cookbook}},
+  year         = {2026}
+}
+
+% ======================================================================
+% C. Suggested replacements/additions for claims the current citations do not
+%    fully support (see REPORT.md, "Claim discrepancies"). Metadata verified;
+%    for C.3/C.4 the specific theorem was NOT checked against the full text.
+% ======================================================================
+
+@inproceedings{hofmann2003static,
+  author    = {Hofmann, Martin and Jost, Steffen},
+  title     = {Static Prediction of Heap Space Usage for First-Order Functional Programs},
+  booktitle = {Proceedings of the 30th {ACM} {SIGPLAN-SIGACT} Symposium on Principles of Programming Languages ({POPL} '03)},
+  publisher = {ACM},
+  address   = {New York, NY, USA},
+  pages     = {185--197},
+  year      = {2003},
+  doi       = {10.1145/604131.604148}
+}
+
+@inproceedings{hoffmann2017towards,
+  author    = {Hoffmann, Jan and Das, Ankush and Weng, Shu-Chun},
+  title     = {Towards Automatic Resource Bound Analysis for {OCaml}},
+  booktitle = {Proceedings of the 44th {ACM} {SIGPLAN} Symposium on Principles of Programming Languages ({POPL} '17)},
+  publisher = {ACM},
+  address   = {New York, NY, USA},
+  pages     = {359--373},
+  year      = {2017},
+  doi       = {10.1145/3009837.3009842}
+}
+
+@article{braun2009quantitative,
+  author  = {Braun, Christelle and Chatzikokolakis, Konstantinos and Palamidessi, Catuscia},
+  title   = {Quantitative Notions of Leakage for One-try Attacks},
+  journal = {Electronic Notes in Theoretical Computer Science},
+  volume  = {249},
+  pages   = {75--91},
+  year    = {2009},
+  doi     = {10.1016/j.entcs.2009.07.085}
+}
+
+@inproceedings{kopf2010vulnerability,
+  author    = {K{\"o}pf, Boris and Smith, Geoffrey},
+  title     = {Vulnerability Bounds and Leakage Resilience of Blinded Cryptography under Timing Attacks},
+  booktitle = {2010 23rd {IEEE} Computer Security Foundations Symposium ({CSF})},
+  publisher = {IEEE},
+  pages     = {44--56},
+  year      = {2010},
+  doi       = {10.1109/CSF.2010.11}
+}
+
+% ---- prior-art additions ----
+
+@article{BenSaid2020Orchestration,
+  author  = {Ben Said, Najah and Cristescu, Ioana},
+  title   = {End-to-end information flow security for web services orchestration},
+  journal = {Science of Computer Programming},
+  volume  = {187},
+  pages   = {102376},
+  year    = {2020},
+  doi     = {10.1016/j.scico.2019.102376}
+}
+
+% CORE -- self-composition verification of side-channel (constant-time) policies (SCP)
+
+@article{BacelarAlmeida2013SelfComp,
+  author  = {Bacelar Almeida, Jos{\'e} and Barbosa, Manuel and Pinto, Jorge Sousa and Vieira, B{\'a}rbara},
+  title   = {Formal verification of side-channel countermeasures using self-composition},
+  journal = {Science of Computer Programming},
+  volume  = {78},
+  number  = {7},
+  pages   = {796--812},
+  year    = {2013},
+  doi     = {10.1016/j.scico.2011.10.008}
+}
+
+% CORE -- DSL whose secret/public type system rules out timing channels (SCP)
+
+@article{Mogensen2022Hermes,
+  author  = {Mogensen, Torben {\AE}gidius},
+  title   = {Hermes: A reversible language for lightweight encryption},
+  journal = {Science of Computer Programming},
+  volume  = {215},
+  pages   = {102746},
+  year    = {2022},
+  doi     = {10.1016/j.scico.2021.102746}
+}
+
+% CORE -- product programs / relational program logics, 2-safety (JLAMP)
+
+@article{Barthe2016ProductPrograms,
+  author  = {Barthe, Gilles and Crespo, Juan Manuel and Kunz, C{\'e}sar},
+  title   = {Product programs and relational program logics},
+  journal = {Journal of Logical and Algebraic Methods in Programming},
+  volume  = {85},
+  number  = {5},
+  pages   = {847--859},
+  year    = {2016},
+  doi     = {10.1016/j.jlamp.2016.05.004}
+}
+
+% CORE -- mechanised (Rocq) static analysis of a coordination language, with an
+% extracted checker for exactly the judgement the soundness theorem is about (JLAMP)
+
+@article{Miculan2027Klaim,
+  author  = {Miculan, Marino},
+  title   = {{KLAIM}, certified: Mechanising flow logic for tuple-space coordination},
+  journal = {Journal of Logical and Algebraic Methods in Programming},
+  volume  = {152},
+  pages   = {101179},
+  year    = {2027},
+  note    = {In press; registered with Crossref September 2026},
+  doi     = {10.1016/j.jlamp.2026.101179}
+}
+
+% CORE -- static cost analysis with cost relations (COSTA) (Elsevier, TCS)
+
+@article{Albert2012CostBytecode,
+  author  = {Albert, Elvira and Arenas, Puri and Genaim, Samir and Puebla, Germ{\'a}n and Zanardini, Damiano},
+  title   = {Cost analysis of object-oriented bytecode programs},
+  journal = {Theoretical Computer Science},
+  volume  = {413},
+  number  = {1},
+  pages   = {142--159},
+  year    = {2012},
+  doi     = {10.1016/j.tcs.2011.07.009}
+}
+
+% OPT -- semantic (two-run) characterisation of secure information flow (SCP classic)
+
+@article{JoshiLeino2000,
+  author  = {Joshi, Rajeev and Leino, K. Rustan M.},
+  title   = {A semantic approach to secure information flow},
+  journal = {Science of Computer Programming},
+  volume  = {37},
+  number  = {1--3},
+  pages   = {113--138},
+  year    = {2000},
+  doi     = {10.1016/S0167-6423(99)00024-6}
+}
+
+% OPT -- injection prevented structurally by embedding the guest grammar (SCP)
+
+@article{Bravenboer2010Injection,
+  author  = {Bravenboer, Martin and Dolstra, Eelco and Visser, Eelco},
+  title   = {Preventing injection attacks with syntax embeddings},
+  journal = {Science of Computer Programming},
+  volume  = {75},
+  number  = {7},
+  pages   = {473--495},
+  year    = {2010},
+  doi     = {10.1016/j.scico.2009.05.004}
+}
+
+% OPT -- checkable certificates for worst-case execution time (abstraction-carrying code) (SCP)
+
+@article{Rodrigues2015CertWCET,
+  author  = {Rodrigues, V{\'i}tor and Akesson, Benny and Florido, M{\'a}rio and de Sousa, Sim{\~a}o Melo and Pedroso, Jo{\~a}o Pedro and Vasconcelos, Pedro},
+  title   = {Certifying execution time in multicores},
+  journal = {Science of Computer Programming},
+  volume  = {111},
+  pages   = {505--534},
+  year    = {2015},
+  doi     = {10.1016/j.scico.2015.06.006}
+}
+
+% OPT -- static QoS (incl. monetary cost) analysis of choreographic models (SCP)
+
+@article{LopezPombo2026MoCheQoS,
+  author  = {Lopez Pombo, Carlos G. and Mart{\'i}nez-Su{\~n}{\'e}, Agust{\'i}n E. and Tuosto, Emilio},
+  title   = {{MoCheQoS}: A tool for static analysis of {QoS} in communicating systems},
+  journal = {Science of Computer Programming},
+  volume  = {253},
+  pages   = {103501},
+  year    = {2026},
+  doi     = {10.1016/j.scico.2026.103501}
+}
+
+% ---------------------------------------------------------------------------
+% B. Seminal / expected non-SCP work
+% ---------------------------------------------------------------------------
+
+% CORE
+
+@inproceedings{Barthe2004SelfComposition,
+  author    = {Barthe, Gilles and D'Argenio, Pedro R. and Rezk, Tamara},
+  title     = {Secure information flow by self-composition},
+  booktitle = {Proceedings of the 17th IEEE Computer Security Foundations Workshop (CSFW)},
+  pages     = {100--114},
+  year      = {2004},
+  publisher = {IEEE},
+  doi       = {10.1109/CSFW.2004.1310735}
+}
+% (journal version, if preferred: Math. Struct. Comput. Sci. 21(6):1207--1252, 2011,
+%  doi:10.1017/S0960129511000193)
+
+% CORE
+
+@inproceedings{Terauchi2005Safety,
+  author    = {Terauchi, Tachio and Aiken, Alex},
+  title     = {Secure information flow as a safety problem},
+  booktitle = {Static Analysis (SAS 2005)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {3672},
+  pages     = {352--367},
+  publisher = {Springer},
+  year      = {2005},
+  doi       = {10.1007/11547662_24}
+}
+
+% CORE (no DOI: USENIX; metadata from the USENIX landing page)
+
+@inproceedings{Almeida2016ConstantTime,
+  author    = {Almeida, Jos{\'e} Bacelar and Barbosa, Manuel and Barthe, Gilles and Dupressoir, Fran{\c c}ois and Emmi, Michael},
+  title     = {Verifying constant-time implementations},
+  booktitle = {25th USENIX Security Symposium (USENIX Security 16)},
+  address   = {Austin, TX},
+  pages     = {53--70},
+  publisher = {USENIX Association},
+  year      = {2016},
+  isbn      = {978-1-931971-32-4},
+  url       = {https://www.usenix.org/conference/usenixsecurity16/technical-sessions/presentation/almeida}
+}
+
+% CORE
+
+@article{Myers2006Robust,
+  author  = {Myers, Andrew C. and Sabelfeld, Andrei and Zdancewic, Steve},
+  title   = {Enforcing robust declassification and qualified robustness},
+  journal = {Journal of Computer Security},
+  volume  = {14},
+  number  = {2},
+  pages   = {157--196},
+  year    = {2006},
+  doi     = {10.3233/JCS-2006-14203}
+}
+% (original: Zdancewic & Myers, Robust declassification, CSFW 2001, pp. 15--23,
+%  doi:10.1109/CSFW.2001.930133)
+
+% CORE
+
+@article{SabelfeldSands2009,
+  author  = {Sabelfeld, Andrei and Sands, David},
+  title   = {Declassification: Dimensions and principles},
+  journal = {Journal of Computer Security},
+  volume  = {17},
+  number  = {5},
+  pages   = {517--548},
+  year    = {2009},
+  doi     = {10.3233/JCS-2009-0352}
+}
+
+% OPT (cite together with Manzino2026EDSL if Delimited Release is named)
+
+@inproceedings{SabelfeldMyers2004Delimited,
+  author    = {Sabelfeld, Andrei and Myers, Andrew C.},
+  title     = {A model for delimited information release},
+  booktitle = {Software Security -- Theories and Systems (ISSS 2003)},
+  series    = {Lecture Notes in Computer Science},
+  volume    = {3233},
+  pages     = {174--191},
+  publisher = {Springer},
+  year      = {2004},
+  doi       = {10.1007/978-3-540-37621-7_9}
+}
+
+% OPT (for the observer-relative declassification future work, Sec. 12)
+
+@article{MyersLiskov2000DLM,
+  author  = {Myers, Andrew C. and Liskov, Barbara},
+  title   = {Protecting privacy using the decentralized label model},
+  journal = {ACM Transactions on Software Engineering and Methodology},
+  volume  = {9},
+  number  = {4},
+  pages   = {410--442},
+  year    = {2000},
+  doi     = {10.1145/363516.363526}
+}
+
+% CORE
+
+@article{Wegbreit1975,
+  author  = {Wegbreit, Ben},
+  title   = {Mechanical program analysis},
+  journal = {Communications of the ACM},
+  volume  = {18},
+  number  = {9},
+  pages   = {528--539},
+  year    = {1975},
+  doi     = {10.1145/361002.361016}
+}
+
+% OPT (origin of AARA; the draft cites only Hoffmann et al. 2012 and Kahn & Hoffmann 2020)
+
+@inproceedings{Necula1997PCC,
+  author    = {Necula, George C.},
+  title     = {Proof-carrying code},
+  booktitle = {Proceedings of the 24th ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages (POPL)},
+  pages     = {106--119},
+  year      = {1997},
+  publisher = {ACM},
+  doi       = {10.1145/263699.263712}
+}
+
+% CORE
+
+@inproceedings{CraryWeirich2000,
+  author    = {Crary, Karl and Weirich, Stephanie},
+  title     = {Resource bound certification},
+  booktitle = {Proceedings of the 27th ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages (POPL)},
+  pages     = {184--198},
+  year      = {2000},
+  publisher = {ACM},
+  doi       = {10.1145/325694.325716}
+}
+
+% OPT (relational cost analysis in an imperative setting; the draft claims RelCost
+% "has not been applied to this setting")
+
+@article{Qu2019ARel,
+  author  = {Qu, Weihao and Gaboardi, Marco and Garg, Deepak},
+  title   = {Relational cost analysis for functional-imperative programs},
+  journal = {Proceedings of the ACM on Programming Languages},
+  volume  = {3},
+  number  = {ICFP},
+  pages   = {1--29},
+  year    = {2019},
+  doi     = {10.1145/3341696}
+}
+
+% CORE -- languages for LLM programs
+
+@article{BeurerKellner2023LMQL,
+  author  = {Beurer-Kellner, Luca and Fischer, Marc and Vechev, Martin},
+  title   = {Prompting is programming: A query language for large language models},
+  journal = {Proceedings of the ACM on Programming Languages},
+  volume  = {7},
+  number  = {PLDI},
+  pages   = {1946--1969},
+  year    = {2023},
+  doi     = {10.1145/3591300}
+}
+
+% CORE (no DOI: ICLR 2024 / OpenReview sY5N0zY5Od; arXiv:2310.03714)
+
+@inproceedings{Khattab2024DSPy,
+  author    = {Khattab, Omar and Singhvi, Arnav and Maheshwari, Paridhi and Zhang, Zhiyuan and Santhanam, Keshav and Vardhamanan, Sri and Haq, Saiful and Sharma, Ashutosh and Joshi, Thomas T. and Moazam, Hanna and Miller, Heather and Zaharia, Matei and Potts, Christopher},
+  title     = {{DSPy}: Compiling declarative language model calls into self-improving pipelines},
+  booktitle = {The Twelfth International Conference on Learning Representations (ICLR)},
+  year      = {2024},
+  note      = {arXiv:2310.03714},
+  url       = {https://openreview.net/forum?id=sY5N0zY5Od}
+}
+
+% OPT (no DOI: NeurIPS 2024; arXiv:2312.07104)
+
+@inproceedings{Zheng2024SGLang,
+  author    = {Zheng, Lianmin and Yin, Liangsheng and Xie, Zhiqiang and Sun, Chuyue and Huang, Jeff and Yu, Cody Hao and Cao, Shiyi and Kozyrakis, Christos and Stoica, Ion and Gonzalez, Joseph E. and Barrett, Clark and Sheng, Ying},
+  title     = {{SGLang}: Efficient execution of structured language model programs},
+  booktitle = {Advances in Neural Information Processing Systems 37 (NeurIPS)},
+  year      = {2024},
+  note      = {arXiv:2312.07104}
+}

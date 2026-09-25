@@ -1,0 +1,81 @@
+\section{Mechanisation}\label{sec:mechanisation}
+
+We mechanised the core of the development in Coq~8.18~\cite{coq818}. The file
+\file{proofs/OrchLang.v} has about 1,100 lines, uses no axioms, and builds in a few
+seconds with \code{make proofs}, which also runs \code{Print Assumptions} on each
+main theorem; every one is reported closed under the global context.
+\Cref{tab:coq} maps the results of this paper to their Coq names.
+
+\begin{table}[t]
+\centering
+\caption{Results of this paper and their mechanisation. ``Pen and paper'' results have full
+proofs in \ref{app:proofs}.}
+\label{tab:coq}
+\footnotesize
+\begin{tabular}{@{}lll@{}}
+\toprule
+Result & Coq & Status \\
+\midrule
+\Cref{lem:coupling} (coupling validity) & & pen and paper \\
+\Cref{thm:size-blind} (size blindness) & \code{size\_blind} & mechanised \\
+\Cref{lem:equal} (equal signatures) & \code{equiv\_sound} & mechanised \\
+Resolution by a store's outcomes & \code{resolve\_exact} & mechanised \\
+\Cref{thm:ni} (noninterference) & \code{request\_trace\_noninterference}, & mechanised \\
+ & \code{observers\_agree} & \\
+\Cref{thm:leakage} (leakage bound) & & pen and paper \\
+\Cref{thm:observers} (coarser observers) & & pen and paper \\
+\Cref{thm:completeness} (completeness) & & pen and paper \\
+\Cref{thm:bound} (guaranteed bound) & \code{unary\_bound}, & mechanised \\
+ & \code{guaranteed\_bound} & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\paragraph{What is modelled} The development covers the core calculus of
+\cref{sec:providers}: calls, public and secret branches, and retry. The provider
+\code{Pi}, the validator \code{V}, the keying scheme, the tape and the guard
+predicates are section variables, so every theorem holds for all of them.
+\Cref{fig:coq} shows the mechanised statement of \cref{thm:ni}. The relation
+\code{bequiv} is a request-equivalence judgment: a derivation of it for the two
+resolved programs is the Coq counterpart of equal signatures, and
+\code{equiv\_sound} is \cref{lem:equal}. Strings are Coq strings, so length is a length
+in bytes. The store is flat, and block scoping appears as freshness side conditions
+of the judgment, which the implementation meets by giving every declaration its own
+identity. \Cref{thm:bound} is stated with the tokenizer contract, the decoding bound
+$\lambda$ and the provider's cap as hypotheses (\code{Pi\_cap}, \code{Pi\_bytes},
+\code{bin\_contract}), so the theorem is exactly as strong as those measured facts.
+
+\begin{figure}[t]
+\begin{lstlisting}[language={},numbers=none,xleftmargin=0pt,basicstyle=\ttfamily\scriptsize,
+  morekeywords={Theorem,forall,Proof,Qed}]
+Theorem request_trace_noninterference :
+  forall (b : block) (pubs : list var) (s1 s2 : store) (v1 v2 : guard -> bool) G',
+    (forall x, In x pubs -> s1 x = s2 x) ->   (* related stores           *)
+    agrees v1 s1 -> agrees v2 s2 ->           (* each vector is its store's *)
+    no_secret_assign_block b ->
+    bequiv (diag pubs) (resolve_block v1 b) (resolve_block v2 b) G' ->
+    forall h, snd (exec_block b s1 h) = snd (exec_block b s2 h).
+\end{lstlisting}
+\caption{The mechanised form of \cref{thm:ni}. If the two resolutions of \code{b} are
+request-equivalent, executions from related stores extend any history by the same events,
+for every provider \code{Pi}, validator \code{V}, keying scheme and tape, all of which are
+section variables. The corollary \code{observers\_agree} applies any function of the history.}
+\label{fig:coq}
+\end{figure}
+
+\paragraph{What is not mechanised} \Cref{lem:coupling} is not mechanised, so the Coq
+theorems are pointwise, per tape. \Cref{thm:leakage,thm:observers,thm:completeness}
+are pen and paper. That equal signatures, as the implementation computes them, give a
+derivation of \code{bequiv} is argued in the text rather than proved, and the C++
+implementation is not verified against the model; it is connected to it only by the
+tests and the evaluation of \cref{sec:evaluation}. A route to closing that gap is
+the one Miculan took for a flow logic of KLAIM: mechanise the analysis itself and
+extract a checker that decides exactly the judgment the theorems are
+about~\cite{Miculan2027Klaim}.
+
+\paragraph{A gap found} Mechanising \cref{thm:size-blind} exposed the flaw in our
+first definition of fresh twins that \cref{sec:theorem} describes. The pen-and-paper
+proof had assumed, without saying so, that a string absent from every constant is
+absent from every concatenation of constants. The Coq proof needs the stronger
+property, a character that occurs in no constant, in the lemma
+\code{marked\_request}, and stating that lemma is what revealed the gap.

@@ -1,0 +1,20 @@
+workflow Triage budget 1000000 {
+  input  ticket: text untrusted max_bytes 4096;
+  secret high_risk: boolean;
+  model  small = mock("openai/gpt-4o-mini") max_tokens 300
+                tokenizer o200k_base overhead 9;
+  model  large = mock("openai/gpt-4o") max_tokens 900
+                tokenizer o200k_base overhead 9;
+  prompt answer(t: text) -> text = "Answer this support ticket: {t}";
+  prompt check(r: text) -> text = "Check this reply for mistakes: {r}";
+  tool   send_reply(r: text);
+
+  let reply: text = call answer(ticket) using small;
+  if high_risk {
+    let second: text = call check(reply) using large;
+  }
+  endorse(reply) as vetted: text
+          because "a support agent approves every reply";
+  emit send_reply(vetted);
+  output reply;
+}

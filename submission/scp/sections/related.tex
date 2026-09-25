@@ -1,0 +1,107 @@
+\section{Related work}\label{sec:related}
+
+\paragraph{Resource-aware noninterference and relational cost} Ngo et al.\ and RelCost
+are the closest work and are discussed in \cref{sec:intro-classical,sec:classical}.
+Ngo et al.\ extend automatic amortised resource
+analysis~\cite{hofmann2003static,hoffmann2012multivariate}, and relational cost analysis
+has since been extended to functional-imperative programs~\cite{Qu2019ARel}. Relative to
+Ngo et al., our contribution is the theorem that indexing by size cannot be sound for
+opaque operations whose cost depends on content. Relative to RelCost, whose refinements
+can express the content comparison for a fixed pair of runs, it is the resolution over
+feasible secret outcomes, the observers, the leakage bound, and the application to LLM
+calls.
+
+\paragraph{Timing channels, constant time and cross-copying} Agat's transformation pads
+the arms of a secret branch so that they take equal time~\cite{agat2000transforming}.
+The program-counter security model of Molnar et al.\ asks that the sequence of executed
+instructions not depend on secrets, and their transformation removes secret-dependent
+branches~\cite{molnar2006program}. Constant-time programming forbids secret-dependent
+control flow and memory access altogether; it has been checked by
+self-composition~\cite{BacelarAlmeida2013SelfComp} and by product
+programs~\cite{Almeida2016ConstantTime}. Hermes, a
+reversible language for lightweight encryption published in this journal, uses secret and
+public types to make operations on secret data independent of it and so to prevent
+timing attacks~\cite{Mogensen2022Hermes}. In all of these the observable operation is
+fixed by the program: an instruction, a memory access, a step of time. For an LLM call,
+the provider fixes the cost from the request content, so ``the same operation'' has to
+mean the same request. OrchLang accepts secret branches whose arms send identical
+requests and bounds what the remaining differences reveal.
+
+\paragraph{Relational verification} Noninterference is a two-run
+property~\cite{goguen1982security}, and self-composition reduces it to a property of one
+program~\cite{Barthe2004SelfComposition,Terauchi2005Safety}; product programs connect
+such reductions to relational program logics~\cite{Barthe2016ProductPrograms}.
+Probabilistic relational Hoare logic~\cite{barthe2009formal} and coupling
+proofs~\cite{barthe2017coupling} relate the randomness of two runs. \Cref{lem:equal} is a
+derivation of this kind in which every call is related by the identity coupling, and
+comparing signatures is a self-composition that never builds the product program.
+
+\paragraph{Quantitative information flow} Min-entropy leakage~\cite{smith2009foundations},
+its behaviour under cascading~\cite{espinoza2012min}, bounds by the number of possible
+observations~\cite{kopf2010vulnerability,doychev2013cacheaudit}, and the partition model
+of adaptive attacks~\cite{kopf2007information} are what \cref{thm:leakage} uses.
+CacheAudit bounds cache leakage by counting observations~\cite{doychev2013cacheaudit}; we
+count signature classes, because the provider's noise makes counting observations
+useless.
+
+\paragraph{Information-flow typing and declassification} OrchLang's flow typing is
+conventional: the lattice model of Denning~\cite{denning1976lattice}, the type-based
+formulation of Volpano et al.~\cite{volpano1996sound}, and the standard two-point
+confidentiality and integrity lattices surveyed by Sabelfeld and
+Myers~\cite{sabelfeld2003language}. Its declassification is trusted, justified in writing
+and all or nothing: in the dimensions of Sabelfeld and Sands~\cite{SabelfeldSands2009} it
+constrains only where in the program a release happens, not what is released or by
+whom, and it offers no robustness guarantee~\cite{Myers2006Robust}. In this
+journal, Manzino and de Latorre embed a DSL in Haskell whose types enforce delimited
+release, so that declassification cannot reveal more than
+intended~\cite{manzino2026haskell}, and Ben Said and Cristescu verify noninterference of
+web-service compositions and generate secure orchestrators from
+them~\cite{BenSaid2020Orchestration}. Both control which data reach which party; neither
+addresses what the pattern of an orchestrator's requests reveals.
+
+\paragraph{Static cost analysis and certified bounds} Static cost analysis goes back to
+Wegbreit~\cite{Wegbreit1975}; COSTA derives cost relations from bytecode and solves them
+into closed-form bounds~\cite{Albert2012CostBytecode}, and Ali, Lamo and Pun apply the
+same method to Rpl, a resource-sensitive workflow modelling language, in this
+journal~\cite{ali2023cost}. In Rpl the cost of a step is declared by the program, so costs
+compose; in an LLM workflow a tokenizer decides it, and token counts do not compose
+(\cref{sec:bounds}). Proof-carrying code~\cite{Necula1997PCC} and resource bound
+certification~\cite{CraryWeirich2000} attach checkable evidence to a program. OrchLang's
+certificate is a report rather than such evidence, and a checker for it is future work.
+
+\paragraph{Languages for LLM programs} LMQL treats prompting as programming, with
+constraints on generation~\cite{BeurerKellner2023LMQL}, and DSPy compiles declarative
+pipelines of model calls and optimises their prompts~\cite{Khattab2024DSPy}. Both are
+more expressive than OrchLang, and neither checks information flow or certifies a token
+bound. OrchLang gives up expressiveness, including the agents that make up most of our
+exclusions, in exchange for decidable analyses.
+
+\paragraph{Security of LLM agents} Indirect prompt injection~\cite{greshake2023not} is what
+the integrity part of OrchLang's typing targets. CaMeL separates a planner from untrusted
+data and tracks provenance and capabilities in a custom
+interpreter~\cite{debenedetti2026defeating}; FIDES tracks confidentiality and integrity
+labels in an agent planner~\cite{costa2025securing}; Beurer-Kellner et al.\ catalogue
+design patterns for agents, among them the plan-then-execute pattern that our AgentDojo
+ports follow~\cite{beurerkellner2025design}. AgentFlow combines a flow-centric policy
+language with a runtime monitor, and explicitly leaves timing, token-length and
+resource-usage channels out of scope~\cite{ammanaghattashivakumar2026agentflow}; Ghost in
+the Agent tracks information flow through the execution traces of
+agents~\cite{cai2026ghost}; Agentproof verifies extracted workflow graphs
+statically~\cite{xavier2026agentproof}. None of these bounds resource use or reasons
+about what the content of requests reveals. AgentDojo~\cite{debenedetti2024agentdojo}
+supplies the tasks and recorded attacks of our evaluation.
+
+\paragraph{Side channels of LLM services} The token lengths of streamed responses leak
+response text to a network observer~\cite{weiss2024what}; output token counts leak
+information about inputs through timing~\cite{zhang2024time}; the sizes and timing of
+encrypted streams reveal prompt topics across 28 models~\cite{mcdonald2025whisper}; and
+prompt caches shared across users form a timing channel at seven
+providers~\cite{gu2025auditing}. These papers establish the channel for single calls. We
+study how a workflow's control flow feeds it.
+
+\paragraph{Budgets and tokenization} Token Budgets catalogues 63 budget-overrun incidents
+in LLM agents and enforces spending caps at run time, with affine types that prevent a
+budget from being copied or spent twice~\cite{khan2026token}; its over-reservation
+figures are measured on a different corpus and are not comparable with our slack.
+Tokenizers are known to charge languages very unequally~\cite{petrov2023language}; we
+measure what this means for sound bounds.

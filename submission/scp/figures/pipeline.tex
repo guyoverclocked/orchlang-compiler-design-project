@@ -1,39 +1,41 @@
-\documentclass[tikz,border=2pt]{standalone}
-\usepackage{lmodern}
-\usepackage[T1]{fontenc}
-\usetikzlibrary{positioning,arrows.meta,fit,calc,backgrounds}
+\documentclass[border=3pt]{standalone}
+\input{common}
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
 \begin{document}
 \begin{tikzpicture}[
-    font=\small,
-    stage/.style={draw, rounded corners=2pt, fill=gray!8, align=center,
-                  minimum height=10mm, inner sep=3pt, text width=24mm},
-    art/.style={draw, align=center, minimum height=8mm, inner sep=3pt, text width=20mm},
-    flow/.style={-{Stealth[length=2mm]}, thick},
-    check/.style={-{Stealth[length=2mm]}, dashed},
-    note/.style={font=\scriptsize, align=center, text=black!70}]
-  % front end
+    font=\small, >={Stealth[length=2mm]},
+    every node/.style={align=center},
+    stage/.style={draw, rounded corners=2pt, fill=oisky!12, minimum height=10mm,
+                  inner sep=3pt, text width=24mm},
+    art/.style={draw, fill=white, minimum height=9mm, inner sep=3pt, text width=17mm},
+    check/.style={->, dashed, black!70},
+    lab/.style={font=\scriptsize, text=black!70, fill=white, inner sep=1pt}]
   \node[art] (src) {workflow\\\texttt{.orch}};
-  \node[stage, right=6mm of src] (parse) {parser, binding\\identities};
-  \node[stage, right=6mm of parse] (types) {types and\\labels (\S\ref*{sec:language})};
-  % analyses
-  \node[stage, above right=2mm and 8mm of types] (cost) {cost bound\\(bytes, contracts)};
-  \node[stage, below right=2mm and 8mm of types] (rel) {request signatures\\and leakage};
-  \node[art, right=24mm of types] (cert) {certificate\\(JSON)};
-  \draw[flow] (src) -- (parse);
-  \draw[flow] (parse) -- (types);
-  \draw[flow] (types.east) -- ++(3mm,0) |- (cost.west);
-  \draw[flow] (types.east) -- ++(3mm,0) |- (rel.west);
-  \draw[flow] (cost.east) -- ++(3mm,0) |- (cert.west);
-  \draw[flow] (rel.east) -- ++(3mm,0) |- (cert.west);
+  \node[stage, right=5mm of src] (parse) {parser and\\binding identities};
+  \node[stage, right=5mm of parse] (labels) {types and\\labels};
+  \node[stage, above right=1mm and 7mm of labels] (cost) {token bounds:\\bytes, contracts};
+  \node[stage, below right=1mm and 7mm of labels] (rel) {request signatures\\and leakage};
+  \node[art, right=7mm of $(cost.east)!0.5!(rel.east)$] (cert) {certificate\\(JSON)};
+  \draw[->] (src) -- (parse);
+  \draw[->] (parse) -- (labels);
+  \draw[->] (labels.east) -- ++(4mm,0) |- (cost.west);
+  \draw[->] (labels.east) -- ++(4mm,0) |- (rel.west);
+  \draw[->] (cost.east) -- ++(4mm,0) |- (cert.west);
+  \draw[->] (rel.east) -- ++(4mm,0) |- (cert.west);
+  % the two analyses, grouped; the Coq model specifies both
+  \begin{scope}[on background layer]
+    \node[draw, dashed, rounded corners=3pt, black!45, inner sep=3pt, fit=(cost)(rel)] (analyses) {};
+  \end{scope}
+  \node[art, text width=50mm, above=5mm of analyses] (coq) {Coq model of the core calculus\\(Lemma 2; Theorems 1, 2 and 6)};
   % runtime and harness
-  \node[stage, below=16mm of rel, text width=38mm] (run) {runtime: content-dependent\\provider, three couplings,\\non-subadditive tokenizer};
-  \node[stage, left=10mm of run, text width=30mm] (harness) {harness\\\texttt{bench/evaluate.py}};
-  \node[art, right=10mm of run, text width=22mm] (real) {real tokenizers,\\a real model};
-  \draw[flow] (harness) -- node[note, above]{runs} (run);
-  \draw[flow] (real) -- node[note, above]{re-bill} (run);
-  \draw[check] (cert.south) |- node[note, pos=0.25, right]{checked\\against runs} ($(run.north east)+(0,2mm)$);
-  % Coq
-  \node[art, above=8mm of cost, text width=34mm] (coq) {Coq model: Lemma~2,\\Theorems 1, 5 and 6};
-  \draw[check] (coq) -- node[note, right]{same rules} (cost);
+  \node[stage, text width=50mm, below=15mm of rel, xshift=-22mm] (run) {runtime: content-dependent\\provider, three couplings,\\non-subadditive tokenizer};
+  \node[stage, text width=28mm, left=6mm of run] (harness) {harness\\\texttt{\footnotesize bench/evaluate.py}};
+  \node[art, text width=24mm, right=6mm of run] (real) {real tokenizers,\\a real model};
+  \draw[->] (harness) -- node[lab, above]{drives} (run);
+  \draw[->] (real) -- node[lab, above]{re-bill} (run);
+  \coordinate (turn) at ([yshift=-4mm]analyses.south -| run.north);
+  \draw[check] (cert.south) |- node[lab, right, pos=0.3]{each claim checked\\against the runs} (turn) -- (run.north);
+  \draw[check] (coq.south) -- node[lab, right]{specifies} (analyses.north);
 \end{tikzpicture}
 \end{document}

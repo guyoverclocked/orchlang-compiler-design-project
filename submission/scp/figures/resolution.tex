@@ -1,0 +1,28 @@
+\documentclass[border=3pt]{standalone}
+\input{common}
+\usepackage{amsmath}
+\hyphenpenalty=10000
+\newcommand{\Call}{\mathsf{Call}}
+\newcommand{\ptext}{\mathsf{text}}
+\newcommand{\pvar}{\mathsf{var}}
+\newcommand{\pres}{\mathsf{res}}
+\begin{document}
+\begin{tikzpicture}[
+    font=\small, >={Stealth[length=2mm]},
+    box/.style={draw, rounded corners=2pt, align=left, inner sep=5pt, fill=white},
+    head/.style={font=\small\bfseries, align=center},
+    lab/.style={font=\footnotesize, text=black!70}]
+  \node[box, fill=oisky!10, anchor=north west] (src) at (0,0) {%
+    \texttt{let reply = call answer(ticket) using small;}\\
+    \texttt{if high\_risk \{ let second = call check(reply) using large; \}}};
+  \node[box, fill=oigreen!8, anchor=north west] (tt) at ([xshift=34mm, yshift=-6mm]src.south west) {%
+    $\Call(\mathit{small}, [\ptext(\text{\texttt{"Answer this support ticket: "}}), \pvar(\texttt{ticket})])$\\[2pt]
+    $\Call(\mathit{large}, [\ptext(\text{\texttt{"Check this reply for mistakes: "}}), \pres(1)])$};
+  \node[box, fill=oiorange!10, anchor=north west] (ff) at ([yshift=-6mm]tt.south west) {%
+    $\Call(\mathit{small}, [\ptext(\text{\texttt{"Answer this support ticket: "}}), \pvar(\texttt{ticket})])$};
+  \coordinate (spine) at ([xshift=6mm]src.south west);
+  \draw[->] (spine) |- node[lab, above, pos=0.72]{$\texttt{high\_risk} = \mathsf{tt}$} (tt.west);
+  \draw[->] (spine) |- node[lab, above, pos=0.72]{$\texttt{high\_risk} = \mathsf{ff}$} (ff.west);
+  \node[lab, text=black, anchor=north west] at ([yshift=-3mm]ff.south west) {two distinct signatures, so $k = 2$: at most $\log_2 2 = 1$ bit};
+\end{tikzpicture}
+\end{document}

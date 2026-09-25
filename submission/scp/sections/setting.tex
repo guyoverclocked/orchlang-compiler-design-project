@@ -1,0 +1,134 @@
+\section{Setting}\label{sec:setting}
+
+This section fixes what a provider may do, how randomness enters an execution, and
+who observes it. The guarantees of \cref{sec:requests} are stated against these
+definitions; \cref{sec:excluded} lists what they leave out.
+
+\subsection{Workflows and providers}\label{sec:providers}
+
+The analyses work on a core calculus that keeps the parts of OrchLang that matter
+for requests. A \emph{model identity} $m$ stands for everything that determines an
+endpoint and its request parameters: provider, model name, output cap $\capm(m)$
+and client-side byte cap. A \emph{request expression} $(m, t_0, a_1, t_1, \dots,
+a_n, t_n)$ is a prompt template with its arguments, where the $t_j$ are literal text
+and each $a_j$ is a literal or a variable. Commands are
+\[
+c \;::=\; \mathsf{skip} \mid c_1;c_2 \mid x \leftarrow \mathsf{call}\ r \mid
+\mathsf{if}\ \pi(x)\ \mathsf{then}\ c_1\ \mathsf{else}\ c_2 \mid \mathsf{retry}\ n\ c
+\qquad (n \geq 1),
+\]
+where a guard $\pi$ is a predicate on strings drawn from the forms the surface
+language allows: \code{tokens(x)} compared with a constant, or the truth of a
+boolean. A store $\sigma$ maps variables to strings. Variables are partitioned into
+public inputs, secrets and local bindings; block scoping is a well-formedness
+condition that the type system checks.
+
+\begin{definition}[Provider]\label{def:provider}
+A \emph{provider} is a pair $(\Pi, V)$ of functions. For a model identity $m$, a
+request text $q$ and a random draw $\omega \in \Omega$, $\Pi(m, q, \omega)$ returns a
+response text and the number $o \leq \capm(m)$ of output tokens the provider
+reports. For the transcript $T$ of one retry attempt and a draw $\omega$,
+$V(T, \omega)$ decides whether the attempt succeeded. We write $\Prov$ for the class
+of all providers.
+\end{definition}
+
+Nothing else is assumed. $\Pi$ and $V$ may depend on every character of the
+request, which is the point: a real model answers what it is asked. A provider
+with state, such as a prompt cache or a rate limiter, is included as long as its
+state is a function of the requests it has received, since the results below all
+establish that two executions send the same requests.
+
+\subsection{Randomness and couplings}\label{sec:couplings}
+
+Randomness is supplied by a \emph{tape} $\rho : K \to \Omega$ of independent draws
+indexed by keys. Each random event of an execution (a call, or the decision that
+ends a retry attempt) reads the tape at a key that a \emph{keying scheme} computes
+from the execution so far. We use three schemes. The \emph{global} scheme keys an
+event by its position in the execution; the \emph{model} scheme keys a call by
+its model and the number of earlier calls to that model; the \emph{request}
+scheme keys a call by its model, its request text and the number of earlier calls
+that sent the same text. A scheme is \emph{fresh} if no two events of one
+execution read the same key. All three are fresh.
+
+\begin{lemma}[Coupling validity]\label{lem:coupling}
+Under a fresh keying scheme, the transcript of an execution driven by a random tape
+has the same distribution as the transcript of an execution in which every random
+event draws independently from $\Omega$.
+\end{lemma}
+
+\begin{proof}
+The $i$-th event reads $\rho(k_i)$, where $k_i$ is a function of the events before
+it and differs from $k_1, \dots, k_{i-1}$ by freshness. Conditioned on the first
+$i-1$ draws, which determine $k_i$, the entry $\rho(k_i)$ has not been read, so it
+is independent of them and distributed as $\Omega$. The transcript is the same
+function of the sequence of draws in both processes.
+\end{proof}
+
+Running two executions on the same tape is therefore a proof device, a coupling in
+the sense of probabilistic relational verification~\cite{barthe2009formal,barthe2017coupling}.
+It never changes what a single execution does. The mock runtime of
+\cref{sec:implementation} implements all three schemes, so that the evaluation can
+check each verdict under each coupling.
+
+\subsection{Observers and noninterference}\label{sec:observers}
+
+An execution produces a \emph{history}, the sequence of events
+$\mathsf{call}(m, q, \mathit{resp}, o)$ and $\mathsf{attempt}(b)$. An observer is a
+function of the history. \Cref{tab:observers} lists the four we consider; each is a
+function of the one above it, so security against an observer implies security
+against every observer below it. The billed input of a call is
+$\tau_m(q) + \mathit{env}_m(q)$ for the model's tokenizer $\tau_m$ and request
+envelope $\mathit{env}_m$, both arbitrary functions. A network observer who sees the
+sizes of encrypted requests and responses sees a function of the trace.
+
+\begin{table}[t]
+\centering
+\caption{Observers of an execution. Each row is a function of the row above it.}
+\label{tab:observers}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+Observer & What it sees \\
+\midrule
+\code{trace} & every event of the history, in order \\
+\code{provider} & for each provider, its own events, in order \\
+\code{bill} & for each model: number of calls, total input tokens, total output tokens \\
+\code{spend} & the sum over models of price times tokens \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Two stores are \emph{related}, $\sigma_1 \sim \sigma_2$, when they agree on every
+public input, including values that have been declassified.
+
+\begin{definition}[Noninterference]\label{def:ni}
+A program $c$ is \emph{$O$-noninterfering} for an observer $O$ if for all related
+stores $\sigma_1 \sim \sigma_2$ the distributions of $O(h_1)$ and $O(h_2)$ are equal,
+where $h_i$ is the history of $c$ from $\sigma_i$ with independent randomness. It is
+\emph{pointwise} $O$-noninterfering under a keying scheme if $O(h_1(\rho)) =
+O(h_2(\rho))$ for every tape $\rho$.
+\end{definition}
+
+This is the standard two-run formulation of noninterference~\cite{goguen1982security,sabelfeld2003language},
+with the observer made explicit. By \cref{lem:coupling}, pointwise noninterference
+under any fresh scheme implies noninterference. When a workflow must reveal
+something, we measure how much with min-entropy leakage~\cite{smith2009foundations}:
+the logarithm of the factor by which an observation increases an adversary's chance
+of guessing the secret in one try. The \emph{min-capacity} of a channel is its
+largest min-entropy leakage over all prior distributions of the secret, and a
+workflow leaks at most $b$ bits to $O$ if the channel from the secrets to $O$'s view
+has min-capacity at most $b$.
+
+\subsection{What the guarantee excludes}\label{sec:excluded}
+
+Timing is not part of the history, so it is covered only insofar as it is a
+function of the history, as with a cache keyed by requests. Providers whose
+randomness is correlated with the secret through a channel outside the program are
+excluded, as are observers who see more than the history, such as someone with
+access to a provider's internal state. Declassification and endorsement are
+trusted: the compiler records the justification the programmer writes but checks
+nothing about it, and it does not enforce robustness in the sense of Myers,
+Sabelfeld and Zdancewic~\cite{Myers2006Robust}, so untrusted text could in
+principle influence what a declassification releases. Declassification is also all
+or nothing. A value declassified so that one provider may read it becomes public to
+every observer, which is coarser than the setting deserves when the provider is
+trusted with content but the network is not (\cref{sec:conclusion}).

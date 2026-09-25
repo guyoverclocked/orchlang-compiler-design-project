@@ -1,0 +1,137 @@
+\section{Introduction}\label{sec:intro}
+
+\Cref{fig:triage} shows a customer-support workflow written in OrchLang, the
+language this paper is about. It answers a ticket with a small model. When the
+customer's account carries a private fraud-risk flag, \code{high\_risk}, it also
+asks a larger model to check the reply before the reply is sent. The flag never
+reaches a prompt, the workflow's output or the tool that sends the reply. An
+information-flow type system with a program-counter label therefore has nothing
+to object to: nothing observable at a sink depends on the flag.
+
+The requests do depend on it. For a customer with the flag set, the workflow makes
+two requests, one of them to a more expensive model; for everyone else it makes
+one. The provider bills per model, so a tenant's invoice shows which customers
+were checked. An observer of the encrypted traffic sees request and response
+sizes, from which token-length and packet-size attacks have recovered response
+text and prompt topics~\cite{weiss2024what,mcdonald2025whisper}, and a
+prompt cache shared between users turns the same requests into a timing
+channel~\cite{gu2025auditing}. Each of these observers sees a function of the
+workflow's requests and responses. If a secret changes the requests, it can change
+what they see, even when no secret value crosses any boundary.
+
+\begin{figure}[t]
+\lstinputlisting[basicstyle=\ttfamily\footnotesize]{examples/triage.orch}
+\vspace{-2pt}
+{\scriptsize\ttfamily\raggedright\hangindent=1.5em\input{sections/triage-output}\par}
+\caption{The running example and the compiler's verdict. The secret \code{high\_risk} never
+reaches a prompt, an output or a tool, yet it decides whether the second request is sent.
+With the header \code{workflow Triage budget 1000000 leaks 1} the same program is accepted
+with a warning that it reveals at most one bit (\cref{sec:quantitative}); without the
+\code{endorse} on lines 16--17 it is rejected earlier, because text derived from the untrusted
+ticket would drive the tool (\cref{sec:language}).}
+\label{fig:triage}
+\end{figure}
+
+\subsection{Why the classical treatment does not transfer}\label{sec:intro-classical}
+
+This is a resource side channel, and its classical treatment is mature. Ngo,
+Dehesa-Azuara, Fredrikson and Hoffmann define resource-aware noninterference and
+constant resource, and certify both by combining information-flow typing with
+automatic amortised resource analysis (AARA)~\cite{ngo2017verifying}. Çiçek,
+Barthe, Gaboardi, Garg and Hoffmann's RelCost bounds the difference in cost
+between two executions with relational refinement types~\cite{cicek2017relational}.
+Ngo et al.\ quantify over environments that agree on the sizes of secret data, and
+RelCost bounds cost differences in terms of sizes and of how much two inputs
+differ. Both charge each operation a cost that the program's data determine.
+
+The cost of an LLM call is not determined by sizes. Two requests of exactly the
+same length in tokens can receive answers of different lengths, because the model
+answers what it is asked. We ran a small instruction-tuned model on fifteen pairs
+of chat requests padded to identical token counts, and under a shared sampling
+seed all fifteen pairs produced outputs of different lengths
+(\cref{sec:eval-models}). Tokenizers disagree with sizes as well: under the
+fourteen tokenizers we measured, 84--92\% of random pairs of equal-length strings
+receive different token counts. One might hope to repair the classical analysis
+with a finer size measure. \Cref{sec:sizes} shows that no size measure suffices:
+an analysis that sees prompt text only through a size measure is either unsound
+for some provider whose answers depend on content, or it rejects a secret-guarded
+branch whose two arms are identical (\cref{thm:size-blind}, mechanised in Coq).
+Instantiating Ngo et al.'s framework with a call charged by the sizes of its
+request yields such an analysis. RelCost can do better, because it can also state
+that two runs with identical inputs have the same cost; charging a call a zero
+difference exactly when its two requests are identical is sound, and it is, in
+essence, the comparison we develop in \cref{sec:requests}. Ngo et al.'s
+quantitative bound fails for a different reason. It counts the possible values of
+a cost interval, and an LLM call may return anywhere from zero tokens to its cap,
+so the bound is at least $\log_2(\capm+1)$ bits for every workflow that calls a
+model, including those that provably leak nothing: 6.0 to 9.4 bits on the eleven
+leak-free workflows of our suite, where our bound is zero (\cref{sec:eval-leakage}).
+
+We learned this twice. The first version of our compiler accepted a secret branch
+when its arms had equal certified cost bounds, and an external audit showed that
+equal maxima do not make equal bills. The repair compared symbolic sizes of
+requests; our own audit then showed that equal sizes do not make equal bills
+either. \Cref{sec:failed} records both counterexamples, and \cref{thm:size-blind}
+explains why every repair of that kind fails.
+
+\subsection{Contributions}\label{sec:contributions}
+
+\begin{itemize}[leftmargin=*]
+\item \emph{A size-blindness theorem} (\cref{sec:sizes}). An analysis whose verdict
+  depends on the text of a program only through a size measure is unsound for
+  content-dependent providers or rejects identical arms, even if soundness is
+  demanded only for deterministic providers and only for the total count of output
+  tokens. We mechanised the theorem in Coq, and doing so exposed a gap in our own
+  pen-and-paper proof.
+\item \emph{Content-level request signatures} (\cref{sec:requests}). A branch
+  guarded by secret content is resolved for every outcome vector the secret can
+  realise, and the resulting request signatures are compared by content. If all
+  resolutions agree, the workflow is noninterfering for every provider, tokenizer
+  and observer of its transcript (\cref{thm:ni}, mechanised). If $k$ classes remain,
+  the channel from the secrets to any such observer has min-capacity at most
+  $\log_2 k$, across any number of adaptively chosen invocations
+  (\cref{thm:leakage}). Observers that see less than the full transcript admit
+  reordering of independent calls, except inside retry bodies (\cref{thm:observers}),
+  and a rejection is justified up to dead code (\cref{thm:completeness}).
+\item \emph{Token bounds that hold for real tokenizers} (\cref{sec:bounds}). Token
+  counts are not subadditive, a response can re-encode to nine tokens per generated
+  token, and six of fourteen tokenizers emit more tokens than bytes on some input.
+  We therefore compute the guaranteed input bound in bytes and convert it once per
+  request through per-tokenizer contracts generated from measurements. The bound
+  is proved relative to those contracts (\cref{thm:bound}, mechanised).
+\item \emph{An implementation and an evaluation able to fail} (\cref{sec:implementation,sec:evaluation}).
+  The compiler \code{orchc} implements both analyses. Its runtime includes a
+  provider whose answers depend on the request content, three ways of coupling
+  the randomness of two runs, and re-billing with real tokenizers. The evaluation
+  includes 30 real workflows ported from 52 candidates under a protocol that fixed
+  the labels before any port was written, with a held-out split checked once
+  against a frozen compiler.
+\end{itemize}
+
+We do not claim that combining information flow with resource analysis is
+new~\cite{ngo2017verifying}, nor relational cost analysis~\cite{cicek2017relational},
+nor leakage through the token counts, sizes and timing of LLM
+services~\cite{weiss2024what,zhang2024time,mcdonald2025whisper,gu2025auditing}.
+The flow part of OrchLang is conventional two-point confidentiality and integrity
+typing~\cite{denning1976lattice,volpano1996sound}; for agents, CaMeL and FIDES
+enforce richer policies at run time~\cite{debenedetti2026defeating,costa2025securing}.
+Accepting a secret branch because its arms perform the same observable operations
+goes back to Agat's cross-copying transformation~\cite{agat2000transforming}, and
+requiring the sequence of observable operations to be independent of the secret is
+the program-counter security model of Molnar et al.~\cite{molnar2006program}, with
+instructions replaced here by requests. What we add is the proof that, for LLM
+calls, ``the same operation'' has to mean the same request content, and an analysis
+built on that. Finally, the relational analysis never fires on the 30
+real workflows, because none has a secret in its source's threat model; its
+practical relevance rests on the threat model, not on deployed workflows
+(\cref{sec:eval-real}).
+
+\Cref{sec:setting} fixes the model of providers, randomness and observers.
+\Cref{sec:language} introduces OrchLang. \Cref{sec:sizes} presents the two rules
+that failed and the theorem behind them, and \cref{sec:requests} the analysis that
+replaces them. \Cref{sec:bounds} turns to token bounds, \cref{sec:mechanisation}
+to the Coq development and \cref{sec:implementation} to the compiler. We evaluate
+in \cref{sec:evaluation} and discuss related work in \cref{sec:related}.
+\Cref{sec:conclusion} states the limitations and \cref{sec:conclusion-final}
+concludes. The appendices contain the remaining proofs and the corpus of real
+workflows.

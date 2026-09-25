@@ -1,0 +1,175 @@
+\section{Why comparing sizes cannot work}\label{sec:sizes}
+
+A relational analysis for the channel of \cref{fig:triage} has to decide when two
+arms of a secret branch are ``the same'' from the point of view of an observer. We
+tried two answers before the one in \cref{sec:requests}. Both compared something
+coarser than what determines the observation, and this section proves that every
+answer of that kind fails.
+
+\subsection{Two rules that failed}\label{sec:failed}
+
+\paragraph{Equal bounds} The first rule accepted a secret branch when its arms had
+equal certified worst-case costs. An upper bound constrains a maximum, and two
+quantities with the same maximum need not be equal. The counterexample from the
+external audit is \code{if tokens(s) == 0 \{ call p(x) \} else \{ call p(y) \}},
+with \code{x} and \code{y} both declared to hold at most 100 tokens. Both arms have
+the same bound, 111 tokens, and the bills differ whenever \code{x} and \code{y}
+differ in length; in the audit they differed in 225 of 425 paired runs. The
+workflow is still in the regression suite, where it is rejected and still leaks
+under the runtime.
+
+\paragraph{Equal sizes} The repair abstracted each arm to a sequence of
+$\Call(m, \mathit{size})$ nodes, with sizes symbolic in the lengths of variables,
+and accepted a branch whose arms gave equal sequences. It was unsound for three
+independent reasons, each with a counterexample that the rule accepts and the
+runtime shows leaking.
+
+\begin{itemize}[leftmargin=*]
+\item \emph{Tokenizers.} Sizes were estimated tokens, $\bytes/4$. Real tokenizers
+  bill strings of equal size differently: \code{"aaaa"} is one token under
+  OpenAI's \code{r50k\_base} encoding and \code{"bbbb"} is two. Re-billing the
+  requests of the rule's four accepted counterexamples with \code{r50k\_base},
+  \code{cl100k\_base} and \code{o200k\_base}, with the provider's answers held fixed,
+  shows the bill moving with the secret for three of them.
+\item \emph{Providers.} Even an exact token count does not help, because the
+  provider answers the content of a request, not its size. The model of
+  \cref{sec:eval-models} answered all fifteen pairs of equal-length requests at
+  different lengths, 34.1 tokens apart on average.
+\item \emph{Names.} The rule compared models and prompts by their local names, so a
+  redeclaration of either inside one arm was invisible to it.
+\end{itemize}
+
+On the relational suite of \cref{sec:eval-rules}, the size rule accepts 12
+workflows, four of which leak, and the bounds rule accepts 15, six of which leak.
+
+\subsection{The size-blindness theorem}\label{sec:theorem}
+
+The two rules have something in common: whether they accept a program depends on
+its text constants only through a measure of their size. We show that no rule of
+that form can be both sound and useful.
+
+\begin{definition}[Size-indexed analysis]\label{def:size}
+A \emph{size measure} is a function $\mu : \Sigma^* \to \mathbb{N}$, such as the
+length in bytes, in characters, in estimated tokens, or in tokens under some
+tokenizer. A relational analysis $A$, a predicate on programs, is
+\emph{$\mu$-indexed} if $A(c) = A(c')$ whenever $c'$ is $c$ with one text constant
+$t$ replaced by a string $t'$ with $\mu(t') = \mu(t)$. The measure has \emph{fresh
+twins} if for every string $t$ with $\mu(t) > 0$ and every finite set $W$ of
+strings, some $t'$ with $\mu(t') = \mu(t)$ contains a character that occurs in no
+member of $W$.
+\end{definition}
+
+Every measure used in practice has fresh twins: strings of a given size can be
+built from characters the program never uses. Both withdrawn rules are
+$\mu$-indexed, the first for the measure behind its cost bounds and the second for
+$\bytes/4$.
+
+\begin{theorem}[Size blindness]\label{thm:size-blind}
+Let $\mu$ have fresh twins, and let $A$ be $\mu$-indexed and sound in the following
+weak sense: for every program $A$ accepts and every deterministic provider that
+respects the caps, any two related stores give the same total number of output
+tokens. Let $c$ be a well-typed program with a secret-guarded branch, both of whose
+outcomes are feasible, whose then-arm unconditionally calls a model $m$ with
+$\capm(m) > 0$ on a request that contains a text constant $t$ with $\mu(t) > 0$.
+Then $A$ rejects $c$, whatever the else-arm is, including a copy of the then-arm.
+\end{theorem}
+
+\begin{proof}
+Let $W$ be the set of text constants of $c$, and choose a fresh twin $t'$ of $t$
+that contains a character $\star$ occurring in no member of $W$. Let $c'$ be $c$
+with $t$ replaced by $t'$ in that one call. Since $A$ is $\mu$-indexed,
+$A(c') = A(c)$. Consider the deterministic provider $\Pi^\star$ that answers the empty
+string to every request, reports $\capm(m)$ output tokens when the request contains
+$\star$ and zero otherwise, and whose validator always accepts. Take every public
+input to be the empty string. Every request of $c'$ is then a concatenation of
+members of $W \cup \{t'\}$ and empty strings, because secrets never reach a request
+(the \textsc{Call} rule of \cref{fig:rules}) and every response is empty. So a
+request contains $\star$ exactly when it comes from the modified call. An execution
+whose secret selects the then-arm reports at least $\capm(m) > 0$ output tokens;
+one whose secret selects the else-arm reports none. The two stores are related,
+their totals differ, and $\Pi^\star$ is deterministic and respects the caps, so $A$
+cannot soundly accept $c'$. Since $A(c) = A(c')$, it rejects $c$.
+\end{proof}
+
+The theorem is mechanised as \code{size\_blind} in our Coq development
+(\cref{sec:mechanisation}), where ``unconditionally'' is rendered as ``the call is in
+the top-level sequence of the then-arm''. It is the formal content of both
+withdrawn rules. Each compared something coarser than what determines the
+observation, a maximum in one case and a size in the other, and the proof builds a
+provider that exploits the difference. The theorem also says more than ``these two
+rules were wrong'': no analysis that compares only sizes can be sound against
+content-dependent providers without rejecting a program as harmless as
+\code{if s \{ p(x) \} else \{ p(x) \}} with a non-empty template.
+
+Mechanising the theorem exposed a gap in our first proof. The draft defined a
+fresh twin as a string that occurs in no member of $W$ and in which no member of
+$W$ occurs. That does not stop a \emph{concatenation} of constants from containing
+the twin across a boundary: with $W = \{\code{ab}\}$ and $t' = \code{ba}$, the
+request \code{abab} contains $t'$. The Coq proof needs a character absent from every
+constant, and \cref{def:size} now requires one.
+
+\subsection{The classical instantiation}\label{sec:classical}
+
+Ngo et al.'s constant resource and resource-aware noninterference relate
+executions whose environments agree on public data and on the \emph{sizes} of
+secret data whose size is deemed public~\cite[Definitions 1 and 2]{ngo2017verifying},
+and their type system attaches potential to data according to its size and charges
+each operation a constant cost. Instantiating it with an LLM call,
+charging the call a function of the sizes of its template and arguments and its
+output as a constant or as an unknown in $[0, \capm]$, gives an analysis whose
+verdict depends on text constants only through their sizes.
+
+\begin{corollary}\label{cor:classical}
+The size-based instantiation of resource-aware noninterference is unsound for some
+content-dependent provider, or it rejects every secret-guarded branch whose
+then-arm calls a model with a non-empty prompt.
+\end{corollary}
+
+The alternative, treating the cost of a call as data that depends on the request
+content, makes every call inside a secret branch a secret-dependent cost, and
+constant-resource typing then rejects the branch outright. The same happens under
+the standard program-counter rule if calls are treated as observable events.
+
+\begin{proposition}\label{prop:pc}
+If calls are typed as low-observable events with the program-counter rule of
+Volpano, Smith and Irvine~\cite{volpano1996sound}, every secret-guarded branch that
+contains a call is rejected. If calls are treated as unobservable, the channel of
+\cref{fig:triage} is not detected at all.
+\end{proposition}
+
+RelCost is not size-indexed in the sense of \cref{def:size}. Its relational
+refinements also record how much the inputs of two runs differ, for lists the
+number of positions at which they differ~\cite{cicek2017relational}, so a call can be
+given a zero cost difference exactly when its two requests are identical. That
+instantiation is sound under the coupling of \cref{sec:couplings}, and it amounts to
+comparing requests by content for a fixed pair of runs. What it does not provide,
+and \cref{sec:requests} adds, is the resolution of a secret branch over the outcomes
+the secret can realise (RelCost relates two given runs), observers coarser than the
+trace, a leakage bound in bits, and an account of why comparing sizes cannot work.
+\Cref{tab:options} summarises the options.
+
+\begin{table}[t]
+\centering
+\caption{Four ways to treat an LLM call inside a secret-guarded branch.}
+\label{tab:options}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+Calls are treated as & Consequence \\
+\midrule
+unobservable & unsound: the channel of \cref{fig:triage} is invisible (\cref{prop:pc}) \\
+low-observable events & every secret branch containing a call is rejected (\cref{prop:pc}) \\
+costs indexed by size & unsound for content-dependent providers, or identical arms are rejected (\cref{thm:size-blind}) \\
+requests compared by content & sound for every provider, tokenizer and observer of the transcript (\cref{thm:ni}); rejections justified up to dead code (\cref{thm:completeness}) \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+Ngo et al.'s quantitative bound fails differently. For uniformly sampled
+environments, it bounds the Shannon entropy of a program's resource observations by
+$\log_2(u - l + 1)$, where $u$ and $l$ are upper and lower bounds on the
+cost~\cite[Section V-A, Lemmas 6 and 7]{ngo2017verifying}. An LLM call may return anywhere
+from zero tokens to its cap, so $u - l \geq \capm$ for any workflow with a call,
+whether or not it has a secret, and the bound is at least $\log_2(\capm + 1)$ bits for
+a workflow that provably leaks nothing. Counting observations is hopeless here,
+because the provider's noise alone produces a vast number of possible observations;
+\cref{sec:quantitative} counts request classes instead.

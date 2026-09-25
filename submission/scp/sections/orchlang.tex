@@ -1,0 +1,134 @@
+\section{OrchLang}\label{sec:language}
+
+OrchLang is a small, statically typed language for LLM workflows. A workflow
+declares its inputs, secrets, models, prompt templates and tools, then calls
+models, branches, retries, invokes tools and returns one output (\cref{fig:syntax}).
+The compiler, \code{orchc}, makes no network requests; models are named by
+provider and model name and are only ever called by the mock runtime described in
+\cref{sec:implementation}.
+
+\begin{figure}[t]
+\centering\footnotesize
+\begin{tabular}{@{}r@{\;}c@{\;}l@{}}
+$w$ & ::= & \code{workflow} $X$ \code{budget} $n$ [\code{leaks} $b$] [\code{observer} $O$] \code{\{} $d^*\ s^*$ \code{\}} \\[2pt]
+$d$ & ::= & \code{input} $x$\code{:} $T$ [\code{untrusted}] $\ell^*$\code{;}
+      $\mid$ \code{secret} $x$\code{:} $T$ $\ell^*$\code{;} \\
+    & $\mid$ & \code{model} $x$ \code{= mock(}"\textit{provider}\code{/}\textit{name}"\code{) max\_tokens} $n$ \\
+    &        & \quad [\code{tokenizer} $\tau$] [\code{overhead} $n$] [\code{max\_bytes} $n$]\code{;} \\
+    & $\mid$ & \code{prompt} $p$\code{(}$x_1$\code{:} $T_1$, \dots\code{) -> } $T$ \code{=} "\textit{template with} \code{\{}$x_i$\code{\}}"\code{;} \\
+    & $\mid$ & \code{tool} $f$\code{(}$x_1$\code{:} $T_1$, \dots\code{);} \\
+$\ell$ & ::= & \code{max\_bytes} $n$ $\mid$ \code{max\_tokens} $n$ \code{tokenizer} $\tau$ $\mid$ \code{max\_tokens} $n$ \\[2pt]
+$s$ & ::= & \code{let} $y$\code{:} $T$ \code{= call} $p$\code{(}$a_1$, \dots, $a_k$\code{) using} $x$\code{;} \\
+    & $\mid$ & \code{emit} $f$\code{(}$a_1$, \dots, $a_k$\code{);}
+      $\;\mid\;$ \code{output} $a$\code{;} \\
+    & $\mid$ & \code{if} $g$ \code{\{} $s^*$ \code{\}} [\code{else \{} $s^*$ \code{\}}]
+      $\;\mid\;$ \code{retry} $n$ \code{\{} $s^*$ \code{\}} \\
+    & $\mid$ & (\code{declassify} $\mid$ \code{endorse})\code{(}$x$\code{) as} $y$\code{:} $T$ \code{because} "\textit{justification}"\code{;} \\
+$g$ & ::= & $x$ $\mid$ \code{tokens(}$x$\code{)} $\bowtie$ $n$ \qquad ($\bowtie\ \in \{\code{<}, \code{<=}, \code{>}, \code{>=}, \code{==}, \code{!=}\}$) \\
+$a$ & ::= & $x$ $\mid$ "\textit{literal}" \\
+\end{tabular}
+\caption{Abridged syntax of OrchLang. The full grammar, including \code{require} statements and
+monetary prices, is in the language specification that accompanies the artifact.}
+\label{fig:syntax}
+\end{figure}
+
+\subsection{Design commitments}
+
+Three decisions make the analyses decidable, and \cref{sec:eval-real} measures what
+they cost. First, the shape of a workflow is fixed before it runs: the only loop is
+\code{retry} $n$ with a literal $n$, and the only branch tests a declared value.
+Second, every length the compiler cannot see is declared in a stated unit: bytes
+(\code{max\_bytes}), tokens of a named tokenizer (\code{max\_tokens} $n$
+\code{tokenizer} $\tau$), or, for an estimate only, tokens. Third, leaving the
+security lattice requires a written justification (\code{declassify},
+\code{endorse}), which the compiler copies into its certificate.
+
+Every declaration receives a unique binding identity, and all analyses refer to
+bindings, models and prompts by identity, never by name. A redeclaration inside a
+branch arm is therefore a different binding. This choice was forced by one of the
+counterexamples in \cref{sec:failed}. Inputs and secrets may be declared only at
+the top level of a workflow, since an input declared inside an arm would have no
+single meaning for the environment that supplies it.
+
+\subsection{Labels}\label{sec:labels}
+
+Values carry labels from the product lattice
+$\{\Pub \sqsubseteq \Sec\} \times \{\Tru \sqsubseteq \Unt\}$ of confidentiality
+(public, secret) and integrity (trusted, untrusted)~\cite{denning1976lattice}; we
+write $\conf(\ell)$ and $\integ(\ell)$ for the two components and $\sqcup$ for the
+join. A literal and an ordinary input are $(\Pub,\Tru)$, an input declared
+\code{untrusted} is $(\Pub,\Unt)$, and a secret is $(\Sec,\Tru)$. A model's
+response is labelled with the join of everything that reached its request, so text
+from a retrieved page stays untrusted through any number of calls. It can drive an
+effect only after someone endorses it and writes down why.
+
+Each binding also carries a \emph{data label}, which records what its content
+depends on, separately from the program counter $pc$ under which it was computed.
+The distinction matters inside a secret-guarded arm. A program-counter discipline
+labels every value computed there as secret, so the second call of a chain inside
+the arm could not receive the first call's response. Yet the content of that
+response depends only on public data; only its existence depends on the secret,
+and existence is exactly what the relational analysis of \cref{sec:requests}
+accounts for. OrchLang therefore checks prompt arguments against the data label,
+while outputs and effects, whose occurrence is visible outside the request trace,
+are still checked against the program counter. \Cref{fig:rules} gives the rules for
+calls, branches, effects and outputs.
+
+\begin{figure}[t]
+\centering\footnotesize
+\begin{mathpar}
+\inferrule*[right=Call]
+  {\Gamma(a_i) = (\ell_i, \delta_i) \\ \conf(\delta_i) = \Pub \ \ (1 \le i \le k) \quad\text{[E230]}}
+  {\Gamma; pc \vdash \code{let}\ y = \code{call}\ p(a_1,\dots,a_k)\ \code{using}\ m \\
+   \dashv \Gamma[y \mapsto (pc \sqcup \textstyle\bigsqcup_i \ell_i,\;
+   (\Pub, \integ(pc)) \sqcup \textstyle\bigsqcup_i \delta_i)]}
+\and
+\inferrule*[right=If]
+  {\Gamma(x) = (\ell, \delta) \\ \Gamma; pc \sqcup \ell \vdash s_1 \\ \Gamma; pc \sqcup \ell \vdash s_2}
+  {\Gamma; pc \vdash \code{if}\ x\ \{s_1\}\ \code{else}\ \{s_2\} \dashv \Gamma}
+\and
+\inferrule*[right=Emit]
+  {\Gamma(a_i) = (\ell_i, \delta_i) \\ \ell_i \sqsubseteq (\Pub, \Tru) \quad\text{[E232, E233]} \\
+   pc \sqsubseteq (\Pub, \Tru) \quad\text{[E234, E235]}}
+  {\Gamma; pc \vdash \code{emit}\ f(a_1,\dots,a_k) \dashv \Gamma}
+\and
+\inferrule*[right=Output]
+  {\Gamma(a) = (\ell, \delta) \\ \conf(\ell \sqcup pc) = \Pub \quad\text{[E231]}}
+  {\Gamma; pc \vdash \code{output}\ a \dashv \Gamma}
+\end{mathpar}
+\caption{Selected label rules. $\Gamma$ maps each binding to its label $\ell$ and data label
+$\delta$; literals are $(\Pub,\Tru)$. A premise that fails produces the diagnostic in brackets.
+In \textsc{Call} the data label ignores the confidentiality of $pc$ but keeps its integrity. In
+\textsc{If}, a guard whose data label is secret also creates the relational obligation of
+\cref{sec:requests}.}
+\label{fig:rules}
+\end{figure}
+
+The data label keeps integrity joined with the program counter, which is
+conservative: a value computed inside an arm guarded by untrusted data is untrusted
+even if it was computed only from trusted data. The real-workflow evaluation found
+two cases where this over-reports (\cref{sec:eval-real}). Reclassification copies a
+value into a new binding and relabels one component: \code{declassify} lowers
+confidentiality to that of the program counter and \code{endorse} lowers integrity
+to that of the program counter, so relabelling inside a secret arm still yields a
+secret-dependent value. An endorsed copy of a secret keeps a secret data label.
+Because the only bindings with secret data labels are secrets and their endorsed
+copies, and \textsc{Call} keeps both out of requests, secret content never appears
+in a request.
+
+\begin{example}\label{ex:triage-labels}
+In \cref{fig:triage}, \code{reply} is $(\Pub,\Unt)$ because the untrusted
+\code{ticket} reached its request. Inside the arm, $pc = (\Sec,\Tru)$, so
+\code{second} gets label $(\Sec,\Unt)$ but data label $(\Pub,\Unt)$: another
+call could still receive it. Without the \code{endorse} on lines 16--17,
+\textsc{Emit} fails with \code{E233}, because text derived from the ticket would
+choose what the tool sends. With it, \code{vetted} is $(\Pub,\Tru)$ and the flow
+check passes; the branch on \code{high\_risk} is then the relational analysis's
+concern.
+\end{example}
+
+A workflow that passes every check receives a certificate: a JSON document bound to
+the source by its SHA-256 digest, which records the token bounds and their
+derivation, every label, every reclassification with its justification, and the
+leakage report. The certificate is a report, not a proof object; no independent
+checker exists yet (\cref{sec:conclusion}).

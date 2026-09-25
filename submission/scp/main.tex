@@ -1,0 +1,141 @@
+%% Manuscript for Science of Computer Programming (Elsevier), research paper.
+%% Build: make (figures, then latexmk). Class: elsarticle v3.5 (bundled here), numbered references.
+\documentclass[preprint,12pt,sort&compress,nopreprintline]{elsarticle}
+
+\usepackage{lmodern}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathpartir}
+\usepackage{booktabs}
+\usepackage{tabularx}
+\usepackage{multirow}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{listings}
+\usepackage{microtype}
+\usepackage{enumitem}
+\usepackage[switch]{lineno}
+\usepackage[hidelinks]{hyperref}
+\usepackage[capitalise,nameinlink,noabbrev]{cleveref}
+\pdfstringdefDisableCommands{\def\corref#1{}\def\fnref#1{}}
+
+\journal{Science of Computer Programming}
+
+%% Cross-reference names in the journal's style: "Fig. 3", "Section 4", "Table 2".
+\crefname{figure}{Fig.}{Figs.}
+\Crefname{figure}{Fig.}{Figs.}
+\crefname{section}{Section}{Sections}
+\crefname{appendix}{Appendix}{Appendices}
+\crefname{table}{Table}{Tables}
+\crefname{lstlisting}{Listing}{Listings}
+
+%% Theorem-like environments, numbered separately.
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\newtheorem{corollary}{Corollary}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newtheorem{example}{Example}
+\crefname{theorem}{Theorem}{Theorems}
+\crefname{lemma}{Lemma}{Lemmas}
+\crefname{proposition}{Proposition}{Propositions}
+\crefname{corollary}{Corollary}{Corollaries}
+\crefname{definition}{Definition}{Definitions}
+\crefname{example}{Example}{Examples}
+
+%% OrchLang listings.
+\definecolor{kw}{HTML}{0B3D91}
+\definecolor{str}{HTML}{7A3E00}
+\definecolor{cmt}{HTML}{5A5A5A}
+\lstdefinelanguage{OrchLang}{
+  morekeywords={workflow,budget,leaks,observer,input,secret,model,prompt,tool,let,call,using,
+    if,else,retry,emit,output,endorse,declassify,as,because,require,tokens,untrusted,
+    max_tokens,max_bytes,tokenizer,overhead,mock,text,boolean},
+  morestring=[b]",
+  morecomment=[l]{//},
+  sensitive=true}
+\lstset{
+  language=OrchLang,
+  basicstyle=\ttfamily\footnotesize,
+  keywordstyle=\color{kw}\bfseries,
+  stringstyle=\color{str},
+  commentstyle=\color{cmt}\itshape,
+  columns=fullflexible,
+  keepspaces=true,
+  showstringspaces=false,
+  numbers=left, numberstyle=\scriptsize\color{cmt}, numbersep=6pt, xleftmargin=16pt,
+  frame=tb, framerule=0.4pt, aboveskip=6pt, belowskip=4pt,
+  escapeinside={(*}{*)}}
+\newcommand{\code}[1]{\texttt{#1}}
+\DeclareRobustCommand{\file}[1]{\path{#1}}
+
+%% Notation.
+\newcommand{\Prov}{\mathcal{P}}
+\newcommand{\sig}{\mathit{sig}}
+\newcommand{\sigv}[1]{\mathit{sig}_{#1}}
+\newcommand{\bytes}{\mathit{bytes}}
+\newcommand{\tok}{\mathit{tokens}}
+\newcommand{\capm}{\mathit{cap}}
+\newcommand{\Call}{\mathsf{Call}}
+\newcommand{\Retry}{\mathsf{Retry}}
+\newcommand{\Branch}{\mathsf{Branch}}
+\newcommand{\ptext}{\mathsf{text}}
+\newcommand{\pvar}{\mathsf{var}}
+\newcommand{\pres}{\mathsf{res}}
+\newcommand{\Pub}{\mathrm{P}}
+\newcommand{\Sec}{\mathrm{S}}
+\newcommand{\Tru}{\mathrm{T}}
+\newcommand{\Unt}{\mathrm{U}}
+\newcommand{\conf}{\mathsf{C}}
+\newcommand{\integ}{\mathsf{I}}
+\newcommand{\eps}{\varepsilon}
+
+\begin{document}
+
+\begin{frontmatter}
+
+\title{Compare the requests, not their sizes: Resource side channels and sound token bounds for LLM workflows}
+
+\author[vit]{Nambi Rajan M\corref{cor}}
+\ead{AUTHOR-EMAIL} %% TODO(author): corresponding e-mail address
+\cortext[cor]{Corresponding author.}
+\affiliation[vit]{organization={Vellore Institute of Technology},
+            city={Vellore},
+            state={Tamil Nadu},
+            country={India}} %% TODO(author): school/department and postcode
+
+\input{sections/abstract}
+
+\begin{keyword}
+Information flow \sep Resource side channels \sep Relational analysis \sep
+Quantitative information flow \sep Tokenization \sep Large language models \sep Coq
+\end{keyword}
+
+\end{frontmatter}
+
+\linenumbers
+
+\input{sections/introduction}
+\input{sections/setting}
+\input{sections/orchlang}
+\input{sections/sizes}
+\input{sections/requests}
+\input{sections/bounds}
+\input{sections/mechanisation}
+\input{sections/implementation}
+\input{sections/evaluation}
+\input{sections/related}
+\input{sections/conclusion}
+
+\appendix
+\input{sections/appendix}
+
+\input{sections/endmatter}
+
+\bibliographystyle{elsarticle-num}
+\bibliography{references}
+
+\end{document}

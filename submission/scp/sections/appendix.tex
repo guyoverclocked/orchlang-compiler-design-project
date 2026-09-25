@@ -1,0 +1,136 @@
+\section{Proofs}\label{app:proofs}
+
+This appendix gives the proofs that \cref{sec:requests} sketches. We use the core
+calculus of \cref{sec:providers} and the semantics of \cref{sec:couplings}: given a tape
+$\rho$, an execution is deterministic, and $\langle c, \sigma, h\rangle \Downarrow_\rho
+\langle \sigma', h' \rangle$ runs $c$ from store $\sigma$ and history $h$. A call
+$x \leftarrow \mathsf{call}\ r$ evaluates $r$ in $\sigma$ to a request $q$, computes the
+key $k$ of the event from $h$ under the scheme, obtains $(\mathit{resp}, o) = \Pi(m, q,
+\rho(k))$, binds $x$ to $\mathit{resp}$ and appends $\mathsf{call}(m, q, \mathit{resp}, o)$.
+A retry runs its body, lets $V$ decide from the attempt's transcript and a draw keyed by
+it, appends $\mathsf{attempt}(b)$, and stops if $b$ holds or no attempts remain.
+
+\begin{proof}[Proof of \cref{lem:equal}]
+By induction on the length of the common signature, and within a node on its nesting.
+Throughout, the two executions start from the same history, and we show that they
+extend it by the same events and bind equal values at corresponding positions.
+\begin{itemize}[leftmargin=*]
+\item \emph{Call.} The pieces are equal. A $\ptext$ piece denotes the same text in both
+  executions; a $\pvar(b)$ piece denotes $\sigma_1(b) = \sigma_2(b)$ by hypothesis; a
+  $\pres(p)$ piece denotes the response bound at position $p$, which is equal in both
+  executions by the induction hypothesis. So both evaluate the request to the same text
+  $q$ for the same model identity $m$. The histories so far are equal, so the scheme,
+  whose keys are functions of the history and the request, computes the same key $k$;
+  the tape gives the same draw; and $\Pi(m, q, \rho(k))$ gives the same response and
+  count. Both histories are extended by the same event, and both bindings receive the
+  same response.
+\item \emph{Retry.} The bounds are equal. Each attempt runs a body with equal signatures
+  from equal histories, so by the induction hypothesis it produces equal transcripts.
+  The validator reads the same transcript and, the histories being equal, the same draw,
+  so both executions decide alike and stop after the same attempt.
+\item \emph{Public branch.} The guard terms are equal and denote equal values, a $\pvar$
+  piece by hypothesis and a $\pres$ piece by induction, so both executions take the same
+  arm, whose signatures are equal.
+\item \emph{Resolved branch.} $\sigv{v_i}$ inlines the arm that $v_i$ selects, and
+  $v_i$ is the outcome vector of $\sigma_i$, so the inlined arm is the one execution $i$
+  takes. The inlined nodes are then compared like any others. That a store's own outcome
+  vector selects the arm the store takes is \code{resolve\_exact} in the Coq
+  development; it needs the side condition that no statement before the branch
+  rebinds a secret, which the type system guarantees.\qedhere
+\end{itemize}
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:leakage}]
+Let $\mathit{cls}(\sigma_S)$ be the class of $\sigv{v(\sigma_S)}(c)$ among the at most $k(c)$
+distinct signatures. Fix public inputs $\sigma_P$ and a tape $\rho$. By \cref{lem:equal},
+two secret assignments with the same class produce the same history; signatures are
+symbolic in the public inputs, so this holds for every $\sigma_P$. Outputs and effects
+are functions of public data and responses: the \textsc{Output} and \textsc{Emit} rules
+of \cref{fig:rules} reject any output or effect under a secret program counter, and any
+secret content reaching them. Hence one invocation's observation is
+$G(\mathit{cls}(\sigma_S), \sigma_P, \rho)$ for some function $G$.
+
+Now let an adversary choose the public inputs of each invocation from the observations
+of earlier invocations and its own coins $\alpha$, with fresh tapes $\rho_1, \rho_2,
+\dots$ By induction on the number of invocations, the whole sequence of observations is
+a function of $\mathit{cls}(\sigma_S)$, the tapes and $\alpha$: the $j$-th public input is
+a function of the first $j-1$ observations and $\alpha$, and the $j$-th observation is
+$G(\mathit{cls}(\sigma_S), \sigma_P^{(j)}, \rho_j)$. The tapes and $\alpha$ are independent
+of the secrets. The channel from the secrets to the observations therefore factors as a
+cascade whose first stage is the deterministic map $\mathit{cls}$ onto at most $k(c)$
+values. The min-entropy leakage of a cascade is at most that of its first
+stage~\cite{espinoza2012min}, and for every prior the min-entropy leakage of a channel
+with at most $k$ possible outputs is at most $\log_2 k$~\cite[Theorem
+1]{doychev2013cacheaudit}. Taking the maximum over priors gives min-capacity at most
+$\log_2 k(c)$.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:observers}]
+Consider a maximal run of calls outside any retry body, none of which references
+another in the run. Every request in the run is determined by pieces from outside the
+run, so both executions send the same multiset of requests in the run (for the bill
+normal form) or the same sequence for each provider (for the provider normal form).
+Under the request scheme a call's draw is keyed by its model, its request and the
+number of earlier calls with the same request, not by its position; a stable sort keeps
+equal requests in their order of execution, so the $i$-th copy of a request has the same
+occurrence index in both executions and receives the same response. Totals per model
+are independent of order, and each provider's own sequence is preserved by the stable
+sort. The $\pres$ references are rewritten to follow the moved calls, so later pieces
+denote the same responses. Control nodes are compared exactly and sit between runs, so
+the induction of \cref{lem:equal} continues past them. Calls inside a retry body are not
+moved, because the validator reads the attempt's transcript in order.
+\end{proof}
+
+\begin{proof}[Proof of \cref{thm:completeness}]
+Choose public inputs that are pairwise distinct strings over a character that occurs in
+no constant of the program, and a provider whose responses are fresh strings that encode
+the model, the request and the draw, with a validator that always rejects, so every
+retry runs to its bound. Under this provider the rendering of a signature as a history
+is injective: distinct sequences of pieces give distinct request texts, because the
+public inputs and responses are distinct and fresh; distinct retry bounds give distinct
+numbers of attempts; and a call present in one signature and absent in the other changes
+the length of the history. The hypothesis on public guards provides inputs and responses
+that drive both executions to the first difference, before which their histories agree by
+\cref{lem:equal}; at the difference the histories differ, so the trace distinguishes the
+two secrets. For $k(c)$ classes, the same provider makes the trace an injective function
+of the class, a deterministic channel with $k(c)$ distinct outputs, whose min-entropy
+leakage under the uniform prior on the classes is $\log_2
+k(c)$~\cite[Theorem 1]{smith2009foundations}.
+\end{proof}
+
+\begin{proof}[Proof of \cref{prop:pc}]
+Under the program-counter rule of Volpano et al.~\cite{volpano1996sound}, an event
+observable at the public level may not occur under a secret program counter, and every
+call inside a secret-guarded branch occurs under one; so every such branch is rejected.
+If calls are unobservable, the rule places no constraint on them, and \cref{fig:triage},
+whose only secret-dependent behaviour is a call, is accepted.
+\end{proof}
+
+\section{The real-workflow corpus}\label{app:corpus}
+
+\Cref{tab:ports} lists the 30 ports. The adaptations are those of the protocol: A1, a
+whole response is passed where the source extracts a field; A2, a multi-way choice
+becomes a cascade of yes/no calls; A3, an early exit decided by a response is dropped;
+A4, a list that the model filters is passed unfiltered; A6, a stand-in replaces a value
+computed inside a branch as the single output. Each adaptation is recorded in the
+corpus manifest with whether the certified bound still bounds the source. The 22
+excluded candidates, each with its category and reason, are listed in the exclusion log
+of the artifact (\file{bench/real/EXCLUSIONS.md}).
+
+\begin{table}[p]
+\centering
+\caption{The 30 ported workflows (E11). Codes are those reported on the port without
+annotations; endorsements are those of the accepted variant. The output bound and the
+guaranteed input bound are in tokens; ``--'' means that a model's tokenizer is unpublished.
+The last column gives AgentDojo's recorded successful attacks within the task's plan, out of
+all successful attacks. Prefixes: \code{ac} Anthropic cookbook, \code{lg} LangGraph,
+\code{ad} AgentDojo.}
+\label{tab:ports}
+\scriptsize\setlength{\tabcolsep}{3pt}
+\begin{tabular}{@{}llllrlrrl@{}}
+\toprule
+Port & Split & Verdict & Codes & End. & Adapt. & Output & Input (guar.) & Attacks \\
+\midrule
+\input{sections/corpus-table}
+\end{tabular}
+\end{table}

@@ -1,0 +1,5 @@
+Size-based side-channel analyses of LLM calls are unsound or reject identical arms
+Comparing requests by content gives noninterference for any provider or tokenizer
+Leakage is bounded by the log of the number of request classes (min-capacity)
+Token bounds are sound when computed in bytes: tokenization is not subadditive
+Thirty real workflows ported under a fixed protocol; no certified bound exceeded

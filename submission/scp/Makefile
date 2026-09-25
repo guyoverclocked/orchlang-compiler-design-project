@@ -8,7 +8,7 @@
 # Figures are compiled to PDF here, so the submission system never has to
 # compile TikZ or pgfplots itself.
 
-FIGURES := $(patsubst figures/%.tex,fig-%.pdf,$(wildcard figures/*.tex))
+FIGURES := $(patsubst figures/%.tex,fig-%.pdf,$(filter-out figures/common.tex,$(wildcard figures/*.tex)))
 
 .PHONY: all data check bundle clean
 
@@ -18,7 +18,7 @@ fig-%.pdf: figures/%.tex $(wildcard figures/data/*.csv)
 	cd figures && pdflatex -interaction=nonstopmode -halt-on-error $*.tex > /dev/null
 	mv figures/$*.pdf $@
 
-main.pdf: main.tex references.bib highlights.txt $(FIGURES)
+main.pdf: main.tex $(wildcard sections/*.tex) references.bib highlights.txt $(FIGURES)
 	latexmk -pdf -interaction=nonstopmode -halt-on-error main.tex > /dev/null
 	@grep -E "Warning: (Citation|Reference)" main.log || true
 
