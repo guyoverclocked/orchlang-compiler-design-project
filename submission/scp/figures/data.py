@@ -1,0 +1,82 @@
+#!/usr/bin/env python3
+"""Write the CSV files the manuscript's plots are drawn from.
+
+Every number comes from bench/results/*.json, which python bench/evaluate.py
+writes (and which bench/tokenizers/measure.py writes for tokenizers.json).
+Run from the repository root:  python submission/scp/figures/data.py
+"""
+import csv
+import json
+import os
+
+ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..'))
+RESULTS = os.path.join(ROOT, 'bench', 'results')
+OUT = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'data')
+
+# Display names for the tokenizers, in the order of the measurement table.
+TOKENIZERS = [
+    ('gpt2', 'GPT-2'), ('r50k_base', 'r50k'), ('cl100k_base', 'cl100k'), ('o200k_base', 'o200k'),
+    ('llama2', 'Llama 2'), ('llama3', 'Llama 3'), ('mistral', 'Mistral'), ('phi3', 'Phi-3'),
+    ('gemma2', 'Gemma 2'), ('qwen25', 'Qwen2.5'), ('deepseekv3', 'DeepSeek-V3'), ('olmo2', 'OLMo 2'),
+    ('t5', 'T5'), ('xlmr', 'XLM-R'),
+]
+
+
+def load(name):
+    return json.load(open(os.path.join(RESULTS, name), encoding='utf-8'))
+
+
+def write(name, header, rows):
+    os.makedirs(OUT, exist_ok=True)
+    with open(os.path.join(OUT, name), 'w', newline='', encoding='utf-8') as handle:
+        writer = csv.writer(handle)
+        writer.writerow(header)
+        writer.writerows(rows)
+
+
+def tokenizers():
+    facts = load('tokenizers.json')
+    facts = facts.get('tokenizers', facts)
+    rows = []
+    for key, label in TOKENIZERS:
+        entry = facts[key]
+        rows.append([label,
+                     entry['q5_estimate']['multilingual']['byte_estimate_exceeded_pct'],
+                     entry['q5_estimate']['code']['byte_estimate_exceeded_pct'],
+                     entry['q4_concatenation']['max_defect'],
+                     entry['q3_sequences']['max_reencoded_tokens_per_generated_token'],
+                     entry['q1_code_points']['max_tokens_minus_bytes']])
+    write('tokenizers.csv', ['tokenizer', 'bytes4_multilingual', 'bytes4_code', 'concat_defect',
+                             'reencode', 'tokens_minus_bytes'], rows)
+
+
+def relational():
+    rows = load('relational.json')
+    out = []
+    for rule in ('bounds', 'sizes', 'content'):
+        accepted = [r for r in rows if r[rule] == 'accept']
+        rejected = [r for r in rows if r[rule] == 'reject']
+        out.append([rule,
+                    sum(1 for r in accepted if r['leaks'] == 'no'),
+                    sum(1 for r in accepted if r['leaks'] == 'yes'),
+                    sum(1 for r in rejected if r['leaks'] == 'yes'),
+                    sum(1 for r in rejected if r['leaks'] == 'no')])
+    write('relational.csv', ['rule', 'accept_safe', 'accept_leaking', 'reject_leaking', 'reject_safe'], out)
+
+
+def real():
+    data = load('real.json')
+    out = []
+    for row in data['rows']:
+        if row['in_guar<='] == '-':
+            continue
+        out.append([row['workflow'], row['workflow'].split('-')[0],
+                    round(row['in_guar<='] / float(row['in_est<=']), 2), row['rebill/guar']])
+    write('real.csv', ['workflow', 'source', 'guar_over_est', 'rebill_over_guar'], out)
+
+
+if __name__ == '__main__':
+    tokenizers()
+    relational()
+    real()
+    print('wrote', ', '.join(sorted(os.listdir(OUT))))
