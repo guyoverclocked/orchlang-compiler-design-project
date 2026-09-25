@@ -823,7 +823,20 @@ nothing.
 
 ### 9.7 Analysis cost
 
-TODO-COST
+Certifying the 47 synthetic workflows the harness times takes 0.11 s in total
+(2.4 ms each), and the 30 real ports, of 17 to 84 lines, take 0.07 s (the slowest
+3.0 ms). Both figures include process start-up and are not isolated measurements
+of the analyser; at these sizes the analysis is not a bottleneck. Its one
+super-linear step is resolution. The feasible outcome vectors are a product over
+independent secrets, each secret contributing a number of vectors linear in its
+distinct length thresholds, so their count is exponential in the number of
+secrets that guard branches. The implementation enumerates at most 4,096
+vectors. Beyond that it treats every vector as its own class, which keeps
+Theorem 2's bound sound (the leakage is then bounded by the logarithm of the
+vector count) but rejects a workflow that is in fact noninterfering unless its
+budget covers that bound. No workflow came near the limit: the most feasible
+outcome vectors in any certificate the harness produces is four, and the real
+workflows, having no secrets, have one.
 
 ---
 
@@ -848,7 +861,12 @@ to revisions and regenerated from measurements.
 **External.** The real-workflow corpus is three sources and 52 candidates, sampled
 by a fixed rule, not a random sample of deployed workflows. Its labels are derived
 by rules applied by the author; for AgentDojo the untrusted labels are AgentDojo's
-own canary mechanism, and the cross-check uses AgentDojo's recorded runs.
+own canary mechanism, and the cross-check uses AgentDojo's recorded runs. The
+AgentDojo ports are the tasks' ground-truth plans, not AgentDojo's tool-calling
+agent, so neither their bounds nor the cross-check describe that agent. The
+harness's scoring of extra diagnostics was changed after the held-out results
+were seen; the change and its cause are recorded, and it affects only whether
+the two false positives fail the run, not whether they are reported.
 Declared byte bounds on inputs (8 KiB where a source gives none) are
 assumptions, and the certificate holds only when a deployment enforces them.
 Every assumption the guaranteed bound makes about a provider (its caps, its

@@ -237,6 +237,13 @@ vectors, `k`, is the number of classes of secrets the observer can
 distinguish, and the workflow reveals at most `log2 k` bits (min-capacity; for
 any number of invocations, with adaptively chosen public inputs).
 
+The feasible outcome vectors are a product over independent secrets, so their
+number grows exponentially with the number of secrets that guard branches. The
+compiler enumerates at most 4,096. Beyond that it counts every vector as its own
+class, which keeps the bound sound but rejects the workflow unless its budget
+covers `log2` of the vector count. The certificate records the count
+(`outcome_vectors`) and whether it was enumerated.
+
 Equal signatures mean identical requests, so the analysis needs no assumption
 about tokenizers or about how a provider answers. Comparing request *sizes*
 instead, as an earlier version did, is unsound for content-dependent providers

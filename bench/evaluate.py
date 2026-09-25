@@ -1058,6 +1058,14 @@ def main():
         start = time.time()
         run(['certify', path])
         real_times.append((time.time() - start, path))
+    # Resolution is the analysis's one exponential step: how close does any
+    # certified workflow come to the analyser's enumeration limit?
+    most_vectors = 0
+    for path in timed + real_timed + orch_files('leakage', 'accept'):
+        code, out, err = run(['certify', path])
+        if code == 0:
+            for entry in json.loads(out)['workflows']:
+                most_vectors = max(most_vectors, (entry.get('leakage') or {}).get('outcome_vectors', 0))
 
     report = io.StringIO()
     report.write('OrchLang evaluation\n===================\n\n')
@@ -1244,6 +1252,8 @@ def main():
                      '  slowest %.1f ms (%s)\n'
                      % (len(real_times), min(lines), max(lines), sum(t for t, _ in real_times),
                         1000.0 * slowest, os.path.basename(slowest_path)))
+    report.write('  most feasible outcome vectors in any of these certificates or the leakage\n'
+                 '  suite\'s: %d (the analyser enumerates at most 4096)\n' % most_vectors)
 
     if failures:
         report.write('\nFAILURES (%d)\n\n' % len(failures))
