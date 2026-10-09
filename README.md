@@ -17,6 +17,7 @@ Release candidate 0.5.0-rc1 · C++17 · MIT license
 - [Current SCP requirements](docs/SCP_AUTHOR_REQUIREMENTS.md) and [official-template LaTeX manuscript](submission/research/manuscript/OrchLang_SCP_OSP.tex)
 - [Publication strategy](docs/SUBMISSION_PLAN.md) and [verified journal shortlist](docs/JOURNAL_SHORTLIST.md)
 - [ArchiveGate-style presentation package](submission/research/README.md)
+- [Unchanged third-party source study](research/INCIDENT_TRIAGE_SOURCE_STUDY.md), [source protocol](research/INCIDENT_TRIAGE_ANALYSIS.md), and [concurrent meter finding](research/INCIDENT_TRIAGE_CONCURRENCY.md)
 
 ## The question
 
@@ -46,16 +47,18 @@ make check
 
 No API key, model download, network request or real tool invocation is required.
 
-To present the six interactive examples, start the localhost server and open
+To present the eight interactive examples, start the localhost server and open
 <http://127.0.0.1:8765/>:
 
 ```sh
 python3 demo/server.py
 ```
 
-The demo invokes the real local compiler, graph and stochastic analyzers, then
-their independent checks. Opening `demo/index.html` directly displays labeled
-saved evidence with digests; it does not run the current tools.
+Stories 01–07 invoke the real local compiler or graph/stochastic analyzers and
+their independent checks. Story 08 freshly replays source protocols and recorded
+LangGraph concurrency/path evidence; it does not rerun LangGraph. Python 3.12+
+is required for that pinned source's syntax. Opening `demo/index.html` directly
+displays labeled saved evidence with digests; it does not run the current tools.
 
 ```orchlang
 workflow MatchedChain budget 2000 {
@@ -143,6 +146,31 @@ Python functions. [Runtime setup](integrations/langgraph/README.md) and
 admitted syntax, atomic state updates, provenance and limitations. These
 adapters do not establish arbitrary Python translation or external adoption.
 
+## Unchanged third-party source and per-incident usage
+
+A separate case study executes the MIT-licensed `agent-incident-triage`
+workflow at immutable revision `c08f710acfeefe233329df613fe8358eaac5f350`.
+All 23 original files and a local Git bundle are included with their hashes.
+The 22-run source study and six paired scripted paths exercise exact requests,
+repair/schema failures, full summaries, draft fallback and the source budget
+guard. They use offline outcomes, including an explicitly artificial oversized
+response for the nominal-price guard; no provider invoice is measured.
+
+A strict source-specific AST protocol independently checks the complete
+pre-dispatch dependency argument. The generated OrchGraph certificate covers
+only the first classifier request pair. Neither is a generic Python translator
+or a mechanized proof of Python semantics. Equal exact redactor output, valid
+public metadata, fixed configuration, fresh isolated apps and a shared complete
+outcome oracle are premises. Raw incident state/checkpoint privacy is excluded.
+
+One controlled concurrent schedule on the original shared app records another
+incident's usage rows and mislabels a classification row. Four unique calls
+have 456 source-estimated units, while summing both returned snapshots gives
+687, including 231 foreign units in A's snapshot. Mock prices are zero.
+A bounded, replay-gated offline manager creates one fresh graph per incident
+and retains it for approval; it is a repair demonstration for this source
+profile, not a production service or general concurrency verifier.
+
 ## What changed in this upgrade
 
 - Resolve provider/model/cap/price contracts instead of trusting source alias spelling.
@@ -165,7 +193,10 @@ adapters do not establish arbitrary Python translation or external adoption.
 ## Evidence
 
 The evidence includes 112 C++ regressions, 203 Python audit tests (including 21
-source-cost tests), eight demo HTTP tests, and 31 optional LangGraph tests.
+source-cost tests), nine demo HTTP tests, and 31 optional LangGraph tests.
+The closing demo now has nine HTTP tests. The separately scoped incident
+extension has 12 direct-source, 13 source-protocol, 19 concurrency/session, and
+10 path-replay tests. Its 16-stage reproduction is recorded separately.
 Address/undefined-behavior sanitizer checks and the shipped examples pass.
 The full reproduction manifest binds builds, sources and result files.
 
@@ -195,7 +226,10 @@ The full reproduction manifest binds builds, sources and result files.
 | Finite cross-checks of proved models | 60 checks / 120 unit-mass histograms; all 11 fresh state-cap probes UNKNOWN |
 | Exact all-finite-horizon trace laws | 12 cases: six proofs/six finite witnesses, all independently replayed; 48 equality DP checks and six witness checks; all fresh cap/tamper probes match expectations |
 | Installed wheel | 23 offline build/install/CLI stages; tampering rejects; UNKNOWN preserves no equality claim |
-| Closing HTML demo | Seven fixed stories; eight HTTP tests; live and saved evidence clearly labeled |
+| Third-party source protocol | 22 recorded runs; seven independent checks; classifier-only graph slice; full source-specific dependency argument |
+| Third-party path coverage | Six authored paired paths / 12 runs / 24 calls; all pairs independently replay equal |
+| Shared source meter | One controlled 19-event schedule; 456 unique vs 687 summed snapshot units; isolated apps keep two own rows each |
+| Closing HTML demo | Eight fixed stories; nine HTTP tests; fresh execution, fresh replay and saved evidence clearly labeled |
 
 The two modes repeat the same patterns/grid; their counts are not pooled as independent applications. `bench/results/sourced.json` records ordinal draws; `sourced_request_sensitive.json` adds template/literal bytes and abstract value fields to response draws. The request-sensitive mock still has no generated text. The development corpus has three conservative rejections whose ordinal bills agree in 300 comparisons, exposing precision limits.
 
@@ -223,6 +257,17 @@ The source auditor checks cost arithmetic and report integrity. The separate gra
 To also repeat the pinned LangGraph tests and both actual execution studies,
 pass `--integration-python integrations/langgraph/.venv/bin/python` after
 setting up that optional environment. The script never installs its runtime.
+
+To repeat the separately pinned incident-triage extension after installing its
+documented Python 3.14.6 lock, run:
+
+```sh
+python3 audit/reproduce_incident_triage.py \
+  --integration-python integrations/incident_triage/.venv/bin/python
+```
+
+This reconstructs the clean upstream checkout from the included local bundle;
+it installs nothing and uses no provider. See [source custody](integrations/incident_triage/SOURCE_SNAPSHOT.md).
 
 ## Commands and scope
 

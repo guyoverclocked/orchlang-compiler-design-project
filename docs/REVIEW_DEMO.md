@@ -92,9 +92,9 @@ sufficient bisimulation check and an exact all-finite-horizon trace-law check. T
 established relational resource analysis, quantitative information flow probabilistic bisimulation and weighted-automaton equivalence. The artifact has restricted source adapters,
 actual offline LangGraph execution, independent replay and explicit limits.”
 
-The seven stories cover a compiler rejection, a matched dependent chain, a
+The eight stories cover a compiler rejection, a matched dependent chain, a
 productive cycle, hidden order, noisy usage, and equal means with different
-laws, and equal observable laws with different hidden transition structure. Opening `demo/index.html` directly gives clearly marked **STATIC
+laws, equal observable laws with different hidden transition structure, and the real-source meter case. Finish on story 08: independently replay the source protocol, six selected paths, and the recorded shared-meter schedule. Say explicitly that this button does not rerun LangGraph. Opening `demo/index.html` directly gives clearly marked **STATIC
 EVIDENCE**; use the server for a current live run. No provider calls occur.
 
 ## Assessment if asked

@@ -1,0 +1,444 @@
+{
+  "format": "orchlang-incident-triage-concurrency-study",
+  "version": 1,
+  "status": "completed",
+  "source": {
+    "repository": "https://github.com/codewithkachi/agent-incident-triage",
+    "commit": "c08f710acfeefe233329df613fe8358eaac5f350",
+    "git_tree": "2f6e2058052e4cccd48ae41230d9d5dd1ba5aa02",
+    "license": "MIT",
+    "tracked_file_count": 23,
+    "tracked_file_sha256": {
+      ".github/workflows/ci.yml": "6f198f6b51650ec58d82b346d818d0976dbf20613e41f7937f254dd7e5d2541b",
+      ".gitignore": "bdc4989c9ce00b36ba3fec6672e80957194a9b7cfcfe1fa10b6733cbe9bdd6a0",
+      "LICENSE": "2201062c20bd45f4a65b1f39a094c4908927c9e58cfaee7265ed4a531bde57b6",
+      "README.md": "fce821c23c907468d9df4c10ecb446df3a86ed8a871831b9dbdfce54e0cc57d4",
+      "data/sample_incidents.jsonl": "37f14141767c284812d7161526b9ca5981f706d0aafddf8fee987d75a530ef58",
+      "data/sites.json": "51d9b3fa3c1711e85e26708ebd59b43320d191c044a5e11d2893cb5964819d98",
+      "eval/golden_trajectories.jsonl": "eb95fb666c7a5a9f8ef4f8ec0adbf9b667b7b9071db80f876648ff6cb7056fa1",
+      "eval/results.json": "c98bd8ced53f9d443632d1fe4d73ebeba757139babe90d4b2ca82526774dc2cd",
+      "requirements.txt": "5894fad802cbbddd734d3ab2cc923f77bf5c040ae3fcc4644e97b55376385b83",
+      "src/triage/__init__.py": "fd51f9a6ee5ca073a6bdc74b51a48b5130a4ab90556a267014a8be562f8ed868",
+      "src/triage/api.py": "ad1f7fdd60c2a08ca5f97266d13868c1d05a271016f7e9881bdb9a2c92f85d63",
+      "src/triage/config.py": "54400bc276090cea7bbf9eed4322b988b5ef73652ce1d343897caac7c62b37aa",
+      "src/triage/costs.py": "f1393f1ceada49308d689b47ed736fb864a872ca31bc6bbe7e84265be288d92f",
+      "src/triage/evaluate.py": "e8da95a5264f111e69315906213653b57d52de5d476bebd4b571729283fdd42e",
+      "src/triage/graph.py": "0fc931ff7edb64cc26d9eb8b7aa8ec3b05bcefbb667641a30610456ddde4138b",
+      "src/triage/guardrails.py": "94d086fb139eff7c7b3bf7ca0b49055c4a7b0a13509913ca855fb6a04a110b5d",
+      "src/triage/llm.py": "2a92f378b51921e312b678ad3aab5a6d7aadd5a7f96d5cc641488e7833ce710a",
+      "src/triage/models.py": "23987632467f7475efa7964c8d83157c9e4a9267f03df494a7a2f5a9da8816be",
+      "src/triage/run_demo.py": "79b3bc2fb715c13638dfcd6a8c37403c054fd247d51afc8201ec5794b739a302",
+      "tests/conftest.py": "e8cef54430b962c6bea485630ba8a1c470dd8a3abcb3cc8b01ac93402a28a373",
+      "tests/test_api.py": "9dae64a11c9d098d84f39cfd8b608f47d90330fd2c5584797e523d6c64fdb05d",
+      "tests/test_graph.py": "202984dd4bad9781be6e69381194e66ec40ccbeaab4d71ee59574cd3d58884a4",
+      "tests/test_guardrails.py": "7585e3d8cb9c152ac9c1735c99798913cdc2fe35c4d22728d7603e953b382ff1"
+    },
+    "manifest_sha256": "38e804b6470ad0c58f0da526f71ab39b7a7ad5a4a241c0e156569ba0ad203500",
+    "verified_before_and_after_execution": true
+  },
+  "harness": {
+    "runner_sha256": "7c8136cc435e79d426f8296e32a64b03d7f3a21098e48ab685f148f653f4454f",
+    "verifier_sha256": "add37e31e08ad72188a5a6081522e9359124a5ea16669966501425cd847a7632",
+    "test_sha256": "09c9e3e8334bbf358603de5228d55be39a6e4c324f9090f9fc35d2b441f04407",
+    "source_harness_sha256": "f13bdebb6d2442802ae9ed0663e1d05ee1a014fd9a3e69222a078cacb281e399",
+    "manifest_sha256": "38e804b6470ad0c58f0da526f71ab39b7a7ad5a4a241c0e156569ba0ad203500",
+    "dependency_lock_sha256": "b9599a3084f6b8f47aea39da6f04e1808296a3371b58f8ae5d39ca827154ca6b",
+    "python": "3.14.6",
+    "langgraph": "1.2.14",
+    "pydantic": "2.14.0"
+  },
+  "scope": {
+    "source_execution": "unchanged pinned LangGraph files; one graph shared for the race, separate graphs for the isolation control",
+    "provider": "pinned deterministic MockLLM only; no provider client or outbound network call",
+    "pii": "synthetic non-PII text only",
+    "observer": [
+      "captured exact system/user/response strings",
+      "source NodeCost rows",
+      "pending/approved status",
+      "deterministic wrapper event order"
+    ],
+    "excluded": [
+      "raw checkpoint/state confidentiality",
+      "provider billing",
+      "uncontrolled schedules",
+      "general concurrency verification"
+    ]
+  },
+  "instrumentation": {
+    "boundary": "wrapper around complete(system,user); delegates every response to the pinned MockLLM",
+    "schedule": "hold A.classify after the mock response is ready but before wrapper return; B completes classify and draft on the same app; then release A",
+    "upstream_source_patched": false,
+    "network_or_process_attempts": []
+  },
+  "inputs": {
+    "A": {
+      "incident_id": "SYNTH-A",
+      "site": "GTS-01",
+      "reported_by": "synthetic operator",
+      "text": "ALPHA SIGNAL: An intruder forced the rear loading gate.",
+      "thread_id": "SYNTH-A"
+    },
+    "B": {
+      "incident_id": "SYNTH-B",
+      "site": "GTS-01",
+      "reported_by": "synthetic operator",
+      "text": "BRAVO SIGNAL: A minor water leak was found in the storage room.",
+      "thread_id": "SYNTH-B"
+    }
+  },
+  "shared_graph": {
+    "call_responses": [
+      {
+        "call_id": "A.classify",
+        "task": "A",
+        "phase": "classify",
+        "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+        "user": "INCIDENT REPORT: ALPHA SIGNAL: An intruder forced the rear loading gate.",
+        "response": "{\"category\": \"physical_security\", \"severity\": \"high\", \"summary\": \"alpha signal: an intruder forced the rear loading gate.\", \"people_at_risk\": false}"
+      },
+      {
+        "call_id": "B.classify",
+        "task": "B",
+        "phase": "classify",
+        "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+        "user": "INCIDENT REPORT: BRAVO SIGNAL: A minor water leak was found in the storage room.",
+        "response": "{\"category\": \"environmental\", \"severity\": \"medium\", \"summary\": \"bravo signal: a minor water leak was found in the storage room.\", \"people_at_risk\": false}"
+      },
+      {
+        "call_id": "B.draft",
+        "task": "B",
+        "phase": "draft",
+        "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+        "user": "category: environmental\npriority: P3\nsummary: bravo signal: a minor water leak was found in the storage room.",
+        "response": "[\"Log the incident and notify the site duty manager\", \"Contain the release and check ventilation before re-entry\"]"
+      },
+      {
+        "call_id": "A.draft",
+        "task": "A",
+        "phase": "draft",
+        "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+        "user": "category: physical_security\npriority: P2\nsummary: alpha signal: an intruder forced the rear loading gate.",
+        "response": "[\"Log the incident and notify the site duty manager\", \"Review CCTV and secure the affected entry point\"]"
+      }
+    ],
+    "events": [
+      {
+        "sequence": 0,
+        "kind": "graph_invocation_started",
+        "task": "A"
+      },
+      {
+        "sequence": 1,
+        "kind": "request_started",
+        "call_id": "A.classify"
+      },
+      {
+        "sequence": 2,
+        "kind": "oracle_response_ready",
+        "call_id": "A.classify"
+      },
+      {
+        "sequence": 3,
+        "kind": "held_before_tracking_return",
+        "call_id": "A.classify"
+      },
+      {
+        "sequence": 4,
+        "kind": "graph_invocation_started",
+        "task": "B"
+      },
+      {
+        "sequence": 5,
+        "kind": "request_started",
+        "call_id": "B.classify"
+      },
+      {
+        "sequence": 6,
+        "kind": "oracle_response_ready",
+        "call_id": "B.classify"
+      },
+      {
+        "sequence": 7,
+        "kind": "wrapper_return",
+        "call_id": "B.classify"
+      },
+      {
+        "sequence": 8,
+        "kind": "request_started",
+        "call_id": "B.draft"
+      },
+      {
+        "sequence": 9,
+        "kind": "oracle_response_ready",
+        "call_id": "B.draft"
+      },
+      {
+        "sequence": 10,
+        "kind": "wrapper_return",
+        "call_id": "B.draft"
+      },
+      {
+        "sequence": 11,
+        "kind": "graph_invocation_pending",
+        "task": "B"
+      },
+      {
+        "sequence": 12,
+        "kind": "incident_B_completed_before_A_release"
+      },
+      {
+        "sequence": 13,
+        "kind": "released_to_tracking_return",
+        "call_id": "A.classify"
+      },
+      {
+        "sequence": 14,
+        "kind": "wrapper_return",
+        "call_id": "A.classify"
+      },
+      {
+        "sequence": 15,
+        "kind": "request_started",
+        "call_id": "A.draft"
+      },
+      {
+        "sequence": 16,
+        "kind": "oracle_response_ready",
+        "call_id": "A.draft"
+      },
+      {
+        "sequence": 17,
+        "kind": "wrapper_return",
+        "call_id": "A.draft"
+      },
+      {
+        "sequence": 18,
+        "kind": "graph_invocation_pending",
+        "task": "A"
+      }
+    ],
+    "runs": {
+      "A": {
+        "thread_id": "SYNTH-A",
+        "terminal": {
+          "kind": "pending_approval",
+          "error": null,
+          "report_status": "pending_approval",
+          "classification": {
+            "category": "physical_security",
+            "severity": "high",
+            "summary": "alpha signal: an intruder forced the rear loading gate.",
+            "people_at_risk": false
+          },
+          "priority": {
+            "level": "P2",
+            "rationale": "severity=high, people_at_risk=False, site_criticality=standard",
+            "response_sla_minutes": 60
+          },
+          "recommended_actions": [
+            "Log the incident and notify the site duty manager",
+            "Review CCTV and secure the affected entry point"
+          ]
+        },
+        "cost_rows": [
+          {
+            "node": "classify",
+            "input_tokens": 96,
+            "output_tokens": 38,
+            "cost_usd": 0.0
+          },
+          {
+            "node": "draft",
+            "input_tokens": 69,
+            "output_tokens": 28,
+            "cost_usd": 0.0
+          },
+          {
+            "node": "draft",
+            "input_tokens": 94,
+            "output_tokens": 37,
+            "cost_usd": 0.0
+          },
+          {
+            "node": "draft",
+            "input_tokens": 68,
+            "output_tokens": 26,
+            "cost_usd": 0.0
+          }
+        ]
+      },
+      "B": {
+        "thread_id": "SYNTH-B",
+        "terminal": {
+          "kind": "pending_approval",
+          "error": null,
+          "report_status": "pending_approval",
+          "classification": {
+            "category": "environmental",
+            "severity": "medium",
+            "summary": "bravo signal: a minor water leak was found in the storage room.",
+            "people_at_risk": false
+          },
+          "priority": {
+            "level": "P3",
+            "rationale": "severity=medium, people_at_risk=False, site_criticality=standard",
+            "response_sla_minutes": 240
+          },
+          "recommended_actions": [
+            "Log the incident and notify the site duty manager",
+            "Contain the release and check ventilation before re-entry"
+          ]
+        },
+        "cost_rows": [
+          {
+            "node": "classify",
+            "input_tokens": 96,
+            "output_tokens": 38,
+            "cost_usd": 0.0
+          },
+          {
+            "node": "draft",
+            "input_tokens": 69,
+            "output_tokens": 28,
+            "cost_usd": 0.0
+          }
+        ]
+      }
+    },
+    "source_inferred_tracking_call_order": [
+      "B.classify",
+      "B.draft",
+      "A.classify",
+      "A.draft"
+    ],
+    "isolation_note": "One build_graph instance owns one mutable tracker and current_node; the scheduled call order makes B finish both calls before A's classification wrapper returns to TrackingLLM.complete."
+  },
+  "isolated_per_invocation_graphs": {
+    "runs": {
+      "A": {
+        "thread_id": "SYNTH-A",
+        "terminal": {
+          "kind": "pending_approval",
+          "error": null,
+          "report_status": "pending_approval",
+          "classification": {
+            "category": "physical_security",
+            "severity": "high",
+            "summary": "alpha signal: an intruder forced the rear loading gate.",
+            "people_at_risk": false
+          },
+          "priority": {
+            "level": "P2",
+            "rationale": "severity=high, people_at_risk=False, site_criticality=standard",
+            "response_sla_minutes": 60
+          },
+          "recommended_actions": [
+            "Log the incident and notify the site duty manager",
+            "Review CCTV and secure the affected entry point"
+          ]
+        },
+        "cost_rows": [
+          {
+            "node": "classify",
+            "input_tokens": 94,
+            "output_tokens": 37,
+            "cost_usd": 0.0
+          },
+          {
+            "node": "draft",
+            "input_tokens": 68,
+            "output_tokens": 26,
+            "cost_usd": 0.0
+          }
+        ],
+        "calls": [
+          {
+            "call_id": "A.classify",
+            "task": "A",
+            "phase": "classify",
+            "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+            "user": "INCIDENT REPORT: ALPHA SIGNAL: An intruder forced the rear loading gate.",
+            "response": "{\"category\": \"physical_security\", \"severity\": \"high\", \"summary\": \"alpha signal: an intruder forced the rear loading gate.\", \"people_at_risk\": false}"
+          },
+          {
+            "call_id": "A.draft",
+            "task": "A",
+            "phase": "draft",
+            "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+            "user": "category: physical_security\npriority: P2\nsummary: alpha signal: an intruder forced the rear loading gate.",
+            "response": "[\"Log the incident and notify the site duty manager\", \"Review CCTV and secure the affected entry point\"]"
+          }
+        ]
+      },
+      "B": {
+        "thread_id": "SYNTH-B",
+        "terminal": {
+          "kind": "pending_approval",
+          "error": null,
+          "report_status": "pending_approval",
+          "classification": {
+            "category": "environmental",
+            "severity": "medium",
+            "summary": "bravo signal: a minor water leak was found in the storage room.",
+            "people_at_risk": false
+          },
+          "priority": {
+            "level": "P3",
+            "rationale": "severity=medium, people_at_risk=False, site_criticality=standard",
+            "response_sla_minutes": 240
+          },
+          "recommended_actions": [
+            "Log the incident and notify the site duty manager",
+            "Contain the release and check ventilation before re-entry"
+          ]
+        },
+        "cost_rows": [
+          {
+            "node": "classify",
+            "input_tokens": 96,
+            "output_tokens": 38,
+            "cost_usd": 0.0
+          },
+          {
+            "node": "draft",
+            "input_tokens": 69,
+            "output_tokens": 28,
+            "cost_usd": 0.0
+          }
+        ],
+        "calls": [
+          {
+            "call_id": "B.classify",
+            "task": "B",
+            "phase": "classify",
+            "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+            "user": "INCIDENT REPORT: BRAVO SIGNAL: A minor water leak was found in the storage room.",
+            "response": "{\"category\": \"environmental\", \"severity\": \"medium\", \"summary\": \"bravo signal: a minor water leak was found in the storage room.\", \"people_at_risk\": false}"
+          },
+          {
+            "call_id": "B.draft",
+            "task": "B",
+            "phase": "draft",
+            "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+            "user": "category: environmental\npriority: P3\nsummary: bravo signal: a minor water leak was found in the storage room.",
+            "response": "[\"Log the incident and notify the site duty manager\", \"Contain the release and check ventilation before re-entry\"]"
+          }
+        ]
+      }
+    },
+    "approvals": {
+      "A": {
+        "status": "approved",
+        "call_count_before": 2,
+        "call_count_after": 2,
+        "thread_id": "SYNTH-A"
+      },
+      "B": {
+        "status": "approved",
+        "call_count_before": 2,
+        "call_count_after": 2,
+        "thread_id": "SYNTH-B"
+      }
+    }
+  }
+}

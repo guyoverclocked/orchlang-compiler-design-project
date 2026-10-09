@@ -1,0 +1,48 @@
+{
+  "attestation_scope": "conditional source-specific pre-dispatch request/usage/route dependency argument; not generic source translation or a mechanized proof of Python semantics",
+  "checks": [
+    "pinned upstream selected file bytes and source manifest identity",
+    "independent AST re-extraction of request, helper, schema, control, cost and gate dependencies",
+    "serialized theorem claim, classifier-only lowering scope, and exclusions",
+    "typed summary, repair, exact source estimator/budget, draft, and human gate obligations",
+    "22 finite source runs and 11 exact-redaction pair projections",
+    "authored raw-text classifier, repair, and draft mutations rejected",
+    "independent replay of the source-bound classifier OrchGraph certificate"
+  ],
+  "claim_kind": "independent pinned-source AST contract re-extraction plus classifier graph certificate replay",
+  "format": "orchlang-incident-triage-source-analysis-attestation",
+  "graph": {
+    "certificate_sha256": "5f8dfbe841c58ee6bfa0d6788a47115992faae8b2beba3ed75b417f61a5850fa",
+    "graph_product_edges": 10,
+    "graph_product_nodes": 11,
+    "graph_replay_status": "verified",
+    "graph_sha256": "81ffdf3bacbd5e7ad96f76a4757e971e8801996f2d0b716d5aad24353889b282"
+  },
+  "limitations": [
+    "The upstream redactor is a trusted approved release under the exact equality relation.",
+    "The shared complete outcome oracle and serial fresh graph/tracker/checkpointer are premises.",
+    "The OrchGraph proof covers the classifier request pair only; the remainder is a strict source-specific dependency contract.",
+    "No checkpoint/full-state privacy, general PII coverage, provider billing, live-provider behavior, or external dispatch claim is verified."
+  ],
+  "replay_checker_sha256": "4d7917f19810e230e26d7573c5a7cbe8bb74a7649064a5084d89b127bde58175",
+  "report_sha256": "0fd0eaa631ab5deb2da3ac396860271b87cc4eca6be1500f746dee29bfcb262a",
+  "source": {
+    "checked_source_files": {
+      "data/sites.json": "51d9b3fa3c1711e85e26708ebd59b43320d191c044a5e11d2893cb5964819d98",
+      "src/triage/config.py": "54400bc276090cea7bbf9eed4322b988b5ef73652ce1d343897caac7c62b37aa",
+      "src/triage/costs.py": "f1393f1ceada49308d689b47ed736fb864a872ca31bc6bbe7e84265be288d92f",
+      "src/triage/graph.py": "0fc931ff7edb64cc26d9eb8b7aa8ec3b05bcefbb667641a30610456ddde4138b",
+      "src/triage/guardrails.py": "94d086fb139eff7c7b3bf7ca0b49055c4a7b0a13509913ca855fb6a04a110b5d",
+      "src/triage/llm.py": "2a92f378b51921e312b678ad3aab5a6d7aadd5a7f96d5cc641488e7833ce710a",
+      "src/triage/models.py": "23987632467f7475efa7964c8d83157c9e4a9267f03df494a7a2f5a9da8816be"
+    },
+    "commit": "c08f710acfeefe233329df613fe8358eaac5f350",
+    "git_tree": "2f6e2058052e4cccd48ae41230d9d5dd1ba5aa02",
+    "license": "MIT",
+    "manifest_sha256": "38e804b6470ad0c58f0da526f71ab39b7a7ad5a4a241c0e156569ba0ad203500",
+    "repository": "https://github.com/codewithkachi/agent-incident-triage"
+  },
+  "source_study_sha256": "3f10906bb8fdd2283c59b188863304ecb2431c662ca0be3c0a04aaadfa05e9ab",
+  "status": "verified",
+  "version": 1
+}

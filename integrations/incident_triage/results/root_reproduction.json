@@ -1,0 +1,37 @@
+{
+  "format": "orchlang-independent-root-source-study-reproduction",
+  "status": "passed",
+  "upstream_commit": "c08f710acfeefe233329df613fe8358eaac5f350",
+  "source_file_count": 23,
+  "source_hashes_checked_by_primary_agent": true,
+  "source_worktree_clean": true,
+  "unit_tests": 12,
+  "actual_source_cases": 22,
+  "model_calls": 45,
+  "source_node_invocations": 87,
+  "exact_rerun_bytes_match": true,
+  "commands": [
+    {
+      "command": "INCIDENT_TRIAGE_UPSTREAM=/tmp/agent-incident-triage-research integrations/incident_triage/.venv/bin/python -m unittest discover -s integrations/incident_triage -p test_*.py -v",
+      "exit_code": 0
+    },
+    {
+      "command": "integrations/incident_triage/.venv/bin/python integrations/incident_triage/run_study.py --upstream /tmp/agent-incident-triage-research --output tmp/incident-triage-root-rerun.json",
+      "exit_code": 0
+    },
+    {
+      "command": "integrations/incident_triage/.venv/bin/python integrations/incident_triage/verify_results.py tmp/incident-triage-root-rerun.json",
+      "exit_code": 0
+    }
+  ],
+  "source_study_sha256": "3f10906bb8fdd2283c59b188863304ecb2431c662ca0be3c0a04aaadfa05e9ab",
+  "study_file_sha256": {
+    "run_study.py": "f13bdebb6d2442802ae9ed0663e1d05ee1a014fd9a3e69222a078cacb281e399",
+    "verify_results.py": "3fe4dae778e4ef411b42e97a5f205891b3171288dac8180c292a3ad1adbe467a",
+    "test_study.py": "d0eb09bc5f94a57c622db5aeca0c78ae58b4c0dde87b6892a1a9b37979e55001",
+    "UPSTREAM_MANIFEST.json": "38e804b6470ad0c58f0da526f71ab39b7a7ad5a4a241c0e156569ba0ad203500",
+    "requirements.lock": "b9599a3084f6b8f47aea39da6f04e1808296a3371b58f8ae5d39ca827154ca6b",
+    "results/source_study.json": "3f10906bb8fdd2283c59b188863304ecb2431c662ca0be3c0a04aaadfa05e9ab"
+  },
+  "scope": "Separate post-freeze direct-source execution study, not included in the base44-stage manifest or a source-to-OrchLang translation."
+}

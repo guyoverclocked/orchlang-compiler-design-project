@@ -31,3 +31,7 @@ build/
 .venv/
 
 /.build/
+
+# Local delivery archives are inventoried by digest rather than duplicated in Git.
+/output/release/*.zip
+/output/release/*.bundle

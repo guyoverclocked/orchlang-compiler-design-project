@@ -1,0 +1,33 @@
+{
+  "status": "verified",
+  "source": {
+    "repository": "https://github.com/codewithkachi/agent-incident-triage",
+    "commit": "c08f710acfeefe233329df613fe8358eaac5f350",
+    "git_tree": "2f6e2058052e4cccd48ae41230d9d5dd1ba5aa02",
+    "license": "MIT",
+    "manifest_sha256": "38e804b6470ad0c58f0da526f71ab39b7a7ad5a4a241c0e156569ba0ad203500",
+    "checked_source_files": {
+      "data/sites.json": "51d9b3fa3c1711e85e26708ebd59b43320d191c044a5e11d2893cb5964819d98",
+      "src/triage/config.py": "54400bc276090cea7bbf9eed4322b988b5ef73652ce1d343897caac7c62b37aa",
+      "src/triage/costs.py": "f1393f1ceada49308d689b47ed736fb864a872ca31bc6bbe7e84265be288d92f",
+      "src/triage/graph.py": "0fc931ff7edb64cc26d9eb8b7aa8ec3b05bcefbb667641a30610456ddde4138b",
+      "src/triage/guardrails.py": "94d086fb139eff7c7b3bf7ca0b49055c4a7b0a13509913ca855fb6a04a110b5d",
+      "src/triage/llm.py": "2a92f378b51921e312b678ad3aab5a6d7aadd5a7f96d5cc641488e7833ce710a",
+      "src/triage/models.py": "23987632467f7475efa7964c8d83157c9e4a9267f03df494a7a2f5a9da8816be"
+    }
+  },
+  "graph": {
+    "path": "classifier_request.certificate.json",
+    "sha256": "5f8dfbe841c58ee6bfa0d6788a47115992faae8b2beba3ed75b417f61a5850fa",
+    "status": "accepted",
+    "product_nodes": 11,
+    "product_edges": 10,
+    "checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42"
+  },
+  "source_study_projection": {
+    "source_case_count": 22,
+    "source_pair_count": 11,
+    "equal_projection_pairs": 5,
+    "different_projection_pairs": 6
+  }
+}

@@ -1,0 +1,292 @@
+{
+  "checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+  "format": "orchlang-cyclic-request-certificate",
+  "graph_name": "incident_triage_classifier_request_slice",
+  "max_nodes": 1000,
+  "nodes": [
+    {
+      "equal_values": [
+        [
+          "classifier_user_message",
+          "classifier_user_message"
+        ]
+      ],
+      "id": 0,
+      "left": [
+        "entry",
+        0
+      ],
+      "right": [
+        "entry",
+        0
+      ],
+      "rule": "left-secret",
+      "successors": [
+        1,
+        2
+      ]
+    },
+    {
+      "equal_values": [
+        [
+          "classifier_user_message",
+          "classifier_user_message"
+        ]
+      ],
+      "id": 1,
+      "left": [
+        "left_call",
+        0
+      ],
+      "right": [
+        "entry",
+        0
+      ],
+      "rule": "right-secret",
+      "successors": [
+        3,
+        4
+      ]
+    },
+    {
+      "equal_values": [
+        [
+          "classifier_user_message",
+          "classifier_user_message"
+        ]
+      ],
+      "id": 2,
+      "left": [
+        "right_call",
+        0
+      ],
+      "right": [
+        "entry",
+        0
+      ],
+      "rule": "right-secret",
+      "successors": [
+        5,
+        6
+      ]
+    },
+    {
+      "equal_values": [
+        [
+          "classifier_user_message",
+          "classifier_user_message"
+        ]
+      ],
+      "id": 3,
+      "left": [
+        "left_call",
+        0
+      ],
+      "right": [
+        "left_call",
+        0
+      ],
+      "rule": "matched-call",
+      "successors": [
+        7
+      ]
+    },
+    {
+      "equal_values": [
+        [
+          "classifier_user_message",
+          "classifier_user_message"
+        ]
+      ],
+      "id": 4,
+      "left": [
+        "left_call",
+        0
+      ],
+      "right": [
+        "right_call",
+        0
+      ],
+      "rule": "matched-call",
+      "successors": [
+        8
+      ]
+    },
+    {
+      "equal_values": [
+        [
+          "classifier_user_message",
+          "classifier_user_message"
+        ]
+      ],
+      "id": 5,
+      "left": [
+        "right_call",
+        0
+      ],
+      "right": [
+        "left_call",
+        0
+      ],
+      "rule": "matched-call",
+      "successors": [
+        9
+      ]
+    },
+    {
+      "equal_values": [
+        [
+          "classifier_user_message",
+          "classifier_user_message"
+        ]
+      ],
+      "id": 6,
+      "left": [
+        "right_call",
+        0
+      ],
+      "right": [
+        "right_call",
+        0
+      ],
+      "rule": "matched-call",
+      "successors": [
+        10
+      ]
+    },
+    {
+      "equal_values": [
+        [
+          "classifier_user_message",
+          "classifier_user_message"
+        ],
+        [
+          "left_response",
+          "left_response"
+        ]
+      ],
+      "id": 7,
+      "left": [
+        "left_call",
+        1
+      ],
+      "right": [
+        "left_call",
+        1
+      ],
+      "rule": "stop",
+      "successors": []
+    },
+    {
+      "equal_values": [
+        [
+          "classifier_user_message",
+          "classifier_user_message"
+        ],
+        [
+          "left_response",
+          "right_response"
+        ]
+      ],
+      "id": 8,
+      "left": [
+        "left_call",
+        1
+      ],
+      "right": [
+        "right_call",
+        1
+      ],
+      "rule": "stop",
+      "successors": []
+    },
+    {
+      "equal_values": [
+        [
+          "classifier_user_message",
+          "classifier_user_message"
+        ],
+        [
+          "right_response",
+          "left_response"
+        ]
+      ],
+      "id": 9,
+      "left": [
+        "right_call",
+        1
+      ],
+      "right": [
+        "left_call",
+        1
+      ],
+      "rule": "stop",
+      "successors": []
+    },
+    {
+      "equal_values": [
+        [
+          "classifier_user_message",
+          "classifier_user_message"
+        ],
+        [
+          "right_response",
+          "right_response"
+        ]
+      ],
+      "id": 10,
+      "left": [
+        "right_call",
+        1
+      ],
+      "right": [
+        "right_call",
+        1
+      ],
+      "rule": "stop",
+      "successors": []
+    }
+  ],
+  "product_edges": 10,
+  "product_nodes": 11,
+  "reachable_source_states": [
+    "entry",
+    "left_call",
+    "right_call"
+  ],
+  "root": 0,
+  "semantics": {
+    "claim": "equal complete request/usage traces and stop positions under the shared oracle",
+    "cycles": "every finite trace prefix; no termination or finite total-cost claim",
+    "input_accounting": "complete additive request contract in compatible token units",
+    "inputs": "all public external values agree; secret inputs may differ",
+    "oracle": "shared Omega(resolved-contract,per-contract-ordinal,template,ordered-text-values)",
+    "unsupported": [
+      "declassification",
+      "tools",
+      "request serialization",
+      "independent provider sampling",
+      "call-free cycles"
+    ]
+  },
+  "source_sha256": "81ffdf3bacbd5e7ad96f76a4757e971e8801996f2d0b716d5aad24353889b282",
+  "state_entry_bounds": {
+    "entry": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "total_tokens": 0
+    },
+    "left_call": {
+      "input_tokens": 128375,
+      "output_tokens": 1,
+      "total_tokens": 128376
+    },
+    "right_call": {
+      "input_tokens": 128375,
+      "output_tokens": 1,
+      "total_tokens": 128376
+    }
+  },
+  "status": "accepted",
+  "version": 1
+}

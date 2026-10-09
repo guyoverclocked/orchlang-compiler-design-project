@@ -1,0 +1,33 @@
+{
+  "commit": "c08f710acfeefe233329df613fe8358eaac5f350",
+  "format": "orchlang-upstream-source-manifest",
+  "git_tree": "2f6e2058052e4cccd48ae41230d9d5dd1ba5aa02",
+  "license": "MIT",
+  "repository": "https://github.com/codewithkachi/agent-incident-triage",
+  "tracked_file_sha256": {
+    ".github/workflows/ci.yml": "6f198f6b51650ec58d82b346d818d0976dbf20613e41f7937f254dd7e5d2541b",
+    ".gitignore": "bdc4989c9ce00b36ba3fec6672e80957194a9b7cfcfe1fa10b6733cbe9bdd6a0",
+    "LICENSE": "2201062c20bd45f4a65b1f39a094c4908927c9e58cfaee7265ed4a531bde57b6",
+    "README.md": "fce821c23c907468d9df4c10ecb446df3a86ed8a871831b9dbdfce54e0cc57d4",
+    "data/sample_incidents.jsonl": "37f14141767c284812d7161526b9ca5981f706d0aafddf8fee987d75a530ef58",
+    "data/sites.json": "51d9b3fa3c1711e85e26708ebd59b43320d191c044a5e11d2893cb5964819d98",
+    "eval/golden_trajectories.jsonl": "eb95fb666c7a5a9f8ef4f8ec0adbf9b667b7b9071db80f876648ff6cb7056fa1",
+    "eval/results.json": "c98bd8ced53f9d443632d1fe4d73ebeba757139babe90d4b2ca82526774dc2cd",
+    "requirements.txt": "5894fad802cbbddd734d3ab2cc923f77bf5c040ae3fcc4644e97b55376385b83",
+    "src/triage/__init__.py": "fd51f9a6ee5ca073a6bdc74b51a48b5130a4ab90556a267014a8be562f8ed868",
+    "src/triage/api.py": "ad1f7fdd60c2a08ca5f97266d13868c1d05a271016f7e9881bdb9a2c92f85d63",
+    "src/triage/config.py": "54400bc276090cea7bbf9eed4322b988b5ef73652ce1d343897caac7c62b37aa",
+    "src/triage/costs.py": "f1393f1ceada49308d689b47ed736fb864a872ca31bc6bbe7e84265be288d92f",
+    "src/triage/evaluate.py": "e8da95a5264f111e69315906213653b57d52de5d476bebd4b571729283fdd42e",
+    "src/triage/graph.py": "0fc931ff7edb64cc26d9eb8b7aa8ec3b05bcefbb667641a30610456ddde4138b",
+    "src/triage/guardrails.py": "94d086fb139eff7c7b3bf7ca0b49055c4a7b0a13509913ca855fb6a04a110b5d",
+    "src/triage/llm.py": "2a92f378b51921e312b678ad3aab5a6d7aadd5a7f96d5cc641488e7833ce710a",
+    "src/triage/models.py": "23987632467f7475efa7964c8d83157c9e4a9267f03df494a7a2f5a9da8816be",
+    "src/triage/run_demo.py": "79b3bc2fb715c13638dfcd6a8c37403c054fd247d51afc8201ec5794b739a302",
+    "tests/conftest.py": "e8cef54430b962c6bea485630ba8a1c470dd8a3abcb3cc8b01ac93402a28a373",
+    "tests/test_api.py": "9dae64a11c9d098d84f39cfd8b608f47d90330fd2c5584797e523d6c64fdb05d",
+    "tests/test_graph.py": "202984dd4bad9781be6e69381194e66ec40ccbeaab4d71ee59574cd3d58884a4",
+    "tests/test_guardrails.py": "7585e3d8cb9c152ac9c1735c99798913cdc2fe35c4d22728d7603e953b382ff1"
+  },
+  "version": 1
+}

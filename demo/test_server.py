@@ -60,7 +60,7 @@ class DemoHTTPTests(unittest.TestCase):
         status, body = self.get('/api/fixtures')
         self.assertEqual(status, 200)
         catalog = json.loads(body)
-        self.assertEqual(len(catalog['fixtures']), 7)
+        self.assertEqual(len(catalog['fixtures']), 8)
         self.assertEqual(catalog['limits']['horizon'], 8)
 
         status, error = self.post({'fixture': 'aggregate-order', 'options': {'horizon': 9}})
@@ -127,6 +127,26 @@ class DemoHTTPTests(unittest.TestCase):
         self.assertEqual(analysis['bisimulation']['status'], 'inconclusive')
         self.assertEqual(analysis['trace_equivalence']['status'], 'proved_equal')
         self.assertEqual(analysis['trace_equivalence']['replay']['status'], 'verified')
+
+    def test_source_case_fresh_replay_distinguishes_recorded_execution(self) -> None:
+        status, result = self.post({'fixture': 'source-case', 'options': {}})
+        self.assertEqual(status, 200, result)
+        case = result['source_case']
+        self.assertEqual(case['protocol_replay']['status'], 'verified')
+        self.assertEqual(case['concurrency_replay']['status'], 'verified')
+        self.assertEqual(case['paths_replay']['status'], 'verified')
+        self.assertEqual(case['paths_replay']['run_count'], 12)
+        self.assertEqual(len(case['path_specs']), 6)
+        race = case['concurrency_replay']['shared_app']
+        self.assertEqual(race['unique_call_tokens'], 456)
+        self.assertEqual(race['sum_of_returned_state_snapshot_tokens'], 687)
+        self.assertEqual(race['A_classifier_recorded_as'], 'draft')
+        self.assertIn('recorded', result['live_notice'])
+        self.assertIn('No LangGraph execution', result['live_notice'])
+
+        status, error = self.post({'fixture': 'source-case', 'options': {'upstream': '/tmp/elsewhere'}})
+        self.assertEqual(status, 400)
+        self.assertIn('unknown controls', error['error'])
 
 
 if __name__ == '__main__':

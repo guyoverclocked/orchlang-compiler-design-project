@@ -1,0 +1,2489 @@
+{
+  "assumptions_and_limits": [
+    "No real personal data, API key, or provider endpoint is used.",
+    "The tracked source hashes, commit, and tree are checked before import and after all graph runs; outbound socket connect and datagram send operations fail closed during graph execution.",
+    "The upstream default factory is exercised once with TRIAGE_LLM=mock; other cases pass an instrumented wrapper around the pinned MockLLM.",
+    "No source-to-graph translation is performed or claimed.",
+    "Usage rows are source estimates, not provider-reported token counts or monetary billing.",
+    "The mock is deterministic and not a probabilistic shared-oracle implementation.",
+    "The source redactor covers only its explicit regexes; this study does not establish general PII removal.",
+    "The graph uses LangGraph MemorySaver and retains the original input state; this study does not analyze checkpoint or other storage confidentiality.",
+    "Finite direct executions do not establish an all-input theorem, deployed-provider security, or general noninterference."
+  ],
+  "cases": [
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"operational\", \"severity\": \"low\", \"summary\": \"a routine report concerns activity near the site entrance.\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: A routine report concerns activity near the site entrance."
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: operational\npriority: P4\nsummary: a routine report concerns activity near the site entrance."
+        }
+      ],
+      "case_id": "mock_marker_absent",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-mock-marker",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "A routine report concerns activity near the site entrance.",
+        "thread_id": "source-study-paired-mock-marker"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "A routine report concerns activity near the site entrance.",
+      "terminal": {
+        "classification": {
+          "category": "operational",
+          "people_at_risk": false,
+          "severity": "low",
+          "summary": "a routine report concerns activity near the site entrance."
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P4",
+          "rationale": "severity=low, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 1440
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 95,
+          "node": "classify",
+          "output_tokens": 36
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 67,
+          "node": "draft",
+          "output_tokens": 13
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"cyber\", \"severity\": \"low\", \"summary\": \"a routine report concerns activity near the site entrance. contact [email]\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: A routine report concerns activity near the site entrance. Contact [EMAIL]"
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Isolate affected devices and reset exposed credentials\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: cyber\npriority: P4\nsummary: a routine report concerns activity near the site entrance. contact [email]"
+        }
+      ],
+      "case_id": "mock_marker_present",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-mock-marker",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "A routine report concerns activity near the site entrance. Contact person@example.invalid.",
+        "thread_id": "source-study-paired-mock-marker"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "A routine report concerns activity near the site entrance. Contact [EMAIL]",
+      "terminal": {
+        "classification": {
+          "category": "cyber",
+          "people_at_risk": false,
+          "severity": "low",
+          "summary": "a routine report concerns activity near the site entrance. contact [email]"
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P4",
+          "rationale": "severity=low, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 1440
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Isolate affected devices and reset exposed credentials"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 99,
+          "node": "classify",
+          "output_tokens": 38
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 70,
+          "node": "draft",
+          "output_tokens": 27
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"cyber\", \"severity\": \"low\", \"summary\": \"at the rear gate, contacts: [email] .\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: At the rear gate, contacts: [EMAIL] ."
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Isolate affected devices and reset exposed credentials\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: cyber\npriority: P4\nsummary: at the rear gate, contacts: [email] ."
+        }
+      ],
+      "case_id": "pii_count_one",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-pii-shape-count",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "At the rear gate, contacts: person@example.invalid .",
+        "thread_id": "source-study-pii-shape-count"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "At the rear gate, contacts: [EMAIL] .",
+      "terminal": {
+        "classification": {
+          "category": "cyber",
+          "people_at_risk": false,
+          "severity": "low",
+          "summary": "at the rear gate, contacts: [email] ."
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P4",
+          "rationale": "severity=low, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 1440
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Isolate affected devices and reset exposed credentials"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 90,
+          "node": "classify",
+          "output_tokens": 29
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 61,
+          "node": "draft",
+          "output_tokens": 27
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"cyber\", \"severity\": \"low\", \"summary\": \"at the rear gate, contacts: [email] [email]\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: At the rear gate, contacts: [EMAIL] [EMAIL]"
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Isolate affected devices and reset exposed credentials\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: cyber\npriority: P4\nsummary: at the rear gate, contacts: [email] [email]"
+        }
+      ],
+      "case_id": "pii_count_two",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-pii-shape-count",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "At the rear gate, contacts: person@example.invalid a.very.long.synthetic.name@department.example.invalid.",
+        "thread_id": "source-study-pii-shape-count"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "At the rear gate, contacts: [EMAIL] [EMAIL]",
+      "terminal": {
+        "classification": {
+          "category": "cyber",
+          "people_at_risk": false,
+          "severity": "low",
+          "summary": "at the rear gate, contacts: [email] [email]"
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P4",
+          "rationale": "severity=low, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 1440
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Isolate affected devices and reset exposed credentials"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 91,
+          "node": "classify",
+          "output_tokens": 30
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 62,
+          "node": "draft",
+          "output_tokens": 27
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"physical_security\", \"severity\": \"high\", \"summary\": \"at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number].\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: At the rear gate, an intruder forced the loading bay open. Contact [EMAIL]; callback [PHONE]; National Insurance [NI-NUMBER]."
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Review CCTV and secure the affected entry point\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: physical_security\npriority: P2\nsummary: at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number]."
+        }
+      ],
+      "case_id": "pii_email_a",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-pii-email",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "At the rear gate, an intruder forced the loading bay open. Contact person@example.invalid; callback 07700 900123; National Insurance QQ 12 34 56 C.",
+        "thread_id": "source-study-paired-pii-email"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "At the rear gate, an intruder forced the loading bay open. Contact [EMAIL]; callback [PHONE]; National Insurance [NI-NUMBER].",
+      "terminal": {
+        "classification": {
+          "category": "physical_security",
+          "people_at_risk": false,
+          "severity": "high",
+          "summary": "at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number]."
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P2",
+          "rationale": "severity=high, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 60
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Review CCTV and secure the affected entry point"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 112,
+          "node": "classify",
+          "output_tokens": 54
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 86,
+          "node": "draft",
+          "output_tokens": 26
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"physical_security\", \"severity\": \"high\", \"summary\": \"at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number].\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: At the rear gate, an intruder forced the loading bay open. Contact [EMAIL]; callback [PHONE]; National Insurance [NI-NUMBER]."
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Review CCTV and secure the affected entry point\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: physical_security\npriority: P2\nsummary: at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number]."
+        }
+      ],
+      "case_id": "pii_email_b",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-pii-email",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "At the rear gate, an intruder forced the loading bay open. Contact a.very.long.synthetic.name@department.example.invalid; callback 07700 900123; National Insurance QQ 12 34 56 C.",
+        "thread_id": "source-study-paired-pii-email"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "At the rear gate, an intruder forced the loading bay open. Contact [EMAIL]; callback [PHONE]; National Insurance [NI-NUMBER].",
+      "terminal": {
+        "classification": {
+          "category": "physical_security",
+          "people_at_risk": false,
+          "severity": "high",
+          "summary": "at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number]."
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P2",
+          "rationale": "severity=high, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 60
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Review CCTV and secure the affected entry point"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 112,
+          "node": "classify",
+          "output_tokens": 54
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 86,
+          "node": "draft",
+          "output_tokens": 26
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"physical_security\", \"severity\": \"high\", \"summary\": \"at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number].\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: At the rear gate, an intruder forced the loading bay open. Contact [EMAIL]; callback [PHONE]; National Insurance [NI-NUMBER]."
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Review CCTV and secure the affected entry point\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: physical_security\npriority: P2\nsummary: at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number]."
+        }
+      ],
+      "case_id": "pii_national_insurance_a",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-pii-national_insurance",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "At the rear gate, an intruder forced the loading bay open. Contact person@example.invalid; callback 07700 900123; National Insurance QQ 12 34 56 C.",
+        "thread_id": "source-study-paired-pii-national_insurance"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "At the rear gate, an intruder forced the loading bay open. Contact [EMAIL]; callback [PHONE]; National Insurance [NI-NUMBER].",
+      "terminal": {
+        "classification": {
+          "category": "physical_security",
+          "people_at_risk": false,
+          "severity": "high",
+          "summary": "at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number]."
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P2",
+          "rationale": "severity=high, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 60
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Review CCTV and secure the affected entry point"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 112,
+          "node": "classify",
+          "output_tokens": 54
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 86,
+          "node": "draft",
+          "output_tokens": 26
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"physical_security\", \"severity\": \"high\", \"summary\": \"at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number].\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: At the rear gate, an intruder forced the loading bay open. Contact [EMAIL]; callback [PHONE]; National Insurance [NI-NUMBER]."
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Review CCTV and secure the affected entry point\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: physical_security\npriority: P2\nsummary: at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number]."
+        }
+      ],
+      "case_id": "pii_national_insurance_b",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-pii-national_insurance",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "At the rear gate, an intruder forced the loading bay open. Contact person@example.invalid; callback 07700 900123; National Insurance ZZ987654Z.",
+        "thread_id": "source-study-paired-pii-national_insurance"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "At the rear gate, an intruder forced the loading bay open. Contact [EMAIL]; callback [PHONE]; National Insurance [NI-NUMBER].",
+      "terminal": {
+        "classification": {
+          "category": "physical_security",
+          "people_at_risk": false,
+          "severity": "high",
+          "summary": "at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number]."
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P2",
+          "rationale": "severity=high, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 60
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Review CCTV and secure the affected entry point"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 112,
+          "node": "classify",
+          "output_tokens": 54
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 86,
+          "node": "draft",
+          "output_tokens": 26
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"physical_security\", \"severity\": \"high\", \"summary\": \"at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number].\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: At the rear gate, an intruder forced the loading bay open. Contact [EMAIL]; callback [PHONE]; National Insurance [NI-NUMBER]."
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Review CCTV and secure the affected entry point\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: physical_security\npriority: P2\nsummary: at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number]."
+        }
+      ],
+      "case_id": "pii_phone_a",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-pii-phone",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "At the rear gate, an intruder forced the loading bay open. Contact person@example.invalid; callback 07700 900123; National Insurance QQ 12 34 56 C.",
+        "thread_id": "source-study-paired-pii-phone"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "At the rear gate, an intruder forced the loading bay open. Contact [EMAIL]; callback [PHONE]; National Insurance [NI-NUMBER].",
+      "terminal": {
+        "classification": {
+          "category": "physical_security",
+          "people_at_risk": false,
+          "severity": "high",
+          "summary": "at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number]."
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P2",
+          "rationale": "severity=high, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 60
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Review CCTV and secure the affected entry point"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 112,
+          "node": "classify",
+          "output_tokens": 54
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 86,
+          "node": "draft",
+          "output_tokens": 26
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"physical_security\", \"severity\": \"high\", \"summary\": \"at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number].\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: At the rear gate, an intruder forced the loading bay open. Contact [EMAIL]; callback [PHONE]; National Insurance [NI-NUMBER]."
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Review CCTV and secure the affected entry point\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: physical_security\npriority: P2\nsummary: at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number]."
+        }
+      ],
+      "case_id": "pii_phone_b",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-pii-phone",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "At the rear gate, an intruder forced the loading bay open. Contact person@example.invalid; callback 0113 496 0999; National Insurance QQ 12 34 56 C.",
+        "thread_id": "source-study-paired-pii-phone"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "At the rear gate, an intruder forced the loading bay open. Contact [EMAIL]; callback [PHONE]; National Insurance [NI-NUMBER].",
+      "terminal": {
+        "classification": {
+          "category": "physical_security",
+          "people_at_risk": false,
+          "severity": "high",
+          "summary": "at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number]."
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P2",
+          "rationale": "severity=high, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 60
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Review CCTV and secure the affected entry point"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 112,
+          "node": "classify",
+          "output_tokens": 54
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 86,
+          "node": "draft",
+          "output_tokens": 26
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"physical_security\", \"severity\": \"low\", \"summary\": \"at the rear gate, callback field: .\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: At the rear gate, callback field: ."
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Review CCTV and secure the affected entry point\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: physical_security\npriority: P4\nsummary: at the rear gate, callback field: ."
+        }
+      ],
+      "case_id": "pii_presence_absent",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-pii-shape-presence",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "At the rear gate, callback field: .",
+        "thread_id": "source-study-pii-shape-presence"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "At the rear gate, callback field: .",
+      "terminal": {
+        "classification": {
+          "category": "physical_security",
+          "people_at_risk": false,
+          "severity": "low",
+          "summary": "at the rear gate, callback field: ."
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P4",
+          "rationale": "severity=low, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 1440
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Review CCTV and secure the affected entry point"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 89,
+          "node": "classify",
+          "output_tokens": 31
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 63,
+          "node": "draft",
+          "output_tokens": 26
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"cyber\", \"severity\": \"low\", \"summary\": \"at the rear gate, callback field: [email]\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: At the rear gate, callback field: [EMAIL]"
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Isolate affected devices and reset exposed credentials\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: cyber\npriority: P4\nsummary: at the rear gate, callback field: [email]"
+        }
+      ],
+      "case_id": "pii_presence_present",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-pii-shape-presence",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "At the rear gate, callback field: person@example.invalid.",
+        "thread_id": "source-study-pii-shape-presence"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "At the rear gate, callback field: [EMAIL]",
+      "terminal": {
+        "classification": {
+          "category": "cyber",
+          "people_at_risk": false,
+          "severity": "low",
+          "summary": "at the rear gate, callback field: [email]"
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P4",
+          "rationale": "severity=low, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 1440
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Isolate affected devices and reset exposed credentials"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 91,
+          "node": "classify",
+          "output_tokens": 30
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 62,
+          "node": "draft",
+          "output_tokens": 27
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"cyber\", \"severity\": \"low\", \"summary\": \"at the rear gate, callback: [email]\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: At the rear gate, callback: [EMAIL]"
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Isolate affected devices and reset exposed credentials\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: cyber\npriority: P4\nsummary: at the rear gate, callback: [email]"
+        }
+      ],
+      "case_id": "pii_type_email",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-pii-shape-type",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "At the rear gate, callback: person@example.invalid.",
+        "thread_id": "source-study-pii-shape-type"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "At the rear gate, callback: [EMAIL]",
+      "terminal": {
+        "classification": {
+          "category": "cyber",
+          "people_at_risk": false,
+          "severity": "low",
+          "summary": "at the rear gate, callback: [email]"
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P4",
+          "rationale": "severity=low, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 1440
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Isolate affected devices and reset exposed credentials"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 89,
+          "node": "classify",
+          "output_tokens": 28
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 60,
+          "node": "draft",
+          "output_tokens": 27
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"physical_security\", \"severity\": \"low\", \"summary\": \"at the rear gate, callback: [phone].\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: At the rear gate, callback: [PHONE]."
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Review CCTV and secure the affected entry point\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: physical_security\npriority: P4\nsummary: at the rear gate, callback: [phone]."
+        }
+      ],
+      "case_id": "pii_type_phone",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-pii-shape-type",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "At the rear gate, callback: 07700 900123.",
+        "thread_id": "source-study-pii-shape-type"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "At the rear gate, callback: [PHONE].",
+      "terminal": {
+        "classification": {
+          "category": "physical_security",
+          "people_at_risk": false,
+          "severity": "low",
+          "summary": "at the rear gate, callback: [phone]."
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P4",
+          "rationale": "severity=low, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 1440
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Review CCTV and secure the affected entry point"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 90,
+          "node": "classify",
+          "output_tokens": 32
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 63,
+          "node": "draft",
+          "output_tokens": 26
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"physical_security\", \"severity\": \"low\", \"summary\": \"a person reported an incident at the rear gate after closing.\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: A person reported an incident at the rear gate after closing."
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Review CCTV and secure the affected entry point\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: physical_security\npriority: P4\nsummary: a person reported an incident at the rear gate after closing."
+        }
+      ],
+      "case_id": "public_text_a",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-public-text",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "A person reported an incident at the rear gate after closing.",
+        "thread_id": "source-study-paired-public-text"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "A person reported an incident at the rear gate after closing.",
+      "terminal": {
+        "classification": {
+          "category": "physical_security",
+          "people_at_risk": false,
+          "severity": "low",
+          "summary": "a person reported an incident at the rear gate after closing."
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P4",
+          "rationale": "severity=low, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 1440
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Review CCTV and secure the affected entry point"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 96,
+          "node": "classify",
+          "output_tokens": 38
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 70,
+          "node": "draft",
+          "output_tokens": 26
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"cyber\", \"severity\": \"critical\", \"summary\": \"a ransomware incident affected the network server after closing.\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: A ransomware incident affected the network server after closing."
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Escalate to the on-call incident commander immediately\", \"Isolate affected devices and reset exposed credentials\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: cyber\npriority: P1\nsummary: a ransomware incident affected the network server after closing."
+        }
+      ],
+      "case_id": "public_text_b",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-public-text",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "A ransomware incident affected the network server after closing.",
+        "thread_id": "source-study-paired-public-text"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "A ransomware incident affected the network server after closing.",
+      "terminal": {
+        "classification": {
+          "category": "cyber",
+          "people_at_risk": false,
+          "severity": "critical",
+          "summary": "a ransomware incident affected the network server after closing."
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P1",
+          "rationale": "severity=critical, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 15
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Escalate to the on-call incident commander immediately",
+          "Isolate affected devices and reset exposed credentials"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 97,
+          "node": "classify",
+          "output_tokens": 37
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 67,
+          "node": "draft",
+          "output_tokens": 42
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "intentional deterministic schema-failure probe",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: At the rear gate, an intruder forced the loading bay open. Contact [EMAIL]; callback [PHONE]; National Insurance [NI-NUMBER]."
+        },
+        {
+          "response": "{\"category\": \"physical_security\", \"severity\": \"high\", \"summary\": \"at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number]. your previous response failed validation with: expecting value: line 1 column 1 (char 0) respond again with only valid json for the schema.\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: At the rear gate, an intruder forced the loading bay open. Contact [EMAIL]; callback [PHONE]; National Insurance [NI-NUMBER].\n\nYour previous response failed validation with:\nExpecting value: line 1 column 1 (char 0)\nRespond again with ONLY valid JSON for the schema."
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Review CCTV and secure the affected entry point\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: physical_security\npriority: P2\nsummary: at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number]. your previous response failed validation with: expecting value: line 1 column 1 (char 0) respond again with only valid json for the schema."
+        }
+      ],
+      "case_id": "retry_email_a",
+      "cost_tracker": {
+        "entry_count": 3,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-retry-email",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "At the rear gate, an intruder forced the loading bay open. Contact person@example.invalid; callback 07700 900123; National Insurance QQ 12 34 56 C.",
+        "thread_id": "source-study-paired-retry-email"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "At the rear gate, an intruder forced the loading bay open. Contact [EMAIL]; callback [PHONE]; National Insurance [NI-NUMBER].",
+      "terminal": {
+        "classification": {
+          "category": "physical_security",
+          "people_at_risk": false,
+          "severity": "high",
+          "summary": "at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number]. your previous response failed validation with: expecting value: line 1 column 1 (char 0) respond again with only valid json for the schema."
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P2",
+          "rationale": "severity=high, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 60
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Review CCTV and secure the affected entry point"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 112,
+          "node": "classify",
+          "output_tokens": 11
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 147,
+          "node": "classify",
+          "output_tokens": 89
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 2,
+          "input_tokens": 121,
+          "node": "draft",
+          "output_tokens": 26
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "intentional deterministic schema-failure probe",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: At the rear gate, an intruder forced the loading bay open. Contact [EMAIL]; callback [PHONE]; National Insurance [NI-NUMBER]."
+        },
+        {
+          "response": "{\"category\": \"physical_security\", \"severity\": \"high\", \"summary\": \"at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number]. your previous response failed validation with: expecting value: line 1 column 1 (char 0) respond again with only valid json for the schema.\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: At the rear gate, an intruder forced the loading bay open. Contact [EMAIL]; callback [PHONE]; National Insurance [NI-NUMBER].\n\nYour previous response failed validation with:\nExpecting value: line 1 column 1 (char 0)\nRespond again with ONLY valid JSON for the schema."
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Review CCTV and secure the affected entry point\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: physical_security\npriority: P2\nsummary: at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number]. your previous response failed validation with: expecting value: line 1 column 1 (char 0) respond again with only valid json for the schema."
+        }
+      ],
+      "case_id": "retry_email_b",
+      "cost_tracker": {
+        "entry_count": 3,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-retry-email",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "At the rear gate, an intruder forced the loading bay open. Contact a.very.long.synthetic.name@department.example.invalid; callback 07700 900123; National Insurance QQ 12 34 56 C.",
+        "thread_id": "source-study-paired-retry-email"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "At the rear gate, an intruder forced the loading bay open. Contact [EMAIL]; callback [PHONE]; National Insurance [NI-NUMBER].",
+      "terminal": {
+        "classification": {
+          "category": "physical_security",
+          "people_at_risk": false,
+          "severity": "high",
+          "summary": "at the rear gate, an intruder forced the loading bay open. contact [email]; callback [phone]; national insurance [ni-number]. your previous response failed validation with: expecting value: line 1 column 1 (char 0) respond again with only valid json for the schema."
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P2",
+          "rationale": "severity=high, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 60
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Review CCTV and secure the affected entry point"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 112,
+          "node": "classify",
+          "output_tokens": 11
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 147,
+          "node": "classify",
+          "output_tokens": 89
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 2,
+          "input_tokens": 121,
+          "node": "draft",
+          "output_tokens": 26
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"operational\", \"severity\": \"low\", \"summary\": \"a routine security incident occurred at an unlisted location.\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: A routine security incident occurred at an unlisted location."
+        }
+      ],
+      "case_id": "unknown_site_route",
+      "cost_tracker": {
+        "entry_count": 1,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "unknown_site_route",
+        "reported_by": "synthetic operator",
+        "site": "NOT-A-SITE",
+        "text": "A routine security incident occurred at an unlisted location.",
+        "thread_id": "source-study-unknown_site_route"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "error"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "human_review",
+          "update_keys": [
+            "classification",
+            "costs",
+            "error",
+            "incident"
+          ]
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "A routine security incident occurred at an unlisted location.",
+      "terminal": {
+        "classification": {
+          "category": "operational",
+          "people_at_risk": false,
+          "severity": "low",
+          "summary": "a routine security incident occurred at an unlisted location."
+        },
+        "error": "unknown site 'NOT-A-SITE'",
+        "kind": "human_review",
+        "priority": null,
+        "recommended_actions": null,
+        "report_status": null
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 96,
+          "node": "classify",
+          "output_tokens": 36
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"physical_security\", \"severity\": \"low\", \"summary\": \"a person named jane example reported a security incident at the rear gate.\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: A person named Jane Example reported a security incident at the rear gate."
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Review CCTV and secure the affected entry point\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: physical_security\npriority: P4\nsummary: a person named jane example reported a security incident at the rear gate."
+        }
+      ],
+      "case_id": "unlisted_name_a",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-unlisted-name",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "A person named Jane Example reported a security incident at the rear gate.",
+        "thread_id": "source-study-paired-unlisted-name"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "A person named Jane Example reported a security incident at the rear gate.",
+      "terminal": {
+        "classification": {
+          "category": "physical_security",
+          "people_at_risk": false,
+          "severity": "low",
+          "summary": "a person named jane example reported a security incident at the rear gate."
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P4",
+          "rationale": "severity=low, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 1440
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Review CCTV and secure the affected entry point"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 99,
+          "node": "classify",
+          "output_tokens": 41
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 73,
+          "node": "draft",
+          "output_tokens": 26
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"physical_security\", \"severity\": \"low\", \"summary\": \"a person named alex example reported a security incident at the rear gate.\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: A person named Alex Example reported a security incident at the rear gate."
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Review CCTV and secure the affected entry point\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: physical_security\npriority: P4\nsummary: a person named alex example reported a security incident at the rear gate."
+        }
+      ],
+      "case_id": "unlisted_name_b",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "injected_mock_wrapper",
+      "input": {
+        "incident_id": "paired-unlisted-name",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "A person named Alex Example reported a security incident at the rear gate.",
+        "thread_id": "source-study-paired-unlisted-name"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "A person named Alex Example reported a security incident at the rear gate.",
+      "terminal": {
+        "classification": {
+          "category": "physical_security",
+          "people_at_risk": false,
+          "severity": "low",
+          "summary": "a person named alex example reported a security incident at the rear gate."
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P4",
+          "rationale": "severity=low, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 1440
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Review CCTV and secure the affected entry point"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 99,
+          "node": "classify",
+          "output_tokens": 41
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 73,
+          "node": "draft",
+          "output_tokens": 26
+        }
+      ]
+    },
+    {
+      "calls": [
+        {
+          "response": "{\"category\": \"physical_security\", \"severity\": \"low\", \"summary\": \"a person reported an incident at the rear gate after closing.\", \"people_at_risk\": false}",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user": "INCIDENT REPORT: A person reported an incident at the rear gate after closing."
+        },
+        {
+          "response": "[\"Log the incident and notify the site duty manager\", \"Review CCTV and secure the affected entry point\"]",
+          "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+          "user": "category: physical_security\npriority: P4\nsummary: a person reported an incident at the rear gate after closing."
+        }
+      ],
+      "case_id": "upstream_default_mock",
+      "cost_tracker": {
+        "entry_count": 2,
+        "model_name": "mock",
+        "total_cost_usd": 0.0
+      },
+      "execution_mode": "upstream_default_mock",
+      "input": {
+        "incident_id": "paired-public-text",
+        "reported_by": "synthetic operator",
+        "site": "GTS-01",
+        "text": "A person reported an incident at the rear gate after closing.",
+        "thread_id": "source-study-paired-public-text"
+      },
+      "network_attempt_count": 0,
+      "node_events": [
+        {
+          "kind": "node",
+          "name": "classify",
+          "update_keys": [
+            "classification",
+            "costs"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "enrich",
+          "update_keys": [
+            "enrichment"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "prioritise",
+          "update_keys": [
+            "priority"
+          ]
+        },
+        {
+          "kind": "node",
+          "name": "draft",
+          "update_keys": [
+            "costs",
+            "report"
+          ]
+        },
+        {
+          "before_node": "dispatch",
+          "kind": "interrupt"
+        }
+      ],
+      "process_attempt_count": 0,
+      "source_redacted_text": "A person reported an incident at the rear gate after closing.",
+      "terminal": {
+        "classification": {
+          "category": "physical_security",
+          "people_at_risk": false,
+          "severity": "low",
+          "summary": "a person reported an incident at the rear gate after closing."
+        },
+        "error": null,
+        "kind": "pending_approval",
+        "priority": {
+          "level": "P4",
+          "rationale": "severity=low, people_at_risk=False, site_criticality=standard",
+          "response_sla_minutes": 1440
+        },
+        "recommended_actions": [
+          "Log the incident and notify the site duty manager",
+          "Review CCTV and secure the affected entry point"
+        ],
+        "report_status": "pending_approval"
+      },
+      "usage": [
+        {
+          "cost_usd": 0.0,
+          "index": 0,
+          "input_tokens": 96,
+          "node": "classify",
+          "output_tokens": 38
+        },
+        {
+          "cost_usd": 0.0,
+          "index": 1,
+          "input_tokens": 70,
+          "node": "draft",
+          "output_tokens": 26
+        }
+      ]
+    }
+  ],
+  "execution": {
+    "case_count": 22,
+    "cost_usage_rows": 45,
+    "mock_contract": "Pinned triage.llm.MockLLM is deterministic from system/user text; paired executions rerun identical requests and therefore produce identical responses. The retry probe injects one fixed malformed classification response before delegating to that same mock. One case calls build_graph() with TRIAGE_LLM=mock and instruments the upstream MockLLM method while preserving its body.",
+    "mode": "unmodified upstream source, direct LangGraph execution",
+    "model_call_count": 45,
+    "network_calls": 0,
+    "network_guard": "socket.socket connect/send methods, socket.create_connection, and socket.getaddrinfo fail closed during graph execution",
+    "outbound_provider_calls": 0,
+    "process_calls": 0,
+    "process_guard": "subprocess.Popen/run and os.system/popen fail closed during graph execution",
+    "provider": "none; upstream default mock and injected instrumented upstream MockLLM",
+    "provider_configuration": {
+      "TRIAGE_LLM": "mock",
+      "default_factory_runs": 1,
+      "injected_wrapper_runs": 21
+    },
+    "source_cost_model": "estimate_tokens(text)=max(1,len(text)//4); call input is system+user; output is the exact deterministic mock string",
+    "source_node_invocations": 87
+  },
+  "findings": [
+    {
+      "id": "redacted-pair-trace-equality",
+      "observation": "For each paired value in the three README-listed PII patterns, the upstream redactor produced identical text and the executed graph produced identical full request/response, reported-usage, node-event, and terminal records.",
+      "scope": "Only the synthetic input pairs, pinned code, deterministic mock, injected retry schedule, and collected observations in this report."
+    },
+    {
+      "id": "retry-path-preserves-pair-equality",
+      "observation": "With one deterministic malformed classifier response, the upstream retry helper generated the same repair prompt for both email variants, and the entire three-call graph traces matched.",
+      "scope": "One fixed failure position and fixed mock response; not all provider errors or retries."
+    },
+    {
+      "id": "redaction-shape-remains-observable",
+      "observation": "The redactor normalizes matched values, but its output retains marker presence, occurrence count, and pattern type. The presence, count, and type probes therefore use different exact classifier requests and are not value-substitution equality pairs.",
+      "scope": "Three fixed synthetic comparisons under the pinned deterministic mock; no provider or all-input inference."
+    },
+    {
+      "id": "default-mock-factory-equivalence",
+      "observation": "For one fixed public incident, direct build_graph() with TRIAGE_LLM=mock matched the injected-wrapper run in exact captured model calls, source usage rows, node events, and terminal projection.",
+      "scope": "One deterministic mock case; instrumentation delegates to the pinned MockLLM.complete implementation."
+    },
+    {
+      "id": "unsupported-name-remains-in-input",
+      "observation": "The two synthetic name-like strings are outside the three README-listed patterns; they remained in source-redacted text and the classifier requests differed.",
+      "scope": "This is outside the documented pattern list and is not reported as a violation of that limited promise."
+    },
+    {
+      "id": "mock-email-marker-heuristic",
+      "observation": "The source mock's keyword list includes 'email'; because the source redactor emits '[EMAIL]', adding a redacted email can affect the mock's heuristic classification on neutral text.",
+      "scope": "Mock-specific behavior only; no inference about real LLM classifiers."
+    },
+    {
+      "id": "raw-state-remains-outside-request-projection",
+      "observation": "The graph input state retains the original incident object while the classify prompt uses redacted incident.text; this run records request traces, not checkpoint confidentiality.",
+      "scope": "No claim about persistence security or storage encryption."
+    }
+  ],
+  "format": "orchlang-incident-triage-source-study",
+  "harness": {
+    "dependency_lock_sha256": "b9599a3084f6b8f47aea39da6f04e1808296a3371b58f8ae5d39ca827154ca6b",
+    "input_corpus_sha256": "dbd784dcec978e4e6160d7664e96a741a8546a1bb5587fdf32bc7aed46a7457a",
+    "langgraph": "1.2.14",
+    "manifest_sha256": "38e804b6470ad0c58f0da526f71ab39b7a7ad5a4a241c0e156569ba0ad203500",
+    "pydantic": "2.14.0",
+    "python": "3.14.6",
+    "run_study_sha256": "f13bdebb6d2442802ae9ed0663e1d05ee1a014fd9a3e69222a078cacb281e399",
+    "test_sha256": "d0eb09bc5f94a57c622db5aeca0c78ae58b4c0dde87b6892a1a9b37979e55001",
+    "verifier_sha256": "3fe4dae778e4ef411b42e97a5f205891b3171288dac8180c292a3ad1adbe467a"
+  },
+  "pairs": [
+    {
+      "call_count": 2,
+      "dimension": "email value substitution with fixed redacted skeleton",
+      "expected_relation": "equal",
+      "left": "pii_email_a",
+      "observed_relation": "equal",
+      "right": "pii_email_b"
+    },
+    {
+      "call_count": 2,
+      "dimension": "phone value substitution with fixed redacted skeleton",
+      "expected_relation": "equal",
+      "left": "pii_phone_a",
+      "observed_relation": "equal",
+      "right": "pii_phone_b"
+    },
+    {
+      "call_count": 2,
+      "dimension": "national_insurance value substitution with fixed redacted skeleton",
+      "expected_relation": "equal",
+      "left": "pii_national_insurance_a",
+      "observed_relation": "equal",
+      "right": "pii_national_insurance_b"
+    },
+    {
+      "call_count": 2,
+      "dimension": "PII presence changes redacted skeleton",
+      "expected_relation": "different",
+      "left": "pii_presence_absent",
+      "observed_relation": "different",
+      "right": "pii_presence_present"
+    },
+    {
+      "call_count": 2,
+      "dimension": "PII occurrence count changes redacted skeleton",
+      "expected_relation": "different",
+      "left": "pii_count_one",
+      "observed_relation": "different",
+      "right": "pii_count_two"
+    },
+    {
+      "call_count": 2,
+      "dimension": "PII pattern type changes redaction marker",
+      "expected_relation": "different",
+      "left": "pii_type_email",
+      "observed_relation": "different",
+      "right": "pii_type_phone"
+    },
+    {
+      "call_count": 3,
+      "dimension": "email value substitution through one repair retry",
+      "expected_relation": "equal",
+      "left": "retry_email_a",
+      "observed_relation": "equal",
+      "right": "retry_email_b"
+    },
+    {
+      "call_count": 2,
+      "dimension": "public non-PII content mutation",
+      "expected_relation": "different",
+      "left": "public_text_a",
+      "observed_relation": "different",
+      "right": "public_text_b"
+    },
+    {
+      "call_count": 2,
+      "dimension": "injected wrapper versus upstream default mock factory",
+      "expected_relation": "equal",
+      "left": "public_text_a",
+      "observed_relation": "equal",
+      "right": "upstream_default_mock"
+    },
+    {
+      "call_count": 2,
+      "dimension": "unlisted name-like public text",
+      "expected_relation": "different",
+      "left": "unlisted_name_a",
+      "observed_relation": "different",
+      "right": "unlisted_name_b"
+    },
+    {
+      "call_count": 2,
+      "dimension": "mock-specific redaction-marker heuristic",
+      "expected_relation": "different",
+      "left": "mock_marker_absent",
+      "observed_relation": "different",
+      "right": "mock_marker_present"
+    }
+  ],
+  "source": {
+    "commit": "c08f710acfeefe233329df613fe8358eaac5f350",
+    "git_tree": "2f6e2058052e4cccd48ae41230d9d5dd1ba5aa02",
+    "license": "MIT",
+    "manifest_sha256": "38e804b6470ad0c58f0da526f71ab39b7a7ad5a4a241c0e156569ba0ad203500",
+    "repository": "https://github.com/codewithkachi/agent-incident-triage",
+    "tracked_file_count": 23,
+    "tracked_file_sha256": {
+      ".github/workflows/ci.yml": "6f198f6b51650ec58d82b346d818d0976dbf20613e41f7937f254dd7e5d2541b",
+      ".gitignore": "bdc4989c9ce00b36ba3fec6672e80957194a9b7cfcfe1fa10b6733cbe9bdd6a0",
+      "LICENSE": "2201062c20bd45f4a65b1f39a094c4908927c9e58cfaee7265ed4a531bde57b6",
+      "README.md": "fce821c23c907468d9df4c10ecb446df3a86ed8a871831b9dbdfce54e0cc57d4",
+      "data/sample_incidents.jsonl": "37f14141767c284812d7161526b9ca5981f706d0aafddf8fee987d75a530ef58",
+      "data/sites.json": "51d9b3fa3c1711e85e26708ebd59b43320d191c044a5e11d2893cb5964819d98",
+      "eval/golden_trajectories.jsonl": "eb95fb666c7a5a9f8ef4f8ec0adbf9b667b7b9071db80f876648ff6cb7056fa1",
+      "eval/results.json": "c98bd8ced53f9d443632d1fe4d73ebeba757139babe90d4b2ca82526774dc2cd",
+      "requirements.txt": "5894fad802cbbddd734d3ab2cc923f77bf5c040ae3fcc4644e97b55376385b83",
+      "src/triage/__init__.py": "fd51f9a6ee5ca073a6bdc74b51a48b5130a4ab90556a267014a8be562f8ed868",
+      "src/triage/api.py": "ad1f7fdd60c2a08ca5f97266d13868c1d05a271016f7e9881bdb9a2c92f85d63",
+      "src/triage/config.py": "54400bc276090cea7bbf9eed4322b988b5ef73652ce1d343897caac7c62b37aa",
+      "src/triage/costs.py": "f1393f1ceada49308d689b47ed736fb864a872ca31bc6bbe7e84265be288d92f",
+      "src/triage/evaluate.py": "e8da95a5264f111e69315906213653b57d52de5d476bebd4b571729283fdd42e",
+      "src/triage/graph.py": "0fc931ff7edb64cc26d9eb8b7aa8ec3b05bcefbb667641a30610456ddde4138b",
+      "src/triage/guardrails.py": "94d086fb139eff7c7b3bf7ca0b49055c4a7b0a13509913ca855fb6a04a110b5d",
+      "src/triage/llm.py": "2a92f378b51921e312b678ad3aab5a6d7aadd5a7f96d5cc641488e7833ce710a",
+      "src/triage/models.py": "23987632467f7475efa7964c8d83157c9e4a9267f03df494a7a2f5a9da8816be",
+      "src/triage/run_demo.py": "79b3bc2fb715c13638dfcd6a8c37403c054fd247d51afc8201ec5794b739a302",
+      "tests/conftest.py": "e8cef54430b962c6bea485630ba8a1c470dd8a3abcb3cc8b01ac93402a28a373",
+      "tests/test_api.py": "9dae64a11c9d098d84f39cfd8b608f47d90330fd2c5584797e523d6c64fdb05d",
+      "tests/test_graph.py": "202984dd4bad9781be6e69381194e66ec40ccbeaab4d71ee59574cd3d58884a4",
+      "tests/test_guardrails.py": "7585e3d8cb9c152ac9c1735c99798913cdc2fe35c4d22728d7603e953b382ff1"
+    },
+    "verified_before_and_after_execution": true
+  },
+  "study_questions": {
+    "not_compared_as_whole_output": [
+      "raw incident object retained in graph state/checkpoints",
+      "internal logger output",
+      "runtime metadata outside the captured stream updates and selected terminal fields"
+    ],
+    "observation": "exact ordered system/user/response strings, source token-cost rows, node/update events, interrupt, and selected terminal projection",
+    "pii_pairs_expected_equal": true,
+    "pii_shape_pairs_expected_different": true,
+    "public_mutation_expected_different": true,
+    "retry_pair_expected_equal": true,
+    "unknown_site_route_expected": [
+      "classify",
+      "enrich",
+      "human_review"
+    ],
+    "unlisted_name_expected_different": true
+  },
+  "version": 1
+}

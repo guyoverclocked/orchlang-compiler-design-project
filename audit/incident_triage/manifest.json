@@ -1,0 +1,370 @@
+{
+  "format": "orchlang-incident-extension-reproduction",
+  "version": 1,
+  "status": "passed",
+  "started_utc": "2026-10-09T02:26:36.377690+00:00",
+  "completed_utc": "2026-10-09T02:26:40.602841+00:00",
+  "python": "3.12.14",
+  "platform": "macOS-27.0-arm64-arm-64bit",
+  "integration_interpreter": "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/.venv/bin/python",
+  "source_commit": "c08f710acfeefe233329df613fe8358eaac5f350",
+  "source_bundle_sha256": "deb487b425c49d95c39cd9ff2d689dc56401f66ffd44f7ae17fbe9a691849080",
+  "inputs_unchanged_during_run": true,
+  "input_sha256": {
+    "audit/2026-09-17/reproduce.py": "41568b063164c94f5223fcede44318aea0a0895b8f5c3f76df8bce93c281ebe1",
+    "audit/certificate_audit.py": "85c98f9f9ad532a7d299c57d2e4e38943a8fa64075cb7ca388ff2222bd9e936e",
+    "audit/evaluate_graphs.py": "a3e47096c3aee47ebe2944b2493fdc35106c8309e83ba8e5b98a21ac8f82a24d",
+    "audit/evaluate_probabilistic_channels.py": "9c32294b65727e263db467eb47d28a960e7f2ac521476e9f4160014a216e647d",
+    "audit/evaluate_probabilistic_replay.py": "b172117735dd3c46003284a293ca5cfd6f2d9e7f44277dfaba9a22a543041c0d",
+    "audit/evaluate_source_graphs.py": "0cc8fc78e2e41b874d00eea736b835ab5d227f0205a33e3ec4dda02e914a4723",
+    "audit/evaluate_stochastic_bisimulation.py": "d347795a8f8b562f6a8d909bd21237d851136a336dd107c38190adc3e0ba0961",
+    "audit/evaluate_trace_equivalence.py": "1b640526931de261d8aaf9943b7fcd858bcda5b0d8fdf23026814f026c74719a",
+    "audit/generate_graph_examples.py": "d240ed27783cb68ec1a4e6c862731b7061d9bd227565d2d42543c183b1349ea7",
+    "audit/graph_adversarial.py": "c83605f5d13be564103e80ab2f489f7613146f197b81a67f5ef83b3a2dd20932",
+    "audit/orchgraph.py": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+    "audit/probabilistic_channels.py": "45380e75cdcc4d6f285a0027cbb85dab97d22dff11c5c94d3940b6813e8dce00",
+    "audit/probabilistic_reference.py": "9c081f87e1dcd7b283bb4894a1a1794c8183e09fcadeac53c9467cb1606e3012",
+    "audit/relational_stress.py": "c90e6d101d31f609eae804e60a5346df6ae7c3dcc5df8a1354f7c7aedc483a8b",
+    "audit/replay_graph_certificate.py": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
+    "audit/replay_probabilistic_report.py": "7297248e651c3972cc62287409b47a95f3f41b6b1800adc1011dc7bb4cfb1e1f",
+    "audit/replay_stochastic_certificate.py": "1b987ad220e733a4e1be79b7391bce245d8d7e56bc515bccec051918a8161407",
+    "audit/replay_trace_equivalence.py": "cd117dcfcbb868a22e10594efc3380b1a38d4af9dafdb3bcd4c89e61b0aaad55",
+    "audit/reproduce_final.py": "d141a5dd9164b2221218f129076907b83a6014bbde3c3eb3f57c766b1948f59b",
+    "audit/reproduce_incident_triage.py": "e719599209ddd7997a03475ec3f103b8c912327d533b55259db6b2685c8083aa",
+    "audit/source_to_graph.py": "85b7f497150cf8c2f40cf48547336e3f0223bf7ea960b7959e19be2fa609a3a7",
+    "audit/stochastic_bisimulation.py": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+    "audit/test_certificate_audit.py": "5f3da57bca0b9b14073927188c72fc2dff5c55a4f271a6fc59bff5a38da1050f",
+    "audit/test_evaluate_source_graphs.py": "409197d83e941e4ab3d70794c43ddd991bf46a7cc595e42de0c12dc526951179",
+    "audit/test_graph_evaluation.py": "50d908fef9e843d75081a57739c5fd35e7bebf6a700670a59701f2defee7f11e",
+    "audit/test_graph_replay.py": "d8e360d78feb6ce356f3bca2eab329cecef51c14e90285019bc88e6c7036382c",
+    "audit/test_orchgraph.py": "71749833a4f6b55162dd67a103c0efeb973742901c916ece2f884c1e6edcdedc",
+    "audit/test_probabilistic_channels.py": "448cdd6052b6087abfe679a6b0946da01869d78a2647ee10100c7d489c4bc429",
+    "audit/test_probabilistic_reference.py": "12ec5202a7e9b2c6652ba85019fe1900a033b42bf985c22863ca3cea34bc61d9",
+    "audit/test_probabilistic_replay.py": "d2225e53fadb2e716e51f66e578207518fd751ebf504e28dbf0f4c0aa7939534",
+    "audit/test_relational_stress.py": "809c83c71d9bb276f8984cd806895483c439f62997bd5dd4f778ea330d7eddfa",
+    "audit/test_source_to_graph.py": "c8f71f51408fa326c53681139ee531008057fe7579d59a506ebcd7df0dfce8cb",
+    "audit/test_stochastic_bisimulation.py": "13d47700ca4b90ace8ef87ed503adee43437cf79b0f22df633d2ba9f6a507877",
+    "audit/test_stochastic_replay.py": "20b6226319bacafd6258a960fdb7ca83a28099244221ff545c6b836692faf444",
+    "audit/test_trace_equivalence.py": "bb370216fb2f7dc0bcec89cc4d91ad5cec488088e2804a414261371a624453a6",
+    "audit/test_trace_equivalence_replay.py": "5192459ad8ee67bccadef02c9bf70e125ccda7970ac78f82ca591b9edf6dad53",
+    "audit/trace_equivalence.py": "a9b7aa176b5081ab12a9cff31343b2509de4105daa1c7d87b386765581146ade",
+    "integrations/incident_triage/.gitignore": "472f568478bff9056ec56b5c5e8a7ca3d280c651d527321e1eb80892801164be",
+    "integrations/incident_triage/README.md": "85141541a6dbbc636e04cdc052fab2afe2cf1176b2ed87aef44bc6328630a494",
+    "integrations/incident_triage/SOURCE_SNAPSHOT.md": "ae73cff9ed9936bd4385b0cba75271813dd2697e50b7fb48a74e046ddece66a5",
+    "integrations/incident_triage/UPSTREAM_MANIFEST.json": "38e804b6470ad0c58f0da526f71ab39b7a7ad5a4a241c0e156569ba0ad203500",
+    "integrations/incident_triage/concurrency/README.md": "7d6b27207d04abdfe2beb415da4e486280187b04dc8164d4ecb99e08419db646",
+    "integrations/incident_triage/concurrency/SESSION_MANAGER.md": "70582dc33dca6729c5ff25ace92a685bcaca200f6de51f2bdebb4217ae667814",
+    "integrations/incident_triage/concurrency/demo_isolated_sessions.py": "f766d63c448b031ac948c99f41806638f36403b2e4ea31e89f8aa91a3a8d71e0",
+    "integrations/incident_triage/concurrency/isolated_session_manager.py": "17b737386ff0bef1cbe9919da2876b865dfa15d7e746d792a68bbf3034c281a4",
+    "integrations/incident_triage/concurrency/results/concurrency_study.json": "9ffaa057d7a8e3f73a908f1c4933f13404890331d6e4c112793e0aac86a1c232",
+    "integrations/incident_triage/concurrency/results/root_reproduction.json": "95a28b53a611e6043e6547151763f053b42725064b8623a830be76e3b852199a",
+    "integrations/incident_triage/concurrency/run_concurrency_study.py": "7c8136cc435e79d426f8296e32a64b03d7f3a21098e48ab685f148f653f4454f",
+    "integrations/incident_triage/concurrency/test_concurrency_study.py": "09c9e3e8334bbf358603de5228d55be39a6e4c324f9090f9fc35d2b441f04407",
+    "integrations/incident_triage/concurrency/test_isolated_sessions.py": "f36160bd43e82435f0af368ff39688857f62acaf2e851cdebd053e3fee5c9e27",
+    "integrations/incident_triage/concurrency/verify_concurrency_study.py": "add37e31e08ad72188a5a6081522e9359124a5ea16669966501425cd847a7632",
+    "integrations/incident_triage/protocol_paths/README.md": "b36134d48dc5c5fe6f15ca4ce0f61a643c60cb7d6d07bda463ef93e623ce859d",
+    "integrations/incident_triage/protocol_paths/results/protocol_paths.attestation.json": "46c0550478d95500af06dc83aceea55daac48c92ec71e9cb0ed405c60607ee28",
+    "integrations/incident_triage/protocol_paths/results/protocol_paths.json": "e2abae3d5a44c034e476646ca332e6d5a119f47097cbf9e5bbd3e5ec5f29113b",
+    "integrations/incident_triage/protocol_paths/run_protocol_paths.py": "ef5ed75203c4ef4fd4683f79b272c044dd9b874cf870a0a79f85ca8c30b3f7d9",
+    "integrations/incident_triage/protocol_paths/test_protocol_paths.py": "a7f92254de028eee3f5ee65e3ade4d23044d7ed1e315a1b6d93e8d30a0351045",
+    "integrations/incident_triage/protocol_paths/verify_protocol_paths.py": "f84eaae9dd90914fde0b8a7ce2c0257bd3cc1fe131352ef63579fc15aa97e700",
+    "integrations/incident_triage/requirements.lock": "b9599a3084f6b8f47aea39da6f04e1808296a3371b58f8ae5d39ca827154ca6b",
+    "integrations/incident_triage/results/root_reproduction.json": "32a4a97b3eea9523740b9b83b12b6ac7f78a8a7d43a0698f6501d51867441623",
+    "integrations/incident_triage/results/source_study.json": "3f10906bb8fdd2283c59b188863304ecb2431c662ca0be3c0a04aaadfa05e9ab",
+    "integrations/incident_triage/run_study.py": "f13bdebb6d2442802ae9ed0663e1d05ee1a014fd9a3e69222a078cacb281e399",
+    "integrations/incident_triage/source_analysis/README.md": "71127deb5984fb360a02042c74e6cec204fb3bdff1612d82f750fd6998687315",
+    "integrations/incident_triage/source_analysis/__init__.py": "cff4a37f0cb2eac2a99efa47bef6a3ca22ebf893e5cf3eb8f9cf168eb288b7c4",
+    "integrations/incident_triage/source_analysis/artifacts/classifier_request.attestation.json": "6b753260b7f3a2096073ed8bc139021a93dd4a5a5a2f168cfabf74cf61a41f4c",
+    "integrations/incident_triage/source_analysis/artifacts/classifier_request.certificate.json": "5f8dfbe841c58ee6bfa0d6788a47115992faae8b2beba3ed75b417f61a5850fa",
+    "integrations/incident_triage/source_analysis/artifacts/classifier_request.graph.json": "81ffdf3bacbd5e7ad96f76a4757e971e8801996f2d0b716d5aad24353889b282",
+    "integrations/incident_triage/source_analysis/artifacts/source_analysis.attestation.json": "7d02eb18f68ad409debed23702939945fc86d6c50656eaa4e71ec20cee28b033",
+    "integrations/incident_triage/source_analysis/artifacts/source_analysis.json": "0fd0eaa631ab5deb2da3ac396860271b87cc4eca6be1500f746dee29bfcb262a",
+    "integrations/incident_triage/source_analysis/bridge.py": "c0c845f7cef1f74663981a5db96c0f0eb989241b24746cb6708362ad49393fa8",
+    "integrations/incident_triage/source_analysis/replay_projection.py": "4d7917f19810e230e26d7573c5a7cbe8bb74a7649064a5084d89b127bde58175",
+    "integrations/incident_triage/source_analysis/test_source_analysis.py": "9145d19feb779361b757c9f7e338e85ffe5fb336d21e0520d367173058792e8c",
+    "integrations/incident_triage/test_study.py": "d0eb09bc5f94a57c622db5aeca0c78ae58b4c0dde87b6892a1a9b37979e55001",
+    "integrations/incident_triage/upstream_c08f710.bundle": "deb487b425c49d95c39cd9ff2d689dc56401f66ffd44f7ae17fbe9a691849080",
+    "integrations/incident_triage/upstream_snapshot/.github/workflows/ci.yml": "6f198f6b51650ec58d82b346d818d0976dbf20613e41f7937f254dd7e5d2541b",
+    "integrations/incident_triage/upstream_snapshot/.gitignore": "bdc4989c9ce00b36ba3fec6672e80957194a9b7cfcfe1fa10b6733cbe9bdd6a0",
+    "integrations/incident_triage/upstream_snapshot/LICENSE": "2201062c20bd45f4a65b1f39a094c4908927c9e58cfaee7265ed4a531bde57b6",
+    "integrations/incident_triage/upstream_snapshot/README.md": "fce821c23c907468d9df4c10ecb446df3a86ed8a871831b9dbdfce54e0cc57d4",
+    "integrations/incident_triage/upstream_snapshot/data/sample_incidents.jsonl": "37f14141767c284812d7161526b9ca5981f706d0aafddf8fee987d75a530ef58",
+    "integrations/incident_triage/upstream_snapshot/data/sites.json": "51d9b3fa3c1711e85e26708ebd59b43320d191c044a5e11d2893cb5964819d98",
+    "integrations/incident_triage/upstream_snapshot/eval/golden_trajectories.jsonl": "eb95fb666c7a5a9f8ef4f8ec0adbf9b667b7b9071db80f876648ff6cb7056fa1",
+    "integrations/incident_triage/upstream_snapshot/eval/results.json": "c98bd8ced53f9d443632d1fe4d73ebeba757139babe90d4b2ca82526774dc2cd",
+    "integrations/incident_triage/upstream_snapshot/requirements.txt": "5894fad802cbbddd734d3ab2cc923f77bf5c040ae3fcc4644e97b55376385b83",
+    "integrations/incident_triage/upstream_snapshot/src/triage/__init__.py": "fd51f9a6ee5ca073a6bdc74b51a48b5130a4ab90556a267014a8be562f8ed868",
+    "integrations/incident_triage/upstream_snapshot/src/triage/api.py": "ad1f7fdd60c2a08ca5f97266d13868c1d05a271016f7e9881bdb9a2c92f85d63",
+    "integrations/incident_triage/upstream_snapshot/src/triage/config.py": "54400bc276090cea7bbf9eed4322b988b5ef73652ce1d343897caac7c62b37aa",
+    "integrations/incident_triage/upstream_snapshot/src/triage/costs.py": "f1393f1ceada49308d689b47ed736fb864a872ca31bc6bbe7e84265be288d92f",
+    "integrations/incident_triage/upstream_snapshot/src/triage/evaluate.py": "e8da95a5264f111e69315906213653b57d52de5d476bebd4b571729283fdd42e",
+    "integrations/incident_triage/upstream_snapshot/src/triage/graph.py": "0fc931ff7edb64cc26d9eb8b7aa8ec3b05bcefbb667641a30610456ddde4138b",
+    "integrations/incident_triage/upstream_snapshot/src/triage/guardrails.py": "94d086fb139eff7c7b3bf7ca0b49055c4a7b0a13509913ca855fb6a04a110b5d",
+    "integrations/incident_triage/upstream_snapshot/src/triage/llm.py": "2a92f378b51921e312b678ad3aab5a6d7aadd5a7f96d5cc641488e7833ce710a",
+    "integrations/incident_triage/upstream_snapshot/src/triage/models.py": "23987632467f7475efa7964c8d83157c9e4a9267f03df494a7a2f5a9da8816be",
+    "integrations/incident_triage/upstream_snapshot/src/triage/run_demo.py": "79b3bc2fb715c13638dfcd6a8c37403c054fd247d51afc8201ec5794b739a302",
+    "integrations/incident_triage/upstream_snapshot/tests/conftest.py": "e8cef54430b962c6bea485630ba8a1c470dd8a3abcb3cc8b01ac93402a28a373",
+    "integrations/incident_triage/upstream_snapshot/tests/test_api.py": "9dae64a11c9d098d84f39cfd8b608f47d90330fd2c5584797e523d6c64fdb05d",
+    "integrations/incident_triage/upstream_snapshot/tests/test_graph.py": "202984dd4bad9781be6e69381194e66ec40ccbeaab4d71ee59574cd3d58884a4",
+    "integrations/incident_triage/upstream_snapshot/tests/test_guardrails.py": "7585e3d8cb9c152ac9c1735c99798913cdc2fe35c4d22728d7603e953b382ff1",
+    "integrations/incident_triage/verify_results.py": "3fe4dae778e4ef411b42e97a5f205891b3171288dac8180c292a3ad1adbe467a"
+  },
+  "stages": [
+    {
+      "stage": "source-bundle-verification",
+      "exit_code": 0,
+      "log": "audit/incident_triage/source-bundle-verification.log",
+      "argv": [
+        "git",
+        "bundle",
+        "verify",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/upstream_c08f710.bundle"
+      ]
+    },
+    {
+      "stage": "source-offline-clone",
+      "exit_code": 0,
+      "log": "audit/incident_triage/source-offline-clone.log",
+      "argv": [
+        "git",
+        "clone",
+        "--quiet",
+        "--no-checkout",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/upstream_c08f710.bundle",
+        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ty93erhn/upstream"
+      ]
+    },
+    {
+      "stage": "source-pinned-checkout",
+      "exit_code": 0,
+      "log": "audit/incident_triage/source-pinned-checkout.log",
+      "argv": [
+        "git",
+        "-C",
+        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ty93erhn/upstream",
+        "checkout",
+        "--quiet",
+        "--detach",
+        "c08f710acfeefe233329df613fe8358eaac5f350"
+      ]
+    },
+    {
+      "stage": "direct-source-tests",
+      "exit_code": 0,
+      "log": "audit/incident_triage/direct-source-tests.log",
+      "argv": [
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage",
+        "-p",
+        "test_study.py",
+        "-v"
+      ]
+    },
+    {
+      "stage": "direct-source-execution",
+      "exit_code": 0,
+      "log": "audit/incident_triage/direct-source-execution.log",
+      "argv": [
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/.venv/bin/python",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/run_study.py",
+        "--upstream",
+        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ty93erhn/upstream",
+        "--output",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/source_study.json"
+      ]
+    },
+    {
+      "stage": "independent-direct-source-replay",
+      "exit_code": 0,
+      "log": "audit/incident_triage/independent-direct-source-replay.log",
+      "argv": [
+        "/Users/nambi/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/verify_results.py",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/source_study.json"
+      ]
+    },
+    {
+      "stage": "source-protocol-tests",
+      "exit_code": 0,
+      "log": "audit/incident_triage/source-protocol-tests.log",
+      "argv": [
+        "/Users/nambi/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-m",
+        "unittest",
+        "integrations.incident_triage.source_analysis.test_source_analysis",
+        "-v"
+      ]
+    },
+    {
+      "stage": "source-protocol-and-classifier-graph",
+      "exit_code": 0,
+      "log": "audit/incident_triage/source-protocol-and-classifier-graph.log",
+      "argv": [
+        "/Users/nambi/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/source_analysis/bridge.py",
+        "--upstream",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/upstream_snapshot",
+        "--study",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/source_study.json",
+        "--output-dir",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/source_analysis"
+      ]
+    },
+    {
+      "stage": "independent-source-protocol-replay",
+      "exit_code": 0,
+      "log": "audit/incident_triage/independent-source-protocol-replay.log",
+      "argv": [
+        "/Users/nambi/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/source_analysis/replay_projection.py",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/source_analysis/source_analysis.json",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/upstream_snapshot",
+        "--study",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/source_study.json",
+        "--attestation",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/source_protocol.attestation.json"
+      ]
+    },
+    {
+      "stage": "concurrency-and-session-tests",
+      "exit_code": 0,
+      "log": "audit/incident_triage/concurrency-and-session-tests.log",
+      "argv": [
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/.venv/bin/python",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/concurrency",
+        "-p",
+        "test_*.py",
+        "-v"
+      ]
+    },
+    {
+      "stage": "controlled-concurrent-source-execution",
+      "exit_code": 0,
+      "log": "audit/incident_triage/controlled-concurrent-source-execution.log",
+      "argv": [
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/.venv/bin/python",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/concurrency/run_concurrency_study.py",
+        "--upstream",
+        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ty93erhn/upstream",
+        "--output",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/concurrency_study.json"
+      ]
+    },
+    {
+      "stage": "independent-concurrency-witness-replay",
+      "exit_code": 0,
+      "log": "audit/incident_triage/independent-concurrency-witness-replay.log",
+      "argv": [
+        "/Users/nambi/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/concurrency/verify_concurrency_study.py",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/concurrency_study.json",
+        "--upstream",
+        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ty93erhn/upstream"
+      ]
+    },
+    {
+      "stage": "isolated-session-manager-demo",
+      "exit_code": 0,
+      "log": "audit/incident_triage/isolated-session-manager-demo.log",
+      "argv": [
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/.venv/bin/python",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/concurrency/demo_isolated_sessions.py"
+      ]
+    },
+    {
+      "stage": "source-protocol-path-tests",
+      "exit_code": 0,
+      "log": "audit/incident_triage/source-protocol-path-tests.log",
+      "argv": [
+        "/Users/nambi/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/protocol_paths",
+        "-p",
+        "test_*.py",
+        "-v"
+      ]
+    },
+    {
+      "stage": "source-protocol-path-execution",
+      "exit_code": 0,
+      "log": "audit/incident_triage/source-protocol-path-execution.log",
+      "argv": [
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/.venv/bin/python",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/protocol_paths/run_protocol_paths.py",
+        "--upstream",
+        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ty93erhn/upstream",
+        "--output",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/protocol_paths.json"
+      ]
+    },
+    {
+      "stage": "independent-protocol-path-replay",
+      "exit_code": 0,
+      "log": "audit/incident_triage/independent-protocol-path-replay.log",
+      "argv": [
+        "/Users/nambi/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/protocol_paths/verify_protocol_paths.py",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/protocol_paths.json",
+        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ty93erhn/upstream",
+        "--attestation",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/protocol_paths.attestation.json"
+      ]
+    }
+  ],
+  "result_sha256": {
+    "audit/incident_triage/concurrency-and-session-tests.log": "693e142696a7f258b7a373906025eda97555620e9f9e08c76a9b92d43a2c6448",
+    "audit/incident_triage/concurrency_study.json": "9ffaa057d7a8e3f73a908f1c4933f13404890331d6e4c112793e0aac86a1c232",
+    "audit/incident_triage/controlled-concurrent-source-execution.log": "9ffaa057d7a8e3f73a908f1c4933f13404890331d6e4c112793e0aac86a1c232",
+    "audit/incident_triage/direct-source-execution.log": "e0e2729292ee959e96657690490171b6421c4141eb47beae9aeed7130651dfe1",
+    "audit/incident_triage/direct-source-tests.log": "7227eed6cdce4b8cd7c1d54901e7da056ca30ae9f5706b7c2edda031b22edc9d",
+    "audit/incident_triage/independent-concurrency-witness-replay.log": "3a8c64e3e86868db43fa4d006fb3759e51d3fdcd8b47a1fade4121b47b60ce5c",
+    "audit/incident_triage/independent-direct-source-replay.log": "949e39c095ee567aa85d1ffee8795cb35ab84de53db87b74b8fbc3c5a338b837",
+    "audit/incident_triage/independent-protocol-path-replay.log": "e814d942d4940255421b2da74037e047592d73cacc3eab36aa23e3c9fc78ced4",
+    "audit/incident_triage/independent-source-protocol-replay.log": "fd5804a31f6b7b86147a99bd57fd70f820830697938c9841073b13718287c703",
+    "audit/incident_triage/isolated-session-manager-demo.log": "1f8555ba320f3e059dbdef09fd6b39a5aa1a653107e026b75eac1d7e607c40b1",
+    "audit/incident_triage/isolated_session_demo.json": "1f8555ba320f3e059dbdef09fd6b39a5aa1a653107e026b75eac1d7e607c40b1",
+    "audit/incident_triage/protocol_paths.attestation.json": "46c0550478d95500af06dc83aceea55daac48c92ec71e9cb0ed405c60607ee28",
+    "audit/incident_triage/protocol_paths.json": "e2abae3d5a44c034e476646ca332e6d5a119f47097cbf9e5bbd3e5ec5f29113b",
+    "audit/incident_triage/source-bundle-verification.log": "b96d11457293618f899ee88a314c849c5db52f994e2e295e1f377a6f3268d29b",
+    "audit/incident_triage/source-offline-clone.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "audit/incident_triage/source-pinned-checkout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "audit/incident_triage/source-protocol-and-classifier-graph.log": "d8787a84aedc5cc1de483d7edbb379c070d840c6920ad1fc2737ee6ae57dcf62",
+    "audit/incident_triage/source-protocol-path-execution.log": "520100772150c3af61f294ef654a0bd5a35ad655c3dea53d68eb73f27941910e",
+    "audit/incident_triage/source-protocol-path-tests.log": "accfa34bc46c7cecb81bdae09dc274e41bee601b74985e676089088e721c0f07",
+    "audit/incident_triage/source-protocol-tests.log": "6b92ce43c900d7842bed59979d58061cde11f34a182f259123ded0590d87b114",
+    "audit/incident_triage/source_analysis/classifier_request.attestation.json": "6b753260b7f3a2096073ed8bc139021a93dd4a5a5a2f168cfabf74cf61a41f4c",
+    "audit/incident_triage/source_analysis/classifier_request.certificate.json": "5f8dfbe841c58ee6bfa0d6788a47115992faae8b2beba3ed75b417f61a5850fa",
+    "audit/incident_triage/source_analysis/classifier_request.graph.json": "81ffdf3bacbd5e7ad96f76a4757e971e8801996f2d0b716d5aad24353889b282",
+    "audit/incident_triage/source_analysis/source_analysis.attestation.json": "7d02eb18f68ad409debed23702939945fc86d6c50656eaa4e71ec20cee28b033",
+    "audit/incident_triage/source_analysis/source_analysis.json": "0fd0eaa631ab5deb2da3ac396860271b87cc4eca6be1500f746dee29bfcb262a",
+    "audit/incident_triage/source_protocol.attestation.json": "7d02eb18f68ad409debed23702939945fc86d6c50656eaa4e71ec20cee28b033",
+    "audit/incident_triage/source_study.json": "3f10906bb8fdd2283c59b188863304ecb2431c662ca0be3c0a04aaadfa05e9ab"
+  },
+  "byte_identical_reproductions": [
+    "22-run direct source study",
+    "source AST protocol and classifier graph artifacts",
+    "controlled concurrency witness",
+    "12-run scripted source-path study"
+  ],
+  "scope": [
+    "one unchanged pinned MIT-licensed third-party workflow, with synthetic incidents and offline clients",
+    "the full source dependency claim is conditional and source-specific, not a generic Python translator or mechanized Python proof",
+    "the OrchGraph certificate covers only the first classifier request pair",
+    "the race is one controlled schedule; the manager is a bounded pinned MockLLM utility",
+    "scripted gpt-4o-mini name/nominal prices exercise source branches only; no provider execution or invoice measurements",
+    "raw incident state/checkpoint privacy and external dispatch behavior are excluded",
+    "independent replay checks source bytes, arithmetic and records; it is not a second LangGraph interpreter",
+    "the separate base 44-stage compiler reproduction must also be run"
+  ]
+}

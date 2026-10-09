@@ -1,0 +1,24 @@
+{
+  "claim_scope": "observed source CostTracker contamination and mutable current_node misattribution under one controlled schedule; not a general concurrency proof",
+  "isolated_apps": {
+    "cost_rows_per_incident": {
+      "A": 2,
+      "B": 2
+    },
+    "per_id_approvals": {
+      "A": "approved",
+      "B": "approved"
+    }
+  },
+  "shared_app": {
+    "A_classifier_recorded_as": "draft",
+    "A_cost_rows": 4,
+    "B_cost_rows": 2,
+    "duplicated_B_tokens_in_A_snapshot": 231,
+    "schedule_events": 19,
+    "source_model_calls": 4,
+    "sum_of_returned_state_snapshot_tokens": 687,
+    "unique_call_tokens": 456
+  },
+  "status": "verified"
+}

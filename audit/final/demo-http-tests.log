@@ -14,10 +14,13 @@ test_productive_cycle_graph_certificate_is_replayed (demo.test_server.DemoHTTPTe
 ok
 test_request_body_limit_is_enforced_before_analysis (demo.test_server.DemoHTTPTests.test_request_body_limit_is_enforced_before_analysis) ... [demo] "POST /api/evaluate HTTP/1.1" 413 -
 ok
+test_source_case_fresh_replay_distinguishes_recorded_execution (demo.test_server.DemoHTTPTests.test_source_case_fresh_replay_distinguishes_recorded_execution) ... [demo] "POST /api/evaluate HTTP/1.1" 200 -
+[demo] "POST /api/evaluate HTTP/1.1" 400 -
+ok
 test_standalone_page_embeds_recorded_fixture_data (demo.test_server.DemoHTTPTests.test_standalone_page_embeds_recorded_fixture_data) ... [demo] "GET / HTTP/1.1" 200 -
 ok
 
 ----------------------------------------------------------------------
-Ran 8 tests in 1.323s
+Ran 9 tests in 1.527s
 
 OK

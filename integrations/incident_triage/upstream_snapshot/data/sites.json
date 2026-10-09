@@ -1,0 +1,38 @@
+{
+  "GTS-01": {
+    "name": "Gateshead Distribution Centre",
+    "criticality": "standard",
+    "prior_incidents": 4,
+    "procedures": {
+      "physical_security": ["SOP-SEC-002 Perimeter breach response", "SOP-SEC-007 CCTV review"],
+      "cyber": ["SOP-IT-001 Device isolation"],
+      "safety": ["SOP-HS-003 Accident reporting (RIDDOR)", "SOP-HS-001 First aid"],
+      "operational": ["SOP-OPS-004 Equipment outage"],
+      "environmental": ["SOP-ENV-002 Spill containment"]
+    }
+  },
+  "NCL-02": {
+    "name": "Newcastle Data Hall",
+    "criticality": "critical",
+    "prior_incidents": 1,
+    "procedures": {
+      "physical_security": ["SOP-SEC-010 Restricted area access", "SOP-SEC-007 CCTV review"],
+      "cyber": ["SOP-IT-001 Device isolation", "SOP-IT-005 Credential reset", "SOP-IT-009 SOC escalation"],
+      "safety": ["SOP-HS-001 First aid"],
+      "operational": ["SOP-OPS-009 Cooling failure response"],
+      "environmental": ["SOP-ENV-001 Coolant leak response"]
+    }
+  },
+  "SUN-03": {
+    "name": "Sunderland Chemical Store",
+    "criticality": "sensitive",
+    "prior_incidents": 7,
+    "procedures": {
+      "physical_security": ["SOP-SEC-002 Perimeter breach response"],
+      "cyber": ["SOP-IT-001 Device isolation"],
+      "safety": ["SOP-HS-003 Accident reporting (RIDDOR)", "SOP-HS-008 COSHH exposure"],
+      "operational": ["SOP-OPS-004 Equipment outage"],
+      "environmental": ["SOP-ENV-002 Spill containment", "SOP-ENV-005 Fume release"]
+    }
+  }
+}

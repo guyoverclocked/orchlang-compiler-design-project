@@ -1,0 +1,26 @@
+test_controlled_schedule_exposes_tracker_contamination (test_concurrency_study.ConcurrencyStudyTests.test_controlled_schedule_exposes_tracker_contamination) ... ok
+test_generated_report_is_byte_stable (test_concurrency_study.ConcurrencyStudyTests.test_generated_report_is_byte_stable) ... ok
+test_isolated_apps_keep_exact_rows_and_approve_by_thread_id (test_concurrency_study.ConcurrencyStudyTests.test_isolated_apps_keep_exact_rows_and_approve_by_thread_id) ... ok
+test_verifier_rejects_a_different_schedule (test_concurrency_study.ConcurrencyStudyTests.test_verifier_rejects_a_different_schedule) ... ok
+test_verifier_rejects_corrected_misattribution (test_concurrency_study.ConcurrencyStudyTests.test_verifier_rejects_corrected_misattribution) ... ok
+test_verifier_rejects_missing_foreign_rows (test_concurrency_study.ConcurrencyStudyTests.test_verifier_rejects_missing_foreign_rows) ... ok
+/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/.venv/lib/python3.14/site-packages/langsmith/_internal/_beta_decorator.py:70: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+  if asyncio.iscoroutinefunction(func):
+test_cancellation_releases_start_and_approval_handles (test_isolated_sessions.IsolatedSessionManagerTests.test_cancellation_releases_start_and_approval_handles) ... ok
+test_duplicate_capacity_discard_and_expiry (test_isolated_sessions.IsolatedSessionManagerTests.test_duplicate_capacity_discard_and_expiry) ... ok
+test_evidence_json_reader_rejects_oversized_sparse_file (test_isolated_sessions.IsolatedSessionManagerTests.test_evidence_json_reader_rejects_oversized_sparse_file) ... ok
+test_human_review_is_not_approvable_and_can_be_discarded (test_isolated_sessions.IsolatedSessionManagerTests.test_human_review_is_not_approvable_and_can_be_discarded) ... ok
+test_invalid_input_is_rejected_before_reserving_id (test_isolated_sessions.IsolatedSessionManagerTests.test_invalid_input_is_rejected_before_reserving_id) ... ok
+test_new_start_recovers_capacity_from_expired_idle_sessions (test_isolated_sessions.IsolatedSessionManagerTests.test_new_start_recovers_capacity_from_expired_idle_sessions) ... ok
+test_nonfinite_lifetimes_are_rejected_before_source_loading (test_isolated_sessions.IsolatedSessionManagerTests.test_nonfinite_lifetimes_are_rejected_before_source_loading) ... ok
+test_per_session_lock_rejects_mutation_and_expiry_skips_busy_app (test_isolated_sessions.IsolatedSessionManagerTests.test_per_session_lock_rejects_mutation_and_expiry_skips_busy_app) ... ok
+test_preloaded_package_harness_with_wrong_origin_is_rejected (test_isolated_sessions.IsolatedSessionManagerTests.test_preloaded_package_harness_with_wrong_origin_is_rejected) ... ok
+test_required_source_gate_is_verified_and_bound_to_locked_runtime (test_isolated_sessions.IsolatedSessionManagerTests.test_required_source_gate_is_verified_and_bound_to_locked_runtime) ... ok
+test_source_gate_rejects_changed_snapshot_before_import (test_isolated_sessions.IsolatedSessionManagerTests.test_source_gate_rejects_changed_snapshot_before_import) ... ok
+test_two_incidents_start_concurrently_with_isolated_correct_rows (test_isolated_sessions.IsolatedSessionManagerTests.test_two_incidents_start_concurrently_with_isolated_correct_rows) ... ok
+test_unrelated_top_level_harness_cannot_replace_fixed_loader (test_isolated_sessions.IsolatedSessionManagerTests.test_unrelated_top_level_harness_cannot_replace_fixed_loader) ... ok
+
+----------------------------------------------------------------------
+Ran 19 tests in 1.187s
+
+OK

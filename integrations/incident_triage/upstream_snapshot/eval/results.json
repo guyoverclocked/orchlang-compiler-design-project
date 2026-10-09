@@ -1,0 +1,107 @@
+{
+  "summary": {
+    "n_incidents": 8,
+    "category_accuracy": 0.875,
+    "priority_accuracy": 1.0,
+    "procedure_attachment_rate": 0.875,
+    "llm": "mock"
+  },
+  "rows": [
+    {
+      "incident_id": "INC-1001",
+      "expected_category": "physical_security",
+      "expected_priority": "P2",
+      "expected_procedure": "SOP-SEC-002 Perimeter breach response",
+      "got_category": "physical_security",
+      "got_priority": "P2",
+      "category_ok": true,
+      "priority_ok": true,
+      "procedure_ok": true,
+      "cost_usd": 0.0
+    },
+    {
+      "incident_id": "INC-1002",
+      "expected_category": "cyber",
+      "expected_priority": "P1",
+      "expected_procedure": "SOP-IT-001 Device isolation",
+      "got_category": "cyber",
+      "got_priority": "P1",
+      "category_ok": true,
+      "priority_ok": true,
+      "procedure_ok": true,
+      "cost_usd": 0.0
+    },
+    {
+      "incident_id": "INC-1003",
+      "expected_category": "environmental",
+      "expected_priority": "P1",
+      "expected_procedure": "SOP-ENV-002 Spill containment",
+      "got_category": "safety",
+      "got_priority": "P1",
+      "category_ok": false,
+      "priority_ok": true,
+      "procedure_ok": false,
+      "cost_usd": 0.0
+    },
+    {
+      "incident_id": "INC-1004",
+      "expected_category": "safety",
+      "expected_priority": "P1",
+      "expected_procedure": "SOP-HS-003 Accident reporting (RIDDOR)",
+      "got_category": "safety",
+      "got_priority": "P1",
+      "category_ok": true,
+      "priority_ok": true,
+      "procedure_ok": true,
+      "cost_usd": 0.0
+    },
+    {
+      "incident_id": "INC-1005",
+      "expected_category": "physical_security",
+      "expected_priority": "P2",
+      "expected_procedure": "SOP-SEC-010 Restricted area access",
+      "got_category": "physical_security",
+      "got_priority": "P2",
+      "category_ok": true,
+      "priority_ok": true,
+      "procedure_ok": true,
+      "cost_usd": 0.0
+    },
+    {
+      "incident_id": "INC-1006",
+      "expected_category": "cyber",
+      "expected_priority": "P3",
+      "expected_procedure": "SOP-IT-001 Device isolation",
+      "got_category": "cyber",
+      "got_priority": "P3",
+      "category_ok": true,
+      "priority_ok": true,
+      "procedure_ok": true,
+      "cost_usd": 0.0
+    },
+    {
+      "incident_id": "INC-1007",
+      "expected_category": "safety",
+      "expected_priority": "P3",
+      "expected_procedure": "SOP-HS-003 Accident reporting (RIDDOR)",
+      "got_category": "safety",
+      "got_priority": "P3",
+      "category_ok": true,
+      "priority_ok": true,
+      "procedure_ok": true,
+      "cost_usd": 0.0
+    },
+    {
+      "incident_id": "INC-1008",
+      "expected_category": "operational",
+      "expected_priority": "P4",
+      "expected_procedure": "SOP-OPS-004 Equipment outage",
+      "got_category": "operational",
+      "got_priority": "P4",
+      "category_ok": true,
+      "priority_ok": true,
+      "procedure_ok": true,
+      "cost_usd": 0.0
+    }
+  ]
+}

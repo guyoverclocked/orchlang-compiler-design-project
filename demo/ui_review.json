@@ -1,0 +1,16 @@
+{
+  "format": "orchlang-browser-review",
+  "date": "2026-10-09",
+  "reviewer": "root agent using documented in-app browser controls",
+  "url": "http://127.0.0.1:8765/",
+  "stories": 8,
+  "result": "all eight showed fresh local results",
+  "stories_01_to_07": "LIVE LOCAL RUN with compiler SHA 7dfbd0d962122f175c25147b8a16551a44098c75d893f0cbd12474c835b17ca4",
+  "story_08": "LIVE LOCAL REPLAY with upstream c08f710acfeefe233329df613fe8358eaac5f350; source, race and six-path recorded evidence independently checked",
+  "visual_review": "source case screenshot inspected in browser; readable case rail, status, request/source panels and explicit replay notice",
+  "limits": [
+    "visual inspection is a manual observation, not an exhaustive browser compatibility test",
+    "no screenshot file was exported"
+  ],
+  "html_sha256": "1f41063d101d0657d056fc16984040296410af0376f5587993ccd9215e2d2dff"
+}

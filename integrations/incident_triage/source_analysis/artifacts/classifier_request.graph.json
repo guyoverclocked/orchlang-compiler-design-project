@@ -1,0 +1,80 @@
+{
+  "chars_per_token": 1,
+  "entry": "entry",
+  "format": "orchlang-request-graph",
+  "inputs": {
+    "classifier_user_message": {
+      "label": "public",
+      "max_tokens": 128068,
+      "type": "text"
+    },
+    "pair_side": {
+      "label": "secret",
+      "type": "boolean"
+    }
+  },
+  "models": {
+    "source_mock": {
+      "max_tokens": 1,
+      "model": "MockLLM@c08f710acfeefe233329df613fe8358eaac5f350",
+      "provider": "pinned-source-fixture"
+    }
+  },
+  "name": "incident_triage_classifier_request_slice",
+  "registers": {
+    "left_response": {
+      "model": "source_mock"
+    },
+    "right_response": {
+      "model": "source_mock"
+    }
+  },
+  "states": {
+    "entry": {
+      "calls": [],
+      "next": {
+        "else": "right_call",
+        "guard": {
+          "value": "pair_side"
+        },
+        "kind": "secret",
+        "then": "left_call"
+      }
+    },
+    "left_call": {
+      "calls": [
+        {
+          "arguments": [
+            {
+              "value": "classifier_user_message"
+            }
+          ],
+          "model": "source_mock",
+          "result": "left_response",
+          "template": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}."
+        }
+      ],
+      "next": {
+        "kind": "stop"
+      }
+    },
+    "right_call": {
+      "calls": [
+        {
+          "arguments": [
+            {
+              "value": "classifier_user_message"
+            }
+          ],
+          "model": "source_mock",
+          "result": "right_response",
+          "template": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}."
+        }
+      ],
+      "next": {
+        "kind": "stop"
+      }
+    }
+  },
+  "version": 1
+}

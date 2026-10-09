@@ -1,0 +1,25 @@
+{
+  "format": "orchlang-incident-concurrency-independent-root-reproduction",
+  "version": 1,
+  "status": "verified",
+  "reviewed_utc_date": "2026-10-09",
+  "source_commit": "c08f710acfeefe233329df613fe8358eaac5f350",
+  "source_tree": "2f6e2058052e4cccd48ae41230d9d5dd1ba5aa02",
+  "source_files_verified": 23,
+  "source_unchanged": true,
+  "source_checkout_origin": "local upstream_c08f710.bundle; no network clone",
+  "runtime_python": "3.14.6",
+  "tests_passed": 6,
+  "byte_identical_to_saved_report": true,
+  "result_sha256": "9ffaa057d7a8e3f73a908f1c4933f13404890331d6e4c112793e0aac86a1c232",
+  "bundle_sha256": "deb487b425c49d95c39cd9ff2d689dc56401f66ffd44f7ae17fbe9a691849080",
+  "runner_sha256": "7c8136cc435e79d426f8296e32a64b03d7f3a21098e48ab685f148f653f4454f",
+  "verifier_sha256": "add37e31e08ad72188a5a6081522e9359124a5ea16669966501425cd847a7632",
+  "observation": "misattribution and foreign usage rows under the controlled source schedule; isolated graph control restores attribution",
+  "limitations": [
+    "recorded deterministic schedule",
+    "pinned mock",
+    "source estimates; no provider invoice",
+    "no general concurrency proof"
+  ]
+}

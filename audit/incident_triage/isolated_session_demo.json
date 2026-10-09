@@ -1,0 +1,118 @@
+{
+  "active_sessions_after_approval": 0,
+  "approvals": [
+    {
+      "incident_id": "OFFLINE-DEMO-A",
+      "model_calls_after": 2,
+      "model_calls_before": 2,
+      "status": "approved",
+      "thread_id": "OFFLINE-DEMO-A"
+    },
+    {
+      "incident_id": "OFFLINE-DEMO-B",
+      "model_calls_after": 2,
+      "model_calls_before": 2,
+      "status": "approved",
+      "thread_id": "OFFLINE-DEMO-B"
+    }
+  ],
+  "format": "orchlang-incident-triage-isolated-session-manager",
+  "gate": {
+    "runtime": {
+      "dependency_lock_sha256": "b9599a3084f6b8f47aea39da6f04e1808296a3371b58f8ae5d39ca827154ca6b",
+      "langgraph": "1.2.14",
+      "locked_distribution_count": 38,
+      "pydantic": "2.14.0",
+      "python": "3.14.6"
+    },
+    "source_attestation_sha256": "7d02eb18f68ad409debed23702939945fc86d6c50656eaa4e71ec20cee28b033",
+    "source_commit": "c08f710acfeefe233329df613fe8358eaac5f350",
+    "source_license": "MIT",
+    "source_manifest_sha256": "38e804b6470ad0c58f0da526f71ab39b7a7ad5a4a241c0e156569ba0ad203500",
+    "source_replay_certificate_sha256": "5f8dfbe841c58ee6bfa0d6788a47115992faae8b2beba3ed75b417f61a5850fa",
+    "source_replay_checker_sha256": "4d7917f19810e230e26d7573c5a7cbe8bb74a7649064a5084d89b127bde58175",
+    "source_replay_checks": 7,
+    "source_replay_graph_sha256": "81ffdf3bacbd5e7ad96f76a4757e971e8801996f2d0b716d5aad24353889b282",
+    "source_report_sha256": "0fd0eaa631ab5deb2da3ac396860271b87cc4eca6be1500f746dee29bfcb262a",
+    "source_root": "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/upstream_snapshot",
+    "source_study_sha256": "3f10906bb8fdd2283c59b188863304ecb2431c662ca0be3c0a04aaadfa05e9ab",
+    "source_tree": "2f6e2058052e4cccd48ae41230d9d5dd1ba5aa02",
+    "status": "verified"
+  },
+  "network": "disabled by fixed source profile: pinned MockLLM only",
+  "starts": [
+    {
+      "cost_rows": [
+        {
+          "cost_usd": 0.0,
+          "input_tokens": 92,
+          "node": "classify",
+          "output_tokens": 34
+        },
+        {
+          "cost_usd": 0.0,
+          "input_tokens": 66,
+          "node": "draft",
+          "output_tokens": 26
+        }
+      ],
+      "error_sha256": null,
+      "incident_id": "OFFLINE-DEMO-A",
+      "model_calls": [
+        {
+          "input_tokens": 92,
+          "output_tokens": 34,
+          "phase": "classify",
+          "request_sha256": "23a110580f66e61b1c9a3604f0f1ed3782043c1f0de747c8e5d4ee5cb5b160a0",
+          "response_sha256": "1fc0d6102218b8741d3189c47aa165472667ad50c3175f149f2df50dbe070b85"
+        },
+        {
+          "input_tokens": 66,
+          "output_tokens": 26,
+          "phase": "draft",
+          "request_sha256": "765eb14fca719f7633f68cdee1c32f61f1b0fefc76ccd8785a7cd726cda1e388",
+          "response_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7"
+        }
+      ],
+      "status": "pending_approval",
+      "thread_id": "OFFLINE-DEMO-A"
+    },
+    {
+      "cost_rows": [
+        {
+          "cost_usd": 0.0,
+          "input_tokens": 93,
+          "node": "classify",
+          "output_tokens": 35
+        },
+        {
+          "cost_usd": 0.0,
+          "input_tokens": 66,
+          "node": "draft",
+          "output_tokens": 28
+        }
+      ],
+      "error_sha256": null,
+      "incident_id": "OFFLINE-DEMO-B",
+      "model_calls": [
+        {
+          "input_tokens": 93,
+          "output_tokens": 35,
+          "phase": "classify",
+          "request_sha256": "3581d41b36ba22e1b4eca6850adfcb29f0fe90c622f4818f46505f27a1046359",
+          "response_sha256": "ceb11b76b15ecbf9ef90e25afc6a67d69e98a4923cecfe800daf3294f81d29bf"
+        },
+        {
+          "input_tokens": 66,
+          "output_tokens": 28,
+          "phase": "draft",
+          "request_sha256": "a7fe9f5d06b3ac988005ff8b653bb2b152e0e2f4ee3d21eb8ba1bc93b4ac324e",
+          "response_sha256": "259c88d64ee57c2d2187bd15bd059dfc6c200520d568b88716e946973751899a"
+        }
+      ],
+      "status": "pending_approval",
+      "thread_id": "OFFLINE-DEMO-B"
+    }
+  ],
+  "version": 1
+}

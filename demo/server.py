@@ -104,6 +104,14 @@ FIXTURES: dict[str, dict[str, Any]] = {
         'description': 'Different hidden transition structures produce the same ordered usage law. Bisimulation is inconclusive; exact rational trace equivalence proves equality for every finite call horizon under this supplied model.',
         'default': {'horizon': 2},
     },
+    'source-case': {
+        'title': 'A real workflow needs an isolated meter.',
+        'eyebrow': '08 / PINNED SOURCE AND INDEPENDENT REPLAY',
+        'kind': 'source-case',
+        'path': 'integrations/incident_triage/upstream_snapshot/src/triage/graph.py',
+        'description': 'Check the source-specific request protocol, then replay a recorded concurrent execution: two incident IDs share one meter. Separate graph instances restore attribution in the tested control.',
+        'default': {},
+    },
 }
 
 
@@ -640,6 +648,165 @@ def _channel_message(fixture_id: str, analysis: dict[str, Any]) -> str:
     return f'Exact ordered-trace TV={tv_trace}; the supplied alternatives have equal expected output usage but different laws.'
 
 
+def _source_case_evaluate() -> dict[str, Any]:
+    """Freshly check source contracts and a saved, actual-source race witness.
+
+    This does not execute LangGraph. The source execution is recorded; both
+    independent verifiers run now. The temporary Git checkout comes only from
+    the fixed local bundle, whose digest is bound in the reproduction record.
+    """
+    fixture_id = 'source-case'
+    meta = FIXTURES[fixture_id]
+    response = _base_result(fixture_id, _fixed_path(meta['path']).read_bytes())
+    relative = 'integrations/incident_triage/'
+    analysis_path = _fixed_path(relative + 'source_analysis/artifacts/source_analysis.json')
+    study_path = _fixed_path(relative + 'results/source_study.json')
+    witness_path = _fixed_path(relative + 'concurrency/results/concurrency_study.json')
+    path_study_path = _fixed_path(relative + 'protocol_paths/results/protocol_paths.json')
+    bundle_path = _fixed_path(relative + 'upstream_c08f710.bundle')
+    reproduction = _decode_json(
+        _fixed_path(relative + 'concurrency/results/root_reproduction.json').read_bytes(),
+        'source witness reproduction record',
+    )
+    if _sha(bundle_path.read_bytes()) != reproduction.get('bundle_sha256'):
+        raise DemoError('fixed upstream bundle digest differs from its reproduction record')
+
+    with tempfile.TemporaryDirectory(prefix='orchlang-demo-protocol-') as temp:
+        attestation_path = Path(temp) / 'fresh_attestation.json'
+        protocol = _command([
+            sys.executable,
+            str(_fixed_path(relative + 'source_analysis/replay_projection.py')),
+            str(analysis_path),
+            str(ROOT / relative / 'upstream_snapshot'),
+            '--study', str(study_path), '--attestation', str(attestation_path),
+        ])
+        if protocol['returncode'] != 0 or not attestation_path.is_file():
+            raise DemoError('independent source-protocol replay did not verify')
+        protocol_attestation = _decode_json(
+            attestation_path.read_bytes(), 'independent source-protocol replay',
+        )
+    expected_checks = [
+        'pinned upstream selected file bytes and source manifest identity',
+        'independent AST re-extraction of request, helper, schema, control, cost and gate dependencies',
+        'serialized theorem claim, classifier-only lowering scope, and exclusions',
+        'typed summary, repair, exact source estimator/budget, draft, and human gate obligations',
+        '22 finite source runs and 11 exact-redaction pair projections',
+        'authored raw-text classifier, repair, and draft mutations rejected',
+        'independent replay of the source-bound classifier OrchGraph certificate',
+    ]
+    expected_scope = ('conditional source-specific pre-dispatch request/usage/route dependency argument; '
+                      'not generic source translation or a mechanized proof of Python semantics')
+    if (protocol['returncode'] != 0 or protocol_attestation.get('status') != 'verified'
+            or protocol_attestation.get('checks') != expected_checks
+            or protocol_attestation.get('claim_kind') !=
+               'independent pinned-source AST contract re-extraction plus classifier graph certificate replay'
+            or protocol_attestation.get('attestation_scope') != expected_scope
+            or protocol_attestation.get('report_sha256') != _sha(analysis_path.read_bytes())
+            or protocol_attestation.get('source_study_sha256') != _sha(study_path.read_bytes())
+            or protocol_attestation.get('source', {}).get('commit') !=
+               'c08f710acfeefe233329df613fe8358eaac5f350'
+            or protocol_attestation.get('graph', {}).get('graph_replay_status') != 'verified'):
+        raise DemoError('independent source-protocol replay did not verify')
+
+    with tempfile.TemporaryDirectory(prefix='orchlang-demo-upstream-') as temp:
+        checkout = Path(temp) / 'source'
+        cloned = _command(['git', 'clone', '--quiet', '--no-checkout', str(bundle_path), str(checkout)])
+        if cloned['returncode'] != 0:
+            raise DemoError('could not reconstruct the fixed local upstream checkout')
+        checked_out = _command([
+            'git', '-C', str(checkout), 'checkout', '--quiet', '--detach',
+            'c08f710acfeefe233329df613fe8358eaac5f350',
+        ])
+        if checked_out['returncode'] != 0:
+            raise DemoError('the fixed upstream revision is unavailable in the local bundle')
+        replay = _command([
+            sys.executable,
+            str(_fixed_path(relative + 'concurrency/verify_concurrency_study.py')),
+            str(witness_path), '--upstream', str(checkout),
+        ])
+        path_attestation_path = Path(temp) / 'paths.attestation.json'
+        paths_replay = _command([
+            sys.executable,
+            str(_fixed_path(relative + 'protocol_paths/verify_protocol_paths.py')),
+            str(path_study_path), str(checkout), '--attestation', str(path_attestation_path),
+        ])
+        if paths_replay['returncode'] != 0 or not path_attestation_path.is_file():
+            raise DemoError('independent recorded source-path replay did not verify')
+        path_attestation = _decode_json(
+            path_attestation_path.read_bytes(), 'independent recorded source-path replay',
+        )
+    witness_attestation = _decode_json(replay['stdout'], 'independent concurrency witness replay')
+    if replay['returncode'] != 0 or witness_attestation.get('status') != 'verified':
+        raise DemoError('independent recorded concurrency witness replay did not verify')
+    if (path_attestation.get('status') != 'verified'
+            or path_attestation.get('report_sha256') != _sha(path_study_path.read_bytes())
+            or path_attestation.get('source_commit') != 'c08f710acfeefe233329df613fe8358eaac5f350'
+            or path_attestation.get('claim_kind') !=
+               'independent fixed-fixture reconstruction of selected unchanged-source paths'
+            or path_attestation.get('path_count') != 6 or path_attestation.get('pair_count') != 6
+            or path_attestation.get('run_count') != 12 or path_attestation.get('call_count') != 24
+            or len(path_attestation.get('checks', [])) != 9):
+        raise DemoError('independent recorded source-path replay did not verify')
+
+    analysis = _decode_json(analysis_path.read_bytes(), 'source analysis')
+    study = _decode_json(study_path.read_bytes(), 'recorded source study')
+    witness = _decode_json(witness_path.read_bytes(), 'recorded concurrency study')
+    path_study = _decode_json(path_study_path.read_bytes(), 'recorded source path study')
+    response['source_case'] = {
+        'source_commit': 'c08f710acfeefe233329df613fe8358eaac5f350',
+        'protocol_replay': protocol_attestation,
+        'concurrency_replay': witness_attestation,
+        'paths_replay': path_attestation,
+        'path_specs': path_study['path_specs'],
+        'conditional_claim': analysis.get('claim'),
+        'dependency_protocol': analysis.get('source_ast_contract', {}).get('dependency_protocol'),
+        'mutations': analysis.get('authored_mutation_probes', []),
+        'projection': analysis.get('source_study_projection', {}),
+        'recorded_source_run_count': len(study.get('runs', [])),
+        'shared_rows': witness['shared_graph']['runs'],
+        'isolated_rows': witness['isolated_per_invocation_graphs']['runs'],
+        'approvals': witness['isolated_per_invocation_graphs']['approvals'],
+        'execution_notice': 'The original LangGraph executions are recorded. This button freshly runs independent source/profile and witness checks; it does not rerun LangGraph.',
+    }
+    response['request_plan'] = [
+        {'scenario': 'classify', 'template': 'exact CLASSIFY_SYSTEM',
+         'argument': 'INCIDENT REPORT: + exact redact_pii(text)'},
+        {'scenario': 'repair', 'template': 'source validation/repair helper',
+         'argument': 'same request + same schema error under the shared outcome premise'},
+        {'scenario': 'draft', 'template': 'exact ACTIONS_SYSTEM',
+         'argument': 'classification category + priority level + complete summary'},
+    ]
+    for label, path, kind in [
+        ('source dependency report', analysis_path, 'analysis'),
+        ('recorded direct source executions', study_path, 'recorded execution'),
+        ('recorded concurrent source execution', witness_path, 'recorded execution'),
+        ('recorded source path executions', path_study_path, 'recorded execution'),
+        ('pinned upstream Git bundle', bundle_path, 'source'),
+    ]:
+        response['artifacts'].append(_artifact(label, _sha(path.read_bytes()), kind))
+    response['artifacts'] += [
+        _artifact('source-protocol replayer executable', _tool_sha(relative + 'source_analysis/replay_projection.py'), 'tool'),
+        _artifact('concurrency witness verifier executable', _tool_sha(relative + 'concurrency/verify_concurrency_study.py'), 'tool'),
+        _artifact('source-path verifier executable', _tool_sha(relative + 'protocol_paths/verify_protocol_paths.py'), 'tool'),
+        _artifact('fresh independent source-protocol replay', protocol['digest'], 'replay'),
+        _artifact('fresh independent concurrency witness replay', replay['digest'], 'replay'),
+        _artifact('fresh independent source-path replay', paths_replay['digest'], 'replay'),
+    ]
+    response['assumptions'] = [
+        'The source-specific claim requires equal valid metadata and exact redacted text, fixed configuration, fresh isolated apps, and a shared complete-outcome oracle.',
+        'The protocol is an exact-source recognizer with inspected helper contracts; it is not a general Python translator.',
+        'Only the first classifier request slice is exported to the existing OrchGraph checker. The full protocol has a separate source-specific independent checker.',
+        'The race is one controlled schedule on unchanged upstream source. Its mitigation is a tested isolated-app control, not a proof of every concurrent schedule.',
+        'Usage uses the source character-count estimate. Mock prices are zero; no provider charge or budget violation is measured.',
+        'Six authored paired source paths use fixed outcomes. The oversized-response budget probe uses nominal prices only; no invoice or realistic provider likelihood is inferred.',
+        'Original incident text remains in state/checkpoints. That storage privacy is outside the selected observation.',
+        'The local Git clone reads a bundled source archive and makes no external network request.',
+    ]
+    response['security_result'] = 'Conditional source protocol and recorded shared-meter witness independently verified; isolated source apps restore their own rows.'
+    response['live_notice'] = 'Fresh independent replay over recorded source executions. No LangGraph execution, provider call, or external network request occurs in this button.'
+    return response
+
+
 def evaluate(fixture_id: str, payload: dict[str, Any] | None = None) -> dict[str, Any]:
     if fixture_id not in FIXTURES:
         raise DemoError('unknown fixed fixture identifier')
@@ -655,9 +822,12 @@ def evaluate(fixture_id: str, payload: dict[str, Any] | None = None) -> dict[str
         'noisy-bit': {'horizon'},
         'same-mean': {'horizon'},
         'bisim-gap': {'horizon'},
+        'source-case': set(),
     }[fixture_id]
     if set(payload) - allowed:
         raise DemoError('request contains unknown controls')
+    if fixture_id == 'source-case':
+        return _source_case_evaluate()
     if fixture_id == 'budget-leak':
         for field in ('xLength', 'yLength'):
             value = payload.get(field, meta['default'][field])
@@ -701,6 +871,8 @@ def build_offline_evidence() -> dict[str, Any]:
             'source_sha256': results[fixture_id]['source']['sha256'],
             'report_digests': [item for item in results[fixture_id]['artifacts'] if item['kind'] in ('analysis', 'certificate', 'replay', 'compiler', 'run')],
         }
+        if fixture_id == 'source-case':
+            results[fixture_id]['offline_provenance']['compiler_source'] = 'This fixture runs independent source/profile, concurrency and path replayers; it does not execute orchc or LangGraph.'
     return {
         'format': 'orchlang-demo-offline-evidence',
         'version': 1,
@@ -836,7 +1008,7 @@ class DemoHandler(BaseHTTPRequestHandler):
             options = payload.get('options', {})
             result = evaluate(fixture_id, options)
             result['execution'] = 'live localhost run'
-            result['live_notice'] = 'Fresh report from the repository-local compiler/checkers. No provider or external network call was made.'
+            result.setdefault('live_notice', 'Fresh report from the repository-local compiler/checkers. No provider or external network call was made.')
             self._json(200, result)
         except (UnicodeDecodeError, json.JSONDecodeError) as error:
             self._json(400, {'error': 'invalid UTF-8 JSON request'})

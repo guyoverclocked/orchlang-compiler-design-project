@@ -1,0 +1,1198 @@
+{
+  "accounting_note": "No source billing conformance is claimed: upstream estimates max(1, len(system + user) // 4) using Python code points, whereas OrchGraph uses ceil(UTF8 bytes / divisor) per template/argument fragment.",
+  "authored_mutation_probes": [
+    {
+      "checked_obligation": "classify.clean_text must be exactly redact_pii(validated_incident.text)",
+      "diagnostic": "expected call to redact_pii",
+      "expected_risk": "classifier request may contain raw incident text",
+      "id": "AUTHORED-CLASSIFY-RAW-BYPASS",
+      "mutation": "replace the classifier's redacted source with incident.text",
+      "rejection_basis": "semantic_AST_dependency_check",
+      "status": "rejected_by_source_ast_contract",
+      "upstream_modified": false
+    },
+    {
+      "checked_obligation": "repair helper accepts only system/user/schema and formats only original user plus SchemaViolation",
+      "diagnostic": "classifier call_with_repair has an unrecognized extra input; raw-text repair injection is not allowed",
+      "expected_risk": "repair prompt may contain raw incident text after an initial schema failure",
+      "id": "AUTHORED-REPAIR-RAW-BYPASS",
+      "mutation": "add raw_text to call_with_repair and interpolate it only in the validation-repair request",
+      "rejection_basis": "semantic_AST_dependency_check",
+      "status": "rejected_by_source_ast_contract",
+      "upstream_modified": false
+    },
+    {
+      "checked_obligation": "draft prompt depends only on Classification.category, Priority.level, Classification.summary",
+      "diagnostic": "draft prompt contains an unrecognized dependency, including possible raw incident text",
+      "expected_risk": "draft request may contain raw incident text after classification",
+      "id": "AUTHORED-DRAFT-RAW-BYPASS",
+      "mutation": "append state['incident']['text'] to the action-drafting request",
+      "rejection_basis": "semantic_AST_dependency_check",
+      "status": "rejected_by_source_ast_contract",
+      "upstream_modified": false
+    }
+  ],
+  "claim": "For this recognized pinned source version, equality of the exact ordered redactor output plus equality of valid public metadata/configuration, serialized fresh graph execution, and the shared complete outcome oracle implies equal pre-dispatch model request, source-estimated usage, error-route, node, and interrupt observations.",
+  "format": "orchlang-incident-triage-source-analysis",
+  "graph": {
+    "certificate": {
+      "checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+      "path": "classifier_request.certificate.json",
+      "product_edges": 10,
+      "product_nodes": 11,
+      "sha256": "5f8dfbe841c58ee6bfa0d6788a47115992faae8b2beba3ed75b417f61a5850fa",
+      "status": "accepted"
+    },
+    "document": {
+      "chars_per_token": 1,
+      "entry": "entry",
+      "format": "orchlang-request-graph",
+      "inputs": {
+        "classifier_user_message": {
+          "label": "public",
+          "max_tokens": 128068,
+          "type": "text"
+        },
+        "pair_side": {
+          "label": "secret",
+          "type": "boolean"
+        }
+      },
+      "models": {
+        "source_mock": {
+          "max_tokens": 1,
+          "model": "MockLLM@c08f710acfeefe233329df613fe8358eaac5f350",
+          "provider": "pinned-source-fixture"
+        }
+      },
+      "name": "incident_triage_classifier_request_slice",
+      "registers": {
+        "left_response": {
+          "model": "source_mock"
+        },
+        "right_response": {
+          "model": "source_mock"
+        }
+      },
+      "states": {
+        "entry": {
+          "calls": [],
+          "next": {
+            "else": "right_call",
+            "guard": {
+              "value": "pair_side"
+            },
+            "kind": "secret",
+            "then": "left_call"
+          }
+        },
+        "left_call": {
+          "calls": [
+            {
+              "arguments": [
+                {
+                  "value": "classifier_user_message"
+                }
+              ],
+              "model": "source_mock",
+              "result": "left_response",
+              "template": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}."
+            }
+          ],
+          "next": {
+            "kind": "stop"
+          }
+        },
+        "right_call": {
+          "calls": [
+            {
+              "arguments": [
+                {
+                  "value": "classifier_user_message"
+                }
+              ],
+              "model": "source_mock",
+              "result": "right_response",
+              "template": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}."
+            }
+          ],
+          "next": {
+            "kind": "stop"
+          }
+        }
+      },
+      "version": 1
+    },
+    "independent_replay": {
+      "certificate_sha256": "5f8dfbe841c58ee6bfa0d6788a47115992faae8b2beba3ed75b417f61a5850fa",
+      "checks": {
+        "all_product_relations_and_local_rules": true,
+        "call_free_cycle_exclusion": true,
+        "complete_universal_successor_closure": true,
+        "graph_schema_and_types": true,
+        "no_unreachable_or_extra_product_nodes": true,
+        "reachable_source_states_and_cost_summaries": true,
+        "root_public_identity_relation": true,
+        "source_hash_binding": true,
+        "strict_graph_and_certificate_schema": true
+      },
+      "format": "orchlang-cyclic-request-replay-attestation",
+      "graph_name": "incident_triage_classifier_request_slice",
+      "producer_checker_hash_verified": false,
+      "producer_checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+      "product_edges_replayed": 10,
+      "product_nodes_replayed": 11,
+      "replayer_sha256": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
+      "resource_limits": {
+        "certificate_declared_product_nodes": 1000,
+        "graph_declarations_or_calls": 1000000,
+        "graph_states": 100000,
+        "json_bytes_each": 134217728,
+        "product_nodes": 1000000
+      },
+      "scope": {
+        "claim": "the reported finite product graph is the complete closure of the replayed version-1 graph under the declared local rules",
+        "not_claimed": [
+          "mechanized proof of the relational metatheory",
+          "source-language or framework-to-graph translation fidelity",
+          "real provider request serialization or billing behavior",
+          "termination or finite total-cost bounds for billable cycles",
+          "validation of the producer checker implementation from its reported hash"
+        ]
+      },
+      "source_sha256": "81ffdf3bacbd5e7ad96f76a4757e971e8801996f2d0b716d5aad24353889b282",
+      "status": "verified",
+      "version": 1
+    },
+    "path": "classifier_request.graph.json",
+    "sha256": "81ffdf3bacbd5e7ad96f76a4757e971e8801996f2d0b716d5aad24353889b282"
+  },
+  "graph_output_cap_note": "The generated graph schema requires an output cap; the value 1 is adapter-only and is not sourced from or claimed for upstream MockLLM.",
+  "not_claimed": [
+    "machine-checked semantics for arbitrary Python or full LangGraph translation",
+    "source provider output cap or provider usage receipt",
+    "PII protection for marker presence, count, pattern type, non-matching values, or raw state/checkpoint storage",
+    "provider-side billing or provider tokenization conformance",
+    "real-provider behavior, upstream vulnerability, or universal PII coverage"
+  ],
+  "runtime_provenance": {
+    "dependency_lock_sha256": "b9599a3084f6b8f47aea39da6f04e1808296a3371b58f8ae5d39ca827154ca6b",
+    "langgraph": "1.2.14",
+    "network_calls": 0,
+    "outbound_provider_calls": 0,
+    "provider": "none; upstream default mock and injected instrumented upstream MockLLM",
+    "pydantic": "2.14.0",
+    "python": "3.14.6"
+  },
+  "source": {
+    "checked_source_files": {
+      "data/sites.json": "51d9b3fa3c1711e85e26708ebd59b43320d191c044a5e11d2893cb5964819d98",
+      "src/triage/config.py": "54400bc276090cea7bbf9eed4322b988b5ef73652ce1d343897caac7c62b37aa",
+      "src/triage/costs.py": "f1393f1ceada49308d689b47ed736fb864a872ca31bc6bbe7e84265be288d92f",
+      "src/triage/graph.py": "0fc931ff7edb64cc26d9eb8b7aa8ec3b05bcefbb667641a30610456ddde4138b",
+      "src/triage/guardrails.py": "94d086fb139eff7c7b3bf7ca0b49055c4a7b0a13509913ca855fb6a04a110b5d",
+      "src/triage/llm.py": "2a92f378b51921e312b678ad3aab5a6d7aadd5a7f96d5cc641488e7833ce710a",
+      "src/triage/models.py": "23987632467f7475efa7964c8d83157c9e4a9267f03df494a7a2f5a9da8816be"
+    },
+    "commit": "c08f710acfeefe233329df613fe8358eaac5f350",
+    "git_tree": "2f6e2058052e4cccd48ae41230d9d5dd1ba5aa02",
+    "license": "MIT",
+    "manifest_sha256": "38e804b6470ad0c58f0da526f71ab39b7a7ad5a4a241c0e156569ba0ad203500",
+    "repository": "https://github.com/codewithkachi/agent-incident-triage"
+  },
+  "source_ast_contract": {
+    "control": {
+      "checked_from_ast": true,
+      "edges": [
+        {
+          "from": "classify",
+          "kind": "conditional",
+          "line": 162,
+          "to": {
+            "on_error": "human_review",
+            "otherwise": "enrich"
+          }
+        },
+        {
+          "from": "enrich",
+          "kind": "conditional",
+          "line": 163,
+          "to": {
+            "on_error": "human_review",
+            "otherwise": "prioritise"
+          }
+        },
+        {
+          "from": "prioritise",
+          "kind": "unconditional",
+          "line": 164,
+          "to": "draft"
+        },
+        {
+          "from": "draft",
+          "kind": "conditional",
+          "line": 165,
+          "to": {
+            "on_error": "human_review",
+            "otherwise": "dispatch"
+          }
+        },
+        {
+          "from": "dispatch",
+          "kind": "unconditional",
+          "line": 166,
+          "to": "END"
+        },
+        {
+          "from": "human_review",
+          "kind": "unconditional",
+          "line": 167,
+          "to": "END"
+        }
+      ],
+      "error_route": "human_review",
+      "interrupt_before": [
+        "dispatch"
+      ],
+      "nodes": [
+        {
+          "function": "classify",
+          "line": 154,
+          "name": "classify"
+        },
+        {
+          "function": "enrich",
+          "line": 155,
+          "name": "enrich"
+        },
+        {
+          "function": "prioritise",
+          "line": 156,
+          "name": "prioritise"
+        },
+        {
+          "function": "draft",
+          "line": 157,
+          "name": "draft"
+        },
+        {
+          "function": "dispatch",
+          "line": 158,
+          "name": "dispatch"
+        },
+        {
+          "function": "human_review",
+          "line": 159,
+          "name": "human_review"
+        }
+      ],
+      "source_entry": "classify"
+    },
+    "dependency_protocol": {
+      "classification": {
+        "prompt_schema_note": {
+          "mismatch": true,
+          "prompt_summary_max_chars": 280,
+          "validated_summary_max_chars": 300
+        },
+        "request": {
+          "dynamic_user_value": "redact_pii(incident.text)",
+          "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+          "user_prefix": "INCIDENT REPORT: "
+        },
+        "response_schema": {
+          "category": {
+            "type": "Literal['physical_security', 'cyber', 'safety', 'operational', 'environmental']"
+          },
+          "people_at_risk": {
+            "type": "bool"
+          },
+          "severity": {
+            "type": "Literal['low', 'medium', 'high', 'critical']"
+          },
+          "summary": {
+            "max_length": 300,
+            "type": "str"
+          }
+        },
+        "typed_result_dependencies": {
+          "category": [
+            "enrich.related_procedures",
+            "draft.user.category",
+            "report payload"
+          ],
+          "people_at_risk": [
+            "priority matrix",
+            "priority rationale",
+            "report payload"
+          ],
+          "severity": [
+            "priority matrix",
+            "priority rationale",
+            "report payload"
+          ],
+          "summary": [
+            "draft.user.summary",
+            "report payload"
+          ]
+        }
+      },
+      "conditional_result": "equal exact redacted text plus equal valid public metadata/configuration and the shared complete outcome oracle yields equal pre-dispatch request/usage/route observations for this recognized source version",
+      "deterministic_dependencies": {
+        "enrichment": {
+          "dependencies": [
+            "incident.site",
+            "classification.category",
+            "registry bytes"
+          ],
+          "fields": {
+            "prior_incidents_at_site": {
+              "type": "int"
+            },
+            "related_procedures": {
+              "type": "list[str]"
+            },
+            "site_criticality": {
+              "type": "Literal['standard', 'sensitive', 'critical']"
+            },
+            "site_name": {
+              "type": "str"
+            }
+          },
+          "operation": "lookup valid incident.site in the bound JSON registry; use classification.category to select procedures; unknown key sets error",
+          "registry": {
+            "GTS-01": {
+              "criticality": "standard",
+              "name": "Gateshead Distribution Centre",
+              "prior_incidents": 4,
+              "procedures": {
+                "cyber": [
+                  "SOP-IT-001 Device isolation"
+                ],
+                "environmental": [
+                  "SOP-ENV-002 Spill containment"
+                ],
+                "operational": [
+                  "SOP-OPS-004 Equipment outage"
+                ],
+                "physical_security": [
+                  "SOP-SEC-002 Perimeter breach response",
+                  "SOP-SEC-007 CCTV review"
+                ],
+                "safety": [
+                  "SOP-HS-003 Accident reporting (RIDDOR)",
+                  "SOP-HS-001 First aid"
+                ]
+              }
+            },
+            "NCL-02": {
+              "criticality": "critical",
+              "name": "Newcastle Data Hall",
+              "prior_incidents": 1,
+              "procedures": {
+                "cyber": [
+                  "SOP-IT-001 Device isolation",
+                  "SOP-IT-005 Credential reset",
+                  "SOP-IT-009 SOC escalation"
+                ],
+                "environmental": [
+                  "SOP-ENV-001 Coolant leak response"
+                ],
+                "operational": [
+                  "SOP-OPS-009 Cooling failure response"
+                ],
+                "physical_security": [
+                  "SOP-SEC-010 Restricted area access",
+                  "SOP-SEC-007 CCTV review"
+                ],
+                "safety": [
+                  "SOP-HS-001 First aid"
+                ]
+              }
+            },
+            "SUN-03": {
+              "criticality": "sensitive",
+              "name": "Sunderland Chemical Store",
+              "prior_incidents": 7,
+              "procedures": {
+                "cyber": [
+                  "SOP-IT-001 Device isolation"
+                ],
+                "environmental": [
+                  "SOP-ENV-002 Spill containment",
+                  "SOP-ENV-005 Fume release"
+                ],
+                "operational": [
+                  "SOP-OPS-004 Equipment outage"
+                ],
+                "physical_security": [
+                  "SOP-SEC-002 Perimeter breach response"
+                ],
+                "safety": [
+                  "SOP-HS-003 Accident reporting (RIDDOR)",
+                  "SOP-HS-008 COSHH exposure"
+                ]
+              }
+            }
+          },
+          "registry_sha256": "51d9b3fa3c1711e85e26708ebd59b43320d191c044a5e11d2893cb5964819d98",
+          "source_line": 83,
+          "unknown_site_error_format": "unknown site {incident.site!r}",
+          "unknown_site_route": "human_review before priority/draft"
+        },
+        "priority": {
+          "critical_site_rule": "if site_criticality == 'critical' and level != 'P1', decrement P number and set SLA from {P1:15,P2:60,P3:240}",
+          "dependencies": [
+            "classification.severity",
+            "classification.people_at_risk",
+            "enrichment.site_criticality",
+            "config.PRIORITY_MATRIX"
+          ],
+          "fields": {
+            "level": {
+              "type": "Literal['P1', 'P2', 'P3', 'P4']"
+            },
+            "rationale": {
+              "type": "str"
+            },
+            "response_sla_minutes": {
+              "type": "int"
+            }
+          },
+          "matrix": [
+            {
+              "level": "P1",
+              "people_at_risk": false,
+              "response_sla_minutes": 15,
+              "severity": "critical"
+            },
+            {
+              "level": "P1",
+              "people_at_risk": true,
+              "response_sla_minutes": 15,
+              "severity": "critical"
+            },
+            {
+              "level": "P2",
+              "people_at_risk": false,
+              "response_sla_minutes": 60,
+              "severity": "high"
+            },
+            {
+              "level": "P1",
+              "people_at_risk": true,
+              "response_sla_minutes": 15,
+              "severity": "high"
+            },
+            {
+              "level": "P4",
+              "people_at_risk": false,
+              "response_sla_minutes": 1440,
+              "severity": "low"
+            },
+            {
+              "level": "P3",
+              "people_at_risk": true,
+              "response_sla_minutes": 240,
+              "severity": "low"
+            },
+            {
+              "level": "P3",
+              "people_at_risk": false,
+              "response_sla_minutes": 240,
+              "severity": "medium"
+            },
+            {
+              "level": "P2",
+              "people_at_risk": true,
+              "response_sla_minutes": 60,
+              "severity": "medium"
+            }
+          ],
+          "rationale_fields": [
+            "severity",
+            "people_at_risk",
+            "site_criticality"
+          ],
+          "source_line": 98
+        }
+      },
+      "draft_and_gate": {
+        "actions_coercion_and_limit": "[str(action) for action in parsed_actions][:5]",
+        "budget_error_format": "cost budget exceeded (${tracker.total_usd})",
+        "control": {
+          "checked_from_ast": true,
+          "edges": [
+            {
+              "from": "classify",
+              "kind": "conditional",
+              "line": 162,
+              "to": {
+                "on_error": "human_review",
+                "otherwise": "enrich"
+              }
+            },
+            {
+              "from": "enrich",
+              "kind": "conditional",
+              "line": 163,
+              "to": {
+                "on_error": "human_review",
+                "otherwise": "prioritise"
+              }
+            },
+            {
+              "from": "prioritise",
+              "kind": "unconditional",
+              "line": 164,
+              "to": "draft"
+            },
+            {
+              "from": "draft",
+              "kind": "conditional",
+              "line": 165,
+              "to": {
+                "on_error": "human_review",
+                "otherwise": "dispatch"
+              }
+            },
+            {
+              "from": "dispatch",
+              "kind": "unconditional",
+              "line": 166,
+              "to": "END"
+            },
+            {
+              "from": "human_review",
+              "kind": "unconditional",
+              "line": 167,
+              "to": "END"
+            }
+          ],
+          "error_route": "human_review",
+          "interrupt_before": [
+            "dispatch"
+          ],
+          "nodes": [
+            {
+              "function": "classify",
+              "line": 154,
+              "name": "classify"
+            },
+            {
+              "function": "enrich",
+              "line": 155,
+              "name": "enrich"
+            },
+            {
+              "function": "prioritise",
+              "line": 156,
+              "name": "prioritise"
+            },
+            {
+              "function": "draft",
+              "line": 157,
+              "name": "draft"
+            },
+            {
+              "function": "dispatch",
+              "line": 158,
+              "name": "dispatch"
+            },
+            {
+              "function": "human_review",
+              "line": 159,
+              "name": "human_review"
+            }
+          ],
+          "source_entry": "classify"
+        },
+        "draft_source_line": 115,
+        "fallback_action": "Review incident manually; drafting agent returned invalid output",
+        "full_state_checkpoint_privacy": "excluded: raw incident remains in state/checkpointer and human_review returns state",
+        "gate": "interrupt_before=['dispatch']; theorem endpoint is the pending pre-dispatch state",
+        "maximum_model_completions_pre_dispatch": 3,
+        "raw_incident_text_dependency": false,
+        "report_fields": {
+          "classification": {
+            "type": "Classification"
+          },
+          "enrichment": {
+            "type": "Enrichment"
+          },
+          "incident_id": {
+            "type": "str"
+          },
+          "priority": {
+            "type": "Priority"
+          },
+          "recommended_actions": {
+            "type": "list[str]"
+          },
+          "status": {
+            "type": "Literal['pending_approval', 'approved', 'rejected']"
+          }
+        },
+        "response_handling": "JSON list parsing with a fixed fallback action on JSON/assertion failure; response content does not affect routing",
+        "system": "You draft recommended actions for a triaged incident. Respond with ONLY a JSON array of 2-5 short imperative action strings, specific to the category and priority given.",
+        "user_template": "category: {classification.category}\\npriority: {priority.level}\\nsummary: {classification.summary}"
+      },
+      "excluded": [
+        "generic Python-to-OrchGraph translation",
+        "proof of sanitizer adequacy or general PII coverage",
+        "checkpoint/full-state storage privacy",
+        "external human decision or dispatch effects",
+        "provider-side tokenization, usage receipts, currency charges, or output caps",
+        "invalid Pydantic inputs, concurrent use of one graph, provider failures, or arbitrary source/config mutations",
+        "source report payload equality beyond the dependencies needed for later requests and control"
+      ],
+      "execution_premises": {
+        "fixed_assets_config_dependency_versions_and_provider": true,
+        "fresh_graph_and_checkpointer_per_run": true,
+        "reason": "build_graph closes over mutable tracker/current_node; classify clears shared tracker.entries",
+        "serialized_nonconcurrent_invocations": true,
+        "source_graph_topology": {
+          "checked_from_ast": true,
+          "edges": [
+            {
+              "from": "classify",
+              "kind": "conditional",
+              "line": 162,
+              "to": {
+                "on_error": "human_review",
+                "otherwise": "enrich"
+              }
+            },
+            {
+              "from": "enrich",
+              "kind": "conditional",
+              "line": 163,
+              "to": {
+                "on_error": "human_review",
+                "otherwise": "prioritise"
+              }
+            },
+            {
+              "from": "prioritise",
+              "kind": "unconditional",
+              "line": 164,
+              "to": "draft"
+            },
+            {
+              "from": "draft",
+              "kind": "conditional",
+              "line": 165,
+              "to": {
+                "on_error": "human_review",
+                "otherwise": "dispatch"
+              }
+            },
+            {
+              "from": "dispatch",
+              "kind": "unconditional",
+              "line": 166,
+              "to": "END"
+            },
+            {
+              "from": "human_review",
+              "kind": "unconditional",
+              "line": 167,
+              "to": "END"
+            }
+          ],
+          "error_route": "human_review",
+          "interrupt_before": [
+            "dispatch"
+          ],
+          "nodes": [
+            {
+              "function": "classify",
+              "line": 154,
+              "name": "classify"
+            },
+            {
+              "function": "enrich",
+              "line": 155,
+              "name": "enrich"
+            },
+            {
+              "function": "prioritise",
+              "line": 156,
+              "name": "prioritise"
+            },
+            {
+              "function": "draft",
+              "line": 157,
+              "name": "draft"
+            },
+            {
+              "function": "dispatch",
+              "line": 158,
+              "name": "dispatch"
+            },
+            {
+              "function": "human_review",
+              "line": 159,
+              "name": "human_review"
+            }
+          ],
+          "source_entry": "classify"
+        },
+        "terminal_scope": "all request, source-estimated usage, error-route, node and interrupt events through the pre-dispatch human gate"
+      },
+      "format": "orchlang-incident-triage-dependency-protocol",
+      "input_relation": {
+        "not_released": [
+          "PII marker presence",
+          "PII count",
+          "PII pattern type",
+          "unmatched sensitive text",
+          "raw state/checkpoint storage"
+        ],
+        "public_fields_equal": [
+          "incident_id",
+          "site",
+          "reported_by",
+          "thread_id"
+        ],
+        "redactor": {
+          "contract": "deterministic ordered Python re.sub calls on one text value",
+          "function": "triage.guardrails.redact_pii",
+          "order": [
+            "EMAIL_RE",
+            "PHONE_RE",
+            "NI_NUMBER_RE"
+          ],
+          "patterns": {
+            "EMAIL_RE": "[\\w.+-]+@[\\w-]+\\.[\\w.]+",
+            "NI_NUMBER_RE": "\\b[A-Z]{2}\\s?\\d{2}\\s?\\d{2}\\s?\\d{2}\\s?[A-Z]\\b",
+            "PHONE_RE": "(?:\\+44\\s?|0)\\d{2,4}[\\s-]?\\d{3}[\\s-]?\\d{3,4}"
+          },
+          "replacements": {
+            "EMAIL_RE": "[EMAIL]",
+            "NI_NUMBER_RE": "[NI-NUMBER]",
+            "PHONE_RE": "[PHONE]"
+          },
+          "source_line": 21
+        },
+        "release_scope": "only exact equality of the ordered sanitizer output is released; residual text is assumed public under this pair relation",
+        "secret_relation": "redact_pii(text_left) == redact_pii(text_right)",
+        "validity": {
+          "fields": {
+            "incident_id": {
+              "type": "str"
+            },
+            "reported_by": {
+              "type": "str"
+            },
+            "site": {
+              "type": "str"
+            },
+            "text": {
+              "max_length": 4000,
+              "min_length": 10,
+              "type": "str"
+            }
+          },
+          "invalid_input_behavior": "Pydantic validation may raise before the graph's SchemaViolation route",
+          "model": "IncidentReport",
+          "validation_precedes_classifier_try": true
+        }
+      },
+      "recognized_helper_ast_sha256": {
+        "costs.py:complete": "7684b478cabfa1065e66afd303ead07b1f25c20b6003a59222a47969b7cb3ba4",
+        "costs.py:estimate_tokens": "4703e938d4a4d9b4ffa02c42deb6b48f65d31cc4283bfc70f72e181bab085e88",
+        "costs.py:over_budget": "2927ac2c288ab01ba4b1bf88b45351008a409a7d00b4be19f4f5b24a9d953381",
+        "costs.py:record": "31c971c85338d3f7d22e6580315d1f5b7e76eb0679a08476fdfd43c07951b4e3",
+        "costs.py:total_usd": "3f5540b6b70bf541c956a44f1d1fa0e4b7c317ae8dd39e0fe9da03b1525af124",
+        "graph.py:build_graph": "668545efc5222cf3ced3c075c76a001aba145e9dc0e29930c903967053e5d9b0",
+        "graph.py:classify": "48eaa5566eab16288aed4b3994e2ec810c422fadbf6d92740dd455a1be66e714",
+        "graph.py:draft": "fb9f2887e9cf0773b88faff67850bd156f286edbb685ab544693b5babdd9cbd2",
+        "graph.py:enrich": "3f0a332b02dac194d50ee999e56541ff11e519b38c20a22a183b7ae18d68e793",
+        "graph.py:prioritise": "d6b1e3c1895c874d6f6784c151555908a962f4a6c61906119ce8910e8184c03a",
+        "graph.py:route_after": "c529af4ff8e20f3abb7d71d54fdd367946e1f3f0ed4ca600dc6df3fd6b5556e2",
+        "guardrails.py:call_with_repair": "4279abe8dc845eb592de93e5bfee33c7a2a5fdf872358990a759b273c227cb4c",
+        "guardrails.py:parse_structured": "ebad3330ecabaa957178d1af2d427674fca42a2a7acc53edbdd990626e34617a",
+        "guardrails.py:redact_pii": "f8ade865e5cdfaa8ee4d59f533f531f48f8409f938f9fc4a88f86203af3b5dcf"
+      },
+      "shared_outcome_oracle": {
+        "coupled_outcome": [
+          "response text",
+          "any source-observed provider usage metadata"
+        ],
+        "key": [
+          "resolved provider/model contract",
+          "per-contract call ordinal",
+          "exact system string",
+          "exact user string"
+        ],
+        "not_established_for": [
+          "arbitrary live providers",
+          "network errors",
+          "retries outside call_with_repair",
+          "provider usage receipts not exposed by this source wrapper"
+        ],
+        "scope": "premise for paired requests at classify, repair, and draft; the pinned MockLLM is deterministic for identical complete requests in the captured source study"
+      },
+      "source_files_sha256": {
+        "data/sites.json": "51d9b3fa3c1711e85e26708ebd59b43320d191c044a5e11d2893cb5964819d98",
+        "src/triage/config.py": "54400bc276090cea7bbf9eed4322b988b5ef73652ce1d343897caac7c62b37aa",
+        "src/triage/costs.py": "f1393f1ceada49308d689b47ed736fb864a872ca31bc6bbe7e84265be288d92f",
+        "src/triage/graph.py": "0fc931ff7edb64cc26d9eb8b7aa8ec3b05bcefbb667641a30610456ddde4138b",
+        "src/triage/guardrails.py": "94d086fb139eff7c7b3bf7ca0b49055c4a7b0a13509913ca855fb6a04a110b5d",
+        "src/triage/llm.py": "2a92f378b51921e312b678ad3aab5a6d7aadd5a7f96d5cc641488e7833ce710a",
+        "src/triage/models.py": "23987632467f7475efa7964c8d83157c9e4a9267f03df494a7a2f5a9da8816be"
+      },
+      "source_line_map": {
+        "CostTracker.over_budget": {
+          "file": "src/triage/costs.py",
+          "line": 43
+        },
+        "CostTracker.record": {
+          "file": "src/triage/costs.py",
+          "line": 24
+        },
+        "CostTracker.total_usd": {
+          "file": "src/triage/costs.py",
+          "line": 39
+        },
+        "TrackingLLM.complete": {
+          "file": "src/triage/costs.py",
+          "line": 59
+        },
+        "call_with_repair": {
+          "file": "src/triage/guardrails.py",
+          "line": 42
+        },
+        "classify": {
+          "file": "src/triage/graph.py",
+          "line": 66
+        },
+        "draft": {
+          "file": "src/triage/graph.py",
+          "line": 115
+        },
+        "enrich": {
+          "file": "src/triage/graph.py",
+          "line": 83
+        },
+        "estimate_tokens": {
+          "file": "src/triage/costs.py",
+          "line": 15
+        },
+        "parse_structured": {
+          "file": "src/triage/guardrails.py",
+          "line": 31
+        },
+        "prioritise": {
+          "file": "src/triage/graph.py",
+          "line": 98
+        },
+        "redact_pii": {
+          "file": "src/triage/guardrails.py",
+          "line": 21
+        },
+        "route_after": {
+          "file": "src/triage/graph.py",
+          "line": 148
+        }
+      },
+      "trust_boundary": [
+        "pinned source bytes and Python/Pydantic/LangGraph semantics",
+        "the exact redactor is an approved release under the stated relation",
+        "the shared complete outcome oracle premise",
+        "serial fresh graph/tracker/checkpointer execution"
+      ],
+      "usage_and_budget": {
+        "budget_guard": "draft checks tracker.over_budget before issuing ACTIONS_SYSTEM request; true returns error and routes to human_review",
+        "budget_guard_source_line": 115,
+        "budget_predicate": "rounded_total_usd > MAX_COST_PER_INCIDENT_USD",
+        "budget_usd": 0.05,
+        "estimator": {
+          "expression": "max(1, len(text) // 4)",
+          "function": "triage.costs.estimate_tokens",
+          "length_unit": "Python Unicode code points",
+          "not_equivalent_to_graph_accounting": "OrchGraph estimates ceil(UTF8-bytes / divisor) per template/argument fragment",
+          "source_line": 15
+        },
+        "mock_price": 0.0,
+        "not_provider_billing": true,
+        "numeric_semantics": "Python float arithmetic and built-in round at six decimal places for each row and total",
+        "observer": "source tracker/wrapper call rows, including classifier failures whose returned state omits costs",
+        "over_budget_source_line": 43,
+        "pricing": {
+          "gpt-4o-mini": {
+            "input": 0.15,
+            "output": 0.6
+          },
+          "mock": {
+            "input": 0.0,
+            "output": 0.0
+          }
+        },
+        "record_formula": {
+          "cost_usd": "round((input_tokens * pricing.input + output_tokens * pricing.output) / 1_000_000, 6)",
+          "input_tokens": "max(1, len(system + user) // 4)",
+          "length_unit": "Python Unicode code points",
+          "output_tokens": "max(1, len(response) // 4)",
+          "pricing_lookup": "PRICING.get(model_name, PRICING['mock'])",
+          "source_line": 24
+        },
+        "total_formula": "round(sum(per_call_rounded_cost_usd), 6)",
+        "total_source_line": 39
+      },
+      "validation_and_repair": {
+        "parser_contract": {
+          "decoder": "json.loads(cleaned)",
+          "fence_condition": "cleaned.startswith('```')",
+          "fence_flags": [
+            "re.S"
+          ],
+          "fence_regex": "^```(?:json)?\\s*|\\s*```$",
+          "strip_raw_response": true,
+          "validator": "schema.model_validate(decoded)",
+          "wrapped_as": "SchemaViolation(str(error))",
+          "wrapped_errors": [
+            "json.JSONDecodeError",
+            "pydantic.ValidationError"
+          ]
+        },
+        "parser_source_line": 31,
+        "repair": {
+          "exact_user_formula": "original user + '\\n\\nYour previous response failed validation with:\\n' + str(SchemaViolation) + '\\nRespond again with ONLY valid JSON for the schema.'",
+          "failure_effect": "a second SchemaViolation becomes classify error; classify returns no costs field, so request/usage trace must be read from the tracker or wrapper",
+          "failure_error_format": "classification failed schema validation: {exc}",
+          "function": "triage.guardrails.call_with_repair",
+          "initial_call_line": 44,
+          "maximum_completions": 2,
+          "repair_call_line": 52,
+          "repair_user_expression_is_formatted_from": [
+            "user",
+            "SchemaViolation text"
+          ],
+          "same_complete_oracle_required_for": [
+            "initial completion",
+            "optional repair completion"
+          ],
+          "source_expression": "f'{user}\\n\\nYour previous response failed validation with:\\n{exc}\\nRespond again with ONLY valid JSON for the schema.'",
+          "source_line": 42
+        }
+      },
+      "version": 1
+    },
+    "incident_fields": {
+      "incident_id": {
+        "type": "str"
+      },
+      "reported_by": {
+        "type": "str"
+      },
+      "site": {
+        "type": "str"
+      },
+      "text": {
+        "max_length": 4000,
+        "min_length": 10,
+        "type": "str"
+      }
+    },
+    "recognized_helper_ast_sha256": {
+      "costs.py:complete": "7684b478cabfa1065e66afd303ead07b1f25c20b6003a59222a47969b7cb3ba4",
+      "costs.py:estimate_tokens": "4703e938d4a4d9b4ffa02c42deb6b48f65d31cc4283bfc70f72e181bab085e88",
+      "costs.py:over_budget": "2927ac2c288ab01ba4b1bf88b45351008a409a7d00b4be19f4f5b24a9d953381",
+      "costs.py:record": "31c971c85338d3f7d22e6580315d1f5b7e76eb0679a08476fdfd43c07951b4e3",
+      "costs.py:total_usd": "3f5540b6b70bf541c956a44f1d1fa0e4b7c317ae8dd39e0fe9da03b1525af124",
+      "graph.py:build_graph": "668545efc5222cf3ced3c075c76a001aba145e9dc0e29930c903967053e5d9b0",
+      "graph.py:classify": "48eaa5566eab16288aed4b3994e2ec810c422fadbf6d92740dd455a1be66e714",
+      "graph.py:draft": "fb9f2887e9cf0773b88faff67850bd156f286edbb685ab544693b5babdd9cbd2",
+      "graph.py:enrich": "3f0a332b02dac194d50ee999e56541ff11e519b38c20a22a183b7ae18d68e793",
+      "graph.py:prioritise": "d6b1e3c1895c874d6f6784c151555908a962f4a6c61906119ce8910e8184c03a",
+      "graph.py:route_after": "c529af4ff8e20f3abb7d71d54fdd367946e1f3f0ed4ca600dc6df3fd6b5556e2",
+      "guardrails.py:call_with_repair": "4279abe8dc845eb592de93e5bfee33c7a2a5fdf872358990a759b273c227cb4c",
+      "guardrails.py:parse_structured": "ebad3330ecabaa957178d1af2d427674fca42a2a7acc53edbdd990626e34617a",
+      "guardrails.py:redact_pii": "f8ade865e5cdfaa8ee4d59f533f531f48f8409f938f9fc4a88f86203af3b5dcf"
+    },
+    "redactor": {
+      "contract": "deterministic ordered Python re.sub calls on one text value",
+      "function": "triage.guardrails.redact_pii",
+      "order": [
+        "EMAIL_RE",
+        "PHONE_RE",
+        "NI_NUMBER_RE"
+      ],
+      "patterns": {
+        "EMAIL_RE": "[\\w.+-]+@[\\w-]+\\.[\\w.]+",
+        "NI_NUMBER_RE": "\\b[A-Z]{2}\\s?\\d{2}\\s?\\d{2}\\s?\\d{2}\\s?[A-Z]\\b",
+        "PHONE_RE": "(?:\\+44\\s?|0)\\d{2,4}[\\s-]?\\d{3}[\\s-]?\\d{3,4}"
+      },
+      "replacements": {
+        "EMAIL_RE": "[EMAIL]",
+        "NI_NUMBER_RE": "[NI-NUMBER]",
+        "PHONE_RE": "[PHONE]"
+      },
+      "source_line": 21
+    },
+    "request": {
+      "classification_prompt_summary_max": 280,
+      "classification_schema_summary_max": 300,
+      "exact_message_pair": {
+        "dynamic_user_value": "redact_pii(incident.text)",
+        "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+        "user_prefix": "INCIDENT REPORT: "
+      },
+      "excluded_helper_phase": "the optional repair completion after SchemaViolation",
+      "source_call_function": "call_with_repair",
+      "source_call_line": 74,
+      "source_call_phase": "first completion only",
+      "source_helpers": [
+        "IncidentReport.model_validate",
+        "redact_pii",
+        "call_with_repair"
+      ],
+      "source_node": "classify",
+      "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}.",
+      "system_symbol": "CLASSIFY_SYSTEM",
+      "user_expression": {
+        "kind": "fstring",
+        "prefix": "INCIDENT REPORT: ",
+        "value": {
+          "argument": "IncidentReport.text",
+          "kind": "redact_pii"
+        }
+      }
+    },
+    "source_budget_usd": 0.05,
+    "source_estimator": {
+      "expression": "max(1, len(text) // 4)",
+      "function": "triage.costs.estimate_tokens",
+      "length_unit": "Python Unicode code points",
+      "not_equivalent_to_graph_accounting": "OrchGraph estimates ceil(UTF8-bytes / divisor) per template/argument fragment",
+      "source_line": 15
+    },
+    "source_mock_name": "mock",
+    "source_model_summary_mismatch": {
+      "mismatch": true,
+      "prompt_max_chars": 280,
+      "schema_max_chars": 300
+    },
+    "source_provider_default": "mock",
+    "source_scope": "pinned source, exact pre-dispatch request/usage/route dependencies under stated helper and oracle contracts",
+    "system": "You classify the incident report of a UK facilities and security operation. Respond with ONLY JSON: {\"category\": one of [\"physical_security\",\"cyber\",\"safety\",\"operational\",\"environmental\"], \"severity\": one of [\"low\",\"medium\",\"high\",\"critical\"], \"summary\": string (max 280 chars), \"people_at_risk\": boolean}."
+  },
+  "source_study_projection": {
+    "different_projection_pairs": 6,
+    "equal_projection_pairs": 5,
+    "finite_source_corpus_only": true,
+    "pair_checks": [
+      {
+        "captured_source_calls_agree": true,
+        "left": "mock_marker_absent",
+        "right": "mock_marker_present",
+        "same_first_classifier_request": false,
+        "same_public_metadata": true,
+        "same_redacted_text": false
+      },
+      {
+        "captured_source_calls_agree": true,
+        "left": "pii_count_one",
+        "right": "pii_count_two",
+        "same_first_classifier_request": false,
+        "same_public_metadata": true,
+        "same_redacted_text": false
+      },
+      {
+        "captured_source_calls_agree": true,
+        "left": "pii_email_a",
+        "right": "pii_email_b",
+        "same_first_classifier_request": true,
+        "same_public_metadata": true,
+        "same_redacted_text": true
+      },
+      {
+        "captured_source_calls_agree": true,
+        "left": "pii_national_insurance_a",
+        "right": "pii_national_insurance_b",
+        "same_first_classifier_request": true,
+        "same_public_metadata": true,
+        "same_redacted_text": true
+      },
+      {
+        "captured_source_calls_agree": true,
+        "left": "pii_phone_a",
+        "right": "pii_phone_b",
+        "same_first_classifier_request": true,
+        "same_public_metadata": true,
+        "same_redacted_text": true
+      },
+      {
+        "captured_source_calls_agree": true,
+        "left": "pii_presence_absent",
+        "right": "pii_presence_present",
+        "same_first_classifier_request": false,
+        "same_public_metadata": true,
+        "same_redacted_text": false
+      },
+      {
+        "captured_source_calls_agree": true,
+        "left": "pii_type_email",
+        "right": "pii_type_phone",
+        "same_first_classifier_request": false,
+        "same_public_metadata": true,
+        "same_redacted_text": false
+      },
+      {
+        "captured_source_calls_agree": true,
+        "left": "public_text_a",
+        "right": "public_text_b",
+        "same_first_classifier_request": false,
+        "same_public_metadata": true,
+        "same_redacted_text": false
+      },
+      {
+        "captured_source_calls_agree": true,
+        "left": "public_text_a",
+        "right": "upstream_default_mock",
+        "same_first_classifier_request": true,
+        "same_public_metadata": true,
+        "same_redacted_text": true
+      },
+      {
+        "captured_source_calls_agree": true,
+        "left": "retry_email_a",
+        "right": "retry_email_b",
+        "same_first_classifier_request": true,
+        "same_public_metadata": true,
+        "same_redacted_text": true
+      },
+      {
+        "captured_source_calls_agree": true,
+        "left": "unlisted_name_a",
+        "right": "unlisted_name_b",
+        "same_first_classifier_request": false,
+        "same_public_metadata": true,
+        "same_redacted_text": false
+      }
+    ],
+    "source_case_count": 22,
+    "source_pair_count": 11
+  },
+  "source_to_graph_mapping": {
+    "graph_analysis_input": "classifier_user_message",
+    "graph_argument_equals_source_user_message": true,
+    "graph_self_composition_lanes": [
+      "left_call",
+      "right_call"
+    ],
+    "graph_template_equals_source_system": true,
+    "input_projection": "'INCIDENT REPORT: ' + redact_pii(IncidentReport.text)",
+    "request_equivalence": "redact_pii(t_left) == redact_pii(t_right), with identical valid public metadata",
+    "scope": "the OrchGraph certificate covers the exact first classifier system/user pair only",
+    "self_composition_secret_selector_is_synthetic": true,
+    "source_file": "src/triage/graph.py",
+    "source_node": "classify",
+    "source_operation": "call_with_repair(tracked, CLASSIFY_SYSTEM, f'INCIDENT REPORT: {redact_pii(incident.text)}', Classification)",
+    "source_operation_line": 74
+  },
+  "status": "generated; see independent source_analysis.attestation.json",
+  "version": 1
+}

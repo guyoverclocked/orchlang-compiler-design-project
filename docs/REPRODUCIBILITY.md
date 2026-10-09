@@ -3,7 +3,7 @@
 ## Requirements and scope
 
 The compiler needs C++17 and make. The audit, finite-channel, stochastic and
-local demo tools need Python 3.10+ and the standard library. The wheel builder
+local analysis tools need Python 3.10+ and the standard library. HTML story 08 needs Python 3.12+ for the pinned source syntax. The wheel builder
 also needs local pip, setuptools and wheel; it does not contact a package
 index. LangGraph is optional and uses its separate pinned environment.
 All evaluated model behavior is offline. No provider keys, paid calls or
@@ -154,3 +154,14 @@ renders the extended technical report. `scripts/build_scp_manuscript.py`
 fills the downloaded official OSP LaTeX template without altering its
 format settings. PDF/deck authoring dependencies are optional and are not
 required to build or use the compiler and analysis wheel.
+
+## Separate unchanged-source extension
+
+The base compiler reproduction is 44 stages. The pinned incident-triage source case has a separate 16-stage guarded reproduction and 54 focused tests (12 direct, 13 source protocol, 19 concurrency/session, 10 selected paths). It clones the clean source from the included local Git bundle, installs nothing, and byte-reproduces four evidence families. Actual source execution needs the documented exact Python 3.14.6 lock; AST/replay checks work with Python 3.12+.
+
+```sh
+python3 audit/reproduce_incident_triage.py \
+  --integration-python integrations/incident_triage/.venv/bin/python
+```
+
+Read `integrations/incident_triage/README.md` for environment setup and `SOURCE_SNAPSHOT.md` for custody. `audit/incident_triage/manifest.json` binds source/runtime/harness/report inputs and logs separately from the main compiler manifest. The case is conditional, uses synthetic offline outcomes, and excludes provider invoices, general source translation and raw checkpoint privacy.
