@@ -6,8 +6,9 @@
 // computed once, without executing anything and without consulting a model.
 // It is deliberately reported in two parts:
 //
-//   guaranteed  output tokens, capped by each provider's own max_tokens.  This
-//               half needs no assumption about how text is tokenized.
+//   guaranteed  output tokens, capped by the declared provider max_tokens
+//               contract. This component does not use the input tokenizer
+//               estimate, but still assumes the provider honors that contract.
 //   estimated   input tokens: prompt templates plus the declared bounds of the
 //               arguments substituted into them.  This half is sound only
 //               relative to the declared characters-per-token assumption, which
@@ -47,6 +48,8 @@ struct CostBound {
     // False when at least one selected model declared no price, so the
     // monetary figure is a partial total rather than a bound.
     bool moneyComplete{true};
+    // False when a finite unit price produced a non-finite derived figure.
+    bool moneyFinite{true};
     // False when an argument reaching a prompt had no declared token bound.
     bool defined{true};
 

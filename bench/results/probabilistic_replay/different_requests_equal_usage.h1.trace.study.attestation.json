@@ -1,0 +1,53 @@
+{
+  "format": "orchlang-finite-usage-channel-replay-attestation",
+  "version": 1,
+  "status": "verified",
+  "verification_method": "independent finite DFS re-execution",
+  "claim_scope": "replayed finite scenario histograms and exact leakage metrics for the bound inputs, kernel, observer, and horizon; not a general proof",
+  "verifier_exact_integer_bit_limit": 8192,
+  "unverified_fields": [
+    "analyzer_sha256 (digest shape only; producer executable was not replayed)",
+    "rows[*].state_visits, peak_frontier, call_transitions, terminal_states, work_bytes_estimate (producer execution counters; checked for shape and declared-budget bounds, not recomputed by DFS)",
+    "metrics.pairwise[*].maximum_log_likelihood_ratio_nats_approx",
+    "metrics.min_entropy_leakage_bits_approx",
+    "metrics.mutual_information_bits_approx"
+  ],
+  "diagnostic": null,
+  "report_sha256": "09c7240ef2c6288093cb966326812b0d22375380338ff9fabeb306ffbafcda74",
+  "source_sha256": "6956de33d4f1798dbe5f2ec0aab6b7f74ec7a1d1d52cf0369be7cceba8b600a6",
+  "kernel_sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b",
+  "producer_analyzer_sha256": "45380e75cdcc4d6f285a0027cbb85dab97d22dff11c5c94d3940b6813e8dce00",
+  "public_store_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "secret_scenarios_sha256": "65ba9bae030c6dee87d198eacddd557a759b4c629201aa5ee45bd4aa8e38398b",
+  "observer": "trace",
+  "horizon": 1,
+  "declared_scope": "authored synthetic finite success-only kernels; no provider distribution fitting, currency, errors or infinite-horizon analysis",
+  "producer_max_states": 100000,
+  "producer_max_work_bytes": 1073741824,
+  "max_reference_paths": 1000000,
+  "max_reference_steps": 10000000,
+  "max_reference_work_bytes": 1073741824,
+  "scenario_rows_verified": 2,
+  "independent_rows": [
+    {
+      "leaf_paths": 2,
+      "call_transitions": 2,
+      "control_steps": 4,
+      "work_bytes": 2280
+    },
+    {
+      "leaf_paths": 2,
+      "call_transitions": 2,
+      "control_steps": 4,
+      "work_bytes": 2273
+    }
+  ],
+  "verified_exact_metrics": [
+    "pairwise exact total variation",
+    "pairwise symmetric finite/infinite likelihood ratios",
+    "equal-observation-law predicates",
+    "Bayes vulnerability and prior vulnerability",
+    "exact min-entropy vulnerability ratio",
+    "exact mutual-information symbolic terms (multiset comparison)"
+  ]
+}

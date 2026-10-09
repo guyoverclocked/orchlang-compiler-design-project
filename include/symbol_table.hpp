@@ -7,6 +7,8 @@
 #include <map>
 #include <optional>
 #include <string>
+#include <tuple>
+#include <utility>
 #include <vector>
 
 namespace orchlang {
@@ -15,13 +17,34 @@ enum class SymbolKind { Input, Secret, Model, Prompt, PromptParameter, LocalResu
 
 std::string symbolKindName(SymbolKind kind);
 
-struct ModelMetadata {
+// A resolved model contract.  Source aliases are deliberately not part of its
+// identity: two aliases with the same provider/model/cap/price denote the same
+// oracle and billing contract.
+struct ModelContract {
     std::string provider;
     std::string modelName;
     std::size_t maxTokens{0};
     bool hasUnitPrice{false};
     double unitPrice{0.0};
+
+    bool operator==(const ModelContract& other) const {
+        return provider == other.provider && modelName == other.modelName &&
+               maxTokens == other.maxTokens && hasUnitPrice == other.hasUnitPrice &&
+               unitPrice == other.unitPrice;
+    }
+    bool operator!=(const ModelContract& other) const { return !(*this == other); }
+    bool operator<(const ModelContract& other) const {
+        return std::tie(provider, modelName, maxTokens, hasUnitPrice, unitPrice) <
+               std::tie(other.provider, other.modelName, other.maxTokens, other.hasUnitPrice,
+                        other.unitPrice);
+    }
+
+    std::string stableKey() const;
+    std::string displayName() const;
+    std::string tokenizerIdentity() const;
 };
+
+using ModelMetadata = ModelContract;
 
 struct PromptParameterInfo {
     std::string name;
@@ -34,6 +57,9 @@ struct PromptSignature {
     // Static token cost of the template itself, excluding the substituted
     // arguments.  Derived once at declaration and reused at every call site.
     std::size_t templateTokens{0};
+    // Exact decoded template bytes used to form requests.  Token estimates are
+    // not an equality oracle: different strings can have the same estimate.
+    std::string templateText;
 };
 
 struct ToolSignature {
@@ -41,6 +67,17 @@ struct ToolSignature {
 };
 
 struct Symbol {
+    Symbol() = default;
+    Symbol(std::string declaredName, SymbolKind declaredKind, Type declaredType,
+           std::string declaredScope, SourceLocation declaredLocation,
+           std::optional<ModelMetadata> declaredModel,
+           std::optional<PromptSignature> declaredPrompt,
+           std::optional<ToolSignature> declaredTool, Label declaredLabel)
+        : name(std::move(declaredName)), kind(declaredKind), type(declaredType),
+          scope(std::move(declaredScope)), location(std::move(declaredLocation)),
+          model(std::move(declaredModel)), prompt(std::move(declaredPrompt)),
+          tool(std::move(declaredTool)), label(declaredLabel), contentLabel(declaredLabel) {}
+
     std::string name;
     SymbolKind kind{SymbolKind::Input};
     Type type;
@@ -56,6 +93,18 @@ struct Symbol {
     // bound, or a model or tool name, has no bound at all.
     bool tokenBoundKnown{false};
     std::size_t tokenBound{0};
+    // Non-empty only for model-generated output bounds, whose unit is tied to
+    // the producing model's tokenizer. Empty means the source supplied an
+    // external bound under the language's declared input-size assumption.
+    std::string tokenBoundTokenizer;
+    // `label` includes control dependence (the program counter). `contentLabel`
+    // describes the value's contents alone. A model result created under a
+    // secret guard can have public contents but secret-dependent existence.
+    Label contentLabel{publicTrusted()};
+    // Every lexical declaration gets a unique binding identity. Aliases made by
+    // reclassification retain valueIdentity, while shadowing gets a new one.
+    std::size_t bindingIdentity{0};
+    std::size_t valueIdentity{0};
 };
 
 struct Scope {
@@ -75,6 +124,7 @@ public:
 
 private:
     std::vector<Scope> scopes_;
+    std::size_t nextBindingIdentity_{1};
 };
 
 std::string formatSymbolTable(const SymbolTable& table);

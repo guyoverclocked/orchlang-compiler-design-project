@@ -1,0 +1,155 @@
+{
+  "checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+  "format": "orchlang-cyclic-request-certificate",
+  "graph_name": "productive_cycle",
+  "max_nodes": 50000,
+  "nodes": [
+    {
+      "equal_values": [
+        [
+          "lg_input_0000",
+          "lg_input_0000"
+        ],
+        [
+          "lg_input_0001",
+          "lg_input_0001"
+        ]
+      ],
+      "id": 0,
+      "left": [
+        "lg_state_0000",
+        0
+      ],
+      "right": [
+        "lg_state_0000",
+        0
+      ],
+      "rule": "matched-call",
+      "successors": [
+        1
+      ]
+    },
+    {
+      "equal_values": [
+        [
+          "lg_input_0000",
+          "lg_input_0000"
+        ],
+        [
+          "lg_input_0001",
+          "lg_input_0001"
+        ],
+        [
+          "lg_slot_0000",
+          "lg_slot_0000"
+        ]
+      ],
+      "id": 1,
+      "left": [
+        "lg_state_0000",
+        1
+      ],
+      "right": [
+        "lg_state_0000",
+        1
+      ],
+      "rule": "public-choice",
+      "successors": [
+        2,
+        3
+      ]
+    },
+    {
+      "equal_values": [
+        [
+          "lg_input_0000",
+          "lg_input_0000"
+        ],
+        [
+          "lg_input_0001",
+          "lg_input_0001"
+        ],
+        [
+          "lg_slot_0000",
+          "lg_slot_0000"
+        ]
+      ],
+      "id": 2,
+      "left": [
+        "lg_state_0000",
+        0
+      ],
+      "right": [
+        "lg_state_0000",
+        0
+      ],
+      "rule": "matched-call",
+      "successors": [
+        1
+      ]
+    },
+    {
+      "equal_values": [
+        [
+          "lg_input_0000",
+          "lg_input_0000"
+        ],
+        [
+          "lg_input_0001",
+          "lg_input_0001"
+        ],
+        [
+          "lg_slot_0000",
+          "lg_slot_0000"
+        ]
+      ],
+      "id": 3,
+      "left": [
+        "lg_stop_0000",
+        0
+      ],
+      "right": [
+        "lg_stop_0000",
+        0
+      ],
+      "rule": "stop",
+      "successors": []
+    }
+  ],
+  "product_edges": 4,
+  "product_nodes": 4,
+  "reachable_source_states": [
+    "lg_state_0000",
+    "lg_stop_0000"
+  ],
+  "root": 0,
+  "semantics": {
+    "claim": "equal complete request/usage traces and stop positions under the shared oracle",
+    "cycles": "every finite trace prefix; no termination or finite total-cost claim",
+    "input_accounting": "complete additive request contract in compatible token units",
+    "inputs": "all public external values agree; secret inputs may differ",
+    "oracle": "shared Omega(resolved-contract,per-contract-ordinal,template,ordered-text-values)",
+    "unsupported": [
+      "declassification",
+      "tools",
+      "request serialization",
+      "independent provider sampling",
+      "call-free cycles"
+    ]
+  },
+  "source_sha256": "6e793545fe55ebba06720d3f6a8e94a638860d24fea35ce819295fc63fbf2c58",
+  "state_entry_bounds": {
+    "lg_state_0000": {
+      "input_tokens": 66,
+      "output_tokens": 12,
+      "total_tokens": 78
+    },
+    "lg_stop_0000": {
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "total_tokens": 0
+    }
+  },
+  "status": "accepted",
+  "version": 1
+}

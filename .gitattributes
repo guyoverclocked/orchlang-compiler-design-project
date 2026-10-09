@@ -1,0 +1,11 @@
+# Generated document/media/archive artifacts are binary, including ASCII PDFs.
+*.pdf binary
+*.pptx binary
+*.docx binary
+*.png binary
+*.whl binary
+*.zip binary
+
+# Markdown hard line breaks and byte-exact generated logs are intentional.
+*.md whitespace=-blank-at-eol
+*.log whitespace=-blank-at-eol,-blank-at-eof

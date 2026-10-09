@@ -1,0 +1,978 @@
+{
+  "equal_cross_check_horizons": [
+    1,
+    2,
+    4,
+    8
+  ],
+  "failures": [],
+  "fixtures": [
+    {
+      "bisimulation_comparison": {
+        "attestation_status": "verified",
+        "source": "saved stochastic-bisimulation evaluation with matching raw fixture hashes",
+        "status": "inconclusive"
+      },
+      "claim": "a finite ordered-usage observation distinguishes the supplied scenarios",
+      "finite_dp_cross_check": {
+        "histograms_differ": true,
+        "path": "bench/results/trace_equivalence/aggregate_hides_order.witness-dp.json",
+        "sha256": "7c712fd51a2913e7a791520fd32cd0562a5e771a14e084090f97c68142479f26",
+        "witness_horizon": 1
+      },
+      "fresh_unknown_probe": {
+        "certificate": {
+          "path": "bench/results/trace_equivalence/aggregate_hides_order.cap-unknown.certificate.json",
+          "sha256": "cd5f1bb6a39a4ca194715ec12b067c2cf5dccca0ce6183a4a6a3fe4ae8079afe"
+        },
+        "independent_attestation": {
+          "decision": null,
+          "path": "bench/results/trace_equivalence/aggregate_hides_order.cap-unknown.attestation.json",
+          "sha256": "d31f4402cf341b16ba7e45fad636e2944516fc6841fada5b39a384a76879ab74",
+          "status": "unknown"
+        },
+        "producer_max_states": 1,
+        "producer_status": "unknown"
+      },
+      "graph": {
+        "path": "examples/channels/aggregate_hides_order.graph.json",
+        "sha256": "6698767717f8b5920c5a409ce3047b62ed68663d6564ec20a7ac19ad3feb4898"
+      },
+      "independent_attestation": {
+        "decision": "unequal",
+        "pair_count": 1,
+        "path": "bench/results/trace_equivalence/aggregate_hides_order.attestation.json",
+        "sha256": "df826a811c18cb86c232bb59f638cab7e95390272b7cc50967d87a78aae80bce",
+        "status": "verified"
+      },
+      "input_hashes": {
+        "graph_raw_sha256": "6698767717f8b5920c5a409ce3047b62ed68663d6564ec20a7ac19ad3feb4898",
+        "kernel_raw_sha256": "62df7f0ad13716c524d3c2ebd48789f56fc4b51f5999cb2e439480d3015ee07e",
+        "public_store_canonical_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "secret_scenarios_canonical_sha256": "c746a0cd8c632a82c9994be1df942b4258d3968e3d63189dd6b0f9cfe75945a0"
+      },
+      "kernel": {
+        "path": "examples/channels/aggregate_hides_order.kernel.json",
+        "sha256": "62df7f0ad13716c524d3c2ebd48789f56fc4b51f5999cb2e439480d3015ee07e"
+      },
+      "name": "aggregate_hides_order",
+      "producer_status": "unequal",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "tamper_probe": {
+        "independent_attestation": {
+          "path": "bench/results/trace_equivalence/aggregate_hides_order.tamper-attestation.json",
+          "sha256": "d8a901be398d86ca70db74027720e3bfe1aab46a2983c87a2b645c8c274f43c7",
+          "status": "rejected"
+        },
+        "path": "bench/results/trace_equivalence/aggregate_hides_order.tampered.json",
+        "sha256": "81f46091a234088661d5096225ae415614513d8dd9578b5132822e7191c3508a"
+      },
+      "trace_certificate": {
+        "path": "bench/results/trace_equivalence/aggregate_hides_order.certificate.json",
+        "sha256": "e9dc2436e69aebe07d9d26b807538e296fb807905b6c5e2da620932008d63c16",
+        "state_count": 6,
+        "transition_count": 4
+      }
+    },
+    {
+      "bisimulation_comparison": {
+        "attestation_status": "verified",
+        "source": "saved stochastic-bisimulation evaluation with matching raw fixture hashes",
+        "status": "inconclusive"
+      },
+      "claim": "a finite ordered-usage observation distinguishes the supplied scenarios",
+      "finite_dp_cross_check": {
+        "histograms_differ": true,
+        "path": "bench/results/trace_equivalence/biased_productive_cycle.witness-dp.json",
+        "sha256": "dee23da6868d848cc4bd88aef3a6363157ad730b926353370c7681b89b912d5f",
+        "witness_horizon": 1
+      },
+      "fresh_unknown_probe": {
+        "certificate": {
+          "path": "bench/results/trace_equivalence/biased_productive_cycle.cap-unknown.certificate.json",
+          "sha256": "4c2737fa222e20bfeb59f31d8c543b957c91262590011a0996718a9cfaf0ebf7"
+        },
+        "independent_attestation": {
+          "decision": null,
+          "path": "bench/results/trace_equivalence/biased_productive_cycle.cap-unknown.attestation.json",
+          "sha256": "30ab7d15e08a7ddb72447f62029501c287a1762cf2bc2a6f21e51219b4879c7a",
+          "status": "unknown"
+        },
+        "producer_max_states": 1,
+        "producer_status": "unknown"
+      },
+      "graph": {
+        "path": "examples/channels/biased_productive_cycle.graph.json",
+        "sha256": "8da6a2a965021760108194c6decadbc205c975bb5a4cf2ad731374f67b610de2"
+      },
+      "independent_attestation": {
+        "decision": "unequal",
+        "pair_count": 1,
+        "path": "bench/results/trace_equivalence/biased_productive_cycle.attestation.json",
+        "sha256": "8e15d9feed21ac94ba9d3510b86cb527509f249e7e207c5aa128abb3b20dc0ef",
+        "status": "verified"
+      },
+      "input_hashes": {
+        "graph_raw_sha256": "8da6a2a965021760108194c6decadbc205c975bb5a4cf2ad731374f67b610de2",
+        "kernel_raw_sha256": "be226002f14ff3c0e7071c16a78cf7fafcd0da009ad185b98be28136e37f5175",
+        "public_store_canonical_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "secret_scenarios_canonical_sha256": "c746a0cd8c632a82c9994be1df942b4258d3968e3d63189dd6b0f9cfe75945a0"
+      },
+      "kernel": {
+        "path": "examples/channels/biased_productive_cycle.kernel.json",
+        "sha256": "be226002f14ff3c0e7071c16a78cf7fafcd0da009ad185b98be28136e37f5175"
+      },
+      "name": "biased_productive_cycle",
+      "producer_status": "unequal",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "tamper_probe": {
+        "independent_attestation": {
+          "path": "bench/results/trace_equivalence/biased_productive_cycle.tamper-attestation.json",
+          "sha256": "d8a901be398d86ca70db74027720e3bfe1aab46a2983c87a2b645c8c274f43c7",
+          "status": "rejected"
+        },
+        "path": "bench/results/trace_equivalence/biased_productive_cycle.tampered.json",
+        "sha256": "0c6343cfcbf6813e5db8d4ccad731e7c358386a467175aa4c87547e76bfd1910"
+      },
+      "trace_certificate": {
+        "path": "bench/results/trace_equivalence/biased_productive_cycle.certificate.json",
+        "sha256": "e8addf054e774464f3f082c6bf4d5bd66b9b724c1cf5d36f22868e8e441a2438",
+        "state_count": 134,
+        "transition_count": 136
+      }
+    },
+    {
+      "bisimulation_comparison": {
+        "attestation_status": "verified",
+        "source": "saved stochastic-bisimulation evaluation with matching raw fixture hashes",
+        "status": "proved_equal"
+      },
+      "claim": "exact all-finite-horizon success-only ordered usage-trace laws for every supplied secret scenario under the declared finite rational kernel",
+      "finite_dp_cross_check": {
+        "check_count": 8,
+        "path": "bench/results/trace_equivalence/canonical_alias_chain.finite-dp.json",
+        "sha256": "f030477dd1afeea493af9a1cbe9365086105711895a245ecd895ea20d30aa367"
+      },
+      "fresh_unknown_probe": {
+        "certificate": {
+          "path": "bench/results/trace_equivalence/canonical_alias_chain.cap-unknown.certificate.json",
+          "sha256": "a9f03c7e5fa06da4e465f1aa7e16093eabe6a8e63277ae5dcb51c0f76eed3303"
+        },
+        "independent_attestation": {
+          "decision": null,
+          "path": "bench/results/trace_equivalence/canonical_alias_chain.cap-unknown.attestation.json",
+          "sha256": "040f4b0c6212090de450f67ec54274f4730bfc7de3f8bfa6f09b29cc772c3ff2",
+          "status": "unknown"
+        },
+        "producer_max_states": 1,
+        "producer_status": "unknown"
+      },
+      "graph": {
+        "path": "examples/channels/canonical_alias_chain.graph.json",
+        "sha256": "44fd0d5cfcc94d14dceef393bb27f843c4ebb5dec5e1feeb62913e8607f7ae22"
+      },
+      "independent_attestation": {
+        "decision": "proved_equal",
+        "pair_count": 1,
+        "path": "bench/results/trace_equivalence/canonical_alias_chain.attestation.json",
+        "sha256": "8a01759cd0c9502b4f52dff16d4db7d05b19f708a7e09fe7426ef4a57ba1d39f",
+        "status": "verified"
+      },
+      "input_hashes": {
+        "graph_raw_sha256": "44fd0d5cfcc94d14dceef393bb27f843c4ebb5dec5e1feeb62913e8607f7ae22",
+        "kernel_raw_sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b",
+        "public_store_canonical_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "secret_scenarios_canonical_sha256": "c746a0cd8c632a82c9994be1df942b4258d3968e3d63189dd6b0f9cfe75945a0"
+      },
+      "kernel": {
+        "path": "examples/channels/canonical_alias_chain.kernel.json",
+        "sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b"
+      },
+      "name": "canonical_alias_chain",
+      "producer_status": "proved_equal",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "tamper_probe": {
+        "independent_attestation": {
+          "path": "bench/results/trace_equivalence/canonical_alias_chain.tamper-attestation.json",
+          "sha256": "8241ae6cdfaa6abe2b51f1718864c9158728c7c82fdcecbbe79340dd300eb358",
+          "status": "rejected"
+        },
+        "path": "bench/results/trace_equivalence/canonical_alias_chain.tampered.json",
+        "sha256": "6dd36bb2c585c32f40e667bc84b18a36ee88d01c157728d55b011c0858e33c90"
+      },
+      "trace_certificate": {
+        "path": "bench/results/trace_equivalence/canonical_alias_chain.certificate.json",
+        "sha256": "615a9960ec178fea3edd019da19bf86339ac36ff0867f9d688cf5c6453e24c7d",
+        "state_count": 14,
+        "transition_count": 12
+      }
+    },
+    {
+      "bisimulation_comparison": {
+        "attestation_status": "verified",
+        "source": "saved stochastic-bisimulation evaluation with matching raw fixture hashes",
+        "status": "inconclusive"
+      },
+      "claim": "a finite ordered-usage observation distinguishes the supplied scenarios",
+      "finite_dp_cross_check": {
+        "histograms_differ": true,
+        "path": "bench/results/trace_equivalence/changed_public_context.witness-dp.json",
+        "sha256": "cd301e0e79127b068339388bad52702e7d9fe856d45d09cd9e8129a45504710a",
+        "witness_horizon": 1
+      },
+      "fresh_unknown_probe": {
+        "certificate": {
+          "path": "bench/results/trace_equivalence/changed_public_context.cap-unknown.certificate.json",
+          "sha256": "19baa89238bc3ec08f0caaa0b6b6894ab1e6c09dabb7a2b71ed4f4408356b39c"
+        },
+        "independent_attestation": {
+          "decision": null,
+          "path": "bench/results/trace_equivalence/changed_public_context.cap-unknown.attestation.json",
+          "sha256": "3aa0407fb6d5d45eb822db38874312143d71379ad8aab80c08e3cfe12c908f71",
+          "status": "unknown"
+        },
+        "producer_max_states": 1,
+        "producer_status": "unknown"
+      },
+      "graph": {
+        "path": "examples/channels/changed_public_context.graph.json",
+        "sha256": "c0fd454003fde2f6b12a33493fbd812fc899f69ccdc507cdf2774b8a09cee89e"
+      },
+      "independent_attestation": {
+        "decision": "unequal",
+        "pair_count": 1,
+        "path": "bench/results/trace_equivalence/changed_public_context.attestation.json",
+        "sha256": "96c4346316b4b324e7761e6c9b72c4cfb90a7e9d93b3c2139c692cc84d651bbf",
+        "status": "verified"
+      },
+      "input_hashes": {
+        "graph_raw_sha256": "c0fd454003fde2f6b12a33493fbd812fc899f69ccdc507cdf2774b8a09cee89e",
+        "kernel_raw_sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b",
+        "public_store_canonical_sha256": "d140ac8dc4f7e39b366c86aa657632b835da4f75f12fb3845c339023d2fa9cc1",
+        "secret_scenarios_canonical_sha256": "c746a0cd8c632a82c9994be1df942b4258d3968e3d63189dd6b0f9cfe75945a0"
+      },
+      "kernel": {
+        "path": "examples/channels/changed_public_context.kernel.json",
+        "sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b"
+      },
+      "name": "changed_public_context",
+      "producer_status": "unequal",
+      "public_store": {
+        "q": "qq"
+      },
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "tamper_probe": {
+        "independent_attestation": {
+          "path": "bench/results/trace_equivalence/changed_public_context.tamper-attestation.json",
+          "sha256": "d8a901be398d86ca70db74027720e3bfe1aab46a2983c87a2b645c8c274f43c7",
+          "status": "rejected"
+        },
+        "path": "bench/results/trace_equivalence/changed_public_context.tampered.json",
+        "sha256": "f6dfc64da9899591eed3ce21b067bb8a7bbb9e99660e0cbb43c312e7c7219508"
+      },
+      "trace_certificate": {
+        "path": "bench/results/trace_equivalence/changed_public_context.certificate.json",
+        "sha256": "3b51950ed5032366b1fb9ac6d26e5ddb25dd820f45ac3337ddc6d606ebac3fc0",
+        "state_count": 6,
+        "transition_count": 4
+      }
+    },
+    {
+      "bisimulation_comparison": {
+        "attestation_status": "verified",
+        "source": "saved stochastic-bisimulation evaluation with matching raw fixture hashes",
+        "status": "proved_equal"
+      },
+      "claim": "exact all-finite-horizon success-only ordered usage-trace laws for every supplied secret scenario under the declared finite rational kernel",
+      "finite_dp_cross_check": {
+        "check_count": 8,
+        "path": "bench/results/trace_equivalence/different_requests_equal_usage.finite-dp.json",
+        "sha256": "d2d3ee95471a9e6774674f925153be39fd9f19d1ca02e2a779f36cc2baa9123b"
+      },
+      "fresh_unknown_probe": {
+        "certificate": {
+          "path": "bench/results/trace_equivalence/different_requests_equal_usage.cap-unknown.certificate.json",
+          "sha256": "4cf08a9b2797f53ef4286f1e5a4367e6e2bc999112ddb47cd0e3f3d880bf6edf"
+        },
+        "independent_attestation": {
+          "decision": null,
+          "path": "bench/results/trace_equivalence/different_requests_equal_usage.cap-unknown.attestation.json",
+          "sha256": "eb99e7570d9e78231df12afab5ee36a18664e786e8ce125061b61e02b650a68b",
+          "status": "unknown"
+        },
+        "producer_max_states": 1,
+        "producer_status": "unknown"
+      },
+      "graph": {
+        "path": "examples/channels/different_requests_equal_usage.graph.json",
+        "sha256": "6956de33d4f1798dbe5f2ec0aab6b7f74ec7a1d1d52cf0369be7cceba8b600a6"
+      },
+      "independent_attestation": {
+        "decision": "proved_equal",
+        "pair_count": 1,
+        "path": "bench/results/trace_equivalence/different_requests_equal_usage.attestation.json",
+        "sha256": "33524072ed8465aa7f9e5cf06524f9021b22196330242402924ec9084822224d",
+        "status": "verified"
+      },
+      "input_hashes": {
+        "graph_raw_sha256": "6956de33d4f1798dbe5f2ec0aab6b7f74ec7a1d1d52cf0369be7cceba8b600a6",
+        "kernel_raw_sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b",
+        "public_store_canonical_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "secret_scenarios_canonical_sha256": "c746a0cd8c632a82c9994be1df942b4258d3968e3d63189dd6b0f9cfe75945a0"
+      },
+      "kernel": {
+        "path": "examples/channels/different_requests_equal_usage.kernel.json",
+        "sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b"
+      },
+      "name": "different_requests_equal_usage",
+      "producer_status": "proved_equal",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "tamper_probe": {
+        "independent_attestation": {
+          "path": "bench/results/trace_equivalence/different_requests_equal_usage.tamper-attestation.json",
+          "sha256": "8241ae6cdfaa6abe2b51f1718864c9158728c7c82fdcecbbe79340dd300eb358",
+          "status": "rejected"
+        },
+        "path": "bench/results/trace_equivalence/different_requests_equal_usage.tampered.json",
+        "sha256": "0168c2b7ab2c34644527043ead823edd8eef95fec3ed1ad540b54afec5b39b08"
+      },
+      "trace_certificate": {
+        "path": "bench/results/trace_equivalence/different_requests_equal_usage.certificate.json",
+        "sha256": "cc629db67ddd9298e77b91da800ffb1d3eddb1c02b337d8486cce29583372a15",
+        "state_count": 6,
+        "transition_count": 4
+      }
+    },
+    {
+      "bisimulation_comparison": {
+        "attestation_status": "verified",
+        "source": "saved stochastic-bisimulation evaluation with matching raw fixture hashes",
+        "status": "proved_equal"
+      },
+      "claim": "exact all-finite-horizon success-only ordered usage-trace laws for every supplied secret scenario under the declared finite rational kernel",
+      "finite_dp_cross_check": {
+        "check_count": 8,
+        "path": "bench/results/trace_equivalence/equivalent_dependent_chain.finite-dp.json",
+        "sha256": "14dd917cafa51518661744760dc3c64900dca0eedd25a6cd81b15590f41bd876"
+      },
+      "fresh_unknown_probe": {
+        "certificate": {
+          "path": "bench/results/trace_equivalence/equivalent_dependent_chain.cap-unknown.certificate.json",
+          "sha256": "7e20402b4ba871d94b66dac3ea09a213db181dedc78f0a553b3c6ddf8dc95ac5"
+        },
+        "independent_attestation": {
+          "decision": null,
+          "path": "bench/results/trace_equivalence/equivalent_dependent_chain.cap-unknown.attestation.json",
+          "sha256": "95165a4ec61bac0b2cb9d429ab8ec2db393b1db01db3869722e2da7b5ff01b92",
+          "status": "unknown"
+        },
+        "producer_max_states": 1,
+        "producer_status": "unknown"
+      },
+      "graph": {
+        "path": "examples/channels/equivalent_dependent_chain.graph.json",
+        "sha256": "d2288c35e5b47eb71b77e50bba8c067eae4dcda66269e6c3a8e4f38692c1bf9f"
+      },
+      "independent_attestation": {
+        "decision": "proved_equal",
+        "pair_count": 1,
+        "path": "bench/results/trace_equivalence/equivalent_dependent_chain.attestation.json",
+        "sha256": "fccbb337170f1db84ae1e8e99972162ff4754f1350027c9ec885377855102c40",
+        "status": "verified"
+      },
+      "input_hashes": {
+        "graph_raw_sha256": "d2288c35e5b47eb71b77e50bba8c067eae4dcda66269e6c3a8e4f38692c1bf9f",
+        "kernel_raw_sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b",
+        "public_store_canonical_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "secret_scenarios_canonical_sha256": "c746a0cd8c632a82c9994be1df942b4258d3968e3d63189dd6b0f9cfe75945a0"
+      },
+      "kernel": {
+        "path": "examples/channels/equivalent_dependent_chain.kernel.json",
+        "sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b"
+      },
+      "name": "equivalent_dependent_chain",
+      "producer_status": "proved_equal",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "tamper_probe": {
+        "independent_attestation": {
+          "path": "bench/results/trace_equivalence/equivalent_dependent_chain.tamper-attestation.json",
+          "sha256": "8241ae6cdfaa6abe2b51f1718864c9158728c7c82fdcecbbe79340dd300eb358",
+          "status": "rejected"
+        },
+        "path": "bench/results/trace_equivalence/equivalent_dependent_chain.tampered.json",
+        "sha256": "ed5602307b996dcd3a2dbd14b8739c02193b0ef89774bcd985d714f26f965ddf"
+      },
+      "trace_certificate": {
+        "path": "bench/results/trace_equivalence/equivalent_dependent_chain.certificate.json",
+        "sha256": "c254e795986296b47bcd95369d704849cfc4e4ba7253d72e37e50de673caafcb",
+        "state_count": 14,
+        "transition_count": 12
+      }
+    },
+    {
+      "bisimulation_comparison": {
+        "attestation_status": "verified",
+        "source": "saved stochastic-bisimulation evaluation with matching raw fixture hashes",
+        "status": "proved_equal"
+      },
+      "claim": "exact all-finite-horizon success-only ordered usage-trace laws for every supplied secret scenario under the declared finite rational kernel",
+      "finite_dp_cross_check": {
+        "check_count": 8,
+        "path": "bench/results/trace_equivalence/fixed_public_context.finite-dp.json",
+        "sha256": "b7923132d595ffd923047407c9c0c5b2d3aaba483e79441fea34421361b817f9"
+      },
+      "fresh_unknown_probe": {
+        "certificate": {
+          "path": "bench/results/trace_equivalence/fixed_public_context.cap-unknown.certificate.json",
+          "sha256": "5901aae2c759afbd79c79819aa345304ccbb48b887a9082b52cd800c83b76551"
+        },
+        "independent_attestation": {
+          "decision": null,
+          "path": "bench/results/trace_equivalence/fixed_public_context.cap-unknown.attestation.json",
+          "sha256": "bb5250849f6789e9986096f69060e928e345bc7c4a098981fad025afdb037642",
+          "status": "unknown"
+        },
+        "producer_max_states": 1,
+        "producer_status": "unknown"
+      },
+      "graph": {
+        "path": "examples/channels/fixed_public_context.graph.json",
+        "sha256": "2d64a6834c5bd91b365b550d578f844835c8d363ee404fec82e22d463a1cf9de"
+      },
+      "independent_attestation": {
+        "decision": "proved_equal",
+        "pair_count": 1,
+        "path": "bench/results/trace_equivalence/fixed_public_context.attestation.json",
+        "sha256": "44c32202acc6a989dd0b1f9ffa00ff96a1a81707fac56e61d70ebe3da3437d13",
+        "status": "verified"
+      },
+      "input_hashes": {
+        "graph_raw_sha256": "2d64a6834c5bd91b365b550d578f844835c8d363ee404fec82e22d463a1cf9de",
+        "kernel_raw_sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b",
+        "public_store_canonical_sha256": "52073a5a89f06ed6679dd921f822244d775cd35b3f02d8320fde953a99cdcae3",
+        "secret_scenarios_canonical_sha256": "c746a0cd8c632a82c9994be1df942b4258d3968e3d63189dd6b0f9cfe75945a0"
+      },
+      "kernel": {
+        "path": "examples/channels/fixed_public_context.kernel.json",
+        "sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b"
+      },
+      "name": "fixed_public_context",
+      "producer_status": "proved_equal",
+      "public_store": {
+        "q": "q"
+      },
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "tamper_probe": {
+        "independent_attestation": {
+          "path": "bench/results/trace_equivalence/fixed_public_context.tamper-attestation.json",
+          "sha256": "8241ae6cdfaa6abe2b51f1718864c9158728c7c82fdcecbbe79340dd300eb358",
+          "status": "rejected"
+        },
+        "path": "bench/results/trace_equivalence/fixed_public_context.tampered.json",
+        "sha256": "85d72b918049d51de64c0e8be7214abb5b4e3dd8122438cb2b48940217edd4e0"
+      },
+      "trace_certificate": {
+        "path": "bench/results/trace_equivalence/fixed_public_context.certificate.json",
+        "sha256": "bc6a91c5f5e6d4a38f6238fd486b18a91707bf58d63633e973b49e6ef625e7bd",
+        "state_count": 6,
+        "transition_count": 4
+      }
+    },
+    {
+      "bisimulation_comparison": {
+        "attestation_status": "verified",
+        "source": "saved stochastic-bisimulation evaluation with matching raw fixture hashes",
+        "status": "inconclusive"
+      },
+      "claim": "a finite ordered-usage observation distinguishes the supplied scenarios",
+      "finite_dp_cross_check": {
+        "histograms_differ": true,
+        "path": "bench/results/trace_equivalence/history_conditioned_usage.witness-dp.json",
+        "sha256": "9096c99589944f5c256b4c56fa33815678f8823aa1a65e2617b2359730b416b6",
+        "witness_horizon": 2
+      },
+      "fresh_unknown_probe": {
+        "certificate": {
+          "path": "bench/results/trace_equivalence/history_conditioned_usage.cap-unknown.certificate.json",
+          "sha256": "7b22bbb238942d655e8e2f1c28354d75e7057bad1e9a3cb41efe22641ad0fad8"
+        },
+        "independent_attestation": {
+          "decision": null,
+          "path": "bench/results/trace_equivalence/history_conditioned_usage.cap-unknown.attestation.json",
+          "sha256": "2ee37450d7828903772c2f5d0b950aa82bd8e2ebcbfe80d5630e1277a8e25002",
+          "status": "unknown"
+        },
+        "producer_max_states": 1,
+        "producer_status": "unknown"
+      },
+      "graph": {
+        "path": "examples/channels/history_conditioned_usage.graph.json",
+        "sha256": "6ebf39a21215c8632fef7fabf5f5bb19953886914e4c85d226e695cfa8431210"
+      },
+      "independent_attestation": {
+        "decision": "unequal",
+        "pair_count": 1,
+        "path": "bench/results/trace_equivalence/history_conditioned_usage.attestation.json",
+        "sha256": "b05f22529721286c00fba309602774642bb3e7b9fbe95945193e6d364ffd9bef",
+        "status": "verified"
+      },
+      "input_hashes": {
+        "graph_raw_sha256": "6ebf39a21215c8632fef7fabf5f5bb19953886914e4c85d226e695cfa8431210",
+        "kernel_raw_sha256": "d3214743609fb90d704d7f0fd08b52d6c7de91b4c734ff4105f89eb3931ff0ab",
+        "public_store_canonical_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "secret_scenarios_canonical_sha256": "c746a0cd8c632a82c9994be1df942b4258d3968e3d63189dd6b0f9cfe75945a0"
+      },
+      "kernel": {
+        "path": "examples/channels/history_conditioned_usage.kernel.json",
+        "sha256": "d3214743609fb90d704d7f0fd08b52d6c7de91b4c734ff4105f89eb3931ff0ab"
+      },
+      "name": "history_conditioned_usage",
+      "producer_status": "unequal",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "tamper_probe": {
+        "independent_attestation": {
+          "path": "bench/results/trace_equivalence/history_conditioned_usage.tamper-attestation.json",
+          "sha256": "d8a901be398d86ca70db74027720e3bfe1aab46a2983c87a2b645c8c274f43c7",
+          "status": "rejected"
+        },
+        "path": "bench/results/trace_equivalence/history_conditioned_usage.tampered.json",
+        "sha256": "b23c587e632300e5486b837a5cb3ead3e5abb98619d7d7137b19ab27936af1fc"
+      },
+      "trace_certificate": {
+        "path": "bench/results/trace_equivalence/history_conditioned_usage.certificate.json",
+        "sha256": "268503ff0c218f5d6bc30080f2ef0910c4a01e96b0ece07126b8f817fc88829d",
+        "state_count": 6,
+        "transition_count": 4
+      }
+    },
+    {
+      "bisimulation_comparison": {
+        "attestation_status": "verified",
+        "source": "saved stochastic-bisimulation evaluation with matching raw fixture hashes",
+        "status": "proved_equal"
+      },
+      "claim": "exact all-finite-horizon success-only ordered usage-trace laws for every supplied secret scenario under the declared finite rational kernel",
+      "finite_dp_cross_check": {
+        "check_count": 8,
+        "path": "bench/results/trace_equivalence/merge_stress_productive_cycle.finite-dp.json",
+        "sha256": "4aa21a61c87035bd37abafeeed36a67035c302ddd8fc046d56002916c6c97a7f"
+      },
+      "fresh_unknown_probe": {
+        "certificate": {
+          "path": "bench/results/trace_equivalence/merge_stress_productive_cycle.cap-unknown.certificate.json",
+          "sha256": "85303c3acf6680f62e9123e2f6a3d964adbec0d8b3e3dbb5c98815720bbe7216"
+        },
+        "independent_attestation": {
+          "decision": null,
+          "path": "bench/results/trace_equivalence/merge_stress_productive_cycle.cap-unknown.attestation.json",
+          "sha256": "62adb3a275697fff9e3c3d547727fcf821134493c9b0842ac3a242a522d5756a",
+          "status": "unknown"
+        },
+        "producer_max_states": 1,
+        "producer_status": "unknown"
+      },
+      "graph": {
+        "path": "examples/channels/merge_stress_productive_cycle.graph.json",
+        "sha256": "d1bafe2732f0ca44b0a54c865936dd0cad2b05af157df0ce2484f0d290a05b82"
+      },
+      "independent_attestation": {
+        "decision": "proved_equal",
+        "pair_count": 1,
+        "path": "bench/results/trace_equivalence/merge_stress_productive_cycle.attestation.json",
+        "sha256": "a75dd902e050c85159ce0bab853f7852a9068c4f5a445d9662be244b139d34e5",
+        "status": "verified"
+      },
+      "input_hashes": {
+        "graph_raw_sha256": "d1bafe2732f0ca44b0a54c865936dd0cad2b05af157df0ce2484f0d290a05b82",
+        "kernel_raw_sha256": "3d9b0a039d26d43c76299956ea93c0ced3e065499d345a11ced349a7f6382f4a",
+        "public_store_canonical_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "secret_scenarios_canonical_sha256": "c746a0cd8c632a82c9994be1df942b4258d3968e3d63189dd6b0f9cfe75945a0"
+      },
+      "kernel": {
+        "path": "examples/channels/merge_stress_productive_cycle.kernel.json",
+        "sha256": "3d9b0a039d26d43c76299956ea93c0ced3e065499d345a11ced349a7f6382f4a"
+      },
+      "name": "merge_stress_productive_cycle",
+      "producer_status": "proved_equal",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "tamper_probe": {
+        "independent_attestation": {
+          "path": "bench/results/trace_equivalence/merge_stress_productive_cycle.tamper-attestation.json",
+          "sha256": "8241ae6cdfaa6abe2b51f1718864c9158728c7c82fdcecbbe79340dd300eb358",
+          "status": "rejected"
+        },
+        "path": "bench/results/trace_equivalence/merge_stress_productive_cycle.tampered.json",
+        "sha256": "aee85f2ea54433078cdd900aff647ee37d86acc023da897d4c7e219c7dbd4d01"
+      },
+      "trace_certificate": {
+        "path": "bench/results/trace_equivalence/merge_stress_productive_cycle.certificate.json",
+        "sha256": "59355695bdfcc9b4350f9e8246c1e654c104bbc4582da8c956c9a09c5a228e19",
+        "state_count": 134,
+        "transition_count": 268
+      }
+    },
+    {
+      "bisimulation_comparison": {
+        "attestation_status": "verified",
+        "source": "saved stochastic-bisimulation evaluation with matching raw fixture hashes",
+        "status": "inconclusive"
+      },
+      "claim": "a finite ordered-usage observation distinguishes the supplied scenarios",
+      "finite_dp_cross_check": {
+        "histograms_differ": true,
+        "path": "bench/results/trace_equivalence/noisy_usage_bit.witness-dp.json",
+        "sha256": "db41851d79e32b993d0609efecb30ff5e6ca137492491dd35f5c148ff4425a6b",
+        "witness_horizon": 1
+      },
+      "fresh_unknown_probe": {
+        "certificate": {
+          "path": "bench/results/trace_equivalence/noisy_usage_bit.cap-unknown.certificate.json",
+          "sha256": "cdf0804594d57c07644fff63ecf6a4b966f7c0044550e603c35bd93a92b4dc2a"
+        },
+        "independent_attestation": {
+          "decision": null,
+          "path": "bench/results/trace_equivalence/noisy_usage_bit.cap-unknown.attestation.json",
+          "sha256": "ac246204f5022cf36595ef2192e5fda004312c20c186c419d76b3db4ebbf0c59",
+          "status": "unknown"
+        },
+        "producer_max_states": 1,
+        "producer_status": "unknown"
+      },
+      "graph": {
+        "path": "examples/channels/noisy_usage_bit.graph.json",
+        "sha256": "9e8ebdfedcdf070c906646b18abfa32ee2b516cad146160eff9be9dc51078952"
+      },
+      "independent_attestation": {
+        "decision": "unequal",
+        "pair_count": 1,
+        "path": "bench/results/trace_equivalence/noisy_usage_bit.attestation.json",
+        "sha256": "f1e84ec60bf978e5c7beb36965bf95055179d4cc0b7186afff0881456bc412fd",
+        "status": "verified"
+      },
+      "input_hashes": {
+        "graph_raw_sha256": "9e8ebdfedcdf070c906646b18abfa32ee2b516cad146160eff9be9dc51078952",
+        "kernel_raw_sha256": "be226002f14ff3c0e7071c16a78cf7fafcd0da009ad185b98be28136e37f5175",
+        "public_store_canonical_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "secret_scenarios_canonical_sha256": "c746a0cd8c632a82c9994be1df942b4258d3968e3d63189dd6b0f9cfe75945a0"
+      },
+      "kernel": {
+        "path": "examples/channels/noisy_usage_bit.kernel.json",
+        "sha256": "be226002f14ff3c0e7071c16a78cf7fafcd0da009ad185b98be28136e37f5175"
+      },
+      "name": "noisy_usage_bit",
+      "producer_status": "unequal",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "tamper_probe": {
+        "independent_attestation": {
+          "path": "bench/results/trace_equivalence/noisy_usage_bit.tamper-attestation.json",
+          "sha256": "d8a901be398d86ca70db74027720e3bfe1aab46a2983c87a2b645c8c274f43c7",
+          "status": "rejected"
+        },
+        "path": "bench/results/trace_equivalence/noisy_usage_bit.tampered.json",
+        "sha256": "149feb083d69ee75bd705fab7bf463b8c2309142faffa94c26860a1a8a474a92"
+      },
+      "trace_certificate": {
+        "path": "bench/results/trace_equivalence/noisy_usage_bit.certificate.json",
+        "sha256": "ca972f6d6345861c3a5717f910746fbb654fd3d2a571c539319c96aa0a3669f3",
+        "state_count": 6,
+        "transition_count": 4
+      }
+    },
+    {
+      "bisimulation_comparison": {
+        "attestation_status": "verified",
+        "source": "saved stochastic-bisimulation evaluation with matching raw fixture hashes",
+        "status": "inconclusive"
+      },
+      "claim": "a finite ordered-usage observation distinguishes the supplied scenarios",
+      "finite_dp_cross_check": {
+        "histograms_differ": true,
+        "path": "bench/results/trace_equivalence/same_mean_distinct_laws.witness-dp.json",
+        "sha256": "923f55eded3fc92d25dbef520497e0f18896f3f9364079d01266d4f78133f48a",
+        "witness_horizon": 1
+      },
+      "fresh_unknown_probe": {
+        "certificate": {
+          "path": "bench/results/trace_equivalence/same_mean_distinct_laws.cap-unknown.certificate.json",
+          "sha256": "5f399782f60e9d7c62e58b942d3b3a86fc9ce4cea4107fdda48aa94e19bc5a50"
+        },
+        "independent_attestation": {
+          "decision": null,
+          "path": "bench/results/trace_equivalence/same_mean_distinct_laws.cap-unknown.attestation.json",
+          "sha256": "40507c38451bfc348afab8bda9b53116db4f77a40bbce2de4aa8d6453d7466e3",
+          "status": "unknown"
+        },
+        "producer_max_states": 1,
+        "producer_status": "unknown"
+      },
+      "graph": {
+        "path": "examples/channels/same_mean_distinct_laws.graph.json",
+        "sha256": "dd162d378bac2b9a9e549e6e78f509efaa2ff8b1f5c4a9092147a257ee89ddd7"
+      },
+      "independent_attestation": {
+        "decision": "unequal",
+        "pair_count": 1,
+        "path": "bench/results/trace_equivalence/same_mean_distinct_laws.attestation.json",
+        "sha256": "11777d1c3a112a3e3e55ce73d173ca23bf006f8f837a3d75d0e69b7f5ad97f1c",
+        "status": "verified"
+      },
+      "input_hashes": {
+        "graph_raw_sha256": "dd162d378bac2b9a9e549e6e78f509efaa2ff8b1f5c4a9092147a257ee89ddd7",
+        "kernel_raw_sha256": "d5c67dff48e768099560eb1bc52eebe088b5a77bad33752076480e67e97c373e",
+        "public_store_canonical_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "secret_scenarios_canonical_sha256": "c746a0cd8c632a82c9994be1df942b4258d3968e3d63189dd6b0f9cfe75945a0"
+      },
+      "kernel": {
+        "path": "examples/channels/same_mean_distinct_laws.kernel.json",
+        "sha256": "d5c67dff48e768099560eb1bc52eebe088b5a77bad33752076480e67e97c373e"
+      },
+      "name": "same_mean_distinct_laws",
+      "producer_status": "unequal",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "tamper_probe": {
+        "independent_attestation": {
+          "path": "bench/results/trace_equivalence/same_mean_distinct_laws.tamper-attestation.json",
+          "sha256": "d8a901be398d86ca70db74027720e3bfe1aab46a2983c87a2b645c8c274f43c7",
+          "status": "rejected"
+        },
+        "path": "bench/results/trace_equivalence/same_mean_distinct_laws.tampered.json",
+        "sha256": "b176a4f9733564b927a5005dd741265e0e14f486093bb002385064db5ba7a83f"
+      },
+      "trace_certificate": {
+        "path": "bench/results/trace_equivalence/same_mean_distinct_laws.certificate.json",
+        "sha256": "4a67013ef006192b12acaa070c5fa40176cd11fef514829a44d87ac29fc6862c",
+        "state_count": 5,
+        "transition_count": 3
+      }
+    },
+    {
+      "bisimulation_comparison": {
+        "attestation_status": "not independently replayed in this trace-equivalence study",
+        "source": "fresh authored comparison via stochastic_bisimulation.analyze",
+        "status": "inconclusive"
+      },
+      "claim": "exact all-finite-horizon success-only ordered usage-trace laws for every supplied secret scenario under the declared finite rational kernel",
+      "finite_dp_cross_check": {
+        "check_count": 8,
+        "path": "bench/results/trace_equivalence/trace_equal_not_bisimilar.finite-dp.json",
+        "sha256": "d663523aa7cda6418b9ebb54b5b04e4d52d269a895b7cc2c52c0da59dee0a96f"
+      },
+      "fresh_unknown_probe": {
+        "certificate": {
+          "path": "bench/results/trace_equivalence/trace_equal_not_bisimilar.cap-unknown.certificate.json",
+          "sha256": "65710e3749a6e128871ece1c48e552dba4c208822f8e57932b3cb6f4d5a7d1d6"
+        },
+        "independent_attestation": {
+          "decision": null,
+          "path": "bench/results/trace_equivalence/trace_equal_not_bisimilar.cap-unknown.attestation.json",
+          "sha256": "4d42ebe90ad196482f232339d1d7cad42a12405a4757c82917fe01aee0c7f68d",
+          "status": "unknown"
+        },
+        "producer_max_states": 1,
+        "producer_status": "unknown"
+      },
+      "graph": {
+        "path": "examples/channels/trace_equal_not_bisimilar.graph.json",
+        "sha256": "efcbebac78bca61881f2e511fb116b36207b4d5c8323896ff9efc9cac8f7c9de"
+      },
+      "independent_attestation": {
+        "decision": "proved_equal",
+        "pair_count": 1,
+        "path": "bench/results/trace_equivalence/trace_equal_not_bisimilar.attestation.json",
+        "sha256": "f233e80d1e0f9b84667f57429bebf69aae2d043777d239c55d88656c2e2d700d",
+        "status": "verified"
+      },
+      "input_hashes": {
+        "graph_raw_sha256": "efcbebac78bca61881f2e511fb116b36207b4d5c8323896ff9efc9cac8f7c9de",
+        "kernel_raw_sha256": "b9d38c56fd2a41493dcb6942bc00bc1759aab6612146973d9b6eb4e07867a42f",
+        "public_store_canonical_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+        "secret_scenarios_canonical_sha256": "c746a0cd8c632a82c9994be1df942b4258d3968e3d63189dd6b0f9cfe75945a0"
+      },
+      "kernel": {
+        "path": "examples/channels/trace_equal_not_bisimilar.kernel.json",
+        "sha256": "b9d38c56fd2a41493dcb6942bc00bc1759aab6612146973d9b6eb4e07867a42f"
+      },
+      "name": "trace_equal_not_bisimilar",
+      "producer_status": "proved_equal",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "tamper_probe": {
+        "independent_attestation": {
+          "path": "bench/results/trace_equivalence/trace_equal_not_bisimilar.tamper-attestation.json",
+          "sha256": "8241ae6cdfaa6abe2b51f1718864c9158728c7c82fdcecbbe79340dd300eb358",
+          "status": "rejected"
+        },
+        "path": "bench/results/trace_equivalence/trace_equal_not_bisimilar.tampered.json",
+        "sha256": "b900f537511611c437682cbe0203a4ae9813d7d75a4e9276c156fcc88a58df44"
+      },
+      "trace_certificate": {
+        "path": "bench/results/trace_equivalence/trace_equal_not_bisimilar.certificate.json",
+        "sha256": "d9f181e129e896b3574a6599a94a1529f9405bed40542720a0773d50c9f5ca36",
+        "state_count": 10,
+        "transition_count": 10
+      }
+    }
+  ],
+  "format": "orchlang-exact-trace-equivalence-evaluation",
+  "limits": {
+    "finite_dp": {
+      "max_states": 100000,
+      "max_work_bytes": 67108864
+    },
+    "fresh_unknown_probe": {
+      "max_states": 1
+    },
+    "independent_replay": {
+      "max_control_steps": 1000000,
+      "max_matrix_entries": 10000000,
+      "max_rational_bits": 8192,
+      "max_states": 10000,
+      "max_transitions": 1000000,
+      "max_work_bytes": 67108864
+    },
+    "producer": {
+      "max_matrix_entries": 10000000,
+      "max_rational_bits": 8192,
+      "max_states": 10000,
+      "max_work_bytes": 67108864
+    }
+  },
+  "method": "producer-generated exact weighted-automaton certificates are independently checked by reconstructing the finite semantic closure and verifying exact row-space certificates or exact finite distinguishing witnesses",
+  "runtime": {
+    "python": "3.12.14"
+  },
+  "scope": "12 controlled authored graph/kernel fixtures; finite rational successful-outcome models; exact ordered call-usage traces, no real providers or adoption study",
+  "source_hashes": {
+    "evaluation_driver": "1b640526931de261d8aaf9943b7fcd858bcda5b0d8fdf23026814f026c74719a",
+    "finite_channel_dp": "45380e75cdcc4d6f285a0027cbb85dab97d22dff11c5c94d3940b6813e8dce00",
+    "independent_closure_replayer": "1b987ad220e733a4e1be79b7391bce245d8d7e56bc515bccec051918a8161407",
+    "independent_trace_replayer": "cd117dcfcbb868a22e10594efc3380b1a38d4af9dafdb3bcd4c89e61b0aaad55",
+    "stochastic_bisimulation_comparison": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+    "trace_equivalence_producer": "a9b7aa176b5081ab12a9cff31343b2509de4105daa1c7d87b386765581146ade"
+  },
+  "status": "passed",
+  "summary": {
+    "bisimulation_status_counts": {
+      "inconclusive": 7,
+      "proved_equal": 5
+    },
+    "equal_not_bisimilar_fixture": {
+      "finite_dp_cross_check": {
+        "check_count": 8,
+        "path": "bench/results/trace_equivalence/trace_equal_not_bisimilar.finite-dp.json",
+        "sha256": "d663523aa7cda6418b9ebb54b5b04e4d52d269a895b7cc2c52c0da59dee0a96f"
+      },
+      "independent_replay_status": "verified",
+      "name": "trace_equal_not_bisimilar",
+      "strong_bisimulation_status": "inconclusive",
+      "trace_equivalence_status": "proved_equal"
+    },
+    "finite_witness_dp_checks": 6,
+    "finite_witness_dp_distinguishing_checks": 6,
+    "fixture_count": 12,
+    "fresh_producer_and_replay_unknown_probes": 12,
+    "independently_replayed_finite_witnesses": 6,
+    "independently_replayed_proofs": 6,
+    "producer_decision_counts": {
+      "proved_equal": 6,
+      "unequal": 6
+    },
+    "proved_equal_finite_dp_checks": 48,
+    "proved_equal_scenario_histograms_checked": 96,
+    "semantically_tampered_reports_rejected": 12
+  },
+  "version": 1
+}

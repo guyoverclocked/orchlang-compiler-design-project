@@ -42,9 +42,21 @@ bool isPlaceholderName(const std::string& name) {
 struct ValueFacts {
     Type type{TypeKind::Unknown};
     Label label{publicTrusted()};
+    Label contentLabel{publicTrusted()};
     bool tokenBoundKnown{false};
     std::size_t tokenBound{0};
+    std::string tokenBoundTokenizer;
+    std::size_t bindingIdentity{0};
+    std::size_t valueIdentity{0};
 };
+
+ValueFacts literalFacts(Type type, const Expr& expression, std::size_t charsPerToken) {
+    ValueFacts facts;
+    facts.type = type;
+    facts.tokenBoundKnown = true;
+    facts.tokenBound = estimateTextTokens(substitutedText(expression), charsPerToken);
+    return facts;
+}
 
 // Per-block analysis context.  The program-counter label is what carries
 // implicit flows: inside a branch guarded by a secret, pc is secret, and every
@@ -88,6 +100,7 @@ private:
     SemanticResult& result_;
     AnalysisOptions options_;
     std::size_t outputCount_{0};
+    std::size_t nextCallSiteId_{1};
 };
 
 bool Analyzer::insertSymbol(std::size_t scope, Symbol symbol) {
@@ -117,24 +130,24 @@ ValueFacts Analyzer::inspect(const Expr& expression, const Context& context) {
             ValueFacts facts;
             facts.type = symbol->type;
             facts.label = symbol->label;
+            facts.contentLabel = symbol->contentLabel;
             facts.tokenBoundKnown = symbol->tokenBoundKnown;
             facts.tokenBound = symbol->tokenBound;
+            facts.tokenBoundTokenizer = symbol->tokenBoundTokenizer;
+            facts.bindingIdentity = symbol->bindingIdentity;
+            facts.valueIdentity = symbol->valueIdentity;
             return facts;
         }
         // Every literal is measured through substitutedText, the one function
         // the runtime also uses, so the two can never drift apart.
         case ExprKind::StringLiteral:
-            return {{TypeKind::Text}, publicTrusted(), true,
-                    estimateTextTokens(substitutedText(expression), options_.charsPerToken)};
+            return literalFacts({TypeKind::Text}, expression, options_.charsPerToken);
         case ExprKind::IntegerLiteral:
-            return {{TypeKind::Integer}, publicTrusted(), true,
-                    estimateTextTokens(substitutedText(expression), options_.charsPerToken)};
+            return literalFacts({TypeKind::Integer}, expression, options_.charsPerToken);
         case ExprKind::DecimalLiteral:
-            return {{TypeKind::Decimal}, publicTrusted(), true,
-                    estimateTextTokens(substitutedText(expression), options_.charsPerToken)};
+            return literalFacts({TypeKind::Decimal}, expression, options_.charsPerToken);
         case ExprKind::BooleanLiteral:
-            return {{TypeKind::Boolean}, publicTrusted(), true,
-                    estimateTextTokens(substitutedText(expression), options_.charsPerToken)};
+            return literalFacts({TypeKind::Boolean}, expression, options_.charsPerToken);
         case ExprKind::Call:
             // A call is only syntactically reachable as the right side of a let.
             return {};
@@ -188,18 +201,30 @@ void Analyzer::checkPlaceholders(const PromptDecl& prompt) {
 void Analyzer::declareInput(const InputDecl& input, const Context& context) {
     Symbol symbol{input.name,   SymbolKind::Input, input.type, "", input.location, std::nullopt,
                   std::nullopt, std::nullopt,      input.label};
+    symbol.contentLabel = input.label;
     symbol.tokenBoundKnown = input.hasTokenBound;
     symbol.tokenBound = input.tokenBound;
-    insertSymbol(context.scope, std::move(symbol));
+    if (insertSymbol(context.scope, std::move(symbol))) {
+        const Symbol* inserted = result_.symbols.lookupLocal(context.scope, input.name);
+        if (inserted) {
+            result_.declarationBindings[&input] = inserted->bindingIdentity;
+        }
+    }
 }
 
 void Analyzer::declareSecret(const SecretDecl& secret, const Context& context) {
     Symbol symbol{secret.name,  SymbolKind::Secret, secret.type,
                   "",           secret.location,    std::nullopt,
                   std::nullopt, std::nullopt,       Label{Confidentiality::Secret, Integrity::Trusted}};
+    symbol.contentLabel = {Confidentiality::Secret, Integrity::Trusted};
     symbol.tokenBoundKnown = secret.hasTokenBound;
     symbol.tokenBound = secret.tokenBound;
-    insertSymbol(context.scope, std::move(symbol));
+    if (insertSymbol(context.scope, std::move(symbol))) {
+        const Symbol* inserted = result_.symbols.lookupLocal(context.scope, secret.name);
+        if (inserted) {
+            result_.declarationBindings[&secret] = inserted->bindingIdentity;
+        }
+    }
 }
 
 void Analyzer::declareModel(const ModelDecl& model, const Context& context) {
@@ -213,6 +238,7 @@ void Analyzer::declareModel(const ModelDecl& model, const Context& context) {
 void Analyzer::declarePrompt(const PromptDecl& prompt, const Context& context) {
     PromptSignature signature;
     signature.returnType = prompt.returnType;
+    signature.templateText = prompt.templateText;
     for (const Parameter& parameter : prompt.parameters) {
         signature.parameters.push_back({parameter.name, parameter.type});
     }
@@ -257,9 +283,14 @@ ValueFacts Analyzer::inspectCall(const CallExpr& call, const Context& context) {
     // A secret may not cross it, and an argument with no token bound leaves the
     // input half of the cost bound undefined.
     Label argumentJoin = context.pc;
+    Label argumentContentJoin = publicTrusted();
     for (std::size_t index = 0; index < arguments.size(); ++index) {
         const ValueFacts& argument = arguments[index];
-        if (argument.label.isSecret()) {
+        // E230 rejects secret contents. A secret program counter controls
+        // whether this local value exists, but does not make its contents
+        // secret; the relational gate must prove matched requests before such
+        // a value may be used in a chain.
+        if (argument.contentLabel.isSecret()) {
             result_.diagnostics.error(
                 "E230", call.arguments[index]->location,
                 "secret value cannot be passed to prompt '" + call.promptName +
@@ -279,6 +310,7 @@ ValueFacts Analyzer::inspectCall(const CallExpr& call, const Context& context) {
             }
         }
         argumentJoin = join(argumentJoin, argument.label);
+        argumentContentJoin = join(argumentContentJoin, argument.contentLabel);
     }
 
     if (!prompt || prompt->kind != SymbolKind::Prompt || !prompt->prompt) {
@@ -306,10 +338,14 @@ ValueFacts Analyzer::inspectCall(const CallExpr& call, const Context& context) {
     }
 
     CallSiteFacts site;
+    site.id = nextCallSiteId_++;
+    site.location = call.location;
     site.promptName = call.promptName;
+    site.modelAlias = call.modelName;
     site.modelName = call.modelName;
     if (prompt && prompt->prompt) {
         site.promptTemplateTokens = prompt->prompt->templateTokens;
+        site.promptTemplateText = prompt->prompt->templateText;
     }
     for (std::size_t index = 0; index < arguments.size(); ++index) {
         const ValueFacts& argument = arguments[index];
@@ -320,15 +356,23 @@ ValueFacts Analyzer::inspectCall(const CallExpr& call, const Context& context) {
         }
 
         ArgumentFact fact;
-        fact.isSecret = argument.label.isSecret();
+        fact.isSecret = argument.contentLabel.isSecret();
+        fact.tokenBoundKnown = argument.tokenBoundKnown;
+        fact.tokenBound = argument.tokenBound;
+        fact.tokenBoundTokenizer = argument.tokenBoundTokenizer;
+        fact.contentLabel = argument.contentLabel;
+        fact.bindingIdentity = argument.bindingIdentity;
+        fact.valueIdentity = argument.valueIdentity;
         if (index < call.arguments.size() && call.arguments[index]) {
             const Expr& expression = *call.arguments[index];
             if (expression.kind() == ExprKind::Identifier) {
                 fact.name = static_cast<const IdentifierExpr&>(expression).name;
             } else {
                 fact.isLiteral = true;
+                fact.literalText = substitutedText(expression);
+                fact.literalKind = expression.kind();
                 fact.literalTokens =
-                    estimateTextTokens(substitutedText(expression), options_.charsPerToken);
+                    estimateTextTokens(fact.literalText, options_.charsPerToken);
             }
         }
         site.arguments.push_back(std::move(fact));
@@ -342,16 +386,40 @@ ValueFacts Analyzer::inspectCall(const CallExpr& call, const Context& context) {
     // untrusted document into an untrusted answer, and keeps that answer out of
     // sinks unless the author endorses it explicitly.
     facts.label = argumentJoin;
+    facts.contentLabel = argumentContentJoin;
 
     if (!model || model->kind != SymbolKind::Model || !model->model) {
         result_.diagnostics.error("E241", call.location,
                                   "unknown model '" + call.modelName + "' in using clause");
     } else {
+        const ModelMetadata& metadata = *model->model;
+        site.resolvedModel = ModelContract{metadata.provider, metadata.modelName,
+                                           metadata.maxTokens, metadata.hasUnitPrice,
+                                           metadata.unitPrice};
         facts.tokenBoundKnown = true;
         facts.tokenBound = model->model->maxTokens;
+        facts.tokenBoundTokenizer = site.resolvedModel->tokenizerIdentity();
         site.modelMaxTokens = model->model->maxTokens;
         site.hasUnitPrice = model->model->hasUnitPrice;
         site.unitPrice = model->model->unitPrice;
+    }
+
+    // A generated string's cap is expressed in its producer tokenizer. Without
+    // an explicit conversion contract, reusing it as another model's input
+    // bound is not sound. Same-model chains and externally bounded inputs are
+    // retained; cross-tokenizer model chains fail closed with E267.
+    if (site.resolvedModel) {
+        const std::string targetTokenizer = site.resolvedModel->tokenizerIdentity();
+        for (std::size_t index = 0; index < arguments.size(); ++index) {
+            const std::string& sourceTokenizer = arguments[index].tokenBoundTokenizer;
+            if (!sourceTokenizer.empty() && sourceTokenizer != targetTokenizer) {
+                result_.diagnostics.error(
+                    "E267", call.arguments[index]->location,
+                    "model output bound for argument " + std::to_string(index + 1) +
+                        " is in tokenizer '" + sourceTokenizer + "' and cannot bound input under '" +
+                        targetTokenizer + "' without a conversion contract");
+            }
+        }
     }
     result_.callSites[&call] = site;
     return facts;
@@ -369,9 +437,23 @@ void Analyzer::analyzeLet(const LetStmt& let, const Context& context) {
     }
     Symbol symbol{let.name,     SymbolKind::LocalResult, let.type, "", let.location, std::nullopt,
                   std::nullopt, std::nullopt,            facts.label};
+    symbol.contentLabel = facts.contentLabel;
     symbol.tokenBoundKnown = facts.tokenBoundKnown;
     symbol.tokenBound = facts.tokenBound;
-    insertSymbol(context.scope, std::move(symbol));
+    symbol.tokenBoundTokenizer = facts.tokenBoundTokenizer;
+    if (insertSymbol(context.scope, std::move(symbol))) {
+        const Symbol* inserted = result_.symbols.lookupLocal(context.scope, let.name);
+        if (inserted) {
+            result_.letResultValueIdentities[&let] = inserted->valueIdentity;
+            if (let.call) {
+                const auto callSite = result_.callSites.find(let.call.get());
+                if (callSite != result_.callSites.end()) {
+                    callSite->second.resultName = let.name;
+                    callSite->second.resultValueIdentity = inserted->valueIdentity;
+                }
+            }
+        }
+    }
 }
 
 void Analyzer::analyzeRequire(const RequireStmt& requirement, const Context& context) {
@@ -488,11 +570,16 @@ void Analyzer::analyzeEmit(const EmitStmt& emit, const Context& context) {
 
 void Analyzer::analyzeIf(const IfStmt& branch, const Context& context) {
     Label guardLabel = publicTrusted();
+    BranchGuardFacts branchFacts;
     const Symbol* subject = result_.symbols.lookup(context.scope, branch.condition.subjectName);
     if (!subject) {
         result_.diagnostics.error("E202", branch.condition.location,
                                   "use of undeclared identifier '" + branch.condition.subjectName + "'");
     } else {
+        branchFacts.resolved = true;
+        branchFacts.contentLabel = subject->contentLabel;
+        branchFacts.bindingIdentity = subject->bindingIdentity;
+        branchFacts.valueIdentity = subject->valueIdentity;
         guardLabel = subject->label;
         if (branch.condition.kind == ConditionKind::Flag && subject->type.kind != TypeKind::Boolean &&
             subject->type.kind != TypeKind::Unknown) {
@@ -513,6 +600,7 @@ void Analyzer::analyzeIf(const IfStmt& branch, const Context& context) {
     inner.pc = join(context.pc, guardLabel);
     result_.guardLabels[&branch] = inner.pc;
     result_.guardOwnLabels[&branch] = guardLabel;
+    result_.branchGuards[&branch] = branchFacts;
 
     Context thenContext = inner;
     thenContext.scope = result_.symbols.createScope(
@@ -570,8 +658,17 @@ void Analyzer::analyzeReclassify(const ReclassifyStmt& reclassify, const Context
 
     Symbol symbol{reclassify.name, SymbolKind::Reclassified, reclassify.type, "",
                   reclassify.location, std::nullopt, std::nullopt, std::nullopt, to};
+    Label contentTo = subject->contentLabel;
+    if (reclassify.endorsement) {
+        contentTo.integrity = Integrity::Trusted;
+    } else {
+        contentTo.confidentiality = Confidentiality::Public;
+    }
+    symbol.contentLabel = contentTo;
     symbol.tokenBoundKnown = subject->tokenBoundKnown;
     symbol.tokenBound = subject->tokenBound;
+    symbol.tokenBoundTokenizer = subject->tokenBoundTokenizer;
+    symbol.valueIdentity = subject->valueIdentity;
     insertSymbol(context.scope, std::move(symbol));
 
     result_.reclassifications.push_back({context.workflow, reclassify.sourceName, reclassify.name,

@@ -1,0 +1,295 @@
+{
+  "format": "orchlang-request-graph",
+  "version": 1,
+  "name": "ApplSelfConsistencyBalanced",
+  "chars_per_token": 4,
+  "inputs": {
+    "in_0": {
+      "type": "text",
+      "label": "public",
+      "max_tokens": 160
+    },
+    "in_1": {
+      "type": "text",
+      "label": "public",
+      "max_tokens": 160
+    },
+    "in_2": {
+      "type": "text",
+      "label": "public",
+      "max_tokens": 600
+    },
+    "in_3": {
+      "type": "text",
+      "label": "public",
+      "max_tokens": 300
+    },
+    "in_4": {
+      "type": "text",
+      "label": "public",
+      "max_tokens": 300
+    },
+    "in_5": {
+      "type": "text",
+      "label": "public",
+      "max_tokens": 120
+    },
+    "in_6": {
+      "type": "boolean",
+      "label": "public"
+    },
+    "in_7": {
+      "type": "boolean",
+      "label": "secret"
+    }
+  },
+  "registers": {
+    "r_0": {
+      "model": "model_0"
+    },
+    "r_1": {
+      "model": "model_0"
+    },
+    "r_2": {
+      "model": "model_0"
+    },
+    "r_3": {
+      "model": "model_0"
+    },
+    "r_4": {
+      "model": "model_0"
+    },
+    "r_5": {
+      "model": "model_0"
+    },
+    "r_6": {
+      "model": "model_0"
+    },
+    "r_7": {
+      "model": "model_0"
+    },
+    "r_8": {
+      "model": "model_0"
+    },
+    "r_9": {
+      "model": "model_0"
+    }
+  },
+  "models": {
+    "model_0": {
+      "provider": "mock",
+      "model": "common-metric-worker",
+      "max_tokens": 96
+    },
+    "model_1": {
+      "provider": "mock",
+      "model": "common-metric-actor",
+      "max_tokens": 50
+    },
+    "model_2": {
+      "provider": "mock",
+      "model": "common-metric-actor",
+      "max_tokens": 50
+    }
+  },
+  "states": {
+    "state_0": {
+      "calls": [],
+      "next": {
+        "kind": "stop"
+      }
+    },
+    "state_1": {
+      "calls": [
+        {
+          "model": "model_0",
+          "template": "Process {x}",
+          "arguments": [
+            {
+              "value": "in_0"
+            }
+          ],
+          "result": "r_4"
+        }
+      ],
+      "next": {
+        "kind": "goto",
+        "target": "state_0"
+      }
+    },
+    "state_2": {
+      "calls": [
+        {
+          "model": "model_0",
+          "template": "Process {x}",
+          "arguments": [
+            {
+              "value": "in_0"
+            }
+          ],
+          "result": "r_3"
+        }
+      ],
+      "next": {
+        "kind": "goto",
+        "target": "state_1"
+      }
+    },
+    "state_3": {
+      "calls": [
+        {
+          "model": "model_0",
+          "template": "Process {x}",
+          "arguments": [
+            {
+              "value": "in_0"
+            }
+          ],
+          "result": "r_2"
+        }
+      ],
+      "next": {
+        "kind": "goto",
+        "target": "state_2"
+      }
+    },
+    "state_4": {
+      "calls": [
+        {
+          "model": "model_0",
+          "template": "Process {x}",
+          "arguments": [
+            {
+              "value": "in_0"
+            }
+          ],
+          "result": "r_1"
+        }
+      ],
+      "next": {
+        "kind": "goto",
+        "target": "state_3"
+      }
+    },
+    "state_5": {
+      "calls": [
+        {
+          "model": "model_0",
+          "template": "Process {x}",
+          "arguments": [
+            {
+              "value": "in_0"
+            }
+          ],
+          "result": "r_0"
+        }
+      ],
+      "next": {
+        "kind": "goto",
+        "target": "state_4"
+      }
+    },
+    "state_6": {
+      "calls": [
+        {
+          "model": "model_0",
+          "template": "Process {x}",
+          "arguments": [
+            {
+              "value": "in_0"
+            }
+          ],
+          "result": "r_9"
+        }
+      ],
+      "next": {
+        "kind": "goto",
+        "target": "state_0"
+      }
+    },
+    "state_7": {
+      "calls": [
+        {
+          "model": "model_0",
+          "template": "Process {x}",
+          "arguments": [
+            {
+              "value": "in_0"
+            }
+          ],
+          "result": "r_8"
+        }
+      ],
+      "next": {
+        "kind": "goto",
+        "target": "state_6"
+      }
+    },
+    "state_8": {
+      "calls": [
+        {
+          "model": "model_0",
+          "template": "Process {x}",
+          "arguments": [
+            {
+              "value": "in_0"
+            }
+          ],
+          "result": "r_7"
+        }
+      ],
+      "next": {
+        "kind": "goto",
+        "target": "state_7"
+      }
+    },
+    "state_9": {
+      "calls": [
+        {
+          "model": "model_0",
+          "template": "Process {x}",
+          "arguments": [
+            {
+              "value": "in_0"
+            }
+          ],
+          "result": "r_6"
+        }
+      ],
+      "next": {
+        "kind": "goto",
+        "target": "state_8"
+      }
+    },
+    "state_10": {
+      "calls": [
+        {
+          "model": "model_0",
+          "template": "Process {x}",
+          "arguments": [
+            {
+              "value": "in_0"
+            }
+          ],
+          "result": "r_5"
+        }
+      ],
+      "next": {
+        "kind": "goto",
+        "target": "state_9"
+      }
+    },
+    "state_11": {
+      "calls": [],
+      "next": {
+        "kind": "secret",
+        "guard": {
+          "value": "in_7"
+        },
+        "then": "state_5",
+        "else": "state_10"
+      }
+    }
+  },
+  "entry": "state_11"
+}

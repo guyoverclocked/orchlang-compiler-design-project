@@ -1,0 +1,48 @@
+{
+  "claim": null,
+  "closed_system": null,
+  "format": "orchlang-exact-trace-equivalence",
+  "hashes": {
+    "checker_sha256": "a9b7aa176b5081ab12a9cff31343b2509de4105daa1c7d87b386765581146ade",
+    "closure_producer_sha256": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+    "graph_sha256": "2d64a6834c5bd91b365b550d578f844835c8d363ee404fec82e22d463a1cf9de",
+    "kernel_sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b",
+    "public_store_sha256": "52073a5a89f06ed6679dd921f822244d775cd35b3f02d8320fde953a99cdcae3",
+    "secret_scenarios_sha256": "c746a0cd8c632a82c9994be1df942b4258d3968e3d63189dd6b0f9cfe75945a0"
+  },
+  "inputs": {
+    "public_store": {
+      "q": "q"
+    },
+    "secret_scenarios": [
+      {
+        "secret": false
+      },
+      {
+        "secret": true
+      }
+    ]
+  },
+  "label_alphabet": null,
+  "limits": {
+    "max_matrix_entries": 10000000,
+    "max_rational_bits": 8192,
+    "max_states": 1,
+    "max_work_bytes": 67108864
+  },
+  "result": null,
+  "scope": {
+    "comparison": "one fixed public store and all explicitly supplied distinct secret assignments",
+    "excluded": [
+      "provider behavior/probability validity",
+      "errors/retries",
+      "currency/cumulative budgets",
+      "termination probability/infinite-run laws"
+    ],
+    "observer": "ordered call labels are normalized resolved contract plus integer input and output usage; each finite word is observed with separate stopped and nonterminal mass",
+    "oracle": "declared finite rational conditional kernel; exact modeled request, saturated contract ordinal, and retained complete-event history determine outcomes",
+    "semantics": "successful model outcomes only; responses update their result register and complete event history; stop states emit no further calls"
+  },
+  "status": "unknown",
+  "version": 1
+}

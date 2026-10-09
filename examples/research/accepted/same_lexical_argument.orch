@@ -1,0 +1,12 @@
+workflow SameArgument budget 1000 {
+  secret choose: boolean max_tokens 1;
+  input source: text max_tokens 32;
+  model shared = mock("research-model") max_tokens 4;
+  prompt ask(t: text) -> text = "Request: {t}";
+  if choose {
+    let result_left: text = call ask(source) using shared;
+  } else {
+    let result_right: text = call ask(source) using shared;
+  }
+  output "complete";
+}

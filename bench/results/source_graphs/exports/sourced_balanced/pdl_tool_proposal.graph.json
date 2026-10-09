@@ -1,0 +1,127 @@
+{
+  "format": "orchlang-request-graph",
+  "version": 1,
+  "name": "PdlToolProposalBalanced",
+  "chars_per_token": 4,
+  "inputs": {
+    "in_0": {
+      "type": "text",
+      "label": "public",
+      "max_tokens": 160
+    },
+    "in_1": {
+      "type": "text",
+      "label": "public",
+      "max_tokens": 160
+    },
+    "in_2": {
+      "type": "text",
+      "label": "public",
+      "max_tokens": 600
+    },
+    "in_3": {
+      "type": "text",
+      "label": "public",
+      "max_tokens": 300
+    },
+    "in_4": {
+      "type": "text",
+      "label": "public",
+      "max_tokens": 300
+    },
+    "in_5": {
+      "type": "text",
+      "label": "public",
+      "max_tokens": 120
+    },
+    "in_6": {
+      "type": "boolean",
+      "label": "public"
+    },
+    "in_7": {
+      "type": "boolean",
+      "label": "secret"
+    }
+  },
+  "registers": {
+    "r_0": {
+      "model": "model_0"
+    },
+    "r_1": {
+      "model": "model_0"
+    }
+  },
+  "models": {
+    "model_0": {
+      "provider": "mock",
+      "model": "common-metric-worker",
+      "max_tokens": 96
+    },
+    "model_1": {
+      "provider": "mock",
+      "model": "common-metric-actor",
+      "max_tokens": 50
+    },
+    "model_2": {
+      "provider": "mock",
+      "model": "common-metric-actor",
+      "max_tokens": 50
+    }
+  },
+  "states": {
+    "state_0": {
+      "calls": [],
+      "next": {
+        "kind": "stop"
+      }
+    },
+    "state_1": {
+      "calls": [
+        {
+          "model": "model_0",
+          "template": "Propose an action for {x}",
+          "arguments": [
+            {
+              "value": "in_0"
+            }
+          ],
+          "result": "r_0"
+        }
+      ],
+      "next": {
+        "kind": "goto",
+        "target": "state_0"
+      }
+    },
+    "state_2": {
+      "calls": [
+        {
+          "model": "model_0",
+          "template": "Propose an action for {x}",
+          "arguments": [
+            {
+              "value": "in_0"
+            }
+          ],
+          "result": "r_1"
+        }
+      ],
+      "next": {
+        "kind": "goto",
+        "target": "state_0"
+      }
+    },
+    "state_3": {
+      "calls": [],
+      "next": {
+        "kind": "secret",
+        "guard": {
+          "value": "in_7"
+        },
+        "then": "state_1",
+        "else": "state_2"
+      }
+    }
+  },
+  "entry": "state_3"
+}

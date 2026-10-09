@@ -1,0 +1,94 @@
+{
+  "format": "orchlang-finite-outcome-kernel",
+  "version": 1,
+  "history_window": 1,
+  "defaults": {
+    "m": [
+      {
+        "response": "x",
+        "output_tokens": 1,
+        "probability": "1"
+      }
+    ]
+  },
+  "rules": [
+    {
+      "model": "m",
+      "template": "A",
+      "outcomes": [
+        {
+          "response": "a",
+          "output_tokens": 1,
+          "probability": "1"
+        }
+      ]
+    },
+    {
+      "model": "m",
+      "template": "B",
+      "outcomes": [
+        {
+          "response": "b",
+          "output_tokens": 1,
+          "probability": "1"
+        }
+      ]
+    },
+    {
+      "model": "m",
+      "template": "C",
+      "outcomes": [
+        {
+          "response": "x",
+          "output_tokens": 1,
+          "probability": "1"
+        }
+      ],
+      "history": [
+        {
+          "contract": {
+            "provider": "offline",
+            "model": "finite-worker",
+            "max_tokens": 8,
+            "has_unit_price": false,
+            "unit_price": 0.0
+          },
+          "ordinal": 0,
+          "template": "A",
+          "arguments": [],
+          "response": "a",
+          "input_tokens": 1,
+          "output_tokens": 1
+        }
+      ]
+    },
+    {
+      "model": "m",
+      "template": "C",
+      "outcomes": [
+        {
+          "response": "xxx",
+          "output_tokens": 3,
+          "probability": "1"
+        }
+      ],
+      "history": [
+        {
+          "contract": {
+            "provider": "offline",
+            "model": "finite-worker",
+            "max_tokens": 8,
+            "has_unit_price": false,
+            "unit_price": 0.0
+          },
+          "ordinal": 0,
+          "template": "B",
+          "arguments": [],
+          "response": "b",
+          "input_tokens": 1,
+          "output_tokens": 1
+        }
+      ]
+    }
+  ]
+}

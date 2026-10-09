@@ -1,5 +1,7 @@
 #include "parser.hpp"
 
+#include <cerrno>
+#include <cmath>
 #include <cstdlib>
 #include <limits>
 #include <string>
@@ -268,7 +270,16 @@ std::unique_ptr<ModelDecl> Parser::parseModel() {
         }
         advance();
         model->hasUnitPrice = true;
-        model->unitPrice = std::strtod(price.lexeme.c_str(), nullptr);
+        errno = 0;
+        char* end = nullptr;
+        const double unitPrice = std::strtod(price.lexeme.c_str(), &end);
+        if (errno == ERANGE || end != price.lexeme.c_str() + price.lexeme.size() ||
+            !std::isfinite(unitPrice)) {
+            diagnostics_.error("P007", price.location,
+                               "cost_per_token must be finite and representable as a double");
+            return nullptr;
+        }
+        model->unitPrice = unitPrice;
     }
     if (!consume(TokenKind::Semicolon, "';' after the model declaration")) {
         return nullptr;

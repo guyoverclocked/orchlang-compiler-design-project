@@ -1,0 +1,23 @@
+test_balanced_dependent_chain_has_source_and_companion_evidence (demo.test_server.DemoHTTPTests.test_balanced_dependent_chain_has_source_and_companion_evidence) ... [demo] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_channel_reports_replay_and_preserve_observer_difference (demo.test_server.DemoHTTPTests.test_channel_reports_replay_and_preserve_observer_difference) ... [demo] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_compiler_rejection_includes_offline_billing_witness (demo.test_server.DemoHTTPTests.test_compiler_rejection_includes_offline_billing_witness) ... [demo] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_exact_trace_equivalence_resolves_a_bisimulation_gap (demo.test_server.DemoHTTPTests.test_exact_trace_equivalence_resolves_a_bisimulation_gap) ... [demo] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_fixture_catalog_is_fixed_and_horizon_is_bounded (demo.test_server.DemoHTTPTests.test_fixture_catalog_is_fixed_and_horizon_is_bounded) ... [demo] "GET /api/fixtures HTTP/1.1" 200 -
+[demo] "POST /api/evaluate HTTP/1.1" 400 -
+[demo] "POST /api/evaluate HTTP/1.1" 400 -
+ok
+test_productive_cycle_graph_certificate_is_replayed (demo.test_server.DemoHTTPTests.test_productive_cycle_graph_certificate_is_replayed) ... [demo] "POST /api/evaluate HTTP/1.1" 200 -
+ok
+test_request_body_limit_is_enforced_before_analysis (demo.test_server.DemoHTTPTests.test_request_body_limit_is_enforced_before_analysis) ... [demo] "POST /api/evaluate HTTP/1.1" 413 -
+ok
+test_standalone_page_embeds_recorded_fixture_data (demo.test_server.DemoHTTPTests.test_standalone_page_embeds_recorded_fixture_data) ... [demo] "GET / HTTP/1.1" 200 -
+ok
+
+----------------------------------------------------------------------
+Ran 8 tests in 1.323s
+
+OK

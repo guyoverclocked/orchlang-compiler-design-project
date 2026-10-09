@@ -1,0 +1,41 @@
+{
+  "format": "orchlang-cyclic-request-replay-attestation",
+  "version": 1,
+  "status": "verified",
+  "graph_name": "LmqlJokeSegmentsBalanced",
+  "source_sha256": "c5ac6ca7edefe946da7d69cc8a1c34ea1e88d1112cffa313d16adcc382094069",
+  "certificate_sha256": "87b1ae4cef1a15b3ed60a371ddba68dbccf5497959648500f8cc5063241c23ca",
+  "replayer_sha256": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
+  "producer_checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+  "producer_checker_hash_verified": false,
+  "resource_limits": {
+    "json_bytes_each": 134217728,
+    "graph_states": 100000,
+    "graph_declarations_or_calls": 1000000,
+    "product_nodes": 1000000,
+    "certificate_declared_product_nodes": 50000
+  },
+  "product_nodes_replayed": 31,
+  "product_edges_replayed": 30,
+  "checks": {
+    "strict_graph_and_certificate_schema": true,
+    "source_hash_binding": true,
+    "graph_schema_and_types": true,
+    "reachable_source_states_and_cost_summaries": true,
+    "root_public_identity_relation": true,
+    "all_product_relations_and_local_rules": true,
+    "complete_universal_successor_closure": true,
+    "no_unreachable_or_extra_product_nodes": true,
+    "call_free_cycle_exclusion": true
+  },
+  "scope": {
+    "claim": "the reported finite product graph is the complete closure of the replayed version-1 graph under the declared local rules",
+    "not_claimed": [
+      "mechanized proof of the relational metatheory",
+      "source-language or framework-to-graph translation fidelity",
+      "real provider request serialization or billing behavior",
+      "termination or finite total-cost bounds for billable cycles",
+      "validation of the producer checker implementation from its reported hash"
+    ]
+  }
+}

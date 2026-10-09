@@ -1,0 +1,16 @@
+// These literals display as the same bytes, but the modeled request identity
+// includes the source expression kind. The secret branch must therefore fail
+// the relational check: the request-sensitive shared oracle can distinguish
+// Boolean true from text "true".
+workflow TypedLiteralCollision budget 1000 {
+  secret choose: boolean max_tokens 1;
+  model shared = mock("research-model") max_tokens 8;
+  prompt boolean_prompt(value: boolean) -> text = "Value: {value}";
+  prompt text_prompt(value: text) -> text = "Value: {value}";
+  if choose {
+    let left: text = call boolean_prompt(true) using shared;
+  } else {
+    let right: text = call text_prompt("true") using shared;
+  }
+  output "done";
+}

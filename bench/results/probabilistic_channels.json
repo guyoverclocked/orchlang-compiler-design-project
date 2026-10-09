@@ -1,0 +1,4928 @@
+{
+  "format": "orchlang-controlled-finite-usage-study",
+  "version": 1,
+  "scope": "authored synthetic finite success-only kernels; no provider distribution fitting, currency, errors or infinite-horizon analysis",
+  "producer_sha256": "45380e75cdcc4d6f285a0027cbb85dab97d22dff11c5c94d3940b6813e8dce00",
+  "reference_sha256": "9c081f87e1dcd7b283bb4894a1a1794c8183e09fcadeac53c9467cb1606e3012",
+  "driver_sha256": "9c32294b65727e263db467eb47d28a960e7f2ac521476e9f4160014a216e647d",
+  "rows": [
+    {
+      "name": "equivalent_dependent_chain",
+      "horizon": 1,
+      "observer": "aggregate",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/equivalent_dependent_chain.h1.aggregate.json",
+      "evidence_sha256": "1f1675180f20e0a2c9b1d2417849d3f5d1d724957779914ca3fc84f825f757e7",
+      "dp_seconds_advisory": 0.0004045410023536533,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0002149580031982623,
+          "dp_work_bytes_estimate": 1908,
+          "dfs_work_bytes": 2006
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0004625829969882034,
+          "dp_work_bytes_estimate": 1903,
+          "dfs_work_bytes": 1999
+        }
+      ]
+    },
+    {
+      "name": "equivalent_dependent_chain",
+      "horizon": 1,
+      "observer": "trace",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/equivalent_dependent_chain.h1.trace.json",
+      "evidence_sha256": "a48744e474061d53ab6c5d49cf9a4b48337aa88161e9ddba45b376488116b7d5",
+      "dp_seconds_advisory": 0.00031441600003745407,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00017816699983086437,
+          "dp_work_bytes_estimate": 2224,
+          "dfs_work_bytes": 2282
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00019658400560729206,
+          "dp_work_bytes_estimate": 2219,
+          "dfs_work_bytes": 2275
+        }
+      ]
+    },
+    {
+      "name": "equivalent_dependent_chain",
+      "horizon": 2,
+      "observer": "aggregate",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/equivalent_dependent_chain.h2.aggregate.json",
+      "evidence_sha256": "a5a10ad20dcc9013beb8656b95503d55321daa086bad32186be519081aa16de5",
+      "dp_seconds_advisory": 0.0003972080012317747,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00030195900035323575,
+          "dp_work_bytes_estimate": 4184,
+          "dfs_work_bytes": 5814
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00033095899561885744,
+          "dp_work_bytes_estimate": 4171,
+          "dfs_work_bytes": 5799
+        }
+      ]
+    },
+    {
+      "name": "equivalent_dependent_chain",
+      "horizon": 2,
+      "observer": "trace",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/equivalent_dependent_chain.h2.trace.json",
+      "evidence_sha256": "9d88ca61d06fd2d1be3d9db485b05b7f68df63e53532e22c39ebed56b5fe8757",
+      "dp_seconds_advisory": 0.00044216699461685494,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00037095900188433006,
+          "dp_work_bytes_estimate": 6526,
+          "dfs_work_bytes": 7864
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0003492920004646294,
+          "dp_work_bytes_estimate": 6513,
+          "dfs_work_bytes": 7849
+        }
+      ]
+    },
+    {
+      "name": "equivalent_dependent_chain",
+      "horizon": 3,
+      "observer": "aggregate",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/equivalent_dependent_chain.h3.aggregate.json",
+      "evidence_sha256": "b34ca9eaa089370fe6f4f6ac4eaa7a7b62549364d8b67dbc8522be92e67854dc",
+      "dp_seconds_advisory": 0.0003785410008276813,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0003455420010141097,
+          "dp_work_bytes_estimate": 4184,
+          "dfs_work_bytes": 5814
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00031062500056577846,
+          "dp_work_bytes_estimate": 4171,
+          "dfs_work_bytes": 5799
+        }
+      ]
+    },
+    {
+      "name": "equivalent_dependent_chain",
+      "horizon": 3,
+      "observer": "trace",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/equivalent_dependent_chain.h3.trace.json",
+      "evidence_sha256": "914891328181b41490581fd469966defd7ce6a25c82b75f7145a4cbbe859f307",
+      "dp_seconds_advisory": 0.0004175000067334622,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0003519999954733066,
+          "dp_work_bytes_estimate": 6526,
+          "dfs_work_bytes": 7864
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0003831669964711182,
+          "dp_work_bytes_estimate": 6513,
+          "dfs_work_bytes": 7849
+        }
+      ]
+    },
+    {
+      "name": "equivalent_dependent_chain",
+      "horizon": 4,
+      "observer": "aggregate",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/equivalent_dependent_chain.h4.aggregate.json",
+      "evidence_sha256": "dfdd3c29b64a02b8baefddf894328280cdeb5b751e63750f8eb2784c800e9cae",
+      "dp_seconds_advisory": 0.00037479199818335474,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0002909160029958002,
+          "dp_work_bytes_estimate": 4184,
+          "dfs_work_bytes": 5814
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0003120420005870983,
+          "dp_work_bytes_estimate": 4171,
+          "dfs_work_bytes": 5799
+        }
+      ]
+    },
+    {
+      "name": "equivalent_dependent_chain",
+      "horizon": 4,
+      "observer": "trace",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/equivalent_dependent_chain.h4.trace.json",
+      "evidence_sha256": "2734a816871a4a04664f63007690a14e9361981d000bb0754aba367e8e15a347",
+      "dp_seconds_advisory": 0.00043654200271703303,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00038995799695840105,
+          "dp_work_bytes_estimate": 6526,
+          "dfs_work_bytes": 7864
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0003467919959803112,
+          "dp_work_bytes_estimate": 6513,
+          "dfs_work_bytes": 7849
+        }
+      ]
+    },
+    {
+      "name": "equivalent_dependent_chain",
+      "horizon": 5,
+      "observer": "aggregate",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/equivalent_dependent_chain.h5.aggregate.json",
+      "evidence_sha256": "4d6bc234638c39f590cb63ce80d4ca2cdc0b4cfd322fe8c20cfc87f7408f5160",
+      "dp_seconds_advisory": 0.0003851669971481897,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00032479199580848217,
+          "dp_work_bytes_estimate": 4184,
+          "dfs_work_bytes": 5814
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0002842499961843714,
+          "dp_work_bytes_estimate": 4171,
+          "dfs_work_bytes": 5799
+        }
+      ]
+    },
+    {
+      "name": "equivalent_dependent_chain",
+      "horizon": 5,
+      "observer": "trace",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/equivalent_dependent_chain.h5.trace.json",
+      "evidence_sha256": "d1b2bd199bed2f9cf6c7573a164fd5e8347cb59de0c4ff6beb0492c51a24d071",
+      "dp_seconds_advisory": 0.00042929100163746625,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0003499169979477301,
+          "dp_work_bytes_estimate": 6526,
+          "dfs_work_bytes": 7864
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00038220799615373835,
+          "dp_work_bytes_estimate": 6513,
+          "dfs_work_bytes": 7849
+        }
+      ]
+    },
+    {
+      "name": "equivalent_dependent_chain",
+      "horizon": 6,
+      "observer": "aggregate",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/equivalent_dependent_chain.h6.aggregate.json",
+      "evidence_sha256": "933a2cb1dacec69dce219e973526a0b78b06d88da94b75b113f893ed06a0a8bd",
+      "dp_seconds_advisory": 0.0003917499998351559,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0002872499971999787,
+          "dp_work_bytes_estimate": 4184,
+          "dfs_work_bytes": 5814
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0003980839974246919,
+          "dp_work_bytes_estimate": 4171,
+          "dfs_work_bytes": 5799
+        }
+      ]
+    },
+    {
+      "name": "equivalent_dependent_chain",
+      "horizon": 6,
+      "observer": "trace",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/equivalent_dependent_chain.h6.trace.json",
+      "evidence_sha256": "0b66a1f698847f4383f84e4a573af8622503ea537d591c0dff7255ae70572e11",
+      "dp_seconds_advisory": 0.00043179099884582683,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00038345799839589745,
+          "dp_work_bytes_estimate": 6526,
+          "dfs_work_bytes": 7864
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0003465830013738014,
+          "dp_work_bytes_estimate": 6513,
+          "dfs_work_bytes": 7849
+        }
+      ]
+    },
+    {
+      "name": "different_requests_equal_usage",
+      "horizon": 1,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/different_requests_equal_usage.h1.aggregate.json",
+      "evidence_sha256": "374a14fe97aa83de6a8e5158380b6dba0b3bb3945c90a68b93db888811588899",
+      "dp_seconds_advisory": 0.0002651670001796447,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001950410005520098,
+          "dp_work_bytes_estimate": 1906,
+          "dfs_work_bytes": 2004
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00014241699682315812,
+          "dp_work_bytes_estimate": 1901,
+          "dfs_work_bytes": 1997
+        }
+      ]
+    },
+    {
+      "name": "different_requests_equal_usage",
+      "horizon": 1,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/different_requests_equal_usage.h1.trace.json",
+      "evidence_sha256": "09c7240ef2c6288093cb966326812b0d22375380338ff9fabeb306ffbafcda74",
+      "dp_seconds_advisory": 0.0002726660022744909,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00015775000065332279,
+          "dp_work_bytes_estimate": 2222,
+          "dfs_work_bytes": 2280
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00018687499687075615,
+          "dp_work_bytes_estimate": 2217,
+          "dfs_work_bytes": 2273
+        }
+      ]
+    },
+    {
+      "name": "different_requests_equal_usage",
+      "horizon": 2,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/different_requests_equal_usage.h2.aggregate.json",
+      "evidence_sha256": "b3a6d82ebb0d7252a9a9bed1d1b159987248a62ce052a4f8bf2ab0b1a450bc67",
+      "dp_seconds_advisory": 0.00027462499565444887,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00015412500215461478,
+          "dp_work_bytes_estimate": 1906,
+          "dfs_work_bytes": 2004
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001494169991929084,
+          "dp_work_bytes_estimate": 1901,
+          "dfs_work_bytes": 1997
+        }
+      ]
+    },
+    {
+      "name": "different_requests_equal_usage",
+      "horizon": 2,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/different_requests_equal_usage.h2.trace.json",
+      "evidence_sha256": "e348a50fb705aff6ea22e8a909ecb7568e28e7ac7d5b5061c36e6d0f20bd6d8b",
+      "dp_seconds_advisory": 0.00028116699832025915,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00017637500423006713,
+          "dp_work_bytes_estimate": 2222,
+          "dfs_work_bytes": 2280
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001524580002296716,
+          "dp_work_bytes_estimate": 2217,
+          "dfs_work_bytes": 2273
+        }
+      ]
+    },
+    {
+      "name": "different_requests_equal_usage",
+      "horizon": 3,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/different_requests_equal_usage.h3.aggregate.json",
+      "evidence_sha256": "b315cd7c31691f5b979a98eeb8a5990ea46a68839fad8e46eff4f0f778c378f1",
+      "dp_seconds_advisory": 0.000258250001934357,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00014891700266161934,
+          "dp_work_bytes_estimate": 1906,
+          "dfs_work_bytes": 2004
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00017800000205170363,
+          "dp_work_bytes_estimate": 1901,
+          "dfs_work_bytes": 1997
+        }
+      ]
+    },
+    {
+      "name": "different_requests_equal_usage",
+      "horizon": 3,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/different_requests_equal_usage.h3.trace.json",
+      "evidence_sha256": "2174a0c05a3f5621ca3e02347933fdce41449b649a1ced75340d9e589ec54085",
+      "dp_seconds_advisory": 0.00027599999884841964,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00015333299961639568,
+          "dp_work_bytes_estimate": 2222,
+          "dfs_work_bytes": 2280
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00015512500249315053,
+          "dp_work_bytes_estimate": 2217,
+          "dfs_work_bytes": 2273
+        }
+      ]
+    },
+    {
+      "name": "different_requests_equal_usage",
+      "horizon": 4,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/different_requests_equal_usage.h4.aggregate.json",
+      "evidence_sha256": "f28369963db4d961406b08de72fe4e62a698de24a57d61da323dc6151585b06f",
+      "dp_seconds_advisory": 0.00026824999804375693,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00017912499606609344,
+          "dp_work_bytes_estimate": 1906,
+          "dfs_work_bytes": 2004
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001459159975638613,
+          "dp_work_bytes_estimate": 1901,
+          "dfs_work_bytes": 1997
+        }
+      ]
+    },
+    {
+      "name": "different_requests_equal_usage",
+      "horizon": 4,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/different_requests_equal_usage.h4.trace.json",
+      "evidence_sha256": "ec8f2516316f37140516977f5b795be6958e00f3d6ae232c1a99a3be7df478c5",
+      "dp_seconds_advisory": 0.000272749995929189,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00015712500317022204,
+          "dp_work_bytes_estimate": 2222,
+          "dfs_work_bytes": 2280
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001855830050772056,
+          "dp_work_bytes_estimate": 2217,
+          "dfs_work_bytes": 2273
+        }
+      ]
+    },
+    {
+      "name": "different_requests_equal_usage",
+      "horizon": 5,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/different_requests_equal_usage.h5.aggregate.json",
+      "evidence_sha256": "b4d2c4215a587a80799942b1c9cfcda6add099f58bf2116b42b191d214668515",
+      "dp_seconds_advisory": 0.0002640000020619482,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00014391700096894056,
+          "dp_work_bytes_estimate": 1906,
+          "dfs_work_bytes": 2004
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00014520800323225558,
+          "dp_work_bytes_estimate": 1901,
+          "dfs_work_bytes": 1997
+        }
+      ]
+    },
+    {
+      "name": "different_requests_equal_usage",
+      "horizon": 5,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/different_requests_equal_usage.h5.trace.json",
+      "evidence_sha256": "cac27d17e2c5e4cab31a0802fbcfe333aa87fc60c5a789360a61fbde80950a13",
+      "dp_seconds_advisory": 0.00032766699587227777,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00014962500426918268,
+          "dp_work_bytes_estimate": 2222,
+          "dfs_work_bytes": 2280
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001520000005257316,
+          "dp_work_bytes_estimate": 2217,
+          "dfs_work_bytes": 2273
+        }
+      ]
+    },
+    {
+      "name": "different_requests_equal_usage",
+      "horizon": 6,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/different_requests_equal_usage.h6.aggregate.json",
+      "evidence_sha256": "a090b9d887019dd2b0838aca72091691b097f0fb8ab7ed7669d098a90789541f",
+      "dp_seconds_advisory": 0.000259083004493732,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00018554199778009206,
+          "dp_work_bytes_estimate": 1906,
+          "dfs_work_bytes": 2004
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00013958299678051844,
+          "dp_work_bytes_estimate": 1901,
+          "dfs_work_bytes": 1997
+        }
+      ]
+    },
+    {
+      "name": "different_requests_equal_usage",
+      "horizon": 6,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/different_requests_equal_usage.h6.trace.json",
+      "evidence_sha256": "f5a251647d2cfb55988b88746e8fd142ecdebb26d524b8551b45708c2a03b37a",
+      "dp_seconds_advisory": 0.00027433299692347646,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001568750012665987,
+          "dp_work_bytes_estimate": 2222,
+          "dfs_work_bytes": 2280
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00019162499665981159,
+          "dp_work_bytes_estimate": 2217,
+          "dfs_work_bytes": 2273
+        }
+      ]
+    },
+    {
+      "name": "noisy_usage_bit",
+      "horizon": 1,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.18872187554086706,
+      "evidence": "bench/results/probabilistic_channels/noisy_usage_bit.h1.aggregate.json",
+      "evidence_sha256": "d01db0d0d10e8ae6189fd277fa00db531404c84e1c3e72684dc5124d46b9d96a",
+      "dp_seconds_advisory": 0.0003338329988764599,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00018483299936633557,
+          "dp_work_bytes_estimate": 1906,
+          "dfs_work_bytes": 2004
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00017462499818066135,
+          "dp_work_bytes_estimate": 1901,
+          "dfs_work_bytes": 1997
+        }
+      ]
+    },
+    {
+      "name": "noisy_usage_bit",
+      "horizon": 1,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.18872187554086706,
+      "evidence": "bench/results/probabilistic_channels/noisy_usage_bit.h1.trace.json",
+      "evidence_sha256": "b6e4839c356271ebe87790a6b7739e5f15281b695a13ab6b73fad5477aaba320",
+      "dp_seconds_advisory": 0.00037141700158827007,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001829999964684248,
+          "dp_work_bytes_estimate": 2222,
+          "dfs_work_bytes": 2280
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00018066699703922495,
+          "dp_work_bytes_estimate": 2217,
+          "dfs_work_bytes": 2273
+        }
+      ]
+    },
+    {
+      "name": "noisy_usage_bit",
+      "horizon": 2,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.18872187554086706,
+      "evidence": "bench/results/probabilistic_channels/noisy_usage_bit.h2.aggregate.json",
+      "evidence_sha256": "099e6a0f88abf6afc54f9b2375069547644d224d2b29787c6fecdfd616d5c2cc",
+      "dp_seconds_advisory": 0.00031158299680100754,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00028033400303684175,
+          "dp_work_bytes_estimate": 1906,
+          "dfs_work_bytes": 2004
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00017166700126836076,
+          "dp_work_bytes_estimate": 1901,
+          "dfs_work_bytes": 1997
+        }
+      ]
+    },
+    {
+      "name": "noisy_usage_bit",
+      "horizon": 2,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.18872187554086706,
+      "evidence": "bench/results/probabilistic_channels/noisy_usage_bit.h2.trace.json",
+      "evidence_sha256": "9991adea84c5a6dea05322b4c9682bdcad24869407e13b9ac27faba336831e82",
+      "dp_seconds_advisory": 0.00032558399834670126,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00017637500423006713,
+          "dp_work_bytes_estimate": 2222,
+          "dfs_work_bytes": 2280
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0002145409962395206,
+          "dp_work_bytes_estimate": 2217,
+          "dfs_work_bytes": 2273
+        }
+      ]
+    },
+    {
+      "name": "noisy_usage_bit",
+      "horizon": 3,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.18872187554086706,
+      "evidence": "bench/results/probabilistic_channels/noisy_usage_bit.h3.aggregate.json",
+      "evidence_sha256": "a2b622268429315e4384be92b665b3c4408dd289816f83d89f403cc812e71137",
+      "dp_seconds_advisory": 0.00031595799373462796,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016412499826401472,
+          "dp_work_bytes_estimate": 1906,
+          "dfs_work_bytes": 2004
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001662499998928979,
+          "dp_work_bytes_estimate": 1901,
+          "dfs_work_bytes": 1997
+        }
+      ]
+    },
+    {
+      "name": "noisy_usage_bit",
+      "horizon": 3,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.18872187554086706,
+      "evidence": "bench/results/probabilistic_channels/noisy_usage_bit.h3.trace.json",
+      "evidence_sha256": "08f489b0677565f06aff56bddd90843d75198a482c401f6544944db66af4a716",
+      "dp_seconds_advisory": 0.00031966700043994933,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00021879199630348012,
+          "dp_work_bytes_estimate": 2222,
+          "dfs_work_bytes": 2280
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001737909988150932,
+          "dp_work_bytes_estimate": 2217,
+          "dfs_work_bytes": 2273
+        }
+      ]
+    },
+    {
+      "name": "noisy_usage_bit",
+      "horizon": 4,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.18872187554086706,
+      "evidence": "bench/results/probabilistic_channels/noisy_usage_bit.h4.aggregate.json",
+      "evidence_sha256": "7b0ae2d38fc89a5a01a8c3b081cbb212e7cdd44fafeaf12ff43240bc5b1ad829",
+      "dp_seconds_advisory": 0.00030141699971864,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00020808300178032368,
+          "dp_work_bytes_estimate": 1906,
+          "dfs_work_bytes": 2004
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016033300198614597,
+          "dp_work_bytes_estimate": 1901,
+          "dfs_work_bytes": 1997
+        }
+      ]
+    },
+    {
+      "name": "noisy_usage_bit",
+      "horizon": 4,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.18872187554086706,
+      "evidence": "bench/results/probabilistic_channels/noisy_usage_bit.h4.trace.json",
+      "evidence_sha256": "9fa05e083ab1f20b89c61a27481c6552af9cf839906f0f7a9fd65cea872b53ab",
+      "dp_seconds_advisory": 0.00031887499790173024,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00018708399875322357,
+          "dp_work_bytes_estimate": 2222,
+          "dfs_work_bytes": 2280
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00022058300237404183,
+          "dp_work_bytes_estimate": 2217,
+          "dfs_work_bytes": 2273
+        }
+      ]
+    },
+    {
+      "name": "noisy_usage_bit",
+      "horizon": 5,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.18872187554086706,
+      "evidence": "bench/results/probabilistic_channels/noisy_usage_bit.h5.aggregate.json",
+      "evidence_sha256": "2ce6e428da56cf326cb9e165639586bf4fb30686729e0ddf1d1326f1a0867782",
+      "dp_seconds_advisory": 0.0003044160039280541,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016945799870882183,
+          "dp_work_bytes_estimate": 1906,
+          "dfs_work_bytes": 2004
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001655000014579855,
+          "dp_work_bytes_estimate": 1901,
+          "dfs_work_bytes": 1997
+        }
+      ]
+    },
+    {
+      "name": "noisy_usage_bit",
+      "horizon": 5,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.18872187554086706,
+      "evidence": "bench/results/probabilistic_channels/noisy_usage_bit.h5.trace.json",
+      "evidence_sha256": "eae2caec40e4a88ae26f6659171118964e2fe41bb90fb07d11691750fec480a7",
+      "dp_seconds_advisory": 0.00033233400608878583,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00021275000472087413,
+          "dp_work_bytes_estimate": 2222,
+          "dfs_work_bytes": 2280
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00017508299788460135,
+          "dp_work_bytes_estimate": 2217,
+          "dfs_work_bytes": 2273
+        }
+      ]
+    },
+    {
+      "name": "noisy_usage_bit",
+      "horizon": 6,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.18872187554086706,
+      "evidence": "bench/results/probabilistic_channels/noisy_usage_bit.h6.aggregate.json",
+      "evidence_sha256": "f1a2eef775c8b46fbbb5154671c1dd49c8bffe0b4b6657a1b4b7f45ea2c29cd9",
+      "dp_seconds_advisory": 0.00031316700187744573,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016312500520143658,
+          "dp_work_bytes_estimate": 1906,
+          "dfs_work_bytes": 2004
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0002068330068141222,
+          "dp_work_bytes_estimate": 1901,
+          "dfs_work_bytes": 1997
+        }
+      ]
+    },
+    {
+      "name": "noisy_usage_bit",
+      "horizon": 6,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.18872187554086706,
+      "evidence": "bench/results/probabilistic_channels/noisy_usage_bit.h6.trace.json",
+      "evidence_sha256": "1f41a330a4a4ac19d057dfb4e554aec34ff2a09d99e42c7967451d5807a0cbfe",
+      "dp_seconds_advisory": 0.00031808299536351115,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00017529199976706877,
+          "dp_work_bytes_estimate": 2222,
+          "dfs_work_bytes": 2280
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00021762499818578362,
+          "dp_work_bytes_estimate": 2217,
+          "dfs_work_bytes": 2273
+        }
+      ]
+    },
+    {
+      "name": "same_mean_distinct_laws",
+      "horizon": 1,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/same_mean_distinct_laws.h1.aggregate.json",
+      "evidence_sha256": "668468d32d0397107a2af76ab537807cf5d40d0cd232e7cc3fe9f6e692c23116",
+      "dp_seconds_advisory": 0.0002981669967994094,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.00013929100532550365,
+          "dp_work_bytes_estimate": 1109,
+          "dfs_work_bytes": 1176
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001580419993842952,
+          "dp_work_bytes_estimate": 1902,
+          "dfs_work_bytes": 2000
+        }
+      ]
+    },
+    {
+      "name": "same_mean_distinct_laws",
+      "horizon": 1,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/same_mean_distinct_laws.h1.trace.json",
+      "evidence_sha256": "49d64a4b76547e86cf486a7b4f80fbc92ec1878a6f2d1d79f6ea13f7c6cdfb03",
+      "dp_seconds_advisory": 0.000298250000923872,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.0001817500015022233,
+          "dp_work_bytes_estimate": 1267,
+          "dfs_work_bytes": 1314
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00017262499750358984,
+          "dp_work_bytes_estimate": 2218,
+          "dfs_work_bytes": 2276
+        }
+      ]
+    },
+    {
+      "name": "same_mean_distinct_laws",
+      "horizon": 2,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/same_mean_distinct_laws.h2.aggregate.json",
+      "evidence_sha256": "b6fc007ba4731146a68d200a3eb477959500bf6ff8ed386ae14106a9efd3a538",
+      "dp_seconds_advisory": 0.0002909159957198426,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.0001339170048595406,
+          "dp_work_bytes_estimate": 1109,
+          "dfs_work_bytes": 1176
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00020179100101813674,
+          "dp_work_bytes_estimate": 1902,
+          "dfs_work_bytes": 2000
+        }
+      ]
+    },
+    {
+      "name": "same_mean_distinct_laws",
+      "horizon": 2,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/same_mean_distinct_laws.h2.trace.json",
+      "evidence_sha256": "f1706554dc805808c483fda486778c19263f7b20c1bd6cc6f7d307017ace6bb9",
+      "dp_seconds_advisory": 0.0002989579952554777,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.00014154199743643403,
+          "dp_work_bytes_estimate": 1267,
+          "dfs_work_bytes": 1314
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001658750043134205,
+          "dp_work_bytes_estimate": 2218,
+          "dfs_work_bytes": 2276
+        }
+      ]
+    },
+    {
+      "name": "same_mean_distinct_laws",
+      "horizon": 3,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/same_mean_distinct_laws.h3.aggregate.json",
+      "evidence_sha256": "8987863253d15b22235d00d54ca4e226779b5d137f10d4cea784176c799efbfe",
+      "dp_seconds_advisory": 0.0002932920033344999,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.00018075000116368756,
+          "dp_work_bytes_estimate": 1109,
+          "dfs_work_bytes": 1176
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016825000056996942,
+          "dp_work_bytes_estimate": 1902,
+          "dfs_work_bytes": 2000
+        }
+      ]
+    },
+    {
+      "name": "same_mean_distinct_laws",
+      "horizon": 3,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/same_mean_distinct_laws.h3.trace.json",
+      "evidence_sha256": "fdd7cc70b6e15f1805f67fe8d47f980216d150343203187b2abe38c33c291c9c",
+      "dp_seconds_advisory": 0.00029675000405404717,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.0001400420005666092,
+          "dp_work_bytes_estimate": 1267,
+          "dfs_work_bytes": 1314
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001770410017343238,
+          "dp_work_bytes_estimate": 2218,
+          "dfs_work_bytes": 2276
+        }
+      ]
+    },
+    {
+      "name": "same_mean_distinct_laws",
+      "horizon": 4,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/same_mean_distinct_laws.h4.aggregate.json",
+      "evidence_sha256": "5c643f1e2f6da15e4e90206ac9b880c27fb2a90163deb889c9c799201a55d012",
+      "dp_seconds_advisory": 0.0002972920046886429,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.00013079200289212167,
+          "dp_work_bytes_estimate": 1109,
+          "dfs_work_bytes": 1176
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016183400293812156,
+          "dp_work_bytes_estimate": 1902,
+          "dfs_work_bytes": 2000
+        }
+      ]
+    },
+    {
+      "name": "same_mean_distinct_laws",
+      "horizon": 4,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/same_mean_distinct_laws.h4.trace.json",
+      "evidence_sha256": "04c7e6c315b7ccadfc07ab79ea28b6c42e902ae783fd7648a8eb6b6d56854a20",
+      "dp_seconds_advisory": 0.0003003329984494485,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.00013925000530434772,
+          "dp_work_bytes_estimate": 1267,
+          "dfs_work_bytes": 1314
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00027545900229597464,
+          "dp_work_bytes_estimate": 2218,
+          "dfs_work_bytes": 2276
+        }
+      ]
+    },
+    {
+      "name": "same_mean_distinct_laws",
+      "horizon": 5,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/same_mean_distinct_laws.h5.aggregate.json",
+      "evidence_sha256": "d99973ee0dced663fd9ced30ced538ad341deb1cd95f876dc90c482954b440e8",
+      "dp_seconds_advisory": 0.0002843749971361831,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.00013454199506668374,
+          "dp_work_bytes_estimate": 1109,
+          "dfs_work_bytes": 1176
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016054099978646263,
+          "dp_work_bytes_estimate": 1902,
+          "dfs_work_bytes": 2000
+        }
+      ]
+    },
+    {
+      "name": "same_mean_distinct_laws",
+      "horizon": 5,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/same_mean_distinct_laws.h5.trace.json",
+      "evidence_sha256": "3dad5accfbde56eef74d50a9fa61feb2d5931fae655fce69c2b66439f467c44f",
+      "dp_seconds_advisory": 0.0003464999972493388,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.00014066699804970995,
+          "dp_work_bytes_estimate": 1267,
+          "dfs_work_bytes": 1314
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00017583300359547138,
+          "dp_work_bytes_estimate": 2218,
+          "dfs_work_bytes": 2276
+        }
+      ]
+    },
+    {
+      "name": "same_mean_distinct_laws",
+      "horizon": 6,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/same_mean_distinct_laws.h6.aggregate.json",
+      "evidence_sha256": "bf7bd7e8ac184cc3babb35b155aa5396fc98e5653a8e421629970eeb6bfd50f7",
+      "dp_seconds_advisory": 0.0002994999958900735,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.0001372499973513186,
+          "dp_work_bytes_estimate": 1109,
+          "dfs_work_bytes": 1176
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00021012499928474426,
+          "dp_work_bytes_estimate": 1902,
+          "dfs_work_bytes": 2000
+        }
+      ]
+    },
+    {
+      "name": "same_mean_distinct_laws",
+      "horizon": 6,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/same_mean_distinct_laws.h6.trace.json",
+      "evidence_sha256": "1de855344b2406a8f5dac7e96958380049ebe81b740c402aee2fd5d3f009391a",
+      "dp_seconds_advisory": 0.00031733300420455635,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.00014737500168848783,
+          "dp_work_bytes_estimate": 1267,
+          "dfs_work_bytes": 1314
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016825000056996942,
+          "dp_work_bytes_estimate": 2218,
+          "dfs_work_bytes": 2276
+        }
+      ]
+    },
+    {
+      "name": "aggregate_hides_order",
+      "horizon": 1,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/aggregate_hides_order.h1.aggregate.json",
+      "evidence_sha256": "f0f1adc124b57dccbcb6f1c653335ef10449c2400e7b568aed9fc4ea8c836e5a",
+      "dp_seconds_advisory": 0.0003338750029797666,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.00015645800158381462,
+          "dp_work_bytes_estimate": 1111,
+          "dfs_work_bytes": 1180
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.00015862500004004687,
+          "dp_work_bytes_estimate": 1106,
+          "dfs_work_bytes": 1169
+        }
+      ]
+    },
+    {
+      "name": "aggregate_hides_order",
+      "horizon": 1,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/aggregate_hides_order.h1.trace.json",
+      "evidence_sha256": "a4e17b82a8c2d54936152f77982b51d164767bc649db7f8aa48f65abd95036ad",
+      "dp_seconds_advisory": 0.00032229099451797083,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.0001632089988561347,
+          "dp_work_bytes_estimate": 1269,
+          "dfs_work_bytes": 1318
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.0002025420035351999,
+          "dp_work_bytes_estimate": 1264,
+          "dfs_work_bytes": 1307
+        }
+      ]
+    },
+    {
+      "name": "aggregate_hides_order",
+      "horizon": 2,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/aggregate_hides_order.h2.aggregate.json",
+      "evidence_sha256": "16d77978f0c53328623299e348c8727f044dc03fd8e5eb0403d7a4f6f87ac52c",
+      "dp_seconds_advisory": 0.0003384160008863546,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.000185500000952743,
+          "dp_work_bytes_estimate": 1430,
+          "dfs_work_bytes": 2020
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00018533299589762464,
+          "dp_work_bytes_estimate": 1425,
+          "dfs_work_bytes": 2011
+        }
+      ]
+    },
+    {
+      "name": "aggregate_hides_order",
+      "horizon": 2,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/aggregate_hides_order.h2.trace.json",
+      "evidence_sha256": "df438b9383fc43803d77361445555e16428da2f89e78256488d0532705163fc7",
+      "dp_seconds_advisory": 0.00036087499756831676,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0002552500009187497,
+          "dp_work_bytes_estimate": 2101,
+          "dfs_work_bytes": 2607
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00020362500072224066,
+          "dp_work_bytes_estimate": 2096,
+          "dfs_work_bytes": 2598
+        }
+      ]
+    },
+    {
+      "name": "aggregate_hides_order",
+      "horizon": 3,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/aggregate_hides_order.h3.aggregate.json",
+      "evidence_sha256": "54a81dca3d7fb2d3a2284e618cb60358203ab6d05bd4a54f4a441f2f05bf4e0d",
+      "dp_seconds_advisory": 0.00033237499883398414,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001812920017982833,
+          "dp_work_bytes_estimate": 1430,
+          "dfs_work_bytes": 2020
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00022000000171829015,
+          "dp_work_bytes_estimate": 1425,
+          "dfs_work_bytes": 2011
+        }
+      ]
+    },
+    {
+      "name": "aggregate_hides_order",
+      "horizon": 3,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/aggregate_hides_order.h3.trace.json",
+      "evidence_sha256": "060e81926fb91b20e5d4a3fb22c66bf428761f717324217685f288e74d944b10",
+      "dp_seconds_advisory": 0.00035541599936550483,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0002121659999829717,
+          "dp_work_bytes_estimate": 2101,
+          "dfs_work_bytes": 2607
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00020366600074339658,
+          "dp_work_bytes_estimate": 2096,
+          "dfs_work_bytes": 2598
+        }
+      ]
+    },
+    {
+      "name": "aggregate_hides_order",
+      "horizon": 4,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/aggregate_hides_order.h4.aggregate.json",
+      "evidence_sha256": "ae054e9de26daef9245559e7efe96afacff3d17581bce6428854ffa83736cbcb",
+      "dp_seconds_advisory": 0.0003278340009273961,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00022154199541546404,
+          "dp_work_bytes_estimate": 1430,
+          "dfs_work_bytes": 2020
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00017991699860431254,
+          "dp_work_bytes_estimate": 1425,
+          "dfs_work_bytes": 2011
+        }
+      ]
+    },
+    {
+      "name": "aggregate_hides_order",
+      "horizon": 4,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/aggregate_hides_order.h4.trace.json",
+      "evidence_sha256": "68bd879c5c0abf4cf98d0f465a0d449a6bf70ceea70c7b4eaad32b8ada04af7e",
+      "dp_seconds_advisory": 0.00034916599543066695,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00020162500004516914,
+          "dp_work_bytes_estimate": 2101,
+          "dfs_work_bytes": 2607
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0002377499986323528,
+          "dp_work_bytes_estimate": 2096,
+          "dfs_work_bytes": 2598
+        }
+      ]
+    },
+    {
+      "name": "aggregate_hides_order",
+      "horizon": 5,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/aggregate_hides_order.h5.aggregate.json",
+      "evidence_sha256": "61a1a4baa81c0fa7682bfa6c6dccba27f36103abe661add8529d2043d9b0652f",
+      "dp_seconds_advisory": 0.00033795900526456535,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00018562500190455467,
+          "dp_work_bytes_estimate": 1430,
+          "dfs_work_bytes": 2020
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001748750000842847,
+          "dp_work_bytes_estimate": 1425,
+          "dfs_work_bytes": 2011
+        }
+      ]
+    },
+    {
+      "name": "aggregate_hides_order",
+      "horizon": 5,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/aggregate_hides_order.h5.trace.json",
+      "evidence_sha256": "abe1d9d045c4de1c31edaa663322c82cc2c2b648583fea6089c61932f3ee8152",
+      "dp_seconds_advisory": 0.00034308300382690504,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00024108400248223916,
+          "dp_work_bytes_estimate": 2101,
+          "dfs_work_bytes": 2607
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00019608300499385223,
+          "dp_work_bytes_estimate": 2096,
+          "dfs_work_bytes": 2598
+        }
+      ]
+    },
+    {
+      "name": "aggregate_hides_order",
+      "horizon": 6,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/aggregate_hides_order.h6.aggregate.json",
+      "evidence_sha256": "ed3b933a1d7e352ecc3a9cb868cb325e823201f579d52de712c7d41605318083",
+      "dp_seconds_advisory": 0.00033200000325450674,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00019633400370366871,
+          "dp_work_bytes_estimate": 1430,
+          "dfs_work_bytes": 2020
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00022612499742535874,
+          "dp_work_bytes_estimate": 1425,
+          "dfs_work_bytes": 2011
+        }
+      ]
+    },
+    {
+      "name": "aggregate_hides_order",
+      "horizon": 6,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/aggregate_hides_order.h6.trace.json",
+      "evidence_sha256": "67696e79195e83160d14b672965e9a0a4f55469e005cab088e052f66f91318db",
+      "dp_seconds_advisory": 0.00035983300040243194,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00021033300436101854,
+          "dp_work_bytes_estimate": 2101,
+          "dfs_work_bytes": 2607
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00020450000010896474,
+          "dp_work_bytes_estimate": 2096,
+          "dfs_work_bytes": 2598
+        }
+      ]
+    },
+    {
+      "name": "history_conditioned_usage",
+      "horizon": 1,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/history_conditioned_usage.h1.aggregate.json",
+      "evidence_sha256": "fc9c3f3bbc2da4688fba5c167dea2e4fe17103e5c8f11320562f44c3e5e92fff",
+      "dp_seconds_advisory": 0.0003667499986477196,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.0001972090030903928,
+          "dp_work_bytes_estimate": 1349,
+          "dfs_work_bytes": 1380
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.00018279199866810814,
+          "dp_work_bytes_estimate": 1346,
+          "dfs_work_bytes": 1375
+        }
+      ]
+    },
+    {
+      "name": "history_conditioned_usage",
+      "horizon": 1,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/history_conditioned_usage.h1.trace.json",
+      "evidence_sha256": "af76fc8a20af3882536c221f3cd53f0c32a7f357dd6b3880fa24a4fd6015b588",
+      "dp_seconds_advisory": 0.0003697499996633269,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.00019337500270921737,
+          "dp_work_bytes_estimate": 1507,
+          "dfs_work_bytes": 1518
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 2,
+          "dp_transitions": 1,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 1,
+          "dfs_seconds_advisory": 0.0002981249999720603,
+          "dp_work_bytes_estimate": 1504,
+          "dfs_work_bytes": 1513
+        }
+      ]
+    },
+    {
+      "name": "history_conditioned_usage",
+      "horizon": 2,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/history_conditioned_usage.h2.aggregate.json",
+      "evidence_sha256": "566ca9f9b38081a9a452ce0fd90abdb1d5d7512e7d528ed5416110d6a8aaf1c4",
+      "dp_seconds_advisory": 0.0003860419965349138,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0002229999954579398,
+          "dp_work_bytes_estimate": 1912,
+          "dfs_work_bytes": 2432
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00021416699746623635,
+          "dp_work_bytes_estimate": 1903,
+          "dfs_work_bytes": 2417
+        }
+      ]
+    },
+    {
+      "name": "history_conditioned_usage",
+      "horizon": 2,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/history_conditioned_usage.h2.trace.json",
+      "evidence_sha256": "fb6e37e8cccce33c3a3efe7feabf17c0627e84a0a3d9b3e9ba29f05f03f750ce",
+      "dp_seconds_advisory": 0.0004085420005139895,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00027795799542218447,
+          "dp_work_bytes_estimate": 2583,
+          "dfs_work_bytes": 3019
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00023554200015496463,
+          "dp_work_bytes_estimate": 2574,
+          "dfs_work_bytes": 3004
+        }
+      ]
+    },
+    {
+      "name": "history_conditioned_usage",
+      "horizon": 3,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/history_conditioned_usage.h3.aggregate.json",
+      "evidence_sha256": "065e19d8ea63a61e14510cbf22d8b9204d1ab335ef7f53b4bbcde367a8456695",
+      "dp_seconds_advisory": 0.000395874994865153,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00021399999968707561,
+          "dp_work_bytes_estimate": 1912,
+          "dfs_work_bytes": 2432
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00025183400430250913,
+          "dp_work_bytes_estimate": 1903,
+          "dfs_work_bytes": 2417
+        }
+      ]
+    },
+    {
+      "name": "history_conditioned_usage",
+      "horizon": 3,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/history_conditioned_usage.h3.trace.json",
+      "evidence_sha256": "8f2cec756afef75d58e24e3ae83e3a8964e22b0b50f201c1223efd829f930b83",
+      "dp_seconds_advisory": 0.00040958300087368116,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00024112499522743747,
+          "dp_work_bytes_estimate": 2583,
+          "dfs_work_bytes": 3019
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00024200000189011917,
+          "dp_work_bytes_estimate": 2574,
+          "dfs_work_bytes": 3004
+        }
+      ]
+    },
+    {
+      "name": "history_conditioned_usage",
+      "horizon": 4,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/history_conditioned_usage.h4.aggregate.json",
+      "evidence_sha256": "ed619e75346d6d4b06f59d81529a25f0be85f4fb79767fde594e433da88c4b1c",
+      "dp_seconds_advisory": 0.0004497909976635128,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00022429200180340558,
+          "dp_work_bytes_estimate": 1912,
+          "dfs_work_bytes": 2432
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00021987500076647848,
+          "dp_work_bytes_estimate": 1903,
+          "dfs_work_bytes": 2417
+        }
+      ]
+    },
+    {
+      "name": "history_conditioned_usage",
+      "horizon": 4,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/history_conditioned_usage.h4.trace.json",
+      "evidence_sha256": "c47fe7ecf24c42f8293b7b2ef1e035743a95f1ee2a2dbccd6b729ca043e3cf1d",
+      "dp_seconds_advisory": 0.0004085420005139895,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0002877080041798763,
+          "dp_work_bytes_estimate": 2583,
+          "dfs_work_bytes": 3019
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.000243875001615379,
+          "dp_work_bytes_estimate": 2574,
+          "dfs_work_bytes": 3004
+        }
+      ]
+    },
+    {
+      "name": "history_conditioned_usage",
+      "horizon": 5,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/history_conditioned_usage.h5.aggregate.json",
+      "evidence_sha256": "1795f83fb91b2c12e99a34cc3205e5a096dc693153131afa69b6088453dd5a70",
+      "dp_seconds_advisory": 0.00039166599890450016,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00022412500402424484,
+          "dp_work_bytes_estimate": 1912,
+          "dfs_work_bytes": 2432
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00025370900402776897,
+          "dp_work_bytes_estimate": 1903,
+          "dfs_work_bytes": 2417
+        }
+      ]
+    },
+    {
+      "name": "history_conditioned_usage",
+      "horizon": 5,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/history_conditioned_usage.h5.trace.json",
+      "evidence_sha256": "651e4d915484e3a23086d054ad386a2d7509ce25cdc67286504d4cd5594be032",
+      "dp_seconds_advisory": 0.00040987499960465357,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0002421669996692799,
+          "dp_work_bytes_estimate": 2583,
+          "dfs_work_bytes": 3019
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00023179200070444494,
+          "dp_work_bytes_estimate": 2574,
+          "dfs_work_bytes": 3004
+        }
+      ]
+    },
+    {
+      "name": "history_conditioned_usage",
+      "horizon": 6,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/history_conditioned_usage.h6.aggregate.json",
+      "evidence_sha256": "fe715143b419d63f7df6c6b8bf0f29268ce2666a18b6fed9ad08a662274c5678",
+      "dp_seconds_advisory": 0.000393000002077315,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.000255083003139589,
+          "dp_work_bytes_estimate": 1912,
+          "dfs_work_bytes": 2432
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00021858399850316346,
+          "dp_work_bytes_estimate": 1903,
+          "dfs_work_bytes": 2417
+        }
+      ]
+    },
+    {
+      "name": "history_conditioned_usage",
+      "horizon": 6,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/history_conditioned_usage.h6.trace.json",
+      "evidence_sha256": "a0880b14d63ef83dd94b2cf7ac182d6baceeca559f93b31d0b5132282228f667",
+      "dp_seconds_advisory": 0.00041237499681301415,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00024249999842140824,
+          "dp_work_bytes_estimate": 2583,
+          "dfs_work_bytes": 3019
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 1,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0002732499997364357,
+          "dp_work_bytes_estimate": 2574,
+          "dfs_work_bytes": 3004
+        }
+      ]
+    },
+    {
+      "name": "biased_productive_cycle",
+      "horizon": 1,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.18872187554086706,
+      "evidence": "bench/results/probabilistic_channels/biased_productive_cycle.h1.aggregate.json",
+      "evidence_sha256": "d90c779b74b99e40e26b7141bf253193f1750a27d3bfc2a70f70839561f7f92b",
+      "dp_seconds_advisory": 0.0003578329997253604,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00022770799841964617,
+          "dp_work_bytes_estimate": 1907,
+          "dfs_work_bytes": 3266
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00025933300639735535,
+          "dp_work_bytes_estimate": 1902,
+          "dfs_work_bytes": 3256
+        }
+      ]
+    },
+    {
+      "name": "biased_productive_cycle",
+      "horizon": 1,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.18872187554086706,
+      "evidence": "bench/results/probabilistic_channels/biased_productive_cycle.h1.trace.json",
+      "evidence_sha256": "e000df085f8778a05a63cccb55a42943570b15b15cb0fbb115e785b8b59d3be3",
+      "dp_seconds_advisory": 0.0003778750033234246,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00024987500364659354,
+          "dp_work_bytes_estimate": 2223,
+          "dfs_work_bytes": 3840
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0002825420015142299,
+          "dp_work_bytes_estimate": 2218,
+          "dfs_work_bytes": 3830
+        }
+      ]
+    },
+    {
+      "name": "biased_productive_cycle",
+      "horizon": 2,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.26029981477378317,
+      "evidence": "bench/results/probabilistic_channels/biased_productive_cycle.h2.aggregate.json",
+      "evidence_sha256": "13e4aab1da3b977a4633100b8f3ddc97703f5010646c58cfee348987898093fd",
+      "dp_seconds_advisory": 0.0004027499962830916,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 5,
+          "dp_transitions": 4,
+          "dfs_leaf_paths": 3,
+          "dfs_transitions": 4,
+          "dfs_seconds_advisory": 0.00033970799995586276,
+          "dp_work_bytes_estimate": 3025,
+          "dfs_work_bytes": 6824
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 5,
+          "dp_transitions": 4,
+          "dfs_leaf_paths": 3,
+          "dfs_transitions": 4,
+          "dfs_seconds_advisory": 0.00037129099655430764,
+          "dp_work_bytes_estimate": 3016,
+          "dfs_work_bytes": 6807
+        }
+      ]
+    },
+    {
+      "name": "biased_productive_cycle",
+      "horizon": 2,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.26029981477378317,
+      "evidence": "bench/results/probabilistic_channels/biased_productive_cycle.h2.trace.json",
+      "evidence_sha256": "1746045c219fad22a935c4cf882b9ae0f74fce7b998cd81535528573fef69110",
+      "dp_seconds_advisory": 0.0004347080030129291,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 5,
+          "dp_transitions": 4,
+          "dfs_leaf_paths": 3,
+          "dfs_transitions": 4,
+          "dfs_seconds_advisory": 0.00043899999582208693,
+          "dp_work_bytes_estimate": 4354,
+          "dfs_work_bytes": 8883
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 5,
+          "dp_transitions": 4,
+          "dfs_leaf_paths": 3,
+          "dfs_transitions": 4,
+          "dfs_seconds_advisory": 0.0003915409979526885,
+          "dp_work_bytes_estimate": 4345,
+          "dfs_work_bytes": 8866
+        }
+      ]
+    },
+    {
+      "name": "biased_productive_cycle",
+      "horizon": 3,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.2821788068898955,
+      "evidence": "bench/results/probabilistic_channels/biased_productive_cycle.h3.aggregate.json",
+      "evidence_sha256": "4cf157225d7fb0e9b978cdde5434ea133f2a8bee1a512e46ffa51529775f103f",
+      "dp_seconds_advisory": 0.00043504100176505744,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0005940409973845817,
+          "dp_work_bytes_estimate": 4143,
+          "dfs_work_bytes": 11209
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0004967499990016222,
+          "dp_work_bytes_estimate": 4130,
+          "dfs_work_bytes": 11188
+        }
+      ]
+    },
+    {
+      "name": "biased_productive_cycle",
+      "horizon": 3,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.28217880688989544,
+      "evidence": "bench/results/probabilistic_channels/biased_productive_cycle.h3.trace.json",
+      "evidence_sha256": "410bbc67de084e45daf536515df2067cfe8502468bf0fac80a491177ede6982b",
+      "dp_seconds_advisory": 0.0004996669958927669,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0006633750017499551,
+          "dp_work_bytes_estimate": 6999,
+          "dfs_work_bytes": 15503
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.000628834000963252,
+          "dp_work_bytes_estimate": 6986,
+          "dfs_work_bytes": 15482
+        }
+      ]
+    },
+    {
+      "name": "biased_productive_cycle",
+      "horizon": 4,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.28810579728850944,
+      "evidence": "bench/results/probabilistic_channels/biased_productive_cycle.h4.aggregate.json",
+      "evidence_sha256": "0325de555fff3de19c9eee4a9bdf36013e9916800d92a4a4b090a5464864bcd9",
+      "dp_seconds_advisory": 0.00047862499923212454,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 9,
+          "dp_transitions": 8,
+          "dfs_leaf_paths": 5,
+          "dfs_transitions": 8,
+          "dfs_seconds_advisory": 0.0006749590029357933,
+          "dp_work_bytes_estimate": 5261,
+          "dfs_work_bytes": 16428
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 9,
+          "dp_transitions": 8,
+          "dfs_leaf_paths": 5,
+          "dfs_transitions": 8,
+          "dfs_seconds_advisory": 0.0006522919939015992,
+          "dp_work_bytes_estimate": 5244,
+          "dfs_work_bytes": 16405
+        }
+      ]
+    },
+    {
+      "name": "biased_productive_cycle",
+      "horizon": 4,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.28810579728850944,
+      "evidence": "bench/results/probabilistic_channels/biased_productive_cycle.h4.trace.json",
+      "evidence_sha256": "c765ba88a11ffe3c921aed1827849b7cfc6ed78074d731a529753e1ea36d8ca5",
+      "dp_seconds_advisory": 0.0005801670049550012,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 9,
+          "dp_transitions": 8,
+          "dfs_leaf_paths": 5,
+          "dfs_transitions": 8,
+          "dfs_seconds_advisory": 0.0009062919998541474,
+          "dp_work_bytes_estimate": 10158,
+          "dfs_work_bytes": 23707
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 9,
+          "dp_transitions": 8,
+          "dfs_leaf_paths": 5,
+          "dfs_transitions": 8,
+          "dfs_seconds_advisory": 0.0008855409978423268,
+          "dp_work_bytes_estimate": 10141,
+          "dfs_work_bytes": 23684
+        }
+      ]
+    },
+    {
+      "name": "biased_productive_cycle",
+      "horizon": 5,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.28963082600597817,
+      "evidence": "bench/results/probabilistic_channels/biased_productive_cycle.h5.aggregate.json",
+      "evidence_sha256": "3d2822697928fa30531dd017a74bfeb8ce63804dcec873e7536be0abecbf5407",
+      "dp_seconds_advisory": 0.0005651669998769648,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 11,
+          "dp_transitions": 10,
+          "dfs_leaf_paths": 6,
+          "dfs_transitions": 10,
+          "dfs_seconds_advisory": 0.0008505840014549904,
+          "dp_work_bytes_estimate": 6381,
+          "dfs_work_bytes": 22484
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 11,
+          "dp_transitions": 10,
+          "dfs_leaf_paths": 6,
+          "dfs_transitions": 10,
+          "dfs_seconds_advisory": 0.0008585000032326207,
+          "dp_work_bytes_estimate": 6360,
+          "dfs_work_bytes": 22462
+        }
+      ]
+    },
+    {
+      "name": "biased_productive_cycle",
+      "horizon": 5,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.28963082600597817,
+      "evidence": "bench/results/probabilistic_channels/biased_productive_cycle.h5.trace.json",
+      "evidence_sha256": "3a9f62306223393aa4700537a1192e79ceecc4a019812d06905f88aea9ebc7f5",
+      "dp_seconds_advisory": 0.0006687499990221113,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 11,
+          "dp_transitions": 10,
+          "dfs_leaf_paths": 6,
+          "dfs_transitions": 10,
+          "dfs_seconds_advisory": 0.0012137920057284646,
+          "dp_work_bytes_estimate": 13833,
+          "dfs_work_bytes": 33498
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 11,
+          "dp_transitions": 10,
+          "dfs_leaf_paths": 6,
+          "dfs_transitions": 10,
+          "dfs_seconds_advisory": 0.0013087909974274226,
+          "dp_work_bytes_estimate": 13812,
+          "dfs_work_bytes": 33476
+        }
+      ]
+    },
+    {
+      "name": "biased_productive_cycle",
+      "horizon": 6,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.2900158585286372,
+      "evidence": "bench/results/probabilistic_channels/biased_productive_cycle.h6.aggregate.json",
+      "evidence_sha256": "5a2254f86b71b5230dbb30ae1f026b411b6b8bb5496d512bc211b16857da5ddd",
+      "dp_seconds_advisory": 0.0005893339985050261,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 13,
+          "dp_transitions": 12,
+          "dfs_leaf_paths": 7,
+          "dfs_transitions": 12,
+          "dfs_seconds_advisory": 0.0010550000006332994,
+          "dp_work_bytes_estimate": 7501,
+          "dfs_work_bytes": 29367
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 13,
+          "dp_transitions": 12,
+          "dfs_leaf_paths": 7,
+          "dfs_transitions": 12,
+          "dfs_seconds_advisory": 0.0010893750004470348,
+          "dp_work_bytes_estimate": 7476,
+          "dfs_work_bytes": 29348
+        }
+      ]
+    },
+    {
+      "name": "biased_productive_cycle",
+      "horizon": 6,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1/2",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "3/4",
+      "mutual_information_bits_approx": 0.2900158585286372,
+      "evidence": "bench/results/probabilistic_channels/biased_productive_cycle.h6.trace.json",
+      "evidence_sha256": "c71b41aec298b24c039aa998863be28136c3ed05add811dfa38b98f4bcf4c5e7",
+      "dp_seconds_advisory": 0.0008891250035958365,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 13,
+          "dp_transitions": 12,
+          "dfs_leaf_paths": 7,
+          "dfs_transitions": 12,
+          "dfs_seconds_advisory": 0.0015458750058314763,
+          "dp_work_bytes_estimate": 18022,
+          "dfs_work_bytes": 44866
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 13,
+          "dp_transitions": 12,
+          "dfs_leaf_paths": 7,
+          "dfs_transitions": 12,
+          "dfs_seconds_advisory": 0.001556916999106761,
+          "dp_work_bytes_estimate": 17997,
+          "dfs_work_bytes": 44847
+        }
+      ]
+    },
+    {
+      "name": "fixed_public_context",
+      "horizon": 1,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/fixed_public_context.h1.aggregate.json",
+      "evidence_sha256": "234b95653dfb23d3a53d2a0a3ab7e8d6c5087278c117a379dc797252026dc216",
+      "dp_seconds_advisory": 0.00029962499684188515,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016095799946924672,
+          "dp_work_bytes_estimate": 1936,
+          "dfs_work_bytes": 2044
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00019916600285796449,
+          "dp_work_bytes_estimate": 1931,
+          "dfs_work_bytes": 2037
+        }
+      ]
+    },
+    {
+      "name": "fixed_public_context",
+      "horizon": 1,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/fixed_public_context.h1.trace.json",
+      "evidence_sha256": "1e50859b8e1eab2f67c0fc4916c244ced5a8157a3cd7eabc755d6f2feec92748",
+      "dp_seconds_advisory": 0.0003081250033574179,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016458299796795473,
+          "dp_work_bytes_estimate": 2252,
+          "dfs_work_bytes": 2320
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00015520900342380628,
+          "dp_work_bytes_estimate": 2247,
+          "dfs_work_bytes": 2313
+        }
+      ]
+    },
+    {
+      "name": "fixed_public_context",
+      "horizon": 2,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/fixed_public_context.h2.aggregate.json",
+      "evidence_sha256": "b53637068ac056fb4c7b5d7a84ded32dd70029e983be22957a66654ab31969ad",
+      "dp_seconds_advisory": 0.000283792003756389,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00020566700550261885,
+          "dp_work_bytes_estimate": 1936,
+          "dfs_work_bytes": 2044
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00015558399900328368,
+          "dp_work_bytes_estimate": 1931,
+          "dfs_work_bytes": 2037
+        }
+      ]
+    },
+    {
+      "name": "fixed_public_context",
+      "horizon": 2,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/fixed_public_context.h2.trace.json",
+      "evidence_sha256": "1d4bb20a383b5ceff81722d065346c4182dab052c7f883d1f2b5e78acf004b07",
+      "dp_seconds_advisory": 0.00029437500052154064,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001678749977145344,
+          "dp_work_bytes_estimate": 2252,
+          "dfs_work_bytes": 2320
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00020170800416963175,
+          "dp_work_bytes_estimate": 2247,
+          "dfs_work_bytes": 2313
+        }
+      ]
+    },
+    {
+      "name": "fixed_public_context",
+      "horizon": 3,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/fixed_public_context.h3.aggregate.json",
+      "evidence_sha256": "1f08bb9733e01601c4a1601ed958a03c6a983f3ff4183e3c18e4e004997f195f",
+      "dp_seconds_advisory": 0.00028920899785589427,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00015095800335984677,
+          "dp_work_bytes_estimate": 1936,
+          "dfs_work_bytes": 2044
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00015329199959523976,
+          "dp_work_bytes_estimate": 1931,
+          "dfs_work_bytes": 2037
+        }
+      ]
+    },
+    {
+      "name": "fixed_public_context",
+      "horizon": 3,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/fixed_public_context.h3.trace.json",
+      "evidence_sha256": "9098f629e63b092af80233420cfdda5531383d6733bf6cd939ba1df2e7c21ea7",
+      "dp_seconds_advisory": 0.00032079200173029676,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00020283299818402156,
+          "dp_work_bytes_estimate": 2252,
+          "dfs_work_bytes": 2320
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00015904199972283095,
+          "dp_work_bytes_estimate": 2247,
+          "dfs_work_bytes": 2313
+        }
+      ]
+    },
+    {
+      "name": "fixed_public_context",
+      "horizon": 4,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/fixed_public_context.h4.aggregate.json",
+      "evidence_sha256": "dd2441d09f6cd11f611baf6776f622c20a6fc8d4cc87c4a27243b46509bc3993",
+      "dp_seconds_advisory": 0.0003012079978361726,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016433299606433138,
+          "dp_work_bytes_estimate": 1936,
+          "dfs_work_bytes": 2044
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0002892500051530078,
+          "dp_work_bytes_estimate": 1931,
+          "dfs_work_bytes": 2037
+        }
+      ]
+    },
+    {
+      "name": "fixed_public_context",
+      "horizon": 4,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/fixed_public_context.h4.trace.json",
+      "evidence_sha256": "adbbdcfeda2528721d5845227c8e85306344919d5ed18a092eaa9138e075f349",
+      "dp_seconds_advisory": 0.00028845899942098185,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016187500295927748,
+          "dp_work_bytes_estimate": 2252,
+          "dfs_work_bytes": 2320
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001604169956408441,
+          "dp_work_bytes_estimate": 2247,
+          "dfs_work_bytes": 2313
+        }
+      ]
+    },
+    {
+      "name": "fixed_public_context",
+      "horizon": 5,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/fixed_public_context.h5.aggregate.json",
+      "evidence_sha256": "b5b80fd60724f4443fa3b89d828e01e850e4385198a1df865afd97529a1ce824",
+      "dp_seconds_advisory": 0.00032541599648538977,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00015429199993377551,
+          "dp_work_bytes_estimate": 1936,
+          "dfs_work_bytes": 2044
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00015270799485733733,
+          "dp_work_bytes_estimate": 1931,
+          "dfs_work_bytes": 2037
+        }
+      ]
+    },
+    {
+      "name": "fixed_public_context",
+      "horizon": 5,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/fixed_public_context.h5.trace.json",
+      "evidence_sha256": "35e7ccd942011caf331f90c2081377317ed7e7f7702c0fb0d6b503f623eb9465",
+      "dp_seconds_advisory": 0.0003029159997822717,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00019449999672360718,
+          "dp_work_bytes_estimate": 2252,
+          "dfs_work_bytes": 2320
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016366600175388157,
+          "dp_work_bytes_estimate": 2247,
+          "dfs_work_bytes": 2313
+        }
+      ]
+    },
+    {
+      "name": "fixed_public_context",
+      "horizon": 6,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/fixed_public_context.h6.aggregate.json",
+      "evidence_sha256": "6925898161f936805ff497c998c8a60e1d2c92831c497db4a40627cd9da298c7",
+      "dp_seconds_advisory": 0.00028199999360367656,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00015683400124544278,
+          "dp_work_bytes_estimate": 1936,
+          "dfs_work_bytes": 2044
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00018575000285636634,
+          "dp_work_bytes_estimate": 1931,
+          "dfs_work_bytes": 2037
+        }
+      ]
+    },
+    {
+      "name": "fixed_public_context",
+      "horizon": 6,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/fixed_public_context.h6.trace.json",
+      "evidence_sha256": "e8827ca2da8167f6d1137e5ad6fd62cf1f71c6111ab9bb3d9bfdb0326ec8c7c3",
+      "dp_seconds_advisory": 0.00030258300103014335,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016258300456684083,
+          "dp_work_bytes_estimate": 2252,
+          "dfs_work_bytes": 2320
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00015854199591558427,
+          "dp_work_bytes_estimate": 2247,
+          "dfs_work_bytes": 2313
+        }
+      ]
+    },
+    {
+      "name": "changed_public_context",
+      "horizon": 1,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/changed_public_context.h1.aggregate.json",
+      "evidence_sha256": "0f5e167c162fbe9987d70178388b5defa9a50f97cae5027b9272bd3160a64987",
+      "dp_seconds_advisory": 0.00034087499807355925,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016362499445676804,
+          "dp_work_bytes_estimate": 1939,
+          "dfs_work_bytes": 2048
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00015549999807262793,
+          "dp_work_bytes_estimate": 1934,
+          "dfs_work_bytes": 2045
+        }
+      ]
+    },
+    {
+      "name": "changed_public_context",
+      "horizon": 1,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/changed_public_context.h1.trace.json",
+      "evidence_sha256": "362fd5b38be05ddde056da8c45128a28bbfb5436c2e6e5c44fd45251b6b151fa",
+      "dp_seconds_advisory": 0.0003179580016876571,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0002130840002791956,
+          "dp_work_bytes_estimate": 2255,
+          "dfs_work_bytes": 2324
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00017025000124704093,
+          "dp_work_bytes_estimate": 2250,
+          "dfs_work_bytes": 2321
+        }
+      ]
+    },
+    {
+      "name": "changed_public_context",
+      "horizon": 2,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/changed_public_context.h2.aggregate.json",
+      "evidence_sha256": "f4eb16138bdeb1e3e9e2d0c8d210a0e84703af18efa0fbd52fd362205d55cd22",
+      "dp_seconds_advisory": 0.0003064170014113188,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016375000268453732,
+          "dp_work_bytes_estimate": 1939,
+          "dfs_work_bytes": 2048
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00019962499936809763,
+          "dp_work_bytes_estimate": 1934,
+          "dfs_work_bytes": 2045
+        }
+      ]
+    },
+    {
+      "name": "changed_public_context",
+      "horizon": 2,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/changed_public_context.h2.trace.json",
+      "evidence_sha256": "2f0d762f7ff0169cdd4ec8f39680838c3149b1835f4c62b9006cf7aaea60be49",
+      "dp_seconds_advisory": 0.0003104170027654618,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00017458300135331228,
+          "dp_work_bytes_estimate": 2255,
+          "dfs_work_bytes": 2324
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001662499998928979,
+          "dp_work_bytes_estimate": 2250,
+          "dfs_work_bytes": 2321
+        }
+      ]
+    },
+    {
+      "name": "changed_public_context",
+      "horizon": 3,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/changed_public_context.h3.aggregate.json",
+      "evidence_sha256": "27c4654802c7038e8cb68cc84cba3cae42f1e123aa207f48cfa68642508c439a",
+      "dp_seconds_advisory": 0.00029770800028927624,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00020345899974927306,
+          "dp_work_bytes_estimate": 1939,
+          "dfs_work_bytes": 2048
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00014791700232308358,
+          "dp_work_bytes_estimate": 1934,
+          "dfs_work_bytes": 2045
+        }
+      ]
+    },
+    {
+      "name": "changed_public_context",
+      "horizon": 3,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/changed_public_context.h3.trace.json",
+      "evidence_sha256": "be4766ebb543e7acfa7839063f5d52312c972c4a6451fbf4808bdaf6bf89f3d3",
+      "dp_seconds_advisory": 0.00031316700187744573,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00017333299911115319,
+          "dp_work_bytes_estimate": 2255,
+          "dfs_work_bytes": 2324
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00021129199740244076,
+          "dp_work_bytes_estimate": 2250,
+          "dfs_work_bytes": 2321
+        }
+      ]
+    },
+    {
+      "name": "changed_public_context",
+      "horizon": 4,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/changed_public_context.h4.aggregate.json",
+      "evidence_sha256": "9358043e8a1d3b54cc16b0e4977457efe37f4674b5270d6183afe6466c97c4b9",
+      "dp_seconds_advisory": 0.00030258300103014335,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016079199849627912,
+          "dp_work_bytes_estimate": 1939,
+          "dfs_work_bytes": 2048
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00015637499745935202,
+          "dp_work_bytes_estimate": 1934,
+          "dfs_work_bytes": 2045
+        }
+      ]
+    },
+    {
+      "name": "changed_public_context",
+      "horizon": 4,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/changed_public_context.h4.trace.json",
+      "evidence_sha256": "b75be8986d26e2380bc0c4c1fd4350b2f654a6100a763d31b66acd3b55534d52",
+      "dp_seconds_advisory": 0.00032862500665942207,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0002039159953710623,
+          "dp_work_bytes_estimate": 2255,
+          "dfs_work_bytes": 2324
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016458300524391234,
+          "dp_work_bytes_estimate": 2250,
+          "dfs_work_bytes": 2321
+        }
+      ]
+    },
+    {
+      "name": "changed_public_context",
+      "horizon": 5,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/changed_public_context.h5.aggregate.json",
+      "evidence_sha256": "7179954fbe4343bf79c92fad0149f521ddfff74f3c065190cf4a17148eec3280",
+      "dp_seconds_advisory": 0.00030249999690568075,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00015770900063216686,
+          "dp_work_bytes_estimate": 1939,
+          "dfs_work_bytes": 2048
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001997500003199093,
+          "dp_work_bytes_estimate": 1934,
+          "dfs_work_bytes": 2045
+        }
+      ]
+    },
+    {
+      "name": "changed_public_context",
+      "horizon": 5,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/changed_public_context.h5.trace.json",
+      "evidence_sha256": "69b65310bdf5bb5c8f1f33050ee12b3747a2ab563dde911c084894033f2e8a31",
+      "dp_seconds_advisory": 0.0003153750003548339,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016929199773585424,
+          "dp_work_bytes_estimate": 2255,
+          "dfs_work_bytes": 2324
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016316699475282803,
+          "dp_work_bytes_estimate": 2250,
+          "dfs_work_bytes": 2321
+        }
+      ]
+    },
+    {
+      "name": "changed_public_context",
+      "horizon": 6,
+      "observer": "aggregate",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/changed_public_context.h6.aggregate.json",
+      "evidence_sha256": "f01fdc1abc0c387e01fe8994f34260af40033a7a0c182d08a611754d5facc081",
+      "dp_seconds_advisory": 0.0003562080019037239,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016158299695234746,
+          "dp_work_bytes_estimate": 1939,
+          "dfs_work_bytes": 2048
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016150000010384247,
+          "dp_work_bytes_estimate": 1934,
+          "dfs_work_bytes": 2045
+        }
+      ]
+    },
+    {
+      "name": "changed_public_context",
+      "horizon": 6,
+      "observer": "trace",
+      "structural_status": "rejected",
+      "total_variation": "1",
+      "mean_usage_vectors_equal": false,
+      "bayes_vulnerability": "1",
+      "mutual_information_bits_approx": 1.0,
+      "evidence": "bench/results/probabilistic_channels/changed_public_context.h6.trace.json",
+      "evidence_sha256": "df09bbe30976da654d2fbeb040f2636f5099f78c39aef5396c7fee3e23bd6b2d",
+      "dp_seconds_advisory": 0.00031870899692876264,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.000299541003187187,
+          "dp_work_bytes_estimate": 2255,
+          "dfs_work_bytes": 2324
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00017366599786328152,
+          "dp_work_bytes_estimate": 2250,
+          "dfs_work_bytes": 2321
+        }
+      ]
+    },
+    {
+      "name": "merge_stress_productive_cycle",
+      "horizon": 1,
+      "observer": "aggregate",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/merge_stress_productive_cycle.h1.aggregate.json",
+      "evidence_sha256": "c07158163aea8023f733b89dd13a8b81060bbf96dd5ac9fef72f6655eae92a01",
+      "dp_seconds_advisory": 0.00028170800214866176,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0002507090030121617,
+          "dp_work_bytes_estimate": 1905,
+          "dfs_work_bytes": 3430
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00018362500122748315,
+          "dp_work_bytes_estimate": 1902,
+          "dfs_work_bytes": 3422
+        }
+      ]
+    },
+    {
+      "name": "merge_stress_productive_cycle",
+      "horizon": 1,
+      "observer": "trace",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/merge_stress_productive_cycle.h1.trace.json",
+      "evidence_sha256": "6273e316fddadd7c1cbf680188cd08b9f7fb28398428f7aac3fe13bb775f730b",
+      "dp_seconds_advisory": 0.0002830829980666749,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001998329971684143,
+          "dp_work_bytes_estimate": 2221,
+          "dfs_work_bytes": 4004
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00023545900330645964,
+          "dp_work_bytes_estimate": 2218,
+          "dfs_work_bytes": 3996
+        }
+      ]
+    },
+    {
+      "name": "merge_stress_productive_cycle",
+      "horizon": 2,
+      "observer": "aggregate",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/merge_stress_productive_cycle.h2.aggregate.json",
+      "evidence_sha256": "080b9af6aeeddb17288ed93b3ed70a3031d81db09af349354910f4909a39ca5a",
+      "dp_seconds_advisory": 0.0003065830023842864,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 5,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00043708399607567117,
+          "dp_work_bytes_estimate": 3181,
+          "dfs_work_bytes": 10520
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 5,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00042791700252564624,
+          "dp_work_bytes_estimate": 3174,
+          "dfs_work_bytes": 10504
+        }
+      ]
+    },
+    {
+      "name": "merge_stress_productive_cycle",
+      "horizon": 2,
+      "observer": "trace",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/merge_stress_productive_cycle.h2.trace.json",
+      "evidence_sha256": "f3c8ceac03a1e167b2bbe8ee6c2d633845c63f9b362b09c0908ea724ed20d45f",
+      "dp_seconds_advisory": 0.00035200000274926424,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 5,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0005545419990085065,
+          "dp_work_bytes_estimate": 5209,
+          "dfs_work_bytes": 14064
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 5,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0005437080035335384,
+          "dp_work_bytes_estimate": 5202,
+          "dfs_work_bytes": 14048
+        }
+      ]
+    },
+    {
+      "name": "merge_stress_productive_cycle",
+      "horizon": 4,
+      "observer": "aggregate",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/merge_stress_productive_cycle.h4.aggregate.json",
+      "evidence_sha256": "48a88441e39b7e48bdf8cef83e309b7343422df61c2770d4e91e820b3211c54a",
+      "dp_seconds_advisory": 0.00039158299478003755,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 9,
+          "dp_transitions": 14,
+          "dfs_leaf_paths": 16,
+          "dfs_transitions": 30,
+          "dfs_seconds_advisory": 0.002322833002835978,
+          "dp_work_bytes_estimate": 5733,
+          "dfs_work_bytes": 69668
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 9,
+          "dp_transitions": 14,
+          "dfs_leaf_paths": 16,
+          "dfs_transitions": 30,
+          "dfs_seconds_advisory": 0.002428208004857879,
+          "dp_work_bytes_estimate": 5718,
+          "dfs_work_bytes": 69604
+        }
+      ]
+    },
+    {
+      "name": "merge_stress_productive_cycle",
+      "horizon": 4,
+      "observer": "trace",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/merge_stress_productive_cycle.h4.trace.json",
+      "evidence_sha256": "b6bc7bb3061a756cca705e20a4402b0ad40f5c3d3673e9a03e6b5844ba3eab0a",
+      "dp_seconds_advisory": 0.0015054999967105687,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 9,
+          "dp_transitions": 14,
+          "dfs_leaf_paths": 16,
+          "dfs_transitions": 30,
+          "dfs_seconds_advisory": 0.003428292002354283,
+          "dp_work_bytes_estimate": 13249,
+          "dfs_work_bytes": 106032
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 9,
+          "dp_transitions": 14,
+          "dfs_leaf_paths": 16,
+          "dfs_transitions": 30,
+          "dfs_seconds_advisory": 0.0034625420012162067,
+          "dp_work_bytes_estimate": 13234,
+          "dfs_work_bytes": 105968
+        }
+      ]
+    },
+    {
+      "name": "merge_stress_productive_cycle",
+      "horizon": 8,
+      "observer": "aggregate",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/merge_stress_productive_cycle.h8.aggregate.json",
+      "evidence_sha256": "0f49cf512650fae699eaf6a98ee7b491c20f886f7cd1bb9be4bde30157d0af33",
+      "dp_seconds_advisory": 0.0005513330033863895,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 17,
+          "dp_transitions": 30,
+          "dfs_leaf_paths": 256,
+          "dfs_transitions": 510,
+          "dfs_seconds_advisory": 0.06114208299550228,
+          "dp_work_bytes_estimate": 10853,
+          "dfs_work_bytes": 1970244
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 17,
+          "dp_transitions": 30,
+          "dfs_leaf_paths": 256,
+          "dfs_transitions": 510,
+          "dfs_seconds_advisory": 0.061230207997141406,
+          "dp_work_bytes_estimate": 10822,
+          "dfs_work_bytes": 1969220
+        }
+      ]
+    },
+    {
+      "name": "merge_stress_productive_cycle",
+      "horizon": 8,
+      "observer": "trace",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/merge_stress_productive_cycle.h8.trace.json",
+      "evidence_sha256": "00062dcc2d4880aa6f0b51758796282ff65ad7ea9b89777855dc664075985d81",
+      "dp_seconds_advisory": 0.000909166999917943,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 17,
+          "dp_transitions": 30,
+          "dfs_leaf_paths": 256,
+          "dfs_transitions": 510,
+          "dfs_seconds_advisory": 0.10296095899684587,
+          "dp_work_bytes_estimate": 37601,
+          "dfs_work_bytes": 3311008
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 17,
+          "dp_transitions": 30,
+          "dfs_leaf_paths": 256,
+          "dfs_transitions": 510,
+          "dfs_seconds_advisory": 0.10254154200083576,
+          "dp_work_bytes_estimate": 37570,
+          "dfs_work_bytes": 3309984
+        }
+      ]
+    },
+    {
+      "name": "merge_stress_productive_cycle",
+      "horizon": 12,
+      "observer": "aggregate",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/merge_stress_productive_cycle.h12.aggregate.json",
+      "evidence_sha256": "2de1c48fa336b639442973cbf1787d8fe85aedf11d3f164e12cc1f44af15655f",
+      "dp_seconds_advisory": 0.0007572499962407164,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 25,
+          "dp_transitions": 46,
+          "dfs_leaf_paths": 4096,
+          "dfs_transitions": 8190,
+          "dfs_seconds_advisory": 1.3778552500007208,
+          "dp_work_bytes_estimate": 16027,
+          "dfs_work_bytes": 45223236
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 25,
+          "dp_transitions": 46,
+          "dfs_leaf_paths": 4096,
+          "dfs_transitions": 8190,
+          "dfs_seconds_advisory": 1.3839187499979744,
+          "dp_work_bytes_estimate": 15980,
+          "dfs_work_bytes": 45206852
+        }
+      ]
+    },
+    {
+      "name": "merge_stress_productive_cycle",
+      "horizon": 12,
+      "observer": "trace",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/merge_stress_productive_cycle.h12.trace.json",
+      "evidence_sha256": "af4dbaaed8e7c9b98d9151c88691edc14d085ae41f4114fdccdfaf514eead85e",
+      "dp_seconds_advisory": 0.0012552910047816113,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 25,
+          "dp_transitions": 46,
+          "dfs_leaf_paths": 4096,
+          "dfs_transitions": 8190,
+          "dfs_seconds_advisory": 2.407924874998571,
+          "dp_work_bytes_estimate": 73009,
+          "dfs_work_bytes": 78942112
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 25,
+          "dp_transitions": 46,
+          "dfs_leaf_paths": 4096,
+          "dfs_transitions": 8190,
+          "dfs_seconds_advisory": 2.404766750005365,
+          "dp_work_bytes_estimate": 72962,
+          "dfs_work_bytes": 78925728
+        }
+      ]
+    },
+    {
+      "name": "canonical_alias_chain",
+      "horizon": 1,
+      "observer": "aggregate",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/canonical_alias_chain.h1.aggregate.json",
+      "evidence_sha256": "c67eb636685a88602e86175c50b01395bd1354490feec4335d8bafbccc4a8a4f",
+      "dp_seconds_advisory": 0.00035354200372239575,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.0001966659983736463,
+          "dp_work_bytes_estimate": 1908,
+          "dfs_work_bytes": 2006
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00022295799863059074,
+          "dp_work_bytes_estimate": 1903,
+          "dfs_work_bytes": 1999
+        }
+      ]
+    },
+    {
+      "name": "canonical_alias_chain",
+      "horizon": 1,
+      "observer": "trace",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/canonical_alias_chain.h1.trace.json",
+      "evidence_sha256": "fb357e5dbd8e87bbfdefc34de405849cc55d36a3e7635e7bdf504993a91afd9b",
+      "dp_seconds_advisory": 0.0003398340049898252,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00017958300304599106,
+          "dp_work_bytes_estimate": 2224,
+          "dfs_work_bytes": 2282
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 3,
+          "dp_transitions": 2,
+          "dfs_leaf_paths": 2,
+          "dfs_transitions": 2,
+          "dfs_seconds_advisory": 0.00016783300088718534,
+          "dp_work_bytes_estimate": 2219,
+          "dfs_work_bytes": 2275
+        }
+      ]
+    },
+    {
+      "name": "canonical_alias_chain",
+      "horizon": 2,
+      "observer": "aggregate",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/canonical_alias_chain.h2.aggregate.json",
+      "evidence_sha256": "c9f5cf07ba99489645ff4d9c5a526247964a2fb84fc98746aafae69f153f66ee",
+      "dp_seconds_advisory": 0.0004703330050688237,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00030283399973995984,
+          "dp_work_bytes_estimate": 4184,
+          "dfs_work_bytes": 5814
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0003406670002732426,
+          "dp_work_bytes_estimate": 4171,
+          "dfs_work_bytes": 5799
+        }
+      ]
+    },
+    {
+      "name": "canonical_alias_chain",
+      "horizon": 2,
+      "observer": "trace",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/canonical_alias_chain.h2.trace.json",
+      "evidence_sha256": "7fc9bae79b686498b39022673d1b149bf37f89fc5936d72711283c59e0688d93",
+      "dp_seconds_advisory": 0.0004707080006483011,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0003848749984172173,
+          "dp_work_bytes_estimate": 6526,
+          "dfs_work_bytes": 7864
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0004563750044326298,
+          "dp_work_bytes_estimate": 6513,
+          "dfs_work_bytes": 7849
+        }
+      ]
+    },
+    {
+      "name": "canonical_alias_chain",
+      "horizon": 3,
+      "observer": "aggregate",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/canonical_alias_chain.h3.aggregate.json",
+      "evidence_sha256": "0a3f4671bb799530dc151b31be0a2204af48fd6746c58e01107d128715d25028",
+      "dp_seconds_advisory": 0.00041079200309468433,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00033929200435522944,
+          "dp_work_bytes_estimate": 4184,
+          "dfs_work_bytes": 5814
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0003018750066985376,
+          "dp_work_bytes_estimate": 4171,
+          "dfs_work_bytes": 5799
+        }
+      ]
+    },
+    {
+      "name": "canonical_alias_chain",
+      "horizon": 3,
+      "observer": "trace",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/canonical_alias_chain.h3.trace.json",
+      "evidence_sha256": "2ebdd534a5228179164143e6d0c8670d47ce5874966ab05926980ad95dbb8e86",
+      "dp_seconds_advisory": 0.0004603340057656169,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0004056670004501939,
+          "dp_work_bytes_estimate": 6526,
+          "dfs_work_bytes": 7864
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0003580000047804788,
+          "dp_work_bytes_estimate": 6513,
+          "dfs_work_bytes": 7849
+        }
+      ]
+    },
+    {
+      "name": "canonical_alias_chain",
+      "horizon": 4,
+      "observer": "aggregate",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/canonical_alias_chain.h4.aggregate.json",
+      "evidence_sha256": "4438d5ef583dfc845adb4b96b00be69678bae2261b85a1f55c9a077341f2a8d8",
+      "dp_seconds_advisory": 0.0004505830002017319,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00030695900204591453,
+          "dp_work_bytes_estimate": 4184,
+          "dfs_work_bytes": 5814
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00033974999678321183,
+          "dp_work_bytes_estimate": 4171,
+          "dfs_work_bytes": 5799
+        }
+      ]
+    },
+    {
+      "name": "canonical_alias_chain",
+      "horizon": 4,
+      "observer": "trace",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/canonical_alias_chain.h4.trace.json",
+      "evidence_sha256": "40fd3ca833fc592974931ba2df0e5e0b06d44266c5247471bc2ab0e70753ed7c",
+      "dp_seconds_advisory": 0.0004602090048138052,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00036220800393493846,
+          "dp_work_bytes_estimate": 6526,
+          "dfs_work_bytes": 7864
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00040304200229002163,
+          "dp_work_bytes_estimate": 6513,
+          "dfs_work_bytes": 7849
+        }
+      ]
+    },
+    {
+      "name": "canonical_alias_chain",
+      "horizon": 5,
+      "observer": "aggregate",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/canonical_alias_chain.h5.aggregate.json",
+      "evidence_sha256": "bbbdcc869d7ae74985a116dd7d5700f8604f920b7938deaa2a5d69ffe0dc1d31",
+      "dp_seconds_advisory": 0.0004128749933443032,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0003108329983660951,
+          "dp_work_bytes_estimate": 4184,
+          "dfs_work_bytes": 5814
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0003448749994277023,
+          "dp_work_bytes_estimate": 4171,
+          "dfs_work_bytes": 5799
+        }
+      ]
+    },
+    {
+      "name": "canonical_alias_chain",
+      "horizon": 5,
+      "observer": "trace",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/canonical_alias_chain.h5.trace.json",
+      "evidence_sha256": "8639e0907d3163db9d3300138e61c5926a4396ba0c2a78c112d4252b8481528b",
+      "dp_seconds_advisory": 0.00047341599565697834,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00041641700227046385,
+          "dp_work_bytes_estimate": 6526,
+          "dfs_work_bytes": 7864
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.000374625000404194,
+          "dp_work_bytes_estimate": 6513,
+          "dfs_work_bytes": 7849
+        }
+      ]
+    },
+    {
+      "name": "canonical_alias_chain",
+      "horizon": 6,
+      "observer": "aggregate",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/canonical_alias_chain.h6.aggregate.json",
+      "evidence_sha256": "d9e64a705a55e7c1a56ccf07254f03d81b9e0dab2cae972ecf5dae36e1f196fd",
+      "dp_seconds_advisory": 0.00046595800085924566,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00031016700086183846,
+          "dp_work_bytes_estimate": 4184,
+          "dfs_work_bytes": 5814
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0003527919980115257,
+          "dp_work_bytes_estimate": 4171,
+          "dfs_work_bytes": 5799
+        }
+      ]
+    },
+    {
+      "name": "canonical_alias_chain",
+      "horizon": 6,
+      "observer": "trace",
+      "structural_status": "accepted",
+      "total_variation": "0",
+      "mean_usage_vectors_equal": true,
+      "bayes_vulnerability": "1/2",
+      "mutual_information_bits_approx": 0.0,
+      "evidence": "bench/results/probabilistic_channels/canonical_alias_chain.h6.trace.json",
+      "evidence_sha256": "b843a9881d57323f8e9ae711a0ddc1c0694e0b7e7cd4e7e59620c54dc6fe3f71",
+      "dp_seconds_advisory": 0.0004640000042854808,
+      "comparisons": [
+        {
+          "scenario_index": 0,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.0003655420005088672,
+          "dp_work_bytes_estimate": 6526,
+          "dfs_work_bytes": 7864
+        },
+        {
+          "scenario_index": 1,
+          "histogram_equal": true,
+          "dp_state_visits": 7,
+          "dp_transitions": 6,
+          "dfs_leaf_paths": 4,
+          "dfs_transitions": 6,
+          "dfs_seconds_advisory": 0.00041466599941486493,
+          "dp_work_bytes_estimate": 6513,
+          "dfs_work_bytes": 7849
+        }
+      ]
+    }
+  ],
+  "fixtures": [
+    {
+      "name": "equivalent_dependent_chain",
+      "structural_status": "accepted",
+      "graph": "examples/channels/equivalent_dependent_chain.graph.json",
+      "kernel": "examples/channels/equivalent_dependent_chain.kernel.json",
+      "source_sha256": "d2288c35e5b47eb71b77e50bba8c067eae4dcda66269e6c3a8e4f38692c1bf9f",
+      "kernel_sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b"
+    },
+    {
+      "name": "different_requests_equal_usage",
+      "structural_status": "rejected",
+      "graph": "examples/channels/different_requests_equal_usage.graph.json",
+      "kernel": "examples/channels/different_requests_equal_usage.kernel.json",
+      "source_sha256": "6956de33d4f1798dbe5f2ec0aab6b7f74ec7a1d1d52cf0369be7cceba8b600a6",
+      "kernel_sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b"
+    },
+    {
+      "name": "noisy_usage_bit",
+      "structural_status": "rejected",
+      "graph": "examples/channels/noisy_usage_bit.graph.json",
+      "kernel": "examples/channels/noisy_usage_bit.kernel.json",
+      "source_sha256": "9e8ebdfedcdf070c906646b18abfa32ee2b516cad146160eff9be9dc51078952",
+      "kernel_sha256": "be226002f14ff3c0e7071c16a78cf7fafcd0da009ad185b98be28136e37f5175"
+    },
+    {
+      "name": "same_mean_distinct_laws",
+      "structural_status": "rejected",
+      "graph": "examples/channels/same_mean_distinct_laws.graph.json",
+      "kernel": "examples/channels/same_mean_distinct_laws.kernel.json",
+      "source_sha256": "dd162d378bac2b9a9e549e6e78f509efaa2ff8b1f5c4a9092147a257ee89ddd7",
+      "kernel_sha256": "d5c67dff48e768099560eb1bc52eebe088b5a77bad33752076480e67e97c373e"
+    },
+    {
+      "name": "aggregate_hides_order",
+      "structural_status": "rejected",
+      "graph": "examples/channels/aggregate_hides_order.graph.json",
+      "kernel": "examples/channels/aggregate_hides_order.kernel.json",
+      "source_sha256": "6698767717f8b5920c5a409ce3047b62ed68663d6564ec20a7ac19ad3feb4898",
+      "kernel_sha256": "62df7f0ad13716c524d3c2ebd48789f56fc4b51f5999cb2e439480d3015ee07e"
+    },
+    {
+      "name": "history_conditioned_usage",
+      "structural_status": "rejected",
+      "graph": "examples/channels/history_conditioned_usage.graph.json",
+      "kernel": "examples/channels/history_conditioned_usage.kernel.json",
+      "source_sha256": "6ebf39a21215c8632fef7fabf5f5bb19953886914e4c85d226e695cfa8431210",
+      "kernel_sha256": "d3214743609fb90d704d7f0fd08b52d6c7de91b4c734ff4105f89eb3931ff0ab"
+    },
+    {
+      "name": "biased_productive_cycle",
+      "structural_status": "rejected",
+      "graph": "examples/channels/biased_productive_cycle.graph.json",
+      "kernel": "examples/channels/biased_productive_cycle.kernel.json",
+      "source_sha256": "8da6a2a965021760108194c6decadbc205c975bb5a4cf2ad731374f67b610de2",
+      "kernel_sha256": "be226002f14ff3c0e7071c16a78cf7fafcd0da009ad185b98be28136e37f5175"
+    },
+    {
+      "name": "fixed_public_context",
+      "structural_status": "rejected",
+      "graph": "examples/channels/fixed_public_context.graph.json",
+      "kernel": "examples/channels/fixed_public_context.kernel.json",
+      "source_sha256": "2d64a6834c5bd91b365b550d578f844835c8d363ee404fec82e22d463a1cf9de",
+      "kernel_sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b"
+    },
+    {
+      "name": "changed_public_context",
+      "structural_status": "rejected",
+      "graph": "examples/channels/changed_public_context.graph.json",
+      "kernel": "examples/channels/changed_public_context.kernel.json",
+      "source_sha256": "c0fd454003fde2f6b12a33493fbd812fc899f69ccdc507cdf2774b8a09cee89e",
+      "kernel_sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b"
+    },
+    {
+      "name": "merge_stress_productive_cycle",
+      "structural_status": "accepted",
+      "graph": "examples/channels/merge_stress_productive_cycle.graph.json",
+      "kernel": "examples/channels/merge_stress_productive_cycle.kernel.json",
+      "source_sha256": "d1bafe2732f0ca44b0a54c865936dd0cad2b05af157df0ce2484f0d290a05b82",
+      "kernel_sha256": "3d9b0a039d26d43c76299956ea93c0ced3e065499d345a11ced349a7f6382f4a"
+    },
+    {
+      "name": "canonical_alias_chain",
+      "structural_status": "accepted",
+      "graph": "examples/channels/canonical_alias_chain.graph.json",
+      "kernel": "examples/channels/canonical_alias_chain.kernel.json",
+      "source_sha256": "44fd0d5cfcc94d14dceef393bb27f843c4ebb5dec5e1feeb62913e8607f7ae22",
+      "kernel_sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b"
+    }
+  ],
+  "failures": [],
+  "summary": {
+    "fixtures": 11,
+    "accepted_structurally": 3,
+    "rejected_structurally": 8,
+    "channel_analyses": 130,
+    "histogram_comparisons": 260,
+    "exact_unit_mass_rows": 260,
+    "different_histograms": 0,
+    "aggregate_zero_channels": 35,
+    "trace_zero_channels": 30,
+    "mean_equal_but_positive_tv_analyses": 17,
+    "unknown_resource_probes": 11,
+    "dp_call_transitions": 1132,
+    "dfs_call_transitions": 35692,
+    "dfs_leaf_paths": 18056
+  },
+  "status": "passed"
+}

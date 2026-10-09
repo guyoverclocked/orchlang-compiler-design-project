@@ -1,0 +1,13 @@
+c++ -Iinclude -std=c++17 -Wall -Wextra -pedantic -O2 -MMD -MP -c src/diagnostic.cpp -o build/diagnostic.o
+c++ -Iinclude -std=c++17 -Wall -Wextra -pedantic -O2 -MMD -MP -c src/ast.cpp -o build/ast.o
+c++ -Iinclude -std=c++17 -Wall -Wextra -pedantic -O2 -MMD -MP -c src/lexer.cpp -o build/lexer.o
+c++ -Iinclude -std=c++17 -Wall -Wextra -pedantic -O2 -MMD -MP -c src/parser.cpp -o build/parser.o
+c++ -Iinclude -std=c++17 -Wall -Wextra -pedantic -O2 -MMD -MP -c src/symbol_table.cpp -o build/symbol_table.o
+c++ -Iinclude -std=c++17 -Wall -Wextra -pedantic -O2 -MMD -MP -c src/semantic_analyzer.cpp -o build/semantic_analyzer.o
+c++ -Iinclude -std=c++17 -Wall -Wextra -pedantic -O2 -MMD -MP -c src/cost_analyzer.cpp -o build/cost_analyzer.o
+c++ -Iinclude -std=c++17 -Wall -Wextra -pedantic -O2 -MMD -MP -c src/ir.cpp -o build/ir.o
+c++ -Iinclude -std=c++17 -Wall -Wextra -pedantic -O2 -MMD -MP -c src/certificate.cpp -o build/certificate.o
+c++ -Iinclude -std=c++17 -Wall -Wextra -pedantic -O2 -MMD -MP -c src/relational.cpp -o build/relational.o
+c++ -Iinclude -std=c++17 -Wall -Wextra -pedantic -O2 -MMD -MP -c src/interpreter.cpp -o build/interpreter.o
+c++ -Iinclude -std=c++17 -Wall -Wextra -pedantic -O2 -MMD -MP -c src/main.cpp -o build/main.o
+c++ -std=c++17 -Wall -Wextra -pedantic -O2 build/diagnostic.o build/ast.o build/lexer.o build/parser.o build/symbol_table.o build/semantic_analyzer.o build/cost_analyzer.o build/ir.o build/certificate.o build/relational.o build/interpreter.o build/main.o -o orchc

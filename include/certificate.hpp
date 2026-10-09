@@ -20,7 +20,8 @@ namespace orchlang {
 
 std::string printCertificate(const Program& program, const SemanticResult& semantic,
                              const CostResult& cost, const ProgramIR& ir,
-                             const RelationalResult& relational);
+                             const RelationalResult& relational,
+                             const std::string& sourceBytes = {});
 
 // A short human-readable summary of the same facts, for the terminal.
 std::string printCertificateSummary(const CostResult& cost, const SemanticResult& semantic);

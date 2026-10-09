@@ -1,0 +1,44 @@
+{
+  "all_finite_horizons_claim": true,
+  "claim_scope": "this attests only the supplied source-bound finite rational model, fixed stores, and declared success-only ordered-usage observer; it is not a general algorithm theorem proof or a real-provider claim",
+  "decision": "proved_equal",
+  "diagnostic": null,
+  "format": "orchlang-exact-trace-equivalence-replay-attestation",
+  "graph_sha256": "2d64a6834c5bd91b365b550d578f844835c8d363ee404fec82e22d463a1cf9de",
+  "independent_matrix_entries": 182,
+  "independent_work_bytes": 22272,
+  "kernel_sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b",
+  "pair_count": 1,
+  "public_store_sha256": "52073a5a89f06ed6679dd921f822244d775cd35b3f02d8320fde953a99cdcae3",
+  "report_sha256": "bc6a91c5f5e6d4a38f6238fd486b18a91707bf58d63633e973b49e6ef625e7bd",
+  "scenario_count": 2,
+  "secret_scenarios_sha256": "c746a0cd8c632a82c9994be1df942b4258d3968e3d63189dd6b0f9cfe75945a0",
+  "state_count": 6,
+  "status": "verified",
+  "transition_count": 4,
+  "unverified_fields": [
+    "hashes.checker_sha256 and hashes.closure_producer_sha256 (digest syntax checked only; executable identity is not established)",
+    "producer-side resource consumption; the verifier measures its own deterministic budget"
+  ],
+  "verification_method": "independent bounded finite semantic-closure reconstruction and verifier-owned exact rational weighted-automaton span or witness checks",
+  "verified_pairs": [
+    {
+      "basis_size": 3,
+      "checked_action_closures": 6,
+      "left_scenario": 1,
+      "max_word_length": 1,
+      "rank": 3,
+      "right_scenario": 0,
+      "status": "equal"
+    }
+  ],
+  "verifier_limits": {
+    "max_control_steps": 1000000,
+    "max_matrix_entries": 10000000,
+    "max_rational_bits": 8192,
+    "max_states": 10000,
+    "max_transitions": 1000000,
+    "max_work_bytes": 67108864
+  },
+  "version": 1
+}

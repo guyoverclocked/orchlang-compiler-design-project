@@ -1,0 +1,17 @@
+{
+  "all_finite_horizons_claim": false,
+  "claim_scope": "this attests only the supplied source-bound finite rational model, fixed stores, and declared success-only ordered-usage observer; it is not a general algorithm theorem proof or a real-provider claim",
+  "decision": null,
+  "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
+  "format": "orchlang-exact-trace-equivalence-replay-attestation",
+  "graph_sha256": "6ebf39a21215c8632fef7fabf5f5bb19953886914e4c85d226e695cfa8431210",
+  "kernel_sha256": "d3214743609fb90d704d7f0fd08b52d6c7de91b4c734ff4105f89eb3931ff0ab",
+  "report_sha256": "7b22bbb238942d655e8e2f1c28354d75e7057bad1e9a3cb41efe22641ad0fad8",
+  "status": "unknown",
+  "unverified_fields": [
+    "hashes.checker_sha256 and hashes.closure_producer_sha256 (digest syntax checked only; executable identity is not established)",
+    "producer-side resource consumption; the verifier measures its own deterministic budget"
+  ],
+  "verification_method": "independent bounded finite semantic-closure reconstruction and verifier-owned exact rational weighted-automaton span or witness checks",
+  "version": 1
+}

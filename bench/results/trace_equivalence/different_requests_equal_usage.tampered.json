@@ -1,0 +1,385 @@
+{
+  "claim": "exact all-finite-horizon success-only ordered usage-trace laws for every supplied secret scenario under the declared finite rational kernel",
+  "closed_system": {
+    "initial_state_ids": [
+      "S000001",
+      "S000000"
+    ],
+    "state_count": 6,
+    "states": [
+      {
+        "history": [],
+        "id": "S000000",
+        "kind": "call",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 0
+          }
+        ],
+        "pc": [
+          "left",
+          0
+        ],
+        "values": {
+          "secret": true
+        }
+      },
+      {
+        "history": [],
+        "id": "S000001",
+        "kind": "call",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 0
+          }
+        ],
+        "pc": [
+          "right",
+          0
+        ],
+        "values": {
+          "secret": false
+        }
+      },
+      {
+        "history": [],
+        "id": "S000002",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "left",
+          1
+        ],
+        "values": {
+          "r": "x",
+          "secret": true
+        }
+      },
+      {
+        "history": [],
+        "id": "S000003",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "left",
+          1
+        ],
+        "values": {
+          "r": "xx",
+          "secret": true
+        }
+      },
+      {
+        "history": [],
+        "id": "S000004",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "right",
+          1
+        ],
+        "values": {
+          "r": "x",
+          "secret": false
+        }
+      },
+      {
+        "history": [],
+        "id": "S000005",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "right",
+          1
+        ],
+        "values": {
+          "r": "xx",
+          "secret": false
+        }
+      }
+    ],
+    "transition_count": 4,
+    "transitions": [
+      {
+        "from": "S000000",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 1
+        },
+        "probability": "1/2",
+        "to": "S000002"
+      },
+      {
+        "from": "S000000",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 2
+        },
+        "probability": "1/2",
+        "to": "S000003"
+      },
+      {
+        "from": "S000001",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 1
+        },
+        "probability": "1/2",
+        "to": "S000004"
+      },
+      {
+        "from": "S000001",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 2
+        },
+        "probability": "1/2",
+        "to": "S000005"
+      }
+    ]
+  },
+  "format": "orchlang-exact-trace-equivalence",
+  "hashes": {
+    "checker_sha256": "a9b7aa176b5081ab12a9cff31343b2509de4105daa1c7d87b386765581146ade",
+    "closure_producer_sha256": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+    "graph_sha256": "6956de33d4f1798dbe5f2ec0aab6b7f74ec7a1d1d52cf0369be7cceba8b600a6",
+    "kernel_sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b",
+    "public_store_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "secret_scenarios_sha256": "c746a0cd8c632a82c9994be1df942b4258d3968e3d63189dd6b0f9cfe75945a0"
+  },
+  "inputs": {
+    "public_store": {},
+    "secret_scenarios": [
+      {
+        "secret": false
+      },
+      {
+        "secret": true
+      }
+    ]
+  },
+  "label_alphabet": [
+    {
+      "contract": {
+        "has_unit_price": false,
+        "max_tokens": 8,
+        "model": "finite-worker",
+        "provider": "offline",
+        "unit_price": 0.0
+      },
+      "input_tokens": 1,
+      "output_tokens": 1
+    },
+    {
+      "contract": {
+        "has_unit_price": false,
+        "max_tokens": 8,
+        "model": "finite-worker",
+        "provider": "offline",
+        "unit_price": 0.0
+      },
+      "input_tokens": 1,
+      "output_tokens": 2
+    }
+  ],
+  "limits": {
+    "max_matrix_entries": 10000000,
+    "max_rational_bits": 8192,
+    "max_states": 10000,
+    "max_work_bytes": 67108864
+  },
+  "result": {
+    "basis_state_order": [
+      "S000000",
+      "S000001",
+      "S000002",
+      "S000003",
+      "S000004",
+      "S000005"
+    ],
+    "pairs": [
+      {
+        "basis": [
+          {
+            "nonterminal_dot": "0",
+            "row": [
+              "0",
+              "-1",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "stop_dot": "0",
+            "word": []
+          },
+          {
+            "nonterminal_dot": "0",
+            "row": [
+              "0",
+              "0",
+              "1/2",
+              "0",
+              "-1/2",
+              "0"
+            ],
+            "stop_dot": "0",
+            "word": [
+              {
+                "contract": {
+                  "has_unit_price": false,
+                  "max_tokens": 8,
+                  "model": "finite-worker",
+                  "provider": "offline",
+                  "unit_price": 0.0
+                },
+                "input_tokens": 1,
+                "output_tokens": 1
+              }
+            ]
+          },
+          {
+            "nonterminal_dot": "0",
+            "row": [
+              "0",
+              "0",
+              "0",
+              "1/2",
+              "0",
+              "-1/2"
+            ],
+            "stop_dot": "0",
+            "word": [
+              {
+                "contract": {
+                  "has_unit_price": false,
+                  "max_tokens": 8,
+                  "model": "finite-worker",
+                  "provider": "offline",
+                  "unit_price": 0.0
+                },
+                "input_tokens": 1,
+                "output_tokens": 2
+              }
+            ]
+          }
+        ],
+        "closed_under_label_matrices": true,
+        "initial_difference_in_span": true,
+        "left_scenario": 1,
+        "left_state_id": "S000000",
+        "max_word_length": 1,
+        "nonterminal_outputs_zero": true,
+        "rank": 3,
+        "right_scenario": 0,
+        "right_state_id": "S000001",
+        "status": "equal",
+        "stop_outputs_zero": true
+      }
+    ]
+  },
+  "scope": {
+    "comparison": "one fixed public store and all explicitly supplied distinct secret assignments",
+    "excluded": [
+      "provider behavior/probability validity",
+      "errors/retries",
+      "currency/cumulative budgets",
+      "termination probability/infinite-run laws"
+    ],
+    "observer": "ordered call labels are normalized resolved contract plus integer input and output usage; each finite word is observed with separate stopped and nonterminal mass",
+    "oracle": "declared finite rational conditional kernel; exact modeled request, saturated contract ordinal, and retained complete-event history determine outcomes",
+    "semantics": "successful model outcomes only; responses update their result register and complete event history; stop states emit no further calls"
+  },
+  "status": "proved_equal",
+  "version": 1
+}

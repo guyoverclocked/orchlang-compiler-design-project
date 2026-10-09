@@ -39,14 +39,21 @@ void addDependency(std::vector<int>& dependencies, int identifier) {
 
 std::string jsonEscape(const std::string& text) {
     std::ostringstream out;
-    for (const char character : text) {
+    const char hex[] = "0123456789abcdef";
+    for (const unsigned char character : text) {
         switch (character) {
             case '\\': out << "\\\\"; break;
             case '"': out << "\\\""; break;
             case '\n': out << "\\n"; break;
             case '\r': out << "\\r"; break;
             case '\t': out << "\\t"; break;
-            default: out << character; break;
+            default:
+                if (character < 0x20) {
+                    out << "\\u00" << hex[(character >> 4) & 0xf] << hex[character & 0xf];
+                } else {
+                    out << static_cast<char>(character);
+                }
+                break;
         }
     }
     return out.str();

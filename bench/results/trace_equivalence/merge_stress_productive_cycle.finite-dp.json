@@ -1,0 +1,872 @@
+{
+  "checks": [
+    {
+      "equal_exact_histograms": true,
+      "horizon": 1,
+      "observer": "aggregate",
+      "scenario_count": 2,
+      "scenario_histogram_sha256": [
+        "a98235549d2284737302ec059b5dd6769ccc95c7ff2a48a8d10410c4f8bc0a7d",
+        "a98235549d2284737302ec059b5dd6769ccc95c7ff2a48a8d10410c4f8bc0a7d"
+      ]
+    },
+    {
+      "equal_exact_histograms": true,
+      "horizon": 1,
+      "observer": "trace",
+      "scenario_count": 2,
+      "scenario_histogram_sha256": [
+        "fb39edcb81e59f6245b0bb742edd8212c3534793646baa255c85c5ecc7142ad7",
+        "fb39edcb81e59f6245b0bb742edd8212c3534793646baa255c85c5ecc7142ad7"
+      ]
+    },
+    {
+      "equal_exact_histograms": true,
+      "horizon": 2,
+      "observer": "aggregate",
+      "scenario_count": 2,
+      "scenario_histogram_sha256": [
+        "3ac2f294ae92e75cce83bc6bb10d88be88927bfd30fedd1dee3edb57081378a3",
+        "3ac2f294ae92e75cce83bc6bb10d88be88927bfd30fedd1dee3edb57081378a3"
+      ]
+    },
+    {
+      "equal_exact_histograms": true,
+      "horizon": 2,
+      "observer": "trace",
+      "scenario_count": 2,
+      "scenario_histogram_sha256": [
+        "59e81d7a7a780700d1953787acc8a7d2d82dea753af9a41e40c5683e0ed11f51",
+        "59e81d7a7a780700d1953787acc8a7d2d82dea753af9a41e40c5683e0ed11f51"
+      ]
+    },
+    {
+      "equal_exact_histograms": true,
+      "horizon": 4,
+      "observer": "aggregate",
+      "scenario_count": 2,
+      "scenario_histogram_sha256": [
+        "95fa478709b6220d12483762297c27756618c79f4e9423ee4c8a7f628c5e8bfc",
+        "95fa478709b6220d12483762297c27756618c79f4e9423ee4c8a7f628c5e8bfc"
+      ]
+    },
+    {
+      "equal_exact_histograms": true,
+      "horizon": 4,
+      "observer": "trace",
+      "scenario_count": 2,
+      "scenario_histogram_sha256": [
+        "793b75bb08ac8262ea017a248ed55b0c44f3d0dfe04a2435b034f2090d36ed83",
+        "793b75bb08ac8262ea017a248ed55b0c44f3d0dfe04a2435b034f2090d36ed83"
+      ]
+    },
+    {
+      "equal_exact_histograms": true,
+      "horizon": 8,
+      "observer": "aggregate",
+      "scenario_count": 2,
+      "scenario_histogram_sha256": [
+        "3138a946ea87ee31beef92e3c24630be8fead3226421b04969675df9a31ee2fb",
+        "3138a946ea87ee31beef92e3c24630be8fead3226421b04969675df9a31ee2fb"
+      ]
+    },
+    {
+      "equal_exact_histograms": true,
+      "horizon": 8,
+      "observer": "trace",
+      "scenario_count": 2,
+      "scenario_histogram_sha256": [
+        "ade79bc7a8a7bbfd5e7bad0c20e27fd93be7913077168a69d05b77d647d3adfa",
+        "ade79bc7a8a7bbfd5e7bad0c20e27fd93be7913077168a69d05b77d647d3adfa"
+      ]
+    }
+  ],
+  "distributions": {
+    "H1.aggregate": {
+      "horizon": 1,
+      "observer": "aggregate",
+      "scenario_histograms": [
+        {
+          "call_transitions": 2,
+          "entries": [
+            {
+              "observation": {
+                "billing": [
+                  {
+                    "call_count": 1,
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  }
+                ],
+                "stopped": false
+              },
+              "probability": "1"
+            }
+          ],
+          "histogram_sha256": "a98235549d2284737302ec059b5dd6769ccc95c7ff2a48a8d10410c4f8bc0a7d",
+          "mass": "1",
+          "scenario_index": 0,
+          "state_visits": 3,
+          "support_size": 1,
+          "work_bytes_estimate": 1905
+        },
+        {
+          "call_transitions": 2,
+          "entries": [
+            {
+              "observation": {
+                "billing": [
+                  {
+                    "call_count": 1,
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  }
+                ],
+                "stopped": false
+              },
+              "probability": "1"
+            }
+          ],
+          "histogram_sha256": "a98235549d2284737302ec059b5dd6769ccc95c7ff2a48a8d10410c4f8bc0a7d",
+          "mass": "1",
+          "scenario_index": 1,
+          "state_visits": 3,
+          "support_size": 1,
+          "work_bytes_estimate": 1902
+        }
+      ]
+    },
+    "H1.trace": {
+      "horizon": 1,
+      "observer": "trace",
+      "scenario_histograms": [
+        {
+          "call_transitions": 2,
+          "entries": [
+            {
+              "observation": {
+                "stopped": false,
+                "usage_trace": [
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  }
+                ]
+              },
+              "probability": "1"
+            }
+          ],
+          "histogram_sha256": "fb39edcb81e59f6245b0bb742edd8212c3534793646baa255c85c5ecc7142ad7",
+          "mass": "1",
+          "scenario_index": 0,
+          "state_visits": 3,
+          "support_size": 1,
+          "work_bytes_estimate": 2221
+        },
+        {
+          "call_transitions": 2,
+          "entries": [
+            {
+              "observation": {
+                "stopped": false,
+                "usage_trace": [
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  }
+                ]
+              },
+              "probability": "1"
+            }
+          ],
+          "histogram_sha256": "fb39edcb81e59f6245b0bb742edd8212c3534793646baa255c85c5ecc7142ad7",
+          "mass": "1",
+          "scenario_index": 1,
+          "state_visits": 3,
+          "support_size": 1,
+          "work_bytes_estimate": 2218
+        }
+      ]
+    },
+    "H2.aggregate": {
+      "horizon": 2,
+      "observer": "aggregate",
+      "scenario_histograms": [
+        {
+          "call_transitions": 6,
+          "entries": [
+            {
+              "observation": {
+                "billing": [
+                  {
+                    "call_count": 2,
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 2,
+                    "output_tokens": 2
+                  }
+                ],
+                "stopped": false
+              },
+              "probability": "1"
+            }
+          ],
+          "histogram_sha256": "3ac2f294ae92e75cce83bc6bb10d88be88927bfd30fedd1dee3edb57081378a3",
+          "mass": "1",
+          "scenario_index": 0,
+          "state_visits": 5,
+          "support_size": 1,
+          "work_bytes_estimate": 3181
+        },
+        {
+          "call_transitions": 6,
+          "entries": [
+            {
+              "observation": {
+                "billing": [
+                  {
+                    "call_count": 2,
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 2,
+                    "output_tokens": 2
+                  }
+                ],
+                "stopped": false
+              },
+              "probability": "1"
+            }
+          ],
+          "histogram_sha256": "3ac2f294ae92e75cce83bc6bb10d88be88927bfd30fedd1dee3edb57081378a3",
+          "mass": "1",
+          "scenario_index": 1,
+          "state_visits": 5,
+          "support_size": 1,
+          "work_bytes_estimate": 3174
+        }
+      ]
+    },
+    "H2.trace": {
+      "horizon": 2,
+      "observer": "trace",
+      "scenario_histograms": [
+        {
+          "call_transitions": 6,
+          "entries": [
+            {
+              "observation": {
+                "stopped": false,
+                "usage_trace": [
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  }
+                ]
+              },
+              "probability": "1"
+            }
+          ],
+          "histogram_sha256": "59e81d7a7a780700d1953787acc8a7d2d82dea753af9a41e40c5683e0ed11f51",
+          "mass": "1",
+          "scenario_index": 0,
+          "state_visits": 5,
+          "support_size": 1,
+          "work_bytes_estimate": 5209
+        },
+        {
+          "call_transitions": 6,
+          "entries": [
+            {
+              "observation": {
+                "stopped": false,
+                "usage_trace": [
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  }
+                ]
+              },
+              "probability": "1"
+            }
+          ],
+          "histogram_sha256": "59e81d7a7a780700d1953787acc8a7d2d82dea753af9a41e40c5683e0ed11f51",
+          "mass": "1",
+          "scenario_index": 1,
+          "state_visits": 5,
+          "support_size": 1,
+          "work_bytes_estimate": 5202
+        }
+      ]
+    },
+    "H4.aggregate": {
+      "horizon": 4,
+      "observer": "aggregate",
+      "scenario_histograms": [
+        {
+          "call_transitions": 14,
+          "entries": [
+            {
+              "observation": {
+                "billing": [
+                  {
+                    "call_count": 4,
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 4,
+                    "output_tokens": 4
+                  }
+                ],
+                "stopped": false
+              },
+              "probability": "1"
+            }
+          ],
+          "histogram_sha256": "95fa478709b6220d12483762297c27756618c79f4e9423ee4c8a7f628c5e8bfc",
+          "mass": "1",
+          "scenario_index": 0,
+          "state_visits": 9,
+          "support_size": 1,
+          "work_bytes_estimate": 5733
+        },
+        {
+          "call_transitions": 14,
+          "entries": [
+            {
+              "observation": {
+                "billing": [
+                  {
+                    "call_count": 4,
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 4,
+                    "output_tokens": 4
+                  }
+                ],
+                "stopped": false
+              },
+              "probability": "1"
+            }
+          ],
+          "histogram_sha256": "95fa478709b6220d12483762297c27756618c79f4e9423ee4c8a7f628c5e8bfc",
+          "mass": "1",
+          "scenario_index": 1,
+          "state_visits": 9,
+          "support_size": 1,
+          "work_bytes_estimate": 5718
+        }
+      ]
+    },
+    "H4.trace": {
+      "horizon": 4,
+      "observer": "trace",
+      "scenario_histograms": [
+        {
+          "call_transitions": 14,
+          "entries": [
+            {
+              "observation": {
+                "stopped": false,
+                "usage_trace": [
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  }
+                ]
+              },
+              "probability": "1"
+            }
+          ],
+          "histogram_sha256": "793b75bb08ac8262ea017a248ed55b0c44f3d0dfe04a2435b034f2090d36ed83",
+          "mass": "1",
+          "scenario_index": 0,
+          "state_visits": 9,
+          "support_size": 1,
+          "work_bytes_estimate": 13249
+        },
+        {
+          "call_transitions": 14,
+          "entries": [
+            {
+              "observation": {
+                "stopped": false,
+                "usage_trace": [
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  }
+                ]
+              },
+              "probability": "1"
+            }
+          ],
+          "histogram_sha256": "793b75bb08ac8262ea017a248ed55b0c44f3d0dfe04a2435b034f2090d36ed83",
+          "mass": "1",
+          "scenario_index": 1,
+          "state_visits": 9,
+          "support_size": 1,
+          "work_bytes_estimate": 13234
+        }
+      ]
+    },
+    "H8.aggregate": {
+      "horizon": 8,
+      "observer": "aggregate",
+      "scenario_histograms": [
+        {
+          "call_transitions": 30,
+          "entries": [
+            {
+              "observation": {
+                "billing": [
+                  {
+                    "call_count": 8,
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 8,
+                    "output_tokens": 8
+                  }
+                ],
+                "stopped": false
+              },
+              "probability": "1"
+            }
+          ],
+          "histogram_sha256": "3138a946ea87ee31beef92e3c24630be8fead3226421b04969675df9a31ee2fb",
+          "mass": "1",
+          "scenario_index": 0,
+          "state_visits": 17,
+          "support_size": 1,
+          "work_bytes_estimate": 10853
+        },
+        {
+          "call_transitions": 30,
+          "entries": [
+            {
+              "observation": {
+                "billing": [
+                  {
+                    "call_count": 8,
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 8,
+                    "output_tokens": 8
+                  }
+                ],
+                "stopped": false
+              },
+              "probability": "1"
+            }
+          ],
+          "histogram_sha256": "3138a946ea87ee31beef92e3c24630be8fead3226421b04969675df9a31ee2fb",
+          "mass": "1",
+          "scenario_index": 1,
+          "state_visits": 17,
+          "support_size": 1,
+          "work_bytes_estimate": 10822
+        }
+      ]
+    },
+    "H8.trace": {
+      "horizon": 8,
+      "observer": "trace",
+      "scenario_histograms": [
+        {
+          "call_transitions": 30,
+          "entries": [
+            {
+              "observation": {
+                "stopped": false,
+                "usage_trace": [
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  }
+                ]
+              },
+              "probability": "1"
+            }
+          ],
+          "histogram_sha256": "ade79bc7a8a7bbfd5e7bad0c20e27fd93be7913077168a69d05b77d647d3adfa",
+          "mass": "1",
+          "scenario_index": 0,
+          "state_visits": 17,
+          "support_size": 1,
+          "work_bytes_estimate": 37601
+        },
+        {
+          "call_transitions": 30,
+          "entries": [
+            {
+              "observation": {
+                "stopped": false,
+                "usage_trace": [
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  },
+                  {
+                    "contract": {
+                      "has_unit_price": false,
+                      "max_tokens": 8,
+                      "model": "finite-worker",
+                      "provider": "offline",
+                      "unit_price": 0.0
+                    },
+                    "input_tokens": 1,
+                    "output_tokens": 1
+                  }
+                ]
+              },
+              "probability": "1"
+            }
+          ],
+          "histogram_sha256": "ade79bc7a8a7bbfd5e7bad0c20e27fd93be7913077168a69d05b77d647d3adfa",
+          "mass": "1",
+          "scenario_index": 1,
+          "state_visits": 17,
+          "support_size": 1,
+          "work_bytes_estimate": 37570
+        }
+      ]
+    }
+  },
+  "fixture": "merge_stress_productive_cycle",
+  "format": "orchlang-trace-equivalence-finite-dp-cross-check",
+  "scope": "finite-horizon DP corroboration at listed horizons; the exact certificate carries the all-finite-horizon claim",
+  "source_hashes": {
+    "graph_sha256": "d1bafe2732f0ca44b0a54c865936dd0cad2b05af157df0ce2484f0d290a05b82",
+    "kernel_sha256": "3d9b0a039d26d43c76299956ea93c0ced3e065499d345a11ced349a7f6382f4a"
+  },
+  "version": 1
+}

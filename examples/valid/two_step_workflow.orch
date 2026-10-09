@@ -1,7 +1,9 @@
 workflow TwoStepAnswer budget 1900 {
   input question: text max_tokens 200;
   model researcher = mock("offline-research") max_tokens 500;
-  model editor = mock("offline-editor") max_tokens 600;
+  // A result's token bound is reusable only under the same tokenizer identity.
+  // These roles share a canonical model but choose different output caps.
+  model editor = mock("offline-research") max_tokens 600;
 
   prompt extract(query: text) -> text = "Extract useful facts for: {query}";
   prompt refine(notes: text) -> text = "Turn these notes into a concise answer: {notes}";

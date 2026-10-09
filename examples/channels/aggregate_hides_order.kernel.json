@@ -1,0 +1,64 @@
+{
+  "format": "orchlang-finite-outcome-kernel",
+  "version": 1,
+  "history_window": 0,
+  "defaults": {
+    "m": [
+      {
+        "response": "x",
+        "output_tokens": 1,
+        "probability": "1"
+      }
+    ]
+  },
+  "rules": [
+    {
+      "model": "m",
+      "template": "A",
+      "outcomes": [
+        {
+          "response": "x",
+          "output_tokens": 1,
+          "probability": "1"
+        }
+      ],
+      "ordinal": 0
+    },
+    {
+      "model": "m",
+      "template": "A",
+      "outcomes": [
+        {
+          "response": "xxx",
+          "output_tokens": 3,
+          "probability": "1"
+        }
+      ],
+      "ordinal": 1
+    },
+    {
+      "model": "m",
+      "template": "B",
+      "outcomes": [
+        {
+          "response": "xxx",
+          "output_tokens": 3,
+          "probability": "1"
+        }
+      ],
+      "ordinal": 0
+    },
+    {
+      "model": "m",
+      "template": "B",
+      "outcomes": [
+        {
+          "response": "x",
+          "output_tokens": 1,
+          "probability": "1"
+        }
+      ],
+      "ordinal": 1
+    }
+  ]
+}

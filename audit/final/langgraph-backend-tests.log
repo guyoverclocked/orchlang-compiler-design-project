@@ -1,0 +1,18 @@
+test_all_six_authored_accepted_graphs_match_reference (integrations.langgraph.test_backend.LangGraphBackendTests.test_all_six_authored_accepted_graphs_match_reference) ... /Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/langgraph/.venv/lib/python3.14/site-packages/langsmith/_internal/_beta_decorator.py:70: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+  if asyncio.iscoroutinefunction(func):
+ok
+test_bad_certificate_and_stale_relation_never_build_stategraph (integrations.langgraph.test_backend.LangGraphBackendTests.test_bad_certificate_and_stale_relation_never_build_stategraph) ... ok
+test_call_horizon_checks_control_after_last_allowed_call (integrations.langgraph.test_backend.LangGraphBackendTests.test_call_horizon_checks_control_after_last_allowed_call) ... ok
+test_graph_control_limit_fails_closed (integrations.langgraph.test_backend.LangGraphBackendTests.test_graph_control_limit_fails_closed) ... ok
+test_input_validation_precedes_stategraph_construction (integrations.langgraph.test_backend.LangGraphBackendTests.test_input_validation_precedes_stategraph_construction) ... ok
+test_mutating_a_normalized_read_view_cannot_change_verified_execution (integrations.langgraph.test_backend.LangGraphBackendTests.test_mutating_a_normalized_read_view_cannot_change_verified_execution) ... ok
+test_oracle_output_usage_must_bound_full_response (integrations.langgraph.test_backend.LangGraphBackendTests.test_oracle_output_usage_must_bound_full_response) ... ok
+test_real_langgraph_recursion_limit_fails_closed (integrations.langgraph.test_backend.LangGraphBackendTests.test_real_langgraph_recursion_limit_fails_closed) ... ok
+test_request_and_response_byte_limits_fail_closed (integrations.langgraph.test_backend.LangGraphBackendTests.test_request_and_response_byte_limits_fail_closed) ... ok
+test_session_preserves_optional_price_identity_and_call_cap (integrations.langgraph.test_backend.LangGraphBackendTests.test_session_preserves_optional_price_identity_and_call_cap) ... ok
+test_source_request_session_matches_full_value_oracle (integrations.langgraph.test_backend.LangGraphBackendTests.test_source_request_session_matches_full_value_oracle) ... ok
+
+----------------------------------------------------------------------
+Ran 11 tests in 0.612s
+
+OK

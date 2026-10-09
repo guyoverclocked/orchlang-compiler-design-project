@@ -13,6 +13,7 @@
 #include <cstdlib>
 #include <fstream>
 #include <iostream>
+#include <limits>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -28,18 +29,22 @@ struct Invocation {
     std::string path;
     AnalysisOptions options;
     RunOptions run;
+    bool jsonOutput{false};
 };
 
 void printUsage(std::ostream& out) {
     out << "Usage: orchc <tokens|check|ast|symbols|ir|ir-json|cost|certify|run> <source.orch>\n"
         << "       orchc <source.orch>\n"
-        << "Options: --chars-per-token <n>   tokenization assumption for input tokens (default "
-        << defaultCharsPerToken() << ";\n"
-        << "                                 1 is unconditionally sound, larger is tighter)\n"
+        << "Options: --chars-per-token <n>   UTF-8 bytes per estimated input token (default "
+        << defaultCharsPerToken() << "; applied per template/argument fragment)\n"
+        << "                                 input soundness assumes complete-request usage is compositional\n"
         << "         --seed <n>            seed for the offline mock runtime used by 'run'\n"
         << "         --retry-failure <p>   percentage chance one retry attempt fails (default 50)\n"
         << "         --pin <name>=<n>      pin an input or secret's token length for 'run'\n"
         << "         --pin <name>=true     pin a boolean input or secret for 'run'\n"
+        << "         --json                structured JSON output for 'run'\n"
+        << "         --audit-unsafe        bypass cost/relational gates for offline witness runs\n"
+        << "         --request-sensitive-oracle   include modeled request content in offline model draws\n"
         << "Compatibility flags: --tokens, --check\n";
 }
 
@@ -57,7 +62,7 @@ Command parseCommand(const std::string& value) {
 }
 
 bool readSource(const std::string& path, std::string& source) {
-    std::ifstream input(path);
+    std::ifstream input(path, std::ios::binary);
     if (!input) {
         return false;
     }
@@ -72,6 +77,25 @@ void printDiagnostics(const DiagnosticBag& diagnostics) {
     if (!rendered.empty()) {
         std::cerr << rendered;
     }
+}
+
+bool parseSizeValue(const std::string& text, std::size_t& value) {
+    if (text.empty()) {
+        return false;
+    }
+    std::size_t parsed = 0;
+    for (const char character : text) {
+        if (character < '0' || character > '9') {
+            return false;
+        }
+        const std::size_t digit = static_cast<std::size_t>(character - '0');
+        if (parsed > (std::numeric_limits<std::size_t>::max() - digit) / 10) {
+            return false;
+        }
+        parsed = parsed * 10 + digit;
+    }
+    value = parsed;
+    return true;
 }
 
 // Pulls the option flags out of the argument list, leaving the positional
@@ -105,7 +129,7 @@ bool collectArguments(int argc, char* argv[], Invocation& invocation) {
             }
             const std::string spec = argv[++index];
             const std::size_t split = spec.find('=');
-            if (split == std::string::npos) {
+            if (split == std::string::npos || split == 0) {
                 return false;
             }
             const std::string name = spec.substr(0, split);
@@ -113,8 +137,11 @@ bool collectArguments(int argc, char* argv[], Invocation& invocation) {
             if (value == "true" || value == "false") {
                 invocation.run.pinnedFlags[name] = value == "true";
             } else {
-                invocation.run.pinnedLengths[name] =
-                    static_cast<std::size_t>(std::strtoull(value.c_str(), nullptr, 10));
+                std::size_t length = 0;
+                if (!parseSizeValue(value, length)) {
+                    return false;
+                }
+                invocation.run.pinnedLengths[name] = length;
             }
             continue;
         }
@@ -129,18 +156,34 @@ bool collectArguments(int argc, char* argv[], Invocation& invocation) {
             invocation.run.retryFailurePercent = static_cast<unsigned>(value);
             continue;
         }
+        if (argument == "--audit-unsafe") {
+            invocation.run.auditUnsafe = true;
+            continue;
+        }
+        if (argument == "--request-sensitive-oracle") {
+            invocation.run.requestSensitiveOracle = true;
+            continue;
+        }
+        if (argument == "--json") {
+            invocation.jsonOutput = true;
+            continue;
+        }
         positional.push_back(argument);
     }
 
     if (positional.size() == 1) {
         invocation.command = Command::Check;
         invocation.path = positional[0];
-        return true;
+        return !invocation.jsonOutput && !invocation.run.auditUnsafe &&
+               !invocation.run.requestSensitiveOracle;
     }
     if (positional.size() == 2) {
         invocation.command = parseCommand(positional[0]);
         invocation.path = positional[1];
-        return invocation.command != Command::Invalid;
+        return invocation.command != Command::Invalid &&
+               ((!invocation.jsonOutput && !invocation.run.auditUnsafe &&
+                 !invocation.run.requestSensitiveOracle) ||
+                invocation.command == Command::Run);
     }
     return false;
 }
@@ -212,7 +255,7 @@ int main(int argc, char* argv[]) {
             printDiagnostics(diagnostics);
             return 1;
         }
-        std::cout << printRun(run);
+        std::cout << (invocation.jsonOutput ? printRunJson(run) : printRun(run));
         return 0;
     }
 
@@ -269,7 +312,7 @@ int main(int argc, char* argv[]) {
             std::cout << printIRJson(lowered.program);
         } else {
             std::cout << printCertificate(parsed.program, semantic, cost, lowered.program,
-                                          relational);
+                                          relational, source);
         }
         return 0;
     }

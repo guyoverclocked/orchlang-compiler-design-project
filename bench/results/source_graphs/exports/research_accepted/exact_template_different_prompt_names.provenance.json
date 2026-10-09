@@ -1,0 +1,176 @@
+{
+  "format": "orchlang-source-graph-provenance",
+  "version": 1,
+  "workflow": "ExactTemplate",
+  "workflow_budget_tokens": 1000,
+  "chars_per_token": 4,
+  "source_sha256": "12c5cea7d6a46955ddbcb0aa16e22e87e5163fbff8ab0ab4733f0cfe7a7694e2",
+  "graph_sha256": "24fcddd4c5d1ee991e3c71b59a88e2d391690aa3b6486293704014632df3d517",
+  "certificate_sha256": "a1e9b3f99cab7d54c13793dabe782c742197992ea404305f3a20d228b265ad76",
+  "adapter_sha256": "85b7f497150cf8c2f40cf48547336e3f0223bf7ea960b7959e19be2fa609a3a7",
+  "source_cost_parser_sha256": "85c98f9f9ad532a7d299c57d2e4e38943a8fa64075cb7ca388ff2222bd9e936e",
+  "compiler_sha256": "7dfbd0d962122f175c25147b8a16551a44098c75d893f0cbd12474c835b17ca4",
+  "graph_format": "orchlang-request-graph",
+  "graph_version": 1,
+  "semantic_gate": "orchc check passed before export",
+  "graph_checker": {
+    "status": "accepted",
+    "product_nodes": 19,
+    "product_edges": 18
+  },
+  "independent_replay": {
+    "status": "verified"
+  },
+  "claim_scope": "billing projection for the supported source subset under the graph's shared-oracle and complete request-accounting premises",
+  "omitted_output": {
+    "kind": "literal",
+    "text": "complete",
+    "source_location": {
+      "line": 12,
+      "column": 10
+    },
+    "reason": "one unconditional final public text output has no continuation; output content is outside the billing observation"
+  },
+  "mapping": {
+    "inputs": [
+      {
+        "source_name": "choose",
+        "location": {
+          "line": 2,
+          "column": 3
+        },
+        "binding_id": 1,
+        "graph_name": "in_0",
+        "type": "boolean",
+        "label": "secret",
+        "max_tokens": 1
+      },
+      {
+        "source_name": "source",
+        "location": {
+          "line": 3,
+          "column": 3
+        },
+        "binding_id": 2,
+        "graph_name": "in_1",
+        "type": "text",
+        "label": "public",
+        "max_tokens": 32
+      }
+    ],
+    "models": [
+      {
+        "source_name": "shared",
+        "location": {
+          "line": 4,
+          "column": 3
+        },
+        "declaration_id": 0,
+        "graph_alias": "model_0",
+        "contract": {
+          "provider": "mock",
+          "model": "research-model",
+          "max_tokens": 4
+        }
+      }
+    ],
+    "prompts": [
+      {
+        "source_name": "ask_left",
+        "location": {
+          "line": 5,
+          "column": 3
+        },
+        "declaration_id": 0,
+        "template": "Request: {t}",
+        "parameters": [
+          {
+            "name": "t",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "source_name": "ask_right",
+        "location": {
+          "line": 6,
+          "column": 3
+        },
+        "declaration_id": 1,
+        "template": "Request: {t}",
+        "parameters": [
+          {
+            "name": "t",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "values": [
+      {
+        "source_name": "result_left",
+        "location": {
+          "line": 8,
+          "column": 5
+        },
+        "binding_id": 3,
+        "graph_register": "r_0",
+        "type": "text",
+        "producer_contract": {
+          "provider": "mock",
+          "model": "research-model",
+          "max_tokens": 4
+        }
+      },
+      {
+        "source_name": "result_right",
+        "location": {
+          "line": 10,
+          "column": 5
+        },
+        "binding_id": 4,
+        "graph_register": "r_1",
+        "type": "text",
+        "producer_contract": {
+          "provider": "mock",
+          "model": "research-model",
+          "max_tokens": 4
+        }
+      }
+    ],
+    "states": [
+      {
+        "source_location": {
+          "line": 7,
+          "column": 3
+        },
+        "kind": "secret",
+        "source_guard": "choose",
+        "graph_guard": {
+          "value": "in_0"
+        }
+      },
+      {
+        "source_location": {
+          "line": 8,
+          "column": 5
+        },
+        "graph_state": "state_1"
+      },
+      {
+        "source_location": {
+          "line": 10,
+          "column": 5
+        },
+        "graph_state": "state_2"
+      },
+      {
+        "source_location": {
+          "line": 7,
+          "column": 3
+        },
+        "graph_state": "state_3"
+      }
+    ]
+  }
+}

@@ -1,5 +1,6 @@
 #include "cost_analyzer.hpp"
 
+#include <cmath>
 #include <sstream>
 #include <string>
 
@@ -15,6 +16,7 @@ CostBound sequence(const CostBound& left, const CostBound& right) {
     combined.totalTokens = addTokens(left.totalTokens, right.totalTokens);
     combined.money = left.money + right.money;
     combined.moneyComplete = left.moneyComplete && right.moneyComplete;
+    combined.moneyFinite = left.moneyFinite && right.moneyFinite && std::isfinite(combined.money);
     combined.defined = left.defined && right.defined;
     return combined;
 }
@@ -32,6 +34,7 @@ CostBound choice(const CostBound& left, const CostBound& right) {
     combined.totalTokens = maxTokens(left.totalTokens, right.totalTokens);
     combined.money = left.money >= right.money ? left.money : right.money;
     combined.moneyComplete = left.moneyComplete && right.moneyComplete;
+    combined.moneyFinite = left.moneyFinite && right.moneyFinite && std::isfinite(combined.money);
     combined.defined = left.defined && right.defined;
     return combined;
 }
@@ -44,6 +47,7 @@ CostBound repeat(const CostBound& body, std::size_t factor) {
     scaled.totalTokens = multiplyTokens(body.totalTokens, factor);
     scaled.money = body.money * static_cast<double>(factor);
     scaled.moneyComplete = body.moneyComplete;
+    scaled.moneyFinite = body.moneyFinite && std::isfinite(scaled.money);
     scaled.defined = body.defined;
     return scaled;
 }
@@ -117,6 +121,7 @@ CostBound Deriver::statement(const Stmt& node, int depth) {
             if (site.hasUnitPrice) {
                 bound.money = static_cast<double>(addTokens(bound.guaranteed, bound.estimated)) *
                               site.unitPrice;
+                bound.moneyFinite = std::isfinite(bound.money);
             } else {
                 bound.moneyComplete = false;
             }
@@ -213,6 +218,12 @@ CostResult CostAnalyzer::analyze(const Program& program, const SemanticResult& s
                     << cost.bound.guaranteed << " + estimated " << cost.bound.estimated
                     << ") exceeds workflow budget " << cost.budget;
             result.diagnostics.error("E260", workflow.location, message.str());
+        }
+        if (!cost.bound.moneyFinite) {
+            result.diagnostics.error(
+                "E268", workflow.location,
+                "workflow '" + workflow.name +
+                    "' has a monetary bound too large to represent as a finite number");
         }
         result.workflows.push_back(std::move(cost));
     }

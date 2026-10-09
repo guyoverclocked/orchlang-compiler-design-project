@@ -1,3 +1,5 @@
+> Historical document: this describes an earlier project stage. Current guarantees, metrics and presentation are in `docs/PAPER.md`, `docs/FORMAL_CONTRACT.md` and `submission/research/`. Historical claims are preserved for traceability, not reused as current evidence.
+
 # OrchLang Review Presentation
 
 **Project:** OrchLang: A Statically Typed Domain Specific Language Compiler for Safe and Cost Aware LLM Workflows  

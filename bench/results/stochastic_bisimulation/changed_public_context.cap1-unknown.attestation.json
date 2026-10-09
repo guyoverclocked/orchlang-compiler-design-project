@@ -1,0 +1,17 @@
+{
+  "certificate_status": null,
+  "claim_scope": "No equality claim: independent replay did not verify a proved_equal certificate.",
+  "diagnostic": "producer certificate is UNKNOWN; no partial closure is replayed",
+  "equal_laws_claim": false,
+  "format": "orchlang-stochastic-bisimulation-replay-attestation",
+  "graph_sha256": "c0fd454003fde2f6b12a33493fbd812fc899f69ccdc507cdf2774b8a09cee89e",
+  "kernel_sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b",
+  "report_sha256": "8fca548abaf8e70de3ff5200a32f9bafa958798b48d68408f6a9cd9cea4e2a94",
+  "status": "unknown",
+  "unverified_fields": [
+    "hashes.checker_sha256 (digest shape only; the producer executable was not replayed)",
+    "analysis_stats.byte_work_estimate (producer meter; verifier uses a separate deterministic work budget)"
+  ],
+  "verification_method": "independent finite-state closure and bisimulation replay",
+  "version": 1
+}

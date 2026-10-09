@@ -1,27 +1,49 @@
 #include "relational.hpp"
 
 #include <algorithm>
+#include <iomanip>
+#include <map>
 #include <sstream>
+#include <utility>
 
 namespace orchlang {
 
-std::string SizeTerm::text() const {
-    std::ostringstream out;
-    out << constant;
-    for (const std::string& name : outer) {
-        out << " + |" << name << '|';
+namespace {
+
+const char* literalKindName(ExprKind kind) {
+    switch (kind) {
+        case ExprKind::StringLiteral: return "text";
+        case ExprKind::IntegerLiteral: return "integer";
+        case ExprKind::DecimalLiteral: return "decimal";
+        case ExprKind::BooleanLiteral: return "boolean";
+        case ExprKind::Identifier: return "identifier";
+        case ExprKind::Call: return "call";
     }
-    for (const std::size_t index : priorResults) {
-        out << " + |call#" << index << '|';
+    return "unknown";
+}
+
+}  // namespace
+
+std::string RequestAtom::text() const {
+    std::ostringstream out;
+    switch (kind) {
+        case RequestAtomKind::Literal:
+            out << "literal(" << literalKindName(literalKind) << ','
+                << std::quoted(literal) << ')';
+            break;
+        case RequestAtomKind::OuterValue:
+            out << "outer(" << (literal.empty() ? std::string("value") : literal)
+                << "#" << identity << ')';
+            break;
+        case RequestAtomKind::PriorResult:
+            out << "result(" << identity << ')';
+            break;
     }
     return out.str();
 }
 
 bool SignatureNode::operator==(const SignatureNode& other) const {
-    if (kind != other.kind) {
-        return false;
-    }
-    if (children.size() != other.children.size()) {
+    if (kind != other.kind || children.size() != other.children.size()) {
         return false;
     }
     for (std::size_t index = 0; index < children.size(); ++index) {
@@ -31,11 +53,12 @@ bool SignatureNode::operator==(const SignatureNode& other) const {
     }
     switch (kind) {
         case SignatureNodeKind::Call:
-            return model == other.model && inputSize == other.inputSize;
+            return modelContract == other.modelContract &&
+                   promptTemplateText == other.promptTemplateText && arguments == other.arguments;
         case SignatureNodeKind::Retry:
             return repeatBound == other.repeatBound;
         case SignatureNodeKind::Branch:
-            return guard == other.guard;
+            return guardTerm == other.guardTerm;
     }
     return false;
 }
@@ -60,7 +83,20 @@ void renderNode(std::ostringstream& out, const SignatureNode& node, int depth) {
     const std::string pad(static_cast<std::size_t>(depth) * 2, ' ');
     switch (node.kind) {
         case SignatureNodeKind::Call:
-            out << pad << "bill(" << node.model << ", in=" << node.inputSize.text() << ")\n";
+            out << pad << "bill(";
+            if (node.modelContract) {
+                out << node.modelContract->displayName();
+            } else {
+                out << "<unresolved-model:" << node.modelAlias << '>';
+            }
+            out << ", template=" << std::quoted(node.promptTemplateText) << ", args=[";
+            for (std::size_t index = 0; index < node.arguments.size(); ++index) {
+                if (index != 0) {
+                    out << ", ";
+                }
+                out << node.arguments[index].text();
+            }
+            out << "])\n";
             break;
         case SignatureNodeKind::Retry:
             out << pad << "retry " << node.repeatBound << " {\n";
@@ -93,19 +129,24 @@ void renderSignature(std::ostringstream& out, const Signature& signature, int de
     }
 }
 
-// Builds the billing signature of a block.
-//
-// `localCalls` maps names bound by calls *inside* the region being abstracted to
-// their position in the signature.  A name not in that map was bound outside the
-// region, so both compared executions hold the same value for it.
+// Builds a signature of exact request content. The environment is copied when
+// entering a branch/retry body, so child-scope bindings never leak into sibling
+// arms or later statements. The monotonically assigned call positions are
+// local to this signature and align corresponding results across secret arms.
 class SignatureBuilder {
 public:
-    SignatureBuilder(const SemanticResult& semantic, SignatureResult& result)
+    explicit SignatureBuilder(const SemanticResult& semantic, SignatureResult& result)
         : semantic_(semantic), result_(result) {}
 
-    Signature build(const Block& block);
+    Signature build(const Block& block) {
+        std::map<std::size_t, std::size_t> priorResults;
+        std::size_t nextPosition = 0;
+        return build(block, priorResults, nextPosition);
+    }
 
 private:
+    using ResultEnvironment = std::map<std::size_t, std::size_t>;
+
     void undefine(const std::string& reason, const SourceLocation& location) {
         if (result_.defined) {
             result_.defined = false;
@@ -114,142 +155,179 @@ private:
         }
     }
 
-    const SemanticResult& semantic_;
-    SignatureResult& result_;
-    std::vector<std::pair<std::string, std::size_t>> localCalls_;
-    std::size_t callIndex_{0};
-};
-
-Signature SignatureBuilder::build(const Block& block) {
-    Signature signature;
-    for (const auto& statement : block) {
-        if (!statement) {
-            continue;
+    RequestAtom atomForValue(std::size_t valueIdentity, const std::string& name,
+                             const ResultEnvironment& environment) const {
+        const auto prior = environment.find(valueIdentity);
+        if (prior != environment.end()) {
+            return {RequestAtomKind::PriorResult, name, prior->second};
         }
-        switch (statement->kind()) {
-            case StmtKind::Let: {
-                const auto& let = static_cast<const LetStmt&>(*statement);
-                if (!let.call) {
-                    break;
-                }
-                const auto found = semantic_.callSites.find(let.call.get());
-                if (found == semantic_.callSites.end()) {
-                    undefine("call site was not analysed", statement->location);
-                    break;
-                }
-                const CallSiteFacts& site = found->second;
+        return {RequestAtomKind::OuterValue, name, valueIdentity};
+    }
 
-                SignatureNode node;
-                node.kind = SignatureNodeKind::Call;
-                node.model = site.modelName;
-                node.location = statement->location;
-                node.inputSize.constant = site.promptTemplateTokens;
+    static std::size_t saturatingAdd(std::size_t left, std::size_t right) {
+        const std::size_t maximum = static_cast<std::size_t>(-1);
+        return right > maximum - left ? maximum : left + right;
+    }
 
-                for (const ArgumentFact& argument : site.arguments) {
-                    if (argument.isSecret) {
-                        undefine("an argument depends on a secret, so its size is not "
-                                 "guaranteed to agree across executions",
-                                 statement->location);
-                        continue;
-                    }
-                    if (argument.isLiteral) {
-                        node.inputSize.constant += argument.literalTokens;
-                        continue;
-                    }
-                    // A result produced earlier inside this region is fixed by
-                    // the oracle coupling and referred to by position; anything
-                    // else was bound outside and is fixed by hypothesis.
-                    bool local = false;
-                    for (const auto& entry : localCalls_) {
-                        if (entry.first == argument.name) {
-                            node.inputSize.priorResults.push_back(entry.second);
-                            local = true;
-                            break;
-                        }
-                    }
-                    if (!local) {
-                        node.inputSize.outer.push_back(argument.name);
-                    }
-                }
-                std::sort(node.inputSize.outer.begin(), node.inputSize.outer.end());
-                std::sort(node.inputSize.priorResults.begin(), node.inputSize.priorResults.end());
+    static std::size_t saturatingMultiply(std::size_t value, std::size_t factor) {
+        const std::size_t maximum = static_cast<std::size_t>(-1);
+        return value != 0 && factor > maximum / value ? maximum : value * factor;
+    }
 
-                localCalls_.push_back({let.name, callIndex_});
-                ++callIndex_;
-                signature.push_back(std::move(node));
-                break;
+    GuardTerm guardFor(const IfStmt& branch, const ResultEnvironment& environment) {
+        GuardTerm term;
+        term.kind = branch.condition.kind;
+        term.op = branch.condition.op;
+        term.limit = branch.condition.limit;
+        const auto facts = semantic_.branchGuards.find(&branch);
+        if (facts == semantic_.branchGuards.end() || !facts->second.resolved) {
+            undefine("the branch guard binding was not resolved", branch.location);
+            return term;
+        }
+        term.subject = atomForValue(facts->second.valueIdentity,
+                                    branch.condition.subjectName, environment);
+        return term;
+    }
+
+    Signature build(const Block& block, ResultEnvironment environment,
+                    std::size_t& nextPosition) {
+        Signature signature;
+        for (const auto& statement : block) {
+            if (!statement) {
+                continue;
             }
-            case StmtKind::Retry: {
-                const auto& retry = static_cast<const RetryStmt&>(*statement);
-                SignatureNode node;
-                node.kind = SignatureNodeKind::Retry;
-                node.repeatBound = retry.bound;
-                node.location = statement->location;
-                node.children.push_back(build(retry.body));
-                signature.push_back(std::move(node));
-                break;
-            }
-            case StmtKind::If: {
-                const auto& branch = static_cast<const IfStmt&>(*statement);
-                const auto guard = semantic_.guardOwnLabels.find(&branch);
-                const bool secretGuard = guard != semantic_.guardOwnLabels.end() &&
-                                         guard->second.isSecret();
-
-                Signature thenSignature = build(branch.thenBranch);
-                Signature elseSignature =
-                    branch.hasElse ? build(branch.elseBranch) : Signature{};
-
-                if (secretGuard) {
-                    // A nested secret branch must already have been discharged
-                    // on its own; if its arms agree, either one stands for both,
-                    // which is what makes the analysis compositional.
-                    if (!signaturesEqual(thenSignature, elseSignature)) {
-                        undefine("a nested secret-guarded branch has arms that bill differently",
-                                 statement->location);
-                    }
-                    for (SignatureNode& node : thenSignature) {
-                        signature.push_back(std::move(node));
-                    }
-                    break;
-                }
-
-                // A public guard sees the same public data in both executions,
-                // so both take the same arm; the arms need not agree.
-                SignatureNode node;
-                node.kind = SignatureNodeKind::Branch;
-                node.guard = conditionToString(branch.condition);
-                node.location = statement->location;
-                node.children.push_back(std::move(thenSignature));
-                node.children.push_back(std::move(elseSignature));
-                signature.push_back(std::move(node));
-                break;
-            }
-            case StmtKind::Reclassify: {
-                // Relabelling copies a value, so the new name denotes the same
-                // quantity.  Inherit the source's position if it had one.
-                const auto& reclassify = static_cast<const ReclassifyStmt&>(*statement);
-                for (const auto& entry : localCalls_) {
-                    if (entry.first == reclassify.sourceName) {
-                        localCalls_.push_back({reclassify.name, entry.second});
+            switch (statement->kind()) {
+                case StmtKind::Let: {
+                    const auto& let = static_cast<const LetStmt&>(*statement);
+                    if (!let.call) {
                         break;
                     }
+                    const auto found = semantic_.callSites.find(let.call.get());
+                    if (found == semantic_.callSites.end()) {
+                        undefine("call site was not analysed", statement->location);
+                        break;
+                    }
+                    const CallSiteFacts& site = found->second;
+
+                    SignatureNode node;
+                    node.kind = SignatureNodeKind::Call;
+                    node.modelContract = site.resolvedModel;
+                    node.modelAlias = site.modelAlias;
+                    node.promptTemplateText = site.promptTemplateText;
+                    node.location = statement->location;
+                    if (!site.resolvedModel) {
+                        undefine("the call has no resolved model contract", statement->location);
+                    }
+                    for (const ArgumentFact& argument : site.arguments) {
+                        if (argument.isSecret) {
+                            undefine("an argument contains secret data, so its request may differ "
+                                     "across executions",
+                                     statement->location);
+                            continue;
+                        }
+                        if (argument.isLiteral) {
+                            node.arguments.push_back(
+                                {RequestAtomKind::Literal, argument.literalText, 0,
+                                 argument.literalKind});
+                        } else {
+                            node.arguments.push_back(atomForValue(
+                                argument.valueIdentity, argument.name, environment));
+                        }
+                    }
+                    signature.push_back(std::move(node));
+
+                    const auto resultIdentity =
+                        semantic_.letResultValueIdentities.find(&let);
+                    if (resultIdentity == semantic_.letResultValueIdentities.end()) {
+                        undefine("the call result binding was not resolved", statement->location);
+                    } else {
+                        environment[resultIdentity->second] = nextPosition;
+                    }
+                    ++nextPosition;
+                    break;
                 }
-                break;
+                case StmtKind::Retry: {
+                    const auto& retry = static_cast<const RetryStmt&>(*statement);
+                    SignatureNode node;
+                    node.kind = SignatureNodeKind::Retry;
+                    node.repeatBound = retry.bound;
+                    node.location = statement->location;
+                    const std::size_t firstPosition = nextPosition;
+                    std::size_t afterOneAttempt = firstPosition;
+                    node.children.push_back(build(retry.body, environment, afterOneAttempt));
+                    const std::size_t positionsPerAttempt = afterOneAttempt - firstPosition;
+                    nextPosition = saturatingAdd(
+                        firstPosition, saturatingMultiply(positionsPerAttempt, retry.bound));
+                    signature.push_back(std::move(node));
+                    break;
+                }
+                case StmtKind::If: {
+                    const auto& branch = static_cast<const IfStmt&>(*statement);
+                    const auto guard = semantic_.branchGuards.find(&branch);
+                    if (guard == semantic_.branchGuards.end() || !guard->second.resolved) {
+                        undefine("the branch guard binding was not resolved", statement->location);
+                        break;
+                    }
+
+                    // Alternatives start at the same abstract call position.
+                    // The enclosing sequence advances by the larger arm, so a
+                    // corresponding post-branch call has one identity on both
+                    // paths and declarations still remain arm-local.
+                    const std::size_t branchStart = nextPosition;
+                    std::size_t afterThen = branchStart;
+                    Signature thenSignature = build(branch.thenBranch, environment, afterThen);
+                    std::size_t afterElse = branchStart;
+                    Signature elseSignature = branch.hasElse
+                        ? build(branch.elseBranch, environment, afterElse)
+                        : Signature{};
+                    nextPosition = std::max(afterThen, afterElse);
+
+                    if (guard->second.contentLabel.isSecret()) {
+                        // A secret predicate is allowed only when its own arms
+                        // have the same billing structure. This keeps the
+                        // check compositional inside a larger secret arm.
+                        if (!signaturesEqual(thenSignature, elseSignature)) {
+                            undefine("a nested secret-guarded branch has arms that bill differently",
+                                     statement->location);
+                        }
+                        for (SignatureNode& node : thenSignature) {
+                            signature.push_back(std::move(node));
+                        }
+                        break;
+                    }
+
+                    // Public data and corresponding model results are equal in
+                    // the paired executions. Preserve the branch predicate by
+                    // lexical value identity, not its source spelling.
+                    SignatureNode node;
+                    node.kind = SignatureNodeKind::Branch;
+                    node.guard = conditionToString(branch.condition);
+                    node.guardTerm = guardFor(branch, environment);
+                    node.location = statement->location;
+                    node.children.push_back(std::move(thenSignature));
+                    node.children.push_back(std::move(elseSignature));
+                    signature.push_back(std::move(node));
+                    break;
+                }
+                case StmtKind::Reclassify:
+                case StmtKind::Input:
+                case StmtKind::Secret:
+                case StmtKind::Model:
+                case StmtKind::Prompt:
+                case StmtKind::Tool:
+                case StmtKind::Require:
+                case StmtKind::Emit:
+                case StmtKind::Output:
+                    // None of these introduces a billable model request.
+                    break;
             }
-            case StmtKind::Input:
-            case StmtKind::Secret:
-            case StmtKind::Model:
-            case StmtKind::Prompt:
-            case StmtKind::Tool:
-            case StmtKind::Require:
-            case StmtKind::Emit:
-            case StmtKind::Output:
-                // None of these reaches a model, so none of them bills.
-                break;
         }
+        return signature;
     }
-    return signature;
-}
+
+    const SemanticResult& semantic_;
+    SignatureResult& result_;
+};
 
 SignatureResult signatureOf(const Block& block, const SemanticResult& semantic) {
     SignatureResult result;
@@ -258,8 +336,6 @@ SignatureResult signatureOf(const Block& block, const SemanticResult& semantic) 
     return result;
 }
 
-// Walks a workflow discharging the relational obligation at every
-// secret-guarded branch.
 class Checker {
 public:
     Checker(const SemanticResult& semantic, RelationalResult& result, std::string workflow)
@@ -285,22 +361,22 @@ void Checker::block(const Block& statements) {
         if (statement->kind() != StmtKind::If) {
             continue;
         }
-        const auto& branch = static_cast<const IfStmt&>(*statement);
 
-        // Check the arms first, so a nested obligation is reported at its own
-        // location rather than being folded into the enclosing one.
+        const auto& branch = static_cast<const IfStmt&>(*statement);
         block(branch.thenBranch);
         block(branch.elseBranch);
 
-        const auto guard = semantic_.guardOwnLabels.find(&branch);
-        if (guard == semantic_.guardOwnLabels.end() || !guard->second.isSecret()) {
+        const auto guard = semantic_.branchGuards.find(&branch);
+        if (guard == semantic_.branchGuards.end() || !guard->second.resolved ||
+            !guard->second.contentLabel.isSecret()) {
             continue;
         }
 
         const std::string guardText = conditionToString(branch.condition);
         const SignatureResult thenSide = signatureOf(branch.thenBranch, semantic_);
-        const SignatureResult elseSide =
-            branch.hasElse ? signatureOf(branch.elseBranch, semantic_) : SignatureResult{};
+        const SignatureResult elseSide = branch.hasElse
+            ? signatureOf(branch.elseBranch, semantic_)
+            : SignatureResult{};
 
         RelationalObligation obligation;
         obligation.workflow = workflow_;
@@ -313,8 +389,8 @@ void Checker::block(const Block& statements) {
             obligation.detail = "signature undefined: " + why;
             result_.diagnostics.error(
                 "E236", statement->location,
-                "this branch is guarded by a secret and its billing cannot be shown independent "
-                "of that secret (" + why + ")");
+                "this branch is guarded by secret data and its billing cannot be shown independent "
+                "of that data (" + why + ")");
         } else if (!signaturesEqual(thenSide.signature, elseSide.signature)) {
             obligation.discharged = false;
             std::ostringstream detail;
@@ -323,9 +399,9 @@ void Checker::block(const Block& statements) {
             obligation.detail = detail.str();
 
             std::ostringstream message;
-            message << "this branch is guarded by a secret and its two arms bill differently, so "
-                       "the bill reveals the secret; then-arm bills ["
-                    << signatureText(thenSide.signature) << "] and else-arm bills ["
+            message << "this branch is guarded by secret data and its two arms have different "
+                       "billing contracts or request content; then-arm ["
+                    << signatureText(thenSide.signature) << "] and else-arm ["
                     << signatureText(elseSide.signature) << "]";
             std::string text = message.str();
             for (char& character : text) {
@@ -336,7 +412,8 @@ void Checker::block(const Block& statements) {
             result_.diagnostics.error("E236", statement->location, text);
         } else {
             obligation.discharged = true;
-            obligation.detail = "both arms bill " + signatureText(thenSide.signature);
+            obligation.detail = "both arms have identical request and billing contracts: " +
+                               signatureText(thenSide.signature);
         }
         result_.obligations.push_back(std::move(obligation));
     }
@@ -357,7 +434,19 @@ std::string signatureText(const Signature& signature) {
         first = false;
         switch (node.kind) {
             case SignatureNodeKind::Call:
-                out << node.model << "(in=" << node.inputSize.text() << ")";
+                if (node.modelContract) {
+                    out << node.modelContract->displayName();
+                } else {
+                    out << "<unresolved-model:" << node.modelAlias << '>';
+                }
+                out << " request(template=" << std::quoted(node.promptTemplateText) << ", args=[";
+                for (std::size_t index = 0; index < node.arguments.size(); ++index) {
+                    if (index != 0) {
+                        out << ", ";
+                    }
+                    out << node.arguments[index].text();
+                }
+                out << "])";
                 break;
             case SignatureNodeKind::Retry:
                 out << "retry " << node.repeatBound << "{"

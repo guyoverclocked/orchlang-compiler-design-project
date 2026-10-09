@@ -1,0 +1,612 @@
+{
+  "format": "orchlang-source-bound-report",
+  "version": 1,
+  "source_sha256": "59d0a7e608d7a4c0dca8433d93503f356d6d9f572148ff61be4a07fcf19b934e",
+  "compiler_sha256": "7dfbd0d962122f175c25147b8a16551a44098c75d893f0cbd12474c835b17ca4",
+  "source_name": "lmql_retrieval.orch",
+  "certificate": {
+    "format": "orchlang-safety-certificate",
+    "version": 3,
+    "source_sha256": "59d0a7e608d7a4c0dca8433d93503f356d6d9f572148ff61be4a07fcf19b934e",
+    "assumptions": {
+      "chars_per_token": 4,
+      "input_accounting": "Each call adds ceil(UTF-8 template bytes / chars_per_token) to the separately declared argument bounds.",
+      "output_assumption": "The oracle emits no more than the resolved model contract's declared max_tokens cap.",
+      "input_assumption": "For every complete request, target-model input usage is at most the sum of the template estimate and declared argument bounds. chars_per_token is a UTF-8 byte divisor; provider tokenizers, request envelopes, and tokenization boundary effects are not modeled.",
+      "note": "These are explicit abstract accounting assumptions, not a guarantee about real provider billing."
+    },
+    "workflows": [
+      {
+        "name": "LmqlRetrievalBalanced",
+        "budget_tokens": 100000,
+        "security_contract": {
+          "declassification_present": false,
+          "billing_noninterference_claimed": true,
+          "guarantee_scope": {
+            "property": "paired billing-trace equality under the stated abstract model",
+            "oracle_coupling": "Paired executions share abstract responses under \u03a9(M,k,Q) when resolved contract M, per-contract ordinal k, retry outcomes, and the complete modeled request Q match. The default ordinal mock ignores Q in its output projection; --request-sensitive-oracle adds decoded template bytes, ordered literal bytes, and identifier Value(tokens,flag) fields to Q. This models no real provider request text.",
+            "token_usage": "Input use follows the summed UTF-8 template and declared argument bounds; output use respects the resolved contract's max_tokens cap.",
+            "relational_obligations": "A discharged entry records a local structural request-trace comparison. It is not by itself a universal whole-workflow claim.",
+            "declassification": "This workflow contains no declassification; the claim is still conditional on the stated shared-oracle and abstract token-accounting assumptions."
+          }
+        },
+        "bound": {
+          "guaranteed_tokens": 192,
+          "estimated_tokens": 727,
+          "total_tokens": 919,
+          "component_sum_tokens": 919,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "derivation": [
+          {
+            "depth": 0,
+            "rule": "branch",
+            "detail": "route",
+            "guaranteed_tokens": 0,
+            "estimated_tokens": 0,
+            "total_tokens": 0,
+            "line": 20
+          },
+          {
+            "depth": 1,
+            "rule": "call",
+            "detail": "term = step via m [out<=96, in<=3+160]",
+            "guaranteed_tokens": 96,
+            "estimated_tokens": 163,
+            "total_tokens": 259,
+            "line": 21
+          },
+          {
+            "depth": 1,
+            "rule": "call",
+            "detail": "answer2 = retrieved via m [out<=96, in<=8+556]",
+            "guaranteed_tokens": 96,
+            "estimated_tokens": 564,
+            "total_tokens": 660,
+            "line": 22
+          },
+          {
+            "depth": 1,
+            "rule": "call",
+            "detail": "term = step via m [out<=96, in<=3+160]",
+            "guaranteed_tokens": 96,
+            "estimated_tokens": 163,
+            "total_tokens": 259,
+            "line": 24
+          },
+          {
+            "depth": 1,
+            "rule": "call",
+            "detail": "answer2 = retrieved via m [out<=96, in<=8+556]",
+            "guaranteed_tokens": 96,
+            "estimated_tokens": 564,
+            "total_tokens": 660,
+            "line": 25
+          },
+          {
+            "depth": 0,
+            "rule": "branch-max",
+            "detail": "max(then=919, else=919)",
+            "guaranteed_tokens": 192,
+            "estimated_tokens": 727,
+            "total_tokens": 919,
+            "line": 20
+          }
+        ],
+        "call_facts": [
+          {
+            "id": 1,
+            "location": {
+              "file": "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/bench/sourced/balanced/lmql_retrieval.orch",
+              "line": 21,
+              "column": 22
+            },
+            "result": "term",
+            "result_value_id": 29,
+            "prompt": "step",
+            "model_alias": "m",
+            "model_contract": {
+              "provider": "mock",
+              "model": "common-metric-worker",
+              "max_tokens": 96,
+              "has_unit_price": false,
+              "unit_price": 0,
+              "stable_key": "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0",
+              "tokenizer_identity": "4:mock20:common-metric-worker"
+            },
+            "template_text": "Process {x}",
+            "template_tokens": 3,
+            "arguments": [
+              {
+                "position": 0,
+                "kind": "value",
+                "literal_expr_kind": null,
+                "name": "query",
+                "literal_text": null,
+                "binding_id": 1,
+                "value_id": 1,
+                "content_label": "public,trusted",
+                "token_bound": 160,
+                "token_bound_tokenizer": null
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "location": {
+              "file": "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/bench/sourced/balanced/lmql_retrieval.orch",
+              "line": 22,
+              "column": 25
+            },
+            "result": "answer2",
+            "result_value_id": 30,
+            "prompt": "retrieved",
+            "model_alias": "m",
+            "model_contract": {
+              "provider": "mock",
+              "model": "common-metric-worker",
+              "max_tokens": 96,
+              "has_unit_price": false,
+              "unit_price": 0,
+              "stable_key": "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0",
+              "tokenizer_identity": "4:mock20:common-metric-worker"
+            },
+            "template_text": "For {q}, use {p} and term {t}",
+            "template_tokens": 8,
+            "arguments": [
+              {
+                "position": 0,
+                "kind": "value",
+                "literal_expr_kind": null,
+                "name": "term",
+                "literal_text": null,
+                "binding_id": 29,
+                "value_id": 29,
+                "content_label": "public,trusted",
+                "token_bound": 96,
+                "token_bound_tokenizer": "4:mock20:common-metric-worker"
+              },
+              {
+                "position": 1,
+                "kind": "value",
+                "literal_expr_kind": null,
+                "name": "page",
+                "literal_text": null,
+                "binding_id": 4,
+                "value_id": 4,
+                "content_label": "public,untrusted",
+                "token_bound": 300,
+                "token_bound_tokenizer": null
+              },
+              {
+                "position": 2,
+                "kind": "value",
+                "literal_expr_kind": null,
+                "name": "query",
+                "literal_text": null,
+                "binding_id": 1,
+                "value_id": 1,
+                "content_label": "public,trusted",
+                "token_bound": 160,
+                "token_bound_tokenizer": null
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "location": {
+              "file": "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/bench/sourced/balanced/lmql_retrieval.orch",
+              "line": 24,
+              "column": 22
+            },
+            "result": "term",
+            "result_value_id": 31,
+            "prompt": "step",
+            "model_alias": "m",
+            "model_contract": {
+              "provider": "mock",
+              "model": "common-metric-worker",
+              "max_tokens": 96,
+              "has_unit_price": false,
+              "unit_price": 0,
+              "stable_key": "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0",
+              "tokenizer_identity": "4:mock20:common-metric-worker"
+            },
+            "template_text": "Process {x}",
+            "template_tokens": 3,
+            "arguments": [
+              {
+                "position": 0,
+                "kind": "value",
+                "literal_expr_kind": null,
+                "name": "query",
+                "literal_text": null,
+                "binding_id": 1,
+                "value_id": 1,
+                "content_label": "public,trusted",
+                "token_bound": 160,
+                "token_bound_tokenizer": null
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "location": {
+              "file": "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/bench/sourced/balanced/lmql_retrieval.orch",
+              "line": 25,
+              "column": 25
+            },
+            "result": "answer2",
+            "result_value_id": 32,
+            "prompt": "retrieved",
+            "model_alias": "m",
+            "model_contract": {
+              "provider": "mock",
+              "model": "common-metric-worker",
+              "max_tokens": 96,
+              "has_unit_price": false,
+              "unit_price": 0,
+              "stable_key": "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0",
+              "tokenizer_identity": "4:mock20:common-metric-worker"
+            },
+            "template_text": "For {q}, use {p} and term {t}",
+            "template_tokens": 8,
+            "arguments": [
+              {
+                "position": 0,
+                "kind": "value",
+                "literal_expr_kind": null,
+                "name": "term",
+                "literal_text": null,
+                "binding_id": 31,
+                "value_id": 31,
+                "content_label": "public,trusted",
+                "token_bound": 96,
+                "token_bound_tokenizer": "4:mock20:common-metric-worker"
+              },
+              {
+                "position": 1,
+                "kind": "value",
+                "literal_expr_kind": null,
+                "name": "page",
+                "literal_text": null,
+                "binding_id": 4,
+                "value_id": 4,
+                "content_label": "public,untrusted",
+                "token_bound": 300,
+                "token_bound_tokenizer": null
+              },
+              {
+                "position": 2,
+                "kind": "value",
+                "literal_expr_kind": null,
+                "name": "query",
+                "literal_text": null,
+                "binding_id": 1,
+                "value_id": 1,
+                "content_label": "public,trusted",
+                "token_bound": 160,
+                "token_bound_tokenizer": null
+              }
+            ]
+          }
+        ],
+        "bindings": [
+          {
+            "scope": "workflow:LmqlRetrievalBalanced",
+            "name": "actor_a",
+            "kind": "model",
+            "type": "<unknown>",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced",
+            "name": "actor_b",
+            "kind": "model",
+            "type": "<unknown>",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced",
+            "name": "answer",
+            "kind": "prompt",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced",
+            "name": "follow",
+            "kind": "prompt",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced",
+            "name": "history",
+            "kind": "input",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": 600
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced",
+            "name": "m",
+            "kind": "model",
+            "type": "<unknown>",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced",
+            "name": "observation",
+            "kind": "input",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "untrusted",
+            "token_bound": 120
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced",
+            "name": "page",
+            "kind": "input",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "untrusted",
+            "token_bound": 300
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced",
+            "name": "page2",
+            "kind": "input",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "untrusted",
+            "token_bound": 300
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced",
+            "name": "plan",
+            "kind": "prompt",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced",
+            "name": "query",
+            "kind": "input",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": 160
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced",
+            "name": "query2",
+            "kind": "input",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": 160
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced",
+            "name": "retrieved",
+            "kind": "prompt",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced",
+            "name": "route",
+            "kind": "secret",
+            "type": "boolean",
+            "confidentiality": "secret",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced",
+            "name": "step",
+            "kind": "prompt",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced",
+            "name": "translate",
+            "kind": "prompt",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced",
+            "name": "use_tool",
+            "kind": "input",
+            "type": "boolean",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced::prompt:step",
+            "name": "x",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced::prompt:follow",
+            "name": "q",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced::prompt:follow",
+            "name": "x",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced::prompt:translate",
+            "name": "target",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced::prompt:translate",
+            "name": "x",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced::prompt:plan",
+            "name": "x",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced::prompt:answer",
+            "name": "p",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced::prompt:answer",
+            "name": "q",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced::prompt:retrieved",
+            "name": "p",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced::prompt:retrieved",
+            "name": "q",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced::prompt:retrieved",
+            "name": "t",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced::then@20",
+            "name": "answer2",
+            "kind": "local-result",
+            "type": "text",
+            "confidentiality": "secret",
+            "integrity": "untrusted",
+            "token_bound": 96
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced::then@20",
+            "name": "term",
+            "kind": "local-result",
+            "type": "text",
+            "confidentiality": "secret",
+            "integrity": "trusted",
+            "token_bound": 96
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced::else@20",
+            "name": "answer2",
+            "kind": "local-result",
+            "type": "text",
+            "confidentiality": "secret",
+            "integrity": "untrusted",
+            "token_bound": 96
+          },
+          {
+            "scope": "workflow:LmqlRetrievalBalanced::else@20",
+            "name": "term",
+            "kind": "local-result",
+            "type": "text",
+            "confidentiality": "secret",
+            "integrity": "trusted",
+            "token_bound": 96
+          }
+        ],
+        "reclassifications": [],
+        "relational_obligations": [
+          {
+            "guard": "route",
+            "discharged": true,
+            "detail": "both arms have identical request and billing contracts: mock:common-metric-worker (max_tokens=96) request(template=\"Process {x}\", args=[outer(query#1)]); mock:common-metric-worker (max_tokens=96) request(template=\"For {q}, use {p} and term {t}\", args=[result(0), outer(page#4), outer(query#1)])",
+            "line": 20
+          }
+        ],
+        "sinks": []
+      }
+    ]
+  },
+  "independent_cost_audit": {
+    "verified": "source binding, resolved request cost facts and every token-cost derivation step",
+    "workflows": 1,
+    "calls": 4,
+    "not_verified": [
+      "type correctness",
+      "security labels",
+      "relational obligations",
+      "declassification/endorsement justifications",
+      "provider/tokenizer contracts"
+    ]
+  }
+}

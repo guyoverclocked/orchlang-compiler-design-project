@@ -1,0 +1,1284 @@
+{
+  "experiment": "15 source-derived partial bounded patterns, three authored variants each",
+  "oracle_mode": "ordinal",
+  "limits": "15 pinned source examples, 45 authored bounded variants; not 15 full ports or 45 independent real applications",
+  "selection": "purposive examples from three DSL frameworks, selected after compiler design; no independent annotator or held-out claim",
+  "environment": {
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "python": "3.12.14",
+    "compiler_sha256": "7dfbd0d962122f175c25147b8a16551a44098c75d893f0cbd12474c835b17ca4",
+    "manifest_sha256": "269ea6e9b841fa1282d8f2753c0be70007ed6571aaf26641ea6661ad06403c85",
+    "baseline_commit": "a49fcdbdaa99723d7b6e1913f6d01e4f88682dd9"
+  },
+  "leak_metric": "Conditional mutual information for a uniform Boolean secret in each fixed public-input/shared-oracle slice, averaged over the declared grid; offline mock only, not deployed attack capacity",
+  "totals": {
+    "base_executions": 1500,
+    "bound_violations": 0,
+    "source_reports_checked": 30,
+    "balanced_comparisons": 2250,
+    "balanced_mismatches": 0,
+    "unbalanced_comparisons": 2250,
+    "unbalanced_mismatches": 2250,
+    "balanced_accepted": 15,
+    "baseline_balanced_accepted": 8,
+    "newly_accepted": 7,
+    "mutations_rejected": 15
+  },
+  "patterns": [
+    {
+      "id": "pdl_chaining",
+      "framework": "PDL",
+      "source_url": "https://github.com/IBM/prompt-declaration-language/blob/44a1383f2869afdf69a5bc96954af39490399a3f/examples/demo/2-model-chaining.pdl",
+      "base": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 192,
+          "estimated_tokens": 425,
+          "total_tokens": 617,
+          "component_sum_tokens": 617,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "branch_coverage": {}
+      },
+      "balanced": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E230"
+          ]
+        },
+        "bound": {
+          "guaranteed_tokens": 192,
+          "estimated_tokens": 425,
+          "total_tokens": 617,
+          "component_sum_tokens": 617,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "comparisons": 150,
+        "mismatches": 0,
+        "first_witness": null,
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 0.0
+      },
+      "unbalanced": {
+        "accepted": false,
+        "diagnostics": [
+          "E236"
+        ],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E230"
+          ]
+        },
+        "comparisons": 150,
+        "mismatches": 150,
+        "first_witness": {
+          "seed": 1,
+          "query_tokens": 0,
+          "use_tool": false,
+          "false_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              3,
+              60,
+              95
+            ]
+          },
+          "true_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              2,
+              57,
+              54
+            ]
+          }
+        },
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 1.0
+      }
+    },
+    {
+      "id": "pdl_function",
+      "framework": "PDL",
+      "source_url": "https://github.com/IBM/prompt-declaration-language/blob/44a1383f2869afdf69a5bc96954af39490399a3f/examples/demo/4-function.pdl",
+      "base": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 192,
+          "estimated_tokens": 340,
+          "total_tokens": 532,
+          "component_sum_tokens": 532,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "branch_coverage": {}
+      },
+      "balanced": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 192,
+          "estimated_tokens": 340,
+          "total_tokens": 532,
+          "component_sum_tokens": 532,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "comparisons": 150,
+        "mismatches": 0,
+        "first_witness": null,
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 0.0
+      },
+      "unbalanced": {
+        "accepted": false,
+        "diagnostics": [
+          "E236"
+        ],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E236"
+          ]
+        },
+        "comparisons": 150,
+        "mismatches": 150,
+        "first_witness": {
+          "seed": 1,
+          "query_tokens": 0,
+          "use_tool": false,
+          "false_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              3,
+              23,
+              49
+            ]
+          },
+          "true_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              2,
+              20,
+              6
+            ]
+          }
+        },
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 1.0
+      }
+    },
+    {
+      "id": "pdl_chat_turn",
+      "framework": "PDL",
+      "source_url": "https://github.com/IBM/prompt-declaration-language/blob/44a1383f2869afdf69a5bc96954af39490399a3f/examples/demo/7-chatbot-roles.pdl",
+      "base": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 96,
+          "estimated_tokens": 766,
+          "total_tokens": 862,
+          "component_sum_tokens": 862,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "branch_coverage": {}
+      },
+      "balanced": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 96,
+          "estimated_tokens": 766,
+          "total_tokens": 862,
+          "component_sum_tokens": 862,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "comparisons": 150,
+        "mismatches": 0,
+        "first_witness": null,
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 0.0
+      },
+      "unbalanced": {
+        "accepted": false,
+        "diagnostics": [
+          "E236"
+        ],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E236"
+          ]
+        },
+        "comparisons": 150,
+        "mismatches": 150,
+        "first_witness": {
+          "seed": 1,
+          "query_tokens": 0,
+          "use_tool": false,
+          "false_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              2,
+              409,
+              92
+            ]
+          },
+          "true_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              1,
+              406,
+              41
+            ]
+          }
+        },
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 1.0
+      }
+    },
+    {
+      "id": "pdl_tool_proposal",
+      "framework": "PDL",
+      "source_url": "https://github.com/IBM/prompt-declaration-language/blob/44a1383f2869afdf69a5bc96954af39490399a3f/examples/demo/8-tools.pdl",
+      "base": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 96,
+          "estimated_tokens": 167,
+          "total_tokens": 263,
+          "component_sum_tokens": 263,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "branch_coverage": {}
+      },
+      "balanced": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 96,
+          "estimated_tokens": 167,
+          "total_tokens": 263,
+          "component_sum_tokens": 263,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "comparisons": 150,
+        "mismatches": 0,
+        "first_witness": null,
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 0.0
+      },
+      "unbalanced": {
+        "accepted": false,
+        "diagnostics": [
+          "E236"
+        ],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E236"
+          ]
+        },
+        "comparisons": 150,
+        "mismatches": 150,
+        "first_witness": {
+          "seed": 1,
+          "query_tokens": 0,
+          "use_tool": false,
+          "false_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              2,
+              10,
+              109
+            ]
+          },
+          "true_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              1,
+              7,
+              82
+            ]
+          }
+        },
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 1.0
+      }
+    },
+    {
+      "id": "pdl_react_cycle",
+      "framework": "PDL",
+      "source_url": "https://github.com/IBM/prompt-declaration-language/blob/44a1383f2869afdf69a5bc96954af39490399a3f/examples/demo/9-react.pdl",
+      "base": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 576,
+          "estimated_tokens": 1155,
+          "total_tokens": 1731,
+          "component_sum_tokens": 1731,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "branch_coverage": {}
+      },
+      "balanced": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E230"
+          ]
+        },
+        "bound": {
+          "guaranteed_tokens": 576,
+          "estimated_tokens": 1155,
+          "total_tokens": 1731,
+          "component_sum_tokens": 1731,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "comparisons": 150,
+        "mismatches": 0,
+        "first_witness": null,
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 0.0
+      },
+      "unbalanced": {
+        "accepted": false,
+        "diagnostics": [
+          "E236"
+        ],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E230"
+          ]
+        },
+        "comparisons": 150,
+        "mismatches": 150,
+        "first_witness": {
+          "seed": 1,
+          "query_tokens": 0,
+          "use_tool": false,
+          "false_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              3,
+              146,
+              121
+            ]
+          },
+          "true_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              2,
+              143,
+              59
+            ]
+          }
+        },
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 1.0
+      }
+    },
+    {
+      "id": "pdl_fixed_map",
+      "framework": "PDL",
+      "source_url": "https://github.com/IBM/prompt-declaration-language/blob/44a1383f2869afdf69a5bc96954af39490399a3f/examples/map-reduce/context_fork.pdl",
+      "base": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 288,
+          "estimated_tokens": 508,
+          "total_tokens": 796,
+          "component_sum_tokens": 796,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "branch_coverage": {}
+      },
+      "balanced": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 288,
+          "estimated_tokens": 508,
+          "total_tokens": 796,
+          "component_sum_tokens": 796,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "comparisons": 150,
+        "mismatches": 0,
+        "first_witness": null,
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 0.0
+      },
+      "unbalanced": {
+        "accepted": false,
+        "diagnostics": [
+          "E236"
+        ],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E236"
+          ]
+        },
+        "comparisons": 150,
+        "mismatches": 150,
+        "first_witness": {
+          "seed": 1,
+          "query_tokens": 0,
+          "use_tool": false,
+          "false_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              4,
+              31,
+              193
+            ]
+          },
+          "true_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              3,
+              28,
+              139
+            ]
+          }
+        },
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 1.0
+      }
+    },
+    {
+      "id": "pdl_independent",
+      "framework": "PDL",
+      "source_url": "https://github.com/IBM/prompt-declaration-language/blob/44a1383f2869afdf69a5bc96954af39490399a3f/examples/independent/independent.pdl",
+      "base": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 288,
+          "estimated_tokens": 503,
+          "total_tokens": 791,
+          "component_sum_tokens": 791,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "branch_coverage": {}
+      },
+      "balanced": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 288,
+          "estimated_tokens": 503,
+          "total_tokens": 791,
+          "component_sum_tokens": 791,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "comparisons": 150,
+        "mismatches": 0,
+        "first_witness": null,
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 0.0
+      },
+      "unbalanced": {
+        "accepted": false,
+        "diagnostics": [
+          "E236"
+        ],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E236"
+          ]
+        },
+        "comparisons": 150,
+        "mismatches": 150,
+        "first_witness": {
+          "seed": 1,
+          "query_tokens": 0,
+          "use_tool": false,
+          "false_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              4,
+              26,
+              138
+            ]
+          },
+          "true_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              3,
+              23,
+              121
+            ]
+          }
+        },
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 1.0
+      }
+    },
+    {
+      "id": "pdl_rag_pair",
+      "framework": "PDL",
+      "source_url": "https://github.com/IBM/prompt-declaration-language/blob/44a1383f2869afdf69a5bc96954af39490399a3f/examples/rag/pdf_query.pdl",
+      "base": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 192,
+          "estimated_tokens": 930,
+          "total_tokens": 1122,
+          "component_sum_tokens": 1122,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "branch_coverage": {}
+      },
+      "balanced": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 192,
+          "estimated_tokens": 930,
+          "total_tokens": 1122,
+          "component_sum_tokens": 1122,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "comparisons": 150,
+        "mismatches": 0,
+        "first_witness": null,
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 0.0
+      },
+      "unbalanced": {
+        "accepted": false,
+        "diagnostics": [
+          "E236"
+        ],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E236"
+          ]
+        },
+        "comparisons": 150,
+        "mismatches": 150,
+        "first_witness": {
+          "seed": 1,
+          "query_tokens": 0,
+          "use_tool": false,
+          "false_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              3,
+              524,
+              123
+            ]
+          },
+          "true_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              2,
+              521,
+              54
+            ]
+          }
+        },
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 1.0
+      }
+    },
+    {
+      "id": "appl_self_consistency",
+      "framework": "APPL",
+      "source_url": "https://github.com/APPL-Team/APPL/blob/e39c7401e5023d1b8d4c851e3a6f1048a462f03d/examples/basic/cot_sc.py",
+      "base": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 480,
+          "estimated_tokens": 815,
+          "total_tokens": 1295,
+          "component_sum_tokens": 1295,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "branch_coverage": {}
+      },
+      "balanced": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 480,
+          "estimated_tokens": 815,
+          "total_tokens": 1295,
+          "component_sum_tokens": 1295,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "comparisons": 150,
+        "mismatches": 0,
+        "first_witness": null,
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 0.0
+      },
+      "unbalanced": {
+        "accepted": false,
+        "diagnostics": [
+          "E236"
+        ],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E236"
+          ]
+        },
+        "comparisons": 150,
+        "mismatches": 150,
+        "first_witness": {
+          "seed": 1,
+          "query_tokens": 0,
+          "use_tool": false,
+          "false_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              6,
+              18,
+              331
+            ]
+          },
+          "true_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              5,
+              15,
+              291
+            ]
+          }
+        },
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 1.0
+      }
+    },
+    {
+      "id": "appl_tool_branch",
+      "framework": "APPL",
+      "source_url": "https://github.com/APPL-Team/APPL/blob/e39c7401e5023d1b8d4c851e3a6f1048a462f03d/examples/basic/tool_call.py",
+      "base": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 192,
+          "estimated_tokens": 389,
+          "total_tokens": 581,
+          "component_sum_tokens": 581,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "branch_coverage": {
+          "21:3": [
+            "else",
+            "then"
+          ]
+        }
+      },
+      "balanced": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E230"
+          ]
+        },
+        "bound": {
+          "guaranteed_tokens": 192,
+          "estimated_tokens": 389,
+          "total_tokens": 581,
+          "component_sum_tokens": 581,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "comparisons": 150,
+        "mismatches": 0,
+        "first_witness": null,
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 0.0
+      },
+      "unbalanced": {
+        "accepted": false,
+        "diagnostics": [
+          "E236"
+        ],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E230"
+          ]
+        },
+        "comparisons": 150,
+        "mismatches": 150,
+        "first_witness": {
+          "seed": 1,
+          "query_tokens": 0,
+          "use_tool": false,
+          "false_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              2,
+              10,
+              144
+            ]
+          },
+          "true_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              1,
+              7,
+              62
+            ]
+          }
+        },
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 1.0
+      }
+    },
+    {
+      "id": "appl_valid_retry",
+      "framework": "APPL",
+      "source_url": "https://github.com/APPL-Team/APPL/blob/e39c7401e5023d1b8d4c851e3a6f1048a462f03d/examples/advanced/repeat_until_valid.py",
+      "base": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 480,
+          "estimated_tokens": 3830,
+          "total_tokens": 4310,
+          "component_sum_tokens": 4310,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "branch_coverage": {}
+      },
+      "balanced": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 480,
+          "estimated_tokens": 3830,
+          "total_tokens": 4310,
+          "component_sum_tokens": 4310,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "comparisons": 150,
+        "mismatches": 0,
+        "first_witness": null,
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 0.0
+      },
+      "unbalanced": {
+        "accepted": false,
+        "diagnostics": [
+          "E236"
+        ],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E236"
+          ]
+        },
+        "comparisons": 150,
+        "mismatches": 150,
+        "first_witness": {
+          "seed": 1,
+          "query_tokens": 0,
+          "use_tool": false,
+          "false_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              2,
+              409,
+              109
+            ]
+          },
+          "true_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              1,
+              406,
+              89
+            ]
+          }
+        },
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 1.0
+      }
+    },
+    {
+      "id": "appl_two_actor_chat",
+      "framework": "APPL",
+      "source_url": "https://github.com/APPL-Team/APPL/blob/e39c7401e5023d1b8d4c851e3a6f1048a462f03d/examples/advanced/multi_agent_chat/option1_resume.py",
+      "base": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 200,
+          "estimated_tokens": 322,
+          "total_tokens": 522,
+          "component_sum_tokens": 522,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "branch_coverage": {}
+      },
+      "balanced": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E230"
+          ]
+        },
+        "bound": {
+          "guaranteed_tokens": 200,
+          "estimated_tokens": 322,
+          "total_tokens": 522,
+          "component_sum_tokens": 522,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "comparisons": 150,
+        "mismatches": 0,
+        "first_witness": null,
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 0.0
+      },
+      "unbalanced": {
+        "accepted": false,
+        "diagnostics": [
+          "E236"
+        ],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E230"
+          ]
+        },
+        "comparisons": 150,
+        "mismatches": 150,
+        "first_witness": {
+          "seed": 1,
+          "query_tokens": 0,
+          "use_tool": false,
+          "false_billing": {
+            "p4x6d6f636b_m19x636f6d6d6f6e2d6d65747269632d6163746f72_cap50_priced0": [
+              4,
+              68,
+              58
+            ],
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              1,
+              3,
+              73
+            ]
+          },
+          "true_billing": {
+            "p4x6d6f636b_m19x636f6d6d6f6e2d6d65747269632d6163746f72_cap50_priced0": [
+              4,
+              68,
+              58
+            ]
+          }
+        },
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 1.0
+      }
+    },
+    {
+      "id": "lmql_joke_segments",
+      "framework": "LMQL",
+      "source_url": "https://github.com/eth-sri/lmql/blob/fc8edd4457dc5a5e4e595302166bec797582bf53/docs/features/examples/2-constraining.md",
+      "base": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 192,
+          "estimated_tokens": 425,
+          "total_tokens": 617,
+          "component_sum_tokens": 617,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "branch_coverage": {}
+      },
+      "balanced": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E230"
+          ]
+        },
+        "bound": {
+          "guaranteed_tokens": 192,
+          "estimated_tokens": 425,
+          "total_tokens": 617,
+          "component_sum_tokens": 617,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "comparisons": 150,
+        "mismatches": 0,
+        "first_witness": null,
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 0.0
+      },
+      "unbalanced": {
+        "accepted": false,
+        "diagnostics": [
+          "E236"
+        ],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E230"
+          ]
+        },
+        "comparisons": 150,
+        "mismatches": 150,
+        "first_witness": {
+          "seed": 1,
+          "query_tokens": 0,
+          "use_tool": false,
+          "false_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              3,
+              21,
+              94
+            ]
+          },
+          "true_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              2,
+              18,
+              58
+            ]
+          }
+        },
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 1.0
+      }
+    },
+    {
+      "id": "lmql_reason_then_choice",
+      "framework": "LMQL",
+      "source_url": "https://github.com/eth-sri/lmql/blob/fc8edd4457dc5a5e4e595302166bec797582bf53/docs/features/examples/3-multi-part.md",
+      "base": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 192,
+          "estimated_tokens": 425,
+          "total_tokens": 617,
+          "component_sum_tokens": 617,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "branch_coverage": {}
+      },
+      "balanced": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E230"
+          ]
+        },
+        "bound": {
+          "guaranteed_tokens": 192,
+          "estimated_tokens": 425,
+          "total_tokens": 617,
+          "component_sum_tokens": 617,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "comparisons": 150,
+        "mismatches": 0,
+        "first_witness": null,
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 0.0
+      },
+      "unbalanced": {
+        "accepted": false,
+        "diagnostics": [
+          "E236"
+        ],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E230"
+          ]
+        },
+        "comparisons": 150,
+        "mismatches": 150,
+        "first_witness": {
+          "seed": 1,
+          "query_tokens": 0,
+          "use_tool": false,
+          "false_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              3,
+              13,
+              152
+            ]
+          },
+          "true_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              2,
+              10,
+              84
+            ]
+          }
+        },
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 1.0
+      }
+    },
+    {
+      "id": "lmql_retrieval",
+      "framework": "LMQL",
+      "source_url": "https://github.com/eth-sri/lmql/blob/fc8edd4457dc5a5e4e595302166bec797582bf53/docs/features/examples/5-wikipedia.md",
+      "base": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": true,
+          "diagnostics": []
+        },
+        "bound": {
+          "guaranteed_tokens": 192,
+          "estimated_tokens": 727,
+          "total_tokens": 919,
+          "component_sum_tokens": 919,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "branch_coverage": {}
+      },
+      "balanced": {
+        "accepted": true,
+        "diagnostics": [],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E230"
+          ]
+        },
+        "bound": {
+          "guaranteed_tokens": 192,
+          "estimated_tokens": 727,
+          "total_tokens": 919,
+          "component_sum_tokens": 919,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "comparisons": 150,
+        "mismatches": 0,
+        "first_witness": null,
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 0.0
+      },
+      "unbalanced": {
+        "accepted": false,
+        "diagnostics": [
+          "E236"
+        ],
+        "baseline": {
+          "accepted": false,
+          "diagnostics": [
+            "E230"
+          ]
+        },
+        "comparisons": 150,
+        "mismatches": 150,
+        "first_witness": {
+          "seed": 1,
+          "query_tokens": 0,
+          "use_tool": false,
+          "false_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              3,
+              262,
+              78
+            ]
+          },
+          "true_billing": {
+            "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0": [
+              2,
+              259,
+              76
+            ]
+          }
+        },
+        "secret_entropy_bits": 1.0,
+        "mean_conditional_leak_bits": 1.0
+      }
+    }
+  ],
+  "failures": []
+}

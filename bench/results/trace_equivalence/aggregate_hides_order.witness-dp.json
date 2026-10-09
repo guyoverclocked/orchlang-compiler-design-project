@@ -1,0 +1,84 @@
+{
+  "distributions": {
+    "horizon": 1,
+    "observer": "trace",
+    "scenario_histograms": [
+      {
+        "call_transitions": 1,
+        "entries": [
+          {
+            "observation": {
+              "stopped": false,
+              "usage_trace": [
+                {
+                  "contract": {
+                    "has_unit_price": false,
+                    "max_tokens": 8,
+                    "model": "finite-worker",
+                    "provider": "offline",
+                    "unit_price": 0.0
+                  },
+                  "input_tokens": 1,
+                  "output_tokens": 3
+                }
+              ]
+            },
+            "probability": "1"
+          }
+        ],
+        "histogram_sha256": "02f70376600548905b0748ca992803699f075b26b114c6ac186d3beb910752d0",
+        "mass": "1",
+        "scenario_index": 0,
+        "state_visits": 2,
+        "support_size": 1,
+        "work_bytes_estimate": 1269
+      },
+      {
+        "call_transitions": 1,
+        "entries": [
+          {
+            "observation": {
+              "stopped": false,
+              "usage_trace": [
+                {
+                  "contract": {
+                    "has_unit_price": false,
+                    "max_tokens": 8,
+                    "model": "finite-worker",
+                    "provider": "offline",
+                    "unit_price": 0.0
+                  },
+                  "input_tokens": 1,
+                  "output_tokens": 1
+                }
+              ]
+            },
+            "probability": "1"
+          }
+        ],
+        "histogram_sha256": "fb39edcb81e59f6245b0bb742edd8212c3534793646baa255c85c5ecc7142ad7",
+        "mass": "1",
+        "scenario_index": 1,
+        "state_visits": 2,
+        "support_size": 1,
+        "work_bytes_estimate": 1264
+      }
+    ]
+  },
+  "dp_witness_probabilities": {
+    "left": "1",
+    "right": "0"
+  },
+  "exact_witness_probabilities_match": true,
+  "finite_dp_histograms_differ": true,
+  "fixture": "aggregate_hides_order",
+  "format": "orchlang-trace-equivalence-witness-dp-cross-check",
+  "horizon": 1,
+  "observer": "trace",
+  "pair": {
+    "left_scenario": 1,
+    "right_scenario": 0
+  },
+  "scope": "finite-DP cross-check of one exact finite witness; not the proof itself",
+  "version": 1
+}

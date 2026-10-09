@@ -1,3 +1,5 @@
+> Historical document: this describes an earlier project stage. Current guarantees, metrics and presentation are in `docs/PAPER.md`, `docs/FORMAL_CONTRACT.md` and `submission/research/`. Historical claims are preserved for traceability, not reused as current evidence.
+
 # OrchLang research and branch audit
 
 Date: 17 September 2026. Audited branch: `v2-static-certification`, commit `fd9d8bc`, against `main` at `077dd06`. Four branch commits; 125 changed files. Working tree was clean at the start. This audit adds evidence and this report; it does not repair or rewrite the compiler or existing paper.

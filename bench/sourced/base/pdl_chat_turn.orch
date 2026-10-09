@@ -1,0 +1,22 @@
+// Authored bounded projection; provenance: sourced/manifest.json
+workflow PdlChatTurnBase budget 100000 {
+  input query: text max_tokens 160;
+  input query2: text max_tokens 160;
+  input history: text max_tokens 600;
+  input page: text untrusted max_tokens 300;
+  input page2: text untrusted max_tokens 300;
+  input observation: text untrusted max_tokens 120;
+  input use_tool: boolean;
+  secret route: boolean;
+  model m = mock("common-metric-worker") max_tokens 96;
+  model actor_a = mock("common-metric-actor") max_tokens 50;
+  model actor_b = mock("common-metric-actor") max_tokens 50;
+  prompt step(x: text) -> text = "Process {x}";
+  prompt follow(x: text, q: text) -> text = "Use {x} to answer {q}";
+  prompt translate(x: text, target: text) -> text = "Translate {x} for {target}";
+  prompt plan(x: text) -> text = "Propose an action for {x}";
+  prompt answer(p: text, q: text) -> text = "Answer {q} from {p}";
+  prompt retrieved(t: text, p: text, q: text) -> text = "For {q}, use {p} and term {t}";
+  let reply: text = call follow(history, query) using m;
+  output query;
+}

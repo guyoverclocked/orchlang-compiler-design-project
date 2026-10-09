@@ -1,10 +1,47 @@
 #include "symbol_table.hpp"
 
+#include <iomanip>
 #include <sstream>
 #include <stdexcept>
 #include <utility>
 
 namespace orchlang {
+
+std::string ModelContract::stableKey() const {
+    std::ostringstream out;
+    // Hex encoding keeps this safe to print as one whitespace-free key while
+    // length prefixes make every component unambiguous.
+    const auto hex = [](const std::string& text) {
+        std::ostringstream encoded;
+        encoded << std::hex << std::setfill('0');
+        for (const unsigned char byte : text) {
+            encoded << std::setw(2) << static_cast<unsigned>(byte);
+        }
+        return encoded.str();
+    };
+    out << "p" << provider.size() << "x" << hex(provider) << "_m" << modelName.size() << "x"
+        << hex(modelName) << "_cap" << maxTokens << "_priced" << (hasUnitPrice ? '1' : '0');
+    if (hasUnitPrice) {
+        out << "_unit" << std::hexfloat << unitPrice;
+    }
+    return out.str();
+}
+
+std::string ModelContract::displayName() const {
+    std::ostringstream out;
+    out << provider << ':' << modelName << " (max_tokens=" << maxTokens;
+    if (hasUnitPrice) {
+        out << ", cost_per_token=" << std::setprecision(17) << unitPrice;
+    }
+    out << ')';
+    return out.str();
+}
+
+std::string ModelContract::tokenizerIdentity() const {
+    std::ostringstream out;
+    out << provider.size() << ':' << provider << modelName.size() << ':' << modelName;
+    return out.str();
+}
 
 std::string symbolKindName(SymbolKind kind) {
     switch (kind) {
@@ -41,6 +78,12 @@ bool SymbolTable::insert(std::size_t scopeIndex, Symbol symbol, const Symbol** e
             *existing = &found->second;
         }
         return false;
+    }
+    if (symbol.bindingIdentity == 0) {
+        symbol.bindingIdentity = nextBindingIdentity_++;
+    }
+    if (symbol.valueIdentity == 0) {
+        symbol.valueIdentity = symbol.bindingIdentity;
     }
     target.symbols.emplace(symbol.name, std::move(symbol));
     if (existing) {
@@ -115,6 +158,9 @@ std::string formatSymbolTable(const SymbolTable& table) {
                 out << " provider=" << symbol.model->provider
                     << " name=" << symbol.model->modelName
                     << " max_tokens=" << symbol.model->maxTokens;
+                if (symbol.model->hasUnitPrice) {
+                    out << " cost_per_token=" << symbol.model->unitPrice;
+                }
             }
             if (symbol.prompt) {
                 out << ' ' << signatureText(*symbol.prompt)
@@ -123,7 +169,10 @@ std::string formatSymbolTable(const SymbolTable& table) {
             if (symbol.tool) {
                 out << ' ' << toolSignatureText(*symbol.tool);
             }
-            out << " label=" << labelName(symbol.label);
+            out << " label=" << labelName(symbol.label)
+                << " content_label=" << labelName(symbol.contentLabel)
+                << " binding_id=" << symbol.bindingIdentity
+                << " value_id=" << symbol.valueIdentity;
             if (symbol.tokenBoundKnown) {
                 out << " token_bound=" << symbol.tokenBound;
             }

@@ -1,0 +1,493 @@
+{
+  "format": "orchlang-source-graph-provenance",
+  "version": 1,
+  "workflow": "ApplTwoActorChatBalanced",
+  "workflow_budget_tokens": 100000,
+  "chars_per_token": 4,
+  "source_sha256": "91e9f5fae67810005fd3c2e31f0f849d4a701a15c80b5953dbf09376ec3093da",
+  "graph_sha256": "b06a61f0deff33db6bba878f097f65bd2c954a0819b2735021fe1426387e8758",
+  "certificate_sha256": "cf87e7eb92913b55e7b0d6b2044af7a44214bbc1b266f166adb04405a14001f8",
+  "adapter_sha256": "85b7f497150cf8c2f40cf48547336e3f0223bf7ea960b7959e19be2fa609a3a7",
+  "source_cost_parser_sha256": "85c98f9f9ad532a7d299c57d2e4e38943a8fa64075cb7ca388ff2222bd9e936e",
+  "compiler_sha256": "7dfbd0d962122f175c25147b8a16551a44098c75d893f0cbd12474c835b17ca4",
+  "graph_format": "orchlang-request-graph",
+  "graph_version": 1,
+  "semantic_gate": "orchc check passed before export",
+  "graph_checker": {
+    "status": "accepted",
+    "product_nodes": 55,
+    "product_edges": 54
+  },
+  "independent_replay": {
+    "status": "verified"
+  },
+  "claim_scope": "billing projection for the supported source subset under the graph's shared-oracle and complete request-accounting premises",
+  "omitted_output": {
+    "kind": "identifier",
+    "source_name": "query",
+    "binding_id": 1,
+    "graph_value_name": "in_0",
+    "value_kind": "input",
+    "type": "text",
+    "confidentiality": "public",
+    "source_location": {
+      "line": 31,
+      "column": 10
+    },
+    "reason": "one unconditional final public text output has no continuation; output content is outside the billing observation"
+  },
+  "mapping": {
+    "inputs": [
+      {
+        "source_name": "query",
+        "location": {
+          "line": 3,
+          "column": 3
+        },
+        "binding_id": 1,
+        "graph_name": "in_0",
+        "type": "text",
+        "label": "public",
+        "max_tokens": 160
+      },
+      {
+        "source_name": "query2",
+        "location": {
+          "line": 4,
+          "column": 3
+        },
+        "binding_id": 2,
+        "graph_name": "in_1",
+        "type": "text",
+        "label": "public",
+        "max_tokens": 160
+      },
+      {
+        "source_name": "history",
+        "location": {
+          "line": 5,
+          "column": 3
+        },
+        "binding_id": 3,
+        "graph_name": "in_2",
+        "type": "text",
+        "label": "public",
+        "max_tokens": 600
+      },
+      {
+        "source_name": "page",
+        "location": {
+          "line": 6,
+          "column": 3
+        },
+        "binding_id": 4,
+        "graph_name": "in_3",
+        "type": "text",
+        "label": "public",
+        "max_tokens": 300
+      },
+      {
+        "source_name": "page2",
+        "location": {
+          "line": 7,
+          "column": 3
+        },
+        "binding_id": 5,
+        "graph_name": "in_4",
+        "type": "text",
+        "label": "public",
+        "max_tokens": 300
+      },
+      {
+        "source_name": "observation",
+        "location": {
+          "line": 8,
+          "column": 3
+        },
+        "binding_id": 6,
+        "graph_name": "in_5",
+        "type": "text",
+        "label": "public",
+        "max_tokens": 120
+      },
+      {
+        "source_name": "use_tool",
+        "location": {
+          "line": 9,
+          "column": 3
+        },
+        "binding_id": 7,
+        "graph_name": "in_6",
+        "type": "boolean",
+        "label": "public",
+        "max_tokens": null
+      },
+      {
+        "source_name": "route",
+        "location": {
+          "line": 10,
+          "column": 3
+        },
+        "binding_id": 8,
+        "graph_name": "in_7",
+        "type": "boolean",
+        "label": "secret",
+        "max_tokens": null
+      }
+    ],
+    "models": [
+      {
+        "source_name": "m",
+        "location": {
+          "line": 11,
+          "column": 3
+        },
+        "declaration_id": 0,
+        "graph_alias": "model_0",
+        "contract": {
+          "provider": "mock",
+          "model": "common-metric-worker",
+          "max_tokens": 96
+        }
+      },
+      {
+        "source_name": "actor_a",
+        "location": {
+          "line": 12,
+          "column": 3
+        },
+        "declaration_id": 1,
+        "graph_alias": "model_1",
+        "contract": {
+          "provider": "mock",
+          "model": "common-metric-actor",
+          "max_tokens": 50
+        }
+      },
+      {
+        "source_name": "actor_b",
+        "location": {
+          "line": 13,
+          "column": 3
+        },
+        "declaration_id": 2,
+        "graph_alias": "model_2",
+        "contract": {
+          "provider": "mock",
+          "model": "common-metric-actor",
+          "max_tokens": 50
+        }
+      }
+    ],
+    "prompts": [
+      {
+        "source_name": "step",
+        "location": {
+          "line": 14,
+          "column": 3
+        },
+        "declaration_id": 0,
+        "template": "Process {x}",
+        "parameters": [
+          {
+            "name": "x",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "source_name": "follow",
+        "location": {
+          "line": 15,
+          "column": 3
+        },
+        "declaration_id": 1,
+        "template": "Use {x} to answer {q}",
+        "parameters": [
+          {
+            "name": "x",
+            "type": "text"
+          },
+          {
+            "name": "q",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "source_name": "translate",
+        "location": {
+          "line": 16,
+          "column": 3
+        },
+        "declaration_id": 2,
+        "template": "Translate {x} for {target}",
+        "parameters": [
+          {
+            "name": "x",
+            "type": "text"
+          },
+          {
+            "name": "target",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "source_name": "plan",
+        "location": {
+          "line": 17,
+          "column": 3
+        },
+        "declaration_id": 3,
+        "template": "Propose an action for {x}",
+        "parameters": [
+          {
+            "name": "x",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "source_name": "answer",
+        "location": {
+          "line": 18,
+          "column": 3
+        },
+        "declaration_id": 4,
+        "template": "Answer {q} from {p}",
+        "parameters": [
+          {
+            "name": "p",
+            "type": "text"
+          },
+          {
+            "name": "q",
+            "type": "text"
+          }
+        ]
+      },
+      {
+        "source_name": "retrieved",
+        "location": {
+          "line": 19,
+          "column": 3
+        },
+        "declaration_id": 5,
+        "template": "For {q}, use {p} and term {t}",
+        "parameters": [
+          {
+            "name": "t",
+            "type": "text"
+          },
+          {
+            "name": "p",
+            "type": "text"
+          },
+          {
+            "name": "q",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "values": [
+      {
+        "source_name": "a1",
+        "location": {
+          "line": 21,
+          "column": 5
+        },
+        "binding_id": 9,
+        "graph_register": "r_0",
+        "type": "text",
+        "producer_contract": {
+          "provider": "mock",
+          "model": "common-metric-actor",
+          "max_tokens": 50
+        }
+      },
+      {
+        "source_name": "b1",
+        "location": {
+          "line": 22,
+          "column": 5
+        },
+        "binding_id": 10,
+        "graph_register": "r_1",
+        "type": "text",
+        "producer_contract": {
+          "provider": "mock",
+          "model": "common-metric-actor",
+          "max_tokens": 50
+        }
+      },
+      {
+        "source_name": "a2",
+        "location": {
+          "line": 23,
+          "column": 5
+        },
+        "binding_id": 11,
+        "graph_register": "r_2",
+        "type": "text",
+        "producer_contract": {
+          "provider": "mock",
+          "model": "common-metric-actor",
+          "max_tokens": 50
+        }
+      },
+      {
+        "source_name": "b2",
+        "location": {
+          "line": 24,
+          "column": 5
+        },
+        "binding_id": 12,
+        "graph_register": "r_3",
+        "type": "text",
+        "producer_contract": {
+          "provider": "mock",
+          "model": "common-metric-actor",
+          "max_tokens": 50
+        }
+      },
+      {
+        "source_name": "a1",
+        "location": {
+          "line": 26,
+          "column": 5
+        },
+        "binding_id": 13,
+        "graph_register": "r_4",
+        "type": "text",
+        "producer_contract": {
+          "provider": "mock",
+          "model": "common-metric-actor",
+          "max_tokens": 50
+        }
+      },
+      {
+        "source_name": "b1",
+        "location": {
+          "line": 27,
+          "column": 5
+        },
+        "binding_id": 14,
+        "graph_register": "r_5",
+        "type": "text",
+        "producer_contract": {
+          "provider": "mock",
+          "model": "common-metric-actor",
+          "max_tokens": 50
+        }
+      },
+      {
+        "source_name": "a2",
+        "location": {
+          "line": 28,
+          "column": 5
+        },
+        "binding_id": 15,
+        "graph_register": "r_6",
+        "type": "text",
+        "producer_contract": {
+          "provider": "mock",
+          "model": "common-metric-actor",
+          "max_tokens": 50
+        }
+      },
+      {
+        "source_name": "b2",
+        "location": {
+          "line": 29,
+          "column": 5
+        },
+        "binding_id": 16,
+        "graph_register": "r_7",
+        "type": "text",
+        "producer_contract": {
+          "provider": "mock",
+          "model": "common-metric-actor",
+          "max_tokens": 50
+        }
+      }
+    ],
+    "states": [
+      {
+        "source_location": {
+          "line": 20,
+          "column": 3
+        },
+        "kind": "secret",
+        "source_guard": "route",
+        "graph_guard": {
+          "value": "in_7"
+        }
+      },
+      {
+        "source_location": {
+          "line": 24,
+          "column": 5
+        },
+        "graph_state": "state_1"
+      },
+      {
+        "source_location": {
+          "line": 23,
+          "column": 5
+        },
+        "graph_state": "state_2"
+      },
+      {
+        "source_location": {
+          "line": 22,
+          "column": 5
+        },
+        "graph_state": "state_3"
+      },
+      {
+        "source_location": {
+          "line": 21,
+          "column": 5
+        },
+        "graph_state": "state_4"
+      },
+      {
+        "source_location": {
+          "line": 29,
+          "column": 5
+        },
+        "graph_state": "state_5"
+      },
+      {
+        "source_location": {
+          "line": 28,
+          "column": 5
+        },
+        "graph_state": "state_6"
+      },
+      {
+        "source_location": {
+          "line": 27,
+          "column": 5
+        },
+        "graph_state": "state_7"
+      },
+      {
+        "source_location": {
+          "line": 26,
+          "column": 5
+        },
+        "graph_state": "state_8"
+      },
+      {
+        "source_location": {
+          "line": 20,
+          "column": 3
+        },
+        "graph_state": "state_9"
+      }
+    ]
+  }
+}

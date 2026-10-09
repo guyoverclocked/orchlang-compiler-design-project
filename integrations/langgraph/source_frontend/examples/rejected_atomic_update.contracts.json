@@ -1,0 +1,7 @@
+{
+  "format": "orchlang-langgraph-contracts",
+  "version": 1,
+  "name": "rejected_atomic_update",
+  "inputs": {"question": {"type": "text", "label": "public", "max_tokens": 64}},
+  "models": {"writer": {"provider": "mock", "model": "text-gen-v1", "max_tokens": 12}}
+}

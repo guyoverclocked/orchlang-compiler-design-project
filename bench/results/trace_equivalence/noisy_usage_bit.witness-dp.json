@@ -1,0 +1,122 @@
+{
+  "distributions": {
+    "horizon": 1,
+    "observer": "trace",
+    "scenario_histograms": [
+      {
+        "call_transitions": 2,
+        "entries": [
+          {
+            "observation": {
+              "stopped": true,
+              "usage_trace": [
+                {
+                  "contract": {
+                    "has_unit_price": false,
+                    "max_tokens": 8,
+                    "model": "finite-worker",
+                    "provider": "offline",
+                    "unit_price": 0.0
+                  },
+                  "input_tokens": 1,
+                  "output_tokens": 1
+                }
+              ]
+            },
+            "probability": "1/4"
+          },
+          {
+            "observation": {
+              "stopped": true,
+              "usage_trace": [
+                {
+                  "contract": {
+                    "has_unit_price": false,
+                    "max_tokens": 8,
+                    "model": "finite-worker",
+                    "provider": "offline",
+                    "unit_price": 0.0
+                  },
+                  "input_tokens": 1,
+                  "output_tokens": 2
+                }
+              ]
+            },
+            "probability": "3/4"
+          }
+        ],
+        "histogram_sha256": "2cb4f4d9fa083be7f7ab626bcc3458c6d9e25ebf215e1c2442ed88d92e50e9ba",
+        "mass": "1",
+        "scenario_index": 0,
+        "state_visits": 3,
+        "support_size": 2,
+        "work_bytes_estimate": 2222
+      },
+      {
+        "call_transitions": 2,
+        "entries": [
+          {
+            "observation": {
+              "stopped": true,
+              "usage_trace": [
+                {
+                  "contract": {
+                    "has_unit_price": false,
+                    "max_tokens": 8,
+                    "model": "finite-worker",
+                    "provider": "offline",
+                    "unit_price": 0.0
+                  },
+                  "input_tokens": 1,
+                  "output_tokens": 1
+                }
+              ]
+            },
+            "probability": "3/4"
+          },
+          {
+            "observation": {
+              "stopped": true,
+              "usage_trace": [
+                {
+                  "contract": {
+                    "has_unit_price": false,
+                    "max_tokens": 8,
+                    "model": "finite-worker",
+                    "provider": "offline",
+                    "unit_price": 0.0
+                  },
+                  "input_tokens": 1,
+                  "output_tokens": 2
+                }
+              ]
+            },
+            "probability": "1/4"
+          }
+        ],
+        "histogram_sha256": "ce81f78987bee91d2522ee0ba68214f14e377690a8d5833922272de2c43f9337",
+        "mass": "1",
+        "scenario_index": 1,
+        "state_visits": 3,
+        "support_size": 2,
+        "work_bytes_estimate": 2217
+      }
+    ]
+  },
+  "dp_witness_probabilities": {
+    "left": "3/4",
+    "right": "1/4"
+  },
+  "exact_witness_probabilities_match": true,
+  "finite_dp_histograms_differ": true,
+  "fixture": "noisy_usage_bit",
+  "format": "orchlang-trace-equivalence-witness-dp-cross-check",
+  "horizon": 1,
+  "observer": "trace",
+  "pair": {
+    "left_scenario": 1,
+    "right_scenario": 0
+  },
+  "scope": "finite-DP cross-check of one exact finite witness; not the proof itself",
+  "version": 1
+}

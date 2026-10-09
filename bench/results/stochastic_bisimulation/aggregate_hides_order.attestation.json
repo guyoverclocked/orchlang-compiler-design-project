@@ -1,0 +1,45 @@
+{
+  "certificate_status": "inconclusive",
+  "claim_scope": "A sound stable partition separates the scenario roots; the result is inconclusive and is not a leakage witness or a claim that trace laws differ.",
+  "diagnostic": null,
+  "equal_laws_claim": false,
+  "format": "orchlang-stochastic-bisimulation-replay-attestation",
+  "graph_sha256": "6698767717f8b5920c5a409ce3047b62ed68663d6564ec20a7ac19ad3feb4898",
+  "independent_control_steps": 2,
+  "independent_outcomes_expanded": 4,
+  "independent_work_bytes": 8798,
+  "initial_scenario_blocks": [
+    "B000001",
+    "B000000"
+  ],
+  "initial_scenario_state_ids": [
+    "S000001",
+    "S000000"
+  ],
+  "kernel_sha256": "62df7f0ad13716c524d3c2ebd48789f56fc4b51f5999cb2e439480d3015ee07e",
+  "partition_block_count": 5,
+  "producer_byte_work_estimate": 15861,
+  "producer_max_states": 10000,
+  "producer_max_work_bytes": 67108864,
+  "public_store_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "report_sha256": "61ba4b9722fa94d3b86799bfbf6b83d9ad7460d4b76e3248c195eb73bbc16860",
+  "scenario_count": 2,
+  "secret_scenarios_sha256": "c746a0cd8c632a82c9994be1df942b4258d3968e3d63189dd6b0f9cfe75945a0",
+  "state_count": 6,
+  "status": "verified",
+  "transition_count": 4,
+  "unverified_fields": [
+    "hashes.checker_sha256 (digest shape only; the producer executable was not replayed)",
+    "analysis_stats.byte_work_estimate (producer meter; verifier uses a separate deterministic work budget)"
+  ],
+  "verification_method": "independent finite-state closure and bisimulation replay",
+  "verifier_limits": {
+    "max_control_steps": 1000000,
+    "max_state_key_bytes": 16777216,
+    "max_states": 10000,
+    "max_transitions": 1000000,
+    "max_work_bytes": 67108864,
+    "rational_precision_limit_bits": 8192
+  },
+  "version": 1
+}

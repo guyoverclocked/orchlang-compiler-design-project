@@ -1,0 +1,19 @@
+{
+  "workflows": [
+    {
+      "name": "ChainMatch",
+      "nodes": [
+        {"id": 1, "kind": "Secret", "name": "choose", "type": "boolean", "label": "secret/trusted", "region": "root", "repeat": 1, "dependencies": [], "attributes": {"max_tokens": "1"}},
+        {"id": 2, "kind": "Input", "name": "source", "type": "text", "label": "public/trusted", "region": "root", "repeat": 1, "dependencies": [], "attributes": {"max_tokens": "32"}},
+        {"id": 3, "kind": "Model", "name": "shared", "type": "<unknown>", "label": "public/trusted", "region": "root", "repeat": 1, "dependencies": [], "attributes": {"provider": "mock", "name": "research-model", "max_tokens": "4"}},
+        {"id": 4, "kind": "Prompt", "name": "ask", "type": "text", "label": "public/trusted", "region": "root", "repeat": 1, "dependencies": [], "attributes": {"parameters": "1"}},
+        {"id": 5, "kind": "Branch", "name": "choose", "type": "boolean", "label": "secret/trusted", "region": "root", "repeat": 1, "dependencies": [1], "attributes": {"guard": "choose", "has_else": "true"}},
+        {"id": 6, "kind": "Call", "name": "first_left", "type": "text", "label": "public/trusted", "region": "root/then@6", "repeat": 1, "dependencies": [4, 3, 2], "attributes": {"prompt": "ask", "model": "shared", "out_tokens": "4", "in_tokens": "35"}},
+        {"id": 7, "kind": "Call", "name": "second_left", "type": "text", "label": "public/trusted", "region": "root/then@6", "repeat": 1, "dependencies": [4, 3, 6], "attributes": {"prompt": "ask", "model": "shared", "out_tokens": "4", "in_tokens": "7"}},
+        {"id": 8, "kind": "Call", "name": "first_right", "type": "text", "label": "public/trusted", "region": "root/else@6", "repeat": 1, "dependencies": [4, 3, 2], "attributes": {"prompt": "ask", "model": "shared", "out_tokens": "4", "in_tokens": "35"}},
+        {"id": 9, "kind": "Call", "name": "second_right", "type": "text", "label": "public/trusted", "region": "root/else@6", "repeat": 1, "dependencies": [4, 3, 8], "attributes": {"prompt": "ask", "model": "shared", "out_tokens": "4", "in_tokens": "7"}},
+        {"id": 10, "kind": "Output", "name": "\"complete\"", "type": "<unknown>", "label": "public/trusted", "region": "root", "repeat": 1, "dependencies": [], "attributes": {}}
+      ]
+    }
+  ]
+}

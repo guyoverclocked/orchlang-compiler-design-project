@@ -1,0 +1,866 @@
+{
+  "caps": {
+    "finite_dp": {
+      "max_states_per_scenario_horizon_observer": 100000,
+      "max_work_bytes_per_scenario_horizon_observer": 67108864
+    },
+    "independent_replayer": {
+      "max_control_steps": 1000000,
+      "max_state_key_bytes": 16777216,
+      "max_states": 10000,
+      "max_transitions": 1000000,
+      "max_work_bytes": 67108864,
+      "rational_precision_limit_bits": 8192
+    },
+    "producer": {
+      "max_state_key_bytes": 16777216,
+      "max_states": 10000,
+      "max_work_bytes": 67108864,
+      "rational_precision_limit_bits": 8192
+    },
+    "unknown_probe": {
+      "producer_max_states": 1,
+      "producer_max_work_bytes": 67108864,
+      "replayer_max_control_steps": 1000000,
+      "replayer_max_states": 10000,
+      "replayer_max_transitions": 1000000,
+      "replayer_max_work_bytes": 67108864
+    }
+  },
+  "failures": [],
+  "fixtures": [
+    {
+      "certificate": {
+        "checker_sha256": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+        "path": "bench/results/stochastic_bisimulation/aggregate_hides_order.certificate.json",
+        "sha256": "61ba4b9722fa94d3b86799bfbf6b83d9ad7460d4b76e3248c195eb73bbc16860",
+        "state_count": 6,
+        "transition_count": 4
+      },
+      "finite_dp_cross_check": null,
+      "graph": {
+        "bytes": 1299,
+        "path": "examples/channels/aggregate_hides_order.graph.json",
+        "sha256": "6698767717f8b5920c5a409ce3047b62ed68663d6564ec20a7ac19ad3feb4898"
+      },
+      "independent_attestation": {
+        "certificate_status": "inconclusive",
+        "equal_laws_claim": false,
+        "independent_work_bytes": 8798,
+        "path": "bench/results/stochastic_bisimulation/aggregate_hides_order.attestation.json",
+        "sha256": "7981bd8eb9df03c889ddad3df9520a78d2985c8fbc4ad70f6d4785b200aaf409",
+        "state_count": 6,
+        "status": "verified",
+        "transition_count": 4
+      },
+      "inputs_artifact": {
+        "path": "bench/results/stochastic_bisimulation/aggregate_hides_order.inputs.json",
+        "sha256": "8523a4ab6dd9a7bab6bbf8b4ec57aeaa9206e81bdf2f10afec5c1e730406a55b"
+      },
+      "kernel": {
+        "bytes": 1083,
+        "path": "examples/channels/aggregate_hides_order.kernel.json",
+        "sha256": "62df7f0ad13716c524d3c2ebd48789f56fc4b51f5999cb2e439480d3015ee07e"
+      },
+      "name": "aggregate_hides_order",
+      "producer_status": "inconclusive",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "state_cap_unknown_probe": {
+        "certificate": {
+          "claim": null,
+          "closed_system": null,
+          "partition_certificate": null,
+          "path": "bench/results/stochastic_bisimulation/aggregate_hides_order.cap1-unknown.certificate.json",
+          "reason": "reachable semantic-state cap reached",
+          "sha256": "7aebd1d6191e22a6e37ce26780c176008878f68876ad1ec912e86f1bacf6c061",
+          "status": "unknown"
+        },
+        "fresh_independent_attestation": {
+          "diagnostic": "producer certificate is UNKNOWN; no partial closure is replayed",
+          "equal_laws_claim": false,
+          "path": "bench/results/stochastic_bisimulation/aggregate_hides_order.cap1-unknown.attestation.json",
+          "sha256": "29c02b09d2e99241491273c68eb3f5b97f7257590f2e85d027be5cc608f0a0ba",
+          "status": "unknown"
+        },
+        "producer_max_states": 1
+      },
+      "structural_status": "rejected"
+    },
+    {
+      "certificate": {
+        "checker_sha256": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+        "path": "bench/results/stochastic_bisimulation/biased_productive_cycle.certificate.json",
+        "sha256": "256c2cdc508dc4c85ce9631693c46963f97bd8226e4c8a6376bae8fdad01c172",
+        "state_count": 134,
+        "transition_count": 136
+      },
+      "finite_dp_cross_check": null,
+      "graph": {
+        "bytes": 1437,
+        "path": "examples/channels/biased_productive_cycle.graph.json",
+        "sha256": "8da6a2a965021760108194c6decadbc205c975bb5a4cf2ad731374f67b610de2"
+      },
+      "independent_attestation": {
+        "certificate_status": "inconclusive",
+        "equal_laws_claim": false,
+        "independent_work_bytes": 261072,
+        "path": "bench/results/stochastic_bisimulation/biased_productive_cycle.attestation.json",
+        "sha256": "d21cb977ec50f1fbae57eced1352ae16ec5d444b008abc29f7cd17c6db13200c",
+        "state_count": 134,
+        "status": "verified",
+        "transition_count": 136
+      },
+      "inputs_artifact": {
+        "path": "bench/results/stochastic_bisimulation/biased_productive_cycle.inputs.json",
+        "sha256": "8523a4ab6dd9a7bab6bbf8b4ec57aeaa9206e81bdf2f10afec5c1e730406a55b"
+      },
+      "kernel": {
+        "bytes": 843,
+        "path": "examples/channels/biased_productive_cycle.kernel.json",
+        "sha256": "be226002f14ff3c0e7071c16a78cf7fafcd0da009ad185b98be28136e37f5175"
+      },
+      "name": "biased_productive_cycle",
+      "producer_status": "inconclusive",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "state_cap_unknown_probe": {
+        "certificate": {
+          "claim": null,
+          "closed_system": null,
+          "partition_certificate": null,
+          "path": "bench/results/stochastic_bisimulation/biased_productive_cycle.cap1-unknown.certificate.json",
+          "reason": "reachable semantic-state cap reached",
+          "sha256": "63b0f454bcbf9597ab555a6c56d18a91b14c7b3f3ef827b6294b91dfc4af1d18",
+          "status": "unknown"
+        },
+        "fresh_independent_attestation": {
+          "diagnostic": "producer certificate is UNKNOWN; no partial closure is replayed",
+          "equal_laws_claim": false,
+          "path": "bench/results/stochastic_bisimulation/biased_productive_cycle.cap1-unknown.attestation.json",
+          "sha256": "9c665e81fe1c91f4baeb3127f4745a61c30bc1205faaabbeb734628122342049",
+          "status": "unknown"
+        },
+        "producer_max_states": 1
+      },
+      "structural_status": "rejected"
+    },
+    {
+      "certificate": {
+        "checker_sha256": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+        "path": "bench/results/stochastic_bisimulation/canonical_alias_chain.certificate.json",
+        "sha256": "4e5b2e6c440c3fd748f875693f3fd27507037744768dcc426f3a9a450962ad7d",
+        "state_count": 14,
+        "transition_count": 12
+      },
+      "finite_dp_cross_check": {
+        "dp_call_transitions": 128,
+        "dp_state_visits": 152,
+        "exact_equal_law_checks": 12,
+        "horizons_checked": 6,
+        "observers_checked": 2,
+        "path": "bench/results/stochastic_bisimulation/finite_dp/canonical_alias_chain.json",
+        "scenario_histograms_checked": 24,
+        "sha256": "a6883fda63acb912f52b07873800d429f676607efd4f6d30bf248c64bb085e9b"
+      },
+      "graph": {
+        "bytes": 1618,
+        "path": "examples/channels/canonical_alias_chain.graph.json",
+        "sha256": "44fd0d5cfcc94d14dceef393bb27f843c4ebb5dec5e1feeb62913e8607f7ae22"
+      },
+      "independent_attestation": {
+        "certificate_status": "proved_equal",
+        "equal_laws_claim": true,
+        "independent_work_bytes": 25020,
+        "path": "bench/results/stochastic_bisimulation/canonical_alias_chain.attestation.json",
+        "sha256": "feb937922b322984dd5fa6f5509615683503ee06a3605720bf752a9744d762ac",
+        "state_count": 14,
+        "status": "verified",
+        "transition_count": 12
+      },
+      "inputs_artifact": {
+        "path": "bench/results/stochastic_bisimulation/canonical_alias_chain.inputs.json",
+        "sha256": "8523a4ab6dd9a7bab6bbf8b4ec57aeaa9206e81bdf2f10afec5c1e730406a55b"
+      },
+      "kernel": {
+        "bytes": 339,
+        "path": "examples/channels/canonical_alias_chain.kernel.json",
+        "sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b"
+      },
+      "name": "canonical_alias_chain",
+      "producer_status": "proved_equal",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "state_cap_unknown_probe": {
+        "certificate": {
+          "claim": null,
+          "closed_system": null,
+          "partition_certificate": null,
+          "path": "bench/results/stochastic_bisimulation/canonical_alias_chain.cap1-unknown.certificate.json",
+          "reason": "reachable semantic-state cap reached",
+          "sha256": "a8bddbe2a791fe8e0ff8f12cbf674c9604489a965bc9fecaa606df5c1b3ed810",
+          "status": "unknown"
+        },
+        "fresh_independent_attestation": {
+          "diagnostic": "producer certificate is UNKNOWN; no partial closure is replayed",
+          "equal_laws_claim": false,
+          "path": "bench/results/stochastic_bisimulation/canonical_alias_chain.cap1-unknown.attestation.json",
+          "sha256": "80bd8e8c66c372641730283f24f14e9490d1e4c4583109cd21a059aaaece9779",
+          "status": "unknown"
+        },
+        "producer_max_states": 1
+      },
+      "structural_status": "accepted"
+    },
+    {
+      "certificate": {
+        "checker_sha256": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+        "path": "bench/results/stochastic_bisimulation/changed_public_context.certificate.json",
+        "sha256": "4a7a37b621382b4cf16650226462901806f307d544fc58b4e436fd1a5735ba31",
+        "state_count": 6,
+        "transition_count": 4
+      },
+      "finite_dp_cross_check": null,
+      "graph": {
+        "bytes": 1275,
+        "path": "examples/channels/changed_public_context.graph.json",
+        "sha256": "c0fd454003fde2f6b12a33493fbd812fc899f69ccdc507cdf2774b8a09cee89e"
+      },
+      "independent_attestation": {
+        "certificate_status": "inconclusive",
+        "equal_laws_claim": false,
+        "independent_work_bytes": 9698,
+        "path": "bench/results/stochastic_bisimulation/changed_public_context.attestation.json",
+        "sha256": "1158573b16eccee385f6ca1ef07cbdf33844a4861d42d17e6013d4d680491c0c",
+        "state_count": 6,
+        "status": "verified",
+        "transition_count": 4
+      },
+      "inputs_artifact": {
+        "path": "bench/results/stochastic_bisimulation/changed_public_context.inputs.json",
+        "sha256": "a9bc094cd50e1916143e20bca7e04ef58252029f29f8d04ecff0dd872078f9bf"
+      },
+      "kernel": {
+        "bytes": 339,
+        "path": "examples/channels/changed_public_context.kernel.json",
+        "sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b"
+      },
+      "name": "changed_public_context",
+      "producer_status": "inconclusive",
+      "public_store": {
+        "q": "qq"
+      },
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "state_cap_unknown_probe": {
+        "certificate": {
+          "claim": null,
+          "closed_system": null,
+          "partition_certificate": null,
+          "path": "bench/results/stochastic_bisimulation/changed_public_context.cap1-unknown.certificate.json",
+          "reason": "reachable semantic-state cap reached",
+          "sha256": "8fca548abaf8e70de3ff5200a32f9bafa958798b48d68408f6a9cd9cea4e2a94",
+          "status": "unknown"
+        },
+        "fresh_independent_attestation": {
+          "diagnostic": "producer certificate is UNKNOWN; no partial closure is replayed",
+          "equal_laws_claim": false,
+          "path": "bench/results/stochastic_bisimulation/changed_public_context.cap1-unknown.attestation.json",
+          "sha256": "d36e66c5027ac03b02f94ed13aa1fe75694b7129c0f9410a2c944cdf47615205",
+          "status": "unknown"
+        },
+        "producer_max_states": 1
+      },
+      "structural_status": "rejected"
+    },
+    {
+      "certificate": {
+        "checker_sha256": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+        "path": "bench/results/stochastic_bisimulation/different_requests_equal_usage.certificate.json",
+        "sha256": "cf80141f0d7bd0584a570469d9b010d5741dc2f997f941cfcf9f5f6123eeda53",
+        "state_count": 6,
+        "transition_count": 4
+      },
+      "finite_dp_cross_check": {
+        "dp_call_transitions": 48,
+        "dp_state_visits": 72,
+        "exact_equal_law_checks": 12,
+        "horizons_checked": 6,
+        "observers_checked": 2,
+        "path": "bench/results/stochastic_bisimulation/finite_dp/different_requests_equal_usage.json",
+        "scenario_histograms_checked": 24,
+        "sha256": "af4affccf982a6d5922ff157d24342a61475518624bf10f30e78e8e7b2ff9fb3"
+      },
+      "graph": {
+        "bytes": 1062,
+        "path": "examples/channels/different_requests_equal_usage.graph.json",
+        "sha256": "6956de33d4f1798dbe5f2ec0aab6b7f74ec7a1d1d52cf0369be7cceba8b600a6"
+      },
+      "independent_attestation": {
+        "certificate_status": "proved_equal",
+        "equal_laws_claim": true,
+        "independent_work_bytes": 9426,
+        "path": "bench/results/stochastic_bisimulation/different_requests_equal_usage.attestation.json",
+        "sha256": "f87f3153158cc7e694dbdfaaef7f4d2bba1390bd2286b5fd8836c41b98dfedc5",
+        "state_count": 6,
+        "status": "verified",
+        "transition_count": 4
+      },
+      "inputs_artifact": {
+        "path": "bench/results/stochastic_bisimulation/different_requests_equal_usage.inputs.json",
+        "sha256": "8523a4ab6dd9a7bab6bbf8b4ec57aeaa9206e81bdf2f10afec5c1e730406a55b"
+      },
+      "kernel": {
+        "bytes": 339,
+        "path": "examples/channels/different_requests_equal_usage.kernel.json",
+        "sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b"
+      },
+      "name": "different_requests_equal_usage",
+      "producer_status": "proved_equal",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "state_cap_unknown_probe": {
+        "certificate": {
+          "claim": null,
+          "closed_system": null,
+          "partition_certificate": null,
+          "path": "bench/results/stochastic_bisimulation/different_requests_equal_usage.cap1-unknown.certificate.json",
+          "reason": "reachable semantic-state cap reached",
+          "sha256": "3fa953bd826ceba7acf2842d4b38067b9b992cfdc18ddfa4f17bf7f5381f7243",
+          "status": "unknown"
+        },
+        "fresh_independent_attestation": {
+          "diagnostic": "producer certificate is UNKNOWN; no partial closure is replayed",
+          "equal_laws_claim": false,
+          "path": "bench/results/stochastic_bisimulation/different_requests_equal_usage.cap1-unknown.attestation.json",
+          "sha256": "9deeb9c35bea64baf803a50f04c537f211199c2e047eef9feadf8ce85a69a528",
+          "status": "unknown"
+        },
+        "producer_max_states": 1
+      },
+      "structural_status": "rejected"
+    },
+    {
+      "certificate": {
+        "checker_sha256": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+        "path": "bench/results/stochastic_bisimulation/equivalent_dependent_chain.certificate.json",
+        "sha256": "62701ca7590f2131119952f6b34d7dde26e7c7dc042d3b15dbda96b9377457cb",
+        "state_count": 14,
+        "transition_count": 12
+      },
+      "finite_dp_cross_check": {
+        "dp_call_transitions": 128,
+        "dp_state_visits": 152,
+        "exact_equal_law_checks": 12,
+        "horizons_checked": 6,
+        "observers_checked": 2,
+        "path": "bench/results/stochastic_bisimulation/finite_dp/equivalent_dependent_chain.json",
+        "scenario_histograms_checked": 24,
+        "sha256": "45b08f3f3d334e218fea923138b3ba024809eba320a56d781dbbe77e6b32ce9b"
+      },
+      "graph": {
+        "bytes": 1510,
+        "path": "examples/channels/equivalent_dependent_chain.graph.json",
+        "sha256": "d2288c35e5b47eb71b77e50bba8c067eae4dcda66269e6c3a8e4f38692c1bf9f"
+      },
+      "independent_attestation": {
+        "certificate_status": "proved_equal",
+        "equal_laws_claim": true,
+        "independent_work_bytes": 25020,
+        "path": "bench/results/stochastic_bisimulation/equivalent_dependent_chain.attestation.json",
+        "sha256": "930bb42d52335381d1730b5d7b5bd6f1f3e8ad98657c72aaa9600979a211e5d7",
+        "state_count": 14,
+        "status": "verified",
+        "transition_count": 12
+      },
+      "inputs_artifact": {
+        "path": "bench/results/stochastic_bisimulation/equivalent_dependent_chain.inputs.json",
+        "sha256": "8523a4ab6dd9a7bab6bbf8b4ec57aeaa9206e81bdf2f10afec5c1e730406a55b"
+      },
+      "kernel": {
+        "bytes": 339,
+        "path": "examples/channels/equivalent_dependent_chain.kernel.json",
+        "sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b"
+      },
+      "name": "equivalent_dependent_chain",
+      "producer_status": "proved_equal",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "state_cap_unknown_probe": {
+        "certificate": {
+          "claim": null,
+          "closed_system": null,
+          "partition_certificate": null,
+          "path": "bench/results/stochastic_bisimulation/equivalent_dependent_chain.cap1-unknown.certificate.json",
+          "reason": "reachable semantic-state cap reached",
+          "sha256": "715ad1ba20e4a80f67b372dbdabaf0c9c311ae7d53dd016cadde2a08378c6e80",
+          "status": "unknown"
+        },
+        "fresh_independent_attestation": {
+          "diagnostic": "producer certificate is UNKNOWN; no partial closure is replayed",
+          "equal_laws_claim": false,
+          "path": "bench/results/stochastic_bisimulation/equivalent_dependent_chain.cap1-unknown.attestation.json",
+          "sha256": "3d3219e28e782bf23d3d603db1503ef1b1b39972828743e15381ad46afa887ad",
+          "status": "unknown"
+        },
+        "producer_max_states": 1
+      },
+      "structural_status": "accepted"
+    },
+    {
+      "certificate": {
+        "checker_sha256": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+        "path": "bench/results/stochastic_bisimulation/fixed_public_context.certificate.json",
+        "sha256": "a5fed5e96586dfc36cd500725ee68f2c83d048cd80789b279e44db5b3cfbbc28",
+        "state_count": 6,
+        "transition_count": 4
+      },
+      "finite_dp_cross_check": {
+        "dp_call_transitions": 48,
+        "dp_state_visits": 72,
+        "exact_equal_law_checks": 12,
+        "horizons_checked": 6,
+        "observers_checked": 2,
+        "path": "bench/results/stochastic_bisimulation/finite_dp/fixed_public_context.json",
+        "scenario_histograms_checked": 24,
+        "sha256": "afdc621c3e6baa213877a23c38ad10b179aca3eb6e9e042cccd5f4bddd9e4d56"
+      },
+      "graph": {
+        "bytes": 1273,
+        "path": "examples/channels/fixed_public_context.graph.json",
+        "sha256": "2d64a6834c5bd91b365b550d578f844835c8d363ee404fec82e22d463a1cf9de"
+      },
+      "independent_attestation": {
+        "certificate_status": "proved_equal",
+        "equal_laws_claim": true,
+        "independent_work_bytes": 9673,
+        "path": "bench/results/stochastic_bisimulation/fixed_public_context.attestation.json",
+        "sha256": "4ee96c32af7b61c248c908eca710515c5af992cadbb158115c8af7a5b7428ff7",
+        "state_count": 6,
+        "status": "verified",
+        "transition_count": 4
+      },
+      "inputs_artifact": {
+        "path": "bench/results/stochastic_bisimulation/fixed_public_context.inputs.json",
+        "sha256": "393acba536d2bd7cb9f86102ffa444b807675917558d1f5fdb68c6f9bec10e85"
+      },
+      "kernel": {
+        "bytes": 339,
+        "path": "examples/channels/fixed_public_context.kernel.json",
+        "sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b"
+      },
+      "name": "fixed_public_context",
+      "producer_status": "proved_equal",
+      "public_store": {
+        "q": "q"
+      },
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "state_cap_unknown_probe": {
+        "certificate": {
+          "claim": null,
+          "closed_system": null,
+          "partition_certificate": null,
+          "path": "bench/results/stochastic_bisimulation/fixed_public_context.cap1-unknown.certificate.json",
+          "reason": "reachable semantic-state cap reached",
+          "sha256": "e52c63a8d67e71374375ce993f2dec85674fc356137acc8364749b68f58769d0",
+          "status": "unknown"
+        },
+        "fresh_independent_attestation": {
+          "diagnostic": "producer certificate is UNKNOWN; no partial closure is replayed",
+          "equal_laws_claim": false,
+          "path": "bench/results/stochastic_bisimulation/fixed_public_context.cap1-unknown.attestation.json",
+          "sha256": "f19a8c308227ba2e32d0e53896db55d0571bc0792c071142c5ab22156ac2ed18",
+          "status": "unknown"
+        },
+        "producer_max_states": 1
+      },
+      "structural_status": "rejected"
+    },
+    {
+      "certificate": {
+        "checker_sha256": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+        "path": "bench/results/stochastic_bisimulation/history_conditioned_usage.certificate.json",
+        "sha256": "72b434a284d7d12579588000778deee93bec65b83006db45d3ac62f7ea15f6aa",
+        "state_count": 6,
+        "transition_count": 4
+      },
+      "finite_dp_cross_check": null,
+      "graph": {
+        "bytes": 1303,
+        "path": "examples/channels/history_conditioned_usage.graph.json",
+        "sha256": "6ebf39a21215c8632fef7fabf5f5bb19953886914e4c85d226e695cfa8431210"
+      },
+      "independent_attestation": {
+        "certificate_status": "inconclusive",
+        "equal_laws_claim": false,
+        "independent_work_bytes": 12350,
+        "path": "bench/results/stochastic_bisimulation/history_conditioned_usage.attestation.json",
+        "sha256": "1f2900d9c4a9c94ab2b0145962b6e83c04b10a2d80a9a112d38b07ebaf4146dd",
+        "state_count": 6,
+        "status": "verified",
+        "transition_count": 4
+      },
+      "inputs_artifact": {
+        "path": "bench/results/stochastic_bisimulation/history_conditioned_usage.inputs.json",
+        "sha256": "8523a4ab6dd9a7bab6bbf8b4ec57aeaa9206e81bdf2f10afec5c1e730406a55b"
+      },
+      "kernel": {
+        "bytes": 1835,
+        "path": "examples/channels/history_conditioned_usage.kernel.json",
+        "sha256": "d3214743609fb90d704d7f0fd08b52d6c7de91b4c734ff4105f89eb3931ff0ab"
+      },
+      "name": "history_conditioned_usage",
+      "producer_status": "inconclusive",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "state_cap_unknown_probe": {
+        "certificate": {
+          "claim": null,
+          "closed_system": null,
+          "partition_certificate": null,
+          "path": "bench/results/stochastic_bisimulation/history_conditioned_usage.cap1-unknown.certificate.json",
+          "reason": "reachable semantic-state cap reached",
+          "sha256": "ec7430d7e9b5b8c0c0eeddad231cf08f6904fb473e2803ebd78b9a3a33ea1c49",
+          "status": "unknown"
+        },
+        "fresh_independent_attestation": {
+          "diagnostic": "producer certificate is UNKNOWN; no partial closure is replayed",
+          "equal_laws_claim": false,
+          "path": "bench/results/stochastic_bisimulation/history_conditioned_usage.cap1-unknown.attestation.json",
+          "sha256": "e4457538701f3eadd95897cac0b28812593859d7c8fe62b1f1dfbf22daca6fca",
+          "status": "unknown"
+        },
+        "producer_max_states": 1
+      },
+      "structural_status": "rejected"
+    },
+    {
+      "certificate": {
+        "checker_sha256": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+        "path": "bench/results/stochastic_bisimulation/merge_stress_productive_cycle.certificate.json",
+        "sha256": "a22a79e098e011c625e962360cccd8293cabccf214c408043b425d5af3914c4f",
+        "state_count": 134,
+        "transition_count": 268
+      },
+      "finite_dp_cross_check": {
+        "dp_call_transitions": 960,
+        "dp_state_visits": 528,
+        "exact_equal_law_checks": 12,
+        "horizons_checked": 6,
+        "observers_checked": 2,
+        "path": "bench/results/stochastic_bisimulation/finite_dp/merge_stress_productive_cycle.json",
+        "scenario_histograms_checked": 24,
+        "sha256": "80eb16a62a3815946caf8d3704582cb56f57800d6ecc56c5da680c5dde1698be"
+      },
+      "graph": {
+        "bytes": 1097,
+        "path": "examples/channels/merge_stress_productive_cycle.graph.json",
+        "sha256": "d1bafe2732f0ca44b0a54c865936dd0cad2b05af157df0ce2484f0d290a05b82"
+      },
+      "independent_attestation": {
+        "certificate_status": "proved_equal",
+        "equal_laws_claim": true,
+        "independent_work_bytes": 400358,
+        "path": "bench/results/stochastic_bisimulation/merge_stress_productive_cycle.attestation.json",
+        "sha256": "55c5ed29df1ac02b567ba1e03a112c628ebe17f41e3a7410070eb27ca6112d6b",
+        "state_count": 134,
+        "status": "verified",
+        "transition_count": 268
+      },
+      "inputs_artifact": {
+        "path": "bench/results/stochastic_bisimulation/merge_stress_productive_cycle.inputs.json",
+        "sha256": "8523a4ab6dd9a7bab6bbf8b4ec57aeaa9206e81bdf2f10afec5c1e730406a55b"
+      },
+      "kernel": {
+        "bytes": 338,
+        "path": "examples/channels/merge_stress_productive_cycle.kernel.json",
+        "sha256": "3d9b0a039d26d43c76299956ea93c0ced3e065499d345a11ced349a7f6382f4a"
+      },
+      "name": "merge_stress_productive_cycle",
+      "producer_status": "proved_equal",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "state_cap_unknown_probe": {
+        "certificate": {
+          "claim": null,
+          "closed_system": null,
+          "partition_certificate": null,
+          "path": "bench/results/stochastic_bisimulation/merge_stress_productive_cycle.cap1-unknown.certificate.json",
+          "reason": "reachable semantic-state cap reached",
+          "sha256": "384c9e686aca6b08020c8682e73e2f6cba7ec94bcbf24c0a089dc0160d2c8bbe",
+          "status": "unknown"
+        },
+        "fresh_independent_attestation": {
+          "diagnostic": "producer certificate is UNKNOWN; no partial closure is replayed",
+          "equal_laws_claim": false,
+          "path": "bench/results/stochastic_bisimulation/merge_stress_productive_cycle.cap1-unknown.attestation.json",
+          "sha256": "02c1b236207097954eb4f8c27d43011d1861872fe0a1b80bfcdee4261a421722",
+          "status": "unknown"
+        },
+        "producer_max_states": 1
+      },
+      "structural_status": "accepted"
+    },
+    {
+      "certificate": {
+        "checker_sha256": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+        "path": "bench/results/stochastic_bisimulation/noisy_usage_bit.certificate.json",
+        "sha256": "e747b187cdab1c536059da8cd10bbff5bb71aa6d9b83a0f766482ff617e7429d",
+        "state_count": 6,
+        "transition_count": 4
+      },
+      "finite_dp_cross_check": null,
+      "graph": {
+        "bytes": 1047,
+        "path": "examples/channels/noisy_usage_bit.graph.json",
+        "sha256": "9e8ebdfedcdf070c906646b18abfa32ee2b516cad146160eff9be9dc51078952"
+      },
+      "independent_attestation": {
+        "certificate_status": "inconclusive",
+        "equal_laws_claim": false,
+        "independent_work_bytes": 9426,
+        "path": "bench/results/stochastic_bisimulation/noisy_usage_bit.attestation.json",
+        "sha256": "cb6f01ae1138a0a77c848976b0df84a6eeeea4715a25197896c9816a0ef85ec3",
+        "state_count": 6,
+        "status": "verified",
+        "transition_count": 4
+      },
+      "inputs_artifact": {
+        "path": "bench/results/stochastic_bisimulation/noisy_usage_bit.inputs.json",
+        "sha256": "8523a4ab6dd9a7bab6bbf8b4ec57aeaa9206e81bdf2f10afec5c1e730406a55b"
+      },
+      "kernel": {
+        "bytes": 843,
+        "path": "examples/channels/noisy_usage_bit.kernel.json",
+        "sha256": "be226002f14ff3c0e7071c16a78cf7fafcd0da009ad185b98be28136e37f5175"
+      },
+      "name": "noisy_usage_bit",
+      "producer_status": "inconclusive",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "state_cap_unknown_probe": {
+        "certificate": {
+          "claim": null,
+          "closed_system": null,
+          "partition_certificate": null,
+          "path": "bench/results/stochastic_bisimulation/noisy_usage_bit.cap1-unknown.certificate.json",
+          "reason": "reachable semantic-state cap reached",
+          "sha256": "971ebce9d08a0a3d30728b1671d72cfd7ef76eeee3e32e643fbca317fe910f09",
+          "status": "unknown"
+        },
+        "fresh_independent_attestation": {
+          "diagnostic": "producer certificate is UNKNOWN; no partial closure is replayed",
+          "equal_laws_claim": false,
+          "path": "bench/results/stochastic_bisimulation/noisy_usage_bit.cap1-unknown.attestation.json",
+          "sha256": "d7cb1718273ea8bf427c052b97a6b506c321b92e83e90888db81ec1136c922de",
+          "status": "unknown"
+        },
+        "producer_max_states": 1
+      },
+      "structural_status": "rejected"
+    },
+    {
+      "certificate": {
+        "checker_sha256": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+        "path": "bench/results/stochastic_bisimulation/same_mean_distinct_laws.certificate.json",
+        "sha256": "fcc8d4d788bcb2c0374504fe332927344f183843f8ca07accd7520ed37db019f",
+        "state_count": 5,
+        "transition_count": 3
+      },
+      "finite_dp_cross_check": null,
+      "graph": {
+        "bytes": 1055,
+        "path": "examples/channels/same_mean_distinct_laws.graph.json",
+        "sha256": "dd162d378bac2b9a9e549e6e78f509efaa2ff8b1f5c4a9092147a257ee89ddd7"
+      },
+      "independent_attestation": {
+        "certificate_status": "inconclusive",
+        "equal_laws_claim": false,
+        "independent_work_bytes": 7367,
+        "path": "bench/results/stochastic_bisimulation/same_mean_distinct_laws.attestation.json",
+        "sha256": "91a31b18b361cdf45ec7c56060e75e9bf0223d7aab7d6300e45541afd9514a27",
+        "state_count": 5,
+        "status": "verified",
+        "transition_count": 3
+      },
+      "inputs_artifact": {
+        "path": "bench/results/stochastic_bisimulation/same_mean_distinct_laws.inputs.json",
+        "sha256": "8523a4ab6dd9a7bab6bbf8b4ec57aeaa9206e81bdf2f10afec5c1e730406a55b"
+      },
+      "kernel": {
+        "bytes": 733,
+        "path": "examples/channels/same_mean_distinct_laws.kernel.json",
+        "sha256": "d5c67dff48e768099560eb1bc52eebe088b5a77bad33752076480e67e97c373e"
+      },
+      "name": "same_mean_distinct_laws",
+      "producer_status": "inconclusive",
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ],
+      "state_cap_unknown_probe": {
+        "certificate": {
+          "claim": null,
+          "closed_system": null,
+          "partition_certificate": null,
+          "path": "bench/results/stochastic_bisimulation/same_mean_distinct_laws.cap1-unknown.certificate.json",
+          "reason": "reachable semantic-state cap reached",
+          "sha256": "34c3c1d2fd6d44c076f49f39297a85183ae0dabfa6afb2775e746a26ea40a4cd",
+          "status": "unknown"
+        },
+        "fresh_independent_attestation": {
+          "diagnostic": "producer certificate is UNKNOWN; no partial closure is replayed",
+          "equal_laws_claim": false,
+          "path": "bench/results/stochastic_bisimulation/same_mean_distinct_laws.cap1-unknown.attestation.json",
+          "sha256": "3e85c3ced745e22f577239cd7e624261288934d878515e78fbbe68244c4a8bfd",
+          "status": "unknown"
+        },
+        "producer_max_states": 1
+      },
+      "structural_status": "rejected"
+    }
+  ],
+  "format": "orchlang-stochastic-bisimulation-evaluation",
+  "method": {
+    "finite_dp_cross_check": "probabilistic_channels.producer_histogram exact dynamic program; aggregate and ordered trace observers",
+    "horizons": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "independent_replay": "audit/replay_stochastic_certificate.py CLI with expected public store and secret assignments",
+    "observers": [
+      "aggregate",
+      "trace"
+    ],
+    "producer": "audit/stochastic_bisimulation.py CLI; certificate binds exact graph/kernel file bytes",
+    "secret_assignment_source": "audit/evaluate_probabilistic_channels.py SCENARIOS values, with priors omitted",
+    "unknown_probe": "fresh producer run with max_states=1, followed by a fresh independent replay; no prior attestation reused"
+  },
+  "runtime": {
+    "python_version": "3.12.14"
+  },
+  "scenario_assignments": [
+    {
+      "secret": false
+    },
+    {
+      "secret": true
+    }
+  ],
+  "scope": "Authored finite request-graph fixtures and synthetic rational kernels; two explicit secret assignments per fixture; no priors or provider calls.",
+  "source_hashes": {
+    "driver_sha256": "d347795a8f8b562f6a8d909bd21237d851136a336dd107c38190adc3e0ba0961",
+    "finite_dp_sha256": "45380e75cdcc4d6f285a0027cbb85dab97d22dff11c5c94d3940b6813e8dce00",
+    "producer_sha256": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+    "replayer_sha256": "1b987ad220e733a4e1be79b7391bce245d8d7e56bc515bccec051918a8161407",
+    "scenario_definition_sha256": "9c32294b65727e263db467eb47d28a960e7f2ac521476e9f4160014a216e647d"
+  },
+  "status": "passed",
+  "summary": {
+    "dp_scenario_histograms_compared": 120,
+    "fixture_count": 11,
+    "fresh_state_cap_unknown_probes": 11,
+    "horizons": [
+      1,
+      2,
+      4,
+      8,
+      16,
+      32
+    ],
+    "normal_certificates_independently_verified": 11,
+    "observers": [
+      "aggregate",
+      "trace"
+    ],
+    "producer_status_counts": {
+      "inconclusive": 6,
+      "proved_equal": 5,
+      "unknown": 0
+    },
+    "proved_equal_dp_comparisons": 60,
+    "structural_status_counts": {
+      "accepted": 3,
+      "rejected": 8
+    }
+  },
+  "version": 1
+}

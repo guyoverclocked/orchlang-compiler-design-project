@@ -1,0 +1,1213 @@
+{
+  "experiment": "17 authored graph fixtures, independent closure replay, finite shared-oracle full-text probes",
+  "scope": "6 accepted / 8 rejected / 3 invalid; no external graph ports or mechanized metatheory",
+  "grid": {
+    "seeds": [
+      1,
+      25
+    ],
+    "public_texts": [
+      "",
+      "short public question",
+      "é漢 UTF8 public text",
+      "PUBLICPUBLICPUBLICPUBLICPUBLICPUBLICPUBLICPUBLICPUBLICPUBLICPUBLICPUBLIC"
+    ],
+    "max_calls": 120,
+    "secrets": "all Boolean assignments; compare each with first per fixed public/seed slice"
+  },
+  "environment": {
+    "platform": "macOS-27.0-arm64-arm-64bit",
+    "python": "3.12.14",
+    "checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+    "replayer_sha256": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
+    "generator_sha256": "d240ed27783cb68ec1a4e6c862731b7061d9bd227565d2d42543c183b1349ea7",
+    "evaluator_sha256": "a3e47096c3aee47ebe2944b2493fdc35106c8309e83ba8e5b98a21ac8f82a24d"
+  },
+  "totals": {
+    "accepted": 6,
+    "rejected": 8,
+    "invalid": 3,
+    "replayed_certificates": 6,
+    "accepted_reference_runs": 1400,
+    "accepted_secret_comparisons": 800,
+    "accepted_mismatches": 0,
+    "accepted_request_mismatches": 0,
+    "accepted_billing_mismatches": 0,
+    "accepted_call_accounting_checks": 28580,
+    "rejected_secret_comparisons": 800,
+    "rejections_with_finite_witness": 8,
+    "rejections_without_finite_witness": 0,
+    "rejections_with_billing_witness": 8,
+    "rejections_without_billing_witness": 0
+  },
+  "fixtures": [
+    {
+      "path": "examples/graphs/accepted/matched_cyclic_chain.json",
+      "source_sha256": "9b827d2e8ef16f8d2fa9a4e146f5ef8341d46f434ce04abca8e0c95c3917b6b8",
+      "expected": "accepted",
+      "status": "accepted",
+      "product_nodes": 91,
+      "product_edges": 114,
+      "diagnostic": null,
+      "independent_replay": {
+        "format": "orchlang-cyclic-request-replay-attestation",
+        "version": 1,
+        "status": "verified",
+        "graph_name": "matched_cyclic_chain",
+        "source_sha256": "9b827d2e8ef16f8d2fa9a4e146f5ef8341d46f434ce04abca8e0c95c3917b6b8",
+        "certificate_sha256": "6f6767ac25a12d1d417e48e85503a912e967663f2bc52f34dd0aa8daae801660",
+        "replayer_sha256": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
+        "producer_checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+        "producer_checker_hash_verified": false,
+        "resource_limits": {
+          "json_bytes_each": 134217728,
+          "graph_states": 100000,
+          "graph_declarations_or_calls": 1000000,
+          "product_nodes": 1000000,
+          "certificate_declared_product_nodes": 50000
+        },
+        "product_nodes_replayed": 91,
+        "product_edges_replayed": 114,
+        "checks": {
+          "strict_graph_and_certificate_schema": true,
+          "source_hash_binding": true,
+          "graph_schema_and_types": true,
+          "reachable_source_states_and_cost_summaries": true,
+          "root_public_identity_relation": true,
+          "all_product_relations_and_local_rules": true,
+          "complete_universal_successor_closure": true,
+          "no_unreachable_or_extra_product_nodes": true,
+          "call_free_cycle_exclusion": true
+        },
+        "scope": {
+          "claim": "the reported finite product graph is the complete closure of the replayed version-1 graph under the declared local rules",
+          "not_claimed": [
+            "mechanized proof of the relational metatheory",
+            "source-language or framework-to-graph translation fidelity",
+            "real provider request serialization or billing behavior",
+            "termination or finite total-cost bounds for billable cycles",
+            "validation of the producer checker implementation from its reported hash"
+          ]
+        }
+      },
+      "comparisons": 100,
+      "mismatches": 0,
+      "request_mismatches": 0,
+      "billing_mismatches": 0,
+      "calls": 832,
+      "truncated_runs": 0,
+      "first_witness": null,
+      "first_billing_witness": null
+    },
+    {
+      "path": "examples/graphs/accepted/canonical_alias_cycle.json",
+      "source_sha256": "aede17773251c302de1cc83e311d8c2dd00b53e3b4e18d1226507e844903c561",
+      "expected": "accepted",
+      "status": "accepted",
+      "product_nodes": 91,
+      "product_edges": 114,
+      "diagnostic": null,
+      "independent_replay": {
+        "format": "orchlang-cyclic-request-replay-attestation",
+        "version": 1,
+        "status": "verified",
+        "graph_name": "canonical_alias_cycle",
+        "source_sha256": "aede17773251c302de1cc83e311d8c2dd00b53e3b4e18d1226507e844903c561",
+        "certificate_sha256": "5da164a60574d07e7beb236815a49077f6f0c55affa53edd41fcd6699ae70274",
+        "replayer_sha256": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
+        "producer_checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+        "producer_checker_hash_verified": false,
+        "resource_limits": {
+          "json_bytes_each": 134217728,
+          "graph_states": 100000,
+          "graph_declarations_or_calls": 1000000,
+          "product_nodes": 1000000,
+          "certificate_declared_product_nodes": 50000
+        },
+        "product_nodes_replayed": 91,
+        "product_edges_replayed": 114,
+        "checks": {
+          "strict_graph_and_certificate_schema": true,
+          "source_hash_binding": true,
+          "graph_schema_and_types": true,
+          "reachable_source_states_and_cost_summaries": true,
+          "root_public_identity_relation": true,
+          "all_product_relations_and_local_rules": true,
+          "complete_universal_successor_closure": true,
+          "no_unreachable_or_extra_product_nodes": true,
+          "call_free_cycle_exclusion": true
+        },
+        "scope": {
+          "claim": "the reported finite product graph is the complete closure of the replayed version-1 graph under the declared local rules",
+          "not_claimed": [
+            "mechanized proof of the relational metatheory",
+            "source-language or framework-to-graph translation fidelity",
+            "real provider request serialization or billing behavior",
+            "termination or finite total-cost bounds for billable cycles",
+            "validation of the producer checker implementation from its reported hash"
+          ]
+        }
+      },
+      "comparisons": 100,
+      "mismatches": 0,
+      "request_mismatches": 0,
+      "billing_mismatches": 0,
+      "calls": 840,
+      "truncated_runs": 0,
+      "first_witness": null,
+      "first_billing_witness": null
+    },
+    {
+      "path": "examples/graphs/accepted/split_control_blocks.json",
+      "source_sha256": "88c0d45f80ddb3eaa0bcf15688dac2df56e524b1e6817b1429b8093c41e3117f",
+      "expected": "accepted",
+      "status": "accepted",
+      "product_nodes": 119,
+      "product_edges": 142,
+      "diagnostic": null,
+      "independent_replay": {
+        "format": "orchlang-cyclic-request-replay-attestation",
+        "version": 1,
+        "status": "verified",
+        "graph_name": "split_control_blocks",
+        "source_sha256": "88c0d45f80ddb3eaa0bcf15688dac2df56e524b1e6817b1429b8093c41e3117f",
+        "certificate_sha256": "e5c2fd4e90cc830dc7d3b6caf3de8e23ea9e97325461d56f91fb98c2915587b9",
+        "replayer_sha256": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
+        "producer_checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+        "producer_checker_hash_verified": false,
+        "resource_limits": {
+          "json_bytes_each": 134217728,
+          "graph_states": 100000,
+          "graph_declarations_or_calls": 1000000,
+          "product_nodes": 1000000,
+          "certificate_declared_product_nodes": 50000
+        },
+        "product_nodes_replayed": 119,
+        "product_edges_replayed": 142,
+        "checks": {
+          "strict_graph_and_certificate_schema": true,
+          "source_hash_binding": true,
+          "graph_schema_and_types": true,
+          "reachable_source_states_and_cost_summaries": true,
+          "root_public_identity_relation": true,
+          "all_product_relations_and_local_rules": true,
+          "complete_universal_successor_closure": true,
+          "no_unreachable_or_extra_product_nodes": true,
+          "call_free_cycle_exclusion": true
+        },
+        "scope": {
+          "claim": "the reported finite product graph is the complete closure of the replayed version-1 graph under the declared local rules",
+          "not_claimed": [
+            "mechanized proof of the relational metatheory",
+            "source-language or framework-to-graph translation fidelity",
+            "real provider request serialization or billing behavior",
+            "termination or finite total-cost bounds for billable cycles",
+            "validation of the producer checker implementation from its reported hash"
+          ]
+        }
+      },
+      "comparisons": 100,
+      "mismatches": 0,
+      "request_mismatches": 0,
+      "billing_mismatches": 0,
+      "calls": 884,
+      "truncated_runs": 0,
+      "first_witness": null,
+      "first_billing_witness": null
+    },
+    {
+      "path": "examples/graphs/accepted/nested_private_choices.json",
+      "source_sha256": "e4199e3b80021714333f80df56174b6af99f915a144057e16a7f27a1b04a7cec",
+      "expected": "accepted",
+      "status": "accepted",
+      "product_nodes": 206,
+      "product_edges": 274,
+      "diagnostic": null,
+      "independent_replay": {
+        "format": "orchlang-cyclic-request-replay-attestation",
+        "version": 1,
+        "status": "verified",
+        "graph_name": "nested_private_choices",
+        "source_sha256": "e4199e3b80021714333f80df56174b6af99f915a144057e16a7f27a1b04a7cec",
+        "certificate_sha256": "6d280122e198dc6ada0b10aa589301af42a5201274219cda109048c001cc7114",
+        "replayer_sha256": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
+        "producer_checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+        "producer_checker_hash_verified": false,
+        "resource_limits": {
+          "json_bytes_each": 134217728,
+          "graph_states": 100000,
+          "graph_declarations_or_calls": 1000000,
+          "product_nodes": 1000000,
+          "certificate_declared_product_nodes": 50000
+        },
+        "product_nodes_replayed": 206,
+        "product_edges_replayed": 274,
+        "checks": {
+          "strict_graph_and_certificate_schema": true,
+          "source_hash_binding": true,
+          "graph_schema_and_types": true,
+          "reachable_source_states_and_cost_summaries": true,
+          "root_public_identity_relation": true,
+          "all_product_relations_and_local_rules": true,
+          "complete_universal_successor_closure": true,
+          "no_unreachable_or_extra_product_nodes": true,
+          "call_free_cycle_exclusion": true
+        },
+        "scope": {
+          "claim": "the reported finite product graph is the complete closure of the replayed version-1 graph under the declared local rules",
+          "not_claimed": [
+            "mechanized proof of the relational metatheory",
+            "source-language or framework-to-graph translation fidelity",
+            "real provider request serialization or billing behavior",
+            "termination or finite total-cost bounds for billable cycles",
+            "validation of the producer checker implementation from its reported hash"
+          ]
+        }
+      },
+      "comparisons": 300,
+      "mismatches": 0,
+      "request_mismatches": 0,
+      "billing_mismatches": 0,
+      "calls": 1624,
+      "truncated_runs": 0,
+      "first_witness": null,
+      "first_billing_witness": null
+    },
+    {
+      "path": "examples/graphs/accepted/unbounded_productive_cycle.json",
+      "source_sha256": "81a867fadfa62ba7c67f9b307c59136d291ec36242b62bc9f2f412d824e920cd",
+      "expected": "accepted",
+      "status": "accepted",
+      "product_nodes": 93,
+      "product_edges": 114,
+      "diagnostic": null,
+      "independent_replay": {
+        "format": "orchlang-cyclic-request-replay-attestation",
+        "version": 1,
+        "status": "verified",
+        "graph_name": "unbounded_productive_cycle",
+        "source_sha256": "81a867fadfa62ba7c67f9b307c59136d291ec36242b62bc9f2f412d824e920cd",
+        "certificate_sha256": "7b520ec46e58ee3b8acaca56485d4e5dbb12d2a7a498641c27fb4a8d6991e6cf",
+        "replayer_sha256": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
+        "producer_checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+        "producer_checker_hash_verified": false,
+        "resource_limits": {
+          "json_bytes_each": 134217728,
+          "graph_states": 100000,
+          "graph_declarations_or_calls": 1000000,
+          "product_nodes": 1000000,
+          "certificate_declared_product_nodes": 50000
+        },
+        "product_nodes_replayed": 93,
+        "product_edges_replayed": 114,
+        "checks": {
+          "strict_graph_and_certificate_schema": true,
+          "source_hash_binding": true,
+          "graph_schema_and_types": true,
+          "reachable_source_states_and_cost_summaries": true,
+          "root_public_identity_relation": true,
+          "all_product_relations_and_local_rules": true,
+          "complete_universal_successor_closure": true,
+          "no_unreachable_or_extra_product_nodes": true,
+          "call_free_cycle_exclusion": true
+        },
+        "scope": {
+          "claim": "the reported finite product graph is the complete closure of the replayed version-1 graph under the declared local rules",
+          "not_claimed": [
+            "mechanized proof of the relational metatheory",
+            "source-language or framework-to-graph translation fidelity",
+            "real provider request serialization or billing behavior",
+            "termination or finite total-cost bounds for billable cycles",
+            "validation of the producer checker implementation from its reported hash"
+          ]
+        }
+      },
+      "comparisons": 100,
+      "mismatches": 0,
+      "request_mismatches": 0,
+      "billing_mismatches": 0,
+      "calls": 24000,
+      "truncated_runs": 200,
+      "first_witness": null,
+      "first_billing_witness": null
+    },
+    {
+      "path": "examples/graphs/accepted/finite_private_chain.json",
+      "source_sha256": "e386c18c42e85a53239f37897974287f06fdd05455dc7d4d08bb8e6dab1c4ecf",
+      "expected": "accepted",
+      "status": "accepted",
+      "product_nodes": 15,
+      "product_edges": 14,
+      "diagnostic": null,
+      "independent_replay": {
+        "format": "orchlang-cyclic-request-replay-attestation",
+        "version": 1,
+        "status": "verified",
+        "graph_name": "finite_private_chain",
+        "source_sha256": "e386c18c42e85a53239f37897974287f06fdd05455dc7d4d08bb8e6dab1c4ecf",
+        "certificate_sha256": "3e880f59ac6784efeec0ecdeafd83e03b6cae1d5d901ce41cd79cf2763f4928f",
+        "replayer_sha256": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
+        "producer_checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+        "producer_checker_hash_verified": false,
+        "resource_limits": {
+          "json_bytes_each": 134217728,
+          "graph_states": 100000,
+          "graph_declarations_or_calls": 1000000,
+          "product_nodes": 1000000,
+          "certificate_declared_product_nodes": 50000
+        },
+        "product_nodes_replayed": 15,
+        "product_edges_replayed": 14,
+        "checks": {
+          "strict_graph_and_certificate_schema": true,
+          "source_hash_binding": true,
+          "graph_schema_and_types": true,
+          "reachable_source_states_and_cost_summaries": true,
+          "root_public_identity_relation": true,
+          "all_product_relations_and_local_rules": true,
+          "complete_universal_successor_closure": true,
+          "no_unreachable_or_extra_product_nodes": true,
+          "call_free_cycle_exclusion": true
+        },
+        "scope": {
+          "claim": "the reported finite product graph is the complete closure of the replayed version-1 graph under the declared local rules",
+          "not_claimed": [
+            "mechanized proof of the relational metatheory",
+            "source-language or framework-to-graph translation fidelity",
+            "real provider request serialization or billing behavior",
+            "termination or finite total-cost bounds for billable cycles",
+            "validation of the producer checker implementation from its reported hash"
+          ]
+        }
+      },
+      "comparisons": 100,
+      "mismatches": 0,
+      "request_mismatches": 0,
+      "billing_mismatches": 0,
+      "calls": 400,
+      "truncated_runs": 0,
+      "first_witness": null,
+      "first_billing_witness": null
+    },
+    {
+      "path": "examples/graphs/rejected/request_template_mutation.json",
+      "source_sha256": "19e675be007d5255fd91aa068faf1938dbcf163327723e35164d18de20dff5ee",
+      "expected": "rejected",
+      "status": "rejected",
+      "product_nodes": 5,
+      "product_edges": 7,
+      "diagnostic": "exact request templates differ",
+      "comparisons": 100,
+      "mismatches": 100,
+      "request_mismatches": 100,
+      "billing_mismatches": 100,
+      "calls": 804,
+      "truncated_runs": 0,
+      "first_witness": {
+        "seed": 1,
+        "public_text": "",
+        "secret_left": {
+          "route": false
+        },
+        "secret_right": {
+          "route": true
+        },
+        "left_stopped": true,
+        "right_stopped": true,
+        "left_call_count": 2,
+        "right_call_count": 4,
+        "first_differing_event_index": 0,
+        "left_event": {
+          "contract": {
+            "provider": "mock",
+            "model": "cycle-worker",
+            "max_tokens": 16,
+            "has_unit_price": true,
+            "unit_price": 0.001
+          },
+          "ordinal": 0,
+          "template": "Different {value}",
+          "arguments": [
+            ""
+          ],
+          "response": "6bm8mO4h6WRWm5OYVgZ93STja3SOkOe46bm8mO4h6WRWm5OYVgZ93STja3SO",
+          "input_tokens": 5,
+          "output_tokens": 15
+        },
+        "right_event": {
+          "contract": {
+            "provider": "mock",
+            "model": "cycle-worker",
+            "max_tokens": 16,
+            "has_unit_price": true,
+            "unit_price": 0.001
+          },
+          "ordinal": 0,
+          "template": "Process {value}",
+          "arguments": [
+            ""
+          ],
+          "response": "9ekUP0fWRmlRNQb0egjm92Z2YhbVc10N9ekUP0fWRmlR",
+          "input_tokens": 4,
+          "output_tokens": 11
+        }
+      },
+      "first_billing_witness": {
+        "seed": 1,
+        "public_text": "",
+        "secret_left": {
+          "route": false
+        },
+        "secret_right": {
+          "route": true
+        },
+        "left_stopped": true,
+        "right_stopped": true,
+        "left_billing": [
+          {
+            "contract": {
+              "provider": "mock",
+              "model": "cycle-worker",
+              "max_tokens": 16,
+              "has_unit_price": true,
+              "unit_price": 0.001
+            },
+            "call_count": 2,
+            "input_tokens": 24,
+            "output_tokens": 26
+          }
+        ],
+        "right_billing": [
+          {
+            "contract": {
+              "provider": "mock",
+              "model": "cycle-worker",
+              "max_tokens": 16,
+              "has_unit_price": true,
+              "unit_price": 0.001
+            },
+            "call_count": 4,
+            "input_tokens": 29,
+            "output_tokens": 24
+          }
+        ],
+        "observation_horizon": "complete run if stopped; otherwise prefix of at most 120 calls"
+      }
+    },
+    {
+      "path": "examples/graphs/rejected/model_cap_mutation.json",
+      "source_sha256": "92a314fe378a54068c25449795da398b5095b517f5b8d6fd940d3aa6e302f347",
+      "expected": "rejected",
+      "status": "rejected",
+      "product_nodes": 5,
+      "product_edges": 7,
+      "diagnostic": "resolved model contracts differ",
+      "comparisons": 100,
+      "mismatches": 100,
+      "request_mismatches": 100,
+      "billing_mismatches": 100,
+      "calls": 898,
+      "truncated_runs": 0,
+      "first_witness": {
+        "seed": 1,
+        "public_text": "",
+        "secret_left": {
+          "route": false
+        },
+        "secret_right": {
+          "route": true
+        },
+        "left_stopped": true,
+        "right_stopped": true,
+        "left_call_count": 12,
+        "right_call_count": 6,
+        "first_differing_event_index": 0,
+        "left_event": {
+          "contract": {
+            "provider": "mock",
+            "model": "cycle-worker",
+            "max_tokens": 8,
+            "has_unit_price": true,
+            "unit_price": 0.001
+          },
+          "ordinal": 0,
+          "template": "Process {value}",
+          "arguments": [
+            ""
+          ],
+          "response": "R2ZN",
+          "input_tokens": 4,
+          "output_tokens": 1
+        },
+        "right_event": {
+          "contract": {
+            "provider": "mock",
+            "model": "cycle-worker",
+            "max_tokens": 16,
+            "has_unit_price": true,
+            "unit_price": 0.001
+          },
+          "ordinal": 0,
+          "template": "Process {value}",
+          "arguments": [
+            ""
+          ],
+          "response": "l2P1",
+          "input_tokens": 4,
+          "output_tokens": 1
+        }
+      },
+      "first_billing_witness": {
+        "seed": 1,
+        "public_text": "",
+        "secret_left": {
+          "route": false
+        },
+        "secret_right": {
+          "route": true
+        },
+        "left_stopped": true,
+        "right_stopped": true,
+        "left_billing": [
+          {
+            "contract": {
+              "provider": "mock",
+              "model": "cycle-worker",
+              "max_tokens": 16,
+              "has_unit_price": true,
+              "unit_price": 0.001
+            },
+            "call_count": 6,
+            "input_tokens": 46,
+            "output_tokens": 27
+          },
+          {
+            "contract": {
+              "provider": "mock",
+              "model": "cycle-worker",
+              "max_tokens": 8,
+              "has_unit_price": true,
+              "unit_price": 0.001
+            },
+            "call_count": 6,
+            "input_tokens": 24,
+            "output_tokens": 22
+          }
+        ],
+        "right_billing": [
+          {
+            "contract": {
+              "provider": "mock",
+              "model": "cycle-worker",
+              "max_tokens": 16,
+              "has_unit_price": true,
+              "unit_price": 0.001
+            },
+            "call_count": 6,
+            "input_tokens": 48,
+            "output_tokens": 45
+          }
+        ],
+        "observation_horizon": "complete run if stopped; otherwise prefix of at most 120 calls"
+      }
+    },
+    {
+      "path": "examples/graphs/rejected/different_public_input.json",
+      "source_sha256": "268c568b9d7f57b19b74a6e8d78dc26c5c041af12d31a09db4ec4c30af322149",
+      "expected": "rejected",
+      "status": "rejected",
+      "product_nodes": 5,
+      "product_edges": 7,
+      "diagnostic": "ordered request arguments are not proved equal",
+      "comparisons": 100,
+      "mismatches": 100,
+      "request_mismatches": 100,
+      "billing_mismatches": 100,
+      "calls": 850,
+      "truncated_runs": 0,
+      "first_witness": {
+        "seed": 1,
+        "public_text": "",
+        "secret_left": {
+          "route": false
+        },
+        "secret_right": {
+          "route": true
+        },
+        "left_stopped": true,
+        "right_stopped": true,
+        "left_call_count": 2,
+        "right_call_count": 2,
+        "first_differing_event_index": 0,
+        "left_event": {
+          "contract": {
+            "provider": "mock",
+            "model": "cycle-worker",
+            "max_tokens": 16,
+            "has_unit_price": true,
+            "unit_price": 0.001
+          },
+          "ordinal": 0,
+          "template": "Process {value}",
+          "arguments": [
+            " second"
+          ],
+          "response": "l0XggP2XgXj2SiXZ1Ub8ggglV8gg53kQl0XggP2XgXj2SiXZ1Ub8ggglV8gg53kQ",
+          "input_tokens": 6,
+          "output_tokens": 16
+        },
+        "right_event": {
+          "contract": {
+            "provider": "mock",
+            "model": "cycle-worker",
+            "max_tokens": 16,
+            "has_unit_price": true,
+            "unit_price": 0.001
+          },
+          "ordinal": 0,
+          "template": "Process {value}",
+          "arguments": [
+            ""
+          ],
+          "response": "Tbm7megVYejQe6UP",
+          "input_tokens": 4,
+          "output_tokens": 4
+        }
+      },
+      "first_billing_witness": {
+        "seed": 1,
+        "public_text": "",
+        "secret_left": {
+          "route": false
+        },
+        "secret_right": {
+          "route": true
+        },
+        "left_stopped": true,
+        "right_stopped": true,
+        "left_billing": [
+          {
+            "contract": {
+              "provider": "mock",
+              "model": "cycle-worker",
+              "max_tokens": 16,
+              "has_unit_price": true,
+              "unit_price": 0.001
+            },
+            "call_count": 2,
+            "input_tokens": 26,
+            "output_tokens": 27
+          }
+        ],
+        "right_billing": [
+          {
+            "contract": {
+              "provider": "mock",
+              "model": "cycle-worker",
+              "max_tokens": 16,
+              "has_unit_price": true,
+              "unit_price": 0.001
+            },
+            "call_count": 2,
+            "input_tokens": 12,
+            "output_tokens": 16
+          }
+        ],
+        "observation_horizon": "complete run if stopped; otherwise prefix of at most 120 calls"
+      }
+    },
+    {
+      "path": "examples/graphs/rejected/private_termination_count.json",
+      "source_sha256": "6d1b01aed0bc6a96aa85ded8558e5bef3445a03d38b598026cc36062f3063118",
+      "expected": "rejected",
+      "status": "rejected",
+      "product_nodes": 9,
+      "product_edges": 11,
+      "diagnostic": "observable events differ: call versus stop",
+      "comparisons": 100,
+      "mismatches": 100,
+      "request_mismatches": 100,
+      "billing_mismatches": 100,
+      "calls": 514,
+      "truncated_runs": 0,
+      "first_witness": {
+        "seed": 1,
+        "public_text": "",
+        "secret_left": {
+          "route": false
+        },
+        "secret_right": {
+          "route": true
+        },
+        "left_stopped": true,
+        "right_stopped": true,
+        "left_call_count": 1,
+        "right_call_count": 2,
+        "first_differing_event_index": 1,
+        "left_event": null,
+        "right_event": {
+          "contract": {
+            "provider": "mock",
+            "model": "cycle-worker",
+            "max_tokens": 16,
+            "has_unit_price": true,
+            "unit_price": 0.001
+          },
+          "ordinal": 1,
+          "template": "Process {value}",
+          "arguments": [
+            "aicQe13Rhm09agSaNVQT6gRa"
+          ],
+          "response": "Oel42cj5l3eQ9daZPjQSaiOlfm07SXfPOel4",
+          "input_tokens": 10,
+          "output_tokens": 9
+        }
+      },
+      "first_billing_witness": {
+        "seed": 1,
+        "public_text": "",
+        "secret_left": {
+          "route": false
+        },
+        "secret_right": {
+          "route": true
+        },
+        "left_stopped": true,
+        "right_stopped": true,
+        "left_billing": [
+          {
+            "contract": {
+              "provider": "mock",
+              "model": "cycle-worker",
+              "max_tokens": 16,
+              "has_unit_price": true,
+              "unit_price": 0.001
+            },
+            "call_count": 1,
+            "input_tokens": 4,
+            "output_tokens": 6
+          }
+        ],
+        "right_billing": [
+          {
+            "contract": {
+              "provider": "mock",
+              "model": "cycle-worker",
+              "max_tokens": 16,
+              "has_unit_price": true,
+              "unit_price": 0.001
+            },
+            "call_count": 2,
+            "input_tokens": 14,
+            "output_tokens": 15
+          }
+        ],
+        "observation_horizon": "complete run if stopped; otherwise prefix of at most 120 calls"
+      }
+    },
+    {
+      "path": "examples/graphs/rejected/unmatched_public_guard.json",
+      "source_sha256": "e103fbc4adeceefb5877813057beb4bb3baadb10143e90a592fc601a562c7499",
+      "expected": "rejected",
+      "status": "rejected",
+      "product_nodes": 13,
+      "product_edges": 16,
+      "diagnostic": "public guards are not proved equal",
+      "comparisons": 100,
+      "mismatches": 9,
+      "request_mismatches": 9,
+      "billing_mismatches": 9,
+      "calls": 704,
+      "truncated_runs": 0,
+      "first_witness": {
+        "seed": 7,
+        "public_text": "short public question",
+        "secret_left": {
+          "route": false
+        },
+        "secret_right": {
+          "route": true
+        },
+        "left_stopped": true,
+        "right_stopped": true,
+        "left_call_count": 2,
+        "right_call_count": 4,
+        "first_differing_event_index": 2,
+        "left_event": null,
+        "right_event": {
+          "contract": {
+            "provider": "mock",
+            "model": "cycle-worker",
+            "max_tokens": 16,
+            "has_unit_price": true,
+            "unit_price": 0.001
+          },
+          "ordinal": 2,
+          "template": "Process {value}",
+          "arguments": [
+            "short public question"
+          ],
+          "response": "XkfPj6aR76fefah8Oe83ab0UPgWR7TS1XkfP",
+          "input_tokens": 10,
+          "output_tokens": 9
+        }
+      },
+      "first_billing_witness": {
+        "seed": 7,
+        "public_text": "short public question",
+        "secret_left": {
+          "route": false
+        },
+        "secret_right": {
+          "route": true
+        },
+        "left_stopped": true,
+        "right_stopped": true,
+        "left_billing": [
+          {
+            "contract": {
+              "provider": "mock",
+              "model": "cycle-worker",
+              "max_tokens": 16,
+              "has_unit_price": true,
+              "unit_price": 0.001
+            },
+            "call_count": 2,
+            "input_tokens": 22,
+            "output_tokens": 16
+          }
+        ],
+        "right_billing": [
+          {
+            "contract": {
+              "provider": "mock",
+              "model": "cycle-worker",
+              "max_tokens": 16,
+              "has_unit_price": true,
+              "unit_price": 0.001
+            },
+            "call_count": 4,
+            "input_tokens": 45,
+            "output_tokens": 41
+          }
+        ],
+        "observation_horizon": "complete run if stopped; otherwise prefix of at most 120 calls"
+      }
+    },
+    {
+      "path": "examples/graphs/rejected/overwritten_result_relation.json",
+      "source_sha256": "2317fb5b7e55aef6723a6a30798f64a40b581dacff0ff9d676dad3ba1b5aa905",
+      "expected": "rejected",
+      "status": "rejected",
+      "product_nodes": 13,
+      "product_edges": 15,
+      "diagnostic": "ordered request arguments are not proved equal",
+      "comparisons": 100,
+      "mismatches": 100,
+      "request_mismatches": 100,
+      "billing_mismatches": 100,
+      "calls": 1227,
+      "truncated_runs": 0,
+      "first_witness": {
+        "seed": 1,
+        "public_text": "",
+        "secret_left": {
+          "route": false
+        },
+        "secret_right": {
+          "route": true
+        },
+        "left_stopped": true,
+        "right_stopped": true,
+        "left_call_count": 21,
+        "right_call_count": 15,
+        "first_differing_event_index": 2,
+        "left_event": {
+          "contract": {
+            "provider": "mock",
+            "model": "cycle-worker",
+            "max_tokens": 16,
+            "has_unit_price": true,
+            "unit_price": 0.001
+          },
+          "ordinal": 2,
+          "template": "Process {value}",
+          "arguments": [
+            "b6P9dQVhP4ddWXV3ce8jNSR0"
+          ],
+          "response": "6d097aiej3R88kP858c5gV3Q",
+          "input_tokens": 10,
+          "output_tokens": 6
+        },
+        "right_event": {
+          "contract": {
+            "provider": "mock",
+            "model": "cycle-worker",
+            "max_tokens": 16,
+            "has_unit_price": true,
+            "unit_price": 0.001
+          },
+          "ordinal": 2,
+          "template": "Process {value}",
+          "arguments": [
+            "lW9VS8g8jb40i6a4gVjbkRa7Q297dcWblW9VS8g8jb40"
+          ],
+          "response": "53491dOR",
+          "input_tokens": 15,
+          "output_tokens": 2
+        }
+      },
+      "first_billing_witness": {
+        "seed": 1,
+        "public_text": "",
+        "secret_left": {
+          "route": false
+        },
+        "secret_right": {
+          "route": true
+        },
+        "left_stopped": true,
+        "right_stopped": true,
+        "left_billing": [
+          {
+            "contract": {
+              "provider": "mock",
+              "model": "cycle-worker",
+              "max_tokens": 16,
+              "has_unit_price": true,
+              "unit_price": 0.001
+            },
+            "call_count": 21,
+            "input_tokens": 134,
+            "output_tokens": 140
+          }
+        ],
+        "right_billing": [
+          {
+            "contract": {
+              "provider": "mock",
+              "model": "cycle-worker",
+              "max_tokens": 16,
+              "has_unit_price": true,
+              "unit_price": 0.001
+            },
+            "call_count": 15,
+            "input_tokens": 91,
+            "output_tokens": 95
+          }
+        ],
+        "observation_horizon": "complete run if stopped; otherwise prefix of at most 120 calls"
+      }
+    },
+    {
+      "path": "examples/graphs/rejected/literal_result_mutation.json",
+      "source_sha256": "6321cf645957372bcdf719fd21e9945d510391f1072c32bae25aeea011705818",
+      "expected": "rejected",
+      "status": "rejected",
+      "product_nodes": 9,
+      "product_edges": 11,
+      "diagnostic": "ordered request arguments are not proved equal",
+      "comparisons": 100,
+      "mismatches": 100,
+      "request_mismatches": 100,
+      "billing_mismatches": 100,
+      "calls": 990,
+      "truncated_runs": 0,
+      "first_witness": {
+        "seed": 1,
+        "public_text": "",
+        "secret_left": {
+          "route": false
+        },
+        "secret_right": {
+          "route": true
+        },
+        "left_stopped": true,
+        "right_stopped": true,
+        "left_call_count": 2,
+        "right_call_count": 2,
+        "first_differing_event_index": 1,
+        "left_event": {
+          "contract": {
+            "provider": "mock",
+            "model": "cycle-worker",
+            "max_tokens": 16,
+            "has_unit_price": true,
+            "unit_price": 0.001
+          },
+          "ordinal": 1,
+          "template": "Process {value}",
+          "arguments": [
+            "fixed"
+          ],
+          "response": "jO57fhVhS17m7UY98mbZcU742gcY894RjO57fhVh",
+          "input_tokens": 6,
+          "output_tokens": 10
+        },
+        "right_event": {
+          "contract": {
+            "provider": "mock",
+            "model": "cycle-worker",
+            "max_tokens": 16,
+            "has_unit_price": true,
+            "unit_price": 0.001
+          },
+          "ordinal": 1,
+          "template": "Process {value}",
+          "arguments": [
+            "fa5b66jc4QOSd5RXkWhhT85hUgmgaU1mfa5b66jc4QOSd5RXkWhh"
+          ],
+          "response": "X7ZYchm5Xd50i0aaRU9gO2X3gdVijkdWX7ZYchm5Xd50i0aaRU9gO2X3",
+          "input_tokens": 17,
+          "output_tokens": 14
+        }
+      },
+      "first_billing_witness": {
+        "seed": 1,
+        "public_text": "",
+        "secret_left": {
+          "route": false
+        },
+        "secret_right": {
+          "route": true
+        },
+        "left_stopped": true,
+        "right_stopped": true,
+        "left_billing": [
+          {
+            "contract": {
+              "provider": "mock",
+              "model": "cycle-worker",
+              "max_tokens": 16,
+              "has_unit_price": true,
+              "unit_price": 0.001
+            },
+            "call_count": 2,
+            "input_tokens": 10,
+            "output_tokens": 23
+          }
+        ],
+        "right_billing": [
+          {
+            "contract": {
+              "provider": "mock",
+              "model": "cycle-worker",
+              "max_tokens": 16,
+              "has_unit_price": true,
+              "unit_price": 0.001
+            },
+            "call_count": 2,
+            "input_tokens": 21,
+            "output_tokens": 27
+          }
+        ],
+        "observation_horizon": "complete run if stopped; otherwise prefix of at most 120 calls"
+      }
+    },
+    {
+      "path": "examples/graphs/rejected/one_sided_private_transition.json",
+      "source_sha256": "399f2d3c2725f6cefcaf16ed4f33a12c8775d402d22761f099848260e625f476",
+      "expected": "rejected",
+      "status": "rejected",
+      "product_nodes": 5,
+      "product_edges": 7,
+      "diagnostic": "observable events differ: call versus stop",
+      "comparisons": 100,
+      "mismatches": 100,
+      "request_mismatches": 100,
+      "billing_mismatches": 100,
+      "calls": 380,
+      "truncated_runs": 0,
+      "first_witness": {
+        "seed": 1,
+        "public_text": "",
+        "secret_left": {
+          "route": false
+        },
+        "secret_right": {
+          "route": true
+        },
+        "left_stopped": true,
+        "right_stopped": true,
+        "left_call_count": 0,
+        "right_call_count": 10,
+        "first_differing_event_index": 0,
+        "left_event": null,
+        "right_event": {
+          "contract": {
+            "provider": "mock",
+            "model": "cycle-worker",
+            "max_tokens": 16,
+            "has_unit_price": true,
+            "unit_price": 0.001
+          },
+          "ordinal": 0,
+          "template": "Process {value}",
+          "arguments": [
+            ""
+          ],
+          "response": "Q42O",
+          "input_tokens": 4,
+          "output_tokens": 1
+        }
+      },
+      "first_billing_witness": {
+        "seed": 1,
+        "public_text": "",
+        "secret_left": {
+          "route": false
+        },
+        "secret_right": {
+          "route": true
+        },
+        "left_stopped": true,
+        "right_stopped": true,
+        "left_billing": [],
+        "right_billing": [
+          {
+            "contract": {
+              "provider": "mock",
+              "model": "cycle-worker",
+              "max_tokens": 16,
+              "has_unit_price": true,
+              "unit_price": 0.001
+            },
+            "call_count": 10,
+            "input_tokens": 83,
+            "output_tokens": 72
+          }
+        ],
+        "observation_horizon": "complete run if stopped; otherwise prefix of at most 120 calls"
+      }
+    },
+    {
+      "path": "examples/graphs/invalid/private_silent_cycle.json",
+      "source_sha256": "529062f2bfbc7dbb3c0a0b1a8e7fe00acdbf90477e476f906b278cf6fe04385f",
+      "expected": "invalid",
+      "status": "invalid",
+      "diagnostic": "reachable call-free cycle at empty_loop"
+    },
+    {
+      "path": "examples/graphs/invalid/secret_request_argument.json",
+      "source_sha256": "13eae93441aa15cb2a8e82d9f63fd26ba709f4438fc777f3088fca2c0c7615c6",
+      "expected": "invalid",
+      "status": "invalid",
+      "diagnostic": "only public text inputs can reach requests"
+    },
+    {
+      "path": "examples/graphs/invalid/cross_token_unit.json",
+      "source_sha256": "da4117510d8aeb6e80e216243bfc9fc027501e284137d8a7071a9425a6fc39b5",
+      "expected": "invalid",
+      "status": "invalid",
+      "diagnostic": "result register token-unit/cap contract disagrees"
+    }
+  ],
+  "failures": [],
+  "limits": [
+    "producer and reference value probe share schema code; replay implementation is separate",
+    "finite sampled executions do not prove the coinductive theorem",
+    "billing vectors are complete-run observations only for stopped runs; otherwise finite-prefix observations",
+    "unwitnessed rejections are unknown in this grid, not proved false positives",
+    "billable cycles may run forever; no finite whole-execution budget"
+  ]
+}

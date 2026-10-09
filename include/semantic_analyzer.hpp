@@ -7,19 +7,19 @@
 
 #include <cstddef>
 #include <map>
+#include <optional>
 #include <string>
 #include <vector>
 
 namespace orchlang {
 
-// How many source characters the analysis assumes fit in one token.
+// UTF-8 bytes per estimated input token for each template/argument fragment.
 //
-// The input-token half of a cost bound is only as sound as this assumption, so
-// it is an explicit, recorded parameter rather than a hidden constant.  A value
-// of 1 is unconditionally sound for any tokenizer that never emits more than
-// one token per character; larger values trade that unconditional soundness for
-// a tighter, assumption-relative bound.  The default follows the widely used
-// four-characters-per-token rule for English prose.
+// The resulting call bound is sound only under the explicit compositional
+// assumption that complete-request input usage is at most the sum of those
+// fragment estimates and declared argument bounds. The default byte-per-four
+// estimate does not model real provider tokenizers, request envelopes, or
+// tokenization effects at fragment boundaries.
 inline constexpr std::size_t defaultCharsPerToken() { return 4; }
 
 struct AnalysisOptions {
@@ -49,17 +49,38 @@ struct ReclassificationSite {
 struct ArgumentFact {
     std::string name;
     bool isLiteral{false};
+    std::string literalText;
+    // The runtime request oracle distinguishes literal expression kinds even
+    // when their substituted bytes happen to be equal (for example true and
+    // the text literal "true").
+    ExprKind literalKind{ExprKind::StringLiteral};
     bool isSecret{false};
     std::size_t literalTokens{0};
+    bool tokenBoundKnown{false};
+    std::size_t tokenBound{0};
+    std::string tokenBoundTokenizer;
+    Label contentLabel{publicTrusted()};
+    std::size_t bindingIdentity{0};
+    std::size_t valueIdentity{0};
 };
 
 // What one 'call' site contributes to a cost bound.  Recorded while the
 // symbol table is in scope so the cost analysis can be a pure structural walk.
 struct CallSiteFacts {
+    std::size_t id{0};
+    SourceLocation location;
+    std::string resultName;
+    std::size_t resultValueIdentity{0};
     std::string promptName;
+    std::string modelAlias;
+    // Kept for readable cost derivations; identity/equality use the resolved
+    // contract below, never the source-level alias.
     std::string modelName;
-    // Output tokens the provider itself caps.  This half of the bound holds
-    // without any tokenizer assumption.
+    std::optional<ModelContract> resolvedModel;
+    std::string promptTemplateText;
+    // Output tokens capped by the declared provider contract. This half does
+    // not use the input-tokenizer estimate, but assumes the provider honors
+    // its declared max_tokens cap.
     std::size_t modelMaxTokens{0};
     // Input tokens: the template plus the bounded arguments substituted into
     // it.  Sound relative to the declared characters-per-token assumption.
@@ -69,6 +90,13 @@ struct CallSiteFacts {
     bool hasUnitPrice{false};
     double unitPrice{0.0};
     std::vector<ArgumentFact> arguments;
+};
+
+struct BranchGuardFacts {
+    bool resolved{false};
+    Label contentLabel{publicTrusted()};
+    std::size_t bindingIdentity{0};
+    std::size_t valueIdentity{0};
 };
 
 struct WorkflowFacts {
@@ -95,6 +123,16 @@ struct SemanticResult {
     // relational analysis needs this one: a public guard inside a secret arm
     // still sends both compared executions down the same path.
     std::map<const IfStmt*, Label> guardOwnLabels;
+    // Intrinsic data sensitivity and lexical identity of the guard, excluding
+    // the enclosing program counter. The relational pass uses these facts to
+    // distinguish a secret predicate from a public predicate evaluated inside
+    // a secret-dependent region.
+    std::map<const IfStmt*, BranchGuardFacts> branchGuards;
+    // Source declaration identity used by the offline runtime's input oracle.
+    std::map<const Stmt*, std::size_t> declarationBindings;
+    // The result's value identity is stable through aliases and unique under
+    // shadowing; relational positional references are mapped from this value.
+    std::map<const LetStmt*, std::size_t> letResultValueIdentities;
     AnalysisOptions options;
 
     bool success() const { return !diagnostics.hasErrors(); }

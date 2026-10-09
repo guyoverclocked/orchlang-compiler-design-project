@@ -1,3 +1,5 @@
+> Historical document: this describes an earlier project stage. Current guarantees, metrics and presentation are in `docs/PAPER.md`, `docs/FORMAL_CONTRACT.md` and `submission/research/`. Historical claims are preserved for traceability, not reused as current evidence.
+
 # OrchLang Review 2 Progress Report
 
 **Student:** Nambi Rajan M  

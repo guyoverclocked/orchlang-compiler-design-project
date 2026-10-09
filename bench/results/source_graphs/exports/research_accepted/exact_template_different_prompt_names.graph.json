@@ -1,0 +1,88 @@
+{
+  "format": "orchlang-request-graph",
+  "version": 1,
+  "name": "ExactTemplate",
+  "chars_per_token": 4,
+  "inputs": {
+    "in_0": {
+      "type": "boolean",
+      "label": "secret"
+    },
+    "in_1": {
+      "type": "text",
+      "label": "public",
+      "max_tokens": 32
+    }
+  },
+  "registers": {
+    "r_0": {
+      "model": "model_0"
+    },
+    "r_1": {
+      "model": "model_0"
+    }
+  },
+  "models": {
+    "model_0": {
+      "provider": "mock",
+      "model": "research-model",
+      "max_tokens": 4
+    }
+  },
+  "states": {
+    "state_0": {
+      "calls": [],
+      "next": {
+        "kind": "stop"
+      }
+    },
+    "state_1": {
+      "calls": [
+        {
+          "model": "model_0",
+          "template": "Request: {t}",
+          "arguments": [
+            {
+              "value": "in_1"
+            }
+          ],
+          "result": "r_0"
+        }
+      ],
+      "next": {
+        "kind": "goto",
+        "target": "state_0"
+      }
+    },
+    "state_2": {
+      "calls": [
+        {
+          "model": "model_0",
+          "template": "Request: {t}",
+          "arguments": [
+            {
+              "value": "in_1"
+            }
+          ],
+          "result": "r_1"
+        }
+      ],
+      "next": {
+        "kind": "goto",
+        "target": "state_0"
+      }
+    },
+    "state_3": {
+      "calls": [],
+      "next": {
+        "kind": "secret",
+        "guard": {
+          "value": "in_0"
+        },
+        "then": "state_1",
+        "else": "state_2"
+      }
+    }
+  },
+  "entry": "state_3"
+}

@@ -1,0 +1,87 @@
+{
+  "format": "orchlang-request-graph",
+  "version": 1,
+  "name": "trace_equal_not_bisimilar",
+  "chars_per_token": 4,
+  "inputs": {
+    "secret": {
+      "type": "boolean",
+      "label": "secret"
+    }
+  },
+  "models": {
+    "m": {
+      "provider": "offline",
+      "model": "trace-equality-worker",
+      "max_tokens": 3
+    }
+  },
+  "registers": {
+    "hidden": {
+      "model": "m"
+    },
+    "done": {
+      "model": "m"
+    }
+  },
+  "entry": "choose",
+  "states": {
+    "choose": {
+      "calls": [],
+      "next": {
+        "kind": "secret",
+        "guard": {
+          "value": "secret"
+        },
+        "then": "dependent",
+        "else": "independent"
+      }
+    },
+    "dependent": {
+      "calls": [
+        {
+          "model": "m",
+          "template": "FIRST",
+          "arguments": [],
+          "result": "hidden"
+        },
+        {
+          "model": "m",
+          "template": "NEXT",
+          "arguments": [
+            {
+              "value": "hidden"
+            }
+          ],
+          "result": "done"
+        }
+      ],
+      "next": {
+        "kind": "stop"
+      }
+    },
+    "independent": {
+      "calls": [
+        {
+          "model": "m",
+          "template": "FIRST",
+          "arguments": [],
+          "result": "hidden"
+        },
+        {
+          "model": "m",
+          "template": "NEXT",
+          "arguments": [
+            {
+              "literal": "pink"
+            }
+          ],
+          "result": "done"
+        }
+      ],
+      "next": {
+        "kind": "stop"
+      }
+    }
+  }
+}

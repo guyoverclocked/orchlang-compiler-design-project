@@ -1,0 +1,84 @@
+{
+  "status": "passed",
+  "reviewed_utc_date": "2026-10-09",
+  "method": "Poppler page renders inspected by the primary agent; built-in LaTeX compiler succeeded; PDF text and links checked",
+  "reproduction_manifest_sha256": "65c8d8fd312f4a004df9faf3a2ecf193e3023594c2a01029ca157d22049ba035",
+  "osp": {
+    "path": "output/pdf/OrchLang_SCP_OSP.pdf",
+    "sha256": "f8f79c4d90f62b7442639e95606c41608211d586a5d31e8c671ce6309a363f18",
+    "pages": 9,
+    "pages_visually_inspected": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ],
+    "layout_findings": [],
+    "stock_submission_wording_corrected": true,
+    "filled_metadata_column_header": "Value",
+    "editable_source": "submission/research/manuscript/OrchLang_SCP_OSP.tex",
+    "human_author_fields_pending": true,
+    "public_commit_pending": true,
+    "known_template_warning": "The stock 6.5cm metadata columns extend approximately35.7pt beyond the body text width while remaining within the A4 page; template dimensions preserved."
+  },
+  "technical_report": {
+    "path": "output/pdf/OrchLang_Technical_Report.pdf",
+    "sha256": "89ce368cb877736f337827bfd616bb4686c546bbf20ec9343348e3abc6a28a52",
+    "pages": 17,
+    "pages_visually_inspected": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17
+    ],
+    "layout_findings": [],
+    "updated_reference_pages_reinspected": [
+      16,
+      17
+    ],
+    "editable_source": "docs/PAPER.md"
+  },
+  "demo": {
+    "url": "http://127.0.0.1:8765/",
+    "method": "Actual browser UI fresh live runs of all seven stories, with visible fresh-run status and expected check/replay verdicts",
+    "stories_checked": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7
+    ],
+    "layout_inspected": true,
+    "provider_calls": 0,
+    "direct_file_mode": "clearly labeled recorded static evidence; live checks require the stdlib loopback server"
+  },
+  "presentation": {
+    "path": "submission/research/dist_current/OrchLang_Current_Software_Review.pptx",
+    "slides": 32,
+    "speaker_notes": 32,
+    "last_slide_demo_link_verified": true,
+    "package_layout_findings": 0,
+    "agent_visual_qa": "all32renders inspected",
+    "pdf_limitation": "slide PDF is a raster render; PPTX remains native editable"
+  }
+}

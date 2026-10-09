@@ -380,10 +380,10 @@ def gen_relational():
                      '  } else {\n    if tokens(head) <= 50 { let b: text = call step(x) using m; }\n'
                      '  }\n  output "done";\n', False))
 
-    # A literal argument of a different size moves the bill.
+    # Exact literals match. Equal estimated lengths alone are insufficient.
     files.append(rel('SameLiteral.orch',
                      '  if flag {\n    let a: text = call step("aaaa") using m;\n'
-                     '  } else {\n    let b: text = call step("bbbb") using m;\n  }\n'
+                     '  } else {\n    let b: text = call step("aaaa") using m;\n  }\n'
                      '  output "done";\n', True))
     files.append(rel('DifferentLiteralLength.orch',
                      '  if flag {\n    let a: text = call step("aaaa") using m;\n'
@@ -392,6 +392,38 @@ def gen_relational():
                      '  output "done";\n', False))
 
     return files
+
+
+def gen_conservative():
+    """Stricter structural rejection need not leak in the mock billing metric.
+
+    The former accepted SameLiteral fixture (aaaa vs bbbb) is retained here.
+    These are separated from the leaking witness suite deliberately: absence
+    of a mock witness is a measured precision limit, not a broken experiment.
+    """
+    directory = os.path.join(HERE, 'relational', 'conservative')
+    bodies = {
+        'EqualEstimatedLiterals':
+            '  if flag { let a: text = call step("aaaa") using m; }\n'
+            '  else { let b: text = call step("bbbb") using m; }\n',
+        'EquivalentGuardOperators':
+            '  if flag {\n'
+            '    if tokens(x) < 11 { let a: text = call step(x) using m; }\n'
+            '  } else {\n'
+            '    if tokens(x) <= 10 { let b: text = call step(x) using m; }\n'
+            '  }\n',
+        'RenamedTemplateParameters':
+            '  if flag {\n'
+            '    prompt local(t: text) -> text = "{t}";\n'
+            '    let a: text = call local(x) using m;\n'
+            '  } else {\n'
+            '    prompt local(u: text) -> text = "{u}";\n'
+            '    let b: text = call local(x) using m;\n'
+            '  }\n',
+    }
+    return [(directory, name + '.orch',
+             workflow(name, 1000000, body + '  output "done";\n', RELATIONAL_PREAMBLE))
+            for name, body in bodies.items()]
 
 
 def main():
@@ -403,6 +435,9 @@ def main():
         write(directory, name, text)
         written += 1
     for directory, name, text in gen_relational():
+        write(directory, name, text)
+        written += 1
+    for directory, name, text in gen_conservative():
         write(directory, name, text)
         written += 1
     print('generated %d benchmark workflows' % written)

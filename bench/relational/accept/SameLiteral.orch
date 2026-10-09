@@ -9,7 +9,7 @@ workflow SameLiteral budget 1000000 {
   if flag {
     let a: text = call step("aaaa") using m;
   } else {
-    let b: text = call step("bbbb") using m;
+    let b: text = call step("aaaa") using m;
   }
   output "done";
 }

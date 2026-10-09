@@ -1,0 +1,25 @@
+{
+  "format": "orchlang-finite-usage-channel-replay-attestation",
+  "version": 1,
+  "status": "unknown",
+  "verification_method": "independent finite DFS re-execution",
+  "claim_scope": "replayed finite scenario histograms and exact leakage metrics for the bound inputs, kernel, observer, and horizon; not a general proof",
+  "verifier_exact_integer_bit_limit": 8192,
+  "unverified_fields": [
+    "analyzer_sha256 (digest shape only; producer executable was not replayed)",
+    "rows[*].state_visits, peak_frontier, call_transitions, terminal_states, work_bytes_estimate (producer execution counters; checked for shape and declared-budget bounds, not recomputed by DFS)",
+    "metrics.pairwise[*].maximum_log_likelihood_ratio_nats_approx",
+    "metrics.min_entropy_leakage_bits_approx",
+    "metrics.mutual_information_bits_approx"
+  ],
+  "diagnostic": "independent DFS row 0: enumeration canonical byte-work limit reached",
+  "report_sha256": "af4dbaaed8e7c9b98d9151c88691edc14d085ae41f4114fdccdfaf514eead85e",
+  "source_sha256": "d1bafe2732f0ca44b0a54c865936dd0cad2b05af157df0ce2484f0d290a05b82",
+  "kernel_sha256": "3d9b0a039d26d43c76299956ea93c0ced3e065499d345a11ced349a7f6382f4a",
+  "observer": "trace",
+  "horizon": 12,
+  "max_reference_paths": 100000,
+  "max_reference_steps": 1000000,
+  "max_reference_work_bytes": 67108864,
+  "replayed_rows": 0
+}

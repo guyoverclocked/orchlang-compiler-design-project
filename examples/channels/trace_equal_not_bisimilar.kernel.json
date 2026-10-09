@@ -1,0 +1,83 @@
+{
+  "format": "orchlang-finite-outcome-kernel",
+  "version": 1,
+  "history_window": 0,
+  "defaults": {
+    "m": [
+      {
+        "response": "ok",
+        "output_tokens": 1,
+        "probability": "1"
+      }
+    ]
+  },
+  "rules": [
+    {
+      "model": "m",
+      "template": "FIRST",
+      "ordinal": 0,
+      "outcomes": [
+        {
+          "response": "red",
+          "output_tokens": 1,
+          "probability": "1/2"
+        },
+        {
+          "response": "blue",
+          "output_tokens": 1,
+          "probability": "1/2"
+        }
+      ]
+    },
+    {
+      "model": "m",
+      "template": "NEXT",
+      "ordinal": 1,
+      "arguments": [
+        "red"
+      ],
+      "outcomes": [
+        {
+          "response": "ok",
+          "output_tokens": 1,
+          "probability": "1"
+        }
+      ]
+    },
+    {
+      "model": "m",
+      "template": "NEXT",
+      "ordinal": 1,
+      "arguments": [
+        "blue"
+      ],
+      "outcomes": [
+        {
+          "response": "ok",
+          "output_tokens": 3,
+          "probability": "1"
+        }
+      ]
+    },
+    {
+      "model": "m",
+      "template": "NEXT",
+      "ordinal": 1,
+      "arguments": [
+        "pink"
+      ],
+      "outcomes": [
+        {
+          "response": "ok",
+          "output_tokens": 1,
+          "probability": "1/2"
+        },
+        {
+          "response": "ok",
+          "output_tokens": 3,
+          "probability": "1/2"
+        }
+      ]
+    }
+  ]
+}

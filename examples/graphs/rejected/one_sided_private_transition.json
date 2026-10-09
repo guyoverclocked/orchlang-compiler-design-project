@@ -1,0 +1,127 @@
+{
+  "format": "orchlang-request-graph",
+  "version": 1,
+  "name": "one_sided_private_transition",
+  "chars_per_token": 4,
+  "inputs": {
+    "query": {
+      "type": "text",
+      "label": "public",
+      "max_tokens": 32
+    },
+    "route": {
+      "type": "boolean",
+      "label": "secret"
+    }
+  },
+  "models": {
+    "m": {
+      "provider": "mock",
+      "model": "cycle-worker",
+      "max_tokens": 16,
+      "unit_price": 0.001
+    }
+  },
+  "registers": {
+    "a": {
+      "model": "m"
+    },
+    "b": {
+      "model": "m"
+    },
+    "x": {
+      "model": "m"
+    },
+    "y": {
+      "model": "m"
+    }
+  },
+  "entry": "choose",
+  "states": {
+    "choose": {
+      "calls": [],
+      "next": {
+        "kind": "secret",
+        "guard": {
+          "value": "route"
+        },
+        "then": "left",
+        "else": "stop"
+      }
+    },
+    "left": {
+      "calls": [
+        {
+          "model": "m",
+          "template": "Process {value}",
+          "arguments": [
+            {
+              "value": "query"
+            }
+          ],
+          "result": "a"
+        },
+        {
+          "model": "m",
+          "template": "Process {value}",
+          "arguments": [
+            {
+              "value": "a"
+            }
+          ],
+          "result": "b"
+        }
+      ],
+      "next": {
+        "kind": "public",
+        "guard": {
+          "value": "b",
+          "op": "<=",
+          "limit": 8
+        },
+        "then": "choose",
+        "else": "stop"
+      }
+    },
+    "right": {
+      "calls": [
+        {
+          "model": "m",
+          "template": "Process {value}",
+          "arguments": [
+            {
+              "value": "query"
+            }
+          ],
+          "result": "x"
+        },
+        {
+          "model": "m",
+          "template": "Process {value}",
+          "arguments": [
+            {
+              "value": "x"
+            }
+          ],
+          "result": "y"
+        }
+      ],
+      "next": {
+        "kind": "public",
+        "guard": {
+          "value": "y",
+          "op": "<=",
+          "limit": 8
+        },
+        "then": "choose",
+        "else": "stop"
+      }
+    },
+    "stop": {
+      "calls": [],
+      "next": {
+        "kind": "stop"
+      }
+    }
+  }
+}

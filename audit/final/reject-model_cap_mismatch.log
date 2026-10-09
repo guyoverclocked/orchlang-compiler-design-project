@@ -1,0 +1,1 @@
+examples/research/rejected/model_cap_mismatch.orch:7:3: error [E236] this branch is guarded by secret data and its two arms have different billing contracts or request content; then-arm [mock:shared-id (max_tokens=4) request(template="Request: {t}", args=[outer(source#2)])] and else-arm [mock:shared-id (max_tokens=5) request(template="Request: {t}", args=[outer(source#2)])]

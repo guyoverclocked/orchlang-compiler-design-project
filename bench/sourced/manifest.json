@@ -1,0 +1,653 @@
+{
+  "format": "orchlang-sourced-patterns",
+  "version": 1,
+  "scope": "15 pinned source examples, 45 authored bounded variants; not 15 full ports or 45 independent real applications",
+  "execution": "offline mock only; common abstract token metric",
+  "selection": "purposive examples from three DSL frameworks, selected after compiler design; no independent annotator or held-out claim",
+  "patterns": [
+    {
+      "id": "pdl_chaining",
+      "framework": "PDL",
+      "source_url": "https://github.com/IBM/prompt-declaration-language/blob/44a1383f2869afdf69a5bc96954af39490399a3f/examples/demo/2-model-chaining.pdl",
+      "revision": "44a1383f2869afdf69a5bc96954af39490399a3f",
+      "source_path": "examples/demo/2-model-chaining.pdl",
+      "source_sha256": "c5fdc6f8db8b0c192c1bdddee088313b00123ef22f4ce223a88096a10bff8de9",
+      "source_lines": [
+        1,
+        10
+      ],
+      "upstream_license": "Apache-2.0",
+      "retained": "Two model requests with the first response in the second request context.",
+      "excluded_or_replaced": [
+        "PDL context accumulation, provider stop strings and original prompts"
+      ],
+      "added_contracts": [
+        "bounded common abstract input-token metric",
+        "provider caps (96; actors 50)",
+        "input/history/passage bounds",
+        "public/untrusted labels are author assignments",
+        "secret route and unequal-arm mutation are author experiments"
+      ],
+      "projection_status": "partial abstraction; upstream behavior not executed",
+      "variants": {
+        "base": {
+          "path": "bench/sourced/base/pdl_chaining.orch",
+          "sha256": "98623c34e2ad3d96074dc708d3ee21bdfb965454091ed896d34c8c455cb65710",
+          "expected": "accept"
+        },
+        "balanced": {
+          "path": "bench/sourced/balanced/pdl_chaining.orch",
+          "sha256": "5262e8d9d5fab173dc144b4b06e1eb71b9cec1b2382f0bbcca072ff1cdb0406e",
+          "expected": "accept"
+        },
+        "unbalanced": {
+          "path": "bench/sourced/unbalanced/pdl_chaining.orch",
+          "sha256": "1ea5945b83bd74ea9ac09f1c0747a5f17f906660eb33ef0622095e75f73a66b8",
+          "expected": "reject:E236"
+        }
+      }
+    },
+    {
+      "id": "pdl_function",
+      "framework": "PDL",
+      "source_url": "https://github.com/IBM/prompt-declaration-language/blob/44a1383f2869afdf69a5bc96954af39490399a3f/examples/demo/4-function.pdl",
+      "revision": "44a1383f2869afdf69a5bc96954af39490399a3f",
+      "source_path": "examples/demo/4-function.pdl",
+      "source_sha256": "48ed4bedd48ca79a0e2b3b754cd3880674a2bf576dc9f95a96090c408fb91e36",
+      "source_lines": [
+        1,
+        22
+      ],
+      "upstream_license": "Apache-2.0",
+      "retained": "Two explicit invocations of one translation function, inlined as requests.",
+      "excluded_or_replaced": [
+        "First-class functions and original sentences; language strings are authored replacements"
+      ],
+      "added_contracts": [
+        "bounded common abstract input-token metric",
+        "provider caps (96; actors 50)",
+        "input/history/passage bounds",
+        "public/untrusted labels are author assignments",
+        "secret route and unequal-arm mutation are author experiments"
+      ],
+      "projection_status": "partial abstraction; upstream behavior not executed",
+      "variants": {
+        "base": {
+          "path": "bench/sourced/base/pdl_function.orch",
+          "sha256": "dd61f99a90767ae9c9b517ece4b1c9804e07d1705f5d9c9aabe46d9b5451ed3a",
+          "expected": "accept"
+        },
+        "balanced": {
+          "path": "bench/sourced/balanced/pdl_function.orch",
+          "sha256": "b5c31cb4ecf7f02b9693f5ad9f1c7bc5665a04cfd040a20be5a42d7364ccd167",
+          "expected": "accept"
+        },
+        "unbalanced": {
+          "path": "bench/sourced/unbalanced/pdl_function.orch",
+          "sha256": "d6a6f0eeb492e099824966fc2d768a5d6750ab45375e2cb91ec7e74c3559a35a",
+          "expected": "reject:E236"
+        }
+      }
+    },
+    {
+      "id": "pdl_chat_turn",
+      "framework": "PDL",
+      "source_url": "https://github.com/IBM/prompt-declaration-language/blob/44a1383f2869afdf69a5bc96954af39490399a3f/examples/demo/7-chatbot-roles.pdl",
+      "revision": "44a1383f2869afdf69a5bc96954af39490399a3f",
+      "source_path": "examples/demo/7-chatbot-roles.pdl",
+      "source_sha256": "ee8b053b9d32e649f256e1da18521fe27c64a1ec91a1fa2de192a81b94f76e76",
+      "source_lines": [
+        1,
+        18
+      ],
+      "upstream_license": "Apache-2.0",
+      "retained": "One model request using supplied bounded conversation history and a query.",
+      "excluded_or_replaced": [
+        "Unbounded interactive read/until loop, dynamic history growth and role semantics"
+      ],
+      "added_contracts": [
+        "bounded common abstract input-token metric",
+        "provider caps (96; actors 50)",
+        "input/history/passage bounds",
+        "public/untrusted labels are author assignments",
+        "secret route and unequal-arm mutation are author experiments"
+      ],
+      "projection_status": "partial abstraction; upstream behavior not executed",
+      "variants": {
+        "base": {
+          "path": "bench/sourced/base/pdl_chat_turn.orch",
+          "sha256": "3a1e322646659a8186dc5494e3653e0cccf356e821469990d6f081e7e9409a4d",
+          "expected": "accept"
+        },
+        "balanced": {
+          "path": "bench/sourced/balanced/pdl_chat_turn.orch",
+          "sha256": "dc9d1c46db7a385fd8033effa2a48483c8414dc15be6b9899721ed22012dd2eb",
+          "expected": "accept"
+        },
+        "unbalanced": {
+          "path": "bench/sourced/unbalanced/pdl_chat_turn.orch",
+          "sha256": "1c09918e49a460ecc208181e400672575cbac2d189ffc194ce1d0af8f68c0bea",
+          "expected": "reject:E236"
+        }
+      }
+    },
+    {
+      "id": "pdl_tool_proposal",
+      "framework": "PDL",
+      "source_url": "https://github.com/IBM/prompt-declaration-language/blob/44a1383f2869afdf69a5bc96954af39490399a3f/examples/demo/8-tools.pdl",
+      "revision": "44a1383f2869afdf69a5bc96954af39490399a3f",
+      "source_path": "examples/demo/8-tools.pdl",
+      "source_sha256": "333d1663859b919ccfbc46a8728fe1f2277a3da3e214b4e67c147a9e3de1249a",
+      "source_lines": [
+        1,
+        31
+      ],
+      "upstream_license": "Apache-2.0",
+      "retained": "One model request that proposes a tool action as data.",
+      "excluded_or_replaced": [
+        "JSON schema enforcement, generated Python expression, dynamic tool selection and execution"
+      ],
+      "added_contracts": [
+        "bounded common abstract input-token metric",
+        "provider caps (96; actors 50)",
+        "input/history/passage bounds",
+        "public/untrusted labels are author assignments",
+        "secret route and unequal-arm mutation are author experiments"
+      ],
+      "projection_status": "partial abstraction; upstream behavior not executed",
+      "variants": {
+        "base": {
+          "path": "bench/sourced/base/pdl_tool_proposal.orch",
+          "sha256": "5f80289c6c1afd9e226f1a57c8e209b2a331fe52aac75bba9b07688ab9e4c062",
+          "expected": "accept"
+        },
+        "balanced": {
+          "path": "bench/sourced/balanced/pdl_tool_proposal.orch",
+          "sha256": "483cdf195df9c2f5f56b24ccd45be77800734db4086dc4c3f8733233a9b1bf48",
+          "expected": "accept"
+        },
+        "unbalanced": {
+          "path": "bench/sourced/unbalanced/pdl_tool_proposal.orch",
+          "sha256": "b38aac08c555fb037c36340bc27c0fdcea86c31efdd49e7567c35e0e263381c5",
+          "expected": "reject:E236"
+        }
+      }
+    },
+    {
+      "id": "pdl_react_cycle",
+      "framework": "PDL",
+      "source_url": "https://github.com/IBM/prompt-declaration-language/blob/44a1383f2869afdf69a5bc96954af39490399a3f/examples/demo/9-react.pdl",
+      "revision": "44a1383f2869afdf69a5bc96954af39490399a3f",
+      "source_path": "examples/demo/9-react.pdl",
+      "source_sha256": "982431bf49315ceca9334d5b326d5ca2aca028b26c09f79053ca4607a6dcabf2",
+      "source_lines": [
+        1,
+        130
+      ],
+      "upstream_license": "Apache-2.0",
+      "retained": "Two dependent requests (thought then action) in a bounded repeated cycle.",
+      "excluded_or_replaced": [
+        "Until-finish loop is restricted to three attempts; tool dispatch/search/calculation, accumulating context and result semantics are excluded"
+      ],
+      "added_contracts": [
+        "bounded common abstract input-token metric",
+        "provider caps (96; actors 50)",
+        "input/history/passage bounds",
+        "public/untrusted labels are author assignments",
+        "secret route and unequal-arm mutation are author experiments"
+      ],
+      "projection_status": "partial abstraction; upstream behavior not executed",
+      "variants": {
+        "base": {
+          "path": "bench/sourced/base/pdl_react_cycle.orch",
+          "sha256": "bff5b12c459ad827a3975e6847f0a8e27a829c9af356ef492ad4d5d5eb36112e",
+          "expected": "accept"
+        },
+        "balanced": {
+          "path": "bench/sourced/balanced/pdl_react_cycle.orch",
+          "sha256": "5e7e0cc37bec6c07f0070b63652c30757cbc2f45fef18827a367061888350228",
+          "expected": "accept"
+        },
+        "unbalanced": {
+          "path": "bench/sourced/unbalanced/pdl_react_cycle.orch",
+          "sha256": "191048be5ad8f1f6b653d043b49efc655666cd7f9bf53a7bd7c93c7bb415387e",
+          "expected": "reject:E236"
+        }
+      }
+    },
+    {
+      "id": "pdl_fixed_map",
+      "framework": "PDL",
+      "source_url": "https://github.com/IBM/prompt-declaration-language/blob/44a1383f2869afdf69a5bc96954af39490399a3f/examples/map-reduce/context_fork.pdl",
+      "revision": "44a1383f2869afdf69a5bc96954af39490399a3f",
+      "source_path": "examples/map-reduce/context_fork.pdl",
+      "source_sha256": "b45119f3b389f7413d5ddeaf923fc8eb98964d5c9cdf288b75f2291e9e2b8fc6",
+      "source_lines": [
+        1,
+        10
+      ],
+      "upstream_license": "Apache-2.0",
+      "retained": "A source list of three elements produces three separate model requests.",
+      "excluded_or_replaced": [
+        "Map/array join and PDL context fork; original names replaced by authored constants"
+      ],
+      "added_contracts": [
+        "bounded common abstract input-token metric",
+        "provider caps (96; actors 50)",
+        "input/history/passage bounds",
+        "public/untrusted labels are author assignments",
+        "secret route and unequal-arm mutation are author experiments"
+      ],
+      "projection_status": "partial abstraction; upstream behavior not executed",
+      "variants": {
+        "base": {
+          "path": "bench/sourced/base/pdl_fixed_map.orch",
+          "sha256": "cb0f387d7526e0fa01fc1fa3024c265cfa753b86ed7693c0576979310ba36b60",
+          "expected": "accept"
+        },
+        "balanced": {
+          "path": "bench/sourced/balanced/pdl_fixed_map.orch",
+          "sha256": "e99b59ca2e4bd626e26bd96c39b764db0a83b5c6593e24385d6c6b6b3b4d44ae",
+          "expected": "accept"
+        },
+        "unbalanced": {
+          "path": "bench/sourced/unbalanced/pdl_fixed_map.orch",
+          "sha256": "bbc4d6bc22f997179ed1b493a89c09eb8a26b069ce6b71aff5e22d546ac4a1d3",
+          "expected": "reject:E236"
+        }
+      }
+    },
+    {
+      "id": "pdl_independent",
+      "framework": "PDL",
+      "source_url": "https://github.com/IBM/prompt-declaration-language/blob/44a1383f2869afdf69a5bc96954af39490399a3f/examples/independent/independent.pdl",
+      "revision": "44a1383f2869afdf69a5bc96954af39490399a3f",
+      "source_path": "examples/independent/independent.pdl",
+      "source_sha256": "68fbbfcd0d5871d263a65bbe836c5a2d55e59615ceb49207a69e7a85b877838b",
+      "source_lines": [
+        1,
+        13
+      ],
+      "upstream_license": "Apache-2.0",
+      "retained": "Two requests with independent contexts followed by one outer-context request.",
+      "excluded_or_replaced": [
+        "PDL context independence is reduced to explicit bounded arguments; original prompts"
+      ],
+      "added_contracts": [
+        "bounded common abstract input-token metric",
+        "provider caps (96; actors 50)",
+        "input/history/passage bounds",
+        "public/untrusted labels are author assignments",
+        "secret route and unequal-arm mutation are author experiments"
+      ],
+      "projection_status": "partial abstraction; upstream behavior not executed",
+      "variants": {
+        "base": {
+          "path": "bench/sourced/base/pdl_independent.orch",
+          "sha256": "bc34ba3a99be6678ea88688880cfdc0f76e574abe6d99ec1c1d99af0ba3b4a16",
+          "expected": "accept"
+        },
+        "balanced": {
+          "path": "bench/sourced/balanced/pdl_independent.orch",
+          "sha256": "3b520943dc7263b79adcb4b575fd2eaab3310e1388e57818f536302b443cf756",
+          "expected": "accept"
+        },
+        "unbalanced": {
+          "path": "bench/sourced/unbalanced/pdl_independent.orch",
+          "sha256": "9cb2325cf68a42f34065fd5d747829357586802a5477185a4dda967be64b830e",
+          "expected": "reject:E236"
+        }
+      }
+    },
+    {
+      "id": "pdl_rag_pair",
+      "framework": "PDL",
+      "source_url": "https://github.com/IBM/prompt-declaration-language/blob/44a1383f2869afdf69a5bc96954af39490399a3f/examples/rag/pdf_query.pdl",
+      "revision": "44a1383f2869afdf69a5bc96954af39490399a3f",
+      "source_path": "examples/rag/pdf_query.pdl",
+      "source_sha256": "f252382caf69042fc1d8865753325a4e3c7460012581a6bf5ed56785c9a611ad",
+      "source_lines": [
+        1,
+        47
+      ],
+      "upstream_license": "Apache-2.0",
+      "retained": "Two fixed questions each cause an answer request with retrieved passages.",
+      "excluded_or_replaced": [
+        "Embedding model, vector database, library include, retrieval and array rendering; retrieved passages supplied as bounded untrusted inputs"
+      ],
+      "added_contracts": [
+        "bounded common abstract input-token metric",
+        "provider caps (96; actors 50)",
+        "input/history/passage bounds",
+        "public/untrusted labels are author assignments",
+        "secret route and unequal-arm mutation are author experiments"
+      ],
+      "projection_status": "partial abstraction; upstream behavior not executed",
+      "variants": {
+        "base": {
+          "path": "bench/sourced/base/pdl_rag_pair.orch",
+          "sha256": "29be44fb25fb0ef75d261b3932fa908dac7e7839dfe9f8c8d6b4d4ad9565633b",
+          "expected": "accept"
+        },
+        "balanced": {
+          "path": "bench/sourced/balanced/pdl_rag_pair.orch",
+          "sha256": "7c05183d113b36739fd185ed7b719c3080ac1ac91c5cf4a761426ff95cb730fb",
+          "expected": "accept"
+        },
+        "unbalanced": {
+          "path": "bench/sourced/unbalanced/pdl_rag_pair.orch",
+          "sha256": "a8ccb064b15c95f26dd91afe38a86c2b474ce15293eaf85a56e6d6cc522a6e5b",
+          "expected": "reject:E236"
+        }
+      }
+    },
+    {
+      "id": "appl_self_consistency",
+      "framework": "APPL",
+      "source_url": "https://github.com/APPL-Team/APPL/blob/e39c7401e5023d1b8d4c851e3a6f1048a462f03d/examples/basic/cot_sc.py",
+      "revision": "e39c7401e5023d1b8d4c851e3a6f1048a462f03d",
+      "source_path": "examples/basic/cot_sc.py",
+      "source_sha256": "c410866cd91d0c0a21cc2854f35ed0a84447c3106260a4f927b4477c7bc4ebb1",
+      "source_lines": [
+        1,
+        67
+      ],
+      "upstream_license": "MIT",
+      "retained": "Five same-question requests, corresponding to the source sequential five-trial case.",
+      "excluded_or_replaced": [
+        "Parallel implementation, answer parsing and mode aggregation; no answer-quality claim"
+      ],
+      "added_contracts": [
+        "bounded common abstract input-token metric",
+        "provider caps (96; actors 50)",
+        "input/history/passage bounds",
+        "public/untrusted labels are author assignments",
+        "secret route and unequal-arm mutation are author experiments"
+      ],
+      "projection_status": "partial abstraction; upstream behavior not executed",
+      "variants": {
+        "base": {
+          "path": "bench/sourced/base/appl_self_consistency.orch",
+          "sha256": "4c08a10ca9d937291e0f7797c0cbbe41a5aa705213fa575728f3b422524155ab",
+          "expected": "accept"
+        },
+        "balanced": {
+          "path": "bench/sourced/balanced/appl_self_consistency.orch",
+          "sha256": "efbb1098e8fcdfc14447dfb4344819d7f303723d34dbd0ff5b599c76615e625e",
+          "expected": "accept"
+        },
+        "unbalanced": {
+          "path": "bench/sourced/unbalanced/appl_self_consistency.orch",
+          "sha256": "f53e6902e5090dfc9d0cb056ce98984b8965dc02f6881b16d88e59c87eb9ebb4",
+          "expected": "reject:E236"
+        }
+      }
+    },
+    {
+      "id": "appl_tool_branch",
+      "framework": "APPL",
+      "source_url": "https://github.com/APPL-Team/APPL/blob/e39c7401e5023d1b8d4c851e3a6f1048a462f03d/examples/basic/tool_call.py",
+      "revision": "e39c7401e5023d1b8d4c851e3a6f1048a462f03d",
+      "source_path": "examples/basic/tool_call.py",
+      "source_sha256": "7439b1135477994747cc31f2c1ddb276b8dca30d013f6e546384e8d856415481",
+      "source_lines": [
+        1,
+        44
+      ],
+      "upstream_license": "MIT",
+      "retained": "A proposal request followed conditionally by a response request with tool information.",
+      "excluded_or_replaced": [
+        "Generated tool-call predicate is represented by a public input flag; Python/SymPy tool execution and tool-message protocol are excluded"
+      ],
+      "added_contracts": [
+        "bounded common abstract input-token metric",
+        "provider caps (96; actors 50)",
+        "input/history/passage bounds",
+        "public/untrusted labels are author assignments",
+        "secret route and unequal-arm mutation are author experiments"
+      ],
+      "projection_status": "partial abstraction; upstream behavior not executed",
+      "variants": {
+        "base": {
+          "path": "bench/sourced/base/appl_tool_branch.orch",
+          "sha256": "31e71e5182979122350233b0f22b739e29f7e41000a0011e3c063723c86daefb",
+          "expected": "accept"
+        },
+        "balanced": {
+          "path": "bench/sourced/balanced/appl_tool_branch.orch",
+          "sha256": "036dcdb0fe2d1028c4bc17559a8b07e776de07787cb6605706cb1b64d7619e4a",
+          "expected": "accept"
+        },
+        "unbalanced": {
+          "path": "bench/sourced/unbalanced/appl_tool_branch.orch",
+          "sha256": "cf91f5a0fc99092446e6820804ac7de689f96bc52967c4228350bcfc061a0e25",
+          "expected": "reject:E236"
+        }
+      }
+    },
+    {
+      "id": "appl_valid_retry",
+      "framework": "APPL",
+      "source_url": "https://github.com/APPL-Team/APPL/blob/e39c7401e5023d1b8d4c851e3a6f1048a462f03d/examples/advanced/repeat_until_valid.py",
+      "revision": "e39c7401e5023d1b8d4c851e3a6f1048a462f03d",
+      "source_path": "examples/advanced/repeat_until_valid.py",
+      "source_sha256": "7fb46f3d66b9f723a14f25b9c6f3ac046877f02687f1d07966d46343da9e1f0f",
+      "source_lines": [
+        1,
+        49
+      ],
+      "upstream_license": "MIT",
+      "retained": "At most five generation attempts, matching the source num_attempts default.",
+      "excluded_or_replaced": [
+        "Content validator and deterministic source mock responses; copied context and its growth replaced by a bounded fixed context; offline success oracle used"
+      ],
+      "added_contracts": [
+        "bounded common abstract input-token metric",
+        "provider caps (96; actors 50)",
+        "input/history/passage bounds",
+        "public/untrusted labels are author assignments",
+        "secret route and unequal-arm mutation are author experiments"
+      ],
+      "projection_status": "partial abstraction; upstream behavior not executed",
+      "variants": {
+        "base": {
+          "path": "bench/sourced/base/appl_valid_retry.orch",
+          "sha256": "a3a30b825b044df44bb50bbc6dbd47045419497ae991ebfe00d778f6613474b9",
+          "expected": "accept"
+        },
+        "balanced": {
+          "path": "bench/sourced/balanced/appl_valid_retry.orch",
+          "sha256": "ba8e095c6598d6dfdce6015d1a723b00140ecc0d877549100e86d9dfe22a17d0",
+          "expected": "accept"
+        },
+        "unbalanced": {
+          "path": "bench/sourced/unbalanced/appl_valid_retry.orch",
+          "sha256": "d1d6f6cd928d04189d965b8305d4c1b4895d71cf464ed336f7f22ceb9adce8c9",
+          "expected": "reject:E236"
+        }
+      }
+    },
+    {
+      "id": "appl_two_actor_chat",
+      "framework": "APPL",
+      "source_url": "https://github.com/APPL-Team/APPL/blob/e39c7401e5023d1b8d4c851e3a6f1048a462f03d/examples/advanced/multi_agent_chat/option1_resume.py",
+      "revision": "e39c7401e5023d1b8d4c851e3a6f1048a462f03d",
+      "source_path": "examples/advanced/multi_agent_chat/option1_resume.py",
+      "source_sha256": "4fd15b8e89ff8d5605875daef923bd80e63845ed39d519db02d908c725826238",
+      "source_lines": [
+        1,
+        42
+      ],
+      "upstream_license": "MIT",
+      "retained": "Two rounds of alternating actors, four requests, each with output cap 50.",
+      "excluded_or_replaced": [
+        "Resumable conversation state and heterogeneous source models/tokenizers; the two actor aliases share one explicit mock model, so no cross-tokenizer conversion is assumed"
+      ],
+      "added_contracts": [
+        "bounded common abstract input-token metric",
+        "provider caps (96; actors 50)",
+        "input/history/passage bounds",
+        "public/untrusted labels are author assignments",
+        "secret route and unequal-arm mutation are author experiments"
+      ],
+      "projection_status": "partial abstraction; upstream behavior not executed",
+      "variants": {
+        "base": {
+          "path": "bench/sourced/base/appl_two_actor_chat.orch",
+          "sha256": "4add9648688d7e547e3aada51f09da010bcd071b4a2adf01529cb2128fa67fa7",
+          "expected": "accept"
+        },
+        "balanced": {
+          "path": "bench/sourced/balanced/appl_two_actor_chat.orch",
+          "sha256": "91e9f5fae67810005fd3c2e31f0f849d4a701a15c80b5953dbf09376ec3093da",
+          "expected": "accept"
+        },
+        "unbalanced": {
+          "path": "bench/sourced/unbalanced/appl_two_actor_chat.orch",
+          "sha256": "44489a4c0a5d14c32bd67455f0b646da47c68004d783a7da18bb1cbbf4d47047",
+          "expected": "reject:E236"
+        }
+      }
+    },
+    {
+      "id": "lmql_joke_segments",
+      "framework": "LMQL",
+      "source_url": "https://github.com/eth-sri/lmql/blob/fc8edd4457dc5a5e4e595302166bec797582bf53/docs/features/examples/2-constraining.md",
+      "revision": "fc8edd4457dc5a5e4e595302166bec797582bf53",
+      "source_path": "docs/features/examples/2-constraining.md",
+      "source_sha256": "303e760fb22c92d487c86b1531bf5caaa7d9ab659e57b11b3fdc6d64726d1ad8",
+      "source_lines": [
+        1,
+        24
+      ],
+      "upstream_license": "Apache-2.0",
+      "retained": "Two dependent generated segments: a question followed by its punchline.",
+      "excluded_or_replaced": [
+        "LMQL constrained decoding, stop rules and character constraint; generation segments are represented as separate requests with authored output caps"
+      ],
+      "added_contracts": [
+        "bounded common abstract input-token metric",
+        "provider caps (96; actors 50)",
+        "input/history/passage bounds",
+        "public/untrusted labels are author assignments",
+        "secret route and unequal-arm mutation are author experiments"
+      ],
+      "projection_status": "partial abstraction; upstream behavior not executed",
+      "variants": {
+        "base": {
+          "path": "bench/sourced/base/lmql_joke_segments.orch",
+          "sha256": "106f4fee16c6bfee3c5dfc53bc80e3ad73411b9b1ae048a8c22df88d6a43b3b4",
+          "expected": "accept"
+        },
+        "balanced": {
+          "path": "bench/sourced/balanced/lmql_joke_segments.orch",
+          "sha256": "845f48ee8ddf18c341835e235ee99b042fe566819a1eff1ddddae071f268786a",
+          "expected": "accept"
+        },
+        "unbalanced": {
+          "path": "bench/sourced/unbalanced/lmql_joke_segments.orch",
+          "sha256": "30185c2bf8945137d59be2cd5727482d405d14e15f6d048cb127b04fa053e879",
+          "expected": "reject:E236"
+        }
+      }
+    },
+    {
+      "id": "lmql_reason_then_choice",
+      "framework": "LMQL",
+      "source_url": "https://github.com/eth-sri/lmql/blob/fc8edd4457dc5a5e4e595302166bec797582bf53/docs/features/examples/3-multi-part.md",
+      "revision": "fc8edd4457dc5a5e4e595302166bec797582bf53",
+      "source_path": "docs/features/examples/3-multi-part.md",
+      "source_sha256": "36e14cd3bc2645c42988809567f50160b60dea1a24ec40915a08189b3765a1d5",
+      "source_lines": [
+        1,
+        32
+      ],
+      "upstream_license": "Apache-2.0",
+      "retained": "A reasoning segment feeds a final answer segment.",
+      "excluded_or_replaced": [
+        "Finite-choice decoding, actual LMQL request batching and original question; two segment-level requests are an abstraction"
+      ],
+      "added_contracts": [
+        "bounded common abstract input-token metric",
+        "provider caps (96; actors 50)",
+        "input/history/passage bounds",
+        "public/untrusted labels are author assignments",
+        "secret route and unequal-arm mutation are author experiments"
+      ],
+      "projection_status": "partial abstraction; upstream behavior not executed",
+      "variants": {
+        "base": {
+          "path": "bench/sourced/base/lmql_reason_then_choice.orch",
+          "sha256": "4a7c78e56bd15973b021afff8e0a18e2744fca4829cf3e77badba79c781a02b0",
+          "expected": "accept"
+        },
+        "balanced": {
+          "path": "bench/sourced/balanced/lmql_reason_then_choice.orch",
+          "sha256": "6b963d004f23902d2f53ec1b2e8e1240d0de4b6da7b0089b88b36f846e21f687",
+          "expected": "accept"
+        },
+        "unbalanced": {
+          "path": "bench/sourced/unbalanced/lmql_reason_then_choice.orch",
+          "sha256": "d46e4a1b09296341d6c4a20090104ae7795308e1d1d2019161a4efa00802a403",
+          "expected": "reject:E236"
+        }
+      }
+    },
+    {
+      "id": "lmql_retrieval",
+      "framework": "LMQL",
+      "source_url": "https://github.com/eth-sri/lmql/blob/fc8edd4457dc5a5e4e595302166bec797582bf53/docs/features/examples/5-wikipedia.md",
+      "revision": "fc8edd4457dc5a5e4e595302166bec797582bf53",
+      "source_path": "docs/features/examples/5-wikipedia.md",
+      "source_sha256": "7168c742cb9e7b4492ef9a0fa2cf1ed502bc6785cef1543bbe3e707de5fc33eb",
+      "source_lines": [
+        1,
+        34
+      ],
+      "upstream_license": "Apache-2.0",
+      "retained": "A generated search term precedes an answer using supplied retrieved text.",
+      "excluded_or_replaced": [
+        "Asynchronous Wikipedia invocation, tool semantics and actual segment batching; retrieval is a bounded untrusted input"
+      ],
+      "added_contracts": [
+        "bounded common abstract input-token metric",
+        "provider caps (96; actors 50)",
+        "input/history/passage bounds",
+        "public/untrusted labels are author assignments",
+        "secret route and unequal-arm mutation are author experiments"
+      ],
+      "projection_status": "partial abstraction; upstream behavior not executed",
+      "variants": {
+        "base": {
+          "path": "bench/sourced/base/lmql_retrieval.orch",
+          "sha256": "e4c560aa3f59db268f8e125d2c459469f79187eb735df83db53f0c2bbb32b226",
+          "expected": "accept"
+        },
+        "balanced": {
+          "path": "bench/sourced/balanced/lmql_retrieval.orch",
+          "sha256": "59d0a7e608d7a4c0dca8433d93503f356d6d9f572148ff61be4a07fcf19b934e",
+          "expected": "accept"
+        },
+        "unbalanced": {
+          "path": "bench/sourced/unbalanced/lmql_retrieval.orch",
+          "sha256": "bfb1cb08967d29afc9b22296294b98ae8e82238ef4154a4c6ad7ce30bfce9059",
+          "expected": "reject:E236"
+        }
+      }
+    }
+  ],
+  "excluded_candidates": [
+    {
+      "source": "PDL examples/map-reduce/reduce.pdl",
+      "reason": "pure numeric reduction contains no model requests"
+    },
+    {
+      "source": "APPL examples/advanced/tree_of_thoughts/tot.py",
+      "reason": "dynamic search frontier and Python state not represented"
+    },
+    {
+      "source": "LangGraph dynamic agent and STORM examples",
+      "reason": "graph routing, tools and state cannot be faithfully translated to the current finite DSL"
+    }
+  ]
+}

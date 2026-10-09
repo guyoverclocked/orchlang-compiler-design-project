@@ -1,0 +1,129 @@
+E1-E3: executing the cost suite (200 seeds each) ...
+E4-E5: paired relational experiment ...
+E6: flow policy conformance ...
+E7: conservative structural rejections ...
+timing ...
+
+OrchLang evaluation
+===================
+
+E1-E3  certified bound versus observed execution
+       (23 workflows, 4600 executions; "paths" counts source-located branch
+        decision sequences, including repeated decisions inside retries)
+
+workflow          certified  out<=  in<=  flat  cfa   peak  slack  paths  cert_viol  comp_viol  flat_viol  cfa_viol
+----------------  ---------  -----  ----  ----  ----  ----  -----  -----  ---------  ---------  ---------  --------
+branch_1          1006       750    256   1284  1006  913   1.1    2      0          0          0          0
+branch_2          1734       1350   384   2290  1734  1528  1.13   2      0          0          0          0
+branch_3          2462       1950   512   3296  2462  2088  1.18   2      0          0          0          0
+branch_4          3190       2550   640   4302  3190  2465  1.29   2      0          0          0          0
+branch_in_retry   2462       1950   512   1284  1006  1920  1.28   6      0          0          17         30
+branch_nested     1734       1350   384   3746  2462  1518  1.14   4      0          0          0          0
+chain_1           278        150    128   278   278   256   1.09   1      0          0          0          0
+chain_2           586        300    286   586   586   545   1.08   1      0          0          0          0
+chain_3           894        450    444   894   894   762   1.17   1      0          0          0          0
+chain_4           1202       600    602   1202  1202  1001  1.2    1      0          0          0          0
+chain_5           1510       750    760   1510  1510  1250  1.21   1      0          0          0          0
+retry_2           556        300    256   278   278   482   1.15   1      0          0          54         54
+retry_3           834        450    384   278   278   646   1.29   1      0          0          73         73
+retry_4           1112       600    512   278   278   834   1.33   1      0          0          74         74
+retry_5           1390       750    640   278   278   1008  1.38   1      0          0          77         77
+retry_6           1668       900    768   278   278   1057  1.58   1      0          0          76         76
+retry_in_branch   1112       750    512   1284  1284  895   1.24   2      0          0          0          0
+retry_nested_2x2  1112       600    512   278   278   868   1.28   1      0          0          116        116
+retry_nested_2x3  1668       900    768   278   278   952   1.75   1      0          0          118        118
+retry_nested_3x3  2502       1350   1152  278   278   1570  1.59   1      0          0          136        136
+wide_input_200    666        300    366   666   666   636   1.05   1      0          0          0          0
+wide_input_2000   2466       300    2166  2466  2466  2399  1.03   1      0          0          0          0
+wide_input_800    1266       300    966   1266  1266  1136  1.11   1      0          0          0          0
+
+  certified total exceeded        : 0 of 4600
+  certified output component      : 0 of 4600
+  certified input component       : 0 of 4600
+  flat per-call sum exceeded      : 741 of 4600 (16.1%)
+  control-flow-aware rule exceeded: 754 of 4600 (16.4%)
+  slack vs peak observed          : median 1.20x, range 1.03-1.75x
+  source branch locations missing an arm: 0 workflows
+
+E4-E5  relational obligation: does the secret move the bill?
+
+workflow                   expected  verdict  comparisons  bills_differ  witness
+-------------------------  --------  -------  -----------  ------------  ------------------------------------------------
+EmptyBothArms              accept    accept   425          0
+MatchingInnerPublicGuard   accept    accept   425          0
+SameCallBothArms           accept    accept   425          0
+SameLiteral                accept    accept   425          0
+SameModelBothArms          accept    accept   425          0
+SameRetryBound             accept    accept   425          0
+TwoCallsBothArms           accept    accept   425          0
+CallInOneArmOnly           reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true",
+DifferentArgument          reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true",
+DifferentInnerPublicGuard  reject    reject   425          171           {"flag": "false", "s": "0"} vs {"flag": "true",
+DifferentLiteralLength     reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true",
+DifferentModel             reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true",
+DifferentRetryBound        reject    reject   425          45            {"flag": "false", "s": "0"} vs {"flag": "true",
+ExtraCall                  reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true",
+
+  accepted workflows: 2975 paired comparisons, 0 showed a different bill
+  rejected workflows: 7 had a concrete leaking witness, 0 had none
+
+E6  flow policy conformance on the paired security suite
+
+workflow                     expected  verdict  codes
+---------------------------  --------  -------  ---------
+InjectionInBranch            reject    reject   E233 E235
+InjectionInRetry             reject    reject   E233
+InjectionToSink              reject    reject   E233
+InjectionTransitive          reject    reject   E233
+MixedTrustToSink             reject    reject   E233
+SecretAsOutput               reject    reject   E231
+SecretCostChannel            reject    reject   E236
+SecretGuardedEffect          reject    reject   E234
+SecretGuardedLaundered       reject    reject   E234 W236
+SecretToPrompt               reject    reject   E230 E231
+SecretToSink                 reject    reject   E232
+UntrustedGuardedEffect       reject    reject   E235
+UntrustedToSinkNoEndorse     reject    reject   E233
+BalancedCostArms             accept    accept
+EffectOutsideSecretBranch    accept    accept
+InjectionEndorsed            accept    accept
+InjectionInBranchEndorsed    accept    accept
+InjectionInRetryEndorsed     accept    accept
+InjectionTransitiveEndorsed  accept    accept
+SecretAsOutputDeclassified   accept    accept
+SecretToPromptDeclassified   accept    accept
+SecretToSinkDeclassified     accept    accept
+TrustedGuardedEffect         accept    accept
+TrustedOnlyToSink            accept    accept
+UnguardedEffect              accept    accept
+UntrustedToOutputOnly        accept    accept
+
+  unsafe rejected for a flow reason : 13
+  unsafe accepted or wrong reason   : 0
+  safe accepted                     : 13
+  safe rejected                     : 0
+
+  This measures conformance to the declared policy, not robustness to
+  adversarial text: the safe variants differ from the unsafe ones by a
+  trusted endorsement or declassification, which the compiler records
+  rather than verifies.
+
+E7  precision limits under the mock billing metric
+
+workflow                   verdict      comparisons  bills_differ
+-------------------------  -----------  -----------  ------------
+EqualEstimatedLiterals     reject:E236  100          0
+EquivalentGuardOperators   reject:E236  100          0
+RenamedTemplateParameters  reject:E236  100          0
+
+  Exact request matching is a sufficient, incomplete check. These rejections
+  have equal observed mock bills. Literal/template cases need not be safe
+  under arbitrary provider tokenizers; equivalent guard operators expose
+  a genuine structural precision limit. No deployed false-positive rate
+  is inferred from these three authored examples.
+
+Analysis cost
+
+  36 workflows certified in 0.07 s (1.9 ms each, including process startup;
+  this is not an isolated measurement of analyser time)
+

@@ -1,0 +1,520 @@
+{
+  "format": "orchlang-source-bound-report",
+  "version": 1,
+  "source_sha256": "cb0f387d7526e0fa01fc1fa3024c265cfa753b86ed7693c0576979310ba36b60",
+  "compiler_sha256": "7dfbd0d962122f175c25147b8a16551a44098c75d893f0cbd12474c835b17ca4",
+  "source_name": "pdl_fixed_map.orch",
+  "certificate": {
+    "format": "orchlang-safety-certificate",
+    "version": 3,
+    "source_sha256": "cb0f387d7526e0fa01fc1fa3024c265cfa753b86ed7693c0576979310ba36b60",
+    "assumptions": {
+      "chars_per_token": 4,
+      "input_accounting": "Each call adds ceil(UTF-8 template bytes / chars_per_token) to the separately declared argument bounds.",
+      "output_assumption": "The oracle emits no more than the resolved model contract's declared max_tokens cap.",
+      "input_assumption": "For every complete request, target-model input usage is at most the sum of the template estimate and declared argument bounds. chars_per_token is a UTF-8 byte divisor; provider tokenizers, request envelopes, and tokenization boundary effects are not modeled.",
+      "note": "These are explicit abstract accounting assumptions, not a guarantee about real provider billing."
+    },
+    "workflows": [
+      {
+        "name": "PdlFixedMapBase",
+        "budget_tokens": 100000,
+        "security_contract": {
+          "declassification_present": false,
+          "billing_noninterference_claimed": true,
+          "guarantee_scope": {
+            "property": "paired billing-trace equality under the stated abstract model",
+            "oracle_coupling": "Paired executions share abstract responses under \u03a9(M,k,Q) when resolved contract M, per-contract ordinal k, retry outcomes, and the complete modeled request Q match. The default ordinal mock ignores Q in its output projection; --request-sensitive-oracle adds decoded template bytes, ordered literal bytes, and identifier Value(tokens,flag) fields to Q. This models no real provider request text.",
+            "token_usage": "Input use follows the summed UTF-8 template and declared argument bounds; output use respects the resolved contract's max_tokens cap.",
+            "relational_obligations": "A discharged entry records a local structural request-trace comparison. It is not by itself a universal whole-workflow claim.",
+            "declassification": "This workflow contains no declassification; the claim is still conditional on the stated shared-oracle and abstract token-accounting assumptions."
+          }
+        },
+        "bound": {
+          "guaranteed_tokens": 288,
+          "estimated_tokens": 508,
+          "total_tokens": 796,
+          "component_sum_tokens": 796,
+          "within_budget": true,
+          "defined": true,
+          "cost": 0,
+          "cost_complete": false
+        },
+        "derivation": [
+          {
+            "depth": 0,
+            "rule": "call",
+            "detail": "first = translate via m [out<=96, in<=7+162]",
+            "guaranteed_tokens": 96,
+            "estimated_tokens": 169,
+            "total_tokens": 265,
+            "line": 20
+          },
+          {
+            "depth": 0,
+            "rule": "call",
+            "detail": "second = translate via m [out<=96, in<=7+162]",
+            "guaranteed_tokens": 96,
+            "estimated_tokens": 169,
+            "total_tokens": 265,
+            "line": 21
+          },
+          {
+            "depth": 0,
+            "rule": "call",
+            "detail": "third = translate via m [out<=96, in<=7+163]",
+            "guaranteed_tokens": 96,
+            "estimated_tokens": 170,
+            "total_tokens": 266,
+            "line": 22
+          }
+        ],
+        "call_facts": [
+          {
+            "id": 1,
+            "location": {
+              "file": "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/bench/sourced/base/pdl_fixed_map.orch",
+              "line": 20,
+              "column": 21
+            },
+            "result": "first",
+            "result_value_id": 29,
+            "prompt": "translate",
+            "model_alias": "m",
+            "model_contract": {
+              "provider": "mock",
+              "model": "common-metric-worker",
+              "max_tokens": 96,
+              "has_unit_price": false,
+              "unit_price": 0,
+              "stable_key": "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0",
+              "tokenizer_identity": "4:mock20:common-metric-worker"
+            },
+            "template_text": "Translate {x} for {target}",
+            "template_tokens": 7,
+            "arguments": [
+              {
+                "position": 0,
+                "kind": "value",
+                "literal_expr_kind": null,
+                "name": "query",
+                "literal_text": null,
+                "binding_id": 1,
+                "value_id": 1,
+                "content_label": "public,trusted",
+                "token_bound": 160,
+                "token_bound_tokenizer": null
+              },
+              {
+                "position": 1,
+                "kind": "literal",
+                "literal_expr_kind": "text",
+                "name": "",
+                "literal_text": "item-one",
+                "binding_id": 0,
+                "value_id": 0,
+                "content_label": "public,trusted",
+                "token_bound": 2,
+                "token_bound_tokenizer": null
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "location": {
+              "file": "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/bench/sourced/base/pdl_fixed_map.orch",
+              "line": 21,
+              "column": 22
+            },
+            "result": "second",
+            "result_value_id": 30,
+            "prompt": "translate",
+            "model_alias": "m",
+            "model_contract": {
+              "provider": "mock",
+              "model": "common-metric-worker",
+              "max_tokens": 96,
+              "has_unit_price": false,
+              "unit_price": 0,
+              "stable_key": "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0",
+              "tokenizer_identity": "4:mock20:common-metric-worker"
+            },
+            "template_text": "Translate {x} for {target}",
+            "template_tokens": 7,
+            "arguments": [
+              {
+                "position": 0,
+                "kind": "value",
+                "literal_expr_kind": null,
+                "name": "query",
+                "literal_text": null,
+                "binding_id": 1,
+                "value_id": 1,
+                "content_label": "public,trusted",
+                "token_bound": 160,
+                "token_bound_tokenizer": null
+              },
+              {
+                "position": 1,
+                "kind": "literal",
+                "literal_expr_kind": "text",
+                "name": "",
+                "literal_text": "item-two",
+                "binding_id": 0,
+                "value_id": 0,
+                "content_label": "public,trusted",
+                "token_bound": 2,
+                "token_bound_tokenizer": null
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "location": {
+              "file": "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/bench/sourced/base/pdl_fixed_map.orch",
+              "line": 22,
+              "column": 21
+            },
+            "result": "third",
+            "result_value_id": 31,
+            "prompt": "translate",
+            "model_alias": "m",
+            "model_contract": {
+              "provider": "mock",
+              "model": "common-metric-worker",
+              "max_tokens": 96,
+              "has_unit_price": false,
+              "unit_price": 0,
+              "stable_key": "p4x6d6f636b_m20x636f6d6d6f6e2d6d65747269632d776f726b6572_cap96_priced0",
+              "tokenizer_identity": "4:mock20:common-metric-worker"
+            },
+            "template_text": "Translate {x} for {target}",
+            "template_tokens": 7,
+            "arguments": [
+              {
+                "position": 0,
+                "kind": "value",
+                "literal_expr_kind": null,
+                "name": "query",
+                "literal_text": null,
+                "binding_id": 1,
+                "value_id": 1,
+                "content_label": "public,trusted",
+                "token_bound": 160,
+                "token_bound_tokenizer": null
+              },
+              {
+                "position": 1,
+                "kind": "literal",
+                "literal_expr_kind": "text",
+                "name": "",
+                "literal_text": "item-three",
+                "binding_id": 0,
+                "value_id": 0,
+                "content_label": "public,trusted",
+                "token_bound": 3,
+                "token_bound_tokenizer": null
+              }
+            ]
+          }
+        ],
+        "bindings": [
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "actor_a",
+            "kind": "model",
+            "type": "<unknown>",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "actor_b",
+            "kind": "model",
+            "type": "<unknown>",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "answer",
+            "kind": "prompt",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "first",
+            "kind": "local-result",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": 96
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "follow",
+            "kind": "prompt",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "history",
+            "kind": "input",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": 600
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "m",
+            "kind": "model",
+            "type": "<unknown>",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "observation",
+            "kind": "input",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "untrusted",
+            "token_bound": 120
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "page",
+            "kind": "input",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "untrusted",
+            "token_bound": 300
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "page2",
+            "kind": "input",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "untrusted",
+            "token_bound": 300
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "plan",
+            "kind": "prompt",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "query",
+            "kind": "input",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": 160
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "query2",
+            "kind": "input",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": 160
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "retrieved",
+            "kind": "prompt",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "route",
+            "kind": "secret",
+            "type": "boolean",
+            "confidentiality": "secret",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "second",
+            "kind": "local-result",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": 96
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "step",
+            "kind": "prompt",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "third",
+            "kind": "local-result",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": 96
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "translate",
+            "kind": "prompt",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase",
+            "name": "use_tool",
+            "kind": "input",
+            "type": "boolean",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase::prompt:step",
+            "name": "x",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase::prompt:follow",
+            "name": "q",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase::prompt:follow",
+            "name": "x",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase::prompt:translate",
+            "name": "target",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase::prompt:translate",
+            "name": "x",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase::prompt:plan",
+            "name": "x",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase::prompt:answer",
+            "name": "p",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase::prompt:answer",
+            "name": "q",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase::prompt:retrieved",
+            "name": "p",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase::prompt:retrieved",
+            "name": "q",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          },
+          {
+            "scope": "workflow:PdlFixedMapBase::prompt:retrieved",
+            "name": "t",
+            "kind": "prompt-parameter",
+            "type": "text",
+            "confidentiality": "public",
+            "integrity": "trusted",
+            "token_bound": null
+          }
+        ],
+        "reclassifications": [],
+        "relational_obligations": [],
+        "sinks": []
+      }
+    ]
+  },
+  "independent_cost_audit": {
+    "verified": "source binding, resolved request cost facts and every token-cost derivation step",
+    "workflows": 1,
+    "calls": 3,
+    "not_verified": [
+      "type correctness",
+      "security labels",
+      "relational obligations",
+      "declassification/endorsement justifications",
+      "provider/tokenizer contracts"
+    ]
+  }
+}

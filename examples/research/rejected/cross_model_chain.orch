@@ -1,0 +1,9 @@
+workflow CrossModelChain budget 1000 {
+  input source: text max_tokens 20;
+  model researcher = mock("research-model") max_tokens 8;
+  model editor = mock("editor-model") max_tokens 8;
+  prompt ask(t: text) -> text = "Request: {t}";
+  let notes: text = call ask(source) using researcher;
+  let answer: text = call ask(notes) using editor;
+  output "complete";
+}

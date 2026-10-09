@@ -3,7 +3,7 @@
 ## Purpose
 
 OrchLang describes LLM workflows that can be checked completely before anything
-runs. The compiler answers two questions about a workflow without contacting a
+runs. The compiler answers three questions about a workflow without contacting a
 model, reading a key, or touching a network:
 
 1. **What is the most this workflow can cost?** A worst-case upper bound on the
@@ -19,8 +19,7 @@ All three are written into an analysis report the compiler emits as JSON.
 
 ## Design commitments
 
-Three commitments shape the grammar, and each exists because a static answer to
-the questions above would otherwise be impossible.
+Three commitments keep the supported fragment finite and make its analysis contracts explicit.
 
 **Repetition is bounded syntactically.** `retry` carries a literal bound. An
 unbounded loop would make the cost bound infinite and the analysis useless, so
@@ -118,19 +117,25 @@ it flows anywhere.
 | `input x: T untrusted;` | `Public/Untrusted` |
 | `secret S: T;` | `Secret/Trusted` |
 | literal | `Public/Trusted` |
-| `let y = call p(a₁..aₙ) using m;` | `pc ⊔ label(a₁) ⊔ … ⊔ label(aₙ)` |
+| `let y = call p(a₁..aₙ) using m;` | Effective label `pc ⊔ L(a₁) ⊔ … ⊔ L(aₙ)`; explicit-data label `D(a₁) ⊔ … ⊔ D(aₙ)` |
 | `declassify(x) as y` | `label(x)` with confidentiality lowered to `Public` |
 | `endorse(x) as y` | `label(x)` with integrity raised to `Trusted` |
 
-### The injection propagation rule
+Each binding has an effective label `L`, including control dependence, and an
+explicit-data label `D`, excluding the program counter. `D` alone does not
+establish secret independence. Direct secret argument data is rejected; a call
+using a prior result produced under secret control is admitted only when the
+enclosing relational request obligation succeeds. Sinks still use `L` and `pc`.
+
+### The declared integrity propagation rule
 
 A model's answer is labelled with the join of everything that reached its
 prompt. A model given only trusted input yields a trusted answer; a model given
 anything untrusted yields an untrusted answer, and so does any model downstream
-of it. This is what makes indirect prompt injection a type error: text from a
-retrieved page cannot become an instruction that drives a tool, however many
-model calls sit between the page and the tool, unless someone endorses it and
-writes down why.
+of it. Thus data declared untrusted cannot reach a tool effect through model calls
+without explicit endorsement. This enforces the declared policy. It does not
+inspect malicious text or establish general prompt-injection resistance. An
+endorsement reason is recorded, not executed as a validator.
 
 ### The program-counter label
 
@@ -155,17 +160,19 @@ data, not an instruction. Returning a secret is not.
 The bound is derived by structural induction over a workflow body:
 
 ```
-C(ε)                       = ⟨0, 0⟩
+C(ε)                       = ⟨0, 0, 0⟩
 C(s ; B)                   = C(s) ⊕ C(B)                  componentwise sum
-C(if c { A } else { B })   = C(A) ⊔ C(B)                  the more expensive arm
+C(if c { A } else { B })   = C(A) ⊔ C(B)                  componentwise maximum
 C(retry n { A })           = n ⊗ C(A)                     componentwise scaling
 C(let y = call p(a…) using m)
-                           = ⟨ maxTokens(m),  τ(template(p)) + Σ bound(aᵢ) ⟩
+                           = ⟨ cap(m), τ(template(p)) + Σ bound(aᵢ),
+                               cap(m) + τ(template(p)) + Σ bound(aᵢ) ⟩
 C(anything else)           = ⟨0, 0⟩
 ```
 
-All arithmetic saturates rather than wrapping, so an overflow yields a bound
-that is still an over-approximation.
+Arithmetic saturates to an unusable overflow sentinel rather than wrapping.
+`E266` rejects a saturated total; the compiler does not issue that sentinel
+as a finite numerical upper bound on an arbitrarily large mathematical cost.
 
 ### Why the bound has two components, and how a branch combines them
 
@@ -177,59 +184,70 @@ one output token once admitted an execution producing twenty. The invariant is
 
 
 
-The two components are reported separately because they rest on different
-foundations.
+The output component uses each declared `max_tokens` cap; honoring that cap is
+an execution contract. The input component uses `ceil(UTF8_bytes / d)` for
+literal/template fragments and declared argument bounds. The compatibility
+option `--chars-per-token` supplies `d` (default 4); it divides UTF-8 bytes,
+not Unicode characters.
 
-The **guaranteed** component counts output tokens. Providers enforce
-`max_tokens` themselves, so this half holds without assuming anything about how
-text is tokenized.
+The required premise is a **complete modeled request-accounting bound**:
+all charged input, including any envelope, framing and tokenizer boundary
+effects, must fit within the additive estimate. Even `d=1` alone does not prove
+that premise for a real provider. The offline mock implements this additive
+fragment accounting; no provider serializer or tokenizer is verified.
 
-The **estimated** component counts input tokens: the prompt template plus the
-declared bounds of the arguments substituted into it. It depends on a
-tokenization function τ, which the compiler takes as an explicit parameter
-`--chars-per-token` (default 4). At 1 the estimate is unconditionally sound for
-any tokenizer that never emits more than one token per character; larger values
-give a tighter bound that is sound only relative to the stated assumption. The
-value used is recorded in the certificate, so a reader can see precisely how
-much of the number rests on an assumption.
+A generated result retains its producing provider/model token unit. Reuse as
+an input to a different provider/model identity is rejected with `E267`.
+Different caps on the same model are compatible. External input bounds are
+assumed to be in the target unit. No conversion contract is implemented.
 
-A monetary figure is derived from `cost_per_token` where models declare one. It
-is reported, not certified: the guarantee is stated over token counts.
+A finite monetary figure can be derived from declared `cost_per_token` values.
+It is nominal metadata, not an external invoice guarantee or a floating-point
+money theorem. Invalid or unrepresentable price calculations are diagnosed.
 
 ### The relational obligation on secret-guarded branches
 
-A branch can leak its guard without any value crossing a boundary: if the arms
-bill differently, the invoice differs, and whoever reads it learns which arm ran.
+Equal certified maxima do not establish equal actual usage. A secret can select
+between differently sized public inputs whose declarations have equal bounds.
+Numeric relational and probabilistic resource analyses exist; this compiler
+implements a conservative structural sufficient condition.
 
-The obvious rule -- accept when both arms have equal certified upper bounds -- is
-unsound, because an upper bound constrains a maximum and two quantities with the
-same maximum need not be equal. `examples/invalid/equal_bounds.orch` is a
-workflow that rule accepts and whose bill nonetheless moves with the secret.
+Its ordered signature contains:
 
-Numbers cannot be compared here at all, because a call's output length is chosen
-by the provider rather than the program. So the compiler compares *structure*.
-Each arm is abstracted to a **billing signature**: an ordered record of which
-model is called and a symbolic term for its input size, where the term is built
-only from
+- resolved model contracts `(provider, actual model ID, output cap, price)`;
+- exact decoded template bytes, not template token estimates;
+- ordered exact literals, lexically resolved outer-value identities, or
+  references to earlier aligned call results;
+- public choices with resolved guard identities/operators/limits; and
+- bounded retries with their bound and body signature.
 
-- constants, from the template and from literal arguments;
-- `|x|` for a variable bound outside the branch, equal because public inputs are
-  fixed; and
-- the result of an earlier call in the same signature, referred to *by position*
-  and equal because the k-th call returns the same answer under a shared model
-  oracle.
+Source aliases and result variable spellings are not model/request identity.
+Shadowed declarations are distinct; relabelling aliases preserve value identity.
+Corresponding secret alternatives align their earlier result positions, including
+nested branch/retry spans. A secret-data guard requires equal defined arm
+signatures (`E236`). A public-data guard retains its choice node, including when
+it occurs under secret control; the enclosing comparison must still match it.
 
-A branch on a public guard keeps both arms, since both executions see the same
-public data and take the same one. A nested secret-guarded branch whose arms
-already agree contributes that common signature, which makes the analysis
-compositional. An argument whose label is secret makes the signature undefined.
+The conditional claim uses two runs with equal public values, no confidentiality
+declassification, and a shared complete outcome oracle `Omega(M,k,Q)` plus
+matched retry-success schedule. Equal model contract `M`, contract ordinal `k`
+and modeled request `Q` give equal results and usage. Matched first calls then
+make result-dependent second calls match. This establishes modeled ordered
+invocation and per-contract usage equality under that coupling. Independently
+sampled provider responses need not be equal.
 
-At a secret-guarded branch, both signatures must be defined and equal, or `E236`
-reports which events differ.
+The default mock keys outcomes by workflow, seed, contract and ordinal. The
+optional `--request-sensitive-oracle` also uses template/literal bytes and
+identifier `(tokens,flag)` values. It probes an abstract request projection,
+not real response text. The observer sees per-contract call/input/output usage;
+timing and provider invoices are outside this claim.
 
-The rule is sound and deliberately incomplete: two arms reading different
-variables that happen always to have equal length are rejected, because the
-compiler has no reason to believe they do.
+Different outer values, different same-estimate literals, renamed template
+placeholders and equivalent guards may be rejected. The rule is sufficient and
+incomplete. `declassify` causes certificate v3 to withhold the unrestricted
+whole-workflow billing claim even when local structural obligations discharge.
+See [FORMAL_CONTRACT.md](FORMAL_CONTRACT.md) for the full assumptions and proof
+sketch.
 
 ### Spend influence
 
@@ -252,6 +270,7 @@ reported as undecidable rather than silently accepted.
 | --- | --- |
 | `L001`–`L003` | Unexpected character, unterminated string, unsupported escape |
 | `P001`, `P004` | Unexpected token; malformed integer literal |
+| `P007` | A model price must be finite and representable |
 | `P005` | `retry` requires a bound of at least 1 |
 | `P006` | A reclassification justification may not be empty |
 | `E201` | A declaration name may appear only once in its scope |
@@ -284,6 +303,9 @@ reported as undecidable rather than silently accepted.
 | `E264` | A requirement that an upper bound cannot discharge |
 | `E265` | The workflow has no defined bound |
 | `E266` | The bound is too large to represent |
+| `E268` | A derived monetary bound is not finite/representable |
+| `E267` | A generated-value bound cannot be reused across provider/model token units |
+| `R002` | A runtime pin is unknown, mistyped, or outside its declared bound |
 | `E270` | A workflow must declare one output |
 | `E271` | A workflow may not declare more than one output |
 
@@ -312,12 +334,23 @@ the certificate records it verbatim alongside the derived bound.
 
 ## Certificate
 
-`orchc certify file.orch` emits JSON containing the derived bound and its two
-components, the tokenization assumption relied on, the derivation that produced
-the bound, the final label of every binding, every reclassification with its
-justification, and every sink the analysis cleared. A runtime, a reviewer, or a
-CI job can check a deployed workflow against the same numbers the compiler
-derived without re-running the analysis.
+`orchc certify file.orch` emits certificate v3 after semantic, cost and
+relational checks. It contains a source SHA-256, output/input/total bounds,
+explicit accounting assumptions, source-located derivation steps, resolved call
+contracts/templates/ordered arguments, effective labels, reclassification reasons,
+sinks and local relational obligations. A workflow-level security-contract field
+records whether declassification prevents the billing claim.
+
+`audit/certificate_audit.py` can independently parse the source, recompute costs,
+and compare all issued request-cost facts and derivation steps. Its envelope
+records source and compiler hashes. It does not independently validate types,
+IFC labels, relational proofs, external contracts or justification truth.
+
+Normal `run` and direct interpreter execution require all analyses to pass.
+`--audit-unsafe` explicitly bypasses cost/relational rejection for offline
+counterexample research; semantic analysis and runtime input checks remain.
+`run --json` reports source-located decisions, attempts and per-contract usage.
+A runtime pin cannot exceed a declared bound or name an undeclared input.
 
 ## Scope and limitations
 
@@ -326,9 +359,8 @@ what it claims:
 
 - Nothing is proven about what a model *says*, only about where its output may
   flow and how much of it there can be.
-- The estimated half of the bound is relative to the declared tokenization
-  assumption. It is not a bound on adversarially chosen text at a
-  characters-per-token setting above 1.
+- Input bounds require complete request accounting and compatible declared token
+  units at every divisor. No setting alone verifies a physical tokenizer.
 - The monetary figure is derived from declared prices and is not a billing
   guarantee.
 - Declassification and endorsement are trusted. The compiler records them and

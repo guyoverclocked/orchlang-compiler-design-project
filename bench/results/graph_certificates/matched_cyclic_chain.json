@@ -1,0 +1,2864 @@
+{
+  "format": "orchlang-cyclic-request-certificate",
+  "version": 1,
+  "graph_name": "matched_cyclic_chain",
+  "status": "accepted",
+  "root": 0,
+  "nodes": [
+    {
+      "id": 0,
+      "left": [
+        "choose",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "left-secret",
+      "successors": [
+        1,
+        2
+      ]
+    },
+    {
+      "id": 1,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "right-secret",
+      "successors": [
+        3,
+        4
+      ]
+    },
+    {
+      "id": 2,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "right-secret",
+      "successors": [
+        5,
+        6
+      ]
+    },
+    {
+      "id": 3,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "left",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        7
+      ]
+    },
+    {
+      "id": 4,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "right",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        8
+      ]
+    },
+    {
+      "id": 5,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "left",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        9
+      ]
+    },
+    {
+      "id": 6,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "right",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        10
+      ]
+    },
+    {
+      "id": 7,
+      "left": [
+        "left",
+        1
+      ],
+      "right": [
+        "left",
+        1
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        11
+      ]
+    },
+    {
+      "id": 8,
+      "left": [
+        "left",
+        1
+      ],
+      "right": [
+        "right",
+        1
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        12
+      ]
+    },
+    {
+      "id": 9,
+      "left": [
+        "right",
+        1
+      ],
+      "right": [
+        "left",
+        1
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        13
+      ]
+    },
+    {
+      "id": 10,
+      "left": [
+        "right",
+        1
+      ],
+      "right": [
+        "right",
+        1
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        14
+      ]
+    },
+    {
+      "id": 11,
+      "left": [
+        "left",
+        2
+      ],
+      "right": [
+        "left",
+        2
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "public-choice",
+      "successors": [
+        15,
+        16
+      ]
+    },
+    {
+      "id": 12,
+      "left": [
+        "left",
+        2
+      ],
+      "right": [
+        "right",
+        2
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "public-choice",
+      "successors": [
+        17,
+        18
+      ]
+    },
+    {
+      "id": 13,
+      "left": [
+        "right",
+        2
+      ],
+      "right": [
+        "left",
+        2
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "public-choice",
+      "successors": [
+        19,
+        20
+      ]
+    },
+    {
+      "id": 14,
+      "left": [
+        "right",
+        2
+      ],
+      "right": [
+        "right",
+        2
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "public-choice",
+      "successors": [
+        21,
+        22
+      ]
+    },
+    {
+      "id": 15,
+      "left": [
+        "choose",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "left-secret",
+      "successors": [
+        23,
+        24
+      ]
+    },
+    {
+      "id": 16,
+      "left": [
+        "stop",
+        0
+      ],
+      "right": [
+        "stop",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "stop",
+      "successors": []
+    },
+    {
+      "id": 17,
+      "left": [
+        "choose",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "left-secret",
+      "successors": [
+        25,
+        26
+      ]
+    },
+    {
+      "id": 18,
+      "left": [
+        "stop",
+        0
+      ],
+      "right": [
+        "stop",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "stop",
+      "successors": []
+    },
+    {
+      "id": 19,
+      "left": [
+        "choose",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "left-secret",
+      "successors": [
+        27,
+        28
+      ]
+    },
+    {
+      "id": 20,
+      "left": [
+        "stop",
+        0
+      ],
+      "right": [
+        "stop",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "stop",
+      "successors": []
+    },
+    {
+      "id": 21,
+      "left": [
+        "choose",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "left-secret",
+      "successors": [
+        29,
+        30
+      ]
+    },
+    {
+      "id": 22,
+      "left": [
+        "stop",
+        0
+      ],
+      "right": [
+        "stop",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "stop",
+      "successors": []
+    },
+    {
+      "id": 23,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "right-secret",
+      "successors": [
+        31,
+        32
+      ]
+    },
+    {
+      "id": 24,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "right-secret",
+      "successors": [
+        33,
+        34
+      ]
+    },
+    {
+      "id": 25,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "right-secret",
+      "successors": [
+        35,
+        36
+      ]
+    },
+    {
+      "id": 26,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "right-secret",
+      "successors": [
+        37,
+        38
+      ]
+    },
+    {
+      "id": 27,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "right-secret",
+      "successors": [
+        39,
+        40
+      ]
+    },
+    {
+      "id": 28,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "right-secret",
+      "successors": [
+        41,
+        42
+      ]
+    },
+    {
+      "id": 29,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "right-secret",
+      "successors": [
+        43,
+        44
+      ]
+    },
+    {
+      "id": 30,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "right-secret",
+      "successors": [
+        45,
+        46
+      ]
+    },
+    {
+      "id": 31,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "left",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        47
+      ]
+    },
+    {
+      "id": 32,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "right",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        48
+      ]
+    },
+    {
+      "id": 33,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "left",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        49
+      ]
+    },
+    {
+      "id": 34,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "right",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        50
+      ]
+    },
+    {
+      "id": 35,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "left",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        51
+      ]
+    },
+    {
+      "id": 36,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "right",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        52
+      ]
+    },
+    {
+      "id": 37,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "left",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        53
+      ]
+    },
+    {
+      "id": 38,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "right",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        54
+      ]
+    },
+    {
+      "id": 39,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "left",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        55
+      ]
+    },
+    {
+      "id": 40,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "right",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        56
+      ]
+    },
+    {
+      "id": 41,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "left",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        57
+      ]
+    },
+    {
+      "id": 42,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "right",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        58
+      ]
+    },
+    {
+      "id": 43,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "left",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        59
+      ]
+    },
+    {
+      "id": 44,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "right",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        60
+      ]
+    },
+    {
+      "id": 45,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "left",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        61
+      ]
+    },
+    {
+      "id": 46,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "right",
+        0
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        62
+      ]
+    },
+    {
+      "id": 47,
+      "left": [
+        "left",
+        1
+      ],
+      "right": [
+        "left",
+        1
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        11
+      ]
+    },
+    {
+      "id": 48,
+      "left": [
+        "left",
+        1
+      ],
+      "right": [
+        "right",
+        1
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        12
+      ]
+    },
+    {
+      "id": 49,
+      "left": [
+        "right",
+        1
+      ],
+      "right": [
+        "left",
+        1
+      ],
+      "equal_values": [
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        13
+      ]
+    },
+    {
+      "id": 50,
+      "left": [
+        "right",
+        1
+      ],
+      "right": [
+        "right",
+        1
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        63
+      ]
+    },
+    {
+      "id": 51,
+      "left": [
+        "left",
+        1
+      ],
+      "right": [
+        "left",
+        1
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        11
+      ]
+    },
+    {
+      "id": 52,
+      "left": [
+        "left",
+        1
+      ],
+      "right": [
+        "right",
+        1
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        12
+      ]
+    },
+    {
+      "id": 53,
+      "left": [
+        "right",
+        1
+      ],
+      "right": [
+        "left",
+        1
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        64
+      ]
+    },
+    {
+      "id": 54,
+      "left": [
+        "right",
+        1
+      ],
+      "right": [
+        "right",
+        1
+      ],
+      "equal_values": [
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        14
+      ]
+    },
+    {
+      "id": 55,
+      "left": [
+        "left",
+        1
+      ],
+      "right": [
+        "left",
+        1
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        11
+      ]
+    },
+    {
+      "id": 56,
+      "left": [
+        "left",
+        1
+      ],
+      "right": [
+        "right",
+        1
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        65
+      ]
+    },
+    {
+      "id": 57,
+      "left": [
+        "right",
+        1
+      ],
+      "right": [
+        "left",
+        1
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        13
+      ]
+    },
+    {
+      "id": 58,
+      "left": [
+        "right",
+        1
+      ],
+      "right": [
+        "right",
+        1
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        14
+      ]
+    },
+    {
+      "id": 59,
+      "left": [
+        "left",
+        1
+      ],
+      "right": [
+        "left",
+        1
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        66
+      ]
+    },
+    {
+      "id": 60,
+      "left": [
+        "left",
+        1
+      ],
+      "right": [
+        "right",
+        1
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        12
+      ]
+    },
+    {
+      "id": 61,
+      "left": [
+        "right",
+        1
+      ],
+      "right": [
+        "left",
+        1
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        13
+      ]
+    },
+    {
+      "id": 62,
+      "left": [
+        "right",
+        1
+      ],
+      "right": [
+        "right",
+        1
+      ],
+      "equal_values": [
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        14
+      ]
+    },
+    {
+      "id": 63,
+      "left": [
+        "right",
+        2
+      ],
+      "right": [
+        "right",
+        2
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "public-choice",
+      "successors": [
+        67,
+        68
+      ]
+    },
+    {
+      "id": 64,
+      "left": [
+        "right",
+        2
+      ],
+      "right": [
+        "left",
+        2
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "public-choice",
+      "successors": [
+        69,
+        70
+      ]
+    },
+    {
+      "id": 65,
+      "left": [
+        "left",
+        2
+      ],
+      "right": [
+        "right",
+        2
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "public-choice",
+      "successors": [
+        69,
+        70
+      ]
+    },
+    {
+      "id": 66,
+      "left": [
+        "left",
+        2
+      ],
+      "right": [
+        "left",
+        2
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "public-choice",
+      "successors": [
+        67,
+        68
+      ]
+    },
+    {
+      "id": 67,
+      "left": [
+        "choose",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "left-secret",
+      "successors": [
+        71,
+        72
+      ]
+    },
+    {
+      "id": 68,
+      "left": [
+        "stop",
+        0
+      ],
+      "right": [
+        "stop",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "stop",
+      "successors": []
+    },
+    {
+      "id": 69,
+      "left": [
+        "choose",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "left-secret",
+      "successors": [
+        73,
+        74
+      ]
+    },
+    {
+      "id": 70,
+      "left": [
+        "stop",
+        0
+      ],
+      "right": [
+        "stop",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "stop",
+      "successors": []
+    },
+    {
+      "id": 71,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "right-secret",
+      "successors": [
+        75,
+        76
+      ]
+    },
+    {
+      "id": 72,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "right-secret",
+      "successors": [
+        77,
+        78
+      ]
+    },
+    {
+      "id": 73,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "right-secret",
+      "successors": [
+        79,
+        80
+      ]
+    },
+    {
+      "id": 74,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "choose",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "right-secret",
+      "successors": [
+        81,
+        82
+      ]
+    },
+    {
+      "id": 75,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "left",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        83
+      ]
+    },
+    {
+      "id": 76,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "right",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        84
+      ]
+    },
+    {
+      "id": 77,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "left",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        85
+      ]
+    },
+    {
+      "id": 78,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "right",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        86
+      ]
+    },
+    {
+      "id": 79,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "left",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        87
+      ]
+    },
+    {
+      "id": 80,
+      "left": [
+        "left",
+        0
+      ],
+      "right": [
+        "right",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        88
+      ]
+    },
+    {
+      "id": 81,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "left",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        89
+      ]
+    },
+    {
+      "id": 82,
+      "left": [
+        "right",
+        0
+      ],
+      "right": [
+        "right",
+        0
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        90
+      ]
+    },
+    {
+      "id": 83,
+      "left": [
+        "left",
+        1
+      ],
+      "right": [
+        "left",
+        1
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        66
+      ]
+    },
+    {
+      "id": 84,
+      "left": [
+        "left",
+        1
+      ],
+      "right": [
+        "right",
+        1
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        12
+      ]
+    },
+    {
+      "id": 85,
+      "left": [
+        "right",
+        1
+      ],
+      "right": [
+        "left",
+        1
+      ],
+      "equal_values": [
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        13
+      ]
+    },
+    {
+      "id": 86,
+      "left": [
+        "right",
+        1
+      ],
+      "right": [
+        "right",
+        1
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "b"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "y"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        63
+      ]
+    },
+    {
+      "id": 87,
+      "left": [
+        "left",
+        1
+      ],
+      "right": [
+        "left",
+        1
+      ],
+      "equal_values": [
+        [
+          "a",
+          "a"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        11
+      ]
+    },
+    {
+      "id": 88,
+      "left": [
+        "left",
+        1
+      ],
+      "right": [
+        "right",
+        1
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        65
+      ]
+    },
+    {
+      "id": 89,
+      "left": [
+        "right",
+        1
+      ],
+      "right": [
+        "left",
+        1
+      ],
+      "equal_values": [
+        [
+          "a",
+          "x"
+        ],
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "a"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        64
+      ]
+    },
+    {
+      "id": 90,
+      "left": [
+        "right",
+        1
+      ],
+      "right": [
+        "right",
+        1
+      ],
+      "equal_values": [
+        [
+          "b",
+          "y"
+        ],
+        [
+          "query",
+          "query"
+        ],
+        [
+          "x",
+          "x"
+        ],
+        [
+          "y",
+          "b"
+        ]
+      ],
+      "rule": "matched-call",
+      "successors": [
+        14
+      ]
+    }
+  ],
+  "max_nodes": 50000,
+  "semantics": {
+    "oracle": "shared Omega(resolved-contract,per-contract-ordinal,template,ordered-text-values)",
+    "inputs": "all public external values agree; secret inputs may differ",
+    "claim": "equal complete request/usage traces and stop positions under the shared oracle",
+    "cycles": "every finite trace prefix; no termination or finite total-cost claim",
+    "input_accounting": "complete additive request contract in compatible token units",
+    "unsupported": [
+      "declassification",
+      "tools",
+      "request serialization",
+      "independent provider sampling",
+      "call-free cycles"
+    ]
+  },
+  "state_entry_bounds": {
+    "choose": {
+      "output_tokens": 0,
+      "input_tokens": 0,
+      "total_tokens": 0
+    },
+    "left": {
+      "output_tokens": 32,
+      "input_tokens": 56,
+      "total_tokens": 88
+    },
+    "right": {
+      "output_tokens": 32,
+      "input_tokens": 56,
+      "total_tokens": 88
+    },
+    "stop": {
+      "output_tokens": 0,
+      "input_tokens": 0,
+      "total_tokens": 0
+    }
+  },
+  "reachable_source_states": [
+    "choose",
+    "left",
+    "right",
+    "stop"
+  ],
+  "product_nodes": 91,
+  "product_edges": 114,
+  "source_sha256": "9b827d2e8ef16f8d2fa9a4e146f5ef8341d46f434ce04abca8e0c95c3917b6b8",
+  "checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42"
+}

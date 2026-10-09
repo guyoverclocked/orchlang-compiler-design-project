@@ -1,0 +1,139 @@
+{
+  "status": "complete",
+  "rows": [
+    {
+      "status": "complete",
+      "mass": "1",
+      "state_visits": 2,
+      "peak_frontier": 1,
+      "call_transitions": 1,
+      "terminal_states": 1,
+      "observer": "trace",
+      "horizon": 1,
+      "work_bytes_estimate": 1269,
+      "max_work_bytes": 1073741824,
+      "histogram": [
+        {
+          "observation": {
+            "stopped": false,
+            "usage_trace": [
+              {
+                "contract": {
+                  "has_unit_price": false,
+                  "max_tokens": 8,
+                  "model": "finite-worker",
+                  "provider": "offline",
+                  "unit_price": 0.0
+                },
+                "input_tokens": 1,
+                "output_tokens": 3
+              }
+            ]
+          },
+          "probability": "1"
+        }
+      ]
+    },
+    {
+      "status": "complete",
+      "mass": "1",
+      "state_visits": 2,
+      "peak_frontier": 1,
+      "call_transitions": 1,
+      "terminal_states": 1,
+      "observer": "trace",
+      "horizon": 1,
+      "work_bytes_estimate": 1264,
+      "max_work_bytes": 1073741824,
+      "histogram": [
+        {
+          "observation": {
+            "stopped": false,
+            "usage_trace": [
+              {
+                "contract": {
+                  "has_unit_price": false,
+                  "max_tokens": 8,
+                  "model": "finite-worker",
+                  "provider": "offline",
+                  "unit_price": 0.0
+                },
+                "input_tokens": 1,
+                "output_tokens": 1
+              }
+            ]
+          },
+          "probability": "1"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "pairwise": [
+      {
+        "left": 0,
+        "right": 1,
+        "total_variation": "1",
+        "equal_observation_laws": false,
+        "maximum_likelihood_ratio": null,
+        "maximum_log_likelihood_ratio_nats_approx": null,
+        "infinite_likelihood_ratio": true
+      }
+    ],
+    "bayes_vulnerability": "1",
+    "prior_bayes_vulnerability": "1/2",
+    "min_entropy_vulnerability_ratio": "2",
+    "min_entropy_leakage_bits_approx": 1.0,
+    "mutual_information_bits_approx": 1.0,
+    "mutual_information_exact_expression": {
+      "form": "sum(coefficient * log2(ratio))",
+      "terms": [
+        {
+          "coefficient": "1/2",
+          "ratio": "2"
+        },
+        {
+          "coefficient": "1/2",
+          "ratio": "2"
+        }
+      ]
+    },
+    "all_pairwise_observation_laws_equal": false,
+    "limits": [
+      "exact probabilities/TV/vulnerability; log displays are floating approximations",
+      "likelihood ratio is a channel statistic, not a differential-privacy claim without declared adjacency"
+    ]
+  },
+  "observer": "trace",
+  "horizon": 1,
+  "priors": [
+    "1/2",
+    "1/2"
+  ],
+  "public_store": {},
+  "secret_scenarios": [
+    {
+      "values": {
+        "secret": false
+      },
+      "prior": "1/2"
+    },
+    {
+      "values": {
+        "secret": true
+      },
+      "prior": "1/2"
+    }
+  ],
+  "format": "orchlang-finite-usage-channel",
+  "version": 1,
+  "source_sha256": "6698767717f8b5920c5a409ce3047b62ed68663d6564ec20a7ac19ad3feb4898",
+  "kernel_sha256": "62df7f0ad13716c524d3c2ebd48789f56fc4b51f5999cb2e439480d3015ee07e",
+  "analyzer_sha256": "45380e75cdcc4d6f285a0027cbb85dab97d22dff11c5c94d3940b6813e8dce00",
+  "public_store_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+  "secret_scenarios_sha256": "65ba9bae030c6dee87d198eacddd557a759b4c629201aa5ee45bd4aa8e38398b",
+  "max_states": 100000,
+  "max_work_bytes": 1073741824,
+  "rule_precedence": "first matching rule in supplied order, otherwise resolved-contract default",
+  "scope": "authored synthetic finite success-only kernels; no provider distribution fitting, currency, errors or infinite-horizon analysis"
+}

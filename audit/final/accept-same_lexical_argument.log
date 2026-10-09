@@ -1,0 +1,5 @@
+Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.
+SameArgument:
+  token bound   39 / budget 1000
+  components    output <= 4, input <= 35 @ 4 chars/token
+  labels        3 secret, 0 untrusted

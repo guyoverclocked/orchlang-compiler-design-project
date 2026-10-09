@@ -35,12 +35,16 @@ E5  Relational precision.  For every rejected relational workflow, search for a
 
 E6  Flow policy conformance.  The paired security suite, checked against the
     diagnostic family each case is supposed to raise.
+
+E7  Conservativeness.  Three structural rejections whose bills agree under the
+    chosen mock metric. They are intentionally distinct from leaking fixtures.
 """
 
 import io
 import itertools
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -71,11 +75,7 @@ def run(args):
 
 
 def diagnostic_codes(text):
-    codes = set()
-    for token in text.replace('[', ' [').split():
-        if token.startswith('[') and token.endswith(']') and len(token) > 2:
-            codes.add(token[1:-1])
-    return codes
+    return set(re.findall(r'\[([ELW]\d{3})\]', text))
 
 
 def certificate(path):
@@ -85,32 +85,33 @@ def certificate(path):
     return json.loads(out)['workflows'][0]
 
 
-def execute(path, seed, pins=None):
-    args = ['run', path, '--seed', str(seed)]
+def execute(path, seed, pins=None, audit_unsafe=False, request_sensitive=False):
+    args = ['run', path, '--seed', str(seed), '--json']
+    if audit_unsafe:
+        # Only explicitly rejected research fixtures may bypass the run gate.
+        # This remains an offline mock execution, never a provider call.
+        args.append('--audit-unsafe')
+    if request_sensitive:
+        args.append('--request-sensitive-oracle')
+    source = io.open(path, encoding='utf-8').read()
+    declared_inputs = set(re.findall(r'\b(?:input|secret)\s+([A-Za-z_][A-Za-z_0-9]*)\s*[:;]', source))
     for name, value in (pins or {}).items():
-        args += ['--pin', '%s=%s' % (name, value)]
+        if name in declared_inputs:
+            args += ['--pin', '%s=%s' % (name, value)]
     code, out, err = run(args)
     if code != 0:
         return None
 
-    result = {'total': 0, 'input': 0, 'output': 0, 'billing': {}, 'models': []}
-    for line in out.splitlines():
-        stripped = line.strip()
-        if stripped.startswith('actual tokens'):
-            parts = stripped.replace('(', ' ').replace(')', ' ').split()
-            # "actual tokens  N  (input A + output B)" becomes
-            # [actual, tokens, N, input, A, +, output, B]
-            result['total'] = int(parts[2])
-            result['input'] = int(parts[4])
-            result['output'] = int(parts[7])
-        elif ' calls ' in stripped and ' in ' in stripped:
-            # "<model>  calls C  in I  out O"
-            parts = stripped.split()
-            result['billing'][parts[0]] = (int(parts[2]), int(parts[4]), int(parts[6]))
-        elif 'via' in stripped and ' in ' in stripped:
-            # "<binding> = <prompt> via <model>  in I out O"
-            result['models'].append(stripped.split('via')[1].split()[0])
-    return result
+    try:
+        document = json.loads(out)['workflows'][0]
+        return {'total': document['total_tokens'], 'input': document['input_tokens'],
+                'output': document['output_tokens'],
+                'billing': {b['model_contract']: (b['calls'], b['input_tokens'], b['output_tokens'])
+                            for b in document['billing']},
+                'branches': document['branches'], 'retries': document['retries'],
+                'trace': document['trace']}
+    except (ValueError, KeyError, IndexError, TypeError):
+        return None
 
 
 def billing_key(observation):
@@ -199,7 +200,13 @@ def evaluate_cost():
         observed = []
         local = {'certified': 0, 'flat': 0, 'control_flow': 0,
                  'output_component': 0, 'input_component': 0}
-        arms = set()
+        paths = set()
+        # Count every syntactic branch location, including locations a random
+        # execution might never reach. Fixtures use one statement per line.
+        source_text = io.open(path, encoding='utf-8').read()
+        branch_decisions = {'%s:%s' % (index, len(line) - len(line.lstrip()) + 1): set()
+                            for index, line in enumerate(source_text.splitlines(), 1)
+                            if line.lstrip().startswith('if ')}
         for seed in range(1, SEEDS + 1):
             run_data = execute(path, seed)
             if run_data is None:
@@ -207,7 +214,12 @@ def evaluate_cost():
                 continue
             observed.append(run_data['total'])
             totals['runs'] += 1
-            arms.add(tuple(sorted(set(run_data['models']))))
+            # Source locations distinguish arms even when both use one model.
+            paths.add(tuple((b['line'], b['column'], b['decision'])
+                            for b in run_data['branches']))
+            for branch in run_data['branches']:
+                branch_decisions.setdefault('%s:%s' % (branch['line'], branch['column']), set()).add(
+                    branch['decision'])
 
             if run_data['total'] > bound['total_tokens']:
                 local['certified'] += 1
@@ -233,7 +245,10 @@ def evaluate_cost():
             'cfa': cfa,
             'peak': peak,
             'slack': round(bound['total_tokens'] / float(peak), 2) if peak else None,
-            'paths': len(arms),
+            'paths': len(paths),
+            'branch_locations': len(branch_decisions),
+            'branch_arms_observed': sum(len(v) for v in branch_decisions.values()),
+            'branch_arms_expected': 2 * len(branch_decisions),
             'cert_viol': local['certified'],
             'comp_viol': local['output_component'] + local['input_component'],
             'flat_viol': local['flat'],
@@ -316,7 +331,7 @@ def evaluate_relational():
                 for assignment in assignments:
                     pins = dict(public_pins)
                     pins.update(assignment)
-                    observation = execute(path, seed, pins)
+                    observation = execute(path, seed, pins, audit_unsafe=expectation == 'reject')
                     if observation is None:
                         fail('paired execution failed: %s seed %d' % (name, seed))
                         continue
@@ -344,6 +359,7 @@ def evaluate_relational():
                     rejected_with_witness += 1
                 else:
                     rejected_without_witness += 1
+                    fail('leaking fixture %s had no billing witness in the fixed search grid' % name)
 
             rows.append({
                 'workflow': name,
@@ -404,16 +420,41 @@ def evaluate_security():
     return rows, counts
 
 
+def evaluate_conservativeness():
+    rows = []
+    for path in orch_files('relational', 'conservative'):
+        name = os.path.basename(path)[:-5]
+        code, out, err = run(['check', path])
+        if code == 0 or 'E236' not in diagnostic_codes(err):
+            fail('conservative fixture %s did not reject with E236' % name)
+            continue
+        comparisons = different = 0
+        for seed in range(1, PAIRED_SEEDS + 1):
+            for size in (0, 10, 11, 37):
+                pair = [execute(path, seed, {'x': size, 'y': 61, 's': 0, 'flag': flag},
+                                audit_unsafe=True) for flag in ('false', 'true')]
+                if any(observation is None for observation in pair):
+                    fail('conservative paired execution failed: %s' % name)
+                    continue
+                comparisons += 1
+                different += billing_key(pair[0]) != billing_key(pair[1])
+        if different:
+            fail('the stated mock-equal conservative fixture %s changed its bill' % name)
+        rows.append({'workflow': name, 'verdict': 'reject:E236',
+                     'comparisons': comparisons, 'bills_differ': different})
+    return rows
+
+
 # ---------------------------------------------------------------- output -----
 
 def table(rows, columns):
     if not rows:
         return '(no rows)\n'
     widths = {c: max(len(c), max(len(str(r.get(c, ''))) for r in rows)) for c in columns}
-    out = '  '.join(c.ljust(widths[c]) for c in columns) + '\n'
+    out = '  '.join(c.ljust(widths[c]) for c in columns).rstrip() + '\n'
     out += '  '.join('-' * widths[c] for c in columns) + '\n'
     for row in rows:
-        out += '  '.join(str(row.get(c, '')).ljust(widths[c]) for c in columns) + '\n'
+        out += '  '.join(str(row.get(c, '')).ljust(widths[c]) for c in columns).rstrip() + '\n'
     return out
 
 
@@ -422,6 +463,13 @@ def main():
         print('build orchc first', file=sys.stderr)
         return 2
     os.makedirs(RESULTS, exist_ok=True)
+    expected_counts = [(('cost',), 23), (('relational', 'accept'), 7),
+                       (('relational', 'reject'), 7), (('relational', 'conservative'), 3),
+                       (('security', 'unsafe'), 13), (('security', 'safe'), 13)]
+    for parts, count in expected_counts:
+        actual = len(orch_files(*parts))
+        if actual != count:
+            fail('suite %s has %d files; release manifest requires %d' % ('/'.join(parts), actual, count))
 
     print('E1-E3: executing the cost suite (%d seeds each) ...' % SEEDS)
     cost_rows, cost_totals = evaluate_cost()
@@ -431,6 +479,9 @@ def main():
 
     print('E6: flow policy conformance ...')
     security_rows, security_counts = evaluate_security()
+
+    print('E7: conservative structural rejections ...')
+    conservative_rows = evaluate_conservativeness()
 
     print('timing ...')
     timed = orch_files('cost') + orch_files('security', 'safe')
@@ -443,8 +494,8 @@ def main():
     report.write('OrchLang evaluation\n===================\n\n')
 
     report.write('E1-E3  certified bound versus observed execution\n')
-    report.write('       (%d workflows, %d executions; "paths" counts distinct model-sets\n'
-                 '        observed, so 1 means a branch arm never ran)\n\n'
+    report.write('       (%d workflows, %d executions; "paths" counts source-located branch\n'
+                 '        decision sequences, including repeated decisions inside retries)\n\n'
                  % (len(cost_rows), cost_totals['runs']))
     report.write(table(cost_rows, ['workflow', 'certified', 'out<=', 'in<=', 'flat', 'cfa',
                                    'peak', 'slack', 'paths', 'cert_viol', 'comp_viol',
@@ -467,8 +518,9 @@ def main():
     if slacks:
         report.write('  slack vs peak observed          : median %.2fx, range %.2f-%.2fx\n'
                      % (sorted(slacks)[len(slacks) // 2], min(slacks), max(slacks)))
-    dead = [r['workflow'] for r in cost_rows if r['paths'] < 2 and 'branch' in r['workflow']]
-    report.write('  branch workflows with a dead arm: %d\n' % len(dead))
+    dead = [r['workflow'] for r in cost_rows
+            if r['branch_arms_observed'] < r['branch_arms_expected']]
+    report.write('  source branch locations missing an arm: %d workflows\n' % len(dead))
     if dead:
         report.write('    %s\n' % ', '.join(dead))
     report.write('\n')
@@ -498,6 +550,14 @@ def main():
                  '  trusted endorsement or declassification, which the compiler records\n'
                  '  rather than verifies.\n\n')
 
+    report.write('E7  precision limits under the mock billing metric\n\n')
+    report.write(table(conservative_rows, ['workflow', 'verdict', 'comparisons', 'bills_differ']))
+    report.write('\n  Exact request matching is a sufficient, incomplete check. These rejections\n'
+                 '  have equal observed mock bills. Literal/template cases need not be safe\n'
+                 '  under arbitrary provider tokenizers; equivalent guard operators expose\n'
+                 '  a genuine structural precision limit. No deployed false-positive rate\n'
+                 '  is inferred from these three authored examples.\n\n')
+
     report.write('Analysis cost\n\n')
     report.write('  %d workflows certified in %.2f s (%.1f ms each, including process startup;\n'
                  '  this is not an isolated measurement of analyser time)\n'
@@ -517,6 +577,8 @@ def main():
         json.dumps(relational_rows, indent=2))
     io.open(os.path.join(RESULTS, 'security.json'), 'w', encoding='utf-8', newline='\n').write(
         json.dumps(security_rows, indent=2))
+    io.open(os.path.join(RESULTS, 'conservative.json'), 'w', encoding='utf-8', newline='\n').write(
+        json.dumps(conservative_rows, indent=2))
     print()
     print(text)
 

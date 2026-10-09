@@ -1,228 +1,108 @@
-# OrchLang Demonstration Script
+# Current OrchLang review demo
 
-About eight minutes. Nothing here needs internet access; the compiler makes no
-network requests at any point.
+Eight minutes. Use the frozen optimized compiler; avoid rebuilding during a live talk. Commands below are offline. The full speaker scripts and examiner Q&A accompany the new presentation.
 
-Run everything from the repository root after `make clean && make check`.
+## 0:00–1:00 · Open with the distinction
 
----
+“A budget bound limits how much a run can use. It does not tell us whether a private decision changes the usage record. This project checks both, for a small bounded workflow language.”
 
-## 0:00 – 0:45  The problem
-
-Say: "LLM workflows fail expensively in three ways. They spend more than you
-meant. They let data go where it shouldn't — a key into a prompt, or text from a
-web page into a tool call. And, more subtly, the *amount* they spend can itself
-reveal a secret. Almost every tool that addresses the first two finds out at run
-time, once the tokens are gone and the effect has fired. OrchLang answers all
-three from the source, before anything runs."
-
----
-
-## 0:45 – 1:25  Build and test
+Show `bench/relational/reject/DifferentArgument.orch`: both public inputs have cap 100; a secret flag selects x or y.
 
 ```sh
-make clean && make check
+./orchc check bench/relational/reject/DifferentArgument.orch
 ```
 
-Expected: a strict C++17 build with `-Wall -Wextra -pedantic` and no warnings,
-`Passed 95/95 tests.`, the valid corpus accepted, every invalid example
-rejected, and a certificate emitted for each valid workflow.
+Expected: E236 comparing resolved outer x versus y. Do not say existing resource-aware or taint analyses universally miss this issue.
 
----
-
-## 1:25 – 2:30  The headline: cost is structural, not a sum
+## 1:00–2:15 · Show one concrete witness
 
 ```sh
-./orchc cost examples/valid/branching_cost.orch
+./orchc run bench/relational/reject/DifferentArgument.orch --audit-unsafe --seed 3 --pin x=37 --pin y=61 --pin s=0 --pin flag=false --json
+./orchc run bench/relational/reject/DifferentArgument.orch --audit-unsafe --seed 3 --pin x=37 --pin y=61 --pin s=0 --pin flag=true --json
 ```
 
-Expected: the derivation prints its working. Point at the last two lines —
-the branch's two arms cost 432 and 1211, and the bound takes the **maximum**,
-not the sum.
+Expected ordinal mock: input usage 69 versus 45; output usage 51 in both. The public inputs and oracle seed stay fixed. The rejection witness uses the explicit offline bypass; ordinary `run` refuses this program. No real provider invoice is involved.
+
+## 2:15–3:00 · Cost is a different property
 
 ```sh
 ./orchc cost examples/valid/bounded_retry.orch
 ```
 
-Expected: `retry-scale  3 x 1110  => 3330 tokens`. Say: "A flat sum over
-syntactic call sites reports 1110 here. The workflow can spend 3330. That is
-the direction that matters, because it is unsound — the benchmark shows it is
-violated on 13.8% of real executions."
+Point to the retry multiplication and separate output/input/total components. State the cap and full input-accounting assumptions. The 4,600-run synthetic grid has zero certificate violations; the flat retry-unaware baseline has 741, not an estimated industry failure rate.
 
-Point out the components line: `output <= 2100, input <= 1230 @ 4 chars/token`.
-The output half is provider-enforced and assumes nothing; the input half is
-relative to a recorded tokenization assumption. Each is maximised separately at
-a branch, so each holds on its own.
-
----
-
-## 2:30 – 3:30  Indirect prompt injection is a type error
+## 3:00–4:30 · Show the substantive improvement
 
 ```sh
-./orchc check examples/invalid/untrusted_sink.orch
+./orchc check examples/research/accepted/chain_matched.orch
+./orchc run examples/research/accepted/chain_matched.orch --seed 3 --json
+./orchc run examples/research/accepted/chain_matched.orch --seed 3 --request-sensitive-oracle --json
 ```
 
-Expected: `E233`. Say: "`web_page` is declared untrusted. The model's answer
-inherits that, because a model is only as trustworthy as what reached its
-prompt. So the answer cannot drive a tool."
+Show the two secret arms with a second call consuming the first result. Explain explicit-data versus effective labels, prior-result positions and the required combined relational gate. The first requests match; shared results make the second requests match. Outputs/tools still cannot occur under secret control. Seven sourced balanced patterns were newly admitted; acceptance rose from 8/15 to 15/15.
+
+## 4:30–5:15 · Show a near miss
+
+```sh
+./orchc check examples/research/rejected/chain_literal_mismatch.orch
+./orchc check examples/research/rejected/template_bytes_differ.orch
+./orchc check examples/research/rejected/cross_model_chain.orch
+```
+
+Expected: E236 for mismatching requests, E267 for unsupported token-unit conversion. Equal rounded literal sizes are not equal requests. Model alias spelling is not identity.
+
+## 5:15–6:00 · Flow policy and explicit trust
 
 ```sh
 ./orchc check bench/security/unsafe/InjectionTransitive.orch
-```
-
-Expected: still `E233`, now through **two** model calls. Say: "Chaining calls
-does not launder it."
-
-```sh
 ./orchc check bench/security/safe/InjectionTransitiveEndorsed.orch
 ```
 
-Expected: accepted. The difference is one `endorse(...) because "..."` line.
+Expected: E233, then acceptance after explicit endorsement. “This enforces a declared flow policy. The compiler records the review assertion; it does not perform that review or detect malicious text.”
 
----
+## 6:00–7:00 · Evidence and auditability
 
-## 3:30 – 4:15  Implicit flow
-
-```sh
-./orchc check examples/invalid/implicit_flow.orch
-```
-
-Expected: `E234`. Say: "No secret value is passed anywhere here. The secret only
-decides *whether* the tool fires — and that alone tells an observer one bit of
-the secret. The program-counter label catches it."
-
-Mention that `bench/security/unsafe/SecretGuardedLaundered.orch` tries to escape
-this by endorsing inside the branch, and is still rejected.
-
----
-
-## 4:15 – 5:30  The bill leaks the secret — and my first answer was wrong
+Show `bench/results/sourced.json` and `sourced_request_sensitive.json`. Both repeat the same 15 source patterns / 45 authored bounded projections. Each has 2,250 equal balanced comparisons and witnesses in all 2,250 unequal-arm slices. Inputs, loop bounds, source reductions and exclusions are explicit. This is not a production-agent benchmark.
 
 ```sh
-./orchc check examples/invalid/cost_channel.orch
+python3 audit/certificate_audit.py bind examples/research/accepted/chain_matched.orch /tmp/chain-report.json
+python3 audit/certificate_audit.py verify examples/research/accepted/chain_matched.orch /tmp/chain-report.json
 ```
 
-Expected: `E236`, naming what each arm bills.
+The Python auditor checks source hashes, request cost facts and each derivation. It does not verify the IFC/relational theorem.
 
-Say: "A secret decides which branch runs. One arm calls a big model, the other a
-small one. No value crosses any boundary, no tool is called, and every taint
-tracker accepts this program — but the invoice still tells you the secret."
+## 7:00–8:00 · Close with the functioning HTML demo
 
-Then the important part:
+Start the local server before the talk, from the repository root:
 
 ```sh
-./orchc check examples/invalid/equal_bounds.orch
+python3 demo/server.py
 ```
 
-Expected: `E236`, reporting `then-arm bills [m(in=1 + |x|)]` against
-`else-arm bills [m(in=1 + |y|)]`.
+Open **http://127.0.0.1:8765/**. Slide 32 of the current deck links to this address.
+Choose story 06, “Same mean, different laws”, and click **Run with local compiler**.
+Wait for **LIVE LOCAL RUN**. Both means are 2; the supplied output-usage laws
+have total variation 1. The independent replayer verifies the bound report.
+Next choose story 07, “Equal laws, hidden states”, and run it live. Strong bisimulation is inconclusive; exact trace-law checking proves equal laws at every finite call horizon under the supplied closed model, and the independent replayer verifies the proof. If time permits, story 04 shows aggregate TV 0 and ordered-trace TV 1.
+These are exact finite models with declared kernels, not provider measurements.
 
-Say: "My first rule was to accept when both arms had the same certified upper
-bound. Here both arms call the same model with an argument capped at a hundred,
-so both bound at exactly 111, and that rule accepted this. But x and y are
-different strings with different real lengths. An upper bound tells you a
-maximum, not a value. An external audit built this counterexample and measured
-it: the bill differs in 225 of 425 paired runs. I withdrew the theorem.
+“The contribution is an inspectable software pipeline: bounded compiler
+contracts, replayable cyclic graph analysis, exact usage channels, and a
+sufficient bisimulation check and an exact all-finite-horizon trace-law check. The methods specialize
+established relational resource analysis, quantitative information flow probabilistic bisimulation and weighted-automaton equivalence. The artifact has restricted source adapters,
+actual offline LangGraph execution, independent replay and explicit limits.”
 
-The repair cannot be a tighter number, because a call's output length is the
-provider's choice, not the program's. So the compiler compares structure — which
-model, in what order, and a symbolic input size that may only mention things
-that provably agree across the two runs. Here the terms differ: |x| against |y|."
+The seven stories cover a compiler rejection, a matched dependent chain, a
+productive cycle, hidden order, noisy usage, and equal means with different
+laws, and equal observable laws with different hidden transition structure. Opening `demo/index.html` directly gives clearly marked **STATIC
+EVIDENCE**; use the server for a current live run. No provider calls occur.
 
-```sh
-./orchc check examples/valid/balanced_signature.orch
-```
+## Assessment if asked
 
-Expected: accepted. The only edit is that both arms now read the same variable.
-
----
-
-## 5:15 – 6:00  The certificate
-
-```sh
-./orchc certify examples/valid/untrusted_endorsed.orch
-```
-
-Expected: JSON carrying the bound and its two components, the tokenization
-assumption relied on, the derivation, the final label of every binding, the
-endorsement with its written justification, and the sink that was cleared.
-
-Trace one line: `web_page` is `untrusted`, `digest_text` is `untrusted`,
-`vetted` is `trusted`, and the reclassification entry says exactly why.
-
----
-
-## 6:00 – 6:45  Front-end phases
-
-```sh
-./orchc tokens  examples/valid/support_triage.orch
-./orchc ast     examples/valid/untrusted_endorsed.orch
-./orchc symbols examples/valid/untrusted_endorsed.orch
-./orchc ir      examples/valid/branching_cost.orch
-```
-
-Expected: location-aware tokens; an AST with labels and declared bounds; a
-symbol table showing each symbol's label and token bound; IR nodes carrying
-region paths and repeat factors.
-
-```sh
-./orchc check examples/invalid/multiple_errors.orch
-```
-
-Expected: a dozen independent diagnostics from one run — `E201`, `E202`, `E210`,
-`E221`, `E222`, `E223`, `E230`, `E231`, `E241`, `E261`, `E271`. Say that the
-parser synchronizes at statement boundaries rather than stopping at the first
-fault.
-
----
-
-## 6:45 – 7:30  The claim is falsifiable
-
-```sh
-./orchc cost examples/valid/bounded_retry.orch | head -2
-./orchc run  examples/valid/bounded_retry.orch --seed 1
-./orchc run  examples/valid/bounded_retry.orch --seed 2
-```
-
-Expected: the certified bound is 3330; the runs consume well under it, and a
-different seed takes a different number of attempts.
-
-Say: "A bound nothing can test is a bound nothing can trust. The mock runtime
-executes the workflow against a seeded generator that respects each model's
-declared cap, and counts what was actually spent. The harness checks every run
-against the certificate."
-
----
-
-## 7:30 – 8:00  Results and honesty
-
-```sh
-cat bench/results/evaluation.txt
-```
-
-Point at four numbers:
-
-- certified bound exceeded, checked componentwise: **0 of 4,600 runs**
-- flat per-call sum exceeded: **636 of 4,600 (13.8%)**
-- control-flow-aware rule exceeded: **644 of 4,600 (14.0%)** — tightening an
-  unsound bound makes it fail *more* often; retries are what break it
-- slack over peak observed: median **1.11×**, with zero dead branch arms
-- accepted workflows with a secret-dependent bill: **0 of 2,975 comparisons**
-- rejected workflows with a real leaking witness: **7 of 7**
-- security suite: **13/13 unsafe rejected, 13/13 safe accepted**
-
-Close by naming the limitations rather than waiting to be asked:
-
-- Combining flow and resource analysis is not new — Ngo et al. (IEEE S&P 2017)
-  and RelCost (POPL 2017) did it for conventional programs. What is specific
-  here is the opaque stochastic call, where numeric comparison is unavailable.
-- The relational guarantee is relative to a coupling: the secret does not change
-  the bill *given the model behaved the same way*.
-- Declassification is trusted; the compiler records it, it does not verify it.
-- Token bounds are not portable across tokenizers, which is the clearest
-  remaining gap.
-- The proofs are on paper, not mechanized, and the mock runtime implements the
-  same assumptions the analysis relies on — so it checks the implementation
-  against the specification, not the specification against reality.
-- The security suite was written by the author, mitigated but not eliminated by
-  pairing every unsafe workflow with a safe one differing by one edit.
+Historical overall novelty was 4.5/10; the current independent assessment is
+5.8/10. The applied method rose from 3.5 to 5.9. SCP OSP
+originality/novelty/significance is 6.2/10, the six-criterion candidate-quality
+proxy is 7.4/10, and scope fit is 8.5/10. These are subjective internal
+judgments, not journal ratings or acceptance probabilities. The requested
+novelty-based score of 8 is not supported. See
+[FINAL_PUBLICATION_REVIEW.md](FINAL_PUBLICATION_REVIEW.md).

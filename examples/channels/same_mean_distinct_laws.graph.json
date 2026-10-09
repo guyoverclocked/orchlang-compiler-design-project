@@ -1,0 +1,64 @@
+{
+  "format": "orchlang-request-graph",
+  "version": 1,
+  "name": "same_mean_distinct_laws",
+  "chars_per_token": 1,
+  "inputs": {
+    "secret": {
+      "type": "boolean",
+      "label": "secret"
+    }
+  },
+  "models": {
+    "m": {
+      "provider": "offline",
+      "model": "finite-worker",
+      "max_tokens": 8
+    }
+  },
+  "registers": {
+    "r": {
+      "model": "m"
+    }
+  },
+  "entry": "choose",
+  "states": {
+    "choose": {
+      "calls": [],
+      "next": {
+        "kind": "secret",
+        "guard": {
+          "value": "secret"
+        },
+        "then": "left",
+        "else": "right"
+      }
+    },
+    "left": {
+      "calls": [
+        {
+          "model": "m",
+          "template": "A",
+          "arguments": [],
+          "result": "r"
+        }
+      ],
+      "next": {
+        "kind": "stop"
+      }
+    },
+    "right": {
+      "calls": [
+        {
+          "model": "m",
+          "template": "B",
+          "arguments": [],
+          "result": "r"
+        }
+      ],
+      "next": {
+        "kind": "stop"
+      }
+    }
+  }
+}

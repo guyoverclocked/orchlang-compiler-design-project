@@ -1,0 +1,18 @@
+workflow RetryBoundMismatch budget 1000 {
+  secret choose: boolean max_tokens 1;
+  input source: text max_tokens 20;
+  model shared = mock("research-model") max_tokens 4;
+  prompt ask(t: text) -> text = "Request: {t}";
+  if choose {
+    retry 2 {
+      let first_left: text = call ask(source) using shared;
+      let second_left: text = call ask(first_left) using shared;
+    }
+  } else {
+    retry 3 {
+      let first_right: text = call ask(source) using shared;
+      let second_right: text = call ask(first_right) using shared;
+    }
+  }
+  output "complete";
+}

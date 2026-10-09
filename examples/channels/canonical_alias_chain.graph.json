@@ -1,0 +1,95 @@
+{
+  "format": "orchlang-request-graph",
+  "version": 1,
+  "name": "canonical_alias_chain",
+  "chars_per_token": 1,
+  "inputs": {
+    "secret": {
+      "type": "boolean",
+      "label": "secret"
+    }
+  },
+  "models": {
+    "m": {
+      "provider": "offline",
+      "model": "finite-worker",
+      "max_tokens": 8
+    },
+    "alias": {
+      "provider": "offline",
+      "model": "finite-worker",
+      "max_tokens": 8
+    }
+  },
+  "registers": {
+    "a": {
+      "model": "m"
+    },
+    "b": {
+      "model": "m"
+    },
+    "r": {
+      "model": "m"
+    }
+  },
+  "entry": "choose",
+  "states": {
+    "choose": {
+      "calls": [],
+      "next": {
+        "kind": "secret",
+        "guard": {
+          "value": "secret"
+        },
+        "then": "left",
+        "else": "right"
+      }
+    },
+    "left": {
+      "calls": [
+        {
+          "model": "m",
+          "template": "Q",
+          "arguments": [],
+          "result": "a"
+        },
+        {
+          "model": "m",
+          "template": "R",
+          "arguments": [
+            {
+              "value": "a"
+            }
+          ],
+          "result": "r"
+        }
+      ],
+      "next": {
+        "kind": "stop"
+      }
+    },
+    "right": {
+      "calls": [
+        {
+          "model": "alias",
+          "template": "Q",
+          "arguments": [],
+          "result": "b"
+        },
+        {
+          "model": "alias",
+          "template": "R",
+          "arguments": [
+            {
+              "value": "b"
+            }
+          ],
+          "result": "r"
+        }
+      ],
+      "next": {
+        "kind": "stop"
+      }
+    }
+  }
+}

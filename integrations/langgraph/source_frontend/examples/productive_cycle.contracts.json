@@ -1,0 +1,13 @@
+{
+  "format": "orchlang-langgraph-contracts",
+  "version": 1,
+  "name": "productive_cycle",
+  "chars_per_token": 4,
+  "inputs": {
+    "question": {"type": "text", "label": "public", "max_tokens": 64},
+    "repeat": {"type": "boolean", "label": "public"}
+  },
+  "models": {
+    "writer": {"provider": "mock", "model": "text-gen-v1", "max_tokens": 12, "unit_price": 0.001}
+  }
+}

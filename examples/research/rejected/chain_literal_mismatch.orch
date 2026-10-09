@@ -1,0 +1,13 @@
+workflow ChainLiteralMismatch budget 1000 {
+  secret choose: boolean max_tokens 1;
+  model shared = mock("research-model") max_tokens 4;
+  prompt ask(t: text) -> text = "Request: {t}";
+  if choose {
+    let first_left: text = call ask("alpha") using shared;
+    let second_left: text = call ask(first_left) using shared;
+  } else {
+    let first_right: text = call ask("bravo") using shared;
+    let second_right: text = call ask(first_right) using shared;
+  }
+  output "complete";
+}

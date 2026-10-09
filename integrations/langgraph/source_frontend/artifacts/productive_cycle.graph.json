@@ -1,0 +1,61 @@
+{
+  "chars_per_token": 4,
+  "entry": "lg_state_0000",
+  "format": "orchlang-request-graph",
+  "inputs": {
+    "lg_input_0000": {
+      "label": "public",
+      "max_tokens": 64,
+      "type": "text"
+    },
+    "lg_input_0001": {
+      "label": "public",
+      "type": "boolean"
+    }
+  },
+  "models": {
+    "lg_model_0000": {
+      "max_tokens": 12,
+      "model": "text-gen-v1",
+      "provider": "mock",
+      "unit_price": 0.001
+    }
+  },
+  "name": "productive_cycle",
+  "registers": {
+    "lg_slot_0000": {
+      "model": "lg_model_0000"
+    }
+  },
+  "states": {
+    "lg_state_0000": {
+      "calls": [
+        {
+          "arguments": [
+            {
+              "value": "lg_input_0000"
+            }
+          ],
+          "model": "lg_model_0000",
+          "result": "lg_slot_0000",
+          "template": "cycle-v1"
+        }
+      ],
+      "next": {
+        "else": "lg_stop_0000",
+        "guard": {
+          "value": "lg_input_0001"
+        },
+        "kind": "public",
+        "then": "lg_state_0000"
+      }
+    },
+    "lg_stop_0000": {
+      "calls": [],
+      "next": {
+        "kind": "stop"
+      }
+    }
+  },
+  "version": 1
+}

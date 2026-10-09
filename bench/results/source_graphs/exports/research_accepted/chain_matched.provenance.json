@@ -1,0 +1,205 @@
+{
+  "format": "orchlang-source-graph-provenance",
+  "version": 1,
+  "workflow": "ChainMatch",
+  "workflow_budget_tokens": 1000,
+  "chars_per_token": 4,
+  "source_sha256": "7fe0ddd257632ed24d1a6ec31ad7b97ce759a6929e7ceda07e85efe0dd7f291b",
+  "graph_sha256": "10c30c7bf73ea00e2c1cd97ff903477076782105a4b6d9ce35a20566463b0a79",
+  "certificate_sha256": "760f376beef54c5808249b3dcc67dfd5ad69e166c2c65029deb32f4efb253cde",
+  "adapter_sha256": "85b7f497150cf8c2f40cf48547336e3f0223bf7ea960b7959e19be2fa609a3a7",
+  "source_cost_parser_sha256": "85c98f9f9ad532a7d299c57d2e4e38943a8fa64075cb7ca388ff2222bd9e936e",
+  "compiler_sha256": "7dfbd0d962122f175c25147b8a16551a44098c75d893f0cbd12474c835b17ca4",
+  "graph_format": "orchlang-request-graph",
+  "graph_version": 1,
+  "semantic_gate": "orchc check passed before export",
+  "graph_checker": {
+    "status": "accepted",
+    "product_nodes": 31,
+    "product_edges": 30
+  },
+  "independent_replay": {
+    "status": "verified"
+  },
+  "claim_scope": "billing projection for the supported source subset under the graph's shared-oracle and complete request-accounting premises",
+  "omitted_output": {
+    "kind": "literal",
+    "text": "complete",
+    "source_location": {
+      "line": 13,
+      "column": 10
+    },
+    "reason": "one unconditional final public text output has no continuation; output content is outside the billing observation"
+  },
+  "mapping": {
+    "inputs": [
+      {
+        "source_name": "choose",
+        "location": {
+          "line": 2,
+          "column": 3
+        },
+        "binding_id": 1,
+        "graph_name": "in_0",
+        "type": "boolean",
+        "label": "secret",
+        "max_tokens": 1
+      },
+      {
+        "source_name": "source",
+        "location": {
+          "line": 3,
+          "column": 3
+        },
+        "binding_id": 2,
+        "graph_name": "in_1",
+        "type": "text",
+        "label": "public",
+        "max_tokens": 32
+      }
+    ],
+    "models": [
+      {
+        "source_name": "shared",
+        "location": {
+          "line": 4,
+          "column": 3
+        },
+        "declaration_id": 0,
+        "graph_alias": "model_0",
+        "contract": {
+          "provider": "mock",
+          "model": "research-model",
+          "max_tokens": 4
+        }
+      }
+    ],
+    "prompts": [
+      {
+        "source_name": "ask",
+        "location": {
+          "line": 5,
+          "column": 3
+        },
+        "declaration_id": 0,
+        "template": "Request: {t}",
+        "parameters": [
+          {
+            "name": "t",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "values": [
+      {
+        "source_name": "first_left",
+        "location": {
+          "line": 7,
+          "column": 5
+        },
+        "binding_id": 3,
+        "graph_register": "r_0",
+        "type": "text",
+        "producer_contract": {
+          "provider": "mock",
+          "model": "research-model",
+          "max_tokens": 4
+        }
+      },
+      {
+        "source_name": "second_left",
+        "location": {
+          "line": 8,
+          "column": 5
+        },
+        "binding_id": 4,
+        "graph_register": "r_1",
+        "type": "text",
+        "producer_contract": {
+          "provider": "mock",
+          "model": "research-model",
+          "max_tokens": 4
+        }
+      },
+      {
+        "source_name": "first_right",
+        "location": {
+          "line": 10,
+          "column": 5
+        },
+        "binding_id": 5,
+        "graph_register": "r_2",
+        "type": "text",
+        "producer_contract": {
+          "provider": "mock",
+          "model": "research-model",
+          "max_tokens": 4
+        }
+      },
+      {
+        "source_name": "second_right",
+        "location": {
+          "line": 11,
+          "column": 5
+        },
+        "binding_id": 6,
+        "graph_register": "r_3",
+        "type": "text",
+        "producer_contract": {
+          "provider": "mock",
+          "model": "research-model",
+          "max_tokens": 4
+        }
+      }
+    ],
+    "states": [
+      {
+        "source_location": {
+          "line": 6,
+          "column": 3
+        },
+        "kind": "secret",
+        "source_guard": "choose",
+        "graph_guard": {
+          "value": "in_0"
+        }
+      },
+      {
+        "source_location": {
+          "line": 8,
+          "column": 5
+        },
+        "graph_state": "state_1"
+      },
+      {
+        "source_location": {
+          "line": 7,
+          "column": 5
+        },
+        "graph_state": "state_2"
+      },
+      {
+        "source_location": {
+          "line": 11,
+          "column": 5
+        },
+        "graph_state": "state_3"
+      },
+      {
+        "source_location": {
+          "line": 10,
+          "column": 5
+        },
+        "graph_state": "state_4"
+      },
+      {
+        "source_location": {
+          "line": 6,
+          "column": 3
+        },
+        "graph_state": "state_5"
+      }
+    ]
+  }
+}

@@ -17,6 +17,7 @@
 #include "ast.hpp"
 #include "diagnostic.hpp"
 #include "semantic_analyzer.hpp"
+#include "token_cost.hpp"
 
 #include <cstdint>
 #include <cstddef>
@@ -31,6 +32,14 @@ struct RunOptions {
     // Chance in [0,100] that one attempt inside a retry block fails and the
     // block tries again.  Models a transient failure or a rejected validation.
     unsigned retryFailurePercent{50};
+    // For offline research counterexamples only. This bypasses budget and
+    // relational rejection but never bypasses lexical, syntax, or semantic
+    // type/security checks.
+    bool auditUnsafe{false};
+    // Optional stronger offline oracle: output draws also depend on the exact
+    // abstract request content. The default remains ordinal-only for existing
+    // reproducibility and benchmark compatibility.
+    bool requestSensitiveOracle{false};
 
     // Pins the token length of named inputs and secrets instead of sampling
     // them.  This is what makes the relational claim testable: run the same
@@ -49,19 +58,32 @@ struct ModelBilling {
     std::size_t inputTokens{0};
     std::size_t outputTokens{0};
     std::size_t calls{0};
+    ModelContract contract;
 
     bool operator==(const ModelBilling& other) const {
         return inputTokens == other.inputTokens && outputTokens == other.outputTokens &&
-               calls == other.calls;
+               calls == other.calls && contract == other.contract;
     }
 };
 
 struct CallTrace {
     std::string binding;
     std::string prompt;
-    std::string model;
+    std::string modelAlias;
+    std::string modelContractKey;
+    ModelContract modelContract;
     std::size_t inputTokens{0};
     std::size_t outputTokens{0};
+};
+
+struct BranchTrace {
+    SourceLocation location;
+    bool tookThen{false};
+};
+
+struct RetryTrace {
+    SourceLocation location;
+    std::size_t attempts{0};
 };
 
 struct WorkflowRun {
@@ -69,12 +91,15 @@ struct WorkflowRun {
     std::size_t inputTokens{0};
     std::size_t outputTokens{0};
     std::size_t calls{0};
+    std::size_t retryAttempts{0};
     std::vector<CallTrace> trace;
+    std::vector<BranchTrace> branches;
+    std::vector<RetryTrace> retries;
     std::vector<std::string> effects;
     // The observation the relational analysis is stated against.
     std::map<std::string, ModelBilling> billing;
 
-    std::size_t totalTokens() const { return inputTokens + outputTokens; }
+    std::size_t totalTokens() const { return addTokens(inputTokens, outputTokens); }
 };
 
 // True when two executions are indistinguishable to someone reading the bill.
@@ -98,5 +123,6 @@ private:
 };
 
 std::string printRun(const RunResult& result);
+std::string printRunJson(const RunResult& result);
 
 }  // namespace orchlang

@@ -1,0 +1,366 @@
+{
+  "assumptions": {
+    "provider_scope": "offline helper only; no provider execution or guarantee",
+    "request_helper": "request(model=<literal alias>, template=<literal text>, arguments=[ordered text literals/state values/prior local results])",
+    "request_oracle": "shared Omega keyed by workflow name, seed, normalized model contract, per-contract ordinal, exact template, and ordered full-text arguments",
+    "state_updates": "each LangGraph node returns atomically; destination-field reads after its producing local call are rejected",
+    "token_helper": "tokens(text) is ceil(UTF-8 bytes / chars_per_token)"
+  },
+  "attestation_sha256": "a51598c1f6f641cccea39f22e4884bb2a7c23dd82c88fd1e9fed5163a684fbca",
+  "certificate_replayer_sha256": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
+  "certificate_sha256": "662d4fc8258da399c7f0fe08781c837b737ef9df44aa4c085557bfa31a37d043",
+  "chars_per_token": 4,
+  "checks": {
+    "certificate_replay": "verified",
+    "extraction": "passed",
+    "graph_check": "accepted"
+  },
+  "contracts_sha256": "081771804a718f30c3d137cad923ee837f13e70abe7e88ec334661d71544432f",
+  "format": "orchlang-langgraph-source-provenance",
+  "frontend_files": [
+    {
+      "path": "__init__.py",
+      "sha256": "140d82abb66e0ba0a1b6e2cad703e20e8a83b5a6645d0d620178dfb87195b431"
+    },
+    {
+      "path": "export.py",
+      "sha256": "06a032143c336a96919929b417cf369ab7db62610c567e409352e4771606c4f9"
+    },
+    {
+      "path": "extract.py",
+      "sha256": "485990b666a741003a94ed8d2e73395dfdbb1e28456e442df8b336e8c531eff8"
+    },
+    {
+      "path": "runtime.py",
+      "sha256": "c717ca7a87748472eb03cd0a30b3365680ed59f782e99a250b112278792408b9"
+    },
+    {
+      "path": "study.py",
+      "sha256": "00ea63e34f8978b2683a419c93712443f61c2fc770e938d34f4991d57edc3d9a"
+    }
+  ],
+  "frontend_sha256": "e0a3cb08434d6bb375dab3e03d58906064f399ddb5c3221645834d17653c99e8",
+  "graph_certificate": {
+    "checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+    "format": "orchlang-cyclic-request-certificate",
+    "graph_name": "productive_cycle",
+    "max_nodes": 50000,
+    "nodes": [
+      {
+        "equal_values": [
+          [
+            "lg_input_0000",
+            "lg_input_0000"
+          ],
+          [
+            "lg_input_0001",
+            "lg_input_0001"
+          ]
+        ],
+        "id": 0,
+        "left": [
+          "lg_state_0000",
+          0
+        ],
+        "right": [
+          "lg_state_0000",
+          0
+        ],
+        "rule": "matched-call",
+        "successors": [
+          1
+        ]
+      },
+      {
+        "equal_values": [
+          [
+            "lg_input_0000",
+            "lg_input_0000"
+          ],
+          [
+            "lg_input_0001",
+            "lg_input_0001"
+          ],
+          [
+            "lg_slot_0000",
+            "lg_slot_0000"
+          ]
+        ],
+        "id": 1,
+        "left": [
+          "lg_state_0000",
+          1
+        ],
+        "right": [
+          "lg_state_0000",
+          1
+        ],
+        "rule": "public-choice",
+        "successors": [
+          2,
+          3
+        ]
+      },
+      {
+        "equal_values": [
+          [
+            "lg_input_0000",
+            "lg_input_0000"
+          ],
+          [
+            "lg_input_0001",
+            "lg_input_0001"
+          ],
+          [
+            "lg_slot_0000",
+            "lg_slot_0000"
+          ]
+        ],
+        "id": 2,
+        "left": [
+          "lg_state_0000",
+          0
+        ],
+        "right": [
+          "lg_state_0000",
+          0
+        ],
+        "rule": "matched-call",
+        "successors": [
+          1
+        ]
+      },
+      {
+        "equal_values": [
+          [
+            "lg_input_0000",
+            "lg_input_0000"
+          ],
+          [
+            "lg_input_0001",
+            "lg_input_0001"
+          ],
+          [
+            "lg_slot_0000",
+            "lg_slot_0000"
+          ]
+        ],
+        "id": 3,
+        "left": [
+          "lg_stop_0000",
+          0
+        ],
+        "right": [
+          "lg_stop_0000",
+          0
+        ],
+        "rule": "stop",
+        "successors": []
+      }
+    ],
+    "product_edges": 4,
+    "product_nodes": 4,
+    "reachable_source_states": [
+      "lg_state_0000",
+      "lg_stop_0000"
+    ],
+    "root": 0,
+    "semantics": {
+      "claim": "equal complete request/usage traces and stop positions under the shared oracle",
+      "cycles": "every finite trace prefix; no termination or finite total-cost claim",
+      "input_accounting": "complete additive request contract in compatible token units",
+      "inputs": "all public external values agree; secret inputs may differ",
+      "oracle": "shared Omega(resolved-contract,per-contract-ordinal,template,ordered-text-values)",
+      "unsupported": [
+        "declassification",
+        "tools",
+        "request serialization",
+        "independent provider sampling",
+        "call-free cycles"
+      ]
+    },
+    "source_sha256": "6e793545fe55ebba06720d3f6a8e94a638860d24fea35ce819295fc63fbf2c58",
+    "state_entry_bounds": {
+      "lg_state_0000": {
+        "input_tokens": 66,
+        "output_tokens": 12,
+        "total_tokens": 78
+      },
+      "lg_stop_0000": {
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 0
+      }
+    },
+    "status": "accepted",
+    "version": 1
+  },
+  "graph_checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+  "graph_diagnostic": null,
+  "graph_sha256": "6e793545fe55ebba06720d3f6a8e94a638860d24fea35ce819295fc63fbf2c58",
+  "mapping": {
+    "builder_variable": "builder",
+    "calls": [
+      {
+        "arguments": [
+          {
+            "kind": "state",
+            "location": {
+              "column": 68,
+              "line": 16
+            },
+            "value": "question"
+          }
+        ],
+        "graph_model_alias": "lg_model_0000",
+        "graph_result": "lg_slot_0000",
+        "local_result": "last",
+        "location": {
+          "column": 12,
+          "line": 16
+        },
+        "source_function": "generate",
+        "source_model_alias": "writer",
+        "source_node": "generate",
+        "template": "cycle-v1"
+      }
+    ],
+    "compiled_variable": "app",
+    "entry_source_node": "generate",
+    "inputs": [
+      {
+        "graph_name": "lg_input_0000",
+        "label": "public",
+        "max_tokens": 64,
+        "source_key": "question",
+        "type": "text"
+      },
+      {
+        "graph_name": "lg_input_0001",
+        "label": "public",
+        "source_key": "repeat",
+        "type": "boolean"
+      }
+    ],
+    "limitations": [
+      "source extraction is Python AST only and does not execute source",
+      "returned StateGraph updates are atomic; destination reads after a producing request are rejected",
+      "external input fields are immutable and result registers require definite initialization",
+      "only straight-line request nodes, two-way static conditional routing, and one active graph path are supported"
+    ],
+    "models": [
+      {
+        "contract": {
+          "max_tokens": 12,
+          "model": "text-gen-v1",
+          "provider": "mock",
+          "unit_price": 0.001
+        },
+        "graph_alias": "lg_model_0000",
+        "source_alias": "writer"
+      }
+    ],
+    "nodes": [
+      {
+        "calls": [
+          "last"
+        ],
+        "graph_state": "lg_state_0000",
+        "location": {
+          "column": 1,
+          "line": 29
+        },
+        "returns": {
+          "last": "last"
+        },
+        "source_function": "generate",
+        "source_node": "generate"
+      }
+    ],
+    "result_slots": [
+      {
+        "graph_register": "lg_slot_0000",
+        "max_writer_cap": 12,
+        "source_key": "last",
+        "token_unit": {
+          "model": "text-gen-v1",
+          "provider": "mock"
+        },
+        "writer_model_alias": "writer"
+      }
+    ],
+    "routers": [
+      {
+        "false_label": "done",
+        "guard": {
+          "value": "lg_input_0001"
+        },
+        "guard_source_field": "repeat",
+        "location": {
+          "column": 1,
+          "line": 20
+        },
+        "path_map": {
+          "again": "generate",
+          "done": "END"
+        },
+        "source_function": "route",
+        "source_node": "generate",
+        "true_label": "again"
+      }
+    ],
+    "state_type": "State"
+  },
+  "mapping_sha256": "27c5286a685b5df997301369b9c237c0ad44367957075b48240f46d6523dff43",
+  "replay_attestation": {
+    "certificate_sha256": "662d4fc8258da399c7f0fe08781c837b737ef9df44aa4c085557bfa31a37d043",
+    "checks": {
+      "all_product_relations_and_local_rules": true,
+      "call_free_cycle_exclusion": true,
+      "complete_universal_successor_closure": true,
+      "graph_schema_and_types": true,
+      "no_unreachable_or_extra_product_nodes": true,
+      "reachable_source_states_and_cost_summaries": true,
+      "root_public_identity_relation": true,
+      "source_hash_binding": true,
+      "strict_graph_and_certificate_schema": true
+    },
+    "format": "orchlang-cyclic-request-replay-attestation",
+    "graph_name": "productive_cycle",
+    "producer_checker_hash_verified": false,
+    "producer_checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+    "product_edges_replayed": 4,
+    "product_nodes_replayed": 4,
+    "replayer_sha256": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
+    "resource_limits": {
+      "certificate_declared_product_nodes": 50000,
+      "graph_declarations_or_calls": 1000000,
+      "graph_states": 100000,
+      "json_bytes_each": 134217728,
+      "product_nodes": 1000000
+    },
+    "scope": {
+      "claim": "the reported finite product graph is the complete closure of the replayed version-1 graph under the declared local rules",
+      "not_claimed": [
+        "mechanized proof of the relational metatheory",
+        "source-language or framework-to-graph translation fidelity",
+        "real provider request serialization or billing behavior",
+        "termination or finite total-cost bounds for billable cycles",
+        "validation of the producer checker implementation from its reported hash"
+      ]
+    },
+    "source_sha256": "6e793545fe55ebba06720d3f6a8e94a638860d24fea35ce819295fc63fbf2c58",
+    "status": "verified",
+    "version": 1
+  },
+  "source_execution": "not_performed_by_exporter",
+  "source_sha256": "3c6a004841123492e873f3c20901910895e12a960d37533f8c0a3dd9a6f14709",
+  "study_artifacts": {
+    "attestation": "productive_cycle.attestation.json",
+    "certificate_or_report": "productive_cycle.certificate.json",
+    "graph": "productive_cycle.graph.json",
+    "provenance": "productive_cycle.provenance.json"
+  },
+  "version": 1,
+  "workflow": "productive_cycle"
+}

@@ -1,0 +1,35 @@
+{
+  "failures": [],
+  "status": "passed",
+  "summary": {
+    "bisimulation_status_counts": {
+      "inconclusive": 7,
+      "proved_equal": 5
+    },
+    "equal_not_bisimilar_fixture": {
+      "finite_dp_cross_check": {
+        "check_count": 8,
+        "path": "bench/results/trace_equivalence/trace_equal_not_bisimilar.finite-dp.json",
+        "sha256": "d663523aa7cda6418b9ebb54b5b04e4d52d269a895b7cc2c52c0da59dee0a96f"
+      },
+      "independent_replay_status": "verified",
+      "name": "trace_equal_not_bisimilar",
+      "strong_bisimulation_status": "inconclusive",
+      "trace_equivalence_status": "proved_equal"
+    },
+    "finite_witness_dp_checks": 6,
+    "finite_witness_dp_distinguishing_checks": 6,
+    "fixture_count": 12,
+    "fresh_producer_and_replay_unknown_probes": 12,
+    "independently_replayed_finite_witnesses": 6,
+    "independently_replayed_proofs": 6,
+    "producer_decision_counts": {
+      "proved_equal": 6,
+      "unequal": 6
+    },
+    "proved_equal_finite_dp_checks": 48,
+    "proved_equal_scenario_histograms_checked": 96,
+    "semantically_tampered_reports_rejected": 12
+  },
+  "summary_sha256": "9dddb048e411960b07c070c7fff2b169361c1df84ce786cfdb73b524bb56c861"
+}

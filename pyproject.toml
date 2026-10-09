@@ -1,0 +1,47 @@
+[build-system]
+requires = ["setuptools>=61", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "orchlang-graph-tools"
+version = "0.5.0rc1"
+description = "Offline OrchLang graph, usage-channel and finite-state trace-law analysis with independent replay"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {file = "LICENSE"}
+authors = [{name = "Nambi Rajan M"}]
+keywords = ["static-analysis", "relational-verification", "LLM-workflows", "research-software"]
+classifiers = [
+  "Development Status :: 3 - Alpha",
+  "Programming Language :: Python :: 3",
+  "Topic :: Software Development :: Compilers",
+  "Topic :: Scientific/Engineering",
+]
+
+[project.urls]
+Repository = "https://github.com/guyoverclocked/orchlang-compiler-design-project"
+Documentation = "https://github.com/guyoverclocked/orchlang-compiler-design-project/tree/codex/research-upgrade/docs"
+
+[project.scripts]
+orchlang-graph-check = "orchgraph:main"
+orchlang-graph-replay = "replay_graph_certificate:main"
+orchlang-channel-analyze = "probabilistic_channels:main"
+orchlang-channel-replay = "replay_probabilistic_report:main"
+orchlang-stochastic-bisimulation = "stochastic_bisimulation:main"
+orchlang-stochastic-replay = "replay_stochastic_certificate:main"
+orchlang-trace-equivalence = "trace_equivalence:main"
+orchlang-trace-replay = "replay_trace_equivalence:main"
+
+[tool.setuptools]
+package-dir = {"" = "audit"}
+py-modules = [
+  "orchgraph",
+  "replay_graph_certificate",
+  "probabilistic_channels",
+  "probabilistic_reference",
+  "replay_probabilistic_report",
+  "stochastic_bisimulation",
+  "replay_stochastic_certificate",
+  "trace_equivalence",
+  "replay_trace_equivalence",
+]

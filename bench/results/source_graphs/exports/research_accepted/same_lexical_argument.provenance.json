@@ -1,0 +1,161 @@
+{
+  "format": "orchlang-source-graph-provenance",
+  "version": 1,
+  "workflow": "SameArgument",
+  "workflow_budget_tokens": 1000,
+  "chars_per_token": 4,
+  "source_sha256": "840d9b45af39473176a3c3490c263a5e638d751d194cc5d47791f752d2a6cd28",
+  "graph_sha256": "ab7d9846749aefb0d80776f1a8fd7307bbd410ba50a7d5e579eb25b58471ca1a",
+  "certificate_sha256": "11a17c1a187f2cdbe6e9ea84770ff421eea00480035fdbb75701595f2bf48d9e",
+  "adapter_sha256": "85b7f497150cf8c2f40cf48547336e3f0223bf7ea960b7959e19be2fa609a3a7",
+  "source_cost_parser_sha256": "85c98f9f9ad532a7d299c57d2e4e38943a8fa64075cb7ca388ff2222bd9e936e",
+  "compiler_sha256": "7dfbd0d962122f175c25147b8a16551a44098c75d893f0cbd12474c835b17ca4",
+  "graph_format": "orchlang-request-graph",
+  "graph_version": 1,
+  "semantic_gate": "orchc check passed before export",
+  "graph_checker": {
+    "status": "accepted",
+    "product_nodes": 19,
+    "product_edges": 18
+  },
+  "independent_replay": {
+    "status": "verified"
+  },
+  "claim_scope": "billing projection for the supported source subset under the graph's shared-oracle and complete request-accounting premises",
+  "omitted_output": {
+    "kind": "literal",
+    "text": "complete",
+    "source_location": {
+      "line": 11,
+      "column": 10
+    },
+    "reason": "one unconditional final public text output has no continuation; output content is outside the billing observation"
+  },
+  "mapping": {
+    "inputs": [
+      {
+        "source_name": "choose",
+        "location": {
+          "line": 2,
+          "column": 3
+        },
+        "binding_id": 1,
+        "graph_name": "in_0",
+        "type": "boolean",
+        "label": "secret",
+        "max_tokens": 1
+      },
+      {
+        "source_name": "source",
+        "location": {
+          "line": 3,
+          "column": 3
+        },
+        "binding_id": 2,
+        "graph_name": "in_1",
+        "type": "text",
+        "label": "public",
+        "max_tokens": 32
+      }
+    ],
+    "models": [
+      {
+        "source_name": "shared",
+        "location": {
+          "line": 4,
+          "column": 3
+        },
+        "declaration_id": 0,
+        "graph_alias": "model_0",
+        "contract": {
+          "provider": "mock",
+          "model": "research-model",
+          "max_tokens": 4
+        }
+      }
+    ],
+    "prompts": [
+      {
+        "source_name": "ask",
+        "location": {
+          "line": 5,
+          "column": 3
+        },
+        "declaration_id": 0,
+        "template": "Request: {t}",
+        "parameters": [
+          {
+            "name": "t",
+            "type": "text"
+          }
+        ]
+      }
+    ],
+    "values": [
+      {
+        "source_name": "result_left",
+        "location": {
+          "line": 7,
+          "column": 5
+        },
+        "binding_id": 3,
+        "graph_register": "r_0",
+        "type": "text",
+        "producer_contract": {
+          "provider": "mock",
+          "model": "research-model",
+          "max_tokens": 4
+        }
+      },
+      {
+        "source_name": "result_right",
+        "location": {
+          "line": 9,
+          "column": 5
+        },
+        "binding_id": 4,
+        "graph_register": "r_1",
+        "type": "text",
+        "producer_contract": {
+          "provider": "mock",
+          "model": "research-model",
+          "max_tokens": 4
+        }
+      }
+    ],
+    "states": [
+      {
+        "source_location": {
+          "line": 6,
+          "column": 3
+        },
+        "kind": "secret",
+        "source_guard": "choose",
+        "graph_guard": {
+          "value": "in_0"
+        }
+      },
+      {
+        "source_location": {
+          "line": 7,
+          "column": 5
+        },
+        "graph_state": "state_1"
+      },
+      {
+        "source_location": {
+          "line": 9,
+          "column": 5
+        },
+        "graph_state": "state_2"
+      },
+      {
+        "source_location": {
+          "line": 6,
+          "column": 3
+        },
+        "graph_state": "state_3"
+      }
+    ]
+  }
+}

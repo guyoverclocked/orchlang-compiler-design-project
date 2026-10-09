@@ -1,0 +1,56 @@
+{
+  "format": "orchlang-safety-certificate",
+  "version": 3,
+  "source_sha256": "840d9b45af39473176a3c3490c263a5e638d751d194cc5d47791f752d2a6cd28",
+  "assumptions": {
+    "chars_per_token": 4,
+    "input_accounting": "Each call adds ceil(UTF-8 template bytes / chars_per_token) to the separately declared argument bounds.",
+    "output_assumption": "The oracle emits no more than the resolved model contract's declared max_tokens cap.",
+    "input_assumption": "For every complete request, target-model input usage is at most the sum of the template estimate and declared argument bounds. chars_per_token is a UTF-8 byte divisor; provider tokenizers, request envelopes, and tokenization boundary effects are not modeled.",
+    "note": "These are explicit abstract accounting assumptions, not a guarantee about real provider billing."
+  },
+  "workflows": [
+    {
+      "name": "SameArgument",
+      "budget_tokens": 1000,
+      "security_contract": {
+        "declassification_present": false,
+        "billing_noninterference_claimed": true,
+        "guarantee_scope": {
+          "property": "paired billing-trace equality under the stated abstract model",
+          "oracle_coupling": "Paired executions share abstract responses under Ω(M,k,Q) when resolved contract M, per-contract ordinal k, retry outcomes, and the complete modeled request Q match. The default ordinal mock ignores Q in its output projection; --request-sensitive-oracle adds decoded template bytes, ordered literal bytes, and identifier Value(tokens,flag) fields to Q. This models no real provider request text.",
+          "token_usage": "Input use follows the summed UTF-8 template and declared argument bounds; output use respects the resolved contract's max_tokens cap.",
+          "relational_obligations": "A discharged entry records a local structural request-trace comparison. It is not by itself a universal whole-workflow claim.",
+          "declassification": "This workflow contains no declassification; the claim is still conditional on the stated shared-oracle and abstract token-accounting assumptions."
+        }
+      },
+      "bound": {"guaranteed_tokens": 4, "estimated_tokens": 35, "total_tokens": 39, "component_sum_tokens": 39, "within_budget": true, "defined": true, "cost": 0, "cost_complete": false},
+      "derivation": [
+        {"depth": 0, "rule": "branch", "detail": "choose", "guaranteed_tokens": 0, "estimated_tokens": 0, "total_tokens": 0, "line": 6},
+        {"depth": 1, "rule": "call", "detail": "result_left = ask via shared [out<=4, in<=3+32]", "guaranteed_tokens": 4, "estimated_tokens": 35, "total_tokens": 39, "line": 7},
+        {"depth": 1, "rule": "call", "detail": "result_right = ask via shared [out<=4, in<=3+32]", "guaranteed_tokens": 4, "estimated_tokens": 35, "total_tokens": 39, "line": 9},
+        {"depth": 0, "rule": "branch-max", "detail": "max(then=39, else=39)", "guaranteed_tokens": 4, "estimated_tokens": 35, "total_tokens": 39, "line": 6}
+      ],
+      "call_facts": [
+        {"id": 1, "location": {"file": "examples/research/accepted/same_lexical_argument.orch", "line": 7, "column": 29}, "result": "result_left", "result_value_id": 6, "prompt": "ask", "model_alias": "shared", "model_contract": {"provider": "mock", "model": "research-model", "max_tokens": 4, "has_unit_price": false, "unit_price": 0, "stable_key": "p4x6d6f636b_m14x72657365617263682d6d6f64656c_cap4_priced0", "tokenizer_identity": "4:mock14:research-model"}, "template_text": "Request: {t}", "template_tokens": 3, "arguments": [{"position": 0, "kind": "value", "literal_expr_kind": null, "name": "source", "literal_text": null, "binding_id": 2, "value_id": 2, "content_label": "public,trusted", "token_bound": 32, "token_bound_tokenizer": null}]},
+        {"id": 2, "location": {"file": "examples/research/accepted/same_lexical_argument.orch", "line": 9, "column": 30}, "result": "result_right", "result_value_id": 7, "prompt": "ask", "model_alias": "shared", "model_contract": {"provider": "mock", "model": "research-model", "max_tokens": 4, "has_unit_price": false, "unit_price": 0, "stable_key": "p4x6d6f636b_m14x72657365617263682d6d6f64656c_cap4_priced0", "tokenizer_identity": "4:mock14:research-model"}, "template_text": "Request: {t}", "template_tokens": 3, "arguments": [{"position": 0, "kind": "value", "literal_expr_kind": null, "name": "source", "literal_text": null, "binding_id": 2, "value_id": 2, "content_label": "public,trusted", "token_bound": 32, "token_bound_tokenizer": null}]}
+      ],
+      "bindings": [
+        {"scope": "workflow:SameArgument", "name": "ask", "kind": "prompt", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:SameArgument", "name": "choose", "kind": "secret", "type": "boolean", "confidentiality": "secret", "integrity": "trusted", "token_bound": 1},
+        {"scope": "workflow:SameArgument", "name": "shared", "kind": "model", "type": "<unknown>", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:SameArgument", "name": "source", "kind": "input", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": 32},
+        {"scope": "workflow:SameArgument::prompt:ask", "name": "t", "kind": "prompt-parameter", "type": "text", "confidentiality": "public", "integrity": "trusted", "token_bound": null},
+        {"scope": "workflow:SameArgument::then@6", "name": "result_left", "kind": "local-result", "type": "text", "confidentiality": "secret", "integrity": "trusted", "token_bound": 4},
+        {"scope": "workflow:SameArgument::else@6", "name": "result_right", "kind": "local-result", "type": "text", "confidentiality": "secret", "integrity": "trusted", "token_bound": 4}
+      ],
+      "reclassifications": [
+      ],
+      "relational_obligations": [
+        {"guard": "choose", "discharged": true, "detail": "both arms have identical request and billing contracts: mock:research-model (max_tokens=4) request(template=\"Request: {t}\", args=[outer(source#2)])", "line": 6}
+      ],
+      "sinks": [
+      ]
+    }
+  ]
+}

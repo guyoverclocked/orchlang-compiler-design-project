@@ -1,0 +1,5 @@
+Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.
+RetryChainMatch:
+  token bound   76 / budget 1000
+  components    output <= 16, input <= 60 @ 4 chars/token
+  labels        5 secret, 0 untrusted

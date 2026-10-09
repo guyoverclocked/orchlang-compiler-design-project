@@ -1,0 +1,18 @@
+{
+  "workflows": [
+    {
+      "name": "AliasSameContract",
+      "nodes": [
+        {"id": 1, "kind": "Secret", "name": "choose", "type": "boolean", "label": "secret/trusted", "region": "root", "repeat": 1, "dependencies": [], "attributes": {"max_tokens": "1"}},
+        {"id": 2, "kind": "Input", "name": "source", "type": "text", "label": "public/trusted", "region": "root", "repeat": 1, "dependencies": [], "attributes": {"max_tokens": "32"}},
+        {"id": 3, "kind": "Model", "name": "primary", "type": "<unknown>", "label": "public/trusted", "region": "root", "repeat": 1, "dependencies": [], "attributes": {"provider": "mock", "name": "shared-id", "max_tokens": "4"}},
+        {"id": 4, "kind": "Model", "name": "backup", "type": "<unknown>", "label": "public/trusted", "region": "root", "repeat": 1, "dependencies": [], "attributes": {"provider": "mock", "name": "shared-id", "max_tokens": "4"}},
+        {"id": 5, "kind": "Prompt", "name": "ask", "type": "text", "label": "public/trusted", "region": "root", "repeat": 1, "dependencies": [], "attributes": {"parameters": "1"}},
+        {"id": 6, "kind": "Branch", "name": "choose", "type": "boolean", "label": "secret/trusted", "region": "root", "repeat": 1, "dependencies": [1], "attributes": {"guard": "choose", "has_else": "true"}},
+        {"id": 7, "kind": "Call", "name": "result_left", "type": "text", "label": "public/trusted", "region": "root/then@7", "repeat": 1, "dependencies": [5, 3, 2], "attributes": {"prompt": "ask", "model": "primary", "out_tokens": "4", "in_tokens": "35"}},
+        {"id": 8, "kind": "Call", "name": "result_right", "type": "text", "label": "public/trusted", "region": "root/else@7", "repeat": 1, "dependencies": [5, 4, 2], "attributes": {"prompt": "ask", "model": "backup", "out_tokens": "4", "in_tokens": "35"}},
+        {"id": 9, "kind": "Output", "name": "\"complete\"", "type": "<unknown>", "label": "public/trusted", "region": "root", "repeat": 1, "dependencies": [], "attributes": {}}
+      ]
+    }
+  ]
+}

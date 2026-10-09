@@ -1,0 +1,1814 @@
+{
+  "cases": [
+    {
+      "artifacts": {
+        "attestation": "integrations/langgraph/source_frontend/artifacts/secret_dependent_chain.attestation.json",
+        "certificate": "integrations/langgraph/source_frontend/artifacts/secret_dependent_chain.certificate.json",
+        "graph": "integrations/langgraph/source_frontend/artifacts/secret_dependent_chain.graph.json",
+        "provenance": "integrations/langgraph/source_frontend/artifacts/secret_dependent_chain.provenance.json"
+      },
+      "attestation_sha256": "83f0772c7a5e82b41fce646a3281f2448ec591d8e70a6a9973f5240c6c363bb8",
+      "certificate_sha256": "bbb30c5794f456ed8d807701a8d15b92e6f57667f4e6ac3cfda6330d035b1cf8",
+      "contracts_path": "integrations/langgraph/source_frontend/examples/secret_dependent_chain.contracts.json",
+      "contracts_sha256": "ee46b7aaae9eedf9d5bd29d2cf222b51081a572be22dcce4a78bba50989dc41a",
+      "diagnostic": null,
+      "frontend": "accepted",
+      "graph_check": "accepted",
+      "graph_sha256": "8b0ad8b85d93f4bce8b55a506acd9db4103f78dd28bec5674fb39e48b3356b7d",
+      "name": "secret_dependent_chain",
+      "replay": "verified",
+      "runs": [
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": false,
+            "public_mode": false,
+            "question": "public question é🙂"
+          },
+          "seed": 1,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "public question é🙂"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 8,
+              "ordinal": 0,
+              "output_tokens": 11,
+              "response": "bb89kOlOkU91UQ4NYTmO2a3dOgZQdaURbb89kOlOkU91",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "bb89kOlOkU91UQ4NYTmO2a3dOgZQdaURbb89kOlOkU91",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 16,
+              "ordinal": 1,
+              "output_tokens": 11,
+              "response": "aaOh4S5P0aaRW7a9WVXj6846mUkVUQSeaaOh4S5P0aaR",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "0a8c5cfa075420a26e2f3aeeaf3edfb2de6ba55d11c544274fd4f3a9a34ce6a2"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": true,
+            "public_mode": false,
+            "question": "public question é🙂"
+          },
+          "seed": 1,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "public question é🙂"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 8,
+              "ordinal": 0,
+              "output_tokens": 11,
+              "response": "bb89kOlOkU91UQ4NYTmO2a3dOgZQdaURbb89kOlOkU91",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "bb89kOlOkU91UQ4NYTmO2a3dOgZQdaURbb89kOlOkU91",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 16,
+              "ordinal": 1,
+              "output_tokens": 11,
+              "response": "aaOh4S5P0aaRW7a9WVXj6846mUkVUQSeaaOh4S5P0aaR",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "0a8c5cfa075420a26e2f3aeeaf3edfb2de6ba55d11c544274fd4f3a9a34ce6a2"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": false,
+            "public_mode": false,
+            "question": "public question é🙂"
+          },
+          "seed": 17,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "public question é🙂"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 8,
+              "ordinal": 0,
+              "output_tokens": 9,
+              "response": "kWh2k3ZkeUeVc9PaeVig5kjSaSQkTRTekWh2",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "kWh2k3ZkeUeVc9PaeVig5kjSaSQkTRTekWh2",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 14,
+              "ordinal": 1,
+              "output_tokens": 3,
+              "response": "3djUNZaNSaRX",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "4b4b0d5f7eb8bf82350f1f8f0ba7f1faf9f1521522c4043271229afa120fb516"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": true,
+            "public_mode": false,
+            "question": "public question é🙂"
+          },
+          "seed": 17,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "public question é🙂"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 8,
+              "ordinal": 0,
+              "output_tokens": 9,
+              "response": "kWh2k3ZkeUeVc9PaeVig5kjSaSQkTRTekWh2",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "kWh2k3ZkeUeVc9PaeVig5kjSaSQkTRTekWh2",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 14,
+              "ordinal": 1,
+              "output_tokens": 3,
+              "response": "3djUNZaNSaRX",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "4b4b0d5f7eb8bf82350f1f8f0ba7f1faf9f1521522c4043271229afa120fb516"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": false,
+            "public_mode": false,
+            "question": "public question é🙂"
+          },
+          "seed": 29,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "public question é🙂"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 8,
+              "ordinal": 0,
+              "output_tokens": 7,
+              "response": "8VNT71cf5SliXThQfNPg2jTh7XhU",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "8VNT71cf5SliXThQfNPg2jTh7XhU",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 12,
+              "ordinal": 1,
+              "output_tokens": 1,
+              "response": "5cd0",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "e0f3eecda1cc2714f46f32a7d851b37584a627206e85e401f68515e5ab5b0a10"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": true,
+            "public_mode": false,
+            "question": "public question é🙂"
+          },
+          "seed": 29,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "public question é🙂"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 8,
+              "ordinal": 0,
+              "output_tokens": 7,
+              "response": "8VNT71cf5SliXThQfNPg2jTh7XhU",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "8VNT71cf5SliXThQfNPg2jTh7XhU",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 12,
+              "ordinal": 1,
+              "output_tokens": 1,
+              "response": "5cd0",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "e0f3eecda1cc2714f46f32a7d851b37584a627206e85e401f68515e5ab5b0a10"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": false,
+            "public_mode": true,
+            "question": "public question é🙂"
+          },
+          "seed": 1,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "public question é🙂"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 8,
+              "ordinal": 0,
+              "output_tokens": 11,
+              "response": "bb89kOlOkU91UQ4NYTmO2a3dOgZQdaURbb89kOlOkU91",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "bb89kOlOkU91UQ4NYTmO2a3dOgZQdaURbb89kOlOkU91",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 16,
+              "ordinal": 1,
+              "output_tokens": 11,
+              "response": "aaOh4S5P0aaRW7a9WVXj6846mUkVUQSeaaOh4S5P0aaR",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "0a8c5cfa075420a26e2f3aeeaf3edfb2de6ba55d11c544274fd4f3a9a34ce6a2"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": true,
+            "public_mode": true,
+            "question": "public question é🙂"
+          },
+          "seed": 1,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "public question é🙂"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 8,
+              "ordinal": 0,
+              "output_tokens": 11,
+              "response": "bb89kOlOkU91UQ4NYTmO2a3dOgZQdaURbb89kOlOkU91",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "bb89kOlOkU91UQ4NYTmO2a3dOgZQdaURbb89kOlOkU91",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 16,
+              "ordinal": 1,
+              "output_tokens": 11,
+              "response": "aaOh4S5P0aaRW7a9WVXj6846mUkVUQSeaaOh4S5P0aaR",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "0a8c5cfa075420a26e2f3aeeaf3edfb2de6ba55d11c544274fd4f3a9a34ce6a2"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": false,
+            "public_mode": true,
+            "question": "public question é🙂"
+          },
+          "seed": 17,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "public question é🙂"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 8,
+              "ordinal": 0,
+              "output_tokens": 9,
+              "response": "kWh2k3ZkeUeVc9PaeVig5kjSaSQkTRTekWh2",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "kWh2k3ZkeUeVc9PaeVig5kjSaSQkTRTekWh2",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 14,
+              "ordinal": 1,
+              "output_tokens": 3,
+              "response": "3djUNZaNSaRX",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "4b4b0d5f7eb8bf82350f1f8f0ba7f1faf9f1521522c4043271229afa120fb516"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": true,
+            "public_mode": true,
+            "question": "public question é🙂"
+          },
+          "seed": 17,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "public question é🙂"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 8,
+              "ordinal": 0,
+              "output_tokens": 9,
+              "response": "kWh2k3ZkeUeVc9PaeVig5kjSaSQkTRTekWh2",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "kWh2k3ZkeUeVc9PaeVig5kjSaSQkTRTekWh2",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 14,
+              "ordinal": 1,
+              "output_tokens": 3,
+              "response": "3djUNZaNSaRX",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "4b4b0d5f7eb8bf82350f1f8f0ba7f1faf9f1521522c4043271229afa120fb516"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": false,
+            "public_mode": true,
+            "question": "public question é🙂"
+          },
+          "seed": 29,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "public question é🙂"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 8,
+              "ordinal": 0,
+              "output_tokens": 7,
+              "response": "8VNT71cf5SliXThQfNPg2jTh7XhU",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "8VNT71cf5SliXThQfNPg2jTh7XhU",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 12,
+              "ordinal": 1,
+              "output_tokens": 1,
+              "response": "5cd0",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "e0f3eecda1cc2714f46f32a7d851b37584a627206e85e401f68515e5ab5b0a10"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": true,
+            "public_mode": true,
+            "question": "public question é🙂"
+          },
+          "seed": 29,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "public question é🙂"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 8,
+              "ordinal": 0,
+              "output_tokens": 7,
+              "response": "8VNT71cf5SliXThQfNPg2jTh7XhU",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "8VNT71cf5SliXThQfNPg2jTh7XhU",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 12,
+              "ordinal": 1,
+              "output_tokens": 1,
+              "response": "5cd0",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "e0f3eecda1cc2714f46f32a7d851b37584a627206e85e401f68515e5ab5b0a10"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": false,
+            "public_mode": false,
+            "question": "second input, with punctuation?"
+          },
+          "seed": 1,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "second input, with punctuation?"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 10,
+              "ordinal": 0,
+              "output_tokens": 11,
+              "response": "cZ3OadmXU0T96NZXk8ekijgZ2bi300decZ3OadmXU0T9",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "cZ3OadmXU0T96NZXk8ekijgZ2bi300decZ3OadmXU0T9",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 16,
+              "ordinal": 1,
+              "output_tokens": 4,
+              "response": "c06Z26Nc1TcON253",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "179fa7077c5e583a211e3ffd102c08e2f355b8f604d26cd54aa4e388848ee88e"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": true,
+            "public_mode": false,
+            "question": "second input, with punctuation?"
+          },
+          "seed": 1,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "second input, with punctuation?"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 10,
+              "ordinal": 0,
+              "output_tokens": 11,
+              "response": "cZ3OadmXU0T96NZXk8ekijgZ2bi300decZ3OadmXU0T9",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "cZ3OadmXU0T96NZXk8ekijgZ2bi300decZ3OadmXU0T9",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 16,
+              "ordinal": 1,
+              "output_tokens": 4,
+              "response": "c06Z26Nc1TcON253",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "179fa7077c5e583a211e3ffd102c08e2f355b8f604d26cd54aa4e388848ee88e"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": false,
+            "public_mode": false,
+            "question": "second input, with punctuation?"
+          },
+          "seed": 17,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "second input, with punctuation?"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 10,
+              "ordinal": 0,
+              "output_tokens": 7,
+              "response": "ZbPe1YP9i29SVbiRbm2XhTS2Yhmb",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "ZbPe1YP9i29SVbiRbm2XhTS2Yhmb",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 12,
+              "ordinal": 1,
+              "output_tokens": 11,
+              "response": "6c99iY14Q0Oaj214eU6fQ6Ql6ce0c0V86c99iY14Q0Oa",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "0dbb2969885a2520e1c27d3577b3577c2c59d9a1d9e4cc41c0e1bc40db32cdad"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": true,
+            "public_mode": false,
+            "question": "second input, with punctuation?"
+          },
+          "seed": 17,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "second input, with punctuation?"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 10,
+              "ordinal": 0,
+              "output_tokens": 7,
+              "response": "ZbPe1YP9i29SVbiRbm2XhTS2Yhmb",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "ZbPe1YP9i29SVbiRbm2XhTS2Yhmb",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 12,
+              "ordinal": 1,
+              "output_tokens": 11,
+              "response": "6c99iY14Q0Oaj214eU6fQ6Ql6ce0c0V86c99iY14Q0Oa",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "0dbb2969885a2520e1c27d3577b3577c2c59d9a1d9e4cc41c0e1bc40db32cdad"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": false,
+            "public_mode": false,
+            "question": "second input, with punctuation?"
+          },
+          "seed": 29,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "second input, with punctuation?"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 10,
+              "ordinal": 0,
+              "output_tokens": 4,
+              "response": "ii816TP38XZ6kcm6",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "ii816TP38XZ6kcm6",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 9,
+              "ordinal": 1,
+              "output_tokens": 5,
+              "response": "O6QiglhdXRV6kXNVR0T3",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "f35ba2d7fa0491f90b580ee2456078d442c7b7a9bca52a75e37c2acd37cffc44"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": true,
+            "public_mode": false,
+            "question": "second input, with punctuation?"
+          },
+          "seed": 29,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "second input, with punctuation?"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 10,
+              "ordinal": 0,
+              "output_tokens": 4,
+              "response": "ii816TP38XZ6kcm6",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "ii816TP38XZ6kcm6",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 9,
+              "ordinal": 1,
+              "output_tokens": 5,
+              "response": "O6QiglhdXRV6kXNVR0T3",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "f35ba2d7fa0491f90b580ee2456078d442c7b7a9bca52a75e37c2acd37cffc44"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": false,
+            "public_mode": true,
+            "question": "second input, with punctuation?"
+          },
+          "seed": 1,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "second input, with punctuation?"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 10,
+              "ordinal": 0,
+              "output_tokens": 11,
+              "response": "cZ3OadmXU0T96NZXk8ekijgZ2bi300decZ3OadmXU0T9",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "cZ3OadmXU0T96NZXk8ekijgZ2bi300decZ3OadmXU0T9",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 16,
+              "ordinal": 1,
+              "output_tokens": 4,
+              "response": "c06Z26Nc1TcON253",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "179fa7077c5e583a211e3ffd102c08e2f355b8f604d26cd54aa4e388848ee88e"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": true,
+            "public_mode": true,
+            "question": "second input, with punctuation?"
+          },
+          "seed": 1,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "second input, with punctuation?"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 10,
+              "ordinal": 0,
+              "output_tokens": 11,
+              "response": "cZ3OadmXU0T96NZXk8ekijgZ2bi300decZ3OadmXU0T9",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "cZ3OadmXU0T96NZXk8ekijgZ2bi300decZ3OadmXU0T9",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 16,
+              "ordinal": 1,
+              "output_tokens": 4,
+              "response": "c06Z26Nc1TcON253",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "179fa7077c5e583a211e3ffd102c08e2f355b8f604d26cd54aa4e388848ee88e"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": false,
+            "public_mode": true,
+            "question": "second input, with punctuation?"
+          },
+          "seed": 17,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "second input, with punctuation?"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 10,
+              "ordinal": 0,
+              "output_tokens": 7,
+              "response": "ZbPe1YP9i29SVbiRbm2XhTS2Yhmb",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "ZbPe1YP9i29SVbiRbm2XhTS2Yhmb",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 12,
+              "ordinal": 1,
+              "output_tokens": 11,
+              "response": "6c99iY14Q0Oaj214eU6fQ6Ql6ce0c0V86c99iY14Q0Oa",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "0dbb2969885a2520e1c27d3577b3577c2c59d9a1d9e4cc41c0e1bc40db32cdad"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": true,
+            "public_mode": true,
+            "question": "second input, with punctuation?"
+          },
+          "seed": 17,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "second input, with punctuation?"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 10,
+              "ordinal": 0,
+              "output_tokens": 7,
+              "response": "ZbPe1YP9i29SVbiRbm2XhTS2Yhmb",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "ZbPe1YP9i29SVbiRbm2XhTS2Yhmb",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 12,
+              "ordinal": 1,
+              "output_tokens": 11,
+              "response": "6c99iY14Q0Oaj214eU6fQ6Ql6ce0c0V86c99iY14Q0Oa",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "0dbb2969885a2520e1c27d3577b3577c2c59d9a1d9e4cc41c0e1bc40db32cdad"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": false,
+            "public_mode": true,
+            "question": "second input, with punctuation?"
+          },
+          "seed": 29,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "second input, with punctuation?"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 10,
+              "ordinal": 0,
+              "output_tokens": 4,
+              "response": "ii816TP38XZ6kcm6",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "ii816TP38XZ6kcm6",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 9,
+              "ordinal": 1,
+              "output_tokens": 5,
+              "response": "O6QiglhdXRV6kXNVR0T3",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "f35ba2d7fa0491f90b580ee2456078d442c7b7a9bca52a75e37c2acd37cffc44"
+        },
+        {
+          "call_count": 2,
+          "inputs": {
+            "private_route": true,
+            "public_mode": true,
+            "question": "second input, with punctuation?"
+          },
+          "seed": 29,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "second input, with punctuation?"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 10,
+              "ordinal": 0,
+              "output_tokens": 4,
+              "response": "ii816TP38XZ6kcm6",
+              "template": "draft-v1"
+            },
+            {
+              "arguments": [
+                "ii816TP38XZ6kcm6",
+                "suffix"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 9,
+              "ordinal": 1,
+              "output_tokens": 5,
+              "response": "O6QiglhdXRV6kXNVR0T3",
+              "template": "answer-v2"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "f35ba2d7fa0491f90b580ee2456078d442c7b7a9bca52a75e37c2acd37cffc44"
+        }
+      ],
+      "source_path": "integrations/langgraph/source_frontend/examples/secret_dependent_chain.py",
+      "source_sha256": "02e3ab0a1c8d5b953c890478515777b690566af1c2fad488237c26aa871a669d"
+    },
+    {
+      "artifacts": {
+        "attestation": "integrations/langgraph/source_frontend/artifacts/productive_cycle.attestation.json",
+        "certificate": "integrations/langgraph/source_frontend/artifacts/productive_cycle.certificate.json",
+        "graph": "integrations/langgraph/source_frontend/artifacts/productive_cycle.graph.json",
+        "provenance": "integrations/langgraph/source_frontend/artifacts/productive_cycle.provenance.json"
+      },
+      "attestation_sha256": "a51598c1f6f641cccea39f22e4884bb2a7c23dd82c88fd1e9fed5163a684fbca",
+      "certificate_sha256": "662d4fc8258da399c7f0fe08781c837b737ef9df44aa4c085557bfa31a37d043",
+      "contracts_path": "integrations/langgraph/source_frontend/examples/productive_cycle.contracts.json",
+      "contracts_sha256": "081771804a718f30c3d137cad923ee837f13e70abe7e88ec334661d71544432f",
+      "diagnostic": null,
+      "frontend": "accepted",
+      "graph_check": "accepted",
+      "graph_sha256": "6e793545fe55ebba06720d3f6a8e94a638860d24fea35ce819295fc63fbf2c58",
+      "name": "productive_cycle",
+      "replay": "verified",
+      "runs": [
+        {
+          "call_count": 1,
+          "inputs": {
+            "question": "loop question é",
+            "repeat": false
+          },
+          "seed": 1,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "loop question é"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 6,
+              "ordinal": 0,
+              "output_tokens": 1,
+              "response": "3dbi",
+              "template": "cycle-v1"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "24f430cc9f20eacdd43a906cf4284d4867a8df1f38b7ff7e7b665bc5f6f2fec4"
+        },
+        {
+          "call_count": 1,
+          "inputs": {
+            "question": "loop question é",
+            "repeat": false
+          },
+          "seed": 17,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "loop question é"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 6,
+              "ordinal": 0,
+              "output_tokens": 4,
+              "response": "aVhgm55jcih2ZXQi",
+              "template": "cycle-v1"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "fc715d7441250c9967e973590aaa356d90c8441875572bc5400c229dd81fb909"
+        },
+        {
+          "call_count": 1,
+          "inputs": {
+            "question": "loop question é",
+            "repeat": false
+          },
+          "seed": 29,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "loop question é"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 6,
+              "ordinal": 0,
+              "output_tokens": 9,
+              "response": "kXeYVT0d78d0i5PS8W48Q7U71S8l2VUbkXeY",
+              "template": "cycle-v1"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "99ad6e70cbb65eea52cdd6ab5665a18034e1002e72aed2894bc0f5164fde6d14"
+        },
+        {
+          "call_count": 3,
+          "inputs": {
+            "question": "loop question é",
+            "repeat": true
+          },
+          "seed": 1,
+          "status": "truncated",
+          "stopped": false,
+          "trace": [
+            {
+              "arguments": [
+                "loop question é"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 6,
+              "ordinal": 0,
+              "output_tokens": 1,
+              "response": "3dbi",
+              "template": "cycle-v1"
+            },
+            {
+              "arguments": [
+                "loop question é"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 6,
+              "ordinal": 1,
+              "output_tokens": 3,
+              "response": "emcNXNbNkhec",
+              "template": "cycle-v1"
+            },
+            {
+              "arguments": [
+                "loop question é"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 6,
+              "ordinal": 2,
+              "output_tokens": 7,
+              "response": "NY9W8eb3Tg5WN4Odak1mSeQPOXS8",
+              "template": "cycle-v1"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "a1c23b471784c2231c96a1e9fb0f66148c9ec06a729d672d4d9364cad28f0945"
+        },
+        {
+          "call_count": 3,
+          "inputs": {
+            "question": "loop question é",
+            "repeat": true
+          },
+          "seed": 17,
+          "status": "truncated",
+          "stopped": false,
+          "trace": [
+            {
+              "arguments": [
+                "loop question é"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 6,
+              "ordinal": 0,
+              "output_tokens": 4,
+              "response": "aVhgm55jcih2ZXQi",
+              "template": "cycle-v1"
+            },
+            {
+              "arguments": [
+                "loop question é"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 6,
+              "ordinal": 1,
+              "output_tokens": 11,
+              "response": "j73cYPP3Zgjf5bdRjVUaW41WT1gfO8Xlj73cYPP3Zgjf",
+              "template": "cycle-v1"
+            },
+            {
+              "arguments": [
+                "loop question é"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 6,
+              "ordinal": 2,
+              "output_tokens": 10,
+              "response": "YRQ3hSPaW9Rl3S9g515m4VRY2i20m7P0YRQ3hSPa",
+              "template": "cycle-v1"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "2782641c804ec9b2b037e00372d070e50ba9980e43a95e935205360da1f047d8"
+        },
+        {
+          "call_count": 3,
+          "inputs": {
+            "question": "loop question é",
+            "repeat": true
+          },
+          "seed": 29,
+          "status": "truncated",
+          "stopped": false,
+          "trace": [
+            {
+              "arguments": [
+                "loop question é"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 6,
+              "ordinal": 0,
+              "output_tokens": 9,
+              "response": "kXeYVT0d78d0i5PS8W48Q7U71S8l2VUbkXeY",
+              "template": "cycle-v1"
+            },
+            {
+              "arguments": [
+                "loop question é"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 6,
+              "ordinal": 1,
+              "output_tokens": 12,
+              "response": "cU59mdi4VR6SUZWfWNbiW2hRejigS3jbcU59mdi4VR6SUZWf",
+              "template": "cycle-v1"
+            },
+            {
+              "arguments": [
+                "loop question é"
+              ],
+              "contract": {
+                "has_unit_price": true,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.001
+              },
+              "input_tokens": 6,
+              "ordinal": 2,
+              "output_tokens": 7,
+              "response": "aeOhjP7lmT4hWi6k30UaifcV4N8P",
+              "template": "cycle-v1"
+            }
+          ],
+          "trace_equal": true,
+          "trace_sha256": "0f071b7a06159cbcab146a81913968004b9d6f96cb93940b0a95fee046c30c3e"
+        }
+      ],
+      "source_path": "integrations/langgraph/source_frontend/examples/productive_cycle.py",
+      "source_sha256": "3c6a004841123492e873f3c20901910895e12a960d37533f8c0a3dd9a6f14709"
+    },
+    {
+      "artifacts": {
+        "certificate": "integrations/langgraph/source_frontend/artifacts/rejected_secret_request_difference.certificate.json",
+        "graph": "integrations/langgraph/source_frontend/artifacts/rejected_secret_request_difference.graph.json",
+        "provenance": "integrations/langgraph/source_frontend/artifacts/rejected_secret_request_difference.provenance.json"
+      },
+      "attestation_sha256": null,
+      "certificate_sha256": "c5eb675c4f4cc4dddb29b35a4ced9c2714c65d11fe08b1ed95c5e2152a603060",
+      "contracts_path": "integrations/langgraph/source_frontend/examples/rejected_secret_request_difference.contracts.json",
+      "contracts_sha256": "cbd5d510a5d4a2ba3db95c523ec350d8d0a445d916a78467b3f9925cdc59e204",
+      "diagnostic": "exact request templates differ",
+      "frontend": "accepted",
+      "graph_check": "rejected",
+      "graph_sha256": "3f55d5d84ff491b7e944437588869d9688577010bd43a90560a0d3e0297bf3ea",
+      "name": "rejected_secret_request_difference",
+      "replay": "not_run_graph_not_accepted",
+      "runs": [
+        {
+          "inputs": {
+            "private_route": false
+          },
+          "seed": 1,
+          "source_graph_probe_equal": true,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "same"
+              ],
+              "contract": {
+                "has_unit_price": false,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.0
+              },
+              "input_tokens": 5,
+              "ordinal": 0,
+              "output_tokens": 7,
+              "response": "2jR3WdhWbP89hgkiVWSkSQdNOY5i",
+              "template": "right-template"
+            }
+          ],
+          "trace_sha256": "5b790e2c1a9da080a7a43c226da8e84a20722370047057cfbe213d2b5e40862c"
+        },
+        {
+          "inputs": {
+            "private_route": false
+          },
+          "seed": 17,
+          "source_graph_probe_equal": true,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "same"
+              ],
+              "contract": {
+                "has_unit_price": false,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.0
+              },
+              "input_tokens": 5,
+              "ordinal": 0,
+              "output_tokens": 7,
+              "response": "bee7PjXPYR2eSYSeea814XWbf9Ul",
+              "template": "right-template"
+            }
+          ],
+          "trace_sha256": "05f2337166c6202a6fc1ad1c365e44f84173c234de8a881cf1fb20788d60430f"
+        },
+        {
+          "inputs": {
+            "private_route": false
+          },
+          "seed": 29,
+          "source_graph_probe_equal": true,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "same"
+              ],
+              "contract": {
+                "has_unit_price": false,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.0
+              },
+              "input_tokens": 5,
+              "ordinal": 0,
+              "output_tokens": 2,
+              "response": "91ZSb6OQ",
+              "template": "right-template"
+            }
+          ],
+          "trace_sha256": "edcd3addbfe9930d3f0c4248cc4c3976d6f556938178f26cc3b80e723277a4e9"
+        },
+        {
+          "inputs": {
+            "private_route": true
+          },
+          "seed": 1,
+          "source_graph_probe_equal": true,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "same"
+              ],
+              "contract": {
+                "has_unit_price": false,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.0
+              },
+              "input_tokens": 5,
+              "ordinal": 0,
+              "output_tokens": 3,
+              "response": "VZk5N2jmWNXk",
+              "template": "left-template"
+            }
+          ],
+          "trace_sha256": "c65a410554f04dd6b77767c5d8d41c7305f8f9002bae960eeca0373d0cb4e601"
+        },
+        {
+          "inputs": {
+            "private_route": true
+          },
+          "seed": 17,
+          "source_graph_probe_equal": true,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "same"
+              ],
+              "contract": {
+                "has_unit_price": false,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.0
+              },
+              "input_tokens": 5,
+              "ordinal": 0,
+              "output_tokens": 10,
+              "response": "8jakdj81Zhj0RaiN65mWTO5e90T2djZN8jakdj81",
+              "template": "left-template"
+            }
+          ],
+          "trace_sha256": "5f767bf346b681ecd3f7fb58648e8aa220c7b83d17d69f7a5b718031956e8e5a"
+        },
+        {
+          "inputs": {
+            "private_route": true
+          },
+          "seed": 29,
+          "source_graph_probe_equal": true,
+          "status": "stopped",
+          "stopped": true,
+          "trace": [
+            {
+              "arguments": [
+                "same"
+              ],
+              "contract": {
+                "has_unit_price": false,
+                "max_tokens": 12,
+                "model": "text-gen-v1",
+                "provider": "mock",
+                "unit_price": 0.0
+              },
+              "input_tokens": 5,
+              "ordinal": 0,
+              "output_tokens": 6,
+              "response": "VYTi3UOe787kaZVcb5bh8WSZ",
+              "template": "left-template"
+            }
+          ],
+          "trace_sha256": "6b91c6db4b6dfe1657a0f1e2dd3a2975ef7b356c5aa08797a145a70452f17660"
+        }
+      ],
+      "secret_trace_comparison": {
+        "different_pairs": 3,
+        "expected_property": "different exact templates under secret assignments; graph checker rejects",
+        "pairs": 3
+      },
+      "source_path": "integrations/langgraph/source_frontend/examples/rejected_secret_request_difference.py",
+      "source_sha256": "bd6e50a0ae266b1c6861ee0bc08a8ad45da713ef1acde978c5ffbc04b5bd5036"
+    },
+    {
+      "contracts_path": "integrations/langgraph/source_frontend/examples/rejected_secret_argument.contracts.json",
+      "contracts_sha256": "28404b22c8275869d0635087c0cb728b5bb67a58ae4191f7c2bd1ae933dd566c",
+      "diagnostic": "request cannot consume direct secret input state field 'secret_text'",
+      "frontend": "rejected",
+      "graph_check": "not_run",
+      "name": "rejected_secret_argument",
+      "replay": "not_run",
+      "runs": [],
+      "source_path": "integrations/langgraph/source_frontend/examples/rejected_secret_argument.py",
+      "source_sha256": "1be0e7155f13b08613ab57f75a451138bf44d62adc970cf3c732209c747e0d8c"
+    },
+    {
+      "contracts_path": "integrations/langgraph/source_frontend/examples/rejected_atomic_update.contracts.json",
+      "contracts_sha256": "b9bfab81a23a9965f001c203c5bc6d1706246dd9774f4b5006702e8a432326fa",
+      "diagnostic": "node 'call' reads state['draft'] after its returned result is produced at {'line': 17, 'column': 68}; LangGraph applies returned state updates atomically, but graph registers update per call",
+      "frontend": "rejected",
+      "graph_check": "not_run",
+      "name": "rejected_atomic_update",
+      "replay": "not_run",
+      "runs": [],
+      "source_path": "integrations/langgraph/source_frontend/examples/rejected_atomic_update.py",
+      "source_sha256": "655a8ff8379122d764380fcad20bc9d20ce14667525e7ce396d3866e06bdf65e"
+    }
+  ],
+  "checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+  "criteria": {
+    "accepted": "every source run must complete or truncate at the configured call horizon exactly like the replay-gated graph backend, with byte-for-byte equal ordered request/response/usage trace",
+    "frontend_rejection": "direct secret request arguments and same-node post-call reads of returned fields must fail closed during AST extraction",
+    "relational_rejection": "the secret-template-divergence graph must be rejected by the graph checker; the actual source and independent value probe must agree per run, and at least one paired secret assignment must have a different trace"
+  },
+  "environment": {
+    "langgraph": "1.2.14",
+    "python": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]"
+  },
+  "exporter_sha256": "06a032143c336a96919929b417cf369ab7db62610c567e409352e4771606c4f9",
+  "format": "orchlang-langgraph-source-study",
+  "langgraph_backend_sha256": "3366a165c888e9bc62a88227c516135403dd55e6e1d5b088ef9dee2ef3c3667b",
+  "limits": {
+    "cycle_max_calls": 3,
+    "max_control_steps": 100000,
+    "seeds": [
+      1,
+      17,
+      29
+    ]
+  },
+  "nonclaims": [
+    "this authored finite study is not an exhaustive Python/LangGraph grammar test or source-translation proof",
+    "the offline oracle does not establish actual model-provider behavior",
+    "graph acceptance does not establish termination or a finite total budget for cycles",
+    "only the declared state/contract assumptions and exported graph property are checked"
+  ],
+  "oracle_contract": {
+    "implementation": "integrations.langgraph.backend.OfflineOmegaOracle",
+    "key": "Omega(workflow name, seed, normalized model contract, per-contract ordinal, exact template, ordered full-text arguments)",
+    "response": "deterministic UTF-8 text with output usage within declared max_tokens",
+    "scope": "offline declared model only; no deployed provider guarantee"
+  },
+  "purpose": "finite execution cross-check of actual LangGraph Python source and its static request-graph projection",
+  "replayer_sha256": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
+  "runtime_helper_sha256": "c717ca7a87748472eb03cd0a30b3365680ed59f782e99a250b112278792408b9",
+  "selection": "three authored fixtures cover dependent calls after a secret branch, two-way public routing, and a productive cycle; three rejected fixtures cover direct secret request input, atomic state-update mismatch, and secret-dependent template divergence",
+  "source_frontend_sha256": "485990b666a741003a94ed8d2e73395dfdbb1e28456e442df8b336e8c531eff8",
+  "study_sha256": "00ea63e34f8978b2683a419c93712443f61c2fc770e938d34f4991d57edc3d9a",
+  "totals": {
+    "call_events": 66,
+    "expected_frontend_rejections": 2,
+    "expected_relational_rejections": 1,
+    "secret_assignment_pairs": 15,
+    "secret_trace_different_pairs": 3,
+    "secret_trace_equal": 12,
+    "source_execution_runs": 36,
+    "source_graph_equal": 30,
+    "source_graph_pairs": 30,
+    "source_value_probe_equal": 6,
+    "source_value_probe_pairs": 6
+  },
+  "version": 1
+}

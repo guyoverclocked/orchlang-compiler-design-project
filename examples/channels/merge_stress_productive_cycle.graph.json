@@ -1,0 +1,66 @@
+{
+  "format": "orchlang-request-graph",
+  "version": 1,
+  "name": "merge_stress_productive_cycle",
+  "chars_per_token": 1,
+  "inputs": {
+    "secret": {
+      "type": "boolean",
+      "label": "secret"
+    }
+  },
+  "models": {
+    "m": {
+      "provider": "offline",
+      "model": "finite-worker",
+      "max_tokens": 8
+    }
+  },
+  "registers": {
+    "r": {
+      "model": "m"
+    }
+  },
+  "entry": "choose",
+  "states": {
+    "choose": {
+      "calls": [],
+      "next": {
+        "kind": "secret",
+        "guard": {
+          "value": "secret"
+        },
+        "then": "left",
+        "else": "right"
+      }
+    },
+    "left": {
+      "calls": [],
+      "next": {
+        "kind": "goto",
+        "target": "loop"
+      }
+    },
+    "right": {
+      "calls": [],
+      "next": {
+        "kind": "goto",
+        "target": "loop"
+      }
+    },
+    "loop": {
+      "calls": [
+        {
+          "model": "m",
+          "template": "Q",
+          "arguments": [],
+          "result": "r"
+        }
+      ],
+      "next": {
+        "kind": "goto",
+        "target": "loop"
+      }
+    }
+  }
+}

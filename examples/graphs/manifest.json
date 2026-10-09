@@ -1,0 +1,87 @@
+[
+  {
+    "path": "examples/graphs/accepted/matched_cyclic_chain.json",
+    "expected": "accepted",
+    "diagnostic": null
+  },
+  {
+    "path": "examples/graphs/accepted/canonical_alias_cycle.json",
+    "expected": "accepted",
+    "diagnostic": null
+  },
+  {
+    "path": "examples/graphs/accepted/split_control_blocks.json",
+    "expected": "accepted",
+    "diagnostic": null
+  },
+  {
+    "path": "examples/graphs/accepted/nested_private_choices.json",
+    "expected": "accepted",
+    "diagnostic": null
+  },
+  {
+    "path": "examples/graphs/accepted/unbounded_productive_cycle.json",
+    "expected": "accepted",
+    "diagnostic": null
+  },
+  {
+    "path": "examples/graphs/accepted/finite_private_chain.json",
+    "expected": "accepted",
+    "diagnostic": null
+  },
+  {
+    "path": "examples/graphs/rejected/request_template_mutation.json",
+    "expected": "rejected",
+    "diagnostic": "templates differ"
+  },
+  {
+    "path": "examples/graphs/rejected/model_cap_mutation.json",
+    "expected": "rejected",
+    "diagnostic": "contracts differ"
+  },
+  {
+    "path": "examples/graphs/rejected/different_public_input.json",
+    "expected": "rejected",
+    "diagnostic": "arguments"
+  },
+  {
+    "path": "examples/graphs/rejected/private_termination_count.json",
+    "expected": "rejected",
+    "diagnostic": "events differ"
+  },
+  {
+    "path": "examples/graphs/rejected/unmatched_public_guard.json",
+    "expected": "rejected",
+    "diagnostic": "guards"
+  },
+  {
+    "path": "examples/graphs/rejected/overwritten_result_relation.json",
+    "expected": "rejected",
+    "diagnostic": "arguments"
+  },
+  {
+    "path": "examples/graphs/rejected/literal_result_mutation.json",
+    "expected": "rejected",
+    "diagnostic": "arguments"
+  },
+  {
+    "path": "examples/graphs/rejected/one_sided_private_transition.json",
+    "expected": "rejected",
+    "diagnostic": "events differ"
+  },
+  {
+    "path": "examples/graphs/invalid/private_silent_cycle.json",
+    "expected": "invalid",
+    "diagnostic": "call-free cycle"
+  },
+  {
+    "path": "examples/graphs/invalid/secret_request_argument.json",
+    "expected": "invalid",
+    "diagnostic": "public text"
+  },
+  {
+    "path": "examples/graphs/invalid/cross_token_unit.json",
+    "expected": "invalid",
+    "diagnostic": "token-unit"
+  }
+]

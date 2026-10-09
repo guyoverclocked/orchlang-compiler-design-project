@@ -16,3 +16,18 @@
 # package.json is tracked so `npm install` alone is enough.
 node_modules/
 package-lock.json
+
+# Python and local presentation build caches
+__pycache__/
+*.pyc
+submission/research/.build/node_modules/
+
+# Machine-local baseline discovery and transient document renders
+/audit/baseline_location.json
+/tmp/
+/submission/research/.build/
+build/
+*.egg-info/
+.venv/
+
+/.build/

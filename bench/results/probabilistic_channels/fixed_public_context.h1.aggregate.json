@@ -1,0 +1,191 @@
+{
+  "status": "complete",
+  "rows": [
+    {
+      "status": "complete",
+      "mass": "1",
+      "state_visits": 3,
+      "peak_frontier": 2,
+      "call_transitions": 2,
+      "terminal_states": 2,
+      "observer": "aggregate",
+      "horizon": 1,
+      "work_bytes_estimate": 1936,
+      "max_work_bytes": 1073741824,
+      "histogram": [
+        {
+          "observation": {
+            "billing": [
+              {
+                "call_count": 1,
+                "contract": {
+                  "has_unit_price": false,
+                  "max_tokens": 8,
+                  "model": "finite-worker",
+                  "provider": "offline",
+                  "unit_price": 0.0
+                },
+                "input_tokens": 2,
+                "output_tokens": 1
+              }
+            ],
+            "stopped": true
+          },
+          "probability": "1/2"
+        },
+        {
+          "observation": {
+            "billing": [
+              {
+                "call_count": 1,
+                "contract": {
+                  "has_unit_price": false,
+                  "max_tokens": 8,
+                  "model": "finite-worker",
+                  "provider": "offline",
+                  "unit_price": 0.0
+                },
+                "input_tokens": 2,
+                "output_tokens": 2
+              }
+            ],
+            "stopped": true
+          },
+          "probability": "1/2"
+        }
+      ]
+    },
+    {
+      "status": "complete",
+      "mass": "1",
+      "state_visits": 3,
+      "peak_frontier": 2,
+      "call_transitions": 2,
+      "terminal_states": 2,
+      "observer": "aggregate",
+      "horizon": 1,
+      "work_bytes_estimate": 1931,
+      "max_work_bytes": 1073741824,
+      "histogram": [
+        {
+          "observation": {
+            "billing": [
+              {
+                "call_count": 1,
+                "contract": {
+                  "has_unit_price": false,
+                  "max_tokens": 8,
+                  "model": "finite-worker",
+                  "provider": "offline",
+                  "unit_price": 0.0
+                },
+                "input_tokens": 2,
+                "output_tokens": 1
+              }
+            ],
+            "stopped": true
+          },
+          "probability": "1/2"
+        },
+        {
+          "observation": {
+            "billing": [
+              {
+                "call_count": 1,
+                "contract": {
+                  "has_unit_price": false,
+                  "max_tokens": 8,
+                  "model": "finite-worker",
+                  "provider": "offline",
+                  "unit_price": 0.0
+                },
+                "input_tokens": 2,
+                "output_tokens": 2
+              }
+            ],
+            "stopped": true
+          },
+          "probability": "1/2"
+        }
+      ]
+    }
+  ],
+  "metrics": {
+    "pairwise": [
+      {
+        "left": 0,
+        "right": 1,
+        "total_variation": "0",
+        "equal_observation_laws": true,
+        "maximum_likelihood_ratio": "1",
+        "maximum_log_likelihood_ratio_nats_approx": 0.0,
+        "infinite_likelihood_ratio": false
+      }
+    ],
+    "bayes_vulnerability": "1/2",
+    "prior_bayes_vulnerability": "1/2",
+    "min_entropy_vulnerability_ratio": "1",
+    "min_entropy_leakage_bits_approx": 0.0,
+    "mutual_information_bits_approx": 0.0,
+    "mutual_information_exact_expression": {
+      "form": "sum(coefficient * log2(ratio))",
+      "terms": [
+        {
+          "coefficient": "1/4",
+          "ratio": "1"
+        },
+        {
+          "coefficient": "1/4",
+          "ratio": "1"
+        },
+        {
+          "coefficient": "1/4",
+          "ratio": "1"
+        },
+        {
+          "coefficient": "1/4",
+          "ratio": "1"
+        }
+      ]
+    },
+    "all_pairwise_observation_laws_equal": true,
+    "limits": [
+      "exact probabilities/TV/vulnerability; log displays are floating approximations",
+      "likelihood ratio is a channel statistic, not a differential-privacy claim without declared adjacency"
+    ]
+  },
+  "observer": "aggregate",
+  "horizon": 1,
+  "priors": [
+    "1/2",
+    "1/2"
+  ],
+  "public_store": {
+    "q": "q"
+  },
+  "secret_scenarios": [
+    {
+      "values": {
+        "secret": false
+      },
+      "prior": "1/2"
+    },
+    {
+      "values": {
+        "secret": true
+      },
+      "prior": "1/2"
+    }
+  ],
+  "format": "orchlang-finite-usage-channel",
+  "version": 1,
+  "source_sha256": "2d64a6834c5bd91b365b550d578f844835c8d363ee404fec82e22d463a1cf9de",
+  "kernel_sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b",
+  "analyzer_sha256": "45380e75cdcc4d6f285a0027cbb85dab97d22dff11c5c94d3940b6813e8dce00",
+  "public_store_sha256": "52073a5a89f06ed6679dd921f822244d775cd35b3f02d8320fde953a99cdcae3",
+  "secret_scenarios_sha256": "65ba9bae030c6dee87d198eacddd557a759b4c629201aa5ee45bd4aa8e38398b",
+  "max_states": 100000,
+  "max_work_bytes": 1073741824,
+  "rule_precedence": "first matching rule in supplied order, otherwise resolved-contract default",
+  "scope": "authored synthetic finite success-only kernels; no provider distribution fitting, currency, errors or infinite-horizon analysis"
+}
