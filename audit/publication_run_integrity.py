@@ -182,6 +182,7 @@ def sha256(raw: bytes) -> str:
 def _generated_source(path: str) -> bool:
     return path in GENERATED_SOURCE_PATHS or path.startswith((
         "audit/final/", "audit/incident_triage/", "bench/results/", "output/release/",
+        "audit/orchlang_graph_tools.egg-info/",
         "integrations/langgraph/source_frontend/artifacts/",
     ))
 
