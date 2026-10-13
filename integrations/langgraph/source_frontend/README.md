@@ -93,6 +93,13 @@ plain `TypedDict` with `str` and `bool` fields, top-level node/router
 functions, one `StateGraph(State)` builder, literal registrations and edges,
 and one final `builder.compile()` assignment. Node names, route maps, and all
 source-control choices are read from the AST, not copied from the contracts.
+Node names must satisfy the pinned LangGraph runtime's naming rules:
+`__start__` and `__end__` are reserved, and names containing `|` or `:` are
+rejected. A top-level function cannot be named `str` or `bool` when that name
+is used as a field annotation. Python 3.14 can defer `TypedDict` annotation
+evaluation until LangGraph later asks for type hints, so even a function
+defined after the class can change the runtime annotation. Rejecting either
+ordering keeps the accepted schema independent of Python's annotation timing.
 
 A node is a straight-line sequence of unique local request results followed
 by one literal state-update dictionary:

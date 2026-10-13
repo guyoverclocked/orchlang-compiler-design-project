@@ -1,0 +1,1318 @@
+{
+  "sha": "88ebfa1fadd1a207aa92115635abf7ed20d66a88",
+  "tree": [
+    {
+      "mode": "040000",
+      "path": ".claude",
+      "sha": "179b411c5e206dca5399aa3c915dcf2c2a8b6092",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/179b411c5e206dca5399aa3c915dcf2c2a8b6092"
+    },
+    {
+      "mode": "040000",
+      "path": ".claude/hooks",
+      "sha": "8ec252d7efc53380e8f91b11de0dce5ba6cccc3c",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/8ec252d7efc53380e8f91b11de0dce5ba6cccc3c"
+    },
+    {
+      "mode": "100755",
+      "path": ".claude/hooks/ensure-pinned-uv.sh",
+      "sha": "379e2518853abfc9b0ac51b63e561ea53495da78",
+      "size": 970,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/379e2518853abfc9b0ac51b63e561ea53495da78"
+    },
+    {
+      "mode": "100644",
+      "path": ".claude/settings.json",
+      "sha": "08ce40ca6f3e24ca1964636551a590608a2c4006",
+      "size": 731,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/08ce40ca6f3e24ca1964636551a590608a2c4006"
+    },
+    {
+      "mode": "040000",
+      "path": ".claude/skills",
+      "sha": "b41c21d6f28c703a925cd0ece88fe242546a5ead",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/b41c21d6f28c703a925cd0ece88fe242546a5ead"
+    },
+    {
+      "mode": "040000",
+      "path": ".claude/skills/dependency-refresh",
+      "sha": "e5e895f795274b83cb3c8f0f8fff250fc4e1074d",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/e5e895f795274b83cb3c8f0f8fff250fc4e1074d"
+    },
+    {
+      "mode": "100644",
+      "path": ".claude/skills/dependency-refresh/SKILL.md",
+      "sha": "97ff51bd7993131a8b9396c22f01c3a9decd7155",
+      "size": 10652,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/97ff51bd7993131a8b9396c22f01c3a9decd7155"
+    },
+    {
+      "mode": "040000",
+      "path": ".claude/skills/dependency-refresh/references",
+      "sha": "bdc0b36f4625b90bc337ffe93c3b7c6ab677d7d8",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/bdc0b36f4625b90bc337ffe93c3b7c6ab677d7d8"
+    },
+    {
+      "mode": "100644",
+      "path": ".claude/skills/dependency-refresh/references/coupling-constraints.md",
+      "sha": "502ef6c4d024f1f1a572920923f1ee9bcd096a6c",
+      "size": 3896,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/502ef6c4d024f1f1a572920923f1ee9bcd096a6c"
+    },
+    {
+      "mode": "100644",
+      "path": ".claude/skills/dependency-refresh/references/live-e2e.md",
+      "sha": "378c8c7251f20357498e069307e4414c80da42b1",
+      "size": 3742,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/378c8c7251f20357498e069307e4414c80da42b1"
+    },
+    {
+      "mode": "040000",
+      "path": ".claude/skills/maintainer-response",
+      "sha": "dc1b63fb8bbd5c773f792d300bbe6e875aad2852",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/dc1b63fb8bbd5c773f792d300bbe6e875aad2852"
+    },
+    {
+      "mode": "100644",
+      "path": ".claude/skills/maintainer-response/SKILL.md",
+      "sha": "55b80c49d373f4922ddfc626996d314be4a3321b",
+      "size": 22086,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/55b80c49d373f4922ddfc626996d314be4a3321b"
+    },
+    {
+      "mode": "040000",
+      "path": ".claude/skills/model-refresh",
+      "sha": "f67b6bd3af90b3e06da3d87b57f9ed74760f9364",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/f67b6bd3af90b3e06da3d87b57f9ed74760f9364"
+    },
+    {
+      "mode": "100644",
+      "path": ".claude/skills/model-refresh/SKILL.md",
+      "sha": "e320c9ee0295f9895a70ccbb1e3e7cd159b97878",
+      "size": 10584,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/e320c9ee0295f9895a70ccbb1e3e7cd159b97878"
+    },
+    {
+      "mode": "040000",
+      "path": ".claude/skills/smoke-test",
+      "sha": "cea4b641857f88c5ccae45ffb7a07363799455a0",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/cea4b641857f88c5ccae45ffb7a07363799455a0"
+    },
+    {
+      "mode": "100644",
+      "path": ".claude/skills/smoke-test/SKILL.md",
+      "sha": "24cf2d1d7fcd5b8c2e3e0fd26a11a217f5584a13",
+      "size": 7830,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/24cf2d1d7fcd5b8c2e3e0fd26a11a217f5584a13"
+    },
+    {
+      "mode": "100644",
+      "path": ".dockerignore",
+      "sha": "c1e069ef6544e7e4d8a2f88fbf8d3836c570471c",
+      "size": 112,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/c1e069ef6544e7e4d8a2f88fbf8d3836c570471c"
+    },
+    {
+      "mode": "100644",
+      "path": ".env.example",
+      "sha": "e0311f120ff8655ea268ead366d22dbfb5c60366",
+      "size": 3405,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/e0311f120ff8655ea268ead366d22dbfb5c60366"
+    },
+    {
+      "mode": "040000",
+      "path": ".github",
+      "sha": "cc79518eeb3795b675110e2d792e74d3b9830c9b",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/cc79518eeb3795b675110e2d792e74d3b9830c9b"
+    },
+    {
+      "mode": "040000",
+      "path": ".github/workflows",
+      "sha": "96c3daee2378e97e9affa167953725d55598ff9a",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/96c3daee2378e97e9affa167953725d55598ff9a"
+    },
+    {
+      "mode": "100644",
+      "path": ".github/workflows/deploy.yml",
+      "sha": "b4860b767595b112a88cfdd9e8c5eadd9368f676",
+      "size": 1507,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/b4860b767595b112a88cfdd9e8c5eadd9368f676"
+    },
+    {
+      "mode": "100644",
+      "path": ".github/workflows/live-smoke-test.yml",
+      "sha": "e83413312f7890f697b3a55aec2e5eb5609a983f",
+      "size": 2798,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/e83413312f7890f697b3a55aec2e5eb5609a983f"
+    },
+    {
+      "mode": "100644",
+      "path": ".github/workflows/template-cleanup.yml",
+      "sha": "2c7fa61e75496d1f28e8917554fd8f1bcdbe5d96",
+      "size": 2376,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/2c7fa61e75496d1f28e8917554fd8f1bcdbe5d96"
+    },
+    {
+      "mode": "100644",
+      "path": ".github/workflows/test.yml",
+      "sha": "925753ff54d0e37398ce89234d6797e669240a5d",
+      "size": 4449,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/925753ff54d0e37398ce89234d6797e669240a5d"
+    },
+    {
+      "mode": "100644",
+      "path": ".gitignore",
+      "sha": "4577b7db5bf8d54de6d28ccb75a8fed6a1099278",
+      "size": 3737,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/4577b7db5bf8d54de6d28ccb75a8fed6a1099278"
+    },
+    {
+      "mode": "100644",
+      "path": ".pre-commit-config.yaml",
+      "sha": "ac20e0e13edacb04b53f6ed4509e38c34304bc7b",
+      "size": 736,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/ac20e0e13edacb04b53f6ed4509e38c34304bc7b"
+    },
+    {
+      "mode": "100644",
+      "path": "CLAUDE.md",
+      "sha": "4eedaab373161578b02da20176f42dce4043d072",
+      "size": 1672,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/4eedaab373161578b02da20176f42dce4043d072"
+    },
+    {
+      "mode": "100644",
+      "path": "LICENSE",
+      "sha": "34dd27b347ebf9885df35847a516628de0e2169a",
+      "size": 1071,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/34dd27b347ebf9885df35847a516628de0e2169a"
+    },
+    {
+      "mode": "100644",
+      "path": "README.md",
+      "sha": "e361c2e1c486073bda5cc2555e4b8901f2d4e644",
+      "size": 13811,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/e361c2e1c486073bda5cc2555e4b8901f2d4e644"
+    },
+    {
+      "mode": "100644",
+      "path": "codecov.yml",
+      "sha": "2be67b3a41d00c23492ad45fdafccbf62fdb2338",
+      "size": 292,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/2be67b3a41d00c23492ad45fdafccbf62fdb2338"
+    },
+    {
+      "mode": "100644",
+      "path": "compose.yaml",
+      "sha": "384ce4839a166907aa71443a58038173ea2faf8d",
+      "size": 2180,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/384ce4839a166907aa71443a58038173ea2faf8d"
+    },
+    {
+      "mode": "040000",
+      "path": "data",
+      "sha": "f50dabe3346cb9e2c68bd8ac10b9c1043c1221e7",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/f50dabe3346cb9e2c68bd8ac10b9c1043c1221e7"
+    },
+    {
+      "mode": "100644",
+      "path": "data/AcmeTech_Employee_Handbook.pdf",
+      "sha": "9a45d3a5eb1ba447cb6f6675fca55e18da446a6c",
+      "size": 4388,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/9a45d3a5eb1ba447cb6f6675fca55e18da446a6c"
+    },
+    {
+      "mode": "040000",
+      "path": "docker",
+      "sha": "ed081e9685757c720e12030c6ac62f88c1a6f2cb",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/ed081e9685757c720e12030c6ac62f88c1a6f2cb"
+    },
+    {
+      "mode": "100644",
+      "path": "docker/Dockerfile.app",
+      "sha": "5cebc8fa4a6de929b723a50c3aa18469e0577458",
+      "size": 603,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/5cebc8fa4a6de929b723a50c3aa18469e0577458"
+    },
+    {
+      "mode": "100644",
+      "path": "docker/Dockerfile.service",
+      "sha": "751247387a7b7773f077ce0f9aecd0960a1027ee",
+      "size": 432,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/751247387a7b7773f077ce0f9aecd0960a1027ee"
+    },
+    {
+      "mode": "100644",
+      "path": "docker/compose.mongo.yaml",
+      "sha": "476cb79b29b8140450e98c5041544b1ea89a1900",
+      "size": 626,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/476cb79b29b8140450e98c5041544b1ea89a1900"
+    },
+    {
+      "mode": "040000",
+      "path": "docs",
+      "sha": "89a2f6b32ef47ce40fa3e409cde4eee49ac003ba",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/89a2f6b32ef47ce40fa3e409cde4eee49ac003ba"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/AGUI.md",
+      "sha": "c47ba2d677ef345b326c5bca1d68ad2dc7ae7fa8",
+      "size": 4297,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/c47ba2d677ef345b326c5bca1d68ad2dc7ae7fa8"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/File_Based_Credentials.md",
+      "sha": "55a1a2e0f2dcb76d178888d8fcc843da3f56c046",
+      "size": 3369,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/55a1a2e0f2dcb76d178888d8fcc843da3f56c046"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/GitHub_MCP_Agent.md",
+      "sha": "e5cfb35e7e06cc95b1ce859763c697545a32b338",
+      "size": 3296,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/e5cfb35e7e06cc95b1ce859763c697545a32b338"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/Local_GPU_Deployment.md",
+      "sha": "127dfdcebcad00c8469732bb5272f836b042e8b6",
+      "size": 4417,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/127dfdcebcad00c8469732bb5272f836b042e8b6"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/Ollama.md",
+      "sha": "3c78629ba61a8eeebdc8db085c66ee0822bf5421",
+      "size": 1270,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/3c78629ba61a8eeebdc8db085c66ee0822bf5421"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/RAG_Assistant.md",
+      "sha": "6242160ea87e824f26ed268da40d71960f7282af",
+      "size": 2351,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/6242160ea87e824f26ed268da40d71960f7282af"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/VertexAI.md",
+      "sha": "ce5bfae327b232ba107327d52f7aff099574edac",
+      "size": 4566,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/ce5bfae327b232ba107327d52f7aff099574edac"
+    },
+    {
+      "mode": "040000",
+      "path": "docs/maintenance",
+      "sha": "d71acd8b3caa0ae313ea64fac2c55b8685ee7785",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/d71acd8b3caa0ae313ea64fac2c55b8685ee7785"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/maintenance/CI_Follow_Through_Run.md",
+      "sha": "a9c464c508b838c40fb971694ea08f2fb28f339d",
+      "size": 2094,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/a9c464c508b838c40fb971694ea08f2fb28f339d"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/maintenance/Daily_Sentinel.md",
+      "sha": "6fff1579040f5fe5a5aa18241d96101077992a9d",
+      "size": 5703,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/6fff1579040f5fe5a5aa18241d96101077992a9d"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/maintenance/README.md",
+      "sha": "5bc68cc592b5e0d6f7b11df20298874b8b00f63b",
+      "size": 3590,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/5bc68cc592b5e0d6f7b11df20298874b8b00f63b"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/maintenance/Weekly_Maintenance_Run.md",
+      "sha": "87bc350330f0117081b3c71a0fe110e76f60016f",
+      "size": 26022,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/87bc350330f0117081b3c71a0fe110e76f60016f"
+    },
+    {
+      "mode": "100644",
+      "path": "langgraph.json",
+      "sha": "6dea888e677a3f495bb0e1e0e0c80ca4f2447d72",
+      "size": 194,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/6dea888e677a3f495bb0e1e0e0c80ca4f2447d72"
+    },
+    {
+      "mode": "040000",
+      "path": "media",
+      "sha": "509554ae762cd4eb2374e589f0984cad5b920930",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/509554ae762cd4eb2374e589f0984cad5b920930"
+    },
+    {
+      "mode": "100644",
+      "path": "media/agent_architecture.excalidraw",
+      "sha": "ff41ec9edb0ec834f19b0b3bf4492e39e3ed88ae",
+      "size": 292564,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/ff41ec9edb0ec834f19b0b3bf4492e39e3ed88ae"
+    },
+    {
+      "mode": "100644",
+      "path": "media/agent_architecture.png",
+      "sha": "e4b6629ea2d94ec70521c71def3d6a5d0344f45b",
+      "size": 186825,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/e4b6629ea2d94ec70521c71def3d6a5d0344f45b"
+    },
+    {
+      "mode": "100644",
+      "path": "media/agent_diagram.png",
+      "sha": "f576e87812b35a87aa5e9045ba6cb245410b08db",
+      "size": 39697,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/f576e87812b35a87aa5e9045ba6cb245410b08db"
+    },
+    {
+      "mode": "100644",
+      "path": "media/app_screenshot.png",
+      "sha": "2abb2fe6ed7ba606eb4bb9071460e3d6cf408f60",
+      "size": 150189,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/2abb2fe6ed7ba606eb4bb9071460e3d6cf408f60"
+    },
+    {
+      "mode": "040000",
+      "path": "privatecredentials",
+      "sha": "ee6477615f1b8ac85aa54c49638a075bd38e275e",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/ee6477615f1b8ac85aa54c49638a075bd38e275e"
+    },
+    {
+      "mode": "100644",
+      "path": "privatecredentials/.gitkeep",
+      "sha": "d9f4f07d8481c4db75e7df2ac4a84b9fe0ef2939",
+      "size": 111,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/d9f4f07d8481c4db75e7df2ac4a84b9fe0ef2939"
+    },
+    {
+      "mode": "100644",
+      "path": "pyproject.toml",
+      "sha": "0e850b55fedf516711e6160f3678ce5a499ff5cb",
+      "size": 3723,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/0e850b55fedf516711e6160f3678ce5a499ff5cb"
+    },
+    {
+      "mode": "040000",
+      "path": "scripts",
+      "sha": "67911645be9063d67a372deec0bf42dc862d3ba0",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/67911645be9063d67a372deec0bf42dc862d3ba0"
+    },
+    {
+      "mode": "040000",
+      "path": "scripts/agui-client",
+      "sha": "c3d406663684729ac1326e9e950ce2eb1698fff9",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/c3d406663684729ac1326e9e950ce2eb1698fff9"
+    },
+    {
+      "mode": "100644",
+      "path": "scripts/agui-client/client.mjs",
+      "sha": "763df9c1a4498c979d9ac8370522df88e08e0ba0",
+      "size": 2537,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/763df9c1a4498c979d9ac8370522df88e08e0ba0"
+    },
+    {
+      "mode": "100644",
+      "path": "scripts/agui-client/package.json",
+      "sha": "ba2d90069fbf0ffac74d98f18a87e96ee8028b73",
+      "size": 232,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/ba2d90069fbf0ffac74d98f18a87e96ee8028b73"
+    },
+    {
+      "mode": "100644",
+      "path": "scripts/check_live_models.py",
+      "sha": "e1c82ee6059605c6b04895a5460fedb096cbe6ac",
+      "size": 5452,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/e1c82ee6059605c6b04895a5460fedb096cbe6ac"
+    },
+    {
+      "mode": "100644",
+      "path": "scripts/create_chroma_db.py",
+      "sha": "dc7b4bd85da5fa40f944b7d6f85534d5ba8491bf",
+      "size": 2659,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/dc7b4bd85da5fa40f944b7d6f85534d5ba8491bf"
+    },
+    {
+      "mode": "100644",
+      "path": "scripts/e2e_ui_tests.py",
+      "sha": "aecf7cd341d3b2e702aa6ac8df8fcc142ca008d2",
+      "size": 21052,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/aecf7cd341d3b2e702aa6ac8df8fcc142ca008d2"
+    },
+    {
+      "mode": "100644",
+      "path": "scripts/smoke_live_app.py",
+      "sha": "5764cafe570cf381a1c780735343eaa9595dba55",
+      "size": 7179,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/5764cafe570cf381a1c780735343eaa9595dba55"
+    },
+    {
+      "mode": "100755",
+      "path": "scripts/smoke_test.sh",
+      "sha": "0083b69f991cb41376dd094ad3705a0d29a0110f",
+      "size": 10881,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/0083b69f991cb41376dd094ad3705a0d29a0110f"
+    },
+    {
+      "mode": "040000",
+      "path": "src",
+      "sha": "ebf24422edd35cd89e6b0ef14fd0dc69f189c494",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/ebf24422edd35cd89e6b0ef14fd0dc69f189c494"
+    },
+    {
+      "mode": "040000",
+      "path": "src/agents",
+      "sha": "f9d01e708e0a2572c36f938f63ec18c976f383e6",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/f9d01e708e0a2572c36f938f63ec18c976f383e6"
+    },
+    {
+      "mode": "100644",
+      "path": "src/agents/__init__.py",
+      "sha": "bbad6dcc36f93b5fc5a43e67e88dec1eaf99b955",
+      "size": 277,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/bbad6dcc36f93b5fc5a43e67e88dec1eaf99b955"
+    },
+    {
+      "mode": "100644",
+      "path": "src/agents/agents.py",
+      "sha": "ba92c7fdfde8ed7792741970fc5265cfcc30b110",
+      "size": 3519,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/ba92c7fdfde8ed7792741970fc5265cfcc30b110"
+    },
+    {
+      "mode": "040000",
+      "path": "src/agents/bg_task_agent",
+      "sha": "480abe2fe42a565cc7cb0939dda3c2d3ac9041a5",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/480abe2fe42a565cc7cb0939dda3c2d3ac9041a5"
+    },
+    {
+      "mode": "100644",
+      "path": "src/agents/bg_task_agent/bg_task_agent.py",
+      "sha": "b0efa87a1210d196ce7f86ce005c4b833945cc8a",
+      "size": 1973,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/b0efa87a1210d196ce7f86ce005c4b833945cc8a"
+    },
+    {
+      "mode": "100644",
+      "path": "src/agents/bg_task_agent/task.py",
+      "sha": "d42019e837516b2f70d222b4085d75292d2c700c",
+      "size": 1928,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/d42019e837516b2f70d222b4085d75292d2c700c"
+    },
+    {
+      "mode": "100644",
+      "path": "src/agents/chatbot.py",
+      "sha": "f1290ee0530ab018a35d93880dd00d2f19585ecf",
+      "size": 682,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/f1290ee0530ab018a35d93880dd00d2f19585ecf"
+    },
+    {
+      "mode": "100644",
+      "path": "src/agents/command_agent.py",
+      "sha": "7846fa71c37290d9a22c3c4cbfdb6fd8d4c84362",
+      "size": 1438,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/7846fa71c37290d9a22c3c4cbfdb6fd8d4c84362"
+    },
+    {
+      "mode": "040000",
+      "path": "src/agents/github_mcp_agent",
+      "sha": "4db05cfd213771270f32ab579fb757baeec3e631",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/4db05cfd213771270f32ab579fb757baeec3e631"
+    },
+    {
+      "mode": "100644",
+      "path": "src/agents/github_mcp_agent/github_mcp_agent.py",
+      "sha": "5b0b2810978254dfbaf88916d65533a7feff55cc",
+      "size": 3749,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/5b0b2810978254dfbaf88916d65533a7feff55cc"
+    },
+    {
+      "mode": "100644",
+      "path": "src/agents/interrupt_agent.py",
+      "sha": "bb095c854aea316fee5a4ca1efbf137f530024aa",
+      "size": 9454,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/bb095c854aea316fee5a4ca1efbf137f530024aa"
+    },
+    {
+      "mode": "100644",
+      "path": "src/agents/knowledge_base_agent.py",
+      "sha": "3bb690a346c1e15232261da361fe1ad90e3f4cf8",
+      "size": 6641,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/3bb690a346c1e15232261da361fe1ad90e3f4cf8"
+    },
+    {
+      "mode": "100644",
+      "path": "src/agents/langgraph_supervisor_agent.py",
+      "sha": "563fe98cdd43f0a8b9fcac057588bf9b02f66e8d",
+      "size": 1880,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/563fe98cdd43f0a8b9fcac057588bf9b02f66e8d"
+    },
+    {
+      "mode": "100644",
+      "path": "src/agents/langgraph_supervisor_hierarchy_agent.py",
+      "sha": "e8791f7c83ec00eb17bea370b5a13f3091d9d289",
+      "size": 1880,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/e8791f7c83ec00eb17bea370b5a13f3091d9d289"
+    },
+    {
+      "mode": "100644",
+      "path": "src/agents/lazy_agent.py",
+      "sha": "b3e8ff6868cf250b9253656568a5ae12933daa9f",
+      "size": 1382,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/b3e8ff6868cf250b9253656568a5ae12933daa9f"
+    },
+    {
+      "mode": "100644",
+      "path": "src/agents/rag_assistant.py",
+      "sha": "d22dbadf93d69ecc5d58f781132f3327185f5e73",
+      "size": 4847,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/d22dbadf93d69ecc5d58f781132f3327185f5e73"
+    },
+    {
+      "mode": "100644",
+      "path": "src/agents/research_assistant.py",
+      "sha": "f7d9c5139c9adc6f375f361bc55f105c5ca346ec",
+      "size": 5134,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/f7d9c5139c9adc6f375f361bc55f105c5ca346ec"
+    },
+    {
+      "mode": "100644",
+      "path": "src/agents/safeguard.py",
+      "sha": "a7376a2eff25df1f4c3e281a3fb31c1cff4ccdab",
+      "size": 5386,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/a7376a2eff25df1f4c3e281a3fb31c1cff4ccdab"
+    },
+    {
+      "mode": "100644",
+      "path": "src/agents/tools.py",
+      "sha": "d37594f83111bb00634acb28918149d49ceb68d1",
+      "size": 2369,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/d37594f83111bb00634acb28918149d49ceb68d1"
+    },
+    {
+      "mode": "100644",
+      "path": "src/agents/utils.py",
+      "sha": "78534175dcbaceabfffb33fcda58140999182d04",
+      "size": 486,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/78534175dcbaceabfffb33fcda58140999182d04"
+    },
+    {
+      "mode": "040000",
+      "path": "src/client",
+      "sha": "448aa1720e33df17595b45908a025be253e36090",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/448aa1720e33df17595b45908a025be253e36090"
+    },
+    {
+      "mode": "100644",
+      "path": "src/client/__init__.py",
+      "sha": "9c2963a41b44040f42f0b2275cbb9f02d41186e7",
+      "size": 103,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/9c2963a41b44040f42f0b2275cbb9f02d41186e7"
+    },
+    {
+      "mode": "100644",
+      "path": "src/client/client.py",
+      "sha": "5ea4fea515243a6a4582756c605c15401d24c6f4",
+      "size": 16254,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/5ea4fea515243a6a4582756c605c15401d24c6f4"
+    },
+    {
+      "mode": "040000",
+      "path": "src/core",
+      "sha": "5805d2f355f64dea324ad3526150fd9d4b5fa95f",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/5805d2f355f64dea324ad3526150fd9d4b5fa95f"
+    },
+    {
+      "mode": "100644",
+      "path": "src/core/__init__.py",
+      "sha": "1e63b2a3ebd33fa4b430e8822ce7f514027e1065",
+      "size": 103,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/1e63b2a3ebd33fa4b430e8822ce7f514027e1065"
+    },
+    {
+      "mode": "100644",
+      "path": "src/core/llm.py",
+      "sha": "d20bed225e3a5fbce6e1a4ea7f5a0e93cf56105d",
+      "size": 6030,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/d20bed225e3a5fbce6e1a4ea7f5a0e93cf56105d"
+    },
+    {
+      "mode": "100644",
+      "path": "src/core/settings.py",
+      "sha": "c5522f646dbf58d3bf34ca8a879cd74e2e8f2d73",
+      "size": 10364,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/c5522f646dbf58d3bf34ca8a879cd74e2e8f2d73"
+    },
+    {
+      "mode": "040000",
+      "path": "src/memory",
+      "sha": "ac7af7b537098ca5ed3cb7c2170c75c46eb30f71",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/ac7af7b537098ca5ed3cb7c2170c75c46eb30f71"
+    },
+    {
+      "mode": "100644",
+      "path": "src/memory/__init__.py",
+      "sha": "357c5e118b0d04bee4b35464c14149f874826196",
+      "size": 1424,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/357c5e118b0d04bee4b35464c14149f874826196"
+    },
+    {
+      "mode": "100644",
+      "path": "src/memory/mongodb.py",
+      "sha": "b4a70d66df6d3a39917e29b30a711ce8fc00ef54",
+      "size": 3485,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/b4a70d66df6d3a39917e29b30a711ce8fc00ef54"
+    },
+    {
+      "mode": "100644",
+      "path": "src/memory/postgres.py",
+      "sha": "27ef75b018ac04fa56ac158137b6f741b00ce47b",
+      "size": 4111,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/27ef75b018ac04fa56ac158137b6f741b00ce47b"
+    },
+    {
+      "mode": "100644",
+      "path": "src/memory/sqlite.py",
+      "sha": "e11f6cd6668dc5ec44e340d0d42271e462ffc8f3",
+      "size": 1234,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/e11f6cd6668dc5ec44e340d0d42271e462ffc8f3"
+    },
+    {
+      "mode": "100644",
+      "path": "src/run_agent.py",
+      "sha": "a50a0e25ab10fab65ee3f26e296b5179b7892b6f",
+      "size": 1157,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/a50a0e25ab10fab65ee3f26e296b5179b7892b6f"
+    },
+    {
+      "mode": "100644",
+      "path": "src/run_client.py",
+      "sha": "f59785d26efcc0304d29016aa4c4992c3ca48ca1",
+      "size": 1550,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/f59785d26efcc0304d29016aa4c4992c3ca48ca1"
+    },
+    {
+      "mode": "100644",
+      "path": "src/run_service.py",
+      "sha": "3b1c292542d291cf1d8407cc2e2955485c670fa3",
+      "size": 1432,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/3b1c292542d291cf1d8407cc2e2955485c670fa3"
+    },
+    {
+      "mode": "040000",
+      "path": "src/schema",
+      "sha": "46204a9fb8677a095cf5510f93abe11cc33079bf",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/46204a9fb8677a095cf5510f93abe11cc33079bf"
+    },
+    {
+      "mode": "100644",
+      "path": "src/schema/__init__.py",
+      "sha": "e28bd7a3e0716ada53355c82e4543d229e3b3432",
+      "size": 564,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/e28bd7a3e0716ada53355c82e4543d229e3b3432"
+    },
+    {
+      "mode": "100644",
+      "path": "src/schema/models.py",
+      "sha": "aec68e65c9417a767a6a239a3a34fa73ff778a98",
+      "size": 4115,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/aec68e65c9417a767a6a239a3a34fa73ff778a98"
+    },
+    {
+      "mode": "100644",
+      "path": "src/schema/schema.py",
+      "sha": "d184213adce66b297cc1e3ac6905b8083db03df8",
+      "size": 6626,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/d184213adce66b297cc1e3ac6905b8083db03df8"
+    },
+    {
+      "mode": "100644",
+      "path": "src/schema/task_data.py",
+      "sha": "49a20d858b641988465555bdc887c4acac6a73ca",
+      "size": 2723,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/49a20d858b641988465555bdc887c4acac6a73ca"
+    },
+    {
+      "mode": "040000",
+      "path": "src/service",
+      "sha": "499c009bce01004caad94ce60f7ede9cc1846765",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/499c009bce01004caad94ce60f7ede9cc1846765"
+    },
+    {
+      "mode": "100644",
+      "path": "src/service/__init__.py",
+      "sha": "bac9e18fca0fb57d720f7eff5d3917596ab9cc1c",
+      "size": 51,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/bac9e18fca0fb57d720f7eff5d3917596ab9cc1c"
+    },
+    {
+      "mode": "100644",
+      "path": "src/service/agui.py",
+      "sha": "5e8ecd4dd7ce34f1f0a41bd76565e26a0185b1fa",
+      "size": 4738,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/5e8ecd4dd7ce34f1f0a41bd76565e26a0185b1fa"
+    },
+    {
+      "mode": "100644",
+      "path": "src/service/service.py",
+      "sha": "0c57a7941392a93af3f68533613c501d4bb40153",
+      "size": 20130,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/0c57a7941392a93af3f68533613c501d4bb40153"
+    },
+    {
+      "mode": "100644",
+      "path": "src/service/threads.py",
+      "sha": "549db19741a12d89689a736d32ca7a427f6fabdc",
+      "size": 4315,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/549db19741a12d89689a736d32ca7a427f6fabdc"
+    },
+    {
+      "mode": "100644",
+      "path": "src/service/utils.py",
+      "sha": "1c0c8afd994365d5f47d78693cdc5bfc161fe9df",
+      "size": 3953,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/1c0c8afd994365d5f47d78693cdc5bfc161fe9df"
+    },
+    {
+      "mode": "100644",
+      "path": "src/streamlit_app.py",
+      "sha": "2b33edcb2eeb2efced7d99e36ce64deb5419be23",
+      "size": 27382,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/2b33edcb2eeb2efced7d99e36ce64deb5419be23"
+    },
+    {
+      "mode": "040000",
+      "path": "src/voice",
+      "sha": "7be0f3c558a27288da20a2018af3440d3c5b8f7d",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/7be0f3c558a27288da20a2018af3440d3c5b8f7d"
+    },
+    {
+      "mode": "100644",
+      "path": "src/voice/__init__.py",
+      "sha": "aa34e75319dbb07ff75d5bb586481e356be2bf45",
+      "size": 1135,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/aa34e75319dbb07ff75d5bb586481e356be2bf45"
+    },
+    {
+      "mode": "100644",
+      "path": "src/voice/manager.py",
+      "sha": "50af9ea633441c1fdcf58c4854c6f535f6799df2",
+      "size": 6566,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/50af9ea633441c1fdcf58c4854c6f535f6799df2"
+    },
+    {
+      "mode": "040000",
+      "path": "src/voice/providers",
+      "sha": "64ea3c68957e7658db1abf524a0e7cfca6142808",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/64ea3c68957e7658db1abf524a0e7cfca6142808"
+    },
+    {
+      "mode": "100644",
+      "path": "src/voice/providers/__init__.py",
+      "sha": "ac80e928834b134c36cd074972277153cbd9d2c1",
+      "size": 331,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/ac80e928834b134c36cd074972277153cbd9d2c1"
+    },
+    {
+      "mode": "100644",
+      "path": "src/voice/providers/openai_stt.py",
+      "sha": "5b2e3265ddd1927d9a3039ef1977d431a2aae75e",
+      "size": 1846,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/5b2e3265ddd1927d9a3039ef1977d431a2aae75e"
+    },
+    {
+      "mode": "100644",
+      "path": "src/voice/providers/openai_tts.py",
+      "sha": "3586e62cab58e14b11536ae39b3beae40eb681fb",
+      "size": 3974,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/3586e62cab58e14b11536ae39b3beae40eb681fb"
+    },
+    {
+      "mode": "100644",
+      "path": "src/voice/stt.py",
+      "sha": "72535e6e423ce28af8aa1de9344db6d57e7e3b04",
+      "size": 5021,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/72535e6e423ce28af8aa1de9344db6d57e7e3b04"
+    },
+    {
+      "mode": "100644",
+      "path": "src/voice/tts.py",
+      "sha": "beffa2e7057bfb42ba37009e449206dd6e276935",
+      "size": 5732,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/beffa2e7057bfb42ba37009e449206dd6e276935"
+    },
+    {
+      "mode": "040000",
+      "path": "tests",
+      "sha": "6872baaff985806a5efe914bd872b4ee6be61406",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/6872baaff985806a5efe914bd872b4ee6be61406"
+    },
+    {
+      "mode": "040000",
+      "path": "tests/agents",
+      "sha": "0f4d1e1b71fcf9fc5a602909991e5911ebf42fe3",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/0f4d1e1b71fcf9fc5a602909991e5911ebf42fe3"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/agents/test_agent_loading.py",
+      "sha": "893c9851772ecdfb21a9960ea517a692ad7f5b3c",
+      "size": 2461,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/893c9851772ecdfb21a9960ea517a692ad7f5b3c"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/agents/test_github_mcp_agent.py",
+      "sha": "16b04fd8467e2f948c2b6d9a7299c9e8d5d4bccf",
+      "size": 4653,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/16b04fd8467e2f948c2b6d9a7299c9e8d5d4bccf"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/agents/test_lazy_agent.py",
+      "sha": "ccc8e8b2df3ae505ecbe1c6644b17fbc7359d5b1",
+      "size": 1887,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/ccc8e8b2df3ae505ecbe1c6644b17fbc7359d5b1"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/agents/test_safeguard.py",
+      "sha": "41b4c405c3d3d65953fb2abde16f936bf7d38b78",
+      "size": 569,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/41b4c405c3d3d65953fb2abde16f936bf7d38b78"
+    },
+    {
+      "mode": "040000",
+      "path": "tests/app",
+      "sha": "a3d217d8c343045aceb3f01fdc111e8f308f22a9",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/a3d217d8c343045aceb3f01fdc111e8f308f22a9"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/app/conftest.py",
+      "sha": "c5efc5ee289d70838f7d4217cdd75026916e0b99",
+      "size": 1033,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/c5efc5ee289d70838f7d4217cdd75026916e0b99"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/app/test_streamlit_app.py",
+      "sha": "3f996a26de5e2d884443857fa21992eed8d9ca5e",
+      "size": 24979,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/3f996a26de5e2d884443857fa21992eed8d9ca5e"
+    },
+    {
+      "mode": "040000",
+      "path": "tests/client",
+      "sha": "fbd1131ffdeb62d961bbeb5adf1e056915d0698f",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/fbd1131ffdeb62d961bbeb5adf1e056915d0698f"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/client/conftest.py",
+      "sha": "0055e6b3de09257b2d664db3a0be32056ac89c9a",
+      "size": 286,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/0055e6b3de09257b2d664db3a0be32056ac89c9a"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/client/test_client.py",
+      "sha": "c39d12d99b33cbe896848957db12ae98582b3fba",
+      "size": 16930,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/c39d12d99b33cbe896848957db12ae98582b3fba"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/conftest.py",
+      "sha": "d4fd1a388f9e08d9215080913263539d919a433f",
+      "size": 789,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/d4fd1a388f9e08d9215080913263539d919a433f"
+    },
+    {
+      "mode": "040000",
+      "path": "tests/core",
+      "sha": "dd0f2a7646130ab70c4a7174898c6772f7547372",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/dd0f2a7646130ab70c4a7174898c6772f7547372"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/core/test_llm.py",
+      "sha": "f78b546ee162262353b089e8de4ff1ebab11e0dd",
+      "size": 4431,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/f78b546ee162262353b089e8de4ff1ebab11e0dd"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/core/test_settings.py",
+      "sha": "4a44071dae3928f7334dfd9cd28f9e445e8cbb22",
+      "size": 10733,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/4a44071dae3928f7334dfd9cd28f9e445e8cbb22"
+    },
+    {
+      "mode": "040000",
+      "path": "tests/integration",
+      "sha": "a44e25356965c2fb6a443dfa12b9fe4d08500b86",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/a44e25356965c2fb6a443dfa12b9fe4d08500b86"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/integration/test_docker_e2e.py",
+      "sha": "fe813ec9420c13b58dcd5e190a0299fcc5052ce3",
+      "size": 1399,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/fe813ec9420c13b58dcd5e190a0299fcc5052ce3"
+    },
+    {
+      "mode": "040000",
+      "path": "tests/schema",
+      "sha": "6bf0a17d83cdda3e3fbe4c7039b3d63c0405380a",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/6bf0a17d83cdda3e3fbe4c7039b3d63c0405380a"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/schema/test_models.py",
+      "sha": "53f1f807ff984799d618e24fc4a2cc2d45b2b0bf",
+      "size": 1499,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/53f1f807ff984799d618e24fc4a2cc2d45b2b0bf"
+    },
+    {
+      "mode": "040000",
+      "path": "tests/service",
+      "sha": "0090dbbb9cc2f6c5026997cc295a69fcf4199732",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/0090dbbb9cc2f6c5026997cc295a69fcf4199732"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/service/conftest.py",
+      "sha": "5a9f74327938f5aa9e1f247912da72d02ed42897",
+      "size": 2127,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/5a9f74327938f5aa9e1f247912da72d02ed42897"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/service/test_agui.py",
+      "sha": "34f38a984480e27a1507ebbe77bbc064f6169826",
+      "size": 9729,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/34f38a984480e27a1507ebbe77bbc064f6169826"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/service/test_auth.py",
+      "sha": "f7d989d94eab073f8673c30f3863d732032ebbca",
+      "size": 1520,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/f7d989d94eab073f8673c30f3863d732032ebbca"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/service/test_service.py",
+      "sha": "b4502236e0d15090c57f76d4711ef7b8c417d7ee",
+      "size": 16200,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/b4502236e0d15090c57f76d4711ef7b8c417d7ee"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/service/test_service_e2e.py",
+      "sha": "ca03b5772695d812a19376f48039cb9b3d2a3692",
+      "size": 3660,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/ca03b5772695d812a19376f48039cb9b3d2a3692"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/service/test_service_lifespan.py",
+      "sha": "a3982432f7ea81f16662267e6bacc93c2ef19114",
+      "size": 2259,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/a3982432f7ea81f16662267e6bacc93c2ef19114"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/service/test_service_message_generator.py",
+      "sha": "c8a74f33935be32229aac2a8016f8b14b510470f",
+      "size": 3168,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/c8a74f33935be32229aac2a8016f8b14b510470f"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/service/test_service_real_graphs.py",
+      "sha": "701c0ce30b1830e417275e614f647f4da8a7fd0b",
+      "size": 9116,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/701c0ce30b1830e417275e614f647f4da8a7fd0b"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/service/test_service_streaming.py",
+      "sha": "27716e45d64038409093212266ab59464b2e14ad",
+      "size": 2297,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/27716e45d64038409093212266ab59464b2e14ad"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/service/test_threads.py",
+      "sha": "9ed82e55514b18d49336e34c8f39ef4d19f36639",
+      "size": 9805,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/9ed82e55514b18d49336e34c8f39ef4d19f36639"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/service/test_threads_sqlite.py",
+      "sha": "f604a9855c52732776f860ef730a4340ef81d352",
+      "size": 9460,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/f604a9855c52732776f860ef730a4340ef81d352"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/service/test_utils.py",
+      "sha": "0366eea3fcb73d5cd810ad7481d029bb366a4dd2",
+      "size": 1816,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/0366eea3fcb73d5cd810ad7481d029bb366a4dd2"
+    },
+    {
+      "mode": "040000",
+      "path": "tests/smoke",
+      "sha": "0de6fb674ebb9bdb70a02721b5ca7f40985d82cb",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/0de6fb674ebb9bdb70a02721b5ca7f40985d82cb"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/smoke/test_persistence.py",
+      "sha": "8d7c3d43227188e00acca981f35a6ed28468ac52",
+      "size": 3262,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/8d7c3d43227188e00acca981f35a6ed28468ac52"
+    },
+    {
+      "mode": "040000",
+      "path": "tests/voice",
+      "sha": "22aab73f8baecca9fff2dee9f60dd7539d4a20e3",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/22aab73f8baecca9fff2dee9f60dd7539d4a20e3"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/voice/conftest.py",
+      "sha": "c70e7b0f0a4e35b1c72c3699f8f630eb6243f1f2",
+      "size": 737,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/c70e7b0f0a4e35b1c72c3699f8f630eb6243f1f2"
+    },
+    {
+      "mode": "040000",
+      "path": "tests/voice/providers",
+      "sha": "df6ee98738c7c0e9e2bec878dd2f142cbc9f8813",
+      "type": "tree",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/trees/df6ee98738c7c0e9e2bec878dd2f142cbc9f8813"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/voice/providers/test_openai_stt.py",
+      "sha": "1b8440bd0ff18b519078328c883a2004e5580eb2",
+      "size": 2464,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/1b8440bd0ff18b519078328c883a2004e5580eb2"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/voice/providers/test_openai_tts.py",
+      "sha": "9ebd09365629401e3db3122a1171c8d8aae11933",
+      "size": 2802,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/9ebd09365629401e3db3122a1171c8d8aae11933"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/voice/test_manager.py",
+      "sha": "9beb83f8689256ef97ec3b44024563d96ea3d740",
+      "size": 2704,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/9beb83f8689256ef97ec3b44024563d96ea3d740"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/voice/test_stt.py",
+      "sha": "70b6c57052a6d8f57161ee8b5fc000d4725f77cc",
+      "size": 3319,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/70b6c57052a6d8f57161ee8b5fc000d4725f77cc"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/voice/test_tts.py",
+      "sha": "d170f03611e4446f423f344329bce186fadd6b28",
+      "size": 3325,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/d170f03611e4446f423f344329bce186fadd6b28"
+    },
+    {
+      "mode": "100644",
+      "path": "uv.lock",
+      "sha": "ef4fbe2ffbd659268153afedbc566d4510e13966",
+      "size": 1029413,
+      "type": "blob",
+      "url": "https://api.github.com/repos/JoshuaC215/agent-service-toolkit/git/blobs/ef4fbe2ffbd659268153afedbc566d4510e13966"
+    }
+  ],
+  "truncated": false
+}

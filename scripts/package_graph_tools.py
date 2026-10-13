@@ -23,7 +23,7 @@ import venv
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output/release"
-VERSION = "0.5.0rc1"
+VERSION = "0.5.0rc2"
 MODULES = {
     "orchgraph": "audit/orchgraph.py",
     "replay_graph_certificate": "audit/replay_graph_certificate.py",

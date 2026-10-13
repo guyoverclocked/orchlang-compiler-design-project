@@ -1,0 +1,1021 @@
+{
+  "sha": "5b2caa8277605b98aa7029246267faeba8a312fb",
+  "tree": [
+    {
+      "mode": "100644",
+      "path": ".dockerignore",
+      "sha": "4be3513e6666362dfc19cb7bc1c0207c2a1a5c72",
+      "size": 470,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/4be3513e6666362dfc19cb7bc1c0207c2a1a5c72"
+    },
+    {
+      "mode": "100644",
+      "path": ".env.example",
+      "sha": "676112a0009f263d47dc12bd18c5ca93584a2501",
+      "size": 47,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/676112a0009f263d47dc12bd18c5ca93584a2501"
+    },
+    {
+      "mode": "040000",
+      "path": ".github",
+      "sha": "81881f4c6db5a130c782e83af939a2b6e9587bb7",
+      "type": "tree",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/trees/81881f4c6db5a130c782e83af939a2b6e9587bb7"
+    },
+    {
+      "mode": "040000",
+      "path": ".github/ISSUE_TEMPLATE",
+      "sha": "297071d972c79764ba659d5a30f16877c96bdeca",
+      "type": "tree",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/trees/297071d972c79764ba659d5a30f16877c96bdeca"
+    },
+    {
+      "mode": "100644",
+      "path": ".github/ISSUE_TEMPLATE/bug_report.md",
+      "sha": "dd84ea7824f11be1eeda22377549cbc1aec7f980",
+      "size": 834,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/dd84ea7824f11be1eeda22377549cbc1aec7f980"
+    },
+    {
+      "mode": "100644",
+      "path": ".github/ISSUE_TEMPLATE/feature_request.md",
+      "sha": "bbcbbe7d61558adde3cbfd0c7a63a67c27ed6d30",
+      "size": 595,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/bbcbbe7d61558adde3cbfd0c7a63a67c27ed6d30"
+    },
+    {
+      "mode": "100644",
+      "path": ".github/dependabot.yml",
+      "sha": "5990d9c64c141eb290490adc52f4cc3da248232b",
+      "size": 522,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/5990d9c64c141eb290490adc52f4cc3da248232b"
+    },
+    {
+      "mode": "100644",
+      "path": ".gitignore",
+      "sha": "9b884612e354849ff01acf24d747d0edda6cede6",
+      "size": 338,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/9b884612e354849ff01acf24d747d0edda6cede6"
+    },
+    {
+      "mode": "100644",
+      "path": "Dockerfile",
+      "sha": "8b1ca3b361bfb023d62451026b01374c696beb35",
+      "size": 1116,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/8b1ca3b361bfb023d62451026b01374c696beb35"
+    },
+    {
+      "mode": "100644",
+      "path": "LICENSE",
+      "sha": "563b12b8bf555029764207b6e5978c52ba3aecce",
+      "size": 11343,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/563b12b8bf555029764207b6e5978c52ba3aecce"
+    },
+    {
+      "mode": "100644",
+      "path": "README.es.md",
+      "sha": "236085be4d2d43a45e08b64c4381e2e21c73825c",
+      "size": 13734,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/236085be4d2d43a45e08b64c4381e2e21c73825c"
+    },
+    {
+      "mode": "100644",
+      "path": "README.fr.md",
+      "sha": "e8c8b46f501c34fca655ba7b6cac0b495e6e0bf7",
+      "size": 12694,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/e8c8b46f501c34fca655ba7b6cac0b495e6e0bf7"
+    },
+    {
+      "mode": "100644",
+      "path": "README.jp.md",
+      "sha": "3a1abe71f4382f64561aedee0943817e3fdcf10a",
+      "size": 15020,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/3a1abe71f4382f64561aedee0943817e3fdcf10a"
+    },
+    {
+      "mode": "100644",
+      "path": "README.kr.md",
+      "sha": "4eec0838ca5275218c1d8b707481472b7287985d",
+      "size": 13340,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/4eec0838ca5275218c1d8b707481472b7287985d"
+    },
+    {
+      "mode": "100644",
+      "path": "README.md",
+      "sha": "d17ad4426b80857db7d910348607aed5c963abdc",
+      "size": 4197,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/d17ad4426b80857db7d910348607aed5c963abdc"
+    },
+    {
+      "mode": "100644",
+      "path": "README.zh.md",
+      "sha": "8068f7dceb909a1dab6c1cd22daf1d01b52d5ae0",
+      "size": 11217,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/8068f7dceb909a1dab6c1cd22daf1d01b52d5ae0"
+    },
+    {
+      "mode": "100644",
+      "path": "application.py",
+      "sha": "17647433828d383d9d2c97a6b4d45c02786815e9",
+      "size": 10529,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/17647433828d383d9d2c97a6b4d45c02786815e9"
+    },
+    {
+      "mode": "040000",
+      "path": "backend",
+      "sha": "7b3add73d2b9fed29872571a454d0e0485ace128",
+      "type": "tree",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/trees/7b3add73d2b9fed29872571a454d0e0485ace128"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/__init__.py",
+      "sha": "3056980a3f88da24662bfe2d8a255e41b58eec1e",
+      "size": 935,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/3056980a3f88da24662bfe2d8a255e41b58eec1e"
+    },
+    {
+      "mode": "040000",
+      "path": "backend/classes",
+      "sha": "633e66a501172611e675221b4747f2fc57c6c243",
+      "type": "tree",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/trees/633e66a501172611e675221b4747f2fc57c6c243"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/classes/__init__.py",
+      "sha": "8ab299e5d20914adaafd67b77638421d24647237",
+      "size": 88,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/8ab299e5d20914adaafd67b77638421d24647237"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/classes/state.py",
+      "sha": "38cb58464dfcc81ca79984e01ff5f53333ed0590",
+      "size": 1305,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/38cb58464dfcc81ca79984e01ff5f53333ed0590"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/graph.py",
+      "sha": "f631ccbeef00a0a89297439d37727bc1cc30cb41",
+      "size": 3774,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/f631ccbeef00a0a89297439d37727bc1cc30cb41"
+    },
+    {
+      "mode": "040000",
+      "path": "backend/nodes",
+      "sha": "8bf605c22b1dff178bce0ef529d24e30302d2268",
+      "type": "tree",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/trees/8bf605c22b1dff178bce0ef529d24e30302d2268"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/nodes/__init__.py",
+      "sha": "81a90792cd0686627e5ee55bc2fe9c0ec3774587",
+      "size": 66,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/81a90792cd0686627e5ee55bc2fe9c0ec3774587"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/nodes/briefing.py",
+      "sha": "f2dbb7b32c461f7fd5cbc8fa022ba475fe846b86",
+      "size": 10064,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/f2dbb7b32c461f7fd5cbc8fa022ba475fe846b86"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/nodes/collector.py",
+      "sha": "7f890fc7e286ea2184708fc72b1cd35c52489555",
+      "size": 1247,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/7f890fc7e286ea2184708fc72b1cd35c52489555"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/nodes/curator.py",
+      "sha": "d30dd638eddc23a506d1cdb2c70e97ae11a8db96",
+      "size": 7055,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/d30dd638eddc23a506d1cdb2c70e97ae11a8db96"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/nodes/editor.py",
+      "sha": "e9bcd31c331f9f23dd6115975d19c9675f9daff9",
+      "size": 9539,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/e9bcd31c331f9f23dd6115975d19c9675f9daff9"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/nodes/enricher.py",
+      "sha": "41cde83ca35bd5abf7b9349c4857d82694cda2c3",
+      "size": 7641,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/41cde83ca35bd5abf7b9349c4857d82694cda2c3"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/nodes/grounding.py",
+      "sha": "c3198f97d094679d2f6d31d4e055885ade2e2936",
+      "size": 2737,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/c3198f97d094679d2f6d31d4e055885ade2e2936"
+    },
+    {
+      "mode": "040000",
+      "path": "backend/nodes/researchers",
+      "sha": "5aa8f10673a6fe95bcfac7e4e491f5229352e0cf",
+      "type": "tree",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/trees/5aa8f10673a6fe95bcfac7e4e491f5229352e0cf"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/nodes/researchers/__init__.py",
+      "sha": "c75545d2b0846a9aa41594ac9cbb3eafb892d1a6",
+      "size": 232,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/c75545d2b0846a9aa41594ac9cbb3eafb892d1a6"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/nodes/researchers/base.py",
+      "sha": "91cc9f10c57f2335a7644c672e3e5fe221947bec",
+      "size": 9612,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/91cc9f10c57f2335a7644c672e3e5fe221947bec"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/nodes/researchers/company.py",
+      "sha": "c36327a2d217b12ef83093a5003784def6567424",
+      "size": 2287,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/c36327a2d217b12ef83093a5003784def6567424"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/nodes/researchers/financial.py",
+      "sha": "f762723494083070486498c2fcac339ccea59570",
+      "size": 2290,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/f762723494083070486498c2fcac339ccea59570"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/nodes/researchers/industry.py",
+      "sha": "b79f163d7efa8c23ecd0bf51caf0ccffe0b82414",
+      "size": 2345,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/b79f163d7efa8c23ecd0bf51caf0ccffe0b82414"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/nodes/researchers/news.py",
+      "sha": "41a21570699253760425b88c2864860f6480420f",
+      "size": 2233,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/41a21570699253760425b88c2864860f6480420f"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/prompts.py",
+      "sha": "176d036b5c8a0ef90bd4be7e77cbacaf7ce9249f",
+      "size": 8043,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/176d036b5c8a0ef90bd4be7e77cbacaf7ce9249f"
+    },
+    {
+      "mode": "040000",
+      "path": "backend/services",
+      "sha": "e038cfdcf93edd22a59cc8e2f22ff5f7b82c13bd",
+      "type": "tree",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/trees/e038cfdcf93edd22a59cc8e2f22ff5f7b82c13bd"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/services/mongodb.py",
+      "sha": "0260dda878dc4b198004005b30f1fee5b6b0c70e",
+      "size": 2296,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/0260dda878dc4b198004005b30f1fee5b6b0c70e"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/services/pdf_service.py",
+      "sha": "2eb3c48036d7f7c882edecf125105220678aa26e",
+      "size": 2448,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/2eb3c48036d7f7c882edecf125105220678aa26e"
+    },
+    {
+      "mode": "040000",
+      "path": "backend/utils",
+      "sha": "18d9bb228af0f59da18063a9ffb9e8415a6786bf",
+      "type": "tree",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/trees/18d9bb228af0f59da18063a9ffb9e8415a6786bf"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/utils/__init__.py",
+      "sha": "47858990df26591ea48d19d69d26f9005d66a19f",
+      "size": 347,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/47858990df26591ea48d19d69d26f9005d66a19f"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/utils/references.py",
+      "sha": "37aabaee69e128bf819e5a996ba3826c8d957ef2",
+      "size": 14492,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/37aabaee69e128bf819e5a996ba3826c8d957ef2"
+    },
+    {
+      "mode": "100644",
+      "path": "backend/utils/utils.py",
+      "sha": "22a8c9b9bb74b072ebe86f1245d1da442bfda850",
+      "size": 16559,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/22a8c9b9bb74b072ebe86f1245d1da442bfda850"
+    },
+    {
+      "mode": "100644",
+      "path": "docker-compose.yml",
+      "sha": "b2bd2c5f1d2576396ae22d0fb446e58f1c271f03",
+      "size": 574,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/b2bd2c5f1d2576396ae22d0fb446e58f1c271f03"
+    },
+    {
+      "mode": "100644",
+      "path": "langgraph.json",
+      "sha": "e2fa79941f1dc9457b4736e41b99f6b203885d40",
+      "size": 167,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/e2fa79941f1dc9457b4736e41b99f6b203885d40"
+    },
+    {
+      "mode": "100644",
+      "path": "langgraph_entry.py",
+      "sha": "15073e97f45d083daf7bf8bd7fe204884b492627",
+      "size": 79,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/15073e97f45d083daf7bf8bd7fe204884b492627"
+    },
+    {
+      "mode": "100644",
+      "path": "package-lock.json",
+      "sha": "8bc1e44afe21da5992ed50c1cc3ff65194a55003",
+      "size": 102,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/8bc1e44afe21da5992ed50c1cc3ff65194a55003"
+    },
+    {
+      "mode": "100644",
+      "path": "requirements.txt",
+      "sha": "a603e4988c782cc9a7fb81a262141fdfdd0f900a",
+      "size": 235,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/a603e4988c782cc9a7fb81a262141fdfdd0f900a"
+    },
+    {
+      "mode": "100755",
+      "path": "setup.sh",
+      "sha": "30ec6b5bbd8a34a3930667b797645316bb20c7a7",
+      "size": 8510,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/30ec6b5bbd8a34a3930667b797645316bb20c7a7"
+    },
+    {
+      "mode": "040000",
+      "path": "static",
+      "sha": "aa54dbdb89836a45b63089086ff8779581a91923",
+      "type": "tree",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/trees/aa54dbdb89836a45b63089086ff8779581a91923"
+    },
+    {
+      "mode": "100644",
+      "path": "static/agent-flow.png",
+      "sha": "cf27fe888e8fcdbf1826c5574ffddf853c2878c5",
+      "size": 104781,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/cf27fe888e8fcdbf1826c5574ffddf853c2878c5"
+    },
+    {
+      "mode": "100644",
+      "path": "static/app-screenshot.png",
+      "sha": "5effd2bbdd2ee2836f45af19c2ae5e7e5ad8c04d",
+      "size": 1218024,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/5effd2bbdd2ee2836f45af19c2ae5e7e5ad8c04d"
+    },
+    {
+      "mode": "100644",
+      "path": "static/demo.mp4",
+      "sha": "f6a2dd15dc39cbb14f1d205e258de6e929e5ba2f",
+      "size": 15056071,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/f6a2dd15dc39cbb14f1d205e258de6e929e5ba2f"
+    },
+    {
+      "mode": "100644",
+      "path": "static/ui-1.png",
+      "sha": "db307b3d9c75e9a8df1fa678464fd8bce50d89cf",
+      "size": 651306,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/db307b3d9c75e9a8df1fa678464fd8bce50d89cf"
+    },
+    {
+      "mode": "100644",
+      "path": "static/ui-2.png",
+      "sha": "251e5f5c2efe91e15a690833752dea66eaade07b",
+      "size": 598207,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/251e5f5c2efe91e15a690833752dea66eaade07b"
+    },
+    {
+      "mode": "040000",
+      "path": "ui",
+      "sha": "3ce4e594115665108a8fdb783704e493085a42c6",
+      "type": "tree",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/trees/3ce4e594115665108a8fdb783704e493085a42c6"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/.env.development.example",
+      "sha": "d8b55e5a0ce1159e7d55d63a75c23ad4bd153d19",
+      "size": 90,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/d8b55e5a0ce1159e7d55d63a75c23ad4bd153d19"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/.gitignore",
+      "sha": "6fef7880150db5114ae179304995509c44395a07",
+      "size": 153,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/6fef7880150db5114ae179304995509c44395a07"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/eslint.config.js",
+      "sha": "82c2e20ccc2bae01b6589f5f391cb20f34db41fd",
+      "size": 739,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/82c2e20ccc2bae01b6589f5f391cb20f34db41fd"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/index.html",
+      "sha": "c942af36ef227b79e6ffb12b497ff6b58f7c0d4a",
+      "size": 510,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/c942af36ef227b79e6ffb12b497ff6b58f7c0d4a"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/package-lock.json",
+      "sha": "7465fd8c4a2d3df083a60667e83164c4ff932428",
+      "size": 239107,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/7465fd8c4a2d3df083a60667e83164c4ff932428"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/package.json",
+      "sha": "b3a2c50d46f0d8407a1dc7d6baaa4da12321d422",
+      "size": 1142,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/b3a2c50d46f0d8407a1dc7d6baaa4da12321d422"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/postcss.config.js",
+      "sha": "2aa7205d4b402a1bdfbe07110c61df920b370066",
+      "size": 81,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/2aa7205d4b402a1bdfbe07110c61df920b370066"
+    },
+    {
+      "mode": "040000",
+      "path": "ui/public",
+      "sha": "758ffd041b109429bfb80f9a546b4bdc9f12e6d0",
+      "type": "tree",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/trees/758ffd041b109429bfb80f9a546b4bdc9f12e6d0"
+    },
+    {
+      "mode": "040000",
+      "path": "ui/public/company-logos",
+      "sha": "e740bd008a4f3c7c076ee9aa7b3428eb93236bc1",
+      "type": "tree",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/trees/e740bd008a4f3c7c076ee9aa7b3428eb93236bc1"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/adobe.png",
+      "sha": "99193b363ea0f1efb3aa0210ecb924e0cebbf62e",
+      "size": 601,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/99193b363ea0f1efb3aa0210ecb924e0cebbf62e"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/airbnb.png",
+      "sha": "6a610f39b834fa3682e6a2e9dfdd57a520c60179",
+      "size": 1173,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/6a610f39b834fa3682e6a2e9dfdd57a520c60179"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/amazon.png",
+      "sha": "1480a646ab01391af0f50ef1c6d4ec8d75cc3647",
+      "size": 658,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/1480a646ab01391af0f50ef1c6d4ec8d75cc3647"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/apple.png",
+      "sha": "6a4e38146ae2573a9a9eeaf7a75f0cda1db979a8",
+      "size": 2468,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/6a4e38146ae2573a9a9eeaf7a75f0cda1db979a8"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/atlassian.png",
+      "sha": "08a2af624f81af6e328e951c02502a80a96dec81",
+      "size": 988,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/08a2af624f81af6e328e951c02502a80a96dec81"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/canva.png",
+      "sha": "31a0232296085ea89dc8553458ecc071e859dc61",
+      "size": 1138,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/31a0232296085ea89dc8553458ecc071e859dc61"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/coinbase.png",
+      "sha": "0a19fa8d5b24971b717761fc0583470347893ee5",
+      "size": 1059,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/0a19fa8d5b24971b717761fc0583470347893ee5"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/datadog.png",
+      "sha": "cd96ebdd47244d8e9eec402035f38cd6b2cc4551",
+      "size": 1309,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/cd96ebdd47244d8e9eec402035f38cd6b2cc4551"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/figma.png",
+      "sha": "036c4de2eb751e7c9c39ddc01060b58fd9fc67a6",
+      "size": 679,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/036c4de2eb751e7c9c39ddc01060b58fd9fc67a6"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/google.png",
+      "sha": "256f76776b098af1d8c2cb3be2064df23b6a2f99",
+      "size": 1063,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/256f76776b098af1d8c2cb3be2064df23b6a2f99"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/meta.png",
+      "sha": "6a775ead00ebb6af74d183c943bd5ab35ac993a6",
+      "size": 1194,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/6a775ead00ebb6af74d183c943bd5ab35ac993a6"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/microsoft.png",
+      "sha": "2cad595ac1c535fdbd03df95501587c52d4d19ab",
+      "size": 177,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/2cad595ac1c535fdbd03df95501587c52d4d19ab"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/netflix.png",
+      "sha": "b0dc408d7f6e682481af30ebd67e9ae601042446",
+      "size": 1468,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/b0dc408d7f6e682481af30ebd67e9ae601042446"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/notion.png",
+      "sha": "86a01da266ff5974762694619405a93e3dca822a",
+      "size": 1511,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/86a01da266ff5974762694619405a93e3dca822a"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/nvidia.png",
+      "sha": "18c2505fdf5099cbc490fe989d7ad0d99418b916",
+      "size": 1607,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/18c2505fdf5099cbc490fe989d7ad0d99418b916"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/salesforce.png",
+      "sha": "049ab23440c606193bf8481fa63ab593369d7a73",
+      "size": 652,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/049ab23440c606193bf8481fa63ab593369d7a73"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/shopify.png",
+      "sha": "6c906068b3959dffcebbc9d9b005d1928c79af7a",
+      "size": 1439,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/6c906068b3959dffcebbc9d9b005d1928c79af7a"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/slack.png",
+      "sha": "cbeeaa2d515c28024b0b8d992230d17f103ed462",
+      "size": 927,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/cbeeaa2d515c28024b0b8d992230d17f103ed462"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/snowflake.png",
+      "sha": "a9a775e142131acc85ac05e9c6221f23784915d1",
+      "size": 621,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/a9a775e142131acc85ac05e9c6221f23784915d1"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/spotify.png",
+      "sha": "21bba18be65076d6d5e9b90da1f6d49970c15c17",
+      "size": 2417,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/21bba18be65076d6d5e9b90da1f6d49970c15c17"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/stripe.png",
+      "sha": "d96078f157574c7f53a7e3ffa54e9bd2e0fbac99",
+      "size": 433,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/d96078f157574c7f53a7e3ffa54e9bd2e0fbac99"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/tesla.png",
+      "sha": "6147cfd36e40b468d54d3f68f4e19bb0a04ab859",
+      "size": 730,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/6147cfd36e40b468d54d3f68f4e19bb0a04ab859"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/uber.png",
+      "sha": "74cf77249d1922db75c835b3202237c5cd3f7676",
+      "size": 752,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/74cf77249d1922db75c835b3202237c5cd3f7676"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/company-logos/zoom.png",
+      "sha": "7a9fe7f59b30eb6843fe252e2dbc4f6489c832b6",
+      "size": 1575,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/7a9fe7f59b30eb6843fe252e2dbc4f6489c832b6"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/favicon.ico",
+      "sha": "a4d952ccde012221c4c6b32bdbd12ca03fa023ae",
+      "size": 2631,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/a4d952ccde012221c4c6b32bdbd12ca03fa023ae"
+    },
+    {
+      "mode": "040000",
+      "path": "ui/public/fonts",
+      "sha": "4ec4cf15be9bc6f47319e7bfad9013967a2c5db0",
+      "type": "tree",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/trees/4ec4cf15be9bc6f47319e7bfad9013967a2c5db0"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/fonts/SuisseIntl-Medium.otf",
+      "sha": "e1585d06027dd3531df90fa6bd19f55e804eaec9",
+      "size": 129268,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/e1585d06027dd3531df90fa6bd19f55e804eaec9"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/fonts/SuisseIntl-Regular.otf",
+      "sha": "7cbabc797aff757d4a3587a8778003446d23a25e",
+      "size": 130136,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/7cbabc797aff757d4a3587a8778003446d23a25e"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/github-icon.png",
+      "sha": "fe006d4dd7e466126501ec981ac5ec4dd1054447",
+      "size": 3548,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/fe006d4dd7e466126501ec981ac5ec4dd1054447"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/tavily-brand-mark.svg",
+      "sha": "f95ac9dce31b34e5ef246ce6532075ba4178d717",
+      "size": 2282,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/f95ac9dce31b34e5ef246ce6532075ba4178d717"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/tavily-by-nebius.svg",
+      "sha": "d99298c9b07d973b243928f7941d02ee2af9b7da",
+      "size": 6969,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/d99298c9b07d973b243928f7941d02ee2af9b7da"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/tavily-full.svg",
+      "sha": "e9f6c0bffdfec9407472af83a1e0ef5b6665def8",
+      "size": 3973,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/e9f6c0bffdfec9407472af83a1e0ef5b6665def8"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/tavily-landscape.webp",
+      "sha": "23362176924ab6f81c5a4507bc8743d0a24f08c9",
+      "size": 369226,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/23362176924ab6f81c5a4507bc8743d0a24f08c9"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/public/tavilylogo.png",
+      "sha": "fd0b06ac15860e0c952695fce6605c73a4730029",
+      "size": 17318,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/fd0b06ac15860e0c952695fce6605c73a4730029"
+    },
+    {
+      "mode": "040000",
+      "path": "ui/src",
+      "sha": "40da37d96762c6bddd392e5e96dfbaf0494ba655",
+      "type": "tree",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/trees/40da37d96762c6bddd392e5e96dfbaf0494ba655"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/src/App.tsx",
+      "sha": "851ab5746f7441b0925fd7ef4839442f8336f164",
+      "size": 20521,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/851ab5746f7441b0925fd7ef4839442f8336f164"
+    },
+    {
+      "mode": "040000",
+      "path": "ui/src/components",
+      "sha": "18a47ee9629e57a0753fb4764c4be7dbc6a368a6",
+      "type": "tree",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/trees/18a47ee9629e57a0753fb4764c4be7dbc6a368a6"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/src/components/CurationExtraction.tsx",
+      "sha": "5e2b8d55566de0cb3c0f2fbce3887ab3abe9ab13",
+      "size": 3028,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/5e2b8d55566de0cb3c0f2fbce3887ab3abe9ab13"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/src/components/ExamplePopup.tsx",
+      "sha": "26cb0a9c1475d186bf137d429a4df97dbeaba8a9",
+      "size": 3450,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/26cb0a9c1475d186bf137d429a4df97dbeaba8a9"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/src/components/Header.tsx",
+      "sha": "79effd6b191af70f0812233cf654108b9bf62c42",
+      "size": 1022,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/79effd6b191af70f0812233cf654108b9bf62c42"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/src/components/LocationInput.tsx",
+      "sha": "c3ee7e004247d3a006d1fca21da1fcf303a8c033",
+      "size": 8520,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/c3ee7e004247d3a006d1fca21da1fcf303a8c033"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/src/components/ResearchBriefings.tsx",
+      "sha": "12770858fd057e7746bb70ad1505542c804b22bd",
+      "size": 3629,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/12770858fd057e7746bb70ad1505542c804b22bd"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/src/components/ResearchForm.tsx",
+      "sha": "1812922be4a54d808071b4a01986ef29c80a1d78",
+      "size": 13572,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/1812922be4a54d808071b4a01986ef29c80a1d78"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/src/components/ResearchQueries.tsx",
+      "sha": "76ec1079853eb7c1df33da0f45ca339a01410f97",
+      "size": 3001,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/76ec1079853eb7c1df33da0f45ca339a01410f97"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/src/components/ResearchReport.tsx",
+      "sha": "b0cf0dfb7bb9a649bb1e44d25655b8aad4e6f596",
+      "size": 7110,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/b0cf0dfb7bb9a649bb1e44d25655b8aad4e6f596"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/src/components/ResearchStatus.tsx",
+      "sha": "c9c340189d49119d0530076fcb66f1c8da15e593",
+      "size": 2356,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/c9c340189d49119d0530076fcb66f1c8da15e593"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/src/components/index.ts",
+      "sha": "a3985663829f2165aa2fffcaa2448379f5b0d97a",
+      "size": 549,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/a3985663829f2165aa2fffcaa2448379f5b0d97a"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/src/env.d.ts",
+      "sha": "e2a993760fa5fe388aa2cd41fbc9a83725765168",
+      "size": 280,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/e2a993760fa5fe388aa2cd41fbc9a83725765168"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/src/index.css",
+      "sha": "4ba58bfc849ff1cc10fa5875b5281a9241027a43",
+      "size": 12318,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/4ba58bfc849ff1cc10fa5875b5281a9241027a43"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/src/main.tsx",
+      "sha": "ea9e3630a4f82a3cc92500297b28fa6f1ff72a75",
+      "size": 234,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/ea9e3630a4f82a3cc92500297b28fa6f1ff72a75"
+    },
+    {
+      "mode": "040000",
+      "path": "ui/src/styles",
+      "sha": "0432bdacb4edb108a03e52cd0a4b0ddca6f1c8d7",
+      "type": "tree",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/trees/0432bdacb4edb108a03e52cd0a4b0ddca6f1c8d7"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/src/styles/index.ts",
+      "sha": "897c7ad39720a5e14ead41771433b3696039ec72",
+      "size": 256,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/897c7ad39720a5e14ead41771433b3696039ec72"
+    },
+    {
+      "mode": "040000",
+      "path": "ui/src/types",
+      "sha": "7a081a13e9669941a8977d837dca1f9288f39d06",
+      "type": "tree",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/trees/7a081a13e9669941a8977d837dca1f9288f39d06"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/src/types/index.ts",
+      "sha": "b105b92930c36b27dc5b35634ac428414bc85875",
+      "size": 1236,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/b105b92930c36b27dc5b35634ac428414bc85875"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/src/vite-env.d.ts",
+      "sha": "11f02fe2a0061d6e6e1f271b21da95423b448b32",
+      "size": 38,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/11f02fe2a0061d6e6e1f271b21da95423b448b32"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/tailwind.config.js",
+      "sha": "c279fe8151cd85ac7b70c794c8f071c6fd4d8c36",
+      "size": 480,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/c279fe8151cd85ac7b70c794c8f071c6fd4d8c36"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/tsconfig.app.json",
+      "sha": "f0a235055d24607ba5e0bedc494ffc35b5956fbb",
+      "size": 552,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/f0a235055d24607ba5e0bedc494ffc35b5956fbb"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/tsconfig.json",
+      "sha": "1ffef600d959ec9e396d5a260bd3f5b927b2cef8",
+      "size": 119,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/1ffef600d959ec9e396d5a260bd3f5b927b2cef8"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/tsconfig.node.json",
+      "sha": "42872c59f5b01c9155864572bc2fbd5833a7406c",
+      "size": 213,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/42872c59f5b01c9155864572bc2fbd5833a7406c"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/vercel.json",
+      "sha": "1323cdac34c6ae8f7e1f8a2f3adc299eae7bdcea",
+      "size": 96,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/1323cdac34c6ae8f7e1f8a2f3adc299eae7bdcea"
+    },
+    {
+      "mode": "100644",
+      "path": "ui/vite.config.ts",
+      "sha": "c45893c7abe2ab374f0eaa9b55983150e51faa60",
+      "size": 590,
+      "type": "blob",
+      "url": "https://api.github.com/repos/guy-hartstein/company-research-agent/git/blobs/c45893c7abe2ab374f0eaa9b55983150e51faa60"
+    }
+  ],
+  "truncated": false
+}

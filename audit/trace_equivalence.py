@@ -54,7 +54,7 @@ from probabilistic_channels import ChannelError, ChannelLimit  # noqa: E402
 
 
 FORMAT = "orchlang-exact-trace-equivalence"
-VERSION = 1
+VERSION = 2
 CLAIM_EQUAL = (
     "exact all-finite-horizon success-only ordered usage-trace laws for every supplied "
     "secret scenario under the declared finite rational kernel"
@@ -88,7 +88,7 @@ MAX_REPORT_BYTES = 64 * 1024 * 1024
 VECTOR_SLOT_WORK_BYTES = 64
 TOP_KEYS = {
     "format", "version", "status", "claim", "hashes", "inputs", "limits",
-    "closed_system", "label_alphabet", "result", "scope",
+    "closed_system", "label_alphabet", "result", "scope", "diagnostics", "telemetry",
 }
 HASH_KEYS = {
     "graph_sha256", "kernel_sha256", "public_store_sha256",
@@ -98,6 +98,16 @@ HASH_KEYS = {
 
 class _Unknown(Exception):
     """A deterministic analysis cap was reached; no partial result is usable."""
+
+    def __init__(self, message: str, *, reason: str = "OTHER_RESOURCE_LIMIT",
+                 phase: str = "row_space", resource: str | None = None,
+                 limit: int | None = None, observed: int | None = None):
+        super().__init__(message)
+        self.reason = reason
+        self.phase = phase
+        self.resource = resource
+        self.limit = limit
+        self.observed = observed
 
 
 class _Invalid(Exception):
@@ -120,6 +130,54 @@ def _rational_bits(value: Fraction) -> int:
     return max(abs(value.numerator).bit_length(), value.denominator.bit_length())
 
 
+def _channel_limit_reason(message: str) -> str:
+    """Map closure/channel cap text to a stable, non-sensitive reason code."""
+    lowered = message.lower()
+    if "semantic-state byte" in lowered or "state-key byte" in lowered:
+        return "STATE_KEY_BYTE_CAP"
+    if "state" in lowered and ("state cap" in lowered or "resource cap" in lowered):
+        return "STATE_CAP"
+    if "control" in lowered and ("step" in lowered or "limit" in lowered):
+        return "CONTROL_STEP_CAP"
+    if "transition" in lowered:
+        return "TRANSITION_CAP"
+    if "request" in lowered and "byte" in lowered:
+        return "REQUEST_BYTE_CAP"
+    if "rational" in lowered or "precision cap" in lowered:
+        return "RATIONAL_BIT_CAP"
+    if "integer digit" in lowered:
+        return "INTEGER_DIGIT_CAP"
+    if "trace" in lowered and "byte" in lowered:
+        return "TRACE_BYTE_CAP"
+    if "value" in lowered and ("byte" in lowered or "limit" in lowered):
+        return "VALUE_BYTE_CAP"
+    if ("source" in lowered or "document" in lowered or "scenario" in lowered
+            or "serialized" in lowered) and "byte" in lowered:
+        return "SOURCE_BYTE_CAP"
+    if "byte-work" in lowered or "work" in lowered:
+        return "BYTE_WORK_CAP"
+    return "OTHER_RESOURCE_LIMIT"
+
+
+def _channel_limit_message(reason: str) -> str:
+    """Return a bounded stable message without embedding input paths or values."""
+    return {
+        "STATE_CAP": "reachable semantic-state cap reached",
+        "STATE_KEY_BYTE_CAP": "semantic-state key byte cap reached",
+        "CONTROL_STEP_CAP": "deterministic control-step cap reached",
+        "TRANSITION_CAP": "call-transition expansion cap reached",
+        "REQUEST_BYTE_CAP": "request byte cap reached",
+        "RATIONAL_BIT_CAP": "exact rational arithmetic precision cap reached",
+        "INTEGER_DIGIT_CAP": "JSON integer digit cap reached",
+        "TRACE_BYTE_CAP": "trace byte cap reached",
+        "SOURCE_BYTE_CAP": "input or document byte cap reached",
+        "VALUE_BYTE_CAP": "request or kernel value byte cap reached",
+        "BYTE_WORK_CAP": "cumulative byte-work cap reached",
+        "MEMORY_LIMIT": "process memory allocation limit reached",
+        "OTHER_RESOURCE_LIMIT": "analysis stopped at an unsupported resource limit",
+    }.get(reason, "analysis stopped at a configured resource limit")
+
+
 class _Meter:
     """Deterministic pre-allocation meter for matrix and byte-work."""
 
@@ -130,18 +188,28 @@ class _Meter:
         self.max_bits = max_bits
         self.entries_used = 0
         self.bytes_used = initial_bytes
+        self.max_rational_bits_observed = 0
+        self.phase = "row_space"
         if self.bytes_used > self.max_bytes:
-            raise _Unknown("closed-system work leaves no byte-work budget for row-space analysis")
+            raise _Unknown(
+                "closed-system work leaves no byte-work budget for row-space analysis",
+                reason="BYTE_WORK_CAP", phase="row_space", resource="work_bytes",
+                limit=self.max_bytes, observed=self.bytes_used,
+            )
 
     def entries(self, count: int, label: str) -> None:
         if type(count) is not int or count < 0:
             raise _Invalid(f"invalid deterministic matrix charge for {label}")
         new_total = self.entries_used + count
         if new_total > self.max_entries:
-            raise _Unknown(f"{label} matrix-entry cap reached")
+            raise _Unknown(f"{label} matrix-entry cap reached", reason="MATRIX_ENTRY_CAP",
+                           phase=self.phase, resource="matrix_entries",
+                           limit=self.max_entries, observed=new_total)
         new_bytes = self.bytes_used + count * VECTOR_SLOT_WORK_BYTES
         if new_bytes > self.max_bytes:
-            raise _Unknown(f"{label} byte-work cap reached")
+            raise _Unknown(f"{label} byte-work cap reached", reason="BYTE_WORK_CAP",
+                           phase=self.phase, resource="work_bytes",
+                           limit=self.max_bytes, observed=new_bytes)
         self.entries_used = new_total
         self.bytes_used = new_bytes
 
@@ -150,17 +218,26 @@ class _Meter:
             raise _Invalid(f"invalid deterministic byte charge for {label}")
         new_total = self.bytes_used + count
         if new_total > self.max_bytes:
-            raise _Unknown(f"{label} byte-work cap reached")
+            raise _Unknown(f"{label} byte-work cap reached", reason="BYTE_WORK_CAP",
+                           phase=self.phase, resource="work_bytes",
+                           limit=self.max_bytes, observed=new_total)
         self.bytes_used = new_total
 
     def fraction(self, value: Fraction, label: str) -> Fraction:
-        if _rational_bits(value) > self.max_bits:
-            raise _Unknown(f"{label} exceeds the {self.max_bits}-bit exact-rational cap")
+        bits = _rational_bits(value)
+        self.max_rational_bits_observed = max(self.max_rational_bits_observed, bits)
+        if bits > self.max_bits:
+            raise _Unknown(f"{label} exceeds the {self.max_bits}-bit exact-rational cap",
+                           reason="RATIONAL_BIT_CAP", phase=self.phase,
+                           resource="rational_bits", limit=self.max_bits, observed=bits)
         return value
 
     def _preflight(self, numerator_bits: int, denominator_bits: int, label: str) -> None:
         if max(numerator_bits, denominator_bits) > self.max_bits:
-            raise _Unknown(f"{label} may exceed the {self.max_bits}-bit exact-rational cap")
+            observed = max(numerator_bits, denominator_bits)
+            raise _Unknown(f"{label} may exceed the {self.max_bits}-bit exact-rational cap",
+                           reason="RATIONAL_BIT_CAP", phase=self.phase,
+                           resource="rational_bits", limit=self.max_bits, observed=observed)
 
     def add(self, left: Fraction, right: Fraction, label: str) -> Fraction:
         if not left:
@@ -485,7 +562,12 @@ def _analysis_result(system, meter: _Meter, state_keys, state_ids, state_index,
             estimated_basis_bytes += 1024 + sum(label_sizes[alphabet_keys[label_index]] + 3
                                                 for label_index in word)
             if total_serialized_basis_bytes + estimated_basis_bytes > MAX_REPORT_BYTES:
-                raise _Unknown("serialized basis report byte cap reached")
+                raise _Unknown(
+                    "serialized basis report byte cap reached",
+                    reason="REPORT_BYTE_CAP", phase="certificate_serialization",
+                    resource="report_bytes", limit=MAX_REPORT_BYTES,
+                    observed=total_serialized_basis_bytes + estimated_basis_bytes,
+                )
             pair_basis.append({
                 "word": _word_json(word, alphabet_keys, observable),
                 "row": [str(value) for value in row],
@@ -538,7 +620,8 @@ def _base_report(status: str, *, graph_raw: bytes | None, kernel_raw: bytes | No
                  public_store: Any, secret_scenarios: Any,
                  limits: dict[str, int], claim: str | None = None,
                  closed_system: Any = None, label_alphabet: Any = None,
-                 result: Any = None) -> dict[str, Any]:
+                 result: Any = None, diagnostics: Any = None,
+                 telemetry: Any = None) -> dict[str, Any]:
     public_copy = _safe_json_copy(public_store, {})
     scenarios_copy = _safe_json_copy(secret_scenarios, [])
     graph_digest = (_sha(graph_raw) if isinstance(graph_raw, bytes)
@@ -565,6 +648,8 @@ def _base_report(status: str, *, graph_raw: bytes | None, kernel_raw: bytes | No
         "label_alphabet": label_alphabet,
         "result": result,
         "scope": SCOPE,
+        "diagnostics": diagnostics,
+        "telemetry": telemetry,
     }
 
 
@@ -582,12 +667,27 @@ def _preflight_independent_replay(result: dict[str, Any], alphabet_keys: list[st
         # Independent root-vector construction; the producer also performs it.
         meter.entries(dimension, "independent replay initial vector")
         if pair["status"] == "equal":
+            # Certificate words are often nested (for example, successive
+            # prefixes of a chain). Replay their shared trie once. Charging
+            # every complete word independently makes the verifier's work
+            # cubic in this common case even though only O(rank) distinct
+            # prefix products are needed.
+            prefix_trie: dict[str, Any] = {}
             for basis_item in pair["basis"]:
                 word_keys = [_closure.canonical(label) for label in basis_item["word"]]
-                # Recompute μA_word from scratch for each certificate row.
+                node = prefix_trie
                 for key in word_keys:
-                    meter.entries(dimension + edge_counts[key],
-                                  "independent replay basis-word product")
+                    child = node.get(key)
+                    if child is None:
+                        # Reserve retained prefix-vector space as well as the
+                        # temporary product vector charged below.
+                        meter.entries(dimension,
+                                      "independent replay basis-prefix cache row")
+                        meter.entries(dimension + edge_counts[key],
+                                      "independent replay basis-prefix product")
+                        child = {}
+                        node[key] = child
+                    node = child
                 # Verify independence and retain a normalized row.
                 meter.entries(2 * dimension, "independent replay row-basis insertion")
                 # Verify closure and membership for every label matrix.
@@ -621,6 +721,10 @@ def analyze(graph_document: Any, kernel_document: Any, public_store: Any,
     """
     limits = _safe_limits(max_states, max_work_bytes, max_matrix_entries,
                           max_rational_bits)
+    phase = "input_validation"
+    meter: _Meter | None = None
+    closed_telemetry: dict[str, Any] | None = None
+    label_count_telemetry: int | None = None
     try:
         if limits["max_states"] != max_states or type(max_states) is not int:
             raise _Invalid("max_states must be an integer in [1, 1000000]")
@@ -653,10 +757,15 @@ def analyze(graph_document: Any, kernel_document: Any, public_store: Any,
             if _closure.canonical(parsed_raw) != _closure.canonical(document):
                 raise _Invalid(f"{label} raw source bytes do not encode the supplied document")
 
+        phase = "semantic_closure"
         system = _closure._build_closed_system(
             graph_document, kernel_document, public_store, secret_scenarios,
             limits["max_states"], limits["max_work_bytes"],
         )
+        closed_telemetry = {
+            "state_count": len(system["states"]),
+            "transition_count": system["transition_count"],
+        }
         # The underlying closure is the semantic source of truth. Charge its
         # deterministic work before any exact row-space allocation.
         source_store_bytes = len(_canon(system["public_store"])) + len(
@@ -665,8 +774,14 @@ def analyze(graph_document: Any, kernel_document: Any, public_store: Any,
         meter = _Meter(limits["max_matrix_entries"], limits["max_work_bytes"],
                        limits["max_rational_bits"],
                        system["work"].used + source_store_bytes)
+        phase = "matrix_build"
+        meter.phase = phase
         (state_keys, state_ids, state_index, closed, alphabet_keys, observable,
          matrices, stop, nonterminal) = _state_system(system, meter)
+        closed_telemetry = closed
+        label_count_telemetry = len(alphabet_keys)
+        phase = "row_space"
+        meter.phase = phase
         status, pairs = _analysis_result(
             system, meter, state_keys, state_ids, state_index, closed,
             alphabet_keys, observable, matrices, stop, nonterminal,
@@ -674,6 +789,8 @@ def analyze(graph_document: Any, kernel_document: Any, public_store: Any,
         alphabet = [observable[key] for key in alphabet_keys]
         result = {"basis_state_order": [row["id"] for row in closed["states"]],
                   "pairs": pairs}
+        phase = "certificate_replay_preflight"
+        meter.phase = phase
         _preflight_independent_replay(result, alphabet_keys, matrices,
                                       len(state_keys), meter)
         report = _base_report(
@@ -682,18 +799,63 @@ def analyze(graph_document: Any, kernel_document: Any, public_store: Any,
             secret_scenarios=system["secret_scenarios"], limits=limits,
             claim=CLAIM_EQUAL if status == "proved_equal" else CLAIM_UNEQUAL,
             closed_system=closed, label_alphabet=alphabet, result=result,
+            telemetry={
+                "closed_state_count": closed["state_count"],
+                "transition_count": closed["transition_count"],
+                "label_count": len(alphabet_keys),
+                "matrix_entries_used": meter.entries_used,
+                "work_bytes_used_before_serialization": meter.bytes_used,
+                "max_rational_bits_observed": meter.max_rational_bits_observed,
+            },
         )
+        phase = "report_serialization"
+        meter.phase = phase
         report_bytes = utf8(json.dumps(report, ensure_ascii=False, sort_keys=True,
                                        separators=(",", ":"), allow_nan=False))
         if len(report_bytes) > MAX_REPORT_BYTES:
-            raise _Unknown("complete report byte cap reached")
+            raise _Unknown("complete report byte cap reached",
+                           reason="REPORT_BYTE_CAP", phase=phase,
+                           resource="report_bytes", limit=MAX_REPORT_BYTES,
+                           observed=len(report_bytes))
         meter.bytes(len(report_bytes), "complete certificate report")
         return report
     except (_Unknown, ChannelLimit, MemoryError) as error:
+        if isinstance(error, _Unknown):
+            diagnostic = {
+                "reason": error.reason,
+                "phase": error.phase,
+                "message": str(error)[:512],
+                "resource": (None if error.resource is None else {
+                    "name": error.resource, "limit": error.limit,
+                    "observed": error.observed,
+                }),
+            }
+        else:
+            if isinstance(error, MemoryError):
+                reason = "MEMORY_LIMIT"
+            else:
+                reason = _channel_limit_reason(str(error))
+            diagnostic = {"reason": reason, "phase": phase,
+                          "message": _channel_limit_message(reason),
+                          "resource": None}
+        telemetry = {
+            "closed_state_count": (None if closed_telemetry is None
+                                   else closed_telemetry["state_count"]),
+            "transition_count": (None if closed_telemetry is None
+                                 else closed_telemetry["transition_count"]),
+            "label_count": label_count_telemetry,
+            "matrix_entries_used": None if meter is None else meter.entries_used,
+            "work_bytes_used_before_serialization": (
+                None if meter is None else meter.bytes_used
+            ),
+            "max_rational_bits_observed": (
+                None if meter is None else meter.max_rational_bits_observed
+            ),
+        }
         return _base_report(
             "unknown", graph_raw=raw_graph, kernel_raw=raw_kernel,
             public_store=public_store, secret_scenarios=secret_scenarios,
-            limits=limits,
+            limits=limits, diagnostics=diagnostic, telemetry=telemetry,
         )
     except (_Invalid, ChannelError, InvalidGraph, ValueError, TypeError,
             KeyError, OverflowError, ZeroDivisionError, RecursionError) as error:
@@ -753,10 +915,26 @@ def main(argv: list[str] | None = None) -> int:
     except (ChannelLimit, OSError, ValueError, TypeError, InvalidGraph,
             OverflowError, RecursionError) as error:
         status = "unknown" if isinstance(error, ChannelLimit) else "invalid"
+        unknown_reason = (_channel_limit_reason(str(error))
+                          if status == "unknown" else None)
         report = _base_report(status, graph_raw=raw_graph, kernel_raw=raw_kernel,
                               public_store=public_store, secret_scenarios=scenarios,
                               limits=limits,
-                              result=(None if status == "unknown" else {"diagnostic": str(error)}))
+                              result=(None if status == "unknown" else {"diagnostic": str(error)}),
+            diagnostics=({
+                                  "reason": unknown_reason,
+                                  "phase": "input_validation",
+                                  "message": _channel_limit_message(unknown_reason),
+                                  "resource": None,
+                              } if status == "unknown" else None),
+                              telemetry=({
+                                  "closed_state_count": None,
+                                  "transition_count": None,
+                                  "label_count": None,
+                                  "matrix_entries_used": None,
+                                  "work_bytes_used_before_serialization": None,
+                                  "max_rational_bits_observed": None,
+                              } if status == "unknown" else None))
 
     encoded = json.dumps(report, ensure_ascii=False, sort_keys=True,
                          separators=(",", ":"), allow_nan=False) + "\n"

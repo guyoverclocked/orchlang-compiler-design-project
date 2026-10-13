@@ -3,7 +3,14 @@
 **Offline research software for token bounds, private workflow routing, exact usage channels, and independently replayed evidence.**
 
 Nambi Rajan M · 24BAI0072 · Compiler Design Laboratory
-Release candidate 0.5.0-rc1 · C++17 · MIT license
+Release candidate 0.5.0-rc2 · C++17 · MIT license
+
+The [publication upgrade](docs/PUBLICATION_UPGRADE.md) adds diagnosed resource
+limits, shared-prefix exact replay, source-admission repairs, a narrow
+machine-checked IR theorem, and frozen research evidence. The external-source
+admission sample retained all 59 original candidates and admitted none; see
+the [audit response](research/publication_upgrade/audit_response.md) for the
+resulting claim boundaries. A software candidate is not an accepted journal paper.
 
 ## Start here
 
@@ -279,7 +286,7 @@ it installs nothing and uses no provider. See [source custody](integrations/inci
 - `--request-sensitive-oracle`: opt-in modeled-request response draws.
 - `--audit-unsafe`: explicit offline witness bypass for cost/relational rejections; parsing, typing and input contracts remain checked.
 
-The C++ runtime uses `mock` calls; graph calls are declared abstract contracts and remain offline. The token theorem assumes cap-respecting outcomes and bounded complete-request input accounting. There is no verified provider tokenizer, request serializer, price/discount/cache model, actual invoice observer, independent-seed pathwise guarantee, or mechanically checked proof. Declassification deliberately releases secrecy; reports withhold the unrestricted billing claim. Endorsement/declassification do not execute their written reasons.
+The C++ runtime uses `mock` calls; graph calls are declared abstract contracts and remain offline. The token theorem assumes cap-respecting outcomes and bounded complete-request input accounting. There is no verified provider tokenizer, request serializer, price/discount/cache model, actual invoice observer, or independent-seed pathwise guarantee. The new mechanized result covers only normalized straight-line request/local-result refinement under an atomic-read side condition; it does not prove source extraction or the full compiler. Declassification deliberately releases secrecy; reports withhold the unrestricted billing claim. Endorsement/declassification do not execute their written reasons.
 
 ## Repository map
 

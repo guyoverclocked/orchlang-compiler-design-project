@@ -81,6 +81,63 @@ class SourceFrontendTests(unittest.TestCase):
         self.assertEqual(state["next"]["then"], graph["entry"])
         self.assertEqual(mapping["nodes"][0]["source_node"], "generate")
 
+    def test_langgraph_reserved_node_names_are_rejected_before_lowering(self) -> None:
+        template = PRELUDE + '''
+class State(TypedDict):
+    query: str
+def run(state):
+    return {}
+builder = StateGraph(State)
+builder.add_node(NODE_NAME, run)
+builder.add_edge(START, NODE_NAME)
+builder.add_edge(NODE_NAME, END)
+app = builder.compile()
+'''
+        for name in ("__start__", "__end__", "a|b", "a:b"):
+            with self.subTest(name=name), self.assertRaisesRegex(
+                FrontendError, "reserved by the supported LangGraph runtime"
+            ):
+                source = template.replace("NODE_NAME", json.dumps(name))
+                extract_source(*_document(source))
+
+    def test_typed_dict_annotation_names_cannot_be_shadowed_by_top_level_functions(self) -> None:
+        for annotation, field, input_type in (
+            ("str", "query", "text"),
+            ("bool", "private", "boolean"),
+        ):
+            for function_position in ("before", "after"):
+                with self.subTest(annotation=annotation, function_position=function_position):
+                    class_decl = f'''class State(TypedDict):
+    {field}: {annotation}
+'''
+                    function_decl = f'''def {annotation}(state):
+    return {{}}
+'''
+                    declarations = (function_decl + class_decl if function_position == "before"
+                                    else class_decl + function_decl)
+                    source = PRELUDE + declarations + f'''
+builder = StateGraph(State)
+builder.add_node("{annotation}", {annotation})
+builder.add_edge(START, "{annotation}")
+builder.add_edge("{annotation}", END)
+app = builder.compile()
+'''
+                    declaration = {"type": input_type,
+                                   "label": "public" if input_type == "text" else "secret"}
+                    if input_type == "text":
+                        declaration["max_tokens"] = 64
+                    contracts = {
+                        "format": "orchlang-langgraph-contracts",
+                        "version": 1,
+                        "name": "shadowed_annotation",
+                        "inputs": {field: declaration},
+                        "models": {},
+                    }
+                    with self.assertRaisesRegex(
+                        FrontendError, "TypedDict annotation .* shadowed by a top-level function"
+                    ):
+                        extract_source(*_document(source, contracts))
+
     def test_secret_argument_is_rejected_before_graph_generation(self) -> None:
         source, contracts = _read_fixture("rejected_secret_argument")
         with self.assertRaisesRegex(FrontendError, "direct secret input"):

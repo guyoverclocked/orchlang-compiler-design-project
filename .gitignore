@@ -35,3 +35,14 @@ build/
 # Local delivery archives are inventoried by digest rather than duplicated in Git.
 /output/release/*.zip
 /output/release/*.bundle
+
+# Rebuildable proof objects; theorem source and assumptions logs are retained.
+*.vo
+*.vos
+*.vok
+*.glob
+.*.aux
+/output/publication_upgrade/reproduction/
+/output/publication_upgrade/*.zip
+/output/publication_upgrade/*.tar.gz
+/output/publication_upgrade/pdf_qa/
