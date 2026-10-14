@@ -126,7 +126,8 @@ At 64 calls per arm, both implementations complete, so their replayer timings
 are directly comparable. Use the recorded medians and min/max samples in the
 paired JSONs; fresh machine runs naturally change the wall-time and RSS values.
 Independently measured verifier work fell from
-9,972,749 to 1,648,825 deterministic bytes. The basis-word matrix-product
+9,972,749 to 1,784,025 deterministic bytes, including the newly reserved parsed
+basis-row storage. The basis-word matrix-product
 estimate fell from 536,640 to 16,512 matrix-entry units because shared prefixes
 are evaluated once. The study supports reduced verifier work in the
 nested-prefix family. It does not establish a general time or memory reduction.
