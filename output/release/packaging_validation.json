@@ -53,15 +53,15 @@
     "replay_graph_certificate": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
     "replay_probabilistic_report": "7297248e651c3972cc62287409b47a95f3f41b6b1800adc1011dc7bb4cfb1e1f",
     "replay_stochastic_certificate": "1b987ad220e733a4e1be79b7391bce245d8d7e56bc515bccec051918a8161407",
-    "replay_trace_equivalence": "cd117dcfcbb868a22e10594efc3380b1a38d4af9dafdb3bcd4c89e61b0aaad55",
+    "replay_trace_equivalence": "88ded10270a4936b14f9c260194d5ebd36900c479f54f7307632c7e7f27dc388",
     "stochastic_bisimulation": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
-    "trace_equivalence": "a9b7aa176b5081ab12a9cff31343b2509de4105daa1c7d87b386765581146ade"
+    "trace_equivalence": "59bdfa053a1fa1bf1e5fafed0db98cde71e84f484fdca7428bbd97abfa3fd05a"
   },
   "network_used": false,
-  "packager_sha256": "8ad47a6c14bc9711cb27573810ac7800d0ec67c91cc6f061a7c6fcb520a23f01",
-  "platform": "macOS-27.0-arm64-arm-64bit",
-  "pyproject_sha256": "9a9ecc295084d519bfc7d22cf5ecb6a4c49d0e75ed11ab90d21c503864308407",
-  "python": "3.12.14",
+  "packager_sha256": "dfb3ee67f95d9c21abd76e11ab64aa46a27011619b987fdcde2542d23decae5d",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "pyproject_sha256": "cddc15ec41f7d9ec09a41b6c3cbe7ad11309b67ee71a065c183bd8bfad497f28",
+  "python": "3.14.6",
   "requires_python": ">=3.10",
   "results": {
     "all_horizon_bisimulation": {
@@ -75,11 +75,11 @@
     },
     "exact_trace_equivalence": {
       "equality_replay_status": "verified",
-      "equality_report_sha256": "aa539ad4596dd7089d029a44d472890ca286a4137919145c56c4602cc58e92b3",
+      "equality_report_sha256": "cf8f53322f877ddb493834fe21ae82aa7a3e77151541399d7803f92be512b857",
       "equality_status": "proved_equal",
       "resource_replay_status": "unknown",
       "resource_status": "unknown",
-      "unequal_report_sha256": "4819530a6dff74a49bfa99e1389ac024e14055c23b65e871cb73f30800944b52",
+      "unequal_report_sha256": "8b31b0d1d8fe9c9cc3443d511a5c08b5163c5e0584f419e16b6213aac861d7d8",
       "unequal_status": "unequal",
       "witness_replay_status": "verified",
       "wrong_source_status": "rejected"
@@ -110,7 +110,7 @@
       "replay_status": "unknown"
     }
   },
-  "software_version": "0.5.0rc1",
+  "software_version": "0.5.0rc2",
   "stages": [
     {
       "exit_code": 0,
@@ -253,7 +253,7 @@
   ],
   "status": "passed",
   "version": 2,
-  "wheel": "output/release/wheels/orchlang_graph_tools-0.5.0rc1-py3-none-any.whl",
-  "wheel_build_interpreter": "/Users/nambi/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3.12",
-  "wheel_sha256": "3afa3a3b49271923520c721788d1a9bc54e25e67c47899b186656428552bc8cc"
+  "wheel": "output/release/wheels/orchlang_graph_tools-0.5.0rc2-py3-none-any.whl",
+  "wheel_build_interpreter": "/opt/homebrew/Cellar/python@3.11/3.11.15_1/Frameworks/Python.framework/Versions/3.11/bin/python3.11",
+  "wheel_sha256": "b93af7d9232eaf9e389096ac96bc0a586e66274e1767d19a32d503e65585a6ae"
 }

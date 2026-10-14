@@ -434,9 +434,10 @@
       }
     ]
   },
+  "diagnostics": null,
   "format": "orchlang-exact-trace-equivalence",
   "hashes": {
-    "checker_sha256": "a9b7aa176b5081ab12a9cff31343b2509de4105daa1c7d87b386765581146ade",
+    "checker_sha256": "59bdfa053a1fa1bf1e5fafed0db98cde71e84f484fdca7428bbd97abfa3fd05a",
     "closure_producer_sha256": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
     "graph_sha256": "efcbebac78bca61881f2e511fb116b36207b4d5c8323896ff9efc9cac8f7c9de",
     "kernel_sha256": "b9d38c56fd2a41493dcb6942bc00bc1759aab6612146973d9b6eb4e07867a42f",
@@ -654,5 +655,13 @@
     "semantics": "successful model outcomes only; responses update their result register and complete event history; stop states emit no further calls"
   },
   "status": "proved_equal",
-  "version": 1
+  "telemetry": {
+    "closed_state_count": 10,
+    "label_count": 2,
+    "matrix_entries_used": 747,
+    "max_rational_bits_observed": 3,
+    "transition_count": 10,
+    "work_bytes_used_before_serialization": 61463
+  },
+  "version": 2
 }

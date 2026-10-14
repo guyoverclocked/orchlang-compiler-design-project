@@ -6,7 +6,21 @@
   "format": "orchlang-exact-trace-equivalence-replay-attestation",
   "graph_sha256": "6956de33d4f1798dbe5f2ec0aab6b7f74ec7a1d1d52cf0369be7cceba8b600a6",
   "kernel_sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b",
-  "report_sha256": "4cf08a9b2797f53ef4286f1e5a4367e6e2bc999112ddb47cd0e3f3d880bf6edf",
+  "producer_diagnostics": {
+    "message": "reachable semantic-state cap reached",
+    "phase": "semantic_closure",
+    "reason": "STATE_CAP",
+    "resource": null
+  },
+  "producer_telemetry": {
+    "closed_state_count": null,
+    "label_count": null,
+    "matrix_entries_used": null,
+    "max_rational_bits_observed": null,
+    "transition_count": null,
+    "work_bytes_used_before_serialization": null
+  },
+  "report_sha256": "d9303c23e50c618df03f4c123124ac85f1e4809515f9212eb1c7c2982dffdd40",
   "status": "unknown",
   "unverified_fields": [
     "hashes.checker_sha256 and hashes.closure_producer_sha256 (digest syntax checked only; executable identity is not established)",

@@ -1,0 +1,3166 @@
+{
+  "format": "orchlang-local-tokenizer-calibration",
+  "version": 1,
+  "status": "completed",
+  "tiktoken_version": "0.12.0",
+  "source_study_sha256": "3f10906bb8fdd2283c59b188863304ecb2431c662ca0be3c0a04aaadfa05e9ab",
+  "samples_sha256": "56ab671c2308e2f84f75ac5a40cf9a850dbfc1798f4b3095ad139dd25c000579",
+  "cache_files": {
+    "0ea1e91bbb3a60f729a8dc8f777fd2fc07cd8df4": "306cd27f03c1a714eca7108e03d66b7dc042abe8c258b44c199a7ed9838dd930",
+    "9b5ad71b2ce5302211f9c61530b329a4922fc6a4": "223921b76ee99bde995b7ff738513eef100fb51d18c93597a113bcffe865b2a7",
+    "README.md": "59978f8ad72fade388ab0c33ed0540d6af16e1989ce12fc646ff51ed73a463a8",
+    "fb374d419588a4632f3f557e76b4b70aebbca790": "446a9538cb6c348e3516120d7c08b09f57c36495e2acfffe59a5bf8b0cfb1a2d"
+  },
+  "encodings": [
+    {
+      "encoding": "cl100k_base",
+      "ordinary_vocab_count": 100256,
+      "max_single_token_raw_bytes": 128,
+      "ordinary_vocab_sha256": "9291e9f4743a26dc09f63cf6ca43abca3b6ee7f6dc58bd7bd2d2ad8dfdc201d9",
+      "strata": {
+        "source-study-call": {
+          "sample_count": 90,
+          "underestimates": 7,
+          "overestimates": 76,
+          "exact": 7,
+          "signed_error_min": -8,
+          "signed_error_max": 17,
+          "mean_absolute_error": 6.644444444444445
+        },
+        "authored-control": {
+          "sample_count": 12,
+          "underestimates": 10,
+          "overestimates": 2,
+          "exact": 0,
+          "signed_error_min": -52,
+          "signed_error_max": 31,
+          "mean_absolute_error": 17.916666666666668
+        }
+      },
+      "samples": [
+        {
+          "id": "mock_marker_absent/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "6bf521849bd2b9e65458f0f020eaa57a64eca556dd2b91ba41b8d8d0700c7113",
+          "codepoints": 382,
+          "utf8_bytes": 382,
+          "local_bpe_tokens": 85,
+          "character_estimate": 95,
+          "signed_error": 10
+        },
+        {
+          "id": "mock_marker_absent/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "634b0d4ef5585a0d75762f6ed68cce3878251c92cb6b6de3d2af4dd4c9d555fa",
+          "codepoints": 144,
+          "utf8_bytes": 144,
+          "local_bpe_tokens": 35,
+          "character_estimate": 36,
+          "signed_error": 1
+        },
+        {
+          "id": "mock_marker_absent/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "2751c66fc97886c5a083a5326f5d3ba03f573201401bfc96d4319d657d12df4a",
+          "codepoints": 271,
+          "utf8_bytes": 271,
+          "local_bpe_tokens": 54,
+          "character_estimate": 67,
+          "signed_error": 13
+        },
+        {
+          "id": "mock_marker_absent/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "31d3cb35db91217cb48f0c306822700e083c5a664e858ea489bee6867ee87540",
+          "codepoints": 53,
+          "utf8_bytes": 53,
+          "local_bpe_tokens": 11,
+          "character_estimate": 13,
+          "signed_error": 2
+        },
+        {
+          "id": "mock_marker_present/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "f0e3c00b39a08362417f89b0a810cfee6446839858f13432cf8765259abfb7d5",
+          "codepoints": 398,
+          "utf8_bytes": 398,
+          "local_bpe_tokens": 89,
+          "character_estimate": 99,
+          "signed_error": 10
+        },
+        {
+          "id": "mock_marker_present/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "0c2c6282461211b87aee1e91cfe7691d3dfff9a10970d69cc1efd2aeacb021c0",
+          "codepoints": 154,
+          "utf8_bytes": 154,
+          "local_bpe_tokens": 39,
+          "character_estimate": 38,
+          "signed_error": -1
+        },
+        {
+          "id": "mock_marker_present/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "b857ad501f9a3aa38836ccf662f91f87b89ee742c260556ce3328a3557dc8ba8",
+          "codepoints": 281,
+          "utf8_bytes": 281,
+          "local_bpe_tokens": 58,
+          "character_estimate": 70,
+          "signed_error": 12
+        },
+        {
+          "id": "mock_marker_present/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "67e06432d677a1bd28bcaed3f26aaf811b5182f7630c0ca55d86637fd99bfe5f",
+          "codepoints": 111,
+          "utf8_bytes": 111,
+          "local_bpe_tokens": 21,
+          "character_estimate": 27,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_count_one/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "05e4ec929c22b89a2aa23fc06590d36cc012e9172520ef62aae31e83900c0b40",
+          "codepoints": 361,
+          "utf8_bytes": 361,
+          "local_bpe_tokens": 86,
+          "character_estimate": 90,
+          "signed_error": 4
+        },
+        {
+          "id": "pii_count_one/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "8e8ee83148ddc248fca8c2a574e1020335b1f8a116c3dce14961b326c459e45c",
+          "codepoints": 117,
+          "utf8_bytes": 117,
+          "local_bpe_tokens": 37,
+          "character_estimate": 29,
+          "signed_error": -8
+        },
+        {
+          "id": "pii_count_one/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "19b91aaeee0e69f7e88cd916f1c669c03c842459c4dfe1da83d5525b7551cc62",
+          "codepoints": 244,
+          "utf8_bytes": 244,
+          "local_bpe_tokens": 55,
+          "character_estimate": 61,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_count_one/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "67e06432d677a1bd28bcaed3f26aaf811b5182f7630c0ca55d86637fd99bfe5f",
+          "codepoints": 111,
+          "utf8_bytes": 111,
+          "local_bpe_tokens": 21,
+          "character_estimate": 27,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_count_two/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "208f7c8d3e404a4c0f66538429e70e241c7112087ff06d0b3e8b3704890f7753",
+          "codepoints": 367,
+          "utf8_bytes": 367,
+          "local_bpe_tokens": 88,
+          "character_estimate": 91,
+          "signed_error": 3
+        },
+        {
+          "id": "pii_count_two/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "4fad8de820fedd6998ebe75af39da190d44de2ad84b9560dca8bcde0b0b5ffc2",
+          "codepoints": 123,
+          "utf8_bytes": 123,
+          "local_bpe_tokens": 38,
+          "character_estimate": 30,
+          "signed_error": -8
+        },
+        {
+          "id": "pii_count_two/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "cfb1afd1855a0342cc35528cc23f832a86c950523afb2687622f1c57a49c97f5",
+          "codepoints": 250,
+          "utf8_bytes": 250,
+          "local_bpe_tokens": 57,
+          "character_estimate": 62,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_count_two/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "67e06432d677a1bd28bcaed3f26aaf811b5182f7630c0ca55d86637fd99bfe5f",
+          "codepoints": 111,
+          "utf8_bytes": 111,
+          "local_bpe_tokens": 21,
+          "character_estimate": 27,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_email_a/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 105,
+          "character_estimate": 112,
+          "signed_error": 7
+        },
+        {
+          "id": "pii_email_a/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "f562fa71f6980673df879ca4ebedb04b98b4bf95dc6b652b72b820a06840dae7",
+          "codepoints": 218,
+          "utf8_bytes": 218,
+          "local_bpe_tokens": 54,
+          "character_estimate": 54,
+          "signed_error": 0
+        },
+        {
+          "id": "pii_email_a/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "781e30b641b4229d1adec2de7b10327af511fc18e75e2f2c4bfcb2af7776c0f3",
+          "codepoints": 344,
+          "utf8_bytes": 344,
+          "local_bpe_tokens": 73,
+          "character_estimate": 86,
+          "signed_error": 13
+        },
+        {
+          "id": "pii_email_a/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_email_b/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 105,
+          "character_estimate": 112,
+          "signed_error": 7
+        },
+        {
+          "id": "pii_email_b/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "f562fa71f6980673df879ca4ebedb04b98b4bf95dc6b652b72b820a06840dae7",
+          "codepoints": 218,
+          "utf8_bytes": 218,
+          "local_bpe_tokens": 54,
+          "character_estimate": 54,
+          "signed_error": 0
+        },
+        {
+          "id": "pii_email_b/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "781e30b641b4229d1adec2de7b10327af511fc18e75e2f2c4bfcb2af7776c0f3",
+          "codepoints": 344,
+          "utf8_bytes": 344,
+          "local_bpe_tokens": 73,
+          "character_estimate": 86,
+          "signed_error": 13
+        },
+        {
+          "id": "pii_email_b/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_national_insurance_a/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 105,
+          "character_estimate": 112,
+          "signed_error": 7
+        },
+        {
+          "id": "pii_national_insurance_a/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "f562fa71f6980673df879ca4ebedb04b98b4bf95dc6b652b72b820a06840dae7",
+          "codepoints": 218,
+          "utf8_bytes": 218,
+          "local_bpe_tokens": 54,
+          "character_estimate": 54,
+          "signed_error": 0
+        },
+        {
+          "id": "pii_national_insurance_a/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "781e30b641b4229d1adec2de7b10327af511fc18e75e2f2c4bfcb2af7776c0f3",
+          "codepoints": 344,
+          "utf8_bytes": 344,
+          "local_bpe_tokens": 73,
+          "character_estimate": 86,
+          "signed_error": 13
+        },
+        {
+          "id": "pii_national_insurance_a/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_national_insurance_b/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 105,
+          "character_estimate": 112,
+          "signed_error": 7
+        },
+        {
+          "id": "pii_national_insurance_b/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "f562fa71f6980673df879ca4ebedb04b98b4bf95dc6b652b72b820a06840dae7",
+          "codepoints": 218,
+          "utf8_bytes": 218,
+          "local_bpe_tokens": 54,
+          "character_estimate": 54,
+          "signed_error": 0
+        },
+        {
+          "id": "pii_national_insurance_b/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "781e30b641b4229d1adec2de7b10327af511fc18e75e2f2c4bfcb2af7776c0f3",
+          "codepoints": 344,
+          "utf8_bytes": 344,
+          "local_bpe_tokens": 73,
+          "character_estimate": 86,
+          "signed_error": 13
+        },
+        {
+          "id": "pii_national_insurance_b/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_phone_a/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 105,
+          "character_estimate": 112,
+          "signed_error": 7
+        },
+        {
+          "id": "pii_phone_a/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "f562fa71f6980673df879ca4ebedb04b98b4bf95dc6b652b72b820a06840dae7",
+          "codepoints": 218,
+          "utf8_bytes": 218,
+          "local_bpe_tokens": 54,
+          "character_estimate": 54,
+          "signed_error": 0
+        },
+        {
+          "id": "pii_phone_a/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "781e30b641b4229d1adec2de7b10327af511fc18e75e2f2c4bfcb2af7776c0f3",
+          "codepoints": 344,
+          "utf8_bytes": 344,
+          "local_bpe_tokens": 73,
+          "character_estimate": 86,
+          "signed_error": 13
+        },
+        {
+          "id": "pii_phone_a/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_phone_b/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 105,
+          "character_estimate": 112,
+          "signed_error": 7
+        },
+        {
+          "id": "pii_phone_b/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "f562fa71f6980673df879ca4ebedb04b98b4bf95dc6b652b72b820a06840dae7",
+          "codepoints": 218,
+          "utf8_bytes": 218,
+          "local_bpe_tokens": 54,
+          "character_estimate": 54,
+          "signed_error": 0
+        },
+        {
+          "id": "pii_phone_b/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "781e30b641b4229d1adec2de7b10327af511fc18e75e2f2c4bfcb2af7776c0f3",
+          "codepoints": 344,
+          "utf8_bytes": 344,
+          "local_bpe_tokens": 73,
+          "character_estimate": 86,
+          "signed_error": 13
+        },
+        {
+          "id": "pii_phone_b/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_presence_absent/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "e14386fc51a56b3f08c79519e5f04ba62268ced10020419abfc9af777802dbf9",
+          "codepoints": 359,
+          "utf8_bytes": 359,
+          "local_bpe_tokens": 84,
+          "character_estimate": 89,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_presence_absent/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "8d1ffdfecb32200a8aa9c3cdf84b56157f577bf96288b2e549fe7903b69bcebd",
+          "codepoints": 127,
+          "utf8_bytes": 127,
+          "local_bpe_tokens": 35,
+          "character_estimate": 31,
+          "signed_error": -4
+        },
+        {
+          "id": "pii_presence_absent/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "61d45d8cf2f7907520d6200c32da75bd24652e3b12cb5a5ce16dd335b969803b",
+          "codepoints": 254,
+          "utf8_bytes": 254,
+          "local_bpe_tokens": 54,
+          "character_estimate": 63,
+          "signed_error": 9
+        },
+        {
+          "id": "pii_presence_absent/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_presence_present/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "12ea8a5f564d5287ca9a2a370e31be69f41f132a12537f9453ea3553c8455d5e",
+          "codepoints": 365,
+          "utf8_bytes": 365,
+          "local_bpe_tokens": 86,
+          "character_estimate": 91,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_presence_present/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "1c15291661eb62cc7ecb3047063d7b2b6ca1618b20c4958a5cb10134f2cb2416",
+          "codepoints": 121,
+          "utf8_bytes": 121,
+          "local_bpe_tokens": 36,
+          "character_estimate": 30,
+          "signed_error": -6
+        },
+        {
+          "id": "pii_presence_present/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "a87879850de2c9ac8178c7ede600456f65eb8b9bf6b0881a52ffaea8f26e8015",
+          "codepoints": 248,
+          "utf8_bytes": 248,
+          "local_bpe_tokens": 55,
+          "character_estimate": 62,
+          "signed_error": 7
+        },
+        {
+          "id": "pii_presence_present/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "67e06432d677a1bd28bcaed3f26aaf811b5182f7630c0ca55d86637fd99bfe5f",
+          "codepoints": 111,
+          "utf8_bytes": 111,
+          "local_bpe_tokens": 21,
+          "character_estimate": 27,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_type_email/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "2a84b65ea9a4169a4c9f184da949ad7ed2965c8cf15cd156a88d7993488dad60",
+          "codepoints": 359,
+          "utf8_bytes": 359,
+          "local_bpe_tokens": 85,
+          "character_estimate": 89,
+          "signed_error": 4
+        },
+        {
+          "id": "pii_type_email/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "c9bdba2089cf680f8cd7126e373ad05f8740624a2a54272e65f86f6cad3720ad",
+          "codepoints": 115,
+          "utf8_bytes": 115,
+          "local_bpe_tokens": 35,
+          "character_estimate": 28,
+          "signed_error": -7
+        },
+        {
+          "id": "pii_type_email/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "e8660e1b1064c3c4cb899dc73a6faa399dcea6aad40ac3ec2d8884cedec4d477",
+          "codepoints": 242,
+          "utf8_bytes": 242,
+          "local_bpe_tokens": 54,
+          "character_estimate": 60,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_type_email/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "67e06432d677a1bd28bcaed3f26aaf811b5182f7630c0ca55d86637fd99bfe5f",
+          "codepoints": 111,
+          "utf8_bytes": 111,
+          "local_bpe_tokens": 21,
+          "character_estimate": 27,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_type_phone/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "f13683ee22e8a78ed0697cfa71c34fd8ea2cf21628b180c930f2c6de80565191",
+          "codepoints": 360,
+          "utf8_bytes": 360,
+          "local_bpe_tokens": 85,
+          "character_estimate": 90,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_type_phone/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "8fe932e3c7a489076705b015554bc1a31a6eef9b5c373fcfda5996824979e7b9",
+          "codepoints": 128,
+          "utf8_bytes": 128,
+          "local_bpe_tokens": 36,
+          "character_estimate": 32,
+          "signed_error": -4
+        },
+        {
+          "id": "pii_type_phone/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "02cea7bdf035995aaed40d4d740d6e3b1f8ae968383d5c151547f98cb51dfe99",
+          "codepoints": 255,
+          "utf8_bytes": 255,
+          "local_bpe_tokens": 55,
+          "character_estimate": 63,
+          "signed_error": 8
+        },
+        {
+          "id": "pii_type_phone/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "public_text_a/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "fba53a360540fb9c8ea4244f73dd86ce42adcb7889c22250b1f469959ce18c19",
+          "codepoints": 385,
+          "utf8_bytes": 385,
+          "local_bpe_tokens": 87,
+          "character_estimate": 96,
+          "signed_error": 9
+        },
+        {
+          "id": "public_text_a/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "e0afb87f572d29cf25a3aff7ea686f5b7a282ce5b3b58af5593526fae5d483a3",
+          "codepoints": 153,
+          "utf8_bytes": 153,
+          "local_bpe_tokens": 37,
+          "character_estimate": 38,
+          "signed_error": 1
+        },
+        {
+          "id": "public_text_a/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "97371448340bd3cb45adcdea96f538d7642f5ad187384818a94049c3a404137a",
+          "codepoints": 280,
+          "utf8_bytes": 280,
+          "local_bpe_tokens": 57,
+          "character_estimate": 70,
+          "signed_error": 13
+        },
+        {
+          "id": "public_text_a/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "public_text_b/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "54bd30d2046d578beb067fb74c274bc42a17c9bacd7d5a436d8a360341020c55",
+          "codepoints": 388,
+          "utf8_bytes": 388,
+          "local_bpe_tokens": 86,
+          "character_estimate": 97,
+          "signed_error": 11
+        },
+        {
+          "id": "public_text_b/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "d92773208b56847e7b8de024e14bf5d70ca0a059b7508ffc1e6a8944e7ad7159",
+          "codepoints": 149,
+          "utf8_bytes": 149,
+          "local_bpe_tokens": 36,
+          "character_estimate": 37,
+          "signed_error": 1
+        },
+        {
+          "id": "public_text_b/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "8a53dcc02cef5d17c1b6ad396ca9f43069c4a270dd492c2329a7a9a955c90437",
+          "codepoints": 271,
+          "utf8_bytes": 271,
+          "local_bpe_tokens": 55,
+          "character_estimate": 67,
+          "signed_error": 12
+        },
+        {
+          "id": "public_text_b/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "b6ac3e0904a7e6ff6aa9603b1a1cf544c36a64a54f3257862d1458c2f53f0d2f",
+          "codepoints": 169,
+          "utf8_bytes": 169,
+          "local_bpe_tokens": 33,
+          "character_estimate": 42,
+          "signed_error": 9
+        },
+        {
+          "id": "retry_email_a/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 105,
+          "character_estimate": 112,
+          "signed_error": 7
+        },
+        {
+          "id": "retry_email_a/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "30075aa6611705c90f4d4a91a97ce4b823233d3db39105fb65650e5d69f74b2a",
+          "codepoints": 46,
+          "utf8_bytes": 46,
+          "local_bpe_tokens": 8,
+          "character_estimate": 11,
+          "signed_error": 3
+        },
+        {
+          "id": "retry_email_a/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "2bad3f466e12fa3108f870572ae0f8ddb78a7937293cd920db8288ec02e58d03",
+          "codepoints": 590,
+          "utf8_bytes": 590,
+          "local_bpe_tokens": 137,
+          "character_estimate": 147,
+          "signed_error": 10
+        },
+        {
+          "id": "retry_email_a/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bde1bdf601037a84bd16feea9ec6c6a018539ed60eab3f8f9f4640018c44c0af",
+          "codepoints": 358,
+          "utf8_bytes": 358,
+          "local_bpe_tokens": 84,
+          "character_estimate": 89,
+          "signed_error": 5
+        },
+        {
+          "id": "retry_email_a/2/input",
+          "stratum": "source-study-call",
+          "text_sha256": "044694643708cc1dfe37ccad4b37ee1e95422e0e9cc4e54908b28c7dc1ae5fb4",
+          "codepoints": 484,
+          "utf8_bytes": 484,
+          "local_bpe_tokens": 104,
+          "character_estimate": 121,
+          "signed_error": 17
+        },
+        {
+          "id": "retry_email_a/2/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "retry_email_b/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 105,
+          "character_estimate": 112,
+          "signed_error": 7
+        },
+        {
+          "id": "retry_email_b/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "30075aa6611705c90f4d4a91a97ce4b823233d3db39105fb65650e5d69f74b2a",
+          "codepoints": 46,
+          "utf8_bytes": 46,
+          "local_bpe_tokens": 8,
+          "character_estimate": 11,
+          "signed_error": 3
+        },
+        {
+          "id": "retry_email_b/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "2bad3f466e12fa3108f870572ae0f8ddb78a7937293cd920db8288ec02e58d03",
+          "codepoints": 590,
+          "utf8_bytes": 590,
+          "local_bpe_tokens": 137,
+          "character_estimate": 147,
+          "signed_error": 10
+        },
+        {
+          "id": "retry_email_b/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bde1bdf601037a84bd16feea9ec6c6a018539ed60eab3f8f9f4640018c44c0af",
+          "codepoints": 358,
+          "utf8_bytes": 358,
+          "local_bpe_tokens": 84,
+          "character_estimate": 89,
+          "signed_error": 5
+        },
+        {
+          "id": "retry_email_b/2/input",
+          "stratum": "source-study-call",
+          "text_sha256": "044694643708cc1dfe37ccad4b37ee1e95422e0e9cc4e54908b28c7dc1ae5fb4",
+          "codepoints": 484,
+          "utf8_bytes": 484,
+          "local_bpe_tokens": 104,
+          "character_estimate": 121,
+          "signed_error": 17
+        },
+        {
+          "id": "retry_email_b/2/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "unknown_site_route/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "87f64a8938be8a7085156ef1e9f618a23d8a9757e8c41a790ca0ce5f3c4fd781",
+          "codepoints": 385,
+          "utf8_bytes": 385,
+          "local_bpe_tokens": 86,
+          "character_estimate": 96,
+          "signed_error": 10
+        },
+        {
+          "id": "unknown_site_route/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "2ae9d7d4ddddf1e73be6777b719af7a5c5d4b075679fe15dd3212dcd52c84edc",
+          "codepoints": 147,
+          "utf8_bytes": 147,
+          "local_bpe_tokens": 36,
+          "character_estimate": 36,
+          "signed_error": 0
+        },
+        {
+          "id": "unlisted_name_a/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "5e3ee74f721e8fd6bc23698addfc7d67f682375ac4c58546a3e3a88d54007cf9",
+          "codepoints": 398,
+          "utf8_bytes": 398,
+          "local_bpe_tokens": 89,
+          "character_estimate": 99,
+          "signed_error": 10
+        },
+        {
+          "id": "unlisted_name_a/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "27efab22fa0f49061817f481711ab313f18eaecd9ef94020aeda2c86feb7ddc9",
+          "codepoints": 166,
+          "utf8_bytes": 166,
+          "local_bpe_tokens": 39,
+          "character_estimate": 41,
+          "signed_error": 2
+        },
+        {
+          "id": "unlisted_name_a/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "5ea23e933cd16077ac59555161c8b2b55d1fee255d5786ef2d317c18561bac2c",
+          "codepoints": 293,
+          "utf8_bytes": 293,
+          "local_bpe_tokens": 59,
+          "character_estimate": 73,
+          "signed_error": 14
+        },
+        {
+          "id": "unlisted_name_a/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "unlisted_name_b/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "acc1837f430f108bb3cb3332853fea2c1361e4b125b64231042a291aa9c0338c",
+          "codepoints": 398,
+          "utf8_bytes": 398,
+          "local_bpe_tokens": 89,
+          "character_estimate": 99,
+          "signed_error": 10
+        },
+        {
+          "id": "unlisted_name_b/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "0929861e927b48ab707351fa0bb734187afa40ac519d23376684b481068e70ee",
+          "codepoints": 166,
+          "utf8_bytes": 166,
+          "local_bpe_tokens": 39,
+          "character_estimate": 41,
+          "signed_error": 2
+        },
+        {
+          "id": "unlisted_name_b/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "41cf6d138b50d3a943716b8f27b475d6f6fcb29d47c99d34aeeba4e18874b921",
+          "codepoints": 293,
+          "utf8_bytes": 293,
+          "local_bpe_tokens": 59,
+          "character_estimate": 73,
+          "signed_error": 14
+        },
+        {
+          "id": "unlisted_name_b/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "upstream_default_mock/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "fba53a360540fb9c8ea4244f73dd86ce42adcb7889c22250b1f469959ce18c19",
+          "codepoints": 385,
+          "utf8_bytes": 385,
+          "local_bpe_tokens": 87,
+          "character_estimate": 96,
+          "signed_error": 9
+        },
+        {
+          "id": "upstream_default_mock/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "e0afb87f572d29cf25a3aff7ea686f5b7a282ce5b3b58af5593526fae5d483a3",
+          "codepoints": 153,
+          "utf8_bytes": 153,
+          "local_bpe_tokens": 37,
+          "character_estimate": 38,
+          "signed_error": 1
+        },
+        {
+          "id": "upstream_default_mock/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "97371448340bd3cb45adcdea96f538d7642f5ad187384818a94049c3a404137a",
+          "codepoints": 280,
+          "utf8_bytes": 280,
+          "local_bpe_tokens": 57,
+          "character_estimate": 70,
+          "signed_error": 13
+        },
+        {
+          "id": "upstream_default_mock/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "ascii",
+          "stratum": "authored-control",
+          "text_sha256": "e4e54bd5f72165c648eb98fda9fd65b5518b40c11492d50e8541be839f8975ff",
+          "codepoints": 47,
+          "utf8_bytes": 47,
+          "local_bpe_tokens": 8,
+          "character_estimate": 11,
+          "signed_error": 3
+        },
+        {
+          "id": "tamil",
+          "stratum": "authored-control",
+          "text_sha256": "d5006c52fa98c81fffd7c5fe93066717bc3c2a5b478bb1887dfb9278bd9d65fc",
+          "codepoints": 46,
+          "utf8_bytes": 126,
+          "local_bpe_tokens": 63,
+          "character_estimate": 11,
+          "signed_error": -52
+        },
+        {
+          "id": "hindi",
+          "stratum": "authored-control",
+          "text_sha256": "5d1c609e0188e753365f27a57b79093941b7098aeb1aef92a53a26118238c2f2",
+          "codepoints": 44,
+          "utf8_bytes": 116,
+          "local_bpe_tokens": 42,
+          "character_estimate": 11,
+          "signed_error": -31
+        },
+        {
+          "id": "japanese",
+          "stratum": "authored-control",
+          "text_sha256": "3b708ed03e81decab07e8ab2e3455bdef3102c9c8b5388e50e751a9baac848bc",
+          "codepoints": 26,
+          "utf8_bytes": 78,
+          "local_bpe_tokens": 24,
+          "character_estimate": 6,
+          "signed_error": -18
+        },
+        {
+          "id": "arabic",
+          "stratum": "authored-control",
+          "text_sha256": "17421db77b42b9cf65fcfb2715b00d4ce6ca98fd9d6adf6b0172b7fcce050737",
+          "codepoints": 29,
+          "utf8_bytes": 53,
+          "local_bpe_tokens": 21,
+          "character_estimate": 7,
+          "signed_error": -14
+        },
+        {
+          "id": "emoji",
+          "stratum": "authored-control",
+          "text_sha256": "b19a068645ef9c6ad843a8b89d52882e34a117b46b9e503b7362eb624e099543",
+          "codepoints": 6,
+          "utf8_bytes": 22,
+          "local_bpe_tokens": 15,
+          "character_estimate": 1,
+          "signed_error": -14
+        },
+        {
+          "id": "combining",
+          "stratum": "authored-control",
+          "text_sha256": "8be5e3609704402259c407e4315d58ac7f7dc443e953ac4f825c9832466f0aca",
+          "codepoints": 32,
+          "utf8_bytes": 48,
+          "local_bpe_tokens": 32,
+          "character_estimate": 8,
+          "signed_error": -24
+        },
+        {
+          "id": "composed",
+          "stratum": "authored-control",
+          "text_sha256": "50bf38cd3a4cd50253ce1a111c563d20cba703333cf9fdc582ee0179b88da30b",
+          "codepoints": 16,
+          "utf8_bytes": 32,
+          "local_bpe_tokens": 16,
+          "character_estimate": 4,
+          "signed_error": -12
+        },
+        {
+          "id": "digits",
+          "stratum": "authored-control",
+          "text_sha256": "9cfe7faff7054298ca87557e15a10262de8d3eee77827417fbdfea1c41b9ec23",
+          "codepoints": 100,
+          "utf8_bytes": 100,
+          "local_bpe_tokens": 34,
+          "character_estimate": 25,
+          "signed_error": -9
+        },
+        {
+          "id": "spaces",
+          "stratum": "authored-control",
+          "text_sha256": "c49613f3a24dd8719ecec47eaeb8649cf713ac8145af38a8c297620cc28eb358",
+          "codepoints": 128,
+          "utf8_bytes": 128,
+          "local_bpe_tokens": 1,
+          "character_estimate": 32,
+          "signed_error": 31
+        },
+        {
+          "id": "code",
+          "stratum": "authored-control",
+          "text_sha256": "3ecaf9a2af378323c8dd8ccdd7a1bad4190c3be7cd53e35be0fd2cef0d668bab",
+          "codepoints": 52,
+          "utf8_bytes": 52,
+          "local_bpe_tokens": 14,
+          "character_estimate": 13,
+          "signed_error": -1
+        },
+        {
+          "id": "special-looking-text",
+          "stratum": "authored-control",
+          "text_sha256": "e443a215b10a2b5a3ebdd4403d28cfc75008b50dacfb62a254d229aae901522c",
+          "codepoints": 26,
+          "utf8_bytes": 26,
+          "local_bpe_tokens": 12,
+          "character_estimate": 6,
+          "signed_error": -6
+        }
+      ]
+    },
+    {
+      "encoding": "o200k_base",
+      "ordinary_vocab_count": 199998,
+      "max_single_token_raw_bytes": 128,
+      "ordinary_vocab_sha256": "dcf8f06c59a061f59909285da2f0fbbc0fa772916ad5f0b4ed52ce6a1c32d04a",
+      "strata": {
+        "source-study-call": {
+          "sample_count": 90,
+          "underestimates": 7,
+          "overestimates": 76,
+          "exact": 7,
+          "signed_error_min": -8,
+          "signed_error_max": 17,
+          "mean_absolute_error": 6.7
+        },
+        "authored-control": {
+          "sample_count": 12,
+          "underestimates": 9,
+          "overestimates": 2,
+          "exact": 1,
+          "signed_error_min": -24,
+          "signed_error_max": 31,
+          "mean_absolute_error": 9.666666666666666
+        }
+      },
+      "samples": [
+        {
+          "id": "mock_marker_absent/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "6bf521849bd2b9e65458f0f020eaa57a64eca556dd2b91ba41b8d8d0700c7113",
+          "codepoints": 382,
+          "utf8_bytes": 382,
+          "local_bpe_tokens": 85,
+          "character_estimate": 95,
+          "signed_error": 10
+        },
+        {
+          "id": "mock_marker_absent/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "634b0d4ef5585a0d75762f6ed68cce3878251c92cb6b6de3d2af4dd4c9d555fa",
+          "codepoints": 144,
+          "utf8_bytes": 144,
+          "local_bpe_tokens": 35,
+          "character_estimate": 36,
+          "signed_error": 1
+        },
+        {
+          "id": "mock_marker_absent/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "2751c66fc97886c5a083a5326f5d3ba03f573201401bfc96d4319d657d12df4a",
+          "codepoints": 271,
+          "utf8_bytes": 271,
+          "local_bpe_tokens": 54,
+          "character_estimate": 67,
+          "signed_error": 13
+        },
+        {
+          "id": "mock_marker_absent/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "31d3cb35db91217cb48f0c306822700e083c5a664e858ea489bee6867ee87540",
+          "codepoints": 53,
+          "utf8_bytes": 53,
+          "local_bpe_tokens": 11,
+          "character_estimate": 13,
+          "signed_error": 2
+        },
+        {
+          "id": "mock_marker_present/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "f0e3c00b39a08362417f89b0a810cfee6446839858f13432cf8765259abfb7d5",
+          "codepoints": 398,
+          "utf8_bytes": 398,
+          "local_bpe_tokens": 89,
+          "character_estimate": 99,
+          "signed_error": 10
+        },
+        {
+          "id": "mock_marker_present/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "0c2c6282461211b87aee1e91cfe7691d3dfff9a10970d69cc1efd2aeacb021c0",
+          "codepoints": 154,
+          "utf8_bytes": 154,
+          "local_bpe_tokens": 39,
+          "character_estimate": 38,
+          "signed_error": -1
+        },
+        {
+          "id": "mock_marker_present/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "b857ad501f9a3aa38836ccf662f91f87b89ee742c260556ce3328a3557dc8ba8",
+          "codepoints": 281,
+          "utf8_bytes": 281,
+          "local_bpe_tokens": 58,
+          "character_estimate": 70,
+          "signed_error": 12
+        },
+        {
+          "id": "mock_marker_present/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "67e06432d677a1bd28bcaed3f26aaf811b5182f7630c0ca55d86637fd99bfe5f",
+          "codepoints": 111,
+          "utf8_bytes": 111,
+          "local_bpe_tokens": 21,
+          "character_estimate": 27,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_count_one/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "05e4ec929c22b89a2aa23fc06590d36cc012e9172520ef62aae31e83900c0b40",
+          "codepoints": 361,
+          "utf8_bytes": 361,
+          "local_bpe_tokens": 86,
+          "character_estimate": 90,
+          "signed_error": 4
+        },
+        {
+          "id": "pii_count_one/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "8e8ee83148ddc248fca8c2a574e1020335b1f8a116c3dce14961b326c459e45c",
+          "codepoints": 117,
+          "utf8_bytes": 117,
+          "local_bpe_tokens": 37,
+          "character_estimate": 29,
+          "signed_error": -8
+        },
+        {
+          "id": "pii_count_one/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "19b91aaeee0e69f7e88cd916f1c669c03c842459c4dfe1da83d5525b7551cc62",
+          "codepoints": 244,
+          "utf8_bytes": 244,
+          "local_bpe_tokens": 55,
+          "character_estimate": 61,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_count_one/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "67e06432d677a1bd28bcaed3f26aaf811b5182f7630c0ca55d86637fd99bfe5f",
+          "codepoints": 111,
+          "utf8_bytes": 111,
+          "local_bpe_tokens": 21,
+          "character_estimate": 27,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_count_two/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "208f7c8d3e404a4c0f66538429e70e241c7112087ff06d0b3e8b3704890f7753",
+          "codepoints": 367,
+          "utf8_bytes": 367,
+          "local_bpe_tokens": 88,
+          "character_estimate": 91,
+          "signed_error": 3
+        },
+        {
+          "id": "pii_count_two/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "4fad8de820fedd6998ebe75af39da190d44de2ad84b9560dca8bcde0b0b5ffc2",
+          "codepoints": 123,
+          "utf8_bytes": 123,
+          "local_bpe_tokens": 38,
+          "character_estimate": 30,
+          "signed_error": -8
+        },
+        {
+          "id": "pii_count_two/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "cfb1afd1855a0342cc35528cc23f832a86c950523afb2687622f1c57a49c97f5",
+          "codepoints": 250,
+          "utf8_bytes": 250,
+          "local_bpe_tokens": 57,
+          "character_estimate": 62,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_count_two/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "67e06432d677a1bd28bcaed3f26aaf811b5182f7630c0ca55d86637fd99bfe5f",
+          "codepoints": 111,
+          "utf8_bytes": 111,
+          "local_bpe_tokens": 21,
+          "character_estimate": 27,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_email_a/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 105,
+          "character_estimate": 112,
+          "signed_error": 7
+        },
+        {
+          "id": "pii_email_a/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "f562fa71f6980673df879ca4ebedb04b98b4bf95dc6b652b72b820a06840dae7",
+          "codepoints": 218,
+          "utf8_bytes": 218,
+          "local_bpe_tokens": 54,
+          "character_estimate": 54,
+          "signed_error": 0
+        },
+        {
+          "id": "pii_email_a/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "781e30b641b4229d1adec2de7b10327af511fc18e75e2f2c4bfcb2af7776c0f3",
+          "codepoints": 344,
+          "utf8_bytes": 344,
+          "local_bpe_tokens": 73,
+          "character_estimate": 86,
+          "signed_error": 13
+        },
+        {
+          "id": "pii_email_a/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_email_b/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 105,
+          "character_estimate": 112,
+          "signed_error": 7
+        },
+        {
+          "id": "pii_email_b/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "f562fa71f6980673df879ca4ebedb04b98b4bf95dc6b652b72b820a06840dae7",
+          "codepoints": 218,
+          "utf8_bytes": 218,
+          "local_bpe_tokens": 54,
+          "character_estimate": 54,
+          "signed_error": 0
+        },
+        {
+          "id": "pii_email_b/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "781e30b641b4229d1adec2de7b10327af511fc18e75e2f2c4bfcb2af7776c0f3",
+          "codepoints": 344,
+          "utf8_bytes": 344,
+          "local_bpe_tokens": 73,
+          "character_estimate": 86,
+          "signed_error": 13
+        },
+        {
+          "id": "pii_email_b/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_national_insurance_a/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 105,
+          "character_estimate": 112,
+          "signed_error": 7
+        },
+        {
+          "id": "pii_national_insurance_a/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "f562fa71f6980673df879ca4ebedb04b98b4bf95dc6b652b72b820a06840dae7",
+          "codepoints": 218,
+          "utf8_bytes": 218,
+          "local_bpe_tokens": 54,
+          "character_estimate": 54,
+          "signed_error": 0
+        },
+        {
+          "id": "pii_national_insurance_a/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "781e30b641b4229d1adec2de7b10327af511fc18e75e2f2c4bfcb2af7776c0f3",
+          "codepoints": 344,
+          "utf8_bytes": 344,
+          "local_bpe_tokens": 73,
+          "character_estimate": 86,
+          "signed_error": 13
+        },
+        {
+          "id": "pii_national_insurance_a/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_national_insurance_b/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 105,
+          "character_estimate": 112,
+          "signed_error": 7
+        },
+        {
+          "id": "pii_national_insurance_b/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "f562fa71f6980673df879ca4ebedb04b98b4bf95dc6b652b72b820a06840dae7",
+          "codepoints": 218,
+          "utf8_bytes": 218,
+          "local_bpe_tokens": 54,
+          "character_estimate": 54,
+          "signed_error": 0
+        },
+        {
+          "id": "pii_national_insurance_b/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "781e30b641b4229d1adec2de7b10327af511fc18e75e2f2c4bfcb2af7776c0f3",
+          "codepoints": 344,
+          "utf8_bytes": 344,
+          "local_bpe_tokens": 73,
+          "character_estimate": 86,
+          "signed_error": 13
+        },
+        {
+          "id": "pii_national_insurance_b/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_phone_a/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 105,
+          "character_estimate": 112,
+          "signed_error": 7
+        },
+        {
+          "id": "pii_phone_a/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "f562fa71f6980673df879ca4ebedb04b98b4bf95dc6b652b72b820a06840dae7",
+          "codepoints": 218,
+          "utf8_bytes": 218,
+          "local_bpe_tokens": 54,
+          "character_estimate": 54,
+          "signed_error": 0
+        },
+        {
+          "id": "pii_phone_a/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "781e30b641b4229d1adec2de7b10327af511fc18e75e2f2c4bfcb2af7776c0f3",
+          "codepoints": 344,
+          "utf8_bytes": 344,
+          "local_bpe_tokens": 73,
+          "character_estimate": 86,
+          "signed_error": 13
+        },
+        {
+          "id": "pii_phone_a/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_phone_b/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 105,
+          "character_estimate": 112,
+          "signed_error": 7
+        },
+        {
+          "id": "pii_phone_b/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "f562fa71f6980673df879ca4ebedb04b98b4bf95dc6b652b72b820a06840dae7",
+          "codepoints": 218,
+          "utf8_bytes": 218,
+          "local_bpe_tokens": 54,
+          "character_estimate": 54,
+          "signed_error": 0
+        },
+        {
+          "id": "pii_phone_b/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "781e30b641b4229d1adec2de7b10327af511fc18e75e2f2c4bfcb2af7776c0f3",
+          "codepoints": 344,
+          "utf8_bytes": 344,
+          "local_bpe_tokens": 73,
+          "character_estimate": 86,
+          "signed_error": 13
+        },
+        {
+          "id": "pii_phone_b/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_presence_absent/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "e14386fc51a56b3f08c79519e5f04ba62268ced10020419abfc9af777802dbf9",
+          "codepoints": 359,
+          "utf8_bytes": 359,
+          "local_bpe_tokens": 84,
+          "character_estimate": 89,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_presence_absent/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "8d1ffdfecb32200a8aa9c3cdf84b56157f577bf96288b2e549fe7903b69bcebd",
+          "codepoints": 127,
+          "utf8_bytes": 127,
+          "local_bpe_tokens": 35,
+          "character_estimate": 31,
+          "signed_error": -4
+        },
+        {
+          "id": "pii_presence_absent/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "61d45d8cf2f7907520d6200c32da75bd24652e3b12cb5a5ce16dd335b969803b",
+          "codepoints": 254,
+          "utf8_bytes": 254,
+          "local_bpe_tokens": 54,
+          "character_estimate": 63,
+          "signed_error": 9
+        },
+        {
+          "id": "pii_presence_absent/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_presence_present/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "12ea8a5f564d5287ca9a2a370e31be69f41f132a12537f9453ea3553c8455d5e",
+          "codepoints": 365,
+          "utf8_bytes": 365,
+          "local_bpe_tokens": 86,
+          "character_estimate": 91,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_presence_present/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "1c15291661eb62cc7ecb3047063d7b2b6ca1618b20c4958a5cb10134f2cb2416",
+          "codepoints": 121,
+          "utf8_bytes": 121,
+          "local_bpe_tokens": 36,
+          "character_estimate": 30,
+          "signed_error": -6
+        },
+        {
+          "id": "pii_presence_present/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "a87879850de2c9ac8178c7ede600456f65eb8b9bf6b0881a52ffaea8f26e8015",
+          "codepoints": 248,
+          "utf8_bytes": 248,
+          "local_bpe_tokens": 55,
+          "character_estimate": 62,
+          "signed_error": 7
+        },
+        {
+          "id": "pii_presence_present/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "67e06432d677a1bd28bcaed3f26aaf811b5182f7630c0ca55d86637fd99bfe5f",
+          "codepoints": 111,
+          "utf8_bytes": 111,
+          "local_bpe_tokens": 21,
+          "character_estimate": 27,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_type_email/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "2a84b65ea9a4169a4c9f184da949ad7ed2965c8cf15cd156a88d7993488dad60",
+          "codepoints": 359,
+          "utf8_bytes": 359,
+          "local_bpe_tokens": 85,
+          "character_estimate": 89,
+          "signed_error": 4
+        },
+        {
+          "id": "pii_type_email/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "c9bdba2089cf680f8cd7126e373ad05f8740624a2a54272e65f86f6cad3720ad",
+          "codepoints": 115,
+          "utf8_bytes": 115,
+          "local_bpe_tokens": 35,
+          "character_estimate": 28,
+          "signed_error": -7
+        },
+        {
+          "id": "pii_type_email/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "e8660e1b1064c3c4cb899dc73a6faa399dcea6aad40ac3ec2d8884cedec4d477",
+          "codepoints": 242,
+          "utf8_bytes": 242,
+          "local_bpe_tokens": 54,
+          "character_estimate": 60,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_type_email/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "67e06432d677a1bd28bcaed3f26aaf811b5182f7630c0ca55d86637fd99bfe5f",
+          "codepoints": 111,
+          "utf8_bytes": 111,
+          "local_bpe_tokens": 21,
+          "character_estimate": 27,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_type_phone/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "f13683ee22e8a78ed0697cfa71c34fd8ea2cf21628b180c930f2c6de80565191",
+          "codepoints": 360,
+          "utf8_bytes": 360,
+          "local_bpe_tokens": 85,
+          "character_estimate": 90,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_type_phone/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "8fe932e3c7a489076705b015554bc1a31a6eef9b5c373fcfda5996824979e7b9",
+          "codepoints": 128,
+          "utf8_bytes": 128,
+          "local_bpe_tokens": 36,
+          "character_estimate": 32,
+          "signed_error": -4
+        },
+        {
+          "id": "pii_type_phone/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "02cea7bdf035995aaed40d4d740d6e3b1f8ae968383d5c151547f98cb51dfe99",
+          "codepoints": 255,
+          "utf8_bytes": 255,
+          "local_bpe_tokens": 55,
+          "character_estimate": 63,
+          "signed_error": 8
+        },
+        {
+          "id": "pii_type_phone/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "public_text_a/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "fba53a360540fb9c8ea4244f73dd86ce42adcb7889c22250b1f469959ce18c19",
+          "codepoints": 385,
+          "utf8_bytes": 385,
+          "local_bpe_tokens": 87,
+          "character_estimate": 96,
+          "signed_error": 9
+        },
+        {
+          "id": "public_text_a/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "e0afb87f572d29cf25a3aff7ea686f5b7a282ce5b3b58af5593526fae5d483a3",
+          "codepoints": 153,
+          "utf8_bytes": 153,
+          "local_bpe_tokens": 37,
+          "character_estimate": 38,
+          "signed_error": 1
+        },
+        {
+          "id": "public_text_a/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "97371448340bd3cb45adcdea96f538d7642f5ad187384818a94049c3a404137a",
+          "codepoints": 280,
+          "utf8_bytes": 280,
+          "local_bpe_tokens": 57,
+          "character_estimate": 70,
+          "signed_error": 13
+        },
+        {
+          "id": "public_text_a/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "public_text_b/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "54bd30d2046d578beb067fb74c274bc42a17c9bacd7d5a436d8a360341020c55",
+          "codepoints": 388,
+          "utf8_bytes": 388,
+          "local_bpe_tokens": 85,
+          "character_estimate": 97,
+          "signed_error": 12
+        },
+        {
+          "id": "public_text_b/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "d92773208b56847e7b8de024e14bf5d70ca0a059b7508ffc1e6a8944e7ad7159",
+          "codepoints": 149,
+          "utf8_bytes": 149,
+          "local_bpe_tokens": 35,
+          "character_estimate": 37,
+          "signed_error": 2
+        },
+        {
+          "id": "public_text_b/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "8a53dcc02cef5d17c1b6ad396ca9f43069c4a270dd492c2329a7a9a955c90437",
+          "codepoints": 271,
+          "utf8_bytes": 271,
+          "local_bpe_tokens": 54,
+          "character_estimate": 67,
+          "signed_error": 13
+        },
+        {
+          "id": "public_text_b/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "b6ac3e0904a7e6ff6aa9603b1a1cf544c36a64a54f3257862d1458c2f53f0d2f",
+          "codepoints": 169,
+          "utf8_bytes": 169,
+          "local_bpe_tokens": 33,
+          "character_estimate": 42,
+          "signed_error": 9
+        },
+        {
+          "id": "retry_email_a/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 105,
+          "character_estimate": 112,
+          "signed_error": 7
+        },
+        {
+          "id": "retry_email_a/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "30075aa6611705c90f4d4a91a97ce4b823233d3db39105fb65650e5d69f74b2a",
+          "codepoints": 46,
+          "utf8_bytes": 46,
+          "local_bpe_tokens": 7,
+          "character_estimate": 11,
+          "signed_error": 4
+        },
+        {
+          "id": "retry_email_a/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "2bad3f466e12fa3108f870572ae0f8ddb78a7937293cd920db8288ec02e58d03",
+          "codepoints": 590,
+          "utf8_bytes": 590,
+          "local_bpe_tokens": 137,
+          "character_estimate": 147,
+          "signed_error": 10
+        },
+        {
+          "id": "retry_email_a/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bde1bdf601037a84bd16feea9ec6c6a018539ed60eab3f8f9f4640018c44c0af",
+          "codepoints": 358,
+          "utf8_bytes": 358,
+          "local_bpe_tokens": 84,
+          "character_estimate": 89,
+          "signed_error": 5
+        },
+        {
+          "id": "retry_email_a/2/input",
+          "stratum": "source-study-call",
+          "text_sha256": "044694643708cc1dfe37ccad4b37ee1e95422e0e9cc4e54908b28c7dc1ae5fb4",
+          "codepoints": 484,
+          "utf8_bytes": 484,
+          "local_bpe_tokens": 104,
+          "character_estimate": 121,
+          "signed_error": 17
+        },
+        {
+          "id": "retry_email_a/2/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "retry_email_b/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 105,
+          "character_estimate": 112,
+          "signed_error": 7
+        },
+        {
+          "id": "retry_email_b/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "30075aa6611705c90f4d4a91a97ce4b823233d3db39105fb65650e5d69f74b2a",
+          "codepoints": 46,
+          "utf8_bytes": 46,
+          "local_bpe_tokens": 7,
+          "character_estimate": 11,
+          "signed_error": 4
+        },
+        {
+          "id": "retry_email_b/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "2bad3f466e12fa3108f870572ae0f8ddb78a7937293cd920db8288ec02e58d03",
+          "codepoints": 590,
+          "utf8_bytes": 590,
+          "local_bpe_tokens": 137,
+          "character_estimate": 147,
+          "signed_error": 10
+        },
+        {
+          "id": "retry_email_b/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bde1bdf601037a84bd16feea9ec6c6a018539ed60eab3f8f9f4640018c44c0af",
+          "codepoints": 358,
+          "utf8_bytes": 358,
+          "local_bpe_tokens": 84,
+          "character_estimate": 89,
+          "signed_error": 5
+        },
+        {
+          "id": "retry_email_b/2/input",
+          "stratum": "source-study-call",
+          "text_sha256": "044694643708cc1dfe37ccad4b37ee1e95422e0e9cc4e54908b28c7dc1ae5fb4",
+          "codepoints": 484,
+          "utf8_bytes": 484,
+          "local_bpe_tokens": 104,
+          "character_estimate": 121,
+          "signed_error": 17
+        },
+        {
+          "id": "retry_email_b/2/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "unknown_site_route/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "87f64a8938be8a7085156ef1e9f618a23d8a9757e8c41a790ca0ce5f3c4fd781",
+          "codepoints": 385,
+          "utf8_bytes": 385,
+          "local_bpe_tokens": 86,
+          "character_estimate": 96,
+          "signed_error": 10
+        },
+        {
+          "id": "unknown_site_route/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "2ae9d7d4ddddf1e73be6777b719af7a5c5d4b075679fe15dd3212dcd52c84edc",
+          "codepoints": 147,
+          "utf8_bytes": 147,
+          "local_bpe_tokens": 36,
+          "character_estimate": 36,
+          "signed_error": 0
+        },
+        {
+          "id": "unlisted_name_a/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "5e3ee74f721e8fd6bc23698addfc7d67f682375ac4c58546a3e3a88d54007cf9",
+          "codepoints": 398,
+          "utf8_bytes": 398,
+          "local_bpe_tokens": 89,
+          "character_estimate": 99,
+          "signed_error": 10
+        },
+        {
+          "id": "unlisted_name_a/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "27efab22fa0f49061817f481711ab313f18eaecd9ef94020aeda2c86feb7ddc9",
+          "codepoints": 166,
+          "utf8_bytes": 166,
+          "local_bpe_tokens": 39,
+          "character_estimate": 41,
+          "signed_error": 2
+        },
+        {
+          "id": "unlisted_name_a/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "5ea23e933cd16077ac59555161c8b2b55d1fee255d5786ef2d317c18561bac2c",
+          "codepoints": 293,
+          "utf8_bytes": 293,
+          "local_bpe_tokens": 59,
+          "character_estimate": 73,
+          "signed_error": 14
+        },
+        {
+          "id": "unlisted_name_a/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "unlisted_name_b/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "acc1837f430f108bb3cb3332853fea2c1361e4b125b64231042a291aa9c0338c",
+          "codepoints": 398,
+          "utf8_bytes": 398,
+          "local_bpe_tokens": 89,
+          "character_estimate": 99,
+          "signed_error": 10
+        },
+        {
+          "id": "unlisted_name_b/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "0929861e927b48ab707351fa0bb734187afa40ac519d23376684b481068e70ee",
+          "codepoints": 166,
+          "utf8_bytes": 166,
+          "local_bpe_tokens": 39,
+          "character_estimate": 41,
+          "signed_error": 2
+        },
+        {
+          "id": "unlisted_name_b/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "41cf6d138b50d3a943716b8f27b475d6f6fcb29d47c99d34aeeba4e18874b921",
+          "codepoints": 293,
+          "utf8_bytes": 293,
+          "local_bpe_tokens": 59,
+          "character_estimate": 73,
+          "signed_error": 14
+        },
+        {
+          "id": "unlisted_name_b/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "upstream_default_mock/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "fba53a360540fb9c8ea4244f73dd86ce42adcb7889c22250b1f469959ce18c19",
+          "codepoints": 385,
+          "utf8_bytes": 385,
+          "local_bpe_tokens": 87,
+          "character_estimate": 96,
+          "signed_error": 9
+        },
+        {
+          "id": "upstream_default_mock/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "e0afb87f572d29cf25a3aff7ea686f5b7a282ce5b3b58af5593526fae5d483a3",
+          "codepoints": 153,
+          "utf8_bytes": 153,
+          "local_bpe_tokens": 37,
+          "character_estimate": 38,
+          "signed_error": 1
+        },
+        {
+          "id": "upstream_default_mock/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "97371448340bd3cb45adcdea96f538d7642f5ad187384818a94049c3a404137a",
+          "codepoints": 280,
+          "utf8_bytes": 280,
+          "local_bpe_tokens": 57,
+          "character_estimate": 70,
+          "signed_error": 13
+        },
+        {
+          "id": "upstream_default_mock/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "ascii",
+          "stratum": "authored-control",
+          "text_sha256": "e4e54bd5f72165c648eb98fda9fd65b5518b40c11492d50e8541be839f8975ff",
+          "codepoints": 47,
+          "utf8_bytes": 47,
+          "local_bpe_tokens": 8,
+          "character_estimate": 11,
+          "signed_error": 3
+        },
+        {
+          "id": "tamil",
+          "stratum": "authored-control",
+          "text_sha256": "d5006c52fa98c81fffd7c5fe93066717bc3c2a5b478bb1887dfb9278bd9d65fc",
+          "codepoints": 46,
+          "utf8_bytes": 126,
+          "local_bpe_tokens": 17,
+          "character_estimate": 11,
+          "signed_error": -6
+        },
+        {
+          "id": "hindi",
+          "stratum": "authored-control",
+          "text_sha256": "5d1c609e0188e753365f27a57b79093941b7098aeb1aef92a53a26118238c2f2",
+          "codepoints": 44,
+          "utf8_bytes": 116,
+          "local_bpe_tokens": 12,
+          "character_estimate": 11,
+          "signed_error": -1
+        },
+        {
+          "id": "japanese",
+          "stratum": "authored-control",
+          "text_sha256": "3b708ed03e81decab07e8ab2e3455bdef3102c9c8b5388e50e751a9baac848bc",
+          "codepoints": 26,
+          "utf8_bytes": 78,
+          "local_bpe_tokens": 18,
+          "character_estimate": 6,
+          "signed_error": -12
+        },
+        {
+          "id": "arabic",
+          "stratum": "authored-control",
+          "text_sha256": "17421db77b42b9cf65fcfb2715b00d4ce6ca98fd9d6adf6b0172b7fcce050737",
+          "codepoints": 29,
+          "utf8_bytes": 53,
+          "local_bpe_tokens": 7,
+          "character_estimate": 7,
+          "signed_error": 0
+        },
+        {
+          "id": "emoji",
+          "stratum": "authored-control",
+          "text_sha256": "b19a068645ef9c6ad843a8b89d52882e34a117b46b9e503b7362eb624e099543",
+          "codepoints": 6,
+          "utf8_bytes": 22,
+          "local_bpe_tokens": 11,
+          "character_estimate": 1,
+          "signed_error": -10
+        },
+        {
+          "id": "combining",
+          "stratum": "authored-control",
+          "text_sha256": "8be5e3609704402259c407e4315d58ac7f7dc443e953ac4f825c9832466f0aca",
+          "codepoints": 32,
+          "utf8_bytes": 48,
+          "local_bpe_tokens": 32,
+          "character_estimate": 8,
+          "signed_error": -24
+        },
+        {
+          "id": "composed",
+          "stratum": "authored-control",
+          "text_sha256": "50bf38cd3a4cd50253ce1a111c563d20cba703333cf9fdc582ee0179b88da30b",
+          "codepoints": 16,
+          "utf8_bytes": 32,
+          "local_bpe_tokens": 16,
+          "character_estimate": 4,
+          "signed_error": -12
+        },
+        {
+          "id": "digits",
+          "stratum": "authored-control",
+          "text_sha256": "9cfe7faff7054298ca87557e15a10262de8d3eee77827417fbdfea1c41b9ec23",
+          "codepoints": 100,
+          "utf8_bytes": 100,
+          "local_bpe_tokens": 34,
+          "character_estimate": 25,
+          "signed_error": -9
+        },
+        {
+          "id": "spaces",
+          "stratum": "authored-control",
+          "text_sha256": "c49613f3a24dd8719ecec47eaeb8649cf713ac8145af38a8c297620cc28eb358",
+          "codepoints": 128,
+          "utf8_bytes": 128,
+          "local_bpe_tokens": 1,
+          "character_estimate": 32,
+          "signed_error": 31
+        },
+        {
+          "id": "code",
+          "stratum": "authored-control",
+          "text_sha256": "3ecaf9a2af378323c8dd8ccdd7a1bad4190c3be7cd53e35be0fd2cef0d668bab",
+          "codepoints": 52,
+          "utf8_bytes": 52,
+          "local_bpe_tokens": 14,
+          "character_estimate": 13,
+          "signed_error": -1
+        },
+        {
+          "id": "special-looking-text",
+          "stratum": "authored-control",
+          "text_sha256": "e443a215b10a2b5a3ebdd4403d28cfc75008b50dacfb62a254d229aae901522c",
+          "codepoints": 26,
+          "utf8_bytes": 26,
+          "local_bpe_tokens": 13,
+          "character_estimate": 6,
+          "signed_error": -7
+        }
+      ]
+    },
+    {
+      "encoding": "r50k_base",
+      "ordinary_vocab_count": 50256,
+      "max_single_token_raw_bytes": 128,
+      "ordinary_vocab_sha256": "b8b450861649b2f643a5038549e1a302d70e36023b75046611725e18a031672a",
+      "strata": {
+        "source-study-call": {
+          "sample_count": 90,
+          "underestimates": 19,
+          "overestimates": 69,
+          "exact": 2,
+          "signed_error_min": -11,
+          "signed_error_max": 19,
+          "mean_absolute_error": 6.477777777777778
+        },
+        "authored-control": {
+          "sample_count": 12,
+          "underestimates": 11,
+          "overestimates": 1,
+          "exact": 0,
+          "signed_error_min": -115,
+          "signed_error_max": 3,
+          "mean_absolute_error": 35.666666666666664
+        }
+      },
+      "samples": [
+        {
+          "id": "mock_marker_absent/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "6bf521849bd2b9e65458f0f020eaa57a64eca556dd2b91ba41b8d8d0700c7113",
+          "codepoints": 382,
+          "utf8_bytes": 382,
+          "local_bpe_tokens": 86,
+          "character_estimate": 95,
+          "signed_error": 9
+        },
+        {
+          "id": "mock_marker_absent/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "634b0d4ef5585a0d75762f6ed68cce3878251c92cb6b6de3d2af4dd4c9d555fa",
+          "codepoints": 144,
+          "utf8_bytes": 144,
+          "local_bpe_tokens": 37,
+          "character_estimate": 36,
+          "signed_error": -1
+        },
+        {
+          "id": "mock_marker_absent/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "2751c66fc97886c5a083a5326f5d3ba03f573201401bfc96d4319d657d12df4a",
+          "codepoints": 271,
+          "utf8_bytes": 271,
+          "local_bpe_tokens": 54,
+          "character_estimate": 67,
+          "signed_error": 13
+        },
+        {
+          "id": "mock_marker_absent/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "31d3cb35db91217cb48f0c306822700e083c5a664e858ea489bee6867ee87540",
+          "codepoints": 53,
+          "utf8_bytes": 53,
+          "local_bpe_tokens": 11,
+          "character_estimate": 13,
+          "signed_error": 2
+        },
+        {
+          "id": "mock_marker_present/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "f0e3c00b39a08362417f89b0a810cfee6446839858f13432cf8765259abfb7d5",
+          "codepoints": 398,
+          "utf8_bytes": 398,
+          "local_bpe_tokens": 91,
+          "character_estimate": 99,
+          "signed_error": 8
+        },
+        {
+          "id": "mock_marker_present/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "0c2c6282461211b87aee1e91cfe7691d3dfff9a10970d69cc1efd2aeacb021c0",
+          "codepoints": 154,
+          "utf8_bytes": 154,
+          "local_bpe_tokens": 42,
+          "character_estimate": 38,
+          "signed_error": -4
+        },
+        {
+          "id": "mock_marker_present/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "b857ad501f9a3aa38836ccf662f91f87b89ee742c260556ce3328a3557dc8ba8",
+          "codepoints": 281,
+          "utf8_bytes": 281,
+          "local_bpe_tokens": 58,
+          "character_estimate": 70,
+          "signed_error": 12
+        },
+        {
+          "id": "mock_marker_present/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "67e06432d677a1bd28bcaed3f26aaf811b5182f7630c0ca55d86637fd99bfe5f",
+          "codepoints": 111,
+          "utf8_bytes": 111,
+          "local_bpe_tokens": 21,
+          "character_estimate": 27,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_count_one/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "05e4ec929c22b89a2aa23fc06590d36cc012e9172520ef62aae31e83900c0b40",
+          "codepoints": 361,
+          "utf8_bytes": 361,
+          "local_bpe_tokens": 88,
+          "character_estimate": 90,
+          "signed_error": 2
+        },
+        {
+          "id": "pii_count_one/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "8e8ee83148ddc248fca8c2a574e1020335b1f8a116c3dce14961b326c459e45c",
+          "codepoints": 117,
+          "utf8_bytes": 117,
+          "local_bpe_tokens": 39,
+          "character_estimate": 29,
+          "signed_error": -10
+        },
+        {
+          "id": "pii_count_one/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "19b91aaeee0e69f7e88cd916f1c669c03c842459c4dfe1da83d5525b7551cc62",
+          "codepoints": 244,
+          "utf8_bytes": 244,
+          "local_bpe_tokens": 55,
+          "character_estimate": 61,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_count_one/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "67e06432d677a1bd28bcaed3f26aaf811b5182f7630c0ca55d86637fd99bfe5f",
+          "codepoints": 111,
+          "utf8_bytes": 111,
+          "local_bpe_tokens": 21,
+          "character_estimate": 27,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_count_two/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "208f7c8d3e404a4c0f66538429e70e241c7112087ff06d0b3e8b3704890f7753",
+          "codepoints": 367,
+          "utf8_bytes": 367,
+          "local_bpe_tokens": 91,
+          "character_estimate": 91,
+          "signed_error": 0
+        },
+        {
+          "id": "pii_count_two/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "4fad8de820fedd6998ebe75af39da190d44de2ad84b9560dca8bcde0b0b5ffc2",
+          "codepoints": 123,
+          "utf8_bytes": 123,
+          "local_bpe_tokens": 41,
+          "character_estimate": 30,
+          "signed_error": -11
+        },
+        {
+          "id": "pii_count_two/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "cfb1afd1855a0342cc35528cc23f832a86c950523afb2687622f1c57a49c97f5",
+          "codepoints": 250,
+          "utf8_bytes": 250,
+          "local_bpe_tokens": 57,
+          "character_estimate": 62,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_count_two/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "67e06432d677a1bd28bcaed3f26aaf811b5182f7630c0ca55d86637fd99bfe5f",
+          "codepoints": 111,
+          "utf8_bytes": 111,
+          "local_bpe_tokens": 21,
+          "character_estimate": 27,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_email_a/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 107,
+          "character_estimate": 112,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_email_a/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "f562fa71f6980673df879ca4ebedb04b98b4bf95dc6b652b72b820a06840dae7",
+          "codepoints": 218,
+          "utf8_bytes": 218,
+          "local_bpe_tokens": 57,
+          "character_estimate": 54,
+          "signed_error": -3
+        },
+        {
+          "id": "pii_email_a/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "781e30b641b4229d1adec2de7b10327af511fc18e75e2f2c4bfcb2af7776c0f3",
+          "codepoints": 344,
+          "utf8_bytes": 344,
+          "local_bpe_tokens": 74,
+          "character_estimate": 86,
+          "signed_error": 12
+        },
+        {
+          "id": "pii_email_a/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_email_b/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 107,
+          "character_estimate": 112,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_email_b/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "f562fa71f6980673df879ca4ebedb04b98b4bf95dc6b652b72b820a06840dae7",
+          "codepoints": 218,
+          "utf8_bytes": 218,
+          "local_bpe_tokens": 57,
+          "character_estimate": 54,
+          "signed_error": -3
+        },
+        {
+          "id": "pii_email_b/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "781e30b641b4229d1adec2de7b10327af511fc18e75e2f2c4bfcb2af7776c0f3",
+          "codepoints": 344,
+          "utf8_bytes": 344,
+          "local_bpe_tokens": 74,
+          "character_estimate": 86,
+          "signed_error": 12
+        },
+        {
+          "id": "pii_email_b/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_national_insurance_a/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 107,
+          "character_estimate": 112,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_national_insurance_a/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "f562fa71f6980673df879ca4ebedb04b98b4bf95dc6b652b72b820a06840dae7",
+          "codepoints": 218,
+          "utf8_bytes": 218,
+          "local_bpe_tokens": 57,
+          "character_estimate": 54,
+          "signed_error": -3
+        },
+        {
+          "id": "pii_national_insurance_a/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "781e30b641b4229d1adec2de7b10327af511fc18e75e2f2c4bfcb2af7776c0f3",
+          "codepoints": 344,
+          "utf8_bytes": 344,
+          "local_bpe_tokens": 74,
+          "character_estimate": 86,
+          "signed_error": 12
+        },
+        {
+          "id": "pii_national_insurance_a/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_national_insurance_b/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 107,
+          "character_estimate": 112,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_national_insurance_b/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "f562fa71f6980673df879ca4ebedb04b98b4bf95dc6b652b72b820a06840dae7",
+          "codepoints": 218,
+          "utf8_bytes": 218,
+          "local_bpe_tokens": 57,
+          "character_estimate": 54,
+          "signed_error": -3
+        },
+        {
+          "id": "pii_national_insurance_b/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "781e30b641b4229d1adec2de7b10327af511fc18e75e2f2c4bfcb2af7776c0f3",
+          "codepoints": 344,
+          "utf8_bytes": 344,
+          "local_bpe_tokens": 74,
+          "character_estimate": 86,
+          "signed_error": 12
+        },
+        {
+          "id": "pii_national_insurance_b/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_phone_a/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 107,
+          "character_estimate": 112,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_phone_a/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "f562fa71f6980673df879ca4ebedb04b98b4bf95dc6b652b72b820a06840dae7",
+          "codepoints": 218,
+          "utf8_bytes": 218,
+          "local_bpe_tokens": 57,
+          "character_estimate": 54,
+          "signed_error": -3
+        },
+        {
+          "id": "pii_phone_a/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "781e30b641b4229d1adec2de7b10327af511fc18e75e2f2c4bfcb2af7776c0f3",
+          "codepoints": 344,
+          "utf8_bytes": 344,
+          "local_bpe_tokens": 74,
+          "character_estimate": 86,
+          "signed_error": 12
+        },
+        {
+          "id": "pii_phone_a/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_phone_b/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 107,
+          "character_estimate": 112,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_phone_b/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "f562fa71f6980673df879ca4ebedb04b98b4bf95dc6b652b72b820a06840dae7",
+          "codepoints": 218,
+          "utf8_bytes": 218,
+          "local_bpe_tokens": 57,
+          "character_estimate": 54,
+          "signed_error": -3
+        },
+        {
+          "id": "pii_phone_b/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "781e30b641b4229d1adec2de7b10327af511fc18e75e2f2c4bfcb2af7776c0f3",
+          "codepoints": 344,
+          "utf8_bytes": 344,
+          "local_bpe_tokens": 74,
+          "character_estimate": 86,
+          "signed_error": 12
+        },
+        {
+          "id": "pii_phone_b/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_presence_absent/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "e14386fc51a56b3f08c79519e5f04ba62268ced10020419abfc9af777802dbf9",
+          "codepoints": 359,
+          "utf8_bytes": 359,
+          "local_bpe_tokens": 85,
+          "character_estimate": 89,
+          "signed_error": 4
+        },
+        {
+          "id": "pii_presence_absent/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "8d1ffdfecb32200a8aa9c3cdf84b56157f577bf96288b2e549fe7903b69bcebd",
+          "codepoints": 127,
+          "utf8_bytes": 127,
+          "local_bpe_tokens": 38,
+          "character_estimate": 31,
+          "signed_error": -7
+        },
+        {
+          "id": "pii_presence_absent/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "61d45d8cf2f7907520d6200c32da75bd24652e3b12cb5a5ce16dd335b969803b",
+          "codepoints": 254,
+          "utf8_bytes": 254,
+          "local_bpe_tokens": 55,
+          "character_estimate": 63,
+          "signed_error": 8
+        },
+        {
+          "id": "pii_presence_absent/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "pii_presence_present/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "12ea8a5f564d5287ca9a2a370e31be69f41f132a12537f9453ea3553c8455d5e",
+          "codepoints": 365,
+          "utf8_bytes": 365,
+          "local_bpe_tokens": 88,
+          "character_estimate": 91,
+          "signed_error": 3
+        },
+        {
+          "id": "pii_presence_present/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "1c15291661eb62cc7ecb3047063d7b2b6ca1618b20c4958a5cb10134f2cb2416",
+          "codepoints": 121,
+          "utf8_bytes": 121,
+          "local_bpe_tokens": 39,
+          "character_estimate": 30,
+          "signed_error": -9
+        },
+        {
+          "id": "pii_presence_present/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "a87879850de2c9ac8178c7ede600456f65eb8b9bf6b0881a52ffaea8f26e8015",
+          "codepoints": 248,
+          "utf8_bytes": 248,
+          "local_bpe_tokens": 55,
+          "character_estimate": 62,
+          "signed_error": 7
+        },
+        {
+          "id": "pii_presence_present/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "67e06432d677a1bd28bcaed3f26aaf811b5182f7630c0ca55d86637fd99bfe5f",
+          "codepoints": 111,
+          "utf8_bytes": 111,
+          "local_bpe_tokens": 21,
+          "character_estimate": 27,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_type_email/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "2a84b65ea9a4169a4c9f184da949ad7ed2965c8cf15cd156a88d7993488dad60",
+          "codepoints": 359,
+          "utf8_bytes": 359,
+          "local_bpe_tokens": 87,
+          "character_estimate": 89,
+          "signed_error": 2
+        },
+        {
+          "id": "pii_type_email/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "c9bdba2089cf680f8cd7126e373ad05f8740624a2a54272e65f86f6cad3720ad",
+          "codepoints": 115,
+          "utf8_bytes": 115,
+          "local_bpe_tokens": 38,
+          "character_estimate": 28,
+          "signed_error": -10
+        },
+        {
+          "id": "pii_type_email/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "e8660e1b1064c3c4cb899dc73a6faa399dcea6aad40ac3ec2d8884cedec4d477",
+          "codepoints": 242,
+          "utf8_bytes": 242,
+          "local_bpe_tokens": 54,
+          "character_estimate": 60,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_type_email/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "67e06432d677a1bd28bcaed3f26aaf811b5182f7630c0ca55d86637fd99bfe5f",
+          "codepoints": 111,
+          "utf8_bytes": 111,
+          "local_bpe_tokens": 21,
+          "character_estimate": 27,
+          "signed_error": 6
+        },
+        {
+          "id": "pii_type_phone/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "f13683ee22e8a78ed0697cfa71c34fd8ea2cf21628b180c930f2c6de80565191",
+          "codepoints": 360,
+          "utf8_bytes": 360,
+          "local_bpe_tokens": 87,
+          "character_estimate": 90,
+          "signed_error": 3
+        },
+        {
+          "id": "pii_type_phone/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "8fe932e3c7a489076705b015554bc1a31a6eef9b5c373fcfda5996824979e7b9",
+          "codepoints": 128,
+          "utf8_bytes": 128,
+          "local_bpe_tokens": 39,
+          "character_estimate": 32,
+          "signed_error": -7
+        },
+        {
+          "id": "pii_type_phone/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "02cea7bdf035995aaed40d4d740d6e3b1f8ae968383d5c151547f98cb51dfe99",
+          "codepoints": 255,
+          "utf8_bytes": 255,
+          "local_bpe_tokens": 56,
+          "character_estimate": 63,
+          "signed_error": 7
+        },
+        {
+          "id": "pii_type_phone/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "public_text_a/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "fba53a360540fb9c8ea4244f73dd86ce42adcb7889c22250b1f469959ce18c19",
+          "codepoints": 385,
+          "utf8_bytes": 385,
+          "local_bpe_tokens": 88,
+          "character_estimate": 96,
+          "signed_error": 8
+        },
+        {
+          "id": "public_text_a/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "e0afb87f572d29cf25a3aff7ea686f5b7a282ce5b3b58af5593526fae5d483a3",
+          "codepoints": 153,
+          "utf8_bytes": 153,
+          "local_bpe_tokens": 40,
+          "character_estimate": 38,
+          "signed_error": -2
+        },
+        {
+          "id": "public_text_a/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "97371448340bd3cb45adcdea96f538d7642f5ad187384818a94049c3a404137a",
+          "codepoints": 280,
+          "utf8_bytes": 280,
+          "local_bpe_tokens": 58,
+          "character_estimate": 70,
+          "signed_error": 12
+        },
+        {
+          "id": "public_text_a/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "public_text_b/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "54bd30d2046d578beb067fb74c274bc42a17c9bacd7d5a436d8a360341020c55",
+          "codepoints": 388,
+          "utf8_bytes": 388,
+          "local_bpe_tokens": 86,
+          "character_estimate": 97,
+          "signed_error": 11
+        },
+        {
+          "id": "public_text_b/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "d92773208b56847e7b8de024e14bf5d70ca0a059b7508ffc1e6a8944e7ad7159",
+          "codepoints": 149,
+          "utf8_bytes": 149,
+          "local_bpe_tokens": 37,
+          "character_estimate": 37,
+          "signed_error": 0
+        },
+        {
+          "id": "public_text_b/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "8a53dcc02cef5d17c1b6ad396ca9f43069c4a270dd492c2329a7a9a955c90437",
+          "codepoints": 271,
+          "utf8_bytes": 271,
+          "local_bpe_tokens": 54,
+          "character_estimate": 67,
+          "signed_error": 13
+        },
+        {
+          "id": "public_text_b/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "b6ac3e0904a7e6ff6aa9603b1a1cf544c36a64a54f3257862d1458c2f53f0d2f",
+          "codepoints": 169,
+          "utf8_bytes": 169,
+          "local_bpe_tokens": 34,
+          "character_estimate": 42,
+          "signed_error": 8
+        },
+        {
+          "id": "retry_email_a/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 107,
+          "character_estimate": 112,
+          "signed_error": 5
+        },
+        {
+          "id": "retry_email_a/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "30075aa6611705c90f4d4a91a97ce4b823233d3db39105fb65650e5d69f74b2a",
+          "codepoints": 46,
+          "utf8_bytes": 46,
+          "local_bpe_tokens": 9,
+          "character_estimate": 11,
+          "signed_error": 2
+        },
+        {
+          "id": "retry_email_a/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "2bad3f466e12fa3108f870572ae0f8ddb78a7937293cd920db8288ec02e58d03",
+          "codepoints": 590,
+          "utf8_bytes": 590,
+          "local_bpe_tokens": 141,
+          "character_estimate": 147,
+          "signed_error": 6
+        },
+        {
+          "id": "retry_email_a/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bde1bdf601037a84bd16feea9ec6c6a018539ed60eab3f8f9f4640018c44c0af",
+          "codepoints": 358,
+          "utf8_bytes": 358,
+          "local_bpe_tokens": 84,
+          "character_estimate": 89,
+          "signed_error": 5
+        },
+        {
+          "id": "retry_email_a/2/input",
+          "stratum": "source-study-call",
+          "text_sha256": "044694643708cc1dfe37ccad4b37ee1e95422e0e9cc4e54908b28c7dc1ae5fb4",
+          "codepoints": 484,
+          "utf8_bytes": 484,
+          "local_bpe_tokens": 102,
+          "character_estimate": 121,
+          "signed_error": 19
+        },
+        {
+          "id": "retry_email_a/2/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "retry_email_b/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "dcf8ce2b228efb2bd9ff7fc4b7ad9bd9e8d81bcb43a5a578c7c47cc1aa527e15",
+          "codepoints": 449,
+          "utf8_bytes": 449,
+          "local_bpe_tokens": 107,
+          "character_estimate": 112,
+          "signed_error": 5
+        },
+        {
+          "id": "retry_email_b/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "30075aa6611705c90f4d4a91a97ce4b823233d3db39105fb65650e5d69f74b2a",
+          "codepoints": 46,
+          "utf8_bytes": 46,
+          "local_bpe_tokens": 9,
+          "character_estimate": 11,
+          "signed_error": 2
+        },
+        {
+          "id": "retry_email_b/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "2bad3f466e12fa3108f870572ae0f8ddb78a7937293cd920db8288ec02e58d03",
+          "codepoints": 590,
+          "utf8_bytes": 590,
+          "local_bpe_tokens": 141,
+          "character_estimate": 147,
+          "signed_error": 6
+        },
+        {
+          "id": "retry_email_b/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bde1bdf601037a84bd16feea9ec6c6a018539ed60eab3f8f9f4640018c44c0af",
+          "codepoints": 358,
+          "utf8_bytes": 358,
+          "local_bpe_tokens": 84,
+          "character_estimate": 89,
+          "signed_error": 5
+        },
+        {
+          "id": "retry_email_b/2/input",
+          "stratum": "source-study-call",
+          "text_sha256": "044694643708cc1dfe37ccad4b37ee1e95422e0e9cc4e54908b28c7dc1ae5fb4",
+          "codepoints": 484,
+          "utf8_bytes": 484,
+          "local_bpe_tokens": 102,
+          "character_estimate": 121,
+          "signed_error": 19
+        },
+        {
+          "id": "retry_email_b/2/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "unknown_site_route/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "87f64a8938be8a7085156ef1e9f618a23d8a9757e8c41a790ca0ce5f3c4fd781",
+          "codepoints": 385,
+          "utf8_bytes": 385,
+          "local_bpe_tokens": 87,
+          "character_estimate": 96,
+          "signed_error": 9
+        },
+        {
+          "id": "unknown_site_route/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "2ae9d7d4ddddf1e73be6777b719af7a5c5d4b075679fe15dd3212dcd52c84edc",
+          "codepoints": 147,
+          "utf8_bytes": 147,
+          "local_bpe_tokens": 38,
+          "character_estimate": 36,
+          "signed_error": -2
+        },
+        {
+          "id": "unlisted_name_a/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "5e3ee74f721e8fd6bc23698addfc7d67f682375ac4c58546a3e3a88d54007cf9",
+          "codepoints": 398,
+          "utf8_bytes": 398,
+          "local_bpe_tokens": 90,
+          "character_estimate": 99,
+          "signed_error": 9
+        },
+        {
+          "id": "unlisted_name_a/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "27efab22fa0f49061817f481711ab313f18eaecd9ef94020aeda2c86feb7ddc9",
+          "codepoints": 166,
+          "utf8_bytes": 166,
+          "local_bpe_tokens": 43,
+          "character_estimate": 41,
+          "signed_error": -2
+        },
+        {
+          "id": "unlisted_name_a/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "5ea23e933cd16077ac59555161c8b2b55d1fee255d5786ef2d317c18561bac2c",
+          "codepoints": 293,
+          "utf8_bytes": 293,
+          "local_bpe_tokens": 61,
+          "character_estimate": 73,
+          "signed_error": 12
+        },
+        {
+          "id": "unlisted_name_a/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "unlisted_name_b/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "acc1837f430f108bb3cb3332853fea2c1361e4b125b64231042a291aa9c0338c",
+          "codepoints": 398,
+          "utf8_bytes": 398,
+          "local_bpe_tokens": 90,
+          "character_estimate": 99,
+          "signed_error": 9
+        },
+        {
+          "id": "unlisted_name_b/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "0929861e927b48ab707351fa0bb734187afa40ac519d23376684b481068e70ee",
+          "codepoints": 166,
+          "utf8_bytes": 166,
+          "local_bpe_tokens": 43,
+          "character_estimate": 41,
+          "signed_error": -2
+        },
+        {
+          "id": "unlisted_name_b/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "41cf6d138b50d3a943716b8f27b475d6f6fcb29d47c99d34aeeba4e18874b921",
+          "codepoints": 293,
+          "utf8_bytes": 293,
+          "local_bpe_tokens": 61,
+          "character_estimate": 73,
+          "signed_error": 12
+        },
+        {
+          "id": "unlisted_name_b/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "upstream_default_mock/0/input",
+          "stratum": "source-study-call",
+          "text_sha256": "fba53a360540fb9c8ea4244f73dd86ce42adcb7889c22250b1f469959ce18c19",
+          "codepoints": 385,
+          "utf8_bytes": 385,
+          "local_bpe_tokens": 88,
+          "character_estimate": 96,
+          "signed_error": 8
+        },
+        {
+          "id": "upstream_default_mock/0/output",
+          "stratum": "source-study-call",
+          "text_sha256": "e0afb87f572d29cf25a3aff7ea686f5b7a282ce5b3b58af5593526fae5d483a3",
+          "codepoints": 153,
+          "utf8_bytes": 153,
+          "local_bpe_tokens": 40,
+          "character_estimate": 38,
+          "signed_error": -2
+        },
+        {
+          "id": "upstream_default_mock/1/input",
+          "stratum": "source-study-call",
+          "text_sha256": "97371448340bd3cb45adcdea96f538d7642f5ad187384818a94049c3a404137a",
+          "codepoints": 280,
+          "utf8_bytes": 280,
+          "local_bpe_tokens": 58,
+          "character_estimate": 70,
+          "signed_error": 12
+        },
+        {
+          "id": "upstream_default_mock/1/output",
+          "stratum": "source-study-call",
+          "text_sha256": "bc92fe3523a89efed782577d14766996cda4babb61403fb0a6c6df62532c85b7",
+          "codepoints": 104,
+          "utf8_bytes": 104,
+          "local_bpe_tokens": 21,
+          "character_estimate": 26,
+          "signed_error": 5
+        },
+        {
+          "id": "ascii",
+          "stratum": "authored-control",
+          "text_sha256": "e4e54bd5f72165c648eb98fda9fd65b5518b40c11492d50e8541be839f8975ff",
+          "codepoints": 47,
+          "utf8_bytes": 47,
+          "local_bpe_tokens": 8,
+          "character_estimate": 11,
+          "signed_error": 3
+        },
+        {
+          "id": "tamil",
+          "stratum": "authored-control",
+          "text_sha256": "d5006c52fa98c81fffd7c5fe93066717bc3c2a5b478bb1887dfb9278bd9d65fc",
+          "codepoints": 46,
+          "utf8_bytes": 126,
+          "local_bpe_tokens": 126,
+          "character_estimate": 11,
+          "signed_error": -115
+        },
+        {
+          "id": "hindi",
+          "stratum": "authored-control",
+          "text_sha256": "5d1c609e0188e753365f27a57b79093941b7098aeb1aef92a53a26118238c2f2",
+          "codepoints": 44,
+          "utf8_bytes": 116,
+          "local_bpe_tokens": 69,
+          "character_estimate": 11,
+          "signed_error": -58
+        },
+        {
+          "id": "japanese",
+          "stratum": "authored-control",
+          "text_sha256": "3b708ed03e81decab07e8ab2e3455bdef3102c9c8b5388e50e751a9baac848bc",
+          "codepoints": 26,
+          "utf8_bytes": 78,
+          "local_bpe_tokens": 31,
+          "character_estimate": 6,
+          "signed_error": -25
+        },
+        {
+          "id": "arabic",
+          "stratum": "authored-control",
+          "text_sha256": "17421db77b42b9cf65fcfb2715b00d4ce6ca98fd9d6adf6b0172b7fcce050737",
+          "codepoints": 29,
+          "utf8_bytes": 53,
+          "local_bpe_tokens": 30,
+          "character_estimate": 7,
+          "signed_error": -23
+        },
+        {
+          "id": "emoji",
+          "stratum": "authored-control",
+          "text_sha256": "b19a068645ef9c6ad843a8b89d52882e34a117b46b9e503b7362eb624e099543",
+          "codepoints": 6,
+          "utf8_bytes": 22,
+          "local_bpe_tokens": 15,
+          "character_estimate": 1,
+          "signed_error": -14
+        },
+        {
+          "id": "combining",
+          "stratum": "authored-control",
+          "text_sha256": "8be5e3609704402259c407e4315d58ac7f7dc443e953ac4f825c9832466f0aca",
+          "codepoints": 32,
+          "utf8_bytes": 48,
+          "local_bpe_tokens": 48,
+          "character_estimate": 8,
+          "signed_error": -40
+        },
+        {
+          "id": "composed",
+          "stratum": "authored-control",
+          "text_sha256": "50bf38cd3a4cd50253ce1a111c563d20cba703333cf9fdc582ee0179b88da30b",
+          "codepoints": 16,
+          "utf8_bytes": 32,
+          "local_bpe_tokens": 16,
+          "character_estimate": 4,
+          "signed_error": -12
+        },
+        {
+          "id": "digits",
+          "stratum": "authored-control",
+          "text_sha256": "9cfe7faff7054298ca87557e15a10262de8d3eee77827417fbdfea1c41b9ec23",
+          "codepoints": 100,
+          "utf8_bytes": 100,
+          "local_bpe_tokens": 50,
+          "character_estimate": 25,
+          "signed_error": -25
+        },
+        {
+          "id": "spaces",
+          "stratum": "authored-control",
+          "text_sha256": "c49613f3a24dd8719ecec47eaeb8649cf713ac8145af38a8c297620cc28eb358",
+          "codepoints": 128,
+          "utf8_bytes": 128,
+          "local_bpe_tokens": 128,
+          "character_estimate": 32,
+          "signed_error": -96
+        },
+        {
+          "id": "code",
+          "stratum": "authored-control",
+          "text_sha256": "3ecaf9a2af378323c8dd8ccdd7a1bad4190c3be7cd53e35be0fd2cef0d668bab",
+          "codepoints": 52,
+          "utf8_bytes": 52,
+          "local_bpe_tokens": 22,
+          "character_estimate": 13,
+          "signed_error": -9
+        },
+        {
+          "id": "special-looking-text",
+          "stratum": "authored-control",
+          "text_sha256": "e443a215b10a2b5a3ebdd4403d28cfc75008b50dacfb62a254d229aae901522c",
+          "codepoints": 26,
+          "utf8_bytes": 26,
+          "local_bpe_tokens": 14,
+          "character_estimate": 6,
+          "signed_error": -8
+        }
+      ]
+    }
+  ],
+  "scope": [
+    "90 source-study call texts include repeated paired scenarios, not 90 independent applications",
+    "12 authored multilingual/adversarial controls; descriptive sample, no statistical generalization",
+    "full census of ordinary vocabulary token bytes; no response re-encoding bound is inferred",
+    "plain local text tokenization; provider envelopes, actual API measurements and invoices excluded"
+  ]
+}

@@ -1,4 +1,4 @@
-test_all_six_authored_accepted_graphs_match_reference (integrations.langgraph.test_backend.LangGraphBackendTests.test_all_six_authored_accepted_graphs_match_reference) ... /Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/langgraph/.venv/lib/python3.14/site-packages/langsmith/_internal/_beta_decorator.py:70: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+test_all_six_authored_accepted_graphs_match_reference (integrations.langgraph.test_backend.LangGraphBackendTests.test_all_six_authored_accepted_graphs_match_reference) ... /Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/.venv/lib/python3.14/site-packages/langsmith/_internal/_beta_decorator.py:70: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
   if asyncio.iscoroutinefunction(func):
 ok
 test_bad_certificate_and_stale_relation_never_build_stategraph (integrations.langgraph.test_backend.LangGraphBackendTests.test_bad_certificate_and_stale_relation_never_build_stategraph) ... ok
@@ -13,6 +13,6 @@ test_session_preserves_optional_price_identity_and_call_cap (integrations.langgr
 test_source_request_session_matches_full_value_oracle (integrations.langgraph.test_backend.LangGraphBackendTests.test_source_request_session_matches_full_value_oracle) ... ok
 
 ----------------------------------------------------------------------
-Ran 11 tests in 0.683s
+Ran 11 tests in 0.664s
 
 OK

@@ -1,0 +1,23 @@
+{
+  "status": "passed",
+  "summary": {
+    "fixture_count": 12,
+    "request_equality_status_counts": {
+      "accepted": 3,
+      "rejected": 9
+    },
+    "strong_stochastic_bisimulation_status_counts": {
+      "inconclusive": 7,
+      "proved_equal": 5
+    },
+    "exact_trace_status_counts": {
+      "proved_equal": 6,
+      "unequal": 6
+    },
+    "independent_replay_status_counts": {
+      "verified": 12
+    },
+    "fixtures_with_finite_observer_comparison": 3
+  },
+  "failures": []
+}

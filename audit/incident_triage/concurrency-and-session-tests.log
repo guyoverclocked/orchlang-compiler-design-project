@@ -4,7 +4,7 @@ test_isolated_apps_keep_exact_rows_and_approve_by_thread_id (test_concurrency_st
 test_verifier_rejects_a_different_schedule (test_concurrency_study.ConcurrencyStudyTests.test_verifier_rejects_a_different_schedule) ... ok
 test_verifier_rejects_corrected_misattribution (test_concurrency_study.ConcurrencyStudyTests.test_verifier_rejects_corrected_misattribution) ... ok
 test_verifier_rejects_missing_foreign_rows (test_concurrency_study.ConcurrencyStudyTests.test_verifier_rejects_missing_foreign_rows) ... ok
-/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/.venv/lib/python3.14/site-packages/langsmith/_internal/_beta_decorator.py:70: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
+/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/.venv/lib/python3.14/site-packages/langsmith/_internal/_beta_decorator.py:70: DeprecationWarning: 'asyncio.iscoroutinefunction' is deprecated and slated for removal in Python 3.16; use inspect.iscoroutinefunction() instead
   if asyncio.iscoroutinefunction(func):
 test_cancellation_releases_start_and_approval_handles (test_isolated_sessions.IsolatedSessionManagerTests.test_cancellation_releases_start_and_approval_handles) ... ok
 test_duplicate_capacity_discard_and_expiry (test_isolated_sessions.IsolatedSessionManagerTests.test_duplicate_capacity_discard_and_expiry) ... ok
@@ -21,6 +21,6 @@ test_two_incidents_start_concurrently_with_isolated_correct_rows (test_isolated_
 test_unrelated_top_level_harness_cannot_replace_fixed_loader (test_isolated_sessions.IsolatedSessionManagerTests.test_unrelated_top_level_harness_cannot_replace_fixed_loader) ... ok
 
 ----------------------------------------------------------------------
-Ran 19 tests in 1.187s
+Ran 19 tests in 1.163s
 
 OK

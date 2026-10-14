@@ -7,7 +7,7 @@
     "python": "3.14.6"
   },
   "format": "orchlang-trace-equivalence-solver-scaling",
-  "generated_at_utc": "2026-10-13T21:35:31.813222+00:00",
+  "generated_at_utc": "2026-10-14T03:40:00.890531+00:00",
   "implementation": {
     "name": "baseline commit 5aa4ebc669a3fbae72d9a605be250624fd0bcbf5",
     "source_sha256": {
@@ -71,7 +71,7 @@
     {
       "calls_per_arm": 2,
       "producer": {
-        "analysis_seconds": 0.0011207080096937716,
+        "analysis_seconds": 0.0011269999668002129,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 5438,
@@ -85,7 +85,7 @@
           "work_bytes_used": 27111
         },
         "legacy_cap_event": null,
-        "peak_rss_bytes": 28344320,
+        "peak_rss_bytes": 28295168,
         "prefix_work_stats": {
           "avoided_repeated_products": 1,
           "naive_basis_word_products": 3,
@@ -106,8 +106,8 @@
         "diagnostic": null,
         "independent_matrix_entries": 160,
         "independent_work_bytes": 15497,
-        "peak_rss_bytes": 28721152,
-        "replay_seconds": 0.0013872919953428209,
+        "peak_rss_bytes": 28377088,
+        "replay_seconds": 0.0013669999898411334,
         "state_count": 6,
         "status": "verified",
         "transition_count": 4,
@@ -117,7 +117,99 @@
     {
       "calls_per_arm": 2,
       "producer": {
-        "analysis_seconds": 0.0011298340104985982,
+        "analysis_seconds": 0.0011193749960511923,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 5438,
+          "state_count": 6,
+          "transition_count": 4
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 256,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 27111
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28180480,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 1,
+          "naive_basis_word_products": 3,
+          "naive_product_matrix_entry_units": 30,
+          "shared_prefix_products": 2,
+          "shared_product_matrix_entry_units": 20
+        },
+        "rank": 3,
+        "report_bytes": 5122,
+        "state_count": 6,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 4
+      },
+      "repetition": 1,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 160,
+        "independent_work_bytes": 15497,
+        "peak_rss_bytes": 28672000,
+        "replay_seconds": 0.0013357919524423778,
+        "state_count": 6,
+        "status": "verified",
+        "transition_count": 4,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 2,
+      "producer": {
+        "analysis_seconds": 0.0011346670216880739,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 5438,
+          "state_count": 6,
+          "transition_count": 4
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 256,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 27111
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28409856,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 1,
+          "naive_basis_word_products": 3,
+          "naive_product_matrix_entry_units": 30,
+          "shared_prefix_products": 2,
+          "shared_product_matrix_entry_units": 20
+        },
+        "rank": 3,
+        "report_bytes": 5122,
+        "state_count": 6,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 4
+      },
+      "repetition": 2,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 160,
+        "independent_work_bytes": 15497,
+        "peak_rss_bytes": 28393472,
+        "replay_seconds": 0.0013264589942991734,
+        "state_count": 6,
+        "status": "verified",
+        "transition_count": 4,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 2,
+      "producer": {
+        "analysis_seconds": 0.0011085419682785869,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 5438,
@@ -146,106 +238,14 @@
         "telemetry": null,
         "transition_count": 4
       },
-      "repetition": 1,
-      "replay": {
-        "decision": "proved_equal",
-        "diagnostic": null,
-        "independent_matrix_entries": 160,
-        "independent_work_bytes": 15497,
-        "peak_rss_bytes": 28573696,
-        "replay_seconds": 0.0013107919949106872,
-        "state_count": 6,
-        "status": "verified",
-        "transition_count": 4,
-        "verified_pairs": 1
-      }
-    },
-    {
-      "calls_per_arm": 2,
-      "producer": {
-        "analysis_seconds": 0.0011189579963684082,
-        "diagnostics": null,
-        "instrumented_closure": {
-          "closure_work_bytes": 5438,
-          "state_count": 6,
-          "transition_count": 4
-        },
-        "instrumented_meter": {
-          "matrix_entries_used": 256,
-          "max_matrix_entries": 10000000,
-          "max_work_bytes": 67108864,
-          "work_bytes_used": 27111
-        },
-        "legacy_cap_event": null,
-        "peak_rss_bytes": 28344320,
-        "prefix_work_stats": {
-          "avoided_repeated_products": 1,
-          "naive_basis_word_products": 3,
-          "naive_product_matrix_entry_units": 30,
-          "shared_prefix_products": 2,
-          "shared_product_matrix_entry_units": 20
-        },
-        "rank": 3,
-        "report_bytes": 5122,
-        "state_count": 6,
-        "status": "proved_equal",
-        "telemetry": null,
-        "transition_count": 4
-      },
-      "repetition": 2,
-      "replay": {
-        "decision": "proved_equal",
-        "diagnostic": null,
-        "independent_matrix_entries": 160,
-        "independent_work_bytes": 15497,
-        "peak_rss_bytes": 28524544,
-        "replay_seconds": 0.0013455830048769712,
-        "state_count": 6,
-        "status": "verified",
-        "transition_count": 4,
-        "verified_pairs": 1
-      }
-    },
-    {
-      "calls_per_arm": 2,
-      "producer": {
-        "analysis_seconds": 0.0011376670154277235,
-        "diagnostics": null,
-        "instrumented_closure": {
-          "closure_work_bytes": 5438,
-          "state_count": 6,
-          "transition_count": 4
-        },
-        "instrumented_meter": {
-          "matrix_entries_used": 256,
-          "max_matrix_entries": 10000000,
-          "max_work_bytes": 67108864,
-          "work_bytes_used": 27111
-        },
-        "legacy_cap_event": null,
-        "peak_rss_bytes": 28442624,
-        "prefix_work_stats": {
-          "avoided_repeated_products": 1,
-          "naive_basis_word_products": 3,
-          "naive_product_matrix_entry_units": 30,
-          "shared_prefix_products": 2,
-          "shared_product_matrix_entry_units": 20
-        },
-        "rank": 3,
-        "report_bytes": 5122,
-        "state_count": 6,
-        "status": "proved_equal",
-        "telemetry": null,
-        "transition_count": 4
-      },
       "repetition": 3,
       "replay": {
         "decision": "proved_equal",
         "diagnostic": null,
         "independent_matrix_entries": 160,
         "independent_work_bytes": 15497,
-        "peak_rss_bytes": 28606464,
-        "replay_seconds": 0.0013670419866684824,
+        "peak_rss_bytes": 28655616,
+        "replay_seconds": 0.0013364170445129275,
         "state_count": 6,
         "status": "verified",
         "transition_count": 4,
@@ -255,7 +255,7 @@
     {
       "calls_per_arm": 2,
       "producer": {
-        "analysis_seconds": 0.0011169170029461384,
+        "analysis_seconds": 0.001110041979700327,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 5438,
@@ -269,7 +269,7 @@
           "work_bytes_used": 27111
         },
         "legacy_cap_event": null,
-        "peak_rss_bytes": 28278784,
+        "peak_rss_bytes": 28475392,
         "prefix_work_stats": {
           "avoided_repeated_products": 1,
           "naive_basis_word_products": 3,
@@ -290,8 +290,8 @@
         "diagnostic": null,
         "independent_matrix_entries": 160,
         "independent_work_bytes": 15497,
-        "peak_rss_bytes": 28721152,
-        "replay_seconds": 0.0013544579851441085,
+        "peak_rss_bytes": 28622848,
+        "replay_seconds": 0.0013358329888433218,
         "state_count": 6,
         "status": "verified",
         "transition_count": 4,
@@ -301,7 +301,7 @@
     {
       "calls_per_arm": 8,
       "producer": {
-        "analysis_seconds": 0.0026804579829331487,
+        "analysis_seconds": 0.0026772089768201113,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 18206,
@@ -315,7 +315,7 @@
           "work_bytes_used": 232130
         },
         "legacy_cap_event": null,
-        "peak_rss_bytes": 28409856,
+        "peak_rss_bytes": 28622848,
         "prefix_work_stats": {
           "avoided_repeated_products": 28,
           "naive_basis_word_products": 36,
@@ -331,151 +331,13 @@
         "transition_count": 16
       },
       "repetition": 0,
-      "replay": {
-        "decision": "proved_equal",
-        "diagnostic": null,
-        "independent_matrix_entries": 2266,
-        "independent_work_bytes": 77320,
-        "peak_rss_bytes": 28852224,
-        "replay_seconds": 0.004058958002133295,
-        "state_count": 18,
-        "status": "verified",
-        "transition_count": 16,
-        "verified_pairs": 1
-      }
-    },
-    {
-      "calls_per_arm": 8,
-      "producer": {
-        "analysis_seconds": 0.0026580420089885592,
-        "diagnostics": null,
-        "instrumented_closure": {
-          "closure_work_bytes": 18206,
-          "state_count": 18,
-          "transition_count": 16
-        },
-        "instrumented_meter": {
-          "matrix_entries_used": 3094,
-          "max_matrix_entries": 10000000,
-          "max_work_bytes": 67108864,
-          "work_bytes_used": 232130
-        },
-        "legacy_cap_event": null,
-        "peak_rss_bytes": 28360704,
-        "prefix_work_stats": {
-          "avoided_repeated_products": 28,
-          "naive_basis_word_products": 36,
-          "naive_product_matrix_entry_units": 1224,
-          "shared_prefix_products": 8,
-          "shared_product_matrix_entry_units": 272
-        },
-        "rank": 9,
-        "report_bytes": 15741,
-        "state_count": 18,
-        "status": "proved_equal",
-        "telemetry": null,
-        "transition_count": 16
-      },
-      "repetition": 1,
-      "replay": {
-        "decision": "proved_equal",
-        "diagnostic": null,
-        "independent_matrix_entries": 2266,
-        "independent_work_bytes": 77320,
-        "peak_rss_bytes": 28655616,
-        "replay_seconds": 0.004066374996909872,
-        "state_count": 18,
-        "status": "verified",
-        "transition_count": 16,
-        "verified_pairs": 1
-      }
-    },
-    {
-      "calls_per_arm": 8,
-      "producer": {
-        "analysis_seconds": 0.0027821249968837947,
-        "diagnostics": null,
-        "instrumented_closure": {
-          "closure_work_bytes": 18206,
-          "state_count": 18,
-          "transition_count": 16
-        },
-        "instrumented_meter": {
-          "matrix_entries_used": 3094,
-          "max_matrix_entries": 10000000,
-          "max_work_bytes": 67108864,
-          "work_bytes_used": 232130
-        },
-        "legacy_cap_event": null,
-        "peak_rss_bytes": 28459008,
-        "prefix_work_stats": {
-          "avoided_repeated_products": 28,
-          "naive_basis_word_products": 36,
-          "naive_product_matrix_entry_units": 1224,
-          "shared_prefix_products": 8,
-          "shared_product_matrix_entry_units": 272
-        },
-        "rank": 9,
-        "report_bytes": 15741,
-        "state_count": 18,
-        "status": "proved_equal",
-        "telemetry": null,
-        "transition_count": 16
-      },
-      "repetition": 2,
-      "replay": {
-        "decision": "proved_equal",
-        "diagnostic": null,
-        "independent_matrix_entries": 2266,
-        "independent_work_bytes": 77320,
-        "peak_rss_bytes": 28852224,
-        "replay_seconds": 0.004029834002722055,
-        "state_count": 18,
-        "status": "verified",
-        "transition_count": 16,
-        "verified_pairs": 1
-      }
-    },
-    {
-      "calls_per_arm": 8,
-      "producer": {
-        "analysis_seconds": 0.002750416984781623,
-        "diagnostics": null,
-        "instrumented_closure": {
-          "closure_work_bytes": 18206,
-          "state_count": 18,
-          "transition_count": 16
-        },
-        "instrumented_meter": {
-          "matrix_entries_used": 3094,
-          "max_matrix_entries": 10000000,
-          "max_work_bytes": 67108864,
-          "work_bytes_used": 232130
-        },
-        "legacy_cap_event": null,
-        "peak_rss_bytes": 28557312,
-        "prefix_work_stats": {
-          "avoided_repeated_products": 28,
-          "naive_basis_word_products": 36,
-          "naive_product_matrix_entry_units": 1224,
-          "shared_prefix_products": 8,
-          "shared_product_matrix_entry_units": 272
-        },
-        "rank": 9,
-        "report_bytes": 15741,
-        "state_count": 18,
-        "status": "proved_equal",
-        "telemetry": null,
-        "transition_count": 16
-      },
-      "repetition": 3,
       "replay": {
         "decision": "proved_equal",
         "diagnostic": null,
         "independent_matrix_entries": 2266,
         "independent_work_bytes": 77320,
         "peak_rss_bytes": 28803072,
-        "replay_seconds": 0.004060124978423119,
+        "replay_seconds": 0.004080250044353306,
         "state_count": 18,
         "status": "verified",
         "transition_count": 16,
@@ -485,7 +347,7 @@
     {
       "calls_per_arm": 8,
       "producer": {
-        "analysis_seconds": 0.0027202499913983047,
+        "analysis_seconds": 0.002685333020053804,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 18206,
@@ -499,7 +361,145 @@
           "work_bytes_used": 232130
         },
         "legacy_cap_event": null,
-        "peak_rss_bytes": 28655616,
+        "peak_rss_bytes": 28524544,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 28,
+          "naive_basis_word_products": 36,
+          "naive_product_matrix_entry_units": 1224,
+          "shared_prefix_products": 8,
+          "shared_product_matrix_entry_units": 272
+        },
+        "rank": 9,
+        "report_bytes": 15741,
+        "state_count": 18,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 16
+      },
+      "repetition": 1,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 2266,
+        "independent_work_bytes": 77320,
+        "peak_rss_bytes": 28852224,
+        "replay_seconds": 0.004015417012851685,
+        "state_count": 18,
+        "status": "verified",
+        "transition_count": 16,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 8,
+      "producer": {
+        "analysis_seconds": 0.0026824999949894845,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 18206,
+          "state_count": 18,
+          "transition_count": 16
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 3094,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 232130
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28639232,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 28,
+          "naive_basis_word_products": 36,
+          "naive_product_matrix_entry_units": 1224,
+          "shared_prefix_products": 8,
+          "shared_product_matrix_entry_units": 272
+        },
+        "rank": 9,
+        "report_bytes": 15741,
+        "state_count": 18,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 16
+      },
+      "repetition": 2,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 2266,
+        "independent_work_bytes": 77320,
+        "peak_rss_bytes": 28737536,
+        "replay_seconds": 0.004004042013548315,
+        "state_count": 18,
+        "status": "verified",
+        "transition_count": 16,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 8,
+      "producer": {
+        "analysis_seconds": 0.002763083961326629,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 18206,
+          "state_count": 18,
+          "transition_count": 16
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 3094,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 232130
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28344320,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 28,
+          "naive_basis_word_products": 36,
+          "naive_product_matrix_entry_units": 1224,
+          "shared_prefix_products": 8,
+          "shared_product_matrix_entry_units": 272
+        },
+        "rank": 9,
+        "report_bytes": 15741,
+        "state_count": 18,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 16
+      },
+      "repetition": 3,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 2266,
+        "independent_work_bytes": 77320,
+        "peak_rss_bytes": 28753920,
+        "replay_seconds": 0.003908917016815394,
+        "state_count": 18,
+        "status": "verified",
+        "transition_count": 16,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 8,
+      "producer": {
+        "analysis_seconds": 0.0026689170044846833,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 18206,
+          "state_count": 18,
+          "transition_count": 16
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 3094,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 232130
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28590080,
         "prefix_work_stats": {
           "avoided_repeated_products": 28,
           "naive_basis_word_products": 36,
@@ -520,8 +520,8 @@
         "diagnostic": null,
         "independent_matrix_entries": 2266,
         "independent_work_bytes": 77320,
-        "peak_rss_bytes": 28819456,
-        "replay_seconds": 0.004071458010002971,
+        "peak_rss_bytes": 28835840,
+        "replay_seconds": 0.003960333997383714,
         "state_count": 18,
         "status": "verified",
         "transition_count": 16,
@@ -531,7 +531,7 @@
     {
       "calls_per_arm": 16,
       "producer": {
-        "analysis_seconds": 0.005298832984408364,
+        "analysis_seconds": 0.005217375000938773,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 35314,
@@ -545,7 +545,7 @@
           "work_bytes_used": 1065992
         },
         "legacy_cap_event": null,
-        "peak_rss_bytes": 28508160,
+        "peak_rss_bytes": 28639232,
         "prefix_work_stats": {
           "avoided_repeated_products": 120,
           "naive_basis_word_products": 136,
@@ -566,8 +566,8 @@
         "diagnostic": null,
         "independent_matrix_entries": 12578,
         "independent_work_bytes": 288435,
-        "peak_rss_bytes": 28753920,
-        "replay_seconds": 0.009993582993047312,
+        "peak_rss_bytes": 29032448,
+        "replay_seconds": 0.01011199998902157,
         "state_count": 34,
         "status": "verified",
         "transition_count": 32,
@@ -577,7 +577,7 @@
     {
       "calls_per_arm": 16,
       "producer": {
-        "analysis_seconds": 0.005237999983364716,
+        "analysis_seconds": 0.005129249999299645,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 35314,
@@ -591,7 +591,7 @@
           "work_bytes_used": 1065992
         },
         "legacy_cap_event": null,
-        "peak_rss_bytes": 28606464,
+        "peak_rss_bytes": 28688384,
         "prefix_work_stats": {
           "avoided_repeated_products": 120,
           "naive_basis_word_products": 136,
@@ -612,8 +612,8 @@
         "diagnostic": null,
         "independent_matrix_entries": 12578,
         "independent_work_bytes": 288435,
-        "peak_rss_bytes": 29097984,
-        "replay_seconds": 0.010256750014377758,
+        "peak_rss_bytes": 29163520,
+        "replay_seconds": 0.010152417002245784,
         "state_count": 34,
         "status": "verified",
         "transition_count": 32,
@@ -623,7 +623,7 @@
     {
       "calls_per_arm": 16,
       "producer": {
-        "analysis_seconds": 0.005171750002773479,
+        "analysis_seconds": 0.005197958031203598,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 35314,
@@ -637,7 +637,7 @@
           "work_bytes_used": 1065992
         },
         "legacy_cap_event": null,
-        "peak_rss_bytes": 28868608,
+        "peak_rss_bytes": 28622848,
         "prefix_work_stats": {
           "avoided_repeated_products": 120,
           "naive_basis_word_products": 136,
@@ -658,8 +658,8 @@
         "diagnostic": null,
         "independent_matrix_entries": 12578,
         "independent_work_bytes": 288435,
-        "peak_rss_bytes": 29097984,
-        "replay_seconds": 0.010309832985512912,
+        "peak_rss_bytes": 29147136,
+        "replay_seconds": 0.010074166988488287,
         "state_count": 34,
         "status": "verified",
         "transition_count": 32,
@@ -669,7 +669,7 @@
     {
       "calls_per_arm": 16,
       "producer": {
-        "analysis_seconds": 0.005287666979711503,
+        "analysis_seconds": 0.005141000030562282,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 35314,
@@ -683,7 +683,7 @@
           "work_bytes_used": 1065992
         },
         "legacy_cap_event": null,
-        "peak_rss_bytes": 28672000,
+        "peak_rss_bytes": 28721152,
         "prefix_work_stats": {
           "avoided_repeated_products": 120,
           "naive_basis_word_products": 136,
@@ -704,8 +704,8 @@
         "diagnostic": null,
         "independent_matrix_entries": 12578,
         "independent_work_bytes": 288435,
-        "peak_rss_bytes": 29065216,
-        "replay_seconds": 0.01012954200268723,
+        "peak_rss_bytes": 29147136,
+        "replay_seconds": 0.010141125007066876,
         "state_count": 34,
         "status": "verified",
         "transition_count": 32,
@@ -715,7 +715,7 @@
     {
       "calls_per_arm": 16,
       "producer": {
-        "analysis_seconds": 0.005397750006522983,
+        "analysis_seconds": 0.005091459024697542,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 35314,
@@ -729,7 +729,7 @@
           "work_bytes_used": 1065992
         },
         "legacy_cap_event": null,
-        "peak_rss_bytes": 28753920,
+        "peak_rss_bytes": 28704768,
         "prefix_work_stats": {
           "avoided_repeated_products": 120,
           "naive_basis_word_products": 136,
@@ -750,8 +750,8 @@
         "diagnostic": null,
         "independent_matrix_entries": 12578,
         "independent_work_bytes": 288435,
-        "peak_rss_bytes": 29114368,
-        "replay_seconds": 0.010341207991586998,
+        "peak_rss_bytes": 29065216,
+        "replay_seconds": 0.010047458985354751,
         "state_count": 34,
         "status": "verified",
         "transition_count": 32,
@@ -761,7 +761,53 @@
     {
       "calls_per_arm": 32,
       "producer": {
-        "analysis_seconds": 0.011354334012139589,
+        "analysis_seconds": 0.011398791975807399,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 69554,
+          "state_count": 66,
+          "transition_count": 64
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 92926,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 6129648
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 29425664,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 496,
+          "naive_basis_word_products": 528,
+          "naive_product_matrix_entry_units": 68640,
+          "shared_prefix_products": 32,
+          "shared_product_matrix_entry_units": 4160
+        },
+        "rank": 33,
+        "report_bytes": 112663,
+        "state_count": 66,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 64
+      },
+      "repetition": 0,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 81970,
+        "independent_work_bytes": 1519995,
+        "peak_rss_bytes": 29802496,
+        "replay_seconds": 0.03304524999111891,
+        "state_count": 66,
+        "status": "verified",
+        "transition_count": 64,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 32,
+      "producer": {
+        "analysis_seconds": 0.011384084005840123,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 69554,
@@ -790,60 +836,14 @@
         "telemetry": null,
         "transition_count": 64
       },
-      "repetition": 0,
-      "replay": {
-        "decision": "proved_equal",
-        "diagnostic": null,
-        "independent_matrix_entries": 81970,
-        "independent_work_bytes": 1519995,
-        "peak_rss_bytes": 29753344,
-        "replay_seconds": 0.033261458011111245,
-        "state_count": 66,
-        "status": "verified",
-        "transition_count": 64,
-        "verified_pairs": 1
-      }
-    },
-    {
-      "calls_per_arm": 32,
-      "producer": {
-        "analysis_seconds": 0.011654292000457644,
-        "diagnostics": null,
-        "instrumented_closure": {
-          "closure_work_bytes": 69554,
-          "state_count": 66,
-          "transition_count": 64
-        },
-        "instrumented_meter": {
-          "matrix_entries_used": 92926,
-          "max_matrix_entries": 10000000,
-          "max_work_bytes": 67108864,
-          "work_bytes_used": 6129648
-        },
-        "legacy_cap_event": null,
-        "peak_rss_bytes": 29278208,
-        "prefix_work_stats": {
-          "avoided_repeated_products": 496,
-          "naive_basis_word_products": 528,
-          "naive_product_matrix_entry_units": 68640,
-          "shared_prefix_products": 32,
-          "shared_product_matrix_entry_units": 4160
-        },
-        "rank": 33,
-        "report_bytes": 112663,
-        "state_count": 66,
-        "status": "proved_equal",
-        "telemetry": null,
-        "transition_count": 64
-      },
       "repetition": 1,
       "replay": {
         "decision": "proved_equal",
         "diagnostic": null,
         "independent_matrix_entries": 81970,
         "independent_work_bytes": 1519995,
-        "peak_rss_bytes": 29753344,
-        "replay_seconds": 0.03362816700246185,
+        "peak_rss_bytes": 29818880,
+        "replay_seconds": 0.03286874998593703,
         "state_count": 66,
         "status": "verified",
         "transition_count": 64,
@@ -853,7 +853,7 @@
     {
       "calls_per_arm": 32,
       "producer": {
-        "analysis_seconds": 0.011411208019126207,
+        "analysis_seconds": 0.011337332951370627,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 69554,
@@ -867,7 +867,7 @@
           "work_bytes_used": 6129648
         },
         "legacy_cap_event": null,
-        "peak_rss_bytes": 29360128,
+        "peak_rss_bytes": 29163520,
         "prefix_work_stats": {
           "avoided_repeated_products": 496,
           "naive_basis_word_products": 528,
@@ -888,8 +888,8 @@
         "diagnostic": null,
         "independent_matrix_entries": 81970,
         "independent_work_bytes": 1519995,
-        "peak_rss_bytes": 29818880,
-        "replay_seconds": 0.033267415972659364,
+        "peak_rss_bytes": 29786112,
+        "replay_seconds": 0.03347166703315452,
         "state_count": 66,
         "status": "verified",
         "transition_count": 64,
@@ -899,7 +899,7 @@
     {
       "calls_per_arm": 32,
       "producer": {
-        "analysis_seconds": 0.011499624990392476,
+        "analysis_seconds": 0.01124025002354756,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 69554,
@@ -913,7 +913,7 @@
           "work_bytes_used": 6129648
         },
         "legacy_cap_event": null,
-        "peak_rss_bytes": 29245440,
+        "peak_rss_bytes": 29458432,
         "prefix_work_stats": {
           "avoided_repeated_products": 496,
           "naive_basis_word_products": 528,
@@ -934,8 +934,8 @@
         "diagnostic": null,
         "independent_matrix_entries": 81970,
         "independent_work_bytes": 1519995,
-        "peak_rss_bytes": 29769728,
-        "replay_seconds": 0.03345408299355768,
+        "peak_rss_bytes": 29523968,
+        "replay_seconds": 0.03303645900450647,
         "state_count": 66,
         "status": "verified",
         "transition_count": 64,
@@ -945,7 +945,7 @@
     {
       "calls_per_arm": 32,
       "producer": {
-        "analysis_seconds": 0.011331208021147177,
+        "analysis_seconds": 0.011373582994565368,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 69554,
@@ -959,7 +959,7 @@
           "work_bytes_used": 6129648
         },
         "legacy_cap_event": null,
-        "peak_rss_bytes": 29376512,
+        "peak_rss_bytes": 29212672,
         "prefix_work_stats": {
           "avoided_repeated_products": 496,
           "naive_basis_word_products": 528,
@@ -980,8 +980,8 @@
         "diagnostic": null,
         "independent_matrix_entries": 81970,
         "independent_work_bytes": 1519995,
-        "peak_rss_bytes": 29753344,
-        "replay_seconds": 0.03409058300894685,
+        "peak_rss_bytes": 29687808,
+        "replay_seconds": 0.033262167009525,
         "state_count": 66,
         "status": "verified",
         "transition_count": 64,
@@ -991,99 +991,7 @@
     {
       "calls_per_arm": 64,
       "producer": {
-        "analysis_seconds": 0.028796250000596046,
-        "diagnostics": null,
-        "instrumented_closure": {
-          "closure_work_bytes": 138034,
-          "state_count": 130,
-          "transition_count": 128
-        },
-        "instrumented_meter": {
-          "matrix_entries_used": 630238,
-          "max_matrix_entries": 10000000,
-          "max_work_bytes": 67108864,
-          "work_bytes_used": 40850626
-        },
-        "legacy_cap_event": null,
-        "peak_rss_bytes": 31309824,
-        "prefix_work_stats": {
-          "avoided_repeated_products": 2016,
-          "naive_basis_word_products": 2080,
-          "naive_product_matrix_entry_units": 536640,
-          "shared_prefix_products": 64,
-          "shared_product_matrix_entry_units": 16512
-        },
-        "rank": 65,
-        "report_bytes": 377193,
-        "state_count": 130,
-        "status": "proved_equal",
-        "telemetry": null,
-        "transition_count": 128
-      },
-      "repetition": 0,
-      "replay": {
-        "decision": "proved_equal",
-        "diagnostic": null,
-        "independent_matrix_entries": 587858,
-        "independent_work_bytes": 9972749,
-        "peak_rss_bytes": 32571392,
-        "replay_seconds": 0.14127454097615555,
-        "state_count": 130,
-        "status": "verified",
-        "transition_count": 128,
-        "verified_pairs": 1
-      }
-    },
-    {
-      "calls_per_arm": 64,
-      "producer": {
-        "analysis_seconds": 0.028770040982635692,
-        "diagnostics": null,
-        "instrumented_closure": {
-          "closure_work_bytes": 138034,
-          "state_count": 130,
-          "transition_count": 128
-        },
-        "instrumented_meter": {
-          "matrix_entries_used": 630238,
-          "max_matrix_entries": 10000000,
-          "max_work_bytes": 67108864,
-          "work_bytes_used": 40850626
-        },
-        "legacy_cap_event": null,
-        "peak_rss_bytes": 31621120,
-        "prefix_work_stats": {
-          "avoided_repeated_products": 2016,
-          "naive_basis_word_products": 2080,
-          "naive_product_matrix_entry_units": 536640,
-          "shared_prefix_products": 64,
-          "shared_product_matrix_entry_units": 16512
-        },
-        "rank": 65,
-        "report_bytes": 377193,
-        "state_count": 130,
-        "status": "proved_equal",
-        "telemetry": null,
-        "transition_count": 128
-      },
-      "repetition": 1,
-      "replay": {
-        "decision": "proved_equal",
-        "diagnostic": null,
-        "independent_matrix_entries": 587858,
-        "independent_work_bytes": 9972749,
-        "peak_rss_bytes": 32784384,
-        "replay_seconds": 0.1422401670133695,
-        "state_count": 130,
-        "status": "verified",
-        "transition_count": 128,
-        "verified_pairs": 1
-      }
-    },
-    {
-      "calls_per_arm": 64,
-      "producer": {
-        "analysis_seconds": 0.028805332985939458,
+        "analysis_seconds": 0.02886824996676296,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 138034,
@@ -1112,14 +1020,14 @@
         "telemetry": null,
         "transition_count": 128
       },
-      "repetition": 2,
+      "repetition": 0,
       "replay": {
         "decision": "proved_equal",
         "diagnostic": null,
         "independent_matrix_entries": 587858,
         "independent_work_bytes": 9972749,
         "peak_rss_bytes": 32768000,
-        "replay_seconds": 0.1411048750160262,
+        "replay_seconds": 0.1639632080332376,
         "state_count": 130,
         "status": "verified",
         "transition_count": 128,
@@ -1129,7 +1037,7 @@
     {
       "calls_per_arm": 64,
       "producer": {
-        "analysis_seconds": 0.028301000013016164,
+        "analysis_seconds": 0.028744209033902735,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 138034,
@@ -1143,7 +1051,99 @@
           "work_bytes_used": 40850626
         },
         "legacy_cap_event": null,
-        "peak_rss_bytes": 31424512,
+        "peak_rss_bytes": 31309824,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 2016,
+          "naive_basis_word_products": 2080,
+          "naive_product_matrix_entry_units": 536640,
+          "shared_prefix_products": 64,
+          "shared_product_matrix_entry_units": 16512
+        },
+        "rank": 65,
+        "report_bytes": 377193,
+        "state_count": 130,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 128
+      },
+      "repetition": 1,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 587858,
+        "independent_work_bytes": 9972749,
+        "peak_rss_bytes": 32800768,
+        "replay_seconds": 0.13822774996515363,
+        "state_count": 130,
+        "status": "verified",
+        "transition_count": 128,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 64,
+      "producer": {
+        "analysis_seconds": 0.028566042019519955,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 138034,
+          "state_count": 130,
+          "transition_count": 128
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 630238,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 40850626
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 31375360,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 2016,
+          "naive_basis_word_products": 2080,
+          "naive_product_matrix_entry_units": 536640,
+          "shared_prefix_products": 64,
+          "shared_product_matrix_entry_units": 16512
+        },
+        "rank": 65,
+        "report_bytes": 377193,
+        "state_count": 130,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 128
+      },
+      "repetition": 2,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 587858,
+        "independent_work_bytes": 9972749,
+        "peak_rss_bytes": 32751616,
+        "replay_seconds": 0.13848429202334955,
+        "state_count": 130,
+        "status": "verified",
+        "transition_count": 128,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 64,
+      "producer": {
+        "analysis_seconds": 0.028405957971699536,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 138034,
+          "state_count": 130,
+          "transition_count": 128
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 630238,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 40850626
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 31555584,
         "prefix_work_stats": {
           "avoided_repeated_products": 2016,
           "naive_basis_word_products": 2080,
@@ -1165,7 +1165,7 @@
         "independent_matrix_entries": 587858,
         "independent_work_bytes": 9972749,
         "peak_rss_bytes": 32817152,
-        "replay_seconds": 0.14044941600877792,
+        "replay_seconds": 0.13971708400640637,
         "state_count": 130,
         "status": "verified",
         "transition_count": 128,
@@ -1175,7 +1175,7 @@
     {
       "calls_per_arm": 64,
       "producer": {
-        "analysis_seconds": 0.028817915997933596,
+        "analysis_seconds": 0.02827354200417176,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 138034,
@@ -1189,7 +1189,7 @@
           "work_bytes_used": 40850626
         },
         "legacy_cap_event": null,
-        "peak_rss_bytes": 31424512,
+        "peak_rss_bytes": 31391744,
         "prefix_work_stats": {
           "avoided_repeated_products": 2016,
           "naive_basis_word_products": 2080,
@@ -1210,8 +1210,8 @@
         "diagnostic": null,
         "independent_matrix_entries": 587858,
         "independent_work_bytes": 9972749,
-        "peak_rss_bytes": 32751616,
-        "replay_seconds": 0.14066166698466986,
+        "peak_rss_bytes": 32587776,
+        "replay_seconds": 0.13850658299634233,
         "state_count": 130,
         "status": "verified",
         "transition_count": 128,
@@ -1221,109 +1221,7 @@
     {
       "calls_per_arm": 128,
       "producer": {
-        "analysis_seconds": 0.06321679198299535,
-        "diagnostics": null,
-        "instrumented_closure": {
-          "closure_work_bytes": 275168,
-          "state_count": 258,
-          "transition_count": 256
-        },
-        "instrumented_meter": {
-          "matrix_entries_used": 1043848,
-          "max_matrix_entries": 10000000,
-          "max_work_bytes": 67108864,
-          "work_bytes_used": 67081608
-        },
-        "legacy_cap_event": {
-          "attempted_entries": 514,
-          "attempted_matrix_entries": 1044362,
-          "attempted_work_bytes": 67114504,
-          "entries_used": 1043848,
-          "max_entries": 10000000,
-          "max_work_bytes": 67108864,
-          "message": "independent replay basis-word product byte-work cap reached",
-          "operation": "independent replay basis-word product",
-          "resource": "work_bytes",
-          "work_bytes_used": 67081608
-        },
-        "peak_rss_bytes": 36503552,
-        "prefix_work_stats": null,
-        "rank": null,
-        "report_bytes": 1607,
-        "state_count": null,
-        "status": "unknown",
-        "telemetry": null,
-        "transition_count": null
-      },
-      "repetition": 0,
-      "replay": {
-        "decision": null,
-        "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
-        "independent_matrix_entries": null,
-        "independent_work_bytes": null,
-        "peak_rss_bytes": 28426240,
-        "replay_seconds": 0.00021979099255986512,
-        "state_count": null,
-        "status": "unknown",
-        "transition_count": null,
-        "verified_pairs": null
-      }
-    },
-    {
-      "calls_per_arm": 128,
-      "producer": {
-        "analysis_seconds": 0.06461666600080207,
-        "diagnostics": null,
-        "instrumented_closure": {
-          "closure_work_bytes": 275168,
-          "state_count": 258,
-          "transition_count": 256
-        },
-        "instrumented_meter": {
-          "matrix_entries_used": 1043848,
-          "max_matrix_entries": 10000000,
-          "max_work_bytes": 67108864,
-          "work_bytes_used": 67081608
-        },
-        "legacy_cap_event": {
-          "attempted_entries": 514,
-          "attempted_matrix_entries": 1044362,
-          "attempted_work_bytes": 67114504,
-          "entries_used": 1043848,
-          "max_entries": 10000000,
-          "max_work_bytes": 67108864,
-          "message": "independent replay basis-word product byte-work cap reached",
-          "operation": "independent replay basis-word product",
-          "resource": "work_bytes",
-          "work_bytes_used": 67081608
-        },
-        "peak_rss_bytes": 36552704,
-        "prefix_work_stats": null,
-        "rank": null,
-        "report_bytes": 1607,
-        "state_count": null,
-        "status": "unknown",
-        "telemetry": null,
-        "transition_count": null
-      },
-      "repetition": 1,
-      "replay": {
-        "decision": null,
-        "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
-        "independent_matrix_entries": null,
-        "independent_work_bytes": null,
-        "peak_rss_bytes": 28557312,
-        "replay_seconds": 0.0002541670110076666,
-        "state_count": null,
-        "status": "unknown",
-        "transition_count": null,
-        "verified_pairs": null
-      }
-    },
-    {
-      "calls_per_arm": 128,
-      "producer": {
-        "analysis_seconds": 0.06357554197893478,
+        "analysis_seconds": 0.06307350000133738,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 275168,
@@ -1357,14 +1255,14 @@
         "telemetry": null,
         "transition_count": null
       },
-      "repetition": 2,
+      "repetition": 0,
       "replay": {
         "decision": null,
         "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
         "independent_matrix_entries": null,
         "independent_work_bytes": null,
-        "peak_rss_bytes": 28491776,
-        "replay_seconds": 0.0002778329944703728,
+        "peak_rss_bytes": 28508160,
+        "replay_seconds": 0.00021016702521592379,
         "state_count": null,
         "status": "unknown",
         "transition_count": null,
@@ -1374,7 +1272,7 @@
     {
       "calls_per_arm": 128,
       "producer": {
-        "analysis_seconds": 0.06364816697896458,
+        "analysis_seconds": 0.06307437497889623,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 275168,
@@ -1408,14 +1306,14 @@
         "telemetry": null,
         "transition_count": null
       },
-      "repetition": 3,
+      "repetition": 1,
       "replay": {
         "decision": null,
         "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
         "independent_matrix_entries": null,
         "independent_work_bytes": null,
-        "peak_rss_bytes": 28524544,
-        "replay_seconds": 0.0002359169884584844,
+        "peak_rss_bytes": 28557312,
+        "replay_seconds": 0.00021808297606185079,
         "state_count": null,
         "status": "unknown",
         "transition_count": null,
@@ -1425,7 +1323,58 @@
     {
       "calls_per_arm": 128,
       "producer": {
-        "analysis_seconds": 0.06502012501005083,
+        "analysis_seconds": 0.06347187497885898,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 275168,
+          "state_count": 258,
+          "transition_count": 256
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 1043848,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 67081608
+        },
+        "legacy_cap_event": {
+          "attempted_entries": 514,
+          "attempted_matrix_entries": 1044362,
+          "attempted_work_bytes": 67114504,
+          "entries_used": 1043848,
+          "max_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "message": "independent replay basis-word product byte-work cap reached",
+          "operation": "independent replay basis-word product",
+          "resource": "work_bytes",
+          "work_bytes_used": 67081608
+        },
+        "peak_rss_bytes": 36585472,
+        "prefix_work_stats": null,
+        "rank": null,
+        "report_bytes": 1607,
+        "state_count": null,
+        "status": "unknown",
+        "telemetry": null,
+        "transition_count": null
+      },
+      "repetition": 2,
+      "replay": {
+        "decision": null,
+        "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
+        "independent_matrix_entries": null,
+        "independent_work_bytes": null,
+        "peak_rss_bytes": 28540928,
+        "replay_seconds": 0.00023583299480378628,
+        "state_count": null,
+        "status": "unknown",
+        "transition_count": null,
+        "verified_pairs": null
+      }
+    },
+    {
+      "calls_per_arm": 128,
+      "producer": {
+        "analysis_seconds": 0.06196883297525346,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 275168,
@@ -1459,6 +1408,57 @@
         "telemetry": null,
         "transition_count": null
       },
+      "repetition": 3,
+      "replay": {
+        "decision": null,
+        "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
+        "independent_matrix_entries": null,
+        "independent_work_bytes": null,
+        "peak_rss_bytes": 28426240,
+        "replay_seconds": 0.00021729100262746215,
+        "state_count": null,
+        "status": "unknown",
+        "transition_count": null,
+        "verified_pairs": null
+      }
+    },
+    {
+      "calls_per_arm": 128,
+      "producer": {
+        "analysis_seconds": 0.0628570830449462,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 275168,
+          "state_count": 258,
+          "transition_count": 256
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 1043848,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 67081608
+        },
+        "legacy_cap_event": {
+          "attempted_entries": 514,
+          "attempted_matrix_entries": 1044362,
+          "attempted_work_bytes": 67114504,
+          "entries_used": 1043848,
+          "max_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "message": "independent replay basis-word product byte-work cap reached",
+          "operation": "independent replay basis-word product",
+          "resource": "work_bytes",
+          "work_bytes_used": 67081608
+        },
+        "peak_rss_bytes": 36782080,
+        "prefix_work_stats": null,
+        "rank": null,
+        "report_bytes": 1607,
+        "state_count": null,
+        "status": "unknown",
+        "telemetry": null,
+        "transition_count": null
+      },
       "repetition": 4,
       "replay": {
         "decision": null,
@@ -1466,7 +1466,7 @@
         "independent_matrix_entries": null,
         "independent_work_bytes": null,
         "peak_rss_bytes": 28540928,
-        "replay_seconds": 0.00022291598725132644,
+        "replay_seconds": 0.0002127080224454403,
         "state_count": null,
         "status": "unknown",
         "transition_count": null,
@@ -1476,7 +1476,7 @@
     {
       "calls_per_arm": 256,
       "producer": {
-        "analysis_seconds": 0.19183483297820203,
+        "analysis_seconds": 0.18912024999735877,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 549856,
@@ -1501,7 +1501,7 @@
           "resource": "work_bytes",
           "work_bytes_used": 67104648
         },
-        "peak_rss_bytes": 56393728,
+        "peak_rss_bytes": 56426496,
         "prefix_work_stats": null,
         "rank": null,
         "report_bytes": 1607,
@@ -1516,8 +1516,8 @@
         "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
         "independent_matrix_entries": null,
         "independent_work_bytes": null,
-        "peak_rss_bytes": 28360704,
-        "replay_seconds": 0.0002754590241238475,
+        "peak_rss_bytes": 28262400,
+        "replay_seconds": 0.000234208011534065,
         "state_count": null,
         "status": "unknown",
         "transition_count": null,
@@ -1527,7 +1527,7 @@
     {
       "calls_per_arm": 256,
       "producer": {
-        "analysis_seconds": 0.19148345800931565,
+        "analysis_seconds": 0.18682087498018518,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 549856,
@@ -1567,8 +1567,8 @@
         "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
         "independent_matrix_entries": null,
         "independent_work_bytes": null,
-        "peak_rss_bytes": 28639232,
-        "replay_seconds": 0.0002478749956935644,
+        "peak_rss_bytes": 28606464,
+        "replay_seconds": 0.0002512919600121677,
         "state_count": null,
         "status": "unknown",
         "transition_count": null,
@@ -1578,7 +1578,7 @@
     {
       "calls_per_arm": 256,
       "producer": {
-        "analysis_seconds": 0.19794079099665396,
+        "analysis_seconds": 0.18910074996529147,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 549856,
@@ -1618,8 +1618,8 @@
         "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
         "independent_matrix_entries": null,
         "independent_work_bytes": null,
-        "peak_rss_bytes": 28606464,
-        "replay_seconds": 0.00025312500656582415,
+        "peak_rss_bytes": 28491776,
+        "replay_seconds": 0.00022479199105873704,
         "state_count": null,
         "status": "unknown",
         "transition_count": null,
@@ -1629,7 +1629,7 @@
     {
       "calls_per_arm": 256,
       "producer": {
-        "analysis_seconds": 0.1980314999818802,
+        "analysis_seconds": 0.18734091601800174,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 549856,
@@ -1654,7 +1654,7 @@
           "resource": "work_bytes",
           "work_bytes_used": 67104648
         },
-        "peak_rss_bytes": 56377344,
+        "peak_rss_bytes": 56344576,
         "prefix_work_stats": null,
         "rank": null,
         "report_bytes": 1607,
@@ -1669,8 +1669,8 @@
         "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
         "independent_matrix_entries": null,
         "independent_work_bytes": null,
-        "peak_rss_bytes": 28540928,
-        "replay_seconds": 0.00029791699489578605,
+        "peak_rss_bytes": 28590080,
+        "replay_seconds": 0.00022870796965435147,
         "state_count": null,
         "status": "unknown",
         "transition_count": null,
@@ -1680,7 +1680,7 @@
     {
       "calls_per_arm": 256,
       "producer": {
-        "analysis_seconds": 0.19222729100147262,
+        "analysis_seconds": 0.19012029096484184,
         "diagnostics": null,
         "instrumented_closure": {
           "closure_work_bytes": 549856,
@@ -1705,7 +1705,7 @@
           "resource": "work_bytes",
           "work_bytes_used": 67104648
         },
-        "peak_rss_bytes": 56590336,
+        "peak_rss_bytes": 56328192,
         "prefix_work_stats": null,
         "rank": null,
         "report_bytes": 1607,
@@ -1720,8 +1720,8 @@
         "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
         "independent_matrix_entries": null,
         "independent_work_bytes": null,
-        "peak_rss_bytes": 28590080,
-        "replay_seconds": 0.00023633299861103296,
+        "peak_rss_bytes": 28540928,
+        "replay_seconds": 0.00023275002604350448,
         "state_count": null,
         "status": "unknown",
         "transition_count": null,
@@ -1763,18 +1763,18 @@
       "median_rank": 3,
       "naive_basis_word_products_median": 3,
       "naive_product_matrix_entry_units_median": 30,
-      "producer_peak_rss_bytes_median": 28344320,
-      "producer_seconds_max": 0.0011376670154277235,
-      "producer_seconds_median": 0.0011207080096937716,
-      "producer_seconds_min": 0.0011169170029461384,
+      "producer_peak_rss_bytes_median": 28393472,
+      "producer_seconds_max": 0.0011346670216880739,
+      "producer_seconds_median": 0.0011193749960511923,
+      "producer_seconds_min": 0.0011085419682785869,
       "producer_status_counts": {
         "proved_equal": 5
       },
       "repetitions": 5,
-      "replay_peak_rss_bytes_median": 28606464,
-      "replay_seconds_max": 0.0013872919953428209,
-      "replay_seconds_median": 0.0013544579851441085,
-      "replay_seconds_min": 0.0013107919949106872,
+      "replay_peak_rss_bytes_median": 28622848,
+      "replay_seconds_max": 0.0013669999898411334,
+      "replay_seconds_median": 0.0013358329888433218,
+      "replay_seconds_min": 0.0013264589942991734,
       "replay_status_counts": {
         "verified": 5
       },
@@ -1790,18 +1790,18 @@
       "median_rank": 9,
       "naive_basis_word_products_median": 36,
       "naive_product_matrix_entry_units_median": 1224,
-      "producer_peak_rss_bytes_median": 28459008,
-      "producer_seconds_max": 0.0027821249968837947,
-      "producer_seconds_median": 0.0027202499913983047,
-      "producer_seconds_min": 0.0026580420089885592,
+      "producer_peak_rss_bytes_median": 28590080,
+      "producer_seconds_max": 0.002763083961326629,
+      "producer_seconds_median": 0.0026824999949894845,
+      "producer_seconds_min": 0.0026689170044846833,
       "producer_status_counts": {
         "proved_equal": 5
       },
       "repetitions": 5,
-      "replay_peak_rss_bytes_median": 28819456,
-      "replay_seconds_max": 0.004071458010002971,
-      "replay_seconds_median": 0.004060124978423119,
-      "replay_seconds_min": 0.004029834002722055,
+      "replay_peak_rss_bytes_median": 28803072,
+      "replay_seconds_max": 0.004080250044353306,
+      "replay_seconds_median": 0.004004042013548315,
+      "replay_seconds_min": 0.003908917016815394,
       "replay_status_counts": {
         "verified": 5
       },
@@ -1817,18 +1817,18 @@
       "median_rank": 17,
       "naive_basis_word_products_median": 136,
       "naive_product_matrix_entry_units_median": 8976,
-      "producer_peak_rss_bytes_median": 28672000,
-      "producer_seconds_max": 0.005397750006522983,
-      "producer_seconds_median": 0.005287666979711503,
-      "producer_seconds_min": 0.005171750002773479,
+      "producer_peak_rss_bytes_median": 28688384,
+      "producer_seconds_max": 0.005217375000938773,
+      "producer_seconds_median": 0.005141000030562282,
+      "producer_seconds_min": 0.005091459024697542,
       "producer_status_counts": {
         "proved_equal": 5
       },
       "repetitions": 5,
-      "replay_peak_rss_bytes_median": 29097984,
-      "replay_seconds_max": 0.010341207991586998,
-      "replay_seconds_median": 0.010256750014377758,
-      "replay_seconds_min": 0.009993582993047312,
+      "replay_peak_rss_bytes_median": 29147136,
+      "replay_seconds_max": 0.010152417002245784,
+      "replay_seconds_median": 0.01011199998902157,
+      "replay_seconds_min": 0.010047458985354751,
       "replay_status_counts": {
         "verified": 5
       },
@@ -1844,18 +1844,18 @@
       "median_rank": 33,
       "naive_basis_word_products_median": 528,
       "naive_product_matrix_entry_units_median": 68640,
-      "producer_peak_rss_bytes_median": 29278208,
-      "producer_seconds_max": 0.011654292000457644,
-      "producer_seconds_median": 0.011411208019126207,
-      "producer_seconds_min": 0.011331208021147177,
+      "producer_peak_rss_bytes_median": 29261824,
+      "producer_seconds_max": 0.011398791975807399,
+      "producer_seconds_median": 0.011373582994565368,
+      "producer_seconds_min": 0.01124025002354756,
       "producer_status_counts": {
         "proved_equal": 5
       },
       "repetitions": 5,
-      "replay_peak_rss_bytes_median": 29753344,
-      "replay_seconds_max": 0.03409058300894685,
-      "replay_seconds_median": 0.03345408299355768,
-      "replay_seconds_min": 0.033261458011111245,
+      "replay_peak_rss_bytes_median": 29786112,
+      "replay_seconds_max": 0.03347166703315452,
+      "replay_seconds_median": 0.03304524999111891,
+      "replay_seconds_min": 0.03286874998593703,
       "replay_status_counts": {
         "verified": 5
       },
@@ -1871,18 +1871,18 @@
       "median_rank": 65,
       "naive_basis_word_products_median": 2080,
       "naive_product_matrix_entry_units_median": 536640,
-      "producer_peak_rss_bytes_median": 31424512,
-      "producer_seconds_max": 0.028817915997933596,
-      "producer_seconds_median": 0.028796250000596046,
-      "producer_seconds_min": 0.028301000013016164,
+      "producer_peak_rss_bytes_median": 31391744,
+      "producer_seconds_max": 0.02886824996676296,
+      "producer_seconds_median": 0.028566042019519955,
+      "producer_seconds_min": 0.02827354200417176,
       "producer_status_counts": {
         "proved_equal": 5
       },
       "repetitions": 5,
       "replay_peak_rss_bytes_median": 32768000,
-      "replay_seconds_max": 0.1422401670133695,
-      "replay_seconds_median": 0.1411048750160262,
-      "replay_seconds_min": 0.14044941600877792,
+      "replay_seconds_max": 0.1639632080332376,
+      "replay_seconds_median": 0.13850658299634233,
+      "replay_seconds_min": 0.13822774996515363,
       "replay_status_counts": {
         "verified": 5
       },
@@ -1898,10 +1898,10 @@
       "median_rank": null,
       "naive_basis_word_products_median": null,
       "naive_product_matrix_entry_units_median": null,
-      "producer_peak_rss_bytes_median": 36503552,
-      "producer_seconds_max": 0.06502012501005083,
-      "producer_seconds_median": 0.06364816697896458,
-      "producer_seconds_min": 0.06321679198299535,
+      "producer_peak_rss_bytes_median": 36569088,
+      "producer_seconds_max": 0.06347187497885898,
+      "producer_seconds_median": 0.06307350000133738,
+      "producer_seconds_min": 0.06196883297525346,
       "producer_status_counts": {
         "unknown": 5
       },
@@ -1926,9 +1926,9 @@
       "naive_basis_word_products_median": null,
       "naive_product_matrix_entry_units_median": null,
       "producer_peak_rss_bytes_median": 56393728,
-      "producer_seconds_max": 0.1980314999818802,
-      "producer_seconds_median": 0.19222729100147262,
-      "producer_seconds_min": 0.19148345800931565,
+      "producer_seconds_max": 0.19012029096484184,
+      "producer_seconds_median": 0.18910074996529147,
+      "producer_seconds_min": 0.18682087498018518,
       "producer_status_counts": {
         "unknown": 5
       },
