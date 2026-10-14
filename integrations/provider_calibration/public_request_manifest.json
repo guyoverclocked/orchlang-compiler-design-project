@@ -1,0 +1,329 @@
+{
+  "artifact_hash_guard_finding": {
+    "finding": "The capsule result JSON digests recorded during initial calibration differed on a later validation while capsule tooling was still being edited. Treat this as expected development-artifact drift, not a change to the immutable original-source identities above. Final result-artifact hashes will be attached only after the capsule agent declares its artifacts final.",
+    "historical_observations": [
+      {
+        "capsule_id": "didilili-langgraphllm-one-node-finite-oracle-v1",
+        "initial_sha256": "f627c54c193a3698231a1f95e0ae2d1b98165b27f269a8a44311acb0c39a6427",
+        "later_observed_sha256": "78ffcea04b8b476c9370f66f1d094124e5a69b4bdedb50d44a00339512ad77f8"
+      },
+      {
+        "capsule_id": "joshuac215-kb-agent-sequential-async-finite-oracle-v1",
+        "initial_sha256": "de6018e7fd8cf1a7b9064c70320d1fc3e132f5c4cfeb4d5f7b95c9d2043f3881",
+        "later_observed_sha256": "5a249028d1b79fe979952b1007d8da44f449ffd1f52faf0136c7e90202d96559"
+      }
+    ],
+    "status": "development_result_artifact_drift_observed; final_binding_pending"
+  },
+  "cases": [
+    {
+      "envelope_profile_id": "envelope_messages",
+      "id": "envelope_messages__P01",
+      "payload_template": {
+        "input_count_endpoint": "responses/input_tokens",
+        "input_count_payload": {
+          "input": [
+            {
+              "content": "Return exactly this ASCII string and nothing else: ORCH-CAL-0.",
+              "role": "user"
+            }
+          ],
+          "model": "<EXACT_MODEL_ID_PENDING>"
+        },
+        "provider_adapter": "openai-responses",
+        "response_endpoint": "responses",
+        "response_payload": {
+          "input": [
+            {
+              "content": "Return exactly this ASCII string and nothing else: ORCH-CAL-0.",
+              "role": "user"
+            }
+          ],
+          "max_output_tokens": 64,
+          "model": "<EXACT_MODEL_ID_PENDING>",
+          "store": false
+        }
+      },
+      "payload_template_sha256": "3e7668278fdb9aad9ba5971086ffc53995bde36a983cc659b1846fc7d83cca33",
+      "prompt_id": "P01"
+    },
+    {
+      "envelope_profile_id": "envelope_messages",
+      "id": "envelope_messages__P02",
+      "payload_template": {
+        "input_count_endpoint": "responses/input_tokens",
+        "input_count_payload": {
+          "input": [
+            {
+              "content": "Return the product of 17 and 19 as one integer and nothing else.",
+              "role": "user"
+            }
+          ],
+          "model": "<EXACT_MODEL_ID_PENDING>"
+        },
+        "provider_adapter": "openai-responses",
+        "response_endpoint": "responses",
+        "response_payload": {
+          "input": [
+            {
+              "content": "Return the product of 17 and 19 as one integer and nothing else.",
+              "role": "user"
+            }
+          ],
+          "max_output_tokens": 64,
+          "model": "<EXACT_MODEL_ID_PENDING>",
+          "store": false
+        }
+      },
+      "payload_template_sha256": "0f645ec36368dff77c3937f227053f14d1e632135c2edd7fa5b107172885b069",
+      "prompt_id": "P02"
+    },
+    {
+      "envelope_profile_id": "envelope_messages",
+      "id": "envelope_messages__P03",
+      "payload_template": {
+        "input_count_endpoint": "responses/input_tokens",
+        "input_count_payload": {
+          "input": [
+            {
+              "content": "Sort these labels alphabetically, then join them with commas: beta, alpha, gamma.",
+              "role": "user"
+            }
+          ],
+          "model": "<EXACT_MODEL_ID_PENDING>"
+        },
+        "provider_adapter": "openai-responses",
+        "response_endpoint": "responses",
+        "response_payload": {
+          "input": [
+            {
+              "content": "Sort these labels alphabetically, then join them with commas: beta, alpha, gamma.",
+              "role": "user"
+            }
+          ],
+          "max_output_tokens": 64,
+          "model": "<EXACT_MODEL_ID_PENDING>",
+          "store": false
+        }
+      },
+      "payload_template_sha256": "c028cb4fc30350eb3d180bad970e1a9aecce822fc186dbd96a2c56d71eb7abd2",
+      "prompt_id": "P03"
+    },
+    {
+      "envelope_profile_id": "envelope_messages",
+      "id": "envelope_messages__P04",
+      "payload_template": {
+        "input_count_endpoint": "responses/input_tokens",
+        "input_count_payload": {
+          "input": [
+            {
+              "content": "Return exactly the UTF-8 text between angle brackets: <café 🌱 λ>.",
+              "role": "user"
+            }
+          ],
+          "model": "<EXACT_MODEL_ID_PENDING>"
+        },
+        "provider_adapter": "openai-responses",
+        "response_endpoint": "responses",
+        "response_payload": {
+          "input": [
+            {
+              "content": "Return exactly the UTF-8 text between angle brackets: <café 🌱 λ>.",
+              "role": "user"
+            }
+          ],
+          "max_output_tokens": 64,
+          "model": "<EXACT_MODEL_ID_PENDING>",
+          "store": false
+        }
+      },
+      "payload_template_sha256": "062698727f6eccd66401e8aae2024a433a6da693a31c3736c0a7981cef793ed8",
+      "prompt_id": "P04"
+    },
+    {
+      "envelope_profile_id": "envelope_text",
+      "id": "envelope_text__P01",
+      "payload_template": {
+        "input_count_endpoint": "responses/input_tokens",
+        "input_count_payload": {
+          "input": "Return exactly this ASCII string and nothing else: ORCH-CAL-0.",
+          "model": "<EXACT_MODEL_ID_PENDING>"
+        },
+        "provider_adapter": "openai-responses",
+        "response_endpoint": "responses",
+        "response_payload": {
+          "input": "Return exactly this ASCII string and nothing else: ORCH-CAL-0.",
+          "max_output_tokens": 64,
+          "model": "<EXACT_MODEL_ID_PENDING>",
+          "store": false
+        }
+      },
+      "payload_template_sha256": "2a2f640c2f0793f7907968bf1a58040e0f3797f3631bf4b8de7a36e6fed7e814",
+      "prompt_id": "P01"
+    },
+    {
+      "envelope_profile_id": "envelope_text",
+      "id": "envelope_text__P02",
+      "payload_template": {
+        "input_count_endpoint": "responses/input_tokens",
+        "input_count_payload": {
+          "input": "Return the product of 17 and 19 as one integer and nothing else.",
+          "model": "<EXACT_MODEL_ID_PENDING>"
+        },
+        "provider_adapter": "openai-responses",
+        "response_endpoint": "responses",
+        "response_payload": {
+          "input": "Return the product of 17 and 19 as one integer and nothing else.",
+          "max_output_tokens": 64,
+          "model": "<EXACT_MODEL_ID_PENDING>",
+          "store": false
+        }
+      },
+      "payload_template_sha256": "d8862a751c478fb213b784350656c0b8219c2e82b75e3eab86a1ce42d42e7ea4",
+      "prompt_id": "P02"
+    },
+    {
+      "envelope_profile_id": "envelope_text",
+      "id": "envelope_text__P03",
+      "payload_template": {
+        "input_count_endpoint": "responses/input_tokens",
+        "input_count_payload": {
+          "input": "Sort these labels alphabetically, then join them with commas: beta, alpha, gamma.",
+          "model": "<EXACT_MODEL_ID_PENDING>"
+        },
+        "provider_adapter": "openai-responses",
+        "response_endpoint": "responses",
+        "response_payload": {
+          "input": "Sort these labels alphabetically, then join them with commas: beta, alpha, gamma.",
+          "max_output_tokens": 64,
+          "model": "<EXACT_MODEL_ID_PENDING>",
+          "store": false
+        }
+      },
+      "payload_template_sha256": "11d66f9eee0f6b6a1096659d9511174b16418946252dc74fe44c02ff847f22cb",
+      "prompt_id": "P03"
+    },
+    {
+      "envelope_profile_id": "envelope_text",
+      "id": "envelope_text__P04",
+      "payload_template": {
+        "input_count_endpoint": "responses/input_tokens",
+        "input_count_payload": {
+          "input": "Return exactly the UTF-8 text between angle brackets: <café 🌱 λ>.",
+          "model": "<EXACT_MODEL_ID_PENDING>"
+        },
+        "provider_adapter": "openai-responses",
+        "response_endpoint": "responses",
+        "response_payload": {
+          "input": "Return exactly the UTF-8 text between angle brackets: <café 🌱 λ>.",
+          "max_output_tokens": 64,
+          "model": "<EXACT_MODEL_ID_PENDING>",
+          "store": false
+        }
+      },
+      "payload_template_sha256": "1cf7affb126dc30d5558bde279de4ee714b0d09f28016891e36dc23e670e9634",
+      "prompt_id": "P04"
+    }
+  ],
+  "created_date_utc": "2026-10-14",
+  "envelope_profiles": [
+    {
+      "capsule_result_artifact_binding": "pending capsule-agent finalization; no mutable result-artifact digest pinned",
+      "id": "envelope_messages",
+      "immutable_source_identity": {
+        "commit": "9de20be80dad6d410268ae75f75cf94c355dd364",
+        "path": "output/publication_upgrade/corpus/sources/didilili/ai-agents-from-zero/9de20be80dad6d410268ae75f75cf94c355dd364/案例与源码-3-LangGraph框架/01-helloworld/LangGraphLLM.py",
+        "repository": "didilili/ai-agents-from-zero",
+        "selection_sha256": "8aefb2d2683d0b8bdbe2737299a320388c43777c5b1606f91de2a99d56ad49fe",
+        "sha256": "b35741309de653d79e2cb403ebc5ddfa6b74383dd22f2e0d0142a1359225818b"
+      },
+      "input_form": "messages",
+      "openai_payload_mapping": "Responses API input is a one-element user-message list with synthetic content",
+      "profile_scope": "source-derived envelope shape only; not the original provider/SDK/model call",
+      "profile_sha256": "56688d7c4940555207d00d3d369d4944d56c0ce7cdf146323aeb116857087d46",
+      "source_capsule_id": "didilili-langgraphllm-one-node-finite-oracle-v1",
+      "source_event_pointer": "result.exact_laws.complete_trace_law[0].representative.request_and_response_events[0].envelope",
+      "source_shape_summary": "offline capsule records one chat-message input nested in an invocation argument list"
+    },
+    {
+      "capsule_result_artifact_binding": "pending capsule-agent finalization; no mutable result-artifact digest pinned",
+      "id": "envelope_text",
+      "immutable_source_identity": {
+        "commit": "88ebfa1fadd1a207aa92115635abf7ed20d66a88",
+        "path": "output/publication_upgrade/corpus/sources/JoshuaC215/agent-service-toolkit/88ebfa1fadd1a207aa92115635abf7ed20d66a88/src/agents/knowledge_base_agent.py",
+        "repository": "JoshuaC215/agent-service-toolkit",
+        "selection_sha256": "09f6a590b4c0e41f113119cc74b77101dc8145bf43805b10c105d1cf4537adfe",
+        "sha256": "6a96b47a58e855444fa410bef6e077220f578f188476a605aabeb88d88bf0ccc"
+      },
+      "input_form": "text",
+      "openai_payload_mapping": "Responses API input is a synthetic plain string",
+      "profile_scope": "source-derived envelope shape only; not the original provider/SDK/model call",
+      "profile_sha256": "0a39bdac5fca57a293e3e0dacac8f78b37c320366439d075078847141c3f2508",
+      "source_capsule_id": "joshuac215-kb-agent-sequential-async-finite-oracle-v1",
+      "source_event_pointer": "result.worlds[0].trace_projection.ordered_events[3].envelope",
+      "source_shape_summary": "offline capsule records one plain-text input passed to an asynchronous invocation boundary"
+    }
+  ],
+  "experiment_id": "scp-provider-usage-calibration-readiness-v1",
+  "manifest_sha256": "9c8e2b720c5764b38b47c03cc3e824de131ebaf9abdff445370bb2a0727d2c42",
+  "model_selection": null,
+  "observer_definitions": {
+    "abstract_declared": "Legacy character heuristic max(1, code_points(prompt text)//4), over prompt text only; envelope overhead excluded.",
+    "api_reported": "Exact provider response usage object plus normalized input/output/total, cached-input, cache-write and reasoning counters where present. Missing or inconsistent counters remain incomplete.",
+    "local_tokenizer": "An explicitly named locally installed tiktoken encoding; package and encoding identities are recorded; never downloads vocabulary data."
+  },
+  "official_docs_reviewed": {
+    "pricing": "https://developers.openai.com/api/docs/pricing",
+    "responses_usage": "https://developers.openai.com/api/reference/resources/responses/methods/create",
+    "reviewed_date_utc": "2026-10-14",
+    "token_counting": "https://developers.openai.com/api/docs/guides/token-counting"
+  },
+  "prompts": [
+    {
+      "id": "P01",
+      "text": "Return exactly this ASCII string and nothing else: ORCH-CAL-0.",
+      "text_sha256": "7b02e2b03e5df8ee6961c050af979228efa7fcb8b18e838f86ce0c32147aa89d"
+    },
+    {
+      "id": "P02",
+      "text": "Return the product of 17 and 19 as one integer and nothing else.",
+      "text_sha256": "0a029f7ea5fa72b739749b2c537577b1d56af1b57aefa57595e41b1fbb58d5c0"
+    },
+    {
+      "id": "P03",
+      "text": "Sort these labels alphabetically, then join them with commas: beta, alpha, gamma.",
+      "text_sha256": "f09b5dc33af11934e14e9ec21b63ce318d2df67fc0dde150ed6c72aea9489337"
+    },
+    {
+      "id": "P04",
+      "text": "Return exactly the UTF-8 text between angle brackets: <café 🌱 λ>.",
+      "text_sha256": "775c112822f2177408dcaf756a5028ec607e8e3975f55ad47db464e09dfe79f6"
+    }
+  ],
+  "proposed_caps": {
+    "automatic_escalation": false,
+    "budget_note": "Planning ceiling only. A model-specific price schedule must be entered at offline plan freeze; estimate reserves each of 8 input-count requests and each of 8 Responses inputs at the highest entered input/cache-write rate, and all 8 outputs at the entered output rate. This does not cap an invoice.",
+    "max_input_tokens_per_case": 1024,
+    "max_output_tokens_per_case": 64,
+    "max_response_requests": 8,
+    "max_retries": 0,
+    "max_tools": 0,
+    "max_wire_requests": 16,
+    "proposed_budget_usd": "0.25",
+    "storage": false
+  },
+  "provider_selection": "pending explicit human selection; optional adapter included for OpenAI Responses",
+  "readiness_only": true,
+  "schema_version": 1,
+  "source_capsule_scope": {
+    "artifacts": "offline capsule result artifacts; immutable original-source identities recorded, mutable result-artifact hash binding pending",
+    "claim": "The two profiles copy only the observed input-shape class and map it into an OpenAI Responses payload.",
+    "exclusions": [
+      "original workflow provider/SDK/model fidelity",
+      "provider configuration from original source",
+      "source prompt content",
+      "output-distribution or probability-radius estimation",
+      "privacy or confidentiality assurance"
+    ]
+  }
+}

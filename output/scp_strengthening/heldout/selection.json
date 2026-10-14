@@ -1,0 +1,1373 @@
+{
+  "frozen_at_utc": "2026-10-14T15:58:00.119268+00:00",
+  "protocol_sha256": "b9f99cafa59659a1e81153fd7b8339975a5ab2f16772162cf76fd64a568c571a",
+  "search_snapshots": [
+    {
+      "path": "output/scp_strengthening/heldout/search_langgraph.json",
+      "sha256": "e8a59b1b9f509b9fb4779b086e8a18043182f3deddd0e37001018d3939bf88e3",
+      "query": "langgraph language:Python stars:>=100",
+      "returned": 100
+    },
+    {
+      "path": "output/scp_strengthening/heldout/search_topic.json",
+      "sha256": "b83abf603aa7a629f33ff93cbe216b0c80f5bcf4aeb904085c407059668d872d",
+      "query": "topic:langgraph language:Python stars:>=100",
+      "returned": 100
+    }
+  ],
+  "unique_repository_count": 129,
+  "selected_repositories": [
+    {
+      "full_name": "doobidoo/mcp-memory-service",
+      "default_branch": "main",
+      "stars": 2014,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 17,
+        "topic:langgraph language:Python stars:>=100": 16
+      }
+    },
+    {
+      "full_name": "vstorm-co/full-stack-ai-agent-template",
+      "default_branch": "main",
+      "stars": 1949,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 18,
+        "topic:langgraph language:Python stars:>=100": 17
+      }
+    },
+    {
+      "full_name": "zi-yue-1129/DATAGEN",
+      "default_branch": "main",
+      "stars": 1809,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 19,
+        "topic:langgraph language:Python stars:>=100": 18
+      }
+    },
+    {
+      "full_name": "neural-maze/philoagents-course",
+      "default_branch": "main",
+      "stars": 1550,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 22,
+        "topic:langgraph language:Python stars:>=100": 20
+      }
+    },
+    {
+      "full_name": "CopilotKit/OpenTag",
+      "default_branch": "main",
+      "stars": 1266,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 23
+      }
+    },
+    {
+      "full_name": "Pan-Chera/Multi-Agent-CAD",
+      "default_branch": "main",
+      "stars": 1033,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 28,
+        "topic:langgraph language:Python stars:>=100": 23
+      }
+    },
+    {
+      "full_name": "FareedKhan-dev/production-grade-agentic-system",
+      "default_branch": "master",
+      "stars": 993,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 29,
+        "topic:langgraph language:Python stars:>=100": 24
+      }
+    },
+    {
+      "full_name": "souvikmajumder26/Multi-Agent-Medical-Assistant",
+      "default_branch": "main",
+      "stars": 990,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 30,
+        "topic:langgraph language:Python stars:>=100": 25
+      }
+    },
+    {
+      "full_name": "zamalali/DeepGit",
+      "default_branch": "main",
+      "stars": 918,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 31,
+        "topic:langgraph language:Python stars:>=100": 26
+      }
+    },
+    {
+      "full_name": "lc2panda/alphastream",
+      "default_branch": "main",
+      "stars": 893,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 32
+      }
+    },
+    {
+      "full_name": "icey1287/SuperMew",
+      "default_branch": "main",
+      "stars": 890,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 33
+      }
+    },
+    {
+      "full_name": "agentscope-ai/agentscope-runtime",
+      "default_branch": "main",
+      "stars": 876,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 34,
+        "topic:langgraph language:Python stars:>=100": 27
+      }
+    }
+  ],
+  "excluded_repositories": [
+    {
+      "full_name": "langchain-ai/langchain",
+      "default_branch": "master",
+      "stars": 147805,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 1,
+        "topic:langgraph language:Python stars:>=100": 1
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "bytedance/deer-flow",
+      "default_branch": "main",
+      "stars": 83860,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 2,
+        "topic:langgraph language:Python stars:>=100": 2
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "langchain-ai/langgraph",
+      "default_branch": "main",
+      "stars": 43261,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 3,
+        "topic:langgraph language:Python stars:>=100": 3
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "langchain-ai/deepagents",
+      "default_branch": "main",
+      "stars": 30257,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 4,
+        "topic:langgraph language:Python stars:>=100": 4
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "xerrors/Yuxi",
+      "default_branch": "main",
+      "stars": 7392,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 5,
+        "topic:langgraph language:Python stars:>=100": 5
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "BitterSecurity/Decepticon",
+      "default_branch": "main",
+      "stars": 6047,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 6,
+        "topic:langgraph language:Python stars:>=100": 6
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "didilili/ai-agents-from-zero",
+      "default_branch": "main",
+      "stars": 5315,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 7,
+        "topic:langgraph language:Python stars:>=100": 7
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "JoshuaC215/agent-service-toolkit",
+      "default_branch": "main",
+      "stars": 4527,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 8,
+        "topic:langgraph language:Python stars:>=100": 8
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "simonlin1212/TradingAgents-astock",
+      "default_branch": "main",
+      "stars": 3703,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 9,
+        "topic:langgraph language:Python stars:>=100": 9
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "langchain-ai/langchain-mcp-adapters",
+      "default_branch": "main",
+      "stars": 3651,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 10,
+        "topic:langgraph language:Python stars:>=100": 10
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "minitap-ai/mobile-use",
+      "default_branch": "main",
+      "stars": 3259,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 11,
+        "topic:langgraph language:Python stars:>=100": 11
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "OpenDCAI/Paper2Any",
+      "default_branch": "main",
+      "stars": 2810,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 12,
+        "topic:langgraph language:Python stars:>=100": 12
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "wassim249/fastapi-langgraph-agent-production-ready-template",
+      "default_branch": "master",
+      "stars": 2699,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 13,
+        "topic:langgraph language:Python stars:>=100": 13
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "beenuar/AiSOC",
+      "default_branch": "main",
+      "stars": 2407,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 14,
+        "topic:langgraph language:Python stars:>=100": 14
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "guy-hartstein/company-research-agent",
+      "default_branch": "main",
+      "stars": 2301,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 15
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "TNT-Likely/PanWatch",
+      "default_branch": "main",
+      "stars": 2115,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 16,
+        "topic:langgraph language:Python stars:>=100": 15
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "langchain-ai/langgraph-supervisor-py",
+      "default_branch": "main",
+      "stars": 1655,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 20
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "langchain-ai/langgraph-swarm-py",
+      "default_branch": "main",
+      "stars": 1579,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 21,
+        "topic:langgraph language:Python stars:>=100": 19
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "aegra/aegra",
+      "default_branch": "main",
+      "stars": 1262,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 24
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "FunnyWolf/agentic-soc-platform",
+      "default_branch": "master",
+      "stars": 1208,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 25,
+        "topic:langgraph language:Python stars:>=100": 21
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "hinthornw/trustcall",
+      "default_branch": "main",
+      "stars": 1093,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 26
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "JudgmentLabs/judgeval",
+      "default_branch": "main",
+      "stars": 1064,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 27,
+        "topic:langgraph language:Python stars:>=100": 22
+      },
+      "reason": "previous cohort or infrastructure exclusion"
+    },
+    {
+      "full_name": "langchain-ai/react-agent",
+      "default_branch": "main",
+      "stars": 854,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 35,
+        "topic:langgraph language:Python stars:>=100": 28
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "xark-argo/argo",
+      "default_branch": "main",
+      "stars": 827,
+      "license_spdx": "NOASSERTION",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 36,
+        "topic:langgraph language:Python stars:>=100": 29
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "chirpz-ai/pandaprobe",
+      "default_branch": "main",
+      "stars": 790,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 37,
+        "topic:langgraph language:Python stars:>=100": 30
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "Haohao-end/openagent",
+      "default_branch": "main",
+      "stars": 777,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 38,
+        "topic:langgraph language:Python stars:>=100": 31
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "vinay-gatech/stocks-insights-ai-agent",
+      "default_branch": "main",
+      "stars": 749,
+      "license_spdx": "NOASSERTION",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 39
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "langchain-ai/langgraph-codeact",
+      "default_branch": "main",
+      "stars": 732,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 40
+      },
+      "reason": "private or archived"
+    },
+    {
+      "full_name": "ScrapeGraphAI/scrapecraft",
+      "default_branch": "main",
+      "stars": 719,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 41,
+        "topic:langgraph language:Python stars:>=100": 32
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "braincrew-lab/langgraph-mcp-agents",
+      "default_branch": "master",
+      "stars": 718,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 42
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "BrandPeng/Langchain1.0-Langgraph1.0-Learning",
+      "default_branch": "main",
+      "stars": 678,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 43,
+        "topic:langgraph language:Python stars:>=100": 33
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "AgentTeam-TaichuAI/ScienceClaw",
+      "default_branch": "master",
+      "stars": 670,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 44,
+        "topic:langgraph language:Python stars:>=100": 34
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "zhongyu09/openchatbi",
+      "default_branch": "main",
+      "stars": 664,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 45,
+        "topic:langgraph language:Python stars:>=100": 35
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "judahpaul16/gpt-home",
+      "default_branch": "main",
+      "stars": 653,
+      "license_spdx": "GPL-3.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 46,
+        "topic:langgraph language:Python stars:>=100": 36
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "nuglifeleoji/Options-Analytics-Agent",
+      "default_branch": "main",
+      "stars": 644,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 47,
+        "topic:langgraph language:Python stars:>=100": 37
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "langtalks/swe-agent",
+      "default_branch": "main",
+      "stars": 643,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 48
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "wassim249/YT-Navigator",
+      "default_branch": "master",
+      "stars": 603,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 49,
+        "topic:langgraph language:Python stars:>=100": 38
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "esxr/langgraph-mcp",
+      "default_branch": "main",
+      "stars": 587,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 50
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "secureagentics/Adrian",
+      "default_branch": "main",
+      "stars": 583,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 51,
+        "topic:langgraph language:Python stars:>=100": 39
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "langchain-ai/langgraph-bigtool",
+      "default_branch": "main",
+      "stars": 558,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 53
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "NicholasGoh/fastapi-mcp-langgraph-template",
+      "default_branch": "main",
+      "stars": 558,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 52
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "kaarthik108/snowChat",
+      "default_branch": "main",
+      "stars": 550,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 54,
+        "topic:langgraph language:Python stars:>=100": 40
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "kennethreitz/simplemind",
+      "default_branch": "main",
+      "stars": 537,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 55
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "girijesh-ai/ai-interview-codex",
+      "default_branch": "main",
+      "stars": 527,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 56,
+        "topic:langgraph language:Python stars:>=100": 41
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "langchain-ai/langgraph-example",
+      "default_branch": "main",
+      "stars": 519,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 57
+      },
+      "reason": "private or archived"
+    },
+    {
+      "full_name": "Annyfee/agent-craft",
+      "default_branch": "main",
+      "stars": 510,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 58,
+        "topic:langgraph language:Python stars:>=100": 42
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "datawhalechina/easy-langent",
+      "default_branch": "main",
+      "stars": 509,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 59,
+        "topic:langgraph language:Python stars:>=100": 43
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "kturung/langgraph_streamlit_codeassistant",
+      "default_branch": "main",
+      "stars": 495,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 60
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "Tswoen/Paper-Agent",
+      "default_branch": "main",
+      "stars": 489,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 61
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "alirezadir/Agentic-AI-Systems",
+      "default_branch": "main",
+      "stars": 488,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 62,
+        "topic:langgraph language:Python stars:>=100": 44
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "NanGePlus/LangGraphChatBot",
+      "default_branch": "main",
+      "stars": 479,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 63
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "RMA-MUN/RAGNotebook",
+      "default_branch": "master",
+      "stars": 471,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 64
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "didilili/shopkeeper-agent",
+      "default_branch": "main",
+      "stars": 460,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 65,
+        "topic:langgraph language:Python stars:>=100": 45
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "liangdabiao/claude-data-analysis",
+      "default_branch": "main",
+      "stars": 442,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 66
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "Arvo-AI/aurora",
+      "default_branch": "main",
+      "stars": 432,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 67,
+        "topic:langgraph language:Python stars:>=100": 46
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "skygazer42/GustoBot",
+      "default_branch": "develop",
+      "stars": 409,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 68,
+        "topic:langgraph language:Python stars:>=100": 47
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "skygazer42/pokemon-chat",
+      "default_branch": "develop",
+      "stars": 408,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 69
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "xeronsh/openOii",
+      "default_branch": "main",
+      "stars": 406,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 70,
+        "topic:langgraph language:Python stars:>=100": 48
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "john-adeojo/graph_websearch_agent",
+      "default_branch": "main",
+      "stars": 402,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 71
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "leonyangdev/lc-studylab",
+      "default_branch": "main",
+      "stars": 401,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 72,
+        "topic:langgraph language:Python stars:>=100": 49
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "kaymen99/sales-outreach-automation-langgraph",
+      "default_branch": "main",
+      "stars": 400,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 73,
+        "topic:langgraph language:Python stars:>=100": 50
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "Repello-AI/Agent-Wiz",
+      "default_branch": "master",
+      "stars": 393,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 74
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "lhh737/LangChain-ReAct-Agent",
+      "default_branch": "main",
+      "stars": 390,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 75,
+        "topic:langgraph language:Python stars:>=100": 51
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "GoogleCloudPlatform/cymbal-air-toolbox-demo",
+      "default_branch": "main",
+      "stars": 350,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 76,
+        "topic:langgraph language:Python stars:>=100": 52
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "martian56/redcell",
+      "default_branch": "main",
+      "stars": 340,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 77,
+        "topic:langgraph language:Python stars:>=100": 53
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "liangdabiao/langgraph_multi-agent-rag-customer-support",
+      "default_branch": "main",
+      "stars": 338,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 78
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "ttguy0707/CyberClaw",
+      "default_branch": "main",
+      "stars": 336,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 79,
+        "topic:langgraph language:Python stars:>=100": 54
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "emma-sue/AegisOps",
+      "default_branch": "main",
+      "stars": 330,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 80,
+        "topic:langgraph language:Python stars:>=100": 55
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "jia-gao/leanctx",
+      "default_branch": "main",
+      "stars": 323,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 81,
+        "topic:langgraph language:Python stars:>=100": 56
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "rokbenko/ai-playground",
+      "default_branch": "main",
+      "stars": 321,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 82,
+        "topic:langgraph language:Python stars:>=100": 57
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "goruck/home-generative-agent",
+      "default_branch": "main",
+      "stars": 318,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 83,
+        "topic:langgraph language:Python stars:>=100": 58
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "Oqura-ai/deepdoc",
+      "default_branch": "main",
+      "stars": 312,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 84,
+        "topic:langgraph language:Python stars:>=100": 59
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "langchain-ai/new-langgraph-project",
+      "default_branch": "main",
+      "stars": 297,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 85,
+        "topic:langgraph language:Python stars:>=100": 60
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "foreveryh/mentis",
+      "default_branch": "main",
+      "stars": 295,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 86
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "yuyuanweb/ai-picture-editor",
+      "default_branch": "main",
+      "stars": 281,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 87,
+        "topic:langgraph language:Python stars:>=100": 61
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "didilili/deepsearch-agents",
+      "default_branch": "main",
+      "stars": 280,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 88,
+        "topic:langgraph language:Python stars:>=100": 62
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "GenseeAI/cognify",
+      "default_branch": "main",
+      "stars": 279,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 90,
+        "topic:langgraph language:Python stars:>=100": 63
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "kaymen99/langgraph-email-automation",
+      "default_branch": "main",
+      "stars": 279,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 89,
+        "topic:langgraph language:Python stars:>=100": 64
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "huygiatrng/AlpacaTradingAgent",
+      "default_branch": "main",
+      "stars": 277,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 91,
+        "topic:langgraph language:Python stars:>=100": 65
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "bernatsampera/event-deep-research",
+      "default_branch": "master",
+      "stars": 257,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 92,
+        "topic:langgraph language:Python stars:>=100": 66
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "mfmezger/conversational-agent-langchain",
+      "default_branch": "main",
+      "stars": 256,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 93
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "santosomar/AI-agents-for-cybersecurity",
+      "default_branch": "main",
+      "stars": 246,
+      "license_spdx": "BSD-3-Clause",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 94,
+        "topic:langgraph language:Python stars:>=100": 67
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "lgesuellip/langgraph-whatsapp-agent",
+      "default_branch": "main",
+      "stars": 243,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 95
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "langchain-ai/langchain-sandbox",
+      "default_branch": "main",
+      "stars": 241,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 96,
+        "topic:langgraph language:Python stars:>=100": 68
+      },
+      "reason": "private or archived"
+    },
+    {
+      "full_name": "kyaukyuai/gpt-all-star",
+      "default_branch": "main",
+      "stars": 240,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 100,
+        "topic:langgraph language:Python stars:>=100": 70
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "nicoladisabato/MultiAgenticRAG",
+      "default_branch": "main",
+      "stars": 240,
+      "license_spdx": null,
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 98
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "redis-developer/langgraph-redis",
+      "default_branch": "main",
+      "stars": 240,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 97,
+        "topic:langgraph language:Python stars:>=100": 71
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "YassWorks/Ally",
+      "default_branch": "main",
+      "stars": 240,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "langgraph language:Python stars:>=100": 99,
+        "topic:langgraph language:Python stars:>=100": 69
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "wshobson/financial-chat",
+      "default_branch": "main",
+      "stars": 237,
+      "license_spdx": null,
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 72
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "eosho/langchain_data_agent",
+      "default_branch": "main",
+      "stars": 236,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 73
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "jkmaina/LangGraphProjects",
+      "default_branch": "main",
+      "stars": 218,
+      "license_spdx": "NOASSERTION",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 74
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "fzn0x/watchtower",
+      "default_branch": "main",
+      "stars": 215,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 75
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "OnePunchMonk/AgentQuant",
+      "default_branch": "main",
+      "stars": 213,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 76
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "Idun-Group/idun-agent-platform",
+      "default_branch": "main",
+      "stars": 203,
+      "license_spdx": "GPL-3.0",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 77
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "muratcankoylan/readwren",
+      "default_branch": "main",
+      "stars": 202,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 78
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "rootflo/wavefront",
+      "default_branch": "develop",
+      "stars": 200,
+      "license_spdx": "NOASSERTION",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 79
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "chatchat-space/LangGraph-Chatchat",
+      "default_branch": "master",
+      "stars": 194,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 81
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "shiv248/Streamlit-x-LangGraph-Cookbooks",
+      "default_branch": "master",
+      "stars": 194,
+      "license_spdx": null,
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 80
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "datawhalechina/easy-data-x-ai",
+      "default_branch": "main",
+      "stars": 192,
+      "license_spdx": "NOASSERTION",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 83
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "yaalalabs/agent-kernel",
+      "default_branch": "develop",
+      "stars": 192,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 82
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "velocitybolt/open-extract",
+      "default_branch": "master",
+      "stars": 191,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 84
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "tarun7r/deep-research-agent",
+      "default_branch": "main",
+      "stars": 188,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 85
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "iblameandrew/deepsearch-academic",
+      "default_branch": "main",
+      "stars": 186,
+      "license_spdx": null,
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 86
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "skygazer42/Weaver",
+      "default_branch": "main",
+      "stars": 184,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 87
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "kaymen99/personal-ai-assistant",
+      "default_branch": "main",
+      "stars": 182,
+      "license_spdx": null,
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 88
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "langchain-ai/retrieval-agent-template",
+      "default_branch": "main",
+      "stars": 179,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 89
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "Sibyl-Labs/Sibyl-Memory",
+      "default_branch": "main",
+      "stars": 173,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 90
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "nihalashetty/Forge",
+      "default_branch": "main",
+      "stars": 171,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 91
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "valmi-io/value",
+      "default_branch": "main",
+      "stars": 170,
+      "license_spdx": "NOASSERTION",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 92
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "kaymen99/Upwork-AI-jobs-applier",
+      "default_branch": "main",
+      "stars": 167,
+      "license_spdx": null,
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 93
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "yuyuanweb/ai-ppt-generator",
+      "default_branch": "main",
+      "stars": 165,
+      "license_spdx": null,
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 94
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "CopilotKit/scene-creator-copilot",
+      "default_branch": "main",
+      "stars": 160,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 95
+      },
+      "reason": "private or archived"
+    },
+    {
+      "full_name": "LangGraph-GUI/LangGraph-learn",
+      "default_branch": "main",
+      "stars": 160,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 96
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "kevin333353/jobsmith",
+      "default_branch": "master",
+      "stars": 154,
+      "license_spdx": "Apache-2.0",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 97
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    },
+    {
+      "full_name": "erfnzdeh/Divar-AI-Contest",
+      "default_branch": "main",
+      "stars": 143,
+      "license_spdx": null,
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 98
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "kaymen99/local-rag-researcher-deepseek",
+      "default_branch": "main",
+      "stars": 141,
+      "license_spdx": null,
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 99
+      },
+      "reason": "not OSI-approved by SPDX3.29.0"
+    },
+    {
+      "full_name": "wanmol/goal-flow",
+      "default_branch": "main",
+      "stars": 141,
+      "license_spdx": "MIT",
+      "query_ranks": {
+        "topic:langgraph language:Python stars:>=100": 100
+      },
+      "reason": "eligible beyond top12 disjoint cutoff"
+    }
+  ],
+  "status": "repository identities frozen before source retrieval and implementation changes"
+}

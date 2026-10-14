@@ -1,0 +1,41 @@
+{
+  "certificate_sha256": "5412381e6235b305fc99d8e4ee9fb94dfa6e615a6117dbd6213e9496423d52e7",
+  "checks": {
+    "all_product_relations_and_local_rules": true,
+    "call_free_cycle_exclusion": true,
+    "complete_universal_successor_closure": true,
+    "graph_schema_and_types": true,
+    "no_unreachable_or_extra_product_nodes": true,
+    "reachable_source_states_and_cost_summaries": true,
+    "root_public_identity_relation": true,
+    "source_hash_binding": true,
+    "strict_graph_and_certificate_schema": true
+  },
+  "format": "orchlang-cyclic-request-replay-attestation",
+  "graph_name": "token_route_ge",
+  "producer_checker_hash_verified": false,
+  "producer_checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+  "product_edges_replayed": 5,
+  "product_nodes_replayed": 6,
+  "replayer_sha256": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
+  "resource_limits": {
+    "certificate_declared_product_nodes": 50000,
+    "graph_declarations_or_calls": 1000000,
+    "graph_states": 100000,
+    "json_bytes_each": 134217728,
+    "product_nodes": 1000000
+  },
+  "scope": {
+    "claim": "the reported finite product graph is the complete closure of the replayed version-1 graph under the declared local rules",
+    "not_claimed": [
+      "mechanized proof of the relational metatheory",
+      "source-language or framework-to-graph translation fidelity",
+      "real provider request serialization or billing behavior",
+      "termination or finite total-cost bounds for billable cycles",
+      "validation of the producer checker implementation from its reported hash"
+    ]
+  },
+  "source_sha256": "fce2841c40323d35f941ef7f9d66572cc72c56ef8bbe76c07e0e3d5c21002c5e",
+  "status": "verified",
+  "version": 1
+}

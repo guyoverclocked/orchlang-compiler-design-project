@@ -1,0 +1,201 @@
+{
+  "checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+  "format": "orchlang-cyclic-request-certificate",
+  "graph_name": "token_route_gt",
+  "max_nodes": 50000,
+  "nodes": [
+    {
+      "equal_values": [
+        [
+          "lg_input_0000",
+          "lg_input_0000"
+        ]
+      ],
+      "id": 0,
+      "left": [
+        "lg_state_0000",
+        0
+      ],
+      "right": [
+        "lg_state_0000",
+        0
+      ],
+      "rule": "matched-call",
+      "successors": [
+        1
+      ]
+    },
+    {
+      "equal_values": [
+        [
+          "lg_input_0000",
+          "lg_input_0000"
+        ],
+        [
+          "lg_slot_0000",
+          "lg_slot_0000"
+        ]
+      ],
+      "id": 1,
+      "left": [
+        "lg_state_0000",
+        1
+      ],
+      "right": [
+        "lg_state_0000",
+        1
+      ],
+      "rule": "public-choice",
+      "successors": [
+        2,
+        3
+      ]
+    },
+    {
+      "equal_values": [
+        [
+          "lg_input_0000",
+          "lg_input_0000"
+        ],
+        [
+          "lg_slot_0000",
+          "lg_slot_0000"
+        ]
+      ],
+      "id": 2,
+      "left": [
+        "lg_state_0001",
+        0
+      ],
+      "right": [
+        "lg_state_0001",
+        0
+      ],
+      "rule": "matched-call",
+      "successors": [
+        4
+      ]
+    },
+    {
+      "equal_values": [
+        [
+          "lg_input_0000",
+          "lg_input_0000"
+        ],
+        [
+          "lg_slot_0000",
+          "lg_slot_0000"
+        ]
+      ],
+      "id": 3,
+      "left": [
+        "lg_state_0002",
+        0
+      ],
+      "right": [
+        "lg_state_0002",
+        0
+      ],
+      "rule": "matched-call",
+      "successors": [
+        5
+      ]
+    },
+    {
+      "equal_values": [
+        [
+          "lg_input_0000",
+          "lg_input_0000"
+        ],
+        [
+          "lg_slot_0000",
+          "lg_slot_0000"
+        ],
+        [
+          "lg_slot_0001",
+          "lg_slot_0001"
+        ]
+      ],
+      "id": 4,
+      "left": [
+        "lg_state_0001",
+        1
+      ],
+      "right": [
+        "lg_state_0001",
+        1
+      ],
+      "rule": "stop",
+      "successors": []
+    },
+    {
+      "equal_values": [
+        [
+          "lg_input_0000",
+          "lg_input_0000"
+        ],
+        [
+          "lg_slot_0000",
+          "lg_slot_0000"
+        ],
+        [
+          "lg_slot_0001",
+          "lg_slot_0001"
+        ]
+      ],
+      "id": 5,
+      "left": [
+        "lg_state_0002",
+        1
+      ],
+      "right": [
+        "lg_state_0002",
+        1
+      ],
+      "rule": "stop",
+      "successors": []
+    }
+  ],
+  "product_edges": 5,
+  "product_nodes": 6,
+  "reachable_source_states": [
+    "lg_state_0000",
+    "lg_state_0001",
+    "lg_state_0002"
+  ],
+  "root": 0,
+  "semantics": {
+    "claim": "equal complete request/usage traces and stop positions under the shared oracle",
+    "cycles": "every finite trace prefix; no termination or finite total-cost claim",
+    "input_accounting": "complete additive request contract in compatible token units",
+    "inputs": "all public external values agree; secret inputs may differ",
+    "oracle": "shared Omega(resolved-contract,per-contract-ordinal,template,ordered-text-values)",
+    "unsupported": [
+      "declassification",
+      "tools",
+      "request serialization",
+      "independent provider sampling",
+      "call-free cycles"
+    ]
+  },
+  "source_sha256": "93c77375cc68254eed67ff27cce5b63df83392325d3505b64316eb85366b948e",
+  "state_entry_bounds": {
+    "lg_state_0000": {
+      "input_tokens": 66,
+      "output_tokens": 8,
+      "total_tokens": 74
+    },
+    "lg_state_0001": {
+      "input_tokens": 11,
+      "output_tokens": 8,
+      "total_tokens": 19
+    },
+    "lg_state_0002": {
+      "input_tokens": 11,
+      "output_tokens": 8,
+      "total_tokens": 19
+    }
+  },
+  "status": "accepted",
+  "version": 1
+}

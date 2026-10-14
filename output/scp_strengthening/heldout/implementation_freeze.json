@@ -1,0 +1,20 @@
+{
+  "extractor_unchanged_from_source_freeze": true,
+  "frozen_at_utc": "2026-10-14T16:59:50.156506+00:00",
+  "scope": "static original whole-file grammar admission only; no source execution; no slice extraction attempted on holdout",
+  "source_freeze_sha256": "e8eddcbb0779e0d66f6b9a9de9a21ed7f68a3980e1215b4b68fe3e817bc13fe6",
+  "tools": [
+    {
+      "path": "integrations/langgraph/source_frontend/extract.py",
+      "sha256": "aa3c1cef891a40480b44dd438f137a5c5f91cc6b9285c38e3cc8bd5eed65f7d9"
+    },
+    {
+      "path": "scripts/publication_upgrade_corpus.py",
+      "sha256": "2fc42d6de8a51e414e7406d3f3de788982bc33c1f742cd38cc1df071312400dd"
+    },
+    {
+      "path": "research/scp_strengthening/heldout/evaluate.py",
+      "sha256": "9fc3d9a9281b74b4feebbc37ada16d68f0bcec99fbb8c96392713057f27463fd"
+    }
+  ]
+}

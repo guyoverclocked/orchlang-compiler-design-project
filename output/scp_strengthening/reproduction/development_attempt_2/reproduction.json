@@ -1,0 +1,202 @@
+{
+  "completed_at_utc": "2026-10-14T17:22:05.487674+00:00",
+  "environment": {
+    "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+    "python": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]"
+  },
+  "failure": "RuntimeError: independent-row-ball-audit failed; inspect /Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-scp-strengthening/output/scp_strengthening/reproduction/independent-row-ball-audit.log",
+  "format": "orchlang-scp-strengthening-reproduction",
+  "frozen_source_verified": false,
+  "independent_human_reproduction": "not asserted",
+  "paid_api_calls": 0,
+  "source_files": null,
+  "source_revision": "b553c11a1a59a141c04954b2f0cd08770c02c617",
+  "stages": [
+    {
+      "command": [
+        "make",
+        "-j4",
+        "check"
+      ],
+      "elapsed_seconds": 3.49365099996794,
+      "exit_code": 0,
+      "kind": "fresh_execution",
+      "log": "output/scp_strengthening/reproduction/native-core.log",
+      "log_sha256": "88401a1944d7b6ab2549986ea92655313100a4fde67dd6ee839f1986a9bdf6e0",
+      "stage": "native-core"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "audit",
+        "-p",
+        "test_*.py",
+        "-q"
+      ],
+      "elapsed_seconds": 13.72903220797889,
+      "exit_code": 0,
+      "kind": "fresh_execution",
+      "log": "output/scp_strengthening/reproduction/python-audit-tests.log",
+      "log_sha256": "2d68f141bd0c0b44129bb5a7f5ed5041d6c15164d96367f22e5102232a49f08c",
+      "stage": "python-audit-tests"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-m",
+        "unittest",
+        "integrations.langgraph.source_frontend.test_extract",
+        "-q"
+      ],
+      "elapsed_seconds": 0.2740464579546824,
+      "exit_code": 0,
+      "kind": "fresh_execution",
+      "log": "output/scp_strengthening/reproduction/frontend-tests.log",
+      "log_sha256": "095febcecf138f8014f61c7d20eb2338bfd9d939a981308a6c9c9c81dfee1d8c",
+      "stage": "frontend-tests"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "research/scp_strengthening/robust_usage",
+        "-p",
+        "test_*.py",
+        "-q"
+      ],
+      "elapsed_seconds": 0.8930020830011927,
+      "exit_code": 0,
+      "kind": "fresh_execution",
+      "log": "output/scp_strengthening/reproduction/conservative-contract-tests.log",
+      "log_sha256": "ad3da27d8d465a8b189ce2a14aeb2093db62c3eed30db3b2703d8008fad6f965",
+      "stage": "conservative-contract-tests"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "research/scp_strengthening/exact_uncertain_distance",
+        "-p",
+        "test_*.py",
+        "-q"
+      ],
+      "elapsed_seconds": 0.08450262504629791,
+      "exit_code": 0,
+      "kind": "fresh_execution",
+      "log": "output/scp_strengthening/reproduction/exact-contract-tests.log",
+      "log_sha256": "1a0017f1c175007a84000910e09c9b947751811e22ee07bb63fdcea3a1c2ddb1",
+      "stage": "exact-contract-tests"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-m",
+        "unittest",
+        "integrations.provider_calibration.test_provider_calibration",
+        "-q"
+      ],
+      "elapsed_seconds": 0.18274329201085493,
+      "exit_code": 0,
+      "kind": "fresh_execution",
+      "log": "output/scp_strengthening/reproduction/provider-fake-transport-tests.log",
+      "log_sha256": "a203c30ab14e10daa462e945d69b5c666f45fff44791beeb9d95f72fb3883663",
+      "stage": "provider-fake-transport-tests"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "integrations/workflow_capsules",
+        "-p",
+        "test_*.py",
+        "-q"
+      ],
+      "elapsed_seconds": 0.702271458983887,
+      "exit_code": 0,
+      "kind": "fresh_execution",
+      "log": "output/scp_strengthening/reproduction/capsule-verifier-tests.log",
+      "log_sha256": "9d7e89ad6d84bf512b822a4dcf65172c0d5191bec4821490cfeaadc6b9dde6a8",
+      "stage": "capsule-verifier-tests"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "integrations/provider_calibration/provider_calibration.py",
+        "validate"
+      ],
+      "elapsed_seconds": 0.0699194580083713,
+      "exit_code": 0,
+      "kind": "recorded_contract_validation",
+      "log": "output/scp_strengthening/reproduction/provider-offline-manifest.log",
+      "log_sha256": "835ef171fe4ffac498128818ab4b44831df53078d470d3f3e5721230f3f58828",
+      "stage": "provider-offline-manifest"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "research/scp_strengthening/heldout/evaluate.py",
+        "--verify"
+      ],
+      "elapsed_seconds": 0.06541799998376518,
+      "exit_code": 0,
+      "kind": "recorded_outcome_validation",
+      "log": "output/scp_strengthening/reproduction/heldout-record-verification.log",
+      "log_sha256": "77065473099061feeff5c68184e256b51beb5267a48ecb990b61f25768e703a4",
+      "stage": "heldout-record-verification"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "research/scp_strengthening/scalability/validate_structured_results.py"
+      ],
+      "elapsed_seconds": 0.05518395802937448,
+      "exit_code": 0,
+      "kind": "recorded_timing_validation",
+      "log": "output/scp_strengthening/reproduction/structured-record-validation.log",
+      "log_sha256": "6ed894f57c9b914c0b556f4a8295df53513506e4093338f0a8c8dac7a7163f5c",
+      "stage": "structured-record-validation"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "integrations/workflow_capsules/verify_finite_trace.py",
+        "research/scp_strengthening/workflow_capsules/didilili-langgraphllm-one-node-finite-oracle-v1.json",
+        "research/scp_strengthening/workflow_capsules/joshuac215-kb-agent-sequential-async-finite-oracle-v1.json"
+      ],
+      "elapsed_seconds": 0.16871429199818522,
+      "exit_code": 0,
+      "kind": "recorded_model_replay",
+      "log": "output/scp_strengthening/reproduction/finite-capsule-law-replay.log",
+      "log_sha256": "387137bb0742db8cdc0df5ef5b317a9b06017f737d287c5ef40a814958de4de8",
+      "stage": "finite-capsule-law-replay"
+    },
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "research/scp_strengthening/second_adversarial_review/independent_finite_law_audit.py"
+      ],
+      "elapsed_seconds": 1.3028139999951236,
+      "exit_code": 1,
+      "kind": "fresh_exact_enumeration",
+      "log": "output/scp_strengthening/reproduction/independent-row-ball-audit.log",
+      "log_sha256": "37cd000e2c9f46eb8c34a0b92c5a664eba13ea4bfdba27b88467cab2c16e94f8",
+      "stage": "independent-row-ball-audit"
+    }
+  ],
+  "started_at_utc": "2026-10-14T17:21:44.453328+00:00",
+  "status": "failed",
+  "version": 1
+}

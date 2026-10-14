@@ -1,0 +1,667 @@
+{
+  "claim": "exact all-finite-horizon success-only ordered usage-trace laws for every supplied secret scenario under the declared finite rational kernel",
+  "closed_system": {
+    "initial_state_ids": [
+      "S000001",
+      "S000000"
+    ],
+    "state_count": 10,
+    "states": [
+      {
+        "history": [],
+        "id": "S000000",
+        "kind": "call",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 3,
+              "model": "trace-equality-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 0
+          }
+        ],
+        "pc": [
+          "dependent",
+          0
+        ],
+        "values": {
+          "secret": true
+        }
+      },
+      {
+        "history": [],
+        "id": "S000001",
+        "kind": "call",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 3,
+              "model": "trace-equality-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 0
+          }
+        ],
+        "pc": [
+          "independent",
+          0
+        ],
+        "values": {
+          "secret": false
+        }
+      },
+      {
+        "history": [],
+        "id": "S000002",
+        "kind": "call",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 3,
+              "model": "trace-equality-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "dependent",
+          1
+        ],
+        "values": {
+          "hidden": "blue",
+          "secret": true
+        }
+      },
+      {
+        "history": [],
+        "id": "S000003",
+        "kind": "call",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 3,
+              "model": "trace-equality-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "dependent",
+          1
+        ],
+        "values": {
+          "hidden": "red",
+          "secret": true
+        }
+      },
+      {
+        "history": [],
+        "id": "S000004",
+        "kind": "call",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 3,
+              "model": "trace-equality-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "independent",
+          1
+        ],
+        "values": {
+          "hidden": "blue",
+          "secret": false
+        }
+      },
+      {
+        "history": [],
+        "id": "S000005",
+        "kind": "call",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 3,
+              "model": "trace-equality-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "independent",
+          1
+        ],
+        "values": {
+          "hidden": "red",
+          "secret": false
+        }
+      },
+      {
+        "history": [],
+        "id": "S000006",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 3,
+              "model": "trace-equality-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 2
+          }
+        ],
+        "pc": [
+          "dependent",
+          2
+        ],
+        "values": {
+          "done": "ok",
+          "hidden": "blue",
+          "secret": true
+        }
+      },
+      {
+        "history": [],
+        "id": "S000007",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 3,
+              "model": "trace-equality-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 2
+          }
+        ],
+        "pc": [
+          "dependent",
+          2
+        ],
+        "values": {
+          "done": "ok",
+          "hidden": "red",
+          "secret": true
+        }
+      },
+      {
+        "history": [],
+        "id": "S000008",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 3,
+              "model": "trace-equality-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 2
+          }
+        ],
+        "pc": [
+          "independent",
+          2
+        ],
+        "values": {
+          "done": "ok",
+          "hidden": "blue",
+          "secret": false
+        }
+      },
+      {
+        "history": [],
+        "id": "S000009",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 3,
+              "model": "trace-equality-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 2
+          }
+        ],
+        "pc": [
+          "independent",
+          2
+        ],
+        "values": {
+          "done": "ok",
+          "hidden": "red",
+          "secret": false
+        }
+      }
+    ],
+    "transition_count": 10,
+    "transitions": [
+      {
+        "from": "S000000",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 3,
+            "model": "trace-equality-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 2,
+          "kind": "call",
+          "output_tokens": 1
+        },
+        "probability": "1/2",
+        "to": "S000002"
+      },
+      {
+        "from": "S000000",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 3,
+            "model": "trace-equality-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 2,
+          "kind": "call",
+          "output_tokens": 1
+        },
+        "probability": "1/2",
+        "to": "S000003"
+      },
+      {
+        "from": "S000001",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 3,
+            "model": "trace-equality-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 2,
+          "kind": "call",
+          "output_tokens": 1
+        },
+        "probability": "1/2",
+        "to": "S000004"
+      },
+      {
+        "from": "S000001",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 3,
+            "model": "trace-equality-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 2,
+          "kind": "call",
+          "output_tokens": 1
+        },
+        "probability": "1/2",
+        "to": "S000005"
+      },
+      {
+        "from": "S000002",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 3,
+            "model": "trace-equality-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 2,
+          "kind": "call",
+          "output_tokens": 3
+        },
+        "probability": "1",
+        "to": "S000006"
+      },
+      {
+        "from": "S000003",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 3,
+            "model": "trace-equality-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 2,
+          "kind": "call",
+          "output_tokens": 1
+        },
+        "probability": "1",
+        "to": "S000007"
+      },
+      {
+        "from": "S000004",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 3,
+            "model": "trace-equality-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 2,
+          "kind": "call",
+          "output_tokens": 1
+        },
+        "probability": "1/2",
+        "to": "S000008"
+      },
+      {
+        "from": "S000004",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 3,
+            "model": "trace-equality-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 2,
+          "kind": "call",
+          "output_tokens": 3
+        },
+        "probability": "1/2",
+        "to": "S000008"
+      },
+      {
+        "from": "S000005",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 3,
+            "model": "trace-equality-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 2,
+          "kind": "call",
+          "output_tokens": 1
+        },
+        "probability": "1/2",
+        "to": "S000009"
+      },
+      {
+        "from": "S000005",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 3,
+            "model": "trace-equality-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 2,
+          "kind": "call",
+          "output_tokens": 3
+        },
+        "probability": "1/2",
+        "to": "S000009"
+      }
+    ]
+  },
+  "diagnostics": null,
+  "format": "orchlang-exact-trace-equivalence",
+  "hashes": {
+    "checker_sha256": "59bdfa053a1fa1bf1e5fafed0db98cde71e84f484fdca7428bbd97abfa3fd05a",
+    "closure_producer_sha256": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+    "graph_sha256": "ad6f09ceab9aa227f4e9464cab3920a489e16357d466488548b320cd1173a774",
+    "kernel_sha256": "e53dd07e498715f1f0e27bba6fd01b3e88fc3e0a777003e13b46c3ff9b46d55a",
+    "public_store_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "secret_scenarios_sha256": "c746a0cd8c632a82c9994be1df942b4258d3968e3d63189dd6b0f9cfe75945a0"
+  },
+  "inputs": {
+    "public_store": {},
+    "secret_scenarios": [
+      {
+        "secret": false
+      },
+      {
+        "secret": true
+      }
+    ]
+  },
+  "label_alphabet": [
+    {
+      "contract": {
+        "has_unit_price": false,
+        "max_tokens": 3,
+        "model": "trace-equality-worker",
+        "provider": "offline",
+        "unit_price": 0.0
+      },
+      "input_tokens": 2,
+      "output_tokens": 1
+    },
+    {
+      "contract": {
+        "has_unit_price": false,
+        "max_tokens": 3,
+        "model": "trace-equality-worker",
+        "provider": "offline",
+        "unit_price": 0.0
+      },
+      "input_tokens": 2,
+      "output_tokens": 3
+    }
+  ],
+  "limits": {
+    "max_matrix_entries": 10000000,
+    "max_rational_bits": 8192,
+    "max_states": 10000,
+    "max_work_bytes": 67108864
+  },
+  "result": {
+    "basis_state_order": [
+      "S000000",
+      "S000001",
+      "S000002",
+      "S000003",
+      "S000004",
+      "S000005",
+      "S000006",
+      "S000007",
+      "S000008",
+      "S000009"
+    ],
+    "pairs": [
+      {
+        "basis": [
+          {
+            "nonterminal_dot": "0",
+            "row": [
+              "1",
+              "-1",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "stop_dot": "0",
+            "word": []
+          },
+          {
+            "nonterminal_dot": "0",
+            "row": [
+              "0",
+              "0",
+              "1/2",
+              "1/2",
+              "-1/2",
+              "-1/2",
+              "0",
+              "0",
+              "0",
+              "0"
+            ],
+            "stop_dot": "0",
+            "word": [
+              {
+                "contract": {
+                  "has_unit_price": false,
+                  "max_tokens": 3,
+                  "model": "trace-equality-worker",
+                  "provider": "offline",
+                  "unit_price": 0.0
+                },
+                "input_tokens": 2,
+                "output_tokens": 1
+              }
+            ]
+          },
+          {
+            "nonterminal_dot": "0",
+            "row": [
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "1/2",
+              "-1/4",
+              "-1/4"
+            ],
+            "stop_dot": "0",
+            "word": [
+              {
+                "contract": {
+                  "has_unit_price": false,
+                  "max_tokens": 3,
+                  "model": "trace-equality-worker",
+                  "provider": "offline",
+                  "unit_price": 0.0
+                },
+                "input_tokens": 2,
+                "output_tokens": 1
+              },
+              {
+                "contract": {
+                  "has_unit_price": false,
+                  "max_tokens": 3,
+                  "model": "trace-equality-worker",
+                  "provider": "offline",
+                  "unit_price": 0.0
+                },
+                "input_tokens": 2,
+                "output_tokens": 1
+              }
+            ]
+          },
+          {
+            "nonterminal_dot": "0",
+            "row": [
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "0",
+              "1/2",
+              "0",
+              "-1/4",
+              "-1/4"
+            ],
+            "stop_dot": "0",
+            "word": [
+              {
+                "contract": {
+                  "has_unit_price": false,
+                  "max_tokens": 3,
+                  "model": "trace-equality-worker",
+                  "provider": "offline",
+                  "unit_price": 0.0
+                },
+                "input_tokens": 2,
+                "output_tokens": 1
+              },
+              {
+                "contract": {
+                  "has_unit_price": false,
+                  "max_tokens": 3,
+                  "model": "trace-equality-worker",
+                  "provider": "offline",
+                  "unit_price": 0.0
+                },
+                "input_tokens": 2,
+                "output_tokens": 3
+              }
+            ]
+          }
+        ],
+        "closed_under_label_matrices": true,
+        "initial_difference_in_span": true,
+        "left_scenario": 1,
+        "left_state_id": "S000000",
+        "max_word_length": 2,
+        "nonterminal_outputs_zero": true,
+        "rank": 4,
+        "right_scenario": 0,
+        "right_state_id": "S000001",
+        "status": "equal",
+        "stop_outputs_zero": true
+      }
+    ]
+  },
+  "scope": {
+    "comparison": "one fixed public store and all explicitly supplied distinct secret assignments",
+    "excluded": [
+      "provider behavior/probability validity",
+      "errors/retries",
+      "currency/cumulative budgets",
+      "termination probability/infinite-run laws"
+    ],
+    "observer": "ordered call labels are normalized resolved contract plus integer input and output usage; each finite word is observed with separate stopped and nonterminal mass",
+    "oracle": "declared finite rational conditional kernel; exact modeled request, saturated contract ordinal, and retained complete-event history determine outcomes",
+    "semantics": "successful model outcomes only; responses update their result register and complete event history; stop states emit no further calls"
+  },
+  "status": "proved_equal",
+  "telemetry": {
+    "closed_state_count": 10,
+    "label_count": 2,
+    "matrix_entries_used": 747,
+    "max_rational_bits_observed": 3,
+    "transition_count": 10,
+    "work_bytes_used_before_serialization": 61463
+  },
+  "version": 2
+}

@@ -1,0 +1,39 @@
+======================================================================
+ERROR: setUpClass (test_certificate_audit.ReportIntegrityTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-scp-strengthening/audit/test_certificate_audit.py", line 101, in setUpClass
+    cls.envelope = bind(cls.source, ROOT / 'orchc')
+                   ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-scp-strengthening/audit/certificate_audit.py", line 322, in bind
+    result = subprocess.run([str(compiler), 'certify', str(source_path)],
+                            capture_output=True, text=True)
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 555, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1039, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/homebrew/Cellar/python@3.14/3.14.6/Frameworks/Python.framework/Versions/3.14/lib/python3.14/subprocess.py", line 1990, in _execute_child
+    raise child_exception_type(errno_num, err_msg, err_filename)
+FileNotFoundError: [Errno 2] No such file or directory: '/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-scp-strengthening/orchc'
+
+======================================================================
+ERROR: setUpClass (test_source_to_graph.SourceToGraphTests)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-scp-strengthening/audit/test_source_to_graph.py", line 68, in setUpClass
+    raise RuntimeError("build orchc before running bridge tests")
+RuntimeError: build orchc before running bridge tests
+
+----------------------------------------------------------------------
+Ran 207 tests in 11.680s
+
+FAILED (errors=2)

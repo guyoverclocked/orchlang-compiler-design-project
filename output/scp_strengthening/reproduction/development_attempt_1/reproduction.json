@@ -1,0 +1,38 @@
+{
+  "completed_at_utc": "2026-10-14T17:19:36.870696+00:00",
+  "environment": {
+    "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+    "python": "3.14.6 (main, Jun 10 2026, 10:03:53) [Clang 21.0.0 (clang-2100.0.123.102)]"
+  },
+  "failure": "RuntimeError: python-audit-tests failed; inspect /Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-scp-strengthening/output/scp_strengthening/reproduction/python-audit-tests.log",
+  "format": "orchlang-scp-strengthening-reproduction",
+  "frozen_source_verified": false,
+  "independent_human_reproduction": "not asserted",
+  "paid_api_calls": 0,
+  "source_files": null,
+  "source_revision": "b553c11a1a59a141c04954b2f0cd08770c02c617",
+  "stages": [
+    {
+      "command": [
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "audit",
+        "-p",
+        "test_*.py",
+        "-q"
+      ],
+      "elapsed_seconds": 11.832655125006568,
+      "exit_code": 1,
+      "kind": "fresh_execution",
+      "log": "output/scp_strengthening/reproduction/python-audit-tests.log",
+      "log_sha256": "3b4e835acbbd07e7e829f3468537ba16f3ec1d9ea84e30a6c0d01abbe6c03760",
+      "stage": "python-audit-tests"
+    }
+  ],
+  "started_at_utc": "2026-10-14T17:19:25.025221+00:00",
+  "status": "failed",
+  "version": 1
+}

@@ -1,0 +1,35 @@
+{
+  "author": {
+    "date": "2026-08-30T09:46:08Z",
+    "email": "at384@deutsche-boerse.com",
+    "name": "at384"
+  },
+  "committer": {
+    "date": "2026-08-30T09:46:08Z",
+    "email": "at384@deutsche-boerse.com",
+    "name": "at384"
+  },
+  "html_url": "https://github.com/zamalali/DeepGit/commit/206f634acd7b3d28603caf4b8cfb27418bdc0a61",
+  "message": "ci: drop GHCR publish workflow\n\nRemove the Docker publish workflow and its GHCR pull reference. GitHub Actions is unavailable on this account, so the workflow would only ever fail. Docker support remains via the local build documented in the README.",
+  "node_id": "C_kwDONeIc3toAKDIwNmY2MzRhY2Q3YjNkMjg2MDNjYWY0YjhjZmIyNzQxOGJkYzBhNjE",
+  "parents": [
+    {
+      "html_url": "https://github.com/zamalali/DeepGit/commit/59c4b31652f68c509d4130f92b517bf288e9e1d5",
+      "sha": "59c4b31652f68c509d4130f92b517bf288e9e1d5",
+      "url": "https://api.github.com/repos/zamalali/DeepGit/git/commits/59c4b31652f68c509d4130f92b517bf288e9e1d5"
+    }
+  ],
+  "sha": "206f634acd7b3d28603caf4b8cfb27418bdc0a61",
+  "tree": {
+    "sha": "2457cf9ec33272352e998d76ba44522d9c14abf1",
+    "url": "https://api.github.com/repos/zamalali/DeepGit/git/trees/2457cf9ec33272352e998d76ba44522d9c14abf1"
+  },
+  "url": "https://api.github.com/repos/zamalali/DeepGit/git/commits/206f634acd7b3d28603caf4b8cfb27418bdc0a61",
+  "verification": {
+    "payload": null,
+    "reason": "unsigned",
+    "signature": null,
+    "verified": false,
+    "verified_at": null
+  }
+}

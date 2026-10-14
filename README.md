@@ -3,9 +3,14 @@
 **Offline research software for token bounds, private workflow routing, exact usage channels, and independently replayed evidence.**
 
 Nambi Rajan M · 24BAI0072 · Compiler Design Laboratory
-Release candidate 0.5.0-rc2 · C++17 · MIT license
+Release candidate 0.5.0-rc3 · C++17 · MIT license
 
-The [publication upgrade](docs/PUBLICATION_UPGRADE.md) adds diagnosed resource
+The [SCP strengthening package](docs/SCP_STRENGTHENING.md) adds returned-state
+and finite-prefix IR proofs, completed-state differential checks, bounded
+public-source workflow slices, robust full-history trace contracts, and broader
+scaling evidence. Both external whole-file cohorts retain zero admissions.
+API calibration and independent human reproduction remain pending. The
+[rc2 publication upgrade](docs/PUBLICATION_UPGRADE.md) adds diagnosed resource
 limits, shared-prefix exact replay, source-admission repairs, a narrow
 machine-checked IR theorem, and frozen research evidence. The external-source
 admission sample retained all 59 original candidates and admitted none; see
@@ -14,7 +19,7 @@ resulting claim boundaries. A software candidate is not an accepted journal pape
 
 ## Start here
 
-- [Upgrade assessment and novelty scores](docs/UPGRADE_ASSESSMENT.md)
+- [Current evidence and reproduction](docs/SCP_STRENGTHENING.md) and [faculty reproduction form](research/scp_strengthening/human_reproduction/REPORT_FORM.md)
 - [Full technical report](docs/PAPER.md) and [focused SCP software-paper draft](docs/SCP_OSP_MANUSCRIPT.md)
 - [Formal contract and proof sketch](docs/FORMAL_CONTRACT.md)
 - [Installation](docs/INSTALLATION.md), [current demo](docs/REVIEW_DEMO.md), and [cyclic graph tutorial](docs/CYCLIC_WORKFLOWS.md)
@@ -297,3 +302,7 @@ Earlier Review 2/Phase 2 submissions and September audits are historical. Their 
 ## License and attribution
 
 The project uses the [MIT license](LICENSE). All original repository commits identify Nambi Rajan M; the authenticated GitHub account matches the repository owner. MIT was selected under the owner's delegated project authority for this local release candidate. Upstream source-pattern attribution and development-tool notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Human authors should review the release and AI-assistance disclosure before journal submission. Journal submission and human author sign-off have not occurred. The release manifest identifies any publicly prepared candidate; a software candidate is not a reviewed journal article.
+
+## Current SCP publication candidate
+
+The rc3 [main paper](submission/research/manuscript/OrchLang_SCP_Strengthened.tex) ([PDF](output/pdf/OrchLang_SCP_Strengthened.pdf)) and [technical supplement](submission/research/manuscript/OrchLang_SCP_Technical_Supplement.tex) ([PDF](output/pdf/OrchLang_SCP_Technical_Supplement.pdf)) bind frozen code `8533214105aad0cc015ea1e1c2aad4057515aff7`. All 19 local reproduction stages and six CI jobs passed on that revision. Read the [faculty/author handoff](research/scp_strengthening/human_reproduction/SUBMISSION_HANDOFF.md) and [archive receipt](output/scp_strengthening/publication/archive_receipt.json). This is a prepared research candidate; author approval, independent human reproduction, live API calibration and journal submission remain pending.

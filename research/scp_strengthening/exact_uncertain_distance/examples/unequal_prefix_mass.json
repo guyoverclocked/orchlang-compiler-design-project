@@ -1,0 +1,50 @@
+{
+  "schema": "orchlang.exact-uncertain-distance/v1",
+  "alphabet": ["A", "B", "C", "D", "__STOP__"],
+  "horizon": 2,
+  "require_stop_by_horizon": false,
+  "rows": [
+    {
+      "scenario": "left",
+      "history": [],
+      "generators": [
+        {"A": "1/2", "B": "1/2", "C": 0, "D": 0, "__STOP__": 0}
+      ]
+    },
+    {
+      "scenario": "right",
+      "history": [],
+      "generators": [
+        {"A": "1/2", "B": "1/2", "C": 0, "D": 0, "__STOP__": 0}
+      ]
+    },
+    {
+      "scenario": "left",
+      "history": ["A"],
+      "generators": [
+        {"A": 0, "B": 0, "C": 1, "D": 0, "__STOP__": 0}
+      ]
+    },
+    {
+      "scenario": "right",
+      "history": ["A"],
+      "generators": [
+        {"A": 0, "B": 0, "C": 0, "D": 1, "__STOP__": 0}
+      ]
+    },
+    {
+      "scenario": "left",
+      "history": ["B"],
+      "generators": [
+        {"A": 0, "B": 0, "C": 1, "D": 0, "__STOP__": 0}
+      ]
+    },
+    {
+      "scenario": "right",
+      "history": ["B"],
+      "generators": [
+        {"A": 0, "B": 0, "C": 1, "D": 0, "__STOP__": 0}
+      ]
+    }
+  ]
+}

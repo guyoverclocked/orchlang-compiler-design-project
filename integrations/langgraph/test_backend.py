@@ -98,12 +98,18 @@ class LangGraphBackendTests(unittest.TestCase):
         self.assertTrue(actual["stopped"])
         self.assertEqual(actual["call_count"], 2)
         self.assertEqual(_projection(actual), _projection(expected))
+        self.assertEqual(actual["version"], 2)
+        self.assertEqual({key: actual["final_values"][key] for key in store}, store)
+        self.assertEqual(actual["final_values"]["a"], actual["trace"][0]["response"])
+        self.assertEqual(actual["final_values"]["b"], actual["trace"][1]["response"])
+        self.assertNotIn("x", actual["final_values"])
 
         expected_prefix = reference_run(graph, store, 17, 1)
         actual_prefix = execute_verified(verified, store, 17, max_calls=1).to_dict()
         self.assertEqual(actual_prefix["status"], "truncated")
         self.assertEqual(actual_prefix["truncated_at_calls"], 1)
         self.assertEqual(_projection(actual_prefix), _projection(expected_prefix))
+        self.assertIsNone(actual_prefix["final_values"])
 
     def test_real_langgraph_recursion_limit_fails_closed(self) -> None:
         graph, verified, _, _ = self._fixture("unbounded_productive_cycle.json")
@@ -116,6 +122,7 @@ class LangGraphBackendTests(unittest.TestCase):
         ).to_dict()
         self.assertEqual(actual["status"], "resource_limited")
         self.assertFalse(actual["stopped"])
+        self.assertIsNone(actual["final_values"])
         self.assertNotIn("truncated_at_calls", actual)
         self.assertEqual(actual["failure"]["type"], "langgraph_recursion_limit")
 
@@ -130,6 +137,7 @@ class LangGraphBackendTests(unittest.TestCase):
         ).to_dict()
         self.assertEqual(actual["status"], "resource_limited")
         self.assertFalse(actual["stopped"])
+        self.assertIsNone(actual["final_values"])
         self.assertIsNotNone(actual["failure"])
 
     def test_bad_certificate_and_stale_relation_never_build_stategraph(self) -> None:

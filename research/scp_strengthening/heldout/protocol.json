@@ -1,0 +1,64 @@
+{
+  "protocol_version": 1,
+  "frozen_at_utc": "2026-10-14T15:56:32.680146+00:00",
+  "baseline_revision": "b553c11a1a59a141c04954b2f0cd08770c02c617",
+  "development_cohort": "rc2 original59; held-out repository identities are disjoint",
+  "queries": [
+    "langgraph language:Python stars:>=100",
+    "topic:langgraph language:Python stars:>=100"
+  ],
+  "query_limit": 100,
+  "sort": "stars descending; then lowercase full_name",
+  "repository_limit": 12,
+  "exclude_previous_selected": [
+    "BitterSecurity/Decepticon",
+    "JoshuaC215/agent-service-toolkit",
+    "OpenDCAI/Paper2Any",
+    "TNT-Likely/PanWatch",
+    "beenuar/AiSOC",
+    "bytedance/deer-flow",
+    "didilili/ai-agents-from-zero",
+    "guy-hartstein/company-research-agent",
+    "minitap-ai/mobile-use",
+    "simonlin1212/TradingAgents-astock",
+    "wassim249/fastapi-langgraph-agent-production-ready-template",
+    "xerrors/Yuxi"
+  ],
+  "exclude_framework_repositories": [
+    "langchain-ai/langchain",
+    "langchain-ai/langgraph",
+    "langchain-ai/deepagents",
+    "langchain-ai/langchain-mcp-adapters",
+    "langchain-ai/langgraph-supervisor-py",
+    "langchain-ai/langgraph-swarm-py",
+    "aegra/aegra",
+    "hinthornw/trustcall",
+    "JudgmentLabs/judgeval"
+  ],
+  "eligibility": "public, not archived, at least100 stars, SPDX3.29.0 isOsiApproved flag true",
+  "path_frame": "all tracked .py paths under repository root excluding test/tests/docs/doc/vendor/vendored/generated/.venv/site-packages components",
+  "candidate_predicate": "AST imports StateGraph from langgraph.graph (aliases included), or literal StateGraph call; alias/module-qualified calls resolved only syntactically by import bindings",
+  "selection_forbidden": [
+    "frontend admission outcomes",
+    "rewritten source",
+    "dropping unsupported statements",
+    "selecting only successful programs"
+  ],
+  "holdout_handling": "Freeze source identities, hashes and all candidate bytes before frontend edits. Frontend implementation agent must not inspect held-out source; evaluator scores unchanged files after declared implementation freeze. One final hold-out evaluation; after inspection, any changes are documented as development and require a fresh future hold-out to generalize.",
+  "outcomes": [
+    "whole-file admitted under explicit module/API premises",
+    "explicit supported workflow slice (reported separately, never whole-file admission)",
+    "unsupported",
+    "extraction error",
+    "retrieval error"
+  ],
+  "differential_requirement": "Whole-source or explicitly scoped callable executes with actual pinned LangGraph and deterministic shared response oracle. Compare canonical complete model invocation arguments, returned response values, final selected graph state and usage/status sequence; fixtures or synthetic source rewrites never count as external.",
+  "contracts": "Explicit source-authentic provider/model/call configuration where statically available, otherwise separately declared conditional model premises. Missing source values cannot be synthesized and attributed to original source.",
+  "bounds": "No arbitrary source execution, paid API calls, network credentials or import side effects during selection. All unsupported candidates and unsuccessful differentials remain in denominators.",
+  "inference_limits": "Convenience sample, repository/file denominators distinct; no population rate, novelty or translation-correctness conclusion from admissions alone.",
+  "retrieval_caps": {
+    "repository_archive_bytes": 134217728,
+    "individual_python_or_license_bytes": 2097152,
+    "oversize_and_retrieval_errors": "retained as explicit failure records; no silent denominator removal"
+  }
+}

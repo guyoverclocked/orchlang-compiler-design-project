@@ -1,15 +1,17 @@
+> Current rc3 evidence and reproduction: [SCP_STRENGTHENING.md](SCP_STRENGTHENING.md). Earlier rc2 run identifiers below are historical records.
+
 # Software metadata for author review
 
 Prepared for **Science of Computer Programming, Software Track / Original
-Software Publication**. The current guide was read on 9 October 2026. The
+Software Publication**. The earlier guide was read on 9 October 2026; author confirmation of the current guide remains pending. The
 publisher's official LaTeX metadata table is populated in
-`submission/research/manuscript/OrchLang_SCP_OSP.tex`; this document is a readable
+`submission/research/manuscript/OrchLang_SCP_Strengthened.tex`; this document is a readable
 summary. [Verified requirements](SCP_AUTHOR_REQUIREMENTS.md).
 
 | Item | Prepared information |
 |---|---|
 | Software | OrchLang |
-| Candidate version | 0.5.0-rc2; Python wheel 0.5.0rc2 |
+| Candidate version | 0.5.0-rc3; Python wheel 0.5.0rc3 |
 | Article | OrchLang: Replayable Contracts for Token Usage and Request-Equivalent LLM Workflows |
 | Author from repository | Nambi Rajan M; name order, affiliation and contact require confirmation |
 | Source | https://github.com/guyoverclocked/orchlang-compiler-design-project |

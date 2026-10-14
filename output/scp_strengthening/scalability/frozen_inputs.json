@@ -1,0 +1,878 @@
+{
+  "case_count": 34,
+  "cases": [
+    {
+      "case_id": "symmetric_chain_2",
+      "expected_class": "proved_equal",
+      "family": "symmetric_equal_chain_primary",
+      "generator": "research/publication_upgrade/solver_scaling.py::_graph,_kernel",
+      "graph_bytes": 838,
+      "graph_path": "output/scp_strengthening/scalability/inputs/scale_2.graph.json",
+      "graph_sha256": "3c884a9d7d79d635bc548e6d872b46fc604992eeb7e0dcd599c23787194e8bbe",
+      "input_sha256": "1dadc93d25c55155e79da2bdcaefa96769a2cd49cd4cea47b2c00d8e278b59fa",
+      "kernel_bytes": 159,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/scale.kernel.json",
+      "kernel_sha256": "a16c41601ebd3388a171dc147c3b2ad2d5e85dd643bbe41d67a2894d00f6406b",
+      "level": 2,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "route": false
+        },
+        {
+          "route": true
+        }
+      ]
+    },
+    {
+      "case_id": "symmetric_chain_8",
+      "expected_class": "proved_equal",
+      "family": "symmetric_equal_chain_primary",
+      "generator": "research/publication_upgrade/solver_scaling.py::_graph,_kernel",
+      "graph_bytes": 2290,
+      "graph_path": "output/scp_strengthening/scalability/inputs/scale_8.graph.json",
+      "graph_sha256": "1558280613768b483fbf233814167dbd3f36db55b7b21dc076d1b832e76e1381",
+      "input_sha256": "088e93e628a427c8cd720d1b6c39ee6fa714a136103fb557e9f64d519c8ed164",
+      "kernel_bytes": 159,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/scale.kernel.json",
+      "kernel_sha256": "a16c41601ebd3388a171dc147c3b2ad2d5e85dd643bbe41d67a2894d00f6406b",
+      "level": 8,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "route": false
+        },
+        {
+          "route": true
+        }
+      ]
+    },
+    {
+      "case_id": "symmetric_chain_16",
+      "expected_class": "proved_equal",
+      "family": "symmetric_equal_chain_primary",
+      "generator": "research/publication_upgrade/solver_scaling.py::_graph,_kernel",
+      "graph_bytes": 4251,
+      "graph_path": "output/scp_strengthening/scalability/inputs/scale_16.graph.json",
+      "graph_sha256": "8d3b530b5cda115d2ad8af6308acf92f23985a89924e64c127f0ce9327ba524d",
+      "input_sha256": "fcb1d212fd2811317bfe179eb73e95232a3a589d4c3b72dca9e5342a9c828681",
+      "kernel_bytes": 159,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/scale.kernel.json",
+      "kernel_sha256": "a16c41601ebd3388a171dc147c3b2ad2d5e85dd643bbe41d67a2894d00f6406b",
+      "level": 16,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "route": false
+        },
+        {
+          "route": true
+        }
+      ]
+    },
+    {
+      "case_id": "symmetric_chain_32",
+      "expected_class": "proved_equal",
+      "family": "symmetric_equal_chain_primary",
+      "generator": "research/publication_upgrade/solver_scaling.py::_graph,_kernel",
+      "graph_bytes": 8187,
+      "graph_path": "output/scp_strengthening/scalability/inputs/scale_32.graph.json",
+      "graph_sha256": "debc8326539a3c42956635ae66ccbf3d49f27cfd1314435be9692411448a3318",
+      "input_sha256": "b260e86f95ca6dfa58314663176a6ca6d26defda131e82ee514aed541ad96419",
+      "kernel_bytes": 159,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/scale.kernel.json",
+      "kernel_sha256": "a16c41601ebd3388a171dc147c3b2ad2d5e85dd643bbe41d67a2894d00f6406b",
+      "level": 32,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "route": false
+        },
+        {
+          "route": true
+        }
+      ]
+    },
+    {
+      "case_id": "symmetric_chain_64",
+      "expected_class": "proved_equal",
+      "family": "symmetric_equal_chain_primary",
+      "generator": "research/publication_upgrade/solver_scaling.py::_graph,_kernel",
+      "graph_bytes": 16059,
+      "graph_path": "output/scp_strengthening/scalability/inputs/scale_64.graph.json",
+      "graph_sha256": "789ba43e68c5eba1910c3a92b73a8805e1766b4d337270f97e42044a7fc81496",
+      "input_sha256": "fee167cb099693e2d10f9a492a6212286db67cf6e245b3c25804c1e5fe662571",
+      "kernel_bytes": 159,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/scale.kernel.json",
+      "kernel_sha256": "a16c41601ebd3388a171dc147c3b2ad2d5e85dd643bbe41d67a2894d00f6406b",
+      "level": 64,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "route": false
+        },
+        {
+          "route": true
+        }
+      ]
+    },
+    {
+      "case_id": "symmetric_chain_128",
+      "expected_class": "proved_equal",
+      "family": "symmetric_equal_chain_primary",
+      "generator": "research/publication_upgrade/solver_scaling.py::_graph,_kernel",
+      "graph_bytes": 31916,
+      "graph_path": "output/scp_strengthening/scalability/inputs/scale_128.graph.json",
+      "graph_sha256": "8e0ba27f14285011418526fcb618eed1d6749f40b0e59e37302c02e0602a3874",
+      "input_sha256": "554681a4b3762cb8aae5ca000ae2b1aac8b859e1fdbb356209b6317d440f0bed",
+      "kernel_bytes": 159,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/scale.kernel.json",
+      "kernel_sha256": "a16c41601ebd3388a171dc147c3b2ad2d5e85dd643bbe41d67a2894d00f6406b",
+      "level": 128,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "route": false
+        },
+        {
+          "route": true
+        }
+      ]
+    },
+    {
+      "case_id": "symmetric_chain_256",
+      "expected_class": "proved_equal",
+      "family": "symmetric_equal_chain_primary",
+      "generator": "research/publication_upgrade/solver_scaling.py::_graph,_kernel",
+      "graph_bytes": 63916,
+      "graph_path": "output/scp_strengthening/scalability/inputs/scale_256.graph.json",
+      "graph_sha256": "2dfbca57ec503b47d70f57ab7ab242c12ecc2ff617537b859c7b44536686213f",
+      "input_sha256": "87c465163e22b805ec13e5c2f89810029602f4fd67271dbd93013748d5c62026",
+      "kernel_bytes": 159,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/scale.kernel.json",
+      "kernel_sha256": "a16c41601ebd3388a171dc147c3b2ad2d5e85dd643bbe41d67a2894d00f6406b",
+      "level": 256,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "route": false
+        },
+        {
+          "route": true
+        }
+      ]
+    },
+    {
+      "case_id": "secret_fanout_2",
+      "expected_class": "equal_or_finite-result",
+      "family": "secret_branch_fanout",
+      "graph_bytes": 514,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/secret_fanout_2.graph.json",
+      "graph_sha256": "facd371d60871eaf6be95066f7b4a896079ea38312186918d5910f050a24653b",
+      "input_sha256": "53163b127917d097ff265acbc2d2066de4fac88ad602fd4e5141f5910f62e111",
+      "kernel_bytes": 158,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/secret_fanout_2.kernel.json",
+      "kernel_sha256": "0b1a3e77222c5d0a15b4bc05ac1e9a3774729bdc51506930eec5c529ba1eefb0",
+      "level": 2,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret_0": false
+        },
+        {
+          "secret_0": true
+        }
+      ]
+    },
+    {
+      "case_id": "secret_fanout_4",
+      "expected_class": "equal_or_finite-result",
+      "family": "secret_branch_fanout",
+      "graph_bytes": 789,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/secret_fanout_4.graph.json",
+      "graph_sha256": "8c20293e3d97b86ec672e28a0768f784bb47524dc5e40168875a328ce13d35cc",
+      "input_sha256": "5459be3a75c41555c563644aca821a09f79e1e2a8d8181e9554d28f4cb2bee09",
+      "kernel_bytes": 158,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/secret_fanout_4.kernel.json",
+      "kernel_sha256": "0b1a3e77222c5d0a15b4bc05ac1e9a3774729bdc51506930eec5c529ba1eefb0",
+      "level": 4,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret_0": false,
+          "secret_1": false
+        },
+        {
+          "secret_0": false,
+          "secret_1": true
+        },
+        {
+          "secret_0": true,
+          "secret_1": false
+        },
+        {
+          "secret_0": true,
+          "secret_1": true
+        }
+      ]
+    },
+    {
+      "case_id": "secret_fanout_8",
+      "expected_class": "equal_or_finite-result",
+      "family": "secret_branch_fanout",
+      "graph_bytes": 1300,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/secret_fanout_8.graph.json",
+      "graph_sha256": "e5c8e3a92b8d129b477020032e1d672eefd796635a7e0091bbc06877475cd198",
+      "input_sha256": "e9ca96141429442c27f05f1b640bd2f86dc1531f64d0b52bb290f983dc570be3",
+      "kernel_bytes": 158,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/secret_fanout_8.kernel.json",
+      "kernel_sha256": "0b1a3e77222c5d0a15b4bc05ac1e9a3774729bdc51506930eec5c529ba1eefb0",
+      "level": 8,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret_0": false,
+          "secret_1": false,
+          "secret_2": false
+        },
+        {
+          "secret_0": false,
+          "secret_1": false,
+          "secret_2": true
+        },
+        {
+          "secret_0": false,
+          "secret_1": true,
+          "secret_2": false
+        },
+        {
+          "secret_0": false,
+          "secret_1": true,
+          "secret_2": true
+        },
+        {
+          "secret_0": true,
+          "secret_1": false,
+          "secret_2": false
+        },
+        {
+          "secret_0": true,
+          "secret_1": false,
+          "secret_2": true
+        },
+        {
+          "secret_0": true,
+          "secret_1": true,
+          "secret_2": false
+        },
+        {
+          "secret_0": true,
+          "secret_1": true,
+          "secret_2": true
+        }
+      ]
+    },
+    {
+      "case_id": "public_context_0",
+      "expected_class": "equal_or_finite-result",
+      "family": "public_branch_context",
+      "graph_bytes": 759,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/public_context_0.graph.json",
+      "graph_sha256": "b8be80641fc195bbad740f2309607b8db3af788f36132b78127fb0eae628ac0a",
+      "input_sha256": "46c0f14d9478e971c0e5da094a21ef1df19cbfc2be1e976cdeeb319648b8236b",
+      "kernel_bytes": 158,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/public_context_0.kernel.json",
+      "kernel_sha256": "0b1a3e77222c5d0a15b4bc05ac1e9a3774729bdc51506930eec5c529ba1eefb0",
+      "level": 0,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "public_context_2",
+      "expected_class": "equal_or_finite-result",
+      "family": "public_branch_context",
+      "graph_bytes": 1367,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/public_context_2.graph.json",
+      "graph_sha256": "70e09e0b3266999d78701837744503461019c8c7897e79b4440932ae7e389702",
+      "input_sha256": "2cba2c634af3db6be8332869f689ae33003bb877c6f08d304cbc98c7a3005b2a",
+      "kernel_bytes": 158,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/public_context_2.kernel.json",
+      "kernel_sha256": "0b1a3e77222c5d0a15b4bc05ac1e9a3774729bdc51506930eec5c529ba1eefb0",
+      "level": 2,
+      "max_states": 10000,
+      "public_store": {
+        "public_0": false,
+        "public_1": true
+      },
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "public_context_4",
+      "expected_class": "equal_or_finite-result",
+      "family": "public_branch_context",
+      "graph_bytes": 1983,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/public_context_4.graph.json",
+      "graph_sha256": "25a204b970b6d1220e3064495c2207c63ce9b762a5afb2eae88c9fbcc6596e02",
+      "input_sha256": "8168a7418d89d3a9e2737b8060cdbca4e55e86ecc52deeb4741dd25126fd5e33",
+      "kernel_bytes": 158,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/public_context_4.kernel.json",
+      "kernel_sha256": "0b1a3e77222c5d0a15b4bc05ac1e9a3774729bdc51506930eec5c529ba1eefb0",
+      "level": 4,
+      "max_states": 10000,
+      "public_store": {
+        "public_0": false,
+        "public_1": true,
+        "public_2": false,
+        "public_3": true
+      },
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "mutable_registers_1",
+      "expected_class": "equal_or_finite-result",
+      "family": "mutable_registers_dependent_requests",
+      "graph_bytes": 573,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/mutable_registers_1.graph.json",
+      "graph_sha256": "10163d36dba042167bd3bb9962e2722f114145a1fb7046c748af3d605eba6336",
+      "input_sha256": "00fc15fa88fd50ffb04f2c6d8e6ec0a2c8c2006ae01330784f8e998e1f4ad951",
+      "kernel_bytes": 216,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/mutable_registers_1.kernel.json",
+      "kernel_sha256": "ff7296e8f81c643464ac152a8d993c60415f40a1acdf3eec6d0a675b2c837f9d",
+      "level": {
+        "registers": 1,
+        "writes": 2
+      },
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "mutable_registers_2",
+      "expected_class": "equal_or_finite-result",
+      "family": "mutable_registers_dependent_requests",
+      "graph_bytes": 738,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/mutable_registers_2.graph.json",
+      "graph_sha256": "d107304ba95fce1861e72fc3bb431464b5cf5ef579827a5a7021a09fabe631f0",
+      "input_sha256": "f44341f930de1984e6a3a7e6e2bbeed9f3a52a969e93b6bf793f24e2f0ac8e76",
+      "kernel_bytes": 216,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/mutable_registers_2.kernel.json",
+      "kernel_sha256": "ff7296e8f81c643464ac152a8d993c60415f40a1acdf3eec6d0a675b2c837f9d",
+      "level": {
+        "registers": 2,
+        "writes": 4
+      },
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "mutable_registers_4",
+      "expected_class": "equal_or_finite-result",
+      "family": "mutable_registers_dependent_requests",
+      "graph_bytes": 1068,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/mutable_registers_4.graph.json",
+      "graph_sha256": "f6cdebdda3121f3b5c8a3b411be46c66d5b40412c1a71f6ede920c70ac6009f7",
+      "input_sha256": "52ce1e7a2de9a85f748023f4d1aa246e97348996a7baba27fa6625fda40ad6af",
+      "kernel_bytes": 216,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/mutable_registers_4.kernel.json",
+      "kernel_sha256": "ff7296e8f81c643464ac152a8d993c60415f40a1acdf3eec6d0a675b2c837f9d",
+      "level": {
+        "registers": 4,
+        "writes": 8
+      },
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "productive_cycle_1",
+      "expected_class": "equal_or_finite-result",
+      "family": "productive_cycle",
+      "graph_bytes": 644,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/productive_cycle_1.graph.json",
+      "graph_sha256": "1bf09cc3dc168c9698cc30ba480a485584303b8c61b582f9302753496100707e",
+      "input_sha256": "78d35dab9e8c184f005b71fc07226955aebaca9a331f07a2f1a08246c520fff6",
+      "kernel_bytes": 158,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/productive_cycle_1.kernel.json",
+      "kernel_sha256": "0b1a3e77222c5d0a15b4bc05ac1e9a3774729bdc51506930eec5c529ba1eefb0",
+      "level": 1,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "productive_cycle_2",
+      "expected_class": "equal_or_finite-result",
+      "family": "productive_cycle",
+      "graph_bytes": 886,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/productive_cycle_2.graph.json",
+      "graph_sha256": "db8558b6bae150d2b0516d884d301bdedbb922e689e151ee271296194b38740c",
+      "input_sha256": "aacac38a0c25f8594580a534ad9a7551618cba90148698c27ea75b586f03ba6f",
+      "kernel_bytes": 158,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/productive_cycle_2.kernel.json",
+      "kernel_sha256": "0b1a3e77222c5d0a15b4bc05ac1e9a3774729bdc51506930eec5c529ba1eefb0",
+      "level": 2,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "productive_cycle_4",
+      "expected_class": "equal_or_finite-result",
+      "family": "productive_cycle",
+      "graph_bytes": 1370,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/productive_cycle_4.graph.json",
+      "graph_sha256": "a51bd09f5d44e84648a1f64aa3434391ba1d56c144c5925ddb1623af08e58d86",
+      "input_sha256": "59658368daed54a68e98f0706feec918a62bf014d4fd9dab0a35d334d011cd9a",
+      "kernel_bytes": 158,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/productive_cycle_4.kernel.json",
+      "kernel_sha256": "0b1a3e77222c5d0a15b4bc05ac1e9a3774729bdc51506930eec5c529ba1eefb0",
+      "level": 4,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "outcome_support_1",
+      "expected_class": "equal_or_finite-result",
+      "family": "oracle_outcome_support",
+      "graph_bytes": 495,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/outcome_support_1.graph.json",
+      "graph_sha256": "95b9acc0150f9011f09b6c53efae9142838dfe79b0c90de4cb9b1a8f016c476c",
+      "input_sha256": "379ea6d83c9e1c88b3c58c5d7a54b2e2ac67705802318b3b9fed8337f46e23e8",
+      "kernel_bytes": 160,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/outcome_support_1.kernel.json",
+      "kernel_sha256": "75c6671e221dafd96107d622e2915ff95f16b6d8337b929453a6c6e1a16e5732",
+      "level": 1,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "outcome_support_2",
+      "expected_class": "equal_or_finite-result",
+      "family": "oracle_outcome_support",
+      "graph_bytes": 495,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/outcome_support_2.graph.json",
+      "graph_sha256": "a8767d9edd4a3bf08f4e924ff63849960cf6d6d578e7d91e99cf87efc928e1c4",
+      "input_sha256": "8547d6ccc021e56df1906b3e4d35517a2e2975df215ca7262a2489f51c697bb3",
+      "kernel_bytes": 215,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/outcome_support_2.kernel.json",
+      "kernel_sha256": "bc3365dbe47c9602c242c218aa709b6903f93ed58a03baa45d2b6879f026d852",
+      "level": 2,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "outcome_support_4",
+      "expected_class": "equal_or_finite-result",
+      "family": "oracle_outcome_support",
+      "graph_bytes": 495,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/outcome_support_4.graph.json",
+      "graph_sha256": "c5cdd68d11b910b08963b64babe0356f0ac98962be30a1b8369c8db98724fafb",
+      "input_sha256": "8795b4d72ef5a223c24424e108b2a1dd608798eefa8542fdb4d2958b9d7b82a0",
+      "kernel_bytes": 325,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/outcome_support_4.kernel.json",
+      "kernel_sha256": "e32785ba890454b7b0c637b96f1adaf54030e18c09524772d016e34d149e466f",
+      "level": 4,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "outcome_support_8",
+      "expected_class": "equal_or_finite-result",
+      "family": "oracle_outcome_support",
+      "graph_bytes": 495,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/outcome_support_8.graph.json",
+      "graph_sha256": "05f5f680270f7609b316b693fccc312c381abbda695e035e7e852a8cd8e6c51e",
+      "input_sha256": "2a33f4bfa60c1dc1305d1f028b744e3e854b66f9db72fae6703f44a936a8d4e1",
+      "kernel_bytes": 545,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/outcome_support_8.kernel.json",
+      "kernel_sha256": "fbdc666d42ec044d4cc74abd5ffbe2188de65c1becba214c78417d1e7c1bda96",
+      "level": 8,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "observation_alphabet_1",
+      "expected_class": "equal_or_finite-result",
+      "family": "usage_observation_alphabet",
+      "graph_bytes": 500,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/observation_alphabet_1.graph.json",
+      "graph_sha256": "1eb1a56c85ebf137de85875676dea353ba28a6f481ebad81eb54fd2fef34c46f",
+      "input_sha256": "a5b2c60dedb4510d59fec23b3cd3e335a7ea999872561ddefd35b844c679f063",
+      "kernel_bytes": 545,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/observation_alphabet_1.kernel.json",
+      "kernel_sha256": "fbdc666d42ec044d4cc74abd5ffbe2188de65c1becba214c78417d1e7c1bda96",
+      "level": {
+        "alphabet_labels": 1,
+        "support": 8
+      },
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "observation_alphabet_2",
+      "expected_class": "equal_or_finite-result",
+      "family": "usage_observation_alphabet",
+      "graph_bytes": 500,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/observation_alphabet_2.graph.json",
+      "graph_sha256": "0024050067aa344be09aa00124bc5bd14d049255d3fff1738d473b5c037a23b2",
+      "input_sha256": "9e4a1016b2028f63d146244d70aef934aceb27313b81360a7438fe5d48eb313b",
+      "kernel_bytes": 545,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/observation_alphabet_2.kernel.json",
+      "kernel_sha256": "c33682f98c53b0ac067242b07cf2da01b3bdd93fb86c85c71fcd2de2d5eb3961",
+      "level": {
+        "alphabet_labels": 2,
+        "support": 8
+      },
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "observation_alphabet_4",
+      "expected_class": "equal_or_finite-result",
+      "family": "usage_observation_alphabet",
+      "graph_bytes": 500,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/observation_alphabet_4.graph.json",
+      "graph_sha256": "0b28e5e0d3efe485b7d92ec15f3643ac340c29eb89eb85b2340d6ee75458212c",
+      "input_sha256": "218512d39f3baff9743433b343b58a3fb0d895522088bf092397d54d4fbb2204",
+      "kernel_bytes": 545,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/observation_alphabet_4.kernel.json",
+      "kernel_sha256": "6ae8506b441be28b52c439704af247bbd5661d8fb97b72dc94f44f15b8045c8e",
+      "level": {
+        "alphabet_labels": 4,
+        "support": 8
+      },
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "observation_alphabet_8",
+      "expected_class": "equal_or_finite-result",
+      "family": "usage_observation_alphabet",
+      "graph_bytes": 500,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/observation_alphabet_8.graph.json",
+      "graph_sha256": "7e3557c4df5b0a3d6ab843ca219fb342bea52a4456f9edbc6d7e6f87ce219a40",
+      "input_sha256": "385aeea6eac64eead9e98ce4153419a27f9153c1b56e63186b3ad8ebdf6b71d9",
+      "kernel_bytes": 545,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/observation_alphabet_8.kernel.json",
+      "kernel_sha256": "f40c75c5b0cf5fbb21a93ec821eb3384b9089162e4ada4bf1bdd3a5181b10b50",
+      "level": {
+        "alphabet_labels": 8,
+        "support": 8
+      },
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "retained_history_0",
+      "expected_class": "equal_or_finite-result",
+      "family": "retained_history_state_growth",
+      "graph_bytes": 670,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/retained_history_0.graph.json",
+      "graph_sha256": "4308c628e8a439aa4805ec38a9ed13cfdbc6b7c0c804ad71c1d72d90ef309c83",
+      "input_sha256": "4a0c9d09aea78967ed05adedc4e4a612f13a4ef20e273c803ce0768c66dc5443",
+      "kernel_bytes": 334,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/retained_history_0.kernel.json",
+      "kernel_sha256": "5ca6dded98338a017fdd766b72217bc9e4b3694771ddd18f6228807c8232a6e6",
+      "level": 0,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "retained_history_1",
+      "expected_class": "equal_or_finite-result",
+      "family": "retained_history_state_growth",
+      "graph_bytes": 670,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/retained_history_1.graph.json",
+      "graph_sha256": "90b8d950652073fa8ca44cd667dfc81ede7b67c78a2d38ec803210c61fdeb9d0",
+      "input_sha256": "1aae215c250a2e8c516616d6915ac4088a44a8a39ea7c8ec0700f98a2d849393",
+      "kernel_bytes": 868,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/retained_history_1.kernel.json",
+      "kernel_sha256": "641305a17c4f54ad76a551881b38a39ddd8556e814cd9f1a6f1deef1d4d5fb5f",
+      "level": 1,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "retained_history_2",
+      "expected_class": "equal_or_finite-result",
+      "family": "retained_history_state_growth",
+      "graph_bytes": 670,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/retained_history_2.graph.json",
+      "graph_sha256": "8569f1f4b99ee5b6ad4aea01e5880a41a14555e45d8e97dea15b109d1e958444",
+      "input_sha256": "daa36a05bbffecf0247e936e059ab163703298d8adef6fdfe0def6ca0b2cbf2d",
+      "kernel_bytes": 2354,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/retained_history_2.kernel.json",
+      "kernel_sha256": "5a8678e9e203f0df0664eae2b2a0e252b3ffc552154a67f766996877a4237563",
+      "level": 2,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "retained_history_3",
+      "expected_class": "equal_or_finite-result",
+      "family": "retained_history_state_growth",
+      "graph_bytes": 670,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/retained_history_3.graph.json",
+      "graph_sha256": "1cb95dc274077bf818b340fa7a270d2ba58a23bad992333e5b14a53499962a8d",
+      "input_sha256": "6157f4e3454a526308b205ecb854e743c462ccb979825caf2e2a21015c1d48ef",
+      "kernel_bytes": 6158,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/retained_history_3.kernel.json",
+      "kernel_sha256": "3b83a32541077ca734df5f811c72a70b990a38ba4bc035e45729ea9e4f663613",
+      "level": 3,
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "history_conditioned_unequal",
+      "expected_class": "proved_unequal_finite_witness",
+      "family": "history_conditioned_request_distinguishing_witness",
+      "graph_bytes": 720,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/history_conditioned_unequal.graph.json",
+      "graph_sha256": "410becc696c9a048ab150b769ee95bb7e42d43f8c4d344e3c21a4c78180d34a1",
+      "input_sha256": "55512e6218ec3040b13b47cd59f466b61addba07e1bcaa3f46f99196a4095228",
+      "kernel_bytes": 977,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/history_conditioned_unequal.kernel.json",
+      "kernel_sha256": "f7374633fc5d2f0844be61c7282e32776a06a354e8b191aa8eaba36f2c8cbdb7",
+      "level": "fixed-authored-shape",
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "bisim_inconclusive_exact_equal",
+      "expected_class": "proved_equal_bisim_inconclusive",
+      "family": "bisimulation_inconclusive_exact_equal",
+      "graph_bytes": 845,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/bisim_inconclusive_exact_equal.graph.json",
+      "graph_sha256": "ad6f09ceab9aa227f4e9464cab3920a489e16357d466488548b320cd1173a774",
+      "input_sha256": "50db0a3198c21302c82071190c1e00cde44b67937a2d1d3625bc284f34437617",
+      "kernel_bytes": 784,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/bisim_inconclusive_exact_equal.kernel.json",
+      "kernel_sha256": "e53dd07e498715f1f0e27bba6fd01b3e88fc3e0a777003e13b46c3ff9b46d55a",
+      "level": "fixed-authored-shape",
+      "max_states": 10000,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    },
+    {
+      "case_id": "resource_unknown_probe",
+      "expected_class": "unknown-resource",
+      "family": "resource_unknown",
+      "graph_bytes": 500,
+      "graph_path": "output/scp_strengthening/scalability/inputs/structured/resource_unknown_probe.graph.json",
+      "graph_sha256": "ba785af8d4a1b050cdf236614fe64b70c1057c7afbb8f52536dbd9bd42128977",
+      "input_sha256": "7bd20ab628acc3b0128ff53bf875dae52b93c24858223f3f5c810b8bd922a7dc",
+      "kernel_bytes": 545,
+      "kernel_path": "output/scp_strengthening/scalability/inputs/structured/resource_unknown_probe.kernel.json",
+      "kernel_sha256": "fbdc666d42ec044d4cc74abd5ffbe2188de65c1becba214c78417d1e7c1bda96",
+      "level": "max_states=1",
+      "max_states": 1,
+      "public_store": {},
+      "secret_scenarios": [
+        {
+          "secret": false
+        },
+        {
+          "secret": true
+        }
+      ]
+    }
+  ],
+  "format": "orchlang-structured-scalability-frozen-inputs",
+  "generator_path": "research/scp_strengthening/scalability/freeze_inputs.py",
+  "generator_sha256": "adf213eb40f3a7bf01dfd906fc3903a06c31d549003c4c53f104679b891ac42c",
+  "schema_validation": {
+    "assignments": "normalized_store for every fixed public/secret pair",
+    "graph": "audit.orchgraph.Graph v1 construction",
+    "kernel": "audit.probabilistic_channels.Kernel v1 construction",
+    "solver_invoked": false
+  },
+  "source_scaling_generator_sha256": "063491c8f54da444fbaf634b905e0107284042b30fb8404379126afdc7f15f0f",
+  "version": 1
+}

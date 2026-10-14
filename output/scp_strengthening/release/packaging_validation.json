@@ -1,0 +1,259 @@
+{
+  "entry_points": [
+    "orchlang-graph-check",
+    "orchlang-graph-replay",
+    "orchlang-channel-analyze",
+    "orchlang-channel-replay",
+    "orchlang-stochastic-bisimulation",
+    "orchlang-stochastic-replay",
+    "orchlang-trace-equivalence",
+    "orchlang-trace-replay"
+  ],
+  "executed_outside_checkout": true,
+  "format": "orchlang-installed-wheel-validation",
+  "isolated_venv": true,
+  "limits": {
+    "bisimulation": {
+      "max_states": 100,
+      "max_work_bytes": 1048576
+    },
+    "bisimulation_replay": {
+      "max_control_steps": 1000,
+      "max_states": 100,
+      "max_transitions": 1000,
+      "max_work_bytes": 1048576
+    },
+    "channel": {
+      "horizon": 2,
+      "max_states": 100,
+      "max_work_bytes": 1048576,
+      "observer": "trace"
+    },
+    "channel_replay": {
+      "max_reference_paths": 100,
+      "max_reference_steps": 1000,
+      "max_reference_work_bytes": 1048576
+    },
+    "exact_trace_equivalence": {
+      "max_states": 100,
+      "max_work_bytes": 1048576
+    }
+  },
+  "limits_note": [
+    "Offline wheel packaging and isolated CLI smoke checks; no provider calls.",
+    "Finite channel replay covers its bound fixture, kernel, observer, and horizon.",
+    "All-horizon replay covers equal finite trace laws under the supplied finite rational kernel and inputs.",
+    "A separate compiler build and framework integration are outside this wheel."
+  ],
+  "mandatory_runtime_dependencies": [],
+  "module_sha256": {
+    "orchgraph": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+    "probabilistic_channels": "45380e75cdcc4d6f285a0027cbb85dab97d22dff11c5c94d3940b6813e8dce00",
+    "probabilistic_reference": "9c081f87e1dcd7b283bb4894a1a1794c8183e09fcadeac53c9467cb1606e3012",
+    "replay_graph_certificate": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
+    "replay_probabilistic_report": "7297248e651c3972cc62287409b47a95f3f41b6b1800adc1011dc7bb4cfb1e1f",
+    "replay_stochastic_certificate": "1b987ad220e733a4e1be79b7391bce245d8d7e56bc515bccec051918a8161407",
+    "replay_trace_equivalence": "88ded10270a4936b14f9c260194d5ebd36900c479f54f7307632c7e7f27dc388",
+    "stochastic_bisimulation": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+    "trace_equivalence": "59bdfa053a1fa1bf1e5fafed0db98cde71e84f484fdca7428bbd97abfa3fd05a"
+  },
+  "network_used": false,
+  "packager_sha256": "d5873690531a6bf2ddf5c2ef1e6f6357eeaab65f2d4d812ad54277b38006655f",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "pyproject_sha256": "609a07bf119a63972e3135568cf9f84976f573572688da2d8c758b25ba91f651",
+  "python": "3.14.6",
+  "requires_python": ">=3.10",
+  "results": {
+    "all_horizon_bisimulation": {
+      "equal_laws_claim": true,
+      "producer_status": "proved_equal",
+      "replay_status": "verified",
+      "report_sha256": "57f566323f5713d345c107cbb5333a0e5567077adf2543b1ecf898762dc4948a",
+      "state_count": 14,
+      "tamper_status": "rejected",
+      "transition_count": 12
+    },
+    "exact_trace_equivalence": {
+      "equality_replay_status": "verified",
+      "equality_report_sha256": "cf8f53322f877ddb493834fe21ae82aa7a3e77151541399d7803f92be512b857",
+      "equality_status": "proved_equal",
+      "resource_replay_status": "unknown",
+      "resource_status": "unknown",
+      "unequal_report_sha256": "8b31b0d1d8fe9c9cc3443d511a5c08b5163c5e0584f419e16b6213aac861d7d8",
+      "unequal_status": "unequal",
+      "witness_replay_status": "verified",
+      "wrong_source_status": "rejected"
+    },
+    "finite_channel": {
+      "graph_sha256": "d2288c35e5b47eb71b77e50bba8c067eae4dcda66269e6c3a8e4f38692c1bf9f",
+      "horizon": 2,
+      "kernel_sha256": "03267f8a9a4f297a53a2fa9b5b3c9dfb4949517965f77dcdd8377171473f746b",
+      "observer": "trace",
+      "producer_status": "complete",
+      "replay_status": "verified",
+      "report_sha256": "93c9183bae997351ff52ce557dcc5bc188b97306fbe6d377d16fe1cea1442db5",
+      "scenario_rows_verified": 2
+    },
+    "graph_checker_and_replayer": {
+      "checker_status": "accepted",
+      "replay_status": "verified",
+      "source_sha256": "9b827d2e8ef16f8d2fa9a4e146f5ef8341d46f434ce04abca8e0c95c3917b6b8",
+      "stale_relation_status": "rejected",
+      "tamper_status": "rejected",
+      "wrong_source_status": "rejected"
+    },
+    "resource_probe": {
+      "closed_system_present": false,
+      "producer_exit_code": 3,
+      "producer_status": "unknown",
+      "replay_exit_code": 2,
+      "replay_status": "unknown"
+    }
+  },
+  "software_version": "0.5.0rc3",
+  "stages": [
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stage": "offline-wheel-build",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stage": "offline-isolated-install",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stage": "installed-wheel-metadata",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stage": "installed-wheel-imports",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stage": "installed-graph-check",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stage": "installed-graph-independent-replay",
+      "timed_out": false
+    },
+    {
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "stage": "installed-stale-relation-rejection",
+      "timed_out": false
+    },
+    {
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "stage": "installed-graph-tamper-rejection",
+      "timed_out": false
+    },
+    {
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "stage": "installed-wrong-graph-source-rejection",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stage": "installed-finite-channel-analysis",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stage": "installed-finite-channel-independent-replay",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stage": "installed-all-horizon-bisimulation",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stage": "installed-all-horizon-independent-replay",
+      "timed_out": false
+    },
+    {
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "stage": "installed-stochastic-certificate-tamper-rejection",
+      "timed_out": false
+    },
+    {
+      "exit_code": 3,
+      "expected_exit_code": 3,
+      "stage": "installed-bisimulation-resource-unknown",
+      "timed_out": false
+    },
+    {
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "stage": "installed-resource-unknown-replay",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stage": "installed-exact-trace-equivalence",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stage": "installed-exact-equality-replay",
+      "timed_out": false
+    },
+    {
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "stage": "installed-exact-trace-inequality",
+      "timed_out": false
+    },
+    {
+      "exit_code": 0,
+      "expected_exit_code": 0,
+      "stage": "installed-exact-witness-replay",
+      "timed_out": false
+    },
+    {
+      "exit_code": 1,
+      "expected_exit_code": 1,
+      "stage": "installed-exact-wrong-source-rejection",
+      "timed_out": false
+    },
+    {
+      "exit_code": 3,
+      "expected_exit_code": 3,
+      "stage": "installed-exact-resource-unknown",
+      "timed_out": false
+    },
+    {
+      "exit_code": 2,
+      "expected_exit_code": 2,
+      "stage": "installed-exact-unknown-replay",
+      "timed_out": false
+    }
+  ],
+  "status": "passed",
+  "version": 2,
+  "wheel": "output/scp_strengthening/release/wheels/orchlang_graph_tools-0.5.0rc3-py3-none-any.whl",
+  "wheel_build_interpreter": "/opt/homebrew/Cellar/python@3.11/3.11.15_1/Frameworks/Python.framework/Versions/3.11/bin/python3.11",
+  "wheel_sha256": "df55c7c23b3a8dee0f4ccc6a7c1b80fe764892801c01309252f98e6bacd0c0ef"
+}

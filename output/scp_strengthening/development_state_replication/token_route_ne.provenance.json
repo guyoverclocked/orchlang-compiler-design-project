@@ -1,0 +1,487 @@
+{
+  "assumptions": {
+    "provider_scope": "offline helper only; no provider execution or guarantee",
+    "request_helper": "request(model=<literal alias>, template=<literal text>, arguments=[ordered text literals/state values/prior local results])",
+    "request_oracle": "shared Omega keyed by workflow name, seed, normalized model contract, per-contract ordinal, exact template, and ordered full-text arguments",
+    "state_updates": "each LangGraph node returns atomically; destination-field reads after its producing local call are rejected",
+    "token_helper": "tokens(text) is ceil(UTF-8 bytes / chars_per_token)"
+  },
+  "attestation_sha256": "33898bf4279493b7b011a5fb6ef5e929f130b2b39372f14b394ee7181c26a01b",
+  "certificate_replayer_sha256": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
+  "certificate_sha256": "d98f7757fd1dfa53cac10d4bd1d4eebdb79ee4750c62d7becfd8fae6aadf194a",
+  "chars_per_token": 4,
+  "checks": {
+    "certificate_replay": "verified",
+    "extraction": "passed",
+    "graph_check": "accepted"
+  },
+  "contracts_sha256": "9a5a78cc530951fc2e280a51a452d504b367c8e8653dc3f90ad7b410225537ba",
+  "format": "orchlang-langgraph-source-provenance",
+  "frontend_files": [
+    {
+      "path": "__init__.py",
+      "sha256": "140d82abb66e0ba0a1b6e2cad703e20e8a83b5a6645d0d620178dfb87195b431"
+    },
+    {
+      "path": "export.py",
+      "sha256": "06a032143c336a96919929b417cf369ab7db62610c567e409352e4771606c4f9"
+    },
+    {
+      "path": "extract.py",
+      "sha256": "aa3c1cef891a40480b44dd438f137a5c5f91cc6b9285c38e3cc8bd5eed65f7d9"
+    },
+    {
+      "path": "runtime.py",
+      "sha256": "c717ca7a87748472eb03cd0a30b3365680ed59f782e99a250b112278792408b9"
+    },
+    {
+      "path": "study.py",
+      "sha256": "00ea63e34f8978b2683a419c93712443f61c2fc770e938d34f4991d57edc3d9a"
+    }
+  ],
+  "frontend_sha256": "509be213bf0d57bcbebdc8d3c4ece4921d9d34bd9c11ecf37564475f924e1575",
+  "graph_certificate": {
+    "checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+    "format": "orchlang-cyclic-request-certificate",
+    "graph_name": "token_route_ne",
+    "max_nodes": 50000,
+    "nodes": [
+      {
+        "equal_values": [
+          [
+            "lg_input_0000",
+            "lg_input_0000"
+          ]
+        ],
+        "id": 0,
+        "left": [
+          "lg_state_0000",
+          0
+        ],
+        "right": [
+          "lg_state_0000",
+          0
+        ],
+        "rule": "matched-call",
+        "successors": [
+          1
+        ]
+      },
+      {
+        "equal_values": [
+          [
+            "lg_input_0000",
+            "lg_input_0000"
+          ],
+          [
+            "lg_slot_0000",
+            "lg_slot_0000"
+          ]
+        ],
+        "id": 1,
+        "left": [
+          "lg_state_0000",
+          1
+        ],
+        "right": [
+          "lg_state_0000",
+          1
+        ],
+        "rule": "public-choice",
+        "successors": [
+          2,
+          3
+        ]
+      },
+      {
+        "equal_values": [
+          [
+            "lg_input_0000",
+            "lg_input_0000"
+          ],
+          [
+            "lg_slot_0000",
+            "lg_slot_0000"
+          ]
+        ],
+        "id": 2,
+        "left": [
+          "lg_state_0001",
+          0
+        ],
+        "right": [
+          "lg_state_0001",
+          0
+        ],
+        "rule": "matched-call",
+        "successors": [
+          4
+        ]
+      },
+      {
+        "equal_values": [
+          [
+            "lg_input_0000",
+            "lg_input_0000"
+          ],
+          [
+            "lg_slot_0000",
+            "lg_slot_0000"
+          ]
+        ],
+        "id": 3,
+        "left": [
+          "lg_state_0002",
+          0
+        ],
+        "right": [
+          "lg_state_0002",
+          0
+        ],
+        "rule": "matched-call",
+        "successors": [
+          5
+        ]
+      },
+      {
+        "equal_values": [
+          [
+            "lg_input_0000",
+            "lg_input_0000"
+          ],
+          [
+            "lg_slot_0000",
+            "lg_slot_0000"
+          ],
+          [
+            "lg_slot_0001",
+            "lg_slot_0001"
+          ]
+        ],
+        "id": 4,
+        "left": [
+          "lg_state_0001",
+          1
+        ],
+        "right": [
+          "lg_state_0001",
+          1
+        ],
+        "rule": "stop",
+        "successors": []
+      },
+      {
+        "equal_values": [
+          [
+            "lg_input_0000",
+            "lg_input_0000"
+          ],
+          [
+            "lg_slot_0000",
+            "lg_slot_0000"
+          ],
+          [
+            "lg_slot_0001",
+            "lg_slot_0001"
+          ]
+        ],
+        "id": 5,
+        "left": [
+          "lg_state_0002",
+          1
+        ],
+        "right": [
+          "lg_state_0002",
+          1
+        ],
+        "rule": "stop",
+        "successors": []
+      }
+    ],
+    "product_edges": 5,
+    "product_nodes": 6,
+    "reachable_source_states": [
+      "lg_state_0000",
+      "lg_state_0001",
+      "lg_state_0002"
+    ],
+    "root": 0,
+    "semantics": {
+      "claim": "equal complete request/usage traces and stop positions under the shared oracle",
+      "cycles": "every finite trace prefix; no termination or finite total-cost claim",
+      "input_accounting": "complete additive request contract in compatible token units",
+      "inputs": "all public external values agree; secret inputs may differ",
+      "oracle": "shared Omega(resolved-contract,per-contract-ordinal,template,ordered-text-values)",
+      "unsupported": [
+        "declassification",
+        "tools",
+        "request serialization",
+        "independent provider sampling",
+        "call-free cycles"
+      ]
+    },
+    "source_sha256": "178452b7a92c404f8257c66e8022b7e8dc2769cd591934e65228d3889e513a8c",
+    "state_entry_bounds": {
+      "lg_state_0000": {
+        "input_tokens": 66,
+        "output_tokens": 8,
+        "total_tokens": 74
+      },
+      "lg_state_0001": {
+        "input_tokens": 11,
+        "output_tokens": 8,
+        "total_tokens": 19
+      },
+      "lg_state_0002": {
+        "input_tokens": 11,
+        "output_tokens": 8,
+        "total_tokens": 19
+      }
+    },
+    "status": "accepted",
+    "version": 1
+  },
+  "graph_checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+  "graph_diagnostic": null,
+  "graph_sha256": "178452b7a92c404f8257c66e8022b7e8dc2769cd591934e65228d3889e513a8c",
+  "mapping": {
+    "builder_variable": "builder",
+    "calls": [
+      {
+        "arguments": [
+          {
+            "kind": "state",
+            "location": {
+              "column": 66,
+              "line": 11
+            },
+            "value": "question"
+          }
+        ],
+        "graph_model_alias": "lg_model_0000",
+        "graph_result": "lg_slot_0000",
+        "local_result": "draft",
+        "location": {
+          "column": 13,
+          "line": 11
+        },
+        "source_function": "draft_node",
+        "source_model_alias": "writer",
+        "source_node": "draft",
+        "template": "draft"
+      },
+      {
+        "arguments": [
+          {
+            "kind": "state",
+            "location": {
+              "column": 72,
+              "line": 18
+            },
+            "value": "draft"
+          }
+        ],
+        "graph_model_alias": "lg_model_0000",
+        "graph_result": "lg_slot_0001",
+        "local_result": "answer",
+        "location": {
+          "column": 14,
+          "line": 18
+        },
+        "source_function": "answer_yes",
+        "source_model_alias": "writer",
+        "source_node": "yes",
+        "template": "answer-yes"
+      },
+      {
+        "arguments": [
+          {
+            "kind": "state",
+            "location": {
+              "column": 71,
+              "line": 21
+            },
+            "value": "draft"
+          }
+        ],
+        "graph_model_alias": "lg_model_0000",
+        "graph_result": "lg_slot_0001",
+        "local_result": "answer",
+        "location": {
+          "column": 14,
+          "line": 21
+        },
+        "source_function": "answer_no",
+        "source_model_alias": "writer",
+        "source_node": "no",
+        "template": "answer-no"
+      }
+    ],
+    "compiled_variable": "app",
+    "entry_source_node": "draft",
+    "inputs": [
+      {
+        "graph_name": "lg_input_0000",
+        "label": "public",
+        "max_tokens": 64,
+        "source_key": "question",
+        "type": "text"
+      }
+    ],
+    "limitations": [
+      "source extraction is Python AST only and does not execute source",
+      "returned StateGraph updates are atomic; destination reads after a producing request are rejected",
+      "external input fields are immutable and result registers require definite initialization",
+      "only straight-line request nodes, two-way static conditional routing, and one active graph path are supported"
+    ],
+    "models": [
+      {
+        "contract": {
+          "max_tokens": 8,
+          "model": "offline-writer",
+          "provider": "mock"
+        },
+        "graph_alias": "lg_model_0000",
+        "source_alias": "writer"
+      }
+    ],
+    "nodes": [
+      {
+        "calls": [
+          "draft"
+        ],
+        "graph_state": "lg_state_0000",
+        "location": {
+          "column": 1,
+          "line": 28
+        },
+        "returns": {
+          "draft": "draft"
+        },
+        "source_function": "draft_node",
+        "source_node": "draft"
+      },
+      {
+        "calls": [
+          "answer"
+        ],
+        "graph_state": "lg_state_0001",
+        "location": {
+          "column": 1,
+          "line": 29
+        },
+        "returns": {
+          "answer": "answer"
+        },
+        "source_function": "answer_yes",
+        "source_node": "yes"
+      },
+      {
+        "calls": [
+          "answer"
+        ],
+        "graph_state": "lg_state_0002",
+        "location": {
+          "column": 1,
+          "line": 30
+        },
+        "returns": {
+          "answer": "answer"
+        },
+        "source_function": "answer_no",
+        "source_node": "no"
+      }
+    ],
+    "result_slots": [
+      {
+        "graph_register": "lg_slot_0000",
+        "max_writer_cap": 8,
+        "source_key": "draft",
+        "token_unit": {
+          "model": "offline-writer",
+          "provider": "mock"
+        },
+        "writer_model_alias": "writer"
+      },
+      {
+        "graph_register": "lg_slot_0001",
+        "max_writer_cap": 8,
+        "source_key": "answer",
+        "token_unit": {
+          "model": "offline-writer",
+          "provider": "mock"
+        },
+        "writer_model_alias": "writer"
+      }
+    ],
+    "routers": [
+      {
+        "false_label": "no",
+        "guard": {
+          "limit": 2,
+          "op": "!=",
+          "value": "lg_slot_0000"
+        },
+        "guard_source_field": "draft",
+        "location": {
+          "column": 1,
+          "line": 13
+        },
+        "path_map": {
+          "no": "no",
+          "yes": "yes"
+        },
+        "source_function": "route",
+        "source_node": "draft",
+        "true_label": "yes"
+      }
+    ],
+    "state_type": "State"
+  },
+  "mapping_sha256": "ea6f3dc7e445dbc46c02dc7a60607e049091dd7b899dd09d19661b945565bde3",
+  "replay_attestation": {
+    "certificate_sha256": "d98f7757fd1dfa53cac10d4bd1d4eebdb79ee4750c62d7becfd8fae6aadf194a",
+    "checks": {
+      "all_product_relations_and_local_rules": true,
+      "call_free_cycle_exclusion": true,
+      "complete_universal_successor_closure": true,
+      "graph_schema_and_types": true,
+      "no_unreachable_or_extra_product_nodes": true,
+      "reachable_source_states_and_cost_summaries": true,
+      "root_public_identity_relation": true,
+      "source_hash_binding": true,
+      "strict_graph_and_certificate_schema": true
+    },
+    "format": "orchlang-cyclic-request-replay-attestation",
+    "graph_name": "token_route_ne",
+    "producer_checker_hash_verified": false,
+    "producer_checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+    "product_edges_replayed": 5,
+    "product_nodes_replayed": 6,
+    "replayer_sha256": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
+    "resource_limits": {
+      "certificate_declared_product_nodes": 50000,
+      "graph_declarations_or_calls": 1000000,
+      "graph_states": 100000,
+      "json_bytes_each": 134217728,
+      "product_nodes": 1000000
+    },
+    "scope": {
+      "claim": "the reported finite product graph is the complete closure of the replayed version-1 graph under the declared local rules",
+      "not_claimed": [
+        "mechanized proof of the relational metatheory",
+        "source-language or framework-to-graph translation fidelity",
+        "real provider request serialization or billing behavior",
+        "termination or finite total-cost bounds for billable cycles",
+        "validation of the producer checker implementation from its reported hash"
+      ]
+    },
+    "source_sha256": "178452b7a92c404f8257c66e8022b7e8dc2769cd591934e65228d3889e513a8c",
+    "status": "verified",
+    "version": 1
+  },
+  "source_execution": "not_performed_by_exporter",
+  "source_sha256": "49677165b4199a1fa8eef59b09bacda30446e37ee4aae0bb56c55cafed2128c9",
+  "version": 1,
+  "workflow": "token_route_ne"
+}

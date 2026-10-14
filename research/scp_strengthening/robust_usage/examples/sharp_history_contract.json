@@ -1,0 +1,43 @@
+{
+  "schema": "orchlang.robust-usage/v1",
+  "horizon": 3,
+  "alphabet": ["a", "b", "__STOP__"],
+  "require_stop_by_horizon": false,
+  "rows": [
+    {
+      "history": [],
+      "left": {"center": {"a": "1/2", "b": "1/2", "__STOP__": "0"}, "radius": "0"},
+      "right": {"center": {"a": "1/2", "b": "1/2", "__STOP__": "0"}, "radius": "0"}
+    },
+    {
+      "history": ["a"],
+      "left": {"center": {"a": "1", "b": "0", "__STOP__": "0"}, "radius": "0"},
+      "right": {"center": {"a": "1/10", "b": "9/10", "__STOP__": "0"}, "radius": "0"}
+    },
+    {
+      "history": ["b"],
+      "left": {"center": {"a": "1", "b": "0", "__STOP__": "0"}, "radius": "0"},
+      "right": {"center": {"a": "9/10", "b": "1/10", "__STOP__": "0"}, "radius": "0"}
+    },
+    {
+      "history": ["a", "a"],
+      "left": {"center": {"a": "1", "b": "0", "__STOP__": "0"}, "radius": "0"},
+      "right": {"center": {"a": "9/10", "b": "1/10", "__STOP__": "0"}, "radius": "0"}
+    },
+    {
+      "history": ["b", "a"],
+      "left": {"center": {"a": "1", "b": "0", "__STOP__": "0"}, "radius": "0"},
+      "right": {"center": {"a": "1/10", "b": "9/10", "__STOP__": "0"}, "radius": "0"}
+    },
+    {
+      "history": ["a", "b"],
+      "left": {"center": {"a": "1", "b": "0", "__STOP__": "0"}, "radius": "0"},
+      "right": {"center": {"a": "1", "b": "0", "__STOP__": "0"}, "radius": "0"}
+    },
+    {
+      "history": ["b", "b"],
+      "left": {"center": {"a": "1", "b": "0", "__STOP__": "0"}, "radius": "0"},
+      "right": {"center": {"a": "1", "b": "0", "__STOP__": "0"}, "radius": "0"}
+    }
+  ]
+}

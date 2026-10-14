@@ -1,0 +1,1619 @@
+{
+  "case_summary": [
+    {
+      "backend_only_registers": [
+        "lg_temp_0000"
+      ],
+      "completed_pairs": 12,
+      "completed_source_fields": [
+        "answer",
+        "draft",
+        "question"
+      ],
+      "cutoff_pairs": 1,
+      "error_pairs": 0,
+      "name": "multi_result_node"
+    },
+    {
+      "backend_only_registers": [],
+      "completed_pairs": 12,
+      "completed_source_fields": [
+        "answer",
+        "draft",
+        "question"
+      ],
+      "cutoff_pairs": 1,
+      "error_pairs": 0,
+      "name": "mutable_result_chain"
+    },
+    {
+      "backend_only_registers": [],
+      "completed_pairs": 12,
+      "completed_source_fields": [
+        "answer",
+        "draft",
+        "question"
+      ],
+      "cutoff_pairs": 1,
+      "error_pairs": 0,
+      "name": "token_route_eq"
+    },
+    {
+      "backend_only_registers": [],
+      "completed_pairs": 12,
+      "completed_source_fields": [
+        "answer",
+        "draft",
+        "question"
+      ],
+      "cutoff_pairs": 1,
+      "error_pairs": 0,
+      "name": "token_route_ge"
+    },
+    {
+      "backend_only_registers": [],
+      "completed_pairs": 12,
+      "completed_source_fields": [
+        "answer",
+        "draft",
+        "question"
+      ],
+      "cutoff_pairs": 1,
+      "error_pairs": 0,
+      "name": "token_route_gt"
+    },
+    {
+      "backend_only_registers": [],
+      "completed_pairs": 12,
+      "completed_source_fields": [
+        "answer",
+        "draft",
+        "question"
+      ],
+      "cutoff_pairs": 1,
+      "error_pairs": 0,
+      "name": "token_route_le"
+    },
+    {
+      "backend_only_registers": [],
+      "completed_pairs": 12,
+      "completed_source_fields": [
+        "answer",
+        "draft",
+        "question"
+      ],
+      "cutoff_pairs": 1,
+      "error_pairs": 0,
+      "name": "token_route_lt"
+    },
+    {
+      "backend_only_registers": [],
+      "completed_pairs": 12,
+      "completed_source_fields": [
+        "answer",
+        "draft",
+        "question"
+      ],
+      "cutoff_pairs": 1,
+      "error_pairs": 0,
+      "name": "token_route_ne"
+    }
+  ],
+  "corruption_injection": [
+    {
+      "caught": true,
+      "mutation": "change a returned answer register",
+      "review_status": "fail"
+    },
+    {
+      "caught": true,
+      "mutation": "remove a mapped draft result register",
+      "review_status": "fail"
+    },
+    {
+      "caught": true,
+      "mutation": "remove the answer source-field mapping",
+      "review_status": "fail"
+    },
+    {
+      "caught": true,
+      "mutation": "publish partial registers on the cutoff pair",
+      "review_status": "fail"
+    }
+  ],
+  "format": "orchlang-completed-state-review",
+  "issues": [],
+  "limits": [
+    "only the eight frozen authored source examples and their contract files are read",
+    "the row mapping is the frozen harness projection being audited; no arbitrary source is executed",
+    "results are offline authored-fixture differentials, not provider validation or general LangGraph refinement",
+    "the source harness records no final state after a call-cap exception; partial source checkpoint state is not compared"
+  ],
+  "observed_error_pairs": 0,
+  "protocol_integrity": {
+    "protocol_frozen_at_utc": "2026-10-14T16:58:29.662153+00:00",
+    "protocol_sha256": "074da339378bf60e67d6529bb9037782cfee22a754cc092c2323ff256725c156",
+    "results_file_mtime_utc": "2026-10-14T16:58:31.275976+00:00",
+    "results_mtime_after_freeze": true,
+    "results_protocol_hash_matches": true,
+    "source_contract_hashes": [
+      {
+        "contracts_match_frozen_hash": true,
+        "name": "multi_result_node",
+        "source_matches_frozen_hash": true
+      },
+      {
+        "contracts_match_frozen_hash": true,
+        "name": "mutable_result_chain",
+        "source_matches_frozen_hash": true
+      },
+      {
+        "contracts_match_frozen_hash": true,
+        "name": "token_route_eq",
+        "source_matches_frozen_hash": true
+      },
+      {
+        "contracts_match_frozen_hash": true,
+        "name": "token_route_ge",
+        "source_matches_frozen_hash": true
+      },
+      {
+        "contracts_match_frozen_hash": true,
+        "name": "token_route_gt",
+        "source_matches_frozen_hash": true
+      },
+      {
+        "contracts_match_frozen_hash": true,
+        "name": "token_route_le",
+        "source_matches_frozen_hash": true
+      },
+      {
+        "contracts_match_frozen_hash": true,
+        "name": "token_route_lt",
+        "source_matches_frozen_hash": true
+      },
+      {
+        "contracts_match_frozen_hash": true,
+        "name": "token_route_ne",
+        "source_matches_frozen_hash": true
+      }
+    ],
+    "tool_hashes": [
+      {
+        "matches_frozen_hash": true,
+        "path": "integrations/langgraph/backend.py"
+      },
+      {
+        "matches_frozen_hash": true,
+        "path": "integrations/langgraph/source_frontend/extract.py"
+      },
+      {
+        "matches_frozen_hash": true,
+        "path": "integrations/langgraph/source_frontend/export.py"
+      },
+      {
+        "matches_frozen_hash": true,
+        "path": "integrations/langgraph/source_frontend/runtime.py"
+      },
+      {
+        "matches_frozen_hash": true,
+        "path": "integrations/langgraph/source_frontend/study.py"
+      },
+      {
+        "matches_frozen_hash": true,
+        "path": "research/scp_strengthening/source_differential/run.py"
+      }
+    ]
+  },
+  "recomputed_rows": [
+    {
+      "case": "multi_result_node",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 0,
+      "issues": []
+    },
+    {
+      "case": "multi_result_node",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 1,
+      "issues": []
+    },
+    {
+      "case": "multi_result_node",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 2,
+      "issues": []
+    },
+    {
+      "case": "multi_result_node",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 3,
+      "issues": []
+    },
+    {
+      "case": "multi_result_node",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 4,
+      "issues": []
+    },
+    {
+      "case": "multi_result_node",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 5,
+      "issues": []
+    },
+    {
+      "case": "multi_result_node",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 6,
+      "issues": []
+    },
+    {
+      "case": "multi_result_node",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 7,
+      "issues": []
+    },
+    {
+      "case": "multi_result_node",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 8,
+      "issues": []
+    },
+    {
+      "case": "multi_result_node",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 9,
+      "issues": []
+    },
+    {
+      "case": "multi_result_node",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 10,
+      "issues": []
+    },
+    {
+      "case": "multi_result_node",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 11,
+      "issues": []
+    },
+    {
+      "case": "multi_result_node",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 12,
+      "issues": []
+    },
+    {
+      "case": "mutable_result_chain",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 13,
+      "issues": []
+    },
+    {
+      "case": "mutable_result_chain",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 14,
+      "issues": []
+    },
+    {
+      "case": "mutable_result_chain",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 15,
+      "issues": []
+    },
+    {
+      "case": "mutable_result_chain",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 16,
+      "issues": []
+    },
+    {
+      "case": "mutable_result_chain",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 17,
+      "issues": []
+    },
+    {
+      "case": "mutable_result_chain",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 18,
+      "issues": []
+    },
+    {
+      "case": "mutable_result_chain",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 19,
+      "issues": []
+    },
+    {
+      "case": "mutable_result_chain",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 20,
+      "issues": []
+    },
+    {
+      "case": "mutable_result_chain",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 21,
+      "issues": []
+    },
+    {
+      "case": "mutable_result_chain",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 22,
+      "issues": []
+    },
+    {
+      "case": "mutable_result_chain",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 23,
+      "issues": []
+    },
+    {
+      "case": "mutable_result_chain",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 24,
+      "issues": []
+    },
+    {
+      "case": "mutable_result_chain",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 25,
+      "issues": []
+    },
+    {
+      "case": "token_route_eq",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 26,
+      "issues": []
+    },
+    {
+      "case": "token_route_eq",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 27,
+      "issues": []
+    },
+    {
+      "case": "token_route_eq",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 28,
+      "issues": []
+    },
+    {
+      "case": "token_route_eq",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 29,
+      "issues": []
+    },
+    {
+      "case": "token_route_eq",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 30,
+      "issues": []
+    },
+    {
+      "case": "token_route_eq",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 31,
+      "issues": []
+    },
+    {
+      "case": "token_route_eq",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 32,
+      "issues": []
+    },
+    {
+      "case": "token_route_eq",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 33,
+      "issues": []
+    },
+    {
+      "case": "token_route_eq",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 34,
+      "issues": []
+    },
+    {
+      "case": "token_route_eq",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 35,
+      "issues": []
+    },
+    {
+      "case": "token_route_eq",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 36,
+      "issues": []
+    },
+    {
+      "case": "token_route_eq",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 37,
+      "issues": []
+    },
+    {
+      "case": "token_route_eq",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 38,
+      "issues": []
+    },
+    {
+      "case": "token_route_ge",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 39,
+      "issues": []
+    },
+    {
+      "case": "token_route_ge",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 40,
+      "issues": []
+    },
+    {
+      "case": "token_route_ge",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 41,
+      "issues": []
+    },
+    {
+      "case": "token_route_ge",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 42,
+      "issues": []
+    },
+    {
+      "case": "token_route_ge",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 43,
+      "issues": []
+    },
+    {
+      "case": "token_route_ge",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 44,
+      "issues": []
+    },
+    {
+      "case": "token_route_ge",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 45,
+      "issues": []
+    },
+    {
+      "case": "token_route_ge",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 46,
+      "issues": []
+    },
+    {
+      "case": "token_route_ge",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 47,
+      "issues": []
+    },
+    {
+      "case": "token_route_ge",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 48,
+      "issues": []
+    },
+    {
+      "case": "token_route_ge",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 49,
+      "issues": []
+    },
+    {
+      "case": "token_route_ge",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 50,
+      "issues": []
+    },
+    {
+      "case": "token_route_ge",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 51,
+      "issues": []
+    },
+    {
+      "case": "token_route_gt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 52,
+      "issues": []
+    },
+    {
+      "case": "token_route_gt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 53,
+      "issues": []
+    },
+    {
+      "case": "token_route_gt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 54,
+      "issues": []
+    },
+    {
+      "case": "token_route_gt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 55,
+      "issues": []
+    },
+    {
+      "case": "token_route_gt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 56,
+      "issues": []
+    },
+    {
+      "case": "token_route_gt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 57,
+      "issues": []
+    },
+    {
+      "case": "token_route_gt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 58,
+      "issues": []
+    },
+    {
+      "case": "token_route_gt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 59,
+      "issues": []
+    },
+    {
+      "case": "token_route_gt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 60,
+      "issues": []
+    },
+    {
+      "case": "token_route_gt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 61,
+      "issues": []
+    },
+    {
+      "case": "token_route_gt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 62,
+      "issues": []
+    },
+    {
+      "case": "token_route_gt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 63,
+      "issues": []
+    },
+    {
+      "case": "token_route_gt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 64,
+      "issues": []
+    },
+    {
+      "case": "token_route_le",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 65,
+      "issues": []
+    },
+    {
+      "case": "token_route_le",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 66,
+      "issues": []
+    },
+    {
+      "case": "token_route_le",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 67,
+      "issues": []
+    },
+    {
+      "case": "token_route_le",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 68,
+      "issues": []
+    },
+    {
+      "case": "token_route_le",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 69,
+      "issues": []
+    },
+    {
+      "case": "token_route_le",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 70,
+      "issues": []
+    },
+    {
+      "case": "token_route_le",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 71,
+      "issues": []
+    },
+    {
+      "case": "token_route_le",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 72,
+      "issues": []
+    },
+    {
+      "case": "token_route_le",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 73,
+      "issues": []
+    },
+    {
+      "case": "token_route_le",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 74,
+      "issues": []
+    },
+    {
+      "case": "token_route_le",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 75,
+      "issues": []
+    },
+    {
+      "case": "token_route_le",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 76,
+      "issues": []
+    },
+    {
+      "case": "token_route_le",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 77,
+      "issues": []
+    },
+    {
+      "case": "token_route_lt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 78,
+      "issues": []
+    },
+    {
+      "case": "token_route_lt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 79,
+      "issues": []
+    },
+    {
+      "case": "token_route_lt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 80,
+      "issues": []
+    },
+    {
+      "case": "token_route_lt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 81,
+      "issues": []
+    },
+    {
+      "case": "token_route_lt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 82,
+      "issues": []
+    },
+    {
+      "case": "token_route_lt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 83,
+      "issues": []
+    },
+    {
+      "case": "token_route_lt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 84,
+      "issues": []
+    },
+    {
+      "case": "token_route_lt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 85,
+      "issues": []
+    },
+    {
+      "case": "token_route_lt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 86,
+      "issues": []
+    },
+    {
+      "case": "token_route_lt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 87,
+      "issues": []
+    },
+    {
+      "case": "token_route_lt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 88,
+      "issues": []
+    },
+    {
+      "case": "token_route_lt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 89,
+      "issues": []
+    },
+    {
+      "case": "token_route_lt",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 90,
+      "issues": []
+    },
+    {
+      "case": "token_route_ne",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 91,
+      "issues": []
+    },
+    {
+      "case": "token_route_ne",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 92,
+      "issues": []
+    },
+    {
+      "case": "token_route_ne",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 93,
+      "issues": []
+    },
+    {
+      "case": "token_route_ne",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 94,
+      "issues": []
+    },
+    {
+      "case": "token_route_ne",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 95,
+      "issues": []
+    },
+    {
+      "case": "token_route_ne",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 96,
+      "issues": []
+    },
+    {
+      "case": "token_route_ne",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 97,
+      "issues": []
+    },
+    {
+      "case": "token_route_ne",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 98,
+      "issues": []
+    },
+    {
+      "case": "token_route_ne",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 99,
+      "issues": []
+    },
+    {
+      "case": "token_route_ne",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 100,
+      "issues": []
+    },
+    {
+      "case": "token_route_ne",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 101,
+      "issues": []
+    },
+    {
+      "case": "token_route_ne",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 102,
+      "issues": []
+    },
+    {
+      "case": "token_route_ne",
+      "checks": {
+        "complete_state": true,
+        "expected_outcome": true,
+        "no_runtime_error": true,
+        "ordered_trace": true,
+        "status": true,
+        "stop": true
+      },
+      "index": 103,
+      "issues": []
+    }
+  ],
+  "status": "pass",
+  "token_route_coverage": {
+    "token_route_eq": {
+      "both_branches_observed": false,
+      "branch_counts": {
+        "no": 12
+      },
+      "wrong_operator_outcomes": 0
+    },
+    "token_route_ge": {
+      "both_branches_observed": true,
+      "branch_counts": {
+        "no": 1,
+        "yes": 11
+      },
+      "wrong_operator_outcomes": 0
+    },
+    "token_route_gt": {
+      "both_branches_observed": true,
+      "branch_counts": {
+        "no": 5,
+        "yes": 7
+      },
+      "wrong_operator_outcomes": 0
+    },
+    "token_route_le": {
+      "both_branches_observed": true,
+      "branch_counts": {
+        "no": 7,
+        "yes": 5
+      },
+      "wrong_operator_outcomes": 0
+    },
+    "token_route_lt": {
+      "both_branches_observed": true,
+      "branch_counts": {
+        "no": 10,
+        "yes": 2
+      },
+      "wrong_operator_outcomes": 0
+    },
+    "token_route_ne": {
+      "both_branches_observed": true,
+      "branch_counts": {
+        "no": 5,
+        "yes": 7
+      },
+      "wrong_operator_outcomes": 0
+    }
+  },
+  "totals": {
+    "all_checks_passed_pairs": 104,
+    "call_events": 224,
+    "completed_pairs": 96,
+    "cutoff_pairs": 8
+  },
+  "version": 1
+}

@@ -51,6 +51,15 @@ successful stop or ordinary call truncation. The adapter also caps compilation
 at 10,000 reachable LangGraph state nodes, below the independent replayer's
 larger schema limit.
 
+Execution results use format version 2. `final_values` contains a copy of all
+initialized input/result/temporary registers only after a normal graph stop.
+It is `null` on call truncation, runtime error or a resource limit: an eager
+register may otherwise hold a partial update from an unfinished atomic source
+node. Source comparisons project this map through the frontend's named input
+and returned-field mapping, excluding internal temporaries. The separate
+completed-state study and comparison truth table are described in
+[`docs/SCP_STRENGTHENING.md`](../../docs/SCP_STRENGTHENING.md).
+
 Python callers can pass a local full-text provider implementing
 `OracleRequest -> OracleOutcome` to `execute_graph`. The request contains the
 normalized resolved contract (including optional-price presence and value),

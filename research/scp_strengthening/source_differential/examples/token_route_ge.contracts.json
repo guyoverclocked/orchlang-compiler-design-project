@@ -1,0 +1,20 @@
+{
+  "chars_per_token": 4,
+  "format": "orchlang-langgraph-contracts",
+  "inputs": {
+    "question": {
+      "label": "public",
+      "max_tokens": 64,
+      "type": "text"
+    }
+  },
+  "models": {
+    "writer": {
+      "max_tokens": 8,
+      "model": "offline-writer",
+      "provider": "mock"
+    }
+  },
+  "name": "token_route_ge",
+  "version": 1
+}
