@@ -1,0 +1,473 @@
+{
+  "exhaustive_oracle_totals": {
+    "cross_scenario_law_pairs_compared_sum": 20739,
+    "exact_vs_exhaustive_mismatches": 0,
+    "fixture_contracts_checked": 26,
+    "left_policy_laws_enumerated_sum": 201,
+    "oracle_method": "Independently enumerates complete deterministic row-generator policies, constructs full padded trace laws, and compares every left/right policy-law pair by direct finite-alphabet L1/2. It shares the production contract parser but not its Bellman recurrence or certificate replay.",
+    "right_policy_laws_enumerated_sum": 361
+  },
+  "failures": [],
+  "fixtures": [
+    {
+      "certificate_replay": {
+        "states": 4,
+        "verified": true
+      },
+      "exact_overlap": "1/2",
+      "exact_worst_case_tv": "1/2",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 625,
+        "left_policy_laws": 25,
+        "right_policy_laws": 25,
+        "worst_case_tv": "1/2"
+      },
+      "name": "unequal_prefix_mass_decisive",
+      "previous_pathwise_bound": "1"
+    },
+    {
+      "certificate_replay": {
+        "states": 2,
+        "verified": true
+      },
+      "exact_overlap": "1",
+      "exact_worst_case_tv": "0",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 1,
+        "left_policy_laws": 1,
+        "right_policy_laws": 1,
+        "worst_case_tv": "0"
+      },
+      "name": "uncertainty_monotonicity_base"
+    },
+    {
+      "certificate_replay": {
+        "states": 2,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 2,
+        "left_policy_laws": 2,
+        "right_policy_laws": 1,
+        "worst_case_tv": "1"
+      },
+      "name": "uncertainty_monotonicity_expanded"
+    },
+    {
+      "certificate_replay": {
+        "states": 2,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 2,
+        "left_policy_laws": 2,
+        "right_policy_laws": 1,
+        "worst_case_tv": "1"
+      },
+      "name": "generator_order_permutation"
+    },
+    {
+      "certificate_replay": {
+        "states": 1,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 1,
+        "left_policy_laws": 1,
+        "right_policy_laws": 1,
+        "worst_case_tv": "1"
+      },
+      "name": "data_processing_before_projection"
+    },
+    {
+      "certificate_replay": {
+        "states": 2,
+        "verified": true
+      },
+      "exact_overlap": "1",
+      "exact_worst_case_tv": "0",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 1,
+        "left_policy_laws": 1,
+        "right_policy_laws": 1,
+        "worst_case_tv": "0"
+      },
+      "name": "data_processing_after_projection"
+    },
+    {
+      "certificate_replay": {
+        "states": 3,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 4,
+        "left_policy_laws": 2,
+        "right_policy_laws": 2,
+        "worst_case_tv": "1"
+      },
+      "name": "shared_parameter_rectangular_projection"
+    },
+    {
+      "certificate_replay": {
+        "states": 2,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 19683,
+        "left_policy_laws": 81,
+        "right_policy_laws": 243,
+        "worst_case_tv": "1"
+      },
+      "name": "stop_padding_and_visible_error"
+    },
+    {
+      "certificate_replay": {
+        "states": 6,
+        "verified": true
+      },
+      "exact_overlap": "1/4",
+      "exact_worst_case_tv": "3/4",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 8,
+        "left_policy_laws": 4,
+        "right_policy_laws": 2,
+        "worst_case_tv": "3/4"
+      },
+      "name": "random_tiny_00"
+    },
+    {
+      "certificate_replay": {
+        "states": 1,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 12,
+        "left_policy_laws": 4,
+        "right_policy_laws": 3,
+        "worst_case_tv": "1"
+      },
+      "name": "random_tiny_01"
+    },
+    {
+      "certificate_replay": {
+        "states": 1,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 4,
+        "left_policy_laws": 1,
+        "right_policy_laws": 4,
+        "worst_case_tv": "1"
+      },
+      "name": "random_tiny_02"
+    },
+    {
+      "certificate_replay": {
+        "states": 3,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 72,
+        "left_policy_laws": 12,
+        "right_policy_laws": 6,
+        "worst_case_tv": "1"
+      },
+      "name": "random_tiny_03"
+    },
+    {
+      "certificate_replay": {
+        "states": 3,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 9,
+        "left_policy_laws": 1,
+        "right_policy_laws": 9,
+        "worst_case_tv": "1"
+      },
+      "name": "random_tiny_04"
+    },
+    {
+      "certificate_replay": {
+        "states": 5,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 24,
+        "left_policy_laws": 6,
+        "right_policy_laws": 4,
+        "worst_case_tv": "1"
+      },
+      "name": "random_tiny_05"
+    },
+    {
+      "certificate_replay": {
+        "states": 4,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 32,
+        "left_policy_laws": 8,
+        "right_policy_laws": 4,
+        "worst_case_tv": "1"
+      },
+      "name": "random_tiny_06"
+    },
+    {
+      "certificate_replay": {
+        "states": 4,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 24,
+        "left_policy_laws": 2,
+        "right_policy_laws": 12,
+        "worst_case_tv": "1"
+      },
+      "name": "random_tiny_07"
+    },
+    {
+      "certificate_replay": {
+        "states": 3,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 72,
+        "left_policy_laws": 12,
+        "right_policy_laws": 6,
+        "worst_case_tv": "1"
+      },
+      "name": "random_tiny_08"
+    },
+    {
+      "certificate_replay": {
+        "states": 2,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 12,
+        "left_policy_laws": 3,
+        "right_policy_laws": 4,
+        "worst_case_tv": "1"
+      },
+      "name": "random_tiny_09"
+    },
+    {
+      "certificate_replay": {
+        "states": 2,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 2,
+        "left_policy_laws": 1,
+        "right_policy_laws": 2,
+        "worst_case_tv": "1"
+      },
+      "name": "random_tiny_10"
+    },
+    {
+      "certificate_replay": {
+        "states": 3,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 6,
+        "left_policy_laws": 6,
+        "right_policy_laws": 1,
+        "worst_case_tv": "1"
+      },
+      "name": "random_tiny_11"
+    },
+    {
+      "certificate_replay": {
+        "states": 4,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 32,
+        "left_policy_laws": 8,
+        "right_policy_laws": 4,
+        "worst_case_tv": "1"
+      },
+      "name": "random_tiny_12"
+    },
+    {
+      "certificate_replay": {
+        "states": 1,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 72,
+        "left_policy_laws": 6,
+        "right_policy_laws": 12,
+        "worst_case_tv": "1"
+      },
+      "name": "random_tiny_13"
+    },
+    {
+      "certificate_replay": {
+        "states": 3,
+        "verified": true
+      },
+      "exact_overlap": "1/4",
+      "exact_worst_case_tv": "3/4",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 1,
+        "left_policy_laws": 1,
+        "right_policy_laws": 1,
+        "worst_case_tv": "3/4"
+      },
+      "name": "random_tiny_14"
+    },
+    {
+      "certificate_replay": {
+        "states": 4,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 8,
+        "left_policy_laws": 2,
+        "right_policy_laws": 4,
+        "worst_case_tv": "1"
+      },
+      "name": "random_tiny_15"
+    },
+    {
+      "certificate_replay": {
+        "states": 4,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 18,
+        "left_policy_laws": 3,
+        "right_policy_laws": 6,
+        "worst_case_tv": "1"
+      },
+      "name": "random_tiny_16"
+    },
+    {
+      "certificate_replay": {
+        "states": 3,
+        "verified": true
+      },
+      "exact_overlap": "0",
+      "exact_worst_case_tv": "1",
+      "exhaustive_oracle": {
+        "compared_law_pairs": 12,
+        "left_policy_laws": 6,
+        "right_policy_laws": 2,
+        "worst_case_tv": "1"
+      },
+      "name": "random_tiny_17"
+    }
+  ],
+  "model": {
+    "horizon": "finite; tested through H=3, plus bounded H=10 unit test",
+    "rectangularity": "All scenario/history rows are independently selectable. Shared global parameters or cross-row/cross-scenario couplings are excluded.",
+    "row_semantics": "Each scenario/history row is any distribution in the convex hull of its explicit rational generator list; missing live rows are the full simplex.",
+    "stop": "First __STOP__ ends the visible trace and is padded through the horizon; require_stop_by_horizon checks every supported path when true."
+  },
+  "prior_art_check": {
+    "boundary": "Discovery and primary-page spot checks are not a systematic literature review; no novelty or first-result claim is made.",
+    "discovery": "OpenAlex search_works query: total variation ambiguity dynamic programming robust probability distributions Tzortzis Charalambous.",
+    "primary_pages_checked_with_web": [
+      {
+        "relevance": "Dynamic programming under conditional-distribution TV ambiguity; related setup, different objective/model.",
+        "title": "Dynamic Programming Subject to Total Variation Distance Ambiguity",
+        "url": "https://arxiv.org/abs/1402.1009"
+      },
+      {
+        "relevance": "Credal transition rows and lower/upper expectations for imprecise Markov chains.",
+        "title": "Imprecise Markov chains and their limit behaviour",
+        "url": "https://arxiv.org/abs/0801.0980"
+      },
+      {
+        "relevance": "Imprecise probability trees and local uncertainty models.",
+        "title": "Imprecise probability trees: Bridging two theories of imprecise probability",
+        "url": "https://arxiv.org/abs/0801.1196"
+      },
+      {
+        "relevance": "Primary ISIPTA proceedings paper on ergodicity coefficients for imprecise chains; adjacent distance literature.",
+        "title": "Coefficients of Ergodicity for Imprecise Markov Chains",
+        "url": "https://leo.ugr.es/sipta/isipta09/proceedings/papers/p039skulj_poster.pdf"
+      },
+      {
+        "relevance": "Trace TV for precise labelled Markov chains, not this uncertain-row model.",
+        "title": "On the Total Variation Distance of Labelled Markov Chains",
+        "url": "https://arxiv.org/abs/1405.2852"
+      },
+      {
+        "relevance": "Finite-horizon trace-TV approximation bounds via approximate probabilistic bisimulation.",
+        "title": "On the Relationship between Bisimulation and Trace Equivalence in an Approximate Probabilistic Context",
+        "url": "https://arxiv.org/abs/1701.04547"
+      }
+    ]
+  },
+  "sanity_properties": {
+    "data_processing": {
+      "after_projection_tv": "0",
+      "before_projection_tv": "1",
+      "nonincreasing": true
+    },
+    "generator_order_invariance": {
+      "invariant": true,
+      "original_order_tv": "1",
+      "permuted_order_tv": "1"
+    },
+    "shared_parameter_excluded_premise": {
+      "compared_paired_laws": 2,
+      "interpretation": "The independent row-product permits left=delta_A/right=delta_B; the tied global-parameter model does not.",
+      "paired_global_parameter_choices": 2,
+      "rectangular_projection_tv": "1",
+      "worst_case_tv": "0"
+    },
+    "uncertainty_set_expansion": {
+      "base_tv": "0",
+      "expanded_tv": "1",
+      "monotone": true
+    }
+  },
+  "schema": "orchlang.exact-uncertain-distance-experiment/v1",
+  "scope": "Development fixtures only; no held-out cohort inputs or outputs are read by this runner.",
+  "status": "pass"
+}

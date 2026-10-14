@@ -1,0 +1,35 @@
+{
+  "author": {
+    "date": "2026-10-14T15:40:31Z",
+    "email": "claudio.filho@dataprev.gov.br",
+    "name": "Claudio Ferreira Filho"
+  },
+  "committer": {
+    "date": "2026-10-14T15:40:31Z",
+    "email": "noreply@github.com",
+    "name": "GitHub"
+  },
+  "html_url": "https://github.com/doobidoo/mcp-memory-service/commit/47a8eff72c47092964734f094fca6a6ed841bbfd",
+  "message": "fix(sync): bootstrap on first sync + clear embedding_pending with its store partition (#1530)\n\n* fix(sync): bootstrap on first sync + clear embedding_pending with its store partition\n\nDelta-sync audit (#1522), findings #3 and #4:\n\n- #3 (bootstrap unreachable): sync_from_peer now calls bootstrap_from_peer on the\n  first sync with a peer (no sync_cursor row) when the peer can serve a baseline,\n  then continues the pull loop from the parked watermark. Falls back silently to the\n  prior pull-from-0 if the peer has no get_baseline or bootstrap fails. Phase 5\n  bootstrap was defined but never called from src/ or scripts/.\n\n- #4 (embedding_pending never cleared): extracted a testable\n  reembed_missing_embeddings(storage) that embeds rows missing a vector, clears\n  embedding_pending=0 in the same pass, and writes each vector into the memory's own\n  store partition (COALESCE(store,'default')) \u2014 a vector written without its partition\n  is invisible to store-scoped KNN (also the root of #1521). repair_missing_embeddings\n  is now a thin path wrapper.\n\nTests: tests/sync/test_1522_audit_fixes.py \u2014 4 passed, 1 xfailed. The xfailed test\ntargets finding #2 (tombstone resurrection): an absolute tombstone-preserve breaks\nlegitimate re-create (HLC alone cannot distinguish a clock-ahead resurrection from a\nlegitimate re-create after delete), so #2 is deferred pending an intentionality signal.\nNeighbor sync/apply/resolver/retrieve suites green.\n\n* test(sync): deepen #1522 coverage per review \u2014 real watermark resume + named-store repair\n\nGreptile P2s on #1530:\n- test_first_sync_installs_baseline_and_resumes_at_watermark: real bootstrap (no mock),\n  baseline at watermark 5 + a later event at seq 6; asserts the pull resumes at the\n  watermark and installs the later event (proves the cursor re-read is load-bearing).\n- test_first_sync_falls_back_when_baseline_fails: baseline fetch raises \u2192 falls back to\n  pull-from-0 and still converges.\n- test_reembed_respects_named_store: a memory in a named store ('projectX') is repaired\n  into its OWN partition (asserts memory_embeddings.store), not 'default'.\n\n* docs(changelog): add fragment for #1522 fixes (#3 bootstrap, #4 embedding_pending/store)",
+  "node_id": "C_kwDONic2f9oAKDQ3YThlZmY3MmM0NzA5Mjk2NDczNGYwOTRmY2E2YTZlZDg0MWJiZmQ",
+  "parents": [
+    {
+      "html_url": "https://github.com/doobidoo/mcp-memory-service/commit/5c3321c85ee1fde0051ce1cfdd4baa8028053490",
+      "sha": "5c3321c85ee1fde0051ce1cfdd4baa8028053490",
+      "url": "https://api.github.com/repos/doobidoo/mcp-memory-service/git/commits/5c3321c85ee1fde0051ce1cfdd4baa8028053490"
+    }
+  ],
+  "sha": "47a8eff72c47092964734f094fca6a6ed841bbfd",
+  "tree": {
+    "sha": "eb94427239b994e529f8f1f0f5da5b34f04ffaa8",
+    "url": "https://api.github.com/repos/doobidoo/mcp-memory-service/git/trees/eb94427239b994e529f8f1f0f5da5b34f04ffaa8"
+  },
+  "url": "https://api.github.com/repos/doobidoo/mcp-memory-service/git/commits/47a8eff72c47092964734f094fca6a6ed841bbfd",
+  "verification": {
+    "payload": "tree eb94427239b994e529f8f1f0f5da5b34f04ffaa8\nparent 5c3321c85ee1fde0051ce1cfdd4baa8028053490\nauthor Claudio Ferreira Filho <claudio.filho@dataprev.gov.br> 1791992431 -0300\ncommitter GitHub <noreply@github.com> 1791992431 +0200\n\nfix(sync): bootstrap on first sync + clear embedding_pending with its store partition (#1530)\n\n* fix(sync): bootstrap on first sync + clear embedding_pending with its store partition\n\nDelta-sync audit (#1522), findings #3 and #4:\n\n- #3 (bootstrap unreachable): sync_from_peer now calls bootstrap_from_peer on the\n  first sync with a peer (no sync_cursor row) when the peer can serve a baseline,\n  then continues the pull loop from the parked watermark. Falls back silently to the\n  prior pull-from-0 if the peer has no get_baseline or bootstrap fails. Phase 5\n  bootstrap was defined but never called from src/ or scripts/.\n\n- #4 (embedding_pending never cleared): extracted a testable\n  reembed_missing_embeddings(storage) that embeds rows missing a vector, clears\n  embedding_pending=0 in the same pass, and writes each vector into the memory's own\n  store partition (COALESCE(store,'default')) \u2014 a vector written without its partition\n  is invisible to store-scoped KNN (also the root of #1521). repair_missing_embeddings\n  is now a thin path wrapper.\n\nTests: tests/sync/test_1522_audit_fixes.py \u2014 4 passed, 1 xfailed. The xfailed test\ntargets finding #2 (tombstone resurrection): an absolute tombstone-preserve breaks\nlegitimate re-create (HLC alone cannot distinguish a clock-ahead resurrection from a\nlegitimate re-create after delete), so #2 is deferred pending an intentionality signal.\nNeighbor sync/apply/resolver/retrieve suites green.\n\n* test(sync): deepen #1522 coverage per review \u2014 real watermark resume + named-store repair\n\nGreptile P2s on #1530:\n- test_first_sync_installs_baseline_and_resumes_at_watermark: real bootstrap (no mock),\n  baseline at watermark 5 + a later event at seq 6; asserts the pull resumes at the\n  watermark and installs the later event (proves the cursor re-read is load-bearing).\n- test_first_sync_falls_back_when_baseline_fails: baseline fetch raises \u2192 falls back to\n  pull-from-0 and still converges.\n- test_reembed_respects_named_store: a memory in a named store ('projectX') is repaired\n  into its OWN partition (asserts memory_embeddings.store), not 'default'.\n\n* docs(changelog): add fragment for #1522 fixes (#3 bootstrap, #4 embedding_pending/store)",
+    "reason": "valid",
+    "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqz6JvCRC1aQ7uu5UhlAAAsg8QAAG+LCD2barVOT8crTAwUQG2\nkUhVyA9WQCQNv41h4ECLbHQrkEA7sjmSQvXLspcCsl9pFdyuhNzkx6jsyuWPvm7E\n6YvDKDeTZNfh/GIVlGvHFDqcVFgQ0X6aLU6vldCop0kI0tcNCNw7ggH3WXDaaUFs\n94XrzklNwrKUxcq0vameHOt7wnVw500/hkk2RnVJfmv6aXlyku5HtPZY8jyY6z8K\nMYHEjQFXxgZlqN5GaVzLX+7FuUjBPLCvsjhK+PvpIny7YfUcBARbcudGdxn1EoUB\nWeBMeafeSJkovE7/QMcjG59VaGMHBpK8AA5FMMALLyx3qKE/bX5Vfw6IrQqQOK/Q\n8Dk1Uf/8BziFikF4hV2c6Ri+6B9VeI0g71Ns3uf1FN9NXs0fNxRHXRf+cDRRXKXJ\njvBGvqMljhyB3PcCoCaquNgtydWL/CMMQ6ZnO5yfv08beCow24xUe/+offBkkV/5\nGWmk3+MDyV4lRJH2K4mgitxF/v4IKEFKX+DB2lIBdDrZxsq9QqmHGUt+AZHEfK/e\nmBuGsqEaz4c6Wmg0n6dYIsWXDTv1jdqwzy0vJY54jnp4Jzixc5OJuc7SsB9wUmI7\njwtn8j6wyGhShpI9gYI0gRtwLfLafsTaRbISwo24NPMWoWXcLQvxLJzM4KjcNs4e\nm99EicuDpuZhuaBZQKdv\n=Ull9\n-----END PGP SIGNATURE-----\n",
+    "verified": true,
+    "verified_at": "2026-10-14T15:40:32Z"
+  }
+}

@@ -1,0 +1,7 @@
+Traceback (most recent call last):
+  File "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-scp-strengthening/research/scp_strengthening/second_adversarial_review/independent_finite_law_audit.py", line 232, in <module>
+    "strict_parser_probes": parser_probes(),
+                            ~~~~~~~~~~~~~^^
+  File "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-scp-strengthening/research/scp_strengthening/second_adversarial_review/independent_finite_law_audit.py", line 162, in parser_probes
+    raise AssertionError(f"parser accepted adversarial case: {name}")
+AssertionError: parser accepted adversarial case: deep nesting

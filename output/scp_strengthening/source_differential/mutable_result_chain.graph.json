@@ -1,0 +1,87 @@
+{
+  "chars_per_token": 4,
+  "entry": "lg_state_0000",
+  "format": "orchlang-request-graph",
+  "inputs": {
+    "lg_input_0000": {
+      "label": "public",
+      "max_tokens": 64,
+      "type": "text"
+    }
+  },
+  "models": {
+    "lg_model_0000": {
+      "max_tokens": 8,
+      "model": "offline-writer",
+      "provider": "mock"
+    }
+  },
+  "name": "mutable_result_chain",
+  "registers": {
+    "lg_slot_0000": {
+      "model": "lg_model_0000"
+    },
+    "lg_slot_0001": {
+      "model": "lg_model_0000"
+    }
+  },
+  "states": {
+    "lg_state_0000": {
+      "calls": [
+        {
+          "arguments": [
+            {
+              "value": "lg_input_0000"
+            }
+          ],
+          "model": "lg_model_0000",
+          "result": "lg_slot_0000",
+          "template": "draft"
+        }
+      ],
+      "next": {
+        "kind": "goto",
+        "target": "lg_state_0001"
+      }
+    },
+    "lg_state_0001": {
+      "calls": [
+        {
+          "arguments": [
+            {
+              "value": "lg_slot_0000"
+            },
+            {
+              "value": "lg_input_0000"
+            }
+          ],
+          "model": "lg_model_0000",
+          "result": "lg_slot_0000",
+          "template": "revise"
+        }
+      ],
+      "next": {
+        "kind": "goto",
+        "target": "lg_state_0002"
+      }
+    },
+    "lg_state_0002": {
+      "calls": [
+        {
+          "arguments": [
+            {
+              "value": "lg_slot_0000"
+            }
+          ],
+          "model": "lg_model_0000",
+          "result": "lg_slot_0001",
+          "template": "answer"
+        }
+      ],
+      "next": {
+        "kind": "stop"
+      }
+    }
+  },
+  "version": 1
+}

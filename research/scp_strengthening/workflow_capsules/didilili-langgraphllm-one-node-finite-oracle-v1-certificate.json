@@ -1,0 +1,2516 @@
+{
+  "artifact": "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-scp-strengthening/research/scp_strengthening/workflow_capsules/didilili-langgraphllm-one-node-finite-oracle-v1.json",
+  "artifact_sha256": "1f8d8eca8860350d0d9d8422005c62dc222b5c79910d1c1a3d59fc61860e45dd",
+  "capsule_id": "didilili-langgraphllm-one-node-finite-oracle-v1",
+  "certificate_id": "independent-bounded-workflow-trace-law-v1",
+  "coarsening_witnesses": [
+    {
+      "coarse_projection_merges_full_traces": false,
+      "complete_trace_sha256s": [
+        "d0af228cb17bbad9241096da0c5d9e000625ae78efb16ba37a7fb71932be7ade"
+      ],
+      "content_projection_sha256": "0d9c082ed444bbae667045e35b29402989578b3dfa01ccce2caa5d5359a5f117",
+      "model_finish_reasons_or_error": [
+        "raised"
+      ],
+      "model_statuses": [
+        "raised"
+      ],
+      "retrieval_statuses": [],
+      "weight": "1/6",
+      "world_ids": [
+        "question_b__provider_exception"
+      ]
+    },
+    {
+      "coarse_projection_merges_full_traces": true,
+      "complete_trace_sha256s": [
+        "487787dc8305c2f6f3ac914a172e6f100b1cb1c9acbd894e3afca545c8541da8",
+        "fc0350185fa5589da5116475f362fcc81b3274ffed369526b70cfdc5b16af52f"
+      ],
+      "content_projection_sha256": "242d925dd07525a5fe9fb4413ed63064274cd6763b05ad0a7da9df2fb0cc8fe4",
+      "model_finish_reasons_or_error": [
+        "length",
+        "stop"
+      ],
+      "model_statuses": [
+        "returned"
+      ],
+      "retrieval_statuses": [],
+      "weight": "1/3",
+      "world_ids": [
+        "question_b__finish_stop",
+        "question_b__finish_length"
+      ]
+    },
+    {
+      "coarse_projection_merges_full_traces": true,
+      "complete_trace_sha256s": [
+        "0863de0ffabbd122e44f3f9743d1bd89a01ebfe00bbb3a68cfd5822e4150c714",
+        "cb039f85aac9e5be213e2e5af19b7f8ace5969ea8fdb9ff25c7e64e35f09172c"
+      ],
+      "content_projection_sha256": "2d403103e76cef65f62cc7198493b0aa65d3fb7be74d697ef34349c49c52d988",
+      "model_finish_reasons_or_error": [
+        "length",
+        "stop"
+      ],
+      "model_statuses": [
+        "returned"
+      ],
+      "retrieval_statuses": [],
+      "weight": "1/3",
+      "world_ids": [
+        "question_a__finish_stop",
+        "question_a__finish_length"
+      ]
+    },
+    {
+      "coarse_projection_merges_full_traces": false,
+      "complete_trace_sha256s": [
+        "bdf2aca6275422234c0086a36fc55783e2c3610c8e6cf56daac62cb977d1b00a"
+      ],
+      "content_projection_sha256": "3c96c9c0262022f83eddb6adae5269d39f7c5f2c57c5f2c171f48cf0db93b146",
+      "model_finish_reasons_or_error": [
+        "raised"
+      ],
+      "model_statuses": [
+        "raised"
+      ],
+      "retrieval_statuses": [],
+      "weight": "1/6",
+      "world_ids": [
+        "question_a__provider_exception"
+      ]
+    }
+  ],
+  "finite_model": {
+    "support": {
+      "elementary_world_count": 6,
+      "graph_recursion_limit": 6,
+      "input_domain_size": 2,
+      "input_states": [
+        {
+          "content": "What is two plus two?",
+          "input_id": "question_a",
+          "weight": "1/2"
+        },
+        {
+          "content": "Why does the graph keep messages?",
+          "input_id": "question_b",
+          "weight": "1/2"
+        }
+      ],
+      "model_call_horizon": 1,
+      "model_responses": [
+        {
+          "content": "The answer is recorded.",
+          "id": "fixture-stop-001",
+          "kind": "returned",
+          "response_id": "finish_stop",
+          "response_metadata": {
+            "finish_reason": "stop",
+            "model_name": "finite-oracle-v1"
+          },
+          "status": "success",
+          "usage_metadata": {
+            "input_tokens": 7,
+            "output_tokens": 4,
+            "total_tokens": 11
+          },
+          "weight": "1/3"
+        },
+        {
+          "content": "The answer is recorded.",
+          "id": "fixture-length-001",
+          "kind": "returned",
+          "response_id": "finish_length",
+          "response_metadata": {
+            "finish_reason": "length",
+            "model_name": "finite-oracle-v1"
+          },
+          "status": "success",
+          "usage_metadata": {
+            "input_tokens": 7,
+            "output_tokens": 8,
+            "total_tokens": 15
+          },
+          "weight": "1/3"
+        },
+        {
+          "exception_message": "finite provider fixture failure",
+          "exception_type": "RuntimeError",
+          "kind": "exception",
+          "response_id": "provider_exception",
+          "weight": "1/3"
+        }
+      ],
+      "response_support_size": 3,
+      "world_weight_rule": "P(input) * P(response); all arithmetic uses exact Fraction values"
+    },
+    "world_count": 6,
+    "world_weights_sum": "1/1",
+    "worlds": [
+      {
+        "content_only_sha256": "2d403103e76cef65f62cc7198493b0aa65d3fb7be74d697ef34349c49c52d988",
+        "independent_replay_identical": true,
+        "outcome": "complete",
+        "probability": "1/6",
+        "run_status": "complete",
+        "trace_sha256": "cb039f85aac9e5be213e2e5af19b7f8ace5969ea8fdb9ff25c7e64e35f09172c",
+        "world_id": "question_a__finish_stop"
+      },
+      {
+        "content_only_sha256": "2d403103e76cef65f62cc7198493b0aa65d3fb7be74d697ef34349c49c52d988",
+        "independent_replay_identical": true,
+        "outcome": "complete",
+        "probability": "1/6",
+        "run_status": "complete",
+        "trace_sha256": "0863de0ffabbd122e44f3f9743d1bd89a01ebfe00bbb3a68cfd5822e4150c714",
+        "world_id": "question_a__finish_length"
+      },
+      {
+        "content_only_sha256": "3c96c9c0262022f83eddb6adae5269d39f7c5f2c57c5f2c171f48cf0db93b146",
+        "independent_replay_identical": true,
+        "outcome": "modeled_error",
+        "probability": "1/6",
+        "run_status": "provider_error",
+        "trace_sha256": "bdf2aca6275422234c0086a36fc55783e2c3610c8e6cf56daac62cb977d1b00a",
+        "world_id": "question_a__provider_exception"
+      },
+      {
+        "content_only_sha256": "242d925dd07525a5fe9fb4413ed63064274cd6763b05ad0a7da9df2fb0cc8fe4",
+        "independent_replay_identical": true,
+        "outcome": "complete",
+        "probability": "1/6",
+        "run_status": "complete",
+        "trace_sha256": "487787dc8305c2f6f3ac914a172e6f100b1cb1c9acbd894e3afca545c8541da8",
+        "world_id": "question_b__finish_stop"
+      },
+      {
+        "content_only_sha256": "242d925dd07525a5fe9fb4413ed63064274cd6763b05ad0a7da9df2fb0cc8fe4",
+        "independent_replay_identical": true,
+        "outcome": "complete",
+        "probability": "1/6",
+        "run_status": "complete",
+        "trace_sha256": "fc0350185fa5589da5116475f362fcc81b3274ffed369526b70cfdc5b16af52f",
+        "world_id": "question_b__finish_length"
+      },
+      {
+        "content_only_sha256": "0d9c082ed444bbae667045e35b29402989578b3dfa01ccce2caa5d5359a5f117",
+        "independent_replay_identical": true,
+        "outcome": "modeled_error",
+        "probability": "1/6",
+        "run_status": "provider_error",
+        "trace_sha256": "d0af228cb17bbad9241096da0c5d9e000625ae78efb16ba37a7fb71932be7ade",
+        "world_id": "question_b__provider_exception"
+      }
+    ]
+  },
+  "isolation_evidence": {
+    "fork_denied": true,
+    "network_denied": true,
+    "unlisted_user_file_denied": true,
+    "writes_denied": true
+  },
+  "lossy_projection_controls": {
+    "final_answer_projection_omits_history": [
+      {
+        "distinct_first_message_contents": [
+          "What is two plus two?",
+          "Why does the graph keep messages?"
+        ],
+        "distinct_message_history_sha256s": [
+          "0d9c082ed444bbae667045e35b29402989578b3dfa01ccce2caa5d5359a5f117",
+          "3c96c9c0262022f83eddb6adae5269d39f7c5f2c57c5f2c171f48cf0db93b146"
+        ],
+        "final_answer_projection_erases_distinct_histories": true,
+        "final_answer_projection_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "weight": "1/3",
+        "world_ids": [
+          "question_a__provider_exception",
+          "question_b__provider_exception"
+        ]
+      },
+      {
+        "distinct_first_message_contents": [
+          "What is two plus two?",
+          "Why does the graph keep messages?"
+        ],
+        "distinct_message_history_sha256s": [
+          "242d925dd07525a5fe9fb4413ed63064274cd6763b05ad0a7da9df2fb0cc8fe4",
+          "2d403103e76cef65f62cc7198493b0aa65d3fb7be74d697ef34349c49c52d988"
+        ],
+        "final_answer_projection_erases_distinct_histories": true,
+        "final_answer_projection_sha256": "97eb1203c6c7bba36bd520903020bde35dd604fee0e08a7416b02e244014cc2f",
+        "weight": "2/3",
+        "world_ids": [
+          "question_a__finish_stop",
+          "question_a__finish_length",
+          "question_b__finish_stop",
+          "question_b__finish_length"
+        ]
+      }
+    ],
+    "message_content_projection_omits_statuses_and_metadata": [
+      {
+        "coarse_projection_merges_full_traces": true,
+        "complete_trace_sha256s": [
+          "487787dc8305c2f6f3ac914a172e6f100b1cb1c9acbd894e3afca545c8541da8",
+          "fc0350185fa5589da5116475f362fcc81b3274ffed369526b70cfdc5b16af52f"
+        ],
+        "content_projection_sha256": "242d925dd07525a5fe9fb4413ed63064274cd6763b05ad0a7da9df2fb0cc8fe4",
+        "model_finish_reasons_or_error": [
+          "length",
+          "stop"
+        ],
+        "model_statuses": [
+          "returned"
+        ],
+        "retrieval_statuses": [],
+        "weight": "1/3",
+        "world_ids": [
+          "question_b__finish_stop",
+          "question_b__finish_length"
+        ]
+      },
+      {
+        "coarse_projection_merges_full_traces": true,
+        "complete_trace_sha256s": [
+          "0863de0ffabbd122e44f3f9743d1bd89a01ebfe00bbb3a68cfd5822e4150c714",
+          "cb039f85aac9e5be213e2e5af19b7f8ace5969ea8fdb9ff25c7e64e35f09172c"
+        ],
+        "content_projection_sha256": "2d403103e76cef65f62cc7198493b0aa65d3fb7be74d697ef34349c49c52d988",
+        "model_finish_reasons_or_error": [
+          "length",
+          "stop"
+        ],
+        "model_statuses": [
+          "returned"
+        ],
+        "retrieval_statuses": [],
+        "weight": "1/3",
+        "world_ids": [
+          "question_a__finish_stop",
+          "question_a__finish_length"
+        ]
+      }
+    ]
+  },
+  "mock_contract_sha256": "a74b5f648f6c8627e3369cbf8679220ff0f55230dfe88d67a51ab44819b91b7c",
+  "observer_laws": {
+    "assistant_message_only_law": [
+      {
+        "projection_sha256": "1a96b90364fea7ddb5f970c288ff7a7eeb30d3e3b078436497a90de24b01febb",
+        "representative": {
+          "$message": {
+            "data": {
+              "additional_kwargs": {},
+              "content": "The answer is recorded.",
+              "id": "fixture-stop-001",
+              "invalid_tool_calls": [],
+              "name": null,
+              "response_metadata": {
+                "finish_reason": "stop",
+                "model_name": "finite-oracle-v1"
+              },
+              "status": "success",
+              "tool_calls": [],
+              "type": "ai",
+              "usage_metadata": {
+                "input_tokens": 7,
+                "output_tokens": 4,
+                "total_tokens": 11
+              }
+            },
+            "type": "ai"
+          }
+        },
+        "weight": "1/3",
+        "world_ids": [
+          "question_a__finish_stop",
+          "question_b__finish_stop"
+        ]
+      },
+      {
+        "projection_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "representative": null,
+        "weight": "1/3",
+        "world_ids": [
+          "question_a__provider_exception",
+          "question_b__provider_exception"
+        ]
+      },
+      {
+        "projection_sha256": "dfa36945539f42ded293acdc5d68a1d15de6bd6d2287dc6a763ef8990f6b7f8a",
+        "representative": {
+          "$message": {
+            "data": {
+              "additional_kwargs": {},
+              "content": "The answer is recorded.",
+              "id": "fixture-length-001",
+              "invalid_tool_calls": [],
+              "name": null,
+              "response_metadata": {
+                "finish_reason": "length",
+                "model_name": "finite-oracle-v1"
+              },
+              "status": "success",
+              "tool_calls": [],
+              "type": "ai",
+              "usage_metadata": {
+                "input_tokens": 7,
+                "output_tokens": 8,
+                "total_tokens": 15
+              }
+            },
+            "type": "ai"
+          }
+        },
+        "weight": "1/3",
+        "world_ids": [
+          "question_a__finish_length",
+          "question_b__finish_length"
+        ]
+      }
+    ],
+    "complete_trace_law": [
+      {
+        "projection_sha256": "0863de0ffabbd122e44f3f9743d1bd89a01ebfe00bbb3a68cfd5822e4150c714",
+        "representative": {
+          "callable_returns": [
+            {
+              "node": "model",
+              "update": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "The answer is recorded.",
+                        "id": "fixture-length-001",
+                        "invalid_tool_calls": [],
+                        "name": null,
+                        "response_metadata": {
+                          "finish_reason": "length",
+                          "model_name": "finite-oracle-v1"
+                        },
+                        "status": "success",
+                        "tool_calls": [],
+                        "type": "ai",
+                        "usage_metadata": {
+                          "input_tokens": 7,
+                          "output_tokens": 8,
+                          "total_tokens": 15
+                        }
+                      },
+                      "type": "ai"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "graph_completed": true,
+          "graph_status": "complete",
+          "last_observed_state": {
+            "messages": [
+              {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "What is two plus two?",
+                    "id": "input-question_a",
+                    "name": null,
+                    "response_metadata": {},
+                    "type": "human"
+                  },
+                  "type": "human"
+                }
+              },
+              {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "The answer is recorded.",
+                    "id": "fixture-length-001",
+                    "invalid_tool_calls": [],
+                    "name": null,
+                    "response_metadata": {
+                      "finish_reason": "length",
+                      "model_name": "finite-oracle-v1"
+                    },
+                    "status": "success",
+                    "tool_calls": [],
+                    "type": "ai",
+                    "usage_metadata": {
+                      "input_tokens": 7,
+                      "output_tokens": 8,
+                      "total_tokens": 15
+                    }
+                  },
+                  "type": "ai"
+                }
+              }
+            ]
+          },
+          "ordered_execution_events": [
+            {
+              "config": {
+                "recursion_limit": 6
+              },
+              "input": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "What is two plus two?",
+                        "id": "input-question_a",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  }
+                ]
+              },
+              "kind": "graph_start",
+              "stream_mode": [
+                "updates",
+                "values"
+              ]
+            },
+            {
+              "kind": "graph_state",
+              "ordinal": 1,
+              "state": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "What is two plus two?",
+                        "id": "input-question_a",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "envelope": {
+                "args": [
+                  [
+                    {
+                      "$message": {
+                        "data": {
+                          "additional_kwargs": {},
+                          "content": "What is two plus two?",
+                          "id": "input-question_a",
+                          "name": null,
+                          "response_metadata": {},
+                          "type": "human"
+                        },
+                        "type": "human"
+                      }
+                    }
+                  ]
+                ],
+                "kwargs": {},
+                "method": "invoke"
+              },
+              "kind": "model_request"
+            },
+            {
+              "finish_reason": "length",
+              "kind": "model_response",
+              "message": {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "The answer is recorded.",
+                    "id": "fixture-length-001",
+                    "invalid_tool_calls": [],
+                    "name": null,
+                    "response_metadata": {
+                      "finish_reason": "length",
+                      "model_name": "finite-oracle-v1"
+                    },
+                    "status": "success",
+                    "tool_calls": [],
+                    "type": "ai",
+                    "usage_metadata": {
+                      "input_tokens": 7,
+                      "output_tokens": 8,
+                      "total_tokens": 15
+                    }
+                  },
+                  "type": "ai"
+                }
+              },
+              "response_id": "finish_length",
+              "status": "returned",
+              "usage": {
+                "input_tokens": 7,
+                "output_tokens": 8,
+                "total_tokens": 15
+              }
+            },
+            {
+              "kind": "node_update",
+              "node": "model",
+              "update": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "The answer is recorded.",
+                        "id": "fixture-length-001",
+                        "invalid_tool_calls": [],
+                        "name": null,
+                        "response_metadata": {
+                          "finish_reason": "length",
+                          "model_name": "finite-oracle-v1"
+                        },
+                        "status": "success",
+                        "tool_calls": [],
+                        "type": "ai",
+                        "usage_metadata": {
+                          "input_tokens": 7,
+                          "output_tokens": 8,
+                          "total_tokens": 15
+                        }
+                      },
+                      "type": "ai"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "graph_state",
+              "ordinal": 2,
+              "state": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "What is two plus two?",
+                        "id": "input-question_a",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  },
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "The answer is recorded.",
+                        "id": "fixture-length-001",
+                        "invalid_tool_calls": [],
+                        "name": null,
+                        "response_metadata": {
+                          "finish_reason": "length",
+                          "model_name": "finite-oracle-v1"
+                        },
+                        "status": "success",
+                        "tool_calls": [],
+                        "type": "ai",
+                        "usage_metadata": {
+                          "input_tokens": 7,
+                          "output_tokens": 8,
+                          "total_tokens": 15
+                        }
+                      },
+                      "type": "ai"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "graph_complete",
+              "terminal": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "What is two plus two?",
+                        "id": "input-question_a",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  },
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "The answer is recorded.",
+                        "id": "fixture-length-001",
+                        "invalid_tool_calls": [],
+                        "name": null,
+                        "response_metadata": {
+                          "finish_reason": "length",
+                          "model_name": "finite-oracle-v1"
+                        },
+                        "status": "success",
+                        "tool_calls": [],
+                        "type": "ai",
+                        "usage_metadata": {
+                          "input_tokens": 7,
+                          "output_tokens": 8,
+                          "total_tokens": 15
+                        }
+                      },
+                      "type": "ai"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "request_and_response_events": [
+            {
+              "envelope": {
+                "args": [
+                  [
+                    {
+                      "$message": {
+                        "data": {
+                          "additional_kwargs": {},
+                          "content": "What is two plus two?",
+                          "id": "input-question_a",
+                          "name": null,
+                          "response_metadata": {},
+                          "type": "human"
+                        },
+                        "type": "human"
+                      }
+                    }
+                  ]
+                ],
+                "kwargs": {},
+                "method": "invoke"
+              },
+              "kind": "model_request"
+            },
+            {
+              "finish_reason": "length",
+              "kind": "model_response",
+              "message": {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "The answer is recorded.",
+                    "id": "fixture-length-001",
+                    "invalid_tool_calls": [],
+                    "name": null,
+                    "response_metadata": {
+                      "finish_reason": "length",
+                      "model_name": "finite-oracle-v1"
+                    },
+                    "status": "success",
+                    "tool_calls": [],
+                    "type": "ai",
+                    "usage_metadata": {
+                      "input_tokens": 7,
+                      "output_tokens": 8,
+                      "total_tokens": 15
+                    }
+                  },
+                  "type": "ai"
+                }
+              },
+              "response_id": "finish_length",
+              "status": "returned",
+              "usage": {
+                "input_tokens": 7,
+                "output_tokens": 8,
+                "total_tokens": 15
+              }
+            }
+          ],
+          "terminal_state": {
+            "messages": [
+              {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "What is two plus two?",
+                    "id": "input-question_a",
+                    "name": null,
+                    "response_metadata": {},
+                    "type": "human"
+                  },
+                  "type": "human"
+                }
+              },
+              {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "The answer is recorded.",
+                    "id": "fixture-length-001",
+                    "invalid_tool_calls": [],
+                    "name": null,
+                    "response_metadata": {
+                      "finish_reason": "length",
+                      "model_name": "finite-oracle-v1"
+                    },
+                    "status": "success",
+                    "tool_calls": [],
+                    "type": "ai",
+                    "usage_metadata": {
+                      "input_tokens": 7,
+                      "output_tokens": 8,
+                      "total_tokens": 15
+                    }
+                  },
+                  "type": "ai"
+                }
+              }
+            ]
+          }
+        },
+        "weight": "1/6",
+        "world_ids": [
+          "question_a__finish_length"
+        ]
+      },
+      {
+        "projection_sha256": "487787dc8305c2f6f3ac914a172e6f100b1cb1c9acbd894e3afca545c8541da8",
+        "representative": {
+          "callable_returns": [
+            {
+              "node": "model",
+              "update": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "The answer is recorded.",
+                        "id": "fixture-stop-001",
+                        "invalid_tool_calls": [],
+                        "name": null,
+                        "response_metadata": {
+                          "finish_reason": "stop",
+                          "model_name": "finite-oracle-v1"
+                        },
+                        "status": "success",
+                        "tool_calls": [],
+                        "type": "ai",
+                        "usage_metadata": {
+                          "input_tokens": 7,
+                          "output_tokens": 4,
+                          "total_tokens": 11
+                        }
+                      },
+                      "type": "ai"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "graph_completed": true,
+          "graph_status": "complete",
+          "last_observed_state": {
+            "messages": [
+              {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "Why does the graph keep messages?",
+                    "id": "input-question_b",
+                    "name": null,
+                    "response_metadata": {},
+                    "type": "human"
+                  },
+                  "type": "human"
+                }
+              },
+              {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "The answer is recorded.",
+                    "id": "fixture-stop-001",
+                    "invalid_tool_calls": [],
+                    "name": null,
+                    "response_metadata": {
+                      "finish_reason": "stop",
+                      "model_name": "finite-oracle-v1"
+                    },
+                    "status": "success",
+                    "tool_calls": [],
+                    "type": "ai",
+                    "usage_metadata": {
+                      "input_tokens": 7,
+                      "output_tokens": 4,
+                      "total_tokens": 11
+                    }
+                  },
+                  "type": "ai"
+                }
+              }
+            ]
+          },
+          "ordered_execution_events": [
+            {
+              "config": {
+                "recursion_limit": 6
+              },
+              "input": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "Why does the graph keep messages?",
+                        "id": "input-question_b",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  }
+                ]
+              },
+              "kind": "graph_start",
+              "stream_mode": [
+                "updates",
+                "values"
+              ]
+            },
+            {
+              "kind": "graph_state",
+              "ordinal": 1,
+              "state": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "Why does the graph keep messages?",
+                        "id": "input-question_b",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "envelope": {
+                "args": [
+                  [
+                    {
+                      "$message": {
+                        "data": {
+                          "additional_kwargs": {},
+                          "content": "Why does the graph keep messages?",
+                          "id": "input-question_b",
+                          "name": null,
+                          "response_metadata": {},
+                          "type": "human"
+                        },
+                        "type": "human"
+                      }
+                    }
+                  ]
+                ],
+                "kwargs": {},
+                "method": "invoke"
+              },
+              "kind": "model_request"
+            },
+            {
+              "finish_reason": "stop",
+              "kind": "model_response",
+              "message": {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "The answer is recorded.",
+                    "id": "fixture-stop-001",
+                    "invalid_tool_calls": [],
+                    "name": null,
+                    "response_metadata": {
+                      "finish_reason": "stop",
+                      "model_name": "finite-oracle-v1"
+                    },
+                    "status": "success",
+                    "tool_calls": [],
+                    "type": "ai",
+                    "usage_metadata": {
+                      "input_tokens": 7,
+                      "output_tokens": 4,
+                      "total_tokens": 11
+                    }
+                  },
+                  "type": "ai"
+                }
+              },
+              "response_id": "finish_stop",
+              "status": "returned",
+              "usage": {
+                "input_tokens": 7,
+                "output_tokens": 4,
+                "total_tokens": 11
+              }
+            },
+            {
+              "kind": "node_update",
+              "node": "model",
+              "update": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "The answer is recorded.",
+                        "id": "fixture-stop-001",
+                        "invalid_tool_calls": [],
+                        "name": null,
+                        "response_metadata": {
+                          "finish_reason": "stop",
+                          "model_name": "finite-oracle-v1"
+                        },
+                        "status": "success",
+                        "tool_calls": [],
+                        "type": "ai",
+                        "usage_metadata": {
+                          "input_tokens": 7,
+                          "output_tokens": 4,
+                          "total_tokens": 11
+                        }
+                      },
+                      "type": "ai"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "graph_state",
+              "ordinal": 2,
+              "state": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "Why does the graph keep messages?",
+                        "id": "input-question_b",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  },
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "The answer is recorded.",
+                        "id": "fixture-stop-001",
+                        "invalid_tool_calls": [],
+                        "name": null,
+                        "response_metadata": {
+                          "finish_reason": "stop",
+                          "model_name": "finite-oracle-v1"
+                        },
+                        "status": "success",
+                        "tool_calls": [],
+                        "type": "ai",
+                        "usage_metadata": {
+                          "input_tokens": 7,
+                          "output_tokens": 4,
+                          "total_tokens": 11
+                        }
+                      },
+                      "type": "ai"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "graph_complete",
+              "terminal": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "Why does the graph keep messages?",
+                        "id": "input-question_b",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  },
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "The answer is recorded.",
+                        "id": "fixture-stop-001",
+                        "invalid_tool_calls": [],
+                        "name": null,
+                        "response_metadata": {
+                          "finish_reason": "stop",
+                          "model_name": "finite-oracle-v1"
+                        },
+                        "status": "success",
+                        "tool_calls": [],
+                        "type": "ai",
+                        "usage_metadata": {
+                          "input_tokens": 7,
+                          "output_tokens": 4,
+                          "total_tokens": 11
+                        }
+                      },
+                      "type": "ai"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "request_and_response_events": [
+            {
+              "envelope": {
+                "args": [
+                  [
+                    {
+                      "$message": {
+                        "data": {
+                          "additional_kwargs": {},
+                          "content": "Why does the graph keep messages?",
+                          "id": "input-question_b",
+                          "name": null,
+                          "response_metadata": {},
+                          "type": "human"
+                        },
+                        "type": "human"
+                      }
+                    }
+                  ]
+                ],
+                "kwargs": {},
+                "method": "invoke"
+              },
+              "kind": "model_request"
+            },
+            {
+              "finish_reason": "stop",
+              "kind": "model_response",
+              "message": {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "The answer is recorded.",
+                    "id": "fixture-stop-001",
+                    "invalid_tool_calls": [],
+                    "name": null,
+                    "response_metadata": {
+                      "finish_reason": "stop",
+                      "model_name": "finite-oracle-v1"
+                    },
+                    "status": "success",
+                    "tool_calls": [],
+                    "type": "ai",
+                    "usage_metadata": {
+                      "input_tokens": 7,
+                      "output_tokens": 4,
+                      "total_tokens": 11
+                    }
+                  },
+                  "type": "ai"
+                }
+              },
+              "response_id": "finish_stop",
+              "status": "returned",
+              "usage": {
+                "input_tokens": 7,
+                "output_tokens": 4,
+                "total_tokens": 11
+              }
+            }
+          ],
+          "terminal_state": {
+            "messages": [
+              {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "Why does the graph keep messages?",
+                    "id": "input-question_b",
+                    "name": null,
+                    "response_metadata": {},
+                    "type": "human"
+                  },
+                  "type": "human"
+                }
+              },
+              {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "The answer is recorded.",
+                    "id": "fixture-stop-001",
+                    "invalid_tool_calls": [],
+                    "name": null,
+                    "response_metadata": {
+                      "finish_reason": "stop",
+                      "model_name": "finite-oracle-v1"
+                    },
+                    "status": "success",
+                    "tool_calls": [],
+                    "type": "ai",
+                    "usage_metadata": {
+                      "input_tokens": 7,
+                      "output_tokens": 4,
+                      "total_tokens": 11
+                    }
+                  },
+                  "type": "ai"
+                }
+              }
+            ]
+          }
+        },
+        "weight": "1/6",
+        "world_ids": [
+          "question_b__finish_stop"
+        ]
+      },
+      {
+        "projection_sha256": "bdf2aca6275422234c0086a36fc55783e2c3610c8e6cf56daac62cb977d1b00a",
+        "representative": {
+          "callable_returns": [],
+          "graph_completed": false,
+          "graph_status": "provider_error",
+          "last_observed_state": {
+            "messages": [
+              {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "What is two plus two?",
+                    "id": "input-question_a",
+                    "name": null,
+                    "response_metadata": {},
+                    "type": "human"
+                  },
+                  "type": "human"
+                }
+              }
+            ]
+          },
+          "ordered_execution_events": [
+            {
+              "config": {
+                "recursion_limit": 6
+              },
+              "input": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "What is two plus two?",
+                        "id": "input-question_a",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  }
+                ]
+              },
+              "kind": "graph_start",
+              "stream_mode": [
+                "updates",
+                "values"
+              ]
+            },
+            {
+              "kind": "graph_state",
+              "ordinal": 1,
+              "state": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "What is two plus two?",
+                        "id": "input-question_a",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "envelope": {
+                "args": [
+                  [
+                    {
+                      "$message": {
+                        "data": {
+                          "additional_kwargs": {},
+                          "content": "What is two plus two?",
+                          "id": "input-question_a",
+                          "name": null,
+                          "response_metadata": {},
+                          "type": "human"
+                        },
+                        "type": "human"
+                      }
+                    }
+                  ]
+                ],
+                "kwargs": {},
+                "method": "invoke"
+              },
+              "kind": "model_request"
+            },
+            {
+              "exception_message": "finite provider fixture failure",
+              "exception_type": "RuntimeError",
+              "kind": "model_response",
+              "response_id": "provider_exception",
+              "status": "raised"
+            },
+            {
+              "kind": "graph_exception",
+              "message": "finite provider fixture failure",
+              "type": "builtins.RuntimeError"
+            }
+          ],
+          "request_and_response_events": [
+            {
+              "envelope": {
+                "args": [
+                  [
+                    {
+                      "$message": {
+                        "data": {
+                          "additional_kwargs": {},
+                          "content": "What is two plus two?",
+                          "id": "input-question_a",
+                          "name": null,
+                          "response_metadata": {},
+                          "type": "human"
+                        },
+                        "type": "human"
+                      }
+                    }
+                  ]
+                ],
+                "kwargs": {},
+                "method": "invoke"
+              },
+              "kind": "model_request"
+            },
+            {
+              "exception_message": "finite provider fixture failure",
+              "exception_type": "RuntimeError",
+              "kind": "model_response",
+              "response_id": "provider_exception",
+              "status": "raised"
+            }
+          ],
+          "terminal_state": null
+        },
+        "weight": "1/6",
+        "world_ids": [
+          "question_a__provider_exception"
+        ]
+      },
+      {
+        "projection_sha256": "cb039f85aac9e5be213e2e5af19b7f8ace5969ea8fdb9ff25c7e64e35f09172c",
+        "representative": {
+          "callable_returns": [
+            {
+              "node": "model",
+              "update": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "The answer is recorded.",
+                        "id": "fixture-stop-001",
+                        "invalid_tool_calls": [],
+                        "name": null,
+                        "response_metadata": {
+                          "finish_reason": "stop",
+                          "model_name": "finite-oracle-v1"
+                        },
+                        "status": "success",
+                        "tool_calls": [],
+                        "type": "ai",
+                        "usage_metadata": {
+                          "input_tokens": 7,
+                          "output_tokens": 4,
+                          "total_tokens": 11
+                        }
+                      },
+                      "type": "ai"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "graph_completed": true,
+          "graph_status": "complete",
+          "last_observed_state": {
+            "messages": [
+              {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "What is two plus two?",
+                    "id": "input-question_a",
+                    "name": null,
+                    "response_metadata": {},
+                    "type": "human"
+                  },
+                  "type": "human"
+                }
+              },
+              {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "The answer is recorded.",
+                    "id": "fixture-stop-001",
+                    "invalid_tool_calls": [],
+                    "name": null,
+                    "response_metadata": {
+                      "finish_reason": "stop",
+                      "model_name": "finite-oracle-v1"
+                    },
+                    "status": "success",
+                    "tool_calls": [],
+                    "type": "ai",
+                    "usage_metadata": {
+                      "input_tokens": 7,
+                      "output_tokens": 4,
+                      "total_tokens": 11
+                    }
+                  },
+                  "type": "ai"
+                }
+              }
+            ]
+          },
+          "ordered_execution_events": [
+            {
+              "config": {
+                "recursion_limit": 6
+              },
+              "input": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "What is two plus two?",
+                        "id": "input-question_a",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  }
+                ]
+              },
+              "kind": "graph_start",
+              "stream_mode": [
+                "updates",
+                "values"
+              ]
+            },
+            {
+              "kind": "graph_state",
+              "ordinal": 1,
+              "state": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "What is two plus two?",
+                        "id": "input-question_a",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "envelope": {
+                "args": [
+                  [
+                    {
+                      "$message": {
+                        "data": {
+                          "additional_kwargs": {},
+                          "content": "What is two plus two?",
+                          "id": "input-question_a",
+                          "name": null,
+                          "response_metadata": {},
+                          "type": "human"
+                        },
+                        "type": "human"
+                      }
+                    }
+                  ]
+                ],
+                "kwargs": {},
+                "method": "invoke"
+              },
+              "kind": "model_request"
+            },
+            {
+              "finish_reason": "stop",
+              "kind": "model_response",
+              "message": {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "The answer is recorded.",
+                    "id": "fixture-stop-001",
+                    "invalid_tool_calls": [],
+                    "name": null,
+                    "response_metadata": {
+                      "finish_reason": "stop",
+                      "model_name": "finite-oracle-v1"
+                    },
+                    "status": "success",
+                    "tool_calls": [],
+                    "type": "ai",
+                    "usage_metadata": {
+                      "input_tokens": 7,
+                      "output_tokens": 4,
+                      "total_tokens": 11
+                    }
+                  },
+                  "type": "ai"
+                }
+              },
+              "response_id": "finish_stop",
+              "status": "returned",
+              "usage": {
+                "input_tokens": 7,
+                "output_tokens": 4,
+                "total_tokens": 11
+              }
+            },
+            {
+              "kind": "node_update",
+              "node": "model",
+              "update": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "The answer is recorded.",
+                        "id": "fixture-stop-001",
+                        "invalid_tool_calls": [],
+                        "name": null,
+                        "response_metadata": {
+                          "finish_reason": "stop",
+                          "model_name": "finite-oracle-v1"
+                        },
+                        "status": "success",
+                        "tool_calls": [],
+                        "type": "ai",
+                        "usage_metadata": {
+                          "input_tokens": 7,
+                          "output_tokens": 4,
+                          "total_tokens": 11
+                        }
+                      },
+                      "type": "ai"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "graph_state",
+              "ordinal": 2,
+              "state": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "What is two plus two?",
+                        "id": "input-question_a",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  },
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "The answer is recorded.",
+                        "id": "fixture-stop-001",
+                        "invalid_tool_calls": [],
+                        "name": null,
+                        "response_metadata": {
+                          "finish_reason": "stop",
+                          "model_name": "finite-oracle-v1"
+                        },
+                        "status": "success",
+                        "tool_calls": [],
+                        "type": "ai",
+                        "usage_metadata": {
+                          "input_tokens": 7,
+                          "output_tokens": 4,
+                          "total_tokens": 11
+                        }
+                      },
+                      "type": "ai"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "graph_complete",
+              "terminal": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "What is two plus two?",
+                        "id": "input-question_a",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  },
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "The answer is recorded.",
+                        "id": "fixture-stop-001",
+                        "invalid_tool_calls": [],
+                        "name": null,
+                        "response_metadata": {
+                          "finish_reason": "stop",
+                          "model_name": "finite-oracle-v1"
+                        },
+                        "status": "success",
+                        "tool_calls": [],
+                        "type": "ai",
+                        "usage_metadata": {
+                          "input_tokens": 7,
+                          "output_tokens": 4,
+                          "total_tokens": 11
+                        }
+                      },
+                      "type": "ai"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "request_and_response_events": [
+            {
+              "envelope": {
+                "args": [
+                  [
+                    {
+                      "$message": {
+                        "data": {
+                          "additional_kwargs": {},
+                          "content": "What is two plus two?",
+                          "id": "input-question_a",
+                          "name": null,
+                          "response_metadata": {},
+                          "type": "human"
+                        },
+                        "type": "human"
+                      }
+                    }
+                  ]
+                ],
+                "kwargs": {},
+                "method": "invoke"
+              },
+              "kind": "model_request"
+            },
+            {
+              "finish_reason": "stop",
+              "kind": "model_response",
+              "message": {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "The answer is recorded.",
+                    "id": "fixture-stop-001",
+                    "invalid_tool_calls": [],
+                    "name": null,
+                    "response_metadata": {
+                      "finish_reason": "stop",
+                      "model_name": "finite-oracle-v1"
+                    },
+                    "status": "success",
+                    "tool_calls": [],
+                    "type": "ai",
+                    "usage_metadata": {
+                      "input_tokens": 7,
+                      "output_tokens": 4,
+                      "total_tokens": 11
+                    }
+                  },
+                  "type": "ai"
+                }
+              },
+              "response_id": "finish_stop",
+              "status": "returned",
+              "usage": {
+                "input_tokens": 7,
+                "output_tokens": 4,
+                "total_tokens": 11
+              }
+            }
+          ],
+          "terminal_state": {
+            "messages": [
+              {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "What is two plus two?",
+                    "id": "input-question_a",
+                    "name": null,
+                    "response_metadata": {},
+                    "type": "human"
+                  },
+                  "type": "human"
+                }
+              },
+              {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "The answer is recorded.",
+                    "id": "fixture-stop-001",
+                    "invalid_tool_calls": [],
+                    "name": null,
+                    "response_metadata": {
+                      "finish_reason": "stop",
+                      "model_name": "finite-oracle-v1"
+                    },
+                    "status": "success",
+                    "tool_calls": [],
+                    "type": "ai",
+                    "usage_metadata": {
+                      "input_tokens": 7,
+                      "output_tokens": 4,
+                      "total_tokens": 11
+                    }
+                  },
+                  "type": "ai"
+                }
+              }
+            ]
+          }
+        },
+        "weight": "1/6",
+        "world_ids": [
+          "question_a__finish_stop"
+        ]
+      },
+      {
+        "projection_sha256": "d0af228cb17bbad9241096da0c5d9e000625ae78efb16ba37a7fb71932be7ade",
+        "representative": {
+          "callable_returns": [],
+          "graph_completed": false,
+          "graph_status": "provider_error",
+          "last_observed_state": {
+            "messages": [
+              {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "Why does the graph keep messages?",
+                    "id": "input-question_b",
+                    "name": null,
+                    "response_metadata": {},
+                    "type": "human"
+                  },
+                  "type": "human"
+                }
+              }
+            ]
+          },
+          "ordered_execution_events": [
+            {
+              "config": {
+                "recursion_limit": 6
+              },
+              "input": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "Why does the graph keep messages?",
+                        "id": "input-question_b",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  }
+                ]
+              },
+              "kind": "graph_start",
+              "stream_mode": [
+                "updates",
+                "values"
+              ]
+            },
+            {
+              "kind": "graph_state",
+              "ordinal": 1,
+              "state": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "Why does the graph keep messages?",
+                        "id": "input-question_b",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "envelope": {
+                "args": [
+                  [
+                    {
+                      "$message": {
+                        "data": {
+                          "additional_kwargs": {},
+                          "content": "Why does the graph keep messages?",
+                          "id": "input-question_b",
+                          "name": null,
+                          "response_metadata": {},
+                          "type": "human"
+                        },
+                        "type": "human"
+                      }
+                    }
+                  ]
+                ],
+                "kwargs": {},
+                "method": "invoke"
+              },
+              "kind": "model_request"
+            },
+            {
+              "exception_message": "finite provider fixture failure",
+              "exception_type": "RuntimeError",
+              "kind": "model_response",
+              "response_id": "provider_exception",
+              "status": "raised"
+            },
+            {
+              "kind": "graph_exception",
+              "message": "finite provider fixture failure",
+              "type": "builtins.RuntimeError"
+            }
+          ],
+          "request_and_response_events": [
+            {
+              "envelope": {
+                "args": [
+                  [
+                    {
+                      "$message": {
+                        "data": {
+                          "additional_kwargs": {},
+                          "content": "Why does the graph keep messages?",
+                          "id": "input-question_b",
+                          "name": null,
+                          "response_metadata": {},
+                          "type": "human"
+                        },
+                        "type": "human"
+                      }
+                    }
+                  ]
+                ],
+                "kwargs": {},
+                "method": "invoke"
+              },
+              "kind": "model_request"
+            },
+            {
+              "exception_message": "finite provider fixture failure",
+              "exception_type": "RuntimeError",
+              "kind": "model_response",
+              "response_id": "provider_exception",
+              "status": "raised"
+            }
+          ],
+          "terminal_state": null
+        },
+        "weight": "1/6",
+        "world_ids": [
+          "question_b__provider_exception"
+        ]
+      },
+      {
+        "projection_sha256": "fc0350185fa5589da5116475f362fcc81b3274ffed369526b70cfdc5b16af52f",
+        "representative": {
+          "callable_returns": [
+            {
+              "node": "model",
+              "update": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "The answer is recorded.",
+                        "id": "fixture-length-001",
+                        "invalid_tool_calls": [],
+                        "name": null,
+                        "response_metadata": {
+                          "finish_reason": "length",
+                          "model_name": "finite-oracle-v1"
+                        },
+                        "status": "success",
+                        "tool_calls": [],
+                        "type": "ai",
+                        "usage_metadata": {
+                          "input_tokens": 7,
+                          "output_tokens": 8,
+                          "total_tokens": 15
+                        }
+                      },
+                      "type": "ai"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "graph_completed": true,
+          "graph_status": "complete",
+          "last_observed_state": {
+            "messages": [
+              {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "Why does the graph keep messages?",
+                    "id": "input-question_b",
+                    "name": null,
+                    "response_metadata": {},
+                    "type": "human"
+                  },
+                  "type": "human"
+                }
+              },
+              {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "The answer is recorded.",
+                    "id": "fixture-length-001",
+                    "invalid_tool_calls": [],
+                    "name": null,
+                    "response_metadata": {
+                      "finish_reason": "length",
+                      "model_name": "finite-oracle-v1"
+                    },
+                    "status": "success",
+                    "tool_calls": [],
+                    "type": "ai",
+                    "usage_metadata": {
+                      "input_tokens": 7,
+                      "output_tokens": 8,
+                      "total_tokens": 15
+                    }
+                  },
+                  "type": "ai"
+                }
+              }
+            ]
+          },
+          "ordered_execution_events": [
+            {
+              "config": {
+                "recursion_limit": 6
+              },
+              "input": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "Why does the graph keep messages?",
+                        "id": "input-question_b",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  }
+                ]
+              },
+              "kind": "graph_start",
+              "stream_mode": [
+                "updates",
+                "values"
+              ]
+            },
+            {
+              "kind": "graph_state",
+              "ordinal": 1,
+              "state": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "Why does the graph keep messages?",
+                        "id": "input-question_b",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "envelope": {
+                "args": [
+                  [
+                    {
+                      "$message": {
+                        "data": {
+                          "additional_kwargs": {},
+                          "content": "Why does the graph keep messages?",
+                          "id": "input-question_b",
+                          "name": null,
+                          "response_metadata": {},
+                          "type": "human"
+                        },
+                        "type": "human"
+                      }
+                    }
+                  ]
+                ],
+                "kwargs": {},
+                "method": "invoke"
+              },
+              "kind": "model_request"
+            },
+            {
+              "finish_reason": "length",
+              "kind": "model_response",
+              "message": {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "The answer is recorded.",
+                    "id": "fixture-length-001",
+                    "invalid_tool_calls": [],
+                    "name": null,
+                    "response_metadata": {
+                      "finish_reason": "length",
+                      "model_name": "finite-oracle-v1"
+                    },
+                    "status": "success",
+                    "tool_calls": [],
+                    "type": "ai",
+                    "usage_metadata": {
+                      "input_tokens": 7,
+                      "output_tokens": 8,
+                      "total_tokens": 15
+                    }
+                  },
+                  "type": "ai"
+                }
+              },
+              "response_id": "finish_length",
+              "status": "returned",
+              "usage": {
+                "input_tokens": 7,
+                "output_tokens": 8,
+                "total_tokens": 15
+              }
+            },
+            {
+              "kind": "node_update",
+              "node": "model",
+              "update": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "The answer is recorded.",
+                        "id": "fixture-length-001",
+                        "invalid_tool_calls": [],
+                        "name": null,
+                        "response_metadata": {
+                          "finish_reason": "length",
+                          "model_name": "finite-oracle-v1"
+                        },
+                        "status": "success",
+                        "tool_calls": [],
+                        "type": "ai",
+                        "usage_metadata": {
+                          "input_tokens": 7,
+                          "output_tokens": 8,
+                          "total_tokens": 15
+                        }
+                      },
+                      "type": "ai"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "graph_state",
+              "ordinal": 2,
+              "state": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "Why does the graph keep messages?",
+                        "id": "input-question_b",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  },
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "The answer is recorded.",
+                        "id": "fixture-length-001",
+                        "invalid_tool_calls": [],
+                        "name": null,
+                        "response_metadata": {
+                          "finish_reason": "length",
+                          "model_name": "finite-oracle-v1"
+                        },
+                        "status": "success",
+                        "tool_calls": [],
+                        "type": "ai",
+                        "usage_metadata": {
+                          "input_tokens": 7,
+                          "output_tokens": 8,
+                          "total_tokens": 15
+                        }
+                      },
+                      "type": "ai"
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "kind": "graph_complete",
+              "terminal": {
+                "messages": [
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "Why does the graph keep messages?",
+                        "id": "input-question_b",
+                        "name": null,
+                        "response_metadata": {},
+                        "type": "human"
+                      },
+                      "type": "human"
+                    }
+                  },
+                  {
+                    "$message": {
+                      "data": {
+                        "additional_kwargs": {},
+                        "content": "The answer is recorded.",
+                        "id": "fixture-length-001",
+                        "invalid_tool_calls": [],
+                        "name": null,
+                        "response_metadata": {
+                          "finish_reason": "length",
+                          "model_name": "finite-oracle-v1"
+                        },
+                        "status": "success",
+                        "tool_calls": [],
+                        "type": "ai",
+                        "usage_metadata": {
+                          "input_tokens": 7,
+                          "output_tokens": 8,
+                          "total_tokens": 15
+                        }
+                      },
+                      "type": "ai"
+                    }
+                  }
+                ]
+              }
+            }
+          ],
+          "request_and_response_events": [
+            {
+              "envelope": {
+                "args": [
+                  [
+                    {
+                      "$message": {
+                        "data": {
+                          "additional_kwargs": {},
+                          "content": "Why does the graph keep messages?",
+                          "id": "input-question_b",
+                          "name": null,
+                          "response_metadata": {},
+                          "type": "human"
+                        },
+                        "type": "human"
+                      }
+                    }
+                  ]
+                ],
+                "kwargs": {},
+                "method": "invoke"
+              },
+              "kind": "model_request"
+            },
+            {
+              "finish_reason": "length",
+              "kind": "model_response",
+              "message": {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "The answer is recorded.",
+                    "id": "fixture-length-001",
+                    "invalid_tool_calls": [],
+                    "name": null,
+                    "response_metadata": {
+                      "finish_reason": "length",
+                      "model_name": "finite-oracle-v1"
+                    },
+                    "status": "success",
+                    "tool_calls": [],
+                    "type": "ai",
+                    "usage_metadata": {
+                      "input_tokens": 7,
+                      "output_tokens": 8,
+                      "total_tokens": 15
+                    }
+                  },
+                  "type": "ai"
+                }
+              },
+              "response_id": "finish_length",
+              "status": "returned",
+              "usage": {
+                "input_tokens": 7,
+                "output_tokens": 8,
+                "total_tokens": 15
+              }
+            }
+          ],
+          "terminal_state": {
+            "messages": [
+              {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "Why does the graph keep messages?",
+                    "id": "input-question_b",
+                    "name": null,
+                    "response_metadata": {},
+                    "type": "human"
+                  },
+                  "type": "human"
+                }
+              },
+              {
+                "$message": {
+                  "data": {
+                    "additional_kwargs": {},
+                    "content": "The answer is recorded.",
+                    "id": "fixture-length-001",
+                    "invalid_tool_calls": [],
+                    "name": null,
+                    "response_metadata": {
+                      "finish_reason": "length",
+                      "model_name": "finite-oracle-v1"
+                    },
+                    "status": "success",
+                    "tool_calls": [],
+                    "type": "ai",
+                    "usage_metadata": {
+                      "input_tokens": 7,
+                      "output_tokens": 8,
+                      "total_tokens": 15
+                    }
+                  },
+                  "type": "ai"
+                }
+              }
+            ]
+          }
+        },
+        "weight": "1/6",
+        "world_ids": [
+          "question_b__finish_length"
+        ]
+      }
+    ],
+    "content_only_law": [
+      {
+        "projection_sha256": "0d9c082ed444bbae667045e35b29402989578b3dfa01ccce2caa5d5359a5f117",
+        "representative": [
+          "Why does the graph keep messages?"
+        ],
+        "weight": "1/6",
+        "world_ids": [
+          "question_b__provider_exception"
+        ]
+      },
+      {
+        "projection_sha256": "242d925dd07525a5fe9fb4413ed63064274cd6763b05ad0a7da9df2fb0cc8fe4",
+        "representative": [
+          "Why does the graph keep messages?",
+          "The answer is recorded."
+        ],
+        "weight": "1/3",
+        "world_ids": [
+          "question_b__finish_stop",
+          "question_b__finish_length"
+        ]
+      },
+      {
+        "projection_sha256": "2d403103e76cef65f62cc7198493b0aa65d3fb7be74d697ef34349c49c52d988",
+        "representative": [
+          "What is two plus two?",
+          "The answer is recorded."
+        ],
+        "weight": "1/3",
+        "world_ids": [
+          "question_a__finish_stop",
+          "question_a__finish_length"
+        ]
+      },
+      {
+        "projection_sha256": "3c96c9c0262022f83eddb6adae5269d39f7c5f2c57c5f2c171f48cf0db93b146",
+        "representative": [
+          "What is two plus two?"
+        ],
+        "weight": "1/6",
+        "world_ids": [
+          "question_a__provider_exception"
+        ]
+      }
+    ],
+    "final_answer_only_law": [
+      {
+        "projection_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+        "representative": null,
+        "weight": "1/3",
+        "world_ids": [
+          "question_a__provider_exception",
+          "question_b__provider_exception"
+        ]
+      },
+      {
+        "projection_sha256": "97eb1203c6c7bba36bd520903020bde35dd604fee0e08a7416b02e244014cc2f",
+        "representative": "The answer is recorded.",
+        "weight": "2/3",
+        "world_ids": [
+          "question_a__finish_stop",
+          "question_a__finish_length",
+          "question_b__finish_stop",
+          "question_b__finish_length"
+        ]
+      }
+    ],
+    "finish_reason_or_error_law": [
+      {
+        "value": "length",
+        "weight": "1/3"
+      },
+      {
+        "value": "raised",
+        "weight": "1/3"
+      },
+      {
+        "value": "stop",
+        "weight": "1/3"
+      }
+    ],
+    "model_response_status_law": [
+      {
+        "value": "raised",
+        "weight": "1/3"
+      },
+      {
+        "value": "returned",
+        "weight": "2/3"
+      }
+    ],
+    "run_status_law": [
+      {
+        "status": "complete",
+        "weight": "2/3"
+      },
+      {
+        "status": "provider_error",
+        "weight": "1/3"
+      }
+    ]
+  },
+  "scope": "Replay of the hash-bound exported finite trace model and rational observer laws; no workflow source was executed by this verifier. This does not independently establish that the recorded execution occurred as represented.",
+  "source": {
+    "commit": "9de20be80dad6d410268ae75f75cf94c355dd364",
+    "path": "output/publication_upgrade/corpus/sources/didilili/ai-agents-from-zero/9de20be80dad6d410268ae75f75cf94c355dd364/案例与源码-3-LangGraph框架/01-helloworld/LangGraphLLM.py",
+    "repository": "didilili/ai-agents-from-zero",
+    "selected_segments": [
+      {
+        "label": "DiliState",
+        "lines": [
+          28,
+          33
+        ],
+        "sha256": "c50edafba03ce85a7c08e5120040194882e2d45b3cd62bcc6554caff14af0c3c"
+      },
+      {
+        "label": "model_node",
+        "lines": [
+          46,
+          48
+        ],
+        "sha256": "9f9ed698d539c0ed4f5a0aee65a9c35a4a111cc0dcd92f447380d97fb7c2dfbc"
+      },
+      {
+        "label": "graph_init",
+        "lines": [
+          52,
+          52
+        ],
+        "sha256": "825e59017d99144c9251f8af37310866340be38c05e29d3afd23c9f6c8ce4ff6"
+      },
+      {
+        "label": "graph_add_node",
+        "lines": [
+          53,
+          53
+        ],
+        "sha256": "3f1fcb02da526d9065017d47787d99a2fdd478eb01a74ed44d6923b4a2700483"
+      },
+      {
+        "label": "graph_start_edge",
+        "lines": [
+          54,
+          54
+        ],
+        "sha256": "a163ddcf77eb1873bd9672cb7c54298f0b06b76df8dd5bfdd863daf7c1f0839c"
+      },
+      {
+        "label": "graph_end_edge",
+        "lines": [
+          55,
+          55
+        ],
+        "sha256": "ba4983e38a1ca3133e6581f12073898ba6b27c74dbf1e6a4d3c12d4828572fe1"
+      },
+      {
+        "label": "graph_compile",
+        "lines": [
+          58,
+          58
+        ],
+        "sha256": "100fd6f9a81089a7577fc80b4414ff071c55c74ad9e6ccc78596f402cbdc8c55"
+      }
+    ],
+    "selection_sha256": "8aefb2d2683d0b8bdbe2737299a320388c43777c5b1606f91de2a99d56ad49fe",
+    "sha256": "b35741309de653d79e2cb403ebc5ddfa6b74383dd22f2e0d0142a1359225818b"
+  },
+  "verification": "PASS_CONDITIONAL_FINITE_TRACE_CERTIFICATE",
+  "verifier_sha256": "021c99b1d8d4d42e6584799a08f6a52a208368fefe4d167f2d233d6e20a327ec",
+  "worker_sha256": "97343b8fc5998deb2ca7c195d62414c4876187412532e990241d77a979a9c0b5"
+}

@@ -1,0 +1,144 @@
+{
+  "checker_sha256": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+  "format": "orchlang-cyclic-request-certificate",
+  "graph_name": "multi_result_node",
+  "max_nodes": 50000,
+  "nodes": [
+    {
+      "equal_values": [
+        [
+          "lg_input_0000",
+          "lg_input_0000"
+        ]
+      ],
+      "id": 0,
+      "left": [
+        "lg_state_0000",
+        0
+      ],
+      "right": [
+        "lg_state_0000",
+        0
+      ],
+      "rule": "matched-call",
+      "successors": [
+        1
+      ]
+    },
+    {
+      "equal_values": [
+        [
+          "lg_input_0000",
+          "lg_input_0000"
+        ],
+        [
+          "lg_slot_0000",
+          "lg_slot_0000"
+        ]
+      ],
+      "id": 1,
+      "left": [
+        "lg_state_0000",
+        1
+      ],
+      "right": [
+        "lg_state_0000",
+        1
+      ],
+      "rule": "matched-call",
+      "successors": [
+        2
+      ]
+    },
+    {
+      "equal_values": [
+        [
+          "lg_input_0000",
+          "lg_input_0000"
+        ],
+        [
+          "lg_slot_0000",
+          "lg_slot_0000"
+        ],
+        [
+          "lg_temp_0000",
+          "lg_temp_0000"
+        ]
+      ],
+      "id": 2,
+      "left": [
+        "lg_state_0000",
+        2
+      ],
+      "right": [
+        "lg_state_0000",
+        2
+      ],
+      "rule": "matched-call",
+      "successors": [
+        3
+      ]
+    },
+    {
+      "equal_values": [
+        [
+          "lg_input_0000",
+          "lg_input_0000"
+        ],
+        [
+          "lg_slot_0000",
+          "lg_slot_0000"
+        ],
+        [
+          "lg_slot_0001",
+          "lg_slot_0001"
+        ],
+        [
+          "lg_temp_0000",
+          "lg_temp_0000"
+        ]
+      ],
+      "id": 3,
+      "left": [
+        "lg_state_0000",
+        3
+      ],
+      "right": [
+        "lg_state_0000",
+        3
+      ],
+      "rule": "stop",
+      "successors": []
+    }
+  ],
+  "product_edges": 3,
+  "product_nodes": 4,
+  "reachable_source_states": [
+    "lg_state_0000"
+  ],
+  "root": 0,
+  "semantics": {
+    "claim": "equal complete request/usage traces and stop positions under the shared oracle",
+    "cycles": "every finite trace prefix; no termination or finite total-cost claim",
+    "input_accounting": "complete additive request contract in compatible token units",
+    "inputs": "all public external values agree; secret inputs may differ",
+    "oracle": "shared Omega(resolved-contract,per-contract-ordinal,template,ordered-text-values)",
+    "unsupported": [
+      "declassification",
+      "tools",
+      "request serialization",
+      "independent provider sampling",
+      "call-free cycles"
+    ]
+  },
+  "source_sha256": "7ab2e81dfd1183411ed9b809c6e612e69be83dc38cd53624bfc1c2fc98ff30c6",
+  "state_entry_bounds": {
+    "lg_state_0000": {
+      "input_tokens": 98,
+      "output_tokens": 24,
+      "total_tokens": 122
+    }
+  },
+  "status": "accepted",
+  "version": 1
+}

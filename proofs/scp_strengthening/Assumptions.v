@@ -1,0 +1,10 @@
+From PublicationUpgrade Require Import AtomicUpdates.
+From SCPStrengthening Require Import SequentialUpdates Counterexamples.
+
+Print Assumptions node_commit_refines_from.
+Print Assumptions one_node_step_refines_from.
+Print Assumptions finite_prefix_graph_refines_including_cycles.
+Print Assumptions read_after_return_write_breaks_trace_agreement.
+Print Assumptions reusing_one_return_local_loses_one_target_field.
+Print Assumptions duplicate_return_field_makes_commit_order_observable.
+Print Assumptions finite_prefix_cycle_refines.

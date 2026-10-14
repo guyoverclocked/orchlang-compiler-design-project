@@ -1,0 +1,35 @@
+{
+  "author": {
+    "date": "2026-10-13T21:57:39Z",
+    "email": "aniruddhaadak80@gmail.com",
+    "name": "ANIRUDDHA ADAK"
+  },
+  "committer": {
+    "date": "2026-10-13T21:57:39Z",
+    "email": "noreply@github.com",
+    "name": "GitHub"
+  },
+  "html_url": "https://github.com/CopilotKit/OpenTag/commit/aa3d26c723d7141815d2f76c33cbeb4b8e72039a",
+  "message": "fix(e2e): cancel a case's interrupt once it has been accounted for (#82)\n\n* fix(e2e): cancel a case's interrupt once it has been accounted for\n\nThe mid-stream interrupt was scheduled and never cancelled:\n\n  let interruptTimer: NodeJS.Timeout | undefined;\n  if (spec.interrupt && parentTs) {\n    interruptTimer = setTimeout(() => { postAsUser(...) }, spec.interrupt.afterMs);\n  }\n  ...\n  if (interruptTimer === undefined) {\n    /* no-op */\n  }\n\nThat trailing block is the tell: the handle was read only to keep the\ncompiler quiet about an unused variable, and nothing ever cleared the timer.\nafterMs is longer than a lot of replies take, so a case whose bot answers\nfirst returns with the timer still armed and the runner moves on to the next\ncase. It then fires into the finished case's thread: a message the runner\nnever sent, a bot turn nobody asked for, and an \"interrupt send failed\" line\nappended to an errors array whose CaseResult was already returned and written\nto the report.\n\nThe scheduling moves to e2e/interrupt.ts and hands back a cancel(), called as\nsoon as the interrupt phase has read its result - the point after which the\ninterrupt can no longer belong to this case. run.ts calls main() at import, so\nthis is also what makes the behaviour testable at all; the new test drives the\nfake timers directly.\n\nThe dead no-op goes with it.\n\n* fix(e2e): cancel the interrupt when a case throws\n\nThe main loop catches a case that throws and moves on to the next one,\nso a failed Slack call between scheduling and cancelling left the\ninterrupt timer armed for the rest of the run. runCase now cancels it in\na finally. scheduleInterrupt's send also takes Promise<unknown>, since\npostAsUser resolves to the Slack response.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Gk4Q5dr4ovWEnCAsKB5drw\n\n---------\n\nCo-authored-by: Aniruddha Adak <aniruddhaadak80@users.noreply.github.com>\nCo-authored-by: Maxim <maxim.zubarev@icloud.com>\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>\nCo-authored-by: Maxim <1580455+mxmzb@users.noreply.github.com>",
+  "node_id": "C_kwDOTFmBHNoAKGFhM2QyNmM3MjNkNzE0MTgxNWQyZjc2YzMzY2JlYjRiOGU3MjAzOWE",
+  "parents": [
+    {
+      "html_url": "https://github.com/CopilotKit/OpenTag/commit/c1d9e270bd347841bf91ed39266bff96cf7b1062",
+      "sha": "c1d9e270bd347841bf91ed39266bff96cf7b1062",
+      "url": "https://api.github.com/repos/CopilotKit/OpenTag/git/commits/c1d9e270bd347841bf91ed39266bff96cf7b1062"
+    }
+  ],
+  "sha": "aa3d26c723d7141815d2f76c33cbeb4b8e72039a",
+  "tree": {
+    "sha": "6ab51620fb779845b0edc2d5c205c12f55bdca6a",
+    "url": "https://api.github.com/repos/CopilotKit/OpenTag/git/trees/6ab51620fb779845b0edc2d5c205c12f55bdca6a"
+  },
+  "url": "https://api.github.com/repos/CopilotKit/OpenTag/git/commits/aa3d26c723d7141815d2f76c33cbeb4b8e72039a",
+  "verification": {
+    "payload": "tree 6ab51620fb779845b0edc2d5c205c12f55bdca6a\nparent c1d9e270bd347841bf91ed39266bff96cf7b1062\nauthor ANIRUDDHA ADAK <aniruddhaadak80@gmail.com> 1791928659 +0530\ncommitter GitHub <noreply@github.com> 1791928659 +0200\n\nfix(e2e): cancel a case's interrupt once it has been accounted for (#82)\n\n* fix(e2e): cancel a case's interrupt once it has been accounted for\n\nThe mid-stream interrupt was scheduled and never cancelled:\n\n  let interruptTimer: NodeJS.Timeout | undefined;\n  if (spec.interrupt && parentTs) {\n    interruptTimer = setTimeout(() => { postAsUser(...) }, spec.interrupt.afterMs);\n  }\n  ...\n  if (interruptTimer === undefined) {\n    /* no-op */\n  }\n\nThat trailing block is the tell: the handle was read only to keep the\ncompiler quiet about an unused variable, and nothing ever cleared the timer.\nafterMs is longer than a lot of replies take, so a case whose bot answers\nfirst returns with the timer still armed and the runner moves on to the next\ncase. It then fires into the finished case's thread: a message the runner\nnever sent, a bot turn nobody asked for, and an \"interrupt send failed\" line\nappended to an errors array whose CaseResult was already returned and written\nto the report.\n\nThe scheduling moves to e2e/interrupt.ts and hands back a cancel(), called as\nsoon as the interrupt phase has read its result - the point after which the\ninterrupt can no longer belong to this case. run.ts calls main() at import, so\nthis is also what makes the behaviour testable at all; the new test drives the\nfake timers directly.\n\nThe dead no-op goes with it.\n\n* fix(e2e): cancel the interrupt when a case throws\n\nThe main loop catches a case that throws and moves on to the next one,\nso a failed Slack call between scheduling and cancelling left the\ninterrupt timer armed for the rest of the run. runCase now cancels it in\na finally. scheduleInterrupt's send also takes Promise<unknown>, since\npostAsUser resolves to the Slack response.\n\nCo-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>\nClaude-Session: https://claude.ai/code/session_01Gk4Q5dr4ovWEnCAsKB5drw\n\n---------\n\nCo-authored-by: Aniruddha Adak <aniruddhaadak80@users.noreply.github.com>\nCo-authored-by: Maxim <maxim.zubarev@icloud.com>\nCo-authored-by: Claude Opus 5.5 <noreply@anthropic.com>\nCo-authored-by: Maxim <1580455+mxmzb@users.noreply.github.com>",
+    "reason": "valid",
+    "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqzqlTCRC1aQ7uu5UhlAAAIRoQAHvvj1DcApqUk+F6Ywpu1pX9\nT5TfwS3xfGnivaZdYPAe4PWJdCGZhQNt6TROkZDT8VgO+2ap3cpNz1ci9pyBdM45\n0ifNIo3u4c7KKYTKgxoi6Y5cAJrq7c3Rh+Tfcn5j9vn/88/sR3/5KS6HUwx2kfMT\n6m9ai0C9KzFY4R4XD4u2OMxAynQIWMBPCHhmukQJIyRpLURJQNYYTC2elW8sbRNE\n5vGeV5P1UH+uJBgxO7tcI+sffQrI2ShgMyMXRzBT+kePhU5T1MWSEcMijM86qMS5\n+ws/0yiHqh6uRwpHfh/N/KpLDsqKUR4KocSepzMpxpyUiE8SR9GrkNmsBLgzjF3i\nsA8JNJ4/IWJK10upt0waqPYW+urFbgQ5pu6jwBSJhF3vFclC4iHU0AL33XC/rBvg\nsWnz9DX/B9RmnaDrp7+cDm7qyeZ0HYTV6wJkw6K8T8IqGz/FV/oWh2C2ygEhXntR\nw1upAQ/VEk2T9KUyW3xsms2ljv7QY638FQ24202VER6TylTtqVcG1p/s2ghMVx8J\n8Erc79HTi59GW0nwXHHjgdE3xempUIjGQ3Rk7/uQrDQ4R6rIZSWMuY1QsgMIlJP1\nAtl6bssF74WD6XJql3jxRh/Xc4kUfzS1vXnQo21/3VxkoIvrH9TWNEEgzXvGYhbH\nM+cRhrY/IXTzhuoMcYag\n=8jbc\n-----END PGP SIGNATURE-----\n",
+    "verified": true,
+    "verified_at": "2026-10-13T21:57:39Z"
+  }
+}

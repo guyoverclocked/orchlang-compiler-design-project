@@ -1,0 +1,972 @@
+{
+  "analysis_stats": {
+    "byte_work_estimate": 41266,
+    "call_outcome_transitions_before_merge": 16,
+    "expanded_states": 18,
+    "max_state_key_bytes": 16777216,
+    "max_states": 10000,
+    "max_work_bytes": 67108864,
+    "rational_precision_limit_bits": 8192
+  },
+  "claim": "equal ordered success-only usage-trace laws at every finite call horizon",
+  "closed_system": {
+    "initial_state_ids": [
+      "S000000",
+      "S000001"
+    ],
+    "state_count": 18,
+    "states": [
+      {
+        "block": "B000000",
+        "history": [],
+        "id": "S000000",
+        "kind": "call",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 0
+          }
+        ],
+        "pc": [
+          "work",
+          0
+        ],
+        "values": {
+          "secret": false
+        }
+      },
+      {
+        "block": "B000000",
+        "history": [],
+        "id": "S000001",
+        "kind": "call",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 0
+          }
+        ],
+        "pc": [
+          "work",
+          0
+        ],
+        "values": {
+          "secret": true
+        }
+      },
+      {
+        "block": "B000001",
+        "history": [],
+        "id": "S000002",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "work",
+          1
+        ],
+        "values": {
+          "r": "a",
+          "secret": false
+        }
+      },
+      {
+        "block": "B000001",
+        "history": [],
+        "id": "S000003",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "work",
+          1
+        ],
+        "values": {
+          "r": "a",
+          "secret": true
+        }
+      },
+      {
+        "block": "B000001",
+        "history": [],
+        "id": "S000004",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "work",
+          1
+        ],
+        "values": {
+          "r": "b",
+          "secret": false
+        }
+      },
+      {
+        "block": "B000001",
+        "history": [],
+        "id": "S000005",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "work",
+          1
+        ],
+        "values": {
+          "r": "b",
+          "secret": true
+        }
+      },
+      {
+        "block": "B000001",
+        "history": [],
+        "id": "S000006",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "work",
+          1
+        ],
+        "values": {
+          "r": "c",
+          "secret": false
+        }
+      },
+      {
+        "block": "B000001",
+        "history": [],
+        "id": "S000007",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "work",
+          1
+        ],
+        "values": {
+          "r": "c",
+          "secret": true
+        }
+      },
+      {
+        "block": "B000001",
+        "history": [],
+        "id": "S000008",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "work",
+          1
+        ],
+        "values": {
+          "r": "d",
+          "secret": false
+        }
+      },
+      {
+        "block": "B000001",
+        "history": [],
+        "id": "S000009",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "work",
+          1
+        ],
+        "values": {
+          "r": "d",
+          "secret": true
+        }
+      },
+      {
+        "block": "B000001",
+        "history": [],
+        "id": "S000010",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "work",
+          1
+        ],
+        "values": {
+          "r": "e",
+          "secret": false
+        }
+      },
+      {
+        "block": "B000001",
+        "history": [],
+        "id": "S000011",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "work",
+          1
+        ],
+        "values": {
+          "r": "e",
+          "secret": true
+        }
+      },
+      {
+        "block": "B000001",
+        "history": [],
+        "id": "S000012",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "work",
+          1
+        ],
+        "values": {
+          "r": "f",
+          "secret": false
+        }
+      },
+      {
+        "block": "B000001",
+        "history": [],
+        "id": "S000013",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "work",
+          1
+        ],
+        "values": {
+          "r": "f",
+          "secret": true
+        }
+      },
+      {
+        "block": "B000001",
+        "history": [],
+        "id": "S000014",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "work",
+          1
+        ],
+        "values": {
+          "r": "g",
+          "secret": false
+        }
+      },
+      {
+        "block": "B000001",
+        "history": [],
+        "id": "S000015",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "work",
+          1
+        ],
+        "values": {
+          "r": "g",
+          "secret": true
+        }
+      },
+      {
+        "block": "B000001",
+        "history": [],
+        "id": "S000016",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "work",
+          1
+        ],
+        "values": {
+          "r": "h",
+          "secret": false
+        }
+      },
+      {
+        "block": "B000001",
+        "history": [],
+        "id": "S000017",
+        "kind": "stop",
+        "ordinals": [
+          {
+            "contract": {
+              "has_unit_price": false,
+              "max_tokens": 8,
+              "model": "finite-worker",
+              "provider": "offline",
+              "unit_price": 0.0
+            },
+            "count": 1
+          }
+        ],
+        "pc": [
+          "work",
+          1
+        ],
+        "values": {
+          "r": "h",
+          "secret": true
+        }
+      }
+    ],
+    "transition_count": 16,
+    "transitions": [
+      {
+        "from": "S000000",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 1
+        },
+        "probability": "1/8",
+        "to": "S000002"
+      },
+      {
+        "from": "S000000",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 2
+        },
+        "probability": "1/8",
+        "to": "S000004"
+      },
+      {
+        "from": "S000000",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 3
+        },
+        "probability": "1/8",
+        "to": "S000006"
+      },
+      {
+        "from": "S000000",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 4
+        },
+        "probability": "1/8",
+        "to": "S000008"
+      },
+      {
+        "from": "S000000",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 5
+        },
+        "probability": "1/8",
+        "to": "S000010"
+      },
+      {
+        "from": "S000000",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 6
+        },
+        "probability": "1/8",
+        "to": "S000012"
+      },
+      {
+        "from": "S000000",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 7
+        },
+        "probability": "1/8",
+        "to": "S000014"
+      },
+      {
+        "from": "S000000",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 8
+        },
+        "probability": "1/8",
+        "to": "S000016"
+      },
+      {
+        "from": "S000001",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 1
+        },
+        "probability": "1/8",
+        "to": "S000003"
+      },
+      {
+        "from": "S000001",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 2
+        },
+        "probability": "1/8",
+        "to": "S000005"
+      },
+      {
+        "from": "S000001",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 3
+        },
+        "probability": "1/8",
+        "to": "S000007"
+      },
+      {
+        "from": "S000001",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 4
+        },
+        "probability": "1/8",
+        "to": "S000009"
+      },
+      {
+        "from": "S000001",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 5
+        },
+        "probability": "1/8",
+        "to": "S000011"
+      },
+      {
+        "from": "S000001",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 6
+        },
+        "probability": "1/8",
+        "to": "S000013"
+      },
+      {
+        "from": "S000001",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 7
+        },
+        "probability": "1/8",
+        "to": "S000015"
+      },
+      {
+        "from": "S000001",
+        "label": {
+          "contract": {
+            "has_unit_price": false,
+            "max_tokens": 8,
+            "model": "finite-worker",
+            "provider": "offline",
+            "unit_price": 0.0
+          },
+          "input_tokens": 1,
+          "kind": "call",
+          "output_tokens": 8
+        },
+        "probability": "1/8",
+        "to": "S000017"
+      }
+    ]
+  },
+  "format": "orchlang-stochastic-bisimulation-certificate",
+  "hashes": {
+    "checker_sha256": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+    "graph_sha256": "968d78ebb1e62db243add379bc5dcc195e142b6972156a5722b30c8ab1b78762",
+    "kernel_sha256": "3989b62fe8c33225dd36663a01627f261380b9d99903664b087ad14ae065c6df",
+    "public_store_sha256": "44136fa355b3678a1146ad16f7e8649e94fb4fc21fe77e8310c060f61caaff8a",
+    "secret_scenarios_sha256": "c746a0cd8c632a82c9994be1df942b4258d3968e3d63189dd6b0f9cfe75945a0"
+  },
+  "inputs": {
+    "public_store": {},
+    "secret_scenarios": [
+      {
+        "secret": false
+      },
+      {
+        "secret": true
+      }
+    ]
+  },
+  "partition_certificate": {
+    "all_initial_scenarios_equivalent": true,
+    "block_count": 2,
+    "blocks": [
+      {
+        "id": "B000000",
+        "kind": "call",
+        "signature": [
+          {
+            "label": {
+              "contract": {
+                "has_unit_price": false,
+                "max_tokens": 8,
+                "model": "finite-worker",
+                "provider": "offline",
+                "unit_price": 0.0
+              },
+              "input_tokens": 1,
+              "kind": "call",
+              "output_tokens": 1
+            },
+            "probability": "1/8",
+            "target_block": "B000001"
+          },
+          {
+            "label": {
+              "contract": {
+                "has_unit_price": false,
+                "max_tokens": 8,
+                "model": "finite-worker",
+                "provider": "offline",
+                "unit_price": 0.0
+              },
+              "input_tokens": 1,
+              "kind": "call",
+              "output_tokens": 2
+            },
+            "probability": "1/8",
+            "target_block": "B000001"
+          },
+          {
+            "label": {
+              "contract": {
+                "has_unit_price": false,
+                "max_tokens": 8,
+                "model": "finite-worker",
+                "provider": "offline",
+                "unit_price": 0.0
+              },
+              "input_tokens": 1,
+              "kind": "call",
+              "output_tokens": 3
+            },
+            "probability": "1/8",
+            "target_block": "B000001"
+          },
+          {
+            "label": {
+              "contract": {
+                "has_unit_price": false,
+                "max_tokens": 8,
+                "model": "finite-worker",
+                "provider": "offline",
+                "unit_price": 0.0
+              },
+              "input_tokens": 1,
+              "kind": "call",
+              "output_tokens": 4
+            },
+            "probability": "1/8",
+            "target_block": "B000001"
+          },
+          {
+            "label": {
+              "contract": {
+                "has_unit_price": false,
+                "max_tokens": 8,
+                "model": "finite-worker",
+                "provider": "offline",
+                "unit_price": 0.0
+              },
+              "input_tokens": 1,
+              "kind": "call",
+              "output_tokens": 5
+            },
+            "probability": "1/8",
+            "target_block": "B000001"
+          },
+          {
+            "label": {
+              "contract": {
+                "has_unit_price": false,
+                "max_tokens": 8,
+                "model": "finite-worker",
+                "provider": "offline",
+                "unit_price": 0.0
+              },
+              "input_tokens": 1,
+              "kind": "call",
+              "output_tokens": 6
+            },
+            "probability": "1/8",
+            "target_block": "B000001"
+          },
+          {
+            "label": {
+              "contract": {
+                "has_unit_price": false,
+                "max_tokens": 8,
+                "model": "finite-worker",
+                "provider": "offline",
+                "unit_price": 0.0
+              },
+              "input_tokens": 1,
+              "kind": "call",
+              "output_tokens": 7
+            },
+            "probability": "1/8",
+            "target_block": "B000001"
+          },
+          {
+            "label": {
+              "contract": {
+                "has_unit_price": false,
+                "max_tokens": 8,
+                "model": "finite-worker",
+                "provider": "offline",
+                "unit_price": 0.0
+              },
+              "input_tokens": 1,
+              "kind": "call",
+              "output_tokens": 8
+            },
+            "probability": "1/8",
+            "target_block": "B000001"
+          }
+        ],
+        "states": [
+          "S000000",
+          "S000001"
+        ]
+      },
+      {
+        "id": "B000001",
+        "kind": "stop",
+        "signature": [],
+        "states": [
+          "S000002",
+          "S000003",
+          "S000004",
+          "S000005",
+          "S000006",
+          "S000007",
+          "S000008",
+          "S000009",
+          "S000010",
+          "S000011",
+          "S000012",
+          "S000013",
+          "S000014",
+          "S000015",
+          "S000016",
+          "S000017"
+        ]
+      }
+    ],
+    "initial_scenario_blocks": [
+      "B000000",
+      "B000000"
+    ],
+    "refinement_rounds": 1,
+    "stable": true
+  },
+  "scope": {
+    "excluded": [
+      "provider probability validity or provider behavior",
+      "errors, retries, currency, cumulative cost or cumulative trace/work budgets",
+      "termination probability or infinite-run trace law"
+    ],
+    "history_ordinal_saturation": 33,
+    "history_window": 0,
+    "interpretation": "same final block is sufficient for every finite-horizon trace-law equality; different blocks are inconclusive, not a trace-law counterexample",
+    "kernel_rule_precedence": "first matching rule in supplied order, otherwise resolved-contract default",
+    "observer": "ordered call labels contain normalized resolved contract, integer input usage, and integer output usage; stop is a terminal state class",
+    "oracle": "declared finite rational conditional kernel; exact request, saturated contract ordinal, and retained complete-event history determine its distribution",
+    "ordinal_saturation": 33,
+    "saturation_justification": "kernel ordinal and complete-history event ordinal literals are at most 32; all values >=33 match the same rules",
+    "semantics": "successful model outcomes only; each response updates its result register and complete event history"
+  },
+  "status": "proved_equal",
+  "version": 1
+}

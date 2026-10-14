@@ -86,17 +86,21 @@ class ExecutionResult:
     langgraph_recursion_limit: int
     truncated_at_calls: int | None = None
     failure: Mapping[str, Any] | None = None
+    # Eager registers may contain a partial node update at a call/resource cap.
+    # Publish a completed value store only after a normal graph stop.
+    final_values: Mapping[str, Any] | None = None
 
     def to_dict(self) -> dict[str, Any]:
         result: dict[str, Any] = {
             "format": "orchlang-langgraph-execution",
-            "version": 1,
+            "version": 2,
             "status": self.status,
             "trace": self.trace,
             "stopped": self.stopped,
             "control_steps": self.control_steps,
             "call_count": self.call_count,
             "trace_bytes": self.trace_bytes,
+            "final_values": dict(self.final_values) if self.final_values is not None else None,
             "graph_sha256": self.graph_sha256,
             "certificate_sha256": self.certificate_sha256,
             "replay_attestation": dict(self.replay_attestation),
@@ -661,6 +665,7 @@ def execute_verified(verified: VerifiedGraph, store: Mapping[str, Any], seed: in
         langgraph_recursion_limit=recursion_limit,
         truncated_at_calls=runtime.truncated_at_calls,
         failure=runtime.failure,
+        final_values=dict(runtime.values) if runtime.status == "stopped" and runtime.stopped else None,
     )
 
 

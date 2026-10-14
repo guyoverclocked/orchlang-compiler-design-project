@@ -1,0 +1,57 @@
+{
+  "artifacts": [
+    {
+      "capsule_id": "didilili-langgraphllm-one-node-finite-oracle-v1",
+      "capsule_result_artifact_path": "research/scp_strengthening/workflow_capsules/didilili-langgraphllm-one-node-finite-oracle-v1.json",
+      "capsule_result_artifact_sha256": "1f8d8eca8860350d0d9d8422005c62dc222b5c79910d1c1a3d59fc61860e45dd",
+      "envelope_profile_id": "envelope_messages",
+      "envelope_profile_sha256": "56688d7c4940555207d00d3d369d4944d56c0ce7cdf146323aeb116857087d46",
+      "immutable_source_identity": {
+        "commit": "9de20be80dad6d410268ae75f75cf94c355dd364",
+        "path": "output/publication_upgrade/corpus/sources/didilili/ai-agents-from-zero/9de20be80dad6d410268ae75f75cf94c355dd364/案例与源码-3-LangGraph框架/01-helloworld/LangGraphLLM.py",
+        "repository": "didilili/ai-agents-from-zero",
+        "selection_sha256": "8aefb2d2683d0b8bdbe2737299a320388c43777c5b1606f91de2a99d56ad49fe",
+        "sha256": "b35741309de653d79e2cb403ebc5ddfa6b74383dd22f2e0d0142a1359225818b"
+      },
+      "source_event_pointer": "result.exact_laws.complete_trace_law[0].representative.request_and_response_events[0].envelope"
+    },
+    {
+      "capsule_id": "joshuac215-kb-agent-sequential-async-finite-oracle-v1",
+      "capsule_result_artifact_path": "research/scp_strengthening/workflow_capsules/joshuac215-kb-agent-sequential-async-finite-oracle-v1.json",
+      "capsule_result_artifact_sha256": "3b56bda34f906f4f44cf053316ee8b008119a55bcabb977f3b0b1095989342f1",
+      "envelope_profile_id": "envelope_text",
+      "envelope_profile_sha256": "0a39bdac5fca57a293e3e0dacac8f78b37c320366439d075078847141c3f2508",
+      "immutable_source_identity": {
+        "commit": "88ebfa1fadd1a207aa92115635abf7ed20d66a88",
+        "path": "output/publication_upgrade/corpus/sources/JoshuaC215/agent-service-toolkit/88ebfa1fadd1a207aa92115635abf7ed20d66a88/src/agents/knowledge_base_agent.py",
+        "repository": "JoshuaC215/agent-service-toolkit",
+        "selection_sha256": "09f6a590b4c0e41f113119cc74b77101dc8145bf43805b10c105d1cf4537adfe",
+        "sha256": "6a96b47a58e855444fa410bef6e077220f578f188476a605aabeb88d88bf0ccc"
+      },
+      "source_event_pointer": "result.worlds[0].trace_projection.ordered_events[3].envelope"
+    }
+  ],
+  "binding_sha256": "a1fa43073b7413d125729ecc49856bfc6cebc34baa7edf8110020941670cfaef",
+  "binding_status": "final_capsule_artifacts_declared_final_and_bound",
+  "bound_at_utc": "2026-10-14T16:53:01+00:00",
+  "frozen_readiness_manifest_sha256": "9c8e2b720c5764b38b47c03cc3e824de131ebaf9abdff445370bb2a0727d2c42",
+  "historical_artifact_drift_guard_finding": {
+    "finding": "The capsule result JSON digests recorded during initial calibration differed on a later validation while capsule tooling was still being edited. Treat this as expected development-artifact drift, not a change to the immutable original-source identities above. Final result-artifact hashes will be attached only after the capsule agent declares its artifacts final.",
+    "historical_observations": [
+      {
+        "capsule_id": "didilili-langgraphllm-one-node-finite-oracle-v1",
+        "initial_sha256": "f627c54c193a3698231a1f95e0ae2d1b98165b27f269a8a44311acb0c39a6427",
+        "later_observed_sha256": "78ffcea04b8b476c9370f66f1d094124e5a69b4bdedb50d44a00339512ad77f8"
+      },
+      {
+        "capsule_id": "joshuac215-kb-agent-sequential-async-finite-oracle-v1",
+        "initial_sha256": "de6018e7fd8cf1a7b9064c70320d1fc3e132f5c4cfeb4d5f7b95c9d2043f3881",
+        "later_observed_sha256": "5a249028d1b79fe979952b1007d8da44f449ffd1f52faf0136c7e90202d96559"
+      }
+    ],
+    "status": "development_result_artifact_drift_observed; final_binding_pending"
+  },
+  "schema_version": 1,
+  "scope": "Binds frozen envelope profiles to finalized offline capsule result artifacts and their immutable source identities. Does not claim original provider/SDK/model-path fidelity or any live API outcome.",
+  "supersedes_pending_capsule_result_marker": true
+}

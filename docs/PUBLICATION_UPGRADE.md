@@ -1,5 +1,9 @@
 # Publication upgrade: scope and reproduction
 
+Historical rc2 record. For the current rc3 candidate and its new reproduction
+command, use [SCP strengthening](SCP_STRENGTHENING.md). Reproduce/package this
+older release only from its declared historical source revision.
+
 This is the 0.5.0rc2 research-software candidate, prepared for Science of
 Computer Programming's Original Software Publication track. The new paper is
 `submission/research/manuscript/OrchLang_SCP_Publication_Upgrade.tex`; earlier

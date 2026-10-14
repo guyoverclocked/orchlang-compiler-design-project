@@ -9,6 +9,7 @@ contacted.
 """
 from __future__ import annotations
 
+import argparse
 import hashlib
 import json
 import os
@@ -23,7 +24,7 @@ import venv
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "output/release"
-VERSION = "0.5.0rc2"
+VERSION = "0.5.0rc3"
 MODULES = {
     "orchgraph": "audit/orchgraph.py",
     "replay_graph_certificate": "audit/replay_graph_certificate.py",
@@ -98,6 +99,12 @@ def _json_output(result: subprocess.CompletedProcess[str], label: str) -> dict:
 
 
 def main() -> int:
+    global OUT
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--output-dir", type=Path, default=OUT,
+                        help="destination for wheel and smoke evidence")
+    args = parser.parse_args()
+    OUT = args.output_dir.resolve()
     OUT.mkdir(parents=True, exist_ok=True)
     wheel_dir = OUT / "wheels"
     wheel_dir.mkdir(parents=True, exist_ok=True)

@@ -1,0 +1,35 @@
+{
+  "author": {
+    "date": "2026-10-06T15:21:42Z",
+    "email": "111304236+DEENUU1@users.noreply.github.com",
+    "name": "Kacper W\u0142odarczyk"
+  },
+  "committer": {
+    "date": "2026-10-06T15:21:42Z",
+    "email": "noreply@github.com",
+    "name": "GitHub"
+  },
+  "html_url": "https://github.com/vstorm-co/full-stack-ai-agent-template/commit/475f799f7df02738f804fa350f2de244d7331a94",
+  "message": "chore(release): 0.2.21 (#188)\n\nCuts **0.2.21**. Release-only changes: the `pyproject.toml` version,\n`uv.lock`, `CHANGELOG.md` (`[Unreleased]` \u2192 `[0.2.21] - 2026-10-06`) and\nan `UPGRADES.yaml` block.\n\n| PR | Change |\n|---|---|\n| #185 | **`alembic upgrade head` works again in projects without\n`--mcp-client`** (broken since 0.2.19). `test_migrations.py` no longer\nskips on a broken chain, and a matrix check guards the chain. Migrations\nand tests also work without an AI framework |\n| #184 | A conversation resumed on a new connection keeps its context\n(Pydantic AI, PydanticDeep) |\n| #186 | Bulk deletion of non-admin users forgets their agent memory |\n| #187 | Deep research sends withheld text if a run ends on that step\n(guard for #176) |\n\n`UPGRADES.yaml` (0.2.21) has one manual step: run `alembic upgrade\nhead`. Projects without the MCP client were stuck at 0025.",
+  "node_id": "C_kwDOQrqy1toAKDQ3NWY3OTlmN2RmMDI3MzhmODA0ZmEzNTBmMmRlMjQ0ZDczMzFhOTQ",
+  "parents": [
+    {
+      "html_url": "https://github.com/vstorm-co/full-stack-ai-agent-template/commit/d95502d6e11ed2c21cdbeaad54d7906a9155d737",
+      "sha": "d95502d6e11ed2c21cdbeaad54d7906a9155d737",
+      "url": "https://api.github.com/repos/vstorm-co/full-stack-ai-agent-template/git/commits/d95502d6e11ed2c21cdbeaad54d7906a9155d737"
+    }
+  ],
+  "sha": "475f799f7df02738f804fa350f2de244d7331a94",
+  "tree": {
+    "sha": "ec381a8fa64b6459944bd2786c8a236a024c55b8",
+    "url": "https://api.github.com/repos/vstorm-co/full-stack-ai-agent-template/git/trees/ec381a8fa64b6459944bd2786c8a236a024c55b8"
+  },
+  "url": "https://api.github.com/repos/vstorm-co/full-stack-ai-agent-template/git/commits/475f799f7df02738f804fa350f2de244d7331a94",
+  "verification": {
+    "payload": "tree ec381a8fa64b6459944bd2786c8a236a024c55b8\nparent d95502d6e11ed2c21cdbeaad54d7906a9155d737\nauthor Kacper W\u0142odarczyk <111304236+DEENUU1@users.noreply.github.com> 1791300102 +0200\ncommitter GitHub <noreply@github.com> 1791300102 +0200\n\nchore(release): 0.2.21 (#188)\n\nCuts **0.2.21**. Release-only changes: the `pyproject.toml` version,\n`uv.lock`, `CHANGELOG.md` (`[Unreleased]` \u2192 `[0.2.21] - 2026-10-06`) and\nan `UPGRADES.yaml` block.\n\n| PR | Change |\n|---|---|\n| #185 | **`alembic upgrade head` works again in projects without\n`--mcp-client`** (broken since 0.2.19). `test_migrations.py` no longer\nskips on a broken chain, and a matrix check guards the chain. Migrations\nand tests also work without an AI framework |\n| #184 | A conversation resumed on a new connection keeps its context\n(Pydantic AI, PydanticDeep) |\n| #186 | Bulk deletion of non-admin users forgets their agent memory |\n| #187 | Deep research sends withheld text if a run ends on that step\n(guard for #176) |\n\n`UPGRADES.yaml` (0.2.21) has one manual step: run `alembic upgrade\nhead`. Projects without the MCP client were stuck at 0025.",
+    "reason": "valid",
+    "signature": "-----BEGIN PGP SIGNATURE-----\n\nwsFcBAABCAAQBQJqxRIGCRC1aQ7uu5UhlAAAmBYQAAsnRJo9B+EIJeOx74xvAcc6\nrwABoHgztZ9zmg06IlcVLJwXLc5lRARyzg3MFG6KytAGUbSKCjqbmtAG/dJIcxXN\nkkRiIsPL0FU0J1QpxSw5sFt1i3GwY2CQRt2kpb9w3TT/ed7ekwbkE/8qGBTDaWBR\n8NMkKL4Td6vkC60oq3qWgs5ghkd9NwGzUc5v9YG4zqskqsjR+FqBYk64PuDj9DOA\nsqX+Talv54obsgzdPtuF+I3wWjc/+hKTZANuQMvb6nfUGx/JJw4YrT7zDaaO1Bjw\nGHYTFixtU7oQJshMP7/BmriCpHf4KgCJawaK3w/2b+Dy6mB67BV1qAWLB8efVsOr\n3Lj30r2Zf1zuIDFPudRLqW/nKRoLGuKvrmlhu7ky3jcO798FptyXvhGys7bJQmnQ\nYk4RgCs7bbP1L7rZySPZQd/B0lWV67tty/2ZHYz4DRse0DveVNhoaZEkwCnNadzZ\nzjIcMV1CVXwegaS2M8+MbI9sG4ucDiCi+tbEY55rPm6Z0oeX6Za3T5fS4cz9Fr51\njmI7TtPjzUJxvmqvyflKA0ZAT1bh0qcsVnjjRk1VVr7U70G7ssksE9VUrE0hFRNY\n9mqpFMd74eI+mlY5/cGauHCt38eQABqdMMKgguiT7aQqHSSk1KIwswWatwrgo+nr\nHBkV5/HG7n/gQ2t0vffK\n=sIbn\n-----END PGP SIGNATURE-----\n",
+    "verified": true,
+    "verified_at": "2026-10-06T15:21:42Z"
+  }
+}

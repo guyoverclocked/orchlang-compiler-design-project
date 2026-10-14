@@ -1,0 +1,1536 @@
+{
+  "admission_evaluation_performed": false,
+  "candidate_count": 9,
+  "extractor_sha256_at_source_freeze": "aa3c1cef891a40480b44dd438f137a5c5f91cc6b9285c38e3cc8bd5eed65f7d9",
+  "frozen_at_utc": "2026-10-14T16:14:32.424730+00:00",
+  "identities_sha256": "6ca6472d1ce4d1f7354a6bf264043cea70bd8ba65b0a323e0c8a983ca2d632e6",
+  "protocol_sha256": "b9f99cafa59659a1e81153fd7b8339975a5ab2f16772162cf76fd64a568c571a",
+  "python_path_count": 1580,
+  "repositories": [
+    {
+      "archive_bytes": 44260888,
+      "archive_sha256": "5a07f84925a1e4517e6de6d6b72452cd7b73decfd81fad3873095fe7ccb574c3",
+      "archive_url": "https://codeload.github.com/doobidoo/mcp-memory-service/zip/47a8eff72c47092964734f094fca6a6ed841bbfd",
+      "candidates": [],
+      "commit": "47a8eff72c47092964734f094fca6a6ed841bbfd",
+      "license_spdx": "Apache-2.0",
+      "oversize_files": [],
+      "parse_errors": [
+        {
+          "error": "IndentationError: expected an indented block after function definition on line 62 (<unknown>, line 63)",
+          "path": "scripts/maintenance/repair_memories.py",
+          "sha256": "3e57fbec29d4052f707195f38692fbe791b9b2526715eba8b5ac3401d5cfab59"
+        }
+      ],
+      "python_path_count": 403,
+      "repository": "doobidoo/mcp-memory-service",
+      "retained_license_paths": [
+        {
+          "path": "LICENSE",
+          "sha256": "d92a71f96ad18b7e6c112e71f7586b24063d3ab60dc423680eda014043af8858"
+        }
+      ],
+      "status": "frozen"
+    },
+    {
+      "archive_bytes": 105506369,
+      "archive_sha256": "14a79e22444e4bb8bf7a2c872e9af2d8a9ae036137bfecd9f9b49ff6463c8981",
+      "archive_url": "https://codeload.github.com/vstorm-co/full-stack-ai-agent-template/zip/475f799f7df02738f804fa350f2de244d7331a94",
+      "candidates": [],
+      "commit": "475f799f7df02738f804fa350f2de244d7331a94",
+      "license_spdx": "MIT",
+      "oversize_files": [],
+      "parse_errors": [
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 9)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/env.py",
+          "sha256": "663ed281dd3d366bd1bd70cae32a8a7f7d5c7e58389feb941994592fb9574b79"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 42)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0000_create_users.py",
+          "sha256": "9db72d020b59870e2b5f62f19417325cbdfdf1a60523ef1116910e92f55bf3c3"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0001_create_organization_tables.py",
+          "sha256": "32c5d9d439b25a61f92f937513aad2a0acc8a4467ebdcf53e91a3033ee9bce40"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0002_backfill_personal_orgs.py",
+          "sha256": "062f12daf70d5e6633af8bd1626f280ebc753cfd8774cf05663941f36d7c83f9"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0003_add_is_app_admin.py",
+          "sha256": "5d5bcbba48612b1b39e9aceb155ed258e90023163f888e50f7cc52c0f7b3c3cc"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 100)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0004_5_create_core_tables.py",
+          "sha256": "b9849a974108f0f4a553e466484d1f29050987d88278d85b777c32b122b0236c"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0004_create_audit_log.py",
+          "sha256": "0888f78433930f700543c44c5f413f9ea4fd342aebe9f3e4374b50d0016aaec3"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0005_add_org_id_to_conversations_and_rag.py",
+          "sha256": "dbdef74932cb0a817de23b82647502c1eae1d83dfc8266d9bbbd11a8bbc7247a"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0006_backfill_org_id_on_conversations.py",
+          "sha256": "fcf39d1c7ba611fcca18b056d2e66fb793d7dca8c823cbcb5effe20c3e84157a"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0007_create_knowledge_bases.py",
+          "sha256": "d4f4d1e517fb3825915e406999aae6009316aad1d08e3060bead11763408ef69"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0008_backfill_default_kbs.py",
+          "sha256": "b007fee0ee7a50df11563c276f819c18bc1007a14adda80edc2a60ce428ff351"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0009_conv_active_kb_ids.py",
+          "sha256": "ebca891d617800667f5dd37637952e7fa02ebd7555ff02e5ea5baa50782d523e"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0010_org_billing_seats.py",
+          "sha256": "2a064d341510205742cb2f7c44f76dcdda5e0f3bcd18df8ded3aad248b854d63"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0011_create_plan_price_tables.py",
+          "sha256": "df4947b1ff26fff7ad149e2a738663e8849c84b294575b233d86951238807a0c"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0012_create_subscription_table.py",
+          "sha256": "dc4a2d6dc12392df6ecab2c9c7ae6579cd6aa49024d1736189ac6b2bc658d490"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0013_create_stripe_event_table.py",
+          "sha256": "b5d11e80df98b402f2497d0fee626bd11d8e86dc4e43be7aace6c74f0c4fbfe8"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0014_credits_usage_events.py",
+          "sha256": "71867a9af532863fe2118f4c9c106d309ba6aa3f9762ff25410131fb00b96247"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0015_create_mv_usage_daily.py",
+          "sha256": "ba4a7066b92bfbe057cbb7a92fef12bd47d78a06297f5b014ea3cfe9c228936f"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0019_user_external_id.py",
+          "sha256": "fdce248d9dae353446a1c45d0e0531d4fb19431217364fa5e1377eb7db6d4789"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0020_conversation_external_user_id.py",
+          "sha256": "3974dd05297267491cc6a459fe8cf761fb549387ee58cbd3a4254b2cb6e68402"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0021_create_items.py",
+          "sha256": "96843abf2a47248d1200dee8e7f88635c107ec66ba6f84f05e09f0465da795fb"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 16)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0022_sync_source_org_scope.py",
+          "sha256": "a7a16d34c7ea55066d1bba25943ae5ec26933ae855c31aaa49acef82555b4575"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0024_create_webhook_tables.py",
+          "sha256": "1c4c672214002573427b5bf185a808854af405e041bf631305a750118e06b58f"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0026_create_mcp_connections.py",
+          "sha256": "0036de741a6199f16746267b7ecb0c8c3d9f81fab3e982147fb1760e0b8a9baf"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/alembic/versions/0027_user_magic_link_epoch.py",
+          "sha256": "3349a8ea83386f4280240f44fdda3aef43453adc47d3927ce3359a5a9d85e028"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/admin.py",
+          "sha256": "8caea2212e0e96c481203db164e616642127769480871c1c95cfe571e64a2142"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/agents/__init__.py",
+          "sha256": "0cffc7ae3ab45a5cae5a1ae4a652ca992de956ca0666015081784072c8ea0654"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/agents/assistant.py",
+          "sha256": "fe81d8333390e1064a082004372d6ea7ab6c8044207bd0bc85d8fe95b1ec4089"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/agents/deepagents_assistant.py",
+          "sha256": "bf38874f8ec498b59287b4495820141c6bb9a2bc66d4fac83702c473b38924df"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/agents/langchain_assistant.py",
+          "sha256": "b17f5d6f3c11f97f8742f3d62e012e9dbcc4bfe0dc269ec36fa56c098c1fd1e6"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/agents/langgraph_assistant.py",
+          "sha256": "b920e71daed5bdb3f043f72caa332999396ffd14f29b81a41d46ac6d69507695"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 61)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/agents/memory.py",
+          "sha256": "714be1f5afdb22432b45fd393f1882d46e9057def66ede9a253fbabf6870a1a4"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/agents/openai_compatible.py",
+          "sha256": "4d8d19593ea0ae1962ef869a0abdf1003542c028794b384501d4b6b58794e1ba"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 127)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/agents/prompts.py",
+          "sha256": "8dce151ee54b762fb97f4a22655a89fbcaa402d54a6cef13110b8cbf57389cbd"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/agents/pydantic_deep_assistant.py",
+          "sha256": "1004f9215202aa3dc5e18cb4897164f68a825ea41f347f601ba85013d3a88edf"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 7)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/agents/tools/__init__.py",
+          "sha256": "06e0e4bce0404a115cd5d024e9cfc993f316028cd6fd603448938c6c535bbbd2"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/agents/tools/chart_tool.py",
+          "sha256": "40952ad3fa64ff75a8e01eeafb161ce03df8b695c4ecf509e5b478eb169780c3"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/agents/tools/code_execution.py",
+          "sha256": "e5ee3dc0e26c3ea7ee0298350e9bb14a6c22472c8a7b1e3e4c7bdda47c20042c"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/agents/tools/fetch_url.py",
+          "sha256": "dc46befc5f2ee5e0b49fba27f2d0e74754b6663e889328af78a59a31e3149a05"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/agents/tools/rag_tool.py",
+          "sha256": "34584fd9d92deacdc6f11ca3e00855e0472d387a7f92d886c5bbabc51c78962f"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/agents/tools/web_search.py",
+          "sha256": "0b245cefeae495c325eacffd0a7975c4b0dc04d9bc43798c884bb76d829a8109"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 5)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/deps.py",
+          "sha256": "6fc50ed226c30422d621f995183ec8b397d6501d6b49fbfd0faf47549e5f4033"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 2)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/__init__.py",
+          "sha256": "c4d1d88ed661348610569b613ce49a4cf5b91dc17d34d87ceb9031bba6215dc0"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/admin_conversations.py",
+          "sha256": "2a6cf097ebdeea36ee9136b958d408c9d38e47572622f5d62ed6a65d2f4e8f81"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/admin_ratings.py",
+          "sha256": "21b082b5e28b6f0b23f1ba75ce7050db37463d378f36d21a50b98edde4ac7218"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/admin_users.py",
+          "sha256": "75c837e9cfaafb5a9bec7d66ee040e179d921dc95f784c82a9ba94a6352bc4cc"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/agent.py",
+          "sha256": "5044774aeec2c3a542a0650d5d6d13db6f3a8a2161d83defbee91b8df6991f0d"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/auth.py",
+          "sha256": "a3025b5343e4df8ef87176349bbbe95c313545a48536f6e17ced4cad986edfcf"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/billing.py",
+          "sha256": "34d10664192a0bd981735782411cab5526c33eed341fc8f0a35ceafc30683d66"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/channels.py",
+          "sha256": "66bf66dc6a9634da01206a6ce2b98d05fe1ae616bc8c4bb335948f31184d3f21"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 8)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/conversations.py",
+          "sha256": "5c383c00e19f89dd1ee24d51d4866f74cf553a28c77b9b5e2f18a41b9a745616"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/files.py",
+          "sha256": "7f747bc6d96370630ef1ec496c1b2f167b961c54fd8fcb6901270d8eeebab35d"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 8)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/health.py",
+          "sha256": "ad7df46aa1e02d714ae4626ca0d1ee95e27c728e42ddac439d9c113135e5476f"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/invitations.py",
+          "sha256": "64de122b1cf0d78ac8a2fa49023f539126dfa5e768e7acd6dacf4f7c9abb154e"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/items.py",
+          "sha256": "e374bd38f5f1031ae4fc5d74b6861e2ccd0c456fcedfbfb0fb4090f090300dba"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/knowledge_bases.py",
+          "sha256": "410a2524a203523aa956806f767d63adf9e605129cee7466a0788c328d89e9a2"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/marketing.py",
+          "sha256": "406fc28c7f3fc64f488bf0f4563c6ee258b4cb6a47bee954981f17ee7da5e7ca"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 15)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/me_memory.py",
+          "sha256": "0aa248d2fbb8f65eeb07bff00219fd36b19aa9add32be3d853e2933c0923b905"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/members.py",
+          "sha256": "e7f4dfc1cf2cf09a936549395cc2781c01b01034ac7a192b93bdd548752f4234"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/oauth.py",
+          "sha256": "673fdf36b876c4dc11a6819da8e08679904f7f84dc8cc9b470092ad08f34c7f5"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/org_integrations.py",
+          "sha256": "b800194f658a84cb3c99a4c169c0167c4f3ea3ef1e161fcaf68bc3ed92dc262b"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/organizations.py",
+          "sha256": "665ddb24fcbe45fa65b9281a75e4adae9fcaa1d5692d02a650f9281645e25f15"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/projects.py",
+          "sha256": "77d9791d9e70265fcc1a722f109b2cfe05e89b1511dd760b5c1fa0acb57ff35b"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/rag.py",
+          "sha256": "a59f899a165a6bab15cf43b2f25705e977615093d98885e5cb57a3bcef8851a0"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/sessions.py",
+          "sha256": "ecbac3315cbc0d886b88000be104cbf18b570e63b086396dbe304e6a76249149"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/slack_webhook.py",
+          "sha256": "3d64736460ffcd438a7ff05e61e950c65fc6db9873a05dc36a1b34f8fb6f1666"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/telegram_webhook.py",
+          "sha256": "84121fe7105f20ffbcb4f721d7ec6e791740c2e09c958b681199bdc7657e9185"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/users.py",
+          "sha256": "99a21c7088326d9bc1ff9e08684f70ac8f3e4f1740a126f50135930db937b195"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/api/routes/v1/webhooks.py",
+          "sha256": "d6ade5912cbb704afc298d8f3526d66213ab263a87282dee8cc6efc62e2690cb"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 5)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/clients/__init__.py",
+          "sha256": "800e045150d04284f379a2f314764403a3ecd1e3bb7a8f0d62384d503933c33b"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/clients/redis.py",
+          "sha256": "43aee70b5c65f88997fa85a1f888b5401b25f6caddf4866ddeff3e3ebd1bc33c"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/commands/channel.py",
+          "sha256": "979b47a878ab553d348349243c04af71840036bb26f9fab9fc5db24dbfb70def"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 11)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/commands/cleanup.py",
+          "sha256": "a1c8ab95db3f2ea29bcc1facd096f3ea7d0225dbf751e737e32b191e49b5eab4"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/commands/rag.py",
+          "sha256": "d8a023b0953abecd1632fd30011daf834ff1a470690d6fed268f9fd1c79051fd"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 16)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/commands/seed.py",
+          "sha256": "df1c888ecac0cf8e227ddd68860743dfdfc71f90e954070ac8ae943c95a5422c"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/commands/sync_stripe_plans.py",
+          "sha256": "e37641716c87133d74087d7b5cf756c54f26e1ece0d14cdab839994fdda9e8b4"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/core/audit.py",
+          "sha256": "595b6c95b103f62ef144744cb3e920a7a4d470ea82081aa8e7a0de09f40d48f8"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/core/cache.py",
+          "sha256": "55865fbc874b76d6f563c874f48a31a8f903c86f2966d63dea1475e477dff183"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/core/channel_crypto.py",
+          "sha256": "546f7c07120ca172ffe94e81e348025ffa7cc474a839304fadedf309c955c90b"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 2)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/core/config.py",
+          "sha256": "01b7f997f16d4a31fd7fe048a643f45b92dd9a738461645c454b4b02b76674d9"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/core/logfire_setup.py",
+          "sha256": "02aea4e0563bc2b154c0530f9937156eafd535f35d609e453ace6f382b08d442"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/core/oauth.py",
+          "sha256": "62dc890651d8eaab289ddf1a28eae0d12ecec8a036d8b67b44df105a2f06f138"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 12)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/core/security.py",
+          "sha256": "9d78d7c7530dde647f9aa66f0446506d239d155f21335a09c82c7c15f276a1f7"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 2)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/__init__.py",
+          "sha256": "5516cc57756c4310f280b4de9342fdfead6fd53fcbf4c8df185a1b4946b61478"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/base.py",
+          "sha256": "4d68daad5d83e3220a0bbc3f7bc811d2fea1504f787019e5d1b49af06629e7ab"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/migration_filters.py",
+          "sha256": "8d50c6161b730f054285ef9fbee376ad1c5a21a4808288cb378a0eb2addee99f"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 3)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/__init__.py",
+          "sha256": "2a4a7eb9f6d913c83eaea3e5e10642f8bfafd594fb7c368b89d51a6ba9c909c5"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/audit_log.py",
+          "sha256": "0feeae8513941414807c2827ea9ca757d93de534723599a17c45690fb94967cd"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/channel_bot.py",
+          "sha256": "5e527b5e4d2d8054aeb106f631bbb76a853c58692ec2c4ffa2964a998dff8204"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/channel_identity.py",
+          "sha256": "44bf20f03f2cac392fb3221974a40295acee41772dfe88f95536a24646a81cd3"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/channel_session.py",
+          "sha256": "dc994e9fde93f20e28f3101f925c5924dc7e382274989fd56b56954210612d1f"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/chat_file.py",
+          "sha256": "c9a1a50dbb7415604ddd6f02e0d2a01720472490e396c7f1197999ac070c6385"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/conversation.py",
+          "sha256": "cb42522134b18697f274f03021a3604e95c3830b54ed56de94584da7e8f1cd15"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/conversation_share.py",
+          "sha256": "84e63d5cbf697f8f95caa8720596a9aace973f41bd07bb9169aa32d5f2c163f9"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/credit_transaction.py",
+          "sha256": "05eac14c8c246dff9ed8e29940e60525dfa09ab3c43fb66ec27d0224e197b46e"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/item.py",
+          "sha256": "db3f20d4ae10d6015dc9c3f666d845a5bf7ce18d73aa35b26a308ee45961d83c"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/knowledge_base.py",
+          "sha256": "3e4fd70ff301f5277cd8dafb679b498a196f151b781f20880278fae204831f06"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 7)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/message_rating.py",
+          "sha256": "ad42a1ffbddaeb87899a9e91af433fd83429e948303fdeba3151e6133ac79df3"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/organization.py",
+          "sha256": "ffaf5379f6705422d494b2f4a25cc6201d25d9c4333b5a271c5ace678b63d53f"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/plan.py",
+          "sha256": "8ae20d777d3c272403da62371db40c3a64ad3eab3e604ec371d9a5bd458a5d80"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/project.py",
+          "sha256": "a070c7aecfa60f74bfdb444207d93c744dd3ac7dd5808f0f12ab3b4ad16ff118"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/rag_document.py",
+          "sha256": "15cdd81950236009b19ba0401aa494fff28b570874eac6f0010ca3f4ecf78a9f"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/session.py",
+          "sha256": "c8eb6cc6715fe59e60d1bbc44b0a44529c610716b6d89d8f272b4345dffeacee"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/stripe_event.py",
+          "sha256": "6d6de346fb5dd2afb55e98bb2d9833cad9f8979de0730ba57de23a1a9b0f0810"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/subscription.py",
+          "sha256": "d287548bc8ee91b75bba189aef8c191b80110a883efc87b66e35aeb13866e404"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/sync_log.py",
+          "sha256": "eb19e9f144a6d288b3af332d65602e644a690256c0ee4ec2ef065fc22fa20454"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/sync_source.py",
+          "sha256": "05c63783011cc2f3e5466e07da7d9b56e5ce12df5092449aa701ddf35cfca2dd"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/user.py",
+          "sha256": "3da15fb767cbe227eb6f4bcad611a00a43a699161183575d5f1f7b76638dd01c"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/user_slash_command.py",
+          "sha256": "64def5472d51708946d5e5286a1c92b095b543baf19b780a6dea22567b24b294"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/db/models/webhook.py",
+          "sha256": "925fb61517b48a778397c9ad23dc13d52167430aaf66d79b6dfa657c4dd0b4d2"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 8)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/main.py",
+          "sha256": "9f4ce0b46ddb6c91456af950bf6fe71b820b74d825818afbbc866af2eb882480"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 3)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/__init__.py",
+          "sha256": "5a883dd3cec10f5ba13737fe7a95d4a3b600e4cf10793b800d161c8cbfbd0b8c"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/channel_bot.py",
+          "sha256": "149e4468053c44ec9e59e8783b3ac24e358b6f885abdc4362809dd2ff75cb9b3"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/channel_identity.py",
+          "sha256": "7623fe88883e0f5072efb7a2260e8b0ddc3672629d2ba422df72fb854b5373d1"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/channel_session.py",
+          "sha256": "13ee138510dfaaee3506c17144c342587ff88e4952abe09fe9e00fb65e39bb60"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/chat_file.py",
+          "sha256": "cf2046a870a5d82da3ceccfcbbedeb6b89c78743a1f9d9724bc931c124d29613"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 10)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/conversation.py",
+          "sha256": "8af30d5906ae2a355f4c09d5a3df56a47a3947b2f70151667247ab00f2db3d2e"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/conversation_share.py",
+          "sha256": "3e49cdc306e781eace4a089f5db6ca89800fbda878c5b2fd3081715a0277a557"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/credit_transaction.py",
+          "sha256": "0a0422de5f49608fa54d578b7272b71bf7c1b14e0560ec69c72e47c74d29ff07"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/invitation.py",
+          "sha256": "66b1d7d94b82b455e774a0557324fcef5c8f19ae3eece3f3ac8de6ca6c27e11d"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/item.py",
+          "sha256": "31beb9a8cf8242917f6c7141bb80d61d6a5180072a9b31ea8460cce972b18ddc"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/knowledge_base.py",
+          "sha256": "2cdb3d9985561403a106d32bbf22f10ec17c219d2f984c33653ba068f5112021"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/member.py",
+          "sha256": "f0b94628b20150ee38ef37905f0710c8d5ee57bae9cd85c8fc4dc39244283be0"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 171)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/message_rating.py",
+          "sha256": "c4418e3c29641f3813d1e0426be572b9cb77680172230c4158ae28e87a60ee7c"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/organization.py",
+          "sha256": "90cc55726a9c1444fbd579328ac741da2918bea6b123c289a15a16df611ffae5"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/plan.py",
+          "sha256": "e31a82231396b0ed00e3d5057b44e633ac2b2805d388db23d75d53790e6c5182"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/project.py",
+          "sha256": "d6dea81fe3e62e7c7bd71edd8a6ff66819b69ae758135f76871d159193fb218a"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/rag_document.py",
+          "sha256": "dac151492fa06920d9c79221050c130412571c83549ff8786fbe37c82f478b97"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/session.py",
+          "sha256": "c565ea5eb227dbe34770b6ed9508f52417fb2caf59bbbbcce487d203859d414b"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/stripe_event.py",
+          "sha256": "3cc9f4fbb64be6e8aa3b8d5fafe1fdf610c0eea3c9661c99bb7650b9958f8ba0"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/subscription.py",
+          "sha256": "724250ede1f306a547156d43cf50bccd19a26c0e20b858128ae7b5cef1aba544"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/sync_log.py",
+          "sha256": "3af4569bdd0c95f27e96b963b54fbbd4da0e55baa7e20b879bdf4b3107b7aa8e"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/sync_source.py",
+          "sha256": "9c218a520394a42101344c92a9d2a06727ff18128182d61f16c09ca3f5b29137"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/usage_event.py",
+          "sha256": "47d06ab1141382a9b140ec8a76bd7675caeb904594a00304cbfe2059b7c726c1"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/user.py",
+          "sha256": "517a4674c28a49c802f720871bf1e695f85a864f9be2d692c9dad93c6dc09f21"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/repositories/webhook.py",
+          "sha256": "8048d47bec551ef50e4c3e2d4c9c6bd120e21c0689f83b5437f4d996a9488d70"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 2)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/schemas/__init__.py",
+          "sha256": "800a9d8239b4281c4d484b05b6117a5116ed3e374406e4299daff6abdc1c32b4"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/schemas/billing.py",
+          "sha256": "46f3f1b57fdd6e6905d0b29b87e6d91a865c0f6f6ece19877d5e6b1f9f056877"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/schemas/channel_bot.py",
+          "sha256": "81895f0241dbb132b7a2260edcb92568ee43afd5588ae01fcc593ceb530ef0d1"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 103)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/schemas/conversation.py",
+          "sha256": "445af3220fcefab5361f1a8e6a9c6a93260a01f83a654a60693da01417a28ace"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/schemas/conversation_share.py",
+          "sha256": "3c5b755c88a96d7ef2ed83388f7662789c76e78810a704885bdd2fc3e7074ac3"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/schemas/item.py",
+          "sha256": "67762195a18f3eb48d50cc3721d0b863ce876687842604be0fe4be235e84d1c3"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/schemas/knowledge_base.py",
+          "sha256": "172b30bb777cdcf99d33f890ddefb2862b36f4ed13fb91f4a30d250668e996fb"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/schemas/marketing.py",
+          "sha256": "c89c81f4f2f6b4d292ec47d61573ffa8f010cd2522e9877cbc88b1cd823a3c2e"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 70)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/schemas/message_rating.py",
+          "sha256": "df35f80a7be5989818566005ec5a9588a2db97a27270ebf9a3b5e4e7121a4030"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/schemas/organization.py",
+          "sha256": "1030da1afd305e3f4557a651bf832b12d72e3bc085a2644ddb28bf2fed68c7a8"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/schemas/project.py",
+          "sha256": "5e35bbbbb85d2b547ae3fc322365e152ee899f571c5488deeeaf796b976377a3"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/schemas/rag.py",
+          "sha256": "2e3d33a1a030116bddc87e7611598b5153a7505ef195bc19e3d18e3916197863"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/schemas/session.py",
+          "sha256": "328e0351802e4585032404347834862d347017bc24f2c7d62904576df76f936a"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/schemas/sync_source.py",
+          "sha256": "e785e56ffeceac66ab65b2c1fe46d3c13070539b03b4ab2e2ad6432d0383ec9b"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/schemas/token.py",
+          "sha256": "7e57bf4b1f40e1cf5ee2294b229bb1ccb9708a8464910271d8c87380aac1ec8e"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/schemas/webhook.py",
+          "sha256": "551c010fd97f9417e73e3431a7c920e0338bc9de85080523e41663a1764dd282"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 16)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/admin.py",
+          "sha256": "173c335ba169231d428b08fff6509b58cce2f845afdefdbe27c4a8a62f4b8995"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 15)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/agent.py",
+          "sha256": "89f5a1d2bca24fc3e9474cf25c6c7e72756bf1fc1adf04caaae125f39b596ad0"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/agent_invocation.py",
+          "sha256": "921dca400d662a0d402a7a5fef484275409b96ab38c7fcdd3727cc1fb3639a15"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/agent_session.py",
+          "sha256": "f953a18c018d25564b281d22a3315a73959238bcf9a3d9c4c0c4fc796fbcee78"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/anomaly_detection.py",
+          "sha256": "b8a3c2cf375ec834946e0903ed5c0522e6c41e1a14d4b1283a9dd1d7f1744a51"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/billing/__init__.py",
+          "sha256": "b7de77fe9f71968f633627e5a6240106286dfb059757e4490078bbe43a7bc3ed"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/billing/checkout_service.py",
+          "sha256": "1dfdcf99f95b32fa6dc27cf25f766555af87742d48645d4faf650f4b7b8558da"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/billing/credit_service.py",
+          "sha256": "5060acf9bc80eb02e6e38c7a9500fae833a71dea5ede59b9e94fd954f7c6ab5c"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/billing/exceptions.py",
+          "sha256": "3128f1ae62129d0fdf043c6a194a169af7a069389c07617843dbd1e59a983faf"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/billing/facade.py",
+          "sha256": "93805a41d09d8232dd24f903b64b13eec7fc3bc738f0a8721b0ae6a712118e99"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/billing/handlers/__init__.py",
+          "sha256": "5544b8ea82229df41544eedf42207f6a1ff2df18f82ba732ebe5e1b4bbdd768a"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/billing/handlers/customer_events.py",
+          "sha256": "4840db8a25efab5b1f6cd5cc8f7c4cdaa0a44b11747b1d32f0753be78bf4c235"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/billing/handlers/invoice_events.py",
+          "sha256": "3f29cb3b26685e1f45187c54b5cbe8467cc6da87e2c2690fa37945f8b94a6811"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/billing/handlers/payment_events.py",
+          "sha256": "b9c8035e084b49c5cb008055d7f674a802a5a797b8320a6b1075f0dd0ababf78"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/billing/handlers/subscription_events.py",
+          "sha256": "810a2a540778832a5438bad2d9d0af000db1c74ca476c89ab63f20aa228cd3b2"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/billing/pricing.py",
+          "sha256": "3808925bbd4f1acf5a340cdd199d1096935514c989bfb4f358801bd7728dff55"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/billing/stripe_client.py",
+          "sha256": "d4ad8303c1183e29e0ecfc031f3e4fb1dc7ad1aba8f0d8f07d4e7cacce052c99"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/billing/subscription_service.py",
+          "sha256": "bbc069364fc0aefbfe2e7586567fe0337ffa925e513a749e8b5f3934e05454bb"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/billing/webhook_handler.py",
+          "sha256": "9c6394810c112ddf9995de567039a19384797b8ebe36532a59116f25663eb24a"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/channel_bot.py",
+          "sha256": "475b5f41070dc47299f42df2383e878784c0358efb14be1736273845fe34a96a"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/channels/__init__.py",
+          "sha256": "43486e544456e03437448dcda78036fe9ba7ba3787367733eab1dfa7b3bc4eec"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/channels/base.py",
+          "sha256": "4f6bcb3834f527b7d91145c5625634c917a10144b6d3c5d91104f8f3a2575288"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/channels/chart_render.py",
+          "sha256": "fc58f8820f552bceb92e56f855ef08658d9e441906a509aea429398d06103fc4"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/channels/router.py",
+          "sha256": "c44ab4620b13fa90769c993f7bc4bd2e9424c69a9f880798852a067434ddcdfe"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/channels/slack.py",
+          "sha256": "27e002e8e4b41c5b334e64fa5fce0e003858749ecef71cffc6a2c14faca544a7"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/channels/telegram.py",
+          "sha256": "d2327678656778569cba23270cbd9fa84208a6654cb42b8cc6ad710c1267cd0c"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 12)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/conversation.py",
+          "sha256": "ffed0af34507c7f16617f6fb5e091883efd55d6d794a0de989cf1d75587d4642"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/conversation_share.py",
+          "sha256": "2501f2eb7e9decd234e7cc81945c90fb5ed54336aef99e86d85229e04d173888"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/email/__init__.py",
+          "sha256": "b9e6f2f37b8a50a6117ca42f531feaa739836d1d2a28f18faecae1e22aaaf8f0"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/email/exceptions.py",
+          "sha256": "9abfea60156aa6a0768f98fd895be2c493d5958daaf79b23ef1e4196c3285508"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/email/providers/__init__.py",
+          "sha256": "7b62299e673daf0d06ad3cb33ad93ba57922e2dff786d823c29876cd7c30e536"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/email/providers/base.py",
+          "sha256": "fe8765a313b62c356598c26d750a5a4f386dff01dc038d4bc9798eb2f3b4c052"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/email/providers/log.py",
+          "sha256": "b729a213d267e991266a993cf01db6c7aaf8a3bff56e8957a2ba00db6a093a4f"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/email/providers/resend.py",
+          "sha256": "2ea5cace6f86d93008045f09e3d7db0a69bcc23ddf34695b1ea2f4a3cd601921"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/email/providers/smtp.py",
+          "sha256": "642a750ad970b54116843203da254346f5b82024c345064f6c6787e928d4d74a"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/email/service.py",
+          "sha256": "c2e641674edbfcfaaa0fefd84df0297074be7dc392647fa77edae244db5e9dd0"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/email/templates.py",
+          "sha256": "41f65763a99b8e9170ee0a86343dca72afb8b95eccec86ab53745e937cda7af5"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/file_upload.py",
+          "sha256": "a054bebe8672180d0e1ffc8b33c5e0be37a7393455dd6f5d79e83d6c9eac3dc1"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 18)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/invitation.py",
+          "sha256": "fa4119e66207627bd03ac400afbfcdfb16b909ee2716c6fd2b4ee7dc594c20d7"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/item.py",
+          "sha256": "f5c10fbfdd3fa368692e9345cd3d208bbbc4b7a32e679a826d7386a6596eccd8"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/knowledge_base.py",
+          "sha256": "aa4acf00c78676b78a1722e1d32c98cbbe7e07a13f6bb7e102f1fd90c72f2462"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/member.py",
+          "sha256": "0428deb49cc511f8ae7685c0cf7ea4b49aeb8ad0c86417d61d4c8fecad447a87"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 221)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/message_rating.py",
+          "sha256": "d82585a8d0f26854da5c0824d4020f4b6802ffa015140c237e35176382070922"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/newsletter.py",
+          "sha256": "2da4f46cb708e451be21275ab74e828b57b7413fb54072eb8a6716c11e7e2a5f"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/organization.py",
+          "sha256": "a808cfe42722239ffb6fd61ea9f642ac0904e40c77ed78fd180b95c5dabf4d98"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/project.py",
+          "sha256": "8f31f2a316d127d6ca4879d2ce728b8e0ba5da6d9bb0a80445d0f34241bac729"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag/config.py",
+          "sha256": "2f081520286e11a08f329a4445a60136db4f45e85047deb92d1d92374d564e20"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag/connectors/__init__.py",
+          "sha256": "6118205a03737e6efb6aaa6ef8b0e57eaee33fe0fe62d99e44d4000f571088b5"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag/connectors/google_drive.py",
+          "sha256": "0874911d31f9f5f28d07aaa776c981b4766a0798a114b52249f046aaf5ed02ae"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag/connectors/s3.py",
+          "sha256": "955cf69f9bd7e963d2563b1dbd1f4fbce50cf5660a12bd15deb840952224724c"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag/documents.py",
+          "sha256": "982a106d9c4249a8df3df1336546bb241d8313ab7f4a7f0bbd795ed50a82a265"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag/embeddings.py",
+          "sha256": "5d4ff37e848c0252383b27bb817a0017cca3a5d7adb50db398053b9fc2d23bbd"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag/image_describer.py",
+          "sha256": "5a5a40e864f1782d2047f1d7a6b0ca9343ba064b9913e57d478d647a274f2905"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag/ingestion.py",
+          "sha256": "ee9a05d539afc07a2c5e3a1001796ecc2c2fa2ccb8601fb0b966bd1b716adf87"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag/models.py",
+          "sha256": "9d22913d30b7f1ce5946fb1c2b18844c4fca8742d9c493906509fe883ba1086a"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag/reranker.py",
+          "sha256": "1e6cee908db85092e2cd24843687eac4203ca391bd28a611b1b8ba2f4cb7304b"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag/retrieval.py",
+          "sha256": "d35ccb4858f8a9b03e62dbb8f2282d69af84012f03f72ac08d829ce62f8115fc"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag/sources/__init__.py",
+          "sha256": "5e46e95f4c2a98f66eb51102cfa14010c2813d3a27e3c9fbdb14c8352e43debd"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag/sources/base.py",
+          "sha256": "2865fce49d291cc5fd8fc3d3266eb881845c915e77b779864f72180e3e89f938"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag/sources/google_drive.py",
+          "sha256": "cf8702a26b3bcbd74a8e6d5563288b82e07eb7e24327e490f50ef8ff673cbd0e"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag/sources/s3.py",
+          "sha256": "9aa5ba942986dabb026a5d0ffc890bfc2f344a24c691334d0422b49ef6bb952d"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 80)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag/vectorstore.py",
+          "sha256": "9a46acd47c63e7a1409b20a6758cdf571fcc3a0fa2700486d9595e94a2e80d90"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag_document.py",
+          "sha256": "d1f5dbaed6469c8cf5eba49bc7e28acd0432cc3986d8778b9ab62efaa1a00a70"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag_status.py",
+          "sha256": "add54b4ee0ad7c7beb86af69e6a66977239f9bbcf36a55b9971bc0cc30906a92"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rag_sync.py",
+          "sha256": "ed226faeccddfb3ee4d63333ebb133ea07db4b8e68c7109e3daf561d987f115c"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rate_limit/__init__.py",
+          "sha256": "d89fabd99f08cb0a6c3f92142a302e5b327509a1f7c7c339e9c998aad101fdd2"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rate_limit/rules.py",
+          "sha256": "aa15933259c63ab325b77c5bda65308bfc2c938343f7599331f8ee6987dba943"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rate_limit/service.py",
+          "sha256": "923c7a08ca2b2185a8121d473e927f21d50d238af44b28cc64102dba9d29e515"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/rate_limit/storage.py",
+          "sha256": "f9837617a3858a4714ea31f1094cd15fa4a745237f236ecbc7f68a725f5a4c73"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 29)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/research.py",
+          "sha256": "00f1b2c061658d57138b80fd2cb05399560809ed957f21364278ca4b6a696879"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/session.py",
+          "sha256": "980043555de532f989b29aebfb2fd748c43c8536f83c81272bf6e7e636ac514c"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/sync_source.py",
+          "sha256": "81ea0aaa62230e0c40cd2e499a6daa5bb7dd025f62ff56607e218530d7fde759"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/usage.py",
+          "sha256": "4943401279ce6635ebfcf5e81468df90c8c0c3b681e45bc81d179e015238c31f"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 6)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/user.py",
+          "sha256": "2c240a2807e1307bea295aa87c5e4c9cf80dd49ae91d032f1368bc6aab6dcaf8"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/services/webhook.py",
+          "sha256": "4424fdeb00100e7afc0941bdfe0cd76318be02fdc15f38db974067c4d635a96c"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/worker/arq_app.py",
+          "sha256": "adef92b43111bbd681fd8ccc38152848ea24c48055ea96fe11f01314a15e8993"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/worker/background/channel.py",
+          "sha256": "748ab064f35ff6892eaf127b2ec6b7264fac284b5944e4e344dd2ff17d82464e"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/worker/background/rag.py",
+          "sha256": "55e223496a795a3112215c73cdedf37b969f14c534ecf0f0d072beb743379d2d"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/worker/celery_app.py",
+          "sha256": "b38b079fd5c17887649c3ea929496f263238120dda13f787af770b974fd65274"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/worker/prefect_app.py",
+          "sha256": "38806ba560e82b3cc2b75440213e73bf0f7c4fb1665714b73f2f6c432acfdbeb"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/worker/taskiq_app.py",
+          "sha256": "1d83c9d314e864f826621d4d8aca5bd8f28cb5068049a150c8aa85459ee74ebc"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/worker/tasks/__init__.py",
+          "sha256": "9164b5d48e4992c5c422cbac3606ae39fb08d67f3a85d21d815ef0ebeea0cb76"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/worker/tasks/cleanup_tasks.py",
+          "sha256": "0fb4079ffb0120623ee07c471349792dbd8581d2b0d30251332cea0689e93aa6"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/worker/tasks/email_tasks.py",
+          "sha256": "1ba680f4b14949762337268180ba9da4b0b0495fc0811c1ac9162b78fa4b3111"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/worker/tasks/rag_tasks.py",
+          "sha256": "e811272507aa759c20a7d9710a106c9c1349a555d2f82d792a59952cf93ccc3a"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 1)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/app/worker/tasks/schedules.py",
+          "sha256": "c9c656008971d088b92d3b89f23a389dca3e9ce8fdf1318af98e67a611816743"
+        },
+        {
+          "error": "SyntaxError: invalid syntax (<unknown>, line 15)",
+          "path": "template/{{cookiecutter.project_slug}}/backend/cli/commands.py",
+          "sha256": "4fc18ef53df653971e50c93ed6407c9aef7cf38c506df8e59bfd9f5bbaef194b"
+        }
+      ],
+      "python_path_count": 318,
+      "repository": "vstorm-co/full-stack-ai-agent-template",
+      "retained_license_paths": [
+        {
+          "path": "LICENSE",
+          "sha256": "6cbe09b8afeb700f32fff1a0ecf12e4ecde0d907fa56f4b3db0d896a377a9d55"
+        }
+      ],
+      "status": "frozen"
+    },
+    {
+      "archive_bytes": 2473965,
+      "archive_sha256": "7cb29ac975d6db01c5958fa84f88d14e3a994f281a2c08dc86a2172c4dbc2571",
+      "archive_url": "https://codeload.github.com/zi-yue-1129/DATAGEN/zip/9d53a6ce91d6f67bd4e54175adc7c6938c10b6ba",
+      "candidates": [
+        {
+          "bytes": 6740,
+          "commit": "9d53a6ce91d6f67bd4e54175adc7c6938c10b6ba",
+          "path": "src/core/workflow.py",
+          "repository": "zi-yue-1129/DATAGEN",
+          "sha256": "4ebbeb032330e9872e060c6c22a67ec2c8ca9555d52adf1069415535e0ea6c9c",
+          "source_snapshot": "output/scp_strengthening/heldout/sources/zi-yue-1129/DATAGEN/9d53a6ce91d6f67bd4e54175adc7c6938c10b6ba/src/core/workflow.py",
+          "source_url": "https://github.com/zi-yue-1129/DATAGEN/blob/9d53a6ce91d6f67bd4e54175adc7c6938c10b6ba/src/core/workflow.py"
+        }
+      ],
+      "commit": "9d53a6ce91d6f67bd4e54175adc7c6938c10b6ba",
+      "license_spdx": "MIT",
+      "oversize_files": [],
+      "parse_errors": [],
+      "python_path_count": 49,
+      "repository": "zi-yue-1129/DATAGEN",
+      "retained_license_paths": [
+        {
+          "path": "LICENSE",
+          "sha256": "c1a9e2b753ee443b43c7f37f7eca3fca7c3a2ff46dcd48a7f1828581fa98a0eb"
+        }
+      ],
+      "status": "frozen"
+    },
+    {
+      "archive_bytes": 22746178,
+      "archive_sha256": "3211f4a897cba2a89d6abd20e6d57c8bff6ace9d3a1b8c658675bf4ca2be5eb6",
+      "archive_url": "https://codeload.github.com/neural-maze/philoagents-course/zip/b88d7731f5d8ac5a00c05430798f35c03402e4ce",
+      "candidates": [
+        {
+          "bytes": 1757,
+          "commit": "b88d7731f5d8ac5a00c05430798f35c03402e4ce",
+          "path": "philoagents-api/src/philoagents/application/conversation_service/workflow/graph.py",
+          "repository": "neural-maze/philoagents-course",
+          "sha256": "5a075af141c4f6508e7279401ec6a1d2e7fe4156c539118ade7a76a8690e149d",
+          "source_snapshot": "output/scp_strengthening/heldout/sources/neural-maze/philoagents-course/b88d7731f5d8ac5a00c05430798f35c03402e4ce/philoagents-api/src/philoagents/application/conversation_service/workflow/graph.py",
+          "source_url": "https://github.com/neural-maze/philoagents-course/blob/b88d7731f5d8ac5a00c05430798f35c03402e4ce/philoagents-api/src/philoagents/application/conversation_service/workflow/graph.py"
+        }
+      ],
+      "commit": "b88d7731f5d8ac5a00c05430798f35c03402e4ce",
+      "license_spdx": "MIT",
+      "oversize_files": [],
+      "parse_errors": [],
+      "python_path_count": 42,
+      "repository": "neural-maze/philoagents-course",
+      "retained_license_paths": [
+        {
+          "path": "LICENSE",
+          "sha256": "45f92e4695fcba0707b9d92427f5ee3f1477a88b0a436173f0a1e6bd227c3386"
+        },
+        {
+          "path": "philoagents-ui/LICENSE",
+          "sha256": "34ce12802d56431106b380e1e60bcd4a45d2874cf1c8173d1d6b11938f427603"
+        }
+      ],
+      "status": "frozen"
+    },
+    {
+      "archive_bytes": 2140524,
+      "archive_sha256": "0ccece9af4f332893ad846a4eec47a2f4fd4f43ae180a1a24b9b4ec8a8fc4077",
+      "archive_url": "https://codeload.github.com/CopilotKit/OpenTag/zip/aa3d26c723d7141815d2f76c33cbeb4b8e72039a",
+      "candidates": [],
+      "commit": "aa3d26c723d7141815d2f76c33cbeb4b8e72039a",
+      "license_spdx": "MIT",
+      "oversize_files": [],
+      "parse_errors": [],
+      "python_path_count": 43,
+      "repository": "CopilotKit/OpenTag",
+      "retained_license_paths": [
+        {
+          "path": "LICENSE",
+          "sha256": "6d35a6bb107ae508da34636387f6208e75a6938e797bc0d5bfa9489d2ca95bad"
+        }
+      ],
+      "status": "frozen"
+    },
+    {
+      "archive_bytes": 859950,
+      "archive_sha256": "b1d00a65a5ead5a63fcf08d027d7596284480971fc9ed4089eede1a9af69d1f5",
+      "archive_url": "https://codeload.github.com/Pan-Chera/Multi-Agent-CAD/zip/8bf91d83a95f52626d0aa963c6575c79b653ab06",
+      "candidates": [
+        {
+          "bytes": 59057,
+          "commit": "8bf91d83a95f52626d0aa963c6575c79b653ab06",
+          "path": "mac_assembly/graph_assembly.py",
+          "repository": "Pan-Chera/Multi-Agent-CAD",
+          "sha256": "ff71f6876f11e89d15901ae49601069e9ef141f688a228641117bc71bb3077e3",
+          "source_snapshot": "output/scp_strengthening/heldout/sources/Pan-Chera/Multi-Agent-CAD/8bf91d83a95f52626d0aa963c6575c79b653ab06/mac_assembly/graph_assembly.py",
+          "source_url": "https://github.com/Pan-Chera/Multi-Agent-CAD/blob/8bf91d83a95f52626d0aa963c6575c79b653ab06/mac_assembly/graph_assembly.py"
+        },
+        {
+          "bytes": 16100,
+          "commit": "8bf91d83a95f52626d0aa963c6575c79b653ab06",
+          "path": "multi_agent_cad/graph.py",
+          "repository": "Pan-Chera/Multi-Agent-CAD",
+          "sha256": "a378f4b541ad302259715ccca85eb4a3ca44842f78e0f56b81d424f8f1dc9bdd",
+          "source_snapshot": "output/scp_strengthening/heldout/sources/Pan-Chera/Multi-Agent-CAD/8bf91d83a95f52626d0aa963c6575c79b653ab06/multi_agent_cad/graph.py",
+          "source_url": "https://github.com/Pan-Chera/Multi-Agent-CAD/blob/8bf91d83a95f52626d0aa963c6575c79b653ab06/multi_agent_cad/graph.py"
+        },
+        {
+          "bytes": 13620,
+          "commit": "8bf91d83a95f52626d0aa963c6575c79b653ab06",
+          "path": "multi_agent_cad/graph_aider.py",
+          "repository": "Pan-Chera/Multi-Agent-CAD",
+          "sha256": "4f90638a4035286826e905d3fcf2908d186160ae83654a6ff9cf21752e00096e",
+          "source_snapshot": "output/scp_strengthening/heldout/sources/Pan-Chera/Multi-Agent-CAD/8bf91d83a95f52626d0aa963c6575c79b653ab06/multi_agent_cad/graph_aider.py",
+          "source_url": "https://github.com/Pan-Chera/Multi-Agent-CAD/blob/8bf91d83a95f52626d0aa963c6575c79b653ab06/multi_agent_cad/graph_aider.py"
+        }
+      ],
+      "commit": "8bf91d83a95f52626d0aa963c6575c79b653ab06",
+      "license_spdx": "MIT",
+      "oversize_files": [],
+      "parse_errors": [],
+      "python_path_count": 69,
+      "repository": "Pan-Chera/Multi-Agent-CAD",
+      "retained_license_paths": [
+        {
+          "path": "LICENSE",
+          "sha256": "b0d5bf2263928b3c6e536e1791e1820b991ee4c6c74568e5710026c62b8c8c29"
+        },
+        {
+          "path": "packages/cadpy/LICENSE",
+          "sha256": "c122f8e06704acaab9f2715b9940cdfdf1b35cf575088b4890970c6259027361"
+        }
+      ],
+      "status": "frozen"
+    },
+    {
+      "archive_bytes": 211026,
+      "archive_sha256": "8805fb5e75e5c73028b528240141ec52779d84e88b2d0c317d074e50b891786d",
+      "archive_url": "https://codeload.github.com/FareedKhan-dev/production-grade-agentic-system/zip/20def050e099d12c079f501aa6e85b48fe8783bc",
+      "candidates": [
+        {
+          "bytes": 17934,
+          "commit": "20def050e099d12c079f501aa6e85b48fe8783bc",
+          "path": "src/agent/workflow.py",
+          "repository": "FareedKhan-dev/production-grade-agentic-system",
+          "sha256": "22b41752c178c274e5e5eb32ba21bae03264d3518e7cf2cd63ef23beb7fd2213",
+          "source_snapshot": "output/scp_strengthening/heldout/sources/FareedKhan-dev/production-grade-agentic-system/20def050e099d12c079f501aa6e85b48fe8783bc/src/agent/workflow.py",
+          "source_url": "https://github.com/FareedKhan-dev/production-grade-agentic-system/blob/20def050e099d12c079f501aa6e85b48fe8783bc/src/agent/workflow.py"
+        }
+      ],
+      "commit": "20def050e099d12c079f501aa6e85b48fe8783bc",
+      "license_spdx": "MIT",
+      "oversize_files": [],
+      "parse_errors": [],
+      "python_path_count": 34,
+      "repository": "FareedKhan-dev/production-grade-agentic-system",
+      "retained_license_paths": [
+        {
+          "path": "LICENSE",
+          "sha256": "a8f977a4929a938f05e77fde7571544af48534135e4a0d0d2a9935a337b041fb"
+        }
+      ],
+      "status": "frozen"
+    },
+    {
+      "candidates": [],
+      "commit": "dee00a4df4d7142186c30bf2893406a0074faa51",
+      "error": "ValueError: repository archive exceeds preregistered 128MiB cap",
+      "license_spdx": "Apache-2.0",
+      "oversize_files": [],
+      "parse_errors": [],
+      "python_path_count": 0,
+      "repository": "souvikmajumder26/Multi-Agent-Medical-Assistant",
+      "retained_license_paths": [],
+      "status": "retrieval_error"
+    },
+    {
+      "archive_bytes": 732189,
+      "archive_sha256": "0e6de021699e73e8bce881e33eb1c645b78fde0c06bb14c820435a1204bd9c36",
+      "archive_url": "https://codeload.github.com/zamalali/DeepGit/zip/206f634acd7b3d28603caf4b8cfb27418bdc0a61",
+      "candidates": [],
+      "commit": "206f634acd7b3d28603caf4b8cfb27418bdc0a61",
+      "license_spdx": "MIT",
+      "oversize_files": [],
+      "parse_errors": [],
+      "python_path_count": 23,
+      "repository": "zamalali/DeepGit",
+      "retained_license_paths": [
+        {
+          "path": "LICENSE",
+          "sha256": "e4d657c63663e26a285464ddf9b13d38c407a45901a89021f9953dc66946d966"
+        }
+      ],
+      "status": "frozen"
+    },
+    {
+      "archive_bytes": 2301917,
+      "archive_sha256": "31dcc871ef83c20269de0db219676679c61ea2b470b7e6cb707a62811c758420",
+      "archive_url": "https://codeload.github.com/lc2panda/alphastream/zip/abc3398c49ac2ad0ff3be34ca787b03c67004ead",
+      "candidates": [
+        {
+          "bytes": 42727,
+          "commit": "abc3398c49ac2ad0ff3be34ca787b03c67004ead",
+          "path": "app/agents/coordinator.py",
+          "repository": "lc2panda/alphastream",
+          "sha256": "5cd1d7a2f946b8706aa864bf2c54ff9eb0c190494235bb89067167d9c9be101a",
+          "source_snapshot": "output/scp_strengthening/heldout/sources/lc2panda/alphastream/abc3398c49ac2ad0ff3be34ca787b03c67004ead/app/agents/coordinator.py",
+          "source_url": "https://github.com/lc2panda/alphastream/blob/abc3398c49ac2ad0ff3be34ca787b03c67004ead/app/agents/coordinator.py"
+        }
+      ],
+      "commit": "abc3398c49ac2ad0ff3be34ca787b03c67004ead",
+      "license_spdx": "MIT",
+      "oversize_files": [],
+      "parse_errors": [],
+      "python_path_count": 91,
+      "repository": "lc2panda/alphastream",
+      "retained_license_paths": [
+        {
+          "path": "LICENSE",
+          "sha256": "decfe5be3de1978173c6e287abf38d3bdcbfb9fe9463c585287e65a8ad906da8"
+        }
+      ],
+      "status": "frozen"
+    },
+    {
+      "archive_bytes": 2476656,
+      "archive_sha256": "0fda3c0918782210ab8f93c02a0e3acb3a033d04160be67a332c0c8e7dd8f694",
+      "archive_url": "https://codeload.github.com/icey1287/SuperMew/zip/e2ebabe81e066e0498bdb58000942ef5199d338c",
+      "candidates": [
+        {
+          "bytes": 51504,
+          "commit": "e2ebabe81e066e0498bdb58000942ef5199d338c",
+          "path": "backend/rag/pipeline.py",
+          "repository": "icey1287/SuperMew",
+          "sha256": "623d52d28654d83f15ed4df6327a0605fed75a106a6f6839da106a95a0dec4b7",
+          "source_snapshot": "output/scp_strengthening/heldout/sources/icey1287/SuperMew/e2ebabe81e066e0498bdb58000942ef5199d338c/backend/rag/pipeline.py",
+          "source_url": "https://github.com/icey1287/SuperMew/blob/e2ebabe81e066e0498bdb58000942ef5199d338c/backend/rag/pipeline.py"
+        }
+      ],
+      "commit": "e2ebabe81e066e0498bdb58000942ef5199d338c",
+      "license_spdx": "MIT",
+      "oversize_files": [],
+      "parse_errors": [],
+      "python_path_count": 192,
+      "repository": "icey1287/SuperMew",
+      "retained_license_paths": [
+        {
+          "path": "LICENSE",
+          "sha256": "83414b1f6a85fbcb3aa3471a37da98d8dbae5a36ffc8613546cff6682123144c"
+        }
+      ],
+      "status": "frozen"
+    },
+    {
+      "archive_bytes": 3525278,
+      "archive_sha256": "dfa5ea25fd85de411bfad41e2ac2b58754de0a4f580cfa35529235cf5f853219",
+      "archive_url": "https://codeload.github.com/agentscope-ai/agentscope-runtime/zip/22072fd7075ce0c6f43cb39509d6a14b0e60ddb5",
+      "candidates": [
+        {
+          "bytes": 3511,
+          "commit": "22072fd7075ce0c6f43cb39509d6a14b0e60ddb5",
+          "path": "examples/integrations/langgraph/run_langgraph_llm.py",
+          "repository": "agentscope-ai/agentscope-runtime",
+          "sha256": "40805b4fb3078bbf8d6d707a6475a7dbe030d1d79ba30f02e7f128633c7facc9",
+          "source_snapshot": "output/scp_strengthening/heldout/sources/agentscope-ai/agentscope-runtime/22072fd7075ce0c6f43cb39509d6a14b0e60ddb5/examples/integrations/langgraph/run_langgraph_llm.py",
+          "source_url": "https://github.com/agentscope-ai/agentscope-runtime/blob/22072fd7075ce0c6f43cb39509d6a14b0e60ddb5/examples/integrations/langgraph/run_langgraph_llm.py"
+        }
+      ],
+      "commit": "22072fd7075ce0c6f43cb39509d6a14b0e60ddb5",
+      "license_spdx": "Apache-2.0",
+      "oversize_files": [],
+      "parse_errors": [],
+      "python_path_count": 316,
+      "repository": "agentscope-ai/agentscope-runtime",
+      "retained_license_paths": [
+        {
+          "path": "LICENSE",
+          "sha256": "dcc7240d38224c9d04e9cc68f0579a985544162c33dd7256b2b8ae4ed449cf16"
+        },
+        {
+          "path": "src/agentscope_runtime/sandbox/box/mobile/adbmcp/LICENSE",
+          "sha256": "7a2a8bfc6a5c8f367a8ba6c2ecee7d9819d7e6f47f90bbfa1df69989fd879c54"
+        }
+      ],
+      "status": "frozen"
+    }
+  ],
+  "repository_count": 12,
+  "retrieval_errors": 1
+}

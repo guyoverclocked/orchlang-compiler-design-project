@@ -1,3 +1,5 @@
+> Current rc3 evidence and reproduction: [SCP_STRENGTHENING.md](SCP_STRENGTHENING.md). Earlier rc2 run identifiers below are historical records.
+
 # Software metadata for author review
 
 Prepared for **Science of Computer Programming, Software Track / Original
@@ -9,7 +11,7 @@ summary. [Verified requirements](SCP_AUTHOR_REQUIREMENTS.md).
 | Item | Prepared information |
 |---|---|
 | Software | OrchLang |
-| Candidate version | 0.5.0-rc2; Python wheel 0.5.0rc2 |
+| Candidate version | 0.5.0-rc3; Python wheel 0.5.0rc3 |
 | Article | OrchLang: Replayable Contracts for Token Usage and Request-Equivalent LLM Workflows |
 | Author from repository | Nambi Rajan M; name order, affiliation and contact require confirmation |
 | Source | https://github.com/guyoverclocked/orchlang-compiler-design-project |

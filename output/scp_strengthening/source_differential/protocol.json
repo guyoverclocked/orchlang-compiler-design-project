@@ -1,0 +1,110 @@
+{
+  "cases": [
+    {
+      "contracts": "research/scp_strengthening/source_differential/examples/multi_result_node.contracts.json",
+      "contracts_sha256": "16618665d7699016cc8bc30842f74239e103d2f4096108c705c61caa1f6222fb",
+      "name": "multi_result_node",
+      "source": "research/scp_strengthening/source_differential/examples/multi_result_node.py",
+      "source_sha256": "666b42679d5d0be84b3e8dc067ed1a84deeb570c7b9bf6ac63c2278b548ee808"
+    },
+    {
+      "contracts": "research/scp_strengthening/source_differential/examples/mutable_result_chain.contracts.json",
+      "contracts_sha256": "709ce4b988dd10fb127012328bd43e38f1d8cf41a1ef68c6ab47057b049ed73d",
+      "name": "mutable_result_chain",
+      "source": "research/scp_strengthening/source_differential/examples/mutable_result_chain.py",
+      "source_sha256": "557195fce09ccd608484e1f5fbb3c8ee76d8d5fbc6466129a7dceb2f17a7fe22"
+    },
+    {
+      "contracts": "research/scp_strengthening/source_differential/examples/token_route_eq.contracts.json",
+      "contracts_sha256": "624890855ab934dcbcaa2b2b1283cac2786558b33125c14ef0af95a6246ba0ef",
+      "name": "token_route_eq",
+      "source": "research/scp_strengthening/source_differential/examples/token_route_eq.py",
+      "source_sha256": "9c56241a3cc05d91bc77fcb7f5c4777dff2f47b688427f060cff67f3c0fd1827"
+    },
+    {
+      "contracts": "research/scp_strengthening/source_differential/examples/token_route_ge.contracts.json",
+      "contracts_sha256": "fc08d6ac626079edb1b4e331d1297633396fef21171a4b1e6cab8f6a3b5a3b05",
+      "name": "token_route_ge",
+      "source": "research/scp_strengthening/source_differential/examples/token_route_ge.py",
+      "source_sha256": "8f176ad26abfaa80bf0fe7018ba5a5f7b3110dd4673b8b4f7714aadc1021d70c"
+    },
+    {
+      "contracts": "research/scp_strengthening/source_differential/examples/token_route_gt.contracts.json",
+      "contracts_sha256": "9c205ee72f5a33a26f7f228e7d6bfc4908efc85fb3ee7c166da8acd5f3e25469",
+      "name": "token_route_gt",
+      "source": "research/scp_strengthening/source_differential/examples/token_route_gt.py",
+      "source_sha256": "f006e7a20a6b8d3614b482db81b8693d14c7d687303f366e777c54f0f0d34f51"
+    },
+    {
+      "contracts": "research/scp_strengthening/source_differential/examples/token_route_le.contracts.json",
+      "contracts_sha256": "5fca88973878e6c153b100dec0ec9d11a9eaecc0b58e7e6c6ce5254104ea30e1",
+      "name": "token_route_le",
+      "source": "research/scp_strengthening/source_differential/examples/token_route_le.py",
+      "source_sha256": "3074f692060cea1820f5fbe9701a4d9ec24730bcefc3f61c866cfa3202f4ed12"
+    },
+    {
+      "contracts": "research/scp_strengthening/source_differential/examples/token_route_lt.contracts.json",
+      "contracts_sha256": "1549c31cad5e5d8989fa5e1cfc321d718db1594f063834c1a9844ed0e2c94497",
+      "name": "token_route_lt",
+      "source": "research/scp_strengthening/source_differential/examples/token_route_lt.py",
+      "source_sha256": "e730e5de2fa1f007d156833197722270d38c36d1b8d50cf452d1d4d4ea7b95fc"
+    },
+    {
+      "contracts": "research/scp_strengthening/source_differential/examples/token_route_ne.contracts.json",
+      "contracts_sha256": "9a5a78cc530951fc2e280a51a452d504b367c8e8653dc3f90ad7b410225537ba",
+      "name": "token_route_ne",
+      "source": "research/scp_strengthening/source_differential/examples/token_route_ne.py",
+      "source_sha256": "49677165b4199a1fa8eef59b09bacda30446e37ee4aae0bb56c55cafed2128c9"
+    }
+  ],
+  "complete_max_calls": 4,
+  "criteria": "equal exact ordered request/response/usage trace and stop status; complete named source state equals projection of backend final_values; no completed state reported at cutoff",
+  "cutoff_max_calls": 1,
+  "excluded_claims": [
+    "external original source admission",
+    "all-program Python refinement",
+    "real provider usage",
+    "equality of partial eager registers to atomic source updates"
+  ],
+  "format": "orchlang-completed-state-study",
+  "frozen_at_utc": "2026-10-14T16:58:29.662153+00:00",
+  "public_text_inputs": [
+    "",
+    "ordinary public question",
+    "café 🌱 λ",
+    "same words with punctuation?!"
+  ],
+  "seeds": [
+    1,
+    17,
+    29
+  ],
+  "selection": "eight authored cases; multiple returned results, temporary local, overwritten state, all six token comparisons",
+  "tools": [
+    {
+      "path": "integrations/langgraph/backend.py",
+      "sha256": "432930e7b19e5eb165aa88f3db7a524bb155b9159581e2bfcd5e6c736da18ca3"
+    },
+    {
+      "path": "integrations/langgraph/source_frontend/extract.py",
+      "sha256": "aa3c1cef891a40480b44dd438f137a5c5f91cc6b9285c38e3cc8bd5eed65f7d9"
+    },
+    {
+      "path": "integrations/langgraph/source_frontend/export.py",
+      "sha256": "06a032143c336a96919929b417cf369ab7db62610c567e409352e4771606c4f9"
+    },
+    {
+      "path": "integrations/langgraph/source_frontend/runtime.py",
+      "sha256": "c717ca7a87748472eb03cd0a30b3365680ed59f782e99a250b112278792408b9"
+    },
+    {
+      "path": "integrations/langgraph/source_frontend/study.py",
+      "sha256": "00ea63e34f8978b2683a419c93712443f61c2fc770e938d34f4991d57edc3d9a"
+    },
+    {
+      "path": "research/scp_strengthening/source_differential/run.py",
+      "sha256": "566cc4664d88fc2b1ed667bfc69ae153bfd1736a69b91f8a256026736cfd5692"
+    }
+  ],
+  "version": 1
+}

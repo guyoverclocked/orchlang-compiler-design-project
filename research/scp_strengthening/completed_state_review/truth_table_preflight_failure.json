@@ -1,0 +1,12 @@
+{
+  "backend_execution_started": false,
+  "failure": "harness passed compact graph JSON bytes; replay certificate binds exporter pretty-canonical graph bytes",
+  "fixture_outcomes_produced": 0,
+  "format": "orchlang-completed-state-truth-table-preflight-failure",
+  "initial_protocol_sha256": "0ac32da876e814b52f9d08086578a8083867ab4599657db18ec8a88472d7160f",
+  "resolution": "use integrations.langgraph.source_frontend.export._canonical for graph and certificate bytes, then freeze amended tool hashes before execution",
+  "source_compiled_or_invoked": false,
+  "stage": "prepare_graph byte binding, before source application compilation and backend invocation",
+  "time_utc": "2026-10-14T17:07:47.285930+00:00",
+  "version": 1
+}
