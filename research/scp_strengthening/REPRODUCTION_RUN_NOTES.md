@@ -40,3 +40,7 @@ The pre-freeze audit also led to an untracked executable-source guard, a full
 ordered stage-profile gate, explicit claim/evidence membership checks and a
 required TeX/PDF build receipt. These are custody/runner repairs, separate from
 the mathematical and source-execution results.
+
+## Final frozen run
+
+All 19 ordered stages passed at code revision `8533214105aad0cc015ea1e1c2aad4057515aff7`. The executable/proof/config source fingerprint matched the Git tree before and after the run. The separate GitHub run 38612456959 passed all six jobs on this revision. This validates recorded scaling data and recorded capsule models; it does not repeat the timing run or execute the original capsule source slices. No API call or independent human reproduction occurred. The source commit retains three harmless whitespace diagnostics: the provider package initializer and two original held-out source lines, whose bytes are preserved.

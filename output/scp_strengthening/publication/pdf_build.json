@@ -1,0 +1,65 @@
+{
+  "builder": {
+    "bytes": 2975,
+    "path": "scripts/build_strengthening_pdfs.py",
+    "sha256": "b03979fccb54401432df64013522943694c0c1d901b883e4f85e167f7ee0c938"
+  },
+  "compiler": "/opt/homebrew/bin/tectonic",
+  "compiler_version": "Tectonic 0.17.0",
+  "documents": [
+    {
+      "command": [
+        "/opt/homebrew/bin/tectonic",
+        "--keep-logs",
+        "--outdir",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-scp-strengthening/output/pdf",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-scp-strengthening/submission/research/manuscript/OrchLang_SCP_Strengthened.tex"
+      ],
+      "exit_code": 0,
+      "log": {
+        "bytes": 508,
+        "path": "output/scp_strengthening/publication/OrchLang_SCP_Strengthened.build.log",
+        "sha256": "64362ebae2ede9d9e04dd885f55c819f27f9e2dbfc8d91d7dbe1ab13aebb98e9"
+      },
+      "pdf": {
+        "bytes": 68442,
+        "path": "output/pdf/OrchLang_SCP_Strengthened.pdf",
+        "sha256": "f0954fc8e0e699851e1cfac2311b8047c924cc9674f63197a4846244ba250f80"
+      },
+      "pdfinfo": "Title:           OrchLang: Replayable Analysis of Request and Usage Observations in Restricted LLM Workflows\nAuthor:          [Author names to be supplied]; \nCreator:         LaTeX with hyperref\nProducer:        xdvipdfmx (0.1)\nCreationDate:    Thu Oct 15 00:01:21 2026 IST\nCustom Metadata: no\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           6\nEncrypted:       no\nPage size:       595.28 x 841.89 pts (A4)\nPage rot:        0\nFile size:       68442 bytes\nOptimized:       no\nPDF version:     1.5\n",
+      "source": {
+        "bytes": 17158,
+        "path": "submission/research/manuscript/OrchLang_SCP_Strengthened.tex",
+        "sha256": "f133cc9b98a3a91b1a2529d3bff9ec66a940e141ad5eca21bcb7286d20f840ac"
+      }
+    },
+    {
+      "command": [
+        "/opt/homebrew/bin/tectonic",
+        "--keep-logs",
+        "--outdir",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-scp-strengthening/output/pdf",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-scp-strengthening/submission/research/manuscript/OrchLang_SCP_Technical_Supplement.tex"
+      ],
+      "exit_code": 0,
+      "log": {
+        "bytes": 530,
+        "path": "output/scp_strengthening/publication/OrchLang_SCP_Technical_Supplement.build.log",
+        "sha256": "d2b14ef703d48739a3bae2209abf8ca9e30f3afd65e531bc258d1a153e9c8192"
+      },
+      "pdf": {
+        "bytes": 112691,
+        "path": "output/pdf/OrchLang_SCP_Technical_Supplement.pdf",
+        "sha256": "91f8b6834d57ba410e11df0ab30f824226d41d6e38f3f6c3e5cc129d00878ce3"
+      },
+      "pdfinfo": "Creator:         LaTeX with hyperref\nProducer:        xdvipdfmx (0.1)\nCreationDate:    Thu Oct 15 00:01:22 2026 IST\nCustom Metadata: no\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           14\nEncrypted:       no\nPage size:       595.28 x 841.89 pts (A4)\nPage rot:        0\nFile size:       112691 bytes\nOptimized:       no\nPDF version:     1.5\n",
+      "source": {
+        "bytes": 47838,
+        "path": "submission/research/manuscript/OrchLang_SCP_Technical_Supplement.tex",
+        "sha256": "e86519ea7e4a658424c39429dd904ff97c02d40ce691ed1d6dcf5b6527949255"
+      }
+    }
+  ],
+  "scope": "recorded export command/source/PDF custody; visual QA and scientific validity are separate",
+  "status": "passed"
+}

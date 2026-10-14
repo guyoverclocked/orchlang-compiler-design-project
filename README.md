@@ -302,3 +302,7 @@ Earlier Review 2/Phase 2 submissions and September audits are historical. Their 
 ## License and attribution
 
 The project uses the [MIT license](LICENSE). All original repository commits identify Nambi Rajan M; the authenticated GitHub account matches the repository owner. MIT was selected under the owner's delegated project authority for this local release candidate. Upstream source-pattern attribution and development-tool notices are in [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md). Human authors should review the release and AI-assistance disclosure before journal submission. Journal submission and human author sign-off have not occurred. The release manifest identifies any publicly prepared candidate; a software candidate is not a reviewed journal article.
+
+## Current SCP publication candidate
+
+The rc3 [main paper](submission/research/manuscript/OrchLang_SCP_Strengthened.tex) ([PDF](output/pdf/OrchLang_SCP_Strengthened.pdf)) and [technical supplement](submission/research/manuscript/OrchLang_SCP_Technical_Supplement.tex) ([PDF](output/pdf/OrchLang_SCP_Technical_Supplement.pdf)) bind frozen code `8533214105aad0cc015ea1e1c2aad4057515aff7`. All 19 local reproduction stages and six CI jobs passed on that revision. Read the [faculty/author handoff](research/scp_strengthening/human_reproduction/SUBMISSION_HANDOFF.md) and [archive receipt](output/scp_strengthening/publication/archive_receipt.json). This is a prepared research candidate; author approval, independent human reproduction, live API calibration and journal submission remain pending.

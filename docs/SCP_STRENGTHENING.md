@@ -2,8 +2,12 @@
 
 This candidate extends the rc2 software and evidence after a further review.
 The review was input for technical investigation, not an official journal
-decision. Source and paper identity will be printed in the new manuscript and
-evidence index. The earlier rc2 release and its numerical results remain
+decision. The frozen code revision is `8533214105aad0cc015ea1e1c2aad4057515aff7`.
+The new main paper and technical supplement, written after the passing freeze,
+are in `submission/research/manuscript/OrchLang_SCP_Strengthened.tex` and
+`OrchLang_SCP_Technical_Supplement.tex`; matching PDFs are in `output/pdf/`.
+The final source/evidence archive identities are in
+`output/scp_strengthening/publication/archive_receipt.json`. The earlier rc2 release and its numerical results remain
 historical records; use the new reproduction command below for this candidate.
 
 ## Results and their subjects

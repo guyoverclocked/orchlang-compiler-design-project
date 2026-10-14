@@ -1,0 +1,56 @@
+{
+  "exact_law_results": [
+    {
+      "case": 1,
+      "certified_upper_bound": "1",
+      "kernel_pairs_checked": 42875,
+      "left_kernels": 175,
+      "max_exact_trace_tv": "1",
+      "replay_without_certify": true,
+      "right_kernels": 245
+    },
+    {
+      "case": 2,
+      "certified_upper_bound": "3/4",
+      "kernel_pairs_checked": 117649,
+      "left_kernels": 343,
+      "max_exact_trace_tv": "3/4",
+      "replay_without_certify": true,
+      "right_kernels": 343
+    },
+    {
+      "case": 3,
+      "certified_upper_bound": "1",
+      "kernel_pairs_checked": 15435,
+      "left_kernels": 63,
+      "max_exact_trace_tv": "7/8",
+      "replay_without_certify": true,
+      "right_kernels": 245
+    }
+  ],
+  "finite_grid": "all quarter-grid distributions over {a,b,__STOP__}",
+  "horizon": 2,
+  "per_row_tv_radius": "1/4",
+  "replay_boundary_probes": {
+    "prefix_only_replay": {
+      "checks_label_contains_stop_proof": false,
+      "scope": "horizon_prefix_only",
+      "termination_proved_by_contract": false
+    },
+    "shared_helper_fault_injection": {
+      "current_code_claim": false,
+      "deliberately_corrupted_helper": "_local_obligation",
+      "forged_bound": "0",
+      "independently_enumerated_true_tv": "1",
+      "replay_accepts_under_injected_shared_fault": true
+    }
+  },
+  "strict_parser_probes": {
+    "cyclic direct object": "rejected: cyclic direct object contains a cyclic object graph",
+    "deep nesting": "rejected: deep nesting exceeds the 64-level nesting limit",
+    "duplicate escaped key": "rejected: duplicate JSON object key",
+    "exponent number": "rejected: JSON floating-point/non-finite number is unsupported",
+    "invalid UTF-8": "rejected: invalid UTF-8 is not valid UTF-8",
+    "lone escaped surrogate": "rejected: lone escaped surrogate contains a non-scalar Unicode string"
+  }
+}

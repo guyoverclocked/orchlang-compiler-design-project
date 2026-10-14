@@ -1,3 +1,5 @@
+> Historical review snapshot. The prefix-only status-label issue was subsequently fixed, and the final frozen run passes 23 conservative-contract tests. The earlier findings and fault-injection limitations remain recorded below.
+
 # Second adversarial review: robust usage checker and SCP proof
 
 ## Result

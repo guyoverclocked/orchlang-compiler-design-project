@@ -3,9 +3,9 @@
 # Software metadata for author review
 
 Prepared for **Science of Computer Programming, Software Track / Original
-Software Publication**. The current guide was read on 9 October 2026. The
+Software Publication**. The earlier guide was read on 9 October 2026; author confirmation of the current guide remains pending. The
 publisher's official LaTeX metadata table is populated in
-`submission/research/manuscript/OrchLang_SCP_OSP.tex`; this document is a readable
+`submission/research/manuscript/OrchLang_SCP_Strengthened.tex`; this document is a readable
 summary. [Verified requirements](SCP_AUTHOR_REQUIREMENTS.md).
 
 | Item | Prepared information |
