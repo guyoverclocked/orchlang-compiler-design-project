@@ -28,6 +28,13 @@ MAX_ITEMS = 100_000
 MAX_TOKEN = 2**64 - 2
 MAX_VALUE_BYTES = 1024 * 1024
 
+# LangGraph 1.2.14 reserves these public START/END sentinel values and the
+# namespace separators used internally by its Pregel runtime. Keep source
+# names within that runtime's node-name domain before lowering them to private
+# graph-state names.
+LANGGRAPH_RESERVED_NODE_NAMES = {"__start__", "__end__"}
+LANGGRAPH_RESERVED_NODE_NAME_CHARACTERS = {"|", ":"}
+
 
 class FrontendError(ValueError):
     """Source or contract is outside the explicitly supported subset."""
@@ -377,6 +384,10 @@ class _Extractor:
                     or not isinstance(statement.target, ast.Name) or not isinstance(statement.annotation, ast.Name) \
                     or statement.annotation.id not in ("str", "bool"):
                 raise FrontendError(f"state fields must have plain str/bool annotations at {_location(statement)}")
+            if statement.annotation.id in self.functions:
+                raise FrontendError(
+                    f"TypedDict annotation {statement.annotation.id!r} is shadowed by a top-level function"
+                )
             key = _identifier(statement.target.id, "state field")
             if key in fields:
                 raise FrontendError(f"duplicate state field {key!r}")
@@ -384,6 +395,17 @@ class _Extractor:
         self.state_fields = fields
 
     def _validate_state(self) -> None:
+        # In Python 3.14, TypedDict's annotation thunk can resolve names from
+        # the module globals when the runtime later asks for type hints. Thus
+        # a later `def str(...)`/`def bool(...)` can shadow the apparent
+        # builtin annotation too; validating only names already seen while
+        # visiting the class is insufficient.
+        for field_name, field_type in self.state_fields.items():
+            annotation_name = "str" if field_type == "text" else "bool"
+            if annotation_name in self.functions:
+                raise FrontendError(
+                    f"TypedDict annotation {annotation_name!r} is shadowed by a top-level function"
+                )
         inputs = self.contracts["inputs"]
         if set(inputs) - self.state_fields.keys():
             raise FrontendError(f"contract inputs absent from TypedDict: {sorted(set(inputs) - self.state_fields.keys())}")
@@ -414,6 +436,13 @@ class _Extractor:
         used_functions: set[str] = set()
         for source_name, function_name, syntax in self.node_specs:
             _text(source_name, "node name", nonempty=True)
+            if source_name in LANGGRAPH_RESERVED_NODE_NAMES or any(
+                character in source_name
+                for character in LANGGRAPH_RESERVED_NODE_NAME_CHARACTERS
+            ):
+                raise FrontendError(
+                    f"node name {source_name!r} is reserved by the supported LangGraph runtime"
+                )
             if source_name in nodes:
                 raise FrontendError(f"duplicate StateGraph node {source_name!r}")
             if function_name not in self.functions:

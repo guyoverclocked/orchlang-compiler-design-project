@@ -4,14 +4,19 @@ from __future__ import annotations
 
 import copy
 import json
+from fractions import Fraction
 from pathlib import Path
 import sys
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / "audit"))
 from evaluate_probabilistic_channels import SCENARIOS, cases  # noqa: E402
-from replay_trace_equivalence import replay_report  # noqa: E402
+import replay_trace_equivalence as replay_module  # noqa: E402
+from replay_trace_equivalence import (  # noqa: E402
+    TraceReplayLimit, _Meter, _basis_pair, _build_matrices, replay_report,
+)
 from trace_equivalence import analyze  # noqa: E402
 
 
@@ -65,6 +70,29 @@ class TraceEquivalenceReplayTests(unittest.TestCase):
         self.assertTrue(attestation["all_finite_horizons_claim"])
         self.assertEqual(attestation["pair_count"], 1)
 
+    def test_legacy_version_one_equal_certificate_still_replays(self):
+        legacy = copy.deepcopy(self.equal_report)
+        legacy["version"] = 1
+        legacy.pop("diagnostics")
+        legacy.pop("telemetry")
+        attestation = replay_report(legacy, self.equal_graph_raw, self.equal_kernel_raw)
+        self.assertEqual(attestation["status"], "verified")
+        self.assertEqual(attestation["decision"], "proved_equal")
+
+    def test_v2_success_report_requires_null_diagnostics_and_bounded_telemetry(self):
+        tampered = copy.deepcopy(self.equal_report)
+        tampered["diagnostics"] = {"reason": "STATE_CAP"}
+        self.assertEqual(replay_report(tampered, self.equal_graph_raw,
+                                       self.equal_kernel_raw)["status"], "rejected")
+        tampered = copy.deepcopy(self.equal_report)
+        tampered["telemetry"]["matrix_entries_used"] = 10**12
+        self.assertEqual(replay_report(tampered, self.equal_graph_raw,
+                                       self.equal_kernel_raw)["status"], "rejected")
+        tampered = copy.deepcopy(self.equal_report)
+        tampered["telemetry"] = None
+        self.assertEqual(replay_report(tampered, self.equal_graph_raw,
+                                       self.equal_kernel_raw)["status"], "rejected")
+
     def test_exact_unequal_witness_replays(self):
         self.assertEqual(self.unequal_report["status"], "unequal")
         attestation = replay_report(
@@ -101,6 +129,74 @@ class TraceEquivalenceReplayTests(unittest.TestCase):
         self.assertEqual(attestation["status"], "unknown")
         self.assertIsNone(attestation["decision"])
         self.assertFalse(attestation["all_finite_horizons_claim"])
+
+    def test_sparse_adjacency_cap_precedes_edge_tuple_allocation(self):
+        class ProbedEdgeRows:
+            def __init__(self):
+                self.rows = {
+                    "left": [("label", "right", Fraction(1))],
+                    "right": [("label", "left", Fraction(1))],
+                }
+                self.items_iterated = False
+
+            def values(self):
+                return self.rows.values()
+
+            def items(self):
+                self.items_iterated = True
+                return self.rows.items()
+
+        edge_rows = ProbedEdgeRows()
+        meter = _Meter(max_matrix_entries=1, max_work_bytes=10_000,
+                       rational_bits=8192)
+        with self.assertRaises(TraceReplayLimit):
+            _build_matrices({"edge_rows": edge_rows}, ["left", "right"], [], meter)
+        self.assertFalse(edge_rows.items_iterated)
+        self.assertEqual(meter.matrix_entries, 0)
+        self.assertEqual(meter.work_bytes, 0)
+
+    def test_basis_rows_reserve_before_parsing_and_are_charged_once(self):
+        pair = {
+            "left_scenario": 1, "right_scenario": 0,
+            "left_state_id": "S000001", "right_state_id": "S000000",
+            "status": "equal",
+            "basis": [{"word": [], "row": ["1"], "stop_dot": "0",
+                       "nonterminal_dot": "0"}],
+            "rank": 1, "initial_difference_in_span": True,
+            "closed_under_label_matrices": True, "stop_outputs_zero": True,
+            "nonterminal_outputs_zero": True, "max_word_length": 0,
+        }
+        parsed = []
+        original_fraction = replay_module._fraction
+
+        def observe_fraction(value, label, bits):
+            parsed.append(label)
+            return original_fraction(value, label, bits)
+
+        too_tight = _Meter(max_matrix_entries=100, max_work_bytes=100,
+                           rational_bits=8192, initial_work_bytes=95)
+        with patch.object(replay_module, "_fraction", side_effect=observe_fraction):
+            with self.assertRaises(TraceReplayLimit):
+                _basis_pair(
+                    pair, pair_label="pair", initial=[Fraction(1)], dimension=1,
+                    alphabet_keys=set(), matrices={}, stop=[Fraction(0)],
+                    nonterminal=[Fraction(0)], meter=too_tight, max_basis_rows=1,
+                )
+        self.assertEqual(parsed, [])
+        self.assertEqual(too_tight.matrix_entries, 0)
+        self.assertEqual(too_tight.work_bytes, 95)
+
+        enough = _Meter(max_matrix_entries=100, max_work_bytes=10_000,
+                        rational_bits=8192)
+        result = _basis_pair(
+            pair, pair_label="pair", initial=[Fraction(1)], dimension=1,
+            alphabet_keys=set(), matrices={}, stop=[Fraction(0)],
+            nonterminal=[Fraction(0)], meter=enough, max_basis_rows=1,
+        )
+        self.assertEqual(result["rank"], 1)
+        # One retained parsed row plus distinct reduction, echelon, and
+        # initial-membership vectors; each array allocation is charged once.
+        self.assertEqual(enough.matrix_entries, 4)
 
     def test_tampered_basis_row_is_rejected(self):
         report = copy.deepcopy(self.equal_report)

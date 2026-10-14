@@ -23,12 +23,12 @@
       "fresh_unknown_probe": {
         "certificate": {
           "path": "bench/results/trace_equivalence/aggregate_hides_order.cap-unknown.certificate.json",
-          "sha256": "cd5f1bb6a39a4ca194715ec12b067c2cf5dccca0ce6183a4a6a3fe4ae8079afe"
+          "sha256": "dc8f97db825537cebeede3402dfd4ba9c3db748a1bdfa0824ea9aa2f2b199431"
         },
         "independent_attestation": {
           "decision": null,
           "path": "bench/results/trace_equivalence/aggregate_hides_order.cap-unknown.attestation.json",
-          "sha256": "d31f4402cf341b16ba7e45fad636e2944516fc6841fada5b39a384a76879ab74",
+          "sha256": "cf5320b9007ae12178feda9e4afc6393d6afc9feb8b3c3b80ef58a405b0277fa",
           "status": "unknown"
         },
         "producer_max_states": 1,
@@ -42,7 +42,7 @@
         "decision": "unequal",
         "pair_count": 1,
         "path": "bench/results/trace_equivalence/aggregate_hides_order.attestation.json",
-        "sha256": "df826a811c18cb86c232bb59f638cab7e95390272b7cc50967d87a78aae80bce",
+        "sha256": "2f546627fbb4d10d6b7d212b398fa914b322875a023fde0b3b3bdb9a8d84c00c",
         "status": "verified"
       },
       "input_hashes": {
@@ -73,11 +73,11 @@
           "status": "rejected"
         },
         "path": "bench/results/trace_equivalence/aggregate_hides_order.tampered.json",
-        "sha256": "81f46091a234088661d5096225ae415614513d8dd9578b5132822e7191c3508a"
+        "sha256": "ec2b3dda5174986a150a17558e0ce7d2145608e92aaae38765eec39beb354a3f"
       },
       "trace_certificate": {
         "path": "bench/results/trace_equivalence/aggregate_hides_order.certificate.json",
-        "sha256": "e9dc2436e69aebe07d9d26b807538e296fb807905b6c5e2da620932008d63c16",
+        "sha256": "6852a1e503dadabf1e777937f7a8052c9fb837282f4b5a6d13243f4ce45cf7cf",
         "state_count": 6,
         "transition_count": 4
       }
@@ -98,12 +98,12 @@
       "fresh_unknown_probe": {
         "certificate": {
           "path": "bench/results/trace_equivalence/biased_productive_cycle.cap-unknown.certificate.json",
-          "sha256": "4c2737fa222e20bfeb59f31d8c543b957c91262590011a0996718a9cfaf0ebf7"
+          "sha256": "a7ef6fa74da938f54ad16e04b842b9b356051839f51e42dac6bfde5b203dc557"
         },
         "independent_attestation": {
           "decision": null,
           "path": "bench/results/trace_equivalence/biased_productive_cycle.cap-unknown.attestation.json",
-          "sha256": "30ab7d15e08a7ddb72447f62029501c287a1762cf2bc2a6f21e51219b4879c7a",
+          "sha256": "e94727272c8d1ae7551d3aa5fbfa706d5812b3908103297a76dd512793165c7e",
           "status": "unknown"
         },
         "producer_max_states": 1,
@@ -117,7 +117,7 @@
         "decision": "unequal",
         "pair_count": 1,
         "path": "bench/results/trace_equivalence/biased_productive_cycle.attestation.json",
-        "sha256": "8e15d9feed21ac94ba9d3510b86cb527509f249e7e207c5aa128abb3b20dc0ef",
+        "sha256": "9082a552769ecc57c1f9f645ddf21a8c98ef65e6b181faeb9416bd53039d5c27",
         "status": "verified"
       },
       "input_hashes": {
@@ -148,11 +148,11 @@
           "status": "rejected"
         },
         "path": "bench/results/trace_equivalence/biased_productive_cycle.tampered.json",
-        "sha256": "0c6343cfcbf6813e5db8d4ccad731e7c358386a467175aa4c87547e76bfd1910"
+        "sha256": "2bc4c99240c76d7948884deccee8470b92e10d2cf4f3f7a91f07b4a9a5791d7f"
       },
       "trace_certificate": {
         "path": "bench/results/trace_equivalence/biased_productive_cycle.certificate.json",
-        "sha256": "e8addf054e774464f3f082c6bf4d5bd66b9b724c1cf5d36f22868e8e441a2438",
+        "sha256": "4bc3ee2df19fe9d8177d043c9eaa874cfe28166ea8bc2196b1dd246d5357208f",
         "state_count": 134,
         "transition_count": 136
       }
@@ -172,12 +172,12 @@
       "fresh_unknown_probe": {
         "certificate": {
           "path": "bench/results/trace_equivalence/canonical_alias_chain.cap-unknown.certificate.json",
-          "sha256": "a9f03c7e5fa06da4e465f1aa7e16093eabe6a8e63277ae5dcb51c0f76eed3303"
+          "sha256": "da596ac9acb0f17b69520267bf2a78296c302226602dc83004d2cce2c31bcdda"
         },
         "independent_attestation": {
           "decision": null,
           "path": "bench/results/trace_equivalence/canonical_alias_chain.cap-unknown.attestation.json",
-          "sha256": "040f4b0c6212090de450f67ec54274f4730bfc7de3f8bfa6f09b29cc772c3ff2",
+          "sha256": "f92516f93a70912db95d618b54f37a0c82e8971e2d3ef2a857708aeb1e3c59c8",
           "status": "unknown"
         },
         "producer_max_states": 1,
@@ -191,7 +191,7 @@
         "decision": "proved_equal",
         "pair_count": 1,
         "path": "bench/results/trace_equivalence/canonical_alias_chain.attestation.json",
-        "sha256": "8a01759cd0c9502b4f52dff16d4db7d05b19f708a7e09fe7426ef4a57ba1d39f",
+        "sha256": "ece2ab9a938317910aaf8a3ef02891450d07e6135d6e245e8a666fd9159c9925",
         "status": "verified"
       },
       "input_hashes": {
@@ -222,11 +222,11 @@
           "status": "rejected"
         },
         "path": "bench/results/trace_equivalence/canonical_alias_chain.tampered.json",
-        "sha256": "6dd36bb2c585c32f40e667bc84b18a36ee88d01c157728d55b011c0858e33c90"
+        "sha256": "c6b64a0939c20907f472a3b3f1fd38eaaaace244eedd4123962f68cbf9104ace"
       },
       "trace_certificate": {
         "path": "bench/results/trace_equivalence/canonical_alias_chain.certificate.json",
-        "sha256": "615a9960ec178fea3edd019da19bf86339ac36ff0867f9d688cf5c6453e24c7d",
+        "sha256": "4bd775f00a8bf3bfbaeb1d98849a029ba6c72bedd493d1c73eaf244ecbb639d7",
         "state_count": 14,
         "transition_count": 12
       }
@@ -247,12 +247,12 @@
       "fresh_unknown_probe": {
         "certificate": {
           "path": "bench/results/trace_equivalence/changed_public_context.cap-unknown.certificate.json",
-          "sha256": "19baa89238bc3ec08f0caaa0b6b6894ab1e6c09dabb7a2b71ed4f4408356b39c"
+          "sha256": "b8741b60e395c4984132d3aca2c28d10ec49e051adbe08b020d495f266042a1b"
         },
         "independent_attestation": {
           "decision": null,
           "path": "bench/results/trace_equivalence/changed_public_context.cap-unknown.attestation.json",
-          "sha256": "3aa0407fb6d5d45eb822db38874312143d71379ad8aab80c08e3cfe12c908f71",
+          "sha256": "b701e823570574f82859a359ed5e719f81caf3e788cc32414f9c05ce3915899d",
           "status": "unknown"
         },
         "producer_max_states": 1,
@@ -266,7 +266,7 @@
         "decision": "unequal",
         "pair_count": 1,
         "path": "bench/results/trace_equivalence/changed_public_context.attestation.json",
-        "sha256": "96c4346316b4b324e7761e6c9b72c4cfb90a7e9d93b3c2139c692cc84d651bbf",
+        "sha256": "eb67a49f18d66ec3ece247df9e1890fc86e1bc638711cbe1ef7808a578d02ed9",
         "status": "verified"
       },
       "input_hashes": {
@@ -299,11 +299,11 @@
           "status": "rejected"
         },
         "path": "bench/results/trace_equivalence/changed_public_context.tampered.json",
-        "sha256": "f6dfc64da9899591eed3ce21b067bb8a7bbb9e99660e0cbb43c312e7c7219508"
+        "sha256": "cbaeefae9f6148b155752c06c42cbc19f2635621e8c763d957d6eef2221a2eb4"
       },
       "trace_certificate": {
         "path": "bench/results/trace_equivalence/changed_public_context.certificate.json",
-        "sha256": "3b51950ed5032366b1fb9ac6d26e5ddb25dd820f45ac3337ddc6d606ebac3fc0",
+        "sha256": "83c61c10645aea41caaa7a172de5f5a4bae9adaea603e23b25928108a0d1e04f",
         "state_count": 6,
         "transition_count": 4
       }
@@ -323,12 +323,12 @@
       "fresh_unknown_probe": {
         "certificate": {
           "path": "bench/results/trace_equivalence/different_requests_equal_usage.cap-unknown.certificate.json",
-          "sha256": "4cf08a9b2797f53ef4286f1e5a4367e6e2bc999112ddb47cd0e3f3d880bf6edf"
+          "sha256": "d9303c23e50c618df03f4c123124ac85f1e4809515f9212eb1c7c2982dffdd40"
         },
         "independent_attestation": {
           "decision": null,
           "path": "bench/results/trace_equivalence/different_requests_equal_usage.cap-unknown.attestation.json",
-          "sha256": "eb99e7570d9e78231df12afab5ee36a18664e786e8ce125061b61e02b650a68b",
+          "sha256": "34ce36f9a9ad4e0fc43c0bef5bdfeff9e8acee5dbdebbdcd73600562592838aa",
           "status": "unknown"
         },
         "producer_max_states": 1,
@@ -342,7 +342,7 @@
         "decision": "proved_equal",
         "pair_count": 1,
         "path": "bench/results/trace_equivalence/different_requests_equal_usage.attestation.json",
-        "sha256": "33524072ed8465aa7f9e5cf06524f9021b22196330242402924ec9084822224d",
+        "sha256": "9ffb9c47f0813c07a7683cf6826a7ed7a7345cc19909207caa5575aa2cbaff23",
         "status": "verified"
       },
       "input_hashes": {
@@ -373,11 +373,11 @@
           "status": "rejected"
         },
         "path": "bench/results/trace_equivalence/different_requests_equal_usage.tampered.json",
-        "sha256": "0168c2b7ab2c34644527043ead823edd8eef95fec3ed1ad540b54afec5b39b08"
+        "sha256": "9344c4501d833e84ef884881baddfea64ec4606c00ca31dd6b56b54c6037b935"
       },
       "trace_certificate": {
         "path": "bench/results/trace_equivalence/different_requests_equal_usage.certificate.json",
-        "sha256": "cc629db67ddd9298e77b91da800ffb1d3eddb1c02b337d8486cce29583372a15",
+        "sha256": "0102ecea131ecbc3e216ac7fb05deb7cf97830048e64d9ac196001d8a6b679c8",
         "state_count": 6,
         "transition_count": 4
       }
@@ -397,12 +397,12 @@
       "fresh_unknown_probe": {
         "certificate": {
           "path": "bench/results/trace_equivalence/equivalent_dependent_chain.cap-unknown.certificate.json",
-          "sha256": "7e20402b4ba871d94b66dac3ea09a213db181dedc78f0a553b3c6ddf8dc95ac5"
+          "sha256": "c0958e21668dab4c3a1608548c6ed3bff24dc08549f401517e17e314e3c2d222"
         },
         "independent_attestation": {
           "decision": null,
           "path": "bench/results/trace_equivalence/equivalent_dependent_chain.cap-unknown.attestation.json",
-          "sha256": "95165a4ec61bac0b2cb9d429ab8ec2db393b1db01db3869722e2da7b5ff01b92",
+          "sha256": "58c12b9607164a3e23bf464f30a55f21fed6cc4c64cd5c284f0efa95ce670933",
           "status": "unknown"
         },
         "producer_max_states": 1,
@@ -416,7 +416,7 @@
         "decision": "proved_equal",
         "pair_count": 1,
         "path": "bench/results/trace_equivalence/equivalent_dependent_chain.attestation.json",
-        "sha256": "fccbb337170f1db84ae1e8e99972162ff4754f1350027c9ec885377855102c40",
+        "sha256": "bb4f4e3cb1c0af5f9811ef68582c9fea5956180007e09d02ed4339eb40811fa5",
         "status": "verified"
       },
       "input_hashes": {
@@ -447,11 +447,11 @@
           "status": "rejected"
         },
         "path": "bench/results/trace_equivalence/equivalent_dependent_chain.tampered.json",
-        "sha256": "ed5602307b996dcd3a2dbd14b8739c02193b0ef89774bcd985d714f26f965ddf"
+        "sha256": "952669073a05016f676a12dfea8102d4bd7e387037779c2d0054baa38f331d2a"
       },
       "trace_certificate": {
         "path": "bench/results/trace_equivalence/equivalent_dependent_chain.certificate.json",
-        "sha256": "c254e795986296b47bcd95369d704849cfc4e4ba7253d72e37e50de673caafcb",
+        "sha256": "deb9a571de94b88d17d00ecdd02aeaf4758bcf1379ec9819c7cacae0168830c8",
         "state_count": 14,
         "transition_count": 12
       }
@@ -471,12 +471,12 @@
       "fresh_unknown_probe": {
         "certificate": {
           "path": "bench/results/trace_equivalence/fixed_public_context.cap-unknown.certificate.json",
-          "sha256": "5901aae2c759afbd79c79819aa345304ccbb48b887a9082b52cd800c83b76551"
+          "sha256": "32636b53b0cad87137da3bfc60abda15a75a628322702d14ed6c5fef5d3beb87"
         },
         "independent_attestation": {
           "decision": null,
           "path": "bench/results/trace_equivalence/fixed_public_context.cap-unknown.attestation.json",
-          "sha256": "bb5250849f6789e9986096f69060e928e345bc7c4a098981fad025afdb037642",
+          "sha256": "ffd83a6ebf42a94337faf21c11a196578410d4d56e67feb5ba5890a2db4336a3",
           "status": "unknown"
         },
         "producer_max_states": 1,
@@ -490,7 +490,7 @@
         "decision": "proved_equal",
         "pair_count": 1,
         "path": "bench/results/trace_equivalence/fixed_public_context.attestation.json",
-        "sha256": "44c32202acc6a989dd0b1f9ffa00ff96a1a81707fac56e61d70ebe3da3437d13",
+        "sha256": "fa541e58419562d81aaac453d7b11b7a572ebd20c192bc2698c2444a81286aed",
         "status": "verified"
       },
       "input_hashes": {
@@ -523,11 +523,11 @@
           "status": "rejected"
         },
         "path": "bench/results/trace_equivalence/fixed_public_context.tampered.json",
-        "sha256": "85d72b918049d51de64c0e8be7214abb5b4e3dd8122438cb2b48940217edd4e0"
+        "sha256": "a11db12b8871accd03f7637ed6f9fbc55f31d106ee8718d1b765a0c55086a2ac"
       },
       "trace_certificate": {
         "path": "bench/results/trace_equivalence/fixed_public_context.certificate.json",
-        "sha256": "bc6a91c5f5e6d4a38f6238fd486b18a91707bf58d63633e973b49e6ef625e7bd",
+        "sha256": "b67fe9f2d1c39cfee6b73357505638bb8e24118e3df5cb03cce76221c95c2c83",
         "state_count": 6,
         "transition_count": 4
       }
@@ -548,12 +548,12 @@
       "fresh_unknown_probe": {
         "certificate": {
           "path": "bench/results/trace_equivalence/history_conditioned_usage.cap-unknown.certificate.json",
-          "sha256": "7b22bbb238942d655e8e2f1c28354d75e7057bad1e9a3cb41efe22641ad0fad8"
+          "sha256": "b7e8a560f723cc9b41b43bc9771fde0e5b3d9e569669c5f281a8919a9bd7f774"
         },
         "independent_attestation": {
           "decision": null,
           "path": "bench/results/trace_equivalence/history_conditioned_usage.cap-unknown.attestation.json",
-          "sha256": "2ee37450d7828903772c2f5d0b950aa82bd8e2ebcbfe80d5630e1277a8e25002",
+          "sha256": "27b61207b60e7a78cf3f69c14584a1f8a8e68453c9c78eb9d62bb40be23a2a1e",
           "status": "unknown"
         },
         "producer_max_states": 1,
@@ -567,7 +567,7 @@
         "decision": "unequal",
         "pair_count": 1,
         "path": "bench/results/trace_equivalence/history_conditioned_usage.attestation.json",
-        "sha256": "b05f22529721286c00fba309602774642bb3e7b9fbe95945193e6d364ffd9bef",
+        "sha256": "efb5cce21c33f690a7f166fed2cd9d1291052022f4e0de4eca02b1189d447b5c",
         "status": "verified"
       },
       "input_hashes": {
@@ -598,11 +598,11 @@
           "status": "rejected"
         },
         "path": "bench/results/trace_equivalence/history_conditioned_usage.tampered.json",
-        "sha256": "b23c587e632300e5486b837a5cb3ead3e5abb98619d7d7137b19ab27936af1fc"
+        "sha256": "2f3c081b93d97c0cf9896287c483ae075f33ae589162ba56d7da458d341045b2"
       },
       "trace_certificate": {
         "path": "bench/results/trace_equivalence/history_conditioned_usage.certificate.json",
-        "sha256": "268503ff0c218f5d6bc30080f2ef0910c4a01e96b0ece07126b8f817fc88829d",
+        "sha256": "cc29dd05522e23a8a1cdcdd4038d4f97099b0c7d6bc9d1443eb09d144f179503",
         "state_count": 6,
         "transition_count": 4
       }
@@ -622,12 +622,12 @@
       "fresh_unknown_probe": {
         "certificate": {
           "path": "bench/results/trace_equivalence/merge_stress_productive_cycle.cap-unknown.certificate.json",
-          "sha256": "85303c3acf6680f62e9123e2f6a3d964adbec0d8b3e3dbb5c98815720bbe7216"
+          "sha256": "0606938da6a226b3e09c89a104dd589aa4aa908cb0430d28fd33122b3fbbf91a"
         },
         "independent_attestation": {
           "decision": null,
           "path": "bench/results/trace_equivalence/merge_stress_productive_cycle.cap-unknown.attestation.json",
-          "sha256": "62adb3a275697fff9e3c3d547727fcf821134493c9b0842ac3a242a522d5756a",
+          "sha256": "5ccdf60cc0ef15c9701cce57a797a55713f80510bc3085f61d629504eae1bb6a",
           "status": "unknown"
         },
         "producer_max_states": 1,
@@ -641,7 +641,7 @@
         "decision": "proved_equal",
         "pair_count": 1,
         "path": "bench/results/trace_equivalence/merge_stress_productive_cycle.attestation.json",
-        "sha256": "a75dd902e050c85159ce0bab853f7852a9068c4f5a445d9662be244b139d34e5",
+        "sha256": "889da3d73a037fc8db1ea039799ea028a3f6f411923b74caa52f63ba7383be64",
         "status": "verified"
       },
       "input_hashes": {
@@ -672,11 +672,11 @@
           "status": "rejected"
         },
         "path": "bench/results/trace_equivalence/merge_stress_productive_cycle.tampered.json",
-        "sha256": "aee85f2ea54433078cdd900aff647ee37d86acc023da897d4c7e219c7dbd4d01"
+        "sha256": "4045ff1da2679329dfce12ed721a3e787cb4d3c147e02e2f487019352c7fe3c1"
       },
       "trace_certificate": {
         "path": "bench/results/trace_equivalence/merge_stress_productive_cycle.certificate.json",
-        "sha256": "59355695bdfcc9b4350f9e8246c1e654c104bbc4582da8c956c9a09c5a228e19",
+        "sha256": "4ee086342cbd021b742850a44032655b280c6f7c97c6fc8f109db87a1224b3ff",
         "state_count": 134,
         "transition_count": 268
       }
@@ -697,12 +697,12 @@
       "fresh_unknown_probe": {
         "certificate": {
           "path": "bench/results/trace_equivalence/noisy_usage_bit.cap-unknown.certificate.json",
-          "sha256": "cdf0804594d57c07644fff63ecf6a4b966f7c0044550e603c35bd93a92b4dc2a"
+          "sha256": "b10a62d6e6b5ec1afb00d25aee65d5d4784d717777bfe53b9d0c8857f2cf539e"
         },
         "independent_attestation": {
           "decision": null,
           "path": "bench/results/trace_equivalence/noisy_usage_bit.cap-unknown.attestation.json",
-          "sha256": "ac246204f5022cf36595ef2192e5fda004312c20c186c419d76b3db4ebbf0c59",
+          "sha256": "a6ff66c6607049693c9940de5171fe339ba9c61c90070bc4fd8291756b477047",
           "status": "unknown"
         },
         "producer_max_states": 1,
@@ -716,7 +716,7 @@
         "decision": "unequal",
         "pair_count": 1,
         "path": "bench/results/trace_equivalence/noisy_usage_bit.attestation.json",
-        "sha256": "f1e84ec60bf978e5c7beb36965bf95055179d4cc0b7186afff0881456bc412fd",
+        "sha256": "9f5a7ef2f62c0740a0d71bf72ec4e983c1450f06d15289b6228c0410f405319d",
         "status": "verified"
       },
       "input_hashes": {
@@ -747,11 +747,11 @@
           "status": "rejected"
         },
         "path": "bench/results/trace_equivalence/noisy_usage_bit.tampered.json",
-        "sha256": "149feb083d69ee75bd705fab7bf463b8c2309142faffa94c26860a1a8a474a92"
+        "sha256": "d031d6ed305d0d921b29b3887045b1ede7aed6f32e48f6e5ecf4c971e4b7509c"
       },
       "trace_certificate": {
         "path": "bench/results/trace_equivalence/noisy_usage_bit.certificate.json",
-        "sha256": "ca972f6d6345861c3a5717f910746fbb654fd3d2a571c539319c96aa0a3669f3",
+        "sha256": "f0f94f28dbdf1f5491b38cd39f07492fbf6d6e3aad78c88013fd41b7fc430ebd",
         "state_count": 6,
         "transition_count": 4
       }
@@ -772,12 +772,12 @@
       "fresh_unknown_probe": {
         "certificate": {
           "path": "bench/results/trace_equivalence/same_mean_distinct_laws.cap-unknown.certificate.json",
-          "sha256": "5f399782f60e9d7c62e58b942d3b3a86fc9ce4cea4107fdda48aa94e19bc5a50"
+          "sha256": "5911666402d6299cf4bcf287a3026050d57e8a0bd9d3f4ac2df40626b8cd53b2"
         },
         "independent_attestation": {
           "decision": null,
           "path": "bench/results/trace_equivalence/same_mean_distinct_laws.cap-unknown.attestation.json",
-          "sha256": "40507c38451bfc348afab8bda9b53116db4f77a40bbce2de4aa8d6453d7466e3",
+          "sha256": "1835445af3edd89eecf660eaa35b916e68ee1212300d72ce2d806011ea89e03c",
           "status": "unknown"
         },
         "producer_max_states": 1,
@@ -791,7 +791,7 @@
         "decision": "unequal",
         "pair_count": 1,
         "path": "bench/results/trace_equivalence/same_mean_distinct_laws.attestation.json",
-        "sha256": "11777d1c3a112a3e3e55ce73d173ca23bf006f8f837a3d75d0e69b7f5ad97f1c",
+        "sha256": "f0e8c2924795faf0dbedf2b4e197d42627cd0d7e9ccd464c549446d4db0fd19b",
         "status": "verified"
       },
       "input_hashes": {
@@ -822,11 +822,11 @@
           "status": "rejected"
         },
         "path": "bench/results/trace_equivalence/same_mean_distinct_laws.tampered.json",
-        "sha256": "b176a4f9733564b927a5005dd741265e0e14f486093bb002385064db5ba7a83f"
+        "sha256": "be78e66fb009586495d915591d77634ee015aa8d3d8e7b2a3b7a9fb41a7da2e9"
       },
       "trace_certificate": {
         "path": "bench/results/trace_equivalence/same_mean_distinct_laws.certificate.json",
-        "sha256": "4a67013ef006192b12acaa070c5fa40176cd11fef514829a44d87ac29fc6862c",
+        "sha256": "874ea51af2be0ffdd8b42a305768c74e186345df2731d63be640fc8d1145541d",
         "state_count": 5,
         "transition_count": 3
       }
@@ -846,12 +846,12 @@
       "fresh_unknown_probe": {
         "certificate": {
           "path": "bench/results/trace_equivalence/trace_equal_not_bisimilar.cap-unknown.certificate.json",
-          "sha256": "65710e3749a6e128871ece1c48e552dba4c208822f8e57932b3cb6f4d5a7d1d6"
+          "sha256": "177ce2b376da5f0a54d0e323c0b60a4444b0ed4bb9f7ce9b4728a11626bf4ef0"
         },
         "independent_attestation": {
           "decision": null,
           "path": "bench/results/trace_equivalence/trace_equal_not_bisimilar.cap-unknown.attestation.json",
-          "sha256": "4d42ebe90ad196482f232339d1d7cad42a12405a4757c82917fe01aee0c7f68d",
+          "sha256": "e43490194d3a30993716241c58b13bc0a0b9e717256a26f24164e5d2e7d5bc2c",
           "status": "unknown"
         },
         "producer_max_states": 1,
@@ -865,7 +865,7 @@
         "decision": "proved_equal",
         "pair_count": 1,
         "path": "bench/results/trace_equivalence/trace_equal_not_bisimilar.attestation.json",
-        "sha256": "f233e80d1e0f9b84667f57429bebf69aae2d043777d239c55d88656c2e2d700d",
+        "sha256": "599a36cbcf69ab01e429089bf272bb9c51527536fba855989f7df2de35db1007",
         "status": "verified"
       },
       "input_hashes": {
@@ -896,11 +896,11 @@
           "status": "rejected"
         },
         "path": "bench/results/trace_equivalence/trace_equal_not_bisimilar.tampered.json",
-        "sha256": "b900f537511611c437682cbe0203a4ae9813d7d75a4e9276c156fcc88a58df44"
+        "sha256": "0708738bbfe685ad2f7fdb8d62eb62a9746086efd9a4bfc5a4066f92e53edef5"
       },
       "trace_certificate": {
         "path": "bench/results/trace_equivalence/trace_equal_not_bisimilar.certificate.json",
-        "sha256": "d9f181e129e896b3574a6599a94a1529f9405bed40542720a0773d50c9f5ca36",
+        "sha256": "746874d9d0f0a0e1179549dcd86ed8d040ba9d7981aa05ca81f6efc4248dd69c",
         "state_count": 10,
         "transition_count": 10
       }
@@ -932,16 +932,16 @@
   },
   "method": "producer-generated exact weighted-automaton certificates are independently checked by reconstructing the finite semantic closure and verifying exact row-space certificates or exact finite distinguishing witnesses",
   "runtime": {
-    "python": "3.12.14"
+    "python": "3.14.6"
   },
   "scope": "12 controlled authored graph/kernel fixtures; finite rational successful-outcome models; exact ordered call-usage traces, no real providers or adoption study",
   "source_hashes": {
     "evaluation_driver": "1b640526931de261d8aaf9943b7fcd858bcda5b0d8fdf23026814f026c74719a",
     "finite_channel_dp": "45380e75cdcc4d6f285a0027cbb85dab97d22dff11c5c94d3940b6813e8dce00",
     "independent_closure_replayer": "1b987ad220e733a4e1be79b7391bce245d8d7e56bc515bccec051918a8161407",
-    "independent_trace_replayer": "cd117dcfcbb868a22e10594efc3380b1a38d4af9dafdb3bcd4c89e61b0aaad55",
+    "independent_trace_replayer": "88ded10270a4936b14f9c260194d5ebd36900c479f54f7307632c7e7f27dc388",
     "stochastic_bisimulation_comparison": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
-    "trace_equivalence_producer": "a9b7aa176b5081ab12a9cff31343b2509de4105daa1c7d87b386765581146ade"
+    "trace_equivalence_producer": "59bdfa053a1fa1bf1e5fafed0db98cde71e84f484fdca7428bbd97abfa3fd05a"
   },
   "status": "passed",
   "summary": {

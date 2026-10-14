@@ -1,0 +1,66 @@
+{
+  "status": "completed",
+  "samples": 102,
+  "encodings": [
+    {
+      "source-study-call": {
+        "sample_count": 90,
+        "underestimates": 7,
+        "overestimates": 76,
+        "exact": 7,
+        "signed_error_min": -8,
+        "signed_error_max": 17,
+        "mean_absolute_error": 6.644444444444445
+      },
+      "authored-control": {
+        "sample_count": 12,
+        "underestimates": 10,
+        "overestimates": 2,
+        "exact": 0,
+        "signed_error_min": -52,
+        "signed_error_max": 31,
+        "mean_absolute_error": 17.916666666666668
+      }
+    },
+    {
+      "source-study-call": {
+        "sample_count": 90,
+        "underestimates": 7,
+        "overestimates": 76,
+        "exact": 7,
+        "signed_error_min": -8,
+        "signed_error_max": 17,
+        "mean_absolute_error": 6.7
+      },
+      "authored-control": {
+        "sample_count": 12,
+        "underestimates": 9,
+        "overestimates": 2,
+        "exact": 1,
+        "signed_error_min": -24,
+        "signed_error_max": 31,
+        "mean_absolute_error": 9.666666666666666
+      }
+    },
+    {
+      "source-study-call": {
+        "sample_count": 90,
+        "underestimates": 19,
+        "overestimates": 69,
+        "exact": 2,
+        "signed_error_min": -11,
+        "signed_error_max": 19,
+        "mean_absolute_error": 6.477777777777778
+      },
+      "authored-control": {
+        "sample_count": 12,
+        "underestimates": 11,
+        "overestimates": 1,
+        "exact": 0,
+        "signed_error_min": -115,
+        "signed_error_max": 3,
+        "mean_absolute_error": 35.666666666666664
+      }
+    }
+  ]
+}

@@ -55,7 +55,7 @@ compiler, source bridges, study scripts, demo or optional LangGraph runtime.
 ```sh
 python3 -m venv .venv
 .venv/bin/python -m pip install --no-index --no-deps \
-  output/release/wheels/orchlang_graph_tools-0.5.0rc1-py3-none-any.whl
+  output/release/wheels/orchlang_graph_tools-0.5.0rc2-py3-none-any.whl
 .venv/bin/orchlang-graph-check \
   examples/graphs/accepted/matched_cyclic_chain.json --report /tmp/cyclic.json
 .venv/bin/orchlang-graph-replay \

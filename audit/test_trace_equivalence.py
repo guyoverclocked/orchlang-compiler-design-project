@@ -8,14 +8,16 @@ from pathlib import Path
 import subprocess
 import sys
 import unittest
+from unittest.mock import patch
 
 ROOT = Path(__file__).resolve().parents[1]
 AUDIT = ROOT / "audit"
 sys.path.insert(0, str(AUDIT))
 
-from probabilistic_channels import canonical, producer_histogram  # noqa: E402
+from probabilistic_channels import ChannelLimit, canonical, producer_histogram  # noqa: E402
 from replay_trace_equivalence import replay_report  # noqa: E402
 from stochastic_bisimulation import analyze as analyze_bisimulation  # noqa: E402
+import trace_equivalence as trace_equivalence_module  # noqa: E402
 from trace_equivalence import analyze  # noqa: E402
 
 
@@ -56,6 +58,38 @@ def stopped_vs_live_fixture():
         "history_window": 0,
         "defaults": {"m": [{"response": "x", "output_tokens": 1,
                              "probability": "1"}]},
+    }
+    return graph, kernel
+
+
+def equal_chain_fixture(calls_per_arm: int):
+    states = {
+        "choose": {"calls": [], "next": {
+            "kind": "secret", "guard": {"value": "route"},
+            "then": "left0", "else": "right0",
+        }},
+    }
+    for side in ("left", "right"):
+        for index in range(calls_per_arm):
+            states[f"{side}{index}"] = {
+                "calls": [{"model": "m", "template": "ping", "arguments": [],
+                           "result": "r"}],
+                "next": ({"kind": "goto", "target": f"{side}{index + 1}"}
+                         if index + 1 < calls_per_arm else {"kind": "stop"}),
+            }
+    graph = {
+        "format": "orchlang-request-graph", "version": 1,
+        "name": f"equal_chain_{calls_per_arm}", "chars_per_token": 4,
+        "inputs": {"route": {"type": "boolean", "label": "secret"}},
+        "models": {"m": {"provider": "mock", "model": "m", "max_tokens": 1}},
+        "registers": {"r": {"model": "m"}}, "entry": "choose", "states": states,
+    }
+    kernel = {
+        "format": "orchlang-finite-outcome-kernel", "version": 1,
+        "history_window": 0,
+        "defaults": {"m": [{"response": "ok", "output_tokens": 1,
+                             "probability": "1"}]},
+        "rules": [],
     }
     return graph, kernel
 
@@ -166,12 +200,76 @@ class TraceEquivalenceTests(unittest.TestCase):
                 report = analyze(graph, kernel, {}, scenarios(), raw_graph=graph_raw,
                                  raw_kernel=kernel_raw, **options)
                 self.assertEqual(report["status"], "unknown")
+                self.assertIn(report["diagnostics"]["reason"], {
+                    "STATE_CAP", "BYTE_WORK_CAP", "MATRIX_ENTRY_CAP", "RATIONAL_BIT_CAP",
+                })
+                self.assertIsInstance(report["diagnostics"]["phase"], str)
+                self.assertIn("matrix_entries_used", report["telemetry"])
                 self.assertIsNone(report["claim"])
                 self.assertIsNone(report["closed_system"])
                 self.assertIsNone(report["label_alphabet"])
                 self.assertIsNone(report["result"])
                 self.assertEqual(replay_report(report, graph_raw, kernel_raw)["status"],
                                  "unknown")
+
+    def test_unknown_diagnostic_schema_is_strict(self):
+        graph, kernel, graph_raw, kernel_raw = fixture("trace_equal_not_bisimilar")
+        report = analyze(graph, kernel, {}, scenarios(), max_states=1,
+                         raw_graph=graph_raw, raw_kernel=kernel_raw)
+        self.assertEqual(report["diagnostics"]["reason"], "STATE_CAP")
+        tampered = copy.deepcopy(report)
+        tampered["diagnostics"]["reason"] = "PROVED_EQUAL"
+        self.assertEqual(replay_report(tampered, graph_raw, kernel_raw)["status"],
+                         "rejected")
+        tampered = copy.deepcopy(report)
+        tampered["telemetry"]["unexpected"] = 1
+        self.assertEqual(replay_report(tampered, graph_raw, kernel_raw)["status"],
+                         "rejected")
+
+    def test_channel_limit_diagnostic_is_stable_and_does_not_disclose_paths(self):
+        graph, kernel, graph_raw, kernel_raw = fixture("trace_equal_not_bisimilar")
+        cases = (
+            ("reachable semantic-state cap reached", "STATE_CAP"),
+            ("input scenario byte cap reached", "SOURCE_BYTE_CAP"),
+            ("source document byte cap reached: /private/input.json",
+             "SOURCE_BYTE_CAP"),
+        )
+        for cap_message, expected_reason in cases:
+            with self.subTest(cap_message=cap_message), patch.object(
+                trace_equivalence_module._closure, "_build_closed_system",
+                side_effect=ChannelLimit(cap_message),
+            ):
+                report = analyze(graph, kernel, {}, scenarios(),
+                                 raw_graph=graph_raw, raw_kernel=kernel_raw)
+            self.assertEqual(report["status"], "unknown")
+            self.assertEqual(report["diagnostics"]["reason"], expected_reason)
+            self.assertNotIn("/private/input.json", report["diagnostics"]["message"])
+
+    def test_version_one_unknown_report_remains_replayable(self):
+        graph, kernel, graph_raw, kernel_raw = fixture("trace_equal_not_bisimilar")
+        report = analyze(graph, kernel, {}, scenarios(), max_states=1,
+                         raw_graph=graph_raw, raw_kernel=kernel_raw)
+        legacy = copy.deepcopy(report)
+        legacy["version"] = 1
+        legacy.pop("diagnostics")
+        legacy.pop("telemetry")
+        self.assertEqual(replay_report(legacy, graph_raw, kernel_raw)["status"],
+                         "unknown")
+
+    def test_long_equal_chain_replays_with_shared_prefix_products(self):
+        graph, kernel = equal_chain_fixture(128)
+        graph_raw = json.dumps(graph, sort_keys=True, separators=(",", ":")).encode()
+        kernel_raw = json.dumps(kernel, sort_keys=True, separators=(",", ":")).encode()
+        report = analyze(graph, kernel, {}, [{"route": False}, {"route": True}],
+                         raw_graph=graph_raw, raw_kernel=kernel_raw)
+        self.assertEqual(report["status"], "proved_equal")
+        self.assertEqual(report["version"], 2)
+        self.assertGreater(report["telemetry"]["matrix_entries_used"], 0)
+        self.assertLessEqual(report["telemetry"]["work_bytes_used_before_serialization"],
+                             report["limits"]["max_work_bytes"])
+        replay = replay_report(report, graph_raw, kernel_raw)
+        self.assertEqual(replay["status"], "verified")
+        self.assertEqual(replay["decision"], "proved_equal")
 
     def test_invalid_inputs_and_bad_source_binding_fail_closed(self):
         graph, kernel, graph_raw, kernel_raw = fixture("trace_equal_not_bisimilar")

@@ -1,0 +1,1951 @@
+{
+  "environment": {
+    "machine": "arm64",
+    "peak_rss_measurement": "worker process OS high-water RSS including Python runtime; bytes",
+    "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+    "processor": "arm",
+    "python": "3.14.6"
+  },
+  "format": "orchlang-trace-equivalence-solver-scaling",
+  "generated_at_utc": "2026-10-14T03:40:00.890531+00:00",
+  "implementation": {
+    "name": "baseline commit 5aa4ebc669a3fbae72d9a605be250624fd0bcbf5",
+    "source_sha256": {
+      "orchgraph.py": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
+      "probabilistic_channels.py": "45380e75cdcc4d6f285a0027cbb85dab97d22dff11c5c94d3940b6813e8dce00",
+      "replay_trace_equivalence.py": "cd117dcfcbb868a22e10594efc3380b1a38d4af9dafdb3bcd4c89e61b0aaad55",
+      "stochastic_bisimulation.py": "9d153ec842c89756579ec7296060478283c45e965441105430851614d205a495",
+      "trace_equivalence.py": "a9b7aa176b5081ab12a9cff31343b2509de4105daa1c7d87b386765581146ade"
+    },
+    "study_worker_sha256": "063491c8f54da444fbaf634b905e0107284042b30fb8404379126afdc7f15f0f"
+  },
+  "inputs": {
+    "graphs": [
+      {
+        "bytes": 838,
+        "calls_per_arm": 2,
+        "path": "research/publication_upgrade/solver_inputs/scale_2.graph.json",
+        "sha256": "3c884a9d7d79d635bc548e6d872b46fc604992eeb7e0dcd599c23787194e8bbe"
+      },
+      {
+        "bytes": 2290,
+        "calls_per_arm": 8,
+        "path": "research/publication_upgrade/solver_inputs/scale_8.graph.json",
+        "sha256": "1558280613768b483fbf233814167dbd3f36db55b7b21dc076d1b832e76e1381"
+      },
+      {
+        "bytes": 4251,
+        "calls_per_arm": 16,
+        "path": "research/publication_upgrade/solver_inputs/scale_16.graph.json",
+        "sha256": "8d3b530b5cda115d2ad8af6308acf92f23985a89924e64c127f0ce9327ba524d"
+      },
+      {
+        "bytes": 8187,
+        "calls_per_arm": 32,
+        "path": "research/publication_upgrade/solver_inputs/scale_32.graph.json",
+        "sha256": "debc8326539a3c42956635ae66ccbf3d49f27cfd1314435be9692411448a3318"
+      },
+      {
+        "bytes": 16059,
+        "calls_per_arm": 64,
+        "path": "research/publication_upgrade/solver_inputs/scale_64.graph.json",
+        "sha256": "789ba43e68c5eba1910c3a92b73a8805e1766b4d337270f97e42044a7fc81496"
+      },
+      {
+        "bytes": 31916,
+        "calls_per_arm": 128,
+        "path": "research/publication_upgrade/solver_inputs/scale_128.graph.json",
+        "sha256": "8e0ba27f14285011418526fcb618eed1d6749f40b0e59e37302c02e0602a3874"
+      },
+      {
+        "bytes": 63916,
+        "calls_per_arm": 256,
+        "path": "research/publication_upgrade/solver_inputs/scale_256.graph.json",
+        "sha256": "2dfbca57ec503b47d70f57ab7ab242c12ecc2ff617537b859c7b44536686213f"
+      }
+    ],
+    "kernel_path": "research/publication_upgrade/solver_inputs/scale.kernel.json",
+    "kernel_sha256": "a16c41601ebd3388a171dc147c3b2ad2d5e85dd643bbe41d67a2894d00f6406b"
+  },
+  "samples": [
+    {
+      "calls_per_arm": 2,
+      "producer": {
+        "analysis_seconds": 0.0011269999668002129,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 5438,
+          "state_count": 6,
+          "transition_count": 4
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 256,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 27111
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28295168,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 1,
+          "naive_basis_word_products": 3,
+          "naive_product_matrix_entry_units": 30,
+          "shared_prefix_products": 2,
+          "shared_product_matrix_entry_units": 20
+        },
+        "rank": 3,
+        "report_bytes": 5122,
+        "state_count": 6,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 4
+      },
+      "repetition": 0,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 160,
+        "independent_work_bytes": 15497,
+        "peak_rss_bytes": 28377088,
+        "replay_seconds": 0.0013669999898411334,
+        "state_count": 6,
+        "status": "verified",
+        "transition_count": 4,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 2,
+      "producer": {
+        "analysis_seconds": 0.0011193749960511923,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 5438,
+          "state_count": 6,
+          "transition_count": 4
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 256,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 27111
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28180480,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 1,
+          "naive_basis_word_products": 3,
+          "naive_product_matrix_entry_units": 30,
+          "shared_prefix_products": 2,
+          "shared_product_matrix_entry_units": 20
+        },
+        "rank": 3,
+        "report_bytes": 5122,
+        "state_count": 6,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 4
+      },
+      "repetition": 1,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 160,
+        "independent_work_bytes": 15497,
+        "peak_rss_bytes": 28672000,
+        "replay_seconds": 0.0013357919524423778,
+        "state_count": 6,
+        "status": "verified",
+        "transition_count": 4,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 2,
+      "producer": {
+        "analysis_seconds": 0.0011346670216880739,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 5438,
+          "state_count": 6,
+          "transition_count": 4
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 256,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 27111
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28409856,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 1,
+          "naive_basis_word_products": 3,
+          "naive_product_matrix_entry_units": 30,
+          "shared_prefix_products": 2,
+          "shared_product_matrix_entry_units": 20
+        },
+        "rank": 3,
+        "report_bytes": 5122,
+        "state_count": 6,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 4
+      },
+      "repetition": 2,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 160,
+        "independent_work_bytes": 15497,
+        "peak_rss_bytes": 28393472,
+        "replay_seconds": 0.0013264589942991734,
+        "state_count": 6,
+        "status": "verified",
+        "transition_count": 4,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 2,
+      "producer": {
+        "analysis_seconds": 0.0011085419682785869,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 5438,
+          "state_count": 6,
+          "transition_count": 4
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 256,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 27111
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28393472,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 1,
+          "naive_basis_word_products": 3,
+          "naive_product_matrix_entry_units": 30,
+          "shared_prefix_products": 2,
+          "shared_product_matrix_entry_units": 20
+        },
+        "rank": 3,
+        "report_bytes": 5122,
+        "state_count": 6,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 4
+      },
+      "repetition": 3,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 160,
+        "independent_work_bytes": 15497,
+        "peak_rss_bytes": 28655616,
+        "replay_seconds": 0.0013364170445129275,
+        "state_count": 6,
+        "status": "verified",
+        "transition_count": 4,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 2,
+      "producer": {
+        "analysis_seconds": 0.001110041979700327,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 5438,
+          "state_count": 6,
+          "transition_count": 4
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 256,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 27111
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28475392,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 1,
+          "naive_basis_word_products": 3,
+          "naive_product_matrix_entry_units": 30,
+          "shared_prefix_products": 2,
+          "shared_product_matrix_entry_units": 20
+        },
+        "rank": 3,
+        "report_bytes": 5122,
+        "state_count": 6,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 4
+      },
+      "repetition": 4,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 160,
+        "independent_work_bytes": 15497,
+        "peak_rss_bytes": 28622848,
+        "replay_seconds": 0.0013358329888433218,
+        "state_count": 6,
+        "status": "verified",
+        "transition_count": 4,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 8,
+      "producer": {
+        "analysis_seconds": 0.0026772089768201113,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 18206,
+          "state_count": 18,
+          "transition_count": 16
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 3094,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 232130
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28622848,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 28,
+          "naive_basis_word_products": 36,
+          "naive_product_matrix_entry_units": 1224,
+          "shared_prefix_products": 8,
+          "shared_product_matrix_entry_units": 272
+        },
+        "rank": 9,
+        "report_bytes": 15741,
+        "state_count": 18,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 16
+      },
+      "repetition": 0,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 2266,
+        "independent_work_bytes": 77320,
+        "peak_rss_bytes": 28803072,
+        "replay_seconds": 0.004080250044353306,
+        "state_count": 18,
+        "status": "verified",
+        "transition_count": 16,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 8,
+      "producer": {
+        "analysis_seconds": 0.002685333020053804,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 18206,
+          "state_count": 18,
+          "transition_count": 16
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 3094,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 232130
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28524544,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 28,
+          "naive_basis_word_products": 36,
+          "naive_product_matrix_entry_units": 1224,
+          "shared_prefix_products": 8,
+          "shared_product_matrix_entry_units": 272
+        },
+        "rank": 9,
+        "report_bytes": 15741,
+        "state_count": 18,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 16
+      },
+      "repetition": 1,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 2266,
+        "independent_work_bytes": 77320,
+        "peak_rss_bytes": 28852224,
+        "replay_seconds": 0.004015417012851685,
+        "state_count": 18,
+        "status": "verified",
+        "transition_count": 16,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 8,
+      "producer": {
+        "analysis_seconds": 0.0026824999949894845,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 18206,
+          "state_count": 18,
+          "transition_count": 16
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 3094,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 232130
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28639232,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 28,
+          "naive_basis_word_products": 36,
+          "naive_product_matrix_entry_units": 1224,
+          "shared_prefix_products": 8,
+          "shared_product_matrix_entry_units": 272
+        },
+        "rank": 9,
+        "report_bytes": 15741,
+        "state_count": 18,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 16
+      },
+      "repetition": 2,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 2266,
+        "independent_work_bytes": 77320,
+        "peak_rss_bytes": 28737536,
+        "replay_seconds": 0.004004042013548315,
+        "state_count": 18,
+        "status": "verified",
+        "transition_count": 16,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 8,
+      "producer": {
+        "analysis_seconds": 0.002763083961326629,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 18206,
+          "state_count": 18,
+          "transition_count": 16
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 3094,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 232130
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28344320,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 28,
+          "naive_basis_word_products": 36,
+          "naive_product_matrix_entry_units": 1224,
+          "shared_prefix_products": 8,
+          "shared_product_matrix_entry_units": 272
+        },
+        "rank": 9,
+        "report_bytes": 15741,
+        "state_count": 18,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 16
+      },
+      "repetition": 3,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 2266,
+        "independent_work_bytes": 77320,
+        "peak_rss_bytes": 28753920,
+        "replay_seconds": 0.003908917016815394,
+        "state_count": 18,
+        "status": "verified",
+        "transition_count": 16,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 8,
+      "producer": {
+        "analysis_seconds": 0.0026689170044846833,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 18206,
+          "state_count": 18,
+          "transition_count": 16
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 3094,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 232130
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28590080,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 28,
+          "naive_basis_word_products": 36,
+          "naive_product_matrix_entry_units": 1224,
+          "shared_prefix_products": 8,
+          "shared_product_matrix_entry_units": 272
+        },
+        "rank": 9,
+        "report_bytes": 15741,
+        "state_count": 18,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 16
+      },
+      "repetition": 4,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 2266,
+        "independent_work_bytes": 77320,
+        "peak_rss_bytes": 28835840,
+        "replay_seconds": 0.003960333997383714,
+        "state_count": 18,
+        "status": "verified",
+        "transition_count": 16,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 16,
+      "producer": {
+        "analysis_seconds": 0.005217375000938773,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 35314,
+          "state_count": 34,
+          "transition_count": 32
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 15502,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 1065992
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28639232,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 120,
+          "naive_basis_word_products": 136,
+          "naive_product_matrix_entry_units": 8976,
+          "shared_prefix_products": 16,
+          "shared_product_matrix_entry_units": 1056
+        },
+        "rank": 17,
+        "report_bytes": 38383,
+        "state_count": 34,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 32
+      },
+      "repetition": 0,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 12578,
+        "independent_work_bytes": 288435,
+        "peak_rss_bytes": 29032448,
+        "replay_seconds": 0.01011199998902157,
+        "state_count": 34,
+        "status": "verified",
+        "transition_count": 32,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 16,
+      "producer": {
+        "analysis_seconds": 0.005129249999299645,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 35314,
+          "state_count": 34,
+          "transition_count": 32
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 15502,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 1065992
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28688384,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 120,
+          "naive_basis_word_products": 136,
+          "naive_product_matrix_entry_units": 8976,
+          "shared_prefix_products": 16,
+          "shared_product_matrix_entry_units": 1056
+        },
+        "rank": 17,
+        "report_bytes": 38383,
+        "state_count": 34,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 32
+      },
+      "repetition": 1,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 12578,
+        "independent_work_bytes": 288435,
+        "peak_rss_bytes": 29163520,
+        "replay_seconds": 0.010152417002245784,
+        "state_count": 34,
+        "status": "verified",
+        "transition_count": 32,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 16,
+      "producer": {
+        "analysis_seconds": 0.005197958031203598,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 35314,
+          "state_count": 34,
+          "transition_count": 32
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 15502,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 1065992
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28622848,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 120,
+          "naive_basis_word_products": 136,
+          "naive_product_matrix_entry_units": 8976,
+          "shared_prefix_products": 16,
+          "shared_product_matrix_entry_units": 1056
+        },
+        "rank": 17,
+        "report_bytes": 38383,
+        "state_count": 34,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 32
+      },
+      "repetition": 2,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 12578,
+        "independent_work_bytes": 288435,
+        "peak_rss_bytes": 29147136,
+        "replay_seconds": 0.010074166988488287,
+        "state_count": 34,
+        "status": "verified",
+        "transition_count": 32,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 16,
+      "producer": {
+        "analysis_seconds": 0.005141000030562282,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 35314,
+          "state_count": 34,
+          "transition_count": 32
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 15502,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 1065992
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28721152,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 120,
+          "naive_basis_word_products": 136,
+          "naive_product_matrix_entry_units": 8976,
+          "shared_prefix_products": 16,
+          "shared_product_matrix_entry_units": 1056
+        },
+        "rank": 17,
+        "report_bytes": 38383,
+        "state_count": 34,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 32
+      },
+      "repetition": 3,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 12578,
+        "independent_work_bytes": 288435,
+        "peak_rss_bytes": 29147136,
+        "replay_seconds": 0.010141125007066876,
+        "state_count": 34,
+        "status": "verified",
+        "transition_count": 32,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 16,
+      "producer": {
+        "analysis_seconds": 0.005091459024697542,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 35314,
+          "state_count": 34,
+          "transition_count": 32
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 15502,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 1065992
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 28704768,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 120,
+          "naive_basis_word_products": 136,
+          "naive_product_matrix_entry_units": 8976,
+          "shared_prefix_products": 16,
+          "shared_product_matrix_entry_units": 1056
+        },
+        "rank": 17,
+        "report_bytes": 38383,
+        "state_count": 34,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 32
+      },
+      "repetition": 4,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 12578,
+        "independent_work_bytes": 288435,
+        "peak_rss_bytes": 29065216,
+        "replay_seconds": 0.010047458985354751,
+        "state_count": 34,
+        "status": "verified",
+        "transition_count": 32,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 32,
+      "producer": {
+        "analysis_seconds": 0.011398791975807399,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 69554,
+          "state_count": 66,
+          "transition_count": 64
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 92926,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 6129648
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 29425664,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 496,
+          "naive_basis_word_products": 528,
+          "naive_product_matrix_entry_units": 68640,
+          "shared_prefix_products": 32,
+          "shared_product_matrix_entry_units": 4160
+        },
+        "rank": 33,
+        "report_bytes": 112663,
+        "state_count": 66,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 64
+      },
+      "repetition": 0,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 81970,
+        "independent_work_bytes": 1519995,
+        "peak_rss_bytes": 29802496,
+        "replay_seconds": 0.03304524999111891,
+        "state_count": 66,
+        "status": "verified",
+        "transition_count": 64,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 32,
+      "producer": {
+        "analysis_seconds": 0.011384084005840123,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 69554,
+          "state_count": 66,
+          "transition_count": 64
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 92926,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 6129648
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 29261824,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 496,
+          "naive_basis_word_products": 528,
+          "naive_product_matrix_entry_units": 68640,
+          "shared_prefix_products": 32,
+          "shared_product_matrix_entry_units": 4160
+        },
+        "rank": 33,
+        "report_bytes": 112663,
+        "state_count": 66,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 64
+      },
+      "repetition": 1,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 81970,
+        "independent_work_bytes": 1519995,
+        "peak_rss_bytes": 29818880,
+        "replay_seconds": 0.03286874998593703,
+        "state_count": 66,
+        "status": "verified",
+        "transition_count": 64,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 32,
+      "producer": {
+        "analysis_seconds": 0.011337332951370627,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 69554,
+          "state_count": 66,
+          "transition_count": 64
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 92926,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 6129648
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 29163520,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 496,
+          "naive_basis_word_products": 528,
+          "naive_product_matrix_entry_units": 68640,
+          "shared_prefix_products": 32,
+          "shared_product_matrix_entry_units": 4160
+        },
+        "rank": 33,
+        "report_bytes": 112663,
+        "state_count": 66,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 64
+      },
+      "repetition": 2,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 81970,
+        "independent_work_bytes": 1519995,
+        "peak_rss_bytes": 29786112,
+        "replay_seconds": 0.03347166703315452,
+        "state_count": 66,
+        "status": "verified",
+        "transition_count": 64,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 32,
+      "producer": {
+        "analysis_seconds": 0.01124025002354756,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 69554,
+          "state_count": 66,
+          "transition_count": 64
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 92926,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 6129648
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 29458432,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 496,
+          "naive_basis_word_products": 528,
+          "naive_product_matrix_entry_units": 68640,
+          "shared_prefix_products": 32,
+          "shared_product_matrix_entry_units": 4160
+        },
+        "rank": 33,
+        "report_bytes": 112663,
+        "state_count": 66,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 64
+      },
+      "repetition": 3,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 81970,
+        "independent_work_bytes": 1519995,
+        "peak_rss_bytes": 29523968,
+        "replay_seconds": 0.03303645900450647,
+        "state_count": 66,
+        "status": "verified",
+        "transition_count": 64,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 32,
+      "producer": {
+        "analysis_seconds": 0.011373582994565368,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 69554,
+          "state_count": 66,
+          "transition_count": 64
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 92926,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 6129648
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 29212672,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 496,
+          "naive_basis_word_products": 528,
+          "naive_product_matrix_entry_units": 68640,
+          "shared_prefix_products": 32,
+          "shared_product_matrix_entry_units": 4160
+        },
+        "rank": 33,
+        "report_bytes": 112663,
+        "state_count": 66,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 64
+      },
+      "repetition": 4,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 81970,
+        "independent_work_bytes": 1519995,
+        "peak_rss_bytes": 29687808,
+        "replay_seconds": 0.033262167009525,
+        "state_count": 66,
+        "status": "verified",
+        "transition_count": 64,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 64,
+      "producer": {
+        "analysis_seconds": 0.02886824996676296,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 138034,
+          "state_count": 130,
+          "transition_count": 128
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 630238,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 40850626
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 31391744,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 2016,
+          "naive_basis_word_products": 2080,
+          "naive_product_matrix_entry_units": 536640,
+          "shared_prefix_products": 64,
+          "shared_product_matrix_entry_units": 16512
+        },
+        "rank": 65,
+        "report_bytes": 377193,
+        "state_count": 130,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 128
+      },
+      "repetition": 0,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 587858,
+        "independent_work_bytes": 9972749,
+        "peak_rss_bytes": 32768000,
+        "replay_seconds": 0.1639632080332376,
+        "state_count": 130,
+        "status": "verified",
+        "transition_count": 128,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 64,
+      "producer": {
+        "analysis_seconds": 0.028744209033902735,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 138034,
+          "state_count": 130,
+          "transition_count": 128
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 630238,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 40850626
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 31309824,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 2016,
+          "naive_basis_word_products": 2080,
+          "naive_product_matrix_entry_units": 536640,
+          "shared_prefix_products": 64,
+          "shared_product_matrix_entry_units": 16512
+        },
+        "rank": 65,
+        "report_bytes": 377193,
+        "state_count": 130,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 128
+      },
+      "repetition": 1,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 587858,
+        "independent_work_bytes": 9972749,
+        "peak_rss_bytes": 32800768,
+        "replay_seconds": 0.13822774996515363,
+        "state_count": 130,
+        "status": "verified",
+        "transition_count": 128,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 64,
+      "producer": {
+        "analysis_seconds": 0.028566042019519955,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 138034,
+          "state_count": 130,
+          "transition_count": 128
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 630238,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 40850626
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 31375360,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 2016,
+          "naive_basis_word_products": 2080,
+          "naive_product_matrix_entry_units": 536640,
+          "shared_prefix_products": 64,
+          "shared_product_matrix_entry_units": 16512
+        },
+        "rank": 65,
+        "report_bytes": 377193,
+        "state_count": 130,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 128
+      },
+      "repetition": 2,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 587858,
+        "independent_work_bytes": 9972749,
+        "peak_rss_bytes": 32751616,
+        "replay_seconds": 0.13848429202334955,
+        "state_count": 130,
+        "status": "verified",
+        "transition_count": 128,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 64,
+      "producer": {
+        "analysis_seconds": 0.028405957971699536,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 138034,
+          "state_count": 130,
+          "transition_count": 128
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 630238,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 40850626
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 31555584,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 2016,
+          "naive_basis_word_products": 2080,
+          "naive_product_matrix_entry_units": 536640,
+          "shared_prefix_products": 64,
+          "shared_product_matrix_entry_units": 16512
+        },
+        "rank": 65,
+        "report_bytes": 377193,
+        "state_count": 130,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 128
+      },
+      "repetition": 3,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 587858,
+        "independent_work_bytes": 9972749,
+        "peak_rss_bytes": 32817152,
+        "replay_seconds": 0.13971708400640637,
+        "state_count": 130,
+        "status": "verified",
+        "transition_count": 128,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 64,
+      "producer": {
+        "analysis_seconds": 0.02827354200417176,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 138034,
+          "state_count": 130,
+          "transition_count": 128
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 630238,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 40850626
+        },
+        "legacy_cap_event": null,
+        "peak_rss_bytes": 31391744,
+        "prefix_work_stats": {
+          "avoided_repeated_products": 2016,
+          "naive_basis_word_products": 2080,
+          "naive_product_matrix_entry_units": 536640,
+          "shared_prefix_products": 64,
+          "shared_product_matrix_entry_units": 16512
+        },
+        "rank": 65,
+        "report_bytes": 377193,
+        "state_count": 130,
+        "status": "proved_equal",
+        "telemetry": null,
+        "transition_count": 128
+      },
+      "repetition": 4,
+      "replay": {
+        "decision": "proved_equal",
+        "diagnostic": null,
+        "independent_matrix_entries": 587858,
+        "independent_work_bytes": 9972749,
+        "peak_rss_bytes": 32587776,
+        "replay_seconds": 0.13850658299634233,
+        "state_count": 130,
+        "status": "verified",
+        "transition_count": 128,
+        "verified_pairs": 1
+      }
+    },
+    {
+      "calls_per_arm": 128,
+      "producer": {
+        "analysis_seconds": 0.06307350000133738,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 275168,
+          "state_count": 258,
+          "transition_count": 256
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 1043848,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 67081608
+        },
+        "legacy_cap_event": {
+          "attempted_entries": 514,
+          "attempted_matrix_entries": 1044362,
+          "attempted_work_bytes": 67114504,
+          "entries_used": 1043848,
+          "max_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "message": "independent replay basis-word product byte-work cap reached",
+          "operation": "independent replay basis-word product",
+          "resource": "work_bytes",
+          "work_bytes_used": 67081608
+        },
+        "peak_rss_bytes": 36487168,
+        "prefix_work_stats": null,
+        "rank": null,
+        "report_bytes": 1607,
+        "state_count": null,
+        "status": "unknown",
+        "telemetry": null,
+        "transition_count": null
+      },
+      "repetition": 0,
+      "replay": {
+        "decision": null,
+        "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
+        "independent_matrix_entries": null,
+        "independent_work_bytes": null,
+        "peak_rss_bytes": 28508160,
+        "replay_seconds": 0.00021016702521592379,
+        "state_count": null,
+        "status": "unknown",
+        "transition_count": null,
+        "verified_pairs": null
+      }
+    },
+    {
+      "calls_per_arm": 128,
+      "producer": {
+        "analysis_seconds": 0.06307437497889623,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 275168,
+          "state_count": 258,
+          "transition_count": 256
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 1043848,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 67081608
+        },
+        "legacy_cap_event": {
+          "attempted_entries": 514,
+          "attempted_matrix_entries": 1044362,
+          "attempted_work_bytes": 67114504,
+          "entries_used": 1043848,
+          "max_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "message": "independent replay basis-word product byte-work cap reached",
+          "operation": "independent replay basis-word product",
+          "resource": "work_bytes",
+          "work_bytes_used": 67081608
+        },
+        "peak_rss_bytes": 36470784,
+        "prefix_work_stats": null,
+        "rank": null,
+        "report_bytes": 1607,
+        "state_count": null,
+        "status": "unknown",
+        "telemetry": null,
+        "transition_count": null
+      },
+      "repetition": 1,
+      "replay": {
+        "decision": null,
+        "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
+        "independent_matrix_entries": null,
+        "independent_work_bytes": null,
+        "peak_rss_bytes": 28557312,
+        "replay_seconds": 0.00021808297606185079,
+        "state_count": null,
+        "status": "unknown",
+        "transition_count": null,
+        "verified_pairs": null
+      }
+    },
+    {
+      "calls_per_arm": 128,
+      "producer": {
+        "analysis_seconds": 0.06347187497885898,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 275168,
+          "state_count": 258,
+          "transition_count": 256
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 1043848,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 67081608
+        },
+        "legacy_cap_event": {
+          "attempted_entries": 514,
+          "attempted_matrix_entries": 1044362,
+          "attempted_work_bytes": 67114504,
+          "entries_used": 1043848,
+          "max_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "message": "independent replay basis-word product byte-work cap reached",
+          "operation": "independent replay basis-word product",
+          "resource": "work_bytes",
+          "work_bytes_used": 67081608
+        },
+        "peak_rss_bytes": 36585472,
+        "prefix_work_stats": null,
+        "rank": null,
+        "report_bytes": 1607,
+        "state_count": null,
+        "status": "unknown",
+        "telemetry": null,
+        "transition_count": null
+      },
+      "repetition": 2,
+      "replay": {
+        "decision": null,
+        "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
+        "independent_matrix_entries": null,
+        "independent_work_bytes": null,
+        "peak_rss_bytes": 28540928,
+        "replay_seconds": 0.00023583299480378628,
+        "state_count": null,
+        "status": "unknown",
+        "transition_count": null,
+        "verified_pairs": null
+      }
+    },
+    {
+      "calls_per_arm": 128,
+      "producer": {
+        "analysis_seconds": 0.06196883297525346,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 275168,
+          "state_count": 258,
+          "transition_count": 256
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 1043848,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 67081608
+        },
+        "legacy_cap_event": {
+          "attempted_entries": 514,
+          "attempted_matrix_entries": 1044362,
+          "attempted_work_bytes": 67114504,
+          "entries_used": 1043848,
+          "max_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "message": "independent replay basis-word product byte-work cap reached",
+          "operation": "independent replay basis-word product",
+          "resource": "work_bytes",
+          "work_bytes_used": 67081608
+        },
+        "peak_rss_bytes": 36569088,
+        "prefix_work_stats": null,
+        "rank": null,
+        "report_bytes": 1607,
+        "state_count": null,
+        "status": "unknown",
+        "telemetry": null,
+        "transition_count": null
+      },
+      "repetition": 3,
+      "replay": {
+        "decision": null,
+        "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
+        "independent_matrix_entries": null,
+        "independent_work_bytes": null,
+        "peak_rss_bytes": 28426240,
+        "replay_seconds": 0.00021729100262746215,
+        "state_count": null,
+        "status": "unknown",
+        "transition_count": null,
+        "verified_pairs": null
+      }
+    },
+    {
+      "calls_per_arm": 128,
+      "producer": {
+        "analysis_seconds": 0.0628570830449462,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 275168,
+          "state_count": 258,
+          "transition_count": 256
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 1043848,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 67081608
+        },
+        "legacy_cap_event": {
+          "attempted_entries": 514,
+          "attempted_matrix_entries": 1044362,
+          "attempted_work_bytes": 67114504,
+          "entries_used": 1043848,
+          "max_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "message": "independent replay basis-word product byte-work cap reached",
+          "operation": "independent replay basis-word product",
+          "resource": "work_bytes",
+          "work_bytes_used": 67081608
+        },
+        "peak_rss_bytes": 36782080,
+        "prefix_work_stats": null,
+        "rank": null,
+        "report_bytes": 1607,
+        "state_count": null,
+        "status": "unknown",
+        "telemetry": null,
+        "transition_count": null
+      },
+      "repetition": 4,
+      "replay": {
+        "decision": null,
+        "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
+        "independent_matrix_entries": null,
+        "independent_work_bytes": null,
+        "peak_rss_bytes": 28540928,
+        "replay_seconds": 0.0002127080224454403,
+        "state_count": null,
+        "status": "unknown",
+        "transition_count": null,
+        "verified_pairs": null
+      }
+    },
+    {
+      "calls_per_arm": 256,
+      "producer": {
+        "analysis_seconds": 0.18912024999735877,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 549856,
+          "state_count": 514,
+          "transition_count": 512
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 1039916,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 67104648
+        },
+        "legacy_cap_event": {
+          "attempted_entries": 1026,
+          "attempted_matrix_entries": 1040942,
+          "attempted_work_bytes": 67170312,
+          "entries_used": 1039916,
+          "max_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "message": "independent replay closure product byte-work cap reached",
+          "operation": "independent replay closure product",
+          "resource": "work_bytes",
+          "work_bytes_used": 67104648
+        },
+        "peak_rss_bytes": 56426496,
+        "prefix_work_stats": null,
+        "rank": null,
+        "report_bytes": 1607,
+        "state_count": null,
+        "status": "unknown",
+        "telemetry": null,
+        "transition_count": null
+      },
+      "repetition": 0,
+      "replay": {
+        "decision": null,
+        "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
+        "independent_matrix_entries": null,
+        "independent_work_bytes": null,
+        "peak_rss_bytes": 28262400,
+        "replay_seconds": 0.000234208011534065,
+        "state_count": null,
+        "status": "unknown",
+        "transition_count": null,
+        "verified_pairs": null
+      }
+    },
+    {
+      "calls_per_arm": 256,
+      "producer": {
+        "analysis_seconds": 0.18682087498018518,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 549856,
+          "state_count": 514,
+          "transition_count": 512
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 1039916,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 67104648
+        },
+        "legacy_cap_event": {
+          "attempted_entries": 1026,
+          "attempted_matrix_entries": 1040942,
+          "attempted_work_bytes": 67170312,
+          "entries_used": 1039916,
+          "max_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "message": "independent replay closure product byte-work cap reached",
+          "operation": "independent replay closure product",
+          "resource": "work_bytes",
+          "work_bytes_used": 67104648
+        },
+        "peak_rss_bytes": 56393728,
+        "prefix_work_stats": null,
+        "rank": null,
+        "report_bytes": 1607,
+        "state_count": null,
+        "status": "unknown",
+        "telemetry": null,
+        "transition_count": null
+      },
+      "repetition": 1,
+      "replay": {
+        "decision": null,
+        "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
+        "independent_matrix_entries": null,
+        "independent_work_bytes": null,
+        "peak_rss_bytes": 28606464,
+        "replay_seconds": 0.0002512919600121677,
+        "state_count": null,
+        "status": "unknown",
+        "transition_count": null,
+        "verified_pairs": null
+      }
+    },
+    {
+      "calls_per_arm": 256,
+      "producer": {
+        "analysis_seconds": 0.18910074996529147,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 549856,
+          "state_count": 514,
+          "transition_count": 512
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 1039916,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 67104648
+        },
+        "legacy_cap_event": {
+          "attempted_entries": 1026,
+          "attempted_matrix_entries": 1040942,
+          "attempted_work_bytes": 67170312,
+          "entries_used": 1039916,
+          "max_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "message": "independent replay closure product byte-work cap reached",
+          "operation": "independent replay closure product",
+          "resource": "work_bytes",
+          "work_bytes_used": 67104648
+        },
+        "peak_rss_bytes": 56410112,
+        "prefix_work_stats": null,
+        "rank": null,
+        "report_bytes": 1607,
+        "state_count": null,
+        "status": "unknown",
+        "telemetry": null,
+        "transition_count": null
+      },
+      "repetition": 2,
+      "replay": {
+        "decision": null,
+        "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
+        "independent_matrix_entries": null,
+        "independent_work_bytes": null,
+        "peak_rss_bytes": 28491776,
+        "replay_seconds": 0.00022479199105873704,
+        "state_count": null,
+        "status": "unknown",
+        "transition_count": null,
+        "verified_pairs": null
+      }
+    },
+    {
+      "calls_per_arm": 256,
+      "producer": {
+        "analysis_seconds": 0.18734091601800174,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 549856,
+          "state_count": 514,
+          "transition_count": 512
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 1039916,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 67104648
+        },
+        "legacy_cap_event": {
+          "attempted_entries": 1026,
+          "attempted_matrix_entries": 1040942,
+          "attempted_work_bytes": 67170312,
+          "entries_used": 1039916,
+          "max_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "message": "independent replay closure product byte-work cap reached",
+          "operation": "independent replay closure product",
+          "resource": "work_bytes",
+          "work_bytes_used": 67104648
+        },
+        "peak_rss_bytes": 56344576,
+        "prefix_work_stats": null,
+        "rank": null,
+        "report_bytes": 1607,
+        "state_count": null,
+        "status": "unknown",
+        "telemetry": null,
+        "transition_count": null
+      },
+      "repetition": 3,
+      "replay": {
+        "decision": null,
+        "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
+        "independent_matrix_entries": null,
+        "independent_work_bytes": null,
+        "peak_rss_bytes": 28590080,
+        "replay_seconds": 0.00022870796965435147,
+        "state_count": null,
+        "status": "unknown",
+        "transition_count": null,
+        "verified_pairs": null
+      }
+    },
+    {
+      "calls_per_arm": 256,
+      "producer": {
+        "analysis_seconds": 0.19012029096484184,
+        "diagnostics": null,
+        "instrumented_closure": {
+          "closure_work_bytes": 549856,
+          "state_count": 514,
+          "transition_count": 512
+        },
+        "instrumented_meter": {
+          "matrix_entries_used": 1039916,
+          "max_matrix_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "work_bytes_used": 67104648
+        },
+        "legacy_cap_event": {
+          "attempted_entries": 1026,
+          "attempted_matrix_entries": 1040942,
+          "attempted_work_bytes": 67170312,
+          "entries_used": 1039916,
+          "max_entries": 10000000,
+          "max_work_bytes": 67108864,
+          "message": "independent replay closure product byte-work cap reached",
+          "operation": "independent replay closure product",
+          "resource": "work_bytes",
+          "work_bytes_used": 67104648
+        },
+        "peak_rss_bytes": 56328192,
+        "prefix_work_stats": null,
+        "rank": null,
+        "report_bytes": 1607,
+        "state_count": null,
+        "status": "unknown",
+        "telemetry": null,
+        "transition_count": null
+      },
+      "repetition": 4,
+      "replay": {
+        "decision": null,
+        "diagnostic": "producer report is UNKNOWN; no partial result is replayed",
+        "independent_matrix_entries": null,
+        "independent_work_bytes": null,
+        "peak_rss_bytes": 28540928,
+        "replay_seconds": 0.00023275002604350448,
+        "state_count": null,
+        "status": "unknown",
+        "transition_count": null,
+        "verified_pairs": null
+      }
+    }
+  ],
+  "study": {
+    "calls_per_arm": [
+      2,
+      8,
+      16,
+      32,
+      64,
+      128,
+      256
+    ],
+    "caps": {
+      "max_matrix_entries": 10000000,
+      "max_rational_bits": 8192,
+      "max_states": 10000,
+      "max_work_bytes": 67108864
+    },
+    "family": "symmetric deterministic call chains with identical ordered usage labels",
+    "limitations": [
+      "one synthetic symmetric family; it does not characterize real workflow distributions",
+      "wall time and process RSS are environment-specific; exact analysis counters are deterministic work estimates",
+      "producer and replayer runs include Python interpreter startup only in peak RSS, not in reported analysis/replay seconds"
+    ],
+    "measured_repetitions_per_size": 5,
+    "semantics": "two secret routes select mirrored arms; every finite usage word agrees under a point-mass success kernel",
+    "timeout_seconds_per_worker": 120.0,
+    "warmups_per_size": 1
+  },
+  "summaries": [
+    {
+      "calls_per_arm": 2,
+      "independent_work_bytes_median": 15497,
+      "median_rank": 3,
+      "naive_basis_word_products_median": 3,
+      "naive_product_matrix_entry_units_median": 30,
+      "producer_peak_rss_bytes_median": 28393472,
+      "producer_seconds_max": 0.0011346670216880739,
+      "producer_seconds_median": 0.0011193749960511923,
+      "producer_seconds_min": 0.0011085419682785869,
+      "producer_status_counts": {
+        "proved_equal": 5
+      },
+      "repetitions": 5,
+      "replay_peak_rss_bytes_median": 28622848,
+      "replay_seconds_max": 0.0013669999898411334,
+      "replay_seconds_median": 0.0013358329888433218,
+      "replay_seconds_min": 0.0013264589942991734,
+      "replay_status_counts": {
+        "verified": 5
+      },
+      "report_bytes_median": 5122,
+      "shared_prefix_products_median": 2,
+      "shared_product_matrix_entry_units_median": 20,
+      "state_count": 6,
+      "transition_count": 4
+    },
+    {
+      "calls_per_arm": 8,
+      "independent_work_bytes_median": 77320,
+      "median_rank": 9,
+      "naive_basis_word_products_median": 36,
+      "naive_product_matrix_entry_units_median": 1224,
+      "producer_peak_rss_bytes_median": 28590080,
+      "producer_seconds_max": 0.002763083961326629,
+      "producer_seconds_median": 0.0026824999949894845,
+      "producer_seconds_min": 0.0026689170044846833,
+      "producer_status_counts": {
+        "proved_equal": 5
+      },
+      "repetitions": 5,
+      "replay_peak_rss_bytes_median": 28803072,
+      "replay_seconds_max": 0.004080250044353306,
+      "replay_seconds_median": 0.004004042013548315,
+      "replay_seconds_min": 0.003908917016815394,
+      "replay_status_counts": {
+        "verified": 5
+      },
+      "report_bytes_median": 15741,
+      "shared_prefix_products_median": 8,
+      "shared_product_matrix_entry_units_median": 272,
+      "state_count": 18,
+      "transition_count": 16
+    },
+    {
+      "calls_per_arm": 16,
+      "independent_work_bytes_median": 288435,
+      "median_rank": 17,
+      "naive_basis_word_products_median": 136,
+      "naive_product_matrix_entry_units_median": 8976,
+      "producer_peak_rss_bytes_median": 28688384,
+      "producer_seconds_max": 0.005217375000938773,
+      "producer_seconds_median": 0.005141000030562282,
+      "producer_seconds_min": 0.005091459024697542,
+      "producer_status_counts": {
+        "proved_equal": 5
+      },
+      "repetitions": 5,
+      "replay_peak_rss_bytes_median": 29147136,
+      "replay_seconds_max": 0.010152417002245784,
+      "replay_seconds_median": 0.01011199998902157,
+      "replay_seconds_min": 0.010047458985354751,
+      "replay_status_counts": {
+        "verified": 5
+      },
+      "report_bytes_median": 38383,
+      "shared_prefix_products_median": 16,
+      "shared_product_matrix_entry_units_median": 1056,
+      "state_count": 34,
+      "transition_count": 32
+    },
+    {
+      "calls_per_arm": 32,
+      "independent_work_bytes_median": 1519995,
+      "median_rank": 33,
+      "naive_basis_word_products_median": 528,
+      "naive_product_matrix_entry_units_median": 68640,
+      "producer_peak_rss_bytes_median": 29261824,
+      "producer_seconds_max": 0.011398791975807399,
+      "producer_seconds_median": 0.011373582994565368,
+      "producer_seconds_min": 0.01124025002354756,
+      "producer_status_counts": {
+        "proved_equal": 5
+      },
+      "repetitions": 5,
+      "replay_peak_rss_bytes_median": 29786112,
+      "replay_seconds_max": 0.03347166703315452,
+      "replay_seconds_median": 0.03304524999111891,
+      "replay_seconds_min": 0.03286874998593703,
+      "replay_status_counts": {
+        "verified": 5
+      },
+      "report_bytes_median": 112663,
+      "shared_prefix_products_median": 32,
+      "shared_product_matrix_entry_units_median": 4160,
+      "state_count": 66,
+      "transition_count": 64
+    },
+    {
+      "calls_per_arm": 64,
+      "independent_work_bytes_median": 9972749,
+      "median_rank": 65,
+      "naive_basis_word_products_median": 2080,
+      "naive_product_matrix_entry_units_median": 536640,
+      "producer_peak_rss_bytes_median": 31391744,
+      "producer_seconds_max": 0.02886824996676296,
+      "producer_seconds_median": 0.028566042019519955,
+      "producer_seconds_min": 0.02827354200417176,
+      "producer_status_counts": {
+        "proved_equal": 5
+      },
+      "repetitions": 5,
+      "replay_peak_rss_bytes_median": 32768000,
+      "replay_seconds_max": 0.1639632080332376,
+      "replay_seconds_median": 0.13850658299634233,
+      "replay_seconds_min": 0.13822774996515363,
+      "replay_status_counts": {
+        "verified": 5
+      },
+      "report_bytes_median": 377193,
+      "shared_prefix_products_median": 64,
+      "shared_product_matrix_entry_units_median": 16512,
+      "state_count": 130,
+      "transition_count": 128
+    },
+    {
+      "calls_per_arm": 128,
+      "independent_work_bytes_median": null,
+      "median_rank": null,
+      "naive_basis_word_products_median": null,
+      "naive_product_matrix_entry_units_median": null,
+      "producer_peak_rss_bytes_median": 36569088,
+      "producer_seconds_max": 0.06347187497885898,
+      "producer_seconds_median": 0.06307350000133738,
+      "producer_seconds_min": 0.06196883297525346,
+      "producer_status_counts": {
+        "unknown": 5
+      },
+      "repetitions": 5,
+      "replay_peak_rss_bytes_median": null,
+      "replay_seconds_max": null,
+      "replay_seconds_median": null,
+      "replay_seconds_min": null,
+      "replay_status_counts": {
+        "unknown": 5
+      },
+      "report_bytes_median": 1607,
+      "shared_prefix_products_median": null,
+      "shared_product_matrix_entry_units_median": null,
+      "state_count": null,
+      "transition_count": null
+    },
+    {
+      "calls_per_arm": 256,
+      "independent_work_bytes_median": null,
+      "median_rank": null,
+      "naive_basis_word_products_median": null,
+      "naive_product_matrix_entry_units_median": null,
+      "producer_peak_rss_bytes_median": 56393728,
+      "producer_seconds_max": 0.19012029096484184,
+      "producer_seconds_median": 0.18910074996529147,
+      "producer_seconds_min": 0.18682087498018518,
+      "producer_status_counts": {
+        "unknown": 5
+      },
+      "repetitions": 5,
+      "replay_peak_rss_bytes_median": null,
+      "replay_seconds_max": null,
+      "replay_seconds_median": null,
+      "replay_seconds_min": null,
+      "replay_status_counts": {
+        "unknown": 5
+      },
+      "report_bytes_median": 1607,
+      "shared_prefix_products_median": null,
+      "shared_product_matrix_entry_units_median": null,
+      "state_count": null,
+      "transition_count": null
+    }
+  ],
+  "version": 1
+}

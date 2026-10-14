@@ -1,0 +1,1615 @@
+{
+  "sha": "62913c933e21b27da353a89316a09f60525af496",
+  "tree": [
+    {
+      "mode": "100644",
+      "path": ".dockerignore",
+      "sha": "e3952e45dbfbcc93da6983ebe875799b7fe8f055",
+      "size": 332,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/e3952e45dbfbcc93da6983ebe875799b7fe8f055"
+    },
+    {
+      "mode": "100644",
+      "path": ".env.example",
+      "sha": "c8455a03a199ae0cda86c1a606883a2ec4c6f038",
+      "size": 791,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/c8455a03a199ae0cda86c1a606883a2ec4c6f038"
+    },
+    {
+      "mode": "040000",
+      "path": ".github",
+      "sha": "fb3a41da4bf00e8ee2ca1434f29f77907964c266",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/fb3a41da4bf00e8ee2ca1434f29f77907964c266"
+    },
+    {
+      "mode": "100644",
+      "path": ".github/CODEOWNERS",
+      "sha": "90157562fc5a8146823457979c314c1181d504b6",
+      "size": 115,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/90157562fc5a8146823457979c314c1181d504b6"
+    },
+    {
+      "mode": "040000",
+      "path": ".github/ISSUE_TEMPLATE",
+      "sha": "b9a822e5df31df09e125fd3543e8ebe846c3adb2",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/b9a822e5df31df09e125fd3543e8ebe846c3adb2"
+    },
+    {
+      "mode": "100644",
+      "path": ".github/ISSUE_TEMPLATE/bug_report-🐞.md",
+      "sha": "8ccee3e3b839d10b5c3c22f2b23a081dade71a25",
+      "size": 1073,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/8ccee3e3b839d10b5c3c22f2b23a081dade71a25"
+    },
+    {
+      "mode": "100644",
+      "path": ".github/ISSUE_TEMPLATE/feature-request-🚀.md",
+      "sha": "3c4c473543688d212a6418b3534743a299c36eee",
+      "size": 752,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/3c4c473543688d212a6418b3534743a299c36eee"
+    },
+    {
+      "mode": "100644",
+      "path": ".github/PULL_REQUEST_TEMPLATE.md",
+      "sha": "c0e96171b859343e4bcaf2154238344fc2b14943",
+      "size": 981,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/c0e96171b859343e4bcaf2154238344fc2b14943"
+    },
+    {
+      "mode": "040000",
+      "path": ".github/workflows",
+      "sha": "f7ffd9aa7fbf8c6863a2eeb3458dac213024ead0",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/f7ffd9aa7fbf8c6863a2eeb3458dac213024ead0"
+    },
+    {
+      "mode": "100644",
+      "path": ".github/workflows/deployment.yml",
+      "sha": "d71c40c0b951053fb2564742fa8f94ca5657cb73",
+      "size": 2697,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/d71c40c0b951053fb2564742fa8f94ca5657cb73"
+    },
+    {
+      "mode": "100644",
+      "path": ".github/workflows/feature.yml",
+      "sha": "f46f5a5e1717484668c38569dced81b314cbd63d",
+      "size": 1409,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/f46f5a5e1717484668c38569dced81b314cbd63d"
+    },
+    {
+      "mode": "100644",
+      "path": ".github/workflows/ios-tests.yml",
+      "sha": "bc94766bdcc3de3110d2796f33f146c4d1e710ac",
+      "size": 1908,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/bc94766bdcc3de3110d2796f33f146c4d1e710ac"
+    },
+    {
+      "mode": "100644",
+      "path": ".github/workflows/update-graph-docs.yml",
+      "sha": "4292db5d4bc5fe3a0c4a49267422da2ee749aed6",
+      "size": 1953,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/4292db5d4bc5fe3a0c4a49267422da2ee749aed6"
+    },
+    {
+      "mode": "100644",
+      "path": ".gitignore",
+      "sha": "ae90db8fd765a9be4d7fec9a6f1e7c262b0616be",
+      "size": 160,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/ae90db8fd765a9be4d7fec9a6f1e7c262b0616be"
+    },
+    {
+      "mode": "100644",
+      "path": ".pre-commit-config.yaml",
+      "sha": "806acb05c9eaa23fbc42ac74b8ea6a5fc54b35a2",
+      "size": 676,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/806acb05c9eaa23fbc42ac74b8ea6a5fc54b35a2"
+    },
+    {
+      "mode": "100644",
+      "path": ".python-version",
+      "sha": "8531a3b7ee7e007afb605e6ff0089d0ed1fc5af3",
+      "size": 7,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/8531a3b7ee7e007afb605e6ff0089d0ed1fc5af3"
+    },
+    {
+      "mode": "040000",
+      "path": ".vscode",
+      "sha": "34e08850af2049d7a2a7766857b3a47da857b2e2",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/34e08850af2049d7a2a7766857b3a47da857b2e2"
+    },
+    {
+      "mode": "100644",
+      "path": ".vscode/extensions.json",
+      "sha": "6132232e70acdc6b67dcb21496cfc676c0a58c3f",
+      "size": 189,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/6132232e70acdc6b67dcb21496cfc676c0a58c3f"
+    },
+    {
+      "mode": "040000",
+      "path": ".windsurf",
+      "sha": "9e067a4f5371abeb2fbeffbf300f0f6dd21f6dbf",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/9e067a4f5371abeb2fbeffbf300f0f6dd21f6dbf"
+    },
+    {
+      "mode": "040000",
+      "path": ".windsurf/workflows",
+      "sha": "1dcc7a409b2d10dbda343fbc45967e985544f420",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/1dcc7a409b2d10dbda343fbc45967e985544f420"
+    },
+    {
+      "mode": "100644",
+      "path": ".windsurf/workflows/check_prompt_consistency.md",
+      "sha": "6dc9d48cd0a6895c07132b973366eea4176b0de7",
+      "size": 1543,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/6dc9d48cd0a6895c07132b973366eea4176b0de7"
+    },
+    {
+      "mode": "100644",
+      "path": ".windsurf/workflows/generate-pr-title-description.md",
+      "sha": "24cd9e859608baebd6ec06304500ec7ab6ccdf20",
+      "size": 895,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/24cd9e859608baebd6ec06304500ec7ab6ccdf20"
+    },
+    {
+      "mode": "100644",
+      "path": "CITATION.cff",
+      "sha": "da9d9e1ccdd70129098066790f621f6259b0e5a4",
+      "size": 634,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/da9d9e1ccdd70129098066790f621f6259b0e5a4"
+    },
+    {
+      "mode": "100644",
+      "path": "CONTRIBUTING.md",
+      "sha": "bef8e9fbdac397401cd96277f1b4d198a0be0430",
+      "size": 2529,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/bef8e9fbdac397401cd96277f1b4d198a0be0430"
+    },
+    {
+      "mode": "100644",
+      "path": "Dockerfile",
+      "sha": "2264558ade021c6daccae99dee9e128af93bc6e7",
+      "size": 1901,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/2264558ade021c6daccae99dee9e128af93bc6e7"
+    },
+    {
+      "mode": "100644",
+      "path": "LICENSE",
+      "sha": "055b75aaf55b25e2ea67bba85792fea95ec2062b",
+      "size": 10761,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/055b75aaf55b25e2ea67bba85792fea95ec2062b"
+    },
+    {
+      "mode": "100644",
+      "path": "Makefile",
+      "sha": "71a8aa865d9bd866d27bc7b5fc43aaa054f99493",
+      "size": 4481,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/71a8aa865d9bd866d27bc7b5fc43aaa054f99493"
+    },
+    {
+      "mode": "100644",
+      "path": "NOTICE",
+      "sha": "b58ad21d35fa3b9028f93b9032ef56db44349d7b",
+      "size": 556,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/b58ad21d35fa3b9028f93b9032ef56db44349d7b"
+    },
+    {
+      "mode": "100644",
+      "path": "README.md",
+      "sha": "469c40598ad8af18659a354512443489e786edf8",
+      "size": 12285,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/469c40598ad8af18659a354512443489e786edf8"
+    },
+    {
+      "mode": "040000",
+      "path": "doc",
+      "sha": "46d4f389bce2a740e8eda74633ff46266d6478dd",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/46d4f389bce2a740e8eda74633ff46266d6478dd"
+    },
+    {
+      "mode": "100644",
+      "path": "doc/banner-v2.png",
+      "sha": "119d3b92cc392edf73535d81ed0694ee5bbf65cb",
+      "size": 1348811,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/119d3b92cc392edf73535d81ed0694ee5bbf65cb"
+    },
+    {
+      "mode": "100644",
+      "path": "doc/benchmark.jpg",
+      "sha": "45fbbadac9ffc1110dc01dd1e4ccb2f90b104fe3",
+      "size": 98657,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/45fbbadac9ffc1110dc01dd1e4ccb2f90b104fe3"
+    },
+    {
+      "mode": "100644",
+      "path": "doc/graph.png",
+      "sha": "b181fd8aa99d6a7b41615eca16852cf17adec216",
+      "size": 45760,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/b181fd8aa99d6a7b41615eca16852cf17adec216"
+    },
+    {
+      "mode": "100644",
+      "path": "doc/linkedin-demo-with-text.gif",
+      "sha": "7f7347ab73221fc478c87e23700b86aa5edbaa53",
+      "size": 7645250,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/7f7347ab73221fc478c87e23700b86aa5edbaa53"
+    },
+    {
+      "mode": "100644",
+      "path": "doc/linkedin-demo.gif",
+      "sha": "edc9a47f1d92b869bbb14bde2b0e935a6b25c4dd",
+      "size": 5684283,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/edc9a47f1d92b869bbb14bde2b0e935a6b25c4dd"
+    },
+    {
+      "mode": "100644",
+      "path": "doc/readme-banner-1280x320.png",
+      "sha": "e3d37af141d190aa3cd8069bb544b4f2363272af",
+      "size": 158297,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/e3d37af141d190aa3cd8069bb544b4f2363272af"
+    },
+    {
+      "mode": "100644",
+      "path": "doc/readme-banner.gif",
+      "sha": "7755ab7fda95800debaeb515e088236d2b571ec3",
+      "size": 4194548,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/7755ab7fda95800debaeb515e088236d2b571ec3"
+    },
+    {
+      "mode": "100644",
+      "path": "docker-compose.yml",
+      "sha": "452a52e0901704c5bec81a8ceac65d8c9e6ced33",
+      "size": 1615,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/452a52e0901704c5bec81a8ceac65d8c9e6ced33"
+    },
+    {
+      "mode": "100755",
+      "path": "docker-entrypoint.sh",
+      "sha": "8becc2f2fce1499b25ebb0b22fed822d428d0247",
+      "size": 437,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/8becc2f2fce1499b25ebb0b22fed822d428d0247"
+    },
+    {
+      "mode": "100644",
+      "path": "llm-config.defaults.jsonc",
+      "sha": "442aedfe4766d113476db339321fd332b3615b15",
+      "size": 7232,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/442aedfe4766d113476db339321fd332b3615b15"
+    },
+    {
+      "mode": "100644",
+      "path": "llm-config.override.template.jsonc",
+      "sha": "fe6bbf7d8da03d31908f0c34dad70165e0212687",
+      "size": 1348,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/fe6bbf7d8da03d31908f0c34dad70165e0212687"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap",
+      "sha": "173990aa18b27f6d008f3043fa26cbdfb2db1839",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/173990aa18b27f6d008f3043fa26cbdfb2db1839"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use",
+      "sha": "1eceaad68538da9e92c63f790698340424e8e5cf",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/1eceaad68538da9e92c63f790698340424e8e5cf"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/__init__.py",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/agents",
+      "sha": "a179c0fcd85261d1692e3438a7130d4df4b62649",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/a179c0fcd85261d1692e3438a7130d4df4b62649"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/agents/contextor",
+      "sha": "81c2db4542e146dd5d107797b2f27278c413d59d",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/81c2db4542e146dd5d107797b2f27278c413d59d"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/contextor/contextor.md",
+      "sha": "714c4b1afa9b296891751d0f674ec3e1c9e993d0",
+      "size": 1187,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/714c4b1afa9b296891751d0f674ec3e1c9e993d0"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/contextor/contextor.py",
+      "sha": "45df4fb1363f6f207d183a66e4a8a0493e0c4fc2",
+      "size": 7487,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/45df4fb1363f6f207d183a66e4a8a0493e0c4fc2"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/contextor/types.py",
+      "sha": "94db7cbd2cf0d78eff6d5d492817c9f17563287b",
+      "size": 1320,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/94db7cbd2cf0d78eff6d5d492817c9f17563287b"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/agents/cortex",
+      "sha": "601c2f920a742ffb020814e56765538758fd7ee7",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/601c2f920a742ffb020814e56765538758fd7ee7"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/cortex/cortex.md",
+      "sha": "133666f1f4a0616721ac4c08581801316ae6b58f",
+      "size": 5169,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/133666f1f4a0616721ac4c08581801316ae6b58f"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/cortex/cortex.py",
+      "sha": "ee123d5ecca009a1c5dd1b2ec778f72b3beba170",
+      "size": 6238,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/ee123d5ecca009a1c5dd1b2ec778f72b3beba170"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/cortex/types.py",
+      "sha": "15b1a03b01f3d9e00e6c654ac00b3a11fa120593",
+      "size": 607,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/15b1a03b01f3d9e00e6c654ac00b3a11fa120593"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/agents/executor",
+      "sha": "b7185d6986324e85124eddde2814b800d69b008d",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/b7185d6986324e85124eddde2814b800d69b008d"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/executor/executor.md",
+      "sha": "289275584186f9fcf4918ef4b506a1fe49cf2131",
+      "size": 1283,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/289275584186f9fcf4918ef4b506a1fe49cf2131"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/executor/executor.py",
+      "sha": "8cf711aca3df6b61762830cd3b9dab5c6063cf08",
+      "size": 3457,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/8cf711aca3df6b61762830cd3b9dab5c6063cf08"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/executor/tool_node.py",
+      "sha": "9eb6b7b1f4ff89e6e9384a6ecdea79ebb2a8d4c5",
+      "size": 6362,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/9eb6b7b1f4ff89e6e9384a6ecdea79ebb2a8d4c5"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/agents/hopper",
+      "sha": "73841826a0db137c66d15f8688537076b478644e",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/73841826a0db137c66d15f8688537076b478644e"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/hopper/hopper.md",
+      "sha": "27c9d1a7ccea19f0522e9ba51c803d2477efaf70",
+      "size": 662,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/27c9d1a7ccea19f0522e9ba51c803d2477efaf70"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/hopper/hopper.py",
+      "sha": "a82cb52be4eaa553a680fc9d13c4d5534dc8267d",
+      "size": 1727,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/a82cb52be4eaa553a680fc9d13c4d5534dc8267d"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/agents/orchestrator",
+      "sha": "9a338a678733c948641a7c27fa3315ddab73b050",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/9a338a678733c948641a7c27fa3315ddab73b050"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/orchestrator/human.md",
+      "sha": "13a8e9dd230dc6afd657f2104d9db864194ee668",
+      "size": 229,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/13a8e9dd230dc6afd657f2104d9db864194ee668"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/orchestrator/orchestrator.md",
+      "sha": "1d7b9045b47cff3eed34e68742c540a30ca5f763",
+      "size": 816,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/1d7b9045b47cff3eed34e68742c540a30ca5f763"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/orchestrator/orchestrator.py",
+      "sha": "4472fc9e612b8e57b989f55310d22e58b70597a0",
+      "size": 5378,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/4472fc9e612b8e57b989f55310d22e58b70597a0"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/orchestrator/types.py",
+      "sha": "509e9d41fdf2ce79ceb15b605b01caedb38aa4da",
+      "size": 335,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/509e9d41fdf2ce79ceb15b605b01caedb38aa4da"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/agents/outputter",
+      "sha": "37b2fc26d70e521ddace8003a297ade40a17d3ba",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/37b2fc26d70e521ddace8003a297ade40a17d3ba"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/outputter/human.md",
+      "sha": "544a62b24d3e3621a4dd9dd78ee8e6ebdc62c1c8",
+      "size": 771,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/544a62b24d3e3621a4dd9dd78ee8e6ebdc62c1c8"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/outputter/outputter.py",
+      "sha": "5592da5b41815f35ca8f716e1835deaffffe6c88",
+      "size": 3250,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/5592da5b41815f35ca8f716e1835deaffffe6c88"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/outputter/test_outputter.py",
+      "sha": "c8102e349ddc5e4b70d5e593bc4ada7e7793042c",
+      "size": 5567,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/c8102e349ddc5e4b70d5e593bc4ada7e7793042c"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/agents/planner",
+      "sha": "1e1424806dd857c77dcc6d0b2564ff6bf86d64cd",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/1e1424806dd857c77dcc6d0b2564ff6bf86d64cd"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/planner/human.md",
+      "sha": "368c21799ddeb34a4eee615e4a9822e42199b10c",
+      "size": 263,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/368c21799ddeb34a4eee615e4a9822e42199b10c"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/planner/planner.md",
+      "sha": "ee2beb5c0589f3ec27840fed1d6425e6b45c51e0",
+      "size": 3907,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/ee2beb5c0589f3ec27840fed1d6425e6b45c51e0"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/planner/planner.py",
+      "sha": "91200f624dff2cb9511498e49c4abd6e59bed7a1",
+      "size": 3996,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/91200f624dff2cb9511498e49c4abd6e59bed7a1"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/planner/types.py",
+      "sha": "40d0c91b6f8b102ed841850ad44ce64f9828060e",
+      "size": 1496,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/40d0c91b6f8b102ed841850ad44ce64f9828060e"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/planner/utils.py",
+      "sha": "d0248f1fb6c3efd0b2d8a033290a0bd69eb1c562",
+      "size": 2315,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/d0248f1fb6c3efd0b2d8a033290a0bd69eb1c562"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/agents/summarizer",
+      "sha": "294bef62cd2ea4a89a2e8bc034e7572f0f3c0e84",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/294bef62cd2ea4a89a2e8bc034e7572f0f3c0e84"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/summarizer/summarizer.py",
+      "sha": "03d80cd14530c4e903b16bb1abed0113df76e9e5",
+      "size": 1060,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/03d80cd14530c4e903b16bb1abed0113df76e9e5"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/agents/video_analyzer",
+      "sha": "ae8e4e5f3c85759d29bcb1c8b364145afe5a4c5b",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/ae8e4e5f3c85759d29bcb1c8b364145afe5a4c5b"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/video_analyzer/__init__.py",
+      "sha": "5055944924528a7da7a72cdac481392422d02794",
+      "size": 189,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/5055944924528a7da7a72cdac481392422d02794"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/video_analyzer/human.md",
+      "sha": "9bc612810a8485637b0e67ee665a76697f16f050",
+      "size": 107,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/9bc612810a8485637b0e67ee665a76697f16f050"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/video_analyzer/video_analyzer.md",
+      "sha": "0a4a9ab4a5e4cb6ba3b67ee849a5fb5b7fc95f3e",
+      "size": 1386,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/0a4a9ab4a5e4cb6ba3b67ee849a5fb5b7fc95f3e"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/agents/video_analyzer/video_analyzer.py",
+      "sha": "eb1e9d714bd326382c18280154ab932a081584f5",
+      "size": 3703,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/eb1e9d714bd326382c18280154ab932a081584f5"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/clients",
+      "sha": "e6a54e302df997466265e74ac6c8616ec9d5d512",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/e6a54e302df997466265e74ac6c8616ec9d5d512"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/clients/adb_tunnel.py",
+      "sha": "76ff37537d6ef98d707049a7e4c7d6787b86de06",
+      "size": 11121,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/76ff37537d6ef98d707049a7e4c7d6787b86de06"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/clients/browserstack_client.py",
+      "sha": "6995a0b33fe190d31dd1bb0fe1e7201efc4164d1",
+      "size": 16353,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/6995a0b33fe190d31dd1bb0fe1e7201efc4164d1"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/clients/cloud_device_client.py",
+      "sha": "48d508efd8502337ef9988740da280bb0ebf410b",
+      "size": 22073,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/48d508efd8502337ef9988740da280bb0ebf410b"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/clients/cloud_device_factory.py",
+      "sha": "ca7c73152358e594361afba741263afb0f56b506",
+      "size": 9552,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/ca7c73152358e594361afba741263afb0f56b506"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/clients/idb_client.py",
+      "sha": "994cbe6661ea7b4cfb8cc954d2fd13c811e8518f",
+      "size": 16028,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/994cbe6661ea7b4cfb8cc954d2fd13c811e8518f"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/clients/ios_client.py",
+      "sha": "eb045e7ab6d1ebefb5bc9a32adbbc53c2071a8c4",
+      "size": 10353,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/eb045e7ab6d1ebefb5bc9a32adbbc53c2071a8c4"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/clients/ios_client_config.py",
+      "sha": "255f25440fc5b4f4f0b987649ea5f744c3eb5d2a",
+      "size": 4569,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/255f25440fc5b4f4f0b987649ea5f744c3eb5d2a"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/clients/ui_automator_client.py",
+      "sha": "d8978267359bc6c6e9c1264cbb9c1f962e797858",
+      "size": 10006,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/d8978267359bc6c6e9c1264cbb9c1f962e797858"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/clients/wda_client.py",
+      "sha": "0b8421d0623923dcfb5a4df9d9249faef564a1d5",
+      "size": 18967,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/0b8421d0623923dcfb5a4df9d9249faef564a1d5"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/clients/wda_lifecycle.py",
+      "sha": "f236378be3ef81185ac9f331dd232a5a7c9510be",
+      "size": 11316,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/f236378be3ef81185ac9f331dd232a5a7c9510be"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/config.py",
+      "sha": "f750a9ae32722dfbad09890cde57e283836bee88",
+      "size": 14801,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/f750a9ae32722dfbad09890cde57e283836bee88"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/constants.py",
+      "sha": "7dff2f1b5745d3ab7f5de4b579646cfc863c4834",
+      "size": 95,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/7dff2f1b5745d3ab7f5de4b579646cfc863c4834"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/context.py",
+      "sha": "027d52ee2eaaf29d14dab2d3a6f7916f692f1d63",
+      "size": 3360,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/027d52ee2eaaf29d14dab2d3a6f7916f692f1d63"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/controllers",
+      "sha": "71c30d87622aaf0f94fef7a48497026a1c2bb66c",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/71c30d87622aaf0f94fef7a48497026a1c2bb66c"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/controllers/__init__.py",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/controllers/android_controller.py",
+      "sha": "f12c063e37f34798c2e9f1dd4d94087bbeef4439",
+      "size": 18864,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/f12c063e37f34798c2e9f1dd4d94087bbeef4439"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/controllers/cloud_device_controller.py",
+      "sha": "9ada6619c1ce0c49577bb459e392df05900208ff",
+      "size": 22338,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/9ada6619c1ce0c49577bb459e392df05900208ff"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/controllers/controller_factory.py",
+      "sha": "523d39c5f1fc623e6df4639ba4d48d4163b9d3bb",
+      "size": 2023,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/523d39c5f1fc623e6df4639ba4d48d4163b9d3bb"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/controllers/device_controller.py",
+      "sha": "e4e676e3c4e5fd5fb084b1bd7518c116deb29ef6",
+      "size": 5879,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/e4e676e3c4e5fd5fb084b1bd7518c116deb29ef6"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/controllers/ios_controller.py",
+      "sha": "46ea9131fbd22782846737cfcce0bcc68a104fd9",
+      "size": 16969,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/46ea9131fbd22782846737cfcce0bcc68a104fd9"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/controllers/platform_specific_commands_controller.py",
+      "sha": "4d72e281c970bcdf7be12cdc989c6f4fbdcc353d",
+      "size": 10993,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/4d72e281c970bcdf7be12cdc989c6f4fbdcc353d"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/controllers/types.py",
+      "sha": "01a81fb12802b6c9d84ec371a1fe7e557bb5a427",
+      "size": 3260,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/01a81fb12802b6c9d84ec371a1fe7e557bb5a427"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/controllers/unified_controller.py",
+      "sha": "115771a7dd1d9bb403bb6dd74109158f48425bf4",
+      "size": 6634,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/115771a7dd1d9bb403bb6dd74109158f48425bf4"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/graph",
+      "sha": "48c2765b60ecdbe82c1736775ed4bdb0fdb74d39",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/48c2765b60ecdbe82c1736775ed4bdb0fdb74d39"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/graph/graph.py",
+      "sha": "9482dfd2f960cc63518ff72cf3d4bc1db853ff3d",
+      "size": 5355,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/9482dfd2f960cc63518ff72cf3d4bc1db853ff3d"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/graph/state.py",
+      "sha": "f465d39920dbb991e38b5166f1c46cf243e34422",
+      "size": 4186,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/f465d39920dbb991e38b5166f1c46cf243e34422"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/main.py",
+      "sha": "f2562b79b2ae50ad2f536c205197ef3c35b6aa9f",
+      "size": 11336,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/f2562b79b2ae50ad2f536c205197ef3c35b6aa9f"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/sdk",
+      "sha": "20dc521770bcfecf872565f196a0b61e6a39e959",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/20dc521770bcfecf872565f196a0b61e6a39e959"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/sdk/__init__.py",
+      "sha": "350951835386e5a7a3daa7d17254523190c13819",
+      "size": 318,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/350951835386e5a7a3daa7d17254523190c13819"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/sdk/agent.py",
+      "sha": "d1b4cb05a9f7b4c2154b1f19b0620c763a1aa8dc",
+      "size": 54844,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/d1b4cb05a9f7b4c2154b1f19b0620c763a1aa8dc"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/sdk/builders",
+      "sha": "85508e1db978dec348740854ca43a9d5898f18d9",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/85508e1db978dec348740854ca43a9d5898f18d9"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/sdk/builders/__init__.py",
+      "sha": "aee5bec0aa153c97daa9d360327220851f15c509",
+      "size": 424,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/aee5bec0aa153c97daa9d360327220851f15c509"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/sdk/builders/agent_config_builder.py",
+      "sha": "a68019ee255a5bc6ec766659741afc37dad2fda3",
+      "size": 16608,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/a68019ee255a5bc6ec766659741afc37dad2fda3"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/sdk/builders/index.py",
+      "sha": "230c790fb4c0703052aaa0b6eed4615794b58f39",
+      "size": 442,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/230c790fb4c0703052aaa0b6eed4615794b58f39"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/sdk/builders/task_request_builder.py",
+      "sha": "ce7d18a246d7b96d241df1ffd1f2a1d8407b5f53",
+      "size": 8301,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/ce7d18a246d7b96d241df1ffd1f2a1d8407b5f53"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/sdk/constants.py",
+      "sha": "963dda37f599c1e42b6778aa7bbb37c39c554cf2",
+      "size": 33,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/963dda37f599c1e42b6778aa7bbb37c39c554cf2"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/sdk/examples",
+      "sha": "5d42fdfd4abc261a0f6c048d0e7ac75f4f076fe6",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/5d42fdfd4abc261a0f6c048d0e7ac75f4f076fe6"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/sdk/examples/README.md",
+      "sha": "6591e275aadf6f71545ecb9345cb84f66d14b66e",
+      "size": 2416,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/6591e275aadf6f71545ecb9345cb84f66d14b66e"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/sdk/examples/__init__.py",
+      "sha": "43812bea028d10f3d1abeb333d56989ab2b8b360",
+      "size": 46,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/43812bea028d10f3d1abeb333d56989ab2b8b360"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/sdk/examples/app_lock_messaging.py",
+      "sha": "1e533f8c45fccd26260b089c6a776647fbd171ca",
+      "size": 1722,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/1e533f8c45fccd26260b089c6a776647fbd171ca"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/sdk/examples/simple_photo_organizer.py",
+      "sha": "c4ddd667de1c832839e440a80bc002de36052b8d",
+      "size": 2618,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/c4ddd667de1c832839e440a80bc002de36052b8d"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/sdk/examples/smart_notification_assistant.py",
+      "sha": "988012ea81e13a7240043726fa337c451f9cf729",
+      "size": 8152,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/988012ea81e13a7240043726fa337c451f9cf729"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/sdk/examples/video_transcription_example.py",
+      "sha": "a24eb9361e3aa7969b6b8c8d88a477f2d08be452",
+      "size": 3637,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/a24eb9361e3aa7969b6b8c8d88a477f2d08be452"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/sdk/types",
+      "sha": "8b11e34edd1e66d1c2fe2966a8dcfbeac69febeb",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/8b11e34edd1e66d1c2fe2966a8dcfbeac69febeb"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/sdk/types/__init__.py",
+      "sha": "045961515e106e40e7e173d495882aeacf49a851",
+      "size": 1080,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/045961515e106e40e7e173d495882aeacf49a851"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/sdk/types/agent.py",
+      "sha": "1c0b74ebc7859c0745937cab7a098e078f228627",
+      "size": 4131,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/1c0b74ebc7859c0745937cab7a098e078f228627"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/sdk/types/exceptions.py",
+      "sha": "388f184933552f43bd835e12f0023373f5f0ed8a",
+      "size": 3619,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/388f184933552f43bd835e12f0023373f5f0ed8a"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/sdk/types/task.py",
+      "sha": "55b2176c6a814b4945beb04e5392993563c0e06b",
+      "size": 7075,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/55b2176c6a814b4945beb04e5392993563c0e06b"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/sdk/utils.py",
+      "sha": "7b4bad4b124539d2f67c359d8a2c6022d8638452",
+      "size": 967,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/7b4bad4b124539d2f67c359d8a2c6022d8638452"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/services",
+      "sha": "bd4187e2ee89767ad888446d7a301d9b20bdb90c",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/bd4187e2ee89767ad888446d7a301d9b20bdb90c"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/services/accessibility.py",
+      "sha": "8593f69e4255e8ab77f53146878e27d5e8196bec",
+      "size": 3404,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/8593f69e4255e8ab77f53146878e27d5e8196bec"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/services/llm.py",
+      "sha": "5a69c4bafa0a2128d36dcf3158e9040386ff4cab",
+      "size": 9168,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/5a69c4bafa0a2128d36dcf3158e9040386ff4cab"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/services/telemetry.py",
+      "sha": "3435840c581a7341df3bee78265fb5519584ad6f",
+      "size": 13066,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/3435840c581a7341df3bee78265fb5519584ad6f"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/tools",
+      "sha": "c73aeac7c2e10c3d6b366de93ae6119804f10e91",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/c73aeac7c2e10c3d6b366de93ae6119804f10e91"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/index.py",
+      "sha": "19e9cb2bddbc031ef5c58007379a788a54e961a3",
+      "size": 2439,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/19e9cb2bddbc031ef5c58007379a788a54e961a3"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/tools/mobile",
+      "sha": "eabf803beca9d8f06cf5ef97075d7c8852d5d7b9",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/eabf803beca9d8f06cf5ef97075d7c8852d5d7b9"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/mobile/back.py",
+      "sha": "6d668c8a090350bf1ed063884be012f4d4e94478",
+      "size": 1918,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/6d668c8a090350bf1ed063884be012f4d4e94478"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/mobile/erase_one_char.py",
+      "sha": "9b3d39cf35c0a38983fb01e8daaf36c98a636e65",
+      "size": 2017,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/9b3d39cf35c0a38983fb01e8daaf36c98a636e65"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/mobile/focus_and_clear_text.py",
+      "sha": "f1e3496136fbec9b9c9e040ecb4dd24c0a1983b1",
+      "size": 10495,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/f1e3496136fbec9b9c9e040ecb4dd24c0a1983b1"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/mobile/focus_and_input_text.py",
+      "sha": "f40ee5d09b8fe27fbcbfc9b0b7a4bd34addd1938",
+      "size": 5690,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/f40ee5d09b8fe27fbcbfc9b0b7a4bd34addd1938"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/mobile/launch_app.py",
+      "sha": "c970a03c20e21e91f183521faf768b8a4c646067",
+      "size": 3320,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/c970a03c20e21e91f183521faf768b8a4c646067"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/mobile/long_press_on.py",
+      "sha": "b1c169fa8a557ddccf73da974cb6367495903d86",
+      "size": 7160,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/b1c169fa8a557ddccf73da974cb6367495903d86"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/mobile/open_link.py",
+      "sha": "5f92feb512c87c4dfd2f08c57353153188c3314f",
+      "size": 2052,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/5f92feb512c87c4dfd2f08c57353153188c3314f"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/mobile/press_key.py",
+      "sha": "ca942e47bd98c265260c50a3a88dcdfd05cd3463",
+      "size": 2613,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/ca942e47bd98c265260c50a3a88dcdfd05cd3463"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/mobile/stop_app.py",
+      "sha": "02bbf58dbcd97e91e7836d1aead4dd899fa51f3e",
+      "size": 2297,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/02bbf58dbcd97e91e7836d1aead4dd899fa51f3e"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/mobile/swipe.py",
+      "sha": "987212e02e74e5a647e76940d1e2afa0d17993dc",
+      "size": 6033,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/987212e02e74e5a647e76940d1e2afa0d17993dc"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/mobile/tap.py",
+      "sha": "75813b86c13a2f31686a4a6a7ee4c8613f36cc86",
+      "size": 6736,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/75813b86c13a2f31686a4a6a7ee4c8613f36cc86"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/mobile/video_recording.py",
+      "sha": "ebcc2fd8762f96a0fb12857c9cfadab0c8f668db",
+      "size": 6388,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/ebcc2fd8762f96a0fb12857c9cfadab0c8f668db"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/mobile/wait_for_delay.py",
+      "sha": "87fd278a35ac10ca4943f3986a1ab679885d12a2",
+      "size": 2688,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/87fd278a35ac10ca4943f3986a1ab679885d12a2"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/scratchpad.py",
+      "sha": "e28019a0178cb42abb9554c8f66b2ce154dff077",
+      "size": 4509,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/e28019a0178cb42abb9554c8f66b2ce154dff077"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/test_utils.py",
+      "sha": "b5dd9542f5cfe19c7845f4557d68adb282b8740a",
+      "size": 15125,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/b5dd9542f5cfe19c7845f4557d68adb282b8740a"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/tool_wrapper.py",
+      "sha": "1852d01255132ccaa17dc2bacf5cacef592163a8",
+      "size": 454,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/1852d01255132ccaa17dc2bacf5cacef592163a8"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/types.py",
+      "sha": "ccd26eb16e4be13791eec4da6990aaf3fff9498d",
+      "size": 1293,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/ccd26eb16e4be13791eec4da6990aaf3fff9498d"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/tools/utils.py",
+      "sha": "90b2c4480ebc86a567f31544f391f27651fec660",
+      "size": 12539,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/90b2c4480ebc86a567f31544f391f27651fec660"
+    },
+    {
+      "mode": "040000",
+      "path": "minitap/mobile_use/utils",
+      "sha": "c8a2b4e019c3b5c25f99e07fee386108f29fcf7a",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/c8a2b4e019c3b5c25f99e07fee386108f29fcf7a"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/utils/app_launch_utils.py",
+      "sha": "28267e6426c7697c864c36b2a1608120c2f987bd",
+      "size": 5941,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/28267e6426c7697c864c36b2a1608120c2f987bd"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/utils/cli_helpers.py",
+      "sha": "1d87514c437a3c2c6905da970ba0ac6a359aaa6e",
+      "size": 1476,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/1d87514c437a3c2c6905da970ba0ac6a359aaa6e"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/utils/cli_selection.py",
+      "sha": "1a37604c3e35843075efb52d38f1239f83923c28",
+      "size": 4788,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/1a37604c3e35843075efb52d38f1239f83923c28"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/utils/conversations.py",
+      "sha": "e8b2ec7020d53fb917e3822806ae317524e42fcf",
+      "size": 914,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/e8b2ec7020d53fb917e3822806ae317524e42fcf"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/utils/decorators.py",
+      "sha": "fbb722f9bc8ed4aca494a6ff0c69f52bdd227e40",
+      "size": 3603,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/fbb722f9bc8ed4aca494a6ff0c69f52bdd227e40"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/utils/errors.py",
+      "sha": "5cf8b244115308ea994375446feba66a1b453e39",
+      "size": 156,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/5cf8b244115308ea994375446feba66a1b453e39"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/utils/file.py",
+      "sha": "317fb3c63ce50714ef8e772281161ede1184414c",
+      "size": 315,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/317fb3c63ce50714ef8e772281161ede1184414c"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/utils/logger.py",
+      "sha": "2e2d6382c2509564515134d7381bb619183cde19",
+      "size": 5633,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/2e2d6382c2509564515134d7381bb619183cde19"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/utils/media.py",
+      "sha": "17bab887bddb13af65b999a4cd8756ed6fce78d1",
+      "size": 5655,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/17bab887bddb13af65b999a4cd8756ed6fce78d1"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/utils/recorder.py",
+      "sha": "1fbc2f32a131dc9ddf4a5f9ee5e0a7160901af04",
+      "size": 1938,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/1fbc2f32a131dc9ddf4a5f9ee5e0a7160901af04"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/utils/requests_utils.py",
+      "sha": "80c78d66c1a339d281b35e386b595184dc54140c",
+      "size": 1168,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/80c78d66c1a339d281b35e386b595184dc54140c"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/utils/shell_utils.py",
+      "sha": "fbdc0cbeae5284a0f1e0943bcc29e70e560ef881",
+      "size": 650,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/fbdc0cbeae5284a0f1e0943bcc29e70e560ef881"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/utils/test_ui_hierarchy.py",
+      "sha": "00e835c21221bcbeb411801f629e126a38dd805d",
+      "size": 5911,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/00e835c21221bcbeb411801f629e126a38dd805d"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/utils/time.py",
+      "sha": "8034e13120472f1ea57b17f9f6ea33a518f81560",
+      "size": 160,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/8034e13120472f1ea57b17f9f6ea33a518f81560"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/utils/ui_hierarchy.py",
+      "sha": "7db8470710a3c8ad831cba141cd2efafbbc1682e",
+      "size": 4061,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/7db8470710a3c8ad831cba141cd2efafbbc1682e"
+    },
+    {
+      "mode": "100644",
+      "path": "minitap/mobile_use/utils/video.py",
+      "sha": "adb68697e595509b2008927c2686ed242f0a94e1",
+      "size": 8621,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/adb68697e595509b2008927c2686ed242f0a94e1"
+    },
+    {
+      "mode": "100644",
+      "path": "mobile-use.ps1",
+      "sha": "c6eb520b4a1cb66d8724c1fb8e0ef9bff5425b7c",
+      "size": 4856,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/c6eb520b4a1cb66d8724c1fb8e0ef9bff5425b7c"
+    },
+    {
+      "mode": "100755",
+      "path": "mobile-use.sh",
+      "sha": "fde83647d33da494e4b03006fab5693857333b47",
+      "size": 4414,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/fde83647d33da494e4b03006fab5693857333b47"
+    },
+    {
+      "mode": "100644",
+      "path": "pyproject.toml",
+      "sha": "86dce05a33f47ca655f7a3a48a3fe917802a2752",
+      "size": 4097,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/86dce05a33f47ca655f7a3a48a3fe917802a2752"
+    },
+    {
+      "mode": "100644",
+      "path": "pyrightconfig.json",
+      "sha": "c6f60f5225a17286f767921fd4f712cd6df18015",
+      "size": 30,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/c6f60f5225a17286f767921fd4f712cd6df18015"
+    },
+    {
+      "mode": "040000",
+      "path": "scripts",
+      "sha": "372a95f4f6b37125dd2f350f791fcbacabe4a1b1",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/372a95f4f6b37125dd2f350f791fcbacabe4a1b1"
+    },
+    {
+      "mode": "040000",
+      "path": "scripts/doc",
+      "sha": "2b942d34a4a255139518eb8de4d3364e99043c69",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/2b942d34a4a255139518eb8de4d3364e99043c69"
+    },
+    {
+      "mode": "100644",
+      "path": "scripts/doc/generate_graph_docs.py",
+      "sha": "dd4c7b6e222c4ac7d958abe3efc1ec3c03b76945",
+      "size": 2244,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/dd4c7b6e222c4ac7d958abe3efc1ec3c03b76945"
+    },
+    {
+      "mode": "040000",
+      "path": "scripts/git",
+      "sha": "d36d76fccb9a4234abc4420eddba940af124b960",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/d36d76fccb9a4234abc4420eddba940af124b960"
+    },
+    {
+      "mode": "100644",
+      "path": "scripts/git/get_branch_diff.ps1",
+      "sha": "7e39fcf7c64ba6a429f270ac339fd2b1eb3b141c",
+      "size": 449,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/7e39fcf7c64ba6a429f270ac339fd2b1eb3b141c"
+    },
+    {
+      "mode": "100644",
+      "path": "scripts/git/get_branch_diff.sh",
+      "sha": "93b56cbcb030bcfc2f4ce07929fa1745f5d14319",
+      "size": 312,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/93b56cbcb030bcfc2f4ce07929fa1745f5d14319"
+    },
+    {
+      "mode": "040000",
+      "path": "skills",
+      "sha": "047a01e1f48c58e88abb7672973d5252a238a034",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/047a01e1f48c58e88abb7672973d5252a238a034"
+    },
+    {
+      "mode": "100644",
+      "path": "skills/README.md",
+      "sha": "6785249637e8437473ab761f5082c4cedc0e8944",
+      "size": 1737,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/6785249637e8437473ab761f5082c4cedc0e8944"
+    },
+    {
+      "mode": "040000",
+      "path": "skills/mobile-use-setup",
+      "sha": "85d026edd820fbf59d75baa7adb31c6a52d207df",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/85d026edd820fbf59d75baa7adb31c6a52d207df"
+    },
+    {
+      "mode": "100644",
+      "path": "skills/mobile-use-setup/SKILL.md",
+      "sha": "86d67f3b389fc4613efb3594b01be3bc870cb61a",
+      "size": 2378,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/86d67f3b389fc4613efb3594b01be3bc870cb61a"
+    },
+    {
+      "mode": "040000",
+      "path": "skills/mobile-use-setup/references",
+      "sha": "b45b7d4a8c5c8ecfce71508aaceab572252f209d",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/b45b7d4a8c5c8ecfce71508aaceab572252f209d"
+    },
+    {
+      "mode": "100644",
+      "path": "skills/mobile-use-setup/references/android-device.md",
+      "sha": "a6cc9caccdc604fc0fbe2edac11089e917b70272",
+      "size": 3261,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/a6cc9caccdc604fc0fbe2edac11089e917b70272"
+    },
+    {
+      "mode": "100644",
+      "path": "skills/mobile-use-setup/references/ios-physical-device.md",
+      "sha": "5031690ad5bde1c6ff5eea7e82525982f1f95aae",
+      "size": 3201,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/5031690ad5bde1c6ff5eea7e82525982f1f95aae"
+    },
+    {
+      "mode": "040000",
+      "path": "skills/mobile-use-setup/scripts",
+      "sha": "852fd41e63524def82f81c25290919facd65ef16",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/852fd41e63524def82f81c25290919facd65ef16"
+    },
+    {
+      "mode": "100755",
+      "path": "skills/mobile-use-setup/scripts/check-prerequisites.sh",
+      "sha": "3fa68d54b9e0ab84804506865bf3457da646cf54",
+      "size": 3267,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/3fa68d54b9e0ab84804506865bf3457da646cf54"
+    },
+    {
+      "mode": "100755",
+      "path": "skills/mobile-use-setup/scripts/create-project.sh",
+      "sha": "12ccae138ca0bba5d50990b8c5b7b56829ebdd28",
+      "size": 2414,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/12ccae138ca0bba5d50990b8c5b7b56829ebdd28"
+    },
+    {
+      "mode": "100755",
+      "path": "skills/mobile-use-setup/scripts/verify-device.sh",
+      "sha": "087157ddd33780cca898333e12ffe0f921cbd9fa",
+      "size": 3069,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/087157ddd33780cca898333e12ffe0f921cbd9fa"
+    },
+    {
+      "mode": "100644",
+      "path": "slim.Dockerfile",
+      "sha": "863e257903048652d2c19b2e05a526b6d397c245",
+      "size": 1678,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/863e257903048652d2c19b2e05a526b6d397c245"
+    },
+    {
+      "mode": "040000",
+      "path": "tests",
+      "sha": "11496238fb4698335635ef950a40b3eeaeea236d",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/11496238fb4698335635ef950a40b3eeaeea236d"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/__init__.py",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "mode": "040000",
+      "path": "tests/mobile_use",
+      "sha": "6af1aff402761a1ec2d267647ce533913c3287b9",
+      "type": "tree",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/trees/6af1aff402761a1ec2d267647ce533913c3287b9"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/mobile_use/__init__.py",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/mobile_use/test_cloud_device_client.py",
+      "sha": "6a2387c35284f625d05f11de3d3002ecf38fd19f",
+      "size": 1324,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/6a2387c35284f625d05f11de3d3002ecf38fd19f"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/mobile_use/test_idb_client.py",
+      "sha": "23e767d7501f3111dcc5de9fd807080dd20c23d9",
+      "size": 5850,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/23e767d7501f3111dcc5de9fd807080dd20c23d9"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/mobile_use/test_idb_subprocess.py",
+      "sha": "c1c85c019781623472f2116b4978451d12e30b3e",
+      "size": 1157,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/c1c85c019781623472f2116b4978451d12e30b3e"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/mobile_use/test_minimax_provider.py",
+      "sha": "66490eb20dd26d3fc9e7a030842a9964e08a0a67",
+      "size": 1376,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/66490eb20dd26d3fc9e7a030842a9964e08a0a67"
+    },
+    {
+      "mode": "100644",
+      "path": "tests/mobile_use/test_sdk_execution.py",
+      "sha": "8b8e7577daa9d9525cb07b868b2e6f38a509897d",
+      "size": 1982,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/8b8e7577daa9d9525cb07b868b2e6f38a509897d"
+    },
+    {
+      "mode": "100644",
+      "path": "uv.lock",
+      "sha": "46babd9c755078339c23b4f358b7a48189596a9f",
+      "size": 735267,
+      "type": "blob",
+      "url": "https://api.github.com/repos/minitap-ai/mobile-use/git/blobs/46babd9c755078339c23b4f358b7a48189596a9f"
+    }
+  ],
+  "truncated": false
+}

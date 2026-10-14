@@ -9,7 +9,7 @@ summary. [Verified requirements](SCP_AUTHOR_REQUIREMENTS.md).
 | Item | Prepared information |
 |---|---|
 | Software | OrchLang |
-| Candidate version | 0.5.0-rc1; Python wheel 0.5.0rc1 |
+| Candidate version | 0.5.0-rc2; Python wheel 0.5.0rc2 |
 | Article | OrchLang: Replayable Contracts for Token Usage and Request-Equivalent LLM Workflows |
 | Author from repository | Nambi Rajan M; name order, affiliation and contact require confirmation |
 | Source | https://github.com/guyoverclocked/orchlang-compiler-design-project |

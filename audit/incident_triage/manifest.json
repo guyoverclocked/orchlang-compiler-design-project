@@ -2,11 +2,11 @@
   "format": "orchlang-incident-extension-reproduction",
   "version": 1,
   "status": "passed",
-  "started_utc": "2026-10-09T02:26:36.377690+00:00",
-  "completed_utc": "2026-10-09T02:26:40.602841+00:00",
-  "python": "3.12.14",
-  "platform": "macOS-27.0-arm64-arm-64bit",
-  "integration_interpreter": "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/.venv/bin/python",
+  "started_utc": "2026-10-14T03:39:40.095140+00:00",
+  "completed_utc": "2026-10-14T03:39:44.167755+00:00",
+  "python": "3.14.6",
+  "platform": "macOS-27.0-arm64-arm-64bit-Mach-O",
+  "integration_interpreter": "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/.venv/bin/python",
   "source_commit": "c08f710acfeefe233329df613fe8358eaac5f350",
   "source_bundle_sha256": "deb487b425c49d95c39cd9ff2d689dc56401f66ffd44f7ae17fbe9a691849080",
   "inputs_unchanged_during_run": true,
@@ -24,11 +24,13 @@
     "audit/orchgraph.py": "103ebc7129d117fb6416ad03d919e08abdcd787b2cc7dcb5f7290394d383ab42",
     "audit/probabilistic_channels.py": "45380e75cdcc4d6f285a0027cbb85dab97d22dff11c5c94d3940b6813e8dce00",
     "audit/probabilistic_reference.py": "9c081f87e1dcd7b283bb4894a1a1794c8183e09fcadeac53c9467cb1606e3012",
+    "audit/publication_provenance.py": "90b5f8a580cfa34c5f706d68829f9bd77aae3ebd5e601a16c5c66b0b9df26128",
+    "audit/publication_run_integrity.py": "ff72409e84d6e827a9957e8b19e0e433863700b5974cb306bbcfe1b8a6b74b65",
     "audit/relational_stress.py": "c90e6d101d31f609eae804e60a5346df6ae7c3dcc5df8a1354f7c7aedc483a8b",
     "audit/replay_graph_certificate.py": "675590d24c5753a36ee6645a31eed170a52abf118562a8f171296a5fdfab3ccb",
     "audit/replay_probabilistic_report.py": "7297248e651c3972cc62287409b47a95f3f41b6b1800adc1011dc7bb4cfb1e1f",
     "audit/replay_stochastic_certificate.py": "1b987ad220e733a4e1be79b7391bce245d8d7e56bc515bccec051918a8161407",
-    "audit/replay_trace_equivalence.py": "cd117dcfcbb868a22e10594efc3380b1a38d4af9dafdb3bcd4c89e61b0aaad55",
+    "audit/replay_trace_equivalence.py": "88ded10270a4936b14f9c260194d5ebd36900c479f54f7307632c7e7f27dc388",
     "audit/reproduce_final.py": "d141a5dd9164b2221218f129076907b83a6014bbde3c3eb3f57c766b1948f59b",
     "audit/reproduce_incident_triage.py": "e719599209ddd7997a03475ec3f103b8c912327d533b55259db6b2685c8083aa",
     "audit/source_to_graph.py": "85b7f497150cf8c2f40cf48547336e3f0223bf7ea960b7959e19be2fa609a3a7",
@@ -41,13 +43,16 @@
     "audit/test_probabilistic_channels.py": "448cdd6052b6087abfe679a6b0946da01869d78a2647ee10100c7d489c4bc429",
     "audit/test_probabilistic_reference.py": "12ec5202a7e9b2c6652ba85019fe1900a033b42bf985c22863ca3cea34bc61d9",
     "audit/test_probabilistic_replay.py": "d2225e53fadb2e716e51f66e578207518fd751ebf504e28dbf0f4c0aa7939534",
+    "audit/test_publication_corpus.py": "31950f8c348befc10321c6b41ce8aac23ae7a748fd019661bbb86487ba0381c7",
+    "audit/test_publication_provenance.py": "ed915630b9a2061d3dcccc476605abd18ff4176bf1b5b9d9d0ae14bec74b7881",
     "audit/test_relational_stress.py": "809c83c71d9bb276f8984cd806895483c439f62997bd5dd4f778ea330d7eddfa",
     "audit/test_source_to_graph.py": "c8f71f51408fa326c53681139ee531008057fe7579d59a506ebcd7df0dfce8cb",
     "audit/test_stochastic_bisimulation.py": "13d47700ca4b90ace8ef87ed503adee43437cf79b0f22df633d2ba9f6a507877",
     "audit/test_stochastic_replay.py": "20b6226319bacafd6258a960fdb7ca83a28099244221ff545c6b836692faf444",
-    "audit/test_trace_equivalence.py": "bb370216fb2f7dc0bcec89cc4d91ad5cec488088e2804a414261371a624453a6",
-    "audit/test_trace_equivalence_replay.py": "5192459ad8ee67bccadef02c9bf70e125ccda7970ac78f82ca591b9edf6dad53",
-    "audit/trace_equivalence.py": "a9b7aa176b5081ab12a9cff31343b2509de4105daa1c7d87b386765581146ade",
+    "audit/test_trace_equivalence.py": "0db2c9c843148dbe77deef10a3103cfc60ff49283d3baeeffed4fbd1eb094f8c",
+    "audit/test_trace_equivalence_replay.py": "7c9a76902684f3f4e5cdfb6ba3dcdc767b2e0d5eaf758dc21b9aa6b80f039591",
+    "audit/test_trace_legacy_report.py": "dd434255df34a24295c6d84f759ace77e85fe02fb905564d70525833fee7d72c",
+    "audit/trace_equivalence.py": "59bdfa053a1fa1bf1e5fafed0db98cde71e84f484fdca7428bbd97abfa3fd05a",
     "integrations/incident_triage/.gitignore": "472f568478bff9056ec56b5c5e8a7ca3d280c651d527321e1eb80892801164be",
     "integrations/incident_triage/README.md": "85141541a6dbbc636e04cdc052fab2afe2cf1176b2ed87aef44bc6328630a494",
     "integrations/incident_triage/SOURCE_SNAPSHOT.md": "ae73cff9ed9936bd4385b0cba75271813dd2697e50b7fb48a74e046ddece66a5",
@@ -118,7 +123,7 @@
         "git",
         "bundle",
         "verify",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/upstream_c08f710.bundle"
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/upstream_c08f710.bundle"
       ]
     },
     {
@@ -130,8 +135,8 @@
         "clone",
         "--quiet",
         "--no-checkout",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/upstream_c08f710.bundle",
-        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ty93erhn/upstream"
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/upstream_c08f710.bundle",
+        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ucrfi5in/upstream"
       ]
     },
     {
@@ -141,7 +146,7 @@
       "argv": [
         "git",
         "-C",
-        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ty93erhn/upstream",
+        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ucrfi5in/upstream",
         "checkout",
         "--quiet",
         "--detach",
@@ -153,12 +158,12 @@
       "exit_code": 0,
       "log": "audit/incident_triage/direct-source-tests.log",
       "argv": [
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/.venv/bin/python",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/.venv/bin/python",
         "-m",
         "unittest",
         "discover",
         "-s",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage",
         "-p",
         "test_study.py",
         "-v"
@@ -169,12 +174,12 @@
       "exit_code": 0,
       "log": "audit/incident_triage/direct-source-execution.log",
       "argv": [
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/.venv/bin/python",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/run_study.py",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/.venv/bin/python",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/run_study.py",
         "--upstream",
-        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ty93erhn/upstream",
+        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ucrfi5in/upstream",
         "--output",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/source_study.json"
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/audit/incident_triage/source_study.json"
       ]
     },
     {
@@ -182,9 +187,9 @@
       "exit_code": 0,
       "log": "audit/incident_triage/independent-direct-source-replay.log",
       "argv": [
-        "/Users/nambi/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/verify_results.py",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/source_study.json"
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/verify_results.py",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/audit/incident_triage/source_study.json"
       ]
     },
     {
@@ -192,7 +197,7 @@
       "exit_code": 0,
       "log": "audit/incident_triage/source-protocol-tests.log",
       "argv": [
-        "/Users/nambi/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
         "-m",
         "unittest",
         "integrations.incident_triage.source_analysis.test_source_analysis",
@@ -204,14 +209,14 @@
       "exit_code": 0,
       "log": "audit/incident_triage/source-protocol-and-classifier-graph.log",
       "argv": [
-        "/Users/nambi/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/source_analysis/bridge.py",
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/source_analysis/bridge.py",
         "--upstream",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/upstream_snapshot",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/upstream_snapshot",
         "--study",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/source_study.json",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/audit/incident_triage/source_study.json",
         "--output-dir",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/source_analysis"
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/audit/incident_triage/source_analysis"
       ]
     },
     {
@@ -219,14 +224,14 @@
       "exit_code": 0,
       "log": "audit/incident_triage/independent-source-protocol-replay.log",
       "argv": [
-        "/Users/nambi/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/source_analysis/replay_projection.py",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/source_analysis/source_analysis.json",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/upstream_snapshot",
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/source_analysis/replay_projection.py",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/audit/incident_triage/source_analysis/source_analysis.json",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/upstream_snapshot",
         "--study",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/source_study.json",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/audit/incident_triage/source_study.json",
         "--attestation",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/source_protocol.attestation.json"
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/audit/incident_triage/source_protocol.attestation.json"
       ]
     },
     {
@@ -234,12 +239,12 @@
       "exit_code": 0,
       "log": "audit/incident_triage/concurrency-and-session-tests.log",
       "argv": [
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/.venv/bin/python",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/.venv/bin/python",
         "-m",
         "unittest",
         "discover",
         "-s",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/concurrency",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/concurrency",
         "-p",
         "test_*.py",
         "-v"
@@ -250,12 +255,12 @@
       "exit_code": 0,
       "log": "audit/incident_triage/controlled-concurrent-source-execution.log",
       "argv": [
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/.venv/bin/python",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/concurrency/run_concurrency_study.py",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/.venv/bin/python",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/concurrency/run_concurrency_study.py",
         "--upstream",
-        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ty93erhn/upstream",
+        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ucrfi5in/upstream",
         "--output",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/concurrency_study.json"
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/audit/incident_triage/concurrency_study.json"
       ]
     },
     {
@@ -263,11 +268,11 @@
       "exit_code": 0,
       "log": "audit/incident_triage/independent-concurrency-witness-replay.log",
       "argv": [
-        "/Users/nambi/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/concurrency/verify_concurrency_study.py",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/concurrency_study.json",
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/concurrency/verify_concurrency_study.py",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/audit/incident_triage/concurrency_study.json",
         "--upstream",
-        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ty93erhn/upstream"
+        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ucrfi5in/upstream"
       ]
     },
     {
@@ -275,8 +280,8 @@
       "exit_code": 0,
       "log": "audit/incident_triage/isolated-session-manager-demo.log",
       "argv": [
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/.venv/bin/python",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/concurrency/demo_isolated_sessions.py"
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/.venv/bin/python",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/concurrency/demo_isolated_sessions.py"
       ]
     },
     {
@@ -284,12 +289,12 @@
       "exit_code": 0,
       "log": "audit/incident_triage/source-protocol-path-tests.log",
       "argv": [
-        "/Users/nambi/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
         "-m",
         "unittest",
         "discover",
         "-s",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/protocol_paths",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/protocol_paths",
         "-p",
         "test_*.py",
         "-v"
@@ -300,12 +305,12 @@
       "exit_code": 0,
       "log": "audit/incident_triage/source-protocol-path-execution.log",
       "argv": [
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/.venv/bin/python",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/protocol_paths/run_protocol_paths.py",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/.venv/bin/python",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/protocol_paths/run_protocol_paths.py",
         "--upstream",
-        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ty93erhn/upstream",
+        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ucrfi5in/upstream",
         "--output",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/protocol_paths.json"
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/audit/incident_triage/protocol_paths.json"
       ]
     },
     {
@@ -313,36 +318,36 @@
       "exit_code": 0,
       "log": "audit/incident_triage/independent-protocol-path-replay.log",
       "argv": [
-        "/Users/nambi/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/bin/python3",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/integrations/incident_triage/protocol_paths/verify_protocol_paths.py",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/protocol_paths.json",
-        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ty93erhn/upstream",
+        "/opt/homebrew/opt/python@3.14/bin/python3.14",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/integrations/incident_triage/protocol_paths/verify_protocol_paths.py",
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/audit/incident_triage/protocol_paths.json",
+        "/var/folders/bk/g1r_3ybn1ssctdtbyxclrknw0000gn/T/orchlang-incident-reproduction-ucrfi5in/upstream",
         "--attestation",
-        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-compiler-design-project/audit/incident_triage/protocol_paths.attestation.json"
+        "/Users/nambi/Documents/ChatGPT/Compiler Project/orchlang-publication-upgrade/audit/incident_triage/protocol_paths.attestation.json"
       ]
     }
   ],
   "result_sha256": {
-    "audit/incident_triage/concurrency-and-session-tests.log": "693e142696a7f258b7a373906025eda97555620e9f9e08c76a9b92d43a2c6448",
+    "audit/incident_triage/concurrency-and-session-tests.log": "317f0672c1f9f1ed8201b4156c1be47c7de6d0584b3439b421fd6aafb9b43976",
     "audit/incident_triage/concurrency_study.json": "9ffaa057d7a8e3f73a908f1c4933f13404890331d6e4c112793e0aac86a1c232",
     "audit/incident_triage/controlled-concurrent-source-execution.log": "9ffaa057d7a8e3f73a908f1c4933f13404890331d6e4c112793e0aac86a1c232",
-    "audit/incident_triage/direct-source-execution.log": "e0e2729292ee959e96657690490171b6421c4141eb47beae9aeed7130651dfe1",
-    "audit/incident_triage/direct-source-tests.log": "7227eed6cdce4b8cd7c1d54901e7da056ca30ae9f5706b7c2edda031b22edc9d",
+    "audit/incident_triage/direct-source-execution.log": "40bf3eb09f3095cb49e6627ad61a3346a0cc4ebda9823c9ae57cde420c97a53d",
+    "audit/incident_triage/direct-source-tests.log": "34f57fd6c3fdb7757df6d2c74136c320025f6f78dda3891247bf4b9ed2d3aa3a",
     "audit/incident_triage/independent-concurrency-witness-replay.log": "3a8c64e3e86868db43fa4d006fb3759e51d3fdcd8b47a1fade4121b47b60ce5c",
     "audit/incident_triage/independent-direct-source-replay.log": "949e39c095ee567aa85d1ffee8795cb35ab84de53db87b74b8fbc3c5a338b837",
     "audit/incident_triage/independent-protocol-path-replay.log": "e814d942d4940255421b2da74037e047592d73cacc3eab36aa23e3c9fc78ced4",
     "audit/incident_triage/independent-source-protocol-replay.log": "fd5804a31f6b7b86147a99bd57fd70f820830697938c9841073b13718287c703",
-    "audit/incident_triage/isolated-session-manager-demo.log": "1f8555ba320f3e059dbdef09fd6b39a5aa1a653107e026b75eac1d7e607c40b1",
-    "audit/incident_triage/isolated_session_demo.json": "1f8555ba320f3e059dbdef09fd6b39a5aa1a653107e026b75eac1d7e607c40b1",
+    "audit/incident_triage/isolated-session-manager-demo.log": "5d3f940d37a1cc61ce0fda91954527f2c7cff23888f79207aba1cedbc7ec01c0",
+    "audit/incident_triage/isolated_session_demo.json": "5d3f940d37a1cc61ce0fda91954527f2c7cff23888f79207aba1cedbc7ec01c0",
     "audit/incident_triage/protocol_paths.attestation.json": "46c0550478d95500af06dc83aceea55daac48c92ec71e9cb0ed405c60607ee28",
     "audit/incident_triage/protocol_paths.json": "e2abae3d5a44c034e476646ca332e6d5a119f47097cbf9e5bbd3e5ec5f29113b",
-    "audit/incident_triage/source-bundle-verification.log": "b96d11457293618f899ee88a314c849c5db52f994e2e295e1f377a6f3268d29b",
+    "audit/incident_triage/source-bundle-verification.log": "d0e655a777ea8efebe8e8776e70c5baef974489b96662e44725fa3ecc6658286",
     "audit/incident_triage/source-offline-clone.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "audit/incident_triage/source-pinned-checkout.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "audit/incident_triage/source-protocol-and-classifier-graph.log": "d8787a84aedc5cc1de483d7edbb379c070d840c6920ad1fc2737ee6ae57dcf62",
-    "audit/incident_triage/source-protocol-path-execution.log": "520100772150c3af61f294ef654a0bd5a35ad655c3dea53d68eb73f27941910e",
-    "audit/incident_triage/source-protocol-path-tests.log": "accfa34bc46c7cecb81bdae09dc274e41bee601b74985e676089088e721c0f07",
-    "audit/incident_triage/source-protocol-tests.log": "6b92ce43c900d7842bed59979d58061cde11f34a182f259123ded0590d87b114",
+    "audit/incident_triage/source-protocol-path-execution.log": "5d773645f9380e6c5b65e525055e1a62f5705d4c907cfcfe44f9e01c5e6518db",
+    "audit/incident_triage/source-protocol-path-tests.log": "1112e9c9047fb58508b5164deeacdc8255de16f0a8e5eac16b7cfc1828fbea8e",
+    "audit/incident_triage/source-protocol-tests.log": "929fa816e132b8db347309192fa5aaf98aca57738b713210cc5e6753fd1352b4",
     "audit/incident_triage/source_analysis/classifier_request.attestation.json": "6b753260b7f3a2096073ed8bc139021a93dd4a5a5a2f168cfabf74cf61a41f4c",
     "audit/incident_triage/source_analysis/classifier_request.certificate.json": "5f8dfbe841c58ee6bfa0d6788a47115992faae8b2beba3ed75b417f61a5850fa",
     "audit/incident_triage/source_analysis/classifier_request.graph.json": "81ffdf3bacbd5e7ad96f76a4757e971e8801996f2d0b716d5aad24353889b282",

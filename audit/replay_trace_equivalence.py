@@ -28,7 +28,7 @@ except ImportError:
 
 REPORT_FORMAT = "orchlang-exact-trace-equivalence"
 ATTESTATION_FORMAT = "orchlang-exact-trace-equivalence-replay-attestation"
-VERSION = 1
+SUPPORTED_VERSIONS = {1, 2}
 MAX_MATRIX_ENTRIES = 100_000_000
 MAX_WORK_BYTES = 1024 * 1024 * 1024
 MAX_RATIONAL_BITS = 8192
@@ -45,6 +45,7 @@ TOP_KEYS = {
     "format", "version", "status", "claim", "hashes", "inputs", "limits",
     "closed_system", "label_alphabet", "result", "scope",
 }
+TOP_KEYS_V2 = TOP_KEYS | {"diagnostics", "telemetry"}
 HASH_KEYS = {
     "graph_sha256", "kernel_sha256", "public_store_sha256",
     "secret_scenarios_sha256", "checker_sha256", "closure_producer_sha256",
@@ -63,6 +64,28 @@ PAIR_UNEQUAL_KEYS = PAIR_BASE_KEYS | {"counterexample"}
 COUNTEREXAMPLE_KEYS = {"word", "end_kind", "left_probability", "right_probability"}
 LABEL_KEYS = {"contract", "input_tokens", "output_tokens"}
 BASIS_KEYS = {"word", "row", "stop_dot", "nonterminal_dot"}
+DIAGNOSTIC_KEYS = {"reason", "phase", "message", "resource"}
+RESOURCE_KEYS = {"name", "limit", "observed"}
+TELEMETRY_KEYS = {
+    "closed_state_count", "transition_count", "label_count",
+    "matrix_entries_used", "work_bytes_used_before_serialization",
+    "max_rational_bits_observed",
+}
+UNKNOWN_REASONS = {
+    "STATE_CAP", "BYTE_WORK_CAP", "MATRIX_ENTRY_CAP", "RATIONAL_BIT_CAP",
+    "REPORT_BYTE_CAP", "SOURCE_BYTE_CAP", "CONTROL_STEP_CAP", "MEMORY_LIMIT",
+    "STATE_KEY_BYTE_CAP", "TRANSITION_CAP", "REQUEST_BYTE_CAP",
+    "INTEGER_DIGIT_CAP", "TRACE_BYTE_CAP", "VALUE_BYTE_CAP",
+    "OTHER_RESOURCE_LIMIT",
+}
+UNKNOWN_PHASES = {
+    "input_validation", "semantic_closure", "matrix_build", "row_space",
+    "certificate_replay_preflight", "certificate_serialization", "report_serialization",
+}
+RESOURCE_NAMES = {
+    "states", "work_bytes", "matrix_entries", "rational_bits", "report_bytes",
+    "source_bytes", "control_steps", "memory_bytes",
+}
 
 CLAIM_EQUAL = (
     "exact all-finite-horizon success-only ordered usage-trace laws for every supplied "
@@ -114,6 +137,52 @@ def _nat(value: Any, label: str, minimum: int = 0, maximum: int = MAX_STATES) ->
     if type(value) is not int or not minimum <= value <= maximum:
         raise TraceReplayError(f"{label} must be an integer in [{minimum}, {maximum}]")
     return value
+
+
+def _validate_v2_metadata(report: dict[str, Any]) -> None:
+    """Validate additive v2 diagnostics and advisory producer counters."""
+    status = report.get("status")
+    diagnostics = report.get("diagnostics")
+    telemetry = report.get("telemetry")
+    if status == "unknown":
+        item = _keys(diagnostics, DIAGNOSTIC_KEYS, "diagnostics")
+        if item["reason"] not in UNKNOWN_REASONS:
+            raise TraceReplayError("diagnostics.reason is not a supported UNKNOWN reason")
+        if item["phase"] not in UNKNOWN_PHASES:
+            raise TraceReplayError("diagnostics.phase is not a supported analysis phase")
+        if not isinstance(item["message"], str) or not 1 <= len(item["message"]) <= 4096:
+            raise TraceReplayError("diagnostics.message must be a bounded nonempty string")
+        resource = item["resource"]
+        if resource is not None:
+            resource = _keys(resource, RESOURCE_KEYS, "diagnostics.resource")
+            if resource["name"] not in RESOURCE_NAMES:
+                raise TraceReplayError("diagnostics.resource.name is unsupported")
+            for field in ("limit", "observed"):
+                value = resource[field]
+                if value is not None and (type(value) is not int or not 0 <= value < 2**63):
+                    raise TraceReplayError(f"diagnostics.resource.{field} must be a bounded nonnegative integer or null")
+    elif diagnostics is not None:
+        raise TraceReplayError("non-UNKNOWN v2 reports must have null diagnostics")
+
+    if telemetry is None:
+        raise TraceReplayError("v2 reports must include resource telemetry")
+    item = _keys(telemetry, TELEMETRY_KEYS, "telemetry")
+    nullable_bounds = {
+        "closed_state_count": MAX_STATES,
+        "transition_count": MAX_TRANSITIONS,
+        "label_count": MAX_TRANSITIONS,
+        "matrix_entries_used": MAX_MATRIX_ENTRIES,
+        "work_bytes_used_before_serialization": MAX_WORK_BYTES,
+        "max_rational_bits_observed": MAX_RATIONAL_BITS,
+    }
+    for field, maximum in nullable_bounds.items():
+        value = item[field]
+        if value is None:
+            if status != "unknown":
+                raise TraceReplayError(f"successful telemetry.{field} must be an integer")
+        elif (type(value) is not int or not 0 <= value <= maximum
+              or (field == "closed_state_count" and value == 0)):
+            raise TraceReplayError(f"telemetry.{field} is outside its supported range")
 
 
 def _check_sha(value: Any, label: str) -> str:
@@ -169,12 +238,14 @@ class _Meter:
     def entries(self, count: int, label: str) -> None:
         if type(count) is not int or count < 0:
             raise TraceReplayError(f"invalid matrix-entry charge for {label}")
-        self.matrix_entries += count
-        if self.matrix_entries > self.max_matrix_entries:
+        new_entries = self.matrix_entries + count
+        if new_entries > self.max_matrix_entries:
             raise TraceReplayLimit(f"independent {label} matrix-entry cap reached")
-        self.work_bytes += count * 16
-        if self.work_bytes > self.max_work_bytes:
+        new_work_bytes = self.work_bytes + count * 16
+        if new_work_bytes > self.max_work_bytes:
             raise TraceReplayLimit(f"independent {label} byte-work cap reached")
+        self.matrix_entries = new_entries
+        self.work_bytes = new_work_bytes
 
     def bytes(self, count: int, label: str) -> None:
         self.work_bytes += count
@@ -423,6 +494,11 @@ def _semantic_system(report: dict[str, Any], graph_raw: bytes, kernel_raw: bytes
 def _build_matrices(system: dict[str, Any], ordered_keys: list[str],
                     report_alphabet: Any, meter: _Meter):
     dimension = len(ordered_keys)
+    entry_count = sum(len(rows) for rows in system["edge_rows"].values())
+    # Charge sparse adjacency before allocating its per-edge tuples/lists.
+    # If either declared budget cannot hold the reconstruction, fail closed
+    # while only the independently closed edge rows are retained.
+    meter.entries(entry_count, "sparse labeled adjacency")
     index_by_key = {key: index for index, key in enumerate(ordered_keys)}
     raw_matrices: dict[str, list[tuple[int, int, Fraction]]] = defaultdict(list)
     labels: dict[str, dict[str, Any]] = {}
@@ -449,8 +525,6 @@ def _build_matrices(system: dict[str, Any], ordered_keys: list[str],
     if alphabet_keys != actual_keys or len(alphabet_keys) != len(set(alphabet_keys)):
         raise TraceReplayError("label_alphabet differs from the independently reconstructed actions")
     matrices = {key: raw_matrices[key] for key in actual_keys}
-    entry_count = sum(len(edges) for edges in matrices.values())
-    meter.entries(entry_count, "sparse labeled adjacency")
     meter.entries(2 * dimension, "stop/nonterminal output vectors")
     stop = [Fraction(1 if system["kinds"][key] == "stop" else 0)
             for key in ordered_keys]
@@ -511,12 +585,20 @@ def _basis_pair(pair: dict[str, Any], *, pair_label: str, initial: list[Fraction
     raw_basis = pair["basis"]
     if not isinstance(raw_basis, list) or len(raw_basis) > max_basis_rows:
         raise TraceReplayError(f"{pair_label}.basis must be a bounded array")
-    # Preflight dense storage before parsing rows or allocating elimination state.
-    if len(raw_basis) * dimension > meter.max_matrix_entries:
-        raise TraceReplayLimit(f"{pair_label} supplied basis exceeds the matrix-entry cap")
+    # Reserve the retained parsed Fraction rows as a batch before constructing
+    # any one row. `parsed_rows` retains each resulting list throughout exact
+    # closure verification. Row-space reduction/storage below meters their own
+    # distinct working copies; do not charge these reserved input rows again.
+    meter.entries(len(raw_basis) * dimension,
+                  f"{pair_label} parsed basis-row storage")
     rows_by_word: set[tuple[str, ...]] = set()
     row_space = _RowSpace(dimension, meter)
     parsed_rows: list[tuple[list[str], list[Fraction]]] = []
+    # Words share prefixes frequently: a chain certificate contains successive
+    # prefixes of one path. Retain each exact prefix product once and reuse it
+    # when reconstructing later basis rows. This changes verification cost,
+    # not the certificate equation μA_word or the checked row values.
+    prefix_root: dict[str, Any] = {"row": initial, "children": {}}
     for index, raw_item in enumerate(raw_basis):
         item = _keys(raw_item, BASIS_KEYS, f"{pair_label}.basis[{index}]")
         word = _word(item["word"], alphabet_keys, label=f"{pair_label}.basis[{index}].word",
@@ -525,8 +607,19 @@ def _basis_pair(pair: dict[str, Any], *, pair_label: str, initial: list[Fraction
         if word_id in rows_by_word:
             raise TraceReplayError(f"{pair_label}.basis repeats a word")
         rows_by_word.add(word_id)
-        expected = _word_row(initial, word, matrices, dimension, meter,
-                             f"{pair_label}.basis[{index}]")
+        node = prefix_root
+        for action_index, action in enumerate(word):
+            child = node["children"].get(action)
+            if child is None:
+                meter.entries(dimension, f"{pair_label} prefix-cache row")
+                row = _matrix_product(
+                    node["row"], matrices[action], dimension, meter,
+                    f"{pair_label}.basis[{index}] prefix action {action_index}",
+                )
+                child = {"row": row, "children": {}}
+                node["children"][action] = child
+            node = child
+        expected = node["row"]
         raw_row = item["row"]
         if not isinstance(raw_row, list) or len(raw_row) != dimension:
             raise TraceReplayError(f"{pair_label}.basis[{index}].row must have {dimension} entries")
@@ -648,11 +741,16 @@ def replay_report(report_source: Any, graph_source: Any, kernel_source: Any, *,
             report_source, graph_source, kernel_source
         )
         report = _obj(raw_report, "report")
-        if report.get("format") != REPORT_FORMAT or type(report.get("version")) is not int or report["version"] != VERSION:
+        if (report.get("format") != REPORT_FORMAT
+                or type(report.get("version")) is not int
+                or report["version"] not in SUPPORTED_VERSIONS):
             raise TraceReplayError("unsupported trace-equivalence report format/version")
         if report.get("status") == "invalid":
             raise TraceReplayError("producer report status is invalid")
-        report = _keys(report, TOP_KEYS, "report")
+        version = report["version"]
+        report = _keys(report, TOP_KEYS if version == 1 else TOP_KEYS_V2, "report")
+        if version == 2:
+            _validate_v2_metadata(report)
         _closure._check_tree(report, "trace-equivalence report")
         hashes, inputs, graph_hash, kernel_hash = _verify_hashes(
             report, graph_raw, kernel_raw, require_inputs=True
@@ -673,7 +771,10 @@ def replay_report(report_source: Any, graph_source: Any, kernel_source: Any, *,
             return _attestation("unknown", diagnostic="producer report is UNKNOWN; no partial result is replayed",
                                 details={"graph_sha256": graph_hash,
                                          "kernel_sha256": kernel_hash,
-                                         "report_sha256": _sha(report_raw)})
+                                         "report_sha256": _sha(report_raw),
+                                         **({"producer_diagnostics": report["diagnostics"],
+                                             "producer_telemetry": report["telemetry"]}
+                                            if version == 2 else {})})
         if report.get("status") not in ("proved_equal", "unequal"):
             raise TraceReplayError("report status must be proved_equal, unequal, or unknown")
         expected_claim = CLAIM_EQUAL if report["status"] == "proved_equal" else CLAIM_UNEQUAL

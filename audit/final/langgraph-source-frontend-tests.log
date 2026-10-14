@@ -6,6 +6,7 @@ test_contract_inputs_match_typed_dict_fields_exactly (integrations.langgraph.sou
 test_cross_cap_writers_choose_maximum_register_bound (integrations.langgraph.source_frontend.test_extract.SourceFrontendTests.test_cross_cap_writers_choose_maximum_register_bound) ... ok
 test_export_binds_exact_source_contract_graph_certificate_and_replay (integrations.langgraph.source_frontend.test_extract.SourceFrontendTests.test_export_binds_exact_source_contract_graph_certificate_and_replay) ... ok
 test_exporter_rejects_oversized_files_after_bounded_read (integrations.langgraph.source_frontend.test_extract.SourceFrontendTests.test_exporter_rejects_oversized_files_after_bounded_read) ... ok
+test_langgraph_reserved_node_names_are_rejected_before_lowering (integrations.langgraph.source_frontend.test_extract.SourceFrontendTests.test_langgraph_reserved_node_names_are_rejected_before_lowering) ... ok
 test_model_alias_price_and_duplicate_json_validation (integrations.langgraph.source_frontend.test_extract.SourceFrontendTests.test_model_alias_price_and_duplicate_json_validation) ... ok
 test_nonliteral_request_components_and_argument_types_fail_closed (integrations.langgraph.source_frontend.test_extract.SourceFrontendTests.test_nonliteral_request_components_and_argument_types_fail_closed) ... ok
 test_productive_cycle_extracts_and_checks (integrations.langgraph.source_frontend.test_extract.SourceFrontendTests.test_productive_cycle_extracts_and_checks) ... ok
@@ -17,9 +18,10 @@ test_secret_argument_is_rejected_before_graph_generation (integrations.langgraph
 test_secret_branch_dependent_chain_extracts_to_accepted_graph (integrations.langgraph.source_frontend.test_extract.SourceFrontendTests.test_secret_branch_dependent_chain_extracts_to_accepted_graph) ... ok
 test_secret_branch_template_difference_stays_a_relational_rejection (integrations.langgraph.source_frontend.test_extract.SourceFrontendTests.test_secret_branch_template_difference_stays_a_relational_rejection) ... ok
 test_study_artifact_reuse_invalidates_old_attestation_before_rewrite (integrations.langgraph.source_frontend.test_extract.SourceFrontendTests.test_study_artifact_reuse_invalidates_old_attestation_before_rewrite) ... ok
+test_typed_dict_annotation_names_cannot_be_shadowed_by_top_level_functions (integrations.langgraph.source_frontend.test_extract.SourceFrontendTests.test_typed_dict_annotation_names_cannot_be_shadowed_by_top_level_functions) ... ok
 test_unrecognized_statements_and_imports_fail_closed (integrations.langgraph.source_frontend.test_extract.SourceFrontendTests.test_unrecognized_statements_and_imports_fail_closed) ... ok
 
 ----------------------------------------------------------------------
-Ran 20 tests in 0.219s
+Ran 22 tests in 0.202s
 
 OK

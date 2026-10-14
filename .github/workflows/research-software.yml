@@ -1,0 +1,42 @@
+name: Research software checks
+on:
+  push:
+    branches: [main, codex/publication-upgrade]
+  pull_request:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  core:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+        python: ['3.11', '3.14']
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python }}
+      - run: make -j4 check
+      - run: python -m unittest discover -s audit -p 'test_*.py' -v
+      - run: python -m unittest integrations.langgraph.source_frontend.test_extract -v
+      - run: python scripts/publication_upgrade_corpus.py --evaluate
+  atomic-update-proof:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: sudo apt-get update && sudo apt-get install -y coq
+      - run: coqc --version
+      - run: coqc -Q proofs/publication_upgrade PublicationUpgrade proofs/publication_upgrade/AtomicUpdates.v
+      - run: coqc -Q proofs/publication_upgrade PublicationUpgrade proofs/publication_upgrade/Assumptions.v
+  pinned-langgraph:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.14'
+      - run: python -m pip install --require-hashes -r integrations/langgraph/requirements.lock
+      - run: python -m unittest integrations.langgraph.test_backend integrations.langgraph.source_frontend.test_extract -v

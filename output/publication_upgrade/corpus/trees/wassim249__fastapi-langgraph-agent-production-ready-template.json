@@ -1,0 +1,961 @@
+{
+  "sha": "f7faab38fa5332669627139b27c4f2dc4178649e",
+  "tree": [
+    {
+      "mode": "040000",
+      "path": ".cursor",
+      "sha": "9c9fc884ff7aa21bbe975a9a6226798e707e76f0",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/9c9fc884ff7aa21bbe975a9a6226798e707e76f0"
+    },
+    {
+      "mode": "040000",
+      "path": ".cursor/rules",
+      "sha": "b3c38c3e72d9ca40c938daff658830e757d81cfd",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/b3c38c3e72d9ca40c938daff658830e757d81cfd"
+    },
+    {
+      "mode": "100644",
+      "path": ".cursor/rules/project-main-rules.mdc",
+      "sha": "bb5ef0ccb68c7db6d7bd32a3b2425aefae1313ef",
+      "size": 9881,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/bb5ef0ccb68c7db6d7bd32a3b2425aefae1313ef"
+    },
+    {
+      "mode": "100644",
+      "path": ".dockerignore",
+      "sha": "ece9e401d69fd3da642b466e31747e9863c4279a",
+      "size": 586,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/ece9e401d69fd3da642b466e31747e9863c4279a"
+    },
+    {
+      "mode": "100644",
+      "path": ".env.example",
+      "sha": "6e28b2281082186afd53d9ff6930e527f550626a",
+      "size": 1539,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/6e28b2281082186afd53d9ff6930e527f550626a"
+    },
+    {
+      "mode": "100644",
+      "path": ".gitattributes",
+      "sha": "8c7da20012de6f699128547eb57c6c35afed957d",
+      "size": 127,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/8c7da20012de6f699128547eb57c6c35afed957d"
+    },
+    {
+      "mode": "040000",
+      "path": ".github",
+      "sha": "fa4c27bdf7d7ff36ab79ef2ec271bed4eebce9ae",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/fa4c27bdf7d7ff36ab79ef2ec271bed4eebce9ae"
+    },
+    {
+      "mode": "040000",
+      "path": ".github/workflows",
+      "sha": "ad2ef3590f6f4f18d59f98a6b1252b990c498e9f",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/ad2ef3590f6f4f18d59f98a6b1252b990c498e9f"
+    },
+    {
+      "mode": "100644",
+      "path": ".github/workflows/ci.yaml",
+      "sha": "c38551c5a09f49550159ac591f5346b3633e10cf",
+      "size": 383,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/c38551c5a09f49550159ac591f5346b3633e10cf"
+    },
+    {
+      "mode": "100644",
+      "path": ".github/workflows/deploy.yaml",
+      "sha": "ceb21df0e952d28fc2db15b597442e91764ebf56",
+      "size": 1394,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/ceb21df0e952d28fc2db15b597442e91764ebf56"
+    },
+    {
+      "mode": "100644",
+      "path": ".gitignore",
+      "sha": "e6220401119c6102e3faaaae759621852673b8c9",
+      "size": 235,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/e6220401119c6102e3faaaae759621852673b8c9"
+    },
+    {
+      "mode": "100644",
+      "path": ".pre-commit-config.yaml",
+      "sha": "e1246dce1a0c3dab77d4ee8d7fe40139f49a5a88",
+      "size": 1135,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/e1246dce1a0c3dab77d4ee8d7fe40139f49a5a88"
+    },
+    {
+      "mode": "100644",
+      "path": ".python-version",
+      "sha": "24ee5b1be9961e38a503c8e764b7385dbb6ba124",
+      "size": 5,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/24ee5b1be9961e38a503c8e764b7385dbb6ba124"
+    },
+    {
+      "mode": "100644",
+      "path": ".secrets.baseline",
+      "sha": "931f485b0f079897fd3a41749022d9069d24451c",
+      "size": 2566,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/931f485b0f079897fd3a41749022d9069d24451c"
+    },
+    {
+      "mode": "040000",
+      "path": ".vscode",
+      "sha": "8ab9be1d28a357c41749e6deedb06f892c351c19",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/8ab9be1d28a357c41749e6deedb06f892c351c19"
+    },
+    {
+      "mode": "100644",
+      "path": ".vscode/settings.json",
+      "sha": "5b8d52116bf69625eca5a477fd10f511c6ee7a4a",
+      "size": 1217,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/5b8d52116bf69625eca5a477fd10f511c6ee7a4a"
+    },
+    {
+      "mode": "100644",
+      "path": "AGENTS.md",
+      "sha": "fd1373571a8e6ad526f9ff026cb77e9b82f3d91f",
+      "size": 8571,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/fd1373571a8e6ad526f9ff026cb77e9b82f3d91f"
+    },
+    {
+      "mode": "100644",
+      "path": "CLAUDE.md",
+      "sha": "43c994c2d3617f947bcb5adf1933e21dabe46bb5",
+      "size": 11,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/43c994c2d3617f947bcb5adf1933e21dabe46bb5"
+    },
+    {
+      "mode": "100644",
+      "path": "Dockerfile",
+      "sha": "11f88b6d9fb389893f85f6541ab031bb2e8489df",
+      "size": 1328,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/11f88b6d9fb389893f85f6541ab031bb2e8489df"
+    },
+    {
+      "mode": "100644",
+      "path": "LICENSE",
+      "sha": "ffd8ec9cb453e7bd12c5d81f3709ed5692592096",
+      "size": 1075,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/ffd8ec9cb453e7bd12c5d81f3709ed5692592096"
+    },
+    {
+      "mode": "100644",
+      "path": "Makefile",
+      "sha": "3e95fd0e2dc0b939871f696e8b57fdc801201396",
+      "size": 7439,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/3e95fd0e2dc0b939871f696e8b57fdc801201396"
+    },
+    {
+      "mode": "100644",
+      "path": "README.md",
+      "sha": "64ef9b0a73f3a08ef7f105c792c98b83ab371df0",
+      "size": 11006,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/64ef9b0a73f3a08ef7f105c792c98b83ab371df0"
+    },
+    {
+      "mode": "100644",
+      "path": "SECURITY.md",
+      "sha": "4d7e703713f37e4b0413c23877c52fc3eccf9c1e",
+      "size": 1464,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/4d7e703713f37e4b0413c23877c52fc3eccf9c1e"
+    },
+    {
+      "mode": "100644",
+      "path": "alembic.ini",
+      "sha": "f96059f92967e3f0b10dfeddc0f6383c52925b0c",
+      "size": 4615,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/f96059f92967e3f0b10dfeddc0f6383c52925b0c"
+    },
+    {
+      "mode": "040000",
+      "path": "alembic",
+      "sha": "95e41f8ea32ee3b504f98b2b187c0b656a4994cd",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/95e41f8ea32ee3b504f98b2b187c0b656a4994cd"
+    },
+    {
+      "mode": "100644",
+      "path": "alembic/README",
+      "sha": "2500aa1bcf726a14c436070389837be3666ba96f",
+      "size": 39,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/2500aa1bcf726a14c436070389837be3666ba96f"
+    },
+    {
+      "mode": "100644",
+      "path": "alembic/env.py",
+      "sha": "069c1249b69325afd03199962a02425ad5e95ec8",
+      "size": 2718,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/069c1249b69325afd03199962a02425ad5e95ec8"
+    },
+    {
+      "mode": "100644",
+      "path": "alembic/script.py.mako",
+      "sha": "f5d021309e0b9a63b81a4ba6b072dd2423922c73",
+      "size": 742,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/f5d021309e0b9a63b81a4ba6b072dd2423922c73"
+    },
+    {
+      "mode": "040000",
+      "path": "alembic/versions",
+      "sha": "85c00adb35e8f16ac1f55f09a3bd9d1ffc8d26ee",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/85c00adb35e8f16ac1f55f09a3bd9d1ffc8d26ee"
+    },
+    {
+      "mode": "100644",
+      "path": "alembic/versions/b25d38b0cd7c_initial_schema.py",
+      "sha": "b47cb07e6c476221882b147777df21aeab89e72f",
+      "size": 1983,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/b47cb07e6c476221882b147777df21aeab89e72f"
+    },
+    {
+      "mode": "040000",
+      "path": "app",
+      "sha": "a88ed6d36be9693077962e9548d3c9b2f2bb559f",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/a88ed6d36be9693077962e9548d3c9b2f2bb559f"
+    },
+    {
+      "mode": "040000",
+      "path": "app/api",
+      "sha": "967102607a4fdeed734846868b6855c9db80c0c8",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/967102607a4fdeed734846868b6855c9db80c0c8"
+    },
+    {
+      "mode": "040000",
+      "path": "app/api/v1",
+      "sha": "3cf4a96ca332b948d25c8d542d5c973c47991192",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/3cf4a96ca332b948d25c8d542d5c973c47991192"
+    },
+    {
+      "mode": "100644",
+      "path": "app/api/v1/api.py",
+      "sha": "c9f4e80d49ed7e28509237953f9c1195f87f6f04",
+      "size": 785,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/c9f4e80d49ed7e28509237953f9c1195f87f6f04"
+    },
+    {
+      "mode": "100644",
+      "path": "app/api/v1/auth.py",
+      "sha": "28a1b3233c8031868e4ba0d576962e20c4fec98f",
+      "size": 12130,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/28a1b3233c8031868e4ba0d576962e20c4fec98f"
+    },
+    {
+      "mode": "100644",
+      "path": "app/api/v1/chatbot.py",
+      "sha": "a994336bada07d7425a637c06211e5c88808a571",
+      "size": 6450,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/a994336bada07d7425a637c06211e5c88808a571"
+    },
+    {
+      "mode": "040000",
+      "path": "app/core",
+      "sha": "81c2241bc7b8e9d50af81ba755e18b6f03434ff3",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/81c2241bc7b8e9d50af81ba755e18b6f03434ff3"
+    },
+    {
+      "mode": "100644",
+      "path": "app/core/cache.py",
+      "sha": "dc7606a8ee9b57aa2d186bd1b24003c13c8e09ea",
+      "size": 6236,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/dc7606a8ee9b57aa2d186bd1b24003c13c8e09ea"
+    },
+    {
+      "mode": "100644",
+      "path": "app/core/config.py",
+      "sha": "6de4d198ff7910744ee20e8811fbaf753dcb877a",
+      "size": 11223,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/6de4d198ff7910744ee20e8811fbaf753dcb877a"
+    },
+    {
+      "mode": "040000",
+      "path": "app/core/langgraph",
+      "sha": "2dae2355b642f3bab12299bc586407fc57692e49",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/2dae2355b642f3bab12299bc586407fc57692e49"
+    },
+    {
+      "mode": "100644",
+      "path": "app/core/langgraph/graph.py",
+      "sha": "a0af4c59970cb3c1316154fb0baf00aaecf4a886",
+      "size": 18996,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/a0af4c59970cb3c1316154fb0baf00aaecf4a886"
+    },
+    {
+      "mode": "040000",
+      "path": "app/core/langgraph/tools",
+      "sha": "4d496b9741f07c14191a93962547c51cb6e24a64",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/4d496b9741f07c14191a93962547c51cb6e24a64"
+    },
+    {
+      "mode": "100644",
+      "path": "app/core/langgraph/tools/__init__.py",
+      "sha": "4903709fe55ce0f2d171789f3e1576f6fc740ff8",
+      "size": 450,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/4903709fe55ce0f2d171789f3e1576f6fc740ff8"
+    },
+    {
+      "mode": "100644",
+      "path": "app/core/langgraph/tools/ask_human.py",
+      "sha": "80fa629db614bf01542b0705fd2acd250d7c40e6",
+      "size": 801,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/80fa629db614bf01542b0705fd2acd250d7c40e6"
+    },
+    {
+      "mode": "100644",
+      "path": "app/core/langgraph/tools/duckduckgo_search.py",
+      "sha": "5b8b1257c32e154f49a98ce35ae4ba64f78f459b",
+      "size": 368,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/5b8b1257c32e154f49a98ce35ae4ba64f78f459b"
+    },
+    {
+      "mode": "100644",
+      "path": "app/core/limiter.py",
+      "sha": "cf0796dd8a8646dafe5690679c5041733954a675",
+      "size": 1540,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/cf0796dd8a8646dafe5690679c5041733954a675"
+    },
+    {
+      "mode": "100644",
+      "path": "app/core/logging.py",
+      "sha": "17461d4f382bda5c0cc04c0aef8eabbf8b5e4d60",
+      "size": 8154,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/17461d4f382bda5c0cc04c0aef8eabbf8b5e4d60"
+    },
+    {
+      "mode": "100644",
+      "path": "app/core/metrics.py",
+      "sha": "f098973c0c4a15d2f8b817e96328a37dad034c72",
+      "size": 1602,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/f098973c0c4a15d2f8b817e96328a37dad034c72"
+    },
+    {
+      "mode": "100644",
+      "path": "app/core/middleware.py",
+      "sha": "14eb695ed5ce3717e0f13a7f8e3c35b7d36d3b7d",
+      "size": 7673,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/14eb695ed5ce3717e0f13a7f8e3c35b7d36d3b7d"
+    },
+    {
+      "mode": "100644",
+      "path": "app/core/observability.py",
+      "sha": "85946b8fee0124267a1181a696cb946b60390f14",
+      "size": 1212,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/85946b8fee0124267a1181a696cb946b60390f14"
+    },
+    {
+      "mode": "040000",
+      "path": "app/core/prompts",
+      "sha": "32e75576af2b2e713101d2e333a0c993f2469e15",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/32e75576af2b2e713101d2e333a0c993f2469e15"
+    },
+    {
+      "mode": "100644",
+      "path": "app/core/prompts/__init__.py",
+      "sha": "be795de764253c2824941c53be96e92a43a8927d",
+      "size": 919,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/be795de764253c2824941c53be96e92a43a8927d"
+    },
+    {
+      "mode": "100644",
+      "path": "app/core/prompts/session_title.md",
+      "sha": "fa66131cfd09c44ae8a525726b496140234e2dda",
+      "size": 315,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/fa66131cfd09c44ae8a525726b496140234e2dda"
+    },
+    {
+      "mode": "100644",
+      "path": "app/core/prompts/system.md",
+      "sha": "f0f0d3445b8ead7d013496e1d9e18594634c07b0",
+      "size": 385,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/f0f0d3445b8ead7d013496e1d9e18594634c07b0"
+    },
+    {
+      "mode": "100644",
+      "path": "app/main.py",
+      "sha": "b1b289c775dec0f740aef6fd6f595b9e6dfa8e3f",
+      "size": 6209,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/b1b289c775dec0f740aef6fd6f595b9e6dfa8e3f"
+    },
+    {
+      "mode": "040000",
+      "path": "app/models",
+      "sha": "55590a39e1e85cef6d9492b6c265e8baefd5949e",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/55590a39e1e85cef6d9492b6c265e8baefd5949e"
+    },
+    {
+      "mode": "100644",
+      "path": "app/models/base.py",
+      "sha": "2a65fe34041f07f4aebe28215ab6669e86e778e4",
+      "size": 273,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/2a65fe34041f07f4aebe28215ab6669e86e778e4"
+    },
+    {
+      "mode": "100644",
+      "path": "app/models/database.py",
+      "sha": "fdbcd4b725f6592a736dc86e4940a89ac21752ab",
+      "size": 103,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/fdbcd4b725f6592a736dc86e4940a89ac21752ab"
+    },
+    {
+      "mode": "100644",
+      "path": "app/models/session.py",
+      "sha": "6313546b84669b0318718884ca3ac2c802d3eda6",
+      "size": 964,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/6313546b84669b0318718884ca3ac2c802d3eda6"
+    },
+    {
+      "mode": "100644",
+      "path": "app/models/thread.py",
+      "sha": "db792cd901cb630ece18b09eba1e8bdf90fa0040",
+      "size": 529,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/db792cd901cb630ece18b09eba1e8bdf90fa0040"
+    },
+    {
+      "mode": "100644",
+      "path": "app/models/user.py",
+      "sha": "6c86d245ecaf3fa838ab492a3070e5aea8314ff5",
+      "size": 1439,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/6c86d245ecaf3fa838ab492a3070e5aea8314ff5"
+    },
+    {
+      "mode": "040000",
+      "path": "app/schemas",
+      "sha": "b8ca48009f8abcbcd1d179c1b3e381288c7eb378",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/b8ca48009f8abcbcd1d179c1b3e381288c7eb378"
+    },
+    {
+      "mode": "100644",
+      "path": "app/schemas/__init__.py",
+      "sha": "cf17e59fd1565d8ce360f2b7b1695710e3df8746",
+      "size": 420,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/cf17e59fd1565d8ce360f2b7b1695710e3df8746"
+    },
+    {
+      "mode": "100644",
+      "path": "app/schemas/auth.py",
+      "sha": "7a709acba0e5c884af841976f9fbdf83180cff01",
+      "size": 4219,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/7a709acba0e5c884af841976f9fbdf83180cff01"
+    },
+    {
+      "mode": "100644",
+      "path": "app/schemas/base.py",
+      "sha": "b72356c01ad0af438d76d4657f62ff4a4b0101e0",
+      "size": 718,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/b72356c01ad0af438d76d4657f62ff4a4b0101e0"
+    },
+    {
+      "mode": "100644",
+      "path": "app/schemas/chat.py",
+      "sha": "8a0c48388593f18497adb6b160043beb4b96e5bc",
+      "size": 2730,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/8a0c48388593f18497adb6b160043beb4b96e5bc"
+    },
+    {
+      "mode": "100644",
+      "path": "app/schemas/graph.py",
+      "sha": "6b517a35a9f4a5ae64f6f331a6ae077ea201b630",
+      "size": 525,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/6b517a35a9f4a5ae64f6f331a6ae077ea201b630"
+    },
+    {
+      "mode": "040000",
+      "path": "app/services",
+      "sha": "9efdf59407e1070a0f028093a4968790be77862a",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/9efdf59407e1070a0f028093a4968790be77862a"
+    },
+    {
+      "mode": "100644",
+      "path": "app/services/__init__.py",
+      "sha": "a437289c2823a8e502d21dc11c5cedea327ab8a0",
+      "size": 240,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/a437289c2823a8e502d21dc11c5cedea327ab8a0"
+    },
+    {
+      "mode": "100644",
+      "path": "app/services/database.py",
+      "sha": "654e45db647f08e15271869c182ee813a6a4c8b5",
+      "size": 8486,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/654e45db647f08e15271869c182ee813a6a4c8b5"
+    },
+    {
+      "mode": "040000",
+      "path": "app/services/llm",
+      "sha": "8d15369b137542c60ea56f8244162ab34fce2246",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/8d15369b137542c60ea56f8244162ab34fce2246"
+    },
+    {
+      "mode": "100644",
+      "path": "app/services/llm/__init__.py",
+      "sha": "b6f377445a32e721803ae4254637fd3545fb735a",
+      "size": 249,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/b6f377445a32e721803ae4254637fd3545fb735a"
+    },
+    {
+      "mode": "100644",
+      "path": "app/services/llm/registry.py",
+      "sha": "a3a5a9f13d49f47bcf72b164604d466f7eee9279",
+      "size": 4598,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/a3a5a9f13d49f47bcf72b164604d466f7eee9279"
+    },
+    {
+      "mode": "100644",
+      "path": "app/services/llm/service.py",
+      "sha": "f67a2b33ff49dd2151bfcdd2733cc06ee847a841",
+      "size": 12403,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/f67a2b33ff49dd2151bfcdd2733cc06ee847a841"
+    },
+    {
+      "mode": "100644",
+      "path": "app/services/memory.py",
+      "sha": "e8b37cc276809c3f4efab9ac3d8ff2deca2e1cd5",
+      "size": 3929,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/e8b37cc276809c3f4efab9ac3d8ff2deca2e1cd5"
+    },
+    {
+      "mode": "100644",
+      "path": "app/services/session_naming.py",
+      "sha": "dee3a5ff2e51c41112876cc32c388dfb968a71e3",
+      "size": 3402,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/dee3a5ff2e51c41112876cc32c388dfb968a71e3"
+    },
+    {
+      "mode": "040000",
+      "path": "app/utils",
+      "sha": "8cc605040bafef540642713047f016aa98ac28c6",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/8cc605040bafef540642713047f016aa98ac28c6"
+    },
+    {
+      "mode": "100644",
+      "path": "app/utils/__init__.py",
+      "sha": "28c6ce2eed491177f81d9ad1b67c70dfcaf23cb9",
+      "size": 274,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/28c6ce2eed491177f81d9ad1b67c70dfcaf23cb9"
+    },
+    {
+      "mode": "100644",
+      "path": "app/utils/auth.py",
+      "sha": "e508685e73e673e28b7ae038824ab57682f0ad54",
+      "size": 2624,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/e508685e73e673e28b7ae038824ab57682f0ad54"
+    },
+    {
+      "mode": "100644",
+      "path": "app/utils/graph.py",
+      "sha": "fef0eb21bc6e2840bbadee0cc0badfe64be0a32e",
+      "size": 4844,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/fef0eb21bc6e2840bbadee0cc0badfe64be0a32e"
+    },
+    {
+      "mode": "100644",
+      "path": "app/utils/sanitization.py",
+      "sha": "a2b4dd83baa0be11876f3e7976bef9a3a6738512",
+      "size": 3344,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/a2b4dd83baa0be11876f3e7976bef9a3a6738512"
+    },
+    {
+      "mode": "100644",
+      "path": "docker-compose.yml",
+      "sha": "62aabde0932f118498d3123463522799f008cb48",
+      "size": 2925,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/62aabde0932f118498d3123463522799f008cb48"
+    },
+    {
+      "mode": "040000",
+      "path": "docs",
+      "sha": "8bc5d9738c5928b04bc2f32a4ec05ced6ac6cabd",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/8bc5d9738c5928b04bc2f32a4ec05ced6ac6cabd"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/architecture.md",
+      "sha": "42d2a0175e5e8e36a48c0b72dda23f79f5276f8a",
+      "size": 4952,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/42d2a0175e5e8e36a48c0b72dda23f79f5276f8a"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/atlas-cloud-logo-dark.png",
+      "sha": "34cf47c5c35a6c65a55821386e391cb8f0d6fc74",
+      "size": 119355,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/34cf47c5c35a6c65a55821386e391cb8f0d6fc74"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/atlas-cloud-logo.png",
+      "sha": "780a47698cf6fc28ed1a2dcf7542d312bef5f910",
+      "size": 134042,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/780a47698cf6fc28ed1a2dcf7542d312bef5f910"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/authentication.md",
+      "sha": "43b5f537f5404a2a7cfef58158a19550eec93aab",
+      "size": 2634,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/43b5f537f5404a2a7cfef58158a19550eec93aab"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/configuration.md",
+      "sha": "6c989a550e729ef6d5a911580f6efc3e5a25b149",
+      "size": 4889,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/6c989a550e729ef6d5a911580f6efc3e5a25b149"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/database.md",
+      "sha": "663bc7ac95e2c6642247e8c756d3f37afa1d3b0b",
+      "size": 2991,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/663bc7ac95e2c6642247e8c756d3f37afa1d3b0b"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/docker.md",
+      "sha": "c01c51ef7fe9f0d2a869313b1a09dd18d343849a",
+      "size": 2396,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/c01c51ef7fe9f0d2a869313b1a09dd18d343849a"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/evaluation.md",
+      "sha": "b216cc03ea9b4e475faaaa209e707735c5bfc1fe",
+      "size": 2319,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/b216cc03ea9b4e475faaaa209e707735c5bfc1fe"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/getting-started.md",
+      "sha": "ec49a3aa0b68f89e59b60b59de3211a9a5fd47bc",
+      "size": 3651,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/ec49a3aa0b68f89e59b60b59de3211a9a5fd47bc"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/llm-service.md",
+      "sha": "2e2250dffa82476c48b10fad2e780d3c55ccb21c",
+      "size": 3533,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/2e2250dffa82476c48b10fad2e780d3c55ccb21c"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/memory.md",
+      "sha": "f1d886e5637083078b623df9221d4e571fc5bb07",
+      "size": 2693,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/f1d886e5637083078b623df9221d4e571fc5bb07"
+    },
+    {
+      "mode": "100644",
+      "path": "docs/observability.md",
+      "sha": "96e017c83bbb54c6e86655c720be199bee7e4f54",
+      "size": 3863,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/96e017c83bbb54c6e86655c720be199bee7e4f54"
+    },
+    {
+      "mode": "040000",
+      "path": "evals",
+      "sha": "cc59367e61a218ed8360ef97322878e38d9095cd",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/cc59367e61a218ed8360ef97322878e38d9095cd"
+    },
+    {
+      "mode": "100644",
+      "path": "evals/evaluator.py",
+      "sha": "b4ec10a9e18798942a98a7bb9228b7a81acbd26a",
+      "size": 7999,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/b4ec10a9e18798942a98a7bb9228b7a81acbd26a"
+    },
+    {
+      "mode": "100644",
+      "path": "evals/helpers.py",
+      "sha": "3378cfbba1080d56656173b299c4f80c67255147",
+      "size": 6661,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/3378cfbba1080d56656173b299c4f80c67255147"
+    },
+    {
+      "mode": "100644",
+      "path": "evals/main.py",
+      "sha": "79a9506b6abc424788f137e50b043c505ce0add3",
+      "size": 7899,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/79a9506b6abc424788f137e50b043c505ce0add3"
+    },
+    {
+      "mode": "040000",
+      "path": "evals/metrics",
+      "sha": "8ef4baca5e80f08b2c1ee4607104fbb1d4f52e12",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/8ef4baca5e80f08b2c1ee4607104fbb1d4f52e12"
+    },
+    {
+      "mode": "100644",
+      "path": "evals/metrics/__init__.py",
+      "sha": "52862204316e7b77202f633bf96a64377af83ec9",
+      "size": 302,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/52862204316e7b77202f633bf96a64377af83ec9"
+    },
+    {
+      "mode": "040000",
+      "path": "evals/metrics/prompts",
+      "sha": "13a1482ab28b5453d41a13ce303a1f5f56a434e0",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/13a1482ab28b5453d41a13ce303a1f5f56a434e0"
+    },
+    {
+      "mode": "100644",
+      "path": "evals/metrics/prompts/conciseness.md",
+      "sha": "c4ddaf17e2c7c96f59af69c49e2f2e962f934320",
+      "size": 1357,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/c4ddaf17e2c7c96f59af69c49e2f2e962f934320"
+    },
+    {
+      "mode": "100644",
+      "path": "evals/metrics/prompts/hallucination.md",
+      "sha": "a9e892ff1ab41143376ab67a045ee228f5f6ccba",
+      "size": 1443,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/a9e892ff1ab41143376ab67a045ee228f5f6ccba"
+    },
+    {
+      "mode": "100644",
+      "path": "evals/metrics/prompts/helpfulness.md",
+      "sha": "4e504d3909d7a4b1246ca1ebe830f262970ef294",
+      "size": 1296,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/4e504d3909d7a4b1246ca1ebe830f262970ef294"
+    },
+    {
+      "mode": "100644",
+      "path": "evals/metrics/prompts/relevancy.md",
+      "sha": "3cf955789a1741caf5813751d8ed82d695944f98",
+      "size": 1436,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/3cf955789a1741caf5813751d8ed82d695944f98"
+    },
+    {
+      "mode": "100644",
+      "path": "evals/metrics/prompts/toxicity.md",
+      "sha": "c5459f40a7a515c1907d55a872ec359cb3532182",
+      "size": 1428,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/c5459f40a7a515c1907d55a872ec359cb3532182"
+    },
+    {
+      "mode": "100644",
+      "path": "evals/schemas.py",
+      "sha": "0d428b1dafc20e8a42afbe7ff5d7204e9345a347",
+      "size": 291,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/0d428b1dafc20e8a42afbe7ff5d7204e9345a347"
+    },
+    {
+      "mode": "040000",
+      "path": "grafana",
+      "sha": "8b586310ac6b546b7c5e9253fabfa8fb5cf4c194",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/8b586310ac6b546b7c5e9253fabfa8fb5cf4c194"
+    },
+    {
+      "mode": "040000",
+      "path": "grafana/dashboards",
+      "sha": "cbf0fe26c472597e6232ccd6b89c71b55ddaf258",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/cbf0fe26c472597e6232ccd6b89c71b55ddaf258"
+    },
+    {
+      "mode": "100644",
+      "path": "grafana/dashboards/dashboards.yml",
+      "sha": "7a139f879f3400389794e2f504de5707377690f8",
+      "size": 202,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/7a139f879f3400389794e2f504de5707377690f8"
+    },
+    {
+      "mode": "040000",
+      "path": "grafana/dashboards/json",
+      "sha": "de22ad548c310e46abe141f7a6cc3c45fd7570cb",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/de22ad548c310e46abe141f7a6cc3c45fd7570cb"
+    },
+    {
+      "mode": "100644",
+      "path": "grafana/dashboards/json/llm_latency.json",
+      "sha": "cbad7a13b86f981fe8e0f0a67247e3552c6312aa",
+      "size": 1905,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/cbad7a13b86f981fe8e0f0a67247e3552c6312aa"
+    },
+    {
+      "mode": "040000",
+      "path": "prometheus",
+      "sha": "85c10c440c16bc7425a4cd110e45eff6119a9add",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/85c10c440c16bc7425a4cd110e45eff6119a9add"
+    },
+    {
+      "mode": "100644",
+      "path": "prometheus/prometheus.yml",
+      "sha": "7ffbb0a31c0725f998e2ba475575099b28c32b51",
+      "size": 278,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/7ffbb0a31c0725f998e2ba475575099b28c32b51"
+    },
+    {
+      "mode": "100644",
+      "path": "pyproject.toml",
+      "sha": "ba2b8b9d3b1c849a5aef7cf744fb1b4673e1a5c4",
+      "size": 3348,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/ba2b8b9d3b1c849a5aef7cf744fb1b4673e1a5c4"
+    },
+    {
+      "mode": "040000",
+      "path": "scripts",
+      "sha": "59d667bc6a139e6fb1bdc61dbb93c792a2a9cd1a",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/59d667bc6a139e6fb1bdc61dbb93c792a2a9cd1a"
+    },
+    {
+      "mode": "100755",
+      "path": "scripts/build-docker.sh",
+      "sha": "7e8693b57336eaa663cbc97b09db64f1e5ec57d0",
+      "size": 2106,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/7e8693b57336eaa663cbc97b09db64f1e5ec57d0"
+    },
+    {
+      "mode": "100755",
+      "path": "scripts/docker-entrypoint.sh",
+      "sha": "9e22fbb55b6370dce0cfe04c25609babd60bed7e",
+      "size": 3026,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/9e22fbb55b6370dce0cfe04c25609babd60bed7e"
+    },
+    {
+      "mode": "100755",
+      "path": "scripts/set_env.sh",
+      "sha": "4475a04c67db0caa30d134a5509a4840348bdd5b",
+      "size": 5592,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/4475a04c67db0caa30d134a5509a4840348bdd5b"
+    },
+    {
+      "mode": "040000",
+      "path": "typings",
+      "sha": "d564d0bc3dd917926892c55e3706cc116d5b165e",
+      "type": "tree",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/trees/d564d0bc3dd917926892c55e3706cc116d5b165e"
+    },
+    {
+      "mode": "100644",
+      "path": "typings/.gitkeep",
+      "sha": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "size": 0,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/e69de29bb2d1d6434b8b29ae775ad8c2e48c5391"
+    },
+    {
+      "mode": "100644",
+      "path": "uv.lock",
+      "sha": "a7b41b66fe7f78b09d31735861a154186f1af57e",
+      "size": 352777,
+      "type": "blob",
+      "url": "https://api.github.com/repos/wassim249/fastapi-langgraph-agent-production-ready-template/git/blobs/a7b41b66fe7f78b09d31735861a154186f1af57e"
+    }
+  ],
+  "truncated": false
+}
