@@ -39,6 +39,7 @@ class PublicationFixture:
             "examples/graphs/accepted/core.json",
             "examples/channels/core.graph.json",
             "demo/offline_evidence.json",
+            "integrations/langgraph/source_frontend/examples/input.contracts.json",
             "pyproject.toml",
             "research/publication_upgrade/solver_inputs/scale.kernel.json",
             *("research/publication_upgrade/solver_inputs/scale_" + str(n) + ".graph.json"
@@ -128,11 +129,10 @@ class PublicationFixture:
             name = f"research/publication_upgrade/solver_inputs/scale_{size}.graph.json"
             graph_inputs.append({"path": name, "sha256": self.source[name]})
         kernel_path = "research/publication_upgrade/solver_inputs/scale.kernel.json"
-        kernel = {"path": kernel_path, "sha256": self.source[kernel_path]}
         solver_base = {
             "format": "orchlang-trace-equivalence-solver-scaling", "version": 1,
-            "study": {"calls_per_arm": [2, 8, 16, 32, 64, 128, 256]},
-            "inputs": {"graphs": graph_inputs, "kernel": kernel},
+            "study": {"calls_per_arm": [2, 8, 16, 32, 64, 128, 256], "measured_repetitions_per_size": 5},
+            "inputs": {"graphs": graph_inputs, "kernel_path": kernel_path, "kernel_sha256": self.source[kernel_path]},
             "samples": [{"calls_per_arm": size} for size in (2, 8, 16, 32, 64, 128, 256) for _ in range(5)],
         }
         self._write_json(EVIDENCE_PATHS["solver"], solver_base)
@@ -173,7 +173,11 @@ class PublicationFixture:
             },
             "demo_snapshot_sha256": {"demo/offline_evidence.json": self.source["demo/offline_evidence.json"]},
             "package_source_sha256": {"pyproject.toml": self.source["pyproject.toml"]},
-            "integration_artifact_sha256": {artifact_path: sha(root / artifact_path)},
+            "integration_artifact_sha256": {
+                artifact_path: sha(root / artifact_path),
+                "integrations/langgraph/source_frontend/examples/input.contracts.json":
+                    self.source["integrations/langgraph/source_frontend/examples/input.contracts.json"],
+            },
             "results_sha256": {"bench/results/core.json": sha(root / "bench/results/core.json")},
             "package_result_sha256": {"output/release/package.json": sha(root / "output/release/package.json")},
         })

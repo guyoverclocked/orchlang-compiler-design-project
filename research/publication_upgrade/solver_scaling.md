@@ -122,25 +122,23 @@ early resource stop and must not be read as solver speed.
 | 128 | 5/5 UNKNOWN / no certificate | 5/5 equal / 5/5 verified | Crosses the former default-cap boundary |
 | 256 | 5/5 UNKNOWN / no certificate | 5/5 UNKNOWN / no certificate | Exposes the remaining work cap |
 
-At 64 calls per arm, the clean before/after replayer median fell from
-141.10 ms to 88.69 ms (37.1%). Independently measured verifier work fell from
+At 64 calls per arm, both implementations complete, so their replayer timings
+are directly comparable. Use the recorded medians and min/max samples in the
+paired JSONs; fresh machine runs naturally change the wall-time and RSS values.
+Independently measured verifier work fell from
 9,972,749 to 1,648,825 deterministic bytes. The basis-word matrix-product
 estimate fell from 536,640 to 16,512 matrix-entry units because shared prefixes
-are evaluated once. Producer median time was effectively unchanged at this
-size (28.80 ms baseline, 27.96 ms updated). Replayer high-water RSS was 31.2
-MiB baseline and 31.7 MiB updated, so this study supports reduced verifier
-work and time on the nested-prefix family, not lower memory use.
+are evaluated once. The study supports reduced verifier work in the
+nested-prefix family. It does not establish a general time or memory reduction.
 
 At 128 calls per arm, the old producer completed semantic closure (258 states,
 256 transitions) and row-space analysis, then returned UNKNOWN while estimating
 independent replay of certificate basis words. Its meter had consumed
 67,081,608 of the 67,108,864-byte budget before attempting a 32,896-byte
 product charge. The updated producer proves equality and its independent
-replayer verifies the report in all five runs. The updated medians were 82.53
-ms for analysis and 322.36 ms for replay; there is no old replay-time baseline
+replayer verifies the report in all five runs. There is no old replay-time baseline
 at this size because the old producer did not emit a certificate. The report
-median was 1,370,386 bytes, and worker high-water RSS was 37.5 MiB for analysis
-and 44.1 MiB for replay.
+size and process RSS are recorded in the paired JSONs.
 
 At 256 calls per arm, both versions safely return UNKNOWN after completing the
 same 514-state, 512-transition closure. The old cap event was another repeated

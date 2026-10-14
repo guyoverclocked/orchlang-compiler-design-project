@@ -394,17 +394,19 @@ def _validate_study_outputs(
     baseline = _read_json(root, EVIDENCE_PATHS["solver_baseline"])
     expected_sizes = [2, 8, 16, 32, 64, 128, 256]
     for label, study in (("optimized", optimized), ("baseline", baseline)):
+        repetitions = study.get("study", {}).get("measured_repetitions_per_size")
         if (study.get("study", {}).get("calls_per_arm") != expected_sizes
-                or len(study.get("samples", [])) != 35):
-            raise RunIntegrityError("solver " + label + " lacks the fixed seven-size, five-run study")
+                or type(repetitions) is not int or repetitions < 5
+                or len(study.get("samples", [])) != len(expected_sizes) * repetitions):
+            raise RunIntegrityError("solver " + label + " lacks the seven-size study with at least five repetitions")
 
     def input_fingerprints(study: dict[str, Any]) -> dict[str, str]:
         rows = study.get("inputs", {}).get("graphs", [])
-        kernel = study.get("inputs", {}).get("kernel", {})
-        if not isinstance(rows, list) or not isinstance(kernel, dict):
+        inputs = study.get("inputs", {})
+        if not isinstance(rows, list) or not isinstance(inputs, dict):
             return {}
         result = {row.get("path"): row.get("sha256") for row in rows if isinstance(row, dict)}
-        result[kernel.get("path")] = kernel.get("sha256")
+        result[inputs.get("kernel_path")] = inputs.get("kernel_sha256")
         return result
 
     expected_solver_inputs = {
@@ -537,8 +539,10 @@ def validate_run_record(
                 raise RunIntegrityError("core input is absent from or differs from this source revision: " + str(path))
     integration_artifacts = core.get("integration_artifact_sha256")
     expected_integration_artifacts = {
-        path: expected for path, expected in output_hashes.items()
-        if path.startswith("integrations/langgraph/source_frontend/artifacts/")
+        # The core manifest inventories every frontend JSON file, including
+        # immutable contract inputs as well as freshly generated artifacts.
+        path: expected for path, expected in (source_inventory | output_hashes).items()
+        if path.startswith("integrations/langgraph/source_frontend/")
         and path.endswith(".json")
     }
     if (not isinstance(integration_artifacts, dict) or not integration_artifacts
