@@ -1,3 +1,5 @@
 # Frozen third-party source and plotting-tool output retain exact original bytes.
 output/publication_upgrade/corpus/sources/** -whitespace
 research/publication_upgrade/*.svg -whitespace
+# Preserve the generated compiler log, including its original whitespace.
+output/pdf/OrchLang_SCP_Publication_Upgrade.log -whitespace

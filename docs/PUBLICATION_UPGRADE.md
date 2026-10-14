@@ -92,7 +92,8 @@ After writing and compiling the new standalone paper, bind and package it:
 
 ```sh
 python3 scripts/package_publication_upgrade.py --source-revision FROZEN_SHA \
-  --manuscript submission/research/manuscript/OrchLang_SCP_Publication_Upgrade.tex
+  --manuscript submission/research/manuscript/OrchLang_SCP_Publication_Upgrade.tex \
+  --pdf output/pdf/OrchLang_SCP_Publication_Upgrade.pdf
 python3 audit/publication_provenance.py output/publication_upgrade/publication_manifest.json \
   --manuscript submission/research/manuscript/OrchLang_SCP_Publication_Upgrade.tex
 ```
