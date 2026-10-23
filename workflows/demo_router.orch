@@ -1,0 +1,22 @@
+// Router pattern: an LLM classifies the request, then a branch-specific chain runs.
+workflow DemoRouter {
+  input query: text secret max_tokens 64;
+  model m = "qwen0.5b";
+  tool first_word(x) max_tokens 4;
+  prompt route(q) = system "Classify the request as story, joke, or poem. Answer with one word." user "{q}";
+  prompt story(q) = user "Write a short story about: {q}";
+  prompt outline(q) = user "Outline three plot points for: {q}";
+  prompt joke(q) = user "Tell a joke about: {q}";
+  prompt poem(q) = user "Write a four-line poem about: {q}";
+  let raw = call route(query) using m max_tokens 4;
+  let label = tool first_word(raw);
+  if label == "story" {
+    let plan = call outline(query) using m max_tokens 48;
+    let answer = call story(plan) using m max_tokens 96;
+  } else if label == "joke" {
+    let answer = call joke(query) using m max_tokens 48;
+  } else {
+    let answer = call poem(query) using m max_tokens 64;
+  }
+  output answer;
+}
