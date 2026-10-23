@@ -1,0 +1,22 @@
+// Port of LangGraph "Routing" (langchain-ai/docs@5d83d5e, docs/src/oss/langgraph/
+// workflows-agents.mdx lines 760-1070; branch system prompts from the JS variant,
+// lines 920-955). Structured output Route.step becomes a one-word answer.
+workflow Routing {
+  input user_input: text secret max_tokens 40;
+  model llm = "llama1b";
+  tool label_in(x, options) max_tokens 2;
+  prompt router(x) = system "Route the input to story, joke, or poem based on the user's request.\nRespond with exactly one word: poem, story, or joke." user "{x}";
+  prompt story(x) = system "You are an expert storyteller." user "{x}";
+  prompt joke(x) = system "You are an expert comedian." user "{x}";
+  prompt poem(x) = system "You are an expert poet." user "{x}";
+  let raw = call router(user_input) using llm max_tokens 4;
+  let decision = tool label_in(raw, "story,joke,poem");
+  if decision == "story" {
+    let answer = call story(user_input) using llm max_tokens 192;
+  } else if decision == "joke" {
+    let answer = call joke(user_input) using llm max_tokens 96;
+  } else {
+    let answer = call poem(user_input) using llm max_tokens 128;
+  }
+  output answer;
+}

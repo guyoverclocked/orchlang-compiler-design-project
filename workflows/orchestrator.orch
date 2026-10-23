@@ -1,0 +1,29 @@
+// Port of LangGraph "Orchestrator-worker" (workflows-agents.mdx lines 1315-1414).
+// Send-based fan-out over the planner's sections, bounded at 4 workers and run
+// sequentially; the Sections schema is emulated as "name :: description" lines.
+workflow OrchestratorWorker {
+  input topic: text secret max_tokens 32;
+  model llm = "llama1b";
+  tool has_line(x, k) max_tokens 1;
+  tool line(x, k) max_tokens 40;
+  tool section_name(x) max_tokens 16;
+  tool section_desc(x) max_tokens 32;
+  tool join_sections(a, b) max_tokens 600;
+  tool inc(k) max_tokens 1;
+  prompt planner(t) = system "Generate a plan for the report.\nReturn one section per line in the form: <name> :: <description>" user "Here is the report topic: {t}";
+  prompt worker(name, desc) = system "Write a report section following the provided name and description. Include no preamble for each section. Use markdown formatting." user "Here is the section name: {name} and description: {desc}";
+  let plan = call planner(topic) using llm max_tokens 160;
+  let i = "0";
+  let report = "";
+  let more = tool has_line(plan, i);
+  repeat 4 until more == "no" {
+    let row = tool line(plan, i);
+    let name = tool section_name(row);
+    let desc = tool section_desc(row);
+    let sec = call worker(name, desc) using llm max_tokens 128;
+    let report = tool join_sections(report, sec);
+    let i = tool inc(i);
+    let more = tool has_line(plan, i);
+  }
+  output report;
+}

@@ -1,0 +1,24 @@
+// Port of LangGraph "Evaluator-optimizer" (workflows-agents.mdx lines 1522-1601).
+// Unbounded loop bounded at 3 rounds; Feedback schema emulated as two text lines.
+workflow EvaluatorOptimizer {
+  input topic: text secret max_tokens 24;
+  model llm = "llama1b";
+  tool after(x, marker) max_tokens 48;
+  tool eval_stop(x) max_tokens 1;
+  prompt gen0(t) = user "Write a joke about {t}";
+  prompt gen1(t, f) = user "Write a joke about {t} but take into account the feedback: {f}";
+  prompt grade(j) = user "Grade the joke {j}\n\nRespond in exactly two lines:\ngrade: <funny|not funny> (Decide if the joke is funny or not.)\nfeedback: <If the joke is not funny, provide feedback on how to improve it.>";
+  let feedback = "";
+  let stop = "go";
+  repeat 3 until stop == "stop" {
+    if feedback == "" {
+      let joke = call gen0(topic) using llm max_tokens 96;
+    } else {
+      let joke = call gen1(topic, feedback) using llm max_tokens 96;
+    }
+    let ev = call grade(joke) using llm max_tokens 64;
+    let stop = tool eval_stop(ev);
+    let feedback = tool after(ev, "feedback:");
+  }
+  output joke;
+}

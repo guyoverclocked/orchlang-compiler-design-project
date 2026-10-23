@@ -25,11 +25,28 @@ class Template:
     pad_close: str
 
     def render(self, messages: List[Tuple[str, str]]) -> str:
+        if self.family == "llama3":
+            return self._render_llama3(messages)
         out = []
         if self.default_system is not None and (not messages or messages[0][0] != "system"):
             out.append(self.turn.format(role="system", content=self.default_system))
         for role, content in messages:
             out.append(self.turn.format(role=role, content=content))
+        out.append(self.generation)
+        return "".join(out)
+
+
+    def _render_llama3(self, messages: List[Tuple[str, str]]) -> str:
+        """Llama 3.2 Instruct GGUF template (no tools): BOS, a system turn holding
+        the knowledge-date preamble and the trimmed system message, trimmed turns.
+        The date is the template's own fallback, so rendering is deterministic."""
+        system = ""
+        if messages and messages[0][0] == "system":
+            system, messages = messages[0][1].strip(), messages[1:]
+        out = ["<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\n"
+               "Cutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n" + system + "<|eot_id|>"]
+        for role, content in messages:
+            out.append(self.turn.format(role=role, content=content.strip()))
         out.append(self.generation)
         return "".join(out)
 

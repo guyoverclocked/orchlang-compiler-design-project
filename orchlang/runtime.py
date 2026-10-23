@@ -28,6 +28,8 @@ class Record:
     output_tokens: int = 0
     latency: float = 0.0
     dummy: bool = False  # hidden from the observer; kept only for analysis
+    site: int = 0        # call site (0 for dummies/tools); analysis only
+    natural: int = 0     # tokens before the first stop token; analysis only
 
     def observed(self):
         if self.kind == "llm":
@@ -115,6 +117,7 @@ class LlamaBackend(Backend):
         vis = out if visible_end is None else out[:visible_end]
         if cap is not None:
             vis = vis[:cap]
+        self.last_natural = len(out) if visible_end is None else visible_end
         return out, self.decode(vis), len(toks)
 
 
@@ -142,6 +145,7 @@ class MockBackend(Backend):
         rng = random.Random(hashlib.sha256(f"{visible_prompt}|{seed}".encode()).digest())
         natural = rng.randint(1, max(1, cap if cap is not None else max_tokens))
         text = "".join(rng.choice("abcde") for _ in range(natural))
+        self.last_natural = natural
         if forced:
             ids = [ord(c) for c in text] + [0] * (max_tokens - natural)
             return ids, text, len(prompt)
@@ -227,12 +231,14 @@ class Runtime:
         self.exec(prog)
         return RunResult(self.store, self.trace, self.truncations)
 
-    def _llm(self, model: str, prompt: str, n: int, seed: int, forced: bool, dummy=False, cap=None) -> str:
+    def _llm(self, model: str, prompt: str, n: int, seed: int, forced: bool, dummy=False, cap=None,
+             site=0) -> str:
         b = self.backends[model]
         t0 = time.perf_counter()
         ids, visible, ptoks = b.generate(prompt, n, seed, forced, cap)
         dt = time.perf_counter() - t0
-        self.trace.append(Record("llm", model, ptoks, len(ids), dt, dummy))
+        self.trace.append(Record("llm", model, ptoks, len(ids), dt, dummy, site,
+                                 getattr(b, "last_natural", len(ids))))
         return visible
 
     def exec(self, s: C.Stmt) -> None:
@@ -248,12 +254,12 @@ class Runtime:
             if s.pad is None:
                 if self.random_pad:
                     req = self._random_pad(s.model, req)
-                self.store[s.x] = self._llm(s.model, req, s.max_tokens, seed, False)
+                self.store[s.x] = self._llm(s.model, req, s.max_tokens, seed, False, site=s.site)
             else:
                 t, n = s.pad
                 padded, trunc = self.padders[s.model].pad(req, t)
                 self.truncations += trunc
-                self.store[s.x] = self._llm(s.model, padded, n, seed, True, cap=s.max_tokens)
+                self.store[s.x] = self._llm(s.model, padded, n, seed, True, cap=s.max_tokens, site=s.site)
             return
         if isinstance(s, C.Dummy):
             padded, _ = self.padders[s.model].pad(self.dummy_request(s.model), s.t)
