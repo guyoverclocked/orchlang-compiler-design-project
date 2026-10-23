@@ -55,8 +55,12 @@ def main():
         directory = ROOT / 'research' / ('validated-' + date)
         entries = json.loads((directory / 'files.json').read_text(encoding='utf-8'))
         raw_count += verify_hashes(directory, entries)
+    validation = ROOT / 'research' / 'github-validation-2026-10-24'
+    validation_entries = json.loads((validation / 'files.json').read_text(encoding='utf-8'))
+    validation_count = verify_hashes(validation, validation_entries)
     print(json.dumps(dict(status='verified', publication_files=artifact_count,
                           bundles=len(bundles), raw_evidence_files=raw_count,
+                          github_validation_files=validation_count,
                           scope='byte integrity and Git bundle validity; not a scientific proof'),
                      indent=2))
 

@@ -18,6 +18,7 @@ full-language verification are not established.
 - [Independent certificate path and replay](docs/CERTIFICATES.md)
 - [Response-dependent dataflow certificates](docs/DATAFLOW_CERTIFICATES.md)
 - [Clean-snapshot results](research/validated-2026-10-23/README.md)
+- [Fresh GitHub-package validation](research/github-validation-2026-10-24/README.md)
 - [Claim-to-evidence ledger](research/claims.csv)
 - [Journal comparison and submission constraints](research/venue-search-2026-10-24.md)
 - [Controlling publication plan](docs/PUBLICATION_MASTER_PLAN.md)

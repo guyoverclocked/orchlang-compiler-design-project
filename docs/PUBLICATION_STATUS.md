@@ -162,6 +162,13 @@ tables are generated from the retained raw data, not manually invented values.
 The reproduction manual gives exact regeneration commands. Author review and
 release checks are in [AUTHOR_REVIEW.md](AUTHOR_REVIEW.md).
 
+The [fresh GitHub-package check](../research/github-validation-2026-10-24/README.md)
+records a clean clone of 9f4975e: a fresh C++ build, 106 C++ tests, 47 Python tests
+and three Lean files pass. All original evidence hashes and artifact bundles
+verify, and manuscript evidence files regenerate byte-identically. This later
+check is on the same machine by the same implementer; it does not add independent
+review, a new research sample, or cross-platform validation.
+
 ## 6. Prior art and contribution
 
 The [literature record](../research/literature.md) and

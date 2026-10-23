@@ -261,3 +261,28 @@ payment, API use, manuscript/result changes, or independent review occurred.
 Next: commit the selected package, validate from a fresh checkout, record actual
 outcomes, then push to the existing GitHub main branch and verify the remote SHA.
 No inference/API use or charges; USD 0 spent/reserved.
+
+## Fresh pre-push clone validation completed
+
+- Committed the selected source/documentation/artifacts as
+  9f4975e346ec7eecfe8819a2a889b48e4d3a4869 and cloned it into a new local
+  Documents/OrchLang Publication Work/github-publication-check-v1 directory.
+- Ran scripts/offline_check.py with GCC 16.1 C++17 and Lean 4.19.0, outputting to
+  github-publication-cpu-v1 outside the clone. Fresh builds, 106 C++ tests,
+  47 Python tests and all three Lean files pass; manifest is completed with
+  dirty_tree=false and no failures. The clone remains clean after checks.
+- Verified five publication files, four bundle HEADs/structures and 76 original
+  raw-evidence checksums. Regenerated all three manuscript evidence TeX files
+  byte-identically; seven updated documentation entry points have no missing
+  local Markdown links. All 42 core files match the prior tested freeze.
+- Retained the five CPU records plus a scope/verification summary under
+  research/github-validation-2026-10-24, with their own six-entry checksum map.
+  Updated the integrity command to include that map. Full generated research
+  campaigns were not rerun; this is same-host engineering validation, not a new
+  experiment, independent human review or evidence of journal acceptance.
+- Whitespace lint passes for editable source/documentation. Raw historical
+  evidence is excluded from whitespace rewriting to preserve original CRLF
+  bytes/checksums. Pre-existing submission/review3 remains outside the commit.
+
+Next: push the committed package to origin/main without force and verify the
+remote revision. No API calls, secrets or publication-fee agreement; USD 0 spent.
