@@ -23,6 +23,11 @@ struct ModelMetadata {
     double unitPrice{0.0};
 };
 
+// Versioned, length-prefixed canonical structure, not a declaration name/hash.
+// Describes only the current abstract/mock contract. It supplies no missing
+// provider/tokenizer/serializer assurances for a deployed service.
+std::string canonicalModelContract(const ModelMetadata& model);
+
 struct PromptParameterInfo {
     std::string name;
     Type type;
@@ -34,6 +39,7 @@ struct PromptSignature {
     // Static token cost of the template itself, excluding the substituted
     // arguments.  Derived once at declaration and reused at every call site.
     std::size_t templateTokens{0};
+    std::string templateText;
 };
 
 struct ToolSignature {
@@ -56,6 +62,7 @@ struct Symbol {
     // bound, or a model or tool name, has no bound at all.
     bool tokenBoundKnown{false};
     std::size_t tokenBound{0};
+    std::size_t bindingId{0};
 };
 
 struct Scope {
@@ -75,6 +82,7 @@ public:
 
 private:
     std::vector<Scope> scopes_;
+    std::size_t nextBindingId_{1};
 };
 
 std::string formatSymbolTable(const SymbolTable& table);

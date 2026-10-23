@@ -1,0 +1,1993 @@
+[
+  {
+    "id": "pf-basic",
+    "production": {
+      "input": 260,
+      "output": 120,
+      "total": 380
+    },
+    "structural": {
+      "input": 260,
+      "output": 120,
+      "total": 380
+    },
+    "max_calls": 1,
+    "observations": [
+      {
+        "seed": 1,
+        "total": 272,
+        "input": 254,
+        "output": 18,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 2,
+        "total": 265,
+        "input": 181,
+        "output": 84,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 3,
+        "total": 120,
+        "input": 41,
+        "output": 79,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 4,
+        "total": 263,
+        "input": 187,
+        "output": 76,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 5,
+        "total": 351,
+        "input": 260,
+        "output": 91,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 6,
+        "total": 122,
+        "input": 82,
+        "output": 40,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 7,
+        "total": 249,
+        "input": 198,
+        "output": 51,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 8,
+        "total": 362,
+        "input": 256,
+        "output": 106,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 9,
+        "total": 308,
+        "input": 252,
+        "output": 56,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 10,
+        "total": 146,
+        "input": 86,
+        "output": 60,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 11,
+        "total": 200,
+        "input": 83,
+        "output": 117,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 12,
+        "total": 190,
+        "input": 180,
+        "output": 10,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 13,
+        "total": 182,
+        "input": 137,
+        "output": 45,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 14,
+        "total": 239,
+        "input": 167,
+        "output": 72,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 15,
+        "total": 23,
+        "input": 18,
+        "output": 5,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 16,
+        "total": 151,
+        "input": 136,
+        "output": 15,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 17,
+        "total": 215,
+        "input": 150,
+        "output": 65,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 18,
+        "total": 260,
+        "input": 177,
+        "output": 83,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 19,
+        "total": 30,
+        "input": 13,
+        "output": 17,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 20,
+        "total": 238,
+        "input": 223,
+        "output": 15,
+        "calls": 1,
+        "violates": false
+      }
+    ],
+    "source_sha256": "61d1a75e5a4051a6770b17b77c59e9730732f23407b51e470d43997697acafbd",
+    "source_lines": 7,
+    "input_bounds": 1,
+    "model_caps": 1,
+    "original_workflow_executed": false
+  },
+  {
+    "id": "pf-basic-with-builtin-llm",
+    "production": {
+      "input": 260,
+      "output": 120,
+      "total": 380
+    },
+    "structural": {
+      "input": 260,
+      "output": 120,
+      "total": 380
+    },
+    "max_calls": 1,
+    "observations": [
+      {
+        "seed": 1,
+        "total": 245,
+        "input": 200,
+        "output": 45,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 2,
+        "total": 227,
+        "input": 210,
+        "output": 17,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 3,
+        "total": 159,
+        "input": 87,
+        "output": 72,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 4,
+        "total": 298,
+        "input": 210,
+        "output": 88,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 5,
+        "total": 371,
+        "input": 252,
+        "output": 119,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 6,
+        "total": 322,
+        "input": 228,
+        "output": 94,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 7,
+        "total": 271,
+        "input": 239,
+        "output": 32,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 8,
+        "total": 269,
+        "input": 213,
+        "output": 56,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 9,
+        "total": 267,
+        "input": 229,
+        "output": 38,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 10,
+        "total": 258,
+        "input": 235,
+        "output": 23,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 11,
+        "total": 155,
+        "input": 54,
+        "output": 101,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 12,
+        "total": 205,
+        "input": 166,
+        "output": 39,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 13,
+        "total": 96,
+        "input": 42,
+        "output": 54,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 14,
+        "total": 85,
+        "input": 25,
+        "output": 60,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 15,
+        "total": 133,
+        "input": 38,
+        "output": 95,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 16,
+        "total": 114,
+        "input": 57,
+        "output": 57,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 17,
+        "total": 94,
+        "input": 37,
+        "output": 57,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 18,
+        "total": 151,
+        "input": 126,
+        "output": 25,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 19,
+        "total": 134,
+        "input": 74,
+        "output": 60,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 20,
+        "total": 255,
+        "input": 169,
+        "output": 86,
+        "calls": 1,
+        "violates": false
+      }
+    ],
+    "source_sha256": "215044b70646e0cda3b6f55656b9ece4e40318d380115e4ddc1df44cb92ebbda",
+    "source_lines": 7,
+    "input_bounds": 1,
+    "model_caps": 1,
+    "original_workflow_executed": false
+  },
+  {
+    "id": "pf-basic-with-connection",
+    "production": {
+      "input": 260,
+      "output": 120,
+      "total": 380
+    },
+    "structural": {
+      "input": 260,
+      "output": 120,
+      "total": 380
+    },
+    "max_calls": 1,
+    "observations": [
+      {
+        "seed": 1,
+        "total": 299,
+        "input": 236,
+        "output": 63,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 2,
+        "total": 157,
+        "input": 86,
+        "output": 71,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 3,
+        "total": 209,
+        "input": 188,
+        "output": 21,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 4,
+        "total": 259,
+        "input": 223,
+        "output": 36,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 5,
+        "total": 41,
+        "input": 11,
+        "output": 30,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 6,
+        "total": 319,
+        "input": 225,
+        "output": 94,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 7,
+        "total": 210,
+        "input": 166,
+        "output": 44,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 8,
+        "total": 68,
+        "input": 22,
+        "output": 46,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 9,
+        "total": 143,
+        "input": 66,
+        "output": 77,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 10,
+        "total": 346,
+        "input": 235,
+        "output": 111,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 11,
+        "total": 281,
+        "input": 165,
+        "output": 116,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 12,
+        "total": 229,
+        "input": 149,
+        "output": 80,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 13,
+        "total": 200,
+        "input": 128,
+        "output": 72,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 14,
+        "total": 242,
+        "input": 167,
+        "output": 75,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 15,
+        "total": 190,
+        "input": 109,
+        "output": 81,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 16,
+        "total": 98,
+        "input": 39,
+        "output": 59,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 17,
+        "total": 287,
+        "input": 245,
+        "output": 42,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 18,
+        "total": 227,
+        "input": 150,
+        "output": 77,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 19,
+        "total": 129,
+        "input": 74,
+        "output": 55,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 20,
+        "total": 96,
+        "input": 56,
+        "output": 40,
+        "calls": 1,
+        "violates": false
+      }
+    ],
+    "source_sha256": "42526a472383a9ca9a330ee4da07e04ec68fbb6713668a103168cfa21c7b06fb",
+    "source_lines": 7,
+    "input_bounds": 1,
+    "model_caps": 1,
+    "original_workflow_executed": false
+  },
+  {
+    "id": "pf-customer-intent",
+    "production": {
+      "input": 392,
+      "output": 256,
+      "total": 648
+    },
+    "structural": {
+      "input": 392,
+      "output": 256,
+      "total": 648
+    },
+    "max_calls": 1,
+    "observations": [
+      {
+        "seed": 1,
+        "total": 456,
+        "input": 342,
+        "output": 114,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 2,
+        "total": 470,
+        "input": 235,
+        "output": 235,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 3,
+        "total": 402,
+        "input": 211,
+        "output": 191,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 4,
+        "total": 399,
+        "input": 269,
+        "output": 130,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 5,
+        "total": 260,
+        "input": 138,
+        "output": 122,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 6,
+        "total": 276,
+        "input": 178,
+        "output": 98,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 7,
+        "total": 420,
+        "input": 191,
+        "output": 229,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 8,
+        "total": 403,
+        "input": 271,
+        "output": 132,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 9,
+        "total": 354,
+        "input": 267,
+        "output": 87,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 10,
+        "total": 384,
+        "input": 243,
+        "output": 141,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 11,
+        "total": 353,
+        "input": 297,
+        "output": 56,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 12,
+        "total": 170,
+        "input": 168,
+        "output": 2,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 13,
+        "total": 217,
+        "input": 215,
+        "output": 2,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 14,
+        "total": 189,
+        "input": 164,
+        "output": 25,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 15,
+        "total": 303,
+        "input": 287,
+        "output": 16,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 16,
+        "total": 169,
+        "input": 73,
+        "output": 96,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 17,
+        "total": 370,
+        "input": 129,
+        "output": 241,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 18,
+        "total": 236,
+        "input": 67,
+        "output": 169,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 19,
+        "total": 212,
+        "input": 150,
+        "output": 62,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 20,
+        "total": 395,
+        "input": 320,
+        "output": 75,
+        "calls": 1,
+        "violates": false
+      }
+    ],
+    "source_sha256": "860ce4b3bfa57b3fb5b7fb435d0e2ae41bd7ae386d78c2f6a48df747f6808ccb",
+    "source_lines": 8,
+    "input_bounds": 2,
+    "model_caps": 1,
+    "original_workflow_executed": false
+  },
+  {
+    "id": "pf-ner",
+    "production": {
+      "input": 533,
+      "output": 64,
+      "total": 597
+    },
+    "structural": {
+      "input": 533,
+      "output": 64,
+      "total": 597
+    },
+    "max_calls": 1,
+    "observations": [
+      {
+        "seed": 1,
+        "total": 416,
+        "input": 415,
+        "output": 1,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 2,
+        "total": 485,
+        "input": 471,
+        "output": 14,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 3,
+        "total": 41,
+        "input": 19,
+        "output": 22,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 4,
+        "total": 513,
+        "input": 468,
+        "output": 45,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 5,
+        "total": 421,
+        "input": 413,
+        "output": 8,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 6,
+        "total": 416,
+        "input": 382,
+        "output": 34,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 7,
+        "total": 525,
+        "input": 496,
+        "output": 29,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 8,
+        "total": 467,
+        "input": 435,
+        "output": 32,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 9,
+        "total": 89,
+        "input": 73,
+        "output": 16,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 10,
+        "total": 378,
+        "input": 347,
+        "output": 31,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 11,
+        "total": 177,
+        "input": 149,
+        "output": 28,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 12,
+        "total": 511,
+        "input": 494,
+        "output": 17,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 13,
+        "total": 296,
+        "input": 294,
+        "output": 2,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 14,
+        "total": 110,
+        "input": 65,
+        "output": 45,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 15,
+        "total": 289,
+        "input": 237,
+        "output": 52,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 16,
+        "total": 171,
+        "input": 154,
+        "output": 17,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 17,
+        "total": 511,
+        "input": 495,
+        "output": 16,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 18,
+        "total": 67,
+        "input": 28,
+        "output": 39,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 19,
+        "total": 431,
+        "input": 371,
+        "output": 60,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 20,
+        "total": 365,
+        "input": 363,
+        "output": 2,
+        "calls": 1,
+        "violates": false
+      }
+    ],
+    "source_sha256": "12783e76dc2a833e970663884aa43e12fcab5cddb36a61504887db1c6e80f1b8",
+    "source_lines": 8,
+    "input_bounds": 2,
+    "model_caps": 1,
+    "original_workflow_executed": false
+  },
+  {
+    "id": "pf-switch",
+    "production": {
+      "input": 262,
+      "output": 128,
+      "total": 390
+    },
+    "structural": {
+      "input": 262,
+      "output": 128,
+      "total": 390
+    },
+    "max_calls": 1,
+    "observations": [
+      {
+        "seed": 1,
+        "total": 340,
+        "input": 222,
+        "output": 118,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 2,
+        "total": 233,
+        "input": 196,
+        "output": 37,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 3,
+        "total": 209,
+        "input": 94,
+        "output": 115,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 4,
+        "total": 267,
+        "input": 205,
+        "output": 62,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 5,
+        "total": 136,
+        "input": 20,
+        "output": 116,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 6,
+        "total": 176,
+        "input": 168,
+        "output": 8,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 7,
+        "total": 189,
+        "input": 125,
+        "output": 64,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 8,
+        "total": 269,
+        "input": 197,
+        "output": 72,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 9,
+        "total": 265,
+        "input": 201,
+        "output": 64,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 10,
+        "total": 241,
+        "input": 180,
+        "output": 61,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 11,
+        "total": 295,
+        "input": 241,
+        "output": 54,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 12,
+        "total": 166,
+        "input": 135,
+        "output": 31,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 13,
+        "total": 213,
+        "input": 113,
+        "output": 100,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 14,
+        "total": 162,
+        "input": 60,
+        "output": 102,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 15,
+        "total": 285,
+        "input": 204,
+        "output": 81,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 16,
+        "total": 71,
+        "input": 23,
+        "output": 48,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 17,
+        "total": 127,
+        "input": 88,
+        "output": 39,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 18,
+        "total": 65,
+        "input": 11,
+        "output": 54,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 19,
+        "total": 148,
+        "input": 29,
+        "output": 119,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 20,
+        "total": 318,
+        "input": 231,
+        "output": 87,
+        "calls": 1,
+        "violates": false
+      }
+    ],
+    "source_sha256": "e2cb12caa6099dc18a1c43eef0553d8fee05cebd3d1767a7afdb41f4ec490f76",
+    "source_lines": 7,
+    "input_bounds": 1,
+    "model_caps": 1,
+    "original_workflow_executed": false
+  },
+  {
+    "id": "pf-if-else-stubs",
+    "production": {
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    "structural": {
+      "input": 0,
+      "output": 0,
+      "total": 0
+    },
+    "max_calls": 0,
+    "observations": [
+      {
+        "seed": 1,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 2,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 3,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 4,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 5,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 6,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 7,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 8,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 9,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 10,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 11,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 12,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 13,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 14,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 15,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 16,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 17,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 18,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 19,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      },
+      {
+        "seed": 20,
+        "total": 0,
+        "input": 0,
+        "output": 0,
+        "calls": 0,
+        "violates": false
+      }
+    ],
+    "source_sha256": "7360197722c1d4d61be01425bb9e2936350fc35093628a28945162cacb1c8f40",
+    "source_lines": 6,
+    "input_bounds": 2,
+    "model_caps": 0,
+    "original_workflow_executed": false
+  },
+  {
+    "id": "pf-web-classification",
+    "production": {
+      "input": 2203,
+      "output": 256,
+      "total": 2459
+    },
+    "structural": {
+      "input": 2203,
+      "output": 256,
+      "total": 2459
+    },
+    "max_calls": 2,
+    "observations": [
+      {
+        "seed": 1,
+        "total": 1379,
+        "input": 1264,
+        "output": 115,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 2,
+        "total": 1907,
+        "input": 1820,
+        "output": 87,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 3,
+        "total": 824,
+        "input": 672,
+        "output": 152,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 4,
+        "total": 306,
+        "input": 233,
+        "output": 73,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 5,
+        "total": 1177,
+        "input": 1000,
+        "output": 177,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 6,
+        "total": 388,
+        "input": 245,
+        "output": 143,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 7,
+        "total": 1312,
+        "input": 1177,
+        "output": 135,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 8,
+        "total": 641,
+        "input": 501,
+        "output": 140,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 9,
+        "total": 1410,
+        "input": 1290,
+        "output": 120,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 10,
+        "total": 2226,
+        "input": 2106,
+        "output": 120,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 11,
+        "total": 1639,
+        "input": 1575,
+        "output": 64,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 12,
+        "total": 672,
+        "input": 489,
+        "output": 183,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 13,
+        "total": 1109,
+        "input": 941,
+        "output": 168,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 14,
+        "total": 434,
+        "input": 241,
+        "output": 193,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 15,
+        "total": 891,
+        "input": 790,
+        "output": 101,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 16,
+        "total": 1762,
+        "input": 1638,
+        "output": 124,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 17,
+        "total": 2102,
+        "input": 2007,
+        "output": 95,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 18,
+        "total": 677,
+        "input": 557,
+        "output": 120,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 19,
+        "total": 499,
+        "input": 355,
+        "output": 144,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 20,
+        "total": 1130,
+        "input": 1037,
+        "output": 93,
+        "calls": 2,
+        "violates": false
+      }
+    ],
+    "source_sha256": "332e8ace05d1e7d47f22ecc2b30e55e6342d1bb961a88bbf2258a2a67b21d712",
+    "source_lines": 10,
+    "input_bounds": 2,
+    "model_caps": 1,
+    "original_workflow_executed": false
+  },
+  {
+    "id": "lg-prompt-chaining",
+    "production": {
+      "input": 402,
+      "output": 192,
+      "total": 594
+    },
+    "structural": {
+      "input": 402,
+      "output": 192,
+      "total": 594
+    },
+    "max_calls": 3,
+    "observations": [
+      {
+        "seed": 1,
+        "total": 265,
+        "input": 256,
+        "output": 9,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 2,
+        "total": 231,
+        "input": 183,
+        "output": 48,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 3,
+        "total": 69,
+        "input": 43,
+        "output": 26,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 4,
+        "total": 223,
+        "input": 189,
+        "output": 34,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 5,
+        "total": 278,
+        "input": 262,
+        "output": 16,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 6,
+        "total": 146,
+        "input": 84,
+        "output": 62,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 7,
+        "total": 213,
+        "input": 200,
+        "output": 13,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 8,
+        "total": 521,
+        "input": 370,
+        "output": 151,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 9,
+        "total": 291,
+        "input": 254,
+        "output": 37,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 10,
+        "total": 192,
+        "input": 144,
+        "output": 48,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 11,
+        "total": 146,
+        "input": 85,
+        "output": 61,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 12,
+        "total": 376,
+        "input": 267,
+        "output": 109,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 13,
+        "total": 261,
+        "input": 175,
+        "output": 86,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 14,
+        "total": 343,
+        "input": 258,
+        "output": 85,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 15,
+        "total": 200,
+        "input": 95,
+        "output": 105,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 16,
+        "total": 153,
+        "input": 138,
+        "output": 15,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 17,
+        "total": 168,
+        "input": 152,
+        "output": 16,
+        "calls": 1,
+        "violates": false
+      },
+      {
+        "seed": 18,
+        "total": 386,
+        "input": 275,
+        "output": 111,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 19,
+        "total": 144,
+        "input": 81,
+        "output": 63,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 20,
+        "total": 272,
+        "input": 247,
+        "output": 25,
+        "calls": 3,
+        "violates": false
+      }
+    ],
+    "source_sha256": "71effd47590dec6f9cb13ed6807a86b028be40c5644143cbb56d9ea4cdfa746d",
+    "source_lines": 14,
+    "input_bounds": 2,
+    "model_caps": 1,
+    "original_workflow_executed": false
+  },
+  {
+    "id": "lg-parallelization",
+    "production": {
+      "input": 786,
+      "output": 192,
+      "total": 978
+    },
+    "structural": {
+      "input": 786,
+      "output": 192,
+      "total": 978
+    },
+    "max_calls": 3,
+    "observations": [
+      {
+        "seed": 1,
+        "total": 647,
+        "input": 582,
+        "output": 65,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 2,
+        "total": 490,
+        "input": 405,
+        "output": 85,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 3,
+        "total": 892,
+        "input": 744,
+        "output": 148,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 4,
+        "total": 535,
+        "input": 468,
+        "output": 67,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 5,
+        "total": 649,
+        "input": 516,
+        "output": 133,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 6,
+        "total": 326,
+        "input": 246,
+        "output": 80,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 7,
+        "total": 183,
+        "input": 48,
+        "output": 135,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 8,
+        "total": 286,
+        "input": 246,
+        "output": 40,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 9,
+        "total": 443,
+        "input": 375,
+        "output": 68,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 10,
+        "total": 395,
+        "input": 357,
+        "output": 38,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 11,
+        "total": 884,
+        "input": 783,
+        "output": 101,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 12,
+        "total": 662,
+        "input": 501,
+        "output": 161,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 13,
+        "total": 766,
+        "input": 660,
+        "output": 106,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 14,
+        "total": 533,
+        "input": 432,
+        "output": 101,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 15,
+        "total": 784,
+        "input": 645,
+        "output": 139,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 16,
+        "total": 488,
+        "input": 399,
+        "output": 89,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 17,
+        "total": 784,
+        "input": 630,
+        "output": 154,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 18,
+        "total": 317,
+        "input": 267,
+        "output": 50,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 19,
+        "total": 150,
+        "input": 51,
+        "output": 99,
+        "calls": 3,
+        "violates": false
+      },
+      {
+        "seed": 20,
+        "total": 324,
+        "input": 231,
+        "output": 93,
+        "calls": 3,
+        "violates": false
+      }
+    ],
+    "source_sha256": "9800044c9e8892f1ef9d2b72ccff2e146d688f5344c511bfb005aa2690fc23b7",
+    "source_lines": 11,
+    "input_bounds": 1,
+    "model_caps": 1,
+    "original_workflow_executed": false
+  },
+  {
+    "id": "lg-routing",
+    "production": {
+      "input": 522,
+      "output": 128,
+      "total": 650
+    },
+    "structural": {
+      "input": 522,
+      "output": 128,
+      "total": 650
+    },
+    "max_calls": 2,
+    "observations": [
+      {
+        "seed": 1,
+        "total": 100,
+        "input": 56,
+        "output": 44,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 2,
+        "total": 371,
+        "input": 320,
+        "output": 51,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 3,
+        "total": 124,
+        "input": 82,
+        "output": 42,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 4,
+        "total": 201,
+        "input": 136,
+        "output": 65,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 5,
+        "total": 171,
+        "input": 102,
+        "output": 69,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 6,
+        "total": 220,
+        "input": 152,
+        "output": 68,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 7,
+        "total": 559,
+        "input": 490,
+        "output": 69,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 8,
+        "total": 142,
+        "input": 110,
+        "output": 32,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 9,
+        "total": 348,
+        "input": 248,
+        "output": 100,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 10,
+        "total": 113,
+        "input": 18,
+        "output": 95,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 11,
+        "total": 262,
+        "input": 200,
+        "output": 62,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 12,
+        "total": 535,
+        "input": 496,
+        "output": 39,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 13,
+        "total": 306,
+        "input": 198,
+        "output": 108,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 14,
+        "total": 109,
+        "input": 14,
+        "output": 95,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 15,
+        "total": 306,
+        "input": 244,
+        "output": 62,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 16,
+        "total": 366,
+        "input": 294,
+        "output": 72,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 17,
+        "total": 257,
+        "input": 194,
+        "output": 63,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 18,
+        "total": 164,
+        "input": 84,
+        "output": 80,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 19,
+        "total": 247,
+        "input": 180,
+        "output": 67,
+        "calls": 2,
+        "violates": false
+      },
+      {
+        "seed": 20,
+        "total": 71,
+        "input": 20,
+        "output": 51,
+        "calls": 2,
+        "violates": false
+      }
+    ],
+    "source_sha256": "3bf348f2c99ff0b47e357be2dbd5a24fe18e27b744416eb2564998bff4b625e9",
+    "source_lines": 13,
+    "input_bounds": 3,
+    "model_caps": 1,
+    "original_workflow_executed": false
+  }
+]

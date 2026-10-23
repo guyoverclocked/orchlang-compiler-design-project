@@ -1,5 +1,10 @@
 # Publication strategy
 
+> Historical strategy, superseded by `PUBLICATION_MASTER_PLAN.md` on 23 October
+> 2026. Correctness, novelty and coupling claims below are not current evidence.
+> The author subsequently supplied a one-week deadline; the working route is a
+> scoped software/reproducibility candidate, subject to actual review gates.
+
 Where this work can realistically be published, what each venue needs, and what
 to do first. Written after the external audit in
 `docs/RESEARCH_AUDIT_2026-09-17.md` and the corrections that followed it, so the

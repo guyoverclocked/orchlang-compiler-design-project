@@ -1,4 +1,5 @@
 #include "certificate.hpp"
+#include "json_text.hpp"
 
 #include <iomanip>
 #include <map>
@@ -11,18 +12,7 @@ namespace orchlang {
 namespace {
 
 std::string escape(const std::string& text) {
-    std::ostringstream out;
-    for (const char character : text) {
-        switch (character) {
-            case '\\': out << "\\\\"; break;
-            case '"': out << "\\\""; break;
-            case '\n': out << "\\n"; break;
-            case '\r': out << "\\r"; break;
-            case '\t': out << "\\t"; break;
-            default: out << character; break;
-        }
-    }
-    return out.str();
+    return escapeJsonText(text);
 }
 
 std::string quoted(const std::string& text) { return "\"" + escape(text) + "\""; }
@@ -87,11 +77,17 @@ std::string printCertificate(const Program& program, const SemanticResult& seman
     out << "{\n";
     out << "  \"format\": \"orchlang-safety-certificate\",\n";
     out << "  \"version\": 1,\n";
+    out << "  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n";
+    out << "  \"observer\": \"aggregate-abstract-contract-usage\",\n";
+    out << "  \"resource_unit\": \"mock-length-v1\",\n";
     out << "  \"assumptions\": {\n";
     out << "    \"chars_per_token\": " << semantic.options.charsPerToken << ",\n";
-    out << "    \"note\": \"The guaranteed component needs no tokenization assumption; the "
-           "estimated component is sound only if the deployed tokenizer emits at most one token "
-           "per chars_per_token characters.\"\n";
+    out << "    \"note\": \"Output bounds assume every attempt honors the declared cap. "
+           "Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; "
+           "they are not provider-token bounds.\",\n";
+    out << "    \"relational\": \"Equal request construction and abstract model contracts; "
+           "identical stateless request-dependent kernels and identical retry/failure policies "
+           "are external assumptions. No provider conformance or full implementation proof.\"\n";
     out << "  },\n";
     out << "  \"workflows\": [\n";
 

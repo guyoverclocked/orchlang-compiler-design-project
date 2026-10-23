@@ -15,7 +15,7 @@ namespace orchlang {
 
 std::size_t estimateTextTokens(const std::string& text, std::size_t charsPerToken) {
     const std::size_t divisor = charsPerToken == 0 ? 1 : charsPerToken;
-    return (text.size() + divisor - 1) / divisor;
+    return text.size() / divisor + (text.size() % divisor != 0 ? 1 : 0);
 }
 
 namespace {
@@ -217,6 +217,7 @@ void Analyzer::declarePrompt(const PromptDecl& prompt, const Context& context) {
         signature.parameters.push_back({parameter.name, parameter.type});
     }
     signature.templateTokens = estimateTextTokens(prompt.templateText, options_.charsPerToken);
+    signature.templateText = prompt.templateText;
 
     Symbol symbol{prompt.name,  SymbolKind::Prompt, prompt.returnType, "", prompt.location, std::nullopt,
                   signature,    std::nullopt,       publicTrusted()};
@@ -310,6 +311,15 @@ ValueFacts Analyzer::inspectCall(const CallExpr& call, const Context& context) {
     site.modelName = call.modelName;
     if (prompt && prompt->prompt) {
         site.promptTemplateTokens = prompt->prompt->templateTokens;
+        site.promptBindingId = prompt->bindingId;
+        // Include parameter names/types: a template's substitution map is part
+        // of the request contract, even if the raw template bytes agree.
+        site.requestTemplate = std::to_string(prompt->prompt->templateText.size()) + ":" +
+                               prompt->prompt->templateText;
+        for (const auto& parameter : prompt->prompt->parameters) {
+            site.requestTemplate += ":" + std::to_string(parameter.name.size()) + ":" +
+                                    parameter.name + ":" + typeName(parameter.type);
+        }
     }
     for (std::size_t index = 0; index < arguments.size(); ++index) {
         const ValueFacts& argument = arguments[index];
@@ -321,12 +331,17 @@ ValueFacts Analyzer::inspectCall(const CallExpr& call, const Context& context) {
 
         ArgumentFact fact;
         fact.isSecret = argument.label.isSecret();
+        fact.type = typeName(argument.type);
         if (index < call.arguments.size() && call.arguments[index]) {
             const Expr& expression = *call.arguments[index];
             if (expression.kind() == ExprKind::Identifier) {
                 fact.name = static_cast<const IdentifierExpr&>(expression).name;
+                if (const Symbol* resolved = result_.symbols.lookup(context.scope, fact.name)) {
+                    fact.bindingId = resolved->bindingId;
+                }
             } else {
                 fact.isLiteral = true;
+                fact.literalText = substitutedText(expression);
                 fact.literalTokens =
                     estimateTextTokens(substitutedText(expression), options_.charsPerToken);
             }
@@ -350,6 +365,8 @@ ValueFacts Analyzer::inspectCall(const CallExpr& call, const Context& context) {
         facts.tokenBoundKnown = true;
         facts.tokenBound = model->model->maxTokens;
         site.modelMaxTokens = model->model->maxTokens;
+        site.modelBindingId = model->bindingId;
+        site.modelContract = canonicalModelContract(*model->model);
         site.hasUnitPrice = model->model->hasUnitPrice;
         site.unitPrice = model->model->unitPrice;
     }
@@ -372,6 +389,9 @@ void Analyzer::analyzeLet(const LetStmt& let, const Context& context) {
     symbol.tokenBoundKnown = facts.tokenBoundKnown;
     symbol.tokenBound = facts.tokenBound;
     insertSymbol(context.scope, std::move(symbol));
+    if (const Symbol* resolved = result_.symbols.lookupLocal(context.scope, let.name)) {
+        result_.declarationBindings[&let] = resolved->bindingId;
+    }
 }
 
 void Analyzer::analyzeRequire(const RequireStmt& requirement, const Context& context) {
@@ -494,6 +514,7 @@ void Analyzer::analyzeIf(const IfStmt& branch, const Context& context) {
                                   "use of undeclared identifier '" + branch.condition.subjectName + "'");
     } else {
         guardLabel = subject->label;
+        result_.guardBindings[&branch] = subject->bindingId;
         if (branch.condition.kind == ConditionKind::Flag && subject->type.kind != TypeKind::Boolean &&
             subject->type.kind != TypeKind::Unknown) {
             result_.diagnostics.error("E211", branch.condition.location,
@@ -544,6 +565,7 @@ void Analyzer::analyzeReclassify(const ReclassifyStmt& reclassify, const Context
     }
 
     const Label from = subject->label;
+    result_.reclassificationSources[&reclassify] = subject->bindingId;
     Label to = from;
     if (reclassify.endorsement) {
         to.integrity = Integrity::Trusted;
@@ -574,6 +596,10 @@ void Analyzer::analyzeReclassify(const ReclassifyStmt& reclassify, const Context
     symbol.tokenBound = subject->tokenBound;
     insertSymbol(context.scope, std::move(symbol));
 
+    if (const Symbol* resolved = result_.symbols.lookupLocal(context.scope, reclassify.name)) {
+        result_.declarationBindings[&reclassify] = resolved->bindingId;
+    }
+
     result_.reclassifications.push_back({context.workflow, reclassify.sourceName, reclassify.name,
                                          reclassify.endorsement, from, to, reclassify.reason,
                                          reclassify.location});
@@ -593,6 +619,7 @@ void Analyzer::analyzeOutput(const OutputStmt& output, const Context& context) {
 }
 
 void Analyzer::analyzeStatement(const Stmt& statement, const Context& context) {
+    result_.statementScopes[&statement] = context.scope;
     switch (statement.kind()) {
         case StmtKind::Input:
             declareInput(static_cast<const InputDecl&>(statement), context);

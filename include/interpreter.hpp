@@ -17,6 +17,7 @@
 #include "ast.hpp"
 #include "diagnostic.hpp"
 #include "semantic_analyzer.hpp"
+#include "token_cost.hpp"
 
 #include <cstdint>
 #include <cstddef>
@@ -74,7 +75,7 @@ struct WorkflowRun {
     // The observation the relational analysis is stated against.
     std::map<std::string, ModelBilling> billing;
 
-    std::size_t totalTokens() const { return inputTokens + outputTokens; }
+    std::size_t totalTokens() const { return addTokens(inputTokens, outputTokens); }
 };
 
 // True when two executions are indistinguishable to someone reading the bill.

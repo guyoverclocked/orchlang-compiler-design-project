@@ -1,0 +1,36 @@
+{
+  "schema_version": "1",
+  "status": "completed",
+  "purpose": "development-validation-not-final-experiment",
+  "source_commit": "00420ef202dc260fc98237ac584a6210a61e1e5e",
+  "dirty_tree": false,
+  "source_snapshot_sha256": "a05ef9ee08cef893d7653d96736fe3217d5f56261e1548d42f2074d54ad905dc",
+  "corpus_manifest_sha256": "71172b91deea78ca43eecc050adc41acca9dc0f9a7f50cbfeb81eb9c96d79bf8",
+  "observer": "aggregate-abstract-contract-usage",
+  "backend": "mock-and-finite-development",
+  "timestamp_utc": "2026-10-23T18:52:25.168557+00:00",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "compiler": "g++.exe (MinGW-W64 x86_64-ucrt-posix-seh, built by Brecht Sanders, r4) 16.1.0\nCopyright (C) 2026 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+  "flags": [
+    "-std=c++17",
+    "-Wall",
+    "-Wextra",
+    "-pedantic",
+    "-O2",
+    "-Iinclude"
+  ],
+  "seeds": [
+    1,
+    2,
+    3,
+    4,
+    5
+  ],
+  "external_workflows": 0,
+  "proof_checked": true,
+  "budget_usd_cap": "5.00",
+  "spent_usd": "0.00",
+  "outstanding_reserved_usd": "0.00",
+  "failures": []
+}

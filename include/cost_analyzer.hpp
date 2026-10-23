@@ -13,8 +13,9 @@
 //               relative to the declared characters-per-token assumption, which
 //               is recorded alongside it.
 //
-// Keeping the halves apart is the point: a reader can see exactly how much of
-// the certified number rests on an assumption and how much does not.
+// Both halves are conditional contracts: output caps must cover every billed
+// attempt, while input units here are synthetic mock lengths. Neither field
+// establishes deployed-provider accounting or tokenizer conformance.
 
 #include "ast.hpp"
 #include "diagnostic.hpp"

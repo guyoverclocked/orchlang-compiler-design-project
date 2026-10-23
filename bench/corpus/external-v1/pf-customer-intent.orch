@@ -1,0 +1,8 @@
+workflow PFIntent budget 100000 {
+  input history: text max_tokens 256;
+  input info: text max_tokens 128;
+  model m = mock("pf-intent") max_tokens 256;
+  prompt p(h: text, i: text) -> text = "Extract intent: {h} Context: {i}";
+  let intent: text = call p(history, info) using m;
+  output intent;
+}

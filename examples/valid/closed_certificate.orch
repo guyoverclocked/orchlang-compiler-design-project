@@ -1,0 +1,12 @@
+workflow ClosedCertificate budget 1000 {
+    secret s: boolean max_tokens 1;
+    model m = mock("replay-demo-v1") max_tokens 8;
+    prompt p(t: text) -> text = "{t}";
+    if s {
+        let a: text = call p("yes") using m;
+    } else {
+        model alias = mock("replay-demo-v1") max_tokens 8;
+        let b: text = call p("yes") using alias;
+    }
+    output "done";
+}

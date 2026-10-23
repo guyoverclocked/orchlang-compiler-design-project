@@ -1,0 +1,9 @@
+* text=auto eol=lf
+# Raw observations and historical audits retain their original bytes.
+research/** -text
+audit/** -text
+bench/raw/** -text
+bench/results/** -text
+*.pdf -text
+*.png -text
+*.bundle -text

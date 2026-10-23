@@ -1,0 +1,8 @@
+workflow ContentKernel budget 1000 {
+  secret s: boolean max_tokens 1;
+  model m = mock("content-dependent") max_tokens 100;
+  prompt p(t: text) -> text = "{t}";
+  if s { let a: text = call p("yes") using m; }
+  else { let b: text = call p("no!") using m; }
+  output "done";
+}

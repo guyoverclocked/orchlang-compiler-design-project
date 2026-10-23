@@ -3,6 +3,7 @@
 #include "token_cost.hpp"
 
 #include <map>
+#include <limits>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -31,6 +32,9 @@ public:
         if (high <= low) {
             return low;
         }
+        if (low == 0 && high == std::numeric_limits<std::size_t>::max()) {
+            return static_cast<std::size_t>(next());
+        }
         return low + static_cast<std::size_t>(next() % (high - low + 1));
     }
 
@@ -49,6 +53,7 @@ struct Value {
 
 struct ModelInfo {
     std::size_t maxTokens{0};
+    std::string contract;
 };
 
 struct PromptInfo {
@@ -91,8 +96,8 @@ private:
 class Machine {
 public:
     Machine(const SemanticResult& semantic, const RunOptions& options, Random& random,
-            WorkflowRun& run)
-        : semantic_(semantic), options_(options), random_(random), run_(run) {}
+            WorkflowRun& run, DiagnosticBag& diagnostics)
+        : semantic_(semantic), options_(options), random_(random), run_(run), diagnostics_(diagnostics) {}
 
     void block(const Block& statements);
     void enter() {
@@ -123,6 +128,7 @@ private:
     const RunOptions& options_;
     Random& random_;
     WorkflowRun& run_;
+    DiagnosticBag& diagnostics_;
 
     Environment<Value> values_;
     Environment<ModelInfo> models_;
@@ -143,6 +149,14 @@ void Machine::statement(const Stmt& node) {
             // An input honours its declared bound, which is the contract the
             // estimated half of the cost bound is stated against.
             const std::size_t bound = input.hasTokenBound ? input.tokenBound : 0;
+            if (options_.pinnedFlags.count(input.name) && input.type.kind != TypeKind::Boolean) {
+                diagnostics_.error("R003", node.location, "boolean pin resolves to a non-boolean input");
+                break;
+            }
+            if (pinnedLength(input.name, 0) > bound) {
+                diagnostics_.error("R002", node.location, "pinned input length exceeds its declared mock bound");
+                break;
+            }
             const std::size_t sampled = random_.between(0, bound);
             const bool sampledFlag = random_.percent() < 50;
             values_.define(input.name, {pinnedLength(input.name, sampled),
@@ -152,6 +166,14 @@ void Machine::statement(const Stmt& node) {
         case StmtKind::Secret: {
             const auto& secret = static_cast<const SecretDecl&>(node);
             const std::size_t bound = secret.hasTokenBound ? secret.tokenBound : 0;
+            if (options_.pinnedFlags.count(secret.name) && secret.type.kind != TypeKind::Boolean) {
+                diagnostics_.error("R003", node.location, "boolean pin resolves to a non-boolean secret");
+                break;
+            }
+            if (pinnedLength(secret.name, 0) > bound) {
+                diagnostics_.error("R002", node.location, "pinned secret length exceeds its declared mock bound");
+                break;
+            }
             const bool sampledFlag = random_.percent() < 50;
             values_.define(secret.name, {pinnedLength(secret.name, bound),
                                         pinnedFlag(secret.name, sampledFlag)});
@@ -159,7 +181,8 @@ void Machine::statement(const Stmt& node) {
         }
         case StmtKind::Model: {
             const auto& model = static_cast<const ModelDecl&>(node);
-            models_.define(model.name, {model.maxTokens});
+            models_.define(model.name, {model.maxTokens, canonicalModelContract({model.provider,
+                model.modelName, model.maxTokens, model.hasUnitPrice, model.unitPrice})});
             break;
         }
         case StmtKind::Prompt: {
@@ -205,7 +228,7 @@ void Machine::statement(const Stmt& node) {
             ++run_.calls;
             run_.trace.push_back({let.name, let.call->promptName, let.call->modelName, inputTokens,
                                   outputTokens});
-            ModelBilling& billing = run_.billing[let.call->modelName];
+            ModelBilling& billing = run_.billing[model->contract];
             billing.inputTokens = addTokens(billing.inputTokens, inputTokens);
             billing.outputTokens = addTokens(billing.outputTokens, outputTokens);
             ++billing.calls;
@@ -250,6 +273,9 @@ void Machine::statement(const Stmt& node) {
                     ScopedBlock frame(*this);
                     block(retry.body);
                 }
+                if (diagnostics_.hasErrors()) {
+                    break;
+                }
                 if (random_.percent() >= options_.retryFailurePercent) {
                     break;
                 }
@@ -277,6 +303,9 @@ void Machine::statement(const Stmt& node) {
 
 void Machine::block(const Block& statements) {
     for (const auto& node : statements) {
+        if (diagnostics_.hasErrors()) {
+            break;
+        }
         if (node) {
             statement(*node);
         }
@@ -291,6 +320,34 @@ RunResult Interpreter::run(const Program& program, const SemanticResult& semanti
         result.diagnostics.error("R001", {}, "running requires a well-typed program");
         return result;
     }
+    if (options_.retryFailurePercent > 100) {
+        result.diagnostics.error("R004", {}, "retry failure percentage must be in [0,100]");
+        return result;
+    }
+    const auto knownPin = [&](const std::string& name, bool flag) {
+        for (const auto& scope : semantic.symbols.scopes()) {
+            const auto found = scope.symbols.find(name);
+            if (found != scope.symbols.end() &&
+                (found->second.kind == SymbolKind::Input || found->second.kind == SymbolKind::Secret) &&
+                (!flag || found->second.type.kind == TypeKind::Boolean)) {
+                return true;
+            }
+        }
+        return false;
+    };
+    for (const auto& entry : options_.pinnedLengths) {
+        if (!knownPin(entry.first, false)) {
+            result.diagnostics.error("R003", {}, "pin must name a declared input or secret: " + entry.first);
+        }
+    }
+    for (const auto& entry : options_.pinnedFlags) {
+        if (!knownPin(entry.first, true)) {
+            result.diagnostics.error("R003", {}, "boolean pin must name a boolean input or secret: " + entry.first);
+        }
+    }
+    if (result.diagnostics.hasErrors()) {
+        return result;
+    }
 
     for (const auto& workflowPointer : program.workflows) {
         if (!workflowPointer) {
@@ -303,7 +360,7 @@ RunResult Interpreter::run(const Program& program, const SemanticResult& semanti
         // Seeding per workflow keeps each workflow's execution reproducible on
         // its own, independent of how many workflows precede it in the file.
         Random random(options_.seed * 0x2545F4914F6CDD1DULL + workflow.name.size());
-        Machine machine(semantic, options_, random, run);
+        Machine machine(semantic, options_, random, run, result.diagnostics);
         machine.enter();
         machine.block(workflow.statements);
         machine.leave();

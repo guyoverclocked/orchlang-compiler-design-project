@@ -1,4 +1,5 @@
 #include "ir.hpp"
+#include "json_text.hpp"
 
 #include "token_cost.hpp"
 
@@ -38,18 +39,7 @@ void addDependency(std::vector<int>& dependencies, int identifier) {
 }
 
 std::string jsonEscape(const std::string& text) {
-    std::ostringstream out;
-    for (const char character : text) {
-        switch (character) {
-            case '\\': out << "\\\\"; break;
-            case '"': out << "\\\""; break;
-            case '\n': out << "\\n"; break;
-            case '\r': out << "\\r"; break;
-            case '\t': out << "\\t"; break;
-            default: out << character; break;
-        }
-    }
-    return out.str();
+    return escapeJsonText(text);
 }
 
 // A stack of name-to-node maps mirroring the block structure of the source, so
@@ -201,6 +191,10 @@ void Lowerer::lowerStatement(const Stmt& statement, const std::string& region,
                 node.attributes.push_back({"model", let.call->modelName});
                 const auto site = semantic_.callSites.find(let.call.get());
                 if (site != semantic_.callSites.end()) {
+                    node.attributes.push_back({"model_binding", std::to_string(site->second.modelBindingId)});
+                    node.attributes.push_back({"prompt_binding", std::to_string(site->second.promptBindingId)});
+                    node.attributes.push_back({"model_contract", site->second.modelContract});
+                    node.attributes.push_back({"resource_unit", "mock-length-v1"});
                     node.attributes.push_back({"out_tokens", std::to_string(site->second.modelMaxTokens)});
                     node.attributes.push_back(
                         {"in_tokens", std::to_string(addTokens(site->second.promptTemplateTokens,
@@ -268,12 +262,13 @@ void Lowerer::lowerStatement(const Stmt& statement, const std::string& region,
             node.attributes.push_back({"has_else", branch.hasElse ? "true" : "false"});
             workflow_.nodes.push_back(node);
 
-            const std::string base = region + "/then@" + std::to_string(branch.location.line);
+            const std::string marker = std::to_string(branch.location.line) + "#" + std::to_string(node.id);
+            const std::string base = region + "/then@" + marker;
             values_.push();
             lowerBlock(branch.thenBranch, base, repeatFactor);
             values_.pop();
             if (branch.hasElse) {
-                const std::string elseRegion = region + "/else@" + std::to_string(branch.location.line);
+                const std::string elseRegion = region + "/else@" + marker;
                 values_.push();
                 lowerBlock(branch.elseBranch, elseRegion, repeatFactor);
                 values_.pop();
@@ -288,7 +283,8 @@ void Lowerer::lowerStatement(const Stmt& statement, const std::string& region,
             node.attributes.push_back({"bound", std::to_string(retry.bound)});
             workflow_.nodes.push_back(node);
 
-            const std::string body = region + "/retry@" + std::to_string(retry.location.line);
+            const std::string body = region + "/retry@" + std::to_string(retry.location.line) +
+                                     "#" + std::to_string(node.id);
             values_.push();
             lowerBlock(retry.body, body, multiplyTokens(repeatFactor, retry.bound));
             values_.pop();
@@ -320,6 +316,10 @@ void Lowerer::lowerBlock(const Block& statements, const std::string& region,
                          std::size_t repeatFactor) {
     for (const auto& statement : statements) {
         if (statement) {
+            const auto resolvedScope = semantic_.statementScopes.find(statement.get());
+            if (resolvedScope != semantic_.statementScopes.end()) {
+                scope = resolvedScope->second;
+            }
             lowerStatement(*statement, region, repeatFactor);
         }
     }

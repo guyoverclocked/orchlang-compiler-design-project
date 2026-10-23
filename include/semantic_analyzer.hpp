@@ -12,14 +12,11 @@
 
 namespace orchlang {
 
-// How many source characters the analysis assumes fit in one token.
-//
-// The input-token half of a cost bound is only as sound as this assumption, so
-// it is an explicit, recorded parameter rather than a hidden constant.  A value
-// of 1 is unconditionally sound for any tokenizer that never emits more than
-// one token per character; larger values trade that unconditional soundness for
-// a tighter, assumption-relative bound.  The default follows the widely used
-// four-characters-per-token rule for English prose.
+// Historical option name. std::string::size measures UTF-8 bytes, not Unicode
+// characters or model tokens. The mock defines literal/template length as
+// ceil(bytes/divisor), then adds bounded argument lengths. This is a synthetic
+// resource unit, not tokenization of a fully serialized deployed request.
+// Real tokenizers need separate exact serialization/tokenizer contracts.
 inline constexpr std::size_t defaultCharsPerToken() { return 4; }
 
 struct AnalysisOptions {
@@ -51,6 +48,9 @@ struct ArgumentFact {
     bool isLiteral{false};
     bool isSecret{false};
     std::size_t literalTokens{0};
+    std::size_t bindingId{0};
+    std::string literalText;
+    std::string type;
 };
 
 // What one 'call' site contributes to a cost bound.  Recorded while the
@@ -58,6 +58,10 @@ struct ArgumentFact {
 struct CallSiteFacts {
     std::string promptName;
     std::string modelName;
+    std::size_t modelBindingId{0};
+    std::size_t promptBindingId{0};
+    std::string modelContract;
+    std::string requestTemplate;
     // Output tokens the provider itself caps.  This half of the bound holds
     // without any tokenizer assumption.
     std::size_t modelMaxTokens{0};
@@ -95,6 +99,10 @@ struct SemanticResult {
     // relational analysis needs this one: a public guard inside a secret arm
     // still sends both compared executions down the same path.
     std::map<const IfStmt*, Label> guardOwnLabels;
+    std::map<const IfStmt*, std::size_t> guardBindings;
+    std::map<const Stmt*, std::size_t> declarationBindings;
+    std::map<const ReclassifyStmt*, std::size_t> reclassificationSources;
+    std::map<const Stmt*, std::size_t> statementScopes;
     AnalysisOptions options;
 
     bool success() const { return !diagnostics.hasErrors(); }

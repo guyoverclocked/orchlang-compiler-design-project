@@ -1,0 +1,32 @@
+proof/FiniteRelational.lean:23:42: error: unknown identifier 'Rat'
+proof/FiniteRelational.lean:26:4: warning: declaration uses 'sorry'
+proof/FiniteRelational.lean:28:4: warning: declaration uses 'sorry'
+proof/FiniteRelational.lean:107:3: error: unexpected token 'repeat'; expected '_' or identifier
+proof/FiniteRelational.lean:105:34: error: unknown identifier 'pa'
+proof/FiniteRelational.lean:105:45: error: unknown identifier 'pa'
+proof/FiniteRelational.lean:102:14: error: unsolved goals
+case pos.refl
+kernel : Kernel
+secrets : Nat → Bool
+guard : Nat
+a b : Program
+iha : ∀ (plan : Plan), normalize a = some plan → denote kernel secrets a = denotePlan kernel plan
+ihb : ∀ (plan : Plan), normalize b = some plan → denote kernel secrets b = denotePlan kernel plan
+plan : Plan
+ha : normalize a = some plan
+hb : normalize b = some plan
+⊢ (if secrets guard = true then denote kernel secrets a else denote kernel secrets b) = denotePlan kernel plan
+proof/FiniteRelational.lean:1:0: error: unsolved goals
+case repeat
+kernel : Kernel
+secrets : Nat → Bool
+n✝ : Nat
+body✝ : Program
+body_ih✝ : ∀ (plan : Plan), normalize body✝ = some plan → denote kernel secrets body✝ = denotePlan kernel plan
+⊢ ∀ (plan : Plan),
+    normalize (Program.repeat n✝ body✝) = some plan →
+      denote kernel secrets (Program.repeat n✝ body✝) = denotePlan kernel plan
+proof/FiniteRelational.lean:122:8: warning: declaration uses 'sorry'
+'OrchLang.Finite.normalize_correct' depends on axioms: [propext, sorryAx, Quot.sound]
+'OrchLang.Finite.relational_sound' depends on axioms: [propext, sorryAx, Quot.sound]
+'OrchLang.Finite.observer_projection' depends on axioms: [propext, sorryAx, Quot.sound]

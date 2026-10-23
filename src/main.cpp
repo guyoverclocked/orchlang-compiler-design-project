@@ -11,6 +11,7 @@
 #include "symbol_table.hpp"
 
 #include <cstdlib>
+#include <charconv>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -35,7 +36,7 @@ void printUsage(std::ostream& out) {
         << "       orchc <source.orch>\n"
         << "Options: --chars-per-token <n>   tokenization assumption for input tokens (default "
         << defaultCharsPerToken() << ";\n"
-        << "                                 1 is unconditionally sound, larger is tighter)\n"
+        << "                                 synthetic UTF-8 byte estimate, not provider tokenization)\n"
         << "         --seed <n>            seed for the offline mock runtime used by 'run'\n"
         << "         --retry-failure <p>   percentage chance one retry attempt fails (default 50)\n"
         << "         --pin <name>=<n>      pin an input or secret's token length for 'run'\n"
@@ -84,8 +85,11 @@ bool collectArguments(int argc, char* argv[], Invocation& invocation) {
             if (index + 1 >= argc) {
                 return false;
             }
-            const long value = std::strtol(argv[++index], nullptr, 10);
-            if (value < 1) {
+            const std::string text = argv[++index];
+            std::size_t value = 0;
+            const auto parsed = std::from_chars(text.data(), text.data() + text.size(), value);
+            if (parsed.ec != std::errc{} || parsed.ptr != text.data() + text.size() ||
+                text.empty() || value < 1) {
                 return false;
             }
             invocation.options.charsPerToken = static_cast<std::size_t>(value);
@@ -95,7 +99,11 @@ bool collectArguments(int argc, char* argv[], Invocation& invocation) {
             if (index + 1 >= argc) {
                 return false;
             }
-            invocation.run.seed = std::strtoull(argv[++index], nullptr, 10);
+            const std::string text = argv[++index];
+            const auto parsed = std::from_chars(text.data(), text.data() + text.size(), invocation.run.seed);
+            if (parsed.ec != std::errc{} || parsed.ptr != text.data() + text.size() || text.empty()) {
+                return false;
+            }
             continue;
         }
         if (argument == "--pin") {
@@ -110,11 +118,18 @@ bool collectArguments(int argc, char* argv[], Invocation& invocation) {
             }
             const std::string name = spec.substr(0, split);
             const std::string value = spec.substr(split + 1);
+            if (name.empty() || value.empty()) {
+                return false;
+            }
             if (value == "true" || value == "false") {
                 invocation.run.pinnedFlags[name] = value == "true";
             } else {
-                invocation.run.pinnedLengths[name] =
-                    static_cast<std::size_t>(std::strtoull(value.c_str(), nullptr, 10));
+                std::size_t length = 0;
+                const auto parsed = std::from_chars(value.data(), value.data() + value.size(), length);
+                if (parsed.ec != std::errc{} || parsed.ptr != value.data() + value.size()) {
+                    return false;
+                }
+                invocation.run.pinnedLengths[name] = length;
             }
             continue;
         }
@@ -122,8 +137,11 @@ bool collectArguments(int argc, char* argv[], Invocation& invocation) {
             if (index + 1 >= argc) {
                 return false;
             }
-            const long value = std::strtol(argv[++index], nullptr, 10);
-            if (value < 0 || value > 100) {
+            const std::string text = argv[++index];
+            unsigned value = 0;
+            const auto parsed = std::from_chars(text.data(), text.data() + text.size(), value);
+            if (parsed.ec != std::errc{} || parsed.ptr != text.data() + text.size() ||
+                text.empty() || value > 100) {
                 return false;
             }
             invocation.run.retryFailurePercent = static_cast<unsigned>(value);

@@ -1,10 +1,24 @@
 #include "symbol_table.hpp"
 
 #include <sstream>
+#include <iomanip>
+#include <locale>
 #include <stdexcept>
 #include <utility>
 
 namespace orchlang {
+
+std::string canonicalModelContract(const ModelMetadata& model) {
+    std::ostringstream out;
+    out.imbue(std::locale::classic());
+    out << "orch-abstract-model-v1:" << model.provider.size() << ':' << model.provider
+        << ':' << model.modelName.size() << ':' << model.modelName
+        << ":cap=" << model.maxTokens << ":price=" << model.hasUnitPrice;
+    if (model.hasUnitPrice) {
+        out << ':' << std::hexfloat << model.unitPrice;
+    }
+    return out.str();
+}
 
 std::string symbolKindName(SymbolKind kind) {
     switch (kind) {
@@ -42,6 +56,7 @@ bool SymbolTable::insert(std::size_t scopeIndex, Symbol symbol, const Symbol** e
         }
         return false;
     }
+    symbol.bindingId = nextBindingId_++;
     target.symbols.emplace(symbol.name, std::move(symbol));
     if (existing) {
         *existing = nullptr;

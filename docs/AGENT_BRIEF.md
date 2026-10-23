@@ -1,5 +1,7 @@
 # OrchLang — Agent Handoff and Research Brief
 
+> **Superseded research guidance (23 October 2026):** Read [AGENT_START_HERE.md](AGENT_START_HERE.md) and [PUBLICATION_MASTER_PLAN.md](PUBLICATION_MASTER_PLAN.md) first. A fresh counterexample invalidates the “correct-but-narrow” characterization below. The newer plan also corrects the proposed AARA impossibility argument and updates prior art, hardware, budget, and publication gates. This file is retained as historical context.
+
 **Written:** 24 September 2026
 **Repository:** `github.com/guyoverclocked/orchlang-compiler-design-project`, branch `main` at `0d8c0f0`
 **Target venue:** *Science of Computer Programming* (Elsevier)

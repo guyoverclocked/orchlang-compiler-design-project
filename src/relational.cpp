@@ -1,4 +1,5 @@
 #include "relational.hpp"
+#include "token_cost.hpp"
 
 #include <algorithm>
 #include <sstream>
@@ -31,7 +32,9 @@ bool SignatureNode::operator==(const SignatureNode& other) const {
     }
     switch (kind) {
         case SignatureNodeKind::Call:
-            return model == other.model && inputSize == other.inputSize;
+            return model == other.model && inputSize == other.inputSize &&
+                   requestTemplate == other.requestTemplate &&
+                   requestArguments == other.requestArguments;
         case SignatureNodeKind::Retry:
             return repeatBound == other.repeatBound;
         case SignatureNodeKind::Branch:
@@ -60,7 +63,12 @@ void renderNode(std::ostringstream& out, const SignatureNode& node, int depth) {
     const std::string pad(static_cast<std::size_t>(depth) * 2, ' ');
     switch (node.kind) {
         case SignatureNodeKind::Call:
-            out << pad << "bill(" << node.model << ", in=" << node.inputSize.text() << ")\n";
+            out << pad << "bill(" << node.model << ", in=" << node.inputSize.text()
+                << ", request=" << node.requestTemplate;
+            for (const auto& argument : node.requestArguments) {
+                out << "; " << argument;
+            }
+            out << ")\n";
             break;
         case SignatureNodeKind::Retry:
             out << pad << "retry " << node.repeatBound << " {\n";
@@ -116,11 +124,13 @@ private:
 
     const SemanticResult& semantic_;
     SignatureResult& result_;
-    std::vector<std::pair<std::string, std::size_t>> localCalls_;
+    std::vector<std::pair<std::size_t, std::size_t>> localCalls_;
     std::size_t callIndex_{0};
 };
 
 Signature SignatureBuilder::build(const Block& block) {
+    // Lexical block bindings must never escape into siblings or the join.
+    const auto savedCalls = localCalls_;
     Signature signature;
     for (const auto& statement : block) {
         if (!statement) {
@@ -141,7 +151,8 @@ Signature SignatureBuilder::build(const Block& block) {
 
                 SignatureNode node;
                 node.kind = SignatureNodeKind::Call;
-                node.model = site.modelName;
+                node.model = site.modelContract;
+                node.requestTemplate = site.requestTemplate;
                 node.location = statement->location;
                 node.inputSize.constant = site.promptTemplateTokens;
 
@@ -153,7 +164,10 @@ Signature SignatureBuilder::build(const Block& block) {
                         continue;
                     }
                     if (argument.isLiteral) {
-                        node.inputSize.constant += argument.literalTokens;
+                        node.inputSize.constant = addTokens(node.inputSize.constant,
+                                                            argument.literalTokens);
+                        node.requestArguments.push_back("literal:" + argument.type + ":" +
+                            std::to_string(argument.literalText.size()) + ":" + argument.literalText);
                         continue;
                     }
                     // A result produced earlier inside this region is fixed by
@@ -161,20 +175,29 @@ Signature SignatureBuilder::build(const Block& block) {
                     // else was bound outside and is fixed by hypothesis.
                     bool local = false;
                     for (const auto& entry : localCalls_) {
-                        if (entry.first == argument.name) {
+                        if (entry.first == argument.bindingId) {
                             node.inputSize.priorResults.push_back(entry.second);
+                            node.requestArguments.push_back("call:" + argument.type + ":" +
+                                                            std::to_string(entry.second));
                             local = true;
                             break;
                         }
                     }
                     if (!local) {
-                        node.inputSize.outer.push_back(argument.name);
+                        const std::string binding = std::to_string(argument.bindingId);
+                        node.inputSize.outer.push_back(binding);
+                        node.requestArguments.push_back("binding:" + argument.type + ":" + binding);
                     }
                 }
                 std::sort(node.inputSize.outer.begin(), node.inputSize.outer.end());
                 std::sort(node.inputSize.priorResults.begin(), node.inputSize.priorResults.end());
 
-                localCalls_.push_back({let.name, callIndex_});
+                const auto binding = semantic_.declarationBindings.find(&let);
+                if (binding == semantic_.declarationBindings.end()) {
+                    undefine("unresolved call result binding", statement->location);
+                } else {
+                    localCalls_.push_back({binding->second, callIndex_});
+                }
                 ++callIndex_;
                 signature.push_back(std::move(node));
                 break;
@@ -195,9 +218,15 @@ Signature SignatureBuilder::build(const Block& block) {
                 const bool secretGuard = guard != semantic_.guardOwnLabels.end() &&
                                          guard->second.isSecret();
 
+                // Sibling paths start from the same call position. Reserve the
+                // larger suffix for later calls; no branch-local binding escapes.
+                const auto startIndex = callIndex_;
                 Signature thenSignature = build(branch.thenBranch);
+                const auto thenIndex = callIndex_;
+                callIndex_ = startIndex;
                 Signature elseSignature =
                     branch.hasElse ? build(branch.elseBranch) : Signature{};
+                callIndex_ = std::max(thenIndex, callIndex_);
 
                 if (secretGuard) {
                     // A nested secret branch must already have been discharged
@@ -218,6 +247,13 @@ Signature SignatureBuilder::build(const Block& block) {
                 SignatureNode node;
                 node.kind = SignatureNodeKind::Branch;
                 node.guard = conditionToString(branch.condition);
+                const auto resolved = semantic_.guardBindings.find(&branch);
+                if (resolved == semantic_.guardBindings.end()) {
+                    undefine("unresolved public guard", statement->location);
+                } else {
+                    // Guard spelling alone conflates shadowed input bindings.
+                    node.guard += "@binding:" + std::to_string(resolved->second);
+                }
                 node.location = statement->location;
                 node.children.push_back(std::move(thenSignature));
                 node.children.push_back(std::move(elseSignature));
@@ -228,9 +264,12 @@ Signature SignatureBuilder::build(const Block& block) {
                 // Relabelling copies a value, so the new name denotes the same
                 // quantity.  Inherit the source's position if it had one.
                 const auto& reclassify = static_cast<const ReclassifyStmt&>(*statement);
+                const auto source = semantic_.reclassificationSources.find(&reclassify);
+                const auto target = semantic_.declarationBindings.find(&reclassify);
                 for (const auto& entry : localCalls_) {
-                    if (entry.first == reclassify.sourceName) {
-                        localCalls_.push_back({reclassify.name, entry.second});
+                    if (source != semantic_.reclassificationSources.end() &&
+                        target != semantic_.declarationBindings.end() && entry.first == source->second) {
+                        localCalls_.push_back({target->second, entry.second});
                         break;
                     }
                 }
@@ -248,6 +287,7 @@ Signature SignatureBuilder::build(const Block& block) {
                 break;
         }
     }
+    localCalls_ = savedCalls;
     return signature;
 }
 
@@ -323,8 +363,8 @@ void Checker::block(const Block& statements) {
             obligation.detail = detail.str();
 
             std::ostringstream message;
-            message << "this branch is guarded by a secret and its two arms bill differently, so "
-                       "the bill reveals the secret; then-arm bills ["
+            message << "this branch is guarded by a secret and equal resource observations "
+                       "cannot be certified: resolved contracts, requests, or control differ; then-arm ["
                     << signatureText(thenSide.signature) << "] and else-arm bills ["
                     << signatureText(elseSide.signature) << "]";
             std::string text = message.str();
@@ -357,7 +397,12 @@ std::string signatureText(const Signature& signature) {
         first = false;
         switch (node.kind) {
             case SignatureNodeKind::Call:
-                out << node.model << "(in=" << node.inputSize.text() << ")";
+                out << node.model << "(in=" << node.inputSize.text()
+                    << ", request=" << node.requestTemplate;
+                for (const auto& argument : node.requestArguments) {
+                    out << "; " << argument;
+                }
+                out << ")";
                 break;
             case SignatureNodeKind::Retry:
                 out << "retry " << node.repeatBound << "{"

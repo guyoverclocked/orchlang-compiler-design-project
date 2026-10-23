@@ -180,18 +180,17 @@ one output token once admitted an execution producing twenty. The invariant is
 The two components are reported separately because they rest on different
 foundations.
 
-The **guaranteed** component counts output tokens. Providers enforce
-`max_tokens` themselves, so this half holds without assuming anything about how
-text is tokenized.
+The historical **guaranteed** field counts output-cap units. It is conditional
+on every primitive billed attempt honoring the declared cap. The mock implements
+that cap; no provider conformance follows from the field name.
 
 The **estimated** component counts input tokens: the prompt template plus the
-declared bounds of the arguments substituted into it. It depends on a
-tokenization function τ, which the compiler takes as an explicit parameter
-`--chars-per-token` (default 4). At 1 the estimate is unconditionally sound for
-any tokenizer that never emits more than one token per character; larger values
-give a tighter bound that is sound only relative to the stated assumption. The
-value used is recorded in the certificate, so a reader can see precisely how
-much of the number rests on an assumption.
+declared bounds of the arguments. Its synthetic unit is `mock-length-v1`.
+`--chars-per-token` (default 4) actually divides raw string byte length, rounded
+up. The mock adds template syntax and argument lengths rather than tokenizing
+fully substituted text. It is not a real tokenizer function or provider-token
+bound. Exact tokenizer/serializer contracts are required for any deployed
+interpretation; tokenization is generally not additive across concatenation.
 
 A monetary figure is derived from `cost_per_token` where models declare one. It
 is reported, not certified: the guarantee is stated over token counts.
@@ -206,18 +205,20 @@ unsound, because an upper bound constrains a maximum and two quantities with the
 same maximum need not be equal. `examples/invalid/equal_bounds.orch` is a
 workflow that rule accepts and whose bill nonetheless moves with the secret.
 
-Numbers cannot be compared here at all, because a call's output length is chosen
-by the provider rather than the program. So the compiler compares *structure*.
-Each arm is abstracted to a **billing signature**: an ordered record of which
-model is called and a symbolic term for its input size, where the term is built
-only from
+Numeric cap specifications are possible for stochastic calls, but equal caps
+or lengths do not establish equal request-dependent kernels. Each arm is
+abstracted to a **billing signature** that compares canonical resolved abstract
+model contracts, raw prompt templates and parameter maps, literal contents and
+ordered typed argument binding identities. Its additional symbolic size term
+uses
 
 - constants, from the template and from literal arguments;
 - `|x|` for a variable bound outside the branch, equal because public inputs are
   fixed; and
 - the result of an earlier call in the same signature, referred to *by position*
-  and equal because the k-th call returns the same answer under a shared model
-  oracle.
+  and subject to a valid response-content coupling, not merely a common seed.
+  The source IFC pass still conservatively rejects secret-tainted intermediate
+  arguments, including many chains within secret arms.
 
 A branch on a public guard keeps both arms, since both executions see the same
 public data and take the same one. A nested secret-guarded branch whose arms
@@ -227,9 +228,12 @@ compositional. An argument whose label is secret makes the signature undefined.
 At a secret-guarded branch, both signatures must be defined and equal, or `E236`
 reports which events differ.
 
-The rule is sound and deliberately incomplete: two arms reading different
-variables that happen always to have equal length are rejected, because the
-compiler has no reason to believe they do.
+The repaired implementation has regression and finite-oracle evidence, not a
+mechanized whole-language soundness theorem. Different requests are conservatively
+rejected even if a particular kernel gives them equal usage. Canonical model
+aliases may agree despite distinct declaration IDs. A distributional guarantee
+requires identical kernels under equal serialized requests/contracts and related
+external state. See `SEMANTICS.md` for proved fragments and remaining gaps.
 
 ### Spend influence
 
@@ -315,9 +319,10 @@ the certificate records it verbatim alongside the derived bound.
 `orchc certify file.orch` emits JSON containing the derived bound and its two
 components, the tokenization assumption relied on, the derivation that produced
 the bound, the final label of every binding, every reclassification with its
-justification, and every sink the analysis cleared. A runtime, a reviewer, or a
-CI job can check a deployed workflow against the same numbers the compiler
-derived without re-running the analysis.
+justification, and every sink the analysis cleared. It explicitly identifies
+itself as an analysis report. It has no independent source/IR certificate
+verifier or deployed runtime consumer. The separate typed Lean checker theorem
+does not validate these JSON files.
 
 ## Scope and limitations
 
@@ -326,9 +331,8 @@ what it claims:
 
 - Nothing is proven about what a model *says*, only about where its output may
   flow and how much of it there can be.
-- The estimated half of the bound is relative to the declared tokenization
-  assumption. It is not a bound on adversarially chosen text at a
-  characters-per-token setting above 1.
+- The input estimate uses synthetic mock units. No setting alone certifies a
+  deployed tokenizer/serializer, and model-specific counts are not interchangeable.
 - The monetary figure is derived from declared prices and is not a billing
   guarantee.
 - Declassification and endorsement are trusted. The compiler records them and

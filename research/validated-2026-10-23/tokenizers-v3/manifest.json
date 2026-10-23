@@ -1,0 +1,40 @@
+{
+  "schema_version": "1",
+  "status": "completed",
+  "purpose": "development-boundary-probe",
+  "timestamp_utc": "2026-10-23T17:54:22.015668+00:00",
+  "source_commit": "6f325be2d00b8f617b09fb3f7f3f50b4e8f91f82",
+  "dirty_tree": false,
+  "script_sha256": "e7e6fa95ff214fa74cda113eeeffb6a76f2beafac726ab38b9adfa32c8933446",
+  "protocol_sha256": "de1e9bd63b07a617bba5aa7c0006cd119f3ef00443be11aec8b132399309df89",
+  "protocol_status": "development-protocol-not-final-preregistration",
+  "tokenizer_artifacts": [
+    {
+      "id": "gpt2-bpe",
+      "repo": "openai-community/gpt2",
+      "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+      "license": "mit",
+      "file": "gpt2-bpe.json",
+      "sha256": "8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6",
+      "bytes": 1355256,
+      "url": "https://huggingface.co/openai-community/gpt2/resolve/607a30d783dfa663caf39e06633721c8d4cfcd7e/tokenizer.json"
+    },
+    {
+      "id": "bert-wordpiece",
+      "repo": "google-bert/bert-base-uncased",
+      "revision": "86b5e0934494bd15c9632b12f734a8a67f723594",
+      "license": "apache-2.0",
+      "file": "bert-wordpiece.json",
+      "sha256": "ce64fce797c24f68df90b40a3f74f579b336a493db14bd583fd520ea0d8c9a98",
+      "bytes": 466062,
+      "url": "https://huggingface.co/google-bert/bert-base-uncased/resolve/86b5e0934494bd15c9632b12f734a8a67f723594/tokenizer.json"
+    }
+  ],
+  "tokenizers_version": "0.21.4",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "spent_usd": "0.00",
+  "outstanding_reserved_usd": "0.00",
+  "model_inference": false,
+  "external_workflows": 0
+}

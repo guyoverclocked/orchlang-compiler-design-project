@@ -16,3 +16,23 @@
 # package.json is tracked so `npm install` alone is enough.
 node_modules/
 package-lock.json
+
+# Python caches and local proof build products (proof sources remain tracked).
+__pycache__/
+*.pyc
+/proof/.lake/
+*.olean
+*.ilean
+
+# Credentials are local configuration, never publication artifacts.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Local LaTeX build products; the reviewed PDF is copied to publication/.
+/docs/manuscript/*.aux
+/docs/manuscript/*.log
+/docs/manuscript/*.out
+/docs/manuscript/*.synctex.gz

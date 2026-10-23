@@ -1,5 +1,10 @@
 #!/usr/bin/env python3
-"""Evaluate OrchLang's certified bounds, its relational rule, and its flow policy.
+"""Historical mock development harness; not a final publication experiment.
+
+Same-seed comparisons test this mock only, not equality of real call-kernel
+distributions. Both baseline rules below are deliberately unsound negative
+controls. Use scripts/offline_check.py and structural_baseline.py for current
+development validation; do not overwrite historical results to hide failures.
 
 This harness is deliberately strict, because an earlier version of it was not.
 It used to skip any file that failed to certify, count any nonzero exit code as
@@ -41,6 +46,7 @@ import io
 import itertools
 import json
 import os
+import re
 import subprocess
 import sys
 import time
@@ -148,8 +154,9 @@ def flat_baseline(document):
 def control_flow_baseline(document):
     """Take the larger branch arm, but charge a retry body only once.
 
-    A strictly better rule than the flat sum, and still unsound, which is the
-    point: branch-awareness alone does not rescue it.
+    Historical unsound negative control. This is not a competent structural
+    resource analyzer and must not establish comparative superiority. See
+    structural_baseline.py for a max/sum/multiply implementation.
     """
     code, out, err = run(['ir-json', document])
     if code != 0:
@@ -304,6 +311,8 @@ def evaluate_relational():
                 continue
 
             assignments = secret_assignments(path)
+            with open(path, encoding='utf-8') as source_file:
+                declared_inputs = set(re.findall(r'\binput\s+(\w+)\s*:', source_file.read()))
             if not assignments:
                 fail('no secrets to vary in %s' % name)
                 continue
@@ -314,7 +323,7 @@ def evaluate_relational():
             for seed in range(1, PAIRED_SEEDS + 1):
                 observations = {}
                 for assignment in assignments:
-                    pins = dict(public_pins)
+                    pins = {key: value for key, value in public_pins.items() if key in declared_inputs}
                     pins.update(assignment)
                     observation = execute(path, seed, pins)
                     if observation is None:

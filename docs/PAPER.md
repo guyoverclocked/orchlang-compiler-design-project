@@ -1,5 +1,13 @@
 # Beyond Equal Caps: Relational Token-Cost Contracts for LLM Workflows
 
+> **Withdrawn historical draft, 23 October 2026. Do not submit or cite its
+> theorem/novelty claims as established.** The reproduced shadowed-contract
+> counterexample refutes the implemented acceptance claim. The blanket claim
+> that stochastic calls prevent numeric potentials/specifications is withdrawn.
+> Its historical baseline comparisons use broken negative controls. See
+> `PUBLICATION_MASTER_PLAN.md`, `SEMANTICS.md`, `research/claims.csv` and the
+> current `SOFTWARE_PAPER.md` working draft for actual evidence and open gates.
+
 **Nambi Rajan M** (24BAI0072)
 Vellore Institute of Technology
 

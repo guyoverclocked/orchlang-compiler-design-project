@@ -20,12 +20,13 @@
 //
 // WHAT REPLACES IT
 //
-// Costs here cannot be compared numerically at all, because a model call's
-// output length is chosen by the provider, not by the program.  So instead of
-// comparing numbers we compare *structure*: each arm is abstracted to a billing
-// signature recording, in order, which model is called and a symbolic term for
-// how large its input is.  Two arms are indistinguishable to someone reading the
-// bill when their signatures are identical.
+// Numeric cap specifications are possible for stochastic calls. Equality of
+// caps or lengths, however, does not establish equality of request-dependent
+// kernels. The conservative signature compares resolved semantic contracts,
+// request construction (including content and ordered arguments), and sizes.
+// Distributional reasoning additionally assumes identical stateless kernels
+// for identical serialized requests and equal retry policies. This analyzer is
+// not a proof of adapter conformance or of those external assumptions.
 //
 // The symbolic terms refer only to things that provably agree across the two
 // executions being compared: constants, variables bound outside the branch
@@ -82,6 +83,8 @@ struct SignatureNode {
     // Call
     std::string model;
     SizeTerm inputSize;
+    std::string requestTemplate;
+    std::vector<std::string> requestArguments;
 
     // Retry
     std::size_t repeatBound{0};

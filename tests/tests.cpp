@@ -1,4 +1,5 @@
 #include "ast.hpp"
+#include "json_text.hpp"
 #include "certificate.hpp"
 #include "cost_analyzer.hpp"
 #include "interpreter.hpp"
@@ -657,6 +658,152 @@ void testSecretDependentCostIsRejected() {
 })");
     require(hasCode(pipeline, "E236"),
             "arms that call different models bill differently under a secret guard");
+}
+
+std::string pairedContractProgram(const std::string& leftModel, const std::string& rightModel,
+                                  const std::string& leftCall = "call p(x) using m",
+                                  const std::string& rightCall = "call p(x) using m") {
+    return "workflow Contract budget 100000 { secret s: boolean max_tokens 1; "
+           "input x: text max_tokens 10; input y: text max_tokens 10; "
+           "prompt p(t: text) -> text = \"{t}\"; if s { " + leftModel +
+           " let a: text = " + leftCall + "; } else { " + rightModel +
+           " let b: text = " + rightCall + "; } output x; }";
+}
+
+void testShadowedContractsRejected() {
+    for (const std::string other : {
+             "model m = mock(\"large\") max_tokens 1000;",
+             "model m = mock(\"small\") max_tokens 2;"}) {
+        const auto p = compileSource(pairedContractProgram(
+            "model m = mock(\"small\") max_tokens 1;", other));
+        require(hasCode(p, "E236"), "resolved provider/revision/cap mismatch must be rejected");
+    }
+    require(canonicalModelContract({"provider-a", "same", 1, false, 0}) !=
+            canonicalModelContract({"provider-b", "same", 1, false, 0}),
+            "canonical structures distinguish providers; source grammar currently supports only mock");
+}
+
+void testEquivalentModelAliasesAccepted() {
+    auto p = compileSource(pairedContractProgram("model left = mock(\"same\") max_tokens 10;",
+        "model right = mock(\"same\") max_tokens 10;", "call p(x) using left", "call p(x) using right"));
+    requireSemanticallyValid(p);
+    require(p.relational->success(), "equivalent contracts need not share declaration names");
+    const auto& sites = p.semantic->callSites;
+    require(sites.size() == 2, "two resolved sites");
+    const auto& a = sites.begin()->second;
+    const auto& b = std::next(sites.begin())->second;
+    require(a.modelBindingId != b.modelBindingId, "distinct lexical binding identities");
+    require(a.modelContract == b.modelContract, "equal semantic contract structures");
+    RunOptions l; l.seed = 1; l.pinnedFlags["s"] = true;
+    RunOptions r = l; r.pinnedFlags["s"] = false;
+    require(sameBilling(Interpreter(l).run(p.parsed.program, *p.semantic).workflows.front(),
+                        Interpreter(r).run(p.parsed.program, *p.semantic).workflows.front()),
+            "billing observer uses semantic contracts, not alias spelling");
+}
+
+void testEqualLengthDifferentRequestsRejected() {
+    auto p = compileSource(pairedContractProgram("model m = mock(\"m\") max_tokens 10;",
+        "model m = mock(\"m\") max_tokens 10;", "call p(\"yes\") using m", "call p(\"no!\") using m"));
+    require(hasCode(p, "E236"), "equal-length request text does not identify a kernel");
+}
+
+void testShadowedPromptsRejected() {
+    auto p = compileSource(pairedContractProgram(
+        "model m = mock(\"m\") max_tokens 10; prompt q(t: text) -> text = \"YES {t}\";",
+        "model m = mock(\"m\") max_tokens 10; prompt q(t: text) -> text = \"NO! {t}\";",
+        "call q(x) using m", "call q(x) using m"));
+    require(hasCode(p, "E236"), "same-size shadowed template content must remain distinct");
+}
+
+void testOrderedRequestArgumentsRejected() {
+    const auto p = compileSource(R"(workflow C budget 1000 {
+      secret s: boolean max_tokens 1; input x: text max_tokens 10; input y: text max_tokens 10;
+      model m = mock("m") max_tokens 10; prompt p(a: text, b: text) -> text = "{a}{b}";
+      if s { let a: text = call p(x,y) using m; } else { let b: text = call p(y,x) using m; }
+      output x; })");
+    require(hasCode(p, "E236"), "request argument order must not be sorted away");
+}
+
+void testBranchLocalInputsNotAssumedEqual() {
+    const auto p = compileSource(pairedContractProgram(
+        "model m = mock(\"m\") max_tokens 10; input z: text max_tokens 10;",
+        "model m = mock(\"m\") max_tokens 10; input z: text max_tokens 10;",
+        "call p(z) using m", "call p(z) using m"));
+    require(hasCode(p, "E236"), "separate local inputs are not a shared outer value");
+}
+
+void testNestedSecretSignaturesUseSiblingState() {
+    const auto p = compileSource(R"(workflow C budget 1000 {
+      secret s: boolean max_tokens 1; secret t: boolean max_tokens 1;
+      input x: text max_tokens 10; model m = mock("m") max_tokens 10;
+      prompt p(a: text) -> text = "{a}";
+      if s { if t { let a: text = call p(x) using m; } else { let b: text = call p(x) using m; } }
+      else { let c: text = call p(x) using m; }
+      output x; })");
+    requireSemanticallyValid(p);
+    require(p.relational->success(), "matching nested secret arms compose without sibling state leakage");
+}
+
+void testTokenizerEstimateExtremeDivisor() {
+    require(estimateTextTokens("a", saturatedTokens()) == 1,
+            "ceil division must not overflow with a maximum divisor");
+    require(estimateTextTokens("", saturatedTokens()) == 0, "empty text costs zero synthetic units");
+}
+
+void testIrRetainsResolvedLabelsAndDistinctSameLineRegions() {
+    auto p = compileSource(R"(workflow C budget 1000 {
+      secret s: boolean max_tokens 1; input x: text max_tokens 10;
+      model m = mock("m") max_tokens 10; prompt p(t: text) -> text = "{t}";
+      if s { let a: text = call p(x) using m; } else { let b: text = call p(x) using m; }
+      if s { let c: text = call p(x) using m; } else { let d: text = call p(x) using m; } if s { let e: text = call p(x) using m; } else { let f: text = call p(x) using m; }
+      output x; })");
+    requireSemanticallyValid(p);
+    const auto ir = IRLowerer().lower(p.parsed.program, *p.semantic);
+    require(ir.success(), "lowering succeeds");
+    std::vector<std::string> regions;
+    for (const auto& node : ir.program.workflows.front().nodes) {
+        if (node.kind == IRNodeKind::Call) {
+            require(node.label.isSecret(), "branch-local result must retain its pc confidentiality");
+            regions.push_back(node.region);
+        }
+    }
+    require(regions.size() == 6, "six calls present");
+    for (std::size_t i = 0; i < regions.size(); ++i) {
+        for (std::size_t j = i + 1; j < regions.size(); ++j) {
+            require(regions[i] != regions[j], "sibling branches on same source line have unique regions");
+        }
+    }
+}
+
+void testRuntimeRejectsInvalidPinsAndPolicy() {
+    auto p = compileSource(R"(workflow C budget 100 {
+      input x: text max_tokens 2; secret s: boolean max_tokens 1; output x; })");
+    requireSemanticallyValid(p);
+    RunOptions options;
+    options.pinnedLengths["x"] = 3;
+    require(hasCode(Interpreter(options).run(p.parsed.program, *p.semantic).diagnostics, "R002"),
+            "out-of-contract pinned lengths must not masquerade as admitted runs");
+    options = {};
+    options.pinnedFlags["typo"] = true;
+    require(hasCode(Interpreter(options).run(p.parsed.program, *p.semantic).diagnostics, "R003"),
+            "misspelled secret pins must not silently create equal paired runs");
+    options = {};
+    options.pinnedFlags["x"] = true;
+    require(hasCode(Interpreter(options).run(p.parsed.program, *p.semantic).diagnostics, "R003"),
+            "boolean pins must have boolean declarations");
+    options = {};
+    options.retryFailurePercent = 101;
+    require(hasCode(Interpreter(options).run(p.parsed.program, *p.semantic).diagnostics, "R004"),
+            "public runtime API must also validate retry policies");
+}
+
+void testJsonControlBytesAndUtf8() {
+    const std::string control = std::string(1, '\0') + std::string(1, '\x01') + "\n\t\"\\";
+    require(escapeJsonText(control) == "\\u0000\\u0001\\n\\t\\\"\\\\",
+            "reports must encode every JSON control byte");
+    const std::string utf8 = "\xc3\xa9";
+    require(escapeJsonText(utf8) == utf8, "valid UTF-8 bytes must survive JSON escaping");
+    require(estimateTextTokens(utf8, 1) == 2, "synthetic input estimator counts bytes, not codepoints");
 }
 
 // The counterexample that falsified the previous rule.  Both arms bound at the
@@ -1354,6 +1501,17 @@ int main() {
         {"parser unexpected statement", testParserUnexpectedStatement},
         {"AST printer", testAstPrinter},
         {"secret-dependent cost is rejected", testSecretDependentCostIsRejected},
+        {"shadowed model contracts rejected", testShadowedContractsRejected},
+        {"equivalent model aliases accepted", testEquivalentModelAliasesAccepted},
+        {"equal length different requests rejected", testEqualLengthDifferentRequestsRejected},
+        {"shadowed prompt content rejected", testShadowedPromptsRejected},
+        {"ordered request arguments preserved", testOrderedRequestArgumentsRejected},
+        {"branch local inputs not assumed equal", testBranchLocalInputsNotAssumedEqual},
+        {"nested signatures isolate siblings", testNestedSecretSignaturesUseSiblingState},
+        {"token estimate extreme divisor", testTokenizerEstimateExtremeDivisor},
+        {"IR resolved labels and same line regions", testIrRetainsResolvedLabelsAndDistinctSameLineRegions},
+        {"runtime validates pins and retry policy", testRuntimeRejectsInvalidPinsAndPolicy},
+        {"JSON control bytes and UTF8 units", testJsonControlBytesAndUtf8},
         {"equal bounds with different arguments rejected", testEqualBoundsWithDifferentArgumentsIsRejected},
         {"extra call in one arm rejected", testExtraCallInOneArmIsRejected},
         {"differing retry bounds rejected", testDifferingRetryBoundsAreRejected},
