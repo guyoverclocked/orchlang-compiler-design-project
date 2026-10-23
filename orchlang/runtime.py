@@ -122,34 +122,50 @@ class LlamaBackend(Backend):
 
 
 class MockBackend(Backend):
-    """Deterministic character-level backend for tests: the response is a
-    pseudo-random function of (prompt, seed) whose length depends on content."""
+    """Deterministic backend for tests: the response is a pseudo-random function
+    of (visible prompt, seed) whose length depends on content. With `tok`, counts
+    use that tokenizer; otherwise one token per character. The padding message
+    is removed before hashing, so forced decoding is transparent by design."""
 
-    def __init__(self, profile: Profile):
+    WORDS = [" a", " b", " c", " d", " e"]
+
+    def __init__(self, profile: Profile, tok=None):
         self.profile = profile
+        self.tok = tok
 
     def encode(self, text):
-        return [ord(c) for c in text]
+        return self.tok.encode(text) if self.tok else [ord(c) for c in text]
 
-    encode_plain = encode
+    def encode_plain(self, text):
+        return self.tok.encode_plain(text) if self.tok else [ord(c) for c in text]
 
     def decode(self, ids):
-        return "".join(chr(i) for i in ids)
+        return self.tok.decode(ids) if self.tok else "".join(chr(i) for i in ids)
 
     def count(self, text):
-        return len(text)
+        return len(self.encode(text))
+
+    def visible(self, prompt):
+        t = self.profile.tmpl
+        pat = (re.escape(t.pad_open) + "(?:" + re.escape(self.profile.filler) + ")*" + re.escape(t.pad_close)
+               + re.escape(t.generation) + "$")
+        return re.sub(pat, t.generation, prompt, flags=re.S)
 
     def generate(self, prompt, max_tokens, seed, forced, cap=None):
-        t = self.profile.tmpl
-        visible_prompt = re.sub(re.escape(t.pad_open) + ".*?" + re.escape(t.pad_close), "", prompt, flags=re.S)
-        rng = random.Random(hashlib.sha256(f"{visible_prompt}|{seed}".encode()).digest())
-        natural = rng.randint(1, max(1, cap if cap is not None else max_tokens))
-        text = "".join(rng.choice("abcde") for _ in range(natural))
-        self.last_natural = natural
+        rng = random.Random(hashlib.sha256(f"{self.visible(prompt)}|{seed}".encode()).digest())
+        limit = cap if cap is not None else max_tokens
+        natural = rng.randint(1, max(1, limit))
+        if self.tok:
+            text = "".join(rng.choice(self.WORDS) for _ in range(natural))
+            ids = self.encode_plain(text)[:natural]
+            text = self.decode(ids)
+        else:
+            text = "".join(rng.choice("abcde") for _ in range(natural))
+            ids = [ord(c) for c in text]
+        self.last_natural = len(ids)
         if forced:
-            ids = [ord(c) for c in text] + [0] * (max_tokens - natural)
-            return ids, text, len(prompt)
-        return [ord(c) for c in text], text, len(prompt)
+            return ids + [0] * (max_tokens - len(ids)), text, self.count(prompt)
+        return ids, text, self.count(prompt)
 
 
 # ---------------------------------------------------------------- padding

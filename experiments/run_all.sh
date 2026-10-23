@@ -13,6 +13,9 @@ run() {  # name limit [extra args]
       --limit "$n" "$@" > "$OUT/$w.log" 2>&1
   echo "== $w exit $? $(date -u +%FT%TZ)" >> "$OUT/queue.log"
 }
+echo "== transparency start $(date -u +%FT%TZ)" >> "$OUT/queue.log"
+$PY experiments/transparency.py --output "$OUT/transparency.json" > "$OUT/transparency.log" 2>&1
+echo "== transparency exit $? $(date -u +%FT%TZ)" >> "$OUT/queue.log"
 run switch 210 --keep response,intention,llm_result
 run routing 150 --keep answer,decision
 run chaining 150 --keep final,gate,joke
@@ -21,5 +24,5 @@ run email 152 --keep reply,route,cls
 run orchestrator 100 --keep report,plan
 run calculator 100 --keep out,done
 run crag 150 --keep answer,search --corpus $D/crag_corpus.jsonl --web $D/crag_web.jsonl
-run adaptive 80 --keep gen,src,have,done --corpus $D/adaptive_corpus.jsonl --web $D/adaptive_web.jsonl
+run adaptive 60 --keep gen,src,have,done --corpus $D/adaptive_corpus.jsonl --web $D/adaptive_web.jsonl
 echo "== all done $(date -u +%FT%TZ)" >> "$OUT/queue.log"
