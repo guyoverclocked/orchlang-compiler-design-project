@@ -30,7 +30,7 @@ import numpy as np
 
 try:
     from sklearn.ensemble import RandomForestClassifier
-    from sklearn.model_selection import StratifiedKFold, cross_val_predict
+    from sklearn.model_selection import KFold, StratifiedKFold, cross_val_predict
 except ImportError:  # pragma: no cover
     RandomForestClassifier = None
 
@@ -112,17 +112,21 @@ def attack(X, y, seed=0):
     classes, counts = np.unique(y, return_counts=True)
     majority = counts.max() / counts.sum()
     if len(classes) < 2:
-        return {"accuracy": 1.0, "balanced": 1.0, "majority": 1.0, "n": int(len(y))}
-    folds = min(5, counts.min())
-    if folds < 2 or RandomForestClassifier is None:
-        return {"accuracy": None, "balanced": None, "majority": float(majority), "n": int(len(y))}
-    clf = RandomForestClassifier(n_estimators=200, random_state=seed, min_samples_leaf=1)
-    pred = cross_val_predict(clf, np.asarray(X, dtype=float), y,
-                             cv=StratifiedKFold(folds, shuffle=True, random_state=seed))
+        return {"accuracy": 1.0, "balanced": 1.0, "majority": 1.0, "chance_balanced": 1.0, "n": int(len(y))}
+    if RandomForestClassifier is None:
+        return {"accuracy": None, "balanced": None, "majority": float(majority),
+                "chance_balanced": 1.0 / len(classes), "n": int(len(y))}
+    # Stratified 5-fold CV when every class has five members, else shuffled 5-fold CV.
+    cv = (StratifiedKFold(5, shuffle=True, random_state=seed) if counts.min() >= 5
+          else KFold(5, shuffle=True, random_state=seed))
+    clf = RandomForestClassifier(n_estimators=200, random_state=seed, min_samples_leaf=1,
+                                 class_weight="balanced_subsample")
+    pred = cross_val_predict(clf, np.asarray(X, dtype=float), y, cv=cv)
     acc = float((pred == y).mean())
     bal = float(np.mean([(pred[y == c] == c).mean() for c in classes]))
     return {"accuracy": acc, "balanced": bal, "majority": float(majority),
-            "chance_balanced": 1.0 / len(classes), "n": int(len(y))}
+            "chance_balanced": 1.0 / len(classes), "n": int(len(y)),
+            "mi_pred_bits": mutual_information(list(y), list(pred))}
 
 
 def permutation_p(X, y, observed_acc, rounds=0, seed=0):

@@ -1,0 +1,48 @@
+\section{Ported Workflows}\label{app:ports}
+
+Each port's header comment names its source file and line range at the pinned revision; the artifact's \texttt{experiments/census/ports/} directory contains a specification of each with the verbatim source excerpts, node graph, routing conditions and a list of deviations. \Cref{tab:ports} summarizes them.
+
+\begin{table}[h]
+\caption{Sources, secret attributes and principal deviations of the ports. All ports add output caps and replace the original models with Llama~3.2.}
+\label{tab:ports}
+\footnotesize
+\begin{tabular}{p{2.4cm}p{3.6cm}p{2.6cm}p{4.6cm}}
+\toprule
+Workflow & Source (pinned) & Secret attribute & Deviations \\
+\midrule
+Routing & LangGraph docs, \emph{workflows-agents}, routing & requested form (story/joke/poem) & structured \texttt{Route} output as one word; branch system prompts from the JavaScript variant \\
+Prompt chaining & same, prompt chaining (Graph API gate) & DBpedia entity class & none beyond caps \\
+Evaluator--optimizer & same, evaluator--optimizer & DBpedia entity class & loop bounded at 3 rounds; \texttt{Feedback} schema as two text lines \\
+Orchestrator--worker & same, orchestrator--worker (\texttt{Send}) & DBpedia entity class & fan-out bounded at 4 and sequential; sections as text lines \\
+PF switch & Prompt Flow \emph{conditional-flow-for-switch} & retail intent & none beyond caps; Jinja roles as chat messages \\
+Email agent & LangGraph docs, \emph{thinking-in-langgraph} & ticket queue family & classification schema as four text lines; human review becomes a fixed reply \\
+Corrective RAG & LangGraph \emph{langgraph\_crag\_local.ipynb} & question in indexed corpus & BM25 over SQuAD paragraphs for vector store and web search; passages capped at 230 tokens \\
+Calculator agent & LangGraph docs, agents (calculator tools) & GSM8K step count & native tool calling as a CALL/FINAL text protocol; history serialized into the user turn; 6 turns \\
+Adaptive RAG & LangGraph \emph{langgraph\_adaptive\_rag.ipynb} & in corpus / answerable & router prompt names the indexed titles; cycles bounded (2 retrieval, 2 generation rounds); ``not useful'' retries generation \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Lean Development}\label{app:lean}
+
+\Cref{tab:lean} maps the paper's definitions and theorems to the Lean development. The file checks with Lean~4.19.0 in about three seconds; \lean{\#print axioms} reports \lean{propext} and \lean{Quot.sound} for every main theorem, and \lean{erase\_correct} uses only \lean{propext}.
+
+\begin{table}[h]
+\caption{Correspondence between the paper and \lean{proof/ShapeCore.lean}.}
+\label{tab:lean}
+\footnotesize
+\begin{tabular}{ll}
+\toprule
+Paper & Lean \\
+\midrule
+World, Conformance, Transparency & \lean{World}, \lean{World.Conforms}, \lean{World.Transparent} \\
+Execution, static shape & \lean{exec}, \lean{loopRun}, \lean{shape} \\
+Padding discipline, randomness sites, caps & \lean{wt}, \lean{sitesOK}, \lean{capsOK} \\
+Shape lemma, confinement & \lean{shape\_exec}, \lean{high\_store}, \lean{high\_count} \\
+\Cref{thm:ni} and corollary & \lean{noninterference}, \lean{trace\_noninterference}, \lean{distribution\_noninterference} \\
+\Cref{thm:erase} & \lean{erase\_correct}, \lean{clean\_data} \\
+Validator and its soundness & \lean{validateProgram}, \lean{validateProgram\_sound} \\
+Executable checker & \lean{checkJson}, \lean{main} \\
+\bottomrule
+\end{tabular}
+\end{table}

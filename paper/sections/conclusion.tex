@@ -1,0 +1,10 @@
+\section{Conclusion}\label{sec:conclusion}
+
+Content redaction does not make LLM telemetry safe to share. When a workflow's control flow depends on private content---as it does in most of the example workflows its frameworks teach---the number of calls, their models and their token counts encode that content, and a simple classifier reads it back from usage records alone. \sys removes this channel by construction: it pads, forces and aligns exactly the calls whose usage could depend on secrets, and a Lean-verified validator guarantees that every accepted program emits the same usage trace for all secrets. The price is the cost of always running the worst case, which the developer controls through explicit bounds. We hope the census, the ports and the attack serve as a benchmark for future defenses, and that the observability ecosystem, which already distinguishes content from metadata, will start treating usage metadata as sensitive too.
+
+\section*{Artifact availability}\label{sec:artifact}
+The repository contains the \sys compiler and runtime, the Lean development and executable validator, the nine workflow ports with their specifications, the census data and scripts, dataset builders pinned to dataset revisions, all raw run records, and the scripts that generate every number and table in this paper from those records. Models are public Llama~3.2 Instruct GGUF files; no API key or GPU is required.
+
+\section*{Declarations}
+\paragraph{Use of AI assistants.} The implementation, proofs, experiment scripts and an initial draft of this paper were produced with substantial assistance from AI coding assistants (Anthropic Claude through Claude Code, and earlier OpenAI Codex), directed and reviewed by the authors. The authors take full responsibility for the content, have checked the proofs mechanically with Lean, and have verified the reported results against the released raw records.
+\paragraph{Funding and competing interests.} No external funding was received. The authors declare no competing interests.

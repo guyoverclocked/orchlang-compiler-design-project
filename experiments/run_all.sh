@@ -10,12 +10,14 @@ run() {  # name limit [extra args]
   local w=$1 n=$2; shift 2
   echo "== $w start $(date -u +%FT%TZ)" >> "$OUT/queue.log"
   $PY experiments/run_workflow.py --workflow workflows/$w.orch --data $D/$w.jsonl --out "$OUT/$w" \
-      --limit "$n" "$@" > "$OUT/$w.log" 2>&1
+      --limit "$n" "$@" >> "$OUT/$w.log" 2>&1
   echo "== $w exit $? $(date -u +%FT%TZ)" >> "$OUT/queue.log"
 }
-echo "== transparency start $(date -u +%FT%TZ)" >> "$OUT/queue.log"
-$PY experiments/transparency.py --output "$OUT/transparency.json" > "$OUT/transparency.log" 2>&1
-echo "== transparency exit $? $(date -u +%FT%TZ)" >> "$OUT/queue.log"
+if [ ! -s "$OUT/transparency.json" ]; then
+  echo "== transparency start $(date -u +%FT%TZ)" >> "$OUT/queue.log"
+  $PY experiments/transparency.py --output "$OUT/transparency.json" > "$OUT/transparency.log" 2>&1
+  echo "== transparency exit $? $(date -u +%FT%TZ)" >> "$OUT/queue.log"
+fi
 run switch 210 --keep response,intention,llm_result
 run routing 150 --keep answer,decision
 run chaining 150 --keep final,gate,joke

@@ -1,0 +1,75 @@
+\documentclass[acmsmall,screen,nonacm]{acmart}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{xspace}
+\usepackage{listings}
+\usepackage{mathpartir}
+\usepackage{cleveref}
+
+\makeatletter\newcommand{\tabinput}[1]{\@@input #1 }\makeatother
+\input{generated/static.tex}
+\input{generated/results.tex}
+
+\newcommand{\sys}{OrchLang\xspace}
+\newcommand{\obs}{\mathcal{O}}
+\newcommand{\lo}{\mathsf{L}}
+\newcommand{\hi}{\mathsf{H}}
+\newcommand{\kw}[1]{\textsf{#1}}
+\newcommand{\lean}[1]{\texttt{#1}}
+
+\lstdefinelanguage{orch}{
+  morekeywords={workflow,input,text,secret,public,max_tokens,model,prompt,system,user,tool,let,call,using,if,else,repeat,until,output},
+  sensitive=true, morecomment=[l]{//}, morestring=[b]"}
+\lstset{language=orch, basicstyle=\ttfamily\footnotesize, keywordstyle=\bfseries,
+  commentstyle=\itshape, columns=fullflexible, breaklines=true, frame=none, xleftmargin=1em}
+
+\settopmatter{printacmref=false}
+\setcopyright{none}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+
+\begin{document}
+
+\title{Constant-Shape LLM Workflows: Verified Elimination of Usage-Metadata Side Channels}
+
+\author{Nambi Rajan M}
+\affiliation{%
+  \department{Department of Computational Intelligence, SCOPE}
+  \institution{Vellore Institute of Technology}
+  \city{Vellore}\country{India}}
+\email{nambirajan.m2024@vitstudent.ac.in}
+
+\author{Ranjithkumar S}
+\affiliation{%
+  \department{Department of Analytics, SCOPE}
+  \institution{Vellore Institute of Technology}
+  \city{Vellore}\country{India}}
+\email{ranjithkumar.s@vit.ac.in}
+
+\begin{abstract}
+Observability platforms, gateways and billing systems record the usage of every call a large language model (LLM) workflow makes---which model, how many input and output tokens, how long it took---even when prompt and response content is hidden, as their privacy modes recommend. We show that this metadata is a side channel whenever a workflow's control flow depends on private content, and that such dependence is the norm: \censusDependent{} of \censusApps{} (\censusPct\%) application workflows in the official LangGraph, LangChain and Prompt Flow examples route, loop or fan out on content. On faithful ports of nine of these workflows running real models, a classifier given only content-free usage records recovers the workflow's secret routing decision with \resDecisionMedian\% median balanced accuracy (chance \resDecisionChanceMedian\%).
+
+We present \sys, a workflow language and compiler that closes this channel by construction. Information-flow labels identify calls whose usage could depend on secrets; tokenizer-exact static bounds size them; and a shaping transformation aligns the call sequences of secret branches into a minimum-cost common supersequence, inserts dummy calls, pads every secret-dependent request to an exact token count and forces outputs to a fixed length. An executable validator checks every shaped program, and a Lean~4 proof establishes that validated programs emit identical usage traces for all secrets---pointwise for every randomness tape and hence in distribution---and compute the original workflow's results when padding is transparent. On the nine workflows, shaped programs produce one constant usage trace per workflow (attack accuracy equals the majority rate), cost \resOverheadMedian$\times$ the undefended tokens at the median, and preserve task accuracy within \resFuncMaxDrop{} points. Alignment is \resNaiveSavingMedian\% cheaper than executing all branches, and the validator rejected every one of \mutLeak{} injected compiler faults that an independent oracle showed to leak.
+\end{abstract}
+
+\keywords{side channels, information flow, noninterference, LLM agents, workflow compilers, translation validation, Lean}
+
+\maketitle
+
+\input{sections/intro}
+\input{sections/threat}
+\input{sections/language}
+\input{sections/shaping}
+\input{sections/formal}
+\input{sections/implementation}
+\input{sections/evaluation}
+\input{sections/discussion}
+\input{sections/related}
+\input{sections/conclusion}
+
+\bibliographystyle{ACM-Reference-Format}
+\bibliography{refs}
+
+\appendix
+\input{sections/appendix}
+
+\end{document}

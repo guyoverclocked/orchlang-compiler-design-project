@@ -128,7 +128,40 @@ def main():
                 ro = rt.run(case["body"], s1, run)
                 summary[s]["runs"] += 1
                 summary[s]["store_equal_runs"] += (ro.store == r1.store)
-    result = {"programs": args.programs, "seed": args.seed, "lean_checks": len(payloads),
+    # Execution cost per strategy on identical inputs (input + 4 * output units),
+    # over programs that contain both public and secret calls.
+    crng = random.Random(args.seed + 1)
+    savings = {"padall": [], "naive": [], "uniform": []}
+    mixed = 0
+    for case in cases:
+        labs = {C.join(C.LOW, C.expr_label(case["gamma"], c.req)) for c in C.calls(case["body"])}
+        stores = []
+        for _ in range(4):
+            st = {x: crng.choice(["a", "b", "ab", ""]) for x in range(case["nin"])}
+            stores.append(st)
+        cost = {}
+        for s in strategies:
+            tot = 0
+            for k, st in enumerate(stores):
+                r = rt.run(case["shaped"][s], st, k)
+                tot += sum(e.input_tokens + 4 * e.output_tokens for e in r.trace if e.kind == "llm")
+            cost[s] = tot
+        if cost["ours"] == 0:
+            continue
+        has_low = any(C.join(C.LOW, C.expr_label(case["gamma"], c.req)) == C.LOW for c in C.calls(case["body"]))
+        has_high = bool(case["high"]) and any(c.pad for c in C.calls(case["shaped"]["ours"]))
+        if has_low and has_high:
+            mixed += 1
+            for b in savings:
+                if cost[b] > 0:
+                    savings[b].append(1 - cost["ours"] / cost[b])
+    import statistics
+    padded_budget = {"mixed_programs": mixed,
+                     "saving_median": statistics.median(savings["padall"]) if savings["padall"] else None,
+                     "saving_vs": {b: {"median": statistics.median(v) if v else None,
+                                       "mean": sum(v) / len(v) if v else None,
+                                       "max": max(v) if v else None} for b, v in savings.items()}}
+    result = {"padded_budget": padded_budget, "programs": args.programs, "seed": args.seed, "lean_checks": len(payloads),
               "lean_seconds": round(lean_seconds, 2), "original_accepted": orig_accepted,
               "original_python_lean_agreement": orig_agree, "detector_lean_agreement": detect_agree,
               "strategies": summary}

@@ -1,0 +1,101 @@
+\section{Evaluation}\label{sec:eval}
+
+We evaluate five questions. \textbf{RQ1}: Do undefended workflows leak secrets through content-free usage records? \textbf{RQ2}: Does shaping remove the leak, and do weaker or deployed defenses? \textbf{RQ3}: What does shaping cost? \textbf{RQ4}: Does it preserve the workflow's function? \textbf{RQ5}: How strong is the evidence that the implementation meets the formal model, and does the validator catch compiler bugs?
+
+\subsection{Setup}\label{sec:eval-setup}
+
+\paragraph{Workflows and data.} \Cref{tab:workflows} lists the nine ports. Inputs come from public datasets at pinned revisions, sampled with a fixed seed and balanced over a secret attribute: DBpedia topics~\cite{zhang2015charcnn} for the joke and report workflows (entity category; person classes excluded because the models refuse to joke about real people) and for routing requests (requested form); a retail-intent corpus for the Prompt Flow switch (intent); synthetic English support tickets for the email agent (queue family); SQuAD~\cite{rajpurkar2016squad} and SQuAD~2.0~\cite{rajpurkar2018squad2} for the retrieval workflows (whether the question's article is in the indexed corpus, and whether it is answerable); and GSM8K~\cite{cobbe2021gsm8k} for the calculator agent (number of reference computation steps).
+
+\paragraph{Models and execution.} All calls use Llama~3.2 Instruct~\cite{meta2024llama32} in 4-bit GGUF quantization on four CPU cores with greedy decoding: the 1B model everywhere, and the 3B model for generation and query rewriting in adaptive RAG, mirroring the original's small-grader/large-generator split. A pilot with Qwen~2.5 1.5B was abandoned because it refused 14 of 20 joke requests about obscure entities, while Llama~3.2 1B refused none. Each input is run twice, undefended (\emph{orig}) and shaped (\emph{ours}), with the same run seed. In total the evaluation comprises \resRuns{} workflow executions over \resInputs{} inputs.
+
+\paragraph{Attacker.} The attacker sees exactly the usage records of \cref{sec:observer}: per call the model, input and output token counts (and, in a separate experiment, latency). Features are the number of calls, total input and output tokens, and per-position model, input and output tokens. A class-balanced random forest (200 trees) is evaluated with 5-fold cross-validation, stratified when every class has five members. We report balanced accuracy, whose chance level is $1/\#\mathrm{classes}$ regardless of class imbalance, and $I(Y;\hat Y)$, the mutual information between the secret and the cross-validated prediction, which lower-bounds the information in the trace. Two secrets are attacked: the workflow's \emph{internal decision}---the sequence of executed (non-dummy) call sites together with the route or verdict variable where the workflow has one---and the dataset's \emph{secret attribute}.
+
+\paragraph{Baselines.} Besides the undefended workflow we evaluate three weaker defenses, derived exactly from the recorded runs: \emph{pad-only} pads every call to its static $(T,N)$ but neither aligns branches nor pads loops, generalizing the single-call output padding of \citet{zhang2024timewilltell}; \emph{random padding} adds uniformly random input and output tokens per call with the same mean total as shaping, in the style of deployed packet obfuscation~\cite{cloudflare2024padding,openai2026obfuscation}; and \emph{no-force} is the shaped program on an API that cannot force output length, so outputs keep their natural length. For cost we also compile two strategies that are secure by the same theorem: \emph{naive} (every secret arm also executes the other arms' calls as dummies, i.e., secure multi-execution~\cite{devriese2010sme}) and \emph{uniform} (every call to a model is padded to one global cell size, as in BuFLO~\cite{dyer2012peekaboo}).
+
+\begin{table}[t]
+\caption{Ported workflows. Sites: static model-call sites; lines: \sys source lines; findings: constructs reported by the detector; calls: model calls per undefended run (mean, range) and per shaped run (constant).}
+\label{tab:workflows}
+\small
+\begin{tabular}{lrrrrrr}
+\toprule
+Workflow & Sites & Lines & Findings & Inputs & Calls (orig) & Calls (ours) \\
+\midrule
+\tabinput{generated/tab_workflows.tex}
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{RQ1: Undefended workflows leak}\label{sec:eval-leak}
+
+\Cref{tab:leak} reports the attacks. On undefended workflows the attacker recovers the internal decision with \resDecisionMedian\% median balanced accuracy, against a median chance level of \resDecisionChanceMedian\%. The leak is strongest where branches differ in the number of calls (email agent, prompt chaining, evaluator--optimizer, adaptive RAG, the calculator agent's turn count): there the trace length alone identifies the path. It is weaker but present where only token counts differ (the Prompt Flow switch, corrective RAG), matching the census observation that constant call counts do not prevent leakage. The dataset attribute, which the workflow sees only through the model's behavior, is recovered with \resLabelMedian\% median balanced accuracy.
+
+\begin{table*}[t]
+\caption{Balanced accuracy (\%) of the usage-record attacker. Internal decision: path of executed call sites and route variable; attribute: the dataset's secret label. $I(Y;\hat{Y})$ in bits. Pad-only, random padding and no-force are derived from the recorded runs (\cref{sec:eval-setup}); \emph{ours} emits a single trace in every workflow, so its exact mutual information is zero.}
+\label{tab:leak}
+\small
+\begin{tabular}{lrr rr rrr rr rr}
+\toprule
+ & & & \multicolumn{2}{c}{Undefended} & \multicolumn{3}{c}{Weaker defenses} & \multicolumn{2}{c}{Shaped} & \multicolumn{2}{c}{Attribute} \\
+\cmidrule(lr){4-5}\cmidrule(lr){6-8}\cmidrule(lr){9-10}\cmidrule(lr){11-12}
+Workflow & Cls. & Chance & Acc. & $I(Y;\hat Y)$ & Pad-only & Random & No-force & Acc. & $I$ & Orig & Ours \\
+\midrule
+\tabinput{generated/tab_leak.tex}
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{RQ2: Shaping removes the leak; weaker defenses do not}\label{sec:eval-defense}
+
+Every shaped run of every workflow emitted the same usage trace as every other run of that workflow: across \resShapedRuns{} shaped runs there is exactly one distinct trace per workflow, and each trace equals the static shape computed by the Lean validator (\resConformant{} of \resShapedRuns{} runs; the remainder, if any, is listed in the artifact). The attacker's balanced accuracy is therefore the chance level and the mutual information between the trace and any secret is exactly zero, as \cref{thm:ni} predicts.
+
+The weaker defenses leave substantial leakage. Pad-only, which hides each call's lengths but not which calls happen, still leaks in \resPadonlyLeaky{} of \resWorkflows{} workflows (balanced accuracy more than five points above chance), namely all workflows whose paths differ in call count or model. Random padding at the same mean token budget leaves the call structure intact and only blurs counts; it leaks in \resRandpadLeaky{} workflows. No-force, the strongest option on APIs that cannot force output length, aligns the call structure and pads inputs exactly but leaks output lengths, in \resNoforceLeaky{} workflows. Exact output forcing is thus necessary, not merely convenient.
+
+\subsection{RQ3: Cost}\label{sec:eval-overhead}
+
+\Cref{tab:overhead} reports cost. Because a shaped workflow always runs its worst-case shape with every call at its bound, it costs \resOverheadMedian$\times$ the undefended workflow at the median, in price units with output tokens at four times input tokens (range \resOverheadMin--\resOverheadMax$\times$). The overhead is dominated by forced outputs: output caps that the ports inherit or set generously become the actual output length of every call. It is largest for loops whose bound is rarely reached and for workflows whose undefended paths are usually short.
+
+Alignment matters where secret arms differ. Compared with executing every arm's calls (naive), the minimum-cost alignment saves up to \resNaiveSavingMax\% (median \resNaiveSavingMedian\%; in workflows where one arm's calls are a subsequence of another's, both strategies coincide). Compared with a single global cell size per model (uniform), it saves up to \resUniformSavingMax\% (median \resUniformSavingMedian\%). Taint guidance pads every call in these nine ports, because every call depends on the user's secret message; on the \diffMixedPrograms{} randomly generated programs of \cref{sec:eval-validation} that mix public and secret calls, it lowers execution cost by \diffTaintSavingMean\% on average and by up to \diffTaintSavingMax\% relative to padding every call, and by nothing in programs where every expensive call is secret.
+
+\begin{table*}[t]
+\caption{Cost per run. Undefended: mean calls, input and output tokens. Shaped: constant. Price ratio: shaped (or a static strategy) over undefended, with output tokens priced at $4\times$ input. Latency: mean seconds per run on four CPU cores.}
+\label{tab:overhead}
+\small
+\begin{tabular}{l rrr rrr rrr rr}
+\toprule
+ & \multicolumn{3}{c}{Undefended} & \multicolumn{3}{c}{Shaped} & \multicolumn{3}{c}{Price ratio} & \multicolumn{2}{c}{Latency (s)} \\
+\cmidrule(lr){2-4}\cmidrule(lr){5-7}\cmidrule(lr){8-10}\cmidrule(lr){11-12}
+Workflow & Calls & In & Out & Calls & In & Out & Ours & Naive & Uniform & Orig & Ours \\
+\midrule
+\tabinput{generated/tab_overhead.tex}
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{RQ4: Function}\label{sec:eval-function}
+
+\paragraph{Forced decoding is transparent.} For \trGreedyCases{} greedy and \trSampleCases{} sampled ($T=0.8$) generations from padded requests drawn from five workflows, with caps of 16--96 tokens and forced lengths 1--96 tokens beyond the cap, the visible output of forced decoding equalled natural decoding in \trGreedyEqual{} and \trSampleEqual{} cases respectively, and every padded request and forced output had exactly the target token count (\trExactIn{} and \trExactOut{} of \the\numexpr\trGreedyCases+\trSampleCases\relax). The output half of the Transparency hypothesis therefore holds exactly for this serving stack.
+
+\paragraph{Input padding perturbs, but does not degrade, the task.} Adding the padding message changes the prompt, so shaped workflows do not always reproduce the undefended outputs byte for byte (\cref{tab:function}). We measure the effect where ground truth exists. Task accuracy of shaped and undefended workflows differs by at most \resFuncMaxDrop{} points, and no difference is significant under an exact McNemar test at the 5\% level. Internal decisions agree with the undefended run in most inputs; disagreements are perturbations in both directions rather than systematic degradation. A pilot on 80 news-topic classifications with Qwen~2.5 1.5B and 150 padding tokens found that the filler ``\texttt{ .}'' changed 6.25\% of decisions without reducing accuracy (81.25\% vs.\ 80\%), while ``\texttt{ pad}'' changed 15\% and ``\texttt{ \_}'' changed 17.5\% and cost 12.5 accuracy points, so the filler is a tunable part of the design. Truncation of over-long requests occurred \resTruncations{} times in all shaped runs.
+
+\begin{table}[t]
+\caption{Function. Accuracy (\%) where ground truth exists, with exact McNemar $p$; agreement of the internal decision and of all stored outputs with the undefended run (\%); requests truncated to their bound.}
+\label{tab:function}
+\small
+\begin{tabular}{lrrrrrr}
+\toprule
+Workflow & Orig acc. & Ours acc. & $p$ & Decision agr. & Output equal & Trunc. \\
+\midrule
+\tabinput{generated/tab_function.tex}
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Latency}\label{sec:eval-latency}
+
+Latency is outside the theorem but is visible to telemetry. Because a shaped workflow performs the same prefill and decoding work on every run, its latency becomes nearly constant: the coefficient of variation of per-run latency drops from \resLatCVOrig{} to \resLatCVOurs{} at the median. An attacker who also sees per-call latency recovers the internal decision with \resLatencyOrigMedian\% median balanced accuracy on undefended workflows and \resLatencyOursMedian\% on shaped ones (maximum \resLatencyOursMax\%). Residual latency variation stems from content-dependent compute (attention over different tokens, CPU scheduling) and is small but not zero; deployments that must also hide timing can add predictive timing mitigation~\cite{askarov2010predictive,zhang2012timing} on top of shaping, which is easier precisely because the work per call is fixed.
+
+\subsection{RQ5: Validation and fault injection}\label{sec:eval-validation}
+
+\paragraph{Differential testing.} We generated \diffPrograms{} random core programs with nested branches and loops, two to five variables, and random secret labellings, shaped each with all four strategies, and validated all \diffLeanChecks{} original and shaped programs in Lean (\resDiffLeanSeconds{} seconds for the batch). Every shaped program was accepted; Python's mirror of the discipline and the leak detector agreed with Lean on every original program (\diffOrigAccepted{} originals were already secure). Executing every shaped program four times under pairs of different secret inputs with the mock backend produced identical traces in \diffTraceEqual{} of \diffPairs{} pairs, traces equal to Lean's static shape whenever one was defined, and final stores equal to the original program's in \diffStoreEqual{} of \diffRuns{} runs. This testing found two bugs during development, both now fixed and covered by the theorems: the compiler raised a merged call's forced length without capping its visible output (motivating the explicit cap $k$ and \lean{capsOK}), and the validator rejected correct programs whose sequences the compiler had re-associated (motivating \lean{clean}).
+
+\paragraph{Fault injection.} To test whether the validator would catch realistic compiler bugs, we applied \mutOps{} mutation operators to the shaped versions of the nine workflows at up to six positions each: dropping or shrinking a call's padding, undercutting a cap, dropping a dummy, changing a dummy's model or size, unpadding a loop, swapping sequenced statements, changing a request, and reusing a call site. Each of the \mutTotal{} mutants was validated in Lean and executed by an independent oracle---the runtime with a mock model whose responses drive the workflows' routing tests---under \the\numexpr 41\relax{} secret inputs, recording whether traces differed. The validator rejected all \mutLeak{} mutants that the oracle showed to leak. It accepted \mutAccepted{} mutants, all of which shrink the input padding of a call outside any secret branch; such a call still has a constant footprint, the oracle observed no leak, and accepting them is correct. The remaining rejected mutants changed the program's function (detected by erasure) or violated the cap or randomness-site checks without producing an observable leak in the oracle's finite exploration.
