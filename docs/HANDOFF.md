@@ -17,7 +17,7 @@ else) without access to the session that produced it. Read this file first.
 | Fault injection (210 mutants) | Done | `experiments/results/mutation.json` |
 | Transparency, in-band (120 cases) | Done | `experiments/results/transparency-inband.json` |
 | Preliminary in-band runs (switch, routing, chaining) | Done | `experiments/results/runs-inband-preliminary/` |
-| **Transparency, isolated padding** | **Running / to do** | `experiments/transparency.py` |
+| Transparency, isolated padding (120 cases) | **Done: 120/120 identical outputs, 120/120 exact counts** | `experiments/results/transparency-isolated.json` |
 | **Main evaluation, 9 workflows, isolated padding** | **Running / to do** (about 13 CPU hours) | `experiments/run_all.sh` |
 | **Replication on Qwen 2.5 1.5B (3 workflows)** | **Queued / to do** (about 3 CPU hours) | `experiments/run_replication.sh` |
 | Cap tuning, permutation tests, figure, final tables | To do (one command) | `experiments/finalize.sh` |

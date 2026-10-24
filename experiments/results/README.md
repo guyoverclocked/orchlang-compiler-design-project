@@ -11,6 +11,7 @@ regenerate each file.
 | `differential.json`, `logs/differential.log` | 1,000 random programs, 5,000 Lean checks; every shaped program accepted; 16,000/16,000 trace-equal pairs and store-equal runs; Python and detector agree with Lean on all originals |
 | `mutation.json` | Fault injection, 12 operators, 210 mutants: 103 leak per the oracle, all 103 rejected; 18 accepted, none leaking |
 | `transparency-inband.json`, `logs/transparency-inband.log` | Forced decoding vs natural decoding on in-band padded prompts, Llama 3.2 1B: 120/120 visible outputs equal (60 greedy, 60 sampled at T=0.8), 120/120 exact input and output counts |
+| `transparency-isolated.json`, `logs/transparency-isolated.log` | **Full Transparency test with isolated padding**: natural decoding of the original (unpadded) prompt vs the shaped call (padded to T, forced to N > cap, visible output cut at stop token and cap), Llama 3.2 1B, same seed: 120/120 visible outputs equal (60 greedy, 60 sampled at T=0.8), 120/120 calls reporting exactly T input and N output tokens |
 | `runs-inband-preliminary/` | First full runs of the Prompt Flow switch (210 inputs), routing (150) and prompt chaining (150) with **in-band** padding: `compile.json` (findings, Lean verdicts, static shapes), `orig.jsonl` and `ours.jsonl` (one record per input with usage traces) |
 | `cap-tuning-preliminary.json` | Cap-tuning analysis on the switch and routing runs |
 | `pilots/` | Padding-filler and placement pilots (below) |
