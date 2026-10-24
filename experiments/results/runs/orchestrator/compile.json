@@ -1,0 +1,700 @@
+{
+  "workflow": "OrchestratorWorker",
+  "source": "workflows/orchestrator.orch",
+  "source_lines": 26,
+  "slots": {
+    "topic": 0,
+    "plan": 1,
+    "i": 2,
+    "report": 3,
+    "more": 4,
+    "row": 5,
+    "name": 6,
+    "desc": 7,
+    "sec": 8
+  },
+  "high": [
+    "topic",
+    "plan",
+    "i",
+    "report",
+    "more",
+    "row",
+    "name",
+    "desc",
+    "sec"
+  ],
+  "findings": [
+    {
+      "kind": "secret-dependent-size",
+      "line": 15,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-loop",
+      "line": 23,
+      "detail": "iteration count depends on secret more"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 23,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    }
+  ],
+  "calls": 2,
+  "original_lean": {
+    "static_shape": null,
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+  },
+  "strategies": {
+    "ours": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            105,
+            160
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        5,
+        609,
+        672
+      ],
+      "shape_seconds": 0.0009535009994579013
+    },
+    "naive": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            105,
+            160
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        5,
+        609,
+        672
+      ],
+      "shape_seconds": 0.0005570030007220339
+    },
+    "uniform": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            126,
+            160
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            160
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            160
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            160
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            160
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        5,
+        630,
+        800
+      ],
+      "shape_seconds": 0.0005949279984633904
+    },
+    "padall": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            105,
+            160
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        5,
+        609,
+        672
+      ],
+      "shape_seconds": 0.0005881310025870334
+    }
+  },
+  "frontend_seconds": 0.9154747259999567,
+  "lean_seconds_batch": 5.326688461998856,
+  "pads": {
+    "1": [
+      105,
+      160
+    ],
+    "2": [
+      126,
+      128
+    ]
+  },
+  "caps": {
+    "1": 160,
+    "2": 128
+  },
+  "site_lines": {
+    "1": 15,
+    "2": 23
+  }
+}
