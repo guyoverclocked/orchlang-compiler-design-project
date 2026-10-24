@@ -1,0 +1,441 @@
+{
+  "workflow": "EvaluatorOptimizer",
+  "source": "workflows/evaluator.orch",
+  "source_lines": 22,
+  "slots": {
+    "topic": 0,
+    "feedback": 1,
+    "stop": 2,
+    "joke": 3,
+    "ev": 4
+  },
+  "high": [
+    "topic",
+    "feedback",
+    "stop",
+    "joke",
+    "ev"
+  ],
+  "findings": [
+    {
+      "kind": "secret-dependent-loop",
+      "line": 15,
+      "detail": "iteration count depends on secret stop"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 15,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 17,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 19,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    }
+  ],
+  "calls": 3,
+  "original_lean": {
+    "static_shape": null,
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+  },
+  "strategies": {
+    "ours": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            130,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            130,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            130,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        6,
+        957,
+        480
+      ],
+      "shape_seconds": 0.001198082998598693
+    },
+    "naive": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            72,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            130,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            72,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            130,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            72,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            130,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        9,
+        1173,
+        768
+      ],
+      "shape_seconds": 0.0007884309998189565
+    },
+    "uniform": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            96
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            96
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            96
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        6,
+        1134,
+        576
+      ],
+      "shape_seconds": 0.0007193870005721692
+    },
+    "padall": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            130,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            130,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            130,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        6,
+        957,
+        480
+      ],
+      "shape_seconds": 0.000709292999090394
+    }
+  },
+  "frontend_seconds": 0.7708754949999275,
+  "lean_seconds_batch": 4.514888287001668,
+  "pads": {
+    "1": [
+      130,
+      96
+    ],
+    "2": [
+      130,
+      96
+    ],
+    "3": [
+      189,
+      64
+    ]
+  },
+  "caps": {
+    "1": 96,
+    "2": 96,
+    "3": 64
+  },
+  "site_lines": {
+    "1": 15,
+    "2": 17,
+    "3": 19
+  }
+}
