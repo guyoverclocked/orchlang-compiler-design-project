@@ -78,7 +78,7 @@ def fmt(x, nd=1):
     return f"{x:.{nd}f}"
 
 
-def analyze_workflow(run_dir, data_dir, wf, seed=0):
+def analyze_workflow(run_dir, data_dir, wf, seed=0, perm=0):
     info = json.load(open(os.path.join(run_dir, "compile.json")))
     orig = {r["id"]: r for r in A.load(os.path.join(run_dir, "orig.jsonl"))}
     ours = {r["id"]: r for r in A.load(os.path.join(run_dir, "ours.jsonl"))}
@@ -122,6 +122,9 @@ def analyze_workflow(run_dir, data_dir, wf, seed=0):
                 a = A.attack(X, y, seed)
                 a["mi_bits"] = A.mutual_information(y, [tuple(tuple(e[:4]) for e in o) for o in obs])
                 a["classes"] = len(set(y))
+                if perm and key in ("orig", "ours+lat", "orig+lat"):
+                    fast = A.attack(X, y, seed, trees=50)["balanced"]
+                    a["perm_p"] = A.permutation_p(np.asarray(X, float), y, fast, perm, seed)
                 res[t] = a
             leak[key] = res
     func = {}
@@ -165,13 +168,14 @@ def main():
     ap.add_argument("--mutation", default=None)
     ap.add_argument("--differential", default=None)
     ap.add_argument("--transparency", default=None)
+    ap.add_argument("--perm", type=int, default=0, help="permutation rounds for p-values (e.g. 200)")
     args = ap.parse_args()
     os.makedirs(args.out, exist_ok=True)
     res = {}
     for wf in WORKFLOWS:
         d = os.path.join(args.runs, wf)
         if os.path.exists(os.path.join(d, "ours.jsonl")) and os.path.getsize(os.path.join(d, "ours.jsonl")) > 0:
-            res[wf] = analyze_workflow(d, args.data, wf)
+            res[wf] = analyze_workflow(d, args.data, wf, perm=args.perm)
     extra = {}
     for k in ("mutation", "differential", "transparency"):
         p = getattr(args, k)
@@ -242,6 +246,12 @@ def write_tex(res, extra, out):
     M["resLatencyOursMedian"] = pct(med(lat))
     M["resLatencyOursMax"] = pct(max([x for x in lat if x is not None], default=None))
     M["resLatencyOrigMedian"] = pct(med([res[w]["leak"]["orig+lat"]["decision"]["balanced"] for w in wfs]))
+    ps = [(w, res[w]["leak"]["ours+lat"][t].get("perm_p")) for w in wfs for t in ("decision", "label")]
+    ps = [(w, p) for w, p in ps if p is not None]
+    if ps:
+        M["resLatPermTests"] = str(len(ps))
+        M["resLatPermSignificant"] = str(sum(1 for _, p in ps if p < 0.05))
+        M["resLatPermMin"] = f"{min(p for _, p in ps):.3f}"
     if "mutation" in extra:
         t = extra["mutation"]["total"]
         M.update(mutTotal=str(t["mutants"]), mutLeak=str(t["oracle_leak"]), mutAcceptedLeak=str(t["leak_accepted"]),

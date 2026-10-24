@@ -107,7 +107,7 @@ def mutual_information(labels, traces):
     return max(0.0, hl + ht - hj)
 
 
-def attack(X, y, seed=0):
+def attack(X, y, seed=0, trees=200):
     y = np.asarray(y)
     classes, counts = np.unique(y, return_counts=True)
     majority = counts.max() / counts.sum()
@@ -119,7 +119,7 @@ def attack(X, y, seed=0):
     # Stratified 5-fold CV when every class has five members, else shuffled 5-fold CV.
     cv = (StratifiedKFold(5, shuffle=True, random_state=seed) if counts.min() >= 5
           else KFold(5, shuffle=True, random_state=seed))
-    clf = RandomForestClassifier(n_estimators=200, random_state=seed, min_samples_leaf=1,
+    clf = RandomForestClassifier(n_estimators=trees, random_state=seed, min_samples_leaf=1,
                                  class_weight="balanced_subsample")
     pred = cross_val_predict(clf, np.asarray(X, dtype=float), y, cv=cv)
     acc = float((pred == y).mean())
@@ -129,14 +129,18 @@ def attack(X, y, seed=0):
             "mi_pred_bits": mutual_information(list(y), list(pred))}
 
 
-def permutation_p(X, y, observed_acc, rounds=0, seed=0):
-    if not rounds or observed_acc is None:
+def permutation_p(X, y, observed_bal, rounds=0, seed=0, trees=50):
+    """One-sided permutation test of the attacker's balanced accuracy: the
+    fraction of label permutations whose balanced accuracy reaches the observed
+    one (same features, same classifier with `trees` trees)."""
+    if not rounds or observed_bal is None:
         return None
     rng = np.random.default_rng(seed)
     hits = 0
     for _ in range(rounds):
-        yp = rng.permutation(y)
-        if attack(X, yp, seed)["accuracy"] >= observed_acc:
+        yp = rng.permutation(np.asarray(y, dtype=object))
+        b = attack(X, yp, seed, trees)["balanced"]
+        if b is not None and b >= observed_bal:
             hits += 1
     return (hits + 1) / (rounds + 1)
 

@@ -21,6 +21,9 @@ construction, with a machine-checked guarantee:
   distribution, and that it computes the original program's results when padding is
   transparent. The proof uses no axioms beyond Lean's `propext` and `Quot.sound`.
 
+**Continuing this work? Start with [`docs/HANDOFF.md`](docs/HANDOFF.md)**, which covers
+the current status, how to resume the experiments, and how to finalize the paper.
+
 The paper is [`paper/main.tex`](paper/main.tex) ([PDF](paper/main.pdf)). Every number
 in it is generated from the raw run records by the scripts in `experiments/`.
 

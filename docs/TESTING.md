@@ -80,17 +80,39 @@ call reporting exactly T input and N output tokens. The in-band run, recorded in
 `experiments/results/transparency-inband.json`, tests the forced-decoding half on an
 in-band padded prompt: 120 of 120 cases equal, 120 of 120 exact counts.
 
-## 6. Workflow experiments (about 13 CPU hours)
+## 6. Workflow experiments (about 16 CPU hours including the replication)
 
 ```bash
-bash experiments/run_all.sh out/runs
+bash experiments/resume.sh out/runs      # background, resumable; or run_all.sh in the foreground
 ```
 
 Resumable; see `docs/REPRODUCE.md` for the aggregation and paper build. Run nothing
 else CPU-intensive at the same time: llama.cpp uses all cores, and concurrent jobs
 distort latency measurements.
 
-## 7. Legacy prototype
+## 7. Analyses on the recorded runs (minutes)
+
+```bash
+python experiments/cap_tuning.py out/runs --output out/cap-tuning.json
+python experiments/aggregate.py out/runs paper/generated --perm 200 \
+    --mutation out/mutation.json --differential out/differential.json --transparency out/runs/transparency.json
+python experiments/figures.py paper/generated/results.json paper/figures/leakage.pdf
+python experiments/export_otel.py out/runs/email/orig.jsonl out/otel-email.jsonl
+```
+
+- `cap_tuning.py`: cost and truncation when output caps are set from profiling
+  quantiles. Every tuned program is re-validated in Lean.
+- `aggregate.py`: attacks (class-balanced random forest, 5-fold cross-validation),
+  balanced accuracy, I(Y;Ŷ), and with `--perm N` one-sided permutation p-values for
+  the undefended attacks and for shaped runs with latency features; costs; function
+  with exact McNemar tests; per-run conformance against the Lean static shape.
+- `figures.py`: the leakage figure.
+- `export_otel.py`: content-free OpenTelemetry GenAI spans, which are the attacker's view.
+
+`experiments/finalize.sh` runs all of the above together with checks 1–4 and rebuilds
+the paper; see `docs/HANDOFF.md`.
+
+## 8. Legacy prototype
 
 ```bash
 cd legacy/v1 && make check && python -m unittest discover -s tests -p "test_*.py"
