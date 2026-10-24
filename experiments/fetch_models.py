@@ -2,7 +2,7 @@
 
 Usage: python experiments/fetch_models.py MODEL_DIR [--all]
 By default fetches the two Llama 3.2 models used by the evaluated workflows;
---all also fetches the Qwen 2.5 models used in the pilots.
+--all also fetches the Qwen 2.5 models used in the pilots and the replication.
 """
 from __future__ import annotations
 
@@ -23,9 +23,11 @@ MODELS = {
 }
 PILOT = {
     "qwen0.5b": ("Qwen/Qwen2.5-0.5B-Instruct-GGUF", "9217f5db79a29953eb74d5343926648285ec7e67",
-                 "qwen2.5-0.5b-instruct-q4_k_m.gguf", "qwen2", None),
+                 "qwen2.5-0.5b-instruct-q4_k_m.gguf", "qwen2",
+                 "74a4da8c9fdbcd15bd1f6d01d621410d31c6fc00986f5eb687824e7b93d7a9db"),
     "qwen1.5b": ("Qwen/Qwen2.5-1.5B-Instruct-GGUF", "91cad51170dc346986eccefdc2dd33a9da36ead9",
-                 "qwen2.5-1.5b-instruct-q4_k_m.gguf", "qwen2", None),
+                 "qwen2.5-1.5b-instruct-q4_k_m.gguf", "qwen2",
+                 "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e"),
 }
 STOPS = {"llama3": ["<|eot_id|>", "<|eom_id|>", "<|end_of_text|>"], "qwen2": ["<|im_end|>", "<|endoftext|>"]}
 
