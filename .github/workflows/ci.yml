@@ -1,0 +1,31 @@
+name: ci
+on:
+  push:
+  pull_request:
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install Python dependencies
+        run: |
+          pip install numpy scikit-learn jinja2
+      - name: Install Lean 4.19.0
+        run: |
+          curl -sSfL https://github.com/leanprover/lean4/releases/download/v4.19.0/lean-4.19.0-linux.tar.zst -o lean.tar.zst
+          tar --zstd -xf lean.tar.zst
+          echo "$PWD/lean-4.19.0-linux/bin" >> "$GITHUB_PATH"
+      - name: Check proofs
+        run: |
+          lean proof/ShapeCore.lean | tee lean.out
+          ! grep -q sorryAx lean.out
+      - name: Unit tests
+        run: python -m unittest discover -s tests -v
+      - name: Differential test (compiler, runtime and Lean validator)
+        run: LEAN=lean python experiments/differential.py --programs 300 --runs 2 --output diff.json
+      - name: Legacy prototype
+        working-directory: legacy/v1
+        run: make check
