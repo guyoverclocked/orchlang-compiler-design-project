@@ -66,9 +66,11 @@ class Backend:
     def encode_plain(self, text: str) -> List[int]: ...
     def decode(self, ids: List[int]) -> str: ...
     def generate(self, prompt: str, max_tokens: int, seed: int, forced: bool,
-                 cap: Optional[int] = None) -> Tuple[List[int], str, int]:
+                 cap: Optional[int] = None, pad_tokens: int = 0) -> Tuple[List[int], str, int]:
         """Returns (generated ids, visible text, prompt token count). The
-        visible text stops at the first stop token and at `cap` tokens."""
+        visible text stops at the first stop token and at `cap` tokens.
+        `pad_tokens` are processed and billed as part of the request but
+        evaluated in an attention-isolated pass the response cannot see."""
         ...
 
 
@@ -96,8 +98,19 @@ class LlamaBackend(Backend):
     def decode(self, ids):
         return self.m.detokenize(ids).decode("utf-8", errors="ignore")
 
-    def generate(self, prompt, max_tokens, seed, forced, cap=None):
+    def isolated_prefill(self, n: int) -> None:
+        """Process n filler tokens in a context the response never attends to."""
+        if n <= 0:
+            return
+        unit = self.encode_plain(self.profile.filler)[-1]
+        self.m.reset()
+        for i in range(0, n, 512):
+            self.m.eval([unit] * min(512, n - i))
+        self.m.reset()
+
+    def generate(self, prompt, max_tokens, seed, forced, cap=None, pad_tokens=0):
         toks = self.encode(prompt)
+        self.isolated_prefill(pad_tokens)
         self.m.reset()
         self.m.set_seed(seed)
         out: List[int] = []
@@ -118,7 +131,7 @@ class LlamaBackend(Backend):
         if cap is not None:
             vis = vis[:cap]
         self.last_natural = len(out) if visible_end is None else visible_end
-        return out, self.decode(vis), len(toks)
+        return out, self.decode(vis), len(toks) + pad_tokens
 
 
 class MockBackend(Backend):
@@ -147,11 +160,10 @@ class MockBackend(Backend):
 
     def visible(self, prompt):
         t = self.profile.tmpl
-        pat = (re.escape(t.pad_open) + "(?:" + re.escape(self.profile.filler) + ")*" + re.escape(t.pad_close)
-               + re.escape(t.generation) + "$")
-        return re.sub(pat, t.generation, prompt, flags=re.S)
+        pat = re.escape(t.pad_open) + "(?:" + re.escape(self.profile.filler) + ")*" + re.escape(t.pad_close)
+        return re.sub(pat, "", prompt, count=1, flags=re.S)
 
-    def generate(self, prompt, max_tokens, seed, forced, cap=None):
+    def generate(self, prompt, max_tokens, seed, forced, cap=None, pad_tokens=0):
         rng = random.Random(hashlib.sha256(f"{self.visible(prompt)}|{seed}".encode()).digest())
         limit = cap if cap is not None else max_tokens
         natural = rng.randint(1, max(1, limit))
@@ -164,42 +176,63 @@ class MockBackend(Backend):
             ids = [ord(c) for c in text]
         self.last_natural = len(ids)
         if forced:
-            return ids + [0] * (max_tokens - len(ids)), text, self.count(prompt)
-        return ids, text, self.count(prompt)
+            return ids + [0] * (max_tokens - len(ids)), text, self.count(prompt) + pad_tokens
+        return ids, text, self.count(prompt) + pad_tokens
 
 
 # ---------------------------------------------------------------- padding
 
 class Padder:
-    """padReq: truncate the final user content if needed, then add a padding
-    message of filler units so the request has exactly `target` tokens."""
+    """padReq: bring a request to exactly `target` tokens.
+
+    mode "isolated" (default): the request text is kept (its last turn is
+    shortened only if it exceeds the target) and the remaining tokens are
+    processed and billed by the serving system in an attention-isolated pass,
+    so the model sees exactly the original prompt.
+    mode "inband": a padding turn of filler units is inserted into the prompt
+    itself (for APIs that accept only text), right after the first turn or,
+    with position "end", just before the assistant header. Turn delimiters are
+    special tokens, so counts are additive across the padding turn.
+    Returns (text, isolated_pad_tokens, truncated)."""
 
     def __init__(self, backend: Backend):
         self.b = backend
         self.t = backend.profile.tmpl
-        unit = backend.profile.filler
-        self.unit = unit
+        self.unit = backend.profile.filler
+        self.mode = getattr(backend.profile, "pad_mode", "isolated")
+        self.position = getattr(backend.profile, "pad_position", "end")
+        self.close = self.t.turn.split("{content}")[1]
 
-    def pad(self, request: str, target: int) -> Tuple[str, bool]:
+    def pad(self, request: str, target: int) -> Tuple[str, int, bool]:
         gen = self.t.generation
         assert request.endswith(gen), "request must end with the generation header"
         head = request[: -len(gen)]
-        wrap_open, wrap_close = self.t.pad_open, self.t.pad_close
         truncated = False
+        if self.mode == "isolated":
+            while self.b.count(head + gen) > target:
+                truncated = True
+                head = self._shorten(head)
+            text = head + gen
+            return text, target - self.b.count(text), truncated
+        wrap_open, wrap_close = self.t.pad_open, self.t.pad_close
 
         def build(h, k):
-            return h + wrap_open + self.unit * k + wrap_close + gen
+            pad = wrap_open + self.unit * k + wrap_close
+            if self.position == "end":
+                return h + pad + gen
+            i = h.find(self.close)
+            i = len(h) if i < 0 else i + len(self.close)
+            return h[:i] + pad + h[i:] + gen
 
         while self.b.count(build(head, 0)) > target:
             truncated = True
             head = self._shorten(head)
-        base = self.b.count(build(head, 0))
-        k = target - base
+        k = target - self.b.count(build(head, 0))
         for _ in range(64):
             cand = build(head, k)
             c = self.b.count(cand)
             if c == target:
-                return cand, truncated
+                return cand, 0, truncated
             k += target - c
             if k < 0:
                 head = self._shorten(head)
@@ -248,10 +281,10 @@ class Runtime:
         return RunResult(self.store, self.trace, self.truncations)
 
     def _llm(self, model: str, prompt: str, n: int, seed: int, forced: bool, dummy=False, cap=None,
-             site=0) -> str:
+             site=0, pad_tokens=0) -> str:
         b = self.backends[model]
         t0 = time.perf_counter()
-        ids, visible, ptoks = b.generate(prompt, n, seed, forced, cap)
+        ids, visible, ptoks = b.generate(prompt, n, seed, forced, cap, pad_tokens)
         dt = time.perf_counter() - t0
         self.trace.append(Record("llm", model, ptoks, len(ids), dt, dummy, site,
                                  getattr(b, "last_natural", len(ids))))
@@ -273,13 +306,14 @@ class Runtime:
                 self.store[s.x] = self._llm(s.model, req, s.max_tokens, seed, False, site=s.site)
             else:
                 t, n = s.pad
-                padded, trunc = self.padders[s.model].pad(req, t)
+                padded, iso, trunc = self.padders[s.model].pad(req, t)
                 self.truncations += trunc
-                self.store[s.x] = self._llm(s.model, padded, n, seed, True, cap=s.max_tokens, site=s.site)
+                self.store[s.x] = self._llm(s.model, padded, n, seed, True, cap=s.max_tokens, site=s.site,
+                                            pad_tokens=iso)
             return
         if isinstance(s, C.Dummy):
-            padded, _ = self.padders[s.model].pad(self.dummy_request(s.model), s.t)
-            self._llm(s.model, padded, s.n, 0, True, dummy=True)
+            padded, iso, _ = self.padders[s.model].pad(self.dummy_request(s.model), s.t)
+            self._llm(s.model, padded, s.n, 0, True, dummy=True, pad_tokens=iso)
             return
         if isinstance(s, C.Tool):
             arg = C.eval_expr(self.store, s.arg)
@@ -316,5 +350,6 @@ class Runtime:
     def _random_pad(self, model: str, req: str) -> str:
         p = self.padders[model]
         extra = self.rng.randint(0, self.random_pad)
-        return p.pad(req, self.backends[model].count(p.t.pad_open + p.t.pad_close) + extra
-                     + self.backends[model].count(req))[0]
+        text, iso, _ = p.pad(req, self.backends[model].count(p.t.pad_open + p.t.pad_close) + extra
+                             + self.backends[model].count(req))
+        return text

@@ -1,0 +1,126 @@
+routing end joke 'joke' "I'm sorry but"
+routing end joke 'joke' "I couldn't find"
+routing end story 'poem' 'I cannot create or'
+routing end joke 'joke' 'I can’t provide'
+routing end story 'poem' 'I cannot create content'
+routing end joke 'joke' "I'm sorry but"
+routing end poem 'Poem' 'I can’t provide'
+routing end story 'poem' 'I can try to'
+routing end poem 'poem' 'I cannot provide content'
+routing end story 'poem' 'I cannot create content'
+routing end joke 'joke' "I'm sorry but"
+routing end story 'poem' 'I cannot provide a'
+routing end joke 'joke' 'I cannot create content'
+routing end story 'poem' 'I cannot create content'
+routing end poem 'poem' 'I can try to'
+routing end joke 'joke' 'I cannot create content'
+routing end story 'poem' 'Kozalin'
+routing end story 'poem' 'I cannot create content'
+routing end joke 'joke' 'joke'
+routing end poem 'poem' 'I cannot create content'
+switch end unknown "I can't assist with that reque" "I can't help with this request"
+switch end order_search 'Based on the given query, I wo' "Based on the user's query, it "
+switch end order_search "Based on the user's query, it " "I can't help you with this."
+switch end product_info "Based on the user's query, I w" "Based on the user's query, I w"
+switch end product_info 'Based on the query, it seems t' "I can't help you with this."
+switch end product_info "I can't assist with that reque" "I can't help with this request"
+switch end order_search "Based on the user's query, I w" "I can classify the user's inte"
+switch end unknown 'I cannot provide information o' "I can't help with this request"
+switch end product_info "Based on the user's query, I w" "I can't help with this request"
+switch end product_info "Based on the user's query, I w" 'It seems like the user is sear'
+switch end product_info 'Based on the given information' "I can't help you with this."
+switch end order_search 'Based on the given query, I wo' "I can classify the user's inte"
+switch end order_search "Based on the user's query, I w" "I can't help you with this com"
+switch end order_search "Based on the user's query, I w" "I can classify the user's inte"
+switch end order_search "Based on the user's query, I w" "I can't help you with this."
+switch end unknown "Based on the user's query, I w" 'It looks like the user is sear'
+switch end unknown "Based on the user's query, I w" "Based on the user's query, it "
+switch end product_info "Based on the user's query, I w" 'It seems like the user is sear'
+switch end unknown "I can't assist with that reque" "I can't help with this request"
+switch end order_search "Based on the user's query, I w" "I can't assist with this reque"
+routing after_system joke 'joke' 'What did Nassarius'
+routing after_system joke 'joke' 'Why did Brus'
+routing after_system story 'poem' 'poem'
+routing after_system joke 'joke' "I couldn't find"
+routing after_system story 'poem' 'poem'
+routing after_system joke 'joke' "I'm sorry I"
+routing after_system poem 'Poem' 'Golden wheels shine bright'
+routing after_system story 'poem' 'Puig de Past'
+routing after_system poem 'poem' "In twilight's h"
+routing after_system story 'poem' 'It was a crisp'
+routing after_system joke 'joke' "I'd be happy"
+routing after_system story 'poem' 'poem'
+routing after_system joke 'joke' 'Why did the E'
+routing after_system story 'poem' 'poem'
+routing after_system poem 'poem' "In Tokyo's vibrant"
+routing after_system joke 'joke' 'Why did Honda Ball'
+routing after_system story 'poem' 'poem'
+routing after_system story 'poem' 'In the scorch'
+routing after_system joke 'joke' 'Why did the Glo'
+routing after_system poem 'poem' "In Warren Township's"
+switch after_system unknown "I can't assist with that reque" "I can't assist with that reque"
+switch after_system order_search 'Based on the given query, I wo' 'Based on the given information'
+switch after_system order_search "Based on the user's query, it " "I can't provide assistance on "
+switch after_system product_info "Based on the user's query, I w" "Based on the user's query, I w"
+switch after_system product_info 'Based on the query, it seems t' 'Based on the search query "can'
+switch after_system product_info "I can't assist with that reque" "I can't help with that."
+switch after_system order_search "Based on the user's query, I w" "Based on the user's query, I w"
+switch after_system unknown 'I cannot provide information o' "I can't provide assistance wit"
+switch after_system product_info "Based on the user's query, I w" "I can't provide assistance on "
+switch after_system product_info "Based on the user's query, I w" "Based on the query, the user's"
+switch after_system product_info 'Based on the given information' 'Based on the given information'
+switch after_system order_search 'Based on the given query, I wo' 'Based on the given information'
+switch after_system order_search "Based on the user's query, I w" "I can classify the user's inte"
+switch after_system order_search "Based on the user's query, I w" "Based on the user's query, I w"
+switch after_system order_search "Based on the user's query, I w" "Based on the user's query, I w"
+switch after_system unknown "Based on the user's query, I w" "Based on the user's query, I w"
+switch after_system unknown "Based on the user's query, I w" "Based on the user's query, I w"
+switch after_system product_info "Based on the user's query, I w" 'Based on the given information'
+switch after_system unknown "I can't assist with that reque" "I can't assist with that reque"
+switch after_system order_search "Based on the user's query, I w" "I can classify the user's inte"
+routing in_system joke 'joke' 'What did Nassarius'
+routing in_system joke 'joke' 'Why did the tourist'
+routing in_system story 'poem' 'poem'
+routing in_system joke 'joke' 'Joke: Why'
+routing in_system story 'poem' 'poem'
+routing in_system joke 'joke' "I'm sorry I"
+routing in_system poem 'Poem' 'Golden wheels shine bright'
+routing in_system story 'poem' 'poem'
+routing in_system poem 'poem' "Here's a poem"
+routing in_system story 'poem' 'poem'
+routing in_system joke 'joke' 'Pseudophal'
+routing in_system story 'poem' 'poem'
+routing in_system joke 'joke' 'Why did the E'
+routing in_system story 'poem' 'poem'
+routing in_system poem 'poem' "In Kyoto's heart"
+routing in_system joke 'joke' 'Joke: Why'
+routing in_system story 'poem' 'poem'
+routing in_system story 'poem' 'poem'
+routing in_system joke 'joke' 'I can make you'
+routing in_system poem 'poem' 'poem\nIn'
+switch in_system unknown "I can't assist with that reque" "I can't assist with instructio"
+switch in_system order_search 'Based on the given query, I wo' 'Based on the given information'
+switch in_system order_search "Based on the user's query, it " "Based on the user's query, it "
+switch in_system product_info "Based on the user's query, I w" "Based on the user's query, I w"
+switch in_system product_info 'Based on the query, it seems t' 'Based on the query "can you gi'
+switch in_system product_info "I can't assist with that reque" "I can't assist with that reque"
+switch in_system order_search "Based on the user's query, I w" "Based on the user's query, I w"
+switch in_system unknown 'I cannot provide information o' "I can't provide assistance wit"
+switch in_system product_info "Based on the user's query, I w" "I can classify the user's inte"
+switch in_system product_info "Based on the user's query, I w" "Based on the user's query, I w"
+switch in_system product_info 'Based on the given information' 'Based on the given classificat'
+switch in_system order_search 'Based on the given query, I wo' 'Based on the given query, I wo'
+switch in_system order_search "Based on the user's query, I w" "Based on the user's query, I w"
+switch in_system order_search "Based on the user's query, I w" "Based on the user's query, I w"
+switch in_system order_search "Based on the user's query, I w" "Based on the user's query, I w"
+switch in_system unknown "Based on the user's query, I w" "Based on the user's query, I w"
+switch in_system unknown "Based on the user's query, I w" "Based on the user's query, I w"
+switch in_system product_info "Based on the user's query, I w" "Based on the user's query, I w"
+switch in_system unknown "I can't assist with that reque" 'I can sense the frustration in'
+switch in_system order_search "Based on the user's query, I w" "I can classify the user's inte"
+('routing', 'end') agree 0.65 acc_orig 0.60 acc_pad 0.25 n 20
+('switch', 'end') agree 0.85 acc_orig 0.40 acc_pad 0.30 n 20
+('routing', 'after_system') agree 0.60 acc_orig 0.60 acc_pad 0.20 n 20
+('switch', 'after_system') agree 0.65 acc_orig 0.40 acc_pad 0.50 n 20
+('routing', 'in_system') agree 0.70 acc_orig 0.60 acc_pad 0.30 n 20
+('switch', 'in_system') agree 0.75 acc_orig 0.40 acc_pad 0.50 n 20

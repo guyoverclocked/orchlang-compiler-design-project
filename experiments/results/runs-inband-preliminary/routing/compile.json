@@ -1,0 +1,231 @@
+{
+  "workflow": "Routing",
+  "source": "workflows/routing.orch",
+  "source_lines": 19,
+  "slots": {
+    "user_input": 0,
+    "raw": 1,
+    "decision": 2,
+    "answer": 3
+  },
+  "high": [
+    "user_input",
+    "raw",
+    "decision",
+    "answer"
+  ],
+  "findings": [
+    {
+      "kind": "secret-dependent-size",
+      "line": 12,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-branch",
+      "line": 15,
+      "detail": "branch on secret decision selects arms with different usage"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 15,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 17,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 19,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    }
+  ],
+  "calls": 4,
+  "original_lean": {
+    "static_shape": null,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+  },
+  "strategies": {
+    "ours": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            113,
+            4
+          ],
+          [
+            "tool",
+            "label_in"
+          ],
+          [
+            "llm",
+            "llama1b",
+            90,
+            192
+          ]
+        ],
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        2,
+        203,
+        196
+      ],
+      "shape_seconds": 0.0012622650000082558
+    },
+    "naive": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            113,
+            4
+          ],
+          [
+            "tool",
+            "label_in"
+          ],
+          [
+            "llm",
+            "llama1b",
+            90,
+            192
+          ],
+          [
+            "llm",
+            "llama1b",
+            89,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            89,
+            128
+          ]
+        ],
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        4,
+        381,
+        420
+      ],
+      "shape_seconds": 0.0009049950000132867
+    },
+    "uniform": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            113,
+            192
+          ],
+          [
+            "tool",
+            "label_in"
+          ],
+          [
+            "llm",
+            "llama1b",
+            113,
+            192
+          ]
+        ],
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        2,
+        226,
+        384
+      ],
+      "shape_seconds": 0.0008552049999934752
+    },
+    "padall": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            113,
+            4
+          ],
+          [
+            "tool",
+            "label_in"
+          ],
+          [
+            "llm",
+            "llama1b",
+            90,
+            192
+          ]
+        ],
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        2,
+        203,
+        196
+      ],
+      "shape_seconds": 0.0008148339999820564
+    }
+  },
+  "frontend_seconds": 0.7266142180000088,
+  "lean_seconds_batch": 4.162957688999995,
+  "pads": {
+    "1": [
+      113,
+      4
+    ],
+    "2": [
+      90,
+      192
+    ],
+    "3": [
+      90,
+      192
+    ],
+    "4": [
+      90,
+      192
+    ]
+  },
+  "caps": {
+    "1": 4,
+    "2": 192,
+    "3": 96,
+    "4": 128
+  },
+  "site_lines": {
+    "1": 12,
+    "2": 15,
+    "3": 17,
+    "4": 19
+  }
+}

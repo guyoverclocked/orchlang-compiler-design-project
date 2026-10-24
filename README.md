@@ -72,8 +72,10 @@ python experiments/run_workflow.py --workflow workflows/email.orch \
 ```
 
 The runner prints the detector's findings, validates all four shaping strategies in
-Lean, and records the usage trace of each run. See [`docs/REPRODUCE.md`](docs/REPRODUCE.md)
-for the full experiment pipeline.
+Lean, and records the usage trace of each run. See [`docs/TESTING.md`](docs/TESTING.md)
+for every check and how to run it, [`docs/REPRODUCE.md`](docs/REPRODUCE.md) for the
+full experiment pipeline, and [`experiments/results/`](experiments/results) for the
+recorded logs and results (the full nine-workflow evaluation is in progress).
 
 ## License
 

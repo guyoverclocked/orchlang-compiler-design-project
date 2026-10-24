@@ -77,6 +77,8 @@ class Profile:
     gguf: str
     template: str
     filler: str = " ."
+    pad_mode: str = "isolated"   # "isolated" (serving-side) or "inband" (filler turn in the prompt)
+    pad_position: str = "end"    # in-band only: "end" or "after_first"
     stop: List[str] = field(default_factory=list)
     bos: str = ""
 
@@ -131,7 +133,8 @@ def load_profiles(path: Optional[str] = None) -> Dict[str, Profile]:
         if not os.path.isabs(gguf):
             gguf = os.path.join(base, gguf)
         out[key] = Profile(key=key, gguf=gguf, template=cfg["template"],
-                           filler=cfg.get("filler", " ."), stop=cfg.get("stop", []))
+                           filler=cfg.get("filler", " ."), stop=cfg.get("stop", []),
+                           pad_mode=cfg.get("pad_mode", "isolated"), pad_position=cfg.get("pad_position", "end"))
     return out
 
 

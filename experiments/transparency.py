@@ -1,11 +1,14 @@
-"""Empirical check of the forced-decoding half of World.Transparent.
+"""Empirical check of World.Transparent and World.Conforms.
 
-For padded requests drawn from the evaluation datasets, natural generation
-capped at `cap` tokens is compared with forced generation of N > cap tokens
-whose visible part is cut at the first stop token and at `cap`. Both use the
-same randomness cell (seed), under greedy decoding and under sampling.
-Also records that every forced generation emitted exactly N tokens and every
-padded request had exactly T tokens (World.Conforms).
+For requests drawn from the evaluation datasets, natural generation on the
+original request, capped at `cap` tokens, is compared with the shaped call:
+the request padded to T tokens (isolated padding) and decoding forced to
+N > cap tokens, whose visible part is cut at the first stop token and at
+`cap`. Both use the same randomness cell (seed), under greedy decoding and
+under sampling. Equality is exactly the Transparency hypothesis. Also records
+that every padded call reported exactly T input and N output tokens
+(Conformance). With --mode inband, the natural generation is run on the
+in-band padded request instead, which tests only the forced-decoding half.
 """
 from __future__ import annotations
 
@@ -34,10 +37,12 @@ def main():
     ap.add_argument("--model", default="llama1b")
     ap.add_argument("--per", type=int, default=12)
     ap.add_argument("--output", required=True)
+    ap.add_argument("--mode", default="isolated", choices=["isolated", "inband"])
     args = ap.parse_args()
-    prof = M.load_profiles(args.models)[args.model]
+    from dataclasses import replace
+    prof = replace(M.load_profiles(args.models)[args.model], pad_mode=args.mode)
     rng = random.Random(3)
-    out = {"model": args.model, "cases": []}
+    out = {"model": args.model, "mode": args.mode, "cases": []}
     for temp in (0.0, 0.8):
         b = R.LlamaBackend(prof, n_ctx=2048, temperature=temp)
         pad = R.Padder(b)
@@ -49,10 +54,11 @@ def main():
                 cap = rng.choice([16, 48, 96])
                 n = cap + rng.choice([1, 32, 96])
                 target = b.count(req) + rng.choice([10, 100, 300])
-                padded, trunc = pad.pad(req, target)
+                padded, iso, trunc = pad.pad(req, target)
                 seed = rng.randrange(1 << 30)
-                ids_n, vis_n, pt_n = b.generate(padded, cap, seed, False)
-                ids_f, vis_f, pt_f = b.generate(padded, n, seed, True, cap=cap)
+                natural_prompt = req if args.mode == "isolated" else padded
+                ids_n, vis_n, pt_n = b.generate(natural_prompt, cap, seed, False)
+                ids_f, vis_f, pt_f = b.generate(padded, n, seed, True, cap=cap, pad_tokens=iso)
                 out["cases"].append({"workflow": name, "temperature": temp, "cap": cap, "forced": n,
                                      "target": target, "prompt_tokens": pt_f, "generated": len(ids_f),
                                      "natural_tokens": len(ids_n), "visible_equal": vis_n == vis_f,

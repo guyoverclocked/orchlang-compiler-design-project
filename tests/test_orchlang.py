@@ -128,12 +128,20 @@ class Runtime(unittest.TestCase):
         self.assertGreater(len(traces), 1)
 
     def test_padder_exact(self):
-        p = R.Padder(R.MockBackend(PROFILES["m"]))
+        from dataclasses import replace
         req = PROFILES["m"].tmpl.render([("user", "x" * 30)])
+        inband = R.Padder(R.MockBackend(replace(PROFILES["m"], pad_mode="inband")))
         for target in [20, 25, 40, 80]:
-            out, trunc = p.pad(req, target)
-            self.assertEqual(len(out), target)
+            out, iso, trunc = inband.pad(req, target)
+            self.assertEqual((len(out), iso), (target, 0))
             self.assertEqual(trunc, len(req) + 10 > target)
+        isolated = R.Padder(R.MockBackend(PROFILES["m"]))
+        for target in [20, 25, 40, 80]:
+            out, iso, trunc = isolated.pad(req, target)
+            self.assertEqual(len(out) + iso, target)
+            self.assertEqual(trunc, len(req) > target)
+            if not trunc:
+                self.assertEqual(out, req)
 
 
 if __name__ == "__main__":
@@ -164,6 +172,7 @@ class RealTemplates(unittest.TestCase):
                 self.assertEqual(ref, prof.tmpl.render(msgs), key)
 
     def test_padding_exact_with_real_tokenizer(self):
+        from dataclasses import replace
         from orchlang import models as M
         for key, prof in M.load_profiles(MODELS_JSON).items():
             if not os.path.exists(prof.gguf):
@@ -175,8 +184,10 @@ class RealTemplates(unittest.TestCase):
                 count = staticmethod(tok.count)
                 encode_plain = staticmethod(tok.encode_plain)
                 decode = staticmethod(tok.decode)
-            pad = R.Padder(B())
             req = prof.tmpl.render([("system", "Classify."), ("user", "Café résumé 你好 " * 20)])
-            for target in [60, 100, 150, 400]:
-                out, _ = pad.pad(req, target)
-                self.assertEqual(tok.count(out), target, (key, target))
+            for mode in ("inband", "isolated"):
+                B.profile = replace(prof, pad_mode=mode)
+                pad = R.Padder(B())
+                for target in [60, 100, 150, 400]:
+                    out, iso, _ = pad.pad(req, target)
+                    self.assertEqual(tok.count(out) + iso, target, (key, mode, target))
