@@ -872,6 +872,20 @@ theorem validateProgram_sound (w : World) (hw : w.Conforms) (Γ : Ctx) (orig pad
       (exec w ω padded ⟨σ, fun _ => 0, []⟩).store = (exec w ω (erase orig) ⟨σ, fun _ => 0, []⟩).store) :=
   validate_sound w hw Γ _ orig padded hv
 
+/-- End-to-end form: if every declared secret input is labelled high, runs from
+    stores that differ only in declared secret inputs emit identical traces. -/
+theorem secret_inputs_sound (w : World) (hw : w.Conforms) (Γ : Ctx) (orig padded : Stmt)
+    (secrets : List Var) (hs : ∀ x, x ∈ secrets → Γ x = .high)
+    (hv : validateProgram Γ orig padded = true) (σ τ : Store)
+    (hdiff : ∀ x, x ∉ secrets → σ x = τ x) (ω : Nat → Nat → Nat) :
+    (exec w ω padded ⟨σ, fun _ => 0, []⟩).trace = (exec w ω padded ⟨τ, fun _ => 0, []⟩).trace := by
+  apply (validateProgram_sound w hw Γ orig padded hv).1
+  intro x hx
+  apply hdiff x
+  intro hmem
+  rw [hs x hmem] at hx
+  cases hx
+
 -- A secret router whose arms make different calls is rejected until shaped.
 private def Γex : Ctx := fun x => if x = 0 then .high else if x = 1 then .high else .low
 private def leaky : Stmt :=
@@ -896,6 +910,7 @@ private def shaped : Stmt :=
 #print axioms erase_correct
 #print axioms validate_sound
 #print axioms validateProgram_sound
+#print axioms secret_inputs_sound
 
 end OrchLang.Shape
 
@@ -965,6 +980,10 @@ def checkJson (j : Json) : Except String Json := do
   let Γ : Ctx := fun x => if high.contains x then .high else .low
   let orig ← decodeStmt 4096 (← j.getObjVal? "original")
   let padded ← decodeStmt 4096 (← j.getObjVal? "padded")
+  let secrets ← match j.getObjVal? "secret_inputs" with
+    | .ok v => decodeCtx v
+    | .error _ => pure []
+  let secretsHigh := secrets.all high.contains
   let erased := clean (erase padded) == clean (erase orig)
   let typed := wt Γ .low padded
   let sites := sitesOK Γ (fun i => (highSites Γ .low padded).contains i) .low padded
@@ -973,7 +992,8 @@ def checkJson (j : Json) : Except String Json := do
         | .llm m i o => toJson ([toJson "llm", toJson m, toJson i, toJson o] : List Json)
         | .tool t => toJson ([toJson "tool", toJson t] : List Json))
     | none => Json.null
-  pure (Json.mkObj [("accepted", Json.bool (validateProgram Γ orig padded)),
+  pure (Json.mkObj [("accepted", Json.bool (validateProgram Γ orig padded && secretsHigh)),
+    ("secrets_high", Json.bool secretsHigh),
     ("erasure_matches", Json.bool erased), ("padding_discipline", Json.bool typed),
     ("randomness_sites", Json.bool sites), ("caps", Json.bool (capsOK padded)),
     ("static_shape", shapeJson)])

@@ -13,8 +13,11 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 CHECKER = os.path.join(os.path.dirname(HERE), "proof", "ShapeCore.lean")
 
 
-def payload(high: List[int], original: C.Stmt, padded: C.Stmt) -> Dict:
-    return {"high": high, "original": C.stmt_json(original), "padded": C.stmt_json(padded)}
+def payload(high: List[int], original: C.Stmt, padded: C.Stmt, secrets: List[int] = ()) -> Dict:
+    """`secrets` are the declared secret input variables; the validator also checks
+    that each is labelled high (theorem secret_inputs_sound)."""
+    return {"high": high, "original": C.stmt_json(original), "padded": C.stmt_json(padded),
+            "secret_inputs": sorted(secrets)}
 
 
 def lean_validate_batch(items: List[Dict], lean: str = None) -> List[Dict]:

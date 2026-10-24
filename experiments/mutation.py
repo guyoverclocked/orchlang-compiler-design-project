@@ -111,7 +111,19 @@ def main():
                 if mutant == shaped:
                     continue
                 rows.append({"workflow": wf.name, "op": op, "path": list(p), "mutant": mutant, "prog": prog})
-                payloads.append(validate.payload(prog.high_vars(), prog.body, mutant))
+                payloads.append(validate.payload(prog.high_vars(), prog.body, mutant, prog.secret_inputs()))
+        # forget_secret: the compiler drops a declared secret input from its labelling
+        # and shapes consistently with the weaker labelling.
+        for x in prog.secret_inputs():
+            g0 = {y: (C.HIGH if y in prog.secret_inputs() and y != x else C.LOW) for y in prog.slots.values()}
+            g1 = K.infer_labels(prog.body, g0)
+            for y in prog.slots.values():
+                g1.setdefault(y, C.LOW)
+            weak = K.Program(prog.workflow, prog.slots, prog.body, g1, prog.site_lines, prog.site_caps,
+                             prog.var_bounds, prog.output)
+            mutant = K.Shaper(weak, profiles, toks, "ours").run()
+            rows.append({"workflow": wf.name, "op": "forget_secret", "path": [x], "mutant": mutant, "prog": prog})
+            payloads.append(validate.payload(weak.high_vars(), prog.body, mutant, prog.secret_inputs()))
     verdicts = validate.lean_validate_batch(payloads)
     # Mock responses draw words that drive the ported workflows' routing tests,
     # so that different secrets exercise different branches and loop counts.
@@ -120,13 +132,13 @@ def main():
                            "\nintent: billing", "\nintent: bug", "\nintent: question", "\nurgency: critical",
                            "\ngrade: not funny", "\nfeedback: shorter", "\nA :: b", " a", " b"]
     mock = {k: R.MockBackend(p, M.tokenizer_for(p.gguf)) for k, p in profiles.items() if os.path.exists(p.gguf)}
+    mock.update({k + "-other": b for k, b in list(mock.items())})  # target of the dummy_model operator
     summary, details = {}, []
     for row, v in zip(rows, verdicts):
         # Oracle: mock generation with the real tokenizers and templates.
         rt = R.Runtime(mock, dict(T.BASE, retrieve=lambda q: q[:20], web_search=lambda q: q[-20:]), {})
         try:
-            leak, changed = oracle(row["mutant"], row["prog"].body, secrets, rt,
-                                   [x for x, l in row["prog"].gamma.items() if l == C.HIGH and x < len(row["prog"].workflow.inputs)])
+            leak, changed = oracle(row["mutant"], row["prog"].body, secrets, rt, row["prog"].secret_inputs())
             err = None
         except Exception as e:  # mutants may violate runtime preconditions (e.g. unpadded high calls)
             leak, changed, err = None, None, type(e).__name__

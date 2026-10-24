@@ -91,9 +91,9 @@ def main():
         shaped = {s: K.Shaper(fp, {"m": PROFILE}, {"m": CharTok()}, s).run() for s in strategies}
         cases.append(dict(body=body, gamma=gamma, nin=nin, secret=secret, shaped=shaped, high=high,
                           leaky=bool(K.detect_core(fp))))
-        payloads.append(validate.payload(high, body, body))
+        payloads.append(validate.payload(high, body, body, sorted(secret)))
         for s in strategies:
-            payloads.append(validate.payload(high, body, shaped[s]))
+            payloads.append(validate.payload(high, body, shaped[s], sorted(secret)))
     t0 = time.time()
     verdicts = validate.lean_validate_batch(payloads)
     lean_seconds = time.time() - t0

@@ -43,7 +43,7 @@ def compile_all(src_path, profiles):
         shaped[s] = K.Shaper(prog, profiles, toks, s).run()
         t_shape[s] = time.perf_counter() - t1
     high = prog.high_vars()
-    payloads = [validate.payload(high, prog.body, prog.body)] + [validate.payload(high, prog.body, shaped[s]) for s in STRATEGIES]
+    payloads = [validate.payload(high, prog.body, prog.body, prog.secret_inputs())] + [validate.payload(high, prog.body, shaped[s], prog.secret_inputs()) for s in STRATEGIES]
     t2 = time.perf_counter()
     verdicts = validate.lean_validate_batch(payloads)
     t_lean = time.perf_counter() - t2

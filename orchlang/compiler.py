@@ -34,6 +34,9 @@ class Program:
     def high_vars(self) -> List[int]:
         return sorted(x for x, l in self.gamma.items() if l == C.HIGH)
 
+    def secret_inputs(self) -> List[int]:
+        return sorted(self.slots[i.name] for i in self.workflow.inputs if i.secret)
+
 
 # ---------------------------------------------------------------- lowering
 

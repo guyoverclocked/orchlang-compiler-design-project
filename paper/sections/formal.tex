@@ -33,7 +33,7 @@ $\mathit{outTok}_m(\rho)$ and pure tool functions. No property of these function
 \end{mathpar}
 with the evident rules for tools, sequencing and dummies. A second check (\lean{sitesOK}) requires that the call sites reached under $\mathit{pc}=\hi$ are disjoint from those reached under $\mathit{pc}=\lo$, so that the randomness cells read on secret paths never coincide with cells read on public paths. A third (\lean{capsOK}) requires $k \le N$ for every padded call.
 
-\paragraph{Validation.} The validator (\lean{validateProgram}) accepts a candidate $c'$ for the original $c$ if (i) $\Gamma \vdash_{\lo} c'$, (ii) the randomness-site check holds for the set of high sites computed from $c'$, (iii) $k \le N$ throughout, and (iv) erasing all padding annotations, dummies and padded flags from both programs and normalizing sequencing and \texttt{skip} yields syntactically identical programs (\lean{clean (erase c') == clean (erase c)}). Condition (iv) ensures the compiler only added padding; it did not reorder, drop or modify any call or tool.
+\paragraph{Validation.} The validator (\lean{validateProgram}) accepts a candidate $c'$ for the original $c$ if (i) $\Gamma \vdash_{\lo} c'$, (ii) the randomness-site check holds for the set of high sites computed from $c'$, (iii) $k \le N$ throughout, and (iv) erasing all padding annotations, dummies and padded flags from both programs and normalizing sequencing and \texttt{skip} yields syntactically identical programs (\lean{clean (erase c') == clean (erase c)}). Condition (iv) ensures the compiler only added padding; it did not reorder, drop or modify any call or tool. The labelling $\Gamma$ is itself produced by the untrusted compiler, so the executable checker additionally requires (v) that every input the source declares \kw{secret} is labelled $\hi$ in $\Gamma$; without this check, a compiler that forgot a secret could shape consistently with a weaker labelling and be accepted.
 
 \subsection{Theorems}\label{sec:theorems}
 
@@ -58,6 +58,10 @@ Assume Transparency. If the caps check holds for $c'$, then $c'$ and $\mathit{cl
 \begin{theorem}[Validator soundness; \lean{validateProgram\_sound}]
 If $\mathit{validateProgram}(\Gamma, c, c')$ returns true, then (a) under Conformance, $c'$ satisfies the conclusion of \cref{thm:ni}; and (b) under Transparency, $c'$ ends in the same store as the original program $c$ from every initial store and tape.
 \end{theorem}
+
+\begin{corollary}[End-to-end; \lean{secret\_inputs\_sound}]
+Assume Conformance. If the validator accepts $c'$ and every declared secret input is labelled $\hi$, then any two executions of $c'$ from stores that differ only in declared secret inputs emit identical usage traces, for every tape.
+\end{corollary}
 
 \paragraph{Proof structure.} The central lemma (\lean{shape\_exec}) states that under Conformance a statement with a static shape $s$ appends exactly $s$ to the trace from every state. Two confinement lemmas show that statements accepted under $\mathit{pc}=\hi$ write no $\lo$ variable (\lean{high\_store}) and advance no public site's counter (\lean{high\_count}). Noninterference then follows by induction over the program for $\mathit{pc}=\lo$: a call with a public request reads equal requests and equal randomness cells in both runs; a call with a secret request is padded and emits the same event; a secret conditional emits its shape in both runs whatever arm it takes; a public conditional takes the same arm; loops are handled by induction on the iteration bound. Functional preservation is a simulation between a program and its erasure that ignores the trace. The development is \leanLines{} lines including the executable JSON decoder and \lean{\#guard} regression tests that run at every check.
 

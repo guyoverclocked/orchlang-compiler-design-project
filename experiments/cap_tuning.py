@@ -98,7 +98,7 @@ def main():
             rows.append({"q": q, "price_ratio": price / test_price, "truncated_runs": trunc_runs / len(test),
                          "truncated_calls": trunc_calls / max(1, len(calls)), "calls": sc[0], "input": sc[1],
                          "output": sc[2]})
-            payloads.append(validate.payload(p2.high_vars(), body, shaped))
+            payloads.append(validate.payload(p2.high_vars(), body, shaped, prog.secret_inputs()))
             keys.append((wf, q))
         out[wf] = {"calibration": len(cal), "test": len(test), "test_price": test_price, "rows": rows}
     verdicts = validate.lean_validate_batch(payloads) if payloads else []
