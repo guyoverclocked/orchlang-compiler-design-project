@@ -1,6 +1,30 @@
 \section{Shaping Workflows}\label{sec:shaping}
 
-The shaping compiler rewrites a lowered program so that every statement that can run under secret control, or whose request is secret, has a usage footprint fixed at compile time. It has four mechanisms: exact input padding, forced output length, alignment of secret branches with dummy calls, and padding of secret loops.
+\begin{figure}[t]
+\centering
+\begin{tikzpicture}[node distance=4mm and 7mm, every node/.style={font=\footnotesize},
+  box/.style={draw, rounded corners=2pt, align=center, minimum height=8mm, inner sep=3pt},
+  trusted/.style={box, fill=black!8, thick}, arr/.style={-{Stealth[length=2mm]}}]
+\node[box] (src) {\sys\ source\\(labels, bounds)};
+\node[box, right=of src] (low) {lower, infer\\labels, detect};
+\node[box, right=of low] (shape) {shaping compiler\\(untrusted)};
+\node[trusted, right=of shape] (val) {Lean validator\\\lean{validateProgram}};
+\node[box, below=7mm of val] (rt) {runtime: exact padding,\\forced decoding, dummies};
+\node[box, left=of rt] (obs) {usage records\\(constant trace)};
+\node[box, below=7mm of low] (find) {leak findings\\with source lines};
+\draw[arr] (src) -- (low);
+\draw[arr] (low) -- node[above]{$c$, $\Gamma$} (shape);
+\draw[arr] (shape) -- node[above]{$c'$} (val);
+\draw[arr] (val) -- node[right]{accept} (rt);
+\draw[arr] (rt) -- (obs);
+\draw[arr] (low) -- (find);
+\draw[arr, dashed] (val.north) to[bend right=20] node[above]{shape $s$} (shape.north);
+\end{tikzpicture}
+\caption{Pipeline. The compiler is untrusted; the validator, proved sound in Lean, accepts a shaped program $c'$ for the original $c$ only if it satisfies the padding discipline and erases to $c$. The runtime checks every call's usage against the validator's static shape $s$.}
+\label{fig:pipeline}
+\end{figure}
+
+The shaping compiler (\cref{fig:pipeline}) rewrites a lowered program so that every statement that can run under secret control, or whose request is secret, has a usage footprint fixed at compile time. It has four mechanisms: exact input padding, forced output length, alignment of secret branches with dummy calls, and padding of secret loops.
 
 \subsection{Padding a call}\label{sec:padding}
 
