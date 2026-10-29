@@ -1,0 +1,69 @@
+// Port of LangGraph adaptive RAG (langchain-ai/langgraph@eb066bd, examples/rag/
+// langgraph_adaptive_rag.ipynb: router 175-215, graders 233-265 and later cells,
+// rewriter, edges 636-722). Structured outputs become one-word answers; the
+// router's corpus description names the indexed SQuAD v2 titles; the three
+// unbounded cycles are bounded (2 retrieval rounds, 2 generation rounds) and the
+// "not useful" back-edge retries generation instead of re-retrieving. Router and
+// graders use Llama-3.2-1B and generation/rewriting Llama-3.2-3B, mirroring
+// the original gpt-4o-mini / gpt-3.5-turbo split.
+workflow AdaptiveRAG {
+  input question: text secret max_tokens 48;
+  model small = "llama1b";
+  model big = "llama3b";
+  tool route_source(x) max_tokens 2;
+  tool retrieve(q) max_tokens 920;
+  tool web_search(q) max_tokens 690;
+  tool doc(d, i) max_tokens 230;
+  tool yes_no(x) max_tokens 1;
+  tool keep_relevant(d0, k0, d1, k1, d2, k2, d3, k3) max_tokens 920;
+  tool nonempty(x) max_tokens 1;
+  tool copy(x) max_tokens 690;
+  tool qcopy(x) max_tokens 48;
+  prompt route(question) = system "You are an expert at routing a user question to a vectorstore or web search.\nThe vectorstore contains documents related to 1973 oil crisis, Amazon rainforest, Black Death, Computational complexity theory, Geology, Harvard University, Imperialism, Intergovernmental Panel on Climate Change, Islamism, Jacksonville, Florida, Packet switching, Pharmacy, Prime number, Private school, Scottish Parliament, Steam engine, Yuan dynasty.\nUse the vectorstore for questions on these topics. Otherwise, use web-search.\nRespond with exactly one word: vectorstore or web_search." user "{question}";
+  prompt grade(document, question) = system "You are a grader assessing relevance of a retrieved document to a user question. \n \n    If the document contains keyword(s) or semantic meaning related to the user question, grade it as relevant. \n\n    It does not need to be a stringent test. The goal is to filter out erroneous retrievals. \n\n    Give a binary score 'yes' or 'no' score to indicate whether the document is relevant to the question.\nRespond with exactly one word: yes or no." user "Retrieved document: \n\n {document} \n\n User question: {question}";
+  prompt rag(question, context) = user "You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. Use three sentences maximum and keep the answer concise.\nQuestion: {question} \nContext: {context} \nAnswer:";
+  prompt hallucination(documents, generation) = system "You are a grader assessing whether an LLM generation is grounded in / supported by a set of retrieved facts. \n \n     Give a binary score 'yes' or 'no'. 'Yes' means that the answer is grounded in / supported by the set of facts.\nRespond with exactly one word: yes or no." user "Set of facts: \n\n {documents} \n\n LLM generation: {generation}";
+  prompt answer_grade(question, generation) = system "You are a grader assessing whether an answer addresses / resolves a question \n \n     Give a binary score 'yes' or 'no'. Yes' means that the answer resolves the question.\nRespond with exactly one word: yes or no." user "User question: \n\n {question} \n\n LLM generation: {generation}";
+  prompt rewrite(question) = system "You a question re-writer that converts an input question to a better version that is optimized \n \n     for vectorstore retrieval. Look at the input and try to reason about the underlying semantic intent / meaning." user "Here is the initial question: \n\n {question} \n Formulate an improved question.";
+  let r = call route(question) using small max_tokens 3;
+  let src = tool route_source(r);
+  let q = tool qcopy(question);
+  let docs = "";
+  let have = "no";
+  if src == "web" {
+    let docs = tool web_search(question);
+    let have = "yes";
+  }
+  repeat 2 until have == "yes" {
+    let cand = tool retrieve(q);
+    let d0 = tool doc(cand, "0");
+    let d1 = tool doc(cand, "1");
+    let d2 = tool doc(cand, "2");
+    let d3 = tool doc(cand, "3");
+    let g0 = call grade(d0, q) using small max_tokens 3;
+    let g1 = call grade(d1, q) using small max_tokens 3;
+    let g2 = call grade(d2, q) using small max_tokens 3;
+    let g3 = call grade(d3, q) using small max_tokens 3;
+    let k0 = tool yes_no(g0);
+    let k1 = tool yes_no(g1);
+    let k2 = tool yes_no(g2);
+    let k3 = tool yes_no(g3);
+    let docs = tool keep_relevant(d0, k0, d1, k1, d2, k2, d3, k3);
+    let have = tool nonempty(docs);
+    if have == "no" {
+      let q = call rewrite(q) using big max_tokens 48;
+    }
+  }
+  let done = "no";
+  let gen = "";
+  repeat 2 until done == "yes" {
+    let gen = call rag(q, docs) using big max_tokens 128;
+    let h = call hallucination(docs, gen) using small max_tokens 3;
+    let grounded = tool yes_no(h);
+    if grounded == "yes" {
+      let a = call answer_grade(question, gen) using small max_tokens 3;
+      let done = tool yes_no(a);
+    }
+  }
+  output gen;
+}

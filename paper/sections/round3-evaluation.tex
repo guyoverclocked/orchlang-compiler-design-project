@@ -1,0 +1,290 @@
+\section{Evaluation}\label{sec:evaluation}
+
+We answer five questions.
+\begin{description}
+\item[RQ1] Does the trusted implementation agree with the mechanized semantics?
+\item[RQ2] Does heuristic shaping preserve outputs and remove trace leakage on real models at scale?
+\item[RQ3] Do the certified guarantees hold in execution over every guard-admitted input?
+\item[RQ4] What does shaping cost, in heuristic and certified mode?
+\item[RQ5] How far does the logical guarantee extend toward the serving layer?
+\end{description}
+All inference is local and greedy, and every attempted pair stays in its
+denominator.
+
+\paragraph{Setup}
+The applications are bounded ports of nine public workflow patterns: routing,
+prompt chaining, evaluator--optimizer, orchestrator--worker, a prompt-flow switch,
+an email agent, a calculator agent, corrective RAG and adaptive RAG. They run on
+Llama~3.2~1B Instruct, with Llama~3.2~3B on the adaptive workflow's large-model
+path~\cite{meta2024llama32}. A Qwen~2.5~1.5B replication~\cite{qwen2024qwen25}
+re-targets the switch, email and corrective-RAG workflows, for twelve variants in
+total. All models use Q4\_K\_M GGUF weights pinned by SHA-256. We used Python 3.12.14,
+llama-cpp-python 0.3.36 and native llama.cpp build 11490 (\code{9c2e0e491}), with
+four CPU threads, batch size 128 and Vulkan offload to an NVIDIA RTX 5050 Laptop
+GPU. Seeds are fixed by dataset index and call site. The heuristic study ran from
+a clean checkout of the inference freeze \code{41a7d81} at a 4,096-token context.
+The certified study ran from the later clean commit \code{e90c7bc}, which adds the
+segmentation monitor, at a 21,504-token context. The analysis script
+\code{publication/analyze\_round3.py} regenerates every number below from the raw
+records.
+
+\subsection{RQ1: Implementation agreement}\label{sec:rq1}
+
+\paragraph{Operational correspondence}
+The Python runtime, an independent interpreter that imports neither compiler nor
+runtime, and Lean's executable \code{exec} run 150 generated programs plus a
+targeted template program in four store contexts, under two finite kernels and
+five program variants. They agree on all 6,320 executions and 604 validator
+checks. These audit worlds count characters; they test agreement of the
+implementations, not the native tokenizer.
+
+\paragraph{Differential testing}
+On 1,000 generated programs with random secret labellings, Lean accepts all 4,000
+shaped candidates. Python's mirror of the discipline agrees with Lean on all 1,000
+originals. All 16,000 paired executions have equal traces for public-equal stores
+and preserve the original store.
+
+\paragraph{Fault injection}
+Twelve operators model plausible shaping-compiler bugs, for example dropping a
+padding annotation, shrinking a target or removing a dummy. Applied to the twelve
+validated programs, they yield 210 mutants. Each mutant is checked by Lean and,
+independently, executed by a mock-runtime oracle under varied secrets. The oracle
+finds a leak in 79 mutants, and Lean rejects all 79. In total Lean rejects 192
+mutants, and no accepted mutant changes the original's outputs. The runtime refuses
+to execute the 26 mutants whose forced length undercuts the visible cap, and Lean
+rejects all 26 by its cap check.
+
+\paragraph{Serialization and tests}
+The serialization round trip covers 3,036 programs (Section~\ref{sec:impl-boundary}).
+All 52 configured tests pass with the pinned models and Lean configured. They
+include source binding, immutable resumption, model-indexed reservations,
+unsupported stop declarations, complete token-piece decoding, the pre-dispatch
+byte guard, the segmentation monitor and the astral-character boundary.
+
+\subsection{RQ2: Heuristic shaping at scale}\label{sec:rq2}
+
+The heuristic study contains all 1,172 main and 512 replication pairs at one
+frozen implementation. All \roundTwoPairs{} pairs complete with equal saved
+fields, and every shaped trace equals its static shape. An independent audit
+re-tokenizes all 3,368 complete requests, reconstructs visible prefixes, and
+reconciles \roundTwoCalls{} useful and cover model calls against per-model ledgers
+and local eval/yield records. A deliberately corrupted count is detected.
+
+\begin{table}[t]
+\centering\footnotesize
+\setlength{\tabcolsep}{3pt}
+\caption{Heuristic study (one frozen implementation). $K$: observed decision
+classes. BA: original-trace attack balanced accuracy in percent with a 95\%
+bootstrap interval over cross-validated predictions; $p$: label-permutation test
+(200 permutations). Tr.: distinct shaped traces. Cost: shaped/original weighted
+logical usage. Task: inherited task accuracy with a Wilson 95\% interval. (Q):
+Qwen replication. A dash marks no task scorer or a single decision class.}
+\label{tab:heuristic}
+\begin{tabular}{lrrlrrrl}\toprule
+Workflow & Pairs & $K$ & Orig.\ BA [95\% CI] & $p$ & Tr. & Cost & Task [95\% CI]\\\midrule
+\tabinput{generated/round3-primary.tex}
+\bottomrule\end{tabular}
+\end{table}
+
+\paragraph{Leakage}
+A class-balanced random forest predicts each run's decision (its useful-call path
+and decision variables) from the ordered model/tool identities, counts, event
+count and call count, with five-fold cross-validation. Table~\ref{tab:heuristic}
+reports its balanced accuracy on original traces. The attack predicts routing,
+chaining, evaluator, orchestrator and calculator decisions with at least 95
+percent balanced accuracy, and adaptive RAG with 83 percent. Corrective RAG, email
+and the Qwen switch and email variants leak substantially (56 to 75 percent; all
+$p<0.005$). The main switch attack is not
+distinguishable from chance ($p=0.20$), and the primary Qwen corrective-RAG
+port has a single observed decision. These two workflows are worst-case insurance
+rather than demonstrated leaks. After shaping, every workflow has exactly one
+trace, so no classifier can do better than a constant prediction. The
+classifiers illustrate the threat; the theorems carry the guarantee.
+
+\paragraph{Preservation}
+Shaping preserves task errors as well as successes. The inherited scorers give
+65.3, 37.6, 2.0, 34.0 and 53.3 percent for main routing, switch, calculator,
+corrective RAG and adaptive RAG. These bounded ports with 1--3B models do not
+reproduce upstream application accuracy, and the calculator remains a
+control-flow stress test.
+
+\subsection{RQ3: Certified execution over every admitted input}\label{sec:cert-study}
+
+\paragraph{Vocabulary scan}
+For the byte-bounded adapter we first scanned every vocabulary entry of the three
+pinned GGUFs through the complete native token-piece API: 128,256 entries for each
+Llama model and 151,936 for Qwen. All three vocabularies have a maximum raw piece
+length of 128 bytes, and each contains all 256 single-byte pieces. Each Llama
+vocabulary has 231 pieces longer than 32 bytes, and Qwen has 240. The scan found
+a real defect: the Python wrapper's fixed 32-byte buffer returned an empty piece
+for a 128-byte witness. The decoder now retries with the required buffer size.
+The response buffer is therefore $128k$ bytes for visible cap $k$. Input and tool
+buffers are four bytes per declared token annotation, a chosen policy rather than
+a conversion theorem.
+
+\paragraph{Protocol}
+For each variant, the frontend derives slot bounds from all source assignments,
+sizes every target with $E_v$, exports the candidate and bounds to Lean's
+\code{staticCertificate}, and separately runs source-bound validation. All twelve
+candidates pass both checks at context 21,504. We then ran \emph{every} planned
+input: the guard refuses oversized inputs before any dispatch, and both arms run
+under the same byte interface for every admitted input.
+
+\begin{table}[t]
+\centering\scriptsize
+\setlength{\tabcolsep}{2.2pt}
+\caption{Certified study over all planned inputs. Pairs: executed/planned (the
+remainder is refused by the input guard). Saved, Shape: pairs with equal saved
+fields and with the certified shape. Seg.: requests whose tokenization passed
+the segmentation check (Lemma~\ref{lem:seg}). Clip: pairs with any byte clip.
+Heur.: bounded originals whose saved fields equal the heuristic study's original
+for the same ID and seed. Cost: certified/original weighted logical usage; /H:
+certified relative to heuristic shaped usage.}
+\label{tab:certified}
+\begin{tabular}{lrrrrrrrrr}\toprule
+Variant & Pairs & Saved & Shape & Seg. & Clip & Heur. & Max $T{+}N$ & Cost & /H\\\midrule
+\tabinput{generated/round3-certified.tex}
+\bottomrule\end{tabular}
+\end{table}
+
+\paragraph{Results}
+Table~\ref{tab:certified} reports the outcome. Of \rThreeCertPlanned{} planned
+inputs, the guard refuses \rThreeCertRefused{} before dispatch, and all
+\rThreeCertPairs{} admitted pairs complete. All \rThreeCertSaved{} have equal saved
+fields, and \rThreeCertShape{} emit their certified shape. Every one of the
+\rThreeCertCalls{} executed model requests passed the segmentation check
+(\rThreeCertSegmented{} of \rThreeCertCalls{}), so the tokenizer premise of the
+certified theorems was never violated. No request was refused after the first
+dispatch. Response buffers clipped \rThreeCertLlmClips{} responses and tool buffers
+clipped \rThreeCertToolClips{} tool results, affecting \rThreeCertClippedPairs{}
+pairs. Both arms are clipped identically, so preservation is unaffected, but the
+bounded interface is a different application. Only \rThreeCertSameOrig{} of
+\rThreeCertShared{} bounded originals have the same saved fields as the unbounded
+heuristic-study originals with the same seed. The differences concentrate in the
+workflows whose tools return retrieved passages or long intermediate results
+(evaluator, orchestrator, corrective and adaptive RAG). There the declared tool
+annotation, at four bytes per token, is shorter than typical tool output. Adaptive
+RAG clips a retrieval result in every pair, and none of its 60 bounded originals
+matches the unbounded one. Routing, switch, email and calculator are essentially
+unchanged. A tool bound is therefore an
+application decision: raising it reduces clipping but enlarges every downstream
+envelope (RQ4). A retained earlier attempt at a 32,768-token context completed
+16 pairs before device-memory allocation failed in the adaptive workflow.
+Token-context admission does not bound device memory.
+
+\subsection{RQ4: Cost}\label{sec:costs}
+
+\paragraph{Heuristic mode}
+With input weight one and output weight four, the main-study median cost is
+\rThreeMedianCost{} times original usage, ranging from \roundTwoMin{} to
+\roundTwoMax{}. Without the calculator stress test the median is
+\rThreeMedianCostNoCalc{}. Recompiling at output weights 0.25, 1, 2, 4, 8 and 16
+accepts all 72 candidates and leaves every variant's shape unchanged. Static
+recompilation on the records gives zero median saving against all-branches cover
+execution (52 percent at most). Uniform model cells save 16 percent at the median
+and 59 percent at most.
+
+\paragraph{Certified mode}
+The main-study median certified cost is \rThreeCertMedianCost{} times original
+usage, or \rThreeCertOverHeuristic{} times the heuristic shaped usage, and it
+varies by two orders of magnitude across workflows (Table~\ref{tab:certified}).
+Flat workflows (routing, switch, email, orchestrator) cost two to four times their
+originals. Workflows that feed generated text into later prompts cost far more:
+chaining reaches about $104\times$ and calculator about $47\times$. The cause is
+compounding worst cases. A response of visible cap $k$ is bounded by $128k$ bytes,
+the longest native token piece, and under $\alpha=1$ each such byte reserves an
+input token in every later request that contains the response. A typical
+response uses a few bytes per token, so most of the reserved envelope is filler.
+This is the price of an admission proof that holds for \emph{every} guarded
+trajectory, with no lookahead. Three levers reduce it, each with a stated cost:
+\begin{itemize}
+\item a smaller response buffer, which clips more responses;
+\item a tokenizer constant below one token per byte, which byte-level BPE does not
+provide for arbitrary text;
+\item heuristic admission, which keeps the per-call refusal channel of
+Section~\ref{sec:refusal}.
+\end{itemize}
+The certified mode is thus practical for shallow workflows. For deep chains it
+quantifies what a worst-case guarantee costs.
+
+\paragraph{Timing}
+Shaping does not equalise time. A retained latency-augmented attack reaches 100
+percent balanced accuracy on one shaped workflow, which is why the observer
+excludes per-event timestamps.
+
+\subsection{RQ5: Toward the serving layer}\label{sec:native}
+
+Isolated padding makes the wrapper's report truthful but leaves two native
+submissions visible. We implemented a separate greedy prototype that issues one
+\code{llama\_decode} batch of exactly 128 tokens. Useful request tokens occupy
+sequence 0 and filler occupies sequence 1, each with its own positions, and only
+the last useful token requests logits. Subsequent decode submissions contain one
+token each. Sequence membership isolates attention through the native batch
+interface~\cite{llamacpp2026batch}. The experiment covers two model families, three
+prompt bodies (empty, short, multilingual), visible caps 4 and 16, and forced
+length 24, on CPU. Table~\ref{tab:native} keeps every attempt.
+
+\begin{table}[t]
+\centering\footnotesize
+\caption{Native-prefill prototype, 12 cases per configuration. Single: one exact
+128-token prefill. Equal: visible output equals natural unpadded generation.
+Metadata: sequence IDs recover the useful request length.}
+\label{tab:native}
+\begin{tabular}{lrrrr}\toprule
+Native microbatch & Done & Single & Equal & Metadata\\\midrule
+\tabinput{generated/round2-native.tex}
+\bottomrule\end{tabular}
+\end{table}
+
+Natural native-size traces take four distinct values per model; the shaped
+projection takes one (128 followed by 23 single-token decodes). Report
+normalization above the API cannot produce this projection. Two negative results
+bound the claim. First, sequence and logit metadata still identify the useful
+tokens in every case, so a server that sees full batch metadata learns the request
+length. Second, with microbatch 128 one Qwen case changes its visible output, and
+removing the cover cache does not repair it. Microbatch 1 preserves all twelve
+outputs. $\mathsf{TransparentOn}$ is therefore a property of a serving
+configuration, not of attention isolation alone, and it must be established for
+each configuration.
+
+\subsection{Grader contracts: a categorical corrective-RAG ablation}\label{sec:crag}
+
+The primary Qwen corrective-RAG grader mixes numeric-score instructions with a
+yes/no parser. Of its 600 grades, 484 are zeros, 34 ones, five \emph{yes} and 77
+\emph{no}, so almost every retrieved document is discarded. A separate model
+contract pairs a categorical prompt with a grammar that admits only
+\code{\{"score":"yes"\}} or \code{\{"score":"no"\}}. Answer generation, retrieval and
+the rule ``search if any grade is not \emph{yes}'' are unchanged. All 150 pairs
+preserve saved fields, including the four grades, with one shaped trace. All 600
+grades are valid (62 \emph{yes}, 538 \emph{no}). Inherited accuracy rises from
+57/150 to 84/150: 28 answers improve and one regresses (exact McNemar
+$p=\rThreeMcNemarP$). Routing barely changes (149 of 150 questions still search),
+so the gain comes from keeping the documents now graded relevant (62 kept
+documents instead of 5). The ablation shows that a constrained grammar is a
+distinct model contract that shaping handles like any other. It does not
+separate the effects of the prompt and the grammar.
+
+\subsection{Threats to validity}\label{sec:threats}
+
+\paragraph{Internal}
+Equal saved fields compare the variables each workflow declares as kept,
+including its decision variables and final output. Intermediate values are covered
+by trace equality and by the retained per-call request and response records.
+Greedy decoding makes runs deterministic per seed; sampling is covered by the
+theorems' per-tape statement but not exercised. Both studies use one machine, so
+GPU nondeterminism across devices is not sampled. The native prototype's
+counterexample shows that serving configuration can matter.
+
+\paragraph{Construct}
+Balanced accuracy of one classifier family is a lower bound on leakage, not a
+measure of it. We therefore rest the security claim on the theorems and report
+classifier results only as motivation.
+
+\paragraph{External}
+The workflows are authored bounded ports with small open models, and task
+accuracies are low. Shaping's preservation guarantee does not depend on
+accuracy. Its cost does depend on how much the branches of a workflow differ.
+
+\paragraph{Reproducibility}
+Model weights and the native runtime are external dependencies pinned by hash.
+All other inputs, raw records and failed attempts are in the artifact.

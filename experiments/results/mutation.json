@@ -1,0 +1,5088 @@
+{
+ "total": {
+  "mutants": 210,
+  "rejected": 192,
+  "accepted": 18,
+  "oracle_leak": 103,
+  "leak_accepted": 0
+ },
+ "by_operator": {
+  "drop_pad": {
+   "mutants": 27,
+   "rejected": 27,
+   "oracle_leak": 27,
+   "leak_accepted": 0,
+   "accepted": 0
+  },
+  "shrink_input": {
+   "mutants": 27,
+   "rejected": 9,
+   "oracle_leak": 9,
+   "leak_accepted": 0,
+   "accepted": 18
+  },
+  "undercut_cap": {
+   "mutants": 27,
+   "rejected": 27,
+   "oracle_leak": 22,
+   "leak_accepted": 0,
+   "accepted": 0
+  },
+  "drop_dummy": {
+   "mutants": 12,
+   "rejected": 12,
+   "oracle_leak": 11,
+   "leak_accepted": 0,
+   "accepted": 0
+  },
+  "dummy_model": {
+   "mutants": 5,
+   "rejected": 5,
+   "oracle_leak": 5,
+   "leak_accepted": 0,
+   "accepted": 0
+  },
+  "dummy_size": {
+   "mutants": 5,
+   "rejected": 5,
+   "oracle_leak": 5,
+   "leak_accepted": 0,
+   "accepted": 0
+  },
+  "unpad_loop": {
+   "mutants": 5,
+   "rejected": 5,
+   "oracle_leak": 5,
+   "leak_accepted": 0,
+   "accepted": 0
+  },
+  "swap_seq": {
+   "mutants": 45,
+   "rejected": 45,
+   "oracle_leak": 8,
+   "leak_accepted": 0,
+   "accepted": 0
+  },
+  "change_request": {
+   "mutants": 27,
+   "rejected": 27,
+   "oracle_leak": 0,
+   "leak_accepted": 0,
+   "accepted": 0
+  },
+  "site_clash": {
+   "mutants": 19,
+   "rejected": 19,
+   "oracle_leak": 0,
+   "leak_accepted": 0,
+   "accepted": 0
+  },
+  "forget_secret": {
+   "mutants": 9,
+   "rejected": 9,
+   "oracle_leak": 9,
+   "leak_accepted": 0,
+   "accepted": 0
+  },
+  "shrink_output": {
+   "mutants": 2,
+   "rejected": 2,
+   "oracle_leak": 2,
+   "leak_accepted": 0,
+   "accepted": 0
+  }
+ },
+ "details": [
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "drop_pad",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "drop_dummy",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "drop_dummy",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "drop_dummy",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "drop_dummy",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "drop_dummy",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "dummy_model",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "dummy_model",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "dummy_size",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "dummy_size",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "unpad_loop",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "unpad_loop",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "change_request",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": false,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": false,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": false,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": false,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": false,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": false,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "AdaptiveRAG",
+   "op": "forget_secret",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": false,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CalculatorAgent",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    1,
+    0,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CalculatorAgent",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    1,
+    0,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CalculatorAgent",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    1,
+    0,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CalculatorAgent",
+   "op": "unpad_loop",
+   "path": [
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CalculatorAgent",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    0,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CalculatorAgent",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CalculatorAgent",
+   "op": "swap_seq",
+   "path": [
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CalculatorAgent",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    0,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CalculatorAgent",
+   "op": "swap_seq",
+   "path": [],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CalculatorAgent",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CalculatorAgent",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    1,
+    0,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CalculatorAgent",
+   "op": "forget_secret",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": false,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "drop_pad",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "shrink_input",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "undercut_cap",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "drop_dummy",
+   "path": [
+    1,
+    1,
+    0,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "drop_dummy",
+   "path": [
+    1,
+    1,
+    0,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "drop_dummy",
+   "path": [
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "dummy_model",
+   "path": [
+    1,
+    1,
+    0,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "dummy_model",
+   "path": [
+    1,
+    1,
+    0,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "dummy_size",
+   "path": [
+    1,
+    1,
+    0,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "dummy_size",
+   "path": [
+    1,
+    1,
+    0,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "swap_seq",
+   "path": [],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "swap_seq",
+   "path": [
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    0,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "change_request",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": false,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": false,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "PromptChaining",
+   "op": "forget_secret",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": false,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "drop_dummy",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "swap_seq",
+   "path": [],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "CorrectiveRAG",
+   "op": "forget_secret",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": false,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "drop_pad",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "shrink_input",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "undercut_cap",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "drop_dummy",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "drop_dummy",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "drop_dummy",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "dummy_model",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "dummy_size",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "swap_seq",
+   "path": [
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "swap_seq",
+   "path": [],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "change_request",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": false,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EmailSupport",
+   "op": "forget_secret",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": false,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    0,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    0,
+    0,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    0,
+    0,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    0,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    0,
+    0,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    0,
+    0,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    0,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    0,
+    0,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    0,
+    0,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "unpad_loop",
+   "path": [
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "swap_seq",
+   "path": [],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "swap_seq",
+   "path": [
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    0,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    0,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    0,
+    0,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    0,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    0,
+    0,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    0,
+    0,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    0,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "EvaluatorOptimizer",
+   "op": "forget_secret",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": false,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "OrchestratorWorker",
+   "op": "drop_pad",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "OrchestratorWorker",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "OrchestratorWorker",
+   "op": "shrink_input",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "OrchestratorWorker",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "OrchestratorWorker",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "OrchestratorWorker",
+   "op": "undercut_cap",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "OrchestratorWorker",
+   "op": "unpad_loop",
+   "path": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "OrchestratorWorker",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "OrchestratorWorker",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "OrchestratorWorker",
+   "op": "swap_seq",
+   "path": [],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "OrchestratorWorker",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "OrchestratorWorker",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "OrchestratorWorker",
+   "op": "swap_seq",
+   "path": [
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "OrchestratorWorker",
+   "op": "change_request",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "OrchestratorWorker",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "OrchestratorWorker",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    1,
+    1,
+    0,
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": false,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "OrchestratorWorker",
+   "op": "forget_secret",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": false,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "drop_pad",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "drop_pad",
+   "path": [
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "shrink_input",
+   "path": [
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "shrink_input",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "shrink_output",
+   "path": [
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "shrink_output",
+   "path": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "undercut_cap",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "undercut_cap",
+   "path": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "swap_seq",
+   "path": [],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "swap_seq",
+   "path": [
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "change_request",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "change_request",
+   "path": [
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": false,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    1,
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": false,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "site_clash",
+   "path": [
+    1,
+    1,
+    1,
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": false,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "Routing",
+   "op": "forget_secret",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": false,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "ConditionalSwitch",
+   "op": "drop_pad",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "ConditionalSwitch",
+   "op": "shrink_input",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "ConditionalSwitch",
+   "op": "undercut_cap",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": false,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": false,
+   "oracle_error": null
+  },
+  {
+   "workflow": "ConditionalSwitch",
+   "op": "swap_seq",
+   "path": [],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "ConditionalSwitch",
+   "op": "swap_seq",
+   "path": [
+    1
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "ConditionalSwitch",
+   "op": "change_request",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": false,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": false,
+   "oracle_changed": true,
+   "oracle_error": null
+  },
+  {
+   "workflow": "ConditionalSwitch",
+   "op": "forget_secret",
+   "path": [
+    0
+   ],
+   "lean": {
+    "secrets_high": false,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+   },
+   "oracle_leak": true,
+   "oracle_changed": false,
+   "oracle_error": null
+  }
+ ]
+}

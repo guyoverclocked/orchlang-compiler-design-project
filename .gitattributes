@@ -1,9 +1,22 @@
 * text=auto eol=lf
 # Raw observations and historical audits retain their original bytes.
-research/** -text
-audit/** -text
-bench/raw/** -text
-bench/results/** -text
+legacy/v1/research/** -text
+legacy/v1/audit/** -text
+legacy/v1/bench/raw/** -text
+legacy/v1/bench/results/** -text
 *.pdf -text
 *.png -text
 *.bundle -text
+experiments/results/** -text
+publication/evidence/** -text -whitespace
+publication/evidence-summary.json -text -whitespace
+# Earlier manuscript sections remain in Git history; only main.tex is current.
+paper/sections/** export-ignore
+paper/sections/core-syntax.tex -export-ignore
+paper/sections/core-semantics.tex -export-ignore
+paper/sections/core-validation.tex -export-ignore
+paper/sections/round2-evaluation.tex -export-ignore
+paper/generated/** export-ignore
+paper/generated/unified-* -export-ignore
+paper/generated/final-release-* -export-ignore
+paper/generated/round2-* -export-ignore

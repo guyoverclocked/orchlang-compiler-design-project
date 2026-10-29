@@ -1,0 +1,21 @@
+// Port of the LangGraph calculator agent (workflows-agents.mdx lines 1814-1933).
+// Native tool calling becomes a one-line CALL/FINAL text protocol and the message
+// history is serialized into the user turn; the unbounded loop is bounded at 6 turns.
+workflow CalculatorAgent {
+  input question: text secret max_tokens 160;
+  model llm = "llama1b";
+  tool calculator(x) max_tokens 12;
+  tool history(h, out, obs) max_tokens 400;
+  tool final_seen(x) max_tokens 1;
+  prompt turn(q, h) = system "You are a helpful assistant tasked with performing arithmetic on a set of inputs.\n\nTools:\n- add(a, b): Adds `a` and `b`.\n- multiply(a, b): Multiply `a` and `b`.\n- divide(a, b): Divide `a` and `b`.\n\nTo use a tool, reply with exactly one line: CALL <add|multiply|divide> <a> <b>\nWhen you know the answer, reply with one line: FINAL: <answer>" user "{q}\n{h}";
+  let h = "";
+  let done = "no";
+  let out = "";
+  repeat 6 until done == "yes" {
+    let out = call turn(question, h) using llm max_tokens 48;
+    let done = tool final_seen(out);
+    let obs = tool calculator(out);
+    let h = tool history(h, out, obs);
+  }
+  output out;
+}

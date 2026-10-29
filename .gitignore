@@ -31,8 +31,24 @@ __pycache__/
 *.pem
 *.key
 
-# Local LaTeX build products; the reviewed PDF is copied to publication/.
+# Local LaTeX build products; the reviewed PDF is copied to output/pdf/.
 /docs/manuscript/*.aux
 /docs/manuscript/*.log
 /docs/manuscript/*.out
 /docs/manuscript/*.synctex.gz
+__pycache__/
+*.pyc
+paper/*.aux
+paper/*.log
+paper/*.out
+paper/*.bbl
+paper/*.blg
+paper/*.toc
+/tmp/
+paper/*.spl
+/models/
+/models.json
+*.gguf
+/out/
+/runs/
+/build-r3/

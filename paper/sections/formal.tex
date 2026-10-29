@@ -1,0 +1,68 @@
+\section{Guarantees}\label{sec:formal}
+
+The shaping compiler is several hundred lines of untrusted Python. Rather than verify it, we follow the translation-validation approach~\cite{pnueli1998tv,necula2000tv}: a small checker decides, for each original program and each candidate shaped program, whether the candidate is acceptable, and we prove in Lean~4~\cite{moura2021lean4} that every accepted candidate has the desired properties. The development (\lean{proof/ShapeCore.lean}, \leanLines{} lines, \leanTheorems{} theorems) uses only Lean's core library; \lean{\#print axioms} reports only \lean{propext} and \lean{Quot.sound} for the main results. The checker is the same Lean code, compiled and run on the JSON form of programs, so no separate implementation of the checker needs to be trusted.
+
+\subsection{Semantics}\label{sec:semantics}
+
+\paragraph{The world.} Everything outside the program---tokenizers, models, the padder, tools---is a parameter $w$ of the semantics (\lean{World} in Lean), consisting of functions
+$\mathit{tok}_m(r)$ (token count of request $r$ under model $m$),
+$\mathit{gen}_m(r, k, \omega)$ (natural response with cap $k$ on randomness cell $\omega$),
+$\mathit{forced}_m(r, \omega, N)$ (forced-length response),
+$\mathit{view}_m(k, \rho)$ (visible part of a raw response),
+$\mathit{padReq}_m(T, r)$,
+$\mathit{outTok}_m(\rho)$ and pure tool functions. No property of these functions is assumed except through the two explicit hypotheses below.
+
+\paragraph{Randomness.} Model randomness is a tape $\omega : \mathbb{N} \to \mathbb{N} \to \mathbb{N}$: the $j$-th execution of call site $i$ reads cell $\omega(i, j)$. For any tape distribution with independent, identically distributed cells this realizes fresh randomness per call, which is how stochastic decoding behaves; the indexing by site is a proof device that lets two executions taking different secret paths share the randomness of the calls they have in common. Dummy calls and ghost loop iterations read no cell.
+
+\paragraph{Execution.} The big-step function $\mathit{exec}_{w,\omega}(c, \sigma)$ maps a statement and a state---store, per-site counters and the usage trace so far---to a final state. An unpadded call appends $\mathsf{llm}(m, \mathit{tok}_m(r), \mathit{outTok}_m(\rho))$ for request $r$ and response $\rho = \mathit{gen}_m(r, k, \omega(i, j))$ and stores $\rho$; a padded call sends $r' = \mathit{padReq}_m(T, r)$, receives $\rho = \mathit{forced}_m(r', \omega(i,j), N)$, appends $\mathsf{llm}(m, \mathit{tok}_m(r'), \mathit{outTok}_m(\rho))$ and stores $\mathit{view}_m(k, \rho)$. A dummy sends a fixed padded request and appends its event. A loop runs its body while its guard is false, at most $n$ times; if it is padded and stops after $j<n$ iterations, it appends $n-j$ copies of its body's static shape as dummy events. The usage trace of a run is the trace component of the final state; it is exactly the observation of \cref{sec:observer}.
+
+\subsection{The padding discipline}\label{sec:discipline}
+
+\paragraph{Static shape.} The partial function $\mathit{shape}(c)$ returns the trace $c$ must emit, if fixed: a padded call has shape $[\mathsf{llm}(m,T,N)]$, an unpadded call has none, a conditional has a shape only if both arms have the same one, and a padded loop with body shape $s$ has shape $s^n$.
+
+\paragraph{Discipline.} The judgement $\Gamma \vdash_{\mathit{pc}} c$ (\lean{wt}) is a syntax-directed check:
+\begin{mathpar}
+\inferrule{\mathit{pc} \sqcup \Gamma(e) \sqsubseteq \Gamma(x) \\ \mathit{pc} \sqcup \Gamma(e) = \hi \Rightarrow \mathit{pad}\ \text{present}}
+          {\Gamma \vdash_{\mathit{pc}} x \leftarrow \texttt{call}_i\ m\ k\ e\ \mathit{pad}}
+\and
+\inferrule{\mathit{pc}' = \mathit{pc} \sqcup \Gamma(g) \\ \Gamma \vdash_{\mathit{pc}'} c_1 \\ \Gamma \vdash_{\mathit{pc}'} c_2 \\ \mathit{pc}' = \hi \Rightarrow \mathit{shape}(\texttt{if}\ g\ c_1\ c_2)\ \text{defined}}
+          {\Gamma \vdash_{\mathit{pc}} \texttt{if}\ g\ \texttt{then}\ c_1\ \texttt{else}\ c_2}
+\and
+\inferrule{\mathit{pc}' = \mathit{pc} \sqcup \Gamma(g) \\ \Gamma \vdash_{\mathit{pc}'} c \\ \mathit{pc}' = \hi \Rightarrow \mathit{padded} \wedge \mathit{shape}(c)\ \text{defined}}
+          {\Gamma \vdash_{\mathit{pc}} \texttt{loop}\ n\ \texttt{until}\ g\ c\ \mathit{padded}}
+\end{mathpar}
+with the evident rules for tools, sequencing and dummies. A second check (\lean{sitesOK}) requires that the call sites reached under $\mathit{pc}=\hi$ are disjoint from those reached under $\mathit{pc}=\lo$, so that the randomness cells read on secret paths never coincide with cells read on public paths. A third (\lean{capsOK}) requires $k \le N$ for every padded call.
+
+\paragraph{Validation.} The validator (\lean{validateProgram}) accepts a candidate $c'$ for the original $c$ if (i) $\Gamma \vdash_{\lo} c'$, (ii) the randomness-site check holds for the set of high sites computed from $c'$, (iii) $k \le N$ throughout, and (iv) erasing all padding annotations, dummies and padded flags from both programs and normalizing sequencing and \texttt{skip} yields syntactically identical programs (\lean{clean (erase c') == clean (erase c)}). Condition (iv) ensures the compiler only added padding; it did not reorder, drop or modify any call or tool. The labelling $\Gamma$ is itself produced by the untrusted compiler, so the executable checker additionally requires (v) that every input the source declares \kw{secret} is labelled $\hi$ in $\Gamma$; without this check, a compiler that forgot a secret could shape consistently with a weaker labelling and be accepted.
+
+\subsection{Theorems}\label{sec:theorems}
+
+Two hypotheses on the world are stated as Lean propositions and never assumed globally.
+\begin{description}
+\item[Conformance] (\lean{World.Conforms}): $\mathit{tok}_m(\mathit{padReq}_m(T, r)) = T$ for all $m, T, r$, and $\mathit{outTok}_m(\mathit{forced}_m(r, \omega, N)) = N$ for all $m, r, \omega, N$. Padding is exact and forced decoding emits exactly $N$ tokens.
+\item[Transparency] (\lean{World.Transparent}): $\mathit{view}_m(k, \mathit{forced}_m(\mathit{padReq}_m(T, r), \omega, N)) = \mathit{gen}_m(r, k, \omega)$ whenever $k \le N$. The visible part of a padded, forced response equals the natural response to the unpadded request on the same randomness.
+\end{description}
+
+\begin{theorem}[Usage noninterference; \lean{noninterference}, \lean{trace\_noninterference}]\label{thm:ni}
+Assume Conformance. If $\Gamma \vdash_{\lo} c$ and the randomness-site check holds, then for all stores $\sigma_1, \sigma_2$ that agree on $\lo$-labelled variables and every tape $\omega$, the executions of $c$ from $\sigma_1$ and from $\sigma_2$ emit identical usage traces (and end in stores that agree on $\lo$ variables, with counters that agree on all public sites).
+\end{theorem}
+
+\begin{corollary}[Distributional form; \lean{distribution\_noninterference}]
+Under the same hypotheses, for every weighted family of tapes---in particular every distribution of i.i.d.\ randomness cells---the induced distributions of usage traces from $\sigma_1$ and $\sigma_2$ are identical. Consequently every observer, however computationally powerful, guesses any function of the secrets with exactly its prior success probability.
+\end{corollary}
+
+\begin{theorem}[Functional preservation; \lean{erase\_correct}, \lean{clean\_data}]\label{thm:erase}
+Assume Transparency. If the caps check holds for $c'$, then $c'$ and $\mathit{clean}(\mathit{erase}(c'))$ end in the same store (and counters) from every initial store, for every tape.
+\end{theorem}
+
+\begin{theorem}[Validator soundness; \lean{validateProgram\_sound}]
+If $\mathit{validateProgram}(\Gamma, c, c')$ returns true, then (a) under Conformance, $c'$ satisfies the conclusion of \cref{thm:ni}; and (b) under Transparency, $c'$ ends in the same store as the original program $c$ from every initial store and tape.
+\end{theorem}
+
+\begin{corollary}[End-to-end; \lean{secret\_inputs\_sound}]
+Assume Conformance. If the validator accepts $c'$ and every declared secret input is labelled $\hi$, then any two executions of $c'$ from stores that differ only in declared secret inputs emit identical usage traces, for every tape.
+\end{corollary}
+
+\paragraph{Proof structure.} The central lemma (\lean{shape\_exec}) states that under Conformance a statement with a static shape $s$ appends exactly $s$ to the trace from every state. Two confinement lemmas show that statements accepted under $\mathit{pc}=\hi$ write no $\lo$ variable (\lean{high\_store}) and advance no public site's counter (\lean{high\_count}). Noninterference then follows by induction over the program for $\mathit{pc}=\lo$: a call with a public request reads equal requests and equal randomness cells in both runs; a call with a secret request is padded and emits the same event; a secret conditional emits its shape in both runs whatever arm it takes; a public conditional takes the same arm; loops are handled by induction on the iteration bound. Functional preservation is a simulation between a program and its erasure that ignores the trace. The development is \leanLines{} lines including the executable JSON decoder and \lean{\#guard} regression tests that run at every check.
+
+\paragraph{What the theorems do not say.} They say nothing about latency, which is not part of the trace (\cref{sec:eval-latency}); nothing about providers that violate Conformance, which our runtime checks on every call; and functional preservation holds only to the extent Transparency does. Transparency is a property of the serving system: forced decoding preserves the visible prefix by construction of decoding, and isolated padding leaves the prompt the model sees unchanged, so with both, shaped calls return exactly the undefended responses; we test this directly (\cref{sec:eval-function}). With in-band padding the input half is false in general, because the padding turn changes the prompt, and functional preservation becomes an empirical question that we also measure. The Python compiler, lowering and runtime are not verified; the validator makes the compiler irrelevant to security, and the runtime's conformance is checked on every call of every evaluation run.

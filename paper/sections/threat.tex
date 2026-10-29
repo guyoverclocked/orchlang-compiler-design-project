@@ -1,0 +1,46 @@
+\section{Usage Metadata as a Side Channel}\label{sec:threat}
+
+\subsection{Setting and observer}\label{sec:observer}
+
+A \emph{workflow} receives inputs, some of which are confidential (a user's message, a private document, a ticket), and issues a sequence of model calls and tool invocations whose requests, order and number may depend on earlier results. We consider an observer who sees, for each execution, the \emph{usage trace}
+\[
+  \obs \;=\; e_1\, e_2 \cdots e_n, \qquad e_i \in \{\mathsf{llm}(m, t_{\mathrm{in}}, t_{\mathrm{out}}),\ \mathsf{tool}(f)\},
+\]
+the ordered list of model calls with their model identifier $m$ and their billed input and output token counts, together with the names $f$ of invoked tools. The observer does not see prompts, responses or tool arguments. This is precisely the information retained by content-redacting telemetry: the OpenTelemetry GenAI span conventions mark message content as opt-in but recommend the request and response model and the input and output token counts on every span~\cite{otel2026genai}; LangSmith's hide-inputs/outputs mode keeps trace metadata~\cite{langsmith2026mask}; Helicone's omit-logs mode keeps cost, latency and token usage~\cite{helicone2026omit}; Langfuse masking rewrites strings but leaves counts and the observation tree~\cite{langfuse2026mask}; and gateways commonly log the served model and token counts with content logging disabled~\cite{chen2026routing}. Parties who see such traces include observability vendors and their sub-processors, gateway and platform operators, finance teams reading per-request bills, and anyone with read access to a shared tracing project. A network observer sees a coarser projection through request and response sizes~\cite{weiss2024keylog,zhang2025agentprint}.
+
+The goal is \emph{usage noninterference}: two executions whose public inputs agree must produce traces with the same distribution, whatever their secret inputs. Because generation is stochastic we state the property per randomness tape, which implies the distributional version (\cref{sec:formal}).
+
+\paragraph{Out of scope.} Wall-clock latency is correlated with token counts and is measured but not covered by the theorem (\cref{sec:eval-latency}). Streaming-granularity channels (per-token packet sizes and timing)~\cite{weiss2024keylog,mcdonald2025whisper,wei2024speculation}, prompt-cache timing and cached-token counts~\cite{gu2025caching,wu2025kvcache}, provider-internal state and hidden reasoning tokens are orthogonal; \cref{sec:discussion} discusses how they compose with our defense. We assume the provider bills honestly, tokenizes deterministically and honors length controls; billing-integrity audits address the converse problem. The observer is passive: we do not consider adversaries who choose the secret inputs adaptively, although the guarantee holds for every input.
+
+\subsection{How content reaches the trace}\label{sec:leak-forms}
+
+Content influences the usage trace in four ways, all of which occur in the workflows below.
+\begin{description}
+\item[Request size.] A request containing secret text has a secret-dependent input token count, and a response to it has a secret-dependent output token count. This is the single-call channel studied by \citet{zhang2024timewilltell}.
+\item[Branching.] A guard on secret-derived data selects between arms that make different calls, possibly to different models. The number of calls, their order and their models reveal the branch; Chen's router logs are the one-decision special case~\cite{chen2026routing}.
+\item[Loops and fan-out.] Iteration counts that depend on a grader's verdict, on whether a tool call was emitted, or on the length of an LLM-produced list reveal that verdict or length.
+\item[Data flow.] A response produced under secret control, or computed from secret data, becomes part of later requests and so propagates the dependence to calls that are not themselves inside a secret branch.
+\end{description}
+
+\subsection{A census of example workflows}\label{sec:census}
+
+To estimate how often these patterns occur we coded every distinct example workflow in three widely used sources at pinned revisions: the LangGraph repository~\cite{langgraph2026}, the LangChain/LangGraph documentation~\cite{langchaindocs2026} and the Prompt Flow repository~\cite{promptflow2026}. Candidates were found by searching for graph constructs (\texttt{StateGraph}, conditional edges, \texttt{Command(goto=...)}, \texttt{Send}, Prompt Flow \texttt{activate} conditions) and model-call indicators, then reading every candidate by hand and tracing each conditional edge, loop and early return to the inputs of its predicate. Python/JavaScript, Graph/Functional API and provider variants of the same topology were merged. The unit of analysis is a distinct application workflow; evaluation flows and API demonstrations are reported separately. The full coding scheme, the per-workflow evidence with file and line numbers, and the scripts are part of the artifact.
+
+\Cref{tab:census} summarizes the result. Among \censusApps{} application workflows, \censusDependent{} (\censusPct\%) have content-dependent control flow: \censusBranching{} branch on content, \censusLoopsDep{} loop on it and \censusFanout{} fan out over content-derived lists. In \censusUserDriven{} of the \censusDependent{} the decision depends on the semantics of user-provided input. The LangGraph corpus is almost entirely content-dependent (\censusLangGraphPct\%), as expected from material that teaches routers, graders and agents; Prompt Flow's directed-acyclic examples are mostly straight-line. Two further observations matter for defenses. First, \censusUnbounded{} of \censusLoops{} looping workflows have no iteration bound in code and stop only on a content condition or the framework's recursion limit, so the iteration count is an unbounded-capacity channel. Second, in \censusConstantCalls{} workflows the number of calls is constant and content leaks only through token counts, so hiding the call count alone is insufficient; and at least \censusMultiModel{} workflows assign different models to different roles, so the model field alone reveals which role ran.
+
+\begin{table}[t]
+\caption{Content-dependent control flow in example workflows (pinned revisions; manual coding with line-level evidence). A workflow may fall into several categories.}
+\label{tab:census}
+\small
+\begin{tabular}{lrrrrr}
+\toprule
+Subset & Workflows & Content-dependent & Branching & Loop & Fan-out \\
+\midrule
+Application workflows (all sources) & \censusApps & \censusDependent{} (\censusPct\%) & \censusBranching & \censusLoopsDep & \censusFanout \\
+\quad LangGraph and LangChain docs & \censusLangGraph & \censusLangGraphDep{} (\censusLangGraphPct\%) & \censusLangGraphBranch & \censusLangGraphLoop & \censusLangGraphFan \\
+\quad Prompt Flow & \censusPF & \censusPFDep{} (\censusPFPct\%) & \censusPFBranch & \censusPFLoop & \censusPFFan \\
+Evaluation flows (Prompt Flow) & 10 & 2 & 0 & 0 & 2 \\
+API-demonstration classes & 8 & 3 & 2 & 2 & 1 \\
+\bottomrule
+\end{tabular}
+\end{table}

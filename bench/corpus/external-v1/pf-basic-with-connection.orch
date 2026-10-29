@@ -1,7 +1,0 @@
-workflow PFbasic_with_connection budget 100000 {
-  input x: text max_tokens 256;
-  model m = mock("pf-basic") max_tokens 120;
-  prompt p(t: text) -> text = "Complete: {t}";
-  let answer: text = call p(x) using m;
-  output answer;
-}

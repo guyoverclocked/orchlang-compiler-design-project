@@ -1,0 +1,8 @@
+// Adversarial adapter check; this is not an application-accuracy benchmark.
+workflow TemplateBoundary {
+  input q: text secret max_tokens 64;
+  model m = "llama1b";
+  prompt p(x) = user "{x}";
+  let answer = call p(q) using m max_tokens 8;
+  output answer;
+}

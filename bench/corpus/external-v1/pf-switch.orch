@@ -1,7 +1,0 @@
-workflow PFSwitch budget 100000 {
-  input x: text max_tokens 256;
-  model m = mock("pf-switch") max_tokens 128;
-  prompt p(t: text) -> text = "Classify request: {t}";
-  let category: text = call p(x) using m;
-  output category;
-}

@@ -1,0 +1,48 @@
+\begin{figure}[p]
+\small
+Let $L_\Gamma(e)$ join variable labels, and let
+$\ell=pc\sqcup L_\Gamma(e)$ and $pc'=pc\sqcup\Gamma(\mathsf{guardVar}(g))$.
+The judgment $\Gamma;pc\vdash p$ abbreviates \code{wt} returning true.
+\[
+\frac{\ell\sqsubseteq\Gamma(x)\quad(\ell=\hi\Rightarrow\pi\ne\bot)}
+ {\Gamma;pc\vdash\mathsf{call}_i(x,m,k,e,\pi)}
+\qquad
+\frac{pc\sqcup L_\Gamma(e)\sqsubseteq\Gamma(x)}
+ {\Gamma;pc\vdash\mathsf{tool}(x,f,e)}
+\]
+\[
+\frac{\Gamma;pc'\vdash p\quad\Gamma;pc'\vdash q\quad
+ pc'=\hi\Rightarrow\mathsf{shape}(p)=\mathsf{shape}(q)\ne\bot}
+ {\Gamma;pc\vdash\mathsf{if}\ g\ \mathsf{then}\ p\ \mathsf{else}\ q}
+\]
+\[
+\frac{\Gamma;pc'\vdash p\quad
+ pc'=\hi\Rightarrow(b=\mathsf{true}\land\mathsf{shape}(p)\ne\bot)}
+ {\Gamma;pc\vdash\mathsf{loop}(n,g,p,b)}
+\]
+Skip and dummies are well typed; sequencing requires both components to be well
+typed. Separate structural checks require $k\leq N$ at padded calls and mark
+sites reached under a high program counter. Let $H$ be that site set.
+\[
+\frac{\Gamma;\lo\vdash p\quad\mathsf{sitesOK}(\Gamma,H,\lo,p)\quad
+ \mathsf{capsOK}(p)\quad
+ \mathsf{clean}(\lfloor p\rfloor)=\mathsf{clean}(\lfloor p_0\rfloor)}
+ {\mathsf{validateProgram}(\Gamma,p_0,p)=\mathsf{true}}
+\]
+Erasure removes padded annotations and dummies, preserves useful calls/tools and
+control flow, and clears loop-completion flags. Normalization \code{clean}
+removes skip/sequence artifacts without changing useful order.
+\[
+\frac{\mathsf{readSource}(b)=(p_0,\Gamma,S)\quad
+       \forall x\in S,\ \Gamma(x)=\hi\quad
+       \mathsf{validateProgram}(\Gamma,p_0,p)=\mathsf{true}}
+      {\mathsf{acceptSource}(b,p)}
+\]
+The last rule describes the trusted Python entry point. Its source reader, unlike
+the candidate, supplies the original and the declared secret set $S$. Lean checks
+the core premises, but does not prove that \code{readSource} implements parsing.
+\caption{Label propagation, padding discipline, erasure and source-bound
+acceptance. The displayed rules match the executable checks rather than adding
+a second type system.}
+\label{fig:validation}
+\end{figure}

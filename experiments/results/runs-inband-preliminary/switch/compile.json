@@ -1,0 +1,185 @@
+{
+  "workflow": "ConditionalSwitch",
+  "source": "workflows/switch.orch",
+  "source_lines": 18,
+  "slots": {
+    "query": 0,
+    "llm_result": 1,
+    "intention": 2,
+    "response": 3
+  },
+  "high": [
+    "query",
+    "llm_result",
+    "intention",
+    "response"
+  ],
+  "findings": [
+    {
+      "kind": "secret-dependent-size",
+      "line": 10,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    }
+  ],
+  "calls": 1,
+  "original_lean": {
+    "static_shape": null,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+  },
+  "strategies": {
+    "ours": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            198,
+            128
+          ],
+          [
+            "tool",
+            "class_check"
+          ],
+          [
+            "tool",
+            "const"
+          ]
+        ],
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        1,
+        198,
+        128
+      ],
+      "shape_seconds": 0.0012200840000033963
+    },
+    "naive": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            198,
+            128
+          ],
+          [
+            "tool",
+            "class_check"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ]
+        ],
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        1,
+        198,
+        128
+      ],
+      "shape_seconds": 0.0006402199999939739
+    },
+    "uniform": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            198,
+            128
+          ],
+          [
+            "tool",
+            "class_check"
+          ],
+          [
+            "tool",
+            "const"
+          ]
+        ],
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        1,
+        198,
+        128
+      ],
+      "shape_seconds": 0.0005464409999973441
+    },
+    "padall": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            198,
+            128
+          ],
+          [
+            "tool",
+            "class_check"
+          ],
+          [
+            "tool",
+            "const"
+          ]
+        ],
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        1,
+        198,
+        128
+      ],
+      "shape_seconds": 0.0005353230000011422
+    }
+  },
+  "frontend_seconds": 6.046965833999998,
+  "lean_seconds_batch": 85.80363298099999,
+  "pads": {
+    "1": [
+      198,
+      128
+    ]
+  },
+  "caps": {
+    "1": 128
+  },
+  "site_lines": {
+    "1": 10
+  }
+}

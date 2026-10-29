@@ -1,0 +1,22 @@
+// Port of Prompt Flow conditional-flow-for-switch (microsoft/promptflow@33a68c9,
+// examples/flows/standard/conditional-flow-for-switch/: classify_with_llm.jinja2,
+// class_check.py, order_search.py, product_info.py, product_recommendation.py,
+// generate_response.py). One LLM call; branches are deterministic.
+workflow ConditionalSwitch {
+  input query: text secret max_tokens 64;
+  model llm = "llama1b";
+  tool class_check(x) max_tokens 4;
+  prompt classify(q) = system "There is a search bar in the mall APP and users can enter any query in the search bar.\n\nThe user may want to search for orders, view product information, or seek recommended products.\n\nTherefore, please classify user intentions into the following three types according to the query: product_recommendation, order_search, product_info\n\nPlease note that only the above three situations can be returned, and try not to include other return values." user "The user's query is {q}";
+  let llm_result = call classify(query) using llm max_tokens 128;
+  let intention = tool class_check(llm_result);
+  if intention == "order_search" {
+    let response = "Your order is being mailed, please wait patiently.";
+  } else if intention == "product_info" {
+    let response = "This product is produced by Microsoft.";
+  } else if intention == "product_recommendation" {
+    let response = "I recommend promptflow to you, which can solve your problem very well.";
+  } else {
+    let response = "Sorry, no results matching your search were found.";
+  }
+  output response;
+}

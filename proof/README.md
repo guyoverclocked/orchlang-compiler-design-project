@@ -1,61 +1,83 @@
-# Checked feasibility proofs
+# Lean development
 
-Use Lean **4.19.0**. No Mathlib, network fetch, `sorry`, custom axioms or admitted
-lemmas are needed to check these files. They are separate small models; consult
-`docs/SEMANTICS.md` before interpreting their scope.
+`ShapeCore.lean` (Lean 4.19.0, core library only) contains:
 
-```text
-lean proof/BoundedCore.lean
-lean proof/FiniteRelational.lean
-lean proof/DataflowCore.lean
+- the core workflow language, its semantics over an abstract `World`
+  (tokenizers, models, padder, tools) and a per-site randomness tape;
+- the static shape of a statement and the padding discipline `wt`, the
+  randomness-site check `sitesOK` and the cap check `capsOK`;
+- `noninterference` / `trace_noninterference` / `distribution_noninterference`:
+  under `World.Conforms`, programs satisfying the discipline emit identical usage
+  traces from stores that agree on public variables, for every tape;
+- `erase_correct` and `clean_data`: under `World.Transparent`, a shaped program
+  computes the same store as its erasure;
+- `validateProgram` and `validateProgram_sound`: the executable translation
+  validator and its soundness;
+- `checkJson` / `main`: the JSON entry point used by `orchlang/validate.py`;
+- `#guard` regression tests evaluated at every check.
+
+Check the proofs with `lean proof/ShapeCore.lean`. Validate a batch of programs with
+`lean --run proof/ShapeCore.lean batch.json`, where each item is
+`{"high": [vars], "original": stmt, "padded": stmt}`.
+
+Earlier cores (bounded cost, finite relational and dataflow certificates) are in
+`legacy/v1/proof/`.
+
+## Admission-domain extension
+
+`AdmissionDomain.lean` imports the unchanged core and proves `shape_exec_on`,
+`admitted_noninterference` and `certified_domain_noninterference` using
+`World.ConformsOn` instead of global conformance. Only reached model calls and
+cover calls must lie in the specified request domain. A separate same-admission
+premise is necessary when refusal is visible. `DomainCertificate` states the
+required invariant over all advertised inputs and tapes; the runtime does not
+automatically construct it. Failed and unknown-dispatch observations are explicit
+constructors but their physical behavior is not proved by the ideal admission
+adapter. In particular, this adapter is noncomputable specification code, not
+a proposed preflight algorithm that can inspect future model results for free.
+
+```bash
+lean -o proof/ShapeCore.olean proof/ShapeCore.lean
+LEAN_PATH=proof lean proof/AdmissionDomain.lean
+python experiments/admission_domain.py --output out/admission-domain.json
 ```
 
-`#print axioms` reports standard Lean `propext` and `Quot.sound` where used;
-it must not report `sorryAx`. The checker guards include a valid identical-request
-plan, an invalid equal-length/different-content plan, and a wrong-plan certificate.
+PowerShell: `$env:LEAN_PATH=(Resolve-Path proof).Path` before the second command.
+The finite Python example checks 15 strings and three seeds under a character
+mock backend and retains a short/oversized-input refusal counterexample.
 
-On the author's Windows machine the isolated executable is
-`C:/Users/nambi/Documents/OrchLang Publication Work/tools/lean-4.19.0-windows/bin/lean.exe`.
-It was downloaded from the official leanprover/lean4 v4.19.0 GitHub release.
-Archive SHA256: `2c197a74b6d9c4d46363e34e06591165ed848237ba66de849f8b8d5539eb3895`.
-The release API provided no publisher digest, so this is a locally measured
-provenance checksum, not an independent signature verification.
+## Round-3 restricted-domain theory (current headline results)
 
-`certificate_sound` covers typed `Program` and `Plan` values. The executable
-JSON decoder has `decoded_certificate_sound` for successfully decoded values.
-It accepts a JSON batch of `[program, plan]` pairs; constructors are arrays with
-tags `skip`, `call`, `seq`, `branch` (program only), `repeat`, and `retry`.
-`lean --run proof/FiniteRelational.lean batch.json` prints the checked Booleans.
-Unknown tags/arity and over-limit depth/repetition fail closed. No certificate
-is loaded as Lean source code. Retry stops when an attempt has no failed event;
-all previous attempts remain in the observation.
+The global premises `World.Conforms` and `World.Transparent` quantify over every
+padding target, including targets smaller than the request, so no non-truncating
+padder satisfies them. The current results use only restricted premises:
 
-`scripts/closed_certificate.py` independently reconstructs the restricted source
-core and checks source digest/core agreement before invoking Lean. That Python
-reader and binding are trusted; no verified source parser is claimed. This path
-does not validate the C++ `certify` report. The finite result assumes a
-shared kernel function of the full `Action` (contract **and request**).
-For probability interpretation its finite weight tables must additionally be
-normalized and nonnegative. No theorem verifies that a provider satisfies this.
+- `Utf8Envelope.lean` proves the three structural conjuncts of `Envelope.Sound`
+  for `String.utf8ByteSize` (`utf8_append`, `utf8_escape`, `utf8_trim`) and
+  `utf8_envelope_sound`, which reduces soundness to the tokenizer, response and
+  tool bounds.
+- `RestrictedDomain.lean` proves `noninterference_on`, `erase_correct_on` and
+  `shape_budget_sound_on` under `ConformsOn`/`TransparentOn` plus `RunsIn`, and
+  the certified end-to-end theorems `certified_noninterference`,
+  `certified_secret_inputs_sound`, `certified_preservation`,
+  `certified_budget_sound` and `certified_shape_exact`. Their only run-time
+  premise is the input guard `boundedStore`. `padWorld_*` shows the restricted
+  premises are satisfiable by a non-truncating padder that violates global
+  conformance.
+- `VocabularyEnvelope.lean` adds `segmentation_count_le` and
+  `tokenizer_alpha_one`: a tokenization into nonempty pieces that concatenate to
+  the input has at most one token per byte. The byte-bounded runtime checks
+  both premises before every dispatch.
 
-## Text-valued dataflow core
+`ShapeCore.lean` also exposes `roundtrip` (`lean --run proof/ShapeCore.lean
+roundtrip programs.json`), which decodes and re-encodes programs to check the
+Python serializer.
 
-`DataflowCore.lean` is a separate stronger model with a text store. Calls bind
-actual response strings; later requests can use those bindings. Public text and
-Boolean inputs are shared between executions, while secret Booleans affect
-control. Normalization correctness is equality of complete state-transformer
-semantics, so it composes through dataflow. Its relational and decoded-acceptance
-theorems use the same standard axioms. Lexical retry restores the outer store
-between attempts and retains every billed failure. This theorem is not a new
-general relational logic or a mechanized implementation of the C++ IFC policy.
+Check everything, in dependency order, with an axiom audit:
 
-The executable JSON format uses case objects with `program`, `plan`, `execute`.
-Programs contain `skip`, `call` with a response slot/contract/text expression,
-`seq`, `public`, `secret` and `retry`; plans cannot contain `secret`. Text
-expressions are `literal`, `var` and `append`. Optional execution contexts supply
-public/secret Boolean arrays, a text store, explicit finite kernel rows and a
-store-observation limit. The executable checks rational row masses, duplicate
-keys, missing positive-probability requests and operational limits. These are
-runtime checks, not a kernel-validity theorem. Error status is a returned value,
-not an exception that aborts a body. The source reader remains trusted Python.
-Full commands and boundaries: docs/DATAFLOW_CERTIFICATES.md.
+```bash
+python publication/check_proofs.py --output out/proof-receipt.json
+```
+
+Expected: 7 files, 2,312 lines, 78 theorems, no `sorryAx`; certified theorems use
+only `propext` and `Quot.sound`.

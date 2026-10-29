@@ -1,5 +1,0 @@
-// Valid: zero budget is permitted when no model call is declared.
-workflow ZeroBudget budget 0 {
-  input value: text;
-  output value;
-}

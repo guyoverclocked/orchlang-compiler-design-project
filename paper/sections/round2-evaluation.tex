@@ -1,0 +1,227 @@
+\section{Evaluation}\label{sec:evaluation}
+
+The evaluation separates four questions: whether the implementations agree on
+the checked core, whether one frozen implementation preserves application
+outputs, whether source-derived byte envelopes pass the admission certificate,
+and which native observations survive a single-batch serving prototype.
+All inference is local. The full application study and the three additional
+experiments below have separate protocols and denominators.
+
+\subsection{Core checks and implementation identity}
+
+All 47 configured tests pass, including source binding, immutable resumption,
+model-indexed reservations, unsupported stop declarations, complete token-piece
+decoding and pre-dispatch byte guards. Actual pinned GGUFs enable the tokenizer
+and template tests; model-free runs report those cases as skips.
+Generated differential testing retains 1,000 authored programs, 5,000
+original/candidate Lean checks and 16,000 trace/store comparisons without a
+counterexample. A separate operational comparison covers 150 programs in four
+contexts under two finite kernels and five variants, plus a targeted template
+program. Python, an independent interpreter and Lean's actual \code{exec} agree
+on 6,320 executions and 604 validator checks. These audit worlds use character
+counts. They test implementation agreement without verifying the frontend or
+native tokenizer. Retained fault injection rejects all 103 mutants that leak
+under its finite oracle, among 210 mutants over 12 operators.
+
+Before application inference, we froze production code at \code{41a7d81} and ran
+from a clean detached checkout. All nine main workflows and three Qwen variants
+use that identity. Manifests bind the complete implementation, source, data,
+selected IDs, model contracts and native-library hashes. The study uses Python
+3.12.14, llama-cpp-python 0.3.36, native build 11490 (\code{9c2e0e491}), four CPU
+threads, a 4,096-token context, batch size 128 and greedy decoding. GPU execution
+uses Vulkan on an NVIDIA RTX 5050 Laptop GPU, with 99 requested offload layers.
+Seeds are fixed by dataset index and useful-call site. We report logical usage;
+this single-machine protocol supports no throughput or timing-protection claim.
+
+\subsection{Full homogeneous application study}\label{sec:final-validation}
+
+The main study contains 1,172 paired inputs over routing, chaining,
+evaluator--optimizer, orchestrator--worker, switch, email, calculator, corrective
+RAG and adaptive RAG. It uses Llama 3.2 1B, with Llama 3.2 3B for the adaptive
+workflow's larger-model path. Replication contains 512 Qwen 2.5 1.5B pairs over
+switch, email and corrective RAG. The bounded ports retain their declared loop
+limits, retrieval corpora and primary grading prompts. Failed or mismatched
+attempts cannot be removed from the completion denominator.
+
+All \roundTwoPairs{} pairs complete with equal saved fields, one shaped trace
+per workflow and no recorded truncation. The independent record audit checks
+3,368 execution records and \roundTwoCalls{} useful and cover model calls.
+It re-tokenizes every complete request, reconstructs visible prefixes and
+reconciles per-model ledgers. It also matches private local eval/yield records
+to public events, including duplicate multiplicities. A deliberately changed input count is
+detected. These records support the declared client accounting contract; they
+are not provider attestations or a proof of every intermediate store value.
+
+\begin{table}[t]
+\centering\footnotesize
+\setlength{\tabcolsep}{4pt}
+\caption{One frozen implementation. $K$ is the observed decision-class count;
+original balanced accuracy (BA) and task accuracy are percentages. Tr. and MI
+are distinct shaped traces and empirical trace/decision mutual information in
+bits. Cost is shaped/original weighted logical usage. Q denotes Qwen replication;
+a dash omits an unavailable task scorer or an uninformative single-class attack.}
+\label{tab:round2-workflows}
+\begin{tabular}{lrrrrrrr}\toprule
+Workflow & Pairs & $K$ & Orig BA & Tr. & MI & Cost & Task acc.\\\midrule
+\tabinput{generated/round2-workflows.tex}
+\bottomrule\end{tabular}
+\end{table}
+
+Attack features retain ordered model/tool identities, counts, event count and
+model-call count. A class-balanced random forest uses five-fold cross-validation,
+stratified when class counts permit. These are descriptive classifiers on the
+authored corpus. Original switch prediction is near chance, and the primary
+Qwen corrective-RAG port has one observed decision class. Neither supplies a
+general leakage result. Every shaped feature vector is constant within its
+workflow, giving empirical trace/decision MI zero. Fold-dependent prediction
+scores can still differ from $1/K$ because the trained constant prediction
+depends on each fold's labels; this does not reveal information in a constant
+trace.
+
+Output preservation retains task errors. Main-study routing, switch, calculator,
+corrective RAG and adaptive RAG achieve 65.3, 37.6, 2.0, 34.0 and 53.3 percent,
+respectively, using the inherited scorers. Calculator remains a control-flow
+stress test. Preserving these bounded ports does not recover an upstream
+application's accuracy or establish independent response quality.
+
+\subsection{Cost and observer alternatives}\label{sec:costs}
+
+For input weight one and output weight four, main-study median overhead is
+\roundTwoMedian{} times original usage, with range
+\roundTwoMin{}--\roundTwoMax{}. These weights describe logical usage, not a
+provider invoice. Static recompilation on these records gives zero median
+saving against all-branches cover execution, with 52 percent maximum saving;
+uniform model cells give 16 percent median and 59 percent maximum saving.
+These are comparisons of validated envelopes, not new executions of commercial
+defenses. The supplement retains actual alignment/all-branches/uniform/random
+executions of the separate two-route microbenchmark.
+Recompilation at output weights 0.25, 1, 2, 4, 8 and 16 accepts all 72 candidates
+and leaves each of the twelve variants' shapes unchanged. This tests the given
+profiles rather than establishing weight insensitivity for arbitrary programs.
+
+For an observer restricted to exported reports, normalization achieves the same
+fixed reporting abstraction with less execution work. Isolated prefill is useful
+for consuming and auditing an envelope; it adds no input-length protection below
+the wrapper. Historical latency-augmented attacks reach 100 percent balanced
+accuracy on one shaped workflow. The present study therefore makes no timing
+claim. All earlier application cohorts retain their original implementation
+identities in the supplement and do not enlarge this homogeneous denominator.
+
+\subsection{Concrete byte-bounded admission}\label{sec:concrete-admission}
+
+The optional adapter in Section~\ref{sec:static-admission} is instantiated for
+all twelve workflow variants. We scan every vocabulary entry of each pinned
+GGUF with the complete native token-piece API: the two Llama vocabularies each
+contain 128,256 entries and Qwen contains 151,936. All three have maximum raw
+piece length 128 bytes. There are 231 pieces longer than 32 bytes in each Llama
+vocabulary and 240 in Qwen. The former fixed-buffer wrapper returned an empty
+piece for a 128-byte witness; the corrected decoder resizes the buffer and
+retains the complete piece. No generic 32-byte bound is assumed.
+
+The adapter explicitly bounds UTF-8 input buffers, visible responses and tool
+results. A response buffer has size $128k$ for visible token cap $k$; it is
+applied after decoding, because replacement decoding of invalid UTF-8 can expand
+the byte count. Tool and input buffers use four times their declared token
+annotation, as a chosen byte policy rather than a tokenizer conversion theorem.
+Both original and shaped executions use the same buffers. The frontend derives
+slot bounds from all source assignments and sizes each target with $E_v$.
+It then exports the actual candidate and bounds to Lean's
+\code{staticCertificate}, alongside independent source-bound validation.
+
+For these byte-BPE tokenizers we declare $\alpha_m=1$ and $\delta_m=0$ on valid
+UTF-8 complete requests, with automatic BOS insertion disabled. Every vocabulary
+contains all 256 single-byte pieces. The native byte-splitting/merge algorithm
+remains trusted~\cite{llamacpp2026vocab}; 2,058 adversarial and seeded complete
+requests per model have no counterexample to the bound. Arbitrary isolated
+non-UTF-8 byte strings are outside the source-string domain. A Lean lemma proves
+that bounded token-piece lengths and a token cap bound the sum of raw piece
+bytes; the adapter's post-decoding buffer enforces the actual string bound.
+The scan and executable certificate do not verify native code or JSON parsing.
+
+\begin{table}[t]
+\centering\footnotesize
+\caption{Actual source-derived admission candidates. All twelve pass core and
+static admission checks at context 21,504. Guard counts refer to the full planned
+input sets; maximum $T+N$ is taken over the emitted shape. Executed pairs select
+the shortest and longest admitted UTF-8 input before inference.}
+\label{tab:round2-admission}
+\begin{tabular}{lrrr}\toprule
+Variant & Guard admitted & Max. $T+N$ & Equal/shape pairs\\\midrule
+\tabinput{generated/round2-admission.tex}
+\bottomrule\end{tabular}
+\end{table}
+
+The guard admits \roundTwoGuard{} of the 1,684 planned inputs; two Calculator
+inputs exceed the chosen byte policy. The 24 separate pairs complete with equal
+full runtime stores and their certified shapes. Auditing reconciles
+\roundTwoByteCalls{} local model calls, \roundTwoToolClips{} tool-buffer clips
+and \roundTwoResponseClips{} response-buffer clips. Deliberately oversized inputs
+are refused before any dispatch for all twelve variants. This is an implemented
+bounded interface with explicit admission, not evidence that the unbounded
+primary interface satisfies the same value invariant. The theorem covers all
+guarded trajectories under its primitive contracts; finite executions test the
+adapter without proving a physical failure refinement.
+An earlier 32,768-context attempt completed 16 pairs before device-memory
+allocation failed at the adaptive workflow. Those records remain separate:
+token-context admission alone does not bound simultaneous device allocations.
+
+\subsection{Single-batch native prefill}\label{sec:native-prefill}
+
+We also implement a separate greedy prototype using one native
+\code{llama\_decode} submission with 128 tokens. Useful request tokens occupy
+sequence 0 and filler occupies sequence 1; each sequence has its own positions,
+and only the last useful token requests logits. Subsequent decode submissions
+contain one token. Sequence membership provides attention isolation through the
+native batch interface~\cite{llamacpp2026batch}. This experiment runs on CPU with
+two model families, three empty/short/multilingual prompt bodies, visible caps
+4 and 16, and forced length 24. All attempts remain in Table~\ref{tab:round2-native}.
+
+\begin{table}[t]
+\centering\footnotesize
+\caption{Native-prefill prototype, 12 attempted cases per configuration.
+Single counts one exact 128-token prefill; Equal compares the visible output
+with natural unpadded generation. Metadata counts cases in which sequence IDs
+recover the useful request length. Cache removal discards filler sequence 1
+after prefill.}
+\label{tab:round2-native}
+\begin{tabular}{lrrrr}\toprule
+Native microbatch & Done & Single & Equal & Metadata\\\midrule
+\tabinput{generated/round2-native.tex}
+\bottomrule\end{tabular}
+\end{table}
+
+For each model, the natural native-size traces have four distinct values and
+the shaped size projection has one: 128 followed by 23 single-token decode
+submissions. Normalizing reports above this API cannot change those submissions.
+Microbatch size 1 preserves all 12 visible outputs. At size 128, one Qwen case
+differs. Removing the cover cache does not remove that mismatch. These
+observations refute unqualified transparency for the latter configuration;
+they do not prove transparency for every input at size 1.
+Sequence and logit metadata still identify the useful-token subset in every
+case. The prototype therefore supports a fixed native-size projection, while a
+server observing full batch metadata retains request-length information.
+No claim extends this projection to packets, cache traffic, elapsed time or
+arbitrary physical failures.
+
+\subsection{Categorical corrective-RAG ablation}
+
+The primary Qwen grader mixes numeric-score instructions with a yes/no parser.
+The earlier retained diagnosis found 484 zeros, 34 ones, five yes responses and
+77 no responses among 600 grades; accepting numeric ones still sent all 150
+questions to web search. We retain that primary port and evaluate a separate
+contract: a categorical relevance prompt and a grammar permitting only
+\code{\{"score":"yes"\}} or \code{\{"score":"no"\}}. The grammar is part
+of the grader's model-contract identity. Answer generation, retrieval and the
+rule ``search if any of four grades is not yes'' remain the same.
+
+The ablation runs all 150 paired questions. All 600 original grades are valid
+categorical JSON: \categoricalYes{} yes and \categoricalNo{} no. Web search is
+selected for \categoricalSearch{} questions and omitted for
+\categoricalNoSearch{}. Task accuracy is \categoricalTask{} percent under the
+same inherited answer scorer: \categoricalCorrect{}/150 correct, compared with
+\categoricalPrimaryCorrect{}/150 for the primary Qwen port. The paired comparison
+has \categoricalImproved{} improved and \categoricalRegressed{} regressed answers.
+The route distribution remains strongly imbalanced. All pairs preserve saved
+fields, including the four grades, and have one shaped logical trace. Format compliance does not
+establish grader correctness, and this combined prompt/grammar intervention
+does not identify either component's individual causal contribution.

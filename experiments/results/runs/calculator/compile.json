@@ -1,0 +1,609 @@
+{
+  "workflow": "CalculatorAgent",
+  "source": "workflows/calculator.orch",
+  "source_lines": 18,
+  "slots": {
+    "question": 0,
+    "h": 1,
+    "done": 2,
+    "out": 3,
+    "obs": 4
+  },
+  "high": [
+    "question",
+    "h",
+    "done",
+    "out",
+    "obs"
+  ],
+  "findings": [
+    {
+      "kind": "secret-dependent-loop",
+      "line": 15,
+      "detail": "iteration count depends on secret done"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 15,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    }
+  ],
+  "calls": 1,
+  "original_lean": {
+    "static_shape": null,
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+  },
+  "strategies": {
+    "ours": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        6,
+        4236,
+        288
+      ],
+      "shape_seconds": 0.0009031209992826916
+    },
+    "naive": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        6,
+        4236,
+        288
+      ],
+      "shape_seconds": 0.0005250780013739131
+    },
+    "uniform": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        6,
+        4236,
+        288
+      ],
+      "shape_seconds": 0.0004947269990225323
+    },
+    "padall": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ],
+          [
+            "llm",
+            "llama1b",
+            706,
+            48
+          ],
+          [
+            "tool",
+            "final_seen"
+          ],
+          [
+            "tool",
+            "calculator"
+          ],
+          [
+            "tool",
+            "history"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        6,
+        4236,
+        288
+      ],
+      "shape_seconds": 0.00042804500117199495
+    }
+  },
+  "frontend_seconds": 0.8412946359967464,
+  "lean_seconds_batch": 4.873245935996238,
+  "pads": {
+    "1": [
+      706,
+      48
+    ]
+  },
+  "caps": {
+    "1": 48
+  },
+  "site_lines": {
+    "1": 15
+  }
+}

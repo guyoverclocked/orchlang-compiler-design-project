@@ -1,0 +1,750 @@
+\documentclass[preprint,12pt]{elsarticle}
+\usepackage{amsmath,amssymb,amsthm,booktabs,longtable,array,graphicx}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern,microtype,listings,xcolor,tikz}
+\setlength{\emergencystretch}{4em}\tolerance=1500
+\widowpenalty=10000\clubpenalty=10000
+\usetikzlibrary{arrows.meta,positioning}
+\usepackage[colorlinks=true,allcolors=blue!45!black]{hyperref}
+\journal{Science of Computer Programming}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}{Lemma}
+\newtheorem{proposition}{Proposition}
+\theoremstyle{definition}
+\newtheorem{definition}{Definition}
+\newcommand{\code}[1]{\texttt{\hyphenchar\font=`\-#1}}
+\newcommand{\lo}{\mathsf{L}}\newcommand{\hi}{\mathsf{H}}
+\newcommand{\llbracket}{[\![}\newcommand{\rrbracket}{]\!]}
+\makeatletter\newcommand{\tabinput}[1]{\@@input #1 }\makeatother
+\input{generated/round2-results.tex}
+\input{generated/round3-macros.tex}
+\lstset{basicstyle=\ttfamily\small,breaklines=true,columns=fullflexible,
+ frame=single,rulecolor=\color{black!20},showstringspaces=false}
+\begin{document}
+\begin{frontmatter}
+\title{Certified Constant-Shape Usage for Bounded LLM Workflows:\\
+Source-Bound Validation and Static Admission in Lean}
+\author[vit]{Nambi Rajan M}\ead{nambirajan.m2024@vitstudent.ac.in}
+\author[vit]{Ranjithkumar S}\ead{ranjithkumar.s@vit.ac.in}
+\affiliation[vit]{organization={Vellore Institute of Technology},city={Vellore},country={India}}
+\begin{abstract}
+Usage logs of LLM workflows record model identities and token counts even when
+prompts are masked, and these metadata reveal which path a workflow took.
+OrchLang is a bounded workflow language whose untrusted compiler pads calls,
+aligns secret-dependent branches and completes loops so that the logical usage
+trace does not depend on secrets. A Lean validator checks each repair against an
+original program and secrecy policy that a trusted reader re-derives from source.
+A decidable static certificate guarantees before execution that every reached
+request fits its envelope, so the released trace is the work actually performed
+and no run that passes the input guard is refused midway. In 2,312 lines of Lean we prove usage
+noninterference, functional preservation and exact per-model budgets under
+restricted-domain serving contracts that a non-truncating padder satisfies.
+For a UTF-8 byte interface the structural envelope obligations are theorems, and
+the tokenizer bound reduces to a segmentation property that the runtime checks
+before every dispatch. On twelve workflow variants and three local models, a
+heuristic study of \roundTwoPairs{} pairs and a certified study of
+\rThreeCertPairs{} pairs preserve every saved output and emit one logical trace
+per workflow. Checking the Python--Lean boundary exposed and fixed a Unicode
+serialization defect. Timing, server-side batch metadata and physical failures
+remain outside the guarantee.
+\end{abstract}
+\begin{keyword}
+workflow languages \sep information flow \sep noninterference \sep translation validation \sep resource admission \sep Lean \sep LLM systems
+\end{keyword}
+\end{frontmatter}
+
+\section{Introduction}\label{sec:intro}
+
+LLM applications are increasingly built as workflows: a router classifies a
+request, a specialist model answers on one branch, an evaluator loops until a
+draft passes. Operators export usage records of these workflows to observability
+and billing systems. Tracing conventions record model names and input/output
+token counts per span~\cite{otel2026genai}, and observability products offer
+masking of prompt and response contents while still recording that usage
+metadata~\cite{langsmith2026mask,langfuse2026mask,helicone2026omit}. Masking
+contents does not mask control flow. If a medical query takes a branch that calls
+a larger model twice, the ordered list of model identities and token counts
+reveals the branch. Token counts and routing metadata are established leakage
+channels for single requests~\cite{weiss2024prompt,zhang2024timewilltell,chen2026routing};
+a workflow multiplies them across every call it makes.
+
+The programming problem is to change a whole bounded workflow so that its usage
+record no longer depends on secret inputs, while every decision the workflow
+makes stays the same. Constant-resource programming, control-flow balancing,
+padding and translation validation solve analogous problems for timing and network
+traffic~\cite{agat2000transforming,ngo2017constant,wang2014supersequence,pnueli1998tv}.
+LLM workflows add three difficulties. First, an operation is a model contract
+(weights, tokenizer, chat template, stop policy and decoding grammar), and counts in
+one contract's unit say nothing about another's. Second, later prompts are built
+from earlier generated text, so whether a padding target is large enough depends
+on values that do not yet exist when the workflow starts. Third, a validator's
+guarantee is only as good as the original program and secrecy policy it is given.
+
+OrchLang addresses these difficulties as follows. An untrusted compiler proposes
+padding targets, dummy calls and loop completion. A trusted source reader
+re-derives the original program and the declared secrets from the source bytes,
+and a Lean validator checks the candidate against them
+(Section~\ref{sec:acceptance}). A decidable static certificate bounds every value
+from which a request is built, which proves before execution that every padded
+request reached by any trajectory fits its target (Section~\ref{sec:static}). The
+runtime admits complete requests, reserves per-model budgets and records request
+hashes and generated token IDs.
+
+\paragraph{What the guarantee buys}
+A trusted wrapper could simply print a fixed report. Such report normalization
+still needs everything OrchLang checks: a static shape to report, evidence that
+the repair preserves the original's decisions, and evidence that every request
+fits its slot. Without the last item, a report lies whenever a request outgrows
+its slot, or the workflow must refuse midway and the refusal itself leaks.
+Executing the shape makes the report \emph{truthful}: it equals the logical work
+performed in each model contract's own unit and reconciles against local
+evaluation records, which matters for budget enforcement and audit. The
+guarantee concerns this released logical record. A server that observes physical
+batches, a clock or packets needs a separate serving refinement, and we measure
+how far one prototype gets (Section~\ref{sec:native}).
+
+\paragraph{Contributions}
+\begin{enumerate}
+\item \emph{Source-bound translation validation} for LLM workflows. Because the
+original program and policy come from source rather than from the candidate, a
+repair cannot weaken the policy it is checked against
+(Section~\ref{sec:acceptance}).
+\item \emph{A restricted-domain mechanized theory.} Noninterference, functional
+preservation and exact per-model budgets hold under serving contracts that
+constrain only admitted requests. A concrete non-truncating padder satisfies
+these contracts and provably violates the global ones used in earlier
+formulations (Section~\ref{sec:restricted}).
+\item \emph{A static admission certificate} whose soundness is proved in Lean, and
+whose byte-interface instance reduces all remaining tokenizer obligations to a
+segmentation property monitored before each dispatch (Sections~\ref{sec:static}
+and~\ref{sec:discharge}). The end-to-end theorems need only an input guard.
+\item \emph{Boundary assurance} for the trusted Python implementation: three-way
+operational agreement with Lean's executable semantics, and an exact
+serialization round trip that found and fixed a real defect
+(Section~\ref{sec:impl}).
+\item \emph{An evaluation} on twelve workflow variants and three local models. It
+comprises a heuristic study of \roundTwoPairs{} pairs, a certified study over every
+guard-admitted input, cost measurements, and a native single-batch prefill
+prototype whose negative results we report (Section~\ref{sec:evaluation}).
+\end{enumerate}
+
+\begin{table}[t]
+\centering\small
+\caption{Inherited mechanisms and the additional contract studied here.}
+\label{tab:delta}
+\begin{tabular}{>{\raggedright\arraybackslash}p{28mm}>{\raggedright\arraybackslash}p{36mm}>{\raggedright\arraybackslash}p{54mm}}\toprule
+Prior method & Established contribution & Contract added by OrchLang\\\midrule
+Agat, constant-resource types, FaCT~\cite{agat2000transforming,ngo2017constant,cauligi2019fact}
+& Balance control paths; constrain resource-dependent observations.
+& Balance across separately identified model contracts with visible caps and
+generated-text dependencies.\\[1mm]
+Translation validation~\cite{pnueli1998tv,necula2000tv}
+& Check each translation against a supplied original.
+& The original and secrecy policy are re-derived from source bytes, not supplied
+by the candidate.\\[1mm]
+Supersequence defenses, Pacer~\cite{wang2014supersequence,mehta2022pacer}
+& Shape traffic under a network observer.
+& Ordered model/tool events with exact logical counts; useful-call order is preserved.\\[1mm]
+RelCost, eRHL~\cite{cicek2017relcost,avanzini2025erhl}
+& General relational cost reasoning.
+& A decidable admission certificate with a Lean soundness proof, specialised to
+text-valued stores.\\[1mm]
+Token-budget tools~\cite{khan2026budgets,dickerson2026loom}
+& Bound or catalogue agent spending.
+& Per-model budgets that are exact consequences of a certified shape.\\\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Observer and threat model}\label{sec:scope}
+
+\paragraph{Observation}
+The observer receives the ordered list of events exported for one workflow run,
+\[
+e ::= \mathsf{llm}(m,t_{\mathrm{in}},t_{\mathrm{out}})\mid\mathsf{tool}(f),
+\]
+where $m$ is a model contract and $f$ a tool name. Contents, call-site
+identifiers, dummy flags, natural stopping lengths and private audit records are
+not exported. We assume the trusted wrapper releases the record once per run, or
+with timestamps normalised to the run, so that per-event latency is not part of
+the observation. This is an explicit deployment requirement. A retained
+latency-augmented attack reaches 100 percent balanced accuracy against one shaped
+workflow (Section~\ref{sec:costs}), so constant logical usage does not imply
+constant running time.
+
+\paragraph{Property}
+For stores $\sigma\equiv_{\lo}\tau$ that agree on public variables, \emph{usage
+noninterference} requires equal traces for every fixed randomness tape. Public
+inputs may still select different traces. Equality for every tape implies
+equality of trace distributions under any secret-independent tape distribution.
+
+\paragraph{Trust}
+The model and the trusted host may see secret contents. The source reader,
+lowerer, serializer, runtime and native serving code are trusted. The compiler is
+untrusted. Figure~\ref{fig:boundaries} summarises which interfaces carry which
+evidence; Section~\ref{sec:impl} lists the trusted computing base.
+
+\paragraph{Out of scope}
+Elapsed time, streaming chunk boundaries, packets, shared prompt or KV caches,
+concurrency between runs, and physical failures are outside the observation. So
+are external tool providers: a dummy tool event is a logical record and does not
+contact a real service. In isolated-padding mode the wrapper reports filler and
+request prefill as one input count, but an observer below the wrapper sees two
+submissions and recovers the true request length. Section~\ref{sec:native}
+measures a single-submission prototype for that lower observer.
+
+\paragraph{Admission and refusal}
+Before dispatch the host counts the fully rendered request in the receiving
+model's unit and refuses overflow rather than truncating. A refusal is itself
+observable. Our certified guarantees therefore include admission: under the
+static certificate, no request reached by any guarded trajectory is refused
+(Section~\ref{sec:static}). The input guard is a pre-dispatch decision on input
+sizes against public byte bounds. Inputs it rejects are refused before any model
+call, so a refusal reveals only whether some input exceeds its declared bound.
+That one bit is outside the theorems and is the deployment's responsibility, for
+example by rejecting oversized inputs at the user interface.
+
+\begin{figure}[t]
+\centering\small
+\begin{tabular}{p{36mm}p{92mm}}\toprule
+Interface & Assurance\\\midrule
+Checked core & Lean theorems: restricted-domain noninterference, preservation,
+budgets, static admission (Section~\ref{sec:formal}).\\
+Byte-bounded adapter & UTF-8 envelope lemmas proved; tokenizer segmentation and
+input guard checked at run time.\\
+Python implementation & Three-way operational agreement; exact serialization
+round trip; tests.\\
+Native serving & Logical accounting reconciled against eval/yield records; no
+physical-observer refinement.\\\bottomrule
+\end{tabular}
+\caption{Assurance by interface. A check at one interface does not certify the
+interfaces below it.}
+\label{fig:boundaries}
+\end{figure}
+
+\section{Language and shaping}\label{sec:language}
+
+\subsection{Bounded programs}
+
+The source language has labelled text inputs, model profiles, templated prompts,
+capped calls, pure tools, conditionals and bounded loops. For example:
+\par\noindent\begin{minipage}{\linewidth}
+\begin{lstlisting}
+workflow Router {
+  input q: text secret max_tokens 48;
+  model m = "llama1b";
+  prompt classify(x) = user "Classify: {x}";
+  prompt respond(x) = user "Answer: {x}";
+  let route = call classify(q) using m max_tokens 3;
+  if route == "short" {
+    let answer = call respond(q) using m max_tokens 16;
+  } else {
+    let answer = call respond(q) using m max_tokens 64;
+  }
+  output answer;
+}
+\end{lstlisting}
+\end{minipage}\par
+Unshaped usage exposes the request lengths and the selected cap. Shaping fixes the
+classification usage and aligns the two response arms while keeping their visible
+caps. The core contains sequencing, calls, tools, dummies, conditionals and loops.
+Expressions contain literals, variables, concatenation, tool-argument escaping
+and template-level trimming. Escaping prevents separator characters or
+backslashes from changing argument boundaries. Lean defines it character-wise; an
+executable check confirms agreement with the adapter's sequential replacement.
+
+Labels form $\lo\sqsubseteq\hi$. Flow-insensitive propagation joins argument and
+program-counter labels. A high call requires fixed usage, a high conditional
+requires equal arm shapes, and a high loop requires a shaped body completed to its
+public bound. Model responses inherit the label of their requests.
+Figure~\ref{fig:grammar} gives the complete core grammar, using the constructors
+of the executable Lean definitions.
+\input{sections/core-syntax.tex}
+
+\subsection{Targets, padding and output}
+
+In heuristic mode the compiler sizes targets from tokenized literals, variable
+caps and slack. This is an execution envelope, not a sound bound: subword
+concatenation and cross-model values invalidate scalar token bounds. In one audit
+example, a string counted as one BERT token needed 259 GPT-2 tokens in its
+complete request, against an 18-token target. Exact complete-request admission
+catches such cases at run time. Certified mode (Section~\ref{sec:static}) replaces
+the heuristic with sizes that are proved sufficient.
+
+Isolated padding prefills filler in a separate context, resets it and evaluates
+the unchanged request. Logical input usage is the sum of filler and request
+counts. In-band filler changes the visible prompt and may change responses, so it
+is not the default. Forced decoding generates exactly $N$ token IDs, continuing
+past a stop token. The stop token is not masked: generation simply proceeds
+from the context that contains it, so tokens after the first stop never enter
+the visible response. The workflow receives the prefix before the first stop, cut to
+its visible cap $k\leq N$. Natural calls exclude the terminating stop ID; forced
+calls count all $N$ IDs. The implementation recognises EOS and declared
+single-token stop IDs and rejects multi-token stop strings before execution,
+because string-level matching across a visible-cap boundary is outside the
+semantics.
+
+\subsection{Alignment and loops}
+
+A two-sequence dynamic program aligns compatible model contracts or equal tool
+names, merges counts by componentwise maximum and inserts dummy events for
+missing positions. With weight $t_{\mathrm{in}}+4t_{\mathrm{out}}$ per contract it
+minimises the common two-arm profile cost. The weight is a chosen,
+decode-sensitive objective rather than a measured price; Section~\ref{sec:costs}
+varies it. Multi-arm alignment is progressive, and global optimality is not
+claimed. After early loop termination, ghost iterations emit the body's shape
+without updating the store or consuming real-site randomness. Model dummies
+perform real local generation; dummy tool events only add records.
+Figure~\ref{fig:semantics} gives the operational semantics.
+\input{sections/core-semantics.tex}
+
+\section{Mechanized guarantees}\label{sec:formal}
+
+\subsection{Acceptance from a bound source}\label{sec:acceptance}
+
+Translation validation checks each proposed transformation rather than the
+optimiser~\cite{pnueli1998tv,necula2000tv}. Lean checks four conditions on a
+candidate $p$ for original $p_0$ under labelling $\Gamma$:
+\begin{itemize}
+\item the padding discipline;
+\item separated high and public randomness sites;
+\item visible caps no larger than forced lengths;
+\item equality of normalised erasures, so useful requests cannot be changed,
+reordered or dropped.
+\end{itemize}
+Figure~\ref{fig:validation} gives the rules. The question a validator does not
+answer is where $p_0$ and $\Gamma$ come from. OrchLang's trusted source reader
+derives the original, slots, labels and declared secret set from the source bytes,
+independently of the candidate. The interface requires every declared secret to
+be labelled high.
+
+This binding matters in practice. For a source-declared secret query, a
+candidate that supplies an empty secret list and an unshaped call is
+\emph{accepted} by the core checker under the weakened all-public policy. The
+source-bound entry point re-derives the declaration, rejects the same call, and
+accepts the compiler's padded repair. The executable
+\code{experiments/source\_binding\_case.py} reproduces all three Lean verdicts.
+Only SHA-pinned model aliases with identical template, stop, grammar and padding
+contracts share a model identity.
+\input{sections/core-validation.tex}
+
+\subsection{Worlds and restricted serving contracts}\label{sec:restricted}
+
+Execution is parameterised by a world $w$ providing tokenization
+$\mathsf{tok}_m$, natural and forced generation, padding $\mathsf{padReq}_m$,
+visible-prefix extraction $\mathsf{view}_m$ and pure tools. A tape $\omega(i,j)$
+supplies randomness to the $j$th execution of call site $i$; dummies and ghost
+iterations do not advance site counters. A \emph{request domain}
+$D(m,T,N,r)$ names the padded calls a serving adapter supports: model $m$,
+input target $T$, forced length $N$, unpadded request $r$.
+
+\begin{definition}[Restricted serving contracts]
+$\mathsf{ConformsOn}(w,D)$ holds if for all $(m,T,N,r)\in D$ and every cell $c$:
+\[
+\mathsf{tok}_m(\mathsf{padReq}_m(T,r))=T,\qquad
+\mathsf{outTok}_m(\mathsf{forced}_m(\mathsf{padReq}_m(T,r),c,N))=N.
+\]
+$\mathsf{TransparentOn}(w,D)$ holds if for all $(m,T,N,r)\in D$, all $k\leq N$ and
+all $c$:
+\[
+\mathsf{view}_m(k,\mathsf{forced}_m(\mathsf{padReq}_m(T,r),c,N))=\mathsf{gen}_m(r,k,c).
+\]
+\end{definition}
+
+The trajectory predicate $\mathsf{RunsIn}(w,\omega,D,p,s)$ holds when every padded
+call and dummy actually reached by executing $p$ from state $s$ lies in $D$,
+including loop-completion calls. It follows evaluated intermediate stores and
+guards.
+
+Earlier formulations, including our own, assumed the global contracts
+$\mathsf{Conforms}(w)$ and $\mathsf{Transparent}(w)$, which quantify over every
+$T$, including targets smaller than the request. The following proposition shows
+why the restriction matters.
+
+\begin{proposition}[Non-vacuity]\label{prop:nonvacuous}
+Let $\mathsf{padWorld}$ count characters, pad by appending filler without
+truncating, and force exactly $N$ output tokens. For every envelope $b$ it
+satisfies $\mathsf{ConformsOn}(\mathsf{padWorld},D_b)$ for the envelope domain
+$D_b$ defined below and $\mathsf{TransparentOn}(\mathsf{padWorld},D)$ for every
+$D$. It does not satisfy the global $\mathsf{Conforms}$.
+\end{proposition}
+
+The global premise therefore excludes the very padders we deploy, while the
+restricted premises admit them. All theorems below use only the restricted
+contracts. The global versions remain available as corollaries
+(\code{World.Conforms.on}, \code{World.Transparent.on}).
+
+\begin{theorem}[Restricted-domain noninterference]\label{thm:ni-on}
+Let $p$ pass the padding discipline and randomness-site check, and let
+$\mathsf{ConformsOn}(w,D)$. For public-equal states $a,b$ with
+$\mathsf{RunsIn}(w,\omega,D,p,a)$ and $\mathsf{RunsIn}(w,\omega,D,p,b)$, the two
+executions end in public-equal states with equal traces.
+\end{theorem}
+
+The proof inducts over statements with the relation ``public-equal stores,
+counters equal off high sites, equal traces''. Public calls use equal requests and
+cells. High calls emit $(T,N)$ because their requests are admitted. High branches
+and loops emit their common shape by the restricted shape lemma, and confinement
+preserves public state under a high program counter. Unlike a constant-shape
+argument, Theorem~\ref{thm:ni-on} covers programs whose trace depends on public
+inputs.
+
+\subsection{Static admission certificate}\label{sec:static}
+
+$\mathsf{RunsIn}$ is a trajectory property: a later prompt depends on generated
+text, so checking it would require predicting model outputs. The certificate
+avoids lookahead by bounding the values from which every request is built. Let
+$|r|_b$ be a text measure and let the finite vector $v$ bound every store slot, so
+that the store invariant is $I_v(\sigma)\equiv\forall x,\ |\sigma(x)|_b\leq v_x$. The
+computable expression envelope is
+\[
+\begin{aligned}
+E_v(s)&=|s|_b, & E_v(x)&=v_x,\\
+E_v(\mathsf{escape}(e))&=2E_v(e), & E_v(\mathsf{trim}(e))&=E_v(e),\\
+E_v(e_1{+\!+}e_2)&=E_v(e_1)+E_v(e_2).
+\end{aligned}
+\]
+An \emph{envelope} $b$ supplies the measure together with model constants and
+bounds. Its soundness $\mathsf{Sound}(b,w)$ has six conjuncts:
+\begin{itemize}
+\item three structural ones: subadditive concatenation, at most twofold escaping
+and nonexpansive trimming;
+\item tokenizer bounds $\mathsf{tok}_m(r)\leq\alpha_m|r|_b+\delta_m$;
+\item visible-response bounds $\rho_m(k)$;
+\item tool-result bounds $\theta_f$.
+\end{itemize}
+The envelope domain is
+$D_b(m,T,N,r)\equiv\mathsf{tok}_m(r)\leq T\land T+N\leq C_m$. For each padded call
+$\mathsf{call}_i(x,m,k,e,(T,N))$ the checker \code{staticCertificate} tests
+\[
+\alpha_m E_v(e)+\delta_m\leq T,\qquad T+N\leq C_m,\qquad k\leq N,\qquad\rho_m(k)\leq v_x,
+\]
+requires $\theta_f\leq v_x$ for tool assignments, checks dummies against their
+fixed request, and recurses into both branches and loop bodies. Padded loops also
+check their cover profile. The checker never calls \code{exec} or
+$\mathsf{RunsIn}$.
+
+\begin{theorem}[Static certificate implies admission]\label{thm:static}
+If $\mathsf{Sound}(b,w)$ and \code{staticCertificate} accepts $p$ under $v$, then
+for every store $\sigma$ with $I_v(\sigma)$ and every tape $\omega$,
+$\mathsf{RunsIn}(w,\omega,D_b,p,\sigma)$ holds, and the final store satisfies $I_v$.
+\end{theorem}
+
+The proof carries $I_v$ through every useful assignment, using the response and
+tool bounds, and leaves it unchanged under cover work. Loop cases use an
+invariant lemma for both real and ghost iterations.
+
+\paragraph{Certified end-to-end guarantees}
+Composing Theorem~\ref{thm:static} with the restricted theory removes every
+trajectory premise. In the following, $p$ is accepted by \code{validateProgram}
+against the source-derived original $p_0$ and \code{staticCertificate} accepts $p$
+under $v$.
+
+\begin{theorem}[Certified noninterference]\label{thm:cert-ni}
+If $\mathsf{Sound}(b,w)$ and $\mathsf{ConformsOn}(w,D_b)$, then for all
+public-equal $\sigma,\tau$ satisfying $I_v$ and every tape $\omega$, executing $p$
+from $\sigma$ and from $\tau$ emits the same trace. In particular, stores that
+differ only in declared secret inputs emit the same trace.
+\end{theorem}
+
+\begin{theorem}[Certified preservation]\label{thm:cert-pres}
+If $\mathsf{Sound}(b,w)$ and $\mathsf{TransparentOn}(w,D_b)$, then for every
+$\sigma$ satisfying $I_v$ and every $\omega$, $p$ and the erasure of $p_0$ end in
+the same store.
+\end{theorem}
+
+\begin{theorem}[Certified shape and budgets]\label{thm:cert-budget}
+If $\mathsf{Sound}(b,w)$, $\mathsf{ConformsOn}(w,D_b)$ and
+$\mathsf{shape}(p)=s$, then every guarded execution emits exactly $s$. Let $U_m(s)$
+be the input-token sum, output-token sum and call count of contract $m$ in $s$.
+If $U_m(s)\leq B_m$ componentwise for every $m$, every guarded execution stays
+within the budgets $B$.
+\end{theorem}
+
+The only run-time premise left is the input guard $I_v(\sigma)$, which is decided
+on input sizes before the first dispatch. Budgets are kept per contract because
+token units of different models are incomparable. Accounting alone does not
+replace the ordered shape: paths $[A,B]$ and $[B,A]$ have equal per-contract
+totals but different traces.
+
+\subsection{Discharging the byte envelope}\label{sec:discharge}
+
+The deployed adapter measures text in UTF-8 bytes. Its structural obligations
+are proved rather than assumed.
+
+\begin{lemma}[UTF-8 envelope]\label{lem:utf8}
+For $|\cdot|_b=\mathsf{utf8ByteSize}$: concatenation is additive, escaping at most
+doubles size, and trimming does not increase it. Hence $\mathsf{Sound}(b,w)$
+reduces to the tokenizer, response and tool bounds.
+\end{lemma}
+
+The response and tool bounds are enforced by the adapter's post-decoding byte
+buffers, which both the original and the shaped program use. The response buffer
+allows $128k$ bytes for visible cap $k$, the largest raw token-piece length in all
+three pinned vocabularies (Section~\ref{sec:cert-study}). The remaining
+assumption, $\alpha_m=1$ and $\delta_m=0$, reduces to a property of a single
+tokenization.
+
+\begin{lemma}[Segmentation bound]\label{lem:seg}
+If a tokenizer emits pieces that are each nonempty and whose concatenation equals
+the input bytes, then the number of tokens is at most the number of input bytes.
+\end{lemma}
+
+Byte-level BPE with automatic BOS insertion disabled has this form. The chat
+framing, including the begin-of-text marker, is part of the request expression,
+and special tokens render as their own nonempty literals. The certified runtime
+checks both premises on every complete request before dispatch: it reads each
+native piece with the special-token convention, compares their concatenation
+with the request bytes, and refuses a mismatch without dispatching. The
+tokenizer bound is therefore monitored rather than assumed. What remains trusted
+is that the native piece table describes the token IDs the model consumes.
+
+\subsection{Refusal and ideal admission}\label{sec:refusal}
+
+Without a certificate, the per-call admission check prevents overspending but
+leaves a prefix channel. A first call can complete before a later rendered
+request exceeds its target, so one run is refused after $[e_1]$ while another
+completes $[e_1,e_2]$. An executable falsification exhibits exactly this with two
+public-equal stores. We therefore keep an ideal admission semantics with
+observations $\mathsf{refused}$, $\mathsf{completed}(t)$,
+$\mathsf{failed}(\textit{prefix})$ and $\mathsf{unknownDispatch}(\textit{prefix})$.
+
+\begin{proposition}
+If $\mathsf{shape}(p)=s$ and $\mathsf{ConformsOn}(w,D)$, every execution satisfying
+$\mathsf{RunsIn}$ emits exactly $s$. If $\mathsf{RunsIn}$ holds for every advertised
+input and tape, every ideal observation is $\mathsf{completed}(s)$.
+\end{proposition}
+
+The first part is the restricted shape lemma used throughout. The second is
+discharged for guarded inputs by Theorem~\ref{thm:static}. Transport failures and
+unknown dispatches are outside the theorems; the runtime retains reservations
+when dispatch usage cannot be confirmed.
+
+\subsection{Mechanization}\label{sec:mech}
+
+Table~\ref{tab:lean} maps every result to its Lean declaration. The development
+has 2,312 lines and 78 theorems in seven files and is checked by Lean
+4.19.0~\cite{moura2021lean4} with no \code{sorry}. The script
+\code{publication/check\_proofs.py} compiles the files in dependency order and fails
+if any declaration depends on an axiom other than \code{propext},
+\code{Quot.sound} or \code{Classical.choice}. Only the ideal-admission
+observations use \code{Classical.choice}, because $\mathsf{RunsIn}$ is not
+decidable. All certified theorems use only \code{propext} and \code{Quot.sound}.
+
+\begin{table}[t]
+\centering\footnotesize
+\caption{Results and their Lean declarations (file prefix \code{proof/}).}
+\label{tab:lean}
+\begin{tabular}{>{\raggedright\arraybackslash}p{19mm}>{\raggedright\arraybackslash}p{75mm}>{\raggedright\arraybackslash}p{28mm}}\toprule
+Result & Declaration & File\\\midrule
+Prop.~\ref{prop:nonvacuous} & \code{padWorld\_conformsOn}, \code{padWorld\_transparentOn}, \code{padWorld\_not\_globally\_conforming} & RestrictedDomain\\
+Thm.~\ref{thm:ni-on} & \code{noninterference\_on}, \code{trace\_noninterference\_on} & RestrictedDomain\\
+Thm.~\ref{thm:static} & \code{static\_certificate\_sound}, \code{static\_certificate\_implies\_}\allowbreak\code{RunsIn} & AdmissionDomain\\
+Thm.~\ref{thm:cert-ni} & \code{certified\_noninterference}, \code{certified\_secret\_inputs\_sound} & RestrictedDomain\\
+Thm.~\ref{thm:cert-pres} & \code{certified\_preservation} (via \code{erase\_correct\_on}) & RestrictedDomain\\
+Thm.~\ref{thm:cert-budget} & \code{certified\_shape\_exact}, \code{certified\_budget\_sound} & RestrictedDomain\\
+Lemma~\ref{lem:utf8} & \code{utf8\_append}, \code{utf8\_escape}, \code{utf8\_trim}, \code{utf8\_envelope\_sound} & Utf8Envelope\\
+Lemma~\ref{lem:seg} & \code{segmentation\_count\_le}, \code{tokenizer\_alpha\_one} & Vocabulary-Envelope\\
+Prop.~2 & \code{shape\_exec\_on}, \code{certified\_domain\_noninterference} & AdmissionDomain\\
+Global corollaries & \code{noninterference}, \code{erase\_correct}, \code{shape\_budget\_sound}, \code{validateProgram\_sound} & ShapeCore\\\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Implementation and trusted computing base}\label{sec:impl}
+
+The implementation is a Python frontend, compiler and runtime of about 2,600 lines
+over llama-cpp-python, plus the Lean development. The runtime admits complete
+requests, reserves per-model usage before dispatch and confirms counts and caps on
+return. A transport exception or a nonconforming return leaves the reservation in
+place, so usage is marked incomplete rather than recorded as a zero-cost success.
+Each run manifest binds source, dataset, selected IDs, implementation hashes,
+model contracts, decoding parameters, platform and native-library hashes. Resuming
+requires an identical manifest. A separate \code{python -m orchlang check} command
+re-reads source and model bytes to check an exported artifact without trusting its
+declared original or secrets.
+
+\begin{table}[t]
+\centering\footnotesize
+\caption{Trusted computing base and how each part is checked.}
+\label{tab:tcb}
+\begin{tabular}{p{35mm}p{90mm}}\toprule
+Component & Evidence\\\midrule
+Source reader, lowerer & Re-derives original and secrets; policy-omission case; tests.\\
+Python $\to$ Lean serializer & Exact round trip of 3,036 programs (Section~\ref{sec:impl-boundary}).\\
+Python runtime semantics & Agreement with Lean \code{exec} and an independent interpreter on 6,320 executions.\\
+Byte adapter guards & Input guard and post-decoding buffers; refusal-before-dispatch tests.\\
+Native tokenizer & Segmentation premise of Lemma~\ref{lem:seg} checked per request; exhaustive vocabulary scan.\\
+Native generation & Forced-length and visible-prefix contracts checked per call; eval/yield reconciliation.\\\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Checking the Python--Lean boundary}\label{sec:impl-boundary}
+
+Lean checks the program it parses, so the serializer is part of the trusted base.
+We added an encoder to the Lean development and a \code{roundtrip} entry point that
+parses each serialized program and re-encodes it. Programs come from the
+differential generator, with literals extended by accented, CJK, emoji, backslash,
+unit-separator, quote, line-separator and special-token strings, and from every
+application source with its heuristic and certified candidates.
+
+The first run matched only 2,517 of 3,036 programs. Python's JSON encoder escaped
+characters outside the Basic Multilingual Plane as UTF-16 surrogate pairs, and
+Lean's parser decoded each surrogate separately into U+0000. Lean was therefore
+checking a different literal. Besides the validator, this affected the static
+certificate, which would have under-counted a four-byte character as two bytes.
+No shipped workflow source contains a non-ASCII character, so no reported result
+was affected. After switching both interfaces to raw UTF-8, all 3,036 programs
+round-trip exactly. The pre-fix behaviour is reproducible with
+\code{--ascii-escaped}, and a regression test covers it. The episode is a concrete
+case for treating the serializer as part of the trusted base and checking it
+mechanically.
+
+\input{sections/round3-evaluation.tex}
+
+\section{Related work}\label{sec:related}
+
+\paragraph{Language-based information flow}
+Noninterference and its type-based enforcement are
+classical~\cite{goguen1982noninterference,volpano1996sound,sabelfeld2003language}.
+The program-counter security model formalises control-flow
+observations~\cite{molnar2005pc}. Agat's transformation, constant-resource typing
+and synthesis, and FaCT eliminate resource-dependent
+observations~\cite{agat2000transforming,ngo2017constant,cauligi2019fact}, and
+static analyses such as Blazer and Themis detect such
+channels~\cite{antonopoulos2017blazer,chen2017themis}. OrchLang applies balancing to
+operations whose costs are counted per model contract and whose inputs are
+generated text. Its contribution lies in the contracts and the admission
+certificate, not in a new type system.
+
+\paragraph{Verified and validated compilation}
+Verified compilers prove every compilation
+correct~\cite{leroy2009compcert}, and constant-time preservation has been verified
+for a realistic C compiler~\cite{barthe2020ctcompcert,barthe2021constantresource}.
+Translation validation instead checks each output~\cite{pnueli1998tv,necula2000tv}.
+OrchLang validates each repair, and it additionally binds the validator's original
+and policy to source bytes, which closes a policy-omission attack that an unbound
+interface admits.
+
+\paragraph{Resource reasoning and budgets}
+RelCost and probabilistic relational Hoare logics reason about relative and
+expected costs in general~\cite{cicek2017relcost,avanzini2025erhl}. Our budget
+theorem is a corollary of a certified exact shape, and the admission certificate
+is a specialised, decidable invariant for text-valued stores. Token-budget
+catalogues and workflow cost bounds address spending without
+confidentiality~\cite{khan2026budgets,dickerson2026loom,costwright2026,typedresources2026}.
+
+\paragraph{Traffic shaping and timing}
+Supersequence defenses, Tamaraw and Pacer shape network
+traffic~\cite{wang2014supersequence,cai2014tamaraw,mehta2022pacer}, and
+countermeasure studies show how partial shaping
+fails~\cite{dyer2012peekaboo}. Predictive mitigation bounds timing leakage with
+delayed releases~\cite{askarov2010predictive,zhang2012timing}. Providers have
+mitigated token-length channels in streams by padding~\cite{cloudflare2024padding,openai2026obfuscation}.
+These defenses target a network or clock observer. Ours targets the exported
+logical record, and Section~\ref{sec:native} shows what remains below it.
+
+\paragraph{LLM programs and agents}
+LMQL, DSPy and SGLang structure model calls as
+programs~\cite{beurer2023lmql,khattab2024dspy,zheng2024sglang}; their constraints
+concern response languages and performance, not usage observations. CaMeL, FIDES
+and Hard-KLAIM enforce integrity, information flow or authority for
+agents~\cite{debenedetti2025camel,costa2025fides,aldinucci2026hardklaim}, and
+SICC compiles policy-relative inter-agent messages~\cite{xu2026sicc}. These systems
+control which content flows where. OrchLang controls the usage metadata that
+remains when content is hidden, and the two properties compose.
+
+\section{Limitations}\label{sec:limits}
+
+The theorems are about the core semantics under explicit serving contracts. The
+source reader, lowerer and native serving code are trusted; we check them by
+agreement, round trip and per-request monitoring, not by proof. The certified
+guarantee covers inputs within the declared byte guard. Refusing larger inputs is
+a public decision on input size, but it is still observable. The byte interface
+clips tool results identically in both arms, so the bounded original can differ
+from the unbounded application (Section~\ref{sec:cert-study} quantifies this).
+Worst-case byte envelopes compound through chains of generated text, which makes
+certified execution expensive for deep workflows (Section~\ref{sec:costs}).
+Successful context admission does not establish device-memory availability, as
+the retained out-of-memory run at a 32,768-token context shows. Side effects,
+concurrency and stateful tools are outside the semantics.
+
+The application corpus consists of authored bounded ports of public workflow
+examples run with small local models. Their task accuracies are low, and shaping
+preserves them rather than improving them. Leakage is measured with one classifier
+family on these corpora; the formal theorems, not the classifiers, carry the
+security claim. The native prototype fixes a batch-size projection but not
+sequence metadata, and timing protection would require paced release with its own
+leakage and deadline analysis.
+
+\section{Conclusion}
+
+OrchLang turns a hidden-content LLM workflow into one whose exported usage record
+is independent of secrets. The guarantee is checked per repair against a
+source-derived policy. A static certificate ensures in advance that the shaped
+record is truthful and refusal-free. The proofs need only restricted serving
+contracts that real non-truncating padders satisfy, together with a tokenizer
+segmentation property that the runtime monitors. The certified evaluation shows
+that these guarantees hold on real models at a measurable cost, and the native
+prototype marks where a stronger serving refinement must begin.
+
+\section*{Data and software availability}
+The artifact contains the Lean development, Python sources, workflow sources,
+datasets, all execution records (including failed and preliminary attempts),
+protocols, generated tables and SHA-256 integrity manifests, together with the
+complete Git history. Model weights are obtained separately using the recorded
+revisions and hashes. The development history is public at
+\url{https://github.com/guyoverclocked/orchlang-compiler-design-project}. The
+review archive will be deposited with a persistent identifier on acceptance.
+
+\section*{Declaration of generative AI and AI-assisted technologies in the manuscript preparation process}
+During the preparation of this work the authors used AI coding and writing
+assistants (Claude, Anthropic; Codex, OpenAI) to help implement experiment and
+proof scaffolding, run checks, and edit the language of the manuscript. After
+using these tools, the authors reviewed and edited the content as needed and take
+full responsibility for the content of the published article.
+
+\section*{Declaration of competing interest}
+The authors declare that they have no known competing financial interests or
+personal relationships that could have appeared to influence the work reported in
+this paper.
+
+\begingroup\small
+\bibliographystyle{elsarticle-num}\bibliography{refs}
+\endgroup
+\appendix
+\section{Earlier cohorts and the historical implementation}
+
+Earlier evidence remains immutable supplementary material and is never pooled
+with the present studies. An earlier main cohort retained 962 pairs; a later
+completion added 210 main and 512 Qwen pairs under a different implementation.
+Template and Unicode corrections were checked separately: a 48-pair workflow
+study, a 192-case primitive matrix and a 24-pair release check. A targeted
+comparison differed from older saved fields in 6 of 18 examples. A 24-pair
+byte-bounded pilot preceded the certified study of Section~\ref{sec:cert-study}.
+The archive also retains \code{legacy/v1}, an earlier C++/Lean certificate analyzer
+with a different AST and policy. Its 106 C++ tests, 82 Python tests and four Lean
+files are excluded from the counts in this paper.
+
+\section{Reproduction map}\label{app:repro}
+Start with \code{publication/README.md}. With \code{LEAN} pointing at Lean 4.19.0 and
+\code{ORCHLANG\_MODELS} at the pinned model configuration:
+\begingroup
+\lstset{basicstyle=\ttfamily\footnotesize}
+\begin{lstlisting}
+python publication/check_proofs.py --output out/proofs.json
+python -m unittest discover -s tests
+python experiments/source_binding_case.py --output out/policy.json
+python experiments/serializer_roundtrip.py --output out/roundtrip.json
+python experiments/correspondence.py --programs 150 --output out/corr
+python experiments/differential.py --programs 1000 --runs 4 \
+  --output out/differential.json
+python experiments/homogeneous_study.py campaign --models $ORCHLANG_MODELS \
+  --output out/certified --context 21504 --byte-bounded --response-bytes 128
+python publication/analyze_round3.py --certified out/certified \
+  --output out/analysis
+\end{lstlisting}
+\endgroup
+The heuristic study is reproduced by the same campaign driver without the
+byte-bounded flags at a 4,096-token context. The campaign driver requires a clean
+Git checkout and refuses to overwrite evidence. Manifests record every identity
+needed to compare a new run with ours.
+\end{document}

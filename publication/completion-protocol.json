@@ -1,0 +1,21 @@
+{
+  "protocol": "unified-completion-v1",
+  "pilot_included": false,
+  "runtime": "Python 3.12.14 llama-cpp-python 0.3.36 CPU wheel",
+  "api_usd": "0.00",
+  "retain_historical_latency_separately": true,
+  "failure_policy": "retain failure and do not count incomplete pairs",
+  "cross_family": {
+    "crag": 150,
+    "switch": 210,
+    "email": 152
+  },
+  "historical_main_pairs": 962,
+  "purpose": "complete missing planned workflows and run replication on the source-bound runtime",
+  "implementation_commit": "6a24fe8",
+  "primary_missing": {
+    "adaptive": 60,
+    "crag": 150
+  },
+  "threads_per_worker": 4
+}

@@ -1,0 +1,19 @@
+// Port of LangGraph "Prompt chaining" (workflows-agents.mdx lines 183-262, Graph API gate).
+workflow PromptChaining {
+  input topic: text secret max_tokens 24;
+  model llm = "llama1b";
+  tool contains_any(x, chars) max_tokens 1;
+  tool copy(x) max_tokens 96;
+  prompt generate(t) = user "Write a short joke about {t}";
+  prompt improve(j) = user "Make this joke funnier by adding wordplay: {j}";
+  prompt polish(j) = user "Add a surprising twist to this joke: {j}";
+  let joke = call generate(topic) using llm max_tokens 96;
+  let gate = tool contains_any(joke, "?!");
+  if gate == "yes" {
+    let final = tool copy(joke);
+  } else {
+    let improved = call improve(joke) using llm max_tokens 128;
+    let final = call polish(improved) using llm max_tokens 128;
+  }
+  output final;
+}

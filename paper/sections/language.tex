@@ -1,0 +1,61 @@
+\section{The \sys Language}\label{sec:language}
+
+\sys is a small language for bounded LLM workflows. It is deliberately close to the idioms of the frameworks it ports from---prompts with named placeholders, model calls with a token cap, deterministic glue functions, routing on model outputs, loops until a condition---while making every quantity that affects usage explicit and bounded.
+
+\subsection{Syntax by example}
+
+\Cref{fig:email} shows the port of the LangGraph ``Thinking in LangGraph'' customer-support agent~\cite{langchaindocs2026}. Inputs carry a confidentiality label (\kw{secret} or \kw{public}) and a token bound. A \kw{model} declaration names a model contract; a \kw{prompt} is a list of chat messages whose \texttt{\{x\}} placeholders are its parameters. A \kw{call} sends a prompt to a model with a visible output cap (\kw{max\_tokens}); a \kw{tool} applies a pure, deterministic function from a library (here, the tutorial's routing logic and a field parser), with a declared output bound. Conditionals test an output for equality with or a prefix of a string, and \kw{repeat}~$n$ \kw{until}~$c$ runs its body while $c$ is false, at most $n$ times. Variables are global to the workflow; unassigned variables hold the empty string.
+
+\begin{figure}[t]
+\begin{lstlisting}
+workflow EmailSupport {
+  input email_content: text secret max_tokens 300;
+  model llm = "llama1b";
+  tool email_route(x) max_tokens 2;
+  tool field(x, key, fallback) max_tokens 3;
+  prompt classify(email, sender) = user "Analyze this customer email and classify it: ...";
+  prompt draft(email, intent, urgency, context) = user "Draft a response to this customer email: ...";
+  let cls = call classify(email_content, "customer@example.com") using llm max_tokens 80;
+  let route = tool email_route(cls);
+  let intent = tool field(cls, "intent", "unknown");
+  let urgency = tool field(cls, "urgency", "medium");
+  if route == "review" {
+    let reply = "Escalated to human review.";
+  } else {
+    if route == "docs" { let context = "Relevant documentation: ..."; }
+    else if route == "bug" { let context = "Relevant documentation:\n- Bug ticket BUG-12345 created"; }
+    else { let context = ""; }
+    let reply = call draft(email_content, intent, urgency, context) using llm max_tokens 320;
+  }
+  output reply;
+}
+\end{lstlisting}
+\caption{Port of the LangGraph email-support agent (prompts abbreviated). Billing or critical emails are escalated without a drafting call; the number of calls and the size of the draft request reveal the route.}
+\label{fig:email}
+\end{figure}
+
+\paragraph{Lowering.} The compiler lowers a workflow to a core language (\cref{fig:core}) with integer variable slots. A call's request is an expression of literals, variables and concatenation obtained by rendering the prompt with the model's own chat template; we reproduce the Jinja templates of the evaluated models byte for byte, which the test suite checks against the templates embedded in the model files. The request expression is therefore exactly the text the model receives, and its literal parts can be counted with the model's tokenizer. Tool arguments are joined with a separator character; constants are a built-in tool.
+
+\begin{figure}[t]
+\small
+\[
+\begin{array}{rcl}
+e &::=& \texttt{lit}\ s \mid \texttt{var}\ x \mid e \mathbin{+\!\!+} e \\
+g &::=& x = s \mid s \sqsubseteq x \qquad\text{(equality, prefix)}\\
+c &::=& \texttt{skip} \mid c ; c \mid x \leftarrow \texttt{call}_i\ m\ k\ e\ [\texttt{pad}\ T\ N] \mid x \leftarrow \texttt{tool}\ f\ e \\
+  &\mid& \texttt{dummy}\ m\ T\ N \mid \texttt{dummyTool}\ f \mid \texttt{if}\ g\ \texttt{then}\ c\ \texttt{else}\ c \mid \texttt{loop}\ n\ \texttt{until}\ g\ c\ [\texttt{padded}]
+\end{array}
+\]
+\caption{Core language. A call has a static site $i$, model $m$, visible cap $k$ and request $e$; the shaping compiler may add a padding annotation, dummy statements and the padded flag on loops. Source programs contain none of these.}
+\label{fig:core}
+\end{figure}
+
+\subsection{Labels and detection}\label{sec:labels}
+
+Labels form the two-point lattice $\lo \sqsubseteq \hi$. A labelling $\Gamma$ assigns a label to every variable. Secret inputs are $\hi$; the compiler infers the least flow-insensitive labelling satisfying the standard rules~\cite{volpano1996sound}: a variable assigned by a call or tool whose argument has label $\ell$, under program-counter label $\mathit{pc}$, has label at least $\mathit{pc} \sqcup \ell$, and the arms of a conditional or the body of a loop whose guard variable has label $\ell_g$ run under $\mathit{pc} \sqcup \ell_g$. Model responses are labelled like their requests: the provider sees content, but the observer does not, so responses are as secret as what produced them.
+
+Unlike conventional information-flow control, \sys never \emph{rejects} a flow of secrets into a prompt: the model is trusted with content. What it tracks is whether the \emph{usage} of a call can depend on a secret. A call can leak if its request has label $\hi$ (its input and output counts may vary) or if it runs under $\mathit{pc}=\hi$ (whether it happens may vary); a conditional or loop can leak if its guard is $\hi$. The detector reports each such construct with its source line (\cref{tab:workflows} lists the findings for the nine ports). A workflow with no findings already satisfies the padding discipline of \cref{sec:discipline} and is accepted unchanged.
+
+\subsection{Static token bounds}\label{sec:bounds}
+
+Shaping needs, for each secret-dependent call, an input size $T$ that every possible request fits into and an output size $N$. The output size is the call's declared cap or larger. For inputs, \sys computes $T$ from the request expression: each literal piece is counted with the model's tokenizer, each variable contributes its bound---the declared bound of an input, the cap of the call that produced it, or the declared output bound of the tool---and one token of slack is added at each piece boundary because subword tokenizers are not additive over concatenation; the fixed wrapper of the padding message (\cref{sec:padding}) is added on top. Bounds over loops take the maximum over assignments. The runtime enforces the bounds rather than trusting them: a tool output longer than its bound is truncated to it, and a request that would exceed $T$ is shortened before padding. Truncation therefore affects function, never security, and our runs record how often it happens.

@@ -1,9 +1,0 @@
-workflow PublicControl budget 1000 {
-  secret private_data: text max_tokens 10;
-  input route: boolean max_tokens 1;
-  input x: text max_tokens 10;
-  model m = mock("same-v1") max_tokens 10;
-  prompt p(t: text) -> text = "{t}";
-  if route { let a: text = call p(x) using m; }
-  output x;
-}

@@ -1,0 +1,49 @@
+\begin{figure}[p]
+\small
+Write $\langle p,\sigma,c\rangle\Downarrow_{w,\omega}
+\langle\sigma',c',t\rangle$ for the store, site counters and emitted trace.
+Let $r=\llbracket e\rrbracket_\sigma$ and $a=\omega(i,c(i))$.
+The rules below abbreviate the recursive function \code{exec}.
+\[
+\frac{y=\mathsf{gen}_m(r,k,a)}
+ {\begin{gathered}\langle\mathsf{call}_i(x,m,k,e,\bot),\sigma,c\rangle\Downarrow\\
+  \langle\sigma[x\mapsto y],c[i\mapsto c(i)+1],
+  [\mathsf{llm}(m,\mathsf{tok}_m(r),\mathsf{outTok}_m(y))]\rangle\end{gathered}}
+\]
+\[
+\frac{r'=\mathsf{padReq}_m(T,r)\quad y=\mathsf{forced}_m(r',a,N)}
+ {\begin{gathered}\langle\mathsf{call}_i(x,m,k,e,(T,N)),\sigma,c\rangle\Downarrow\\
+  \langle\sigma[x\mapsto\mathsf{view}_m(k,y)],c[i\mapsto c(i)+1],
+  [\mathsf{llm}(m,\mathsf{tok}_m(r'),\mathsf{outTok}_m(y))]\rangle\end{gathered}}
+\]
+\[
+\frac{\langle p,\sigma,c\rangle\Downarrow\langle\sigma_1,c_1,t_1\rangle
+ \quad\langle q,\sigma_1,c_1\rangle\Downarrow\langle\sigma_2,c_2,t_2\rangle}
+ {\langle p;q,\sigma,c\rangle\Downarrow\langle\sigma_2,c_2,t_1{+\!+}t_2\rangle}
+\]
+\[
+\frac{\llbracket g\rrbracket_\sigma=\mathsf{true}\quad
+       \langle p,\sigma,c\rangle\Downarrow\langle\sigma',c',t\rangle}
+ {\langle\mathsf{if}\ g\ \mathsf{then}\ p\ \mathsf{else}\ q,\sigma,c\rangle
+       \Downarrow\langle\sigma',c',t\rangle}
+\]
+The false-guard conditional rule selects $q$. A tool writes
+$\mathsf{toolFn}_f(r)$ to $x$, leaves counters unchanged and emits $[\mathsf{tool}(f)]$.
+A model dummy emits its padded/forced event at cell $0$ without updating the
+store or counters; a tool dummy emits only $[\mathsf{tool}(f)]$.
+\[
+\frac{\neg\llbracket g\rrbracket_\sigma\quad
+ \langle p,\sigma,c\rangle\Downarrow\langle\sigma_1,c_1,t_1\rangle\quad
+ \langle\mathsf{loop}(n,g,p,b),\sigma_1,c_1\rangle\Downarrow
+       \langle\sigma_2,c_2,t_2\rangle}
+ {\langle\mathsf{loop}(n+1,g,p,b),\sigma,c\rangle\Downarrow
+       \langle\sigma_2,c_2,t_1{+\!+}t_2\rangle}
+\]
+A zero-bound loop emits $[]$. If its guard already holds, an unpadded loop emits
+$[]$; a padded loop emits $n$ copies of the body's ghost trace and leaves the
+store and counters unchanged. Under conformance on the cover domain, that ghost
+trace equals $\mathsf{shape}(p)$. These rules include no physical exceptions.
+\caption{Operational semantics, with the fixed world and tape omitted from rule
+arrows for readability. An initial accumulated trace is prepended to $t$.}
+\label{fig:semantics}
+\end{figure}

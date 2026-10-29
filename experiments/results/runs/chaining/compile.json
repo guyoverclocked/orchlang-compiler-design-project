@@ -1,0 +1,255 @@
+{
+  "workflow": "PromptChaining",
+  "source": "workflows/chaining.orch",
+  "source_lines": 18,
+  "slots": {
+    "topic": 0,
+    "joke": 1,
+    "gate": 2,
+    "final": 3,
+    "improved": 4
+  },
+  "high": [
+    "topic",
+    "joke",
+    "gate",
+    "final",
+    "improved"
+  ],
+  "findings": [
+    {
+      "kind": "secret-dependent-size",
+      "line": 10,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-branch",
+      "line": 15,
+      "detail": "branch on secret gate selects arms with different usage"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 15,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 16,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    }
+  ],
+  "calls": 3,
+  "original_lean": {
+    "static_shape": null,
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+  },
+  "strategies": {
+    "ours": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            73,
+            96
+          ],
+          [
+            "tool",
+            "contains_any"
+          ],
+          [
+            "tool",
+            "copy"
+          ],
+          [
+            "llm",
+            "llama1b",
+            150,
+            128
+          ],
+          [
+            "llm",
+            "llama1b",
+            180,
+            128
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        3,
+        403,
+        352
+      ],
+      "shape_seconds": 0.001295611000386998
+    },
+    "naive": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            73,
+            96
+          ],
+          [
+            "tool",
+            "contains_any"
+          ],
+          [
+            "tool",
+            "copy"
+          ],
+          [
+            "llm",
+            "llama1b",
+            150,
+            128
+          ],
+          [
+            "llm",
+            "llama1b",
+            180,
+            128
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        3,
+        403,
+        352
+      ],
+      "shape_seconds": 0.0007485739988624118
+    },
+    "uniform": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            180,
+            128
+          ],
+          [
+            "tool",
+            "contains_any"
+          ],
+          [
+            "tool",
+            "copy"
+          ],
+          [
+            "llm",
+            "llama1b",
+            180,
+            128
+          ],
+          [
+            "llm",
+            "llama1b",
+            180,
+            128
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        3,
+        540,
+        384
+      ],
+      "shape_seconds": 0.0008939960007410264
+    },
+    "padall": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            73,
+            96
+          ],
+          [
+            "tool",
+            "contains_any"
+          ],
+          [
+            "tool",
+            "copy"
+          ],
+          [
+            "llm",
+            "llama1b",
+            150,
+            128
+          ],
+          [
+            "llm",
+            "llama1b",
+            180,
+            128
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        3,
+        403,
+        352
+      ],
+      "shape_seconds": 0.0009273420000681654
+    }
+  },
+  "frontend_seconds": 0.8203536179989896,
+  "lean_seconds_batch": 5.255395305001002,
+  "pads": {
+    "1": [
+      73,
+      96
+    ],
+    "2": [
+      150,
+      128
+    ],
+    "3": [
+      180,
+      128
+    ]
+  },
+  "caps": {
+    "1": 96,
+    "2": 128,
+    "3": 128
+  },
+  "site_lines": {
+    "1": 10,
+    "2": 15,
+    "3": 16
+  }
+}

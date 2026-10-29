@@ -1,0 +1,29 @@
+// Port of the "Thinking in LangGraph" email agent (docs/src/oss/langgraph/
+// thinking-in-langgraph.mdx lines 527-575, 645-681, 730-790). EmailClassification
+// is emulated as four text lines; human_review (interrupt) becomes a fixed
+// escalation reply; documentation and bug tracking are the tutorial's stubs.
+workflow EmailSupport {
+  input email_content: text secret max_tokens 300;
+  model llm = "llama1b";
+  tool email_route(x) max_tokens 2;
+  tool field(x, key, fallback) max_tokens 3;
+  prompt classify(email, sender) = user "\n        Analyze this customer email and classify it:\n\n        Email: {email}\n        From: {sender}\n\n        Provide classification including intent, urgency, topic, and summary.\n        \nRespond in exactly four lines:\nintent: <question|bug|billing|feature|complex>\nurgency: <low|medium|high|critical>\ntopic: <few words>\nsummary: <one sentence>";
+  prompt draft(email, intent, urgency, context) = user "\n        Draft a response to this customer email:\n        {email}\n\n        Email intent: {intent}\n        Urgency level: {urgency}\n\n        {context}\n\n        Guidelines:\n        - Be professional and helpful\n        - Address their specific concern\n        - Use the provided documentation when relevant\n        ";
+  let cls = call classify(email_content, "customer@example.com") using llm max_tokens 80;
+  let route = tool email_route(cls);
+  let intent = tool field(cls, "intent", "unknown");
+  let urgency = tool field(cls, "urgency", "medium");
+  if route == "review" {
+    let reply = "Escalated to human review.";
+  } else {
+    if route == "docs" {
+      let context = "Relevant documentation:\n- Reset password via Settings > Security > Change Password\n- Password must be at least 12 characters\n- Include uppercase, lowercase, numbers, and symbols";
+    } else if route == "bug" {
+      let context = "Relevant documentation:\n- Bug ticket BUG-12345 created";
+    } else {
+      let context = "";
+    }
+    let reply = call draft(email_content, intent, urgency, context) using llm max_tokens 320;
+  }
+  output reply;
+}

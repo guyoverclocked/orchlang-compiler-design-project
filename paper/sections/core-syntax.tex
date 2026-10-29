@@ -1,0 +1,38 @@
+\begin{figure}[p]
+\small
+\[
+\begin{array}{rcl}
+\ell&::=&\lo\mid\hi\qquad(\lo\sqsubseteq\hi)\\
+e&::=&s\mid x\mid e\mathbin{+\!+}e\mid\mathsf{escape}(e)\mid\mathsf{trim}(e)\\
+g&::=&x=s\mid\mathsf{prefix}(x,s)\\
+\pi&::=&\bot\mid(T,N)\\
+p&::=&\mathsf{skip}\mid p;p\\
+ &&\mid\mathsf{call}_{i}(x,m,k,e,\pi)\mid\mathsf{tool}(x,f,e)\\
+ &&\mid\mathsf{dummy}(m,T,N)\mid\mathsf{dummyTool}(f)\\
+ &&\mid\mathsf{if}\ g\ \mathsf{then}\ p\ \mathsf{else}\ p\\
+ &&\mid\mathsf{loop}(n,g,p,b),\qquad b\in\{\mathsf{false},\mathsf{true}\}.
+\end{array}
+\]
+Strings are $s$; variables and randomness sites are natural numbers $x,i$.
+The model contract is $m$, the useful output cap is $k$, and padding annotation
+$(T,N)$ fixes logical input and output counts. The loop runs at most $n$ times,
+stops when $g$ holds, and emits cover iterations when $b=\mathsf{true}$.
+This grammar lists every constructor of Lean's \code{Expr}, \code{Guard} and
+\code{Stmt}; $\pi=\bot$ denotes an unpadded call.
+
+The corresponding surface fragments are
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize]
+input x: text secret max_tokens c;
+prompt P(x) = user "template {x}";
+let y = call P(x) using m max_tokens k;
+let y = tool f(x);
+if x == "value" { ... } else { ... }
+repeat n until x == "done" { ... }
+\end{lstlisting}
+The trusted frontend expands templates into expressions, allocates slots and
+sites, and joins labels into a fixed context $\Gamma$. Literal model/template
+framing is part of the request expression rather than an implicit token charge.
+\caption{Complete core grammar and representative surface constructs. Surface
+parsing and lowering are tested implementations outside the Lean proof.}
+\label{fig:grammar}
+\end{figure}

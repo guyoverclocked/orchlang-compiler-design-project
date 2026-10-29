@@ -1,6 +1,0 @@
-// Expected: E201 for the duplicate input declaration.
-workflow DuplicateSymbols budget 20 {
-  input ticket: text;
-  input ticket: text;
-  output ticket;
-}
