@@ -1,0 +1,914 @@
+[
+  {
+    "id": 0,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "7d935c46f7cc29ca887e545adad3ddea66198e21aba40d07b8bbec4bd10ad857",
+      "program": [
+        "branch",
+        0,
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "yes"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "yes"
+        ]
+      ],
+      "plan": [
+        "call",
+        "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+        "yes"
+      ]
+    }
+  },
+  {
+    "id": 25,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "a40613cc728d49ea93d975a4b106dcc18d68d465a6bc2bce7eb615b7569569e4",
+      "program": [
+        "branch",
+        0,
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes"
+          ]
+        ],
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes"
+          ]
+        ]
+      ],
+      "plan": [
+        "seq",
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "yes"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "yes"
+        ]
+      ]
+    }
+  },
+  {
+    "id": 50,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "7add35de2921eee7f8a34ca264bd416bc9bab6316395a6b0c78426f33cc646b3",
+      "program": [
+        "branch",
+        0,
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "foo"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "foo"
+        ]
+      ],
+      "plan": [
+        "call",
+        "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+        "foo"
+      ]
+    }
+  },
+  {
+    "id": 75,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "c3c07c1b28162ba4f5ca78300179ede5ca92645ee7ff6394d152d0d4f4657a3e",
+      "program": [
+        "branch",
+        0,
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "foo"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "foo"
+          ]
+        ],
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "foo"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "foo"
+          ]
+        ]
+      ],
+      "plan": [
+        "seq",
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "foo"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "foo"
+        ]
+      ]
+    }
+  },
+  {
+    "id": 100,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "6f936c1541b9469c2ba919206513c79d24dc148b7076a2278407f703ad90ab81",
+      "program": [
+        "branch",
+        0,
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "no!"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "no!"
+        ]
+      ],
+      "plan": [
+        "call",
+        "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+        "no!"
+      ]
+    }
+  },
+  {
+    "id": 125,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "823f8323d8112c8043745012b71ddb4e1cdbd73e26ae55a4d334c95922394709",
+      "program": [
+        "branch",
+        0,
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "no!"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "no!"
+          ]
+        ],
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "no!"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "no!"
+          ]
+        ]
+      ],
+      "plan": [
+        "seq",
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "no!"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "no!"
+        ]
+      ]
+    }
+  },
+  {
+    "id": 150,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "503b2387b891c8b0baafa848c4e95d2d4ddf8e7c1fba88b756a3fa51f449116c",
+      "program": [
+        "branch",
+        0,
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "yes"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "yes"
+        ]
+      ],
+      "plan": [
+        "call",
+        "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+        "yes"
+      ]
+    }
+  },
+  {
+    "id": 175,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "b272accc6b9c342bb478271e78cd79d9b324c613cca59f713a2d759f3595b0c0",
+      "program": [
+        "branch",
+        0,
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes"
+          ]
+        ],
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes"
+          ]
+        ]
+      ],
+      "plan": [
+        "seq",
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "yes"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "yes"
+        ]
+      ]
+    }
+  },
+  {
+    "id": 200,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "09c27e336844e2c2c1ead8a2495d122b72c401071938a83eabb7635617b491ab",
+      "program": [
+        "branch",
+        0,
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "foo"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "foo"
+        ]
+      ],
+      "plan": [
+        "call",
+        "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+        "foo"
+      ]
+    }
+  },
+  {
+    "id": 225,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "55a48b06066ed247ff4c3f8b57932f49f1b131b8198dcfa4f425c3276ef06577",
+      "program": [
+        "branch",
+        0,
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "foo"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "foo"
+          ]
+        ],
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "foo"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "foo"
+          ]
+        ]
+      ],
+      "plan": [
+        "seq",
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "foo"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "foo"
+        ]
+      ]
+    }
+  },
+  {
+    "id": 250,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "ed4ff217c17b36344b505f5b9cc75941aff337a2a360e98324bc50ad78a65904",
+      "program": [
+        "branch",
+        0,
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "no!"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "no!"
+        ]
+      ],
+      "plan": [
+        "call",
+        "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+        "no!"
+      ]
+    }
+  },
+  {
+    "id": 275,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "0f06a263475257e66434c2125cc0d40a3f955339408d23953e9b2540e53add3e",
+      "program": [
+        "branch",
+        0,
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "no!"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "no!"
+          ]
+        ],
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "no!"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "no!"
+          ]
+        ]
+      ],
+      "plan": [
+        "seq",
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "no!"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "no!"
+        ]
+      ]
+    }
+  },
+  {
+    "id": 300,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "b5d81ce9fa9dcb7617922f7aba7b94634d5effae2add0d74ccc5de81dd0a7ee8",
+      "program": [
+        "branch",
+        0,
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "yes"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "yes"
+        ]
+      ],
+      "plan": [
+        "call",
+        "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+        "yes"
+      ]
+    }
+  },
+  {
+    "id": 325,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "8cb85ed9e80de6966e6a55ead20489df40a133af784db0500dbe18f6be4aefae",
+      "program": [
+        "branch",
+        0,
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes"
+          ]
+        ],
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes"
+          ]
+        ]
+      ],
+      "plan": [
+        "seq",
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "yes"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "yes"
+        ]
+      ]
+    }
+  },
+  {
+    "id": 350,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "ad4013bbef182b40ec0b1b5655f8e60159967efa4f3261e97872e471a700072e",
+      "program": [
+        "branch",
+        0,
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "foo"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "foo"
+        ]
+      ],
+      "plan": [
+        "call",
+        "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+        "foo"
+      ]
+    }
+  },
+  {
+    "id": 375,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "dea6ea1c160a9f32ba99d1dfdcad3dd542d09f2b0dd7d37cbc21674c0fd4ac3e",
+      "program": [
+        "branch",
+        0,
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "foo"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "foo"
+          ]
+        ],
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "foo"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "foo"
+          ]
+        ]
+      ],
+      "plan": [
+        "seq",
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "foo"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "foo"
+        ]
+      ]
+    }
+  },
+  {
+    "id": 400,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "7e1e852ba6d25b1cccec9c60914300acddccd2878e0d35122be638131b86bbcb",
+      "program": [
+        "branch",
+        0,
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "no!"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "no!"
+        ]
+      ],
+      "plan": [
+        "call",
+        "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+        "no!"
+      ]
+    }
+  },
+  {
+    "id": 425,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "d81ace555bd3d7c56b626a7a2fb06855f5cbd9492d709b86bcd63eacf82ea799",
+      "program": [
+        "branch",
+        0,
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "no!"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "no!"
+          ]
+        ],
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "no!"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "no!"
+          ]
+        ]
+      ],
+      "plan": [
+        "seq",
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "no!"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":1,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "no!"
+        ]
+      ]
+    }
+  },
+  {
+    "id": 450,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "8fdf24ccedfeccf5aa964c4ff8821ba691dd8bc58d88ce390bd8ee7fda51fd2f",
+      "program": [
+        "branch",
+        0,
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "yes"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "yes"
+        ]
+      ],
+      "plan": [
+        "call",
+        "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+        "yes"
+      ]
+    }
+  },
+  {
+    "id": 475,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "191a6eeff032fdc2e9f33b0d10feb23ba17eee2bb47dd1a50bd6d5c35dc5c513",
+      "program": [
+        "branch",
+        0,
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes"
+          ]
+        ],
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes"
+          ]
+        ]
+      ],
+      "plan": [
+        "seq",
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "yes"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "yes"
+        ]
+      ]
+    }
+  },
+  {
+    "id": 500,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "901d45d5053b0f2be1273e311d4448f465a810d1ad44ac6ac13146b305262ae9",
+      "program": [
+        "branch",
+        0,
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "foo"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "foo"
+        ]
+      ],
+      "plan": [
+        "call",
+        "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+        "foo"
+      ]
+    }
+  },
+  {
+    "id": 525,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "e32f61e216369035505fa21e12590070c00d4ad3594a9196949133bcdf7109a0",
+      "program": [
+        "branch",
+        0,
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "foo"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "foo"
+          ]
+        ],
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "foo"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "foo"
+          ]
+        ]
+      ],
+      "plan": [
+        "seq",
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "foo"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "foo"
+        ]
+      ]
+    }
+  },
+  {
+    "id": 550,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "c65a6333709160a6e20736ca9b026bc3c0bd9da9ff7d1fae69a4f2310e8ec7e3",
+      "program": [
+        "branch",
+        0,
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "no!"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "no!"
+        ]
+      ],
+      "plan": [
+        "call",
+        "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+        "no!"
+      ]
+    }
+  },
+  {
+    "id": 575,
+    "certificate": {
+      "format": "orchlang-closed-request-v1",
+      "source_sha256": "a7efb4b8ad8b944ccd87c249696fff850dd8b07861a089f7783e1714d47bf2f7",
+      "program": [
+        "branch",
+        0,
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "no!"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "no!"
+          ]
+        ],
+        [
+          "seq",
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "no!"
+          ],
+          [
+            "call",
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "no!"
+          ]
+        ]
+      ],
+      "plan": [
+        "seq",
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "no!"
+        ],
+        [
+          "call",
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":2,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"B\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+          "no!"
+        ]
+      ]
+    }
+  }
+]

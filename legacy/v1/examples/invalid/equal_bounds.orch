@@ -1,0 +1,23 @@
+// Expected: E236.
+//
+// Both arms call the same model with one argument whose declared cap is 100, so
+// both arms certify at exactly the same number.  Comparing upper bounds accepts
+// this workflow -- and an earlier version of this compiler did.
+//
+// But x and y are different values with different actual lengths, both within
+// their caps.  The secret chooses which one is sent, so the bill moves with the
+// secret.  In the paired experiment this workflow bills differently in 225 of
+// 425 executions that vary only the secret.
+workflow EqualBounds budget 1000 {
+ secret s: text max_tokens 1;
+ input x: text max_tokens 100;
+ input y: text max_tokens 100;
+ model m = mock("m") max_tokens 10;
+ prompt p(t: text) -> text = "{t}";
+ if tokens(s) == 0 {
+   let a: text = call p(x) using m;
+ } else {
+   let b: text = call p(y) using m;
+ }
+ output "done";
+}

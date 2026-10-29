@@ -1,0 +1,356 @@
+{
+  "source_binding": {
+    "schema": "orchlang-source-binding-v1",
+    "source_sha256": "4f18a3518fed56c182a29415d061beda531eb9a4ced9e19db599bc77b9548cb5",
+    "original": [
+      "ite",
+      [
+        "eq",
+        0,
+        "short"
+      ],
+      [
+        "call",
+        1,
+        2,
+        "qwen1.5b",
+        4,
+        [
+          "app",
+          [
+            "lit",
+            "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nIn one paragraph, explain: "
+          ],
+          [
+            "app",
+            [
+              "var",
+              1
+            ],
+            [
+              "lit",
+              "<|im_end|>\n<|im_start|>assistant\n"
+            ]
+          ]
+        ],
+        null
+      ],
+      [
+        "call",
+        2,
+        2,
+        "qwen1.5b",
+        16,
+        [
+          "app",
+          [
+            "lit",
+            "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nIn one paragraph, explain: "
+          ],
+          [
+            "app",
+            [
+              "var",
+              1
+            ],
+            [
+              "lit",
+              "<|im_end|>\n<|im_start|>assistant\n"
+            ]
+          ]
+        ],
+        null
+      ]
+    ],
+    "secret_inputs": [
+      0,
+      1
+    ],
+    "high": [
+      0,
+      1,
+      2
+    ],
+    "slots": {
+      "kind": 0,
+      "q": 1,
+      "answer": 2
+    },
+    "trust": "Python source reader/lowering and serialization; Lean checks the shaped core",
+    "binding_sha256": "9a6d19b8147708b6bed01c46e900e226659926bd243fee52c670fe3e7117f471"
+  },
+  "verdicts": {
+    "aligned": {
+      "static_shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          76,
+          16
+        ]
+      ],
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    },
+    "all_branches": {
+      "static_shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          76,
+          4
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          76,
+          16
+        ]
+      ],
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    },
+    "uniform": {
+      "static_shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          76,
+          16
+        ]
+      ],
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    }
+  },
+  "candidates": {
+    "aligned": [
+      "ite",
+      [
+        "eq",
+        0,
+        "short"
+      ],
+      [
+        "call",
+        1,
+        2,
+        "qwen1.5b",
+        4,
+        [
+          "app",
+          [
+            "lit",
+            "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nIn one paragraph, explain: "
+          ],
+          [
+            "app",
+            [
+              "var",
+              1
+            ],
+            [
+              "lit",
+              "<|im_end|>\n<|im_start|>assistant\n"
+            ]
+          ]
+        ],
+        [
+          76,
+          16
+        ]
+      ],
+      [
+        "call",
+        2,
+        2,
+        "qwen1.5b",
+        16,
+        [
+          "app",
+          [
+            "lit",
+            "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nIn one paragraph, explain: "
+          ],
+          [
+            "app",
+            [
+              "var",
+              1
+            ],
+            [
+              "lit",
+              "<|im_end|>\n<|im_start|>assistant\n"
+            ]
+          ]
+        ],
+        [
+          76,
+          16
+        ]
+      ]
+    ],
+    "all_branches": [
+      "ite",
+      [
+        "eq",
+        0,
+        "short"
+      ],
+      [
+        "seq",
+        [
+          "call",
+          1,
+          2,
+          "qwen1.5b",
+          4,
+          [
+            "app",
+            [
+              "lit",
+              "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nIn one paragraph, explain: "
+            ],
+            [
+              "app",
+              [
+                "var",
+                1
+              ],
+              [
+                "lit",
+                "<|im_end|>\n<|im_start|>assistant\n"
+              ]
+            ]
+          ],
+          [
+            76,
+            4
+          ]
+        ],
+        [
+          "dummy",
+          "qwen1.5b",
+          76,
+          16
+        ]
+      ],
+      [
+        "seq",
+        [
+          "dummy",
+          "qwen1.5b",
+          76,
+          4
+        ],
+        [
+          "call",
+          2,
+          2,
+          "qwen1.5b",
+          16,
+          [
+            "app",
+            [
+              "lit",
+              "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nIn one paragraph, explain: "
+            ],
+            [
+              "app",
+              [
+                "var",
+                1
+              ],
+              [
+                "lit",
+                "<|im_end|>\n<|im_start|>assistant\n"
+              ]
+            ]
+          ],
+          [
+            76,
+            16
+          ]
+        ]
+      ]
+    ],
+    "uniform": [
+      "ite",
+      [
+        "eq",
+        0,
+        "short"
+      ],
+      [
+        "call",
+        1,
+        2,
+        "qwen1.5b",
+        4,
+        [
+          "app",
+          [
+            "lit",
+            "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nIn one paragraph, explain: "
+          ],
+          [
+            "app",
+            [
+              "var",
+              1
+            ],
+            [
+              "lit",
+              "<|im_end|>\n<|im_start|>assistant\n"
+            ]
+          ]
+        ],
+        [
+          76,
+          16
+        ]
+      ],
+      [
+        "call",
+        2,
+        2,
+        "qwen1.5b",
+        16,
+        [
+          "app",
+          [
+            "lit",
+            "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nIn one paragraph, explain: "
+          ],
+          [
+            "app",
+            [
+              "var",
+              1
+            ],
+            [
+              "lit",
+              "<|im_end|>\n<|im_start|>assistant\n"
+            ]
+          ]
+        ],
+        [
+          76,
+          16
+        ]
+      ]
+    ]
+  }
+}

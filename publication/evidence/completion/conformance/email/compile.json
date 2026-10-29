@@ -1,0 +1,581 @@
+{
+  "workflow": "EmailSupport",
+  "source": "workflows/email.orch",
+  "source_lines": 25,
+  "slots": {
+    "email_content": 0,
+    "cls": 1,
+    "route": 2,
+    "intent": 3,
+    "urgency": 4,
+    "reply": 5,
+    "context": 6
+  },
+  "high": [
+    "email_content",
+    "cls",
+    "route",
+    "intent",
+    "urgency",
+    "reply",
+    "context"
+  ],
+  "findings": [
+    {
+      "kind": "secret-dependent-size",
+      "line": 12,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-branch",
+      "line": 26,
+      "detail": "branch on secret route selects arms with different usage"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 26,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    }
+  ],
+  "calls": 2,
+  "original_lean": {
+    "static_shape": null,
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+  },
+  "strategies": {
+    "ours": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            421,
+            80
+          ],
+          [
+            "tool",
+            "email_route"
+          ],
+          [
+            "tool",
+            "field"
+          ],
+          [
+            "tool",
+            "field"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            582,
+            320
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        2,
+        1003,
+        400
+      ],
+      "shape_seconds": 0.004703900005551986
+    },
+    "naive": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            421,
+            80
+          ],
+          [
+            "tool",
+            "email_route"
+          ],
+          [
+            "tool",
+            "field"
+          ],
+          [
+            "tool",
+            "field"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            582,
+            320
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        2,
+        1003,
+        400
+      ],
+      "shape_seconds": 0.002666599990334362
+    },
+    "uniform": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            582,
+            320
+          ],
+          [
+            "tool",
+            "email_route"
+          ],
+          [
+            "tool",
+            "field"
+          ],
+          [
+            "tool",
+            "field"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            582,
+            320
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        2,
+        1164,
+        640
+      ],
+      "shape_seconds": 0.002611599993542768
+    },
+    "padall": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            421,
+            80
+          ],
+          [
+            "tool",
+            "email_route"
+          ],
+          [
+            "tool",
+            "field"
+          ],
+          [
+            "tool",
+            "field"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            582,
+            320
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        2,
+        1003,
+        400
+      ],
+      "shape_seconds": 0.0030990000086603686
+    }
+  },
+  "frontend_seconds": 1.346421799986274,
+  "lean_seconds_batch": 14.853299099995638,
+  "pads": {
+    "1": [
+      421,
+      80
+    ],
+    "2": [
+      582,
+      320
+    ]
+  },
+  "caps": {
+    "1": 80,
+    "2": 320
+  },
+  "site_lines": {
+    "1": 12,
+    "2": 26
+  },
+  "source_binding": {
+    "schema": "orchlang-source-binding-v1",
+    "source_sha256": "88b769e1a49e34372f8eb1bbaf105591b3acc0ad8bd1b31b557b8b519252b58f",
+    "original": [
+      "seq",
+      [
+        "call",
+        1,
+        1,
+        "llama1b",
+        80,
+        [
+          "app",
+          [
+            "lit",
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nAnalyze this customer email and classify it:\n\n        Email: "
+          ],
+          [
+            "app",
+            [
+              "var",
+              0
+            ],
+            [
+              "lit",
+              "\n        From: customer@example.com\n\n        Provide classification including intent, urgency, topic, and summary.\n        \nRespond in exactly four lines:\nintent: <question|bug|billing|feature|complex>\nurgency: <low|medium|high|critical>\ntopic: <few words>\nsummary: <one sentence><|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+            ]
+          ]
+        ],
+        null
+      ],
+      [
+        "seq",
+        [
+          "tool",
+          2,
+          "email_route",
+          [
+            "escape",
+            [
+              "var",
+              1
+            ]
+          ]
+        ],
+        [
+          "seq",
+          [
+            "tool",
+            3,
+            "field",
+            [
+              "app",
+              [
+                "escape",
+                [
+                  "var",
+                  1
+                ]
+              ],
+              [
+                "app",
+                [
+                  "lit",
+                  "\u001f"
+                ],
+                [
+                  "app",
+                  [
+                    "escape",
+                    [
+                      "lit",
+                      "intent"
+                    ]
+                  ],
+                  [
+                    "app",
+                    [
+                      "lit",
+                      "\u001f"
+                    ],
+                    [
+                      "escape",
+                      [
+                        "lit",
+                        "unknown"
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "seq",
+            [
+              "tool",
+              4,
+              "field",
+              [
+                "app",
+                [
+                  "escape",
+                  [
+                    "var",
+                    1
+                  ]
+                ],
+                [
+                  "app",
+                  [
+                    "lit",
+                    "\u001f"
+                  ],
+                  [
+                    "app",
+                    [
+                      "escape",
+                      [
+                        "lit",
+                        "urgency"
+                      ]
+                    ],
+                    [
+                      "app",
+                      [
+                        "lit",
+                        "\u001f"
+                      ],
+                      [
+                        "escape",
+                        [
+                          "lit",
+                          "medium"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "ite",
+              [
+                "eq",
+                2,
+                "review"
+              ],
+              [
+                "tool",
+                5,
+                "const",
+                [
+                  "lit",
+                  "Escalated to human review."
+                ]
+              ],
+              [
+                "seq",
+                [
+                  "ite",
+                  [
+                    "eq",
+                    2,
+                    "docs"
+                  ],
+                  [
+                    "tool",
+                    6,
+                    "const",
+                    [
+                      "lit",
+                      "Relevant documentation:\n- Reset password via Settings > Security > Change Password\n- Password must be at least 12 characters\n- Include uppercase, lowercase, numbers, and symbols"
+                    ]
+                  ],
+                  [
+                    "ite",
+                    [
+                      "eq",
+                      2,
+                      "bug"
+                    ],
+                    [
+                      "tool",
+                      6,
+                      "const",
+                      [
+                        "lit",
+                        "Relevant documentation:\n- Bug ticket BUG-12345 created"
+                      ]
+                    ],
+                    [
+                      "tool",
+                      6,
+                      "const",
+                      [
+                        "lit",
+                        ""
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "call",
+                  2,
+                  5,
+                  "llama1b",
+                  320,
+                  [
+                    "app",
+                    [
+                      "lit",
+                      "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nDraft a response to this customer email:\n        "
+                    ],
+                    [
+                      "app",
+                      [
+                        "var",
+                        0
+                      ],
+                      [
+                        "app",
+                        [
+                          "lit",
+                          "\n\n        Email intent: "
+                        ],
+                        [
+                          "app",
+                          [
+                            "var",
+                            3
+                          ],
+                          [
+                            "app",
+                            [
+                              "lit",
+                              "\n        Urgency level: "
+                            ],
+                            [
+                              "app",
+                              [
+                                "var",
+                                4
+                              ],
+                              [
+                                "app",
+                                [
+                                  "lit",
+                                  "\n\n        "
+                                ],
+                                [
+                                  "app",
+                                  [
+                                    "var",
+                                    6
+                                  ],
+                                  [
+                                    "lit",
+                                    "\n\n        Guidelines:\n        - Be professional and helpful\n        - Address their specific concern\n        - Use the provided documentation when relevant<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                                  ]
+                                ]
+                              ]
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ],
+                  null
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ],
+    "secret_inputs": [
+      0
+    ],
+    "high": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "slots": {
+      "email_content": 0,
+      "cls": 1,
+      "route": 2,
+      "intent": 3,
+      "urgency": 4,
+      "reply": 5,
+      "context": 6
+    },
+    "trust": "Python source reader/lowering and serialization; Lean checks the shaped core",
+    "binding_sha256": "bd1df86dde94b8320c10d23c310a94be14aff98652bc1f7ca44114115dbb6ad3"
+  },
+  "request_targets": "heuristic execution envelopes; complete requests are admitted exactly before dispatch"
+}

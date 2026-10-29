@@ -1,0 +1,27 @@
+{
+  "purpose": "authored-development-grammar; not external workflows",
+  "source_shapes": 8,
+  "source_positive_pairs": 64,
+  "source_negative_pairs": 16,
+  "core_request_shapes": 8,
+  "core_positive_pairs": 64,
+  "core_negative_pairs": 8,
+  "public_texts": [
+    "",
+    "a",
+    "é"
+  ],
+  "public_flags": [
+    false,
+    true
+  ],
+  "secret_flags": [
+    false,
+    true
+  ],
+  "baseline": "historical syntactic_normalize on identical core/assumptions",
+  "expected_source_cases": 80,
+  "expected_core_cases": 72,
+  "request_gain_scope": "core only; source templates already fold adjacent literals",
+  "units": "UTF-8 bytes; independent of C++ mock tokenizer"
+}

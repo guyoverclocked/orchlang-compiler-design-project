@@ -1,0 +1,1 @@
+workflow AggregateGenerated budget 10000 { secret s:boolean max_tokens 1; model a=mock("A") max_tokens 8; model b=mock("B") max_tokens 8; prompt p(t:text)->text="{t}"; if s {let v0:text=call p("yes") using a; let v1:text=call p("yes") using b;} else {let v0:text=call p("no!") using a; let v1:text=call p("no!") using b;} output "done"; }

@@ -1,0 +1,14 @@
+workflow Split budget 1000 {
+ input flag: boolean max_tokens 1;
+ input wide: text max_tokens 200;
+ input narrow: text max_tokens 0;
+ model small = mock("small") max_tokens 1;
+ model large = mock("large") max_tokens 100;
+ prompt p(x: text) -> text = "{x}";
+ if flag {
+   let a: text = call p(wide) using small;
+ } else {
+   let b: text = call p(narrow) using large;
+ }
+ output narrow;
+}

@@ -1,0 +1,11 @@
+// Expected: E261 because an input with no declared bound is fed to a prompt,
+// which leaves the input-token half of the cost bound undefined.
+workflow UnboundedInput budget 2000 {
+  input ticket: text;
+  model fast = mock("local-small") max_tokens 600;
+
+  prompt classify(message: text) -> text = "Classify: {message}";
+
+  let category: text = call classify(ticket) using fast;
+  output category;
+}

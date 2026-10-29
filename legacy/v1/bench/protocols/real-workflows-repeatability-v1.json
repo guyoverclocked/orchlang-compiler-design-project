@@ -1,0 +1,46 @@
+{
+  "schema_version": 1,
+  "status": "frozen-before-control-outcomes",
+  "frozen_at_utc": "2026-10-23T21:36:01.149094+00:00",
+  "purpose": "Post-hoc diagnostic original-vs-original repeatability control selected from independently mismatching source cases; not confirmatory application population inference.",
+  "source_results_sha256": "97507815fb76ee9700ba6f6a583474906a08afe76cc028d9b3c63a51f2a2c924",
+  "cases": [
+    {
+      "id": "lg-chain-functional-cap24-input1-event1",
+      "rendered_request": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!<|im_end|>\n<|im_start|>assistant\n",
+      "schema": null,
+      "output_cap": 24,
+      "seed": 1,
+      "input_cap": 512
+    },
+    {
+      "id": "lg-parallel-graph-cap24-input0-event1",
+      "rendered_request": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+      "schema": null,
+      "output_cap": 24,
+      "seed": 1,
+      "input_cap": 512
+    },
+    {
+      "id": "lg-parallel-graph-cap24-input0-event2",
+      "rendered_request": "<|im_start|>user\nWrite a poem about cats<|im_end|>\n<|im_start|>assistant\n",
+      "schema": null,
+      "output_cap": 24,
+      "seed": 1,
+      "input_cap": 512
+    },
+    {
+      "id": "lg-parallel-graph-cap64-input0-event1",
+      "rendered_request": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+      "schema": null,
+      "output_cap": 64,
+      "seed": 1,
+      "input_cap": 512
+    }
+  ],
+  "repetitions": 2,
+  "total_pairs": 8,
+  "model_protocol": "bench/protocols/real-workflows-local-v2.json",
+  "endpoint": "two consecutive independent actual local generations for each complete identical request; exact output text equality",
+  "no_replay": true
+}

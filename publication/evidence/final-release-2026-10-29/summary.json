@@ -1,0 +1,112 @@
+{
+  "schema": "orchlang-uniform-release-validation-v1",
+  "selection": "shortest and longest input by character length; two per workflow/model variant",
+  "inference_commit": {
+    "git_commit": "ee137316c7c0ddaf02ce61dcc6f70af4815d840e",
+    "git_dirty": true
+  },
+  "implementation": {
+    "orchlang/__main__.py": "f5da4cf72658fd4d603fd64344edf56bcf5af642f8694c8542d1c9bdd914f346",
+    "orchlang/assurance.py": "29f77717ec99007c9b4cfca023168c9ad4faf3e4d63e8a6ffbacc292218820a7",
+    "orchlang/compiler.py": "6f45610f86feba2f8045111e814a4930d4486ea5a7838cf6b000f00de91f6ecd",
+    "orchlang/core.py": "54f8eb20921c63ccd7bc265f0a6e9373d9d2180d8c88d4f21169e865aec60ba8",
+    "orchlang/ledger.py": "04187531d1b9f102f9772f44988380b43b316d69a333eacde9e4b5cdc0a203a9",
+    "orchlang/models.py": "9dda6afbdfbc29e777992ea869c7a7fcbe876ebf539244600ccdcebda81c203c",
+    "orchlang/runtime.py": "2406bfb6595ccec37d70436a2ba8bb417f1648d0d7b3296496fe0d337c2e8518",
+    "orchlang/syntax.py": "03e5c6ed652c7fbf3ba2fa1c00dcf453a391cfa8484b0956943845469c10bfd3",
+    "orchlang/tools.py": "e378ead75b39f530084e72201b128be669e8281ba515f0b160e44a4fc47f5804",
+    "orchlang/validate.py": "48dfa77bd11bb2b1baaaa60bce3f96cbeb7af212bdd1e950d4b32c4a549c5433",
+    "proof/ShapeCore.lean": "c118a53d032fb6d0ca80ea2e4971f187beb76201317ac354853bcb216cc7322a",
+    "experiments/run_workflow.py": "1f2c60ed243711e099a7623371511dff36bf231ba3554846ff9111c04afd89c3"
+  },
+  "driver_sha256": "e4e7c74e4e34eb10e6fabdb8dab314c83e7cc35e41f4044afccf4f6444ba2687",
+  "pairs": 24,
+  "workflows": [
+    {
+      "workflow": "switch",
+      "group": "main",
+      "pairs": 2,
+      "passed": true,
+      "local_calls": 4
+    },
+    {
+      "workflow": "routing",
+      "group": "main",
+      "pairs": 2,
+      "passed": true,
+      "local_calls": 8
+    },
+    {
+      "workflow": "chaining",
+      "group": "main",
+      "pairs": 2,
+      "passed": true,
+      "local_calls": 10
+    },
+    {
+      "workflow": "evaluator",
+      "group": "main",
+      "pairs": 2,
+      "passed": true,
+      "local_calls": 22
+    },
+    {
+      "workflow": "email",
+      "group": "main",
+      "pairs": 2,
+      "passed": true,
+      "local_calls": 8
+    },
+    {
+      "workflow": "orchestrator",
+      "group": "main",
+      "pairs": 2,
+      "passed": true,
+      "local_calls": 20
+    },
+    {
+      "workflow": "calculator",
+      "group": "main",
+      "pairs": 2,
+      "passed": true,
+      "local_calls": 14
+    },
+    {
+      "workflow": "crag",
+      "group": "main",
+      "pairs": 2,
+      "passed": true,
+      "local_calls": 20
+    },
+    {
+      "workflow": "adaptive",
+      "group": "main",
+      "pairs": 2,
+      "passed": true,
+      "local_calls": 54
+    },
+    {
+      "workflow": "switch",
+      "group": "qwen",
+      "pairs": 2,
+      "passed": true,
+      "local_calls": 4
+    },
+    {
+      "workflow": "email",
+      "group": "qwen",
+      "pairs": 2,
+      "passed": true,
+      "local_calls": 7
+    },
+    {
+      "workflow": "crag",
+      "group": "qwen",
+      "pairs": 2,
+      "passed": true,
+      "local_calls": 20
+    }
+  ],
+  "passed": true,
+  "full_corpus_rerun": false
+}

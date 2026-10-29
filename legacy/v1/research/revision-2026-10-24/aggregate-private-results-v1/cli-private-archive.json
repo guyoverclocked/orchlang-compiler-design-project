@@ -1,0 +1,243 @@
+{
+  "source_sha256": "a5aa66f4726e8b566db4b8e97392af9ef0a0c9a1dac8891029f66b44c92bcdf9",
+  "semantics": "trusted-caller archive; private_results are multisets, not public source output",
+  "outcome": {
+    "right": [
+      {
+        "private_results": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes",
+            "x",
+            false
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes",
+            "x",
+            false
+          ]
+        ],
+        "p": [
+          1,
+          4
+        ],
+        "aggregate": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            6,
+            2,
+            2,
+            0
+          ]
+        ]
+      },
+      {
+        "private_results": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes",
+            "x",
+            false
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes",
+            "é",
+            true
+          ]
+        ],
+        "p": [
+          1,
+          4
+        ],
+        "aggregate": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            6,
+            3,
+            2,
+            1
+          ]
+        ]
+      },
+      {
+        "private_results": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes",
+            "é",
+            true
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes",
+            "x",
+            false
+          ]
+        ],
+        "p": [
+          1,
+          4
+        ],
+        "aggregate": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            6,
+            3,
+            2,
+            1
+          ]
+        ]
+      },
+      {
+        "private_results": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes",
+            "é",
+            true
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes",
+            "é",
+            true
+          ]
+        ],
+        "p": [
+          1,
+          4
+        ],
+        "aggregate": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            6,
+            4,
+            2,
+            2
+          ]
+        ]
+      }
+    ],
+    "left": [
+      {
+        "private_results": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes",
+            "x",
+            false
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes",
+            "x",
+            false
+          ]
+        ],
+        "p": [
+          1,
+          4
+        ],
+        "aggregate": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            6,
+            2,
+            2,
+            0
+          ]
+        ]
+      },
+      {
+        "private_results": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes",
+            "x",
+            false
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes",
+            "é",
+            true
+          ]
+        ],
+        "p": [
+          1,
+          4
+        ],
+        "aggregate": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            6,
+            3,
+            2,
+            1
+          ]
+        ]
+      },
+      {
+        "private_results": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes",
+            "é",
+            true
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes",
+            "x",
+            false
+          ]
+        ],
+        "p": [
+          1,
+          4
+        ],
+        "aggregate": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            6,
+            3,
+            2,
+            1
+          ]
+        ]
+      },
+      {
+        "private_results": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes",
+            "é",
+            true
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "yes",
+            "é",
+            true
+          ]
+        ],
+        "p": [
+          1,
+          4
+        ],
+        "aggregate": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"A\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            6,
+            4,
+            2,
+            2
+          ]
+        ]
+      }
+    ],
+    "checked": true
+  }
+}

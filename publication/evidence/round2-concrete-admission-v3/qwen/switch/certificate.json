@@ -1,0 +1,143 @@
+{
+  "payload": {
+    "program": [
+      "seq",
+      [
+        "call",
+        1,
+        1,
+        "qwen1.5b",
+        128,
+        [
+          "app",
+          [
+            "lit",
+            "<|im_start|>system\nThere is a search bar in the mall APP and users can enter any query in the search bar.\n\nThe user may want to search for orders, view product information, or seek recommended products.\n\nTherefore, please classify user intentions into the following three types according to the query: product_recommendation, order_search, product_info\n\nPlease note that only the above three situations can be returned, and try not to include other return values.<|im_end|>\n<|im_start|>user\nThe user's query is "
+          ],
+          [
+            "app",
+            [
+              "var",
+              0
+            ],
+            [
+              "lit",
+              "<|im_end|>\n<|im_start|>assistant\n"
+            ]
+          ]
+        ],
+        [
+          800,
+          128
+        ]
+      ],
+      [
+        "seq",
+        [
+          "tool",
+          2,
+          "class_check",
+          [
+            "escape",
+            [
+              "var",
+              1
+            ]
+          ]
+        ],
+        [
+          "ite",
+          [
+            "eq",
+            2,
+            "order_search"
+          ],
+          [
+            "tool",
+            3,
+            "const",
+            [
+              "lit",
+              "Your order is being mailed, please wait patiently."
+            ]
+          ],
+          [
+            "ite",
+            [
+              "eq",
+              2,
+              "product_info"
+            ],
+            [
+              "tool",
+              3,
+              "const",
+              [
+                "lit",
+                "This product is produced by Microsoft."
+              ]
+            ],
+            [
+              "ite",
+              [
+                "eq",
+                2,
+                "product_recommendation"
+              ],
+              [
+                "tool",
+                3,
+                "const",
+                [
+                  "lit",
+                  "I recommend promptflow to you, which can solve your problem very well."
+                ]
+              ],
+              [
+                "tool",
+                3,
+                "const",
+                [
+                  "lit",
+                  "Sorry, no results matching your search were found."
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ],
+    "bounds": [
+      256,
+      16384,
+      16,
+      70
+    ],
+    "tools": [
+      [
+        "class_check",
+        16
+      ],
+      [
+        "const",
+        70
+      ]
+    ],
+    "dummy_tokens": [
+      [
+        "qwen1.5b",
+        1
+      ]
+    ],
+    "response_bytes_per_token": 128,
+    "context": 21504,
+    "alpha": 1,
+    "delta": 0
+  },
+  "verdict": {
+    "unit": "UTF-8 bytes",
+    "native_adapter_verified": false,
+    "has_fixed_shape": true,
+    "accepted": true
+  }
+}

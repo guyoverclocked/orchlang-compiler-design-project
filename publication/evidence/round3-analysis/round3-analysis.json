@@ -1,0 +1,684 @@
+{
+  "schema": "orchlang-round3-analysis-v1",
+  "primary": {
+    "workflows": [
+      {
+        "group": "main",
+        "workflow": "routing",
+        "label": "Routing",
+        "pairs": 150,
+        "classes": 2,
+        "attack": {
+          "balanced": 0.9540441176470589,
+          "ci": [
+            0.9126784115835964,
+            0.9854403939507095
+          ],
+          "chance": 0.5,
+          "permutation_p": 0.004975124378109453,
+          "permutations": 200,
+          "bootstrap": 2000
+        },
+        "task": {
+          "correct": 98,
+          "n": 150,
+          "rate": 0.6533333333333333,
+          "wilson": [
+            0.5742042140291462,
+            0.7248049109135234
+          ]
+        },
+        "cost_ratio": 1.8403654731837764,
+        "shaped_traces": 1
+      },
+      {
+        "group": "main",
+        "workflow": "chaining",
+        "label": "Chaining",
+        "pairs": 150,
+        "classes": 2,
+        "attack": {
+          "balanced": 1.0,
+          "ci": [
+            1.0,
+            1.0
+          ],
+          "chance": 0.5,
+          "permutation_p": 0.004975124378109453,
+          "permutations": 200,
+          "bootstrap": 2000
+        },
+        "task": null,
+        "cost_ratio": 6.101580894719139,
+        "shaped_traces": 1
+      },
+      {
+        "group": "main",
+        "workflow": "evaluator",
+        "label": "Evaluator",
+        "pairs": 100,
+        "classes": 3,
+        "attack": {
+          "balanced": 1.0,
+          "ci": [
+            1.0,
+            1.0
+          ],
+          "chance": 0.3333333333333333,
+          "permutation_p": 0.004975124378109453,
+          "permutations": 200,
+          "bootstrap": 2000
+        },
+        "task": null,
+        "cost_ratio": 2.0074566650900083,
+        "shaped_traces": 1
+      },
+      {
+        "group": "main",
+        "workflow": "orchestrator",
+        "label": "Orchestrator",
+        "pairs": 100,
+        "classes": 3,
+        "attack": {
+          "balanced": 1.0,
+          "ci": [
+            1.0,
+            1.0
+          ],
+          "chance": 0.3333333333333333,
+          "permutation_p": 0.004975124378109453,
+          "permutations": 200,
+          "bootstrap": 2000
+        },
+        "task": null,
+        "cost_ratio": 1.129746932593813,
+        "shaped_traces": 1
+      },
+      {
+        "group": "main",
+        "workflow": "switch",
+        "label": "PF switch",
+        "pairs": 210,
+        "classes": 4,
+        "attack": {
+          "balanced": 0.26534983341266066,
+          "ci": [
+            0.2172079137887992,
+            0.42184345885093166
+          ],
+          "chance": 0.25,
+          "permutation_p": 0.20398009950248755,
+          "permutations": 200,
+          "bootstrap": 2000
+        },
+        "task": {
+          "correct": 79,
+          "n": 210,
+          "rate": 0.3761904761904762,
+          "wilson": [
+            0.3134485121131666,
+            0.44338068147709353
+          ]
+        },
+        "cost_ratio": 1.5443565438924016,
+        "shaped_traces": 1
+      },
+      {
+        "group": "main",
+        "workflow": "email",
+        "label": "Email",
+        "pairs": 152,
+        "classes": 4,
+        "attack": {
+          "balanced": 0.5974379602698187,
+          "ci": [
+            0.5196707883145204,
+            0.6742605491614901
+          ],
+          "chance": 0.25,
+          "permutation_p": 0.004975124378109453,
+          "permutations": 200,
+          "bootstrap": 2000
+        },
+        "task": null,
+        "cost_ratio": 1.6603376056585317,
+        "shaped_traces": 1
+      },
+      {
+        "group": "main",
+        "workflow": "crag",
+        "label": "Corrective RAG",
+        "pairs": 150,
+        "classes": 2,
+        "attack": {
+          "balanced": 0.75,
+          "ci": [
+            0.5,
+            1.0
+          ],
+          "chance": 0.5,
+          "permutation_p": 0.004975124378109453,
+          "permutations": 200,
+          "bootstrap": 2000
+        },
+        "task": {
+          "correct": 51,
+          "n": 150,
+          "rate": 0.34,
+          "wilson": [
+            0.2690333497875853,
+            0.4189571285331073
+          ]
+        },
+        "cost_ratio": 1.750889088979321,
+        "shaped_traces": 1
+      },
+      {
+        "group": "main",
+        "workflow": "calculator",
+        "label": "Calculator",
+        "pairs": 100,
+        "classes": 3,
+        "attack": {
+          "balanced": 1.0,
+          "ci": [
+            1.0,
+            1.0
+          ],
+          "chance": 0.3333333333333333,
+          "permutation_p": 0.004975124378109453,
+          "permutations": 200,
+          "bootstrap": 2000
+        },
+        "task": {
+          "correct": 2,
+          "n": 100,
+          "rate": 0.02,
+          "wilson": [
+            0.0055019675006616475,
+            0.07001179131757478
+          ]
+        },
+        "cost_ratio": 13.992174746715726,
+        "shaped_traces": 1
+      },
+      {
+        "group": "main",
+        "workflow": "adaptive",
+        "label": "Adaptive RAG",
+        "pairs": 60,
+        "classes": 6,
+        "attack": {
+          "balanced": 0.8333333333333334,
+          "ci": [
+            0.8333333333333334,
+            1.0
+          ],
+          "chance": 0.16666666666666666,
+          "permutation_p": 0.004975124378109453,
+          "permutations": 200,
+          "bootstrap": 2000
+        },
+        "task": {
+          "correct": 32,
+          "n": 60,
+          "rate": 0.5333333333333333,
+          "wilson": [
+            0.40893426933426563,
+            0.6537209404634525
+          ]
+        },
+        "cost_ratio": 2.289911350136343,
+        "shaped_traces": 1
+      },
+      {
+        "group": "replication",
+        "workflow": "switch",
+        "label": "PF switch (Q)",
+        "pairs": 210,
+        "classes": 4,
+        "attack": {
+          "balanced": 0.55845453507324,
+          "ci": [
+            0.4264165169347097,
+            0.6906747798935299
+          ],
+          "chance": 0.25,
+          "permutation_p": 0.004975124378109453,
+          "permutations": 200,
+          "bootstrap": 2000
+        },
+        "task": {
+          "correct": 123,
+          "n": 210,
+          "rate": 0.5857142857142857,
+          "wilson": [
+            0.5181335916422509,
+            0.6502154281798769
+          ]
+        },
+        "cost_ratio": 5.4924919216878925,
+        "shaped_traces": 1
+      },
+      {
+        "group": "replication",
+        "workflow": "email",
+        "label": "Email (Q)",
+        "pairs": 152,
+        "classes": 4,
+        "attack": {
+          "balanced": 0.7399396378269618,
+          "ci": [
+            0.6706387700425877,
+            0.8105790471998658
+          ],
+          "chance": 0.25,
+          "permutation_p": 0.004975124378109453,
+          "permutations": 200,
+          "bootstrap": 2000
+        },
+        "task": null,
+        "cost_ratio": 2.1253071253071254,
+        "shaped_traces": 1
+      },
+      {
+        "group": "replication",
+        "workflow": "crag",
+        "label": "Corrective RAG (Q)",
+        "pairs": 150,
+        "classes": 1,
+        "attack": null,
+        "task": {
+          "correct": 57,
+          "n": 150,
+          "rate": 0.38,
+          "wilson": [
+            0.30623727191930217,
+            0.4597555868212172
+          ]
+        },
+        "cost_ratio": 1.8140693875298006,
+        "shaped_traces": 1
+      }
+    ],
+    "median_cost": 1.8403654731837764,
+    "median_cost_without_calculator": 1.7956272810815488,
+    "range_cost": [
+      1.129746932593813,
+      13.992174746715726
+    ]
+  },
+  "certified": {
+    "workflows": [
+      {
+        "group": "main",
+        "workflow": "routing",
+        "label": "Routing",
+        "planned": 150,
+        "refused": 0,
+        "pairs": 150,
+        "saved_equal": 150,
+        "shape_equal": 150,
+        "certificate_accepted": true,
+        "llm_events": 600,
+        "segmented_events": 600,
+        "clip_events": {
+          "llm": 0,
+          "tool": 0
+        },
+        "clipped_pairs": 0,
+        "max_t_plus_n": 615,
+        "cost_ratio": 3.1960332788590105,
+        "certified_over_heuristic": 1.7366296670030272,
+        "bounded_original_equals_primary": 150,
+        "shared_with_primary": 150,
+        "task": {
+          "correct": 98,
+          "n": 150,
+          "primary_correct_same_ids": 98,
+          "shared": 150
+        },
+        "context": 21504,
+        "response_bytes_per_token": 128
+      },
+      {
+        "group": "main",
+        "workflow": "chaining",
+        "label": "Chaining",
+        "planned": 150,
+        "refused": 0,
+        "pairs": 150,
+        "saved_equal": 150,
+        "shape_equal": 150,
+        "certificate_accepted": true,
+        "llm_events": 640,
+        "segmented_events": 640,
+        "clip_events": {
+          "llm": 0,
+          "tool": 2
+        },
+        "clipped_pairs": 1,
+        "max_t_plus_n": 16782,
+        "cost_ratio": 104.20450723175243,
+        "certified_over_heuristic": 17.078280044101433,
+        "bounded_original_equals_primary": 149,
+        "shared_with_primary": 150,
+        "task": null,
+        "context": 21504,
+        "response_bytes_per_token": 128
+      },
+      {
+        "group": "main",
+        "workflow": "evaluator",
+        "label": "Evaluator",
+        "planned": 100,
+        "refused": 0,
+        "pairs": 100,
+        "saved_equal": 100,
+        "shape_equal": 100,
+        "certificate_accepted": true,
+        "llm_events": 1002,
+        "segmented_events": 1002,
+        "clip_events": {
+          "llm": 0,
+          "tool": 286
+        },
+        "clipped_pairs": 84,
+        "max_t_plus_n": 12771,
+        "cost_ratio": 29.51271381032789,
+        "certified_over_heuristic": 14.474012474012474,
+        "bounded_original_equals_primary": 44,
+        "shared_with_primary": 100,
+        "task": null,
+        "context": 21504,
+        "response_bytes_per_token": 128
+      },
+      {
+        "group": "main",
+        "workflow": "orchestrator",
+        "label": "Orchestrator",
+        "planned": 100,
+        "refused": 0,
+        "pairs": 100,
+        "saved_equal": 100,
+        "shape_equal": 100,
+        "certificate_accepted": true,
+        "llm_events": 988,
+        "segmented_events": 988,
+        "clip_events": {
+          "llm": 0,
+          "tool": 340
+        },
+        "clipped_pairs": 83,
+        "max_t_plus_n": 727,
+        "cost_ratio": 1.901109521256433,
+        "certified_over_heuristic": 1.6808574879227054,
+        "bounded_original_equals_primary": 24,
+        "shared_with_primary": 100,
+        "task": null,
+        "context": 21504,
+        "response_bytes_per_token": 128
+      },
+      {
+        "group": "main",
+        "workflow": "switch",
+        "label": "PF switch",
+        "planned": 210,
+        "refused": 0,
+        "pairs": 210,
+        "saved_equal": 210,
+        "shape_equal": 210,
+        "certificate_accepted": true,
+        "llm_events": 420,
+        "segmented_events": 420,
+        "clip_events": {
+          "llm": 0,
+          "tool": 2
+        },
+        "clipped_pairs": 1,
+        "max_t_plus_n": 1081,
+        "cost_ratio": 3.173187008137964,
+        "certified_over_heuristic": 2.0546984572230014,
+        "bounded_original_equals_primary": 209,
+        "shared_with_primary": 210,
+        "task": {
+          "correct": 79,
+          "n": 210,
+          "primary_correct_same_ids": 79,
+          "shared": 210
+        },
+        "context": 21504,
+        "response_bytes_per_token": 128
+      },
+      {
+        "group": "main",
+        "workflow": "email",
+        "label": "Email",
+        "planned": 152,
+        "refused": 0,
+        "pairs": 152,
+        "saved_equal": 152,
+        "shape_equal": 152,
+        "certificate_accepted": true,
+        "llm_events": 604,
+        "segmented_events": 604,
+        "clip_events": {
+          "llm": 0,
+          "tool": 0
+        },
+        "clipped_pairs": 0,
+        "max_t_plus_n": 2234,
+        "cost_ratio": 3.3657896276973753,
+        "certified_over_heuristic": 2.0271718331419826,
+        "bounded_original_equals_primary": 152,
+        "shared_with_primary": 152,
+        "task": null,
+        "context": 21504,
+        "response_bytes_per_token": 128
+      },
+      {
+        "group": "main",
+        "workflow": "crag",
+        "label": "Corrective RAG",
+        "planned": 150,
+        "refused": 0,
+        "pairs": 150,
+        "saved_equal": 150,
+        "shape_equal": 150,
+        "certificate_accepted": true,
+        "llm_events": 1500,
+        "segmented_events": 1500,
+        "clip_events": {
+          "llm": 0,
+          "tool": 474
+        },
+        "clipped_pairs": 116,
+        "max_t_plus_n": 7293,
+        "cost_ratio": 6.466821885913853,
+        "certified_over_heuristic": 3.5908209437621204,
+        "bounded_original_equals_primary": 118,
+        "shared_with_primary": 150,
+        "task": {
+          "correct": 47,
+          "n": 150,
+          "primary_correct_same_ids": 51,
+          "shared": 150
+        },
+        "context": 21504,
+        "response_bytes_per_token": 128
+      },
+      {
+        "group": "main",
+        "workflow": "calculator",
+        "label": "Calculator",
+        "planned": 100,
+        "refused": 2,
+        "pairs": 98,
+        "saved_equal": 98,
+        "shape_equal": 98,
+        "certificate_accepted": true,
+        "llm_events": 709,
+        "segmented_events": 709,
+        "clip_events": {
+          "llm": 0,
+          "tool": 6
+        },
+        "clipped_pairs": 1,
+        "max_t_plus_n": 2861,
+        "cost_ratio": 46.76919004764426,
+        "certified_over_heuristic": 3.338888888888889,
+        "bounded_original_equals_primary": 98,
+        "shared_with_primary": 98,
+        "task": {
+          "correct": 2,
+          "n": 98,
+          "primary_correct_same_ids": 2,
+          "shared": 98
+        },
+        "context": 21504,
+        "response_bytes_per_token": 128
+      },
+      {
+        "group": "main",
+        "workflow": "adaptive",
+        "label": "Adaptive RAG",
+        "planned": 60,
+        "refused": 0,
+        "pairs": 60,
+        "saved_equal": 60,
+        "shape_equal": 60,
+        "certificate_accepted": true,
+        "llm_events": 1705,
+        "segmented_events": 1705,
+        "clip_events": {
+          "llm": 0,
+          "tool": 330
+        },
+        "clipped_pairs": 60,
+        "max_t_plus_n": 20606,
+        "cost_ratio": 40.50164033597804,
+        "certified_over_heuristic": 16.429636621047663,
+        "bounded_original_equals_primary": 0,
+        "shared_with_primary": 60,
+        "task": {
+          "correct": 32,
+          "n": 60,
+          "primary_correct_same_ids": 32,
+          "shared": 60
+        },
+        "context": 21504,
+        "response_bytes_per_token": 128
+      },
+      {
+        "group": "replication",
+        "workflow": "switch",
+        "label": "PF switch (Q)",
+        "planned": 210,
+        "refused": 0,
+        "pairs": 210,
+        "saved_equal": 210,
+        "shape_equal": 210,
+        "certificate_accepted": true,
+        "llm_events": 420,
+        "segmented_events": 420,
+        "clip_events": {
+          "llm": 0,
+          "tool": 18
+        },
+        "clipped_pairs": 9,
+        "max_t_plus_n": 928,
+        "cost_ratio": 10.47405436228854,
+        "certified_over_heuristic": 1.9069767441860466,
+        "bounded_original_equals_primary": 201,
+        "shared_with_primary": 210,
+        "task": {
+          "correct": 123,
+          "n": 210,
+          "primary_correct_same_ids": 123,
+          "shared": 210
+        },
+        "context": 21504,
+        "response_bytes_per_token": 128
+      },
+      {
+        "group": "replication",
+        "workflow": "email",
+        "label": "Email (Q)",
+        "planned": 152,
+        "refused": 0,
+        "pairs": 152,
+        "saved_equal": 152,
+        "shape_equal": 152,
+        "certificate_accepted": true,
+        "llm_events": 587,
+        "segmented_events": 587,
+        "clip_events": {
+          "llm": 0,
+          "tool": 0
+        },
+        "clipped_pairs": 0,
+        "max_t_plus_n": 2149,
+        "cost_ratio": 4.199017199017199,
+        "certified_over_heuristic": 1.9757225433526011,
+        "bounded_original_equals_primary": 152,
+        "shared_with_primary": 152,
+        "task": null,
+        "context": 21504,
+        "response_bytes_per_token": 128
+      },
+      {
+        "group": "replication",
+        "workflow": "crag",
+        "label": "Corrective RAG (Q)",
+        "planned": 150,
+        "refused": 0,
+        "pairs": 150,
+        "saved_equal": 150,
+        "shape_equal": 150,
+        "certificate_accepted": true,
+        "llm_events": 1500,
+        "segmented_events": 1500,
+        "clip_events": {
+          "llm": 0,
+          "tool": 462
+        },
+        "clipped_pairs": 116,
+        "max_t_plus_n": 7208,
+        "cost_ratio": 6.534369819580577,
+        "certified_over_heuristic": 3.529667463594871,
+        "bounded_original_equals_primary": 132,
+        "shared_with_primary": 150,
+        "task": {
+          "correct": 58,
+          "n": 150,
+          "primary_correct_same_ids": 57,
+          "shared": 150
+        },
+        "context": 21504,
+        "response_bytes_per_token": 128
+      }
+    ],
+    "totals": {
+      "planned": 1684,
+      "refused": 2,
+      "pairs": 1682,
+      "saved_equal": 1682,
+      "shape_equal": 1682,
+      "llm_events": 10675,
+      "segmented_events": 10675,
+      "clipped_pairs": 471,
+      "llm_clips": 0,
+      "tool_clips": 1920,
+      "bounded_original_equals_primary": 1429,
+      "shared_with_primary": 1682
+    },
+    "median_cost": 6.466821885913853,
+    "median_certified_over_heuristic": 2.696793673055945
+  },
+  "categorical": {
+    "improved": 28,
+    "regressed": 1,
+    "mcnemar_p": 1.1175870895385742e-07,
+    "source": "publication/evidence/round2-analysis-v2/summary.json"
+  }
+}

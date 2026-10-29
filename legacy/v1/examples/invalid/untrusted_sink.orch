@@ -1,0 +1,14 @@
+// Expected: E233 because model output derived from an untrusted page reaches a
+// tool without being endorsed.  This is the indirect prompt-injection shape.
+workflow InjectedPublish budget 2000 {
+  input web_page: text untrusted max_tokens 500;
+  model reader = mock("offline-reader") max_tokens 400;
+  tool publish(body: text);
+
+  prompt digest(page: text) -> text = "Summarise: {page}";
+
+  let summary: text = call digest(web_page) using reader;
+  emit publish(summary);
+
+  output summary;
+}

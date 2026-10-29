@@ -1,0 +1,525 @@
+[
+  {
+    "argv": [
+      "/usr/bin/g++",
+      "--version"
+    ],
+    "exit": 0,
+    "stdout": "g++ (Ubuntu 13.3.0-6ubuntu2~24.04.1) 13.3.0\nCopyright (C) 2023 Free Software Foundation, Inc.\nThis is free software; see the source for copying conditions.  There is NO\nwarranty; not even for MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.\n\n",
+    "stderr": "",
+    "seconds": 0.00426715100000008
+  },
+  {
+    "argv": [
+      "/usr/bin/g++",
+      "-std=c++17",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-O1",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-Iinclude",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/ast.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/certificate.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/cost_analyzer.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/diagnostic.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/interpreter.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/ir.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/lexer.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/parser.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/relational.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/semantic_analyzer.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/symbol_table.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/tests/tests.cpp",
+      "-o",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchlang_tests"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 43.247087608
+  },
+  {
+    "argv": [
+      "/usr/bin/g++",
+      "-std=c++17",
+      "-Wall",
+      "-Wextra",
+      "-pedantic",
+      "-O1",
+      "-g",
+      "-fsanitize=address,undefined",
+      "-fno-omit-frame-pointer",
+      "-Iinclude",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/ast.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/certificate.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/cost_analyzer.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/diagnostic.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/interpreter.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/ir.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/lexer.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/parser.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/relational.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/semantic_analyzer.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/symbol_table.cpp",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/src/main.cpp",
+      "-o",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc"
+    ],
+    "exit": 0,
+    "stdout": "",
+    "stderr": "",
+    "seconds": 47.632310401000005
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchlang_tests"
+    ],
+    "exit": 0,
+    "stdout": "PASS lexer keyword and location\nPASS lexer comment and identifier\nPASS lexer string escapes\nPASS lexer decimal and boolean\nPASS lexer bad character\nPASS lexer unterminated string\nPASS lexer lone bang\nPASS parser full statement forms\nPASS parser call structure\nPASS parser empty workflow\nPASS parser missing semicolon\nPASS parser multiple error recovery\nPASS parser missing closing brace\nPASS parser empty input\nPASS parser long identifier\nPASS parser integer overflow\nPASS parser invalid call argument\nPASS parser unexpected statement\nPASS AST printer\nPASS secret-dependent cost is rejected\nPASS shadowed model contracts rejected\nPASS equivalent model aliases accepted\nPASS equal length different requests rejected\nPASS shadowed prompt content rejected\nPASS ordered request arguments preserved\nPASS branch local inputs not assumed equal\nPASS nested signatures isolate siblings\nPASS token estimate extreme divisor\nPASS IR resolved labels and same line regions\nPASS runtime validates pins and retry policy\nPASS JSON control bytes and UTF8 units\nPASS equal bounds with different arguments rejected\nPASS extra call in one arm rejected\nPASS differing retry bounds rejected\nPASS matching retry bounds accepted\nPASS chaining inside secret arm rejected conservatively\nPASS public guard inside secret arm allowed\nPASS differing public sub-branch rejected\nPASS branch bounds each component separately\nPASS literal accounting agrees with runtime\nPASS runtime respects block scope\nPASS accepted workflow has secret-independent billing\nPASS rejected workflow actually leaks\nPASS balanced arms under secret accepted\nPASS public guard with unequal arms fine\nPASS untrusted guard on unequal arms warns\nPASS run is deterministic for a seed\nPASS run stays within certified bound\nPASS run respects declared retry bound\nPASS run takes exactly one branch arm\nPASS run refuses ill-typed program\nPASS parser parses branch\nPASS cost branch takes maximum\nPASS cost retry multiplies\nPASS cost retry overrun caught\nPASS cost separates guaranteed from estimated\nPASS cost assumption moves only estimated half\nPASS empty branch arm costs nothing\nPASS require violation reported\nPASS require satisfied by bound\nPASS require on unbounded subject\nPASS require lower bound undecidable\nPASS unbounded input reaching prompt rejected\nPASS label lattice join and order\nPASS untrusted input taints model output\nPASS untrusted value cannot reach sink\nPASS secret cannot reach sink\nPASS secret guarded effect is implicit flow\nPASS untrusted guarded effect rejected\nPASS declassification clears confidentiality\nPASS reclassification recorded with justification\nPASS empty justification rejected\nPASS pc label survives declassification\nPASS unknown tool reported\nPASS tool arity and types checked\nPASS clean sink accepted\nPASS branch binding does not escape\nPASS certificate records bound and labels\nPASS IR carries regions and repeat factors\nPASS saturating arithmetic never wraps\nPASS symbol table lookup\nPASS semantic valid program\nPASS semantic duplicate symbols\nPASS semantic undeclared identifier\nPASS semantic type mismatch\nPASS semantic unknown prompt\nPASS semantic prompt arity\nPASS semantic prompt argument type\nPASS semantic placeholder unknown\nPASS semantic placeholder missing\nPASS semantic placeholder duplicate\nPASS semantic unknown model\nPASS semantic secret prompt exposure\nPASS semantic secret output exposure\nPASS semantic budget exceeded\nPASS semantic missing output\nPASS semantic multiple outputs\nPASS semantic multiple diagnostics\nPASS semantic declaration before use\nPASS semantic unknown requirement subject\nPASS semantic zero budget\nPASS output literal expression\nPASS IR valid lowering\nPASS IR refuses invalid program\nPASS IR dependency cycle detector\nPASS IR JSON export\nPassed 106/106 tests.\n",
+    "stderr": "",
+    "seconds": 0.28079137800000353
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/balanced_cost_arms.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nBalancedCostArms:\n  token bound   205 / budget 100000\n  components    output <= 150, input <= 55 @ 4 chars/token\n  labels        3 secret, 0 untrusted\n",
+    "stderr": "",
+    "seconds": 0.2537745619999896
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "certify",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/balanced_cost_arms.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"BalancedCostArms\",\n      \"budget_tokens\": 100000,\n      \"bound\": {\"guaranteed_tokens\": 150, \"estimated_tokens\": 55, \"total_tokens\": 205, \"component_sum_tokens\": 205, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"branch\", \"detail\": \"ALERT\", \"guaranteed_tokens\": 0, \"estimated_tokens\": 0, \"line\": 11},\n        {\"depth\": 1, \"rule\": \"call\", \"detail\": \"a = step via small [out<=150, in<=5+50]\", \"guaranteed_tokens\": 150, \"estimated_tokens\": 55, \"line\": 12},\n        {\"depth\": 1, \"rule\": \"call\", \"detail\": \"b = step via small [out<=150, in<=5+50]\", \"guaranteed_tokens\": 150, \"estimated_tokens\": 55, \"line\": 14},\n        {\"depth\": 0, \"rule\": \"branch-max\", \"detail\": \"max(then=205, else=205)\", \"guaranteed_tokens\": 150, \"estimated_tokens\": 55, \"line\": 11}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:BalancedCostArms\", \"name\": \"ALERT\", \"kind\": \"secret\", \"type\": \"boolean\", \"confidentiality\": \"secret\", \"integrity\": \"trusted\", \"token_bound\": 1},\n        {\"scope\": \"workflow:BalancedCostArms\", \"name\": \"small\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:BalancedCostArms\", \"name\": \"src\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 50},\n        {\"scope\": \"workflow:BalancedCostArms\", \"name\": \"step\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:BalancedCostArms::prompt:step\", \"name\": \"payload\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:BalancedCostArms::then@11\", \"name\": \"a\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"secret\", \"integrity\": \"trusted\", \"token_bound\": 150},\n        {\"scope\": \"workflow:BalancedCostArms::else@11\", \"name\": \"b\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"secret\", \"integrity\": \"trusted\", \"token_bound\": 150}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n        {\"guard\": \"ALERT\", \"discharged\": true, \"detail\": \"both arms bill orch-abstract-model-v1:4:mock:13:offline-small:cap=150:price=0(in=5 + |1|, request=18:Process: {payload}:7:payload:text; binding:text:1)\", \"line\": 11}\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": "",
+    "seconds": 0.23114249500000028
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/balanced_signature.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nBalancedSignature:\n  token bound   111 / budget 1000\n  components    output <= 10, input <= 101 @ 4 chars/token\n  labels        3 secret, 0 untrusted\n",
+    "stderr": "",
+    "seconds": 0.21991747199999168
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "certify",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/balanced_signature.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"BalancedSignature\",\n      \"budget_tokens\": 1000,\n      \"bound\": {\"guaranteed_tokens\": 10, \"estimated_tokens\": 101, \"total_tokens\": 111, \"component_sum_tokens\": 111, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"branch\", \"detail\": \"tokens(s) == 0\", \"guaranteed_tokens\": 0, \"estimated_tokens\": 0, \"line\": 11},\n        {\"depth\": 1, \"rule\": \"call\", \"detail\": \"a = p via m [out<=10, in<=1+100]\", \"guaranteed_tokens\": 10, \"estimated_tokens\": 101, \"line\": 12},\n        {\"depth\": 1, \"rule\": \"call\", \"detail\": \"b = p via m [out<=10, in<=1+100]\", \"guaranteed_tokens\": 10, \"estimated_tokens\": 101, \"line\": 14},\n        {\"depth\": 0, \"rule\": \"branch-max\", \"detail\": \"max(then=111, else=111)\", \"guaranteed_tokens\": 10, \"estimated_tokens\": 101, \"line\": 11}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:BalancedSignature\", \"name\": \"m\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:BalancedSignature\", \"name\": \"p\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:BalancedSignature\", \"name\": \"s\", \"kind\": \"secret\", \"type\": \"text\", \"confidentiality\": \"secret\", \"integrity\": \"trusted\", \"token_bound\": 1},\n        {\"scope\": \"workflow:BalancedSignature\", \"name\": \"x\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 100},\n        {\"scope\": \"workflow:BalancedSignature::prompt:p\", \"name\": \"t\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:BalancedSignature::then@11\", \"name\": \"a\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"secret\", \"integrity\": \"trusted\", \"token_bound\": 10},\n        {\"scope\": \"workflow:BalancedSignature::else@11\", \"name\": \"b\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"secret\", \"integrity\": \"trusted\", \"token_bound\": 10}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n        {\"guard\": \"tokens(s) == 0\", \"discharged\": true, \"detail\": \"both arms bill orch-abstract-model-v1:4:mock:1:m:cap=10:price=0(in=1 + |2|, request=3:{t}:1:t:text; binding:text:2)\", \"line\": 11}\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": "",
+    "seconds": 0.2111010300000089
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/bounded_retry.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nResilientExtract:\n  token bound   3330 / budget 3400\n  components    output <= 2100, input <= 1230 @ 4 chars/token\n  labels        0 secret, 0 untrusted\n",
+    "stderr": "",
+    "seconds": 0.17676912400000333
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "certify",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/bounded_retry.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"ResilientExtract\",\n      \"budget_tokens\": 3400,\n      \"bound\": {\"guaranteed_tokens\": 2100, \"estimated_tokens\": 1230, \"total_tokens\": 3330, \"component_sum_tokens\": 3330, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"retry\", \"detail\": \"bound 3\", \"guaranteed_tokens\": 0, \"estimated_tokens\": 0, \"line\": 9},\n        {\"depth\": 1, \"rule\": \"call\", \"detail\": \"attempt = extract via extractor [out<=700, in<=10+400]\", \"guaranteed_tokens\": 700, \"estimated_tokens\": 410, \"line\": 10},\n        {\"depth\": 0, \"rule\": \"retry-scale\", \"detail\": \"3 x 1110\", \"guaranteed_tokens\": 2100, \"estimated_tokens\": 1230, \"line\": 9}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:ResilientExtract\", \"name\": \"document\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 400},\n        {\"scope\": \"workflow:ResilientExtract\", \"name\": \"extract\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:ResilientExtract\", \"name\": \"extractor\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:ResilientExtract::prompt:extract\", \"name\": \"source\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:ResilientExtract::retry@9\", \"name\": \"attempt\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 700}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": "",
+    "seconds": 0.1962480799999895
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/branching_cost.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nTieredTriage:\n  token bound   1639 / budget 2000\n  components    output <= 1020, input <= 620 @ 4 chars/token  (sum 1640 exceeds the total bound; the two maxima fall on different branches)\n  labels        0 secret, 0 untrusted\n",
+    "stderr": "",
+    "seconds": 0.18276615499999593
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "certify",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/branching_cost.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"TieredTriage\",\n      \"budget_tokens\": 2000,\n      \"bound\": {\"guaranteed_tokens\": 1020, \"estimated_tokens\": 620, \"total_tokens\": 1639, \"component_sum_tokens\": 1640, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"severity = triage via small [out<=120, in<=8+300]\", \"guaranteed_tokens\": 120, \"estimated_tokens\": 308, \"line\": 13},\n        {\"depth\": 0, \"rule\": \"branch\", \"detail\": \"tokens(severity) <= 120\", \"guaranteed_tokens\": 0, \"estimated_tokens\": 0, \"line\": 15},\n        {\"depth\": 1, \"rule\": \"call\", \"detail\": \"reply = acknowledge via small [out<=120, in<=12+300]\", \"guaranteed_tokens\": 120, \"estimated_tokens\": 312, \"line\": 16},\n        {\"depth\": 1, \"rule\": \"call\", \"detail\": \"reply = escalate via large [out<=900, in<=11+300]\", \"guaranteed_tokens\": 900, \"estimated_tokens\": 311, \"line\": 18},\n        {\"depth\": 0, \"rule\": \"branch-max\", \"detail\": \"max(then=432, else=1211)\", \"guaranteed_tokens\": 900, \"estimated_tokens\": 312, \"line\": 15}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:TieredTriage\", \"name\": \"acknowledge\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:TieredTriage\", \"name\": \"escalate\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:TieredTriage\", \"name\": \"large\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:TieredTriage\", \"name\": \"severity\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 120},\n        {\"scope\": \"workflow:TieredTriage\", \"name\": \"small\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:TieredTriage\", \"name\": \"ticket\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 300},\n        {\"scope\": \"workflow:TieredTriage\", \"name\": \"triage\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:TieredTriage::prompt:triage\", \"name\": \"message\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:TieredTriage::prompt:escalate\", \"name\": \"message\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:TieredTriage::prompt:acknowledge\", \"name\": \"message\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:TieredTriage::then@15\", \"name\": \"reply\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 120},\n        {\"scope\": \"workflow:TieredTriage::else@15\", \"name\": \"reply\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 900}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": "",
+    "seconds": 0.20954363199999193
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/closed_certificate.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nClosedCertificate:\n  token bound   10 / budget 1000\n  components    output <= 8, input <= 2 @ 4 chars/token\n  labels        3 secret, 0 untrusted\n",
+    "stderr": "",
+    "seconds": 0.21604090599998926
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "certify",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/closed_certificate.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"ClosedCertificate\",\n      \"budget_tokens\": 1000,\n      \"bound\": {\"guaranteed_tokens\": 8, \"estimated_tokens\": 2, \"total_tokens\": 10, \"component_sum_tokens\": 10, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"branch\", \"detail\": \"s\", \"guaranteed_tokens\": 0, \"estimated_tokens\": 0, \"line\": 5},\n        {\"depth\": 1, \"rule\": \"call\", \"detail\": \"a = p via m [out<=8, in<=1+1]\", \"guaranteed_tokens\": 8, \"estimated_tokens\": 2, \"line\": 6},\n        {\"depth\": 1, \"rule\": \"call\", \"detail\": \"b = p via alias [out<=8, in<=1+1]\", \"guaranteed_tokens\": 8, \"estimated_tokens\": 2, \"line\": 9},\n        {\"depth\": 0, \"rule\": \"branch-max\", \"detail\": \"max(then=10, else=10)\", \"guaranteed_tokens\": 8, \"estimated_tokens\": 2, \"line\": 5}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:ClosedCertificate\", \"name\": \"m\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:ClosedCertificate\", \"name\": \"p\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:ClosedCertificate\", \"name\": \"s\", \"kind\": \"secret\", \"type\": \"boolean\", \"confidentiality\": \"secret\", \"integrity\": \"trusted\", \"token_bound\": 1},\n        {\"scope\": \"workflow:ClosedCertificate::prompt:p\", \"name\": \"t\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:ClosedCertificate::then@5\", \"name\": \"a\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"secret\", \"integrity\": \"trusted\", \"token_bound\": 8},\n        {\"scope\": \"workflow:ClosedCertificate::else@5\", \"name\": \"alias\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:ClosedCertificate::else@5\", \"name\": \"b\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"secret\", \"integrity\": \"trusted\", \"token_bound\": 8}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n        {\"guard\": \"s\", \"discharged\": true, \"detail\": \"both arms bill orch-abstract-model-v1:4:mock:14:replay-demo-v1:cap=8:price=0(in=2, request=3:{t}:1:t:text; literal:text:3:yes)\", \"line\": 5}\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": "",
+    "seconds": 0.17703256500000464
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/declassified_secret.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nKeyedLookup:\n  token bound   467 / budget 1500\n  components    output <= 400, input <= 67 @ 4 chars/token\n  labels        1 secret, 0 untrusted\n  escape hatches 1 declassify, 0 endorse (each justified in the certificate)\n",
+    "stderr": "",
+    "seconds": 0.2129748949999879
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "certify",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/declassified_secret.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"KeyedLookup\",\n      \"budget_tokens\": 1500,\n      \"bound\": {\"guaranteed_tokens\": 400, \"estimated_tokens\": 67, \"total_tokens\": 467, \"component_sum_tokens\": 467, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"description = describe via lookup [out<=400, in<=7+60]\", \"guaranteed_tokens\": 400, \"estimated_tokens\": 67, \"line\": 10}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:KeyedLookup\", \"name\": \"API_KEY\", \"kind\": \"secret\", \"type\": \"text\", \"confidentiality\": \"secret\", \"integrity\": \"trusted\", \"token_bound\": 16},\n        {\"scope\": \"workflow:KeyedLookup\", \"name\": \"account\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 60},\n        {\"scope\": \"workflow:KeyedLookup\", \"name\": \"describe\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:KeyedLookup\", \"name\": \"description\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 400},\n        {\"scope\": \"workflow:KeyedLookup\", \"name\": \"key_fingerprint\", \"kind\": \"reclassified\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 16},\n        {\"scope\": \"workflow:KeyedLookup\", \"name\": \"lookup\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:KeyedLookup::prompt:describe\", \"name\": \"reference\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null}\n      ],\n      \"reclassifications\": [\n        {\"operation\": \"declassify\", \"source\": \"API_KEY\", \"result\": \"key_fingerprint\", \"from\": \"secret/trusted\", \"to\": \"public/trusted\", \"justification\": \"only the SHA-256 prefix is forwarded\", \"line\": 9}\n      ],\n      \"relational_obligations\": [\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": "",
+    "seconds": 0.18217772899998863
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/summarization.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nSummarization:\n  token bound   1315 / budget 1600\n  components    output <= 800, input <= 515 @ 4 chars/token\n  labels        0 secret, 0 untrusted\n",
+    "stderr": "",
+    "seconds": 0.16820637699998997
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "certify",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/summarization.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"Summarization\",\n      \"budget_tokens\": 1600,\n      \"bound\": {\"guaranteed_tokens\": 800, \"estimated_tokens\": 515, \"total_tokens\": 1315, \"component_sum_tokens\": 1315, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"summary = summarize via concise [out<=800, in<=15+500]\", \"guaranteed_tokens\": 800, \"estimated_tokens\": 515, \"line\": 8}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:Summarization\", \"name\": \"article\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 500},\n        {\"scope\": \"workflow:Summarization\", \"name\": \"concise\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:Summarization\", \"name\": \"summarize\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:Summarization\", \"name\": \"summary\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 800},\n        {\"scope\": \"workflow:Summarization::prompt:summarize\", \"name\": \"document\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": "",
+    "seconds": 0.17082082299999968
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/support_triage.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nSupportTriage:\n  token bound   1016 / budget 2500\n  components    output <= 600, input <= 416 @ 4 chars/token\n  labels        1 secret, 0 untrusted\n",
+    "stderr": "",
+    "seconds": 0.16333700200000578
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "certify",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/support_triage.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"SupportTriage\",\n      \"budget_tokens\": 2500,\n      \"bound\": {\"guaranteed_tokens\": 600, \"estimated_tokens\": 416, \"total_tokens\": 1016, \"component_sum_tokens\": 1016, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"category = classify via fast [out<=600, in<=16+400]\", \"guaranteed_tokens\": 600, \"estimated_tokens\": 416, \"line\": 9}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:SupportTriage\", \"name\": \"API_KEY\", \"kind\": \"secret\", \"type\": \"text\", \"confidentiality\": \"secret\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:SupportTriage\", \"name\": \"category\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 600},\n        {\"scope\": \"workflow:SupportTriage\", \"name\": \"classify\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:SupportTriage\", \"name\": \"fast\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:SupportTriage\", \"name\": \"ticket\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 400},\n        {\"scope\": \"workflow:SupportTriage::prompt:classify\", \"name\": \"message\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": "",
+    "seconds": 0.18326574799999662
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/two_step_workflow.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nTwoStepAnswer:\n  token bound   1821 / budget 1900\n  components    output <= 1100, input <= 721 @ 4 chars/token\n  labels        0 secret, 0 untrusted\n",
+    "stderr": "",
+    "seconds": 0.18175235500000042
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "certify",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/two_step_workflow.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"TwoStepAnswer\",\n      \"budget_tokens\": 1900,\n      \"bound\": {\"guaranteed_tokens\": 1100, \"estimated_tokens\": 721, \"total_tokens\": 1821, \"component_sum_tokens\": 1821, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"notes = extract via researcher [out<=500, in<=9+200]\", \"guaranteed_tokens\": 500, \"estimated_tokens\": 209, \"line\": 9},\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"answer = refine via editor [out<=600, in<=12+500]\", \"guaranteed_tokens\": 600, \"estimated_tokens\": 512, \"line\": 10}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:TwoStepAnswer\", \"name\": \"answer\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 600},\n        {\"scope\": \"workflow:TwoStepAnswer\", \"name\": \"editor\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:TwoStepAnswer\", \"name\": \"extract\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:TwoStepAnswer\", \"name\": \"notes\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 500},\n        {\"scope\": \"workflow:TwoStepAnswer\", \"name\": \"question\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 200},\n        {\"scope\": \"workflow:TwoStepAnswer\", \"name\": \"refine\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:TwoStepAnswer\", \"name\": \"researcher\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:TwoStepAnswer::prompt:extract\", \"name\": \"query\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:TwoStepAnswer::prompt:refine\", \"name\": \"notes\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": "",
+    "seconds": 0.16355442200000425
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/untrusted_endorsed.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nResearchDigest:\n  token bound   1109 / budget 2400\n  components    output <= 500, input <= 609 @ 4 chars/token\n  labels        0 secret, 2 untrusted\n  escape hatches 0 declassify, 1 endorse (each justified in the certificate)\n",
+    "stderr": "",
+    "seconds": 0.15195270599998878
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "certify",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/valid/untrusted_endorsed.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"ResearchDigest\",\n      \"budget_tokens\": 2400,\n      \"bound\": {\"guaranteed_tokens\": 500, \"estimated_tokens\": 609, \"total_tokens\": 1109, \"component_sum_tokens\": 1109, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"digest_text = digest via reader [out<=500, in<=9+600]\", \"guaranteed_tokens\": 500, \"estimated_tokens\": 609, \"line\": 12}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:ResearchDigest\", \"name\": \"digest\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:ResearchDigest\", \"name\": \"digest_text\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"untrusted\", \"token_bound\": 500},\n        {\"scope\": \"workflow:ResearchDigest\", \"name\": \"publish\", \"kind\": \"tool\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:ResearchDigest\", \"name\": \"query\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 100},\n        {\"scope\": \"workflow:ResearchDigest\", \"name\": \"reader\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:ResearchDigest\", \"name\": \"vetted\", \"kind\": \"reclassified\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 500},\n        {\"scope\": \"workflow:ResearchDigest\", \"name\": \"web_page\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"untrusted\", \"token_bound\": 600},\n        {\"scope\": \"workflow:ResearchDigest::prompt:digest\", \"name\": \"page\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null}\n      ],\n      \"reclassifications\": [\n        {\"operation\": \"endorse\", \"source\": \"digest_text\", \"result\": \"vetted\", \"from\": \"public/untrusted\", \"to\": \"public/trusted\", \"justification\": \"passed the offline schema and length validator\", \"line\": 13}\n      ],\n      \"relational_obligations\": [\n      ],\n      \"sinks\": [\n        {\"tool\": \"publish\", \"region\": \"root\", \"line\": 14}\n      ]\n    }\n  ]\n}\n",
+    "stderr": "",
+    "seconds": 0.1702030649999955
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/budget_exceeded.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/budget_exceeded.orch:2:1: error [E260] certified token bound 655 (guaranteed 600 + estimated 55) exceeds workflow budget 400\n",
+    "seconds": 0.16425688299999308
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/cost_channel.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/cost_channel.orch:14:3: error [E236] this branch is guarded by a secret and equal resource observations cannot be certified: resolved contracts, requests, or control differ; then-arm [orch-abstract-model-v1:4:mock:13:offline-large:cap=900:price=0(in=5 + |1|, request=18:Process: {payload}:7:payload:text; binding:text:1)] and else-arm bills [orch-abstract-model-v1:4:mock:13:offline-small:cap=150:price=0(in=5 + |1|, request=18:Process: {payload}:7:payload:text; binding:text:1)]\n",
+    "seconds": 0.21254337499999565
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/duplicate_symbols.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/duplicate_symbols.orch:4:3: error [E201] duplicate declaration 'ticket'; first declared at /mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/duplicate_symbols.orch:3:3\n",
+    "seconds": 0.24250001699999757
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/equal_bounds.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/equal_bounds.orch:17:2: error [E236] this branch is guarded by a secret and equal resource observations cannot be certified: resolved contracts, requests, or control differ; then-arm [orch-abstract-model-v1:4:mock:1:m:cap=10:price=0(in=1 + |2|, request=3:{t}:1:t:text; binding:text:2)] and else-arm bills [orch-abstract-model-v1:4:mock:1:m:cap=10:price=0(in=1 + |3|, request=3:{t}:1:t:text; binding:text:3)]\n",
+    "seconds": 0.1869178350000027
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/implicit_flow.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/implicit_flow.orch:14:5: error [E234] tool 'notify' is invoked under a secret-dependent condition, which leaks the secret through whether the effect happens\n",
+    "seconds": 0.1827551770000042
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/lexical_errors.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/lexical_errors.orch:4:3: error [L001] unexpected character '@'\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/lexical_errors.orch:4:3: error [P001] expected a workflow statement, found '@'\n",
+    "seconds": 0.17660232299999734
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/multiple_errors.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/multiple_errors.orch:4:3: error [E201] duplicate declaration 'title'; first declared at /mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/multiple_errors.orch:3:3\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/multiple_errors.orch:7:3: error [E222] placeholder '{ghost}' does not match a declared parameter of prompt 'write'\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/multiple_errors.orch:7:3: error [E222] placeholder '{message}' is duplicated in prompt 'write'\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/multiple_errors.orch:7:31: error [E222] prompt parameter 'unused' has no matching placeholder\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/multiple_errors.orch:9:40: error [E230] secret value cannot be passed to prompt 'write'; use 'declassify' with a written justification if this is intended\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/multiple_errors.orch:9:40: error [E261] 'API_KEY' is passed to a prompt but has no declared token bound; add 'max_tokens <n>' to its declaration so the cost bound is defined\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/multiple_errors.orch:9:22: error [E221] prompt 'write' expects 2 argument(s), but 3 were supplied\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/multiple_errors.orch:9:33: error [E223] argument 1 of prompt 'write' has type integer; expected text\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/multiple_errors.orch:9:22: error [E241] unknown model 'missing_model' in using clause\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/multiple_errors.orch:9:3: error [E210] cannot assign integer result to 'answer' declared as text\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/multiple_errors.orch:10:3: error [E202] use of undeclared identifier 'unknown_value'\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/multiple_errors.orch:11:10: error [E231] secret value cannot be exposed as workflow output\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/multiple_errors.orch:12:10: error [E231] secret value cannot be exposed as workflow output\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/multiple_errors.orch:2:1: error [E271] workflow 'MultipleErrors' has multiple output declarations\n",
+    "seconds": 0.2052740600000078
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/paper_motivating.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/paper_motivating.orch:17:18: error [E233] untrusted value reaches tool 'publish'; model output derived from untrusted input must be endorsed before it can drive an external effect\n",
+    "seconds": 0.1778298570000061
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/placeholder_errors.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/placeholder_errors.orch:6:3: error [E222] placeholder '{unknown}' does not match a declared parameter of prompt 'classify'\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/placeholder_errors.orch:6:3: error [E222] placeholder '{message}' is duplicated in prompt 'classify'\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/placeholder_errors.orch:6:34: error [E222] prompt parameter 'category' has no matching placeholder\n",
+    "seconds": 0.1689555730000052
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/require_undecidable.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/require_undecidable.orch:10:3: error [E264] 'require tokens(category) > 5' cannot be established from an upper bound; use '<' or '<='\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/require_undecidable.orch:11:3: error [E263] 'fast' (model) carries no token bound, so 'require tokens(...)' cannot be discharged\n",
+    "seconds": 0.15607774599999402
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/require_violated.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/require_violated.orch:10:3: error [E262] requirement 'tokens(category) <= 5' is not met: 'category' is bounded by 600 tokens\n",
+    "seconds": 0.17644087200000058
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/retry_budget.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/retry_budget.orch:3:1: error [E260] certified token bound 2418 (guaranteed 2100 + estimated 318) exceeds workflow budget 1000\n",
+    "seconds": 0.1728548619999941
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/secret_exposure.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/secret_exposure.orch:6:36: error [E230] secret value cannot be passed to prompt 'classify'; use 'declassify' with a written justification if this is intended\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/secret_exposure.orch:6:36: error [E261] 'API_KEY' is passed to a prompt but has no declared token bound; add 'max_tokens <n>' to its declaration so the cost bound is defined\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/secret_exposure.orch:7:10: error [E231] secret value cannot be exposed as workflow output\n",
+    "seconds": 0.17659670800000526
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/secret_sink.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/secret_sink.orch:11:15: error [E232] secret value reaches tool 'notify'; declassify it explicitly if this is intended\n",
+    "seconds": 0.22190452099999902
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/syntax_errors.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/syntax_errors.orch:4:3: error [P001] expected ';' after the input declaration, found 'output'\n",
+    "seconds": 0.1824225870000049
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/type_mismatch.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/type_mismatch.orch:6:3: error [E210] cannot assign integer result to 'result' declared as text\n",
+    "seconds": 0.16987260099999446
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/unbounded_input.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/unbounded_input.orch:9:38: error [E261] 'ticket' is passed to a prompt but has no declared token bound; add 'max_tokens <n>' to its declaration so the cost bound is defined\n",
+    "seconds": 0.15650623300000177
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/unknown_names.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/unknown_names.orch:5:35: error [E202] use of undeclared identifier 'no_such_value'\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/unknown_names.orch:5:22: error [E220] unknown prompt 'missing' called from let statement\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/unknown_names.orch:5:22: error [E241] unknown model 'absent_model' in using clause\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/unknown_names.orch:6:3: error [E202] use of undeclared identifier 'not_declared'\n/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/unknown_names.orch:7:10: error [E202] use of undeclared identifier 'missing_output'\n",
+    "seconds": 0.21370416300000272
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/unknown_tool.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/unknown_tool.orch:9:3: error [E242] unknown tool 'notify' in emit statement\n",
+    "seconds": 0.16261903899999197
+  },
+  {
+    "argv": [
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/research/revision-2026-10-24/linux-sanitizers-v1/orchc",
+      "check",
+      "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/untrusted_sink.orch"
+    ],
+    "exit": 1,
+    "stdout": "",
+    "stderr": "/mnt/c/Users/nambi/Documents/Compiler Project/orchlang-compiler-design-project/examples/invalid/untrusted_sink.orch:11:16: error [E233] untrusted value reaches tool 'publish'; model output derived from untrusted input must be endorsed before it can drive an external effect\n",
+    "seconds": 0.2503245319999934
+  }
+]

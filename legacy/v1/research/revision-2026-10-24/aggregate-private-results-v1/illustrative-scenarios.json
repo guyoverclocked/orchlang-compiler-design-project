@@ -1,0 +1,20 @@
+[
+  {
+    "path": "examples\\certificates\\aggregate_classification.orch",
+    "source_sha256": "570fdf51a6435c7ef623edd83ef8d9e12cf79567f299c7f9dd57d6f850c58441",
+    "source": "// Two independent labels; the account observer sees totals by contract.\nworkflow IndependentLabels budget 10000 {\n    secret priority: boolean max_tokens 1;\n    model sentiment = mock(\"sentiment-v1\") max_tokens 16;\n    model topic = mock(\"topic-v1\") max_tokens 16;\n    prompt sentiment_label() -> text = \"Label sentiment: The delivery arrived on time.\";\n    prompt topic_label() -> text = \"Label topic: The delivery arrived on time.\";\n    if priority {\n        let a: text = call sentiment_label() using sentiment;\n        let b: text = call topic_label() using topic;\n    } else {\n        let b: text = call topic_label() using topic;\n        let a: text = call sentiment_label() using sentiment;\n    }\n    output \"classification calls complete\";\n}\n",
+    "accepted": true
+  },
+  {
+    "path": "examples\\certificates\\aggregate_document_checks.orch",
+    "source_sha256": "d648fc4a816c15a8d62d0e813d039246390d4a85f20e5c994da452e6da0e8b0e",
+    "source": "// Independent checks can run in either order; neither request uses a response.\nworkflow DocumentChecks budget 10000 {\n    secret confidential_schedule: boolean max_tokens 1;\n    model spelling = mock(\"spelling-check-v1\") max_tokens 64;\n    model citation = mock(\"citation-check-v1\") max_tokens 64;\n    prompt spelling_check() -> text = \"Check spelling: The result was reproduced.\";\n    prompt citation_check() -> text = \"Check citation formatting: [Smith 2025].\";\n    if confidential_schedule {\n        let a: text = call spelling_check() using spelling;\n        let b: text = call citation_check() using citation;\n    } else {\n        let b: text = call citation_check() using citation;\n        let a: text = call spelling_check() using spelling;\n    }\n    output \"checks complete\";\n}\n",
+    "accepted": true
+  },
+  {
+    "path": "examples\\certificates\\aggregate_independent_summaries.orch",
+    "source_sha256": "8d93384565c360d1c4a100a4a132af5e7cbff0b6e80884ec0f28e860b8d8ae82",
+    "source": "// Closed documents, separate calls and no returned text in the public output.\nworkflow IndependentSummaries budget 10000 {\n    secret schedule: boolean max_tokens 1;\n    model summarizer = mock(\"summarizer-v1\") max_tokens 64;\n    prompt summarize(t: text) -> text = \"Summarize: {t}\";\n    if schedule {\n        let a: text = call summarize(\"Document A: rainfall increased in April.\") using summarizer;\n        let b: text = call summarize(\"Document B: the river gauge was repaired.\") using summarizer;\n    } else {\n        let b: text = call summarize(\"Document B: the river gauge was repaired.\") using summarizer;\n        let a: text = call summarize(\"Document A: rainfall increased in April.\") using summarizer;\n    }\n    output \"summary calls complete\";\n}\n",
+    "accepted": true
+  }
+]

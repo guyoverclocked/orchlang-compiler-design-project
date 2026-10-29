@@ -1,0 +1,62 @@
+{
+  "schema": "orchlang-independent-record-audit-v1",
+  "utc": "2026-10-25T01:07:44.076655+00:00",
+  "request_retokenized": true,
+  "visible_prefix_reconstructed": true,
+  "records": 1486,
+  "llm_events": 5831,
+  "campaigns": {
+    "publication\\evidence\\completion\\conformance\\calculator": {
+      "orig": 3,
+      "ours": 3
+    },
+    "publication\\evidence\\completion\\conformance\\chaining": {
+      "orig": 3,
+      "ours": 3
+    },
+    "publication\\evidence\\completion\\conformance\\email": {
+      "orig": 3,
+      "ours": 3
+    },
+    "publication\\evidence\\completion\\conformance\\evaluator": {
+      "orig": 3,
+      "ours": 3
+    },
+    "publication\\evidence\\completion\\conformance\\orchestrator": {
+      "orig": 3,
+      "ours": 3
+    },
+    "publication\\evidence\\completion\\conformance\\routing": {
+      "orig": 3,
+      "ours": 3
+    },
+    "publication\\evidence\\completion\\conformance\\switch": {
+      "orig": 3,
+      "ours": 3
+    },
+    "publication\\evidence\\completion\\main\\adaptive": {
+      "orig": 60,
+      "ours": 60
+    },
+    "publication\\evidence\\completion\\main\\crag": {
+      "orig": 150,
+      "ours": 150
+    },
+    "publication\\evidence\\completion\\replication\\crag": {
+      "orig": 150,
+      "ours": 150
+    },
+    "publication\\evidence\\completion\\replication\\email": {
+      "orig": 152,
+      "ours": 152
+    },
+    "publication\\evidence\\completion\\replication\\switch": {
+      "orig": 210,
+      "ours": 210
+    }
+  },
+  "failures": [],
+  "active_trailing_writes": [],
+  "tampered_count_detected": true,
+  "status": "verified-completed-prefix"
+}

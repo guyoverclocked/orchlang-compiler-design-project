@@ -1,0 +1,4509 @@
+{
+  "summary": {
+    "comparisons": 24,
+    "passed": 24,
+    "unsupported_source_failed": 0,
+    "actual_generation_calls": 0,
+    "replay_calls": 44,
+    "exact_request_matches": 44,
+    "statement": "Conformance under common captured actual model outcomes. Zero new model generations; not independent-generation equivalence or all-input proof."
+  },
+  "generated_utc": "2026-10-23T22:55:43.382162+00:00",
+  "original_results_sha256": "a965fce14f631f644bd34235d694d156bc2d2a8b72bec086c558806701b92c80",
+  "protocol_sha256": "5e35163bd85626580a6c0cf6b734c439068abcde5ab3b1bf1ffa72f328cdddf7",
+  "rows": [
+    {
+      "id": "lg-chain-graph",
+      "output_cap": 24,
+      "seed": 1,
+      "input_index": 0,
+      "inputs": {
+        "topic": "cats"
+      },
+      "status": "pass",
+      "output": {
+        "topic": "cats",
+        "joke": "Why don't cats make good dancers? Because they always land on their feet... but that's not always the most graceful"
+      },
+      "original_output": {
+        "topic": "cats",
+        "joke": "Why don't cats make good dancers? Because they always land on their feet... but that's not always the most graceful"
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 1,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 1,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a short joke about cats"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a short joke about cats<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            2805,
+            21646,
+            911,
+            19423,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 14,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a short joke about cats<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Why don't cats make good dancers? Because they always land on their feet... but that's not always the most graceful",
+          "server_input_tokens": 14,
+          "generated_tokens": 24,
+          "response_reencoded_tokens": 24,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:52:17.1383812Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 1478903500,
+            "load_duration": 1782700,
+            "prompt_eval_count": 14,
+            "prompt_eval_duration": 96693000,
+            "eval_count": 24,
+            "eval_duration": 1376820000
+          },
+          "elapsed_seconds": 1.4799249999996391,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "lg-chain-graph",
+      "output_cap": 24,
+      "seed": 1,
+      "input_index": 1,
+      "inputs": {
+        "topic": "compiler errors"
+      },
+      "status": "pass",
+      "output": {
+        "topic": "compiler errors",
+        "joke": "Why did the compiler cry? It got a compile-entine!"
+      },
+      "original_output": {
+        "topic": "compiler errors",
+        "joke": "Why did the compiler cry? It got a compile-entine!"
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 1,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 1,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a short joke about compiler errors"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a short joke about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            2805,
+            21646,
+            911,
+            19415,
+            5975,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 15,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a short joke about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Why did the compiler cry? It got a compile-entine!",
+          "server_input_tokens": 15,
+          "generated_tokens": 14,
+          "response_reencoded_tokens": 13,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:52:19.3659851Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 818817200,
+            "load_duration": 1092100,
+            "prompt_eval_count": 15,
+            "prompt_eval_duration": 57883000,
+            "eval_count": 14,
+            "eval_duration": 757528000
+          },
+          "elapsed_seconds": 0.8196658999986539,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "lg-chain-graph",
+      "output_cap": 64,
+      "seed": 1,
+      "input_index": 0,
+      "inputs": {
+        "topic": "cats"
+      },
+      "status": "pass",
+      "output": {
+        "topic": "cats",
+        "joke": "Why don't cats make good dancers? Because they always land on their feet... but that's not always the most graceful position!"
+      },
+      "original_output": {
+        "topic": "cats",
+        "joke": "Why don't cats make good dancers? Because they always land on their feet... but that's not always the most graceful position!"
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 1,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 1,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a short joke about cats"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a short joke about cats<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            2805,
+            21646,
+            911,
+            19423,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 14,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a short joke about cats<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Why don't cats make good dancers? Because they always land on their feet... but that's not always the most graceful position!",
+          "server_input_tokens": 14,
+          "generated_tokens": 27,
+          "response_reencoded_tokens": 26,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:52:21.8655543Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 1656578000,
+            "load_duration": 1057300,
+            "prompt_eval_count": 14,
+            "prompt_eval_duration": 61652000,
+            "eval_count": 27,
+            "eval_duration": 1591753000
+          },
+          "elapsed_seconds": 1.6578840000001946,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "lg-chain-graph",
+      "output_cap": 64,
+      "seed": 1,
+      "input_index": 1,
+      "inputs": {
+        "topic": "compiler errors"
+      },
+      "status": "pass",
+      "output": {
+        "topic": "compiler errors",
+        "joke": "Why did the compiler cry? It got a compile-entine!"
+      },
+      "original_output": {
+        "topic": "compiler errors",
+        "joke": "Why did the compiler cry? It got a compile-entine!"
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 1,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 1,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a short joke about compiler errors"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a short joke about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            2805,
+            21646,
+            911,
+            19415,
+            5975,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 15,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a short joke about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Why did the compiler cry? It got a compile-entine!",
+          "server_input_tokens": 15,
+          "generated_tokens": 14,
+          "response_reencoded_tokens": 13,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:52:24.3909574Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 826800200,
+            "load_duration": 1717300,
+            "prompt_eval_count": 15,
+            "prompt_eval_duration": 59811000,
+            "eval_count": 14,
+            "eval_duration": 763346000
+          },
+          "elapsed_seconds": 0.8533122000008007,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "lg-chain-functional",
+      "output_cap": 24,
+      "seed": 1,
+      "input_index": 0,
+      "inputs": {
+        "topic": "cats"
+      },
+      "status": "pass",
+      "output": "Because they always land on their feet... but that's not always the most... FOURFOOT!",
+      "original_output": "Because they always land on their feet... but that's not always the most... FOURFOOT!",
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 3,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 3,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a short joke about cats"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a short joke about cats<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            2805,
+            21646,
+            911,
+            19423,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 14,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a short joke about cats<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Why don't cats make good dancers? Because they always land on their feet... but that's not always the most graceful",
+          "server_input_tokens": 14,
+          "generated_tokens": 24,
+          "response_reencoded_tokens": 24,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:52:26.7189045Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 1452623600,
+            "load_duration": 1563600,
+            "prompt_eval_count": 14,
+            "prompt_eval_duration": 62503000,
+            "eval_count": 24,
+            "eval_duration": 1386794000
+          },
+          "elapsed_seconds": 1.4668658999980835,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 2,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Make this joke funnier by adding wordplay: Why don't cats make good dancers? Because they always land on their feet... but that's not always the most graceful"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why don't cats make good dancers? Because they always land on their feet... but that's not always the most graceful<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            8078,
+            419,
+            21646,
+            2464,
+            88983,
+            553,
+            7842,
+            3409,
+            1363,
+            25,
+            8429,
+            1513,
+            944,
+            19423,
+            1281,
+            1661,
+            60483,
+            30,
+            9211,
+            807,
+            2677,
+            4268,
+            389,
+            862,
+            7541,
+            1112,
+            714,
+            429,
+            594,
+            537,
+            2677,
+            279,
+            1429,
+            77362,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 42,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why don't cats make good dancers? Because they always land on their feet... but that's not always the most graceful<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Why don't cats make good dancers? Because they always land on their feet... but that's not always the most...",
+          "server_input_tokens": 42,
+          "generated_tokens": 24,
+          "response_reencoded_tokens": 24,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:52:28.2495006Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 1506169100,
+            "load_duration": 1826600,
+            "prompt_eval_count": 42,
+            "prompt_eval_duration": 95165000,
+            "eval_count": 24,
+            "eval_duration": 1406579000
+          },
+          "elapsed_seconds": 1.5296044999995502,
+          "source_actual_attempt": 2,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 3,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Add a surprising twist to this joke: Why don't cats make good dancers? Because they always land on their feet... but that's not always the most..."
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nAdd a surprising twist to this joke: Why don't cats make good dancers? Because they always land on their feet... but that's not always the most...<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            2212,
+            264,
+            14861,
+            26646,
+            311,
+            419,
+            21646,
+            25,
+            8429,
+            1513,
+            944,
+            19423,
+            1281,
+            1661,
+            60483,
+            30,
+            9211,
+            807,
+            2677,
+            4268,
+            389,
+            862,
+            7541,
+            1112,
+            714,
+            429,
+            594,
+            537,
+            2677,
+            279,
+            1429,
+            1112,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 40,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nAdd a surprising twist to this joke: Why don't cats make good dancers? Because they always land on their feet... but that's not always the most...<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Because they always land on their feet... but that's not always the most... FOURFOOT!",
+          "server_input_tokens": 40,
+          "generated_tokens": 21,
+          "response_reencoded_tokens": 20,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:52:29.5839851Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 1316152600,
+            "load_duration": 1726600,
+            "prompt_eval_count": 40,
+            "prompt_eval_duration": 96839000,
+            "eval_count": 21,
+            "eval_duration": 1214685000
+          },
+          "elapsed_seconds": 1.3338742000014463,
+          "source_actual_attempt": 3,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "lg-chain-functional",
+      "output_cap": 24,
+      "seed": 1,
+      "input_index": 1,
+      "inputs": {
+        "topic": "compiler errors"
+      },
+      "status": "pass",
+      "output": "Why did the compiler cry? It got a compile-entine! Now that's a sour-sweet day! \n\nExplanation",
+      "original_output": "Why did the compiler cry? It got a compile-entine! Now that's a sour-sweet day! \n\nExplanation",
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 3,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 3,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a short joke about compiler errors"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a short joke about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            2805,
+            21646,
+            911,
+            19415,
+            5975,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 15,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a short joke about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Why did the compiler cry? It got a compile-entine!",
+          "server_input_tokens": 15,
+          "generated_tokens": 14,
+          "response_reencoded_tokens": 13,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:52:34.7283706Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 877013600,
+            "load_duration": 1534600,
+            "prompt_eval_count": 15,
+            "prompt_eval_duration": 64099999,
+            "eval_count": 14,
+            "eval_duration": 807667000
+          },
+          "elapsed_seconds": 0.878499999998894,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 2,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Make this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            8078,
+            419,
+            21646,
+            2464,
+            88983,
+            553,
+            7842,
+            3409,
+            1363,
+            25,
+            8429,
+            1521,
+            279,
+            19415,
+            15729,
+            30,
+            1084,
+            2684,
+            264,
+            19192,
+            12,
+            26872,
+            0,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 31,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Why did the compiler cry? It got a compile-entine! Now that's a sour sweet day!",
+          "server_input_tokens": 31,
+          "generated_tokens": 22,
+          "response_reencoded_tokens": 21,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:52:36.1041232Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 1373629000,
+            "load_duration": 1620000,
+            "prompt_eval_count": 31,
+            "prompt_eval_duration": 60371000,
+            "eval_count": 22,
+            "eval_duration": 1309971000
+          },
+          "elapsed_seconds": 1.3751313000029768,
+          "source_actual_attempt": 2,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 3,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Add a surprising twist to this joke: Why did the compiler cry? It got a compile-entine! Now that's a sour sweet day!"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nAdd a surprising twist to this joke: Why did the compiler cry? It got a compile-entine! Now that's a sour sweet day!<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            2212,
+            264,
+            14861,
+            26646,
+            311,
+            419,
+            21646,
+            25,
+            8429,
+            1521,
+            279,
+            19415,
+            15729,
+            30,
+            1084,
+            2684,
+            264,
+            19192,
+            12,
+            26872,
+            0,
+            4695,
+            429,
+            594,
+            264,
+            20282,
+            10226,
+            1899,
+            0,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 37,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nAdd a surprising twist to this joke: Why did the compiler cry? It got a compile-entine! Now that's a sour sweet day!<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Why did the compiler cry? It got a compile-entine! Now that's a sour-sweet day! \n\nExplanation",
+          "server_input_tokens": 37,
+          "generated_tokens": 24,
+          "response_reencoded_tokens": 24,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:52:37.6639067Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 1537330200,
+            "load_duration": 2049300,
+            "prompt_eval_count": 37,
+            "prompt_eval_duration": 66379000,
+            "eval_count": 24,
+            "eval_duration": 1465666000
+          },
+          "elapsed_seconds": 1.5587496000007377,
+          "source_actual_attempt": 3,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "lg-chain-functional",
+      "output_cap": 64,
+      "seed": 1,
+      "input_index": 0,
+      "inputs": {
+        "topic": "cats"
+      },
+      "status": "pass",
+      "output": "Because they always land on their feet... but that's not always the most *fluffy* graceful position!",
+      "original_output": "Because they always land on their feet... but that's not always the most *fluffy* graceful position!",
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 3,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 3,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a short joke about cats"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a short joke about cats<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            2805,
+            21646,
+            911,
+            19423,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 14,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a short joke about cats<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Why don't cats make good dancers? Because they always land on their feet... but that's not always the most graceful position!",
+          "server_input_tokens": 14,
+          "generated_tokens": 27,
+          "response_reencoded_tokens": 26,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:52:43.0137851Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 1647792200,
+            "load_duration": 1584100,
+            "prompt_eval_count": 14,
+            "prompt_eval_duration": 60429000,
+            "eval_count": 27,
+            "eval_duration": 1583530000
+          },
+          "elapsed_seconds": 1.649034699999902,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 2,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Make this joke funnier by adding wordplay: Why don't cats make good dancers? Because they always land on their feet... but that's not always the most graceful position!"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why don't cats make good dancers? Because they always land on their feet... but that's not always the most graceful position!<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            8078,
+            419,
+            21646,
+            2464,
+            88983,
+            553,
+            7842,
+            3409,
+            1363,
+            25,
+            8429,
+            1513,
+            944,
+            19423,
+            1281,
+            1661,
+            60483,
+            30,
+            9211,
+            807,
+            2677,
+            4268,
+            389,
+            862,
+            7541,
+            1112,
+            714,
+            429,
+            594,
+            537,
+            2677,
+            279,
+            1429,
+            77362,
+            2309,
+            0,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 44,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why don't cats make good dancers? Because they always land on their feet... but that's not always the most graceful position!<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Why don't cats make good dancers? Because they always land on their feet... but that's not always the most... *fluffy* graceful position!",
+          "server_input_tokens": 44,
+          "generated_tokens": 32,
+          "response_reencoded_tokens": 31,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:52:45.0680742Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 2052737900,
+            "load_duration": 2041700,
+            "prompt_eval_count": 44,
+            "prompt_eval_duration": 131198000,
+            "eval_count": 32,
+            "eval_duration": 1916772000
+          },
+          "elapsed_seconds": 2.053625299999112,
+          "source_actual_attempt": 2,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 3,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Add a surprising twist to this joke: Why don't cats make good dancers? Because they always land on their feet... but that's not always the most... *fluffy* graceful position!"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nAdd a surprising twist to this joke: Why don't cats make good dancers? Because they always land on their feet... but that's not always the most... *fluffy* graceful position!<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            2212,
+            264,
+            14861,
+            26646,
+            311,
+            419,
+            21646,
+            25,
+            8429,
+            1513,
+            944,
+            19423,
+            1281,
+            1661,
+            60483,
+            30,
+            9211,
+            807,
+            2677,
+            4268,
+            389,
+            862,
+            7541,
+            1112,
+            714,
+            429,
+            594,
+            537,
+            2677,
+            279,
+            1429,
+            1112,
+            353,
+            1489,
+            29877,
+            9,
+            77362,
+            2309,
+            0,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 47,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nAdd a surprising twist to this joke: Why don't cats make good dancers? Because they always land on their feet... but that's not always the most... *fluffy* graceful position!<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Because they always land on their feet... but that's not always the most *fluffy* graceful position!",
+          "server_input_tokens": 47,
+          "generated_tokens": 23,
+          "response_reencoded_tokens": 22,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:52:46.5941894Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 1523427700,
+            "load_duration": 2684400,
+            "prompt_eval_count": 47,
+            "prompt_eval_duration": 196101000,
+            "eval_count": 23,
+            "eval_duration": 1320678000
+          },
+          "elapsed_seconds": 1.5244944999976724,
+          "source_actual_attempt": 3,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "lg-chain-functional",
+      "output_cap": 64,
+      "seed": 1,
+      "input_index": 1,
+      "inputs": {
+        "topic": "compiler errors"
+      },
+      "status": "pass",
+      "output": "Why did the compiler cry? It got a compile-entine! Now that's a sour-sweet day! \n\nExplanation: \"Compile-entine\" is a playful pun on \"Valentine's Day,\" which is a sweet holiday. However, \"sour\" is added to create a surprising twist, as \"s",
+      "original_output": "Why did the compiler cry? It got a compile-entine! Now that's a sour-sweet day! \n\nExplanation: \"Compile-entine\" is a playful pun on \"Valentine's Day,\" which is a sweet holiday. However, \"sour\" is added to create a surprising twist, as \"s",
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 3,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 3,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a short joke about compiler errors"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a short joke about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            2805,
+            21646,
+            911,
+            19415,
+            5975,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 15,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a short joke about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Why did the compiler cry? It got a compile-entine!",
+          "server_input_tokens": 15,
+          "generated_tokens": 14,
+          "response_reencoded_tokens": 13,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:52:52.3176322Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 835687900,
+            "load_duration": 1065000,
+            "prompt_eval_count": 15,
+            "prompt_eval_duration": 61851000,
+            "eval_count": 14,
+            "eval_duration": 769799000
+          },
+          "elapsed_seconds": 0.8370686000016576,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 2,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Make this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            8078,
+            419,
+            21646,
+            2464,
+            88983,
+            553,
+            7842,
+            3409,
+            1363,
+            25,
+            8429,
+            1521,
+            279,
+            19415,
+            15729,
+            30,
+            1084,
+            2684,
+            264,
+            19192,
+            12,
+            26872,
+            0,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 31,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Why did the compiler cry? It got a compile-entine! Now that's a sour sweet day!",
+          "server_input_tokens": 31,
+          "generated_tokens": 22,
+          "response_reencoded_tokens": 21,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:52:53.6777154Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 1358009900,
+            "load_duration": 1581800,
+            "prompt_eval_count": 31,
+            "prompt_eval_duration": 60592000,
+            "eval_count": 22,
+            "eval_duration": 1293717000
+          },
+          "elapsed_seconds": 1.3591730000007374,
+          "source_actual_attempt": 2,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 3,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Add a surprising twist to this joke: Why did the compiler cry? It got a compile-entine! Now that's a sour sweet day!"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nAdd a surprising twist to this joke: Why did the compiler cry? It got a compile-entine! Now that's a sour sweet day!<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            2212,
+            264,
+            14861,
+            26646,
+            311,
+            419,
+            21646,
+            25,
+            8429,
+            1521,
+            279,
+            19415,
+            15729,
+            30,
+            1084,
+            2684,
+            264,
+            19192,
+            12,
+            26872,
+            0,
+            4695,
+            429,
+            594,
+            264,
+            20282,
+            10226,
+            1899,
+            0,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 37,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nAdd a surprising twist to this joke: Why did the compiler cry? It got a compile-entine! Now that's a sour sweet day!<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Why did the compiler cry? It got a compile-entine! Now that's a sour-sweet day! \n\nExplanation: \"Compile-entine\" is a playful pun on \"Valentine's Day,\" which is a sweet holiday. However, \"sour\" is added to create a surprising twist, as \"s",
+          "server_input_tokens": 37,
+          "generated_tokens": 64,
+          "response_reencoded_tokens": 64,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:52:57.4636663Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 3784381300,
+            "load_duration": 1597100,
+            "prompt_eval_count": 37,
+            "prompt_eval_duration": 58376000,
+            "eval_count": 64,
+            "eval_duration": 3721708000
+          },
+          "elapsed_seconds": 3.7861762000029557,
+          "source_actual_attempt": 3,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "lg-parallel-graph",
+      "output_cap": 24,
+      "seed": 1,
+      "input_index": 0,
+      "inputs": {
+        "topic": "cats"
+      },
+      "status": "pass",
+      "output": {
+        "topic": "cats",
+        "joke": "Why don't cats make good dancers?\n\nBecause they have no rhythm, and they prefer to purr to the beat!",
+        "story": "In the heart of a bustling city, there lived a peculiar cat named Whisker. Whisker was unlike any",
+        "poem": "In the quiet of the night, a cat doth play,\nA shadow on the floor, a silent sway.\nWith",
+        "combined_output": "Here's a story, joke, and poem about cats!\n\nSTORY:\nIn the heart of a bustling city, there lived a peculiar cat named Whisker. Whisker was unlike any\n\nJOKE:\nWhy don't cats make good dancers?\n\nBecause they have no rhythm, and they prefer to purr to the beat!\n\nPOEM:\nIn the quiet of the night, a cat doth play,\nA shadow on the floor, a silent sway.\nWith"
+      },
+      "original_output": {
+        "topic": "cats",
+        "joke": "Why don't cats make good dancers?\n\nBecause they have no rhythm, and they prefer to purr to the beat!",
+        "story": "In the heart of a bustling city, there lived a peculiar cat named Whisker. Whisker was unlike any",
+        "poem": "In the quiet of the night, a cat doth play,\nA shadow on the floor, a silent sway.\nWith",
+        "combined_output": "Here's a story, joke, and poem about cats!\n\nSTORY:\nIn the heart of a bustling city, there lived a peculiar cat named Whisker. Whisker was unlike any\n\nJOKE:\nWhy don't cats make good dancers?\n\nBecause they have no rhythm, and they prefer to purr to the beat!\n\nPOEM:\nIn the quiet of the night, a cat doth play,\nA shadow on the floor, a silent sway.\nWith"
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 3,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 3,
+        "all_original_calls_consumed": true,
+        "ordering": "independent parallel calls only"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a joke about cats"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a joke about cats<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            21646,
+            911,
+            19423,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 13,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a joke about cats<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Why don't cats make good dancers?\n\nBecause they have no rhythm, and they prefer to purr to the beat!",
+          "server_input_tokens": 13,
+          "generated_tokens": 24,
+          "response_reencoded_tokens": 24,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:53:04.698915Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 1400412700,
+            "load_duration": 2084700,
+            "prompt_eval_count": 13,
+            "prompt_eval_duration": 58979000,
+            "eval_count": 24,
+            "eval_duration": 1336346000
+          },
+          "elapsed_seconds": 1.4019922000006773,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 2,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a story about cats"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            3364,
+            911,
+            19423,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 13,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "In the heart of a bustling city, there lived a peculiar cat named Whisker. Whisker was unlike any",
+          "server_input_tokens": 13,
+          "generated_tokens": 24,
+          "response_reencoded_tokens": 24,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:53:06.1475965Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 1426903400,
+            "load_duration": 1255600,
+            "prompt_eval_count": 13,
+            "prompt_eval_duration": 115442000,
+            "eval_count": 24,
+            "eval_duration": 1308115000
+          },
+          "elapsed_seconds": 1.4487526999982947,
+          "source_actual_attempt": 2,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 3,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a poem about cats"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a poem about cats<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            32794,
+            911,
+            19423,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 13,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a poem about cats<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "In the quiet of the night, a cat doth play,\nA shadow on the floor, a silent sway.\nWith",
+          "server_input_tokens": 13,
+          "generated_tokens": 24,
+          "response_reencoded_tokens": 24,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:53:07.6421594Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 1472458400,
+            "load_duration": 1307800,
+            "prompt_eval_count": 13,
+            "prompt_eval_duration": 118165000,
+            "eval_count": 24,
+            "eval_duration": 1351288000
+          },
+          "elapsed_seconds": 1.494060900000477,
+          "source_actual_attempt": 3,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "lg-parallel-graph",
+      "output_cap": 24,
+      "seed": 1,
+      "input_index": 1,
+      "inputs": {
+        "topic": "compiler errors"
+      },
+      "status": "pass",
+      "output": {
+        "topic": "compiler errors",
+        "joke": "Sure, here's a joke about compiler errors:\n\nWhy did the compiler cry?\n\nBecause it had too many issues to handle",
+        "story": "In the heart of Silicon Valley, there was a small startup company called ByteCraft. The company was developing a revolutionary new",
+        "poem": "In the realm of code, where syntax sings,\nA compiler's eye, a watchful king,\nWith rules so strict",
+        "combined_output": "Here's a story, joke, and poem about compiler errors!\n\nSTORY:\nIn the heart of Silicon Valley, there was a small startup company called ByteCraft. The company was developing a revolutionary new\n\nJOKE:\nSure, here's a joke about compiler errors:\n\nWhy did the compiler cry?\n\nBecause it had too many issues to handle\n\nPOEM:\nIn the realm of code, where syntax sings,\nA compiler's eye, a watchful king,\nWith rules so strict"
+      },
+      "original_output": {
+        "topic": "compiler errors",
+        "joke": "Sure, here's a joke about compiler errors:\n\nWhy did the compiler cry?\n\nBecause it had too many issues to handle",
+        "story": "In the heart of Silicon Valley, there was a small startup company called ByteCraft. The company was developing a revolutionary new",
+        "poem": "In the realm of code, where syntax sings,\nA compiler's eye, a watchful king,\nWith rules so strict",
+        "combined_output": "Here's a story, joke, and poem about compiler errors!\n\nSTORY:\nIn the heart of Silicon Valley, there was a small startup company called ByteCraft. The company was developing a revolutionary new\n\nJOKE:\nSure, here's a joke about compiler errors:\n\nWhy did the compiler cry?\n\nBecause it had too many issues to handle\n\nPOEM:\nIn the realm of code, where syntax sings,\nA compiler's eye, a watchful king,\nWith rules so strict"
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 3,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 3,
+        "all_original_calls_consumed": true,
+        "ordering": "independent parallel calls only"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a joke about compiler errors"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a joke about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            21646,
+            911,
+            19415,
+            5975,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 14,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a joke about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Sure, here's a joke about compiler errors:\n\nWhy did the compiler cry?\n\nBecause it had too many issues to handle",
+          "server_input_tokens": 14,
+          "generated_tokens": 24,
+          "response_reencoded_tokens": 24,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:53:13.4783086Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 1389730900,
+            "load_duration": 1880000,
+            "prompt_eval_count": 14,
+            "prompt_eval_duration": 60117000,
+            "eval_count": 24,
+            "eval_duration": 1325314000
+          },
+          "elapsed_seconds": 1.3909143999990192,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 2,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a story about compiler errors"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a story about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            3364,
+            911,
+            19415,
+            5975,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 14,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a story about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "In the heart of Silicon Valley, there was a small startup company called ByteCraft. The company was developing a revolutionary new",
+          "server_input_tokens": 14,
+          "generated_tokens": 24,
+          "response_reencoded_tokens": 24,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:53:14.9851264Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 1483662500,
+            "load_duration": 1305100,
+            "prompt_eval_count": 14,
+            "prompt_eval_duration": 137461000,
+            "eval_count": 24,
+            "eval_duration": 1342512000
+          },
+          "elapsed_seconds": 1.5063462999969488,
+          "source_actual_attempt": 2,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 3,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a poem about compiler errors"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a poem about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            32794,
+            911,
+            19415,
+            5975,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 14,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a poem about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "In the realm of code, where syntax sings,\nA compiler's eye, a watchful king,\nWith rules so strict",
+          "server_input_tokens": 14,
+          "generated_tokens": 24,
+          "response_reencoded_tokens": 24,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:53:16.4441669Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 1446252400,
+            "load_duration": 1687700,
+            "prompt_eval_count": 14,
+            "prompt_eval_duration": 136176000,
+            "eval_count": 24,
+            "eval_duration": 1307105000
+          },
+          "elapsed_seconds": 1.4590095999992627,
+          "source_actual_attempt": 3,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "lg-parallel-graph",
+      "output_cap": 64,
+      "seed": 1,
+      "input_index": 0,
+      "inputs": {
+        "topic": "cats"
+      },
+      "status": "pass",
+      "output": {
+        "topic": "cats",
+        "joke": "Why don't cats make good dancers?\n\nBecause they have no rhythm, and they prefer to purr to the beat!",
+        "story": "In the heart of a bustling city, there lived a peculiar cat named Whisker. Whisker was unlike any other cat in the neighborhood. Instead of chasing mice or lounging in the sun, he spent his days exploring the rooftops and alleys, his fur a blend of midnight black and silver moonlight",
+        "poem": "In the quiet of the night, a cat doth play,\nA shadow on the floor, a silent sway.\nWith eyes like stars, and paws that softly tread,\nIt dances through the shadows, in the dark's sweet bed.\n\nIts fur a velvet cloak, a velvet cloak,\nSoft as the moon's ca",
+        "combined_output": "Here's a story, joke, and poem about cats!\n\nSTORY:\nIn the heart of a bustling city, there lived a peculiar cat named Whisker. Whisker was unlike any other cat in the neighborhood. Instead of chasing mice or lounging in the sun, he spent his days exploring the rooftops and alleys, his fur a blend of midnight black and silver moonlight\n\nJOKE:\nWhy don't cats make good dancers?\n\nBecause they have no rhythm, and they prefer to purr to the beat!\n\nPOEM:\nIn the quiet of the night, a cat doth play,\nA shadow on the floor, a silent sway.\nWith eyes like stars, and paws that softly tread,\nIt dances through the shadows, in the dark's sweet bed.\n\nIts fur a velvet cloak, a velvet cloak,\nSoft as the moon's ca"
+      },
+      "original_output": {
+        "topic": "cats",
+        "joke": "Why don't cats make good dancers?\n\nBecause they have no rhythm, and they prefer to purr to the beat!",
+        "story": "In the heart of a bustling city, there lived a peculiar cat named Whisker. Whisker was unlike any other cat in the neighborhood. Instead of chasing mice or lounging in the sun, he spent his days exploring the rooftops and alleys, his fur a blend of midnight black and silver moonlight",
+        "poem": "In the quiet of the night, a cat doth play,\nA shadow on the floor, a silent sway.\nWith eyes like stars, and paws that softly tread,\nIt dances through the shadows, in the dark's sweet bed.\n\nIts fur a velvet cloak, a velvet cloak,\nSoft as the moon's ca",
+        "combined_output": "Here's a story, joke, and poem about cats!\n\nSTORY:\nIn the heart of a bustling city, there lived a peculiar cat named Whisker. Whisker was unlike any other cat in the neighborhood. Instead of chasing mice or lounging in the sun, he spent his days exploring the rooftops and alleys, his fur a blend of midnight black and silver moonlight\n\nJOKE:\nWhy don't cats make good dancers?\n\nBecause they have no rhythm, and they prefer to purr to the beat!\n\nPOEM:\nIn the quiet of the night, a cat doth play,\nA shadow on the floor, a silent sway.\nWith eyes like stars, and paws that softly tread,\nIt dances through the shadows, in the dark's sweet bed.\n\nIts fur a velvet cloak, a velvet cloak,\nSoft as the moon's ca"
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 3,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 3,
+        "all_original_calls_consumed": true,
+        "ordering": "independent parallel calls only"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a joke about cats"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a joke about cats<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            21646,
+            911,
+            19423,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 13,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a joke about cats<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Why don't cats make good dancers?\n\nBecause they have no rhythm, and they prefer to purr to the beat!",
+          "server_input_tokens": 13,
+          "generated_tokens": 25,
+          "response_reencoded_tokens": 24,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:53:22.1803963Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 1412387200,
+            "load_duration": 4137200,
+            "prompt_eval_count": 13,
+            "prompt_eval_duration": 58205000,
+            "eval_count": 25,
+            "eval_duration": 1348322000
+          },
+          "elapsed_seconds": 1.4136918000003789,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 2,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a story about cats"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            3364,
+            911,
+            19423,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 13,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "In the heart of a bustling city, there lived a peculiar cat named Whisker. Whisker was unlike any other cat in the neighborhood. Instead of chasing mice or lounging in the sun, he spent his days exploring the rooftops and alleys, his fur a blend of midnight black and silver moonlight",
+          "server_input_tokens": 13,
+          "generated_tokens": 64,
+          "response_reencoded_tokens": 64,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:53:25.889635Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 3687661800,
+            "load_duration": 1728400,
+            "prompt_eval_count": 13,
+            "prompt_eval_duration": 114025000,
+            "eval_count": 64,
+            "eval_duration": 3570001000
+          },
+          "elapsed_seconds": 3.7092340999988664,
+          "source_actual_attempt": 2,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 3,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a poem about cats"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a poem about cats<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            32794,
+            911,
+            19423,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 13,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a poem about cats<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "In the quiet of the night, a cat doth play,\nA shadow on the floor, a silent sway.\nWith eyes like stars, and paws that softly tread,\nIt dances through the shadows, in the dark's sweet bed.\n\nIts fur a velvet cloak, a velvet cloak,\nSoft as the moon's ca",
+          "server_input_tokens": 13,
+          "generated_tokens": 64,
+          "response_reencoded_tokens": 64,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:53:29.6006356Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 3693296700,
+            "load_duration": 1255500,
+            "prompt_eval_count": 13,
+            "prompt_eval_duration": 117817000,
+            "eval_count": 64,
+            "eval_duration": 3572803000
+          },
+          "elapsed_seconds": 3.7109510000009323,
+          "source_actual_attempt": 3,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "lg-parallel-graph",
+      "output_cap": 64,
+      "seed": 1,
+      "input_index": 1,
+      "inputs": {
+        "topic": "compiler errors"
+      },
+      "status": "pass",
+      "output": {
+        "topic": "compiler errors",
+        "joke": "Sure, here's a joke about compiler errors:\n\nWhy did the compiler cry?\n\nBecause it had too many issues to handle (compile-ees)!",
+        "story": "In the heart of Silicon Valley, there was a small startup company called ByteCraft. The company was developing a revolutionary new programming language called SwiftFlow, which promised to make software development faster and more efficient. The team was a mix of young, ambitious developers and experienced engineers, all working tirelessly to bring their vision to life",
+        "poem": "In the realm of code, where syntax sings,\nA compiler's eye, a watchful king,\nWith rules so strict, it's hard to please,\nErrors abound, like whispers in the breeze.\n\nThere's a syntax error, a word out of place,\nA misspelled keyword, a typo's trace,\nIt",
+        "combined_output": "Here's a story, joke, and poem about compiler errors!\n\nSTORY:\nIn the heart of Silicon Valley, there was a small startup company called ByteCraft. The company was developing a revolutionary new programming language called SwiftFlow, which promised to make software development faster and more efficient. The team was a mix of young, ambitious developers and experienced engineers, all working tirelessly to bring their vision to life\n\nJOKE:\nSure, here's a joke about compiler errors:\n\nWhy did the compiler cry?\n\nBecause it had too many issues to handle (compile-ees)!\n\nPOEM:\nIn the realm of code, where syntax sings,\nA compiler's eye, a watchful king,\nWith rules so strict, it's hard to please,\nErrors abound, like whispers in the breeze.\n\nThere's a syntax error, a word out of place,\nA misspelled keyword, a typo's trace,\nIt"
+      },
+      "original_output": {
+        "topic": "compiler errors",
+        "joke": "Sure, here's a joke about compiler errors:\n\nWhy did the compiler cry?\n\nBecause it had too many issues to handle (compile-ees)!",
+        "story": "In the heart of Silicon Valley, there was a small startup company called ByteCraft. The company was developing a revolutionary new programming language called SwiftFlow, which promised to make software development faster and more efficient. The team was a mix of young, ambitious developers and experienced engineers, all working tirelessly to bring their vision to life",
+        "poem": "In the realm of code, where syntax sings,\nA compiler's eye, a watchful king,\nWith rules so strict, it's hard to please,\nErrors abound, like whispers in the breeze.\n\nThere's a syntax error, a word out of place,\nA misspelled keyword, a typo's trace,\nIt",
+        "combined_output": "Here's a story, joke, and poem about compiler errors!\n\nSTORY:\nIn the heart of Silicon Valley, there was a small startup company called ByteCraft. The company was developing a revolutionary new programming language called SwiftFlow, which promised to make software development faster and more efficient. The team was a mix of young, ambitious developers and experienced engineers, all working tirelessly to bring their vision to life\n\nJOKE:\nSure, here's a joke about compiler errors:\n\nWhy did the compiler cry?\n\nBecause it had too many issues to handle (compile-ees)!\n\nPOEM:\nIn the realm of code, where syntax sings,\nA compiler's eye, a watchful king,\nWith rules so strict, it's hard to please,\nErrors abound, like whispers in the breeze.\n\nThere's a syntax error, a word out of place,\nA misspelled keyword, a typo's trace,\nIt"
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 3,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 3,
+        "all_original_calls_consumed": true,
+        "ordering": "independent parallel calls only"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a joke about compiler errors"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a joke about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            21646,
+            911,
+            19415,
+            5975,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 14,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a joke about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Sure, here's a joke about compiler errors:\n\nWhy did the compiler cry?\n\nBecause it had too many issues to handle (compile-ees)!",
+          "server_input_tokens": 14,
+          "generated_tokens": 30,
+          "response_reencoded_tokens": 29,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:53:40.2929685Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 1719086800,
+            "load_duration": 1640400,
+            "prompt_eval_count": 14,
+            "prompt_eval_duration": 59186000,
+            "eval_count": 30,
+            "eval_duration": 1656421000
+          },
+          "elapsed_seconds": 1.7199327000016638,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 2,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a story about compiler errors"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a story about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            3364,
+            911,
+            19415,
+            5975,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 14,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a story about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "In the heart of Silicon Valley, there was a small startup company called ByteCraft. The company was developing a revolutionary new programming language called SwiftFlow, which promised to make software development faster and more efficient. The team was a mix of young, ambitious developers and experienced engineers, all working tirelessly to bring their vision to life",
+          "server_input_tokens": 14,
+          "generated_tokens": 64,
+          "response_reencoded_tokens": 64,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:53:44.1263728Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 3814200600,
+            "load_duration": 1325600,
+            "prompt_eval_count": 14,
+            "prompt_eval_duration": 136435000,
+            "eval_count": 64,
+            "eval_duration": 3675059000
+          },
+          "elapsed_seconds": 3.8348193999991054,
+          "source_actual_attempt": 2,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 3,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a poem about compiler errors"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a poem about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            32794,
+            911,
+            19415,
+            5975,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 14,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a poem about compiler errors<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "In the realm of code, where syntax sings,\nA compiler's eye, a watchful king,\nWith rules so strict, it's hard to please,\nErrors abound, like whispers in the breeze.\n\nThere's a syntax error, a word out of place,\nA misspelled keyword, a typo's trace,\nIt",
+          "server_input_tokens": 14,
+          "generated_tokens": 64,
+          "response_reencoded_tokens": 64,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:53:47.9359035Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 3786766400,
+            "load_duration": 1317600,
+            "prompt_eval_count": 14,
+            "prompt_eval_duration": 130388000,
+            "eval_count": 64,
+            "eval_duration": 3653508000
+          },
+          "elapsed_seconds": 3.8078509000006306,
+          "source_actual_attempt": 3,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "lg-routing-graph",
+      "output_cap": 24,
+      "seed": 1,
+      "input_index": 0,
+      "inputs": {
+        "input": "Write me a joke about cats"
+      },
+      "status": "pass",
+      "output": {
+        "input": "Write me a joke about cats",
+        "decision": "joke",
+        "output": "Why don't cats make good dancers?\n\nBecause they have no rhythm, and they prefer to purr to the beat!"
+      },
+      "original_output": {
+        "input": "Write me a joke about cats",
+        "decision": "joke",
+        "output": "Why don't cats make good dancers?\n\nBecause they have no rhythm, and they prefer to purr to the beat!"
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 2,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 2,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "system",
+              "content": "Route the input to story, joke, or poem based on the user's request."
+            },
+            {
+              "role": "user",
+              "content": "Write me a joke about cats"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>system\nRoute the input to story, joke, or poem based on the user's request.<|im_end|>\n<|im_start|>user\nWrite me a joke about cats<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            8948,
+            198,
+            4899,
+            279,
+            1946,
+            311,
+            3364,
+            11,
+            21646,
+            11,
+            476,
+            32794,
+            3118,
+            389,
+            279,
+            1196,
+            594,
+            1681,
+            13,
+            151645,
+            198,
+            151644,
+            872,
+            198,
+            7985,
+            752,
+            264,
+            21646,
+            911,
+            19423,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 36,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": {
+            "properties": {
+              "step": {
+                "default": null,
+                "description": "The next step in the routing process",
+                "enum": [
+                  "poem",
+                  "story",
+                  "joke"
+                ],
+                "title": "Step",
+                "type": "string"
+              }
+            },
+            "title": "Route",
+            "type": "object"
+          },
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>system\nRoute the input to story, joke, or poem based on the user's request.<|im_end|>\n<|im_start|>user\nWrite me a joke about cats<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            },
+            "format": {
+              "properties": {
+                "step": {
+                  "default": null,
+                  "description": "The next step in the routing process",
+                  "enum": [
+                    "poem",
+                    "story",
+                    "joke"
+                  ],
+                  "title": "Step",
+                  "type": "string"
+                }
+              },
+              "title": "Route",
+              "type": "object"
+            }
+          },
+          "status": "ok",
+          "response": "{ \"step\": \"joke\" }",
+          "server_input_tokens": 36,
+          "generated_tokens": 11,
+          "response_reencoded_tokens": 9,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:53:58.1578937Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 859913100,
+            "load_duration": 1694800,
+            "prompt_eval_count": 36,
+            "prompt_eval_duration": 160901000,
+            "eval_count": 11,
+            "eval_duration": 694574000
+          },
+          "elapsed_seconds": 0.8762380000007397,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 2,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write me a joke about cats"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite me a joke about cats<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            752,
+            264,
+            21646,
+            911,
+            19423,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 14,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite me a joke about cats<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Why don't cats make good dancers?\n\nBecause they have no rhythm, and they prefer to purr to the beat!",
+          "server_input_tokens": 14,
+          "generated_tokens": 24,
+          "response_reencoded_tokens": 24,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:53:59.5299506Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 1359316400,
+            "load_duration": 1243900,
+            "prompt_eval_count": 14,
+            "prompt_eval_duration": 56148000,
+            "eval_count": 24,
+            "eval_duration": 1299457000
+          },
+          "elapsed_seconds": 1.371362699999736,
+          "source_actual_attempt": 2,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "lg-routing-graph",
+      "output_cap": 24,
+      "seed": 1,
+      "input_index": 1,
+      "inputs": {
+        "input": "Write a short poem about compilers"
+      },
+      "status": "pass",
+      "output": {
+        "input": "Write a short poem about compilers",
+        "decision": "joke",
+        "output": "In the heart of code, a silent dance,\nWhere lines of text are transformed, transmuted.\nA compiler,"
+      },
+      "original_output": {
+        "input": "Write a short poem about compilers",
+        "decision": "joke",
+        "output": "In the heart of code, a silent dance,\nWhere lines of text are transformed, transmuted.\nA compiler,"
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 2,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 2,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "system",
+              "content": "Route the input to story, joke, or poem based on the user's request."
+            },
+            {
+              "role": "user",
+              "content": "Write a short poem about compilers"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>system\nRoute the input to story, joke, or poem based on the user's request.<|im_end|>\n<|im_start|>user\nWrite a short poem about compilers<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            8948,
+            198,
+            4899,
+            279,
+            1946,
+            311,
+            3364,
+            11,
+            21646,
+            11,
+            476,
+            32794,
+            3118,
+            389,
+            279,
+            1196,
+            594,
+            1681,
+            13,
+            151645,
+            198,
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            2805,
+            32794,
+            911,
+            87075,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 36,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": {
+            "properties": {
+              "step": {
+                "default": null,
+                "description": "The next step in the routing process",
+                "enum": [
+                  "poem",
+                  "story",
+                  "joke"
+                ],
+                "title": "Step",
+                "type": "string"
+              }
+            },
+            "title": "Route",
+            "type": "object"
+          },
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>system\nRoute the input to story, joke, or poem based on the user's request.<|im_end|>\n<|im_start|>user\nWrite a short poem about compilers<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            },
+            "format": {
+              "properties": {
+                "step": {
+                  "default": null,
+                  "description": "The next step in the routing process",
+                  "enum": [
+                    "poem",
+                    "story",
+                    "joke"
+                  ],
+                  "title": "Step",
+                  "type": "string"
+                }
+              },
+              "title": "Route",
+              "type": "object"
+            }
+          },
+          "status": "ok",
+          "response": "{ \"step\": \"joke\" }",
+          "server_input_tokens": 36,
+          "generated_tokens": 11,
+          "response_reencoded_tokens": 9,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:54:02.5720843Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 854736800,
+            "load_duration": 1504400,
+            "prompt_eval_count": 36,
+            "prompt_eval_duration": 164558000,
+            "eval_count": 11,
+            "eval_duration": 685952000
+          },
+          "elapsed_seconds": 0.866631500000949,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 2,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a short poem about compilers"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a short poem about compilers<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            2805,
+            32794,
+            911,
+            87075,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 14,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a short poem about compilers<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "In the heart of code, a silent dance,\nWhere lines of text are transformed, transmuted.\nA compiler,",
+          "server_input_tokens": 14,
+          "generated_tokens": 24,
+          "response_reencoded_tokens": 24,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:54:04.0845223Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 1511348800,
+            "load_duration": 1504100,
+            "prompt_eval_count": 14,
+            "prompt_eval_duration": 178474000,
+            "eval_count": 24,
+            "eval_duration": 1329566000
+          },
+          "elapsed_seconds": 1.51236919999792,
+          "source_actual_attempt": 2,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "lg-routing-graph",
+      "output_cap": 64,
+      "seed": 1,
+      "input_index": 0,
+      "inputs": {
+        "input": "Write me a joke about cats"
+      },
+      "status": "pass",
+      "output": {
+        "input": "Write me a joke about cats",
+        "decision": "joke",
+        "output": "Why don't cats make good dancers?\n\nBecause they have no rhythm, and they prefer to purr to the beat!"
+      },
+      "original_output": {
+        "input": "Write me a joke about cats",
+        "decision": "joke",
+        "output": "Why don't cats make good dancers?\n\nBecause they have no rhythm, and they prefer to purr to the beat!"
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 2,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 2,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "system",
+              "content": "Route the input to story, joke, or poem based on the user's request."
+            },
+            {
+              "role": "user",
+              "content": "Write me a joke about cats"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>system\nRoute the input to story, joke, or poem based on the user's request.<|im_end|>\n<|im_start|>user\nWrite me a joke about cats<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            8948,
+            198,
+            4899,
+            279,
+            1946,
+            311,
+            3364,
+            11,
+            21646,
+            11,
+            476,
+            32794,
+            3118,
+            389,
+            279,
+            1196,
+            594,
+            1681,
+            13,
+            151645,
+            198,
+            151644,
+            872,
+            198,
+            7985,
+            752,
+            264,
+            21646,
+            911,
+            19423,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 36,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": {
+            "properties": {
+              "step": {
+                "default": null,
+                "description": "The next step in the routing process",
+                "enum": [
+                  "poem",
+                  "story",
+                  "joke"
+                ],
+                "title": "Step",
+                "type": "string"
+              }
+            },
+            "title": "Route",
+            "type": "object"
+          },
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>system\nRoute the input to story, joke, or poem based on the user's request.<|im_end|>\n<|im_start|>user\nWrite me a joke about cats<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            },
+            "format": {
+              "properties": {
+                "step": {
+                  "default": null,
+                  "description": "The next step in the routing process",
+                  "enum": [
+                    "poem",
+                    "story",
+                    "joke"
+                  ],
+                  "title": "Step",
+                  "type": "string"
+                }
+              },
+              "title": "Route",
+              "type": "object"
+            }
+          },
+          "status": "ok",
+          "response": "{ \"step\": \"joke\" }",
+          "server_input_tokens": 36,
+          "generated_tokens": 11,
+          "response_reencoded_tokens": 9,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:54:07.2685737Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 864901000,
+            "load_duration": 1219500,
+            "prompt_eval_count": 36,
+            "prompt_eval_duration": 163874000,
+            "eval_count": 11,
+            "eval_duration": 697640000
+          },
+          "elapsed_seconds": 0.8886117000001832,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 2,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write me a joke about cats"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite me a joke about cats<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            752,
+            264,
+            21646,
+            911,
+            19423,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 14,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite me a joke about cats<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "Why don't cats make good dancers?\n\nBecause they have no rhythm, and they prefer to purr to the beat!",
+          "server_input_tokens": 14,
+          "generated_tokens": 25,
+          "response_reencoded_tokens": 24,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:54:08.6963185Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 1411482200,
+            "load_duration": 1381300,
+            "prompt_eval_count": 14,
+            "prompt_eval_duration": 57835000,
+            "eval_count": 25,
+            "eval_duration": 1350229000
+          },
+          "elapsed_seconds": 1.4271286000002874,
+          "source_actual_attempt": 2,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "lg-routing-graph",
+      "output_cap": 64,
+      "seed": 1,
+      "input_index": 1,
+      "inputs": {
+        "input": "Write a short poem about compilers"
+      },
+      "status": "pass",
+      "output": {
+        "input": "Write a short poem about compilers",
+        "decision": "joke",
+        "output": "In the heart of code, a silent dance,\nWhere lines of text are transformed, transmuted.\nA compiler, a wizard of sorts,\nTransforms the syntax, cleans the dust.\n\nFrom human's messy code, it weaves,\nA machine's language, clear and precise.\nA bridge of understanding, it builds"
+      },
+      "original_output": {
+        "input": "Write a short poem about compilers",
+        "decision": "joke",
+        "output": "In the heart of code, a silent dance,\nWhere lines of text are transformed, transmuted.\nA compiler, a wizard of sorts,\nTransforms the syntax, cleans the dust.\n\nFrom human's messy code, it weaves,\nA machine's language, clear and precise.\nA bridge of understanding, it builds"
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 2,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 2,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "system",
+              "content": "Route the input to story, joke, or poem based on the user's request."
+            },
+            {
+              "role": "user",
+              "content": "Write a short poem about compilers"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>system\nRoute the input to story, joke, or poem based on the user's request.<|im_end|>\n<|im_start|>user\nWrite a short poem about compilers<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            8948,
+            198,
+            4899,
+            279,
+            1946,
+            311,
+            3364,
+            11,
+            21646,
+            11,
+            476,
+            32794,
+            3118,
+            389,
+            279,
+            1196,
+            594,
+            1681,
+            13,
+            151645,
+            198,
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            2805,
+            32794,
+            911,
+            87075,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 36,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": {
+            "properties": {
+              "step": {
+                "default": null,
+                "description": "The next step in the routing process",
+                "enum": [
+                  "poem",
+                  "story",
+                  "joke"
+                ],
+                "title": "Step",
+                "type": "string"
+              }
+            },
+            "title": "Route",
+            "type": "object"
+          },
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>system\nRoute the input to story, joke, or poem based on the user's request.<|im_end|>\n<|im_start|>user\nWrite a short poem about compilers<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            },
+            "format": {
+              "properties": {
+                "step": {
+                  "default": null,
+                  "description": "The next step in the routing process",
+                  "enum": [
+                    "poem",
+                    "story",
+                    "joke"
+                  ],
+                  "title": "Step",
+                  "type": "string"
+                }
+              },
+              "title": "Route",
+              "type": "object"
+            }
+          },
+          "status": "ok",
+          "response": "{ \"step\": \"joke\" }",
+          "server_input_tokens": 36,
+          "generated_tokens": 11,
+          "response_reencoded_tokens": 9,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:54:11.777066Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 856451500,
+            "load_duration": 1008200,
+            "prompt_eval_count": 36,
+            "prompt_eval_duration": 163148000,
+            "eval_count": 11,
+            "eval_duration": 689976000
+          },
+          "elapsed_seconds": 0.8577081000003091,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        },
+        {
+          "attempt": 2,
+          "messages": [
+            {
+              "role": "user",
+              "content": "Write a short poem about compilers"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>user\nWrite a short poem about compilers<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            872,
+            198,
+            7985,
+            264,
+            2805,
+            32794,
+            911,
+            87075,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 14,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>user\nWrite a short poem about compilers<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "In the heart of code, a silent dance,\nWhere lines of text are transformed, transmuted.\nA compiler, a wizard of sorts,\nTransforms the syntax, cleans the dust.\n\nFrom human's messy code, it weaves,\nA machine's language, clear and precise.\nA bridge of understanding, it builds",
+          "server_input_tokens": 14,
+          "generated_tokens": 64,
+          "response_reencoded_tokens": 64,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:54:15.7687948Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 3969554500,
+            "load_duration": 1790500,
+            "prompt_eval_count": 14,
+            "prompt_eval_duration": 178722000,
+            "eval_count": 64,
+            "eval_duration": 3785368000
+          },
+          "elapsed_seconds": 3.991153899998608,
+          "source_actual_attempt": 2,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "pf-basic",
+      "output_cap": 24,
+      "seed": 1,
+      "input_index": 0,
+      "inputs": {
+        "text": "Python"
+      },
+      "status": "pass",
+      "output": {
+        "output": " The program should take the user's name as input and then display a personalized greeting message. The program should also handle the"
+      },
+      "original_output": {
+        "output": " The program should take the user's name as input and then display a personalized greeting message. The program should also handle the"
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 1,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 1,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": null,
+          "completion_prompt": "Write a simple Python program that displays the greeting message.",
+          "rendered_request": "Write a simple Python program that displays the greeting message.",
+          "request_token_ids": [
+            7985,
+            264,
+            4285,
+            13027,
+            2025,
+            429,
+            18689,
+            279,
+            42113,
+            1943,
+            13
+          ],
+          "tokenizer_input_tokens": 11,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "Write a simple Python program that displays the greeting message.",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": " The program should take the user's name as input and then display a personalized greeting message. The program should also handle the",
+          "server_input_tokens": 11,
+          "generated_tokens": 24,
+          "response_reencoded_tokens": 24,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:54:23.8509235Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 1473289600,
+            "load_duration": 1661900,
+            "prompt_eval_count": 11,
+            "prompt_eval_duration": 152888000,
+            "eval_count": 24,
+            "eval_duration": 1317130000
+          },
+          "elapsed_seconds": 1.4891877000009117,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "pf-basic",
+      "output_cap": 24,
+      "seed": 1,
+      "input_index": 1,
+      "inputs": {
+        "text": "JavaScript"
+      },
+      "status": "pass",
+      "output": {
+        "output": " Here's a simple JavaScript program that displays a greeting message:\n\n```javascript\n// Greeting message\nconst greetingMessage ="
+      },
+      "original_output": {
+        "output": " Here's a simple JavaScript program that displays a greeting message:\n\n```javascript\n// Greeting message\nconst greetingMessage ="
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 1,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 1,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": null,
+          "completion_prompt": "Write a simple JavaScript program that displays the greeting message.",
+          "rendered_request": "Write a simple JavaScript program that displays the greeting message.",
+          "request_token_ids": [
+            7985,
+            264,
+            4285,
+            12914,
+            2025,
+            429,
+            18689,
+            279,
+            42113,
+            1943,
+            13
+          ],
+          "tokenizer_input_tokens": 11,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "Write a simple JavaScript program that displays the greeting message.",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": " Here's a simple JavaScript program that displays a greeting message:\n\n```javascript\n// Greeting message\nconst greetingMessage =",
+          "server_input_tokens": 11,
+          "generated_tokens": 24,
+          "response_reencoded_tokens": 24,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:54:26.7912545Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 1462215500,
+            "load_duration": 1001700,
+            "prompt_eval_count": 11,
+            "prompt_eval_duration": 114929000,
+            "eval_count": 24,
+            "eval_duration": 1344575000
+          },
+          "elapsed_seconds": 1.4775664000007964,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "pf-basic",
+      "output_cap": 64,
+      "seed": 1,
+      "input_index": 0,
+      "inputs": {
+        "text": "Python"
+      },
+      "status": "pass",
+      "output": {
+        "output": " The program should also include a function that takes a string as input and returns the string in reverse. The program should use a loop to display the greeting message 5 times, and the function should be called within the loop to reverse the greeting message before displaying it. Additionally, the program should include a try-except block"
+      },
+      "original_output": {
+        "output": " The program should also include a function that takes a string as input and returns the string in reverse. The program should use a loop to display the greeting message 5 times, and the function should be called within the loop to reverse the greeting message before displaying it. Additionally, the program should include a try-except block"
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 1,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 1,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": null,
+          "completion_prompt": "Write a simple Python program that displays the greeting message.",
+          "rendered_request": "Write a simple Python program that displays the greeting message.",
+          "request_token_ids": [
+            7985,
+            264,
+            4285,
+            13027,
+            2025,
+            429,
+            18689,
+            279,
+            42113,
+            1943,
+            13
+          ],
+          "tokenizer_input_tokens": 11,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "Write a simple Python program that displays the greeting message.",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": " The program should also include a function that takes a string as input and returns the string in reverse. The program should use a loop to display the greeting message 5 times, and the function should be called within the loop to reverse the greeting message before displaying it. Additionally, the program should include a try-except block",
+          "server_input_tokens": 11,
+          "generated_tokens": 64,
+          "response_reencoded_tokens": 64,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:54:31.9846011Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 3706588400,
+            "load_duration": 1272700,
+            "prompt_eval_count": 11,
+            "prompt_eval_duration": 113794000,
+            "eval_count": 64,
+            "eval_duration": 3589862000
+          },
+          "elapsed_seconds": 3.7219608000013977,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "pf-basic",
+      "output_cap": 64,
+      "seed": 1,
+      "input_index": 1,
+      "inputs": {
+        "text": "JavaScript"
+      },
+      "status": "pass",
+      "output": {
+        "output": " Here's a simple JavaScript program that displays a greeting message:\n\n```javascript\n// Greeting message\nconst greetingMessage = \"Hello, World!\";\n\n// Display the greeting message\nconsole.log(greetingMessage);\n```\n\nThis program defines a constant variable `greetingMessage` with the value `\"Hello, World!\"`."
+      },
+      "original_output": {
+        "output": " Here's a simple JavaScript program that displays a greeting message:\n\n```javascript\n// Greeting message\nconst greetingMessage = \"Hello, World!\";\n\n// Display the greeting message\nconsole.log(greetingMessage);\n```\n\nThis program defines a constant variable `greetingMessage` with the value `\"Hello, World!\"`."
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 1,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 1,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": null,
+          "completion_prompt": "Write a simple JavaScript program that displays the greeting message.",
+          "rendered_request": "Write a simple JavaScript program that displays the greeting message.",
+          "request_token_ids": [
+            7985,
+            264,
+            4285,
+            12914,
+            2025,
+            429,
+            18689,
+            279,
+            42113,
+            1943,
+            13
+          ],
+          "tokenizer_input_tokens": 11,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "Write a simple JavaScript program that displays the greeting message.",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": " Here's a simple JavaScript program that displays a greeting message:\n\n```javascript\n// Greeting message\nconst greetingMessage = \"Hello, World!\";\n\n// Display the greeting message\nconsole.log(greetingMessage);\n```\n\nThis program defines a constant variable `greetingMessage` with the value `\"Hello, World!\"`.",
+          "server_input_tokens": 11,
+          "generated_tokens": 64,
+          "response_reencoded_tokens": 64,
+          "done_reason": "length",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:54:39.8577262Z",
+            "done": true,
+            "done_reason": "length",
+            "total_duration": 3816053300,
+            "load_duration": 1095200,
+            "prompt_eval_count": 11,
+            "prompt_eval_duration": 114498000,
+            "eval_count": 64,
+            "eval_duration": 3699243000
+          },
+          "elapsed_seconds": 3.8187166000025172,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "pf-ner",
+      "output_cap": 24,
+      "seed": 1,
+      "input_index": 0,
+      "inputs": {
+        "entity_type": "job title",
+        "text": "Maxime is a data scientist at Auto Dataset, and his wife is a finance manager in the same company."
+      },
+      "status": "pass",
+      "output": {
+        "entities": [
+          "data scientist",
+          "finance manager"
+        ]
+      },
+      "original_output": {
+        "entities": [
+          "data scientist",
+          "finance manager"
+        ]
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 1,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 1,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "system",
+              "content": "Your task is to find entities of certain type from the given text content.\nIf there're multiple entities, please return them all with comma separated, e.g. \"entity1, entity2, entity3\".\nYou should only return the entity list, nothing else.\nIf there's no such entity, please return \"None\"."
+            },
+            {
+              "role": "user",
+              "content": "Entity type: job title\nText content: Maxime is a data scientist at Auto Dataset, and his wife is a finance manager in the same company.\nEntities:"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>system\nYour task is to find entities of certain type from the given text content.\nIf there're multiple entities, please return them all with comma separated, e.g. \"entity1, entity2, entity3\".\nYou should only return the entity list, nothing else.\nIf there's no such entity, please return \"None\".<|im_end|>\n<|im_start|>user\nEntity type: job title\nText content: Maxime is a data scientist at Auto Dataset, and his wife is a finance manager in the same company.\nEntities:<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            8948,
+            198,
+            7771,
+            3383,
+            374,
+            311,
+            1477,
+            14744,
+            315,
+            3654,
+            943,
+            504,
+            279,
+            2661,
+            1467,
+            2213,
+            624,
+            2679,
+            1052,
+            2299,
+            5248,
+            14744,
+            11,
+            4486,
+            470,
+            1105,
+            678,
+            448,
+            31683,
+            18663,
+            11,
+            384,
+            1302,
+            13,
+            330,
+            2996,
+            16,
+            11,
+            5387,
+            17,
+            11,
+            5387,
+            18,
+            22956,
+            2610,
+            1265,
+            1172,
+            470,
+            279,
+            5387,
+            1140,
+            11,
+            4302,
+            770,
+            624,
+            2679,
+            1052,
+            594,
+            902,
+            1741,
+            5387,
+            11,
+            4486,
+            470,
+            330,
+            4064,
+            3263,
+            151645,
+            198,
+            151644,
+            872,
+            198,
+            3030,
+            943,
+            25,
+            2618,
+            2265,
+            198,
+            1178,
+            2213,
+            25,
+            7487,
+            545,
+            374,
+            264,
+            821,
+            27468,
+            518,
+            8979,
+            39183,
+            11,
+            323,
+            806,
+            7403,
+            374,
+            264,
+            17017,
+            6645,
+            304,
+            279,
+            1852,
+            2813,
+            624,
+            15828,
+            25,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 111,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>system\nYour task is to find entities of certain type from the given text content.\nIf there're multiple entities, please return them all with comma separated, e.g. \"entity1, entity2, entity3\".\nYou should only return the entity list, nothing else.\nIf there's no such entity, please return \"None\".<|im_end|>\n<|im_start|>user\nEntity type: job title\nText content: Maxime is a data scientist at Auto Dataset, and his wife is a finance manager in the same company.\nEntities:<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "data scientist, finance manager",
+          "server_input_tokens": 111,
+          "generated_tokens": 6,
+          "response_reencoded_tokens": 5,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:54:44.5971366Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 717599000,
+            "load_duration": 1244200,
+            "prompt_eval_count": 111,
+            "prompt_eval_duration": 422016000,
+            "eval_count": 6,
+            "eval_duration": 291003000
+          },
+          "elapsed_seconds": 0.7329101000032097,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "pf-ner",
+      "output_cap": 24,
+      "seed": 1,
+      "input_index": 1,
+      "inputs": {
+        "entity_type": "phone number",
+        "text": "The phone number (321) 654-0987 is no longer in service"
+      },
+      "status": "pass",
+      "output": {
+        "entities": [
+          "321",
+          "654",
+          "0987"
+        ]
+      },
+      "original_output": {
+        "entities": [
+          "321",
+          "654",
+          "0987"
+        ]
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 1,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 1,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "system",
+              "content": "Your task is to find entities of certain type from the given text content.\nIf there're multiple entities, please return them all with comma separated, e.g. \"entity1, entity2, entity3\".\nYou should only return the entity list, nothing else.\nIf there's no such entity, please return \"None\"."
+            },
+            {
+              "role": "user",
+              "content": "Entity type: phone number\nText content: The phone number (321) 654-0987 is no longer in service\nEntities:"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>system\nYour task is to find entities of certain type from the given text content.\nIf there're multiple entities, please return them all with comma separated, e.g. \"entity1, entity2, entity3\".\nYou should only return the entity list, nothing else.\nIf there's no such entity, please return \"None\".<|im_end|>\n<|im_start|>user\nEntity type: phone number\nText content: The phone number (321) 654-0987 is no longer in service\nEntities:<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            8948,
+            198,
+            7771,
+            3383,
+            374,
+            311,
+            1477,
+            14744,
+            315,
+            3654,
+            943,
+            504,
+            279,
+            2661,
+            1467,
+            2213,
+            624,
+            2679,
+            1052,
+            2299,
+            5248,
+            14744,
+            11,
+            4486,
+            470,
+            1105,
+            678,
+            448,
+            31683,
+            18663,
+            11,
+            384,
+            1302,
+            13,
+            330,
+            2996,
+            16,
+            11,
+            5387,
+            17,
+            11,
+            5387,
+            18,
+            22956,
+            2610,
+            1265,
+            1172,
+            470,
+            279,
+            5387,
+            1140,
+            11,
+            4302,
+            770,
+            624,
+            2679,
+            1052,
+            594,
+            902,
+            1741,
+            5387,
+            11,
+            4486,
+            470,
+            330,
+            4064,
+            3263,
+            151645,
+            198,
+            151644,
+            872,
+            198,
+            3030,
+            943,
+            25,
+            4540,
+            1372,
+            198,
+            1178,
+            2213,
+            25,
+            576,
+            4540,
+            1372,
+            320,
+            18,
+            17,
+            16,
+            8,
+            220,
+            21,
+            20,
+            19,
+            12,
+            15,
+            24,
+            23,
+            22,
+            374,
+            902,
+            5021,
+            304,
+            2473,
+            198,
+            15828,
+            25,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 112,
+          "input_cap": 512,
+          "output_cap": 24,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>system\nYour task is to find entities of certain type from the given text content.\nIf there're multiple entities, please return them all with comma separated, e.g. \"entity1, entity2, entity3\".\nYou should only return the entity list, nothing else.\nIf there's no such entity, please return \"None\".<|im_end|>\n<|im_start|>user\nEntity type: phone number\nText content: The phone number (321) 654-0987 is no longer in service\nEntities:<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 24,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "321, 654, 0987",
+          "server_input_tokens": 112,
+          "generated_tokens": 15,
+          "response_reencoded_tokens": 14,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:54:46.578761Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 1257307800,
+            "load_duration": 2045900,
+            "prompt_eval_count": 112,
+            "prompt_eval_duration": 441885000,
+            "eval_count": 15,
+            "eval_duration": 812914000
+          },
+          "elapsed_seconds": 1.259338600000774,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "pf-ner",
+      "output_cap": 64,
+      "seed": 1,
+      "input_index": 0,
+      "inputs": {
+        "entity_type": "job title",
+        "text": "Maxime is a data scientist at Auto Dataset, and his wife is a finance manager in the same company."
+      },
+      "status": "pass",
+      "output": {
+        "entities": [
+          "data scientist",
+          "finance manager"
+        ]
+      },
+      "original_output": {
+        "entities": [
+          "data scientist",
+          "finance manager"
+        ]
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 1,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 1,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "system",
+              "content": "Your task is to find entities of certain type from the given text content.\nIf there're multiple entities, please return them all with comma separated, e.g. \"entity1, entity2, entity3\".\nYou should only return the entity list, nothing else.\nIf there's no such entity, please return \"None\"."
+            },
+            {
+              "role": "user",
+              "content": "Entity type: job title\nText content: Maxime is a data scientist at Auto Dataset, and his wife is a finance manager in the same company.\nEntities:"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>system\nYour task is to find entities of certain type from the given text content.\nIf there're multiple entities, please return them all with comma separated, e.g. \"entity1, entity2, entity3\".\nYou should only return the entity list, nothing else.\nIf there's no such entity, please return \"None\".<|im_end|>\n<|im_start|>user\nEntity type: job title\nText content: Maxime is a data scientist at Auto Dataset, and his wife is a finance manager in the same company.\nEntities:<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            8948,
+            198,
+            7771,
+            3383,
+            374,
+            311,
+            1477,
+            14744,
+            315,
+            3654,
+            943,
+            504,
+            279,
+            2661,
+            1467,
+            2213,
+            624,
+            2679,
+            1052,
+            2299,
+            5248,
+            14744,
+            11,
+            4486,
+            470,
+            1105,
+            678,
+            448,
+            31683,
+            18663,
+            11,
+            384,
+            1302,
+            13,
+            330,
+            2996,
+            16,
+            11,
+            5387,
+            17,
+            11,
+            5387,
+            18,
+            22956,
+            2610,
+            1265,
+            1172,
+            470,
+            279,
+            5387,
+            1140,
+            11,
+            4302,
+            770,
+            624,
+            2679,
+            1052,
+            594,
+            902,
+            1741,
+            5387,
+            11,
+            4486,
+            470,
+            330,
+            4064,
+            3263,
+            151645,
+            198,
+            151644,
+            872,
+            198,
+            3030,
+            943,
+            25,
+            2618,
+            2265,
+            198,
+            1178,
+            2213,
+            25,
+            7487,
+            545,
+            374,
+            264,
+            821,
+            27468,
+            518,
+            8979,
+            39183,
+            11,
+            323,
+            806,
+            7403,
+            374,
+            264,
+            17017,
+            6645,
+            304,
+            279,
+            1852,
+            2813,
+            624,
+            15828,
+            25,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 111,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>system\nYour task is to find entities of certain type from the given text content.\nIf there're multiple entities, please return them all with comma separated, e.g. \"entity1, entity2, entity3\".\nYou should only return the entity list, nothing else.\nIf there's no such entity, please return \"None\".<|im_end|>\n<|im_start|>user\nEntity type: job title\nText content: Maxime is a data scientist at Auto Dataset, and his wife is a finance manager in the same company.\nEntities:<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "data scientist, finance manager",
+          "server_input_tokens": 111,
+          "generated_tokens": 6,
+          "response_reencoded_tokens": 5,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:54:48.4923904Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 749406200,
+            "load_duration": 1012200,
+            "prompt_eval_count": 111,
+            "prompt_eval_duration": 448799000,
+            "eval_count": 6,
+            "eval_duration": 297802000
+          },
+          "elapsed_seconds": 0.7505701999980374,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        }
+      ]
+    },
+    {
+      "id": "pf-ner",
+      "output_cap": 64,
+      "seed": 1,
+      "input_index": 1,
+      "inputs": {
+        "entity_type": "phone number",
+        "text": "The phone number (321) 654-0987 is no longer in service"
+      },
+      "status": "pass",
+      "output": {
+        "entities": [
+          "321",
+          "654",
+          "0987"
+        ]
+      },
+      "original_output": {
+        "entities": [
+          "321",
+          "654",
+          "0987"
+        ]
+      },
+      "outputs_equal": true,
+      "usage": {
+        "replay_calls": 1,
+        "actual_generation_calls": 0,
+        "exact_requests_matched": 1,
+        "all_original_calls_consumed": true,
+        "ordering": "strict source call order"
+      },
+      "replay_trace": [
+        {
+          "attempt": 1,
+          "messages": [
+            {
+              "role": "system",
+              "content": "Your task is to find entities of certain type from the given text content.\nIf there're multiple entities, please return them all with comma separated, e.g. \"entity1, entity2, entity3\".\nYou should only return the entity list, nothing else.\nIf there's no such entity, please return \"None\"."
+            },
+            {
+              "role": "user",
+              "content": "Entity type: phone number\nText content: The phone number (321) 654-0987 is no longer in service\nEntities:"
+            }
+          ],
+          "completion_prompt": null,
+          "rendered_request": "<|im_start|>system\nYour task is to find entities of certain type from the given text content.\nIf there're multiple entities, please return them all with comma separated, e.g. \"entity1, entity2, entity3\".\nYou should only return the entity list, nothing else.\nIf there's no such entity, please return \"None\".<|im_end|>\n<|im_start|>user\nEntity type: phone number\nText content: The phone number (321) 654-0987 is no longer in service\nEntities:<|im_end|>\n<|im_start|>assistant\n",
+          "request_token_ids": [
+            151644,
+            8948,
+            198,
+            7771,
+            3383,
+            374,
+            311,
+            1477,
+            14744,
+            315,
+            3654,
+            943,
+            504,
+            279,
+            2661,
+            1467,
+            2213,
+            624,
+            2679,
+            1052,
+            2299,
+            5248,
+            14744,
+            11,
+            4486,
+            470,
+            1105,
+            678,
+            448,
+            31683,
+            18663,
+            11,
+            384,
+            1302,
+            13,
+            330,
+            2996,
+            16,
+            11,
+            5387,
+            17,
+            11,
+            5387,
+            18,
+            22956,
+            2610,
+            1265,
+            1172,
+            470,
+            279,
+            5387,
+            1140,
+            11,
+            4302,
+            770,
+            624,
+            2679,
+            1052,
+            594,
+            902,
+            1741,
+            5387,
+            11,
+            4486,
+            470,
+            330,
+            4064,
+            3263,
+            151645,
+            198,
+            151644,
+            872,
+            198,
+            3030,
+            943,
+            25,
+            4540,
+            1372,
+            198,
+            1178,
+            2213,
+            25,
+            576,
+            4540,
+            1372,
+            320,
+            18,
+            17,
+            16,
+            8,
+            220,
+            21,
+            20,
+            19,
+            12,
+            15,
+            24,
+            23,
+            22,
+            374,
+            902,
+            5021,
+            304,
+            2473,
+            198,
+            15828,
+            25,
+            151645,
+            198,
+            151644,
+            77091,
+            198
+          ],
+          "tokenizer_input_tokens": 112,
+          "input_cap": 512,
+          "output_cap": 64,
+          "schema": null,
+          "http_body": {
+            "model": "qwen2.5:3b",
+            "prompt": "<|im_start|>system\nYour task is to find entities of certain type from the given text content.\nIf there're multiple entities, please return them all with comma separated, e.g. \"entity1, entity2, entity3\".\nYou should only return the entity list, nothing else.\nIf there's no such entity, please return \"None\".<|im_end|>\n<|im_start|>user\nEntity type: phone number\nText content: The phone number (321) 654-0987 is no longer in service\nEntities:<|im_end|>\n<|im_start|>assistant\n",
+            "raw": true,
+            "stream": false,
+            "keep_alive": "30m",
+            "options": {
+              "num_predict": 64,
+              "num_ctx": 4096,
+              "temperature": 0,
+              "seed": 1,
+              "num_gpu": 0,
+              "num_thread": 4,
+              "repeat_penalty": 1.0
+            }
+          },
+          "status": "ok",
+          "response": "321, 654, 0987",
+          "server_input_tokens": 112,
+          "generated_tokens": 15,
+          "response_reencoded_tokens": 14,
+          "done_reason": "stop",
+          "server_metadata": {
+            "model": "qwen2.5:3b",
+            "created_at": "2026-10-23T22:54:50.4330827Z",
+            "done": true,
+            "done_reason": "stop",
+            "total_duration": 1222179400,
+            "load_duration": 1391600,
+            "prompt_eval_count": 112,
+            "prompt_eval_duration": 424815000,
+            "eval_count": 15,
+            "eval_duration": 794208000
+          },
+          "elapsed_seconds": 1.2368764999991981,
+          "source_actual_attempt": 1,
+          "conformance_replay": true
+        }
+      ]
+    }
+  ]
+}

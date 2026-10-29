@@ -1,0 +1,82 @@
+[
+  {
+    "family": "gpt2-bpe",
+    "left": "hel",
+    "right": "lo",
+    "separate_tokens": 2,
+    "joined_tokens": 1,
+    "additive": false
+  },
+  {
+    "family": "gpt2-bpe",
+    "left": "a",
+    "right": "b",
+    "separate_tokens": 2,
+    "joined_tokens": 1,
+    "additive": false
+  },
+  {
+    "family": "gpt2-bpe",
+    "left": " ",
+    "right": "hello",
+    "separate_tokens": 2,
+    "joined_tokens": 1,
+    "additive": false
+  },
+  {
+    "family": "gpt2-bpe",
+    "left": "é",
+    "right": "🙂",
+    "separate_tokens": 3,
+    "joined_tokens": 3,
+    "additive": true
+  },
+  {
+    "family": "gpt2-bpe",
+    "left": "",
+    "right": "a",
+    "separate_tokens": 1,
+    "joined_tokens": 1,
+    "additive": true
+  },
+  {
+    "family": "bert-wordpiece",
+    "left": "hel",
+    "right": "lo",
+    "separate_tokens": 3,
+    "joined_tokens": 1,
+    "additive": false
+  },
+  {
+    "family": "bert-wordpiece",
+    "left": "a",
+    "right": "b",
+    "separate_tokens": 2,
+    "joined_tokens": 1,
+    "additive": false
+  },
+  {
+    "family": "bert-wordpiece",
+    "left": " ",
+    "right": "hello",
+    "separate_tokens": 1,
+    "joined_tokens": 1,
+    "additive": true
+  },
+  {
+    "family": "bert-wordpiece",
+    "left": "é",
+    "right": "🙂",
+    "separate_tokens": 2,
+    "joined_tokens": 1,
+    "additive": false
+  },
+  {
+    "family": "bert-wordpiece",
+    "left": "",
+    "right": "a",
+    "separate_tokens": 1,
+    "joined_tokens": 1,
+    "additive": true
+  }
+]

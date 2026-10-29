@@ -1,0 +1,8 @@
+workflow NER budget 100000 {
+  input entity_type: text max_tokens 512;
+  input document: text max_tokens 512;
+  model local = mock("deployment-override-qwen2.5-3b") max_tokens 64;
+  prompt request(entity_type: text, document: text) -> text = "<|im_start|>system\nYour task is to find entities of certain type from the given text content.\nIf there're multiple entities, please return them all with comma separated, e.g. \"entity1, entity2, entity3\".\nYou should only return the entity list, nothing else.\nIf there's no such entity, please return \"None\".<|im_end|>\n<|im_start|>user\nEntity type: {entity_type}\nText content: {document}\nEntities:<|im_end|>\n<|im_start|>assistant\n";
+  let response: text = call request(entity_type, document) using local;
+  output response;
+}

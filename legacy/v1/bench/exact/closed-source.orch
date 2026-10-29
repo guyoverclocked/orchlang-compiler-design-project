@@ -1,0 +1,11 @@
+workflow ExactClosedSource budget 11 {
+  secret flag: boolean max_tokens 1;
+  model m = mock("exact-source-example-v1") max_tokens 8;
+  prompt p(left: text, right: text) -> text = "{left}{right}";
+  if flag {
+    let a: text = call p("hello", "world") using m;
+  } else {
+    let b: text = call p("hello", "world") using m;
+  }
+  output "done";
+}

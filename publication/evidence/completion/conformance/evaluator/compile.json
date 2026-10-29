@@ -1,0 +1,649 @@
+{
+  "workflow": "EvaluatorOptimizer",
+  "source": "workflows/evaluator.orch",
+  "source_lines": 22,
+  "slots": {
+    "topic": 0,
+    "feedback": 1,
+    "stop": 2,
+    "joke": 3,
+    "ev": 4
+  },
+  "high": [
+    "topic",
+    "feedback",
+    "stop",
+    "joke",
+    "ev"
+  ],
+  "findings": [
+    {
+      "kind": "secret-dependent-loop",
+      "line": 15,
+      "detail": "iteration count depends on secret stop"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 15,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 17,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 19,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    }
+  ],
+  "calls": 3,
+  "original_lean": {
+    "static_shape": null,
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+  },
+  "strategies": {
+    "ours": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            130,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            130,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            130,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        6,
+        957,
+        480
+      ],
+      "shape_seconds": 0.0011310999980196357
+    },
+    "naive": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            72,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            130,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            72,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            130,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            72,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            130,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        9,
+        1173,
+        768
+      ],
+      "shape_seconds": 0.0006950000097276643
+    },
+    "uniform": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            96
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            96
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            96
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        6,
+        1134,
+        576
+      ],
+      "shape_seconds": 0.0007145000126911327
+    },
+    "padall": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            130,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            130,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            130,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            189,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        6,
+        957,
+        480
+      ],
+      "shape_seconds": 0.0007699999987380579
+    }
+  },
+  "frontend_seconds": 0.8560959000024013,
+  "lean_seconds_batch": 16.074967500011553,
+  "pads": {
+    "1": [
+      130,
+      96
+    ],
+    "2": [
+      130,
+      96
+    ],
+    "3": [
+      189,
+      64
+    ]
+  },
+  "caps": {
+    "1": 96,
+    "2": 96,
+    "3": 64
+  },
+  "site_lines": {
+    "1": 15,
+    "2": 17,
+    "3": 19
+  },
+  "source_binding": {
+    "schema": "orchlang-source-binding-v1",
+    "source_sha256": "c8c1b3522d0f20645ccf22b36e62db840184c3469a3a926171d714ad9fc0321f",
+    "original": [
+      "seq",
+      [
+        "tool",
+        1,
+        "const",
+        [
+          "lit",
+          ""
+        ]
+      ],
+      [
+        "seq",
+        [
+          "tool",
+          2,
+          "const",
+          [
+            "lit",
+            "go"
+          ]
+        ],
+        [
+          "loop",
+          3,
+          [
+            "eq",
+            2,
+            "stop"
+          ],
+          [
+            "seq",
+            [
+              "ite",
+              [
+                "eq",
+                1,
+                ""
+              ],
+              [
+                "call",
+                1,
+                3,
+                "llama1b",
+                96,
+                [
+                  "app",
+                  [
+                    "lit",
+                    "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nWrite a joke about "
+                  ],
+                  [
+                    "app",
+                    [
+                      "var",
+                      0
+                    ],
+                    [
+                      "lit",
+                      "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                    ]
+                  ]
+                ],
+                null
+              ],
+              [
+                "call",
+                2,
+                3,
+                "llama1b",
+                96,
+                [
+                  "app",
+                  [
+                    "lit",
+                    "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nWrite a joke about "
+                  ],
+                  [
+                    "app",
+                    [
+                      "var",
+                      0
+                    ],
+                    [
+                      "app",
+                      [
+                        "lit",
+                        " but take into account the feedback: "
+                      ],
+                      [
+                        "app",
+                        [
+                          "var",
+                          1
+                        ],
+                        [
+                          "lit",
+                          "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                        ]
+                      ]
+                    ]
+                  ]
+                ],
+                null
+              ]
+            ],
+            [
+              "seq",
+              [
+                "call",
+                3,
+                4,
+                "llama1b",
+                64,
+                [
+                  "app",
+                  [
+                    "lit",
+                    "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nGrade the joke "
+                  ],
+                  [
+                    "app",
+                    [
+                      "var",
+                      3
+                    ],
+                    [
+                      "lit",
+                      "\n\nRespond in exactly two lines:\ngrade: <funny|not funny> (Decide if the joke is funny or not.)\nfeedback: <If the joke is not funny, provide feedback on how to improve it.><|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                    ]
+                  ]
+                ],
+                null
+              ],
+              [
+                "seq",
+                [
+                  "tool",
+                  2,
+                  "eval_stop",
+                  [
+                    "escape",
+                    [
+                      "var",
+                      4
+                    ]
+                  ]
+                ],
+                [
+                  "tool",
+                  1,
+                  "after",
+                  [
+                    "app",
+                    [
+                      "escape",
+                      [
+                        "var",
+                        4
+                      ]
+                    ],
+                    [
+                      "app",
+                      [
+                        "lit",
+                        "\u001f"
+                      ],
+                      [
+                        "escape",
+                        [
+                          "lit",
+                          "feedback:"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          false
+        ]
+      ]
+    ],
+    "secret_inputs": [
+      0
+    ],
+    "high": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "slots": {
+      "topic": 0,
+      "feedback": 1,
+      "stop": 2,
+      "joke": 3,
+      "ev": 4
+    },
+    "trust": "Python source reader/lowering and serialization; Lean checks the shaped core",
+    "binding_sha256": "e87ac2f76f273e85e6728c68ba9f9fb38c4f3a97c9d37fe0d8f869ed86965d36"
+  },
+  "request_targets": "heuristic execution envelopes; complete requests are admitted exactly before dispatch"
+}

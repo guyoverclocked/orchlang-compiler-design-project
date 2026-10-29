@@ -1,0 +1,195 @@
+{
+  "schema": "orchlang-validation-artifact-v1",
+  "source_binding": {
+    "schema": "orchlang-source-binding-v1",
+    "source_sha256": "723f4351a45d04a1671a6a58894eaf92fe325044a44dc0158942d126cd9bc9e2",
+    "original": [
+      "call",
+      1,
+      1,
+      "llama1b",
+      8,
+      [
+        "app",
+        [
+          "lit",
+          "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+        ],
+        [
+          "app",
+          [
+            "trim",
+            [
+              "var",
+              0
+            ]
+          ],
+          [
+            "lit",
+            "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+          ]
+        ]
+      ],
+      null
+    ],
+    "secret_inputs": [
+      0
+    ],
+    "high": [
+      0,
+      1
+    ],
+    "slots": {
+      "q": 0,
+      "answer": 1
+    },
+    "trust": "Python source reader/lowering and serialization; Lean checks the shaped core",
+    "binding_sha256": "99f4666f95fb484b307f0994e5afbcb9e656622d0625315fee664dbb1c184ffb"
+  },
+  "model_contracts": {
+    "llama1b": {
+      "key": "llama1b",
+      "template": "llama3",
+      "filler": " .",
+      "pad_mode": "isolated",
+      "pad_position": "end",
+      "stop": [
+        "<|eot_id|>",
+        "<|end_of_text|>"
+      ],
+      "bos": "",
+      "sha256": "6f85a640a97cf2bf5b8e764087b1e83da0fdb51d7c9fab7d0fece9385611df83",
+      "gguf_sha256": "6f85a640a97cf2bf5b8e764087b1e83da0fdb51d7c9fab7d0fece9385611df83"
+    }
+  },
+  "candidates": {
+    "ours": [
+      "call",
+      1,
+      1,
+      "llama1b",
+      8,
+      [
+        "app",
+        [
+          "lit",
+          "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+        ],
+        [
+          "app",
+          [
+            "trim",
+            [
+              "var",
+              0
+            ]
+          ],
+          [
+            "lit",
+            "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+          ]
+        ]
+      ],
+      [
+        107,
+        8
+      ]
+    ],
+    "naive": [
+      "call",
+      1,
+      1,
+      "llama1b",
+      8,
+      [
+        "app",
+        [
+          "lit",
+          "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+        ],
+        [
+          "app",
+          [
+            "trim",
+            [
+              "var",
+              0
+            ]
+          ],
+          [
+            "lit",
+            "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+          ]
+        ]
+      ],
+      [
+        107,
+        8
+      ]
+    ],
+    "uniform": [
+      "call",
+      1,
+      1,
+      "llama1b",
+      8,
+      [
+        "app",
+        [
+          "lit",
+          "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+        ],
+        [
+          "app",
+          [
+            "trim",
+            [
+              "var",
+              0
+            ]
+          ],
+          [
+            "lit",
+            "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+          ]
+        ]
+      ],
+      [
+        107,
+        8
+      ]
+    ],
+    "padall": [
+      "call",
+      1,
+      1,
+      "llama1b",
+      8,
+      [
+        "app",
+        [
+          "lit",
+          "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+        ],
+        [
+          "app",
+          [
+            "trim",
+            [
+              "var",
+              0
+            ]
+          ],
+          [
+            "lit",
+            "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+          ]
+        ]
+      ],
+      [
+        107,
+        8
+      ]
+    ]
+  }
+}

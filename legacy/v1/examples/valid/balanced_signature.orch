@@ -1,0 +1,17 @@
+// The safe counterpart of examples/invalid/equal_bounds.orch.
+//
+// The only edit is that both arms read the SAME variable.  Now the two arms have
+// identical billing signatures -- same model, same symbolic input size -- so
+// whichever arm runs, the invoice is the same and the secret is not revealed.
+workflow BalancedSignature budget 1000 {
+  secret s: text max_tokens 1;
+  input x: text max_tokens 100;
+  model m = mock("m") max_tokens 10;
+  prompt p(t: text) -> text = "{t}";
+  if tokens(s) == 0 {
+    let a: text = call p(x) using m;
+  } else {
+    let b: text = call p(x) using m;
+  }
+  output "done";
+}

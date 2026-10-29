@@ -1,0 +1,451 @@
+{
+  "protocol_sha256": "6604a2a43d0ff0fc7e62f884d7847b5c37572dc1ec77703cf0a7fea8bb284b0c",
+  "results_sha256": "765059c13705f2de025e2d5966e99c5ac152eb256bcb0cb0435dd4c83149f5fb",
+  "diagnoses": [
+    {
+      "id": "lg-chain-graph",
+      "output_cap": 24,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-chain-graph",
+      "output_cap": 24,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-chain-graph",
+      "output_cap": 64,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-chain-graph",
+      "output_cap": 64,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-chain-functional",
+      "output_cap": 24,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-chain-functional",
+      "output_cap": 24,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "first-equal-request-divergent-model-response",
+      "first_difference_call": 2,
+      "complete_request": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!<|im_end|>\n<|im_start|>assistant\n",
+      "original_response": "Why did the compiler cry? It got a compile-entine, but it was a sour cry!",
+      "port_response": "Why did the compiler cry? It got a compile-entine! Now that's a sour sweet day!",
+      "consequent_later_prompt_differences": [
+        3
+      ],
+      "cause": "undetermined; caching/numerical effects are hypotheses, not established"
+    },
+    {
+      "id": "lg-chain-functional",
+      "output_cap": 64,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-chain-functional",
+      "output_cap": 64,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-parallel-graph",
+      "output_cap": 24,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "first-equal-request-divergent-model-response",
+      "first_difference_call": 2,
+      "complete_request": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+      "original_response": "In the heart of a bustling city, there lived a peculiar cat named Whisker. Whisker was unlike any",
+      "port_response": "In the heart of a bustling city, there lived a small, cozy apartment building. The building was old and had seen",
+      "consequent_later_prompt_differences": [],
+      "cause": "undetermined; caching/numerical effects are hypotheses, not established"
+    },
+    {
+      "id": "lg-parallel-graph",
+      "output_cap": 24,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-parallel-graph",
+      "output_cap": 64,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "first-equal-request-divergent-model-response",
+      "first_difference_call": 2,
+      "complete_request": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+      "original_response": "In the heart of a bustling city, there lived a small, cozy apartment building. The building was old and had seen many tenants come and go. Among the residents was a peculiar cat named Whiskers. Whiskers was not your average feline; he had a unique way of looking at the world.\n\nWh",
+      "port_response": "In the heart of a bustling city, there lived a peculiar cat named Whisker. Whisker was unlike any other cat in the neighborhood. Instead of chasing mice or lounging in the sun, he spent his days exploring the rooftops and alleys, his fur a blend of midnight black and silver moonlight",
+      "consequent_later_prompt_differences": [],
+      "cause": "undetermined; caching/numerical effects are hypotheses, not established"
+    },
+    {
+      "id": "lg-parallel-graph",
+      "output_cap": 64,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-routing-graph",
+      "output_cap": 24,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-routing-graph",
+      "output_cap": 24,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-routing-graph",
+      "output_cap": 64,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-routing-graph",
+      "output_cap": 64,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "pf-basic",
+      "output_cap": 24,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "translation-request-or-call-mismatch",
+      "first_difference_call": 1,
+      "original_request": "Write a simple Python program that displays the greeting message.",
+      "port_request": "\nWrite a simple Python program that displays the greeting message."
+    },
+    {
+      "id": "pf-basic",
+      "output_cap": 24,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "translation-request-or-call-mismatch",
+      "first_difference_call": 1,
+      "original_request": "Write a simple JavaScript program that displays the greeting message.",
+      "port_request": "\nWrite a simple JavaScript program that displays the greeting message."
+    },
+    {
+      "id": "pf-basic",
+      "output_cap": 64,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "translation-request-or-call-mismatch",
+      "first_difference_call": 1,
+      "original_request": "Write a simple Python program that displays the greeting message.",
+      "port_request": "\nWrite a simple Python program that displays the greeting message."
+    },
+    {
+      "id": "pf-basic",
+      "output_cap": 64,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "translation-request-or-call-mismatch",
+      "first_difference_call": 1,
+      "original_request": "Write a simple JavaScript program that displays the greeting message.",
+      "port_request": "\nWrite a simple JavaScript program that displays the greeting message."
+    },
+    {
+      "id": "pf-ner",
+      "output_cap": 24,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "pf-ner",
+      "output_cap": 24,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "pf-ner",
+      "output_cap": 64,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "pf-ner",
+      "output_cap": 64,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    }
+  ],
+  "diagnosis_counts": {
+    "first-equal-request-divergent-model-response": 3,
+    "independent-generation-exact-match": 17,
+    "translation-request-or-call-mismatch": 4
+  },
+  "workflow_metrics": [
+    {
+      "id": "lg-chain-graph",
+      "translation": "hybrid-host-composition",
+      "original_nonempty_source_lines": 42,
+      "port_kernel_files": [
+        "first.orch",
+        "refine.orch"
+      ],
+      "port_kernel_nonempty_lines": 16,
+      "port_kernel_bytes": 891,
+      "source_input_annotations": 2,
+      "source_model_cap_annotations": 2,
+      "host_case_nonempty_lines": 13,
+      "comparisons": 4,
+      "independently_equal": 4,
+      "actual_generation_calls": 8,
+      "complete_executions": 8,
+      "observed_token_range": [
+        29,
+        41
+      ],
+      "guarded_bound_range": [
+        1608,
+        1728
+      ],
+      "length_terminated_generation_calls": 2,
+      "tokenizer_server_mismatches": 0,
+      "scored_quality": []
+    },
+    {
+      "id": "lg-chain-functional",
+      "translation": "hybrid-host-composition",
+      "original_nonempty_source_lines": 30,
+      "port_kernel_files": [
+        "first.orch",
+        "refine.orch"
+      ],
+      "port_kernel_nonempty_lines": 16,
+      "port_kernel_bytes": 891,
+      "source_input_annotations": 2,
+      "source_model_cap_annotations": 2,
+      "host_case_nonempty_lines": 13,
+      "comparisons": 4,
+      "independently_equal": 3,
+      "actual_generation_calls": 24,
+      "complete_executions": 8,
+      "observed_token_range": [
+        141,
+        187
+      ],
+      "guarded_bound_range": [
+        1608,
+        1728
+      ],
+      "length_terminated_generation_calls": 8,
+      "tokenizer_server_mismatches": 0,
+      "scored_quality": []
+    },
+    {
+      "id": "lg-parallel-graph",
+      "translation": "hybrid-host-composition",
+      "original_nonempty_source_lines": 43,
+      "port_kernel_files": [
+        "joke.orch",
+        "story.orch",
+        "poem.orch"
+      ],
+      "port_kernel_nonempty_lines": 21,
+      "port_kernel_bytes": 1010,
+      "source_input_annotations": 3,
+      "source_model_cap_annotations": 3,
+      "host_case_nonempty_lines": 9,
+      "comparisons": 4,
+      "independently_equal": 2,
+      "actual_generation_calls": 24,
+      "complete_executions": 8,
+      "observed_token_range": [
+        111,
+        200
+      ],
+      "guarded_bound_range": [
+        1608,
+        1728
+      ],
+      "length_terminated_generation_calls": 20,
+      "tokenizer_server_mismatches": 0,
+      "scored_quality": []
+    },
+    {
+      "id": "lg-routing-graph",
+      "translation": "hybrid-host-composition",
+      "original_nonempty_source_lines": 71,
+      "port_kernel_files": [
+        "route.orch",
+        "respond.orch"
+      ],
+      "port_kernel_nonempty_lines": 14,
+      "port_kernel_bytes": 782,
+      "source_input_annotations": 3,
+      "source_model_cap_annotations": 2,
+      "host_case_nonempty_lines": 14,
+      "comparisons": 4,
+      "independently_equal": 4,
+      "actual_generation_calls": 16,
+      "complete_executions": 8,
+      "observed_token_range": [
+        85,
+        125
+      ],
+      "guarded_bound_range": [
+        1072,
+        1152
+      ],
+      "length_terminated_generation_calls": 6,
+      "tokenizer_server_mismatches": 0,
+      "scored_quality": [
+        {
+          "metric": "requested route exact match",
+          "expected": "joke",
+          "original_exact": true,
+          "port_exact": true
+        },
+        {
+          "metric": "requested route exact match",
+          "expected": "poem",
+          "original_exact": false,
+          "port_exact": false
+        },
+        {
+          "metric": "requested route exact match",
+          "expected": "joke",
+          "original_exact": true,
+          "port_exact": true
+        },
+        {
+          "metric": "requested route exact match",
+          "expected": "poem",
+          "original_exact": false,
+          "port_exact": false
+        }
+      ]
+    },
+    {
+      "id": "pf-basic",
+      "translation": "direct-call-kernel",
+      "original_nonempty_source_lines": 106,
+      "port_kernel_files": [
+        "basic.orch"
+      ],
+      "port_kernel_nonempty_lines": 7,
+      "port_kernel_bytes": 339,
+      "source_input_annotations": 1,
+      "source_model_cap_annotations": 1,
+      "host_case_nonempty_lines": 2,
+      "comparisons": 4,
+      "independently_equal": 0,
+      "actual_generation_calls": 8,
+      "complete_executions": 8,
+      "observed_token_range": [
+        35,
+        76
+      ],
+      "guarded_bound_range": [
+        536,
+        576
+      ],
+      "length_terminated_generation_calls": 8,
+      "tokenizer_server_mismatches": 0,
+      "scored_quality": []
+    },
+    {
+      "id": "pf-ner",
+      "translation": "hybrid-host-composition",
+      "original_nonempty_source_lines": 162,
+      "port_kernel_files": [
+        "ner.orch"
+      ],
+      "port_kernel_nonempty_lines": 8,
+      "port_kernel_bytes": 781,
+      "source_input_annotations": 2,
+      "source_model_cap_annotations": 1,
+      "host_case_nonempty_lines": 5,
+      "comparisons": 4,
+      "independently_equal": 4,
+      "actual_generation_calls": 8,
+      "complete_executions": 8,
+      "observed_token_range": [
+        117,
+        127
+      ],
+      "guarded_bound_range": [
+        536,
+        576
+      ],
+      "length_terminated_generation_calls": 0,
+      "tokenizer_server_mismatches": 0,
+      "scored_quality": [
+        {
+          "metric": "exact entity set match; authored expected answers",
+          "expected": [
+            "data scientist",
+            "finance manager"
+          ],
+          "original_exact": true,
+          "port_exact": true
+        },
+        {
+          "metric": "exact entity set match; authored expected answers",
+          "expected": [
+            "(321) 654-0987"
+          ],
+          "original_exact": false,
+          "port_exact": false
+        },
+        {
+          "metric": "exact entity set match; authored expected answers",
+          "expected": [
+            "data scientist",
+            "finance manager"
+          ],
+          "original_exact": true,
+          "port_exact": true
+        },
+        {
+          "metric": "exact entity set match; authored expected answers",
+          "expected": [
+            "(321) 654-0987"
+          ],
+          "original_exact": false,
+          "port_exact": false
+        }
+      ]
+    }
+  ],
+  "source_count_policy": "Nonempty source lines include comments. Upstream snippets exclude visualization and invocation; shared notebook setup imports are supplied by the framework driver. PF source includes YAML/prompts/tools, excludes tests. Host case LOC are AST branch spans; shared drivers/adapters are reported separately. LOC is descriptive, not a time/effort or maintainability study.",
+  "shared_port_function_nonempty_lines": 49,
+  "shared_driver_nonempty_lines": 167,
+  "shared_kernel_interpreter_nonempty_lines": 96,
+  "annotation_scope": "Source input/model annotations use the compiler's abstract contract. Actual Qwen token admission is a separate runtime guard on the complete constructed request; annotations do not become a tokenizer theorem."
+}

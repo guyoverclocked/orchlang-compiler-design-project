@@ -1,0 +1,432 @@
+diff --git a/proof/DataflowCore.lean b/proof/DataflowCore.lean
+index 487fb6f..9ba0a2a 100644
+--- a/proof/DataflowCore.lean
++++ b/proof/DataflowCore.lean
+@@ -21,6 +21,43 @@ def text (env : Store) : Text → String
+   | .var slot => env slot
+   | .append a b => text env a ++ text env b
+ 
++-- Canonicalize the free string monoid without assuming anything about variables.
++-- Calls still require equal full serialized requests, contracts and response slots.
++def appendText : Text → Text → Text
++  | .append a b, c => appendText a (appendText b c)
++  | .literal s, c =>
++      if s = "" then c else
++      match c with
++      | .literal t => .literal (s ++ t)
++      | .append (.literal t) d => .append (.literal (s ++ t)) d
++      | _ => .append (.literal s) c
++  | .var i, c => if c = .literal "" then .var i else .append (.var i) c
++
++theorem appendText_correct (env : Store) (a b : Text) :
++    text env (appendText a b) = text env a ++ text env b := by
++  induction a generalizing b with
++  | append a c iha ihc => simp [appendText, text, iha, ihc, String.append_assoc]
++  | var i => by_cases h : b = .literal "" <;> simp [appendText, h, text]
++  | literal s =>
++      by_cases h : s = ""
++      · simp [appendText, h, text]
++      · cases b with
++        | literal t => simp [appendText, h, text]
++        | var i => simp [appendText, h, text]
++        | append b c => cases b <;> simp [appendText, h, text, String.append_assoc]
++
++def normalizeText : Text → Text
++  | .literal s => .literal s
++  | .var i => .var i
++  | .append a b => appendText (normalizeText a) (normalizeText b)
++
++theorem normalizeText_correct (env : Store) (request : Text) :
++    text env (normalizeText request) = text env request := by
++  induction request with
++  | literal s => rfl
++  | var i => rfl
++  | append a b iha ihb => simp [normalizeText, appendText_correct, text, iha, ihb]
++
+ structure Event where
+   contract : String
+   input : Nat
+@@ -59,6 +96,37 @@ def join (x y : Execution) : Execution :=
+ def compose (a b : Semantics) : Semantics := fun env =>
+   (a env).flatMap fun x => (b x.store).map (join x)
+ 
++theorem rat_one_mul (a : Rat) : (1 : Rat) * a = a := by
++  have hn : (1 : Rat).num = 1 := rfl
++  have hd : (1 : Rat).den = 1 := rfl
++  change Std.Internal.Rat.mul 1 a = a
++  cases a
++  simp [Std.Internal.Rat.mul, hn, hd]
++
++theorem rat_mul_one (a : Rat) : a * (1 : Rat) = a := by
++  have hn : (1 : Rat).num = 1 := rfl
++  have hd : (1 : Rat).den = 1 := rfl
++  change Std.Internal.Rat.mul a 1 = a
++  cases a
++  simp [Std.Internal.Rat.mul, hn, hd]
++
++theorem compose_unit_left (a : Semantics) : compose unit a = a := by
++  funext env
++  simp only [compose, unit, List.flatMap_singleton]
++  apply List.map_id''
++  intro x
++  cases x
++  simp [join, rat_one_mul]
++
++theorem compose_unit_right (a : Semantics) : compose a unit = a := by
++  funext env
++  simp [compose, unit, join, rat_mul_one]
++
++#print axioms rat_one_mul
++#print axioms rat_mul_one
++#print axioms compose_unit_left
++#print axioms compose_unit_right
++
+ -- Retry bodies are lexical: their local bindings do not escape an attempt.
+ -- All events, including billed failures, survive. Stop iff no call failed.
+ def retry : Nat → Semantics → Semantics
+@@ -100,17 +168,45 @@ def denote (kernel : Kernel) (public secret : Nat → Bool) : Program → Semant
+   | .secretBranch g a b => if secret g then denote kernel public secret a else denote kernel public secret b
+   | .retry n body => retry n (denote kernel public secret body)
+ 
++def sequencePlan (a b : Plan) : Plan :=
++  match a, b with
++  | .skip, _ => b
++  | _, .skip => a
++  | _, _ => .seq a b
++
++theorem sequencePlan_correct (kernel : Kernel) (public : Nat → Bool) (a b : Plan) :
++    denotePlan kernel public (sequencePlan a b) =
++      compose (denotePlan kernel public a) (denotePlan kernel public b) := by
++  cases a <;> cases b <;>
++    simp [sequencePlan, denotePlan, compose_unit_left, compose_unit_right]
++
++def publicPlan (guard : Nat) (a b : Plan) : Plan :=
++  if a = b then a else .publicBranch guard a b
++
++theorem publicPlan_correct (kernel : Kernel) (public : Nat → Bool)
++    (guard : Nat) (a b : Plan) :
++    denotePlan kernel public (publicPlan guard a b) =
++      (if public guard then denotePlan kernel public a else denotePlan kernel public b) := by
++  by_cases h : a = b
++  · simp [publicPlan, h]
++  · simp [publicPlan, h, denotePlan]
++
++theorem call_normalizeText (kernel : Kernel) (slot : Nat) (contract : String) (request : Text) :
++    call kernel slot contract (normalizeText request) = call kernel slot contract request := by
++  funext env
++  simp [call, normalizeText_correct]
++
+ def normalize : Program → Option Plan
+   | .skip => some .skip
+-  | .call slot contract request => some (.call slot contract request)
++  | .call slot contract request => some (.call slot contract (normalizeText request))
+   | .seq a b => do
+       let a' ← normalize a
+       let b' ← normalize b
+-      pure (.seq a' b')
++      pure (sequencePlan a' b')
+   | .publicBranch g a b => do
+       let a' ← normalize a
+       let b' ← normalize b
+-      pure (.publicBranch g a' b')
++      pure (publicPlan g a' b')
+   | .secretBranch _ a b => do
+       let a' ← normalize a
+       let b' ← normalize b
+@@ -124,7 +220,10 @@ theorem normalize_correct (program : Program) (kernel : Kernel) (public secret :
+       denote kernel public secret program = denotePlan kernel public plan := by
+   induction program with
+   | skip => intro plan h; cases h; rfl
+-  | call slot contract request => intro plan h; cases h; rfl
++  | call slot contract request =>
++      intro plan h
++      cases h
++      exact (call_normalizeText kernel slot contract request).symm
+   | seq a b iha ihb =>
+       intro plan h
+       cases ha : normalize a with
+@@ -135,7 +234,7 @@ theorem normalize_correct (program : Program) (kernel : Kernel) (public secret :
+           | some pb =>
+               simp [normalize, ha, hb] at h
+               cases h
+-              simp [denote, denotePlan, iha pa ha, ihb pb hb]
++              simp [denote, sequencePlan_correct, iha pa ha, ihb pb hb]
+   | publicBranch g a b iha ihb =>
+       intro plan h
+       cases ha : normalize a with
+@@ -146,7 +245,7 @@ theorem normalize_correct (program : Program) (kernel : Kernel) (public secret :
+           | some pb =>
+               simp [normalize, ha, hb] at h
+               cases h
+-              simp [denote, denotePlan, iha pa ha, ihb pb hb]
++              simp [denote, publicPlan_correct, iha pa ha, ihb pb hb]
+   | secretBranch g a b iha ihb =>
+       intro plan h
+       cases ha : normalize a with
+@@ -173,6 +272,10 @@ theorem normalize_correct (program : Program) (kernel : Kernel) (public secret :
+ def checkCertificate (program : Program) (plan : Plan) : Bool :=
+   decide (normalize program = some plan)
+ 
++-- Primary interface: a verified (incomplete) decision procedure. A saved plan is
++-- only a diagnostic result: checking it recomputes normalize, not a cheaper proof.
++def checkProgram (program : Program) : Bool := (normalize program).isSome
++
+ theorem relational_sound (program : Program) (plan : Plan)
+     (checked : checkCertificate program plan = true) (kernel : Kernel)
+     (public left right : Nat → Bool) :
+@@ -181,6 +284,15 @@ theorem relational_sound (program : Program) (plan : Plan)
+   exact (normalize_correct program kernel public left plan accepted).trans
+     (normalize_correct program kernel public right plan accepted).symm
+ 
++theorem checkProgram_sound (program : Program) (checked : checkProgram program = true)
++    (kernel : Kernel) (public left right : Nat → Bool) :
++    denote kernel public left program = denote kernel public right program := by
++  cases h : normalize program with
++  | none => simp [checkProgram, h] at checked
++  | some plan =>
++      exact (normalize_correct program kernel public left plan h).trans
++        (normalize_correct program kernel public right plan h).symm
++
+ theorem observer_projection (program : Program) (plan : Plan)
+     (checked : checkCertificate program plan = true) (kernel : Kernel)
+     (public left right : Nat → Bool) (env : Store) {α : Type}
+@@ -199,8 +311,26 @@ private def pipelinePlan : Plan :=
+   (.seq (.call 0 "c" (.literal "yes")) (.call 1 "c" (.literal "next:x")))) pipelinePlan)
+ #guard text (fun _ => "é") (.append (.literal "next:") (.var 0)) = "next:é"
+ 
++-- Strict gains over comparing raw request/plan trees, under the same kernels.
++private def expandedRequest : Text :=
++  .append (.append (.literal "Ne") (.literal "xt:")) (.append (.var 0) (.literal ""))
++#guard expandedRequest != .append (.literal "Next:") (.var 0)
++#guard normalizeText expandedRequest = .append (.literal "Next:") (.var 0)
++#guard checkCertificate (.secretBranch 0
++    (.call 1 "c" expandedRequest)
++    (.call 1 "c" (.append (.literal "Next:") (.var 0))))
++  (.call 1 "c" (.append (.literal "Next:") (.var 0)))
++#guard checkCertificate (.secretBranch 0
++    (.seq .skip (.publicBranch 0 pipeline pipeline)) pipeline) pipelinePlan
++
++#print axioms appendText_correct
++#print axioms normalizeText_correct
++#print axioms sequencePlan_correct
++#print axioms publicPlan_correct
++
+ #print axioms normalize_correct
+ #print axioms relational_sound
++#print axioms checkProgram_sound
+ #print axioms observer_projection
+ end OrchLang.Dataflow
+ 
+@@ -266,6 +396,19 @@ def checkDecoded (pj cj : Json) : Except String Bool :=
+   | .error e, _ => .error e
+   | _, .error e => .error e
+ 
++def decideDecoded (pj : Json) : Except String Bool :=
++  match decodeProgram 256 pj with
++  | .ok program => .ok (checkProgram program)
++  | .error e => .error e
++
++theorem decoded_decision_sound (pj : Json) (program : Program)
++    (hp : decodeProgram 256 pj = .ok program)
++    (checked : decideDecoded pj = .ok true) (kernel : Kernel)
++    (public left right : Nat → Bool) :
++    denote kernel public left program = denote kernel public right program := by
++  apply checkProgram_sound program
++  simpa [decideDecoded, hp] using checked
++
+ theorem decoded_certificate_sound (pj cj : Json) (program : Program) (plan : Plan)
+     (hp : decodeProgram 256 pj = .ok program) (hc : decodePlan cj = .ok plan)
+     (checked : checkDecoded pj cj = .ok true) (kernel : Kernel)
+@@ -275,6 +418,7 @@ theorem decoded_certificate_sound (pj cj : Json) (program : Program) (plan : Pla
+   simpa [checkDecoded, hp, hc] using checked
+ 
+ #print axioms decoded_certificate_sound
++#print axioms decoded_decision_sound
+ 
+ private structure TableEntry where
+   contract : String
+@@ -353,15 +497,26 @@ def checkBatch (j : Json) : Except String Json := do
+     let evaluations ← (← (← row.getObjVal? "execute").getArr?).mapM (executeJson program)
+     pure (Json.mkObj [("checked", Json.bool checked), ("executions", Json.arr evaluations)])
+   pure (Json.arr result)
++
++def decideBatch (j : Json) : Except String Json := do
++  let cases ← j.getArr?
++  let result ← cases.mapM fun row => do
++    let programJson ← row.getObjVal? "program"
++    let checked ← decideDecoded programJson
++    let program ← decodeProgram 256 programJson
++    let evaluations ← (← (← row.getObjVal? "execute").getArr?).mapM (executeJson program)
++    pure (Json.mkObj [("checked", Json.bool checked), ("executions", Json.arr evaluations)])
++  pure (Json.arr result)
+ end OrchLang.Dataflow
+ 
+ def main (args : List String) : IO UInt32 := do
+   match args with
+-  | [path] =>
++  | [path] | ["decide", path] =>
+       let contents ← IO.FS.readFile path
+       if contents.utf8ByteSize > 16000000 then
+         (← IO.getStderr).putStrLn "batch byte limit"; return 2
+-      match Lean.Json.parse contents >>= OrchLang.Dataflow.checkBatch with
++      let checker := if args.length = 2 then OrchLang.Dataflow.decideBatch else OrchLang.Dataflow.checkBatch
++      match Lean.Json.parse contents >>= checker with
+       | .ok result => IO.println result.compress; pure 0
+       | .error error => (← IO.getStderr).putStrLn error; pure 2
+   | _ => (← IO.getStderr).putStrLn "usage: lean --run proof/DataflowCore.lean BATCH.json"; pure 2
+diff --git a/runtime/dataflow_gate.py b/runtime/dataflow_gate.py
+index 7e3159c..32da804 100644
+--- a/runtime/dataflow_gate.py
++++ b/runtime/dataflow_gate.py
+@@ -12,18 +12,73 @@ from .finite_reference import Unsupported, canonical
+ from .source_gate import Reader, sequence, sha
+ 
+ 
+-def normalize(program):
++def syntactic_normalize(program):
++    """Historical baseline: exact request trees and exact public/sequence shape."""
+     kind = program[0]
+     if kind in {'skip', 'call'}:
+         return program
+     if kind == 'seq':
+-        a, b = normalize(program[1]), normalize(program[2])
++        a, b = syntactic_normalize(program[1]), syntactic_normalize(program[2])
+         return None if a is None or b is None else ['seq', a, b]
+     if kind in {'public', 'secret'}:
+-        a, b = normalize(program[2]), normalize(program[3])
++        a, b = syntactic_normalize(program[2]), syntactic_normalize(program[3])
+         if a is None or b is None:
+             return None
+         return ['public', program[1], a, b] if kind == 'public' else (a if a == b else None)
++    if kind == 'retry':
++        body = syntactic_normalize(program[2])
++        return None if body is None else ['retry', program[1], body]
++    raise Unsupported('unknown dataflow constructor')
++
++
++def append_text(a, b):
++    """Executable mirror of Lean appendText; never identifies different slots."""
++    if a[0] == 'append':
++        return append_text(a[1], append_text(a[2], b))
++    if a[0] == 'literal':
++        if a[1] == '':
++            return b
++        if b[0] == 'literal':
++            return ['literal', a[1] + b[1]]
++        if b[0] == 'append' and b[1][0] == 'literal':
++            return ['append', ['literal', a[1] + b[1][1]], b[2]]
++        return ['append', a, b]
++    if a[0] == 'var':
++        return a if b == ['literal', ''] else ['append', a, b]
++    raise Unsupported('unknown dataflow text constructor')
++
++
++def normalize_text(term):
++    if term[0] in {'literal', 'var'}:
++        return term
++    if term[0] == 'append':
++        return append_text(normalize_text(term[1]), normalize_text(term[2]))
++    raise Unsupported('unknown dataflow text constructor')
++
++
++def normalize(program):
++    """Verified rewrites preserve complete text-store/ordered-trace semantics.
++
++    This decision procedure recomputes its result; a serialized plan is an audit
++    output, not a proof-carrying witness or a search/check complexity advantage.
++    """
++    kind = program[0]
++    if kind == 'skip':
++        return program
++    if kind == 'call':
++        return ['call', program[1], program[2], normalize_text(program[3])]
++    if kind == 'seq':
++        a, b = normalize(program[1]), normalize(program[2])
++        if a is None or b is None:
++            return None
++        return b if a == ['skip'] else a if b == ['skip'] else ['seq', a, b]
++    if kind in {'public', 'secret'}:
++        a, b = normalize(program[2]), normalize(program[3])
++        if a is None or b is None:
++            return None
++        if a == b:
++            return a
++        return ['public', program[1], a, b] if kind == 'public' else None
+     if kind == 'retry':
+         body = normalize(program[2])
+         return None if body is None else ['retry', program[1], body]
+diff --git a/scripts/dataflow_certificate.py b/scripts/dataflow_certificate.py
+index 605f56d..4c1c51a 100644
+--- a/scripts/dataflow_certificate.py
++++ b/scripts/dataflow_certificate.py
+@@ -1,4 +1,4 @@
+-"""Issue/check source-bound text-dataflow certificates with Lean 4.19.0."""
++"""Run the verified dataflow decision procedure (legacy saved-plan support)."""
+ import argparse
+ import json
+ from pathlib import Path
+@@ -9,10 +9,10 @@ import time
+ 
+ ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT))
+-from runtime.dataflow_gate import issue, bind_certificate
++from runtime.dataflow_gate import issue, bind_certificate, read_source
+ 
+ 
+-def run_checker(lean, cases, directory, record_prefix=None):
++def run_checker(lean, cases, directory, record_prefix=None, decision=False):
+     result, logs, commands = [], [], []
+     version=subprocess.run([str(lean),'--version'],capture_output=True,text=True,timeout=30)
+     if version.returncode or 'version 4.19.0,' not in version.stdout:
+@@ -22,7 +22,10 @@ def run_checker(lean, cases, directory, record_prefix=None):
+             chunk=cases[start:start+16]
+             batch = Path(temp)/f'batch-{start//16:03d}.json'
+             batch.write_text(json.dumps(chunk, ensure_ascii=False),encoding='utf-8',newline='\n')
+-            argv=[str(lean),'--run',str(ROOT/'proof/DataflowCore.lean'),str(batch)]
++            argv=[str(lean),'--run',str(ROOT/'proof/DataflowCore.lean')]
++            if decision:
++                argv.append('decide')
++            argv.append(str(batch))
+             started=time.perf_counter()
+             process = subprocess.run(argv,cwd=ROOT,capture_output=True,text=True,encoding='utf-8',timeout=180)
+             commands.append(dict(argv=argv,case_offset=start,cases=len(chunk),exit=process.returncode,
+@@ -43,12 +46,26 @@ def run_checker(lean, cases, directory, record_prefix=None):
+ 
+ def main():
+     p=argparse.ArgumentParser(description=__doc__)
+-    p.add_argument('mode',choices=['issue','check'])
++    p.add_argument('mode',choices=['decide','issue','check'])
+     p.add_argument('source',type=Path)
+-    p.add_argument('certificate',type=Path)
++    p.add_argument('certificate',type=Path,nargs='?')
+     p.add_argument('--lean',required=True,type=Path)
+     args=p.parse_args()
+     data=args.source.read_bytes()
++    if args.mode=='decide':
++        if args.certificate is not None:
++            p.error('decide takes a source and --lean, without a saved plan')
++        source=read_source(data)
++        with tempfile.TemporaryDirectory(prefix='dataflow-decision-') as temp:
++            results,_=run_checker(args.lean.resolve(),[dict(program=source['program'],execute=[])],temp,decision=True)
++        accepted=results[0]['checked']
++        print(json.dumps(dict(status='accepted' if accepted else 'rejected',
++                              source_sha256=source['source_sha256'],
++                              judgment='shared-public text-dataflow resource-distribution independence',
++                              trusted_boundary='Python source reader; not C++ IFC or source budget')))
++        return int(not accepted)
++    if args.certificate is None:
++        p.error('legacy issue/check requires a saved-plan path')
+     certificate=issue(data) if args.mode=='issue' else json.loads(args.certificate.read_text(encoding='utf-8'))
+     case=bind_certificate(data,certificate)
+     results,_=run_checker(args.lean.resolve(),[case],args.certificate.resolve().parent)
+@@ -59,8 +76,9 @@ def main():
+             json.dump(certificate,stream,indent=2,ensure_ascii=False)
+             stream.write('\n')
+     print(json.dumps(dict(status='checked',source_sha256=certificate['source_sha256'],
++                         method='verified decision procedure; saved plan is diagnostic output',
+                          scope='text-dataflow; shared public inputs; trusted source reader; no budget/provider guarantee')))
+ 
+ 
+ if __name__=='__main__':
+-    main()
++    raise SystemExit(main())

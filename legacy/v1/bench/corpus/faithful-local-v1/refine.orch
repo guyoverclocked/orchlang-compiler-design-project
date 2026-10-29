@@ -1,0 +1,9 @@
+workflow Refine budget 100000 {
+  input joke: text max_tokens 512;
+  model local = mock("deployment-override-qwen2.5-3b") max_tokens 64;
+  prompt improve(value: text) -> text = "<|im_start|>user\nMake this joke funnier by adding wordplay: {value}<|im_end|>\n<|im_start|>assistant\n";
+  prompt polish(value: text) -> text = "<|im_start|>user\nAdd a surprising twist to this joke: {value}<|im_end|>\n<|im_start|>assistant\n";
+  let better: text = call improve(joke) using local;
+  let final: text = call polish(better) using local;
+  output final;
+}

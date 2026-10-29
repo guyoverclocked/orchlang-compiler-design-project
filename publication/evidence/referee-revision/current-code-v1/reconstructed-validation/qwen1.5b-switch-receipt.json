@@ -1,0 +1,115 @@
+{
+  "schema": "orchlang-source-check-receipt-v1",
+  "source_binding_sha256": "d00ad9d9bd1557a78bcc670488df14ab869d513a56dde466df286211e3c35edd",
+  "model_contracts": {
+    "qwen1.5b": {
+      "key": "qwen1.5b",
+      "template": "qwen2",
+      "filler": " .",
+      "pad_mode": "isolated",
+      "pad_position": "end",
+      "stop": [
+        "<|im_end|>",
+        "<|endoftext|>"
+      ],
+      "bos": "",
+      "sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+      "gguf_sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e"
+    }
+  },
+  "verdicts": {
+    "ours": {
+      "static_shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          176,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    },
+    "naive": {
+      "static_shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          176,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    },
+    "uniform": {
+      "static_shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          176,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    }
+  },
+  "accepted": true,
+  "assumptions": [
+    "trusted Python frontend and source binding",
+    "World.Conforms",
+    "World.Transparent for functional preservation",
+    "stated logical observer only"
+  ],
+  "reconstructed_after_execution": true,
+  "protocol_version": "c2bb75c1ff7ef3a7ba824239d97b960efeb27e68"
+}

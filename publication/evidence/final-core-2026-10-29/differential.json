@@ -1,0 +1,68 @@
+{
+  "padded_budget": {
+    "mixed_programs": 185,
+    "saving_median": 0.0,
+    "saving_vs": {
+      "padall": {
+        "median": 0.0,
+        "mean": 0.07754394554625713,
+        "max": 0.9128630705394191
+      },
+      "naive": {
+        "median": 0.0,
+        "mean": 0.10490742472783361,
+        "max": 0.6645962732919255
+      },
+      "uniform": {
+        "median": 0.06464646464646462,
+        "mean": 0.09508274302961844,
+        "max": 0.375
+      }
+    }
+  },
+  "programs": 1000,
+  "seed": 2026,
+  "lean_checks": 5000,
+  "lean_seconds": 4.49,
+  "original_accepted": 649,
+  "original_python_lean_agreement": 1000,
+  "detector_lean_agreement": 1000,
+  "strategies": {
+    "ours": {
+      "accepted": 1000,
+      "trace_equal_pairs": 4000,
+      "pairs": 4000,
+      "static_shape_matches": 1528,
+      "static_shape_runs": 1528,
+      "store_equal_runs": 4000,
+      "runs": 4000
+    },
+    "naive": {
+      "accepted": 1000,
+      "trace_equal_pairs": 4000,
+      "pairs": 4000,
+      "static_shape_matches": 1528,
+      "static_shape_runs": 1528,
+      "store_equal_runs": 4000,
+      "runs": 4000
+    },
+    "uniform": {
+      "accepted": 1000,
+      "trace_equal_pairs": 4000,
+      "pairs": 4000,
+      "static_shape_matches": 1528,
+      "static_shape_runs": 1528,
+      "store_equal_runs": 4000,
+      "runs": 4000
+    },
+    "padall": {
+      "accepted": 1000,
+      "trace_equal_pairs": 4000,
+      "pairs": 4000,
+      "static_shape_matches": 3364,
+      "static_shape_runs": 3364,
+      "store_equal_runs": 4000,
+      "runs": 4000
+    }
+  }
+}

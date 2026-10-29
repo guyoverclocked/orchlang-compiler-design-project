@@ -1,0 +1,16 @@
+// Independent checks can run in either order; neither request uses a response.
+workflow DocumentChecks budget 10000 {
+    secret confidential_schedule: boolean max_tokens 1;
+    model spelling = mock("spelling-check-v1") max_tokens 64;
+    model citation = mock("citation-check-v1") max_tokens 64;
+    prompt spelling_check() -> text = "Check spelling: The result was reproduced.";
+    prompt citation_check() -> text = "Check citation formatting: [Smith 2025].";
+    if confidential_schedule {
+        let a: text = call spelling_check() using spelling;
+        let b: text = call citation_check() using citation;
+    } else {
+        let b: text = call citation_check() using citation;
+        let a: text = call spelling_check() using spelling;
+    }
+    output "checks complete";
+}

@@ -1,0 +1,20 @@
+| Endpoint | Value |
+|---|---:|
+| source_programs | 256 |
+| accepted | 16 |
+| execution_contexts | 3072 |
+| accepted_finite_counterexamples | 0 |
+| source_reconstruction_disagreements | 0 |
+| lean_normalization_disagreements | 0 |
+| lean_reference_disagreements | 0 |
+| lean_replay_disagreements | 0 |
+| cpp_accepted | 8 |
+| cpp_e230_cases | 192 |
+| boundary_cases | 8 |
+| boundary_paths | 23 |
+| source_tampers_rejected | 32 |
+| altered_plans_rejected | 16 |
+| invalid_evaluator_inputs_rejected | 8 |
+| cpp_tests | 106 |
+| python_tests | 47 |
+| proof_files | 3 |

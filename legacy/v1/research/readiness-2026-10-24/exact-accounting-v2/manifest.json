@@ -1,0 +1,61 @@
+{
+  "status": "completed",
+  "timestamp_utc": "2026-10-23T21:29:02.712072+00:00",
+  "source_commit": "460bf3a453879618a86916ca6540bbf6b4f0e21c",
+  "dirty_tree": true,
+  "files": {
+    "runtime/token_accounting.py": "e70e2116be71d776991ee309608f9f33e8f082c3ac881abb402985aa1bcd90cb",
+    "runtime/replay_adapter.py": "b028a75278956cbc63d5f2c2612e75a3b6b82a94477706abd0cf522b3c5f30d4",
+    "runtime/finite_reference.py": "2f4b859f604f2ddeb46853cbbcf1ce15b5c3b394f64a3830f0d14c6b656747a6",
+    "scripts/exact_tokenizer.py": "4da78659c2b7ee1f727f4ce663df5fc06d1f72c8f619253907470926a1619fdf",
+    "scripts/exact_tokenizer_probe.py": "0be74b690dbe921fcc714c1653fec8aacf916a5a9dd331f3bb4cfd31f2c8cbee",
+    "tests/test_token_accounting.py": "39df5cbd66fe3c7371050f4cfe9a2106c380e32be06c337c81a2ac846311b99d"
+  },
+  "protocol_sha256": "3ec70190431780cc8f564947342ae5bf5551b791d6d4a4b4b99a3895fce8ce3d",
+  "family_protocol_sha256": "de1e9bd63b07a617bba5aa7c0006cd119f3ef00443be11aec8b132399309df89",
+  "tokenizer_artifacts": [
+    {
+      "id": "gpt2-bpe",
+      "repo": "openai-community/gpt2",
+      "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+      "license": "mit",
+      "file": "gpt2-bpe.json",
+      "sha256": "8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6",
+      "bytes": 1355256,
+      "url": "https://huggingface.co/openai-community/gpt2/resolve/607a30d783dfa663caf39e06633721c8d4cfcd7e/tokenizer.json"
+    },
+    {
+      "id": "bert-wordpiece",
+      "repo": "google-bert/bert-base-uncased",
+      "revision": "86b5e0934494bd15c9632b12f734a8a67f723594",
+      "license": "apache-2.0",
+      "file": "bert-wordpiece.json",
+      "sha256": "ce64fce797c24f68df90b40a3f74f579b336a493db14bd583fd520ea0d8c9a98",
+      "bytes": 466062,
+      "url": "https://huggingface.co/google-bert/bert-base-uncased/resolve/86b5e0934494bd15c9632b12f734a8a67f723594/tokenizer.json"
+    }
+  ],
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "protocol_status": "development-protocol-after-preliminary-boundary-exploration-not-preregistered",
+  "spent_usd": "0.00",
+  "model_inference": false,
+  "required_tests": {
+    "command": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\tools\\tokenizer-venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "tests.test_token_accounting",
+      "-v"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "test_admission_precedes_dispatch_and_preserves_trace (tests.test_token_accounting.ExactAccountingTests.test_admission_precedes_dispatch_and_preserves_trace) ... ok\ntest_complete_concat_uses_exact_encoding (tests.test_token_accounting.ExactAccountingTests.test_complete_concat_uses_exact_encoding) ... ok\ntest_dynamic_byte_contracts_bound_response_dependent_chain (tests.test_token_accounting.ExactAccountingTests.test_dynamic_byte_contracts_bound_response_dependent_chain) ... ok\ntest_hash_version_and_contract_identity_are_enforced (tests.test_token_accounting.ExactAccountingTests.test_hash_version_and_contract_identity_are_enforced) ... ok\ntest_output_caps_cover_all_alternatives_including_errors (tests.test_token_accounting.ExactAccountingTests.test_output_caps_cover_all_alternatives_including_errors) ... ok\ntest_plain_and_special_counts_bert (tests.test_token_accounting.ExactAccountingTests.test_plain_and_special_counts_bert) ... ok\ntest_retry_all_attempts_and_branch_max (tests.test_token_accounting.ExactAccountingTests.test_retry_all_attempts_and_branch_max) ... ok\ntest_runtime_only_dynamic_bert_has_no_static_bound (tests.test_token_accounting.ExactAccountingTests.test_runtime_only_dynamic_bert_has_no_static_bound) ... ok\ntest_token_cap_does_not_imply_a_byte_cap (tests.test_token_accounting.ExactAccountingTests.test_token_cap_does_not_imply_a_byte_cap) ... ok\ntest_truncation_and_padding_are_disabled (tests.test_token_accounting.ExactAccountingTests.test_truncation_and_padding_are_disabled) ... ok\ntest_utf8_is_strict_and_counts_bytes (tests.test_token_accounting.UTF8ContractTests.test_utf8_is_strict_and_counts_bytes) ... ok\n\n----------------------------------------------------------------------\nRan 11 tests in 0.586s\n\nOK\n",
+    "env": {
+      "ORCHLANG_TOKENIZER_DIR": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\tokenizers-development-v1",
+      "PYTHONUTF8": "1"
+    }
+  }
+}

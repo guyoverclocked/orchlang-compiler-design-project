@@ -1,0 +1,415 @@
+{
+  "workflow": "PromptChaining",
+  "source": "workflows/chaining.orch",
+  "source_lines": 18,
+  "slots": {
+    "topic": 0,
+    "joke": 1,
+    "gate": 2,
+    "final": 3,
+    "improved": 4
+  },
+  "high": [
+    "topic",
+    "joke",
+    "gate",
+    "final",
+    "improved"
+  ],
+  "findings": [
+    {
+      "kind": "secret-dependent-size",
+      "line": 10,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-branch",
+      "line": 15,
+      "detail": "branch on secret gate selects arms with different usage"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 15,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 16,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    }
+  ],
+  "calls": 3,
+  "original_lean": {
+    "static_shape": null,
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+  },
+  "strategies": {
+    "ours": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            73,
+            96
+          ],
+          [
+            "tool",
+            "contains_any"
+          ],
+          [
+            "tool",
+            "copy"
+          ],
+          [
+            "llm",
+            "llama1b",
+            150,
+            128
+          ],
+          [
+            "llm",
+            "llama1b",
+            180,
+            128
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        3,
+        403,
+        352
+      ],
+      "shape_seconds": 0.0016278999974019825
+    },
+    "naive": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            73,
+            96
+          ],
+          [
+            "tool",
+            "contains_any"
+          ],
+          [
+            "tool",
+            "copy"
+          ],
+          [
+            "llm",
+            "llama1b",
+            150,
+            128
+          ],
+          [
+            "llm",
+            "llama1b",
+            180,
+            128
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        3,
+        403,
+        352
+      ],
+      "shape_seconds": 0.0008670999959576875
+    },
+    "uniform": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            180,
+            128
+          ],
+          [
+            "tool",
+            "contains_any"
+          ],
+          [
+            "tool",
+            "copy"
+          ],
+          [
+            "llm",
+            "llama1b",
+            180,
+            128
+          ],
+          [
+            "llm",
+            "llama1b",
+            180,
+            128
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        3,
+        540,
+        384
+      ],
+      "shape_seconds": 0.0008710999973118305
+    },
+    "padall": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            73,
+            96
+          ],
+          [
+            "tool",
+            "contains_any"
+          ],
+          [
+            "tool",
+            "copy"
+          ],
+          [
+            "llm",
+            "llama1b",
+            150,
+            128
+          ],
+          [
+            "llm",
+            "llama1b",
+            180,
+            128
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        3,
+        403,
+        352
+      ],
+      "shape_seconds": 0.0019564999965950847
+    }
+  },
+  "frontend_seconds": 1.3083334999973886,
+  "lean_seconds_batch": 8.912910099999863,
+  "pads": {
+    "1": [
+      73,
+      96
+    ],
+    "2": [
+      150,
+      128
+    ],
+    "3": [
+      180,
+      128
+    ]
+  },
+  "caps": {
+    "1": 96,
+    "2": 128,
+    "3": 128
+  },
+  "site_lines": {
+    "1": 10,
+    "2": 15,
+    "3": 16
+  },
+  "source_binding": {
+    "schema": "orchlang-source-binding-v1",
+    "source_sha256": "16733d31405f6d6f59308ba242af3ae6aed17b6159b31c6b95a36b7e55885201",
+    "original": [
+      "seq",
+      [
+        "call",
+        1,
+        1,
+        "llama1b",
+        96,
+        [
+          "app",
+          [
+            "lit",
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nWrite a short joke about "
+          ],
+          [
+            "app",
+            [
+              "var",
+              0
+            ],
+            [
+              "lit",
+              "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+            ]
+          ]
+        ],
+        null
+      ],
+      [
+        "seq",
+        [
+          "tool",
+          2,
+          "contains_any",
+          [
+            "app",
+            [
+              "escape",
+              [
+                "var",
+                1
+              ]
+            ],
+            [
+              "app",
+              [
+                "lit",
+                "\u001f"
+              ],
+              [
+                "escape",
+                [
+                  "lit",
+                  "?!"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "ite",
+          [
+            "eq",
+            2,
+            "yes"
+          ],
+          [
+            "tool",
+            3,
+            "copy",
+            [
+              "escape",
+              [
+                "var",
+                1
+              ]
+            ]
+          ],
+          [
+            "seq",
+            [
+              "call",
+              2,
+              4,
+              "llama1b",
+              128,
+              [
+                "app",
+                [
+                  "lit",
+                  "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nMake this joke funnier by adding wordplay: "
+                ],
+                [
+                  "app",
+                  [
+                    "var",
+                    1
+                  ],
+                  [
+                    "lit",
+                    "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                  ]
+                ]
+              ],
+              null
+            ],
+            [
+              "call",
+              3,
+              3,
+              "llama1b",
+              128,
+              [
+                "app",
+                [
+                  "lit",
+                  "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nAdd a surprising twist to this joke: "
+                ],
+                [
+                  "app",
+                  [
+                    "var",
+                    4
+                  ],
+                  [
+                    "lit",
+                    "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                  ]
+                ]
+              ],
+              null
+            ]
+          ]
+        ]
+      ]
+    ],
+    "secret_inputs": [
+      0
+    ],
+    "high": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "slots": {
+      "topic": 0,
+      "joke": 1,
+      "gate": 2,
+      "final": 3,
+      "improved": 4
+    },
+    "trust": "Python source reader/lowering and serialization; Lean checks the shaped core",
+    "binding_sha256": "00df35f332603879681955aa431dd42feb63215e522c0f482d7165a3b3c08cb5"
+  },
+  "request_targets": "heuristic execution envelopes; complete requests are admitted exactly before dispatch"
+}

@@ -1,0 +1,8 @@
+{
+  "purpose": "manuscript example syntax/core check and mandatory-secret negative control",
+  "example_accepted": true,
+  "missing_secret_field_rejected": true,
+  "rejection": "property not found: secret_inputs",
+  "binding_sha256": "ff8eed1418779b8e57211c731e19be4caf6f88caf42a85e922f48a1b6673ea5e",
+  "unit": "character-token audit only"
+}

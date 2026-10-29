@@ -1,0 +1,86 @@
+{
+  "timestamp_utc": "2026-10-23T22:53:08.920285+00:00",
+  "source_sha256": "b38083c492550c6f11ac00adba401eb1c4679727237eac9ffc4ac7d1fbe5d612",
+  "rows": [
+    {
+      "upstream_cap": null,
+      "status": "returned",
+      "error": null,
+      "dispatched": 1,
+      "num_predict": 64
+    },
+    {
+      "upstream_cap": 0,
+      "status": "returned",
+      "error": null,
+      "dispatched": 1,
+      "num_predict": 64
+    },
+    {
+      "upstream_cap": -1,
+      "status": "rejected",
+      "error": "ValueError('server output cap violated')",
+      "dispatched": 1,
+      "num_predict": -1
+    },
+    {
+      "upstream_cap": 0.5,
+      "status": "returned",
+      "error": null,
+      "dispatched": 1,
+      "num_predict": 0
+    },
+    {
+      "upstream_cap": false,
+      "status": "returned",
+      "error": null,
+      "dispatched": 1,
+      "num_predict": 64
+    }
+  ],
+  "transport_failure_trace": [
+    {
+      "attempt": 1,
+      "messages": null,
+      "completion_prompt": "one",
+      "rendered_request": "one",
+      "request_token_ids": [
+        1
+      ],
+      "tokenizer_input_tokens": 1,
+      "input_cap": 512,
+      "output_cap": 64,
+      "schema": null,
+      "http_body": {
+        "model": "stub-no-model",
+        "prompt": "one",
+        "raw": true,
+        "stream": false,
+        "keep_alive": "30m",
+        "options": {
+          "num_predict": 64,
+          "num_ctx": 4096,
+          "temperature": 0,
+          "seed": 1,
+          "num_gpu": 0,
+          "num_thread": 4,
+          "repeat_penalty": 1.0
+        }
+      },
+      "status": "error",
+      "error": "OSError('deliberate no-inference transport failure')",
+      "elapsed_seconds": 2.6999987312592566e-06
+    }
+  ],
+  "transport_failure_totals": {
+    "calls": 1,
+    "input": 0,
+    "output": 0,
+    "runtime_bound": 576,
+    "max_call_bound": 1,
+    "guard": "fully rendered exact input admission + output cap + maximum calls",
+    "whole_source_static_token_bound": false
+  },
+  "model_inference": false,
+  "scope": "stub transport confirms pre-dispatch validation and missing-usage behavior only"
+}

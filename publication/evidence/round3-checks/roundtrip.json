@@ -1,0 +1,12 @@
+{
+  "schema": "orchlang-serializer-roundtrip-v1",
+  "programs": 3036,
+  "generated_programs": 1000,
+  "workflow_sources": 12,
+  "returned": 3036,
+  "exact_roundtrips": 3036,
+  "mismatches": [],
+  "all_equal": true,
+  "ascii_escaped": false,
+  "scope": "Python stmt_json -> Lean decodeStmt -> Lean encodeStmt -> JSON equality"
+}

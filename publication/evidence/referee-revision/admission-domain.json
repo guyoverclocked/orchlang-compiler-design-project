@@ -1,0 +1,1230 @@
+{
+  "schema": "orchlang-finite-admission-study-v1",
+  "unit": "characters, mock backend",
+  "public_store": "empty; slot 0 secret",
+  "target": 151,
+  "counterexample": [
+    {
+      "secret": "a",
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+      "status": "refused",
+      "trace": [],
+      "usage": {
+        "confirmed": {},
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      },
+      "reason": "complete request exceeds its declared padding target"
+    }
+  ],
+  "domain": {
+    "alphabet": "ab",
+    "maximum_length": 3,
+    "seeds": [
+      0,
+      1,
+      17
+    ]
+  },
+  "finite_cases": 45,
+  "all_completed_with_static_shape": true,
+  "rows": [
+    {
+      "secret": "",
+      "seed": 0,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "",
+      "seed": 1,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "",
+      "seed": 17,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "a",
+      "seed": 0,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "a",
+      "seed": 1,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "a",
+      "seed": 17,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "b",
+      "seed": 0,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "b",
+      "seed": 1,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "b",
+      "seed": 17,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "aa",
+      "seed": 0,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "aa",
+      "seed": 1,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "aa",
+      "seed": 17,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "ab",
+      "seed": 0,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "ab",
+      "seed": 1,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "ab",
+      "seed": 17,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "ba",
+      "seed": 0,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "ba",
+      "seed": 1,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "ba",
+      "seed": 17,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "bb",
+      "seed": 0,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "bb",
+      "seed": 1,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "bb",
+      "seed": 17,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "aaa",
+      "seed": 0,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "aaa",
+      "seed": 1,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "aaa",
+      "seed": 17,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "aab",
+      "seed": 0,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "aab",
+      "seed": 1,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "aab",
+      "seed": 17,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "aba",
+      "seed": 0,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "aba",
+      "seed": 1,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "aba",
+      "seed": 17,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "abb",
+      "seed": 0,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "abb",
+      "seed": 1,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "abb",
+      "seed": 17,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "baa",
+      "seed": 0,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "baa",
+      "seed": 1,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "baa",
+      "seed": 17,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "bab",
+      "seed": 0,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "bab",
+      "seed": 1,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "bab",
+      "seed": 17,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "bba",
+      "seed": 0,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "bba",
+      "seed": 1,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "bba",
+      "seed": 17,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "bbb",
+      "seed": 0,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "bbb",
+      "seed": 1,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    },
+    {
+      "secret": "bbb",
+      "seed": 17,
+      "status": "completed",
+      "trace": [
+        [
+          "llm",
+          "m",
+          151,
+          8
+        ]
+      ],
+      "usage": {
+        "confirmed": {
+          "m": {
+            "input": 151,
+            "output": 8,
+            "calls": 1
+          }
+        },
+        "usage_complete": true,
+        "unconfirmed": [],
+        "unit": "model-contract-indexed logical input/output token counts and call counts",
+        "limits": {}
+      }
+    }
+  ],
+  "limitation": "Exhaustive only for these 15 strings and 3 tapes; not a deployment-domain proof."
+}

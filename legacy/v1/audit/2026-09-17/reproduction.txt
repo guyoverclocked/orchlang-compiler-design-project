@@ -1,0 +1,168 @@
+RQ1-RQ3: executing the cost suite under 200 seeds each ...
+RQ4: checking the paired security suite ...
+timing ...
+
+OrchLang evaluation
+===================
+
+RQ1/RQ2/RQ3  certified bound vs observed execution (23 workflows, 4600 runs)
+
+workflow          certified  guaranteed  estimated  flat  peak_actual  mean_actual  slack_vs_peak  certified_violations  flat_violations
+----------------  ---------  ----------  ---------  ----  -----------  -----------  -------------  --------------------  ---------------
+branch_1          1006       750         256        1284  508          283.0        1.98           0                     0              
+branch_2          1734       1350        384        2290  764          426.2        2.27           0                     0              
+branch_3          2462       1950        512        3296  1011         569.6        2.44           0                     0              
+branch_4          3190       2550        640        4302  1187         711.3        2.69           0                     0              
+branch_in_retry   2462       1950        512        1284  817          395.2        3.01           0                     0              
+branch_nested     1734       1350        384        3746  686          421.3        2.53           0                     0              
+chain_1           278        150         128        278   273          147.9        1.02           0                     0              
+chain_2           586        300         286        586   539          306.9        1.09           0                     0              
+chain_3           894        450         444        894   812          461.1        1.1            0                     0              
+chain_4           1202       600         602        1202  1085         617.7        1.11           0                     0              
+chain_5           1510       750         760        1510  1288         775.3        1.17           0                     0              
+retry_2           556        300         256        278   542          210.8        1.03           0                     43             
+retry_3           834        450         384        278   693          241.1        1.2            0                     59             
+retry_4           1112       600         512        278   875          257.2        1.27           0                     63             
+retry_5           1390       750         640        278   1144         264.6        1.22           0                     63             
+retry_6           1668       900         768        278   1144         266.1        1.46           0                     63             
+retry_in_branch   1112       600         512        1284  817          395.2        1.36           0                     0              
+retry_nested_2x2  1112       600         512        278   901          322.8        1.23           0                     102            
+retry_nested_2x3  1668       900         768        278   1298         381.8        1.29           0                     111            
+retry_nested_3x3  2502       1350        1152       278   1363         441.5        1.84           0                     117            
+wide_input_200    666        300         366        666   600          327.1        1.11           0                     0              
+wide_input_2000   2466       300         2166       2466  2339         1265.2       1.05           0                     0              
+wide_input_800    1266       300         966        1266  1158         637.7        1.09           0                     0              
+
+  certified bound exceeded : 0 of 4600 runs
+  flat bound exceeded      : 621 of 4600 runs (13.5%)
+  workflows where the flat bound is unsound: 8 of 23
+    retry_2, retry_3, retry_4, retry_5, retry_6, retry_nested_2x2, retry_nested_2x3, retry_nested_3x3
+  slack vs peak observed: median 1.23x, min 1.02x, max 3.01x
+
+RQ4  information-flow analysis on the paired security suite
+
+workflow                     expected  verdict  codes    
+---------------------------  --------  -------  ---------
+InjectionInBranch            reject    reject   E233 E235
+InjectionInRetry             reject    reject   E233     
+InjectionToSink              reject    reject   E233     
+InjectionTransitive          reject    reject   E233     
+MixedTrustToSink             reject    reject   E233     
+SecretAsOutput               reject    reject   E231     
+SecretCostChannel            reject    reject   E236     
+SecretGuardedEffect          reject    reject   E234     
+SecretGuardedLaundered       reject    reject   E234 W236
+SecretToPrompt               reject    reject   E230 E231
+SecretToSink                 reject    reject   E232     
+UntrustedGuardedEffect       reject    reject   E235     
+UntrustedToSinkNoEndorse     reject    reject   E233     
+BalancedCostArms             accept    accept            
+EffectOutsideSecretBranch    accept    accept            
+InjectionEndorsed            accept    accept            
+InjectionInBranchEndorsed    accept    accept            
+InjectionInRetryEndorsed     accept    accept            
+InjectionTransitiveEndorsed  accept    accept            
+SecretAsOutputDeclassified   accept    accept            
+SecretToPromptDeclassified   accept    accept            
+SecretToSinkDeclassified     accept    accept            
+TrustedGuardedEffect         accept    accept            
+TrustedOnlyToSink            accept    accept            
+UnguardedEffect              accept    accept            
+UntrustedToOutputOnly        accept    accept            
+
+  unsafe rejected (true positive) : 13
+  unsafe accepted (false negative): 0
+  safe accepted   (true negative) : 13
+  safe rejected   (false positive): 0
+  recall    1.000
+  precision 1.000
+
+Analysis cost
+
+  36 workflows certified in 0.31 s (8.7 ms each, including process startup)
+
+[
+  {
+    "case": "literal",
+    "certify_exit": 0,
+    "errors": "",
+    "bound": {
+      "guaranteed_tokens": 1,
+      "estimated_tokens": 1,
+      "total_tokens": 2,
+      "within_budget": true,
+      "defined": true,
+      "cost": 0.0,
+      "cost_complete": false
+    },
+    "first_violation": {
+      "seed": 1,
+      "trace": "Literal:\n  calls          1\n  actual tokens  3  (input 2 + output 1)\n    y = p via m  in 2 out 1\n"
+    }
+  },
+  {
+    "case": "boolean",
+    "certify_exit": 0,
+    "errors": "",
+    "bound": {
+      "guaranteed_tokens": 1,
+      "estimated_tokens": 2,
+      "total_tokens": 3,
+      "within_budget": true,
+      "defined": true,
+      "cost": 0.0,
+      "cost_complete": false
+    },
+    "first_violation": {
+      "seed": 1,
+      "trace": "Boolean:\n  calls          1\n  actual tokens  4  (input 3 + output 1)\n    y = p via m  in 3 out 1\n"
+    }
+  },
+  {
+    "case": "split",
+    "certify_exit": 0,
+    "errors": "",
+    "bound": {
+      "guaranteed_tokens": 1,
+      "estimated_tokens": 201,
+      "total_tokens": 202,
+      "within_budget": true,
+      "defined": true,
+      "cost": 0.0,
+      "cost_complete": false
+    }
+  },
+  {
+    "case": "shadow",
+    "certify_exit": 0,
+    "errors": "",
+    "bound": {
+      "guaranteed_tokens": 1,
+      "estimated_tokens": 1,
+      "total_tokens": 2,
+      "within_budget": true,
+      "defined": true,
+      "cost": 0.0,
+      "cost_complete": false
+    },
+    "first_violation": {
+      "seed": 3,
+      "trace": "Shadow:\n  calls          1\n  actual tokens  348  (input 1 + output 347)\n    y = p via m  in 1 out 347\n"
+    }
+  },
+  {
+    "case": "equal_bounds",
+    "certify_exit": 0,
+    "errors": "",
+    "bound": {
+      "guaranteed_tokens": 10,
+      "estimated_tokens": 101,
+      "total_tokens": 111,
+      "within_budget": true,
+      "defined": true,
+      "cost": 0.0,
+      "cost_complete": false
+    }
+  }
+]
+Example checks: 32 passed: 32

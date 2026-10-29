@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "status": "frozen-before-full-comparison-outcomes",
+  "frozen_at_utc": "2026-10-23T21:27:40.307733+00:00",
+  "development_disclosure": "Dependency/API installation and a 16-token cats smoke generation preceded this freeze. No full workflow comparison outcome was observed before freeze.",
+  "corpus": "bench/corpus/faithful-local-v1/manifest.json",
+  "corpus_sha256": "73fdf7bda09d8c261c27c718cf4e2bfe628132f01da7562e1ba8b8115c99eaf1",
+  "output_caps": [
+    24,
+    64
+  ],
+  "input_cap": 512,
+  "seeds": [
+    1
+  ],
+  "repeats": 1,
+  "inputs": {
+    "lg-chain-graph": [
+      {
+        "topic": "cats"
+      },
+      {
+        "topic": "compiler errors"
+      }
+    ],
+    "lg-chain-functional": [
+      {
+        "topic": "cats"
+      },
+      {
+        "topic": "compiler errors"
+      }
+    ],
+    "lg-parallel-graph": [
+      {
+        "topic": "cats"
+      },
+      {
+        "topic": "compiler errors"
+      }
+    ],
+    "lg-routing-graph": [
+      {
+        "input": "Write me a joke about cats"
+      },
+      {
+        "input": "Write a short poem about compilers"
+      }
+    ],
+    "pf-basic": [
+      {
+        "text": "Python"
+      },
+      {
+        "text": "JavaScript"
+      }
+    ],
+    "pf-ner": [
+      {
+        "entity_type": "job title",
+        "text": "Maxime is a data scientist at Auto Dataset, and his wife is a finance manager in the same company."
+      },
+      {
+        "entity_type": "phone number",
+        "text": "The phone number (321) 654-0987 is no longer in service"
+      }
+    ]
+  },
+  "primary_endpoints": [
+    "exact final-output equality",
+    "exact full request/response multiset equality",
+    "actual node/branch agreement",
+    "runtime admission bound violations"
+  ],
+  "comparison": "Two actual generations per matched invocation, original then port; no replay or memoization. Independent stateless temperature-zero calls; parallel call order ignored, dependencies retained.",
+  "amendments": "Retain all failures; any fixture fix requires dated amendment and a fresh output directory.",
+  "budget": "maximum admitted calls * (full request input ceiling + generated output cap); dynamic deployment guard, not production compiler or Lean static theorem",
+  "model": {
+    "name": "qwen2.5:3b",
+    "manifest_sha256": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+    "gguf_sha256": "5ee4f07cdb9beadbbb293e85803c569b01bd37ed059d2715faa7bb405f31caa6",
+    "tokenizer_repo": "Qwen/Qwen2.5-3B-Instruct",
+    "tokenizer_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "tokenizer_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+    "tokenizers_version": "0.21.4",
+    "temperature": 0,
+    "device": "CPU"
+  },
+  "quality": "Report bounded-model task failures separately. Trace equality establishes adapter fidelity on these inputs, not task quality or all-input equivalence.",
+  "cost_usd": "0.00"
+}

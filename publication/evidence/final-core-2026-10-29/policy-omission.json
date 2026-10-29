@@ -1,0 +1,85 @@
+{
+  "schema": "orchlang-source-binding-omission-case-v1",
+  "source": "workflow PrivateReply {\n  input q: text secret max_tokens 8;\n  model m = \"m\";\n  prompt p(x) = user \"Reply: {x}\";\n  let answer = call p(q) using m max_tokens 4;\n  output answer;\n}",
+  "source_binding": {
+    "schema": "orchlang-source-binding-v1",
+    "source_sha256": "14b5b24cb1e6354ff67b90be8babe7619fa94ef49170363794315508005ebdd4",
+    "original": [
+      "call",
+      1,
+      1,
+      "m",
+      4,
+      [
+        "app",
+        [
+          "lit",
+          "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nReply: "
+        ],
+        [
+          "app",
+          [
+            "var",
+            0
+          ],
+          [
+            "lit",
+            "<|im_end|>\n<|im_start|>assistant\n"
+          ]
+        ]
+      ],
+      null
+    ],
+    "secret_inputs": [
+      0
+    ],
+    "high": [
+      0,
+      1
+    ],
+    "slots": {
+      "q": 0,
+      "answer": 1
+    },
+    "trust": "Python source reader/lowering and serialization; Lean checks the shaped core",
+    "binding_sha256": "fbb774311c7c966a92f81da46a35dd9111a59d7a2b1fbfea2f8fd88a3edab7aa"
+  },
+  "candidate_declared_no_secrets": {
+    "static_shape": null,
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": true,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": true
+  },
+  "source_bound": {
+    "unrepaired": {
+      "static_shape": null,
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": false,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": false
+    },
+    "repair": {
+      "static_shape": [
+        [
+          "llm",
+          "m",
+          196,
+          4
+        ]
+      ],
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    }
+  },
+  "interpretation": "Core validation of a candidate-supplied empty secrecy policy accepts the natural call. Re-reading the actual secret declaration rejects that same unshaped call and accepts its repair.",
+  "unit": "character-token sizing only; actual Lean checker, no model inference"
+}

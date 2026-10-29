@@ -1,0 +1,1 @@
+examples/invalid/cost_channel.orch:14:3: error [E236] this branch is guarded by a secret and its two arms bill differently, so the bill reveals the secret; then-arm bills [large(in=5 + |src|)] and else-arm bills [small(in=5 + |src|)]

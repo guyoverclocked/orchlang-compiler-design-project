@@ -1,0 +1,5 @@
+'OrchLang.Shape.static_certificate_implies_RunsIn' depends on axioms: [propext, Quot.sound]
+'OrchLang.Shape.static_certificate_domain' depends on axioms: [propext, Quot.sound]
+'OrchLang.Shape.shape_exec_on' depends on axioms: [propext]
+'OrchLang.Shape.admitted_noninterference' depends on axioms: [propext, Classical.choice, Quot.sound]
+'OrchLang.Shape.certified_domain_noninterference' depends on axioms: [propext, Classical.choice, Quot.sound]

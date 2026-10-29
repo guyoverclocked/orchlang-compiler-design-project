@@ -1,0 +1,8 @@
+// Expected: E202, E220, and E241 for undeclared values, prompt, and model.
+workflow UnknownNames budget 100 {
+  model local = mock("offline") max_tokens 40;
+  prompt known(message: text) -> text = "Known: {message}";
+  let result: text = call missing(no_such_value) using absent_model;
+  require tokens(not_declared) <= 10;
+  output missing_output;
+}

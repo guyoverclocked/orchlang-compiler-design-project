@@ -1,0 +1,63 @@
+{
+  "schema_version": "orchlang-exact-accounting-summary-v1",
+  "status": "completed",
+  "policies": [
+    {
+      "policy": "gpt2-bpe/plain",
+      "text_cases": 1336,
+      "concat_cases": 2249,
+      "concat_relations": {
+        "equal": 1783,
+        "less": 430,
+        "greater": 36
+      },
+      "byte_bound_applicable": true,
+      "byte_bound_violations": 0
+    },
+    {
+      "policy": "gpt2-bpe/special",
+      "text_cases": 1336,
+      "concat_cases": 2249,
+      "concat_relations": {
+        "equal": 1783,
+        "less": 430,
+        "greater": 36
+      },
+      "byte_bound_applicable": false,
+      "byte_bound_violations": null
+    },
+    {
+      "policy": "bert-wordpiece/plain",
+      "text_cases": 1336,
+      "concat_cases": 2249,
+      "concat_relations": {
+        "equal": 1570,
+        "less": 604,
+        "greater": 75
+      },
+      "byte_bound_applicable": false,
+      "byte_bound_violations": null
+    },
+    {
+      "policy": "bert-wordpiece/special",
+      "text_cases": 1336,
+      "concat_cases": 2249,
+      "concat_relations": {
+        "less": 2249
+      },
+      "byte_bound_applicable": false,
+      "byte_bound_violations": null
+    }
+  ],
+  "text_observations": 5344,
+  "concat_observations": 8996,
+  "finite_program_configurations": 64,
+  "supported_static_configurations": 40,
+  "unsupported_static_configurations": 24,
+  "enumerated_paths": 128,
+  "static_bound_violations": 0,
+  "program_families": 8,
+  "spent_usd": "0.00",
+  "model_inference": false,
+  "scope": "boundary-stress-and-finite-text-execution; not external application validation"
+}

@@ -1,0 +1,13 @@
+workflow ShadowedContract budget 10000 {
+  secret s: boolean max_tokens 1;
+  input x: text max_tokens 0;
+  prompt p(t: text) -> text = "{t}";
+  if s {
+    model m = mock("small") max_tokens 1;
+    let a: text = call p(x) using m;
+  } else {
+    model m = mock("large") max_tokens 1000;
+    let b: text = call p(x) using m;
+  }
+  output x;
+}

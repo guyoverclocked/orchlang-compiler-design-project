@@ -1,0 +1,1284 @@
+{
+  "workflow": "CorrectiveRAG",
+  "source": "C:\\Users\\nambi\\Documents\\Compiler Project\\audit-2026-10-24\\unified-publication\\publication\\evidence\\round2-categorical-full\\categorical-crag.orch",
+  "source_lines": 37,
+  "slots": {
+    "question": 0,
+    "docs": 1,
+    "d0": 2,
+    "d1": 3,
+    "d2": 4,
+    "d3": 5,
+    "g0": 6,
+    "g1": 7,
+    "g2": 8,
+    "g3": 9,
+    "k0": 10,
+    "k1": 11,
+    "k2": 12,
+    "k3": 13,
+    "kept": 14,
+    "search": 15,
+    "web": 16,
+    "context": 17,
+    "answer": 18
+  },
+  "high": [
+    "question",
+    "docs",
+    "d0",
+    "d1",
+    "d2",
+    "d3",
+    "g0",
+    "g1",
+    "g2",
+    "g3",
+    "k0",
+    "k1",
+    "k2",
+    "k3",
+    "kept",
+    "search",
+    "web",
+    "context",
+    "answer"
+  ],
+  "findings": [
+    {
+      "kind": "secret-dependent-size",
+      "line": 24,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 25,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 26,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 27,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-branch",
+      "line": 0,
+      "detail": "branch on secret search selects arms with different usage"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 40,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    }
+  ],
+  "calls": 5,
+  "original_lean": {
+    "static_shape": null,
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+  },
+  "strategies": {
+    "ours": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "retrieve"
+          ],
+          [
+            "tool",
+            "doc"
+          ],
+          [
+            "tool",
+            "doc"
+          ],
+          [
+            "tool",
+            "doc"
+          ],
+          [
+            "tool",
+            "doc"
+          ],
+          [
+            "llm",
+            "qwen-categorical",
+            355,
+            16
+          ],
+          [
+            "llm",
+            "qwen-categorical",
+            355,
+            16
+          ],
+          [
+            "llm",
+            "qwen-categorical",
+            355,
+            16
+          ],
+          [
+            "llm",
+            "qwen-categorical",
+            355,
+            16
+          ],
+          [
+            "tool",
+            "json_yes"
+          ],
+          [
+            "tool",
+            "json_yes"
+          ],
+          [
+            "tool",
+            "json_yes"
+          ],
+          [
+            "tool",
+            "json_yes"
+          ],
+          [
+            "tool",
+            "keep_relevant"
+          ],
+          [
+            "tool",
+            "any_no"
+          ],
+          [
+            "tool",
+            "web_search"
+          ],
+          [
+            "tool",
+            "join_docs"
+          ],
+          [
+            "llm",
+            "qwen1.5b",
+            1765,
+            128
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        5,
+        3185,
+        192
+      ],
+      "shape_seconds": 0.0011091000051237643
+    },
+    "naive": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "retrieve"
+          ],
+          [
+            "tool",
+            "doc"
+          ],
+          [
+            "tool",
+            "doc"
+          ],
+          [
+            "tool",
+            "doc"
+          ],
+          [
+            "tool",
+            "doc"
+          ],
+          [
+            "llm",
+            "qwen-categorical",
+            355,
+            16
+          ],
+          [
+            "llm",
+            "qwen-categorical",
+            355,
+            16
+          ],
+          [
+            "llm",
+            "qwen-categorical",
+            355,
+            16
+          ],
+          [
+            "llm",
+            "qwen-categorical",
+            355,
+            16
+          ],
+          [
+            "tool",
+            "json_yes"
+          ],
+          [
+            "tool",
+            "json_yes"
+          ],
+          [
+            "tool",
+            "json_yes"
+          ],
+          [
+            "tool",
+            "json_yes"
+          ],
+          [
+            "tool",
+            "keep_relevant"
+          ],
+          [
+            "tool",
+            "any_no"
+          ],
+          [
+            "tool",
+            "web_search"
+          ],
+          [
+            "tool",
+            "join_docs"
+          ],
+          [
+            "tool",
+            "join_docs"
+          ],
+          [
+            "llm",
+            "qwen1.5b",
+            1765,
+            128
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        5,
+        3185,
+        192
+      ],
+      "shape_seconds": 0.0007478000043192878
+    },
+    "uniform": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "retrieve"
+          ],
+          [
+            "tool",
+            "doc"
+          ],
+          [
+            "tool",
+            "doc"
+          ],
+          [
+            "tool",
+            "doc"
+          ],
+          [
+            "tool",
+            "doc"
+          ],
+          [
+            "llm",
+            "qwen-categorical",
+            355,
+            16
+          ],
+          [
+            "llm",
+            "qwen-categorical",
+            355,
+            16
+          ],
+          [
+            "llm",
+            "qwen-categorical",
+            355,
+            16
+          ],
+          [
+            "llm",
+            "qwen-categorical",
+            355,
+            16
+          ],
+          [
+            "tool",
+            "json_yes"
+          ],
+          [
+            "tool",
+            "json_yes"
+          ],
+          [
+            "tool",
+            "json_yes"
+          ],
+          [
+            "tool",
+            "json_yes"
+          ],
+          [
+            "tool",
+            "keep_relevant"
+          ],
+          [
+            "tool",
+            "any_no"
+          ],
+          [
+            "tool",
+            "web_search"
+          ],
+          [
+            "tool",
+            "join_docs"
+          ],
+          [
+            "llm",
+            "qwen1.5b",
+            1765,
+            128
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        5,
+        3185,
+        192
+      ],
+      "shape_seconds": 0.0007257999968715012
+    },
+    "padall": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "retrieve"
+          ],
+          [
+            "tool",
+            "doc"
+          ],
+          [
+            "tool",
+            "doc"
+          ],
+          [
+            "tool",
+            "doc"
+          ],
+          [
+            "tool",
+            "doc"
+          ],
+          [
+            "llm",
+            "qwen-categorical",
+            355,
+            16
+          ],
+          [
+            "llm",
+            "qwen-categorical",
+            355,
+            16
+          ],
+          [
+            "llm",
+            "qwen-categorical",
+            355,
+            16
+          ],
+          [
+            "llm",
+            "qwen-categorical",
+            355,
+            16
+          ],
+          [
+            "tool",
+            "json_yes"
+          ],
+          [
+            "tool",
+            "json_yes"
+          ],
+          [
+            "tool",
+            "json_yes"
+          ],
+          [
+            "tool",
+            "json_yes"
+          ],
+          [
+            "tool",
+            "keep_relevant"
+          ],
+          [
+            "tool",
+            "any_no"
+          ],
+          [
+            "tool",
+            "web_search"
+          ],
+          [
+            "tool",
+            "join_docs"
+          ],
+          [
+            "llm",
+            "qwen1.5b",
+            1765,
+            128
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        5,
+        3185,
+        192
+      ],
+      "shape_seconds": 0.0007284000021172687
+    }
+  },
+  "frontend_seconds": 0.6307729999971343,
+  "lean_seconds_batch": 5.50452299999597,
+  "pads": {
+    "1": [
+      355,
+      16
+    ],
+    "2": [
+      355,
+      16
+    ],
+    "3": [
+      355,
+      16
+    ],
+    "4": [
+      355,
+      16
+    ],
+    "5": [
+      1765,
+      128
+    ]
+  },
+  "caps": {
+    "1": 16,
+    "2": 16,
+    "3": 16,
+    "4": 16,
+    "5": 128
+  },
+  "site_lines": {
+    "1": 24,
+    "2": 25,
+    "3": 26,
+    "4": 27,
+    "5": 40
+  },
+  "source_binding": {
+    "schema": "orchlang-source-binding-v1",
+    "source_sha256": "520cea242cc921fc9e0c187ea0a61f0aefe1e266e83642fbc6eaf28909fd99d4",
+    "original": [
+      "seq",
+      [
+        "tool",
+        1,
+        "retrieve",
+        [
+          "escape",
+          [
+            "var",
+            0
+          ]
+        ]
+      ],
+      [
+        "seq",
+        [
+          "tool",
+          2,
+          "doc",
+          [
+            "app",
+            [
+              "escape",
+              [
+                "var",
+                1
+              ]
+            ],
+            [
+              "app",
+              [
+                "lit",
+                "\u001f"
+              ],
+              [
+                "escape",
+                [
+                  "lit",
+                  "0"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "seq",
+          [
+            "tool",
+            3,
+            "doc",
+            [
+              "app",
+              [
+                "escape",
+                [
+                  "var",
+                  1
+                ]
+              ],
+              [
+                "app",
+                [
+                  "lit",
+                  "\u001f"
+                ],
+                [
+                  "escape",
+                  [
+                    "lit",
+                    "1"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "seq",
+            [
+              "tool",
+              4,
+              "doc",
+              [
+                "app",
+                [
+                  "escape",
+                  [
+                    "var",
+                    1
+                  ]
+                ],
+                [
+                  "app",
+                  [
+                    "lit",
+                    "\u001f"
+                  ],
+                  [
+                    "escape",
+                    [
+                      "lit",
+                      "2"
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "seq",
+              [
+                "tool",
+                5,
+                "doc",
+                [
+                  "app",
+                  [
+                    "escape",
+                    [
+                      "var",
+                      1
+                    ]
+                  ],
+                  [
+                    "app",
+                    [
+                      "lit",
+                      "\u001f"
+                    ],
+                    [
+                      "escape",
+                      [
+                        "lit",
+                        "3"
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                "seq",
+                [
+                  "call",
+                  1,
+                  6,
+                  "qwen-categorical",
+                  16,
+                  [
+                    "app",
+                    [
+                      "lit",
+                      "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nDecide whether the FACT contains information that helps answer the QUESTION. Return exactly {\"score\":\"yes\"} or {\"score\":\"no\"}. Do not explain.\nQUESTION: "
+                    ],
+                    [
+                      "app",
+                      [
+                        "var",
+                        0
+                      ],
+                      [
+                        "app",
+                        [
+                          "lit",
+                          "\nFACT: "
+                        ],
+                        [
+                          "app",
+                          [
+                            "var",
+                            2
+                          ],
+                          [
+                            "lit",
+                            "<|im_end|>\n<|im_start|>assistant\n"
+                          ]
+                        ]
+                      ]
+                    ]
+                  ],
+                  null
+                ],
+                [
+                  "seq",
+                  [
+                    "call",
+                    2,
+                    7,
+                    "qwen-categorical",
+                    16,
+                    [
+                      "app",
+                      [
+                        "lit",
+                        "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nDecide whether the FACT contains information that helps answer the QUESTION. Return exactly {\"score\":\"yes\"} or {\"score\":\"no\"}. Do not explain.\nQUESTION: "
+                      ],
+                      [
+                        "app",
+                        [
+                          "var",
+                          0
+                        ],
+                        [
+                          "app",
+                          [
+                            "lit",
+                            "\nFACT: "
+                          ],
+                          [
+                            "app",
+                            [
+                              "var",
+                              3
+                            ],
+                            [
+                              "lit",
+                              "<|im_end|>\n<|im_start|>assistant\n"
+                            ]
+                          ]
+                        ]
+                      ]
+                    ],
+                    null
+                  ],
+                  [
+                    "seq",
+                    [
+                      "call",
+                      3,
+                      8,
+                      "qwen-categorical",
+                      16,
+                      [
+                        "app",
+                        [
+                          "lit",
+                          "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nDecide whether the FACT contains information that helps answer the QUESTION. Return exactly {\"score\":\"yes\"} or {\"score\":\"no\"}. Do not explain.\nQUESTION: "
+                        ],
+                        [
+                          "app",
+                          [
+                            "var",
+                            0
+                          ],
+                          [
+                            "app",
+                            [
+                              "lit",
+                              "\nFACT: "
+                            ],
+                            [
+                              "app",
+                              [
+                                "var",
+                                4
+                              ],
+                              [
+                                "lit",
+                                "<|im_end|>\n<|im_start|>assistant\n"
+                              ]
+                            ]
+                          ]
+                        ]
+                      ],
+                      null
+                    ],
+                    [
+                      "seq",
+                      [
+                        "call",
+                        4,
+                        9,
+                        "qwen-categorical",
+                        16,
+                        [
+                          "app",
+                          [
+                            "lit",
+                            "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nDecide whether the FACT contains information that helps answer the QUESTION. Return exactly {\"score\":\"yes\"} or {\"score\":\"no\"}. Do not explain.\nQUESTION: "
+                          ],
+                          [
+                            "app",
+                            [
+                              "var",
+                              0
+                            ],
+                            [
+                              "app",
+                              [
+                                "lit",
+                                "\nFACT: "
+                              ],
+                              [
+                                "app",
+                                [
+                                  "var",
+                                  5
+                                ],
+                                [
+                                  "lit",
+                                  "<|im_end|>\n<|im_start|>assistant\n"
+                                ]
+                              ]
+                            ]
+                          ]
+                        ],
+                        null
+                      ],
+                      [
+                        "seq",
+                        [
+                          "tool",
+                          10,
+                          "json_yes",
+                          [
+                            "escape",
+                            [
+                              "var",
+                              6
+                            ]
+                          ]
+                        ],
+                        [
+                          "seq",
+                          [
+                            "tool",
+                            11,
+                            "json_yes",
+                            [
+                              "escape",
+                              [
+                                "var",
+                                7
+                              ]
+                            ]
+                          ],
+                          [
+                            "seq",
+                            [
+                              "tool",
+                              12,
+                              "json_yes",
+                              [
+                                "escape",
+                                [
+                                  "var",
+                                  8
+                                ]
+                              ]
+                            ],
+                            [
+                              "seq",
+                              [
+                                "tool",
+                                13,
+                                "json_yes",
+                                [
+                                  "escape",
+                                  [
+                                    "var",
+                                    9
+                                  ]
+                                ]
+                              ],
+                              [
+                                "seq",
+                                [
+                                  "tool",
+                                  14,
+                                  "keep_relevant",
+                                  [
+                                    "app",
+                                    [
+                                      "escape",
+                                      [
+                                        "var",
+                                        2
+                                      ]
+                                    ],
+                                    [
+                                      "app",
+                                      [
+                                        "lit",
+                                        "\u001f"
+                                      ],
+                                      [
+                                        "app",
+                                        [
+                                          "escape",
+                                          [
+                                            "var",
+                                            10
+                                          ]
+                                        ],
+                                        [
+                                          "app",
+                                          [
+                                            "lit",
+                                            "\u001f"
+                                          ],
+                                          [
+                                            "app",
+                                            [
+                                              "escape",
+                                              [
+                                                "var",
+                                                3
+                                              ]
+                                            ],
+                                            [
+                                              "app",
+                                              [
+                                                "lit",
+                                                "\u001f"
+                                              ],
+                                              [
+                                                "app",
+                                                [
+                                                  "escape",
+                                                  [
+                                                    "var",
+                                                    11
+                                                  ]
+                                                ],
+                                                [
+                                                  "app",
+                                                  [
+                                                    "lit",
+                                                    "\u001f"
+                                                  ],
+                                                  [
+                                                    "app",
+                                                    [
+                                                      "escape",
+                                                      [
+                                                        "var",
+                                                        4
+                                                      ]
+                                                    ],
+                                                    [
+                                                      "app",
+                                                      [
+                                                        "lit",
+                                                        "\u001f"
+                                                      ],
+                                                      [
+                                                        "app",
+                                                        [
+                                                          "escape",
+                                                          [
+                                                            "var",
+                                                            12
+                                                          ]
+                                                        ],
+                                                        [
+                                                          "app",
+                                                          [
+                                                            "lit",
+                                                            "\u001f"
+                                                          ],
+                                                          [
+                                                            "app",
+                                                            [
+                                                              "escape",
+                                                              [
+                                                                "var",
+                                                                5
+                                                              ]
+                                                            ],
+                                                            [
+                                                              "app",
+                                                              [
+                                                                "lit",
+                                                                "\u001f"
+                                                              ],
+                                                              [
+                                                                "escape",
+                                                                [
+                                                                  "var",
+                                                                  13
+                                                                ]
+                                                              ]
+                                                            ]
+                                                          ]
+                                                        ]
+                                                      ]
+                                                    ]
+                                                  ]
+                                                ]
+                                              ]
+                                            ]
+                                          ]
+                                        ]
+                                      ]
+                                    ]
+                                  ]
+                                ],
+                                [
+                                  "seq",
+                                  [
+                                    "tool",
+                                    15,
+                                    "any_no",
+                                    [
+                                      "app",
+                                      [
+                                        "escape",
+                                        [
+                                          "var",
+                                          10
+                                        ]
+                                      ],
+                                      [
+                                        "app",
+                                        [
+                                          "lit",
+                                          "\u001f"
+                                        ],
+                                        [
+                                          "app",
+                                          [
+                                            "escape",
+                                            [
+                                              "var",
+                                              11
+                                            ]
+                                          ],
+                                          [
+                                            "app",
+                                            [
+                                              "lit",
+                                              "\u001f"
+                                            ],
+                                            [
+                                              "app",
+                                              [
+                                                "escape",
+                                                [
+                                                  "var",
+                                                  12
+                                                ]
+                                              ],
+                                              [
+                                                "app",
+                                                [
+                                                  "lit",
+                                                  "\u001f"
+                                                ],
+                                                [
+                                                  "escape",
+                                                  [
+                                                    "var",
+                                                    13
+                                                  ]
+                                                ]
+                                              ]
+                                            ]
+                                          ]
+                                        ]
+                                      ]
+                                    ]
+                                  ],
+                                  [
+                                    "seq",
+                                    [
+                                      "ite",
+                                      [
+                                        "eq",
+                                        15,
+                                        "yes"
+                                      ],
+                                      [
+                                        "seq",
+                                        [
+                                          "tool",
+                                          16,
+                                          "web_search",
+                                          [
+                                            "escape",
+                                            [
+                                              "var",
+                                              0
+                                            ]
+                                          ]
+                                        ],
+                                        [
+                                          "tool",
+                                          17,
+                                          "join_docs",
+                                          [
+                                            "app",
+                                            [
+                                              "escape",
+                                              [
+                                                "var",
+                                                14
+                                              ]
+                                            ],
+                                            [
+                                              "app",
+                                              [
+                                                "lit",
+                                                "\u001f"
+                                              ],
+                                              [
+                                                "escape",
+                                                [
+                                                  "var",
+                                                  16
+                                                ]
+                                              ]
+                                            ]
+                                          ]
+                                        ]
+                                      ],
+                                      [
+                                        "tool",
+                                        17,
+                                        "join_docs",
+                                        [
+                                          "app",
+                                          [
+                                            "escape",
+                                            [
+                                              "var",
+                                              14
+                                            ]
+                                          ],
+                                          [
+                                            "app",
+                                            [
+                                              "lit",
+                                              "\u001f"
+                                            ],
+                                            [
+                                              "escape",
+                                              [
+                                                "lit",
+                                                ""
+                                              ]
+                                            ]
+                                          ]
+                                        ]
+                                      ]
+                                    ],
+                                    [
+                                      "call",
+                                      5,
+                                      18,
+                                      "qwen1.5b",
+                                      128,
+                                      [
+                                        "app",
+                                        [
+                                          "lit",
+                                          "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\nYou are an assistant for question-answering tasks. \n    \n    Use the following documents to answer the question. \n    \n    If you don't know the answer, just say that you don't know. \n    \n    Use three sentences maximum and keep the answer concise:\n    Question: "
+                                        ],
+                                        [
+                                          "app",
+                                          [
+                                            "var",
+                                            0
+                                          ],
+                                          [
+                                            "app",
+                                            [
+                                              "lit",
+                                              " \n    Documents: "
+                                            ],
+                                            [
+                                              "app",
+                                              [
+                                                "var",
+                                                17
+                                              ],
+                                              [
+                                                "lit",
+                                                " \n    Answer: \n    <|im_end|>\n<|im_start|>assistant\n"
+                                              ]
+                                            ]
+                                          ]
+                                        ]
+                                      ],
+                                      null
+                                    ]
+                                  ]
+                                ]
+                              ]
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ],
+    "secret_inputs": [
+      0
+    ],
+    "high": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18
+    ],
+    "slots": {
+      "question": 0,
+      "docs": 1,
+      "d0": 2,
+      "d1": 3,
+      "d2": 4,
+      "d3": 5,
+      "g0": 6,
+      "g1": 7,
+      "g2": 8,
+      "g3": 9,
+      "k0": 10,
+      "k1": 11,
+      "k2": 12,
+      "k3": 13,
+      "kept": 14,
+      "search": 15,
+      "web": 16,
+      "context": 17,
+      "answer": 18
+    },
+    "trust": "Python source reader/lowering and serialization; Lean checks the shaped core",
+    "binding_sha256": "6f8b29353e2149ddf21782612a2cc633937a46d278a9cde4af52226f0383b546"
+  },
+  "request_targets": "heuristic execution envelopes; complete requests are admitted exactly before dispatch"
+}

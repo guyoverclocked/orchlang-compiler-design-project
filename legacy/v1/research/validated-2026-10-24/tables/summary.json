@@ -1,0 +1,120 @@
+{
+  "metrics": {
+    "source_programs": 256,
+    "accepted": 16,
+    "execution_contexts": 3072,
+    "accepted_finite_counterexamples": 0,
+    "source_reconstruction_disagreements": 0,
+    "lean_normalization_disagreements": 0,
+    "lean_reference_disagreements": 0,
+    "lean_replay_disagreements": 0,
+    "cpp_accepted": 8,
+    "cpp_e230_cases": 192,
+    "boundary_cases": 8,
+    "boundary_paths": 23,
+    "source_tampers_rejected": 32,
+    "altered_plans_rejected": 16,
+    "invalid_evaluator_inputs_rejected": 8,
+    "cpp_tests": 106,
+    "python_tests": 47,
+    "proof_files": 3
+  },
+  "evidence": {
+    "dataflow/altered-plans.json": {
+      "sha256": "654afddd73d3ad980a7823954c0bdca554386d887e9543c0e473d412c14831ca",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\altered-plans.json"
+    },
+    "dataflow/boundaries.json": {
+      "sha256": "e370986e6ea7a782541dc3cb8f0fed9a875aa85ffc2f8025f267eb75a2c69436",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\boundaries.json"
+    },
+    "dataflow/boundary-lean-commands.json": {
+      "sha256": "3c5d23be9821f648953f367e20373722f71f5990f5c2d141835726a52e28843a",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\boundary-lean-commands.json"
+    },
+    "dataflow/certificates.json": {
+      "sha256": "c02098f6e8292dfcc166ba10d464506f4afe99b85148c28233d187caa5a5731a",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\certificates.json"
+    },
+    "dataflow/contexts.json": {
+      "sha256": "de7a18794b550b9b79d7c880588478f8df24351fd170877625b3e1a1ba8e35f8",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\contexts.json"
+    },
+    "dataflow/lean-input.json": {
+      "sha256": "04a2d375f06b577ef65eb1984d4d7f81066edc479bf389696c282ceb813baf79",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\lean-input.json"
+    },
+    "dataflow/lean-output.json": {
+      "sha256": "2afa7f8fc17acedfd25ec2eeea994069573826e92da662ada662fc1f072db63f",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\lean-output.json"
+    },
+    "dataflow/main-lean-commands.json": {
+      "sha256": "3abc56d608f211a2642eb43eb3c8a74c9d7c6a5c000d2b6804037b3e479fe7ea",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\main-lean-commands.json"
+    },
+    "dataflow/manifest.json": {
+      "sha256": "0c022019d5025417d2478d91a7615f6c1deabf8549558c8fb176c4d9107e660b",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\manifest.json"
+    },
+    "dataflow/negative-duplicate-request-commands.json": {
+      "sha256": "2c1018fbf6ce7374b832dd8d4024a0631e2b3c17ea19a06cfc903c0d6e4611f3",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\negative-duplicate-request-commands.json"
+    },
+    "dataflow/negative-evaluator-inputs.json": {
+      "sha256": "c50be396bbdb4ab90492633f69ae3b0ce36a3715dd41ceeb2e4ab82136c11049",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\negative-evaluator-inputs.json"
+    },
+    "dataflow/negative-execution-limit-commands.json": {
+      "sha256": "a99ac5a7b90519cd03d73206614068039faf349a767064c175f3739a662a73f8",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\negative-execution-limit-commands.json"
+    },
+    "dataflow/negative-missing-request-commands.json": {
+      "sha256": "8b9ae990db4f09117e148640829635610f8f5e8ad74e8bf22a739ee0f6025217",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\negative-missing-request-commands.json"
+    },
+    "dataflow/negative-negative-weight-commands.json": {
+      "sha256": "37f6e54e4a93a884635e85ecd997ca018d9da388fc2c9f00f131088ddec3f548",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\negative-negative-weight-commands.json"
+    },
+    "dataflow/negative-row-mass-commands.json": {
+      "sha256": "bdccf6ae9c1043c0470fe979fff50a5e6025309080702c63ee04340fd22d3627",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\negative-row-mass-commands.json"
+    },
+    "dataflow/negative-secret-plan-commands.json": {
+      "sha256": "bf1a0a9cd0cf29936d39fff347200350b542d8b9ce5e6b6e22cbc53eec62f0eb",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\negative-secret-plan-commands.json"
+    },
+    "dataflow/negative-text-constructor-commands.json": {
+      "sha256": "368ccf646c77983b7e9c17b36c0d198185d078ebc6fcca52dbf6b2fdfb47ddae",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\negative-text-constructor-commands.json"
+    },
+    "dataflow/negative-zero-denominator-commands.json": {
+      "sha256": "ace04a4ae52654695402dea87dc6586acd89a6e4e9b06d6f71393c978f1bd092",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\negative-zero-denominator-commands.json"
+    },
+    "dataflow/programs.json": {
+      "sha256": "c6bd89d3d5de9488aad2b4dad2b08e1abf86aad6d1f5961da5b4e37208523f53",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\programs.json"
+    },
+    "dataflow/tamper-lean-commands.json": {
+      "sha256": "dc49235db41b067115695bc9b806268915387ad95fb9f131177049ae05869067",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\tamper-lean-commands.json"
+    },
+    "cpu/commands.json": {
+      "sha256": "97f984ba7dc9c8121c76e5018c2fab1f2b9e27dfa60bedf7bc97708c620aa130",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-cpu-v5\\commands.json"
+    },
+    "cpu/manifest.json": {
+      "sha256": "b3a284960082fc4b83bcd300a936c9d3239739816e6593d6f64c218193321e3d",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-cpu-v5\\manifest.json"
+    },
+    "cpu/results.json": {
+      "sha256": "0d7d614cac85fefd486909a9c3bce47af1bc14af92e4a7c4fd850020f3c85879",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-cpu-v5\\results.json"
+    },
+    "cpu/source-files.json": {
+      "sha256": "a05ef9ee08cef893d7653d96736fe3217d5f56261e1548d42f2074d54ad905dc",
+      "path": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-cpu-v5\\source-files.json"
+    }
+  }
+}

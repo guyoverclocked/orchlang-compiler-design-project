@@ -1,0 +1,220 @@
+{
+  "format": "orchlang-exact-accounting-result-v1",
+  "tokenizer": {
+    "identity": "hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1",
+    "sha256": "8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6",
+    "tokenizers_version": "0.21.4",
+    "add_special_tokens": false,
+    "truncation": false,
+    "padding": false,
+    "serialization": "raw-utf8-v1"
+  },
+  "static_bound": {
+    "input_tokens": 27,
+    "output_tokens": 16,
+    "total_tokens": 43,
+    "calls": 2
+  },
+  "budget_tokens": 43,
+  "paths": [
+    {
+      "trace": [
+        [
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"example-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1\"}",
+          "hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1",
+          6,
+          3,
+          "ok"
+        ],
+        [
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"example-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1\"}",
+          "hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1",
+          5,
+          3,
+          "ok"
+        ]
+      ],
+      "requests": [
+        {
+          "text": "Input:你好",
+          "ids": [
+            20560,
+            25,
+            19526,
+            254,
+            25001,
+            121
+          ],
+          "input_tokens": 6
+        },
+        {
+          "text": "Next:é🙂",
+          "ids": [
+            10019,
+            25,
+            2634,
+            8582,
+            25081
+          ],
+          "input_tokens": 5
+        }
+      ],
+      "private_outputs": [],
+      "weight": "1/4",
+      "usage": {
+        "input_tokens": 11,
+        "output_tokens": 6,
+        "calls": 2,
+        "total_tokens": 17
+      }
+    },
+    {
+      "trace": [
+        [
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"example-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1\"}",
+          "hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1",
+          6,
+          3,
+          "ok"
+        ],
+        [
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"example-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1\"}",
+          "hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1",
+          5,
+          0,
+          "error"
+        ]
+      ],
+      "requests": [
+        {
+          "text": "Input:你好",
+          "ids": [
+            20560,
+            25,
+            19526,
+            254,
+            25001,
+            121
+          ],
+          "input_tokens": 6
+        },
+        {
+          "text": "Next:é🙂",
+          "ids": [
+            10019,
+            25,
+            2634,
+            8582,
+            25081
+          ],
+          "input_tokens": 5
+        }
+      ],
+      "private_outputs": [],
+      "weight": "1/4",
+      "usage": {
+        "input_tokens": 11,
+        "output_tokens": 3,
+        "calls": 2,
+        "total_tokens": 14
+      }
+    },
+    {
+      "trace": [
+        [
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"example-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1\"}",
+          "hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1",
+          6,
+          0,
+          "error"
+        ],
+        [
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"example-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1\"}",
+          "hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1",
+          2,
+          3,
+          "ok"
+        ]
+      ],
+      "requests": [
+        {
+          "text": "Input:你好",
+          "ids": [
+            20560,
+            25,
+            19526,
+            254,
+            25001,
+            121
+          ],
+          "input_tokens": 6
+        },
+        {
+          "text": "Next:",
+          "ids": [
+            10019,
+            25
+          ],
+          "input_tokens": 2
+        }
+      ],
+      "private_outputs": [],
+      "weight": "1/4",
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 3,
+        "calls": 2,
+        "total_tokens": 11
+      }
+    },
+    {
+      "trace": [
+        [
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"example-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1\"}",
+          "hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1",
+          6,
+          0,
+          "error"
+        ],
+        [
+          "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite-replay\",\"revision\":\"example-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1\"}",
+          "hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1",
+          2,
+          0,
+          "error"
+        ]
+      ],
+      "requests": [
+        {
+          "text": "Input:你好",
+          "ids": [
+            20560,
+            25,
+            19526,
+            254,
+            25001,
+            121
+          ],
+          "input_tokens": 6
+        },
+        {
+          "text": "Next:",
+          "ids": [
+            10019,
+            25
+          ],
+          "input_tokens": 2
+        }
+      ],
+      "private_outputs": [],
+      "weight": "1/4",
+      "usage": {
+        "input_tokens": 8,
+        "output_tokens": 0,
+        "calls": 2,
+        "total_tokens": 8
+      }
+    }
+  ],
+  "scope": "trusted-python-finite-text-executor; not C++ source certification or provider billing"
+}

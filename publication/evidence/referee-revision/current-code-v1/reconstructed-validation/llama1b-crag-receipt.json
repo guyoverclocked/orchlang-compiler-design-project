@@ -1,0 +1,311 @@
+{
+  "schema": "orchlang-source-check-receipt-v1",
+  "source_binding_sha256": "e9596a8209ace3911ea861b995fa96cd42d9870523bc9e8b3066348338baf93c",
+  "model_contracts": {
+    "llama1b": {
+      "key": "llama1b",
+      "template": "llama3",
+      "filler": " .",
+      "pad_mode": "isolated",
+      "pad_position": "end",
+      "stop": [
+        "<|eot_id|>",
+        "<|end_of_text|>"
+      ],
+      "bos": "",
+      "sha256": "6f85a640a97cf2bf5b8e764087b1e83da0fdb51d7c9fab7d0fece9385611df83",
+      "gguf_sha256": "6f85a640a97cf2bf5b8e764087b1e83da0fdb51d7c9fab7d0fece9385611df83"
+    }
+  },
+  "verdicts": {
+    "ours": {
+      "static_shape": [
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "any_no"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "join_docs"
+        ],
+        [
+          "llm",
+          "llama1b",
+          1773,
+          128
+        ]
+      ],
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    },
+    "naive": {
+      "static_shape": [
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "any_no"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "join_docs"
+        ],
+        [
+          "tool",
+          "join_docs"
+        ],
+        [
+          "llm",
+          "llama1b",
+          1773,
+          128
+        ]
+      ],
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    },
+    "uniform": {
+      "static_shape": [
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          1773,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          1773,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          1773,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          1773,
+          128
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "any_no"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "join_docs"
+        ],
+        [
+          "llm",
+          "llama1b",
+          1773,
+          128
+        ]
+      ],
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    }
+  },
+  "accepted": true,
+  "assumptions": [
+    "trusted Python frontend and source binding",
+    "World.Conforms",
+    "World.Transparent for functional preservation",
+    "stated logical observer only"
+  ],
+  "reconstructed_after_execution": true,
+  "protocol_version": "c2bb75c1ff7ef3a7ba824239d97b960efeb27e68"
+}

@@ -1,0 +1,54 @@
+{
+  "schema": "orchlang-independent-record-audit-v1",
+  "utc": "2026-10-24T18:45:22.278121+00:00",
+  "request_retokenized": false,
+  "visible_prefix_reconstructed": false,
+  "records": 486,
+  "llm_events": 1535,
+  "campaigns": {
+    "publication\\evidence\\completion\\conformance\\calculator": {
+      "orig": 3,
+      "ours": 3
+    },
+    "publication\\evidence\\completion\\conformance\\chaining": {
+      "orig": 3,
+      "ours": 3
+    },
+    "publication\\evidence\\completion\\conformance\\email": {
+      "orig": 3,
+      "ours": 3
+    },
+    "publication\\evidence\\completion\\conformance\\evaluator": {
+      "orig": 3,
+      "ours": 3
+    },
+    "publication\\evidence\\completion\\conformance\\orchestrator": {
+      "orig": 3,
+      "ours": 3
+    },
+    "publication\\evidence\\completion\\conformance\\routing": {
+      "orig": 3,
+      "ours": 3
+    },
+    "publication\\evidence\\completion\\conformance\\switch": {
+      "orig": 3,
+      "ours": 3
+    },
+    "publication\\evidence\\completion\\main\\adaptive": {
+      "orig": 32,
+      "ours": 0
+    },
+    "publication\\evidence\\completion\\main\\crag": {
+      "orig": 150,
+      "ours": 8
+    },
+    "publication\\evidence\\completion\\replication\\switch": {
+      "orig": 210,
+      "ours": 44
+    }
+  },
+  "failures": [],
+  "active_trailing_writes": [],
+  "tampered_count_detected": true,
+  "status": "verified-completed-prefix"
+}

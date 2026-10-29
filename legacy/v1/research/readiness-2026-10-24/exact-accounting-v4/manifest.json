@@ -1,0 +1,101 @@
+{
+  "status": "completed",
+  "timestamp_utc": "2026-10-23T21:31:34.555884+00:00",
+  "source_commit": "460bf3a453879618a86916ca6540bbf6b4f0e21c",
+  "dirty_tree": true,
+  "files": {
+    "runtime/token_accounting.py": "ae181e57a88cd4389334720d33901c9aae32f0486e947c411c90593a8950283c",
+    "runtime/replay_adapter.py": "b028a75278956cbc63d5f2c2612e75a3b6b82a94477706abd0cf522b3c5f30d4",
+    "runtime/finite_reference.py": "2f4b859f604f2ddeb46853cbbcf1ce15b5c3b394f64a3830f0d14c6b656747a6",
+    "runtime/source_gate.py": "e63a7dbde2bcb1d658a993272977af731c48bd011235597f742f520932910fba",
+    "scripts/exact_tokenizer.py": "b6ff991d254e9dac2645cb36760146c5eee571c4c51811ec4b6be93450eb5a57",
+    "scripts/exact_tokenizer_probe.py": "714dfbc5aa947565f9d92913a537a439feb718159a3503d78295406f5e925647",
+    "tests/test_token_accounting.py": "1eb9a205d3f6780cdaf17215384b9d3356f5eb384b2acadcfb379ea8b4f567f4",
+    "bench/exact/closed-source.orch": "612d9dde4a718cef402e528b81d6b40e2f8b4fe9bf412a0f35adc303c0796f88"
+  },
+  "protocol_sha256": "25eaccc15b363172c448c6ec772d2bbad992fd62ef75a63db14ae42d18e7b1ce",
+  "family_protocol_sha256": "de1e9bd63b07a617bba5aa7c0006cd119f3ef00443be11aec8b132399309df89",
+  "tokenizer_artifacts": [
+    {
+      "id": "gpt2-bpe",
+      "repo": "openai-community/gpt2",
+      "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+      "license": "mit",
+      "file": "gpt2-bpe.json",
+      "sha256": "8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6",
+      "bytes": 1355256,
+      "url": "https://huggingface.co/openai-community/gpt2/resolve/607a30d783dfa663caf39e06633721c8d4cfcd7e/tokenizer.json"
+    },
+    {
+      "id": "bert-wordpiece",
+      "repo": "google-bert/bert-base-uncased",
+      "revision": "86b5e0934494bd15c9632b12f734a8a67f723594",
+      "license": "apache-2.0",
+      "file": "bert-wordpiece.json",
+      "sha256": "ce64fce797c24f68df90b40a3f74f579b336a493db14bd583fd520ea0d8c9a98",
+      "bytes": 466062,
+      "url": "https://huggingface.co/google-bert/bert-base-uncased/resolve/86b5e0934494bd15c9632b12f734a8a67f723594/tokenizer.json"
+    }
+  ],
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "protocol_status": "development-protocol-after-preliminary-boundary-exploration-not-preregistered",
+  "spent_usd": "0.00",
+  "model_inference": false,
+  "required_tests": {
+    "command": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\tools\\tokenizer-venv\\Scripts\\python.exe",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "tests.test_token_accounting",
+      "-v"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": "test_actual_source_counts_complete_substituted_requests (tests.test_token_accounting.ExactAccountingTests.test_actual_source_counts_complete_substituted_requests) ... ok\ntest_admission_precedes_dispatch_and_preserves_trace (tests.test_token_accounting.ExactAccountingTests.test_admission_precedes_dispatch_and_preserves_trace) ... ok\ntest_complete_concat_uses_exact_encoding (tests.test_token_accounting.ExactAccountingTests.test_complete_concat_uses_exact_encoding) ... ok\ntest_dynamic_byte_contracts_bound_response_dependent_chain (tests.test_token_accounting.ExactAccountingTests.test_dynamic_byte_contracts_bound_response_dependent_chain) ... ok\ntest_hash_version_and_contract_identity_are_enforced (tests.test_token_accounting.ExactAccountingTests.test_hash_version_and_contract_identity_are_enforced) ... ok\ntest_output_caps_cover_all_alternatives_including_errors (tests.test_token_accounting.ExactAccountingTests.test_output_caps_cover_all_alternatives_including_errors) ... ok\ntest_plain_and_special_counts_bert (tests.test_token_accounting.ExactAccountingTests.test_plain_and_special_counts_bert) ... ok\ntest_retry_all_attempts_and_branch_max (tests.test_token_accounting.ExactAccountingTests.test_retry_all_attempts_and_branch_max) ... ok\ntest_runtime_only_dynamic_bert_has_no_static_bound (tests.test_token_accounting.ExactAccountingTests.test_runtime_only_dynamic_bert_has_no_static_bound) ... ok\ntest_token_cap_does_not_imply_a_byte_cap (tests.test_token_accounting.ExactAccountingTests.test_token_cap_does_not_imply_a_byte_cap) ... ok\ntest_truncation_and_padding_are_disabled (tests.test_token_accounting.ExactAccountingTests.test_truncation_and_padding_are_disabled) ... ok\ntest_utf8_is_strict_and_counts_bytes (tests.test_token_accounting.UTF8ContractTests.test_utf8_is_strict_and_counts_bytes) ... ok\n\n----------------------------------------------------------------------\nRan 12 tests in 0.962s\n\nOK\n",
+    "env": {
+      "ORCHLANG_TOKENIZER_DIR": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\tokenizers-development-v1",
+      "PYTHONUTF8": "1"
+    }
+  },
+  "cli_source_checks": [
+    {
+      "command": [
+        "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\tools\\tokenizer-venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "C:\\Users\\nambi\\Documents\\Compiler Project\\orchlang-compiler-design-project\\scripts\\exact_tokenizer.py",
+        "--tokenizer",
+        "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\tokenizers-development-v1\\gpt2-bpe.json",
+        "--tokenizer-sha256",
+        "8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6",
+        "analyze-source",
+        "--source",
+        "C:\\Users\\nambi\\Documents\\Compiler Project\\orchlang-compiler-design-project\\bench\\exact\\closed-source.orch"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"format\": \"orchlang-exact-source-accounting-v1\",\n  \"workflow\": \"ExactClosedSource\",\n  \"source_sha256\": \"612d9dde4a718cef402e528b81d6b40e2f8b4fe9bf412a0f35adc303c0796f88\",\n  \"tokenizer\": {\n    \"identity\": \"hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1\",\n    \"sha256\": \"8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6\",\n    \"tokenizers_version\": \"0.21.4\",\n    \"add_special_tokens\": false,\n    \"truncation\": false,\n    \"padding\": false,\n    \"serialization\": \"raw-utf8-v1\"\n  },\n  \"accounting_mode\": \"closed-source-conditional-static-bound\",\n  \"static_bound\": {\n    \"input_tokens\": 3,\n    \"output_tokens\": 8,\n    \"total_tokens\": 11,\n    \"calls\": 1\n  },\n  \"source_declared_budget\": 11,\n  \"within_budget\": true,\n  \"calls\": [\n    {\n      \"source_contract\": {\n        \"accounting\": \"all-attempts-input-and-output\",\n        \"cap\": 8,\n        \"error_policy\": \"status-in-outcome\",\n        \"provider\": \"finite-replay\",\n        \"revision\": \"exact-source-example-v1\",\n        \"sampling\": \"explicit-table\",\n        \"serializer\": \"raw-utf8-v1\",\n        \"state\": \"stateless\",\n        \"tokenizer\": \"utf8-bytes-v1\"\n      },\n      \"request\": \"helloworld\",\n      \"input_ids\": [\n        12758,\n        322,\n        1764\n      ],\n      \"exact_input_tokens\": 3,\n      \"declared_output_cap\": 8\n    },\n    {\n      \"source_contract\": {\n        \"accounting\": \"all-attempts-input-and-output\",\n        \"cap\": 8,\n        \"error_policy\": \"status-in-outcome\",\n        \"provider\": \"finite-replay\",\n        \"revision\": \"exact-source-example-v1\",\n        \"sampling\": \"explicit-table\",\n        \"serializer\": \"raw-utf8-v1\",\n        \"state\": \"stateless\",\n        \"tokenizer\": \"utf8-bytes-v1\"\n      },\n      \"request\": \"helloworld\",\n      \"input_ids\": [\n        12758,\n        322,\n        1764\n      ],\n      \"exact_input_tokens\": 3,\n      \"declared_output_cap\": 8\n    }\n  ],\n  \"output_cap_assumption\": \"every attempt is capped in the selected tokenizer policy; not established by analysis\",\n  \"scope\": \"trusted-source-reader-and-Python-accounting; no primitive execution or Lean/C++ cost correspondence\"\n}\n",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\tools\\tokenizer-venv\\Scripts\\python.exe",
+        "-X",
+        "utf8",
+        "C:\\Users\\nambi\\Documents\\Compiler Project\\orchlang-compiler-design-project\\scripts\\exact_tokenizer.py",
+        "--tokenizer",
+        "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\tokenizers-development-v1\\bert-wordpiece.json",
+        "--tokenizer-sha256",
+        "ce64fce797c24f68df90b40a3f74f579b336a493db14bd583fd520ea0d8c9a98",
+        "analyze-source",
+        "--source",
+        "C:\\Users\\nambi\\Documents\\Compiler Project\\orchlang-compiler-design-project\\bench\\exact\\closed-source.orch"
+      ],
+      "exit_code": 0,
+      "stdout": "{\n  \"format\": \"orchlang-exact-source-accounting-v1\",\n  \"workflow\": \"ExactClosedSource\",\n  \"source_sha256\": \"612d9dde4a718cef402e528b81d6b40e2f8b4fe9bf412a0f35adc303c0796f88\",\n  \"tokenizer\": {\n    \"identity\": \"hf-tokenizers/0.21.4/sha256:ce64fce797c24f68df90b40a3f74f579b336a493db14bd583fd520ea0d8c9a98/specials:0/raw-text-v1\",\n    \"sha256\": \"ce64fce797c24f68df90b40a3f74f579b336a493db14bd583fd520ea0d8c9a98\",\n    \"tokenizers_version\": \"0.21.4\",\n    \"add_special_tokens\": false,\n    \"truncation\": false,\n    \"padding\": false,\n    \"serialization\": \"raw-utf8-v1\"\n  },\n  \"accounting_mode\": \"closed-source-conditional-static-bound\",\n  \"static_bound\": {\n    \"input_tokens\": 2,\n    \"output_tokens\": 8,\n    \"total_tokens\": 10,\n    \"calls\": 1\n  },\n  \"source_declared_budget\": 11,\n  \"within_budget\": true,\n  \"calls\": [\n    {\n      \"source_contract\": {\n        \"accounting\": \"all-attempts-input-and-output\",\n        \"cap\": 8,\n        \"error_policy\": \"status-in-outcome\",\n        \"provider\": \"finite-replay\",\n        \"revision\": \"exact-source-example-v1\",\n        \"sampling\": \"explicit-table\",\n        \"serializer\": \"raw-utf8-v1\",\n        \"state\": \"stateless\",\n        \"tokenizer\": \"utf8-bytes-v1\"\n      },\n      \"request\": \"helloworld\",\n      \"input_ids\": [\n        7592,\n        11108\n      ],\n      \"exact_input_tokens\": 2,\n      \"declared_output_cap\": 8\n    },\n    {\n      \"source_contract\": {\n        \"accounting\": \"all-attempts-input-and-output\",\n        \"cap\": 8,\n        \"error_policy\": \"status-in-outcome\",\n        \"provider\": \"finite-replay\",\n        \"revision\": \"exact-source-example-v1\",\n        \"sampling\": \"explicit-table\",\n        \"serializer\": \"raw-utf8-v1\",\n        \"state\": \"stateless\",\n        \"tokenizer\": \"utf8-bytes-v1\"\n      },\n      \"request\": \"helloworld\",\n      \"input_ids\": [\n        7592,\n        11108\n      ],\n      \"exact_input_tokens\": 2,\n      \"declared_output_cap\": 8\n    }\n  ],\n  \"output_cap_assumption\": \"every attempt is capped in the selected tokenizer policy; not established by analysis\",\n  \"scope\": \"trusted-source-reader-and-Python-accounting; no primitive execution or Lean/C++ cost correspondence\"\n}\n",
+      "stderr": ""
+    }
+  ]
+}

@@ -1,0 +1,452 @@
+{
+  "protocol_sha256": "5e35163bd85626580a6c0cf6b734c439068abcde5ab3b1bf1ffa72f328cdddf7",
+  "results_sha256": "a965fce14f631f644bd34235d694d156bc2d2a8b72bec086c558806701b92c80",
+  "diagnoses": [
+    {
+      "id": "lg-chain-graph",
+      "output_cap": 24,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-chain-graph",
+      "output_cap": 24,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-chain-graph",
+      "output_cap": 64,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-chain-graph",
+      "output_cap": 64,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-chain-functional",
+      "output_cap": 24,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-chain-functional",
+      "output_cap": 24,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-chain-functional",
+      "output_cap": 64,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-chain-functional",
+      "output_cap": 64,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-parallel-graph",
+      "output_cap": 24,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-parallel-graph",
+      "output_cap": 24,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-parallel-graph",
+      "output_cap": 64,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-parallel-graph",
+      "output_cap": 64,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-routing-graph",
+      "output_cap": 24,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-routing-graph",
+      "output_cap": 24,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-routing-graph",
+      "output_cap": 64,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "lg-routing-graph",
+      "output_cap": 64,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "pf-basic",
+      "output_cap": 24,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "pf-basic",
+      "output_cap": 24,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "pf-basic",
+      "output_cap": 64,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "first-equal-request-divergent-model-response",
+      "first_difference_call": 1,
+      "complete_request": "Write a simple Python program that displays the greeting message.",
+      "original_response": " The program should also include a function that takes a string as input and returns the string in reverse. The program should use a loop to display the greeting message 5 times, and the function should be called within the loop to reverse the greeting message before displaying it. Additionally, the program should include a try-except block",
+      "port_response": " The program should take the user's name as input and then display a personalized greeting message. The program should also handle the case where the user does not provide a name, and display a default greeting message. Additionally, the program should validate the user's input to ensure that it is a string and not a number or any",
+      "consequent_later_prompt_differences": [],
+      "cause": "undetermined; caching/numerical effects are hypotheses, not established"
+    },
+    {
+      "id": "pf-basic",
+      "output_cap": 64,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "first-equal-request-divergent-model-response",
+      "first_difference_call": 1,
+      "complete_request": "Write a simple JavaScript program that displays the greeting message.",
+      "original_response": " Here's a simple JavaScript program that displays a greeting message:\n\n```javascript\n// Greeting message\nconst greetingMessage = \"Hello, World!\";\n\n// Display the greeting message\nconsole.log(greetingMessage);\n```\n\nThis program defines a constant variable `greetingMessage` with the value `\"Hello, World!\"`.",
+      "port_response": " Here's a simple JavaScript program that displays a greeting message:\n\n```javascript\n// Greeting message\nconst greetingMessage = \"Hello, World!\";\n\n// Display the greeting message\nconsole.log(greetingMessage);\n```\n\nThis program defines a constant variable `greetingMessage` with the value \"Hello, World!\" and",
+      "consequent_later_prompt_differences": [],
+      "cause": "undetermined; caching/numerical effects are hypotheses, not established"
+    },
+    {
+      "id": "pf-ner",
+      "output_cap": 24,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "pf-ner",
+      "output_cap": 24,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "pf-ner",
+      "output_cap": 64,
+      "input_index": 0,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    },
+    {
+      "id": "pf-ner",
+      "output_cap": 64,
+      "input_index": 1,
+      "seed": 1,
+      "classification": "independent-generation-exact-match"
+    }
+  ],
+  "diagnosis_counts": {
+    "first-equal-request-divergent-model-response": 2,
+    "independent-generation-exact-match": 22
+  },
+  "workflow_metrics": [
+    {
+      "id": "lg-chain-graph",
+      "translation": "hybrid-host-composition",
+      "original_nonempty_source_lines": 42,
+      "original_count_files": [
+        "lg-chain-graph.execute.py"
+      ],
+      "port_kernel_files": [
+        "first.orch",
+        "refine.orch"
+      ],
+      "port_kernel_nonempty_lines": 16,
+      "port_kernel_bytes": 891,
+      "source_input_annotations": 2,
+      "source_model_cap_annotations": 2,
+      "host_case_nonempty_lines": 13,
+      "comparisons": 4,
+      "independently_equal": 4,
+      "actual_generation_calls": 8,
+      "complete_executions": 8,
+      "observed_token_range": [
+        29,
+        41
+      ],
+      "guarded_bound_range": [
+        1608,
+        1728
+      ],
+      "length_terminated_generation_calls": 2,
+      "tokenizer_server_mismatches": 0,
+      "scored_quality": []
+    },
+    {
+      "id": "lg-chain-functional",
+      "translation": "hybrid-host-composition",
+      "original_nonempty_source_lines": 30,
+      "original_count_files": [
+        "lg-chain-functional.execute.py"
+      ],
+      "port_kernel_files": [
+        "first.orch",
+        "refine.orch"
+      ],
+      "port_kernel_nonempty_lines": 16,
+      "port_kernel_bytes": 891,
+      "source_input_annotations": 2,
+      "source_model_cap_annotations": 2,
+      "host_case_nonempty_lines": 13,
+      "comparisons": 4,
+      "independently_equal": 4,
+      "actual_generation_calls": 24,
+      "complete_executions": 8,
+      "observed_token_range": [
+        143,
+        187
+      ],
+      "guarded_bound_range": [
+        1608,
+        1728
+      ],
+      "length_terminated_generation_calls": 8,
+      "tokenizer_server_mismatches": 0,
+      "scored_quality": []
+    },
+    {
+      "id": "lg-parallel-graph",
+      "translation": "hybrid-host-composition",
+      "original_nonempty_source_lines": 43,
+      "original_count_files": [
+        "lg-parallel-graph.execute.py"
+      ],
+      "port_kernel_files": [
+        "joke.orch",
+        "story.orch",
+        "poem.orch"
+      ],
+      "port_kernel_nonempty_lines": 21,
+      "port_kernel_bytes": 1010,
+      "source_input_annotations": 3,
+      "source_model_cap_annotations": 3,
+      "host_case_nonempty_lines": 9,
+      "comparisons": 4,
+      "independently_equal": 4,
+      "actual_generation_calls": 24,
+      "complete_executions": 8,
+      "observed_token_range": [
+        111,
+        200
+      ],
+      "guarded_bound_range": [
+        1608,
+        1728
+      ],
+      "length_terminated_generation_calls": 20,
+      "tokenizer_server_mismatches": 0,
+      "scored_quality": []
+    },
+    {
+      "id": "lg-routing-graph",
+      "translation": "hybrid-host-composition",
+      "original_nonempty_source_lines": 71,
+      "original_count_files": [
+        "lg-routing-graph.execute.py"
+      ],
+      "port_kernel_files": [
+        "route.orch",
+        "respond.orch"
+      ],
+      "port_kernel_nonempty_lines": 14,
+      "port_kernel_bytes": 782,
+      "source_input_annotations": 2,
+      "source_model_cap_annotations": 2,
+      "host_case_nonempty_lines": 14,
+      "comparisons": 4,
+      "independently_equal": 4,
+      "actual_generation_calls": 16,
+      "complete_executions": 8,
+      "observed_token_range": [
+        85,
+        125
+      ],
+      "guarded_bound_range": [
+        1072,
+        1152
+      ],
+      "length_terminated_generation_calls": 6,
+      "tokenizer_server_mismatches": 0,
+      "scored_quality": [
+        {
+          "metric": "requested route exact match",
+          "expected": "joke",
+          "original_exact": true,
+          "port_exact": true
+        },
+        {
+          "metric": "requested route exact match",
+          "expected": "poem",
+          "original_exact": false,
+          "port_exact": false
+        },
+        {
+          "metric": "requested route exact match",
+          "expected": "joke",
+          "original_exact": true,
+          "port_exact": true
+        },
+        {
+          "metric": "requested route exact match",
+          "expected": "poem",
+          "original_exact": false,
+          "port_exact": false
+        }
+      ]
+    },
+    {
+      "id": "pf-basic",
+      "translation": "direct-call-kernel",
+      "original_nonempty_source_lines": 106,
+      "original_count_files": [
+        "examples/flows/standard/basic/flow.dag.yaml",
+        "examples/flows/standard/basic/hello.jinja2",
+        "examples/flows/standard/basic/hello.py"
+      ],
+      "port_kernel_files": [
+        "basic.orch"
+      ],
+      "port_kernel_nonempty_lines": 7,
+      "port_kernel_bytes": 337,
+      "source_input_annotations": 1,
+      "source_model_cap_annotations": 1,
+      "host_case_nonempty_lines": 2,
+      "comparisons": 4,
+      "independently_equal": 2,
+      "actual_generation_calls": 8,
+      "complete_executions": 8,
+      "observed_token_range": [
+        35,
+        75
+      ],
+      "guarded_bound_range": [
+        536,
+        576
+      ],
+      "length_terminated_generation_calls": 8,
+      "tokenizer_server_mismatches": 0,
+      "scored_quality": []
+    },
+    {
+      "id": "pf-ner",
+      "translation": "hybrid-host-composition",
+      "original_nonempty_source_lines": 56,
+      "original_count_files": [
+        "examples/flows/standard/named-entity-recognition/NER_LLM.jinja2",
+        "examples/flows/standard/named-entity-recognition/cleansing.py",
+        "examples/flows/standard/named-entity-recognition/flow.dag.yaml"
+      ],
+      "port_kernel_files": [
+        "ner.orch"
+      ],
+      "port_kernel_nonempty_lines": 8,
+      "port_kernel_bytes": 781,
+      "source_input_annotations": 2,
+      "source_model_cap_annotations": 1,
+      "host_case_nonempty_lines": 5,
+      "comparisons": 4,
+      "independently_equal": 4,
+      "actual_generation_calls": 8,
+      "complete_executions": 8,
+      "observed_token_range": [
+        117,
+        127
+      ],
+      "guarded_bound_range": [
+        536,
+        576
+      ],
+      "length_terminated_generation_calls": 0,
+      "tokenizer_server_mismatches": 0,
+      "scored_quality": [
+        {
+          "metric": "exact entity set match; authored expected answers",
+          "expected": [
+            "data scientist",
+            "finance manager"
+          ],
+          "original_exact": true,
+          "port_exact": true
+        },
+        {
+          "metric": "exact entity set match; authored expected answers",
+          "expected": [
+            "(321) 654-0987"
+          ],
+          "original_exact": false,
+          "port_exact": false
+        },
+        {
+          "metric": "exact entity set match; authored expected answers",
+          "expected": [
+            "data scientist",
+            "finance manager"
+          ],
+          "original_exact": true,
+          "port_exact": true
+        },
+        {
+          "metric": "exact entity set match; authored expected answers",
+          "expected": [
+            "(321) 654-0987"
+          ],
+          "original_exact": false,
+          "port_exact": false
+        }
+      ]
+    }
+  ],
+  "source_count_policy": "Nonempty source lines include comments. Upstream snippets exclude visualization and invocation; shared notebook setup imports are supplied by the framework driver. PF source includes YAML/prompts/tools, excludes tests. Host case LOC are AST branch spans; shared drivers/adapters are reported separately. LOC is descriptive, not a time/effort or maintainability study.",
+  "shared_port_function_nonempty_lines": 49,
+  "shared_driver_nonempty_lines": 167,
+  "shared_kernel_interpreter_nonempty_lines": 96,
+  "annotation_scope": "Source input/model annotations use the compiler's abstract contract. Actual Qwen token admission is a separate runtime guard on the complete constructed request; annotations do not become a tokenizer theorem."
+}

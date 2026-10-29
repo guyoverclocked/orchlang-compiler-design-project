@@ -1,0 +1,86 @@
+[
+  {
+    "workflow": "switch",
+    "group": "main",
+    "pairs": 2,
+    "passed": true,
+    "local_calls": 4
+  },
+  {
+    "workflow": "routing",
+    "group": "main",
+    "pairs": 2,
+    "passed": true,
+    "local_calls": 8
+  },
+  {
+    "workflow": "chaining",
+    "group": "main",
+    "pairs": 2,
+    "passed": true,
+    "local_calls": 10
+  },
+  {
+    "workflow": "evaluator",
+    "group": "main",
+    "pairs": 2,
+    "passed": true,
+    "local_calls": 22
+  },
+  {
+    "workflow": "email",
+    "group": "main",
+    "pairs": 2,
+    "passed": true,
+    "local_calls": 8
+  },
+  {
+    "workflow": "orchestrator",
+    "group": "main",
+    "pairs": 2,
+    "passed": true,
+    "local_calls": 20
+  },
+  {
+    "workflow": "calculator",
+    "group": "main",
+    "pairs": 2,
+    "passed": true,
+    "local_calls": 14
+  },
+  {
+    "workflow": "crag",
+    "group": "main",
+    "pairs": 2,
+    "passed": true,
+    "local_calls": 20
+  },
+  {
+    "workflow": "adaptive",
+    "group": "main",
+    "pairs": 2,
+    "passed": true,
+    "local_calls": 54
+  },
+  {
+    "workflow": "switch",
+    "group": "qwen",
+    "pairs": 2,
+    "passed": true,
+    "local_calls": 4
+  },
+  {
+    "workflow": "email",
+    "group": "qwen",
+    "pairs": 2,
+    "passed": true,
+    "local_calls": 7
+  },
+  {
+    "workflow": "crag",
+    "group": "qwen",
+    "pairs": 2,
+    "passed": true,
+    "local_calls": 20
+  }
+]

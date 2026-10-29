@@ -1,0 +1,67 @@
+{
+  "backend_libraries": {
+    "source": "pinned llama-cpp-python wheel"
+  },
+  "batch": 128,
+  "budgets": {
+    "llama1b": {
+      "calls": 1,
+      "input": 197,
+      "output": 128
+    }
+  },
+  "conditions": [
+    "ours"
+  ],
+  "corpus_sha256": null,
+  "data_sha256": "aae93dbe3b8c41d63b4c5397a025d38319e5e7f424b8c237e0345d7abc146f34",
+  "dependencies": {
+    "llama-cpp-python": "0.3.36"
+  },
+  "git_commit": "37c2db6d3cf4cfdb063c933a453748ea826b779b",
+  "git_dirty": true,
+  "gpu_layers": "0",
+  "implementation_sha256": {
+    "experiments/run_workflow.py": "712499f8e41cb9f871782789296f273f556b5be3e88c404f86f7c05e16ea29a4",
+    "orchlang/__main__.py": "f5da4cf72658fd4d603fd64344edf56bcf5af642f8694c8542d1c9bdd914f346",
+    "orchlang/assurance.py": "fbab1cf81d26093f285af365fe46a7378c8e7cad63d848b5b9eb1a3f8353b681",
+    "orchlang/compiler.py": "9ec7aa23d84888860195c26819103e2cd9116d0db18552818664f1d40f88e2bf",
+    "orchlang/core.py": "6e52e591ae0dea2d1c1217b834f5244e130b44526f884053dab5fec7d4a29139",
+    "orchlang/ledger.py": "04187531d1b9f102f9772f44988380b43b316d69a333eacde9e4b5cdc0a203a9",
+    "orchlang/models.py": "9dda6afbdfbc29e777992ea869c7a7fcbe876ebf539244600ccdcebda81c203c",
+    "orchlang/runtime.py": "9515f462f8f079cacfe6d80df8450a8c2e71161ea87ffb8053c3a52831273383",
+    "orchlang/syntax.py": "03e5c6ed652c7fbf3ba2fa1c00dcf453a391cfa8484b0956943845469c10bfd3",
+    "orchlang/tools.py": "e378ead75b39f530084e72201b128be669e8281ba515f0b160e44a4fc47f5804",
+    "orchlang/validate.py": "41f4ba6215a6948e7a15c4d4f5f636328fee1560c41dc19ffe55fbac58fd0b48",
+    "proof/ShapeCore.lean": "7dc0417910b1408a5769ffb88fddf5dfaea7b82b5520714152b5daf3d2d1b432"
+  },
+  "kept_variables": "response,intention,llm_result",
+  "model_contracts": {
+    "llama1b": {
+      "bos": "",
+      "filler": " .",
+      "gguf_sha256": "6f85a640a97cf2bf5b8e764087b1e83da0fdb51d7c9fab7d0fece9385611df83",
+      "key": "llama1b",
+      "pad_mode": "isolated",
+      "pad_position": "end",
+      "sha256": "6f85a640a97cf2bf5b8e764087b1e83da0fdb51d7c9fab7d0fece9385611df83",
+      "stop": [
+        "<|eot_id|>",
+        "<|end_of_text|>"
+      ],
+      "template": "llama3"
+    }
+  },
+  "observer": "ordered-logical-model-usage-and-tool-names",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "schema": "orchlang-execution-custody-v1",
+  "selected_ids": [
+    "switch-0"
+  ],
+  "source_sha256": "400493d816644e4081c3c34139d96c7ce691da1b5c0eff33ee38a529f5cb5ca8",
+  "spent_api_usd": "0.00",
+  "temperature": 0.0,
+  "threads": 4,
+  "web_sha256": null
+}

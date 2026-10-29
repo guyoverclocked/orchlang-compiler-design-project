@@ -1,0 +1,9 @@
+Traceback (most recent call last):
+  File "C:\Users\nambi\Documents\Compiler Project\audit-2026-10-24\unified-publication\experiments\aggregate.py", line 321, in <module>
+    main()
+  File "C:\Users\nambi\Documents\Compiler Project\audit-2026-10-24\unified-publication\experiments\aggregate.py", line 187, in main
+    write_tex(res, extra, args.out)
+  File "C:\Users\nambi\Documents\Compiler Project\audit-2026-10-24\unified-publication\experiments\aggregate.py", line 298, in write_tex
+    f"{b('orig')} & {fmt(L['orig']['decision']['mi_pred_bits'], 2)} & {b('padonly')} & {b('randpad')} & "
+                         ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^
+KeyError: 'mi_pred_bits'

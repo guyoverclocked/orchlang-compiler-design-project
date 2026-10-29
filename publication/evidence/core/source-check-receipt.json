@@ -1,0 +1,139 @@
+{
+  "schema": "orchlang-source-check-receipt-v1",
+  "source_binding_sha256": "6015eed740a797a958b4dd93246c486b2b7b861007f773bd166f7010bd31116f",
+  "model_contracts": {
+    "llama1b": {
+      "key": "llama1b",
+      "template": "llama3",
+      "filler": " .",
+      "pad_mode": "isolated",
+      "pad_position": "end",
+      "stop": [
+        "<|eot_id|>",
+        "<|end_of_text|>"
+      ],
+      "bos": "",
+      "sha256": "6f85a640a97cf2bf5b8e764087b1e83da0fdb51d7c9fab7d0fece9385611df83",
+      "gguf_sha256": "6f85a640a97cf2bf5b8e764087b1e83da0fdb51d7c9fab7d0fece9385611df83"
+    }
+  },
+  "verdicts": {
+    "ours": {
+      "static_shape": [
+        [
+          "llm",
+          "llama1b",
+          198,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    },
+    "naive": {
+      "static_shape": [
+        [
+          "llm",
+          "llama1b",
+          198,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    },
+    "uniform": {
+      "static_shape": [
+        [
+          "llm",
+          "llama1b",
+          198,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    },
+    "padall": {
+      "static_shape": [
+        [
+          "llm",
+          "llama1b",
+          198,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    }
+  },
+  "accepted": true,
+  "assumptions": [
+    "trusted Python frontend and source binding",
+    "World.Conforms",
+    "World.Transparent for functional preservation",
+    "stated logical observer only"
+  ],
+  "artifact_sha256": "f201ac6b2a4228acb1a2366d0935eb123d5c633cf8209245205b4dd534494c44",
+  "checker_sha256": "7dc0417910b1408a5769ffb88fddf5dfaea7b82b5520714152b5daf3d2d1b432"
+}

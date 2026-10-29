@@ -1,0 +1,65 @@
+name: Validate artifact
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  core:
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, windows-2022]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Windows C++ compiler
+        id: msys
+        if: runner.os == 'Windows'
+        uses: msys2/setup-msys2@v2
+        with:
+          msystem: UCRT64
+          update: true
+          install: mingw-w64-ucrt-x86_64-gcc
+      - name: Install pinned Lean on Linux
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          curl --fail --location --retry 3 https://github.com/leanprover/lean4/releases/download/v4.19.0/lean-4.19.0-linux.tar.zst -o "$RUNNER_TEMP/lean.tar.zst"
+          tar --zstd -xf "$RUNNER_TEMP/lean.tar.zst" -C "$RUNNER_TEMP"
+          echo "LEAN=$RUNNER_TEMP/lean-4.19.0-linux/bin/lean" >> "$GITHUB_ENV"
+          echo "CXX=g++" >> "$GITHUB_ENV"
+      - name: Install pinned Lean on Windows
+        if: runner.os == 'Windows'
+        shell: pwsh
+        env:
+          MSYS_ROOT: ${{ steps.msys.outputs.msys2-location }}
+        run: |
+          Invoke-WebRequest https://github.com/leanprover/lean4/releases/download/v4.19.0/lean-4.19.0-windows.zip -OutFile "$env:RUNNER_TEMP/lean.zip"
+          Expand-Archive -LiteralPath "$env:RUNNER_TEMP/lean.zip" -DestinationPath $env:RUNNER_TEMP
+          "LEAN=$env:RUNNER_TEMP/lean-4.19.0-windows/bin/lean.exe" >> $env:GITHUB_ENV
+          "CXX=$env:MSYS_ROOT/ucrt64/bin/g++.exe" >> $env:GITHUB_ENV
+      - name: Fresh compiler, Python, Lean and corpus checks
+        shell: pwsh
+        run: |
+          python scripts/offline_check.py --cxx "$env:CXX" --lean "$env:LEAN" --output "$env:RUNNER_TEMP/orchlang-validation"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+      - name: Make and sanitizer checks
+        if: runner.os == 'Linux'
+        shell: bash
+        run: |
+          make check
+          make sanitize
+      - name: Retain commands and validation evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-${{ matrix.os }}
+          path: ${{ runner.temp }}/orchlang-validation/*.json

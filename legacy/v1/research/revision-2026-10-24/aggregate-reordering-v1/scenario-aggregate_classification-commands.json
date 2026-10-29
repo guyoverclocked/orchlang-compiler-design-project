@@ -1,0 +1,17 @@
+[
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\tools\\lean-4.19.0-windows\\bin\\lean.exe",
+      "--run",
+      "C:\\Users\\nambi\\Documents\\Compiler Project\\orchlang-compiler-design-project\\proof\\AggregateReordering.lean",
+      "C:\\Users\\nambi\\Documents\\Compiler Project\\orchlang-compiler-design-project\\research\\revision-2026-10-24\\aggregate-reordering-v1\\aggregate-json-28ewhonn\\batch.json"
+    ],
+    "offset": 0,
+    "cases": 1,
+    "exit": 0,
+    "seconds": 1.506761299999198,
+    "stdout": "'OrchLang.Aggregate.pairObservation_comm' depends on axioms: [propext, Quot.sound]\n'OrchLang.Aggregate.samples_comm' depends on axioms: [propext, Quot.sound]\n'OrchLang.Aggregate.mass_perm' depends on axioms: [propext]\n'OrchLang.Aggregate.independent_calls_aggregate' depends on axioms: [propext, Quot.sound]\n'OrchLang.Aggregate.decision_sound' depends on axioms: [propext, Quot.sound]\n'OrchLang.Aggregate.decoded_decision_sound' depends on axioms: [propext, Quot.sound]\n[{\"checked\":true}]\n",
+    "stderr": "",
+    "lean_version": "Lean (version 4.19.0, x86_64-w64-windows-gnu, commit 6caaee842e94, Release)"
+  }
+]

@@ -1,0 +1,452 @@
+{
+  "schema": "orchlang-referee-revision-protocol-v1",
+  "version": "c2bb75c1ff7ef3a7ba824239d97b960efeb27e68",
+  "implementation": {
+    "orchlang/__main__.py": "f5da4cf72658fd4d603fd64344edf56bcf5af642f8694c8542d1c9bdd914f346",
+    "orchlang/assurance.py": "29f77717ec99007c9b4cfca023168c9ad4faf3e4d63e8a6ffbacc292218820a7",
+    "orchlang/compiler.py": "6f45610f86feba2f8045111e814a4930d4486ea5a7838cf6b000f00de91f6ecd",
+    "orchlang/core.py": "54f8eb20921c63ccd7bc265f0a6e9373d9d2180d8c88d4f21169e865aec60ba8",
+    "orchlang/ledger.py": "04187531d1b9f102f9772f44988380b43b316d69a333eacde9e4b5cdc0a203a9",
+    "orchlang/models.py": "9dda6afbdfbc29e777992ea869c7a7fcbe876ebf539244600ccdcebda81c203c",
+    "orchlang/runtime.py": "25bc45cd6d2b1b727d069e3e30da49ff9460d38c52fc844584b0ed8a835ab1d7",
+    "orchlang/syntax.py": "03e5c6ed652c7fbf3ba2fa1c00dcf453a391cfa8484b0956943845469c10bfd3",
+    "orchlang/tools.py": "e378ead75b39f530084e72201b128be669e8281ba515f0b160e44a4fc47f5804",
+    "orchlang/validate.py": "48dfa77bd11bb2b1baaaa60bce3f96cbeb7af212bdd1e950d4b32c4a549c5433",
+    "proof/ShapeCore.lean": "c118a53d032fb6d0ca80ea2e4971f187beb76201317ac354853bcb216cc7322a",
+    "experiments/run_workflow.py": "712499f8e41cb9f871782789296f273f556b5be3e88c404f86f7c05e16ea29a4",
+    "proof/AdmissionDomain.lean": "7159456db7c08e0c097e4416156b2c5097eacf69e789a483cf4ce5063d475fcc",
+    "experiments/referee_revision.py": "6356dddf25e8f38ce888636d98ec70258fb94c0f85cfa544a7ae89ec7cd957dc"
+  },
+  "model_contracts": {
+    "llama1b": {
+      "key": "llama1b",
+      "template": "llama3",
+      "filler": " .",
+      "pad_mode": "isolated",
+      "pad_position": "end",
+      "stop": [
+        "<|eot_id|>",
+        "<|end_of_text|>"
+      ],
+      "bos": "",
+      "sha256": "6f85a640a97cf2bf5b8e764087b1e83da0fdb51d7c9fab7d0fece9385611df83",
+      "gguf_sha256": "6f85a640a97cf2bf5b8e764087b1e83da0fdb51d7c9fab7d0fece9385611df83"
+    },
+    "qwen1.5b": {
+      "key": "qwen1.5b",
+      "template": "qwen2",
+      "filler": " .",
+      "pad_mode": "isolated",
+      "pad_position": "end",
+      "stop": [
+        "<|im_end|>",
+        "<|endoftext|>"
+      ],
+      "bos": "",
+      "sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e",
+      "gguf_sha256": "6a1a2eb6d15622bf3c96857206351ba97e1af16c30d7a74ee38970e434e9407e"
+    }
+  },
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "threads": 4,
+  "temperature": [
+    0.0,
+    0.8
+  ],
+  "seeds": [
+    0,
+    17
+  ],
+  "workflow_selections": {
+    "llama1b": {
+      "switch": [
+        {
+          "id": "switch-25",
+          "inputs": {
+            "query": "where do i see item avaialbility"
+          },
+          "label": "product_info",
+          "gold": "product_info",
+          "selection": "shortest",
+          "historical_store": {
+            "response": "Sorry, no results matching your search were found.",
+            "intention": "unknown",
+            "llm_result": "Based on the query \"where do i see item availability\", I would classify the user's intention as:\n\n**Product Information**\n\nThis is because the user is asking for information about the availability of an item, which is a common query when searching for product details."
+          }
+        },
+        {
+          "id": "switch-148",
+          "inputs": {
+            "query": "I sent some products back but I haven't received the replacement, can you help me track the fucking status of my exchange?"
+          },
+          "label": "order_search",
+          "gold": "order_search",
+          "selection": "longest",
+          "historical_store": {
+            "response": "Sorry, no results matching your search were found.",
+            "intention": "unknown",
+            "llm_result": "I can classify the user's intention as:\n\n1. **Order Search**: The user is looking for information about an order they've placed, specifically the status of their exchange.\n2. **Product Recommendation**: Although the user is asking about the status of their exchange, the primary intention is to get information about the product they sent, not the exchange itself.\n\nThese two intentions can be returned as the primary query, and the product information can be returned as a secondary query."
+          }
+        },
+        {
+          "id": "switch-16",
+          "inputs": {
+            "query": "need to see the availability of  an item how can i do it"
+          },
+          "label": "product_info",
+          "gold": "product_info",
+          "selection": "alternate-historical-branch-or-first-unused",
+          "historical_store": {
+            "response": "This product is produced by Microsoft.",
+            "intention": "product_info",
+            "llm_result": "To classify the user's intention as \"product_info\", you can use the following query:\n\n```sql\nSELECT product_name, product_description, product_image\nFROM products\nWHERE product_id = [insert product ID here]\n```\n\nThis query will return the product information (name, description, and image) for the specified product ID.\n\nIf the user wants to see the availability of an item, you can use the following query:\n\n```sql\nSELECT product_name, product_description, product_image, product_availability\nFROM products\nWHERE product_id = [insert product ID here]\n```\n\nThis query will return the product information along with its"
+          }
+        },
+        {
+          "id": "switch-25-whitespace-boundary",
+          "inputs": {
+            "query": " \t where do i see item avaialbility \t "
+          },
+          "label": "product_info",
+          "gold": "product_info",
+          "selection": "controlled-boundary-variant",
+          "historical_store": null
+        }
+      ],
+      "email": [
+        {
+          "id": "email-7",
+          "inputs": {
+            "email_content": "Healthcare Data Breach Concern\n\nDetected unauthorized attempts to access medical information."
+          },
+          "label": "technical",
+          "priority": "high",
+          "selection": "shortest",
+          "historical_store": {
+            "reply": "Subject: Re: Healthcare Data Breach Concern\n\nDear [Customer Name],\n\nThank you for reaching out to us regarding the unauthorized attempts to access your medical information. I understand your concern and apologize for any distress this may have caused.\n\nI want to assure you that we take the security and confidentiality of our customers' medical information very seriously. Our systems are designed to protect sensitive patient data, and we have implemented robust security measures to prevent unauthorized access.\n\nHowever, I do want to clarify that our systems have been breached, and we have detected unauthorized attempts to access your medical information. This is a serious incident, and we are taking immediate action to investigate and contain the breach.\n\nI want to assure you that we are working closely with our IT department to identify the source of the breach and implement measures to prevent future incidents. We are also providing you with a dedicated support line to assist with any questions or concerns you may have.\n\nIn the meantime, I would like to provide you with some guidance on how to protect your medical information. Please be aware that any unauthorized access to your medical information may result in identity theft or other malicious activities. To minimize the risk, please:\n\n* Do not share your login credentials or access information with anyone.\n* Do not respond to any unsolicited emails or messages that claim to be from us.\n* Do not download any attachments or files from our website.\n* Do not use our website or services for any malicious activities.\n\nIf you have any questions or concerns, please do not hesitate to contact me directly. I am here to assist you and provide any necessary support.\n\nThank you",
+            "route": "draft",
+            "cls": "Analysis:\n\n- **Classification:** The email is a **Bug Report**.\n- **Intent:** The intent is **Complex**.\n- **Urgency:** The urgency is **Low**.\n- **Topic:** The topic is **Security**.\n- **Summary:** The summary is **Medical Data Breach Concern**."
+          }
+        },
+        {
+          "id": "email-82",
+          "inputs": {
+            "email_content": "Immediate Update Required for Security Protocols\n\nDear Customer Support,\\n\\nI am writing to urgently request the enhancement of our security protocols to strengthen data protection across our hospital's medical systems. As the healthcare sector is a primary target for cyberattacks, it is crucial to adopt proactive measures to safeguard sensitive patient information and prevent potential breaches.\\n\\nPlease implement the following security measures:\\n- Multi-factor authentication for all users\\n- Regular software updates and patching\\n- Encryption of sensitive data\\n\\nThank you for understanding the importance of these security enhancements. Kindly review the requested measures, including multi-factor authentication, routine software updates, data encryption, incident response planning, and security audits. Please provide a timeline for implementation and any additional recommendations.\\n\\nIf needed, I am available for a call at <tel_num> to discuss further. Please let us know a suitable time to schedule a call and outline the next steps.\\n\\nBest regards,\\n\\n[Your Name]"
+          },
+          "label": "other",
+          "priority": "low",
+          "selection": "longest",
+          "historical_store": {
+            "reply": "Here's a draft response to the customer email:\n\nDear [Customer Name],\n\nThank you for reaching out to us regarding the urgent need for security protocols enhancement in our hospital's medical systems. I understand the importance of safeguarding sensitive patient information and preventing potential breaches in the healthcare sector.\n\nI appreciate your request for the following security measures:\n\n- Multi-factor authentication for all users\n- Regular software updates and patching\n- Encryption of sensitive data\n\nI agree that these measures are crucial for our hospital's security and will implement them promptly. To ensure a smooth implementation process, I recommend the following:\n\n- Multi-factor authentication will be rolled out across all users within the next 6 weeks\n- Regular software updates and patches will be performed on a bi-weekly basis\n- Encryption of sensitive data will be implemented immediately\n\nIn addition to these measures, I suggest that we also consider the following:\n\n- Incident response planning will be developed and implemented within the next 3 months\n- Security audits will be conducted annually to ensure our security protocols are up-to-date and effective\n\nRegarding your availability for a call, I am available to discuss further at your convenience. Please let me know a suitable time to schedule a call, and I will outline the next steps.\n\nThank you for your patience and cooperation in this matter. I am committed to ensuring the security and integrity of our hospital's medical systems.\n\nBest regards,\n\n[Your Name]\n\nThis response:\n\n* Acknowledges the customer's concern and shows understanding\n* Addresses their specific request for security measures\n* Provides a clear plan for implementation and recommends additional measures\n*",
+            "route": "draft",
+            "cls": "Classification:\n\n- Intent: Feature\n- Urgency: Medium\n- Topic: Security Protocols\n- Summary: The customer is requesting immediate enhancement of security protocols to protect patient data."
+          }
+        },
+        {
+          "id": "email-2",
+          "inputs": {
+            "email_content": "A financial organization encountered delays in data processing, which impacted their investment optimization efforts. The cause might be related to software and hardware compatibility problems. After rebooting the systems and updating the drivers, the issue remains unresolved. Assistance is needed promptly to resolve the problem and reduce potential losses."
+          },
+          "label": "technical",
+          "priority": "low",
+          "selection": "alternate-historical-branch-or-first-unused",
+          "historical_store": {
+            "reply": "Subject: Re: Delayed Data Processing and Investment Optimization Efforts\n\nDear [Customer Name],\n\nThank you for reaching out to us regarding the delays in data processing and investment optimization efforts. I understand the impact this has had on your investment strategy.\n\nI've checked the status of our systems, and unfortunately, the issue persists. I'd like to investigate further to determine the cause of the problem. To help me better understand the issue, could you please provide me with the following information:\n\n1. The exact error message you're receiving.\n2. A detailed description of the issue, including any error codes or warnings.\n3. A brief summary of your investment strategy and the steps you've taken so far.\n\nRegarding the password reset, I can guide you through the process. To reset your password, please follow these steps:\n\n1. Go to the Settings app on your device.\n2. Tap on Security.\n3. Tap on Change Password.\n4. Enter your current password, then create a new one that meets the following requirements:\n   - At least 12 characters\n   - Uppercase letters (A-Z)\n   - Lowercase letters (a-z)\n   - Numbers (0-9)\n   - Symbols (!, @, #, $, etc.)\n\nOnce you've created your new password, you'll be prompted to enter it again to confirm.\n\nIf you have any further questions or concerns, please don't hesitate to reach out. I'm here to help.\n\nBest regards,\n\n[Your Name]\n[Your Organization]\n[Contact Information]",
+            "route": "docs",
+            "cls": "Classification: Bug\n\nIntent: question\nUrgency: low\nTopic: few words\nSummary: The customer is experiencing software and hardware compatibility issues with their financial organization's investment optimization efforts."
+          }
+        },
+        {
+          "id": "email-7-whitespace-boundary",
+          "inputs": {
+            "email_content": " \t Healthcare Data Breach Concern\n\nDetected unauthorized attempts to access medical information. \t "
+          },
+          "label": "technical",
+          "priority": "high",
+          "selection": "controlled-boundary-variant",
+          "historical_store": null
+        }
+      ],
+      "crag": [
+        {
+          "id": "crag-39",
+          "inputs": {
+            "question": "What is Psalm 31:5?"
+          },
+          "label": "in_corpus",
+          "answers": [
+            "prayer of the dying",
+            "the common prayer of the dying",
+            "common prayer of the dying."
+          ],
+          "title": "Martin_Luther",
+          "selection": "shortest",
+          "historical_store": {
+            "answer": "There is no direct reference to Psalm 31 in the provided documents.",
+            "search": "yes"
+          }
+        },
+        {
+          "id": "crag-133",
+          "inputs": {
+            "question": "Along with a desire for more steam pressure, what were early drivers looking to generate when they fastened safety valves down?"
+          },
+          "label": "out_of_corpus",
+          "answers": [
+            "more power",
+            "more power",
+            "greater steam pressure and more power"
+          ],
+          "title": "Steam_engine",
+          "selection": "longest",
+          "historical_store": {
+            "answer": "When early drivers fastened safety valves down, they were looking to generate more steam pressure by adjusting the valve's position, typically by adjusting the weight or spring that restrained the valve against steam pressure.",
+            "search": "yes"
+          }
+        },
+        {
+          "id": "crag-10",
+          "inputs": {
+            "question": "Where did the discharge from glaciers go in Europe in the last Ice Age?"
+          },
+          "label": "in_corpus",
+          "answers": [
+            "Rhine",
+            "Rhine",
+            "the Rhine"
+          ],
+          "title": "Rhine",
+          "selection": "alternate-historical-branch-or-first-unused",
+          "historical_store": {
+            "answer": "The discharge from glaciers went into the Rhine's current course in northwest Europe during the Last Glacial Maximum, around 22,000-14,000 years ago.",
+            "search": "no"
+          }
+        },
+        {
+          "id": "crag-39-whitespace-boundary",
+          "inputs": {
+            "question": " \t What is Psalm 31:5? \t "
+          },
+          "label": "in_corpus",
+          "answers": [
+            "prayer of the dying",
+            "the common prayer of the dying",
+            "common prayer of the dying."
+          ],
+          "title": "Martin_Luther",
+          "selection": "controlled-boundary-variant",
+          "historical_store": null
+        }
+      ]
+    },
+    "qwen1.5b": {
+      "switch": [
+        {
+          "id": "switch-25",
+          "inputs": {
+            "query": "where do i see item avaialbility"
+          },
+          "label": "product_info",
+          "gold": "product_info",
+          "selection": "shortest",
+          "historical_store": {
+            "response": "This product is produced by Microsoft.",
+            "intention": "product_info",
+            "llm_result": "product_info"
+          }
+        },
+        {
+          "id": "switch-148",
+          "inputs": {
+            "query": "I sent some products back but I haven't received the replacement, can you help me track the fucking status of my exchange?"
+          },
+          "label": "order_search",
+          "gold": "order_search",
+          "selection": "longest",
+          "historical_store": {
+            "response": "Your order is being mailed, please wait patiently.",
+            "intention": "order_search",
+            "llm_result": "order_search"
+          }
+        },
+        {
+          "id": "switch-1",
+          "inputs": {
+            "query": "I'd like to use your fucking mobile app, canI get some help?"
+          },
+          "label": "unknown",
+          "gold": "unknown",
+          "selection": "alternate-historical-branch-or-first-unused",
+          "historical_store": {
+            "response": "Your order is being mailed, please wait patiently.",
+            "intention": "order_search",
+            "llm_result": "order_search"
+          }
+        },
+        {
+          "id": "switch-25-whitespace-boundary",
+          "inputs": {
+            "query": " \t where do i see item avaialbility \t "
+          },
+          "label": "product_info",
+          "gold": "product_info",
+          "selection": "controlled-boundary-variant",
+          "historical_store": null
+        }
+      ],
+      "email": [
+        {
+          "id": "email-7",
+          "inputs": {
+            "email_content": "Healthcare Data Breach Concern\n\nDetected unauthorized attempts to access medical information."
+          },
+          "label": "technical",
+          "priority": "high",
+          "selection": "shortest",
+          "historical_store": {
+            "reply": "Subject: Immediate Attention: Unauthorized Access to Healthcare Data\n\nDear [Customer's Name],\n\nI hope this message finds you well. I am writing to address your recent concern regarding unauthorized attempts to access your medical information. We take the security of your personal and sensitive data very seriously.\n\nWe have detected unauthorized attempts to access your medical records. This is a serious matter, and we are taking immediate action to investigate and resolve the issue. Our team is working diligently to ensure that all necessary steps are taken to secure your information and prevent any further unauthorized access.\n\nPlease rest assured that we are taking all necessary steps to protect your privacy and security. We will provide you with regular updates on the progress of our investigation and any additional steps we may need to take to address this concern.\n\nIf you have any questions or concerns, please do not hesitate to contact us. We are here to assist you and ensure that your medical information is protected.\n\nThank you for your understanding and cooperation.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Contact Information]",
+            "route": "draft",
+            "cls": "intent: security concern\nurgency: high\ntopic: data breach\nsummary: Unauthorized attempts to access medical information."
+          }
+        },
+        {
+          "id": "email-82",
+          "inputs": {
+            "email_content": "Immediate Update Required for Security Protocols\n\nDear Customer Support,\\n\\nI am writing to urgently request the enhancement of our security protocols to strengthen data protection across our hospital's medical systems. As the healthcare sector is a primary target for cyberattacks, it is crucial to adopt proactive measures to safeguard sensitive patient information and prevent potential breaches.\\n\\nPlease implement the following security measures:\\n- Multi-factor authentication for all users\\n- Regular software updates and patching\\n- Encryption of sensitive data\\n\\nThank you for understanding the importance of these security enhancements. Kindly review the requested measures, including multi-factor authentication, routine software updates, data encryption, incident response planning, and security audits. Please provide a timeline for implementation and any additional recommendations.\\n\\nIf needed, I am available for a call at <tel_num> to discuss further. Please let us know a suitable time to schedule a call and outline the next steps.\\n\\nBest regards,\\n\\n[Your Name]"
+          },
+          "label": "other",
+          "priority": "low",
+          "selection": "longest",
+          "historical_store": {
+            "reply": "Dear [Customer Support],\n\nI hope this message finds you well. I am writing to urgently request the enhancement of our security protocols to strengthen data protection across our hospital's medical systems. As the healthcare sector is a primary target for cyberattacks, it is crucial to adopt proactive measures to safeguard sensitive patient information and prevent potential breaches.\n\nPlease implement the following security measures:\n\n1. **Multi-factor authentication for all users**: This will add an extra layer of security to ensure that only authorized individuals can access sensitive data.\n2. **Regular software updates and patching**: Keeping all software up-to-date will help prevent vulnerabilities that could be exploited by attackers.\n3. **Encryption of sensitive data**: Encrypting data both at rest and in transit will protect it from unauthorized access.\n\nAdditionally, please implement the following features:\n\n- **Incident response planning**: Develop a comprehensive plan to respond to any security incidents, including a clear chain of command and procedures for handling breaches.\n- **Security audits**: Conduct regular security audits to identify and mitigate any vulnerabilities in our systems.\n\nThank you for understanding the importance of these security enhancements. Kindly review the requested measures, including multi-factor authentication, routine software updates, data encryption, incident response planning, and security audits. Please provide a timeline for implementation and any additional recommendations.\n\nIf needed, I am available for a call at [tel_num] to discuss further. Please let us know a suitable time to schedule a call and outline the next steps.\n\nBest regards,\n\n[Your Name]",
+            "route": "docs",
+            "cls": "intent: Feature\nurgency: High\ntopic: Security Protocols\nsummary: Urgent request for enhanced security protocols to protect sensitive patient information."
+          }
+        },
+        {
+          "id": "email-1",
+          "inputs": {
+            "email_content": "Revise Digital Marketing Plans\n\nRequesting an update on the digital marketing strategies. Our technology software products need a boost in brand visibility. I would like to discuss new methods to improve our online presence and expand our audience. This includes social media, content marketing, and search engine optimization. I look forward to hearing from you to explore ways to enhance our marketing efforts."
+          },
+          "label": "other",
+          "priority": "low",
+          "selection": "alternate-historical-branch-or-first-unused",
+          "historical_store": {
+            "reply": "Subject: Request for Update on Digital Marketing Strategies\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the digital marketing strategies for our technology software products. We understand the importance of brand visibility and would be happy to discuss new methods to improve our online presence and expand our audience.\n\nWe are currently exploring various strategies to enhance our marketing efforts, including social media, content marketing, and search engine optimization. We would appreciate your input on how we can best implement these strategies to achieve our goals.\n\nPlease let us know if you have any specific questions or concerns regarding our current digital marketing plans. We are committed to providing you with the best possible solutions to help you achieve your business objectives.\n\nThank you for your time and consideration.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Contact Information]",
+            "route": "docs",
+            "cls": "Intent: Question\nUrgency: Medium\nTopic: Digital Marketing\nSummary: The customer is requesting an update on digital marketing strategies to improve brand visibility and expand their audience."
+          }
+        },
+        {
+          "id": "email-7-whitespace-boundary",
+          "inputs": {
+            "email_content": " \t Healthcare Data Breach Concern\n\nDetected unauthorized attempts to access medical information. \t "
+          },
+          "label": "technical",
+          "priority": "high",
+          "selection": "controlled-boundary-variant",
+          "historical_store": null
+        }
+      ],
+      "crag": [
+        {
+          "id": "crag-39",
+          "inputs": {
+            "question": "What is Psalm 31:5?"
+          },
+          "label": "in_corpus",
+          "answers": [
+            "prayer of the dying",
+            "the common prayer of the dying",
+            "common prayer of the dying."
+          ],
+          "title": "Martin_Luther",
+          "selection": "shortest",
+          "historical_store": {
+            "answer": "I don't know.",
+            "search": "yes"
+          }
+        },
+        {
+          "id": "crag-133",
+          "inputs": {
+            "question": "Along with a desire for more steam pressure, what were early drivers looking to generate when they fastened safety valves down?"
+          },
+          "label": "out_of_corpus",
+          "answers": [
+            "more power",
+            "more power",
+            "greater steam pressure and more power"
+          ],
+          "title": "Steam_engine",
+          "selection": "longest",
+          "historical_store": {
+            "answer": "Early drivers were looking to generate more steam pressure and more power from the engine when they fastened safety valves down.",
+            "search": "yes"
+          }
+        },
+        {
+          "id": "crag-0",
+          "inputs": {
+            "question": "Where was Genghis Khan buried?"
+          },
+          "label": "out_of_corpus",
+          "answers": [
+            "somewhere in Mongolia at an unknown location",
+            "Mongolia",
+            "unmarked grave somewhere in Mongolia"
+          ],
+          "title": "Genghis_Khan",
+          "selection": "alternate-historical-branch-or-first-unused",
+          "historical_store": {
+            "answer": "Genghis Khan was buried in an unmarked grave somewhere in Mongolia.",
+            "search": "yes"
+          }
+        },
+        {
+          "id": "crag-39-whitespace-boundary",
+          "inputs": {
+            "question": " \t What is Psalm 31:5? \t "
+          },
+          "label": "in_corpus",
+          "answers": [
+            "prayer of the dying",
+            "the common prayer of the dying",
+            "common prayer of the dying."
+          ],
+          "title": "Martin_Luther",
+          "selection": "controlled-boundary-variant",
+          "historical_store": null
+        }
+      ]
+    }
+  },
+  "workflow_pairs": 48,
+  "baseline_extra_executions": 6,
+  "transparency_pairs": 192,
+  "transparency_prompts": [
+    "",
+    "Reply with exactly OK.",
+    "Summarize in one word: café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. café 漢字 a b c. "
+  ],
+  "transparency_caps": [
+    4,
+    16
+  ],
+  "forced_gaps": [
+    0,
+    8
+  ],
+  "input_slack": [
+    0,
+    16,
+    64
+  ],
+  "stop_profiles": [
+    "declared",
+    "declared plus single-token OK when tokenizer supports it"
+  ],
+  "interpretation": "Historical-branch-stratified falsification, not preregistered independent research or quality estimation; no failures omitted.",
+  "observer": "logical usage plus separate trusted local llama-cpp-python eval/generate instrumentation, not gateway/invoice authority"
+}

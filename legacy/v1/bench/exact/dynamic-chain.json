@@ -1,0 +1,15 @@
+{
+  "format": "orchlang-exact-replay-v1",
+  "models": {"m": {"revision": "example-v1", "max_tokens": 8, "max_output_bytes": 8}},
+  "input_byte_bounds": {"x": 8},
+  "env": {"x": "你好"},
+  "budget_tokens": 43,
+  "program": [
+    {"kind": "call", "model": "m", "bind": "first", "request": {"concat": ["Input:", {"var": "x"}]}},
+    {"kind": "call", "model": "m", "bind": "second", "request": {"concat": ["Next:", {"var": "first"}]}}
+  ],
+  "kernels": {"m": {"*": [
+    {"text": "é🙂", "p": "1/2", "status": "ok"},
+    {"text": "", "p": "1/2", "status": "error"}
+  ]}}
+}

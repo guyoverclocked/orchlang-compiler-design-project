@@ -1,0 +1,7 @@
+{
+  "status": "infrastructure-failed",
+  "reason": "A newly added CLI smoke check incorrectly expected GPT2's 11-token source bound for BERT too; BERT's correct source bound is 10. The runner raised AssertionError before writing completed outputs.",
+  "fix": "Compare the CLI result to the direct API's tokenizer-specific source bound.",
+  "valid_measurements": false,
+  "replacement_run": "../exact-accounting-v4"
+}

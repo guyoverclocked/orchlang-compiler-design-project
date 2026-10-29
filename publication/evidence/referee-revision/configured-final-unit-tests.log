@@ -1,0 +1,48 @@
+test_refusal_channel_and_exhaustive_finite_domain (test_admission_domain.AdmissionDomain.test_refusal_channel_and_exhaustive_finite_domain) ... ok
+test_unknown_dispatch_is_visible_with_reservation_retained (test_admission_domain.AdmissionDomain.test_unknown_dispatch_is_visible_with_reservation_retained) ... ok
+test_empty_artifact_cannot_claim_validation_success (test_assurance.Assurance.test_empty_artifact_cannot_claim_validation_success) ... ok
+test_failure_evidence_retains_unknown_reservation_and_rejects_budget_typos (test_assurance.Assurance.test_failure_evidence_retains_unknown_reservation_and_rejects_budget_typos) ... ok
+test_input_overflow_refuses_before_dispatch (test_assurance.Assurance.test_input_overflow_refuses_before_dispatch) ... ok
+test_model_specific_initial_admission (test_assurance.Assurance.test_model_specific_initial_admission) ... ok
+test_nonconforming_backend_is_detected_with_unknown_usage (test_assurance.Assurance.test_nonconforming_backend_is_detected_with_unknown_usage) ... ok
+test_output_files_do_not_invalidate_their_own_resume_identity (test_assurance.Assurance.test_output_files_do_not_invalidate_their_own_resume_identity) ... ok
+test_resume_never_relabels_observations (test_assurance.Assurance.test_resume_never_relabels_observations) ... ok
+test_source_binding_owns_original_and_secrets (test_assurance.Assurance.test_source_binding_owns_original_and_secrets) ... ok
+test_tool_arguments_preserve_delimiters_and_backslashes (test_assurance.Assurance.test_tool_arguments_preserve_delimiters_and_backslashes) ... ok
+test_unbound_old_records_cannot_resume (test_assurance.Assurance.test_unbound_old_records_cannot_resume) ... ok
+test_whole_shape_budget_refuses_before_secret_execution (test_assurance.Assurance.test_whole_shape_budget_refuses_before_secret_execution) ... ok
+test_wrong_input_usage_and_transport_failure_are_not_zero (test_assurance.Assurance.test_wrong_input_usage_and_transport_failure_are_not_zero) ... ok
+test_export_nested_in_checkout_does_not_inherit_parent_commit (test_export_provenance.ExportProvenance.test_export_nested_in_checkout_does_not_inherit_parent_commit) ... ok
+test_source_export_uses_manifest_and_has_no_invented_git_commit (test_export_provenance.ExportProvenance.test_source_export_uses_manifest_and_has_no_invented_git_commit) ... ok
+test_model_units_are_separate_and_invalid_values_fail (test_ledger.Ledger.test_model_units_are_separate_and_invalid_values_fail) ... ok
+test_reserve_confirm_and_refuse_before_dispatch (test_ledger.Ledger.test_reserve_confirm_and_refuse_before_dispatch) ... ok
+test_unconfirmed_attempt_retains_reservation (test_ledger.Ledger.test_unconfirmed_attempt_retains_reservation) ... ok
+test_pinned_aliases_share_identity_but_semantic_fields_do_not (test_model_contracts.Contracts.test_pinned_aliases_share_identity_but_semantic_fields_do_not) ... ok
+test_tool_identity_is_observable_but_analysis_fields_are_hidden (test_observer.Observer.test_tool_identity_is_observable_but_analysis_fields_are_hidden) ... ok
+test_weak_baselines_keep_tool_events (test_observer.Observer.test_weak_baselines_keep_tool_events) ... ok
+test_detects_leaks (test_orchlang.Frontend.test_detects_leaks) ... ok
+test_errors (test_orchlang.Frontend.test_errors) ... ok
+test_labels (test_orchlang.Frontend.test_labels) ... ok
+test_padding_exact_with_real_tokenizer (test_orchlang.RealTemplates.test_padding_exact_with_real_tokenizer) ... llama_context: n_ctx_seq (512) > n_ctx_train (0) -- possible training context overflow
+llama_context: n_ctx_seq (512) > n_ctx_train (0) -- possible training context overflow
+llama_context: n_ctx_seq (512) > n_ctx_train (0) -- possible training context overflow
+ok
+test_templates_match_gguf (test_orchlang.RealTemplates.test_templates_match_gguf) ... llama_context: n_ctx_seq (512) > n_ctx_train (0) -- possible training context overflow
+llama_context: n_ctx_seq (512) > n_ctx_train (0) -- possible training context overflow
+llama_context: n_ctx_seq (512) > n_ctx_train (0) -- possible training context overflow
+ok
+test_noninterference_and_preservation (test_orchlang.Runtime.test_noninterference_and_preservation) ... ok
+test_original_leaks (test_orchlang.Runtime.test_original_leaks) ... ok
+test_padder_exact (test_orchlang.Runtime.test_padder_exact) ... ok
+test_all_strategies_satisfy_discipline (test_orchlang.Shaping.test_all_strategies_satisfy_discipline) ... ok
+test_models_never_merge (test_orchlang.Shaping.test_models_never_merge) ... ok
+test_ours_cheaper_than_naive (test_orchlang.Shaping.test_ours_cheaper_than_naive) ... ok
+test_lean_whitespace_classification_matches_python_exhaustively (test_template_lowering.Templates.test_lean_whitespace_classification_matches_python_exhaustively) ... ok
+test_lowered_requests_match_value_level_templates (test_template_lowering.Templates.test_lowered_requests_match_value_level_templates) ... ok
+test_unicode_line_separators_are_data (test_validator_protocol.Protocol.test_unicode_line_separators_are_data) ... ok
+test_wrong_denominators_types_and_exit_status_cannot_be_receipts (test_validator_protocol.Protocol.test_wrong_denominators_types_and_exit_status_cannot_be_receipts) ... ok
+
+----------------------------------------------------------------------
+Ran 37 tests in 3.564s
+
+OK

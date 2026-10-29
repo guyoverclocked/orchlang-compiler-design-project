@@ -1,0 +1,14 @@
+{
+  "name": "orchlang-submission-tools",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Generators for the OrchLang Phase 2 report and presentation. Not part of the compiler, which has no dependencies.",
+  "scripts": {
+    "report": "node submission/phase2/build_report.js submission/phase2/OrchLang_Phase2_Report_Nambi_Rajan_M.docx",
+    "deck": "node submission/phase2/build_deck.js submission/phase2/OrchLang_Phase2_Presentation_Nambi_Rajan_M.pptx"
+  },
+  "dependencies": {
+    "docx": "^9.0.0",
+    "pptxgenjs": "^3.12.0"
+  }
+}

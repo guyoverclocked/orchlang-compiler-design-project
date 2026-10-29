@@ -1,0 +1,921 @@
+{
+  "date": "2026-10-25",
+  "missing_keys": [],
+  "references": [
+    {
+      "key": "agat2000transforming",
+      "status": "metadata-retrieved",
+      "source": "https://api.crossref.org/works/10.1145/325694.325702",
+      "metadata": {
+        "DOI": "10.1145/325694.325702",
+        "title": [
+          "Transforming out timing leaks"
+        ],
+        "container-title": [
+          "Proceedings of the 27th ACM SIGPLAN-SIGACT symposium on Principles of programming languages"
+        ],
+        "type": "proceedings-article",
+        "volume": null,
+        "issue": null,
+        "page": "40-53",
+        "article-number": null,
+        "published": {
+          "date-parts": [
+            [
+              2000,
+              1,
+              5
+            ]
+          ]
+        },
+        "author": [
+          {
+            "given": "Johan",
+            "family": "Agat",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "Department of Computing Science, Chalmers University of Technology and G\u00f6teborg University"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "aldinucci2026hardklaim",
+      "status": "access-failed",
+      "source": "https://api.crossref.org/works/10.1016/j.jlamp.2026.101191",
+      "error": "<HTTPError 429: 'Too Many Requests'>"
+    },
+    {
+      "key": "avanzini2025erhl",
+      "status": "metadata-retrieved",
+      "source": "https://api.crossref.org/works/10.1145/3704876",
+      "metadata": {
+        "DOI": "10.1145/3704876",
+        "title": [
+          "A Quantitative Probabilistic Relational Hoare Logic"
+        ],
+        "container-title": [
+          "Proceedings of the ACM on Programming Languages"
+        ],
+        "type": "journal-article",
+        "volume": "9",
+        "issue": "POPL",
+        "page": "1167-1195",
+        "article-number": null,
+        "published": {
+          "date-parts": [
+            [
+              2025,
+              1,
+              7
+            ]
+          ]
+        },
+        "author": [
+          {
+            "ORCID": "https://orcid.org/0000-0002-6445-8833",
+            "authenticated-orcid": false,
+            "given": "Martin",
+            "family": "Avanzini",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "Centre Inria d'Universit\u00e9 C\u00f4te d'Azur, Sophia Antipolis, France"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0002-3853-1777",
+            "authenticated-orcid": false,
+            "given": "Gilles",
+            "family": "Barthe",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "MPI-SP + IMDEA Software Institute, Spain, Bochum, Germany"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0009-0009-2981-2962",
+            "authenticated-orcid": false,
+            "given": "Davide",
+            "family": "Davoli",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Centre Inria d'Universit\u00e9 C\u00f4te d'Azur, Sophia Antipolis, France"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "ORCID": "https://orcid.org/0000-0001-6650-9924",
+            "authenticated-orcid": false,
+            "given": "Benjamin",
+            "family": "Gr\u00e9goire",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Centre Inria d'Universit\u00e9 C\u00f4te d'Azur, Sophia Antipolis, France"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "cauligi2019fact",
+      "status": "metadata-retrieved",
+      "source": "https://api.crossref.org/works/10.1145/3314221.3314605",
+      "metadata": {
+        "DOI": "10.1145/3314221.3314605",
+        "title": [
+          "FaCT: a DSL for timing-sensitive computation"
+        ],
+        "container-title": [
+          "Proceedings of the 40th ACM SIGPLAN Conference on Programming Language Design and Implementation"
+        ],
+        "type": "proceedings-article",
+        "volume": null,
+        "issue": null,
+        "page": "174-189",
+        "article-number": null,
+        "published": {
+          "date-parts": [
+            [
+              2019,
+              6,
+              8
+            ]
+          ]
+        },
+        "author": [
+          {
+            "given": "Sunjay",
+            "family": "Cauligi",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "University of California at San Diego, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Gary",
+            "family": "Soeller",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "University of California at San Diego, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Brian",
+            "family": "Johannesmeyer",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "University of California at San Diego, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Fraser",
+            "family": "Brown",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Stanford University, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Riad S.",
+            "family": "Wahby",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Stanford University, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "John",
+            "family": "Renner",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "University of California at San Diego, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Benjamin",
+            "family": "Gr\u00e9goire",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Inria, France"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Gilles",
+            "family": "Barthe",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "MPI for Security and Privacy, Germany / IMDEA Software Institute, Spain"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Ranjit",
+            "family": "Jhala",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "University of California at San Diego, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Deian",
+            "family": "Stefan",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "University of California at San Diego, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "chen2026routing",
+      "status": "metadata-retrieved",
+      "source": "https://arxiv.org/abs/2610.09981",
+      "metadata": {
+        "citation_title": [
+          "Sensitive-Topic Leakage Through LLM Routing Metadata: Measurement and Mitigation"
+        ],
+        "citation_author": [
+          "Chen, Teng-Ruei"
+        ],
+        "citation_date": [
+          "2026/10/07"
+        ],
+        "citation_online_date": [
+          "2026/10/07"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2610.09981"
+        ],
+        "citation_arxiv_id": [
+          "2610.09981"
+        ],
+        "citation_abstract": [
+          "LLM routers pick a cheap or expensive model per request by its content, and many gateways and some cloud platforms can log that choice with content logging off. We measure this privacy channel beyond token counts, accounting for noisy labels and repeated prompts. We run pre-registered studies on 1.7 million real requests (WildChat-1M, LMSYS-Chat-1M) with two cost/quality routers and a domain router, survey eleven systems' logging, and test post-processing defenses. At matched length, the shift's direction depends on category and router. For RouteLLM at the 50% operating point, harassment and self-harm requests reach the strong model 19 points less often than comparable ones on prompts unseen in exploration, medical requests (exploratory: LLM labels failed their gate) 31 points less often on distinct prompts (both post hoc), and sexual requests 10 points more often (secondary); the other router's four are negative. Twenty RouteLLM decisions separate frequent medical askers with AUC 0.71, exploratory and below the pre-registered primary endpoint's 0.75 (domain router: 0.92, an upper estimate). Per-category length-matched parity with accurate labels removes the gap on real traffic, costing at most 0.2 accuracy points on RouterBench (post hoc), where routers' gaps on sensitive subjects (13-42 points, pre-registered) exceed those of an oracle routing by realized accuracy gain (1-11, post hoc). Per-conversation stickiness, per-user budget bands, and pooled parity fail, the last as categories' shifts differ in size or sign. A post hoc exact per-user rate hides only even-prefix strong counts and forfeits most self-assessed routing value; it preserves odd-position decisions, from which a post hoc log attack reaches AUC 0.73 after 20 RouteLLM requests (exploratory)."
+        ]
+      }
+    },
+    {
+      "key": "cicek2017relcost",
+      "status": "metadata-retrieved",
+      "source": "https://api.crossref.org/works/10.1145/3009837.3009858",
+      "metadata": {
+        "DOI": "10.1145/3009837.3009858",
+        "title": [
+          "Relational cost analysis"
+        ],
+        "container-title": [
+          "Proceedings of the 44th ACM SIGPLAN Symposium on Principles of Programming Languages"
+        ],
+        "type": "proceedings-article",
+        "volume": null,
+        "issue": null,
+        "page": "316-329",
+        "article-number": null,
+        "published": {
+          "date-parts": [
+            [
+              2017,
+              1
+            ]
+          ]
+        },
+        "author": [
+          {
+            "given": "Ezgi",
+            "family": "\u00c7i\u00e7ek",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "MPI-SWS, Germany"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Gilles",
+            "family": "Barthe",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "IMDEA Software Institute, Spain"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Marco",
+            "family": "Gaboardi",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "SUNY Buffalo, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Deepak",
+            "family": "Garg",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "MPI-SWS, Germany"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Jan",
+            "family": "Hoffmann",
+            "sequence": "additional",
+            "affiliation": [
+              {
+                "name": "Carnegie Mellon University, USA"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "ciliberto2026pc2",
+      "status": "metadata-retrieved",
+      "source": "https://arxiv.org/abs/2610.28484v1",
+      "metadata": {
+        "citation_title": [
+          "Proof-Carrying Contracts: Commitments AI Agents Cannot Break"
+        ],
+        "citation_author": [
+          "Ciliberto, Carlo",
+          "Rudi, Alessandro",
+          "Tassi, Enrico"
+        ],
+        "citation_date": [
+          "2026/10/20"
+        ],
+        "citation_online_date": [
+          "2026/10/20"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2610.28484"
+        ],
+        "citation_arxiv_id": [
+          "2610.28484"
+        ],
+        "citation_abstract": [
+          "AI agents increasingly act on behalf of people or other agents, purchasing services, exchanging information and delegating work. What an agent must respect is written in instructions, policies or agreements, but text alone cannot make it comply. It may make mistakes, be redirected by what it reads, or pursue different interests. For an economy of such agents to function, parties need agreements they can rely on without inspecting or trusting one another's agents. We introduce Proof-Carrying Contracts (PC2), a framework for making agreed constraints enforceable throughout an agent's interactions with a system. Before a requested operation can run, the agent must supply a machine-checkable proof that it preserves the agreed constraints in every case allowed by its model. An execution system called the Airlock checks the proof and controls access to the operation. The parties specify the conditions to preserve, while the agent supplies the reasoning needed to justify its decisions and remains free to adapt its strategy. This avoids having to design a separate permission policy and prove that every decision it permits is safe. We prove that the constraints hold at every instant during execution, even for an adversarial agent, and identify when this implies safety in the world. Reusable capability modules provide tools and guarantees from which contracts can be constructed. PC2 provides a foundation for an agent economy whose agreements protect both those delegating work and those carrying it out."
+        ]
+      }
+    },
+    {
+      "key": "costa2025fides",
+      "status": "metadata-retrieved",
+      "source": "https://arxiv.org/abs/2505.23643",
+      "metadata": {
+        "citation_title": [
+          "Securing AI Agents with Information-Flow Control"
+        ],
+        "citation_author": [
+          "Costa, Manuel",
+          "K\u00f6pf, Boris",
+          "Kolluri, Aashish",
+          "Paverd, Andrew",
+          "Russinovich, Mark",
+          "Salem, Ahmed",
+          "Tople, Shruti",
+          "Wutschitz, Lukas",
+          "Zanella-B\u00e9guelin, Santiago"
+        ],
+        "citation_date": [
+          "2025/05/29"
+        ],
+        "citation_online_date": [
+          "2025/09/03"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2505.23643"
+        ],
+        "citation_arxiv_id": [
+          "2505.23643"
+        ],
+        "citation_abstract": [
+          "As AI agents become increasingly autonomous and capable, ensuring their security against vulnerabilities such as prompt injection becomes critical. This paper explores the use of information-flow control (IFC) to provide security guarantees for AI agents. We present a formal model to reason about the security and expressiveness of agent planners. Using this model, we characterize the class of properties enforceable by dynamic taint-tracking and construct a taxonomy of tasks to evaluate security and utility trade-offs of planner designs. Informed by this exploration, we present Fides, a planner that tracks confidentiality and integrity labels, deterministically enforces security policies, and introduces novel primitives for selectively hiding information. Its evaluation in AgentDojo demonstrates that this approach enables us to complete a broad range of tasks with security guarantees. A tutorial to walk readers through the the concepts introduced in the paper can be found at https://github.com/microsoft/fides"
+        ]
+      }
+    },
+    {
+      "key": "costwright2026",
+      "status": "manual-check-required",
+      "reason": "repository or author-hosted source"
+    },
+    {
+      "key": "dangol2026graph",
+      "status": "metadata-retrieved",
+      "source": "https://arxiv.org/abs/2606.07150",
+      "metadata": {
+        "citation_title": [
+          "From Privacy to Workflow Integrity: Communication-Graph Metadata in Autonomous Agent Interoperability"
+        ],
+        "citation_author": [
+          "Dangol, Bijaya"
+        ],
+        "citation_date": [
+          "2026/06/05"
+        ],
+        "citation_online_date": [
+          "2026/06/17"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2606.07150"
+        ],
+        "citation_arxiv_id": [
+          "2606.07150"
+        ],
+        "citation_abstract": [
+          "Agent-interoperability protocols such as A2A and MCP standardize what agents say to one another but assume address-based transport. Whether over HTTP(S) or a content-protecting binding such as MLS-based SLIM, these transports protect message content yet leave the communication graph exposed: which agent contacts which, when, and how often. In agent systems this graph is more consequential than a privacy framing suggests. Endpoints are capability-labeled, workflows are structured and chained, and interactions are coupled to actions, so an observer recovers more than past relationships: it can recognize a recurring pending workflow from its opening and, at machine speed, act on it before it completes. The threat is one of workflow integrity, not privacy alone. We give a threat model for the communication graph and locate what makes its metadata distinctively consequential: not stronger fingerprinting but exposure across independent trust domains, coupled to autonomous action. We define transport- and bootstrap-layer privacy properties, give them an indistinguishability-game semantics, evaluate transports, and give an A2A case study where a metadata-protecting binding surfaces its implicit identity assumptions. On a corpus of real multi-agent A2A traffic from the official reference agents, on a live A2A binding, and with a generative model as a controlled instrument, a label-blind classifier recovers a task's class from passive metadata at 6x chance, and from only its opening; a defense-aware adversary does not overturn this, and only the full set of properties drives recovery toward chance. Acting on the leak is distinct from recoverability: under a fixed budget an adversary captures 0.63 of a clairvoyant attacker's advantage on the corpus (0.41 from a workflow's opening), governed by top-ranked precision rather than overall accuracy, so integrity and privacy come apart under defense."
+        ]
+      }
+    },
+    {
+      "key": "debenedetti2025camel",
+      "status": "metadata-retrieved",
+      "source": "https://arxiv.org/abs/2503.18813",
+      "metadata": {
+        "citation_title": [
+          "Defeating Prompt Injections by Design"
+        ],
+        "citation_author": [
+          "Debenedetti, Edoardo",
+          "Shumailov, Ilia",
+          "Fan, Tianqi",
+          "Hayes, Jamie",
+          "Carlini, Nicholas",
+          "Fabian, Daniel",
+          "Kern, Christoph",
+          "Shi, Chongyang",
+          "Terzis, Andreas",
+          "Tram\u00e8r, Florian"
+        ],
+        "citation_date": [
+          "2025/03/24"
+        ],
+        "citation_online_date": [
+          "2025/06/24"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2503.18813"
+        ],
+        "citation_arxiv_id": [
+          "2503.18813"
+        ],
+        "citation_abstract": [
+          "Large Language Models (LLMs) are increasingly deployed in agentic systems that interact with an untrusted environment. However, LLM agents are vulnerable to prompt injection attacks when handling untrusted data. In this paper we propose CaMeL, a robust defense that creates a protective system layer around the LLM, securing it even when underlying models are susceptible to attacks. To operate, CaMeL explicitly extracts the control and data flows from the (trusted) query; therefore, the untrusted data retrieved by the LLM can never impact the program flow. To further improve security, CaMeL uses a notion of a capability to prevent the exfiltration of private data over unauthorized data flows by enforcing security policies when tools are called. We demonstrate effectiveness of CaMeL by solving $77\\%$ of tasks with provable security (compared to $84\\%$ with an undefended system) in AgentDojo. We release CaMeL at https://github.com/google-research/camel-prompt-injection."
+        ]
+      }
+    },
+    {
+      "key": "dickerson2026loom",
+      "status": "manual-check-required",
+      "reason": "repository or author-hosted source"
+    },
+    {
+      "key": "khan2026budgets",
+      "status": "metadata-retrieved",
+      "source": "https://arxiv.org/abs/2606.04056",
+      "metadata": {
+        "citation_title": [
+          "Token Budgets: An Empirical Catalog of 63 LLM-Agent Budget-Overrun Incidents, with an Affine-Typed Rust Mitigation as a Case Study"
+        ],
+        "citation_author": [
+          "Khan, Sajjad"
+        ],
+        "citation_date": [
+          "2026/06/02"
+        ],
+        "citation_online_date": [
+          "2026/06/02"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2606.04056"
+        ],
+        "citation_arxiv_id": [
+          "2606.04056"
+        ],
+        "citation_abstract": [
+          "LLM-agent budget overruns are a documented production failure class: a single retry loop can spend thousands of dollars before an operator notices, and the in-process integrity properties that would prevent it (no aliasing, no double-spend, no use-after-delegation of a cost-bearing value) are enforced, if at all, by ad-hoc wrappers rather than by the type system. Our central contribution is empirical: a catalog of 63 confirmed production incidents from 21 orchestration frameworks (2023-2026), each backed by a quoted GitHub issue and, where reported, a dollar loss, organized into an eight-cluster failure taxonomy (inter-rater Cohen's kappa = 0.837, N = 113), plus 47 supplementary structural entries. As one mitigation evaluated against this taxonomy, we build token-budgets, an 1,180-line Rust crate (no unsafe) that operationalizes affine ownership so that cloning, double-spending, or using a budget after delegating it are compile errors rather than runtime hazards an operator must remember to avoid. The dollar cap is runtime arithmetic under an estimator assumption; the affine layer makes that arithmetic non-bypassable. On single-agent workloads a 4-line Python counter matches the crate at 0/30 overshoot, so the distinguishing value is non-bypassability under operator error in multi-agent delegation: the delegation-fanout race documented in 11 incidents is rejected by the borrow checker at compile time, while the same pattern under asyncio overshoots 30/30 and three disciplined alternatives overshoot 0/30. Across five runtimes, three providers, and a temperature-stratified live-API test (N = 160), the approach reports zero cap violations and zero false refusals, at operational parity with concurrent work. Static over-reservation is 4-6x (2.11x adaptive). Binary-level cap-soundness on the running binary is left open."
+        ]
+      }
+    },
+    {
+      "key": "mehta2022pacer",
+      "status": "manual-check-required",
+      "reason": "repository or author-hosted source"
+    },
+    {
+      "key": "necula2000tv",
+      "status": "metadata-retrieved",
+      "source": "https://api.crossref.org/works/10.1145/349299.349314",
+      "metadata": {
+        "DOI": "10.1145/349299.349314",
+        "title": [
+          "Translation validation for an optimizing compiler"
+        ],
+        "container-title": [
+          "Proceedings of the ACM SIGPLAN 2000 conference on Programming language design and implementation"
+        ],
+        "type": "proceedings-article",
+        "volume": null,
+        "issue": null,
+        "page": "83-94",
+        "article-number": null,
+        "published": {
+          "date-parts": [
+            [
+              2000,
+              5
+            ]
+          ]
+        },
+        "author": [
+          {
+            "given": "George C.",
+            "family": "Necula",
+            "sequence": "first",
+            "affiliation": [
+              {
+                "name": "University of California, Berkeley"
+              }
+            ],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "ngo2017constant",
+      "status": "metadata-retrieved",
+      "source": "https://api.crossref.org/works/10.1109/SP.2017.53",
+      "metadata": {
+        "DOI": "10.1109/sp.2017.53",
+        "title": [
+          "Verifying and Synthesizing Constant-Resource Implementations with Types"
+        ],
+        "container-title": [
+          "2017 IEEE Symposium on Security and Privacy (SP)"
+        ],
+        "type": "proceedings-article",
+        "volume": null,
+        "issue": null,
+        "page": "710-728",
+        "article-number": null,
+        "published": {
+          "date-parts": [
+            [
+              2017,
+              5
+            ]
+          ]
+        },
+        "author": [
+          {
+            "given": "Van Chan",
+            "family": "Ngo",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Mario",
+            "family": "Dehesa-Azuara",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Matthew",
+            "family": "Fredrikson",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "Jan",
+            "family": "Hoffmann",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "pnueli1998tv",
+      "status": "metadata-retrieved",
+      "source": "https://api.crossref.org/works/10.1007/BFb0054170",
+      "metadata": {
+        "DOI": "10.1007/bfb0054170",
+        "title": [
+          "Translation validation"
+        ],
+        "container-title": [
+          "Lecture Notes in Computer Science",
+          "Tools and Algorithms for the Construction and Analysis of Systems"
+        ],
+        "type": "book-chapter",
+        "volume": null,
+        "issue": null,
+        "page": "151-166",
+        "article-number": null,
+        "published": {
+          "date-parts": [
+            [
+              1998
+            ]
+          ]
+        },
+        "author": [
+          {
+            "given": "A.",
+            "family": "Pnueli",
+            "sequence": "first",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "M.",
+            "family": "Siegel",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          },
+          {
+            "given": "E.",
+            "family": "Singerman",
+            "sequence": "additional",
+            "affiliation": [],
+            "role": [
+              {
+                "vocabulary": "crossref",
+                "role": "author"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "key": "typedresources2026",
+      "status": "manual-check-required",
+      "reason": "repository or author-hosted source"
+    },
+    {
+      "key": "wang2014supersequence",
+      "status": "manual-check-required",
+      "reason": "repository or author-hosted source"
+    },
+    {
+      "key": "xu2026sicc",
+      "status": "metadata-retrieved",
+      "source": "https://arxiv.org/abs/2609.26076",
+      "metadata": {
+        "citation_title": [
+          "Selection-Invariant Communication Compilers for Privacy-Aware Multi-Agent LLM Workflows"
+        ],
+        "citation_author": [
+          "Xu, Jinghan",
+          "Fan, Longze",
+          "Wang, Zeyuan",
+          "Li, Xinjin",
+          "Liu, Hankai"
+        ],
+        "citation_date": [
+          "2026/08/04"
+        ],
+        "citation_online_date": [
+          "2026/08/04"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2609.26076"
+        ],
+        "citation_arxiv_id": [
+          "2609.26076"
+        ],
+        "citation_abstract": [
+          "Structured multi-agent workflows exchange intermediate messages whose content and form can reveal private state even when the final output is safe. We identify selection-channel leakage: after authorization fixes what may be released, a private-state-aware choice among semantically valid realizations creates an additional inference channel. We introduce the selection-invariant communication compiler(SICC), which constrains this post-authorization representation kernel rather than prescribing templates. Any deterministic or independently public-randomized generator satisfying the invariant is valid; requirement-indexed canonical forms are one auditable implementation. We prove a compositional communication-layer guarantee: authorization, public-only form generation, and a dependency-safe utility gate make the emitted transcript reveal no information beyond the complete authorized view. Private-state-aware selection remains vulnerable after surface-disjoint and length-matched controls. Across 132 AgentLeak communication replays and 100 executable LangGraph tasks, deterministic SICC retains complete protocol utility without a positive excess-gain signal; independent public randomization preserves the same result in AgentLeak and 480 controlled cases."
+        ]
+      }
+    },
+    {
+      "key": "zhang2024timewilltell",
+      "status": "metadata-retrieved",
+      "source": "https://arxiv.org/abs/2412.15431",
+      "metadata": {
+        "citation_title": [
+          "Time Will Tell: Timing Side Channels via Output Token Count in Large Language Models"
+        ],
+        "citation_author": [
+          "Zhang, Tianchen",
+          "Saileshwar, Gururaj",
+          "Lie, David"
+        ],
+        "citation_date": [
+          "2024/12/19"
+        ],
+        "citation_online_date": [
+          "2024/12/19"
+        ],
+        "citation_pdf_url": [
+          "https://arxiv.org/pdf/2412.15431"
+        ],
+        "citation_arxiv_id": [
+          "2412.15431"
+        ],
+        "citation_abstract": [
+          "This paper demonstrates a new side-channel that enables an adversary to extract sensitive information about inference inputs in large language models (LLMs) based on the number of output tokens in the LLM response. We construct attacks using this side-channel in two common LLM tasks: recovering the target language in machine translation tasks and recovering the output class in classification tasks. In addition, due to the auto-regressive generation mechanism in LLMs, an adversary can recover the output token count reliably using a timing channel, even over the network against a popular closed-source commercial LLM. Our experiments show that an adversary can learn the output language in translation tasks with more than 75% precision across three different models (Tower, M2M100, MBart50). Using this side-channel, we also show the input class in text classification tasks can be leaked out with more than 70% precision from open-source LLMs like Llama-3.1, Llama-3.2, Gemma2, and production models like GPT-4o. Finally, we propose tokenizer-, system-, and prompt-based mitigations against the output token count side-channel."
+        ]
+      }
+    }
+  ],
+  "limitation": "Metadata retrieval is not full-text claim validation or proof of peer review."
+}

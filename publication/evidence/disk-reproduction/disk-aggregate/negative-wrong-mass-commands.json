@@ -1,0 +1,17 @@
+[
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\tools\\lean-4.19.0-windows\\bin\\lean.exe",
+      "--run",
+      "C:\\Users\\nambi\\Documents\\Compiler Project\\audit-2026-10-24\\disk-snapshot\\proof\\AggregateReordering.lean",
+      "C:\\Users\\nambi\\Documents\\Compiler Project\\audit-2026-10-24\\evidence\\disk-aggregate\\aggregate-json-xz4fjkeb\\batch.json"
+    ],
+    "offset": 0,
+    "cases": 1,
+    "exit": 2,
+    "seconds": 1.1203955999953905,
+    "stdout": "'OrchLang.Aggregate.pairObservation_comm' depends on axioms: [propext, Quot.sound]\n'OrchLang.Aggregate.samples_comm' depends on axioms: [propext, Quot.sound]\n'OrchLang.Aggregate.mass_perm' depends on axioms: [propext]\n'OrchLang.Aggregate.independent_calls_aggregate' depends on axioms: [propext, Quot.sound]\n'OrchLang.Aggregate.decision_sound' depends on axioms: [propext, Quot.sound]\n'OrchLang.Aggregate.independent_calls_private_results' depends on axioms: [propext, Quot.sound]\n'OrchLang.Aggregate.private_results_decision_sound' depends on axioms: [propext, Quot.sound]\n'OrchLang.Aggregate.decoded_decision_sound' depends on axioms: [propext, Quot.sound]\n'OrchLang.Aggregate.decoded_private_results_sound' depends on axioms: [propext, Quot.sound]\n",
+    "stderr": "kernel row numerator mass differs from denominator\n",
+    "lean_version": "Lean (version 4.19.0, x86_64-w64-windows-gnu, commit 6caaee842e94, Release)"
+  }
+]

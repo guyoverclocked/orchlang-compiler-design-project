@@ -1,0 +1,29 @@
+{
+  "status": "completed",
+  "timestamp_utc": "2026-10-24T17:04:51.387184+00:00",
+  "source_commit": "cef4772d1568af0b0042d97dcff6c396e8d95a52",
+  "dirty_tree": false,
+  "files": {
+    "proof/AggregateReordering.lean": "7c7b9ac717054c9998038c1f004195358bcb2036b53ad9f54e61eae9c2f3ec7e",
+    "runtime/aggregate_gate.py": "b6b10eaa55fc868a27cacd5a1908872635af89357447facb7eb32b1ad3d1010e",
+    "runtime/source_gate.py": "e63a7dbde2bcb1d658a993272977af731c48bd011235597f742f520932910fba",
+    "scripts/decide_aggregate.py": "17f20e87d675456c4c090dee2c7a22e0c2f59e9eefb5fac947fd5eee9ab2e4c8",
+    "scripts/check_aggregate_reordering.py": "cd8c789a271e240a9d1a65d70c1f7e9607d1237e4dcdd901c6580f17a6efb972",
+    "runtime/finite_reference.py": "2f4b859f604f2ddeb46853cbbcf1ce15b5c3b394f64a3830f0d14c6b656747a6",
+    "runtime/replay_adapter.py": "b028a75278956cbc63d5f2c2612e75a3b6b82a94477706abd0cf522b3c5f30d4"
+  },
+  "executable_sha256": "853ecf7d2f7ee979a236c402de7ffd8cc1c139204a86aa9bb1e7deb9c33105c4",
+  "source_cases": 256,
+  "ordered_baseline_accepted": 16,
+  "aggregate_accepted": 28,
+  "aggregate_gains": 12,
+  "accepted_with_different_ordered_distributions": 12,
+  "accepted_finite_counterexamples": 0,
+  "execution_contexts": 512,
+  "weighted_paths": 2048,
+  "malformed_inputs_rejected": 8,
+  "illustrative_scenarios": 3,
+  "failures": [],
+  "spent_usd": "0.00",
+  "provider_inference": false
+}

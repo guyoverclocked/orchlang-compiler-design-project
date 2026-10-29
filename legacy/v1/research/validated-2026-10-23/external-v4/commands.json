@@ -1,0 +1,2972 @@
+[
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "check",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nPFbasic:\n  token bound   380 / budget 100000\n  components    output <= 120, input <= 260 @ 4 chars/token\n  labels        0 secret, 0 untrusted\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "certify",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"PFbasic\",\n      \"budget_tokens\": 100000,\n      \"bound\": {\"guaranteed_tokens\": 120, \"estimated_tokens\": 260, \"total_tokens\": 380, \"component_sum_tokens\": 380, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"answer = p via m [out<=120, in<=4+256]\", \"guaranteed_tokens\": 120, \"estimated_tokens\": 260, \"line\": 5}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:PFbasic\", \"name\": \"answer\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 120},\n        {\"scope\": \"workflow:PFbasic\", \"name\": \"m\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFbasic\", \"name\": \"p\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFbasic\", \"name\": \"x\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 256},\n        {\"scope\": \"workflow:PFbasic::prompt:p\", \"name\": \"t\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "ir-json",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"workflows\": [\n    {\n      \"name\": \"PFbasic\",\n      \"nodes\": [\n        {\"id\": 1, \"kind\": \"Input\", \"name\": \"x\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"max_tokens\": \"256\"}},\n        {\"id\": 2, \"kind\": \"Model\", \"name\": \"m\", \"type\": \"<unknown>\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"provider\": \"mock\", \"name\": \"pf-basic\", \"max_tokens\": \"120\"}},\n        {\"id\": 3, \"kind\": \"Prompt\", \"name\": \"p\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"parameters\": \"1\"}},\n        {\"id\": 4, \"kind\": \"Call\", \"name\": \"answer\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [3, 2, 1], \"attributes\": {\"prompt\": \"p\", \"model\": \"m\", \"model_binding\": \"2\", \"prompt_binding\": \"3\", \"model_contract\": \"orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0\", \"resource_unit\": \"mock-length-v1\", \"out_tokens\": \"120\", \"in_tokens\": \"260\"}},\n        {\"id\": 5, \"kind\": \"Output\", \"name\": \"answer\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [4], \"attributes\": {}}\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "1"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  272  (input 254 + output 18)\n    answer = p via m  in 254 out 18\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 254  out 18\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "2"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  265  (input 181 + output 84)\n    answer = p via m  in 181 out 84\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 181  out 84\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "3"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  120  (input 41 + output 79)\n    answer = p via m  in 41 out 79\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 41  out 79\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "4"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  263  (input 187 + output 76)\n    answer = p via m  in 187 out 76\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 187  out 76\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "5"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  351  (input 260 + output 91)\n    answer = p via m  in 260 out 91\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 260  out 91\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "6"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  122  (input 82 + output 40)\n    answer = p via m  in 82 out 40\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 82  out 40\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "7"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  249  (input 198 + output 51)\n    answer = p via m  in 198 out 51\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 198  out 51\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "8"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  362  (input 256 + output 106)\n    answer = p via m  in 256 out 106\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 256  out 106\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "9"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  308  (input 252 + output 56)\n    answer = p via m  in 252 out 56\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 252  out 56\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "10"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  146  (input 86 + output 60)\n    answer = p via m  in 86 out 60\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 86  out 60\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "11"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  200  (input 83 + output 117)\n    answer = p via m  in 83 out 117\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 83  out 117\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "12"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  190  (input 180 + output 10)\n    answer = p via m  in 180 out 10\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 180  out 10\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "13"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  182  (input 137 + output 45)\n    answer = p via m  in 137 out 45\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 137  out 45\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "14"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  239  (input 167 + output 72)\n    answer = p via m  in 167 out 72\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 167  out 72\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "15"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  23  (input 18 + output 5)\n    answer = p via m  in 18 out 5\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 18  out 5\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "16"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  151  (input 136 + output 15)\n    answer = p via m  in 136 out 15\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 136  out 15\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "17"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  215  (input 150 + output 65)\n    answer = p via m  in 150 out 65\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 150  out 65\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "18"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  260  (input 177 + output 83)\n    answer = p via m  in 177 out 83\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 177  out 83\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "19"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  30  (input 13 + output 17)\n    answer = p via m  in 13 out 17\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 13  out 17\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic.orch",
+      "--seed",
+      "20"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic:\n  calls          1\n  actual tokens  238  (input 223 + output 15)\n    answer = p via m  in 223 out 15\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 223  out 15\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "check",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nPFbasic_with_builtin_llm:\n  token bound   380 / budget 100000\n  components    output <= 120, input <= 260 @ 4 chars/token\n  labels        0 secret, 0 untrusted\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "certify",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"PFbasic_with_builtin_llm\",\n      \"budget_tokens\": 100000,\n      \"bound\": {\"guaranteed_tokens\": 120, \"estimated_tokens\": 260, \"total_tokens\": 380, \"component_sum_tokens\": 380, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"answer = p via m [out<=120, in<=4+256]\", \"guaranteed_tokens\": 120, \"estimated_tokens\": 260, \"line\": 5}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:PFbasic_with_builtin_llm\", \"name\": \"answer\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 120},\n        {\"scope\": \"workflow:PFbasic_with_builtin_llm\", \"name\": \"m\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFbasic_with_builtin_llm\", \"name\": \"p\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFbasic_with_builtin_llm\", \"name\": \"x\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 256},\n        {\"scope\": \"workflow:PFbasic_with_builtin_llm::prompt:p\", \"name\": \"t\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "ir-json",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"workflows\": [\n    {\n      \"name\": \"PFbasic_with_builtin_llm\",\n      \"nodes\": [\n        {\"id\": 1, \"kind\": \"Input\", \"name\": \"x\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"max_tokens\": \"256\"}},\n        {\"id\": 2, \"kind\": \"Model\", \"name\": \"m\", \"type\": \"<unknown>\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"provider\": \"mock\", \"name\": \"pf-basic\", \"max_tokens\": \"120\"}},\n        {\"id\": 3, \"kind\": \"Prompt\", \"name\": \"p\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"parameters\": \"1\"}},\n        {\"id\": 4, \"kind\": \"Call\", \"name\": \"answer\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [3, 2, 1], \"attributes\": {\"prompt\": \"p\", \"model\": \"m\", \"model_binding\": \"2\", \"prompt_binding\": \"3\", \"model_contract\": \"orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0\", \"resource_unit\": \"mock-length-v1\", \"out_tokens\": \"120\", \"in_tokens\": \"260\"}},\n        {\"id\": 5, \"kind\": \"Output\", \"name\": \"answer\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [4], \"attributes\": {}}\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "1"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  245  (input 200 + output 45)\n    answer = p via m  in 200 out 45\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 200  out 45\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "2"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  227  (input 210 + output 17)\n    answer = p via m  in 210 out 17\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 210  out 17\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "3"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  159  (input 87 + output 72)\n    answer = p via m  in 87 out 72\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 87  out 72\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "4"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  298  (input 210 + output 88)\n    answer = p via m  in 210 out 88\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 210  out 88\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "5"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  371  (input 252 + output 119)\n    answer = p via m  in 252 out 119\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 252  out 119\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "6"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  322  (input 228 + output 94)\n    answer = p via m  in 228 out 94\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 228  out 94\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "7"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  271  (input 239 + output 32)\n    answer = p via m  in 239 out 32\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 239  out 32\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "8"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  269  (input 213 + output 56)\n    answer = p via m  in 213 out 56\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 213  out 56\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "9"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  267  (input 229 + output 38)\n    answer = p via m  in 229 out 38\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 229  out 38\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "10"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  258  (input 235 + output 23)\n    answer = p via m  in 235 out 23\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 235  out 23\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "11"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  155  (input 54 + output 101)\n    answer = p via m  in 54 out 101\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 54  out 101\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "12"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  205  (input 166 + output 39)\n    answer = p via m  in 166 out 39\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 166  out 39\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "13"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  96  (input 42 + output 54)\n    answer = p via m  in 42 out 54\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 42  out 54\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "14"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  85  (input 25 + output 60)\n    answer = p via m  in 25 out 60\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 25  out 60\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "15"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  133  (input 38 + output 95)\n    answer = p via m  in 38 out 95\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 38  out 95\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "16"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  114  (input 57 + output 57)\n    answer = p via m  in 57 out 57\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 57  out 57\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "17"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  94  (input 37 + output 57)\n    answer = p via m  in 37 out 57\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 37  out 57\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "18"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  151  (input 126 + output 25)\n    answer = p via m  in 126 out 25\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 126  out 25\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "19"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  134  (input 74 + output 60)\n    answer = p via m  in 74 out 60\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 74  out 60\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-builtin-llm.orch",
+      "--seed",
+      "20"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_builtin_llm:\n  calls          1\n  actual tokens  255  (input 169 + output 86)\n    answer = p via m  in 169 out 86\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 169  out 86\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "check",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nPFbasic_with_connection:\n  token bound   380 / budget 100000\n  components    output <= 120, input <= 260 @ 4 chars/token\n  labels        0 secret, 0 untrusted\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "certify",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"PFbasic_with_connection\",\n      \"budget_tokens\": 100000,\n      \"bound\": {\"guaranteed_tokens\": 120, \"estimated_tokens\": 260, \"total_tokens\": 380, \"component_sum_tokens\": 380, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"answer = p via m [out<=120, in<=4+256]\", \"guaranteed_tokens\": 120, \"estimated_tokens\": 260, \"line\": 5}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:PFbasic_with_connection\", \"name\": \"answer\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 120},\n        {\"scope\": \"workflow:PFbasic_with_connection\", \"name\": \"m\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFbasic_with_connection\", \"name\": \"p\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFbasic_with_connection\", \"name\": \"x\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 256},\n        {\"scope\": \"workflow:PFbasic_with_connection::prompt:p\", \"name\": \"t\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "ir-json",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"workflows\": [\n    {\n      \"name\": \"PFbasic_with_connection\",\n      \"nodes\": [\n        {\"id\": 1, \"kind\": \"Input\", \"name\": \"x\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"max_tokens\": \"256\"}},\n        {\"id\": 2, \"kind\": \"Model\", \"name\": \"m\", \"type\": \"<unknown>\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"provider\": \"mock\", \"name\": \"pf-basic\", \"max_tokens\": \"120\"}},\n        {\"id\": 3, \"kind\": \"Prompt\", \"name\": \"p\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"parameters\": \"1\"}},\n        {\"id\": 4, \"kind\": \"Call\", \"name\": \"answer\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [3, 2, 1], \"attributes\": {\"prompt\": \"p\", \"model\": \"m\", \"model_binding\": \"2\", \"prompt_binding\": \"3\", \"model_contract\": \"orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0\", \"resource_unit\": \"mock-length-v1\", \"out_tokens\": \"120\", \"in_tokens\": \"260\"}},\n        {\"id\": 5, \"kind\": \"Output\", \"name\": \"answer\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [4], \"attributes\": {}}\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "1"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  299  (input 236 + output 63)\n    answer = p via m  in 236 out 63\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 236  out 63\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "2"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  157  (input 86 + output 71)\n    answer = p via m  in 86 out 71\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 86  out 71\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "3"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  209  (input 188 + output 21)\n    answer = p via m  in 188 out 21\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 188  out 21\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "4"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  259  (input 223 + output 36)\n    answer = p via m  in 223 out 36\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 223  out 36\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "5"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  41  (input 11 + output 30)\n    answer = p via m  in 11 out 30\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 11  out 30\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "6"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  319  (input 225 + output 94)\n    answer = p via m  in 225 out 94\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 225  out 94\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "7"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  210  (input 166 + output 44)\n    answer = p via m  in 166 out 44\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 166  out 44\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "8"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  68  (input 22 + output 46)\n    answer = p via m  in 22 out 46\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 22  out 46\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "9"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  143  (input 66 + output 77)\n    answer = p via m  in 66 out 77\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 66  out 77\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "10"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  346  (input 235 + output 111)\n    answer = p via m  in 235 out 111\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 235  out 111\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "11"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  281  (input 165 + output 116)\n    answer = p via m  in 165 out 116\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 165  out 116\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "12"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  229  (input 149 + output 80)\n    answer = p via m  in 149 out 80\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 149  out 80\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "13"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  200  (input 128 + output 72)\n    answer = p via m  in 128 out 72\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 128  out 72\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "14"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  242  (input 167 + output 75)\n    answer = p via m  in 167 out 75\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 167  out 75\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "15"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  190  (input 109 + output 81)\n    answer = p via m  in 109 out 81\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 109  out 81\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "16"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  98  (input 39 + output 59)\n    answer = p via m  in 39 out 59\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 39  out 59\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "17"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  287  (input 245 + output 42)\n    answer = p via m  in 245 out 42\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 245  out 42\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "18"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  227  (input 150 + output 77)\n    answer = p via m  in 150 out 77\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 150  out 77\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "19"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  129  (input 74 + output 55)\n    answer = p via m  in 74 out 55\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 74  out 55\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-basic-with-connection.orch",
+      "--seed",
+      "20"
+    ],
+    "exit": 0,
+    "stdout": "PFbasic_with_connection:\n  calls          1\n  actual tokens  96  (input 56 + output 40)\n    answer = p via m  in 56 out 40\n  billing\n    orch-abstract-model-v1:4:mock:8:pf-basic:cap=120:price=0  calls 1  in 56  out 40\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "check",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nPFIntent:\n  token bound   648 / budget 100000\n  components    output <= 256, input <= 392 @ 4 chars/token\n  labels        0 secret, 0 untrusted\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "certify",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"PFIntent\",\n      \"budget_tokens\": 100000,\n      \"bound\": {\"guaranteed_tokens\": 256, \"estimated_tokens\": 392, \"total_tokens\": 648, \"component_sum_tokens\": 648, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"intent = p via m [out<=256, in<=8+384]\", \"guaranteed_tokens\": 256, \"estimated_tokens\": 392, \"line\": 6}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:PFIntent\", \"name\": \"history\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 256},\n        {\"scope\": \"workflow:PFIntent\", \"name\": \"info\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 128},\n        {\"scope\": \"workflow:PFIntent\", \"name\": \"intent\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 256},\n        {\"scope\": \"workflow:PFIntent\", \"name\": \"m\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFIntent\", \"name\": \"p\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFIntent::prompt:p\", \"name\": \"h\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFIntent::prompt:p\", \"name\": \"i\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "ir-json",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"workflows\": [\n    {\n      \"name\": \"PFIntent\",\n      \"nodes\": [\n        {\"id\": 1, \"kind\": \"Input\", \"name\": \"history\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"max_tokens\": \"256\"}},\n        {\"id\": 2, \"kind\": \"Input\", \"name\": \"info\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"max_tokens\": \"128\"}},\n        {\"id\": 3, \"kind\": \"Model\", \"name\": \"m\", \"type\": \"<unknown>\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"provider\": \"mock\", \"name\": \"pf-intent\", \"max_tokens\": \"256\"}},\n        {\"id\": 4, \"kind\": \"Prompt\", \"name\": \"p\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"parameters\": \"2\"}},\n        {\"id\": 5, \"kind\": \"Call\", \"name\": \"intent\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [4, 3, 1, 2], \"attributes\": {\"prompt\": \"p\", \"model\": \"m\", \"model_binding\": \"3\", \"prompt_binding\": \"4\", \"model_contract\": \"orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0\", \"resource_unit\": \"mock-length-v1\", \"out_tokens\": \"256\", \"in_tokens\": \"392\"}},\n        {\"id\": 6, \"kind\": \"Output\", \"name\": \"intent\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [5], \"attributes\": {}}\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "1"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  456  (input 342 + output 114)\n    intent = p via m  in 342 out 114\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 342  out 114\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "2"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  470  (input 235 + output 235)\n    intent = p via m  in 235 out 235\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 235  out 235\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "3"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  402  (input 211 + output 191)\n    intent = p via m  in 211 out 191\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 211  out 191\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "4"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  399  (input 269 + output 130)\n    intent = p via m  in 269 out 130\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 269  out 130\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "5"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  260  (input 138 + output 122)\n    intent = p via m  in 138 out 122\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 138  out 122\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "6"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  276  (input 178 + output 98)\n    intent = p via m  in 178 out 98\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 178  out 98\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "7"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  420  (input 191 + output 229)\n    intent = p via m  in 191 out 229\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 191  out 229\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "8"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  403  (input 271 + output 132)\n    intent = p via m  in 271 out 132\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 271  out 132\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "9"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  354  (input 267 + output 87)\n    intent = p via m  in 267 out 87\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 267  out 87\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "10"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  384  (input 243 + output 141)\n    intent = p via m  in 243 out 141\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 243  out 141\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "11"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  353  (input 297 + output 56)\n    intent = p via m  in 297 out 56\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 297  out 56\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "12"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  170  (input 168 + output 2)\n    intent = p via m  in 168 out 2\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 168  out 2\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "13"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  217  (input 215 + output 2)\n    intent = p via m  in 215 out 2\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 215  out 2\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "14"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  189  (input 164 + output 25)\n    intent = p via m  in 164 out 25\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 164  out 25\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "15"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  303  (input 287 + output 16)\n    intent = p via m  in 287 out 16\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 287  out 16\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "16"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  169  (input 73 + output 96)\n    intent = p via m  in 73 out 96\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 73  out 96\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "17"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  370  (input 129 + output 241)\n    intent = p via m  in 129 out 241\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 129  out 241\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "18"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  236  (input 67 + output 169)\n    intent = p via m  in 67 out 169\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 67  out 169\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "19"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  212  (input 150 + output 62)\n    intent = p via m  in 150 out 62\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 150  out 62\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-customer-intent.orch",
+      "--seed",
+      "20"
+    ],
+    "exit": 0,
+    "stdout": "PFIntent:\n  calls          1\n  actual tokens  395  (input 320 + output 75)\n    intent = p via m  in 320 out 75\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-intent:cap=256:price=0  calls 1  in 320  out 75\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "check",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nPFNER:\n  token bound   597 / budget 100000\n  components    output <= 64, input <= 533 @ 4 chars/token\n  labels        0 secret, 0 untrusted\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "certify",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"PFNER\",\n      \"budget_tokens\": 100000,\n      \"bound\": {\"guaranteed_tokens\": 64, \"estimated_tokens\": 533, \"total_tokens\": 597, \"component_sum_tokens\": 597, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"entities = p via m [out<=64, in<=5+528]\", \"guaranteed_tokens\": 64, \"estimated_tokens\": 533, \"line\": 6}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:PFNER\", \"name\": \"document\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 512},\n        {\"scope\": \"workflow:PFNER\", \"name\": \"entities\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 64},\n        {\"scope\": \"workflow:PFNER\", \"name\": \"entity_type\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 16},\n        {\"scope\": \"workflow:PFNER\", \"name\": \"m\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFNER\", \"name\": \"p\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFNER::prompt:p\", \"name\": \"e\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFNER::prompt:p\", \"name\": \"t\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "ir-json",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"workflows\": [\n    {\n      \"name\": \"PFNER\",\n      \"nodes\": [\n        {\"id\": 1, \"kind\": \"Input\", \"name\": \"document\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"max_tokens\": \"512\"}},\n        {\"id\": 2, \"kind\": \"Input\", \"name\": \"entity_type\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"max_tokens\": \"16\"}},\n        {\"id\": 3, \"kind\": \"Model\", \"name\": \"m\", \"type\": \"<unknown>\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"provider\": \"mock\", \"name\": \"pf-ner\", \"max_tokens\": \"64\"}},\n        {\"id\": 4, \"kind\": \"Prompt\", \"name\": \"p\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"parameters\": \"2\"}},\n        {\"id\": 5, \"kind\": \"Call\", \"name\": \"entities\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [4, 3, 1, 2], \"attributes\": {\"prompt\": \"p\", \"model\": \"m\", \"model_binding\": \"3\", \"prompt_binding\": \"4\", \"model_contract\": \"orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0\", \"resource_unit\": \"mock-length-v1\", \"out_tokens\": \"64\", \"in_tokens\": \"533\"}},\n        {\"id\": 6, \"kind\": \"Output\", \"name\": \"entities\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [5], \"attributes\": {}}\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "1"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  416  (input 415 + output 1)\n    entities = p via m  in 415 out 1\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 415  out 1\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "2"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  485  (input 471 + output 14)\n    entities = p via m  in 471 out 14\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 471  out 14\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "3"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  41  (input 19 + output 22)\n    entities = p via m  in 19 out 22\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 19  out 22\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "4"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  513  (input 468 + output 45)\n    entities = p via m  in 468 out 45\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 468  out 45\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "5"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  421  (input 413 + output 8)\n    entities = p via m  in 413 out 8\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 413  out 8\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "6"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  416  (input 382 + output 34)\n    entities = p via m  in 382 out 34\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 382  out 34\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "7"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  525  (input 496 + output 29)\n    entities = p via m  in 496 out 29\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 496  out 29\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "8"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  467  (input 435 + output 32)\n    entities = p via m  in 435 out 32\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 435  out 32\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "9"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  89  (input 73 + output 16)\n    entities = p via m  in 73 out 16\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 73  out 16\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "10"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  378  (input 347 + output 31)\n    entities = p via m  in 347 out 31\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 347  out 31\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "11"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  177  (input 149 + output 28)\n    entities = p via m  in 149 out 28\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 149  out 28\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "12"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  511  (input 494 + output 17)\n    entities = p via m  in 494 out 17\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 494  out 17\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "13"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  296  (input 294 + output 2)\n    entities = p via m  in 294 out 2\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 294  out 2\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "14"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  110  (input 65 + output 45)\n    entities = p via m  in 65 out 45\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 65  out 45\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "15"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  289  (input 237 + output 52)\n    entities = p via m  in 237 out 52\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 237  out 52\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "16"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  171  (input 154 + output 17)\n    entities = p via m  in 154 out 17\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 154  out 17\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "17"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  511  (input 495 + output 16)\n    entities = p via m  in 495 out 16\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 495  out 16\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "18"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  67  (input 28 + output 39)\n    entities = p via m  in 28 out 39\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 28  out 39\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "19"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  431  (input 371 + output 60)\n    entities = p via m  in 371 out 60\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 371  out 60\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-ner.orch",
+      "--seed",
+      "20"
+    ],
+    "exit": 0,
+    "stdout": "PFNER:\n  calls          1\n  actual tokens  365  (input 363 + output 2)\n    entities = p via m  in 363 out 2\n  billing\n    orch-abstract-model-v1:4:mock:6:pf-ner:cap=64:price=0  calls 1  in 363  out 2\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "check",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nPFSwitch:\n  token bound   390 / budget 100000\n  components    output <= 128, input <= 262 @ 4 chars/token\n  labels        0 secret, 0 untrusted\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "certify",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"PFSwitch\",\n      \"budget_tokens\": 100000,\n      \"bound\": {\"guaranteed_tokens\": 128, \"estimated_tokens\": 262, \"total_tokens\": 390, \"component_sum_tokens\": 390, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"category = p via m [out<=128, in<=6+256]\", \"guaranteed_tokens\": 128, \"estimated_tokens\": 262, \"line\": 5}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:PFSwitch\", \"name\": \"category\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 128},\n        {\"scope\": \"workflow:PFSwitch\", \"name\": \"m\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFSwitch\", \"name\": \"p\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFSwitch\", \"name\": \"x\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 256},\n        {\"scope\": \"workflow:PFSwitch::prompt:p\", \"name\": \"t\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "ir-json",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"workflows\": [\n    {\n      \"name\": \"PFSwitch\",\n      \"nodes\": [\n        {\"id\": 1, \"kind\": \"Input\", \"name\": \"x\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"max_tokens\": \"256\"}},\n        {\"id\": 2, \"kind\": \"Model\", \"name\": \"m\", \"type\": \"<unknown>\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"provider\": \"mock\", \"name\": \"pf-switch\", \"max_tokens\": \"128\"}},\n        {\"id\": 3, \"kind\": \"Prompt\", \"name\": \"p\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"parameters\": \"1\"}},\n        {\"id\": 4, \"kind\": \"Call\", \"name\": \"category\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [3, 2, 1], \"attributes\": {\"prompt\": \"p\", \"model\": \"m\", \"model_binding\": \"2\", \"prompt_binding\": \"3\", \"model_contract\": \"orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0\", \"resource_unit\": \"mock-length-v1\", \"out_tokens\": \"128\", \"in_tokens\": \"262\"}},\n        {\"id\": 5, \"kind\": \"Output\", \"name\": \"category\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [4], \"attributes\": {}}\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "1"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  340  (input 222 + output 118)\n    category = p via m  in 222 out 118\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 222  out 118\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "2"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  233  (input 196 + output 37)\n    category = p via m  in 196 out 37\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 196  out 37\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "3"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  209  (input 94 + output 115)\n    category = p via m  in 94 out 115\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 94  out 115\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "4"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  267  (input 205 + output 62)\n    category = p via m  in 205 out 62\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 205  out 62\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "5"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  136  (input 20 + output 116)\n    category = p via m  in 20 out 116\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 20  out 116\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "6"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  176  (input 168 + output 8)\n    category = p via m  in 168 out 8\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 168  out 8\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "7"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  189  (input 125 + output 64)\n    category = p via m  in 125 out 64\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 125  out 64\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "8"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  269  (input 197 + output 72)\n    category = p via m  in 197 out 72\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 197  out 72\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "9"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  265  (input 201 + output 64)\n    category = p via m  in 201 out 64\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 201  out 64\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "10"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  241  (input 180 + output 61)\n    category = p via m  in 180 out 61\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 180  out 61\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "11"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  295  (input 241 + output 54)\n    category = p via m  in 241 out 54\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 241  out 54\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "12"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  166  (input 135 + output 31)\n    category = p via m  in 135 out 31\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 135  out 31\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "13"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  213  (input 113 + output 100)\n    category = p via m  in 113 out 100\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 113  out 100\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "14"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  162  (input 60 + output 102)\n    category = p via m  in 60 out 102\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 60  out 102\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "15"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  285  (input 204 + output 81)\n    category = p via m  in 204 out 81\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 204  out 81\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "16"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  71  (input 23 + output 48)\n    category = p via m  in 23 out 48\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 23  out 48\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "17"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  127  (input 88 + output 39)\n    category = p via m  in 88 out 39\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 88  out 39\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "18"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  65  (input 11 + output 54)\n    category = p via m  in 11 out 54\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 11  out 54\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "19"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  148  (input 29 + output 119)\n    category = p via m  in 29 out 119\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 29  out 119\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-switch.orch",
+      "--seed",
+      "20"
+    ],
+    "exit": 0,
+    "stdout": "PFSwitch:\n  calls          1\n  actual tokens  318  (input 231 + output 87)\n    category = p via m  in 231 out 87\n  billing\n    orch-abstract-model-v1:4:mock:9:pf-switch:cap=128:price=0  calls 1  in 231  out 87\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "check",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nPFIfElse:\n  token bound   0 / budget 100000\n  components    output <= 0, input <= 0 @ 4 chars/token\n  labels        0 secret, 0 untrusted\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "certify",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"PFIfElse\",\n      \"budget_tokens\": 100000,\n      \"bound\": {\"guaranteed_tokens\": 0, \"estimated_tokens\": 0, \"total_tokens\": 0, \"component_sum_tokens\": 0, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": true},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"branch\", \"detail\": \"allowed\", \"guaranteed_tokens\": 0, \"estimated_tokens\": 0, \"line\": 4},\n        {\"depth\": 0, \"rule\": \"branch-max\", \"detail\": \"max(then=0, else=0)\", \"guaranteed_tokens\": 0, \"estimated_tokens\": 0, \"line\": 4}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:PFIfElse\", \"name\": \"allowed\", \"kind\": \"input\", \"type\": \"boolean\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 1},\n        {\"scope\": \"workflow:PFIfElse\", \"name\": \"x\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 256}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "ir-json",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"workflows\": [\n    {\n      \"name\": \"PFIfElse\",\n      \"nodes\": [\n        {\"id\": 1, \"kind\": \"Input\", \"name\": \"x\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"max_tokens\": \"256\"}},\n        {\"id\": 2, \"kind\": \"Input\", \"name\": \"allowed\", \"type\": \"boolean\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"max_tokens\": \"1\"}},\n        {\"id\": 3, \"kind\": \"Branch\", \"name\": \"allowed\", \"type\": \"boolean\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [2], \"attributes\": {\"guard\": \"allowed\", \"has_else\": \"true\"}},\n        {\"id\": 4, \"kind\": \"Output\", \"name\": \"x\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [1], \"attributes\": {}}\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "1"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "2"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "3"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "4"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "5"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "6"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "7"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "8"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "9"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "10"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "11"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "12"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "13"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "14"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "15"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "16"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "17"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "18"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "19"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-if-else-stubs.orch",
+      "--seed",
+      "20"
+    ],
+    "exit": 0,
+    "stdout": "PFIfElse:\n  calls          0\n  actual tokens  0  (input 0 + output 0)\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "check",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nPFWeb:\n  token bound   2459 / budget 100000\n  components    output <= 256, input <= 2203 @ 4 chars/token\n  labels        0 secret, 3 untrusted\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "certify",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"PFWeb\",\n      \"budget_tokens\": 100000,\n      \"bound\": {\"guaranteed_tokens\": 256, \"estimated_tokens\": 2203, \"total_tokens\": 2459, \"component_sum_tokens\": 2459, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"summary = summarize via m [out<=128, in<=5+2000]\", \"guaranteed_tokens\": 128, \"estimated_tokens\": 2005, \"line\": 7},\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"category = classify via m [out<=128, in<=6+192]\", \"guaranteed_tokens\": 128, \"estimated_tokens\": 198, \"line\": 8}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:PFWeb\", \"name\": \"category\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"untrusted\", \"token_bound\": 128},\n        {\"scope\": \"workflow:PFWeb\", \"name\": \"classify\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFWeb\", \"name\": \"m\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFWeb\", \"name\": \"page\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"untrusted\", \"token_bound\": 2000},\n        {\"scope\": \"workflow:PFWeb\", \"name\": \"summarize\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFWeb\", \"name\": \"summary\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"untrusted\", \"token_bound\": 128},\n        {\"scope\": \"workflow:PFWeb\", \"name\": \"url\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 64},\n        {\"scope\": \"workflow:PFWeb::prompt:summarize\", \"name\": \"t\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFWeb::prompt:classify\", \"name\": \"t\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:PFWeb::prompt:classify\", \"name\": \"u\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "ir-json",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"workflows\": [\n    {\n      \"name\": \"PFWeb\",\n      \"nodes\": [\n        {\"id\": 1, \"kind\": \"Input\", \"name\": \"page\", \"type\": \"text\", \"label\": \"public/untrusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"max_tokens\": \"2000\"}},\n        {\"id\": 2, \"kind\": \"Input\", \"name\": \"url\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"max_tokens\": \"64\"}},\n        {\"id\": 3, \"kind\": \"Model\", \"name\": \"m\", \"type\": \"<unknown>\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"provider\": \"mock\", \"name\": \"pf-web-default\", \"max_tokens\": \"128\"}},\n        {\"id\": 4, \"kind\": \"Prompt\", \"name\": \"summarize\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"parameters\": \"1\"}},\n        {\"id\": 5, \"kind\": \"Prompt\", \"name\": \"classify\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"parameters\": \"2\"}},\n        {\"id\": 6, \"kind\": \"Call\", \"name\": \"summary\", \"type\": \"text\", \"label\": \"public/untrusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [4, 3, 1], \"attributes\": {\"prompt\": \"summarize\", \"model\": \"m\", \"model_binding\": \"3\", \"prompt_binding\": \"4\", \"model_contract\": \"orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0\", \"resource_unit\": \"mock-length-v1\", \"out_tokens\": \"128\", \"in_tokens\": \"2005\"}},\n        {\"id\": 7, \"kind\": \"Call\", \"name\": \"category\", \"type\": \"text\", \"label\": \"public/untrusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [5, 3, 6, 2], \"attributes\": {\"prompt\": \"classify\", \"model\": \"m\", \"model_binding\": \"3\", \"prompt_binding\": \"6\", \"model_contract\": \"orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0\", \"resource_unit\": \"mock-length-v1\", \"out_tokens\": \"128\", \"in_tokens\": \"198\"}},\n        {\"id\": 8, \"kind\": \"Output\", \"name\": \"category\", \"type\": \"text\", \"label\": \"public/untrusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [7], \"attributes\": {}}\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "1"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  1379  (input 1264 + output 115)\n    summary = summarize via m  in 1117 out 87\n    category = classify via m  in 147 out 28\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 1264  out 115\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "2"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  1907  (input 1820 + output 87)\n    summary = summarize via m  in 1714 out 48\n    category = classify via m  in 106 out 39\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 1820  out 87\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "3"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  824  (input 672 + output 152)\n    summary = summarize via m  in 614 out 30\n    category = classify via m  in 58 out 122\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 672  out 152\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "4"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  306  (input 233 + output 73)\n    summary = summarize via m  in 115 out 65\n    category = classify via m  in 118 out 8\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 233  out 73\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "5"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  1177  (input 1000 + output 177)\n    summary = summarize via m  in 902 out 56\n    category = classify via m  in 98 out 121\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 1000  out 177\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "6"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  388  (input 245 + output 143)\n    summary = summarize via m  in 194 out 27\n    category = classify via m  in 51 out 116\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 245  out 143\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "7"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  1312  (input 1177 + output 135)\n    summary = summarize via m  in 1114 out 19\n    category = classify via m  in 63 out 116\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 1177  out 135\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "8"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  641  (input 501 + output 140)\n    summary = summarize via m  in 427 out 41\n    category = classify via m  in 74 out 99\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 501  out 140\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "9"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  1410  (input 1290 + output 120)\n    summary = summarize via m  in 1236 out 34\n    category = classify via m  in 54 out 86\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 1290  out 120\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "10"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  2226  (input 2106 + output 120)\n    summary = summarize via m  in 1977 out 119\n    category = classify via m  in 129 out 1\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 2106  out 120\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "11"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  1639  (input 1575 + output 64)\n    summary = summarize via m  in 1544 out 0\n    category = classify via m  in 31 out 64\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 1575  out 64\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "12"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  672  (input 489 + output 183)\n    summary = summarize via m  in 380 out 88\n    category = classify via m  in 109 out 95\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 489  out 183\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "13"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  1109  (input 941 + output 168)\n    summary = summarize via m  in 778 out 93\n    category = classify via m  in 163 out 75\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 941  out 168\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "14"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  434  (input 241 + output 193)\n    summary = summarize via m  in 84 out 114\n    category = classify via m  in 157 out 79\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 241  out 193\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "15"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  891  (input 790 + output 101)\n    summary = summarize via m  in 728 out 51\n    category = classify via m  in 62 out 50\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 790  out 101\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "16"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  1762  (input 1638 + output 124)\n    summary = summarize via m  in 1500 out 120\n    category = classify via m  in 138 out 4\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 1638  out 124\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "17"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  2102  (input 2007 + output 95)\n    summary = summarize via m  in 1856 out 81\n    category = classify via m  in 151 out 14\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 2007  out 95\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "18"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  677  (input 557 + output 120)\n    summary = summarize via m  in 465 out 76\n    category = classify via m  in 92 out 44\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 557  out 120\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "19"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  499  (input 355 + output 144)\n    summary = summarize via m  in 309 out 33\n    category = classify via m  in 46 out 111\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 355  out 144\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\pf-web-classification.orch",
+      "--seed",
+      "20"
+    ],
+    "exit": 0,
+    "stdout": "PFWeb:\n  calls          2\n  actual tokens  1130  (input 1037 + output 93)\n    summary = summarize via m  in 897 out 75\n    category = classify via m  in 140 out 18\n  billing\n    orch-abstract-model-v1:4:mock:14:pf-web-default:cap=128:price=0  calls 2  in 1037  out 93\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "check",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nLGChain:\n  token bound   594 / budget 100000\n  components    output <= 192, input <= 402 @ 4 chars/token\n  labels        0 secret, 0 untrusted\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "certify",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"LGChain\",\n      \"budget_tokens\": 100000,\n      \"bound\": {\"guaranteed_tokens\": 192, \"estimated_tokens\": 402, \"total_tokens\": 594, \"component_sum_tokens\": 594, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"joke = first via m [out<=64, in<=6+256]\", \"guaranteed_tokens\": 64, \"estimated_tokens\": 262, \"line\": 8},\n        {\"depth\": 0, \"rule\": \"branch\", \"detail\": \"improve\", \"guaranteed_tokens\": 0, \"estimated_tokens\": 0, \"line\": 9},\n        {\"depth\": 1, \"rule\": \"call\", \"detail\": \"better = improve_joke via m [out<=64, in<=6+64]\", \"guaranteed_tokens\": 64, \"estimated_tokens\": 70, \"line\": 10},\n        {\"depth\": 1, \"rule\": \"call\", \"detail\": \"final = polish via m [out<=64, in<=6+64]\", \"guaranteed_tokens\": 64, \"estimated_tokens\": 70, \"line\": 11},\n        {\"depth\": 0, \"rule\": \"branch-max\", \"detail\": \"max(then=268, else=0)\", \"guaranteed_tokens\": 128, \"estimated_tokens\": 140, \"line\": 9}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:LGChain\", \"name\": \"first\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:LGChain\", \"name\": \"improve\", \"kind\": \"input\", \"type\": \"boolean\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 1},\n        {\"scope\": \"workflow:LGChain\", \"name\": \"improve_joke\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:LGChain\", \"name\": \"joke\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 64},\n        {\"scope\": \"workflow:LGChain\", \"name\": \"m\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:LGChain\", \"name\": \"polish\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:LGChain\", \"name\": \"x\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 256},\n        {\"scope\": \"workflow:LGChain::prompt:first\", \"name\": \"t\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:LGChain::prompt:improve_joke\", \"name\": \"t\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:LGChain::prompt:polish\", \"name\": \"t\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:LGChain::then@9\", \"name\": \"better\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 64},\n        {\"scope\": \"workflow:LGChain::then@9\", \"name\": \"final\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 64}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "ir-json",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"workflows\": [\n    {\n      \"name\": \"LGChain\",\n      \"nodes\": [\n        {\"id\": 1, \"kind\": \"Input\", \"name\": \"x\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"max_tokens\": \"256\"}},\n        {\"id\": 2, \"kind\": \"Model\", \"name\": \"m\", \"type\": \"<unknown>\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"provider\": \"mock\", \"name\": \"lg-bounded\", \"max_tokens\": \"64\"}},\n        {\"id\": 3, \"kind\": \"Input\", \"name\": \"improve\", \"type\": \"boolean\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"max_tokens\": \"1\"}},\n        {\"id\": 4, \"kind\": \"Prompt\", \"name\": \"first\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"parameters\": \"1\"}},\n        {\"id\": 5, \"kind\": \"Prompt\", \"name\": \"improve_joke\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"parameters\": \"1\"}},\n        {\"id\": 6, \"kind\": \"Prompt\", \"name\": \"polish\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"parameters\": \"1\"}},\n        {\"id\": 7, \"kind\": \"Call\", \"name\": \"joke\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [4, 2, 1], \"attributes\": {\"prompt\": \"first\", \"model\": \"m\", \"model_binding\": \"2\", \"prompt_binding\": \"4\", \"model_contract\": \"orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0\", \"resource_unit\": \"mock-length-v1\", \"out_tokens\": \"64\", \"in_tokens\": \"262\"}},\n        {\"id\": 8, \"kind\": \"Branch\", \"name\": \"improve\", \"type\": \"boolean\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [3], \"attributes\": {\"guard\": \"improve\", \"has_else\": \"false\"}},\n        {\"id\": 9, \"kind\": \"Call\", \"name\": \"better\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root/then@9#8\", \"repeat\": 1, \"dependencies\": [5, 2, 7], \"attributes\": {\"prompt\": \"improve_joke\", \"model\": \"m\", \"model_binding\": \"2\", \"prompt_binding\": \"6\", \"model_contract\": \"orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0\", \"resource_unit\": \"mock-length-v1\", \"out_tokens\": \"64\", \"in_tokens\": \"70\"}},\n        {\"id\": 10, \"kind\": \"Call\", \"name\": \"final\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root/then@9#8\", \"repeat\": 1, \"dependencies\": [6, 2, 9], \"attributes\": {\"prompt\": \"polish\", \"model\": \"m\", \"model_binding\": \"2\", \"prompt_binding\": \"8\", \"model_contract\": \"orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0\", \"resource_unit\": \"mock-length-v1\", \"out_tokens\": \"64\", \"in_tokens\": \"70\"}},\n        {\"id\": 11, \"kind\": \"Output\", \"name\": \"joke\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [7], \"attributes\": {}}\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "1"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          1\n  actual tokens  265  (input 256 + output 9)\n    joke = first via m  in 256 out 9\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 1  in 256  out 9\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "2"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          1\n  actual tokens  231  (input 183 + output 48)\n    joke = first via m  in 183 out 48\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 1  in 183  out 48\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "3"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          1\n  actual tokens  69  (input 43 + output 26)\n    joke = first via m  in 43 out 26\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 1  in 43  out 26\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "4"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          1\n  actual tokens  223  (input 189 + output 34)\n    joke = first via m  in 189 out 34\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 1  in 189  out 34\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "5"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          1\n  actual tokens  278  (input 262 + output 16)\n    joke = first via m  in 262 out 16\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 1  in 262  out 16\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "6"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          1\n  actual tokens  146  (input 84 + output 62)\n    joke = first via m  in 84 out 62\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 1  in 84  out 62\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "7"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          1\n  actual tokens  213  (input 200 + output 13)\n    joke = first via m  in 200 out 13\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 1  in 200  out 13\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "8"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          3\n  actual tokens  521  (input 370 + output 151)\n    joke = first via m  in 258 out 49\n    better = improve_joke via m  in 55 out 51\n    final = polish via m  in 57 out 51\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 370  out 151\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "9"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          1\n  actual tokens  291  (input 254 + output 37)\n    joke = first via m  in 254 out 37\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 1  in 254  out 37\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "10"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          3\n  actual tokens  192  (input 144 + output 48)\n    joke = first via m  in 88 out 37\n    better = improve_joke via m  in 43 out 7\n    final = polish via m  in 13 out 4\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 144  out 48\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "11"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          1\n  actual tokens  146  (input 85 + output 61)\n    joke = first via m  in 85 out 61\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 1  in 85  out 61\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "12"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          3\n  actual tokens  376  (input 267 + output 109)\n    joke = first via m  in 182 out 28\n    better = improve_joke via m  in 34 out 45\n    final = polish via m  in 51 out 36\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 267  out 109\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "13"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          3\n  actual tokens  261  (input 175 + output 86)\n    joke = first via m  in 139 out 15\n    better = improve_joke via m  in 21 out 9\n    final = polish via m  in 15 out 62\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 175  out 86\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "14"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          3\n  actual tokens  343  (input 258 + output 85)\n    joke = first via m  in 169 out 31\n    better = improve_joke via m  in 37 out 46\n    final = polish via m  in 52 out 8\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 258  out 85\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "15"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          3\n  actual tokens  200  (input 95 + output 105)\n    joke = first via m  in 20 out 63\n    better = improve_joke via m  in 69 out 0\n    final = polish via m  in 6 out 42\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 95  out 105\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "16"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          1\n  actual tokens  153  (input 138 + output 15)\n    joke = first via m  in 138 out 15\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 1  in 138  out 15\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "17"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          1\n  actual tokens  168  (input 152 + output 16)\n    joke = first via m  in 152 out 16\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 1  in 152  out 16\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "18"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          3\n  actual tokens  386  (input 275 + output 111)\n    joke = first via m  in 179 out 28\n    better = improve_joke via m  in 34 out 56\n    final = polish via m  in 62 out 27\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 275  out 111\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "19"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          3\n  actual tokens  144  (input 81 + output 63)\n    joke = first via m  in 15 out 9\n    better = improve_joke via m  in 15 out 45\n    final = polish via m  in 51 out 9\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 81  out 63\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-prompt-chaining.orch",
+      "--seed",
+      "20"
+    ],
+    "exit": 0,
+    "stdout": "LGChain:\n  calls          3\n  actual tokens  272  (input 247 + output 25)\n    joke = first via m  in 225 out 9\n    better = improve_joke via m  in 15 out 1\n    final = polish via m  in 7 out 15\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 247  out 25\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "check",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nLGParallel:\n  token bound   978 / budget 100000\n  components    output <= 192, input <= 786 @ 4 chars/token\n  labels        0 secret, 0 untrusted\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "certify",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"LGParallel\",\n      \"budget_tokens\": 100000,\n      \"bound\": {\"guaranteed_tokens\": 192, \"estimated_tokens\": 786, \"total_tokens\": 978, \"component_sum_tokens\": 978, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"a = joke via m [out<=64, in<=6+256]\", \"guaranteed_tokens\": 64, \"estimated_tokens\": 262, \"line\": 7},\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"b = story via m [out<=64, in<=6+256]\", \"guaranteed_tokens\": 64, \"estimated_tokens\": 262, \"line\": 8},\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"c = poem via m [out<=64, in<=6+256]\", \"guaranteed_tokens\": 64, \"estimated_tokens\": 262, \"line\": 9}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:LGParallel\", \"name\": \"a\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 64},\n        {\"scope\": \"workflow:LGParallel\", \"name\": \"b\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 64},\n        {\"scope\": \"workflow:LGParallel\", \"name\": \"c\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 64},\n        {\"scope\": \"workflow:LGParallel\", \"name\": \"joke\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:LGParallel\", \"name\": \"m\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:LGParallel\", \"name\": \"poem\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:LGParallel\", \"name\": \"story\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:LGParallel\", \"name\": \"x\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 256},\n        {\"scope\": \"workflow:LGParallel::prompt:joke\", \"name\": \"t\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:LGParallel::prompt:story\", \"name\": \"t\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:LGParallel::prompt:poem\", \"name\": \"t\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "ir-json",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"workflows\": [\n    {\n      \"name\": \"LGParallel\",\n      \"nodes\": [\n        {\"id\": 1, \"kind\": \"Input\", \"name\": \"x\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"max_tokens\": \"256\"}},\n        {\"id\": 2, \"kind\": \"Model\", \"name\": \"m\", \"type\": \"<unknown>\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"provider\": \"mock\", \"name\": \"lg-bounded\", \"max_tokens\": \"64\"}},\n        {\"id\": 3, \"kind\": \"Prompt\", \"name\": \"joke\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"parameters\": \"1\"}},\n        {\"id\": 4, \"kind\": \"Prompt\", \"name\": \"story\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"parameters\": \"1\"}},\n        {\"id\": 5, \"kind\": \"Prompt\", \"name\": \"poem\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"parameters\": \"1\"}},\n        {\"id\": 6, \"kind\": \"Call\", \"name\": \"a\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [3, 2, 1], \"attributes\": {\"prompt\": \"joke\", \"model\": \"m\", \"model_binding\": \"2\", \"prompt_binding\": \"3\", \"model_contract\": \"orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0\", \"resource_unit\": \"mock-length-v1\", \"out_tokens\": \"64\", \"in_tokens\": \"262\"}},\n        {\"id\": 7, \"kind\": \"Call\", \"name\": \"b\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [4, 2, 1], \"attributes\": {\"prompt\": \"story\", \"model\": \"m\", \"model_binding\": \"2\", \"prompt_binding\": \"5\", \"model_contract\": \"orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0\", \"resource_unit\": \"mock-length-v1\", \"out_tokens\": \"64\", \"in_tokens\": \"262\"}},\n        {\"id\": 8, \"kind\": \"Call\", \"name\": \"c\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [5, 2, 1], \"attributes\": {\"prompt\": \"poem\", \"model\": \"m\", \"model_binding\": \"2\", \"prompt_binding\": \"7\", \"model_contract\": \"orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0\", \"resource_unit\": \"mock-length-v1\", \"out_tokens\": \"64\", \"in_tokens\": \"262\"}},\n        {\"id\": 9, \"kind\": \"Output\", \"name\": \"a\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [6], \"attributes\": {}}\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "1"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  647  (input 582 + output 65)\n    a = joke via m  in 194 out 26\n    b = story via m  in 194 out 31\n    c = poem via m  in 194 out 8\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 582  out 65\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "2"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  490  (input 405 + output 85)\n    a = joke via m  in 135 out 1\n    b = story via m  in 135 out 41\n    c = poem via m  in 135 out 43\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 405  out 85\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "3"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  892  (input 744 + output 148)\n    a = joke via m  in 248 out 51\n    b = story via m  in 248 out 54\n    c = poem via m  in 248 out 43\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 744  out 148\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "4"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  535  (input 468 + output 67)\n    a = joke via m  in 156 out 4\n    b = story via m  in 156 out 23\n    c = poem via m  in 156 out 40\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 468  out 67\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "5"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  649  (input 516 + output 133)\n    a = joke via m  in 172 out 41\n    b = story via m  in 172 out 54\n    c = poem via m  in 172 out 38\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 516  out 133\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "6"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  326  (input 246 + output 80)\n    a = joke via m  in 82 out 3\n    b = story via m  in 82 out 29\n    c = poem via m  in 82 out 48\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 246  out 80\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "7"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  183  (input 48 + output 135)\n    a = joke via m  in 16 out 35\n    b = story via m  in 16 out 57\n    c = poem via m  in 16 out 43\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 48  out 135\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "8"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  286  (input 246 + output 40)\n    a = joke via m  in 82 out 19\n    b = story via m  in 82 out 1\n    c = poem via m  in 82 out 20\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 246  out 40\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "9"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  443  (input 375 + output 68)\n    a = joke via m  in 125 out 38\n    b = story via m  in 125 out 15\n    c = poem via m  in 125 out 15\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 375  out 68\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "10"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  395  (input 357 + output 38)\n    a = joke via m  in 119 out 9\n    b = story via m  in 119 out 20\n    c = poem via m  in 119 out 9\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 357  out 38\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "11"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  884  (input 783 + output 101)\n    a = joke via m  in 261 out 52\n    b = story via m  in 261 out 36\n    c = poem via m  in 261 out 13\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 783  out 101\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "12"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  662  (input 501 + output 161)\n    a = joke via m  in 167 out 44\n    b = story via m  in 167 out 53\n    c = poem via m  in 167 out 64\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 501  out 161\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "13"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  766  (input 660 + output 106)\n    a = joke via m  in 220 out 7\n    b = story via m  in 220 out 63\n    c = poem via m  in 220 out 36\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 660  out 106\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "14"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  533  (input 432 + output 101)\n    a = joke via m  in 144 out 15\n    b = story via m  in 144 out 35\n    c = poem via m  in 144 out 51\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 432  out 101\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "15"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  784  (input 645 + output 139)\n    a = joke via m  in 215 out 55\n    b = story via m  in 215 out 22\n    c = poem via m  in 215 out 62\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 645  out 139\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "16"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  488  (input 399 + output 89)\n    a = joke via m  in 133 out 9\n    b = story via m  in 133 out 31\n    c = poem via m  in 133 out 49\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 399  out 89\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "17"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  784  (input 630 + output 154)\n    a = joke via m  in 210 out 48\n    b = story via m  in 210 out 51\n    c = poem via m  in 210 out 55\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 630  out 154\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "18"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  317  (input 267 + output 50)\n    a = joke via m  in 89 out 39\n    b = story via m  in 89 out 4\n    c = poem via m  in 89 out 7\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 267  out 50\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "19"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  150  (input 51 + output 99)\n    a = joke via m  in 17 out 30\n    b = story via m  in 17 out 38\n    c = poem via m  in 17 out 31\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 51  out 99\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-parallelization.orch",
+      "--seed",
+      "20"
+    ],
+    "exit": 0,
+    "stdout": "LGParallel:\n  calls          3\n  actual tokens  324  (input 231 + output 93)\n    a = joke via m  in 77 out 13\n    b = story via m  in 77 out 54\n    c = poem via m  in 77 out 26\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 3  in 231  out 93\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "check",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch"
+    ],
+    "exit": 0,
+    "stdout": "Check succeeded: 1 workflow(s) passed lexical, syntax, type, information-flow, and cost analysis.\nLGRouting:\n  token bound   650 / budget 100000\n  components    output <= 128, input <= 522 @ 4 chars/token\n  labels        0 secret, 0 untrusted\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "certify",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"format\": \"orchlang-safety-certificate\",\n  \"version\": 1,\n  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n  \"observer\": \"aggregate-abstract-contract-usage\",\n  \"resource_unit\": \"mock-length-v1\",\n  \"assumptions\": {\n    \"chars_per_token\": 4,\n    \"note\": \"Output bounds assume every attempt honors the declared cap. Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; they are not provider-token bounds.\",\n    \"relational\": \"Equal request construction and abstract model contracts; identical stateless request-dependent kernels and identical retry/failure policies are external assumptions. No provider conformance or full implementation proof.\"\n  },\n  \"workflows\": [\n    {\n      \"name\": \"LGRouting\",\n      \"budget_tokens\": 100000,\n      \"bound\": {\"guaranteed_tokens\": 128, \"estimated_tokens\": 522, \"total_tokens\": 650, \"component_sum_tokens\": 650, \"within_budget\": true, \"defined\": true, \"cost\": 0.000000, \"cost_complete\": false},\n      \"derivation\": [\n        {\"depth\": 0, \"rule\": \"call\", \"detail\": \"decision = router via m [out<=64, in<=9+256]\", \"guaranteed_tokens\": 64, \"estimated_tokens\": 265, \"line\": 8},\n        {\"depth\": 0, \"rule\": \"branch\", \"detail\": \"story_route\", \"guaranteed_tokens\": 0, \"estimated_tokens\": 0, \"line\": 9},\n        {\"depth\": 1, \"rule\": \"call\", \"detail\": \"a = respond via m [out<=64, in<=1+256]\", \"guaranteed_tokens\": 64, \"estimated_tokens\": 257, \"line\": 9},\n        {\"depth\": 1, \"rule\": \"branch\", \"detail\": \"joke_route\", \"guaranteed_tokens\": 0, \"estimated_tokens\": 0, \"line\": 10},\n        {\"depth\": 2, \"rule\": \"call\", \"detail\": \"b = respond via m [out<=64, in<=1+256]\", \"guaranteed_tokens\": 64, \"estimated_tokens\": 257, \"line\": 10},\n        {\"depth\": 2, \"rule\": \"call\", \"detail\": \"c = respond via m [out<=64, in<=1+256]\", \"guaranteed_tokens\": 64, \"estimated_tokens\": 257, \"line\": 11},\n        {\"depth\": 1, \"rule\": \"branch-max\", \"detail\": \"max(then=321, else=321)\", \"guaranteed_tokens\": 64, \"estimated_tokens\": 257, \"line\": 10},\n        {\"depth\": 0, \"rule\": \"branch-max\", \"detail\": \"max(then=321, else=321)\", \"guaranteed_tokens\": 64, \"estimated_tokens\": 257, \"line\": 9}\n      ],\n      \"bindings\": [\n        {\"scope\": \"workflow:LGRouting\", \"name\": \"decision\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 64},\n        {\"scope\": \"workflow:LGRouting\", \"name\": \"joke_route\", \"kind\": \"input\", \"type\": \"boolean\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 1},\n        {\"scope\": \"workflow:LGRouting\", \"name\": \"m\", \"kind\": \"model\", \"type\": \"<unknown>\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:LGRouting\", \"name\": \"respond\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:LGRouting\", \"name\": \"router\", \"kind\": \"prompt\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:LGRouting\", \"name\": \"story_route\", \"kind\": \"input\", \"type\": \"boolean\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 1},\n        {\"scope\": \"workflow:LGRouting\", \"name\": \"x\", \"kind\": \"input\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 256},\n        {\"scope\": \"workflow:LGRouting::prompt:router\", \"name\": \"t\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:LGRouting::prompt:respond\", \"name\": \"t\", \"kind\": \"prompt-parameter\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": null},\n        {\"scope\": \"workflow:LGRouting::then@9\", \"name\": \"a\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 64},\n        {\"scope\": \"workflow:LGRouting::then@10\", \"name\": \"b\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 64},\n        {\"scope\": \"workflow:LGRouting::else@10\", \"name\": \"c\", \"kind\": \"local-result\", \"type\": \"text\", \"confidentiality\": \"public\", \"integrity\": \"trusted\", \"token_bound\": 64}\n      ],\n      \"reclassifications\": [\n      ],\n      \"relational_obligations\": [\n      ],\n      \"sinks\": [\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "ir-json",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch"
+    ],
+    "exit": 0,
+    "stdout": "{\n  \"workflows\": [\n    {\n      \"name\": \"LGRouting\",\n      \"nodes\": [\n        {\"id\": 1, \"kind\": \"Input\", \"name\": \"x\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"max_tokens\": \"256\"}},\n        {\"id\": 2, \"kind\": \"Model\", \"name\": \"m\", \"type\": \"<unknown>\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"provider\": \"mock\", \"name\": \"lg-bounded\", \"max_tokens\": \"64\"}},\n        {\"id\": 3, \"kind\": \"Input\", \"name\": \"story_route\", \"type\": \"boolean\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"max_tokens\": \"1\"}},\n        {\"id\": 4, \"kind\": \"Input\", \"name\": \"joke_route\", \"type\": \"boolean\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"max_tokens\": \"1\"}},\n        {\"id\": 5, \"kind\": \"Prompt\", \"name\": \"router\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"parameters\": \"1\"}},\n        {\"id\": 6, \"kind\": \"Prompt\", \"name\": \"respond\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [], \"attributes\": {\"parameters\": \"1\"}},\n        {\"id\": 7, \"kind\": \"Call\", \"name\": \"decision\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [5, 2, 1], \"attributes\": {\"prompt\": \"router\", \"model\": \"m\", \"model_binding\": \"2\", \"prompt_binding\": \"5\", \"model_contract\": \"orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0\", \"resource_unit\": \"mock-length-v1\", \"out_tokens\": \"64\", \"in_tokens\": \"265\"}},\n        {\"id\": 8, \"kind\": \"Branch\", \"name\": \"story_route\", \"type\": \"boolean\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [3], \"attributes\": {\"guard\": \"story_route\", \"has_else\": \"true\"}},\n        {\"id\": 9, \"kind\": \"Call\", \"name\": \"a\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root/then@9#8\", \"repeat\": 1, \"dependencies\": [6, 2, 1], \"attributes\": {\"prompt\": \"respond\", \"model\": \"m\", \"model_binding\": \"2\", \"prompt_binding\": \"7\", \"model_contract\": \"orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0\", \"resource_unit\": \"mock-length-v1\", \"out_tokens\": \"64\", \"in_tokens\": \"257\"}},\n        {\"id\": 10, \"kind\": \"Branch\", \"name\": \"joke_route\", \"type\": \"boolean\", \"label\": \"public/trusted\", \"region\": \"root/else@9#8\", \"repeat\": 1, \"dependencies\": [4], \"attributes\": {\"guard\": \"joke_route\", \"has_else\": \"true\"}},\n        {\"id\": 11, \"kind\": \"Call\", \"name\": \"b\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root/else@9#8/then@10#10\", \"repeat\": 1, \"dependencies\": [6, 2, 1], \"attributes\": {\"prompt\": \"respond\", \"model\": \"m\", \"model_binding\": \"2\", \"prompt_binding\": \"7\", \"model_contract\": \"orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0\", \"resource_unit\": \"mock-length-v1\", \"out_tokens\": \"64\", \"in_tokens\": \"257\"}},\n        {\"id\": 12, \"kind\": \"Call\", \"name\": \"c\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root/else@9#8/else@10#10\", \"repeat\": 1, \"dependencies\": [6, 2, 1], \"attributes\": {\"prompt\": \"respond\", \"model\": \"m\", \"model_binding\": \"2\", \"prompt_binding\": \"7\", \"model_contract\": \"orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0\", \"resource_unit\": \"mock-length-v1\", \"out_tokens\": \"64\", \"in_tokens\": \"257\"}},\n        {\"id\": 13, \"kind\": \"Output\", \"name\": \"x\", \"type\": \"text\", \"label\": \"public/trusted\", \"region\": \"root\", \"repeat\": 1, \"dependencies\": [1], \"attributes\": {}}\n      ]\n    }\n  ]\n}\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "1"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  100  (input 56 + output 44)\n    decision = router via m  in 32 out 16\n    b = respond via m  in 24 out 28\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 56  out 44\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "2"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  371  (input 320 + output 51)\n    decision = router via m  in 164 out 33\n    a = respond via m  in 156 out 18\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 320  out 51\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "3"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  124  (input 82 + output 42)\n    decision = router via m  in 45 out 37\n    c = respond via m  in 37 out 5\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 82  out 42\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "4"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  201  (input 136 + output 65)\n    decision = router via m  in 72 out 51\n    b = respond via m  in 64 out 14\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 136  out 65\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "5"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  171  (input 102 + output 69)\n    decision = router via m  in 55 out 11\n    a = respond via m  in 47 out 58\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 102  out 69\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "6"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  220  (input 152 + output 68)\n    decision = router via m  in 80 out 38\n    a = respond via m  in 72 out 30\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 152  out 68\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "7"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  559  (input 490 + output 69)\n    decision = router via m  in 249 out 55\n    a = respond via m  in 241 out 14\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 490  out 69\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "8"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  142  (input 110 + output 32)\n    decision = router via m  in 59 out 7\n    a = respond via m  in 51 out 25\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 110  out 32\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "9"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  348  (input 248 + output 100)\n    decision = router via m  in 128 out 49\n    a = respond via m  in 120 out 51\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 248  out 100\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "10"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  113  (input 18 + output 95)\n    decision = router via m  in 13 out 56\n    b = respond via m  in 5 out 39\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 18  out 95\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "11"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  262  (input 200 + output 62)\n    decision = router via m  in 104 out 46\n    a = respond via m  in 96 out 16\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 200  out 62\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "12"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  535  (input 496 + output 39)\n    decision = router via m  in 252 out 30\n    a = respond via m  in 244 out 9\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 496  out 39\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "13"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  306  (input 198 + output 108)\n    decision = router via m  in 103 out 56\n    c = respond via m  in 95 out 52\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 198  out 108\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "14"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  109  (input 14 + output 95)\n    decision = router via m  in 11 out 64\n    a = respond via m  in 3 out 31\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 14  out 95\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "15"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  306  (input 244 + output 62)\n    decision = router via m  in 126 out 39\n    b = respond via m  in 118 out 23\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 244  out 62\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "16"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  366  (input 294 + output 72)\n    decision = router via m  in 151 out 27\n    a = respond via m  in 143 out 45\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 294  out 72\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "17"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  257  (input 194 + output 63)\n    decision = router via m  in 101 out 1\n    b = respond via m  in 93 out 62\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 194  out 63\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "18"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  164  (input 84 + output 80)\n    decision = router via m  in 46 out 22\n    c = respond via m  in 38 out 58\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 84  out 80\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "19"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  247  (input 180 + output 67)\n    decision = router via m  in 94 out 14\n    b = respond via m  in 86 out 53\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 180  out 67\n",
+    "stderr": ""
+  },
+  {
+    "argv": [
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\clean-cpu-v3\\orchc.exe",
+      "run",
+      "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\release-candidate-v4\\bench\\corpus\\external-v1\\lg-routing.orch",
+      "--seed",
+      "20"
+    ],
+    "exit": 0,
+    "stdout": "LGRouting:\n  calls          2\n  actual tokens  71  (input 20 + output 51)\n    decision = router via m  in 14 out 26\n    b = respond via m  in 6 out 25\n  billing\n    orch-abstract-model-v1:4:mock:10:lg-bounded:cap=64:price=0  calls 2  in 20  out 51\n",
+    "stderr": ""
+  }
+]

@@ -1,0 +1,9 @@
+workflow RetryContract budget 1000 {
+  secret s: boolean max_tokens 1;
+  input x: text max_tokens 10;
+  model m = mock("same-v1") max_tokens 10;
+  prompt p(t: text) -> text = "{t}";
+  if s { retry 1 { let a: text = call p(x) using m; } }
+  else { retry 2 { let b: text = call p(x) using m; } }
+  output x;
+}

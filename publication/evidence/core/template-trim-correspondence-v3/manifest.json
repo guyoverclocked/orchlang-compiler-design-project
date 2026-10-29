@@ -1,0 +1,32 @@
+{
+  "status": "completed",
+  "programs": 150,
+  "seed": 271828,
+  "targeted_programs": 1,
+  "targeted_contexts": 32,
+  "execution_contexts": 6320,
+  "validator_checks": 604,
+  "lean_seconds": 11.913694799994119,
+  "comparisons": [
+    "Lean exec",
+    "independent JSON interpreter",
+    "production Runtime"
+  ],
+  "unit": "character counts in a finite deterministic audit world; no provider tokens",
+  "files": {
+    "proof\\ShapeCore.lean": "c118a53d032fb6d0ca80ea2e4971f187beb76201317ac354853bcb216cc7322a",
+    "reference\\shape.py": "cda7589482f7805c4afe2a06d23781f1a6cd539882ced55f252c9ede9d7a5165",
+    "orchlang\\runtime.py": "9515f462f8f079cacfe6d80df8450a8c2e71161ea87ffb8053c3a52831273383",
+    "experiments\\correspondence.py": "25f4804463b514b12648d7c956dbcaad3f8879361014074df4eb959b831ff32f"
+  },
+  "command": [
+    "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\tools\\lean-4.19.0-windows\\bin\\lean.exe",
+    "--run",
+    "C:\\Users\\nambi\\Documents\\Compiler Project\\audit-2026-10-24\\unified-publication\\proof\\ShapeCore.lean",
+    "execute",
+    "C:\\Users\\nambi\\Documents\\Compiler Project\\audit-2026-10-24\\unified-publication\\publication\\evidence\\core\\template-trim-correspondence-v3\\lean-input.json"
+  ],
+  "command_exit": 0,
+  "failures": [],
+  "spent_api_usd": "0.00"
+}

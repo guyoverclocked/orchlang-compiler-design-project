@@ -1,0 +1,11 @@
+workflow LGParallel budget 100000 {
+  input x: text max_tokens 256;
+  model m = mock("lg-bounded") max_tokens 64;
+  prompt joke(t: text) -> text = "Write a joke about {t}";
+  prompt story(t: text) -> text = "Write a story about {t}";
+  prompt poem(t: text) -> text = "Write a poem about {t}";
+  let a: text = call joke(x) using m;
+  let b: text = call story(x) using m;
+  let c: text = call poem(x) using m;
+  output a;
+}

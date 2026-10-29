@@ -1,0 +1,37 @@
+{
+  "status": "completed",
+  "timestamp_utc": "2026-10-24T17:04:45.937527+00:00",
+  "source_commit": "cef4772d1568af0b0042d97dcff6c396e8d95a52",
+  "dirty_tree": false,
+  "files": {
+    "proof/DataflowCore.lean": "506cccbd7ba8a54c54ea42be77b4093c9483c1a8d39bf61b6426da052b195c4e",
+    "runtime/dataflow_gate.py": "fc1d8dd07d10183b6bce0532a76081db5c9e9dbf297da681aaacbc96b0d51025",
+    "scripts/dataflow_certificate.py": "719b22470df11aebc0cd63f6fe118d30090530b48abbe6a943ba7a998710e9c3",
+    "scripts/check_dataflow_precision.py": "c054da8783b0dff49f1d87d17933fc1aac1e092e685231b4561be4af22086dbc",
+    "runtime/finite_reference.py": "2f4b859f604f2ddeb46853cbbcf1ce15b5c3b394f64a3830f0d14c6b656747a6",
+    "runtime/replay_adapter.py": "b028a75278956cbc63d5f2c2612e75a3b6b82a94477706abd0cf522b3c5f30d4"
+  },
+  "executable_sha256": "853ecf7d2f7ee979a236c402de7ffd8cc1c139204a86aa9bb1e7deb9c33105c4",
+  "counts": {
+    "source": {
+      "cases": 80,
+      "baseline_accepted": 8,
+      "accepted": 64,
+      "gained": 56,
+      "rejected": 16
+    },
+    "core": {
+      "cases": 72,
+      "baseline_accepted": 8,
+      "accepted": 64,
+      "gained": 56,
+      "rejected": 8
+    }
+  },
+  "execution_contexts": 3648,
+  "historical_policy_differences": 8,
+  "accepted_finite_counterexamples": 0,
+  "failures": [],
+  "spent_usd": "0.00",
+  "provider_inference": false
+}

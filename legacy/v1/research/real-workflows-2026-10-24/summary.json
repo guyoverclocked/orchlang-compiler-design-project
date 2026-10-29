@@ -1,0 +1,190 @@
+{
+  "status": "completed",
+  "scope": "Amended development experiment; six source variants/fivepatterns, one direct call-kernel port and five explicit hybrid host compositions.",
+  "final_protocol": "bench/protocols/real-workflows-local-v4.json",
+  "final_run": "research/real-workflows-2026-10-24/v4",
+  "actual_generation": {
+    "comparison_rows": 24,
+    "original_framework_executions": 24,
+    "port_executions": 24,
+    "corpus_workflows": 6,
+    "distinct_upstream_patterns": 5,
+    "direct_source_translation_workflows": 1,
+    "hybrid_host_composition_workflows": 5,
+    "direct_translation_comparisons": 4,
+    "hybrid_comparisons": 20,
+    "outputs_equal": 22,
+    "full_request_response_multisets_equal": 22,
+    "actual_generation_calls": 88,
+    "original_actual_generation_calls": 44,
+    "port_actual_generation_calls": 44,
+    "replay_generation_calls": 0,
+    "infrastructure_or_differential_failures": 2,
+    "runtime_bound_violations": 0,
+    "source_scope": "Runtime deployment experiment; one direct port plus five explicit hybrid host compositions; no all-input functional equivalence proof or production static tokenizer theorem."
+  },
+  "diagnosis_counts": {
+    "first-equal-request-divergent-model-response": 2,
+    "independent-generation-exact-match": 22
+  },
+  "conformance": {
+    "comparisons": 24,
+    "passed": 24,
+    "unsupported_source_failed": 0,
+    "actual_generation_calls": 0,
+    "replay_calls": 44,
+    "exact_request_matches": 44,
+    "statement": "Conformance under common captured actual model outcomes. Zero new model generations; not independent-generation equivalence or all-input proof."
+  },
+  "conformance_path": "research/real-workflows-2026-10-24/conformance-v4/conformance.json",
+  "repeatability": {
+    "pairs": 8,
+    "exact_response_equal": 7,
+    "response_disagreements": 1,
+    "actual_generation_calls": 16,
+    "replay_calls": 0
+  },
+  "repeatability_path": "research/real-workflows-2026-10-24/repeatability-v1/manifest.json",
+  "task_quality": {
+    "pf-ner": {
+      "exact_passes": 4,
+      "execution_checks": 8,
+      "paired_inputs_scored": 4,
+      "metric": "exact entity set match; authored expected answers"
+    },
+    "lg-routing-graph": {
+      "exact_passes": 4,
+      "execution_checks": 8,
+      "paired_inputs_scored": 4,
+      "metric": "requested route exact match"
+    }
+  },
+  "source_annotation_metrics": "research/real-workflows-2026-10-24/final-analysis-v2/annotation-counts.json",
+  "diagnoses_and_quality": "research/real-workflows-2026-10-24/final-analysis-v2/analysis.json",
+  "recorded_versions": {
+    "v1": {
+      "protocol": "bench/protocols/real-workflows-local-v1.json",
+      "protocol_sha256": "ac6b04c79eb3b64ac54bd29e897e0797d5ca9909885296a86641d9f9bc484869",
+      "records": {
+        "failures.json": "bb4af77634c060ca03266d96fba4d7314691ede550e5a63bc73ebf5164885727",
+        "manifest.json": "83abcd6389618c021889acaff077a4067678b800c4cdf5e9dbba9b3ab91f6461",
+        "results.json": "97507815fb76ee9700ba6f6a583474906a08afe76cc028d9b3c63a51f2a2c924",
+        "summary.json": "96244a6a8de62585d0502c84c3fca31ac0b1e7a36a1cc031b257985c2c9c2674"
+      },
+      "summary": {
+        "comparison_rows": 24,
+        "original_framework_executions": 24,
+        "port_executions": 24,
+        "corpus_workflows": 6,
+        "distinct_upstream_patterns": 5,
+        "direct_source_translation_workflows": 1,
+        "hybrid_host_composition_workflows": 5,
+        "direct_translation_comparisons": 4,
+        "hybrid_comparisons": 20,
+        "outputs_equal": 9,
+        "full_request_response_multisets_equal": 9,
+        "actual_generation_calls": 72,
+        "original_actual_generation_calls": 28,
+        "port_actual_generation_calls": 44,
+        "replay_generation_calls": 0,
+        "infrastructure_or_differential_failures": 27,
+        "runtime_bound_violations": 0,
+        "source_scope": "Runtime deployment experiment; one direct port plus five explicit hybrid host compositions; no all-input functional equivalence proof or production static tokenizer theorem."
+      }
+    },
+    "v2": {
+      "protocol": "bench/protocols/real-workflows-local-v2.json",
+      "protocol_sha256": "d7901f4a59accc8f33d492858fe4159eed9e77d1f9bb5d6009fccb61d2715e6e",
+      "records": {
+        "failures.json": "14a193ff68ab290643cfe52f6e36fd7f19bcf2e3c4605b57a1e9a7511119c23d",
+        "manifest.json": "4ae17b65e14bebf95706f89c76d626c28001a43fbf8d3a60f5de6bae8e18ec3e",
+        "results.json": "50e377f91b7e1fc4dbc3de5703a322e1b33fd2d6f1013ad1f31711b1810db8a3",
+        "summary.json": "566b7efc63f3bf1bb4cd5a4a6433d49ed25faee9e026ee1cb3baa5b66d521491"
+      },
+      "summary": {
+        "comparison_rows": 24,
+        "original_framework_executions": 24,
+        "port_executions": 24,
+        "corpus_workflows": 6,
+        "distinct_upstream_patterns": 5,
+        "direct_source_translation_workflows": 1,
+        "hybrid_host_composition_workflows": 5,
+        "direct_translation_comparisons": 4,
+        "hybrid_comparisons": 20,
+        "outputs_equal": 16,
+        "full_request_response_multisets_equal": 16,
+        "actual_generation_calls": 88,
+        "original_actual_generation_calls": 44,
+        "port_actual_generation_calls": 44,
+        "replay_generation_calls": 0,
+        "infrastructure_or_differential_failures": 16,
+        "runtime_bound_violations": 0,
+        "source_scope": "Runtime deployment experiment; one direct port plus five explicit hybrid host compositions; no all-input functional equivalence proof or production static tokenizer theorem."
+      }
+    },
+    "v3": {
+      "protocol": "bench/protocols/real-workflows-local-v3.json",
+      "protocol_sha256": "6604a2a43d0ff0fc7e62f884d7847b5c37572dc1ec77703cf0a7fea8bb284b0c",
+      "records": {
+        "failures.json": "996269e41ea52d96d50e5f91cd12289b646478783dc3ec3d91dae54497c1387f",
+        "manifest.json": "c8dedbd8d813a2ae84f5d337e420b6927e791fedf1f6632993c6f8f949fb8fc1",
+        "results.json": "765059c13705f2de025e2d5966e99c5ac152eb256bcb0cb0435dd4c83149f5fb",
+        "summary.json": "51c08503f673cc142ecc09d2f56b2f4cae9462bbdf61df0a7572d389a432ca04"
+      },
+      "summary": {
+        "comparison_rows": 24,
+        "original_framework_executions": 24,
+        "port_executions": 24,
+        "corpus_workflows": 6,
+        "distinct_upstream_patterns": 5,
+        "direct_source_translation_workflows": 1,
+        "hybrid_host_composition_workflows": 5,
+        "direct_translation_comparisons": 4,
+        "hybrid_comparisons": 20,
+        "outputs_equal": 17,
+        "full_request_response_multisets_equal": 17,
+        "actual_generation_calls": 88,
+        "original_actual_generation_calls": 44,
+        "port_actual_generation_calls": 44,
+        "replay_generation_calls": 0,
+        "infrastructure_or_differential_failures": 7,
+        "runtime_bound_violations": 0,
+        "source_scope": "Runtime deployment experiment; one direct port plus five explicit hybrid host compositions; no all-input functional equivalence proof or production static tokenizer theorem."
+      }
+    },
+    "v4": {
+      "protocol": "bench/protocols/real-workflows-local-v4.json",
+      "protocol_sha256": "5e35163bd85626580a6c0cf6b734c439068abcde5ab3b1bf1ffa72f328cdddf7",
+      "records": {
+        "failures.json": "f7ff361caafac8b9606c95924ea2e7231fda105e6109711cfe291bc739e6356c",
+        "manifest.json": "7e08e9ac464365f11994e609cfacd8335469fc332c846d346a31327bca9eaa20",
+        "results.json": "a965fce14f631f644bd34235d694d156bc2d2a8b72bec086c558806701b92c80",
+        "summary.json": "a759bbaa888951e8d1f60b89a01a201228d8b8a56ddfb4200196acccef107866"
+      },
+      "summary": {
+        "comparison_rows": 24,
+        "original_framework_executions": 24,
+        "port_executions": 24,
+        "corpus_workflows": 6,
+        "distinct_upstream_patterns": 5,
+        "direct_source_translation_workflows": 1,
+        "hybrid_host_composition_workflows": 5,
+        "direct_translation_comparisons": 4,
+        "hybrid_comparisons": 20,
+        "outputs_equal": 22,
+        "full_request_response_multisets_equal": 22,
+        "actual_generation_calls": 88,
+        "original_actual_generation_calls": 44,
+        "port_actual_generation_calls": 44,
+        "replay_generation_calls": 0,
+        "infrastructure_or_differential_failures": 2,
+        "runtime_bound_violations": 0,
+        "source_scope": "Runtime deployment experiment; one direct port plus five explicit hybrid host compositions; no all-input functional equivalence proof or production static tokenizer theorem."
+      }
+    }
+  },
+  "retired_derived_counts": "final-analysis and v3-diagnosis used initial descriptive metadata. Correct declarations and active upstream-file LOC are in final-analysis-v2; historical outputs remain retained.",
+  "current_adapter_hardening": "Source snapshots reproduce the exact recorded positive-cap implementation. Current runtime additionally rejects invalid caps beforedispatch, pins tokenizer dependency and padding/truncation, and marks transport usageunknown. These changes do not alter any recorded positive64/120 sourcecap.",
+  "cost_usd": "0.00",
+  "extra_smoke_generations_disclosed_not_in_final_denominator": 1
+}

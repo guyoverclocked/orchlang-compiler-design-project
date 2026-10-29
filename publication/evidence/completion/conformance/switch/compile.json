@@ -1,0 +1,316 @@
+{
+  "workflow": "ConditionalSwitch",
+  "source": "workflows/switch.orch",
+  "source_lines": 18,
+  "slots": {
+    "query": 0,
+    "llm_result": 1,
+    "intention": 2,
+    "response": 3
+  },
+  "high": [
+    "query",
+    "llm_result",
+    "intention",
+    "response"
+  ],
+  "findings": [
+    {
+      "kind": "secret-dependent-size",
+      "line": 10,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    }
+  ],
+  "calls": 1,
+  "original_lean": {
+    "static_shape": null,
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+  },
+  "strategies": {
+    "ours": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            198,
+            128
+          ],
+          [
+            "tool",
+            "class_check"
+          ],
+          [
+            "tool",
+            "const"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        1,
+        198,
+        128
+      ],
+      "shape_seconds": 0.0007173000049078837
+    },
+    "naive": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            198,
+            128
+          ],
+          [
+            "tool",
+            "class_check"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        1,
+        198,
+        128
+      ],
+      "shape_seconds": 0.0004645000008167699
+    },
+    "uniform": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            198,
+            128
+          ],
+          [
+            "tool",
+            "class_check"
+          ],
+          [
+            "tool",
+            "const"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        1,
+        198,
+        128
+      ],
+      "shape_seconds": 0.00042130000656470656
+    },
+    "padall": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            198,
+            128
+          ],
+          [
+            "tool",
+            "class_check"
+          ],
+          [
+            "tool",
+            "const"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        1,
+        198,
+        128
+      ],
+      "shape_seconds": 0.0004042999935336411
+    }
+  },
+  "frontend_seconds": 1.1665807000099448,
+  "lean_seconds_batch": 10.47223239998857,
+  "pads": {
+    "1": [
+      198,
+      128
+    ]
+  },
+  "caps": {
+    "1": 128
+  },
+  "site_lines": {
+    "1": 10
+  },
+  "source_binding": {
+    "schema": "orchlang-source-binding-v1",
+    "source_sha256": "400493d816644e4081c3c34139d96c7ce691da1b5c0eff33ee38a529f5cb5ca8",
+    "original": [
+      "seq",
+      [
+        "call",
+        1,
+        1,
+        "llama1b",
+        128,
+        [
+          "app",
+          [
+            "lit",
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\nThere is a search bar in the mall APP and users can enter any query in the search bar.\n\nThe user may want to search for orders, view product information, or seek recommended products.\n\nTherefore, please classify user intentions into the following three types according to the query: product_recommendation, order_search, product_info\n\nPlease note that only the above three situations can be returned, and try not to include other return values.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nThe user's query is "
+          ],
+          [
+            "app",
+            [
+              "var",
+              0
+            ],
+            [
+              "lit",
+              "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+            ]
+          ]
+        ],
+        null
+      ],
+      [
+        "seq",
+        [
+          "tool",
+          2,
+          "class_check",
+          [
+            "escape",
+            [
+              "var",
+              1
+            ]
+          ]
+        ],
+        [
+          "ite",
+          [
+            "eq",
+            2,
+            "order_search"
+          ],
+          [
+            "tool",
+            3,
+            "const",
+            [
+              "lit",
+              "Your order is being mailed, please wait patiently."
+            ]
+          ],
+          [
+            "ite",
+            [
+              "eq",
+              2,
+              "product_info"
+            ],
+            [
+              "tool",
+              3,
+              "const",
+              [
+                "lit",
+                "This product is produced by Microsoft."
+              ]
+            ],
+            [
+              "ite",
+              [
+                "eq",
+                2,
+                "product_recommendation"
+              ],
+              [
+                "tool",
+                3,
+                "const",
+                [
+                  "lit",
+                  "I recommend promptflow to you, which can solve your problem very well."
+                ]
+              ],
+              [
+                "tool",
+                3,
+                "const",
+                [
+                  "lit",
+                  "Sorry, no results matching your search were found."
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ],
+    "secret_inputs": [
+      0
+    ],
+    "high": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "slots": {
+      "query": 0,
+      "llm_result": 1,
+      "intention": 2,
+      "response": 3
+    },
+    "trust": "Python source reader/lowering and serialization; Lean checks the shaped core",
+    "binding_sha256": "6015eed740a797a958b4dd93246c486b2b7b861007f773bd166f7010bd31116f"
+  },
+  "request_targets": "heuristic execution envelopes; complete requests are admitted exactly before dispatch"
+}

@@ -1,0 +1,72 @@
+{
+  "timestamp_utc": "2026-10-23T21:25:46.308777+00:00",
+  "source": "https://github.com/eleata/costwright",
+  "source_commit": "2531c37cc2aa06472a2628bccfb527f185f6b4c0",
+  "version": "0.2.15",
+  "protocol": "two-disclosed-development-probes",
+  "scope": "constructor cap resolution, not relational noninterference",
+  "python": "3.14.3 (tags/v3.14.3:323c59a, Feb  3 2026, 16:04:56) [MSC v.1944 64 bit (AMD64)]",
+  "records": [
+    {
+      "id": "import-alias-capped",
+      "purpose": "Recognize an imported constructor alias with an explicit cap.",
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-m",
+        "costwright.cli",
+        "caps",
+        "C:\\Users\\nambi\\Documents\\Compiler Project\\orchlang-compiler-design-project\\research\\revision-2026-10-24\\costwright-probes\\import-alias-capped.py",
+        "--json"
+      ],
+      "exit": 0,
+      "stdout": {
+        "files_scanned": 1,
+        "findings": [],
+        "schema": "costwright.caps.v1"
+      },
+      "stderr": "",
+      "source_sha256": "91b9d6a01db546d5af69cbf85af07d82f20150675e80cdc10e5306bf2a354211"
+    },
+    {
+      "id": "dynamic-model-conservative",
+      "purpose": "Flag a dynamic model when the cap parameter may be ineffective.",
+      "argv": [
+        "C:\\Python314\\python.exe",
+        "-m",
+        "costwright.cli",
+        "caps",
+        "C:\\Users\\nambi\\Documents\\Compiler Project\\orchlang-compiler-design-project\\research\\revision-2026-10-24\\costwright-probes\\dynamic-model-conservative.py",
+        "--json"
+      ],
+      "exit": 0,
+      "stdout": {
+        "files_scanned": 1,
+        "findings": [
+          {
+            "constructor": "ChatOpenAI",
+            "file": "dynamic-model-conservative.py",
+            "have": [
+              "max_tokens"
+            ],
+            "kind": "ineffective",
+            "line": 3,
+            "provider": "openai",
+            "suggest_kwarg": "max_completion_tokens",
+            "why": "el cap presente no acota: falta el kwarg correcto `max_completion_tokens` como entero positivo (o el valor es None/negativo/variable/True, o es el kwarg equivocado para este constructor)"
+          }
+        ],
+        "schema": "costwright.caps.v1"
+      },
+      "stderr": "",
+      "source_sha256": "8fdb219f15b9c250c4552563a52190ad5de27f22b344f779f75bc6d0ab6e19a5"
+    }
+  ],
+  "source_hashes": {
+    "src/costwright/caps.py": "f717d06e6806a81159a9b3ad5eed985faa9448067c74add02e69d2c8af737308",
+    "src/costwright/cli.py": "162cd81a00af6a369728f8247963e1ad7651f1d639ae0c23b3a4f1c5a4850c39",
+    "src/costwright/extract.py": "4b59cc8add30703dc11938a7db0971172fa2cc52755472d90c6f416d0f95223a",
+    "src/costwright/mapper.py": "e7e72ff01ae0e91bd9bf77cf91790dc3366478d5d8c1a74d3b75a133a8fa6026",
+    "README.md": "2a89cd50605791a851af71d72c159850d5bd834e6500f4673c52b77cc70ddc2d",
+    "docs/NON-INTERFERENCE.md": "1075f8b365ca2ef019b69189075d6af8938b7940fa1bbe722d333f761c0795bb"
+  }
+}

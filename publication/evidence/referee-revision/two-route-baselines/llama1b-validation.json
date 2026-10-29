@@ -1,0 +1,436 @@
+{
+  "source_binding": {
+    "schema": "orchlang-source-binding-v1",
+    "source_sha256": "14b26191eaec3808ccc1d9ce5a3c24372b4f8a5188a4ea689eff8bad3a1ce27d",
+    "original": [
+      "ite",
+      [
+        "eq",
+        0,
+        "short"
+      ],
+      [
+        "call",
+        1,
+        2,
+        "llama1b",
+        4,
+        [
+          "app",
+          [
+            "lit",
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+          ],
+          [
+            "app",
+            [
+              "trim",
+              [
+                "app",
+                [
+                  "lit",
+                  "In one paragraph, explain: "
+                ],
+                [
+                  "var",
+                  1
+                ]
+              ]
+            ],
+            [
+              "lit",
+              "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+            ]
+          ]
+        ],
+        null
+      ],
+      [
+        "call",
+        2,
+        2,
+        "llama1b",
+        16,
+        [
+          "app",
+          [
+            "lit",
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+          ],
+          [
+            "app",
+            [
+              "trim",
+              [
+                "app",
+                [
+                  "lit",
+                  "In one paragraph, explain: "
+                ],
+                [
+                  "var",
+                  1
+                ]
+              ]
+            ],
+            [
+              "lit",
+              "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+            ]
+          ]
+        ],
+        null
+      ]
+    ],
+    "secret_inputs": [
+      0,
+      1
+    ],
+    "high": [
+      0,
+      1,
+      2
+    ],
+    "slots": {
+      "kind": 0,
+      "q": 1,
+      "answer": 2
+    },
+    "trust": "Python source reader/lowering and serialization; Lean checks the shaped core",
+    "binding_sha256": "22d71d1aac764e2449ccf94deacd838847379aa6fb4cb0b46f13fe13ad44b38e"
+  },
+  "verdicts": {
+    "aligned": {
+      "static_shape": [
+        [
+          "llm",
+          "llama1b",
+          83,
+          16
+        ]
+      ],
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    },
+    "all_branches": {
+      "static_shape": [
+        [
+          "llm",
+          "llama1b",
+          83,
+          4
+        ],
+        [
+          "llm",
+          "llama1b",
+          83,
+          16
+        ]
+      ],
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    },
+    "uniform": {
+      "static_shape": [
+        [
+          "llm",
+          "llama1b",
+          83,
+          16
+        ]
+      ],
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    }
+  },
+  "candidates": {
+    "aligned": [
+      "ite",
+      [
+        "eq",
+        0,
+        "short"
+      ],
+      [
+        "call",
+        1,
+        2,
+        "llama1b",
+        4,
+        [
+          "app",
+          [
+            "lit",
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+          ],
+          [
+            "app",
+            [
+              "trim",
+              [
+                "app",
+                [
+                  "lit",
+                  "In one paragraph, explain: "
+                ],
+                [
+                  "var",
+                  1
+                ]
+              ]
+            ],
+            [
+              "lit",
+              "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+            ]
+          ]
+        ],
+        [
+          83,
+          16
+        ]
+      ],
+      [
+        "call",
+        2,
+        2,
+        "llama1b",
+        16,
+        [
+          "app",
+          [
+            "lit",
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+          ],
+          [
+            "app",
+            [
+              "trim",
+              [
+                "app",
+                [
+                  "lit",
+                  "In one paragraph, explain: "
+                ],
+                [
+                  "var",
+                  1
+                ]
+              ]
+            ],
+            [
+              "lit",
+              "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+            ]
+          ]
+        ],
+        [
+          83,
+          16
+        ]
+      ]
+    ],
+    "all_branches": [
+      "ite",
+      [
+        "eq",
+        0,
+        "short"
+      ],
+      [
+        "seq",
+        [
+          "call",
+          1,
+          2,
+          "llama1b",
+          4,
+          [
+            "app",
+            [
+              "lit",
+              "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+            ],
+            [
+              "app",
+              [
+                "trim",
+                [
+                  "app",
+                  [
+                    "lit",
+                    "In one paragraph, explain: "
+                  ],
+                  [
+                    "var",
+                    1
+                  ]
+                ]
+              ],
+              [
+                "lit",
+                "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+              ]
+            ]
+          ],
+          [
+            83,
+            4
+          ]
+        ],
+        [
+          "dummy",
+          "llama1b",
+          83,
+          16
+        ]
+      ],
+      [
+        "seq",
+        [
+          "dummy",
+          "llama1b",
+          83,
+          4
+        ],
+        [
+          "call",
+          2,
+          2,
+          "llama1b",
+          16,
+          [
+            "app",
+            [
+              "lit",
+              "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+            ],
+            [
+              "app",
+              [
+                "trim",
+                [
+                  "app",
+                  [
+                    "lit",
+                    "In one paragraph, explain: "
+                  ],
+                  [
+                    "var",
+                    1
+                  ]
+                ]
+              ],
+              [
+                "lit",
+                "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+              ]
+            ]
+          ],
+          [
+            83,
+            16
+          ]
+        ]
+      ]
+    ],
+    "uniform": [
+      "ite",
+      [
+        "eq",
+        0,
+        "short"
+      ],
+      [
+        "call",
+        1,
+        2,
+        "llama1b",
+        4,
+        [
+          "app",
+          [
+            "lit",
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+          ],
+          [
+            "app",
+            [
+              "trim",
+              [
+                "app",
+                [
+                  "lit",
+                  "In one paragraph, explain: "
+                ],
+                [
+                  "var",
+                  1
+                ]
+              ]
+            ],
+            [
+              "lit",
+              "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+            ]
+          ]
+        ],
+        [
+          83,
+          16
+        ]
+      ],
+      [
+        "call",
+        2,
+        2,
+        "llama1b",
+        16,
+        [
+          "app",
+          [
+            "lit",
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+          ],
+          [
+            "app",
+            [
+              "trim",
+              [
+                "app",
+                [
+                  "lit",
+                  "In one paragraph, explain: "
+                ],
+                [
+                  "var",
+                  1
+                ]
+              ]
+            ],
+            [
+              "lit",
+              "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+            ]
+          ]
+        ],
+        [
+          83,
+          16
+        ]
+      ]
+    ]
+  }
+}

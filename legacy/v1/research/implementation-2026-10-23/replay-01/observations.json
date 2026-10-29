@@ -1,0 +1,2534 @@
+[
+  {
+    "case": "utf8-bytes-v1/0/False",
+    "contracts": {
+      "m": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "utf8-bytes-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      },
+      "alias": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "utf8-bytes-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      }
+    },
+    "kernels": {
+      "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}": {
+        "*": [
+          {
+            "text": "é",
+            "p": "1/2",
+            "status": "ok"
+          },
+          {
+            "text": "",
+            "p": "1/2",
+            "status": "error"
+          }
+        ]
+      }
+    },
+    "program": [
+      {
+        "kind": "retry",
+        "bound": 0,
+        "body": [
+          {
+            "kind": "call",
+            "model": "m",
+            "request": "é",
+            "bind": "answer"
+          },
+          {
+            "kind": "if",
+            "guard": "public",
+            "then": [
+              {
+                "kind": "call",
+                "model": "alias",
+                "request": "é",
+                "bind": "answer"
+              }
+            ],
+            "else": []
+          }
+        ]
+      },
+      {
+        "kind": "private_output",
+        "value": {
+          "var": "secret"
+        }
+      }
+    ],
+    "env": {
+      "public": false,
+      "secret": "retained"
+    },
+    "reference_paths": 1,
+    "replay_paths": 1,
+    "exact_equal": true,
+    "observations": [
+      {
+        "trace": [],
+        "requests": [],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1"
+      }
+    ]
+  },
+  {
+    "case": "utf8-bytes-v1/0/True",
+    "contracts": {
+      "m": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "utf8-bytes-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      },
+      "alias": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "utf8-bytes-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      }
+    },
+    "kernels": {
+      "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}": {
+        "*": [
+          {
+            "text": "é",
+            "p": "1/2",
+            "status": "ok"
+          },
+          {
+            "text": "",
+            "p": "1/2",
+            "status": "error"
+          }
+        ]
+      }
+    },
+    "program": [
+      {
+        "kind": "retry",
+        "bound": 0,
+        "body": [
+          {
+            "kind": "call",
+            "model": "m",
+            "request": "é",
+            "bind": "answer"
+          },
+          {
+            "kind": "if",
+            "guard": "public",
+            "then": [
+              {
+                "kind": "call",
+                "model": "alias",
+                "request": "é",
+                "bind": "answer"
+              }
+            ],
+            "else": []
+          }
+        ]
+      },
+      {
+        "kind": "private_output",
+        "value": {
+          "var": "secret"
+        }
+      }
+    ],
+    "env": {
+      "public": true,
+      "secret": "retained"
+    },
+    "reference_paths": 1,
+    "replay_paths": 1,
+    "exact_equal": true,
+    "observations": [
+      {
+        "trace": [],
+        "requests": [],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1"
+      }
+    ]
+  },
+  {
+    "case": "utf8-bytes-v1/1/False",
+    "contracts": {
+      "m": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "utf8-bytes-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      },
+      "alias": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "utf8-bytes-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      }
+    },
+    "kernels": {
+      "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}": {
+        "*": [
+          {
+            "text": "é",
+            "p": "1/2",
+            "status": "ok"
+          },
+          {
+            "text": "",
+            "p": "1/2",
+            "status": "error"
+          }
+        ]
+      }
+    },
+    "program": [
+      {
+        "kind": "retry",
+        "bound": 1,
+        "body": [
+          {
+            "kind": "call",
+            "model": "m",
+            "request": "é",
+            "bind": "answer"
+          },
+          {
+            "kind": "if",
+            "guard": "public",
+            "then": [
+              {
+                "kind": "call",
+                "model": "alias",
+                "request": "é",
+                "bind": "answer"
+              }
+            ],
+            "else": []
+          }
+        ]
+      },
+      {
+        "kind": "private_output",
+        "value": {
+          "var": "secret"
+        }
+      }
+    ],
+    "env": {
+      "public": false,
+      "secret": "retained"
+    },
+    "reference_paths": 2,
+    "replay_paths": 2,
+    "exact_equal": true,
+    "observations": [
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/2"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/2"
+      }
+    ]
+  },
+  {
+    "case": "utf8-bytes-v1/1/True",
+    "contracts": {
+      "m": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "utf8-bytes-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      },
+      "alias": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "utf8-bytes-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      }
+    },
+    "kernels": {
+      "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}": {
+        "*": [
+          {
+            "text": "é",
+            "p": "1/2",
+            "status": "ok"
+          },
+          {
+            "text": "",
+            "p": "1/2",
+            "status": "error"
+          }
+        ]
+      }
+    },
+    "program": [
+      {
+        "kind": "retry",
+        "bound": 1,
+        "body": [
+          {
+            "kind": "call",
+            "model": "m",
+            "request": "é",
+            "bind": "answer"
+          },
+          {
+            "kind": "if",
+            "guard": "public",
+            "then": [
+              {
+                "kind": "call",
+                "model": "alias",
+                "request": "é",
+                "bind": "answer"
+              }
+            ],
+            "else": []
+          }
+        ]
+      },
+      {
+        "kind": "private_output",
+        "value": {
+          "var": "secret"
+        }
+      }
+    ],
+    "env": {
+      "public": true,
+      "secret": "retained"
+    },
+    "reference_paths": 4,
+    "replay_paths": 4,
+    "exact_equal": true,
+    "observations": [
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/4"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/4"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/4"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/4"
+      }
+    ]
+  },
+  {
+    "case": "utf8-bytes-v1/2/False",
+    "contracts": {
+      "m": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "utf8-bytes-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      },
+      "alias": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "utf8-bytes-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      }
+    },
+    "kernels": {
+      "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}": {
+        "*": [
+          {
+            "text": "é",
+            "p": "1/2",
+            "status": "ok"
+          },
+          {
+            "text": "",
+            "p": "1/2",
+            "status": "error"
+          }
+        ]
+      }
+    },
+    "program": [
+      {
+        "kind": "retry",
+        "bound": 2,
+        "body": [
+          {
+            "kind": "call",
+            "model": "m",
+            "request": "é",
+            "bind": "answer"
+          },
+          {
+            "kind": "if",
+            "guard": "public",
+            "then": [
+              {
+                "kind": "call",
+                "model": "alias",
+                "request": "é",
+                "bind": "answer"
+              }
+            ],
+            "else": []
+          }
+        ]
+      },
+      {
+        "kind": "private_output",
+        "value": {
+          "var": "secret"
+        }
+      }
+    ],
+    "env": {
+      "public": false,
+      "secret": "retained"
+    },
+    "reference_paths": 3,
+    "replay_paths": 3,
+    "exact_equal": true,
+    "observations": [
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/2"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/4"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/4"
+      }
+    ]
+  },
+  {
+    "case": "utf8-bytes-v1/2/True",
+    "contracts": {
+      "m": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "utf8-bytes-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      },
+      "alias": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "utf8-bytes-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      }
+    },
+    "kernels": {
+      "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}": {
+        "*": [
+          {
+            "text": "é",
+            "p": "1/2",
+            "status": "ok"
+          },
+          {
+            "text": "",
+            "p": "1/2",
+            "status": "error"
+          }
+        ]
+      }
+    },
+    "program": [
+      {
+        "kind": "retry",
+        "bound": 2,
+        "body": [
+          {
+            "kind": "call",
+            "model": "m",
+            "request": "é",
+            "bind": "answer"
+          },
+          {
+            "kind": "if",
+            "guard": "public",
+            "then": [
+              {
+                "kind": "call",
+                "model": "alias",
+                "request": "é",
+                "bind": "answer"
+              }
+            ],
+            "else": []
+          }
+        ]
+      },
+      {
+        "kind": "private_output",
+        "value": {
+          "var": "secret"
+        }
+      }
+    ],
+    "env": {
+      "public": true,
+      "secret": "retained"
+    },
+    "reference_paths": 13,
+    "replay_paths": 13,
+    "exact_equal": true,
+    "observations": [
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/4"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            2,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"utf8-bytes-v1\"}",
+            "utf8-bytes-v1",
+            2,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      }
+    ]
+  },
+  {
+    "case": "unicode-codepoints-v1/0/False",
+    "contracts": {
+      "m": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "unicode-codepoints-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      },
+      "alias": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "unicode-codepoints-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      }
+    },
+    "kernels": {
+      "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}": {
+        "*": [
+          {
+            "text": "é",
+            "p": "1/2",
+            "status": "ok"
+          },
+          {
+            "text": "",
+            "p": "1/2",
+            "status": "error"
+          }
+        ]
+      }
+    },
+    "program": [
+      {
+        "kind": "retry",
+        "bound": 0,
+        "body": [
+          {
+            "kind": "call",
+            "model": "m",
+            "request": "é",
+            "bind": "answer"
+          },
+          {
+            "kind": "if",
+            "guard": "public",
+            "then": [
+              {
+                "kind": "call",
+                "model": "alias",
+                "request": "é",
+                "bind": "answer"
+              }
+            ],
+            "else": []
+          }
+        ]
+      },
+      {
+        "kind": "private_output",
+        "value": {
+          "var": "secret"
+        }
+      }
+    ],
+    "env": {
+      "public": false,
+      "secret": "retained"
+    },
+    "reference_paths": 1,
+    "replay_paths": 1,
+    "exact_equal": true,
+    "observations": [
+      {
+        "trace": [],
+        "requests": [],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1"
+      }
+    ]
+  },
+  {
+    "case": "unicode-codepoints-v1/0/True",
+    "contracts": {
+      "m": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "unicode-codepoints-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      },
+      "alias": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "unicode-codepoints-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      }
+    },
+    "kernels": {
+      "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}": {
+        "*": [
+          {
+            "text": "é",
+            "p": "1/2",
+            "status": "ok"
+          },
+          {
+            "text": "",
+            "p": "1/2",
+            "status": "error"
+          }
+        ]
+      }
+    },
+    "program": [
+      {
+        "kind": "retry",
+        "bound": 0,
+        "body": [
+          {
+            "kind": "call",
+            "model": "m",
+            "request": "é",
+            "bind": "answer"
+          },
+          {
+            "kind": "if",
+            "guard": "public",
+            "then": [
+              {
+                "kind": "call",
+                "model": "alias",
+                "request": "é",
+                "bind": "answer"
+              }
+            ],
+            "else": []
+          }
+        ]
+      },
+      {
+        "kind": "private_output",
+        "value": {
+          "var": "secret"
+        }
+      }
+    ],
+    "env": {
+      "public": true,
+      "secret": "retained"
+    },
+    "reference_paths": 1,
+    "replay_paths": 1,
+    "exact_equal": true,
+    "observations": [
+      {
+        "trace": [],
+        "requests": [],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1"
+      }
+    ]
+  },
+  {
+    "case": "unicode-codepoints-v1/1/False",
+    "contracts": {
+      "m": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "unicode-codepoints-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      },
+      "alias": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "unicode-codepoints-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      }
+    },
+    "kernels": {
+      "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}": {
+        "*": [
+          {
+            "text": "é",
+            "p": "1/2",
+            "status": "ok"
+          },
+          {
+            "text": "",
+            "p": "1/2",
+            "status": "error"
+          }
+        ]
+      }
+    },
+    "program": [
+      {
+        "kind": "retry",
+        "bound": 1,
+        "body": [
+          {
+            "kind": "call",
+            "model": "m",
+            "request": "é",
+            "bind": "answer"
+          },
+          {
+            "kind": "if",
+            "guard": "public",
+            "then": [
+              {
+                "kind": "call",
+                "model": "alias",
+                "request": "é",
+                "bind": "answer"
+              }
+            ],
+            "else": []
+          }
+        ]
+      },
+      {
+        "kind": "private_output",
+        "value": {
+          "var": "secret"
+        }
+      }
+    ],
+    "env": {
+      "public": false,
+      "secret": "retained"
+    },
+    "reference_paths": 2,
+    "replay_paths": 2,
+    "exact_equal": true,
+    "observations": [
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/2"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/2"
+      }
+    ]
+  },
+  {
+    "case": "unicode-codepoints-v1/1/True",
+    "contracts": {
+      "m": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "unicode-codepoints-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      },
+      "alias": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "unicode-codepoints-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      }
+    },
+    "kernels": {
+      "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}": {
+        "*": [
+          {
+            "text": "é",
+            "p": "1/2",
+            "status": "ok"
+          },
+          {
+            "text": "",
+            "p": "1/2",
+            "status": "error"
+          }
+        ]
+      }
+    },
+    "program": [
+      {
+        "kind": "retry",
+        "bound": 1,
+        "body": [
+          {
+            "kind": "call",
+            "model": "m",
+            "request": "é",
+            "bind": "answer"
+          },
+          {
+            "kind": "if",
+            "guard": "public",
+            "then": [
+              {
+                "kind": "call",
+                "model": "alias",
+                "request": "é",
+                "bind": "answer"
+              }
+            ],
+            "else": []
+          }
+        ]
+      },
+      {
+        "kind": "private_output",
+        "value": {
+          "var": "secret"
+        }
+      }
+    ],
+    "env": {
+      "public": true,
+      "secret": "retained"
+    },
+    "reference_paths": 4,
+    "replay_paths": 4,
+    "exact_equal": true,
+    "observations": [
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/4"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/4"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/4"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/4"
+      }
+    ]
+  },
+  {
+    "case": "unicode-codepoints-v1/2/False",
+    "contracts": {
+      "m": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "unicode-codepoints-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      },
+      "alias": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "unicode-codepoints-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      }
+    },
+    "kernels": {
+      "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}": {
+        "*": [
+          {
+            "text": "é",
+            "p": "1/2",
+            "status": "ok"
+          },
+          {
+            "text": "",
+            "p": "1/2",
+            "status": "error"
+          }
+        ]
+      }
+    },
+    "program": [
+      {
+        "kind": "retry",
+        "bound": 2,
+        "body": [
+          {
+            "kind": "call",
+            "model": "m",
+            "request": "é",
+            "bind": "answer"
+          },
+          {
+            "kind": "if",
+            "guard": "public",
+            "then": [
+              {
+                "kind": "call",
+                "model": "alias",
+                "request": "é",
+                "bind": "answer"
+              }
+            ],
+            "else": []
+          }
+        ]
+      },
+      {
+        "kind": "private_output",
+        "value": {
+          "var": "secret"
+        }
+      }
+    ],
+    "env": {
+      "public": false,
+      "secret": "retained"
+    },
+    "reference_paths": 3,
+    "replay_paths": 3,
+    "exact_equal": true,
+    "observations": [
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/2"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/4"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/4"
+      }
+    ]
+  },
+  {
+    "case": "unicode-codepoints-v1/2/True",
+    "contracts": {
+      "m": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "unicode-codepoints-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      },
+      "alias": {
+        "provider": "finite",
+        "revision": "test-v1",
+        "tokenizer": "unicode-codepoints-v1",
+        "serializer": "raw-utf8-v1",
+        "cap": 8,
+        "sampling": "explicit-table",
+        "error_policy": "status-in-outcome",
+        "accounting": "all-attempts-input-and-output",
+        "state": "stateless"
+      }
+    },
+    "kernels": {
+      "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}": {
+        "*": [
+          {
+            "text": "é",
+            "p": "1/2",
+            "status": "ok"
+          },
+          {
+            "text": "",
+            "p": "1/2",
+            "status": "error"
+          }
+        ]
+      }
+    },
+    "program": [
+      {
+        "kind": "retry",
+        "bound": 2,
+        "body": [
+          {
+            "kind": "call",
+            "model": "m",
+            "request": "é",
+            "bind": "answer"
+          },
+          {
+            "kind": "if",
+            "guard": "public",
+            "then": [
+              {
+                "kind": "call",
+                "model": "alias",
+                "request": "é",
+                "bind": "answer"
+              }
+            ],
+            "else": []
+          }
+        ]
+      },
+      {
+        "kind": "private_output",
+        "value": {
+          "var": "secret"
+        }
+      }
+    ],
+    "env": {
+      "public": true,
+      "secret": "retained"
+    },
+    "reference_paths": 13,
+    "replay_paths": 13,
+    "exact_equal": true,
+    "observations": [
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/4"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            1,
+            "ok"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      },
+      {
+        "trace": [
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ],
+          [
+            "{\"accounting\":\"all-attempts-input-and-output\",\"cap\":8,\"error_policy\":\"status-in-outcome\",\"provider\":\"finite\",\"revision\":\"test-v1\",\"sampling\":\"explicit-table\",\"serializer\":\"raw-utf8-v1\",\"state\":\"stateless\",\"tokenizer\":\"unicode-codepoints-v1\"}",
+            "unicode-codepoints-v1",
+            1,
+            0,
+            "error"
+          ]
+        ],
+        "requests": [
+          "é",
+          "é",
+          "é",
+          "é"
+        ],
+        "private_outputs": [
+          "retained"
+        ],
+        "weight": "1/16"
+      }
+    ]
+  }
+]

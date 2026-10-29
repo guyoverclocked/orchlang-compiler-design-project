@@ -1,0 +1,20 @@
+{
+  "schema_version": "1",
+  "status": "frozen-offline-projection-protocol-v1",
+  "date": "2026-10-23",
+  "amendment": "v2: reserved identifier text renamed document in pf-ner; runner persists partial failures. See research/protocol-amendments.md; no endpoint, cap, seed or census changes.",
+  "scope": "Bounded synthetic resource analysis of authored external cost projections, not original application execution or provider-token bounds.",
+  "corpus": "bench/corpus/external-v1/manifest.json",
+  "census": {"sources": 2, "candidates": 21, "projections": 11, "exclusions": 10},
+  "primary_endpoints": ["per-projection compiler vs structural max/sum/multiply bounds", "per-component mock bound violations", "expected maximum call-count correspondence"],
+  "secondary_endpoints": ["input/model bound annotation count", "source size", "observed call-count coverage"],
+  "seeds": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20],
+  "baselines": ["competent structural max/sum/multiply on shared primitive IR facts"],
+  "relational_precision_comparison": false,
+  "inference": "No p-values or population confidence claims; report each workflow and retain failures. Repeated seeds are not independent application samples.",
+  "failure_policy": "All 11 projections must check, emit parseable reports/IR, match structural bounds and expected maximum call counts. Infrastructure failures are not unsafe rejections. Bound violations fail the run. No exclusions or cap changes after freeze.",
+  "limitations": "Input/output caps and some guards are introduced deployment annotations. Concurrency, return-value construction and SDK/provider behavior may be removed; every change is recorded. Zero original workflow executions and zero faithful end-to-end translations. No privacy claim is established by this corpus.",
+  "backend": "length-only-mock",
+  "observer": "aggregate-abstract-contract-usage",
+  "spent_usd_cap": "0.00"
+}

@@ -1,0 +1,7 @@
+workflow Polish budget 100000 {
+  input joke: text max_tokens 512;
+  model local = mock("deployment-override-qwen2.5-3b") max_tokens 64;
+  prompt request(joke: text) -> text = "<|im_start|>user\nAdd a surprising twist to this joke: {joke}<|im_end|>\n<|im_start|>assistant\n";
+  let response: text = call request(joke) using local;
+  output response;
+}

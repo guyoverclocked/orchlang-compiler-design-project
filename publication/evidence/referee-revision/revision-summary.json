@@ -1,0 +1,1464 @@
+{
+  "schema": "orchlang-referee-revision-summary-v1",
+  "protocol_version": "c2bb75c1ff7ef3a7ba824239d97b960efeb27e68",
+  "raw_hashes": {
+    "transparency-attempts.jsonl": "2c5f87f80e65dc00c4204e735f7b1e766880bec6b11ef271103ca1bd089f97d0",
+    "workflow-attempts.jsonl": "aec9120629e6df12a7a0d97ffe52595f7fb05b1e02c20098db084f5c650df97f"
+  },
+  "completeness": {
+    "expected_workflow_executions": 102,
+    "observed_workflow_executions": 102,
+    "expected_transparency_pairs": 192,
+    "observed_transparency_pairs": 192,
+    "execution_complete": true,
+    "integrity_errors": []
+  },
+  "workflow": {
+    "planned_pairs": 48,
+    "completed_pairs": 48,
+    "saved_store_equal": 48,
+    "all_store_equal": 48,
+    "shaped_trace_matches": 48,
+    "pair_results": [
+      {
+        "family": "llama1b",
+        "workflow": "crag",
+        "temperature": 0.0,
+        "id": "crag-10",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "answer": "The discharge from glaciers went into the Rhine's current course in northwest Europe during the Last Glacial Maximum, around 22,000-14,000 years ago.",
+            "search": "no"
+          },
+          "ours": {
+            "answer": "The discharge from glaciers went into the Rhine's current course in northwest Europe during the Last Glacial Maximum, around 22,000-14,000 years ago.",
+            "search": "no"
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "crag",
+        "temperature": 0.0,
+        "id": "crag-133",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "answer": "When early drivers fastened safety valves down, they were looking to generate more steam pressure by adjusting the valve's position, typically by adjusting the weight or spring that restrained the valve against steam pressure.",
+            "search": "yes"
+          },
+          "ours": {
+            "answer": "When early drivers fastened safety valves down, they were looking to generate more steam pressure by adjusting the valve's position, typically by adjusting the weight or spring that restrained the valve against steam pressure.",
+            "search": "yes"
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "crag",
+        "temperature": 0.0,
+        "id": "crag-39",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "answer": "There is no direct reference to Psalm 31 in the provided documents.",
+            "search": "yes"
+          },
+          "ours": {
+            "answer": "There is no direct reference to Psalm 31 in the provided documents.",
+            "search": "yes"
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "crag",
+        "temperature": 0.0,
+        "id": "crag-39-whitespace-boundary",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "answer": "There is no Psalm 31:5 in the provided documents.",
+            "search": "yes"
+          },
+          "ours": {
+            "answer": "There is no Psalm 31:5 in the provided documents.",
+            "search": "yes"
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "crag",
+        "temperature": 0.8,
+        "id": "crag-10",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "answer": "The discharge from glaciers in Europe during the last Ice Age likely went into the oceans, where it may have contributed to the formation of sea ice or the sedimentation of glaciers. This process is known as glacial discharge or glacial meltwater. It is not possible to provide a direct answer to where the discharge went without more specific information about the location or time period.",
+            "search": "yes"
+          },
+          "ours": {
+            "answer": "The discharge from glaciers in Europe during the last Ice Age likely went into the oceans, where it may have contributed to the formation of sea ice or the sedimentation of glaciers. This process is known as glacial discharge or glacial meltwater. It is not possible to provide a direct answer to where the discharge went without more specific information about the location or time period.",
+            "search": "yes"
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "crag",
+        "temperature": 0.8,
+        "id": "crag-133",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "answer": "The early drivers used a simple lever to restrain a plug valve in the boiler by carrying a weight or spring that restrained the valve against steam pressure.",
+            "search": "yes"
+          },
+          "ours": {
+            "answer": "The early drivers used a simple lever to restrain a plug valve in the boiler by carrying a weight or spring that restrained the valve against steam pressure.",
+            "search": "yes"
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "crag",
+        "temperature": 0.8,
+        "id": "crag-39",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "answer": "There is no Psalm 31:5 in the provided documents.",
+            "search": "yes"
+          },
+          "ours": {
+            "answer": "There is no Psalm 31:5 in the provided documents.",
+            "search": "yes"
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "crag",
+        "temperature": 0.8,
+        "id": "crag-39-whitespace-boundary",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "answer": "There is no mention of Psalm 31 in the provided documents.",
+            "search": "yes"
+          },
+          "ours": {
+            "answer": "There is no mention of Psalm 31 in the provided documents.",
+            "search": "yes"
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "email",
+        "temperature": 0.0,
+        "id": "email-2",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "reply": "Subject: Re: Delayed Data Processing and Investment Optimization Efforts\n\nDear [Customer Name],\n\nThank you for reaching out to us regarding the delays in data processing and investment optimization efforts. I understand the impact this has had on your investment strategy.\n\nI've checked the status of our systems, and unfortunately, the issue persists. I'd like to investigate further to determine the cause of the problem. I've checked the system logs and drivers, but unfortunately, the issue remains unresolved.\n\nTo help resolve the issue, I'd like to guide you through the process of resetting your password. You can do this by following these steps:\n\n1. Go to Settings > Security > Change Password.\n2. Enter your current password and create a new one that meets the following requirements:\n   - At least 12 characters\n   - Uppercase letters\n   - Lowercase letters\n   - Numbers\n   - Symbols\n\nPlease note that you'll need to create a strong password to ensure the security of your account.\n\nIf you're still experiencing issues, I'd be happy to assist you further. Please let me know if you have any questions or concerns.\n\nBest regards,\n[Your Name]",
+            "route": "docs",
+            "cls": "Classification: Bug\n\nIntent: question\nUrgency: low\nTopic: few words\nSummary: The customer is experiencing software and hardware compatibility issues with their financial organization's investment optimization efforts."
+          },
+          "ours": {
+            "reply": "Subject: Re: Delayed Data Processing and Investment Optimization Efforts\n\nDear [Customer Name],\n\nThank you for reaching out to us regarding the delays in data processing and investment optimization efforts. I understand the impact this has had on your investment strategy.\n\nI've checked the status of our systems, and unfortunately, the issue persists. I'd like to investigate further to determine the cause of the problem. I've checked the system logs and drivers, but unfortunately, the issue remains unresolved.\n\nTo help resolve the issue, I'd like to guide you through the process of resetting your password. You can do this by following these steps:\n\n1. Go to Settings > Security > Change Password.\n2. Enter your current password and create a new one that meets the following requirements:\n   - At least 12 characters\n   - Uppercase letters\n   - Lowercase letters\n   - Numbers\n   - Symbols\n\nPlease note that you'll need to create a strong password to ensure the security of your account.\n\nIf you're still experiencing issues, I'd be happy to assist you further. Please let me know if you have any questions or concerns.\n\nBest regards,\n[Your Name]",
+            "route": "docs",
+            "cls": "Classification: Bug\n\nIntent: question\nUrgency: low\nTopic: few words\nSummary: The customer is experiencing software and hardware compatibility issues with their financial organization's investment optimization efforts."
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "email",
+        "temperature": 0.0,
+        "id": "email-7",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "reply": "Subject: Re: Healthcare Data Breach Concern\n\nDear [Customer Name],\n\nThank you for reaching out to us regarding the unauthorized attempts to access your medical information. I understand your concern and apologize for any distress this may have caused.\n\nI want to assure you that we take the security and confidentiality of our customers' medical information very seriously. Our systems are designed to protect sensitive patient data, and we have implemented robust security measures to prevent unauthorized access.\n\nHowever, I would like to clarify that our systems have been breached, and we have detected unauthorized attempts to access your medical information. This is a serious incident, and we are taking immediate action to investigate and contain the breach.\n\nI want to assure you that we are working closely with our IT department to identify the source of the breach and implement measures to prevent future incidents. We are also providing you with a dedicated support line to assist with any questions or concerns you may have.\n\nIn the meantime, I would like to provide you with some guidance on how to protect your medical information. Please see the attached documentation, which outlines our security protocols and procedures for handling sensitive patient data.\n\nIf you have any further questions or concerns, please do not hesitate to contact me directly. I am here to assist you and provide any necessary support.\n\nThank you for your patience and understanding during this time.\n\nBest regards,\n\n[Your Name]\n[Your Title]\n[Company Name]\n[Contact Information]",
+            "route": "draft",
+            "cls": "Analysis:\n\n- **Classification:** The email is a **Bug Report**.\n- **Intent:** The intent is **Complex**.\n- **Urgency:** The urgency is **Low**.\n- **Topic:** The topic is **Security**.\n- **Summary:** The summary is **Medical Data Breach Concern**."
+          },
+          "ours": {
+            "reply": "Subject: Re: Healthcare Data Breach Concern\n\nDear [Customer Name],\n\nThank you for reaching out to us regarding the unauthorized attempts to access your medical information. I understand your concern and apologize for any distress this may have caused.\n\nI want to assure you that we take the security and confidentiality of our customers' medical information very seriously. Our systems are designed to protect sensitive patient data, and we have implemented robust security measures to prevent unauthorized access.\n\nHowever, I would like to clarify that our systems have been breached, and we have detected unauthorized attempts to access your medical information. This is a serious incident, and we are taking immediate action to investigate and contain the breach.\n\nI want to assure you that we are working closely with our IT department to identify the source of the breach and implement measures to prevent future incidents. We are also providing you with a dedicated support line to assist with any questions or concerns you may have.\n\nIn the meantime, I would like to provide you with some guidance on how to protect your medical information. Please see the attached documentation, which outlines our security protocols and procedures for handling sensitive patient data.\n\nIf you have any further questions or concerns, please do not hesitate to contact me directly. I am here to assist you and provide any necessary support.\n\nThank you for your patience and understanding during this time.\n\nBest regards,\n\n[Your Name]\n[Your Title]\n[Company Name]\n[Contact Information]",
+            "route": "draft",
+            "cls": "Analysis:\n\n- **Classification:** The email is a **Bug Report**.\n- **Intent:** The intent is **Complex**.\n- **Urgency:** The urgency is **Low**.\n- **Topic:** The topic is **Security**.\n- **Summary:** The summary is **Medical Data Breach Concern**."
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "email",
+        "temperature": 0.0,
+        "id": "email-7-whitespace-boundary",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "reply": "Subject: Re: Healthcare Data Breach Concern\n\nDear [Customer Name],\n\nThank you for reaching out to us regarding the unauthorized attempts to access your medical information. I understand your concern and apologize for any distress this may have caused.\n\nI want to assure you that we take the security and confidentiality of our customers' data very seriously. Our systems are designed to protect sensitive information, and we have taken immediate action to investigate and contain the breach.\n\nTo better understand the scope of the issue, I would like to refer you to our Incident Response Plan, which outlines the steps we have taken to address the breach. You can find this document in the attached link: [insert link].\n\nRegarding your specific concern, I would like to address the following points:\n\n*   We have notified the relevant authorities and are cooperating with them to investigate the breach.\n*   We have taken steps to secure our systems and prevent any further unauthorized access.\n*   We are working closely with our vendors and partners to ensure that our systems are up-to-date and secure.\n\nI want to assure you that we are committed to protecting your medical information and will do everything in our power to prevent similar incidents in the future.\n\nIf you have any further questions or concerns, please do not hesitate to contact me directly. I am here to help and want to ensure that you are satisfied with our response.\n\nThank you for your patience and understanding.\n\nBest regards,\n\n[Your Name]\n[Your Title]\n[Company Name]\n[Contact Information]",
+            "route": "draft",
+            "cls": "**Classification:** Urgent - High\n\n**Intent:** Billing\n\n**Urgency:** High\n\n**Topic:** Data Breach\n\n**Summary:** The customer is concerned about unauthorized attempts to access their medical information, indicating a billing issue."
+          },
+          "ours": {
+            "reply": "Subject: Re: Healthcare Data Breach Concern\n\nDear [Customer Name],\n\nThank you for reaching out to us regarding the unauthorized attempts to access your medical information. I understand your concern and apologize for any distress this may have caused.\n\nI want to assure you that we take the security and confidentiality of our customers' data very seriously. Our systems are designed to protect sensitive information, and we have taken immediate action to investigate and contain the breach.\n\nTo better understand the scope of the issue, I would like to refer you to our Incident Response Plan, which outlines the steps we have taken to address the breach. You can find this document in the attached link: [insert link].\n\nRegarding your specific concern, I would like to address the following points:\n\n*   We have notified the relevant authorities and are cooperating with them to investigate the breach.\n*   We have taken steps to secure our systems and prevent any further unauthorized access.\n*   We are working closely with our vendors and partners to ensure that our systems are up-to-date and secure.\n\nI want to assure you that we are committed to protecting your medical information and will do everything in our power to prevent similar incidents in the future.\n\nIf you have any further questions or concerns, please do not hesitate to contact me directly. I am here to help and want to ensure that you are satisfied with our response.\n\nThank you for your patience and understanding.\n\nBest regards,\n\n[Your Name]\n[Your Title]\n[Company Name]\n[Contact Information]",
+            "route": "draft",
+            "cls": "**Classification:** Urgent - High\n\n**Intent:** Billing\n\n**Urgency:** High\n\n**Topic:** Data Breach\n\n**Summary:** The customer is concerned about unauthorized attempts to access their medical information, indicating a billing issue."
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "email",
+        "temperature": 0.0,
+        "id": "email-82",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "reply": "Here's a draft response to the customer email:\n\nDear [Customer Name],\n\nThank you for reaching out to us regarding the urgent need for security protocols enhancement in our hospital's medical systems. I understand the importance of safeguarding sensitive patient information and preventing potential breaches, especially in the healthcare sector.\n\nI appreciate your request for the following security measures:\n\n- Multi-factor authentication for all users\n- Regular software updates and patching\n- Encryption of sensitive data\n\nI agree that these measures are crucial for our hospital's security and will implement them promptly. To ensure a smooth implementation process, I recommend the following:\n\n- Multi-factor authentication will be rolled out across all users within the next 6 weeks\n- Regular software updates and patches will be performed on a bi-weekly basis\n- Encryption of sensitive data will be implemented immediately\n\nIn addition to these measures, I suggest that we also consider the following:\n\n- Incident response planning will be developed and implemented within the next 3 months\n- Security audits will be conducted annually to ensure our security protocols are up-to-date and effective\n\nRegarding your availability for a call, I am available to discuss further at your convenience. Please let me know a suitable time to schedule a call, and I will outline the next steps.\n\nThank you for your patience and understanding in this matter. If you have any further questions or concerns, please do not hesitate to contact me.\n\nBest regards,\n\n[Your Name]\n\nThis response:\n\n* Acknowledges the customer's concern and shows understanding\n* Addresses their specific request for security measures\n* Provides a clear plan for implementation and recommends additional",
+            "route": "draft",
+            "cls": "**Classification:**\n\n- **Intent:** Feature\n- **Urgency:** Medium\n- **Topic:** Security\n- **Summary:** The customer is requesting immediate enhancement of security protocols for the hospital's medical systems.\n\n**Classification Breakdown:**\n\n- **Intent:** The customer is requesting a feature (security protocols) for the hospital's medical systems.\n- **Urgency:** The request is"
+          },
+          "ours": {
+            "reply": "Here's a draft response to the customer email:\n\nDear [Customer Name],\n\nThank you for reaching out to us regarding the urgent need for security protocols enhancement in our hospital's medical systems. I understand the importance of safeguarding sensitive patient information and preventing potential breaches, especially in the healthcare sector.\n\nI appreciate your request for the following security measures:\n\n- Multi-factor authentication for all users\n- Regular software updates and patching\n- Encryption of sensitive data\n\nI agree that these measures are crucial for our hospital's security and will implement them promptly. To ensure a smooth implementation process, I recommend the following:\n\n- Multi-factor authentication will be rolled out across all users within the next 6 weeks\n- Regular software updates and patches will be performed on a bi-weekly basis\n- Encryption of sensitive data will be implemented immediately\n\nIn addition to these measures, I suggest that we also consider the following:\n\n- Incident response planning will be developed and implemented within the next 3 months\n- Security audits will be conducted annually to ensure our security protocols are up-to-date and effective\n\nRegarding your availability for a call, I am available to discuss further at your convenience. Please let me know a suitable time to schedule a call, and I will outline the next steps.\n\nThank you for your patience and understanding in this matter. If you have any further questions or concerns, please do not hesitate to contact me.\n\nBest regards,\n\n[Your Name]\n\nThis response:\n\n* Acknowledges the customer's concern and shows understanding\n* Addresses their specific request for security measures\n* Provides a clear plan for implementation and recommends additional",
+            "route": "draft",
+            "cls": "**Classification:**\n\n- **Intent:** Feature\n- **Urgency:** Medium\n- **Topic:** Security\n- **Summary:** The customer is requesting immediate enhancement of security protocols for the hospital's medical systems.\n\n**Classification Breakdown:**\n\n- **Intent:** The customer is requesting a feature (security protocols) for the hospital's medical systems.\n- **Urgency:** The request is"
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "email",
+        "temperature": 0.8,
+        "id": "email-2",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "reply": "Subject: Re: Data Processing Delays and Investment Optimization\n\nDear [Customer Name],\n\nI am writing to acknowledge receipt of your email regarding data processing delays in your investment optimization efforts. I understand the importance of resolving these issues as soon as possible to minimize potential losses.\n\nI have reviewed the information you provided, and I can see that the cause of the delay lies in software and hardware compatibility problems. To troubleshoot and resolve the issue, I recommend that you reboot your systems and update the drivers. I have attached the necessary documentation, which may be helpful in resolving this issue.\n\nIf the problem persists, I would like to escalate the issue to our technical support team, and they will be able to provide further assistance. In the meantime, I will do my best to provide you with regular updates on the status of your request.\n\nPlease let me know if you have any further questions or concerns.\n\nBest regards,\n[Your Name]\n\nAttachments:\n- Investment Optimization Documentation\n- Software Compatibility and Hardware Issues Guide",
+            "route": "draft",
+            "cls": "Classification: Intent -  Low\nUrgency - High\nTopic - Investment Optimization\nSummary: The customer wants immediate assistance to resolve an unresolved issue impacting their investment optimization efforts."
+          },
+          "ours": {
+            "reply": "Subject: Re: Data Processing Delays and Investment Optimization\n\nDear [Customer Name],\n\nI am writing to acknowledge receipt of your email regarding data processing delays in your investment optimization efforts. I understand the importance of resolving these issues as soon as possible to minimize potential losses.\n\nI have reviewed the information you provided, and I can see that the cause of the delay lies in software and hardware compatibility problems. To troubleshoot and resolve the issue, I recommend that you reboot your systems and update the drivers. I have attached the necessary documentation, which may be helpful in resolving this issue.\n\nIf the problem persists, I would like to escalate the issue to our technical support team, and they will be able to provide further assistance. In the meantime, I will do my best to provide you with regular updates on the status of your request.\n\nPlease let me know if you have any further questions or concerns.\n\nBest regards,\n[Your Name]\n\nAttachments:\n- Investment Optimization Documentation\n- Software Compatibility and Hardware Issues Guide",
+            "route": "draft",
+            "cls": "Classification: Intent -  Low\nUrgency - High\nTopic - Investment Optimization\nSummary: The customer wants immediate assistance to resolve an unresolved issue impacting their investment optimization efforts."
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "email",
+        "temperature": 0.8,
+        "id": "email-7",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "reply": "Here's a draft response to the customer email:\n\nSubject: Re: Healthcare Data Breach Concern\n\nDear [Customer Name],\n\nI am writing to address the healthcare data breach concern you have raised regarding unauthorized attempts to access your medical information. I want to start by acknowledging your trust in our organization and the importance of protecting your sensitive information.\n\nWe take these matters extremely seriously and are taking immediate action to investigate and contain the breach. Our top priority is to ensure the confidentiality, integrity, and availability of your protected health information.\n\nAs stated in our Data Breach Notification Policy, we are providing you with this notification as a matter of law. We will provide you with more details about the breach in our next notification.\n\nIn the meantime, I want to assure you that we are taking all necessary steps to prevent further unauthorized access and protect your information. Our IT department is working closely with our external forensic investigators to identify the breach and contain the incident.\n\nPlease note that we are committed to transparency and cooperation with regulatory bodies. We will keep you informed about any developments and provide you with regular updates on our response efforts.\n\nIf you have any concerns or questions, please do not hesitate to reach out to us. We appreciate your patience and cooperation in this matter.\n\nBest regards,\n\n[Your Name]\n[Organization Name]\n[Contact Information]",
+            "route": "draft",
+            "cls": "Classification: Bug\n\nIntent: The intent of the email is to report a security concern regarding unauthorized attempts to access medical information.\n\nUrgency: The email is of medium to high urgency as it is suggesting that the customer's medical information has been compromised and they need immediate attention.\n\nTopic: The topic of the email is the detection of unauthorized attempts to access medical information.\n\nSummary: The summary of the"
+          },
+          "ours": {
+            "reply": "Here's a draft response to the customer email:\n\nSubject: Re: Healthcare Data Breach Concern\n\nDear [Customer Name],\n\nI am writing to address the healthcare data breach concern you have raised regarding unauthorized attempts to access your medical information. I want to start by acknowledging your trust in our organization and the importance of protecting your sensitive information.\n\nWe take these matters extremely seriously and are taking immediate action to investigate and contain the breach. Our top priority is to ensure the confidentiality, integrity, and availability of your protected health information.\n\nAs stated in our Data Breach Notification Policy, we are providing you with this notification as a matter of law. We will provide you with more details about the breach in our next notification.\n\nIn the meantime, I want to assure you that we are taking all necessary steps to prevent further unauthorized access and protect your information. Our IT department is working closely with our external forensic investigators to identify the breach and contain the incident.\n\nPlease note that we are committed to transparency and cooperation with regulatory bodies. We will keep you informed about any developments and provide you with regular updates on our response efforts.\n\nIf you have any concerns or questions, please do not hesitate to reach out to us. We appreciate your patience and cooperation in this matter.\n\nBest regards,\n\n[Your Name]\n[Organization Name]\n[Contact Information]",
+            "route": "draft",
+            "cls": "Classification: Bug\n\nIntent: The intent of the email is to report a security concern regarding unauthorized attempts to access medical information.\n\nUrgency: The email is of medium to high urgency as it is suggesting that the customer's medical information has been compromised and they need immediate attention.\n\nTopic: The topic of the email is the detection of unauthorized attempts to access medical information.\n\nSummary: The summary of the"
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "email",
+        "temperature": 0.8,
+        "id": "email-7-whitespace-boundary",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "reply": "Subject: Response to Healthcare Data Breach Concern\n\nDear [Customer Name],\n\nThank you for reaching out to us regarding your concern about unauthorized attempts to access your medical information. We appreciate your trust in us to protect your personal and sensitive data.\n\nWe acknowledge that this is a serious matter, and we take it very seriously. Our primary concern is your safety and well-being. We want to assure you that we are taking immediate action to investigate the matter, and our team is working closely with our IT department to ensure the security of our system.\n\nRegarding the email intent, we understand that it is unknown at this stage, but we will investigate the matter and provide you with any necessary updates.\n\nWe take the following guidelines into consideration as we respond to your concern:\n\n1. Be professional and helpful: We will address your specific concern and provide you with the necessary information to help you understand what happened.\n2. Address your specific concern: We will focus on addressing your concern and providing you with any necessary assistance.\n3. Use the provided documentation when relevant: If there are any relevant documentation or guidelines that you need to access, please let us know, and we will provide it to you.\n\nIf you have any further questions or concerns, please do not hesitate to contact us. We are committed to providing you with the highest level of service and support.\n\nThank you for your understanding, and we look forward to resolving this matter promptly.\n\nBest regards,\n\n[Your Name]\n[Your Title]\n[Company Name]\n[Contact Information]",
+            "route": "draft",
+            "cls": "**Classification:** Urgent Security Breach (Classified Information)\n\n**Intent:** Unknown (Potential Security Risk)\n**Urgency:** Medium\n**Topic:** Security Breach\n**Summary:** Customer's medical data was compromised due to unauthorized access attempts."
+          },
+          "ours": {
+            "reply": "Subject: Response to Healthcare Data Breach Concern\n\nDear [Customer Name],\n\nThank you for reaching out to us regarding your concern about unauthorized attempts to access your medical information. We appreciate your trust in us to protect your personal and sensitive data.\n\nWe acknowledge that this is a serious matter, and we take it very seriously. Our primary concern is your safety and well-being. We want to assure you that we are taking immediate action to investigate the matter, and our team is working closely with our IT department to ensure the security of our system.\n\nRegarding the email intent, we understand that it is unknown at this stage, but we will investigate the matter and provide you with any necessary updates.\n\nWe take the following guidelines into consideration as we respond to your concern:\n\n1. Be professional and helpful: We will address your specific concern and provide you with the necessary information to help you understand what happened.\n2. Address your specific concern: We will focus on addressing your concern and providing you with any necessary assistance.\n3. Use the provided documentation when relevant: If there are any relevant documentation or guidelines that you need to access, please let us know, and we will provide it to you.\n\nIf you have any further questions or concerns, please do not hesitate to contact us. We are committed to providing you with the highest level of service and support.\n\nThank you for your understanding, and we look forward to resolving this matter promptly.\n\nBest regards,\n\n[Your Name]\n[Your Title]\n[Company Name]\n[Contact Information]",
+            "route": "draft",
+            "cls": "**Classification:** Urgent Security Breach (Classified Information)\n\n**Intent:** Unknown (Potential Security Risk)\n**Urgency:** Medium\n**Topic:** Security Breach\n**Summary:** Customer's medical data was compromised due to unauthorized access attempts."
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "email",
+        "temperature": 0.8,
+        "id": "email-82",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "reply": "Here's a draft response:\n\nSubject: Re: Immediate Update Required for Security Protocols\n\nDear [Customer Support],\n\nThank you for your prompt response and understanding regarding the urgent need to enhance our security protocols in the healthcare sector. I appreciate the detailed recommendations you provided, which align with our current documentation and existing security measures.\n\nTo confirm, the security measures you suggested are aligned with our current requirements, including multi-factor authentication, regular software updates and patching, data encryption, incident response planning, and security audits. I will review the specific measures you recommended, including multi-factor authentication, routine software updates, data encryption, incident response planning, and security audits.\n\nRegarding the implementation timeline, I would appreciate it if you could provide a more detailed plan, including the following:\n\n- A specific start date for implementing the recommended security measures\n- A plan for maintaining and updating the security measures as needed\n- A timeline for conducting regular security audits and incident response planning\n\nI am available to discuss further and provide any necessary information to facilitate the implementation of these security measures. If needed, I am available for a call at [tel_num] to discuss the implementation plan and answer any questions.\n\nThank you again for your attention to this matter. I look forward to hearing back from you soon.\n\nBest regards,\n\n[Your Name]\n\nThis response:\n\n- Acknowledges the customer's request and provides a clear understanding of the security measures suggested\n- Confirms that the measures are aligned with existing documentation and requirements\n- Requests a more detailed plan for implementation, including a start date, maintenance schedule, and regular security audits\n",
+            "route": "draft",
+            "cls": "**Classification:**\n\n- **Intent:** Feature/Bug\n- **Urgency:** Medium\n- **Topic:** Security Protocols\n- **Summary:** The customer is requesting immediate enhancements to their security protocols for their hospital's medical systems."
+          },
+          "ours": {
+            "reply": "Here's a draft response:\n\nSubject: Re: Immediate Update Required for Security Protocols\n\nDear [Customer Support],\n\nThank you for your prompt response and understanding regarding the urgent need to enhance our security protocols in the healthcare sector. I appreciate the detailed recommendations you provided, which align with our current documentation and existing security measures.\n\nTo confirm, the security measures you suggested are aligned with our current requirements, including multi-factor authentication, regular software updates and patching, data encryption, incident response planning, and security audits. I will review the specific measures you recommended, including multi-factor authentication, routine software updates, data encryption, incident response planning, and security audits.\n\nRegarding the implementation timeline, I would appreciate it if you could provide a more detailed plan, including the following:\n\n- A specific start date for implementing the recommended security measures\n- A plan for maintaining and updating the security measures as needed\n- A timeline for conducting regular security audits and incident response planning\n\nI am available to discuss further and provide any necessary information to facilitate the implementation of these security measures. If needed, I am available for a call at [tel_num] to discuss the implementation plan and answer any questions.\n\nThank you again for your attention to this matter. I look forward to hearing back from you soon.\n\nBest regards,\n\n[Your Name]\n\nThis response:\n\n- Acknowledges the customer's request and provides a clear understanding of the security measures suggested\n- Confirms that the measures are aligned with existing documentation and requirements\n- Requests a more detailed plan for implementation, including a start date, maintenance schedule, and regular security audits\n",
+            "route": "draft",
+            "cls": "**Classification:**\n\n- **Intent:** Feature/Bug\n- **Urgency:** Medium\n- **Topic:** Security Protocols\n- **Summary:** The customer is requesting immediate enhancements to their security protocols for their hospital's medical systems."
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "switch",
+        "temperature": 0.0,
+        "id": "switch-148",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "response": "Sorry, no results matching your search were found.",
+            "intention": "unknown",
+            "llm_result": "I can classify the user's intention as:\n\n1. **Order Search**: The user is looking for information about an order they've placed, specifically the status of their exchange.\n2. **Product Recommendation**: Although the user is asking about the status of their exchange, the primary intention is to get information about the products they've sent back.\n\nThese two intentions can be returned as the primary query, and the product recommendation query can be returned as a secondary query."
+          },
+          "ours": {
+            "response": "Sorry, no results matching your search were found.",
+            "intention": "unknown",
+            "llm_result": "I can classify the user's intention as:\n\n1. **Order Search**: The user is looking for information about an order they've placed, specifically the status of their exchange.\n2. **Product Recommendation**: Although the user is asking about the status of their exchange, the primary intention is to get information about the products they've sent back.\n\nThese two intentions can be returned as the primary query, and the product recommendation query can be returned as a secondary query."
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "switch",
+        "temperature": 0.0,
+        "id": "switch-16",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "response": "I recommend promptflow to you, which can solve your problem very well.",
+            "intention": "product_recommendation",
+            "llm_result": "To classify the user's intention as \"product_recommendation\", you can use the following approach:\n\n1. Check if the query contains keywords related to product recommendations, such as \"best\", \"top\", \"new\", \"coming soon\", or \"recommended\".\n2. If the query contains any of these keywords, it's likely that the user is looking for product recommendations.\n\nHere's an example of how you can implement this in your code:\n\n```python\ndef get_product_recommendation(query):\n    # Define a list of keywords related to product recommendations\n    recommendation_keywords = [\"best\", \"top\", \"new\", \"coming soon\", \""
+          },
+          "ours": {
+            "response": "I recommend promptflow to you, which can solve your problem very well.",
+            "intention": "product_recommendation",
+            "llm_result": "To classify the user's intention as \"product_recommendation\", you can use the following approach:\n\n1. Check if the query contains keywords related to product recommendations, such as \"best\", \"top\", \"new\", \"coming soon\", or \"recommended\".\n2. If the query contains any of these keywords, it's likely that the user is looking for product recommendations.\n\nHere's an example of how you can implement this in your code:\n\n```python\ndef get_product_recommendation(query):\n    # Define a list of keywords related to product recommendations\n    recommendation_keywords = [\"best\", \"top\", \"new\", \"coming soon\", \""
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "switch",
+        "temperature": 0.0,
+        "id": "switch-25",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "response": "Sorry, no results matching your search were found.",
+            "intention": "unknown",
+            "llm_result": "Based on the user's query, I would classify the user's intention as:\n\n**Product Recommendation**\n\nThe user is likely looking for information on where to see the availability of an item, which is a common use case for product recommendation systems."
+          },
+          "ours": {
+            "response": "Sorry, no results matching your search were found.",
+            "intention": "unknown",
+            "llm_result": "Based on the user's query, I would classify the user's intention as:\n\n**Product Recommendation**\n\nThe user is likely looking for information on where to see the availability of an item, which is a common use case for product recommendation systems."
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "switch",
+        "temperature": 0.0,
+        "id": "switch-25-whitespace-boundary",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "response": "Sorry, no results matching your search were found.",
+            "intention": "unknown",
+            "llm_result": "Based on the query, I would classify the user's intention as:\n\n**Product Recommendation**\n\nThe user is likely searching for information about the availability of items, which is a common use case for product recommendation systems."
+          },
+          "ours": {
+            "response": "Sorry, no results matching your search were found.",
+            "intention": "unknown",
+            "llm_result": "Based on the query, I would classify the user's intention as:\n\n**Product Recommendation**\n\nThe user is likely searching for information about the availability of items, which is a common use case for product recommendation systems."
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "switch",
+        "temperature": 0.8,
+        "id": "switch-148",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "response": "Your order is being mailed, please wait patiently.",
+            "intention": "order_search",
+            "llm_result": "I can classify the user's intention as: \n- order_search (the user wants to search for information about an order, specifically the status of an exchange)\n- product_recommendation (the user is likely looking for recommended products, but in this case, the focus is on the status of an exchange)\n\nThese two intentions can be returned, and this is the most accurate response given the context of the query."
+          },
+          "ours": {
+            "response": "Your order is being mailed, please wait patiently.",
+            "intention": "order_search",
+            "llm_result": "I can classify the user's intention as: \n- order_search (the user wants to search for information about an order, specifically the status of an exchange)\n- product_recommendation (the user is likely looking for recommended products, but in this case, the focus is on the status of an exchange)\n\nThese two intentions can be returned, and this is the most accurate response given the context of the query."
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "switch",
+        "temperature": 0.8,
+        "id": "switch-16",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "response": "Sorry, no results matching your search were found.",
+            "intention": "unknown",
+            "llm_result": "You can add a search parameter to the query and check if it's \"availability\". Here's an example:\n\n```javascript\n// Search bar input\nsearchBarInput = document.getElementById(\"search-bar-input\");\nsearchBarInput.addEventListener(\"input\", function() {\n  var searchQuery = searchBarInput.value.trim();\n  if (searchQuery.toLowerCase().includes(\"availability\")) {\n    // Find product information\n    productInfo = getProductInfo(searchQuery);\n    renderProductInfo(productInfo);\n  } else {\n    renderNoAvailabilityMessage();\n  }\n});\n\n// Render no availability message\nfunction renderNoAvailabilityMessage() {\n  var noAvailabilityMessage = document"
+          },
+          "ours": {
+            "response": "Sorry, no results matching your search were found.",
+            "intention": "unknown",
+            "llm_result": "You can add a search parameter to the query and check if it's \"availability\". Here's an example:\n\n```javascript\n// Search bar input\nsearchBarInput = document.getElementById(\"search-bar-input\");\nsearchBarInput.addEventListener(\"input\", function() {\n  var searchQuery = searchBarInput.value.trim();\n  if (searchQuery.toLowerCase().includes(\"availability\")) {\n    // Find product information\n    productInfo = getProductInfo(searchQuery);\n    renderProductInfo(productInfo);\n  } else {\n    renderNoAvailabilityMessage();\n  }\n});\n\n// Render no availability message\nfunction renderNoAvailabilityMessage() {\n  var noAvailabilityMessage = document"
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "switch",
+        "temperature": 0.8,
+        "id": "switch-25",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "response": "Your order is being mailed, please wait patiently.",
+            "intention": "order_search",
+            "llm_result": "Based on the user's query \"where do i see item availability\", I would classify the user's intention as:\n\n1. **Product Information**: The user wants to know where to see information about an item, which is a fundamental aspect of product information.\n\nThis classification aligns with the first return value, \"product_info\", as it matches the query. The second return value, \"order_search\", does not match the user's query, as it is related to searching for orders, not product availability.\n\nThe third return value, \"product_recommendation\", is not applicable in this case, as the user's query is not related to recommending"
+          },
+          "ours": {
+            "response": "Your order is being mailed, please wait patiently.",
+            "intention": "order_search",
+            "llm_result": "Based on the user's query \"where do i see item availability\", I would classify the user's intention as:\n\n1. **Product Information**: The user wants to know where to see information about an item, which is a fundamental aspect of product information.\n\nThis classification aligns with the first return value, \"product_info\", as it matches the query. The second return value, \"order_search\", does not match the user's query, as it is related to searching for orders, not product availability.\n\nThe third return value, \"product_recommendation\", is not applicable in this case, as the user's query is not related to recommending"
+          }
+        }
+      },
+      {
+        "family": "llama1b",
+        "workflow": "switch",
+        "temperature": 0.8,
+        "id": "switch-25-whitespace-boundary",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "response": "Sorry, no results matching your search were found.",
+            "intention": "unknown",
+            "llm_result": "Based on the user's query, I would classify the user's intention as:\n\nProduct Recommendation\n\nThe user is asking where to see item availability, which is a common search query for product recommendation. This is a common use case for a product recommendation feature in an e-commerce or retail app."
+          },
+          "ours": {
+            "response": "Sorry, no results matching your search were found.",
+            "intention": "unknown",
+            "llm_result": "Based on the user's query, I would classify the user's intention as:\n\nProduct Recommendation\n\nThe user is asking where to see item availability, which is a common search query for product recommendation. This is a common use case for a product recommendation feature in an e-commerce or retail app."
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "crag",
+        "temperature": 0.0,
+        "id": "crag-0",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "answer": "Genghis Khan was buried in an unmarked grave somewhere in Mongolia.",
+            "search": "yes"
+          },
+          "ours": {
+            "answer": "Genghis Khan was buried in an unmarked grave somewhere in Mongolia.",
+            "search": "yes"
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "crag",
+        "temperature": 0.0,
+        "id": "crag-133",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "answer": "Early drivers were looking to generate more steam pressure and more power from the engine when they fastened safety valves down.",
+            "search": "yes"
+          },
+          "ours": {
+            "answer": "Early drivers were looking to generate more steam pressure and more power from the engine when they fastened safety valves down.",
+            "search": "yes"
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "crag",
+        "temperature": 0.0,
+        "id": "crag-39",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "answer": "I don't know.",
+            "search": "yes"
+          },
+          "ours": {
+            "answer": "I don't know.",
+            "search": "yes"
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "crag",
+        "temperature": 0.0,
+        "id": "crag-39-whitespace-boundary",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "answer": "I don't know.",
+            "search": "yes"
+          },
+          "ours": {
+            "answer": "I don't know.",
+            "search": "yes"
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "crag",
+        "temperature": 0.8,
+        "id": "crag-0",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "answer": "Genghis Khan was buried without markings according to his customs, likely in the birthplace of Khentii Aimag, near the Onon River and Burkhan Khaldun mountain. However, the exact location of his burial site is unknown.",
+            "search": "yes"
+          },
+          "ours": {
+            "answer": "Genghis Khan was buried without markings according to his customs, likely in the birthplace of Khentii Aimag, near the Onon River and Burkhan Khaldun mountain. However, the exact location of his burial site is unknown.",
+            "search": "yes"
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "crag",
+        "temperature": 0.8,
+        "id": "crag-133",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "answer": "Early drivers fastened safety valves down to increase steam pressure and generate more power from the engine.",
+            "search": "yes"
+          },
+          "ours": {
+            "answer": "Early drivers fastened safety valves down to increase steam pressure and generate more power from the engine.",
+            "search": "yes"
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "crag",
+        "temperature": 0.8,
+        "id": "crag-39",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "answer": "I don't know.",
+            "search": "yes"
+          },
+          "ours": {
+            "answer": "I don't know.",
+            "search": "yes"
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "crag",
+        "temperature": 0.8,
+        "id": "crag-39-whitespace-boundary",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "answer": "I don't know.",
+            "search": "yes"
+          },
+          "ours": {
+            "answer": "I don't know.",
+            "search": "yes"
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "email",
+        "temperature": 0.0,
+        "id": "email-1",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "reply": "Subject: Request for Update on Digital Marketing Strategies\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the digital marketing strategies for our technology software products. We understand the importance of brand visibility and would be happy to discuss new methods to improve our online presence and expand our audience.\n\nWe are currently exploring various strategies to enhance our marketing efforts, including social media, content marketing, and search engine optimization. We would appreciate your input on how we can best implement these strategies to achieve our goals.\n\nPlease let us know if you have any specific questions or concerns regarding our current digital marketing plans. We are committed to providing you with the best possible solutions to help you achieve your business objectives.\n\nThank you for your time and consideration.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Contact Information]",
+            "route": "docs",
+            "cls": "Intent: Question\nUrgency: Medium\nTopic: Digital Marketing\nSummary: The customer is requesting an update on digital marketing strategies to improve brand visibility and expand their audience."
+          },
+          "ours": {
+            "reply": "Subject: Request for Update on Digital Marketing Strategies\n\nDear [Customer's Name],\n\nThank you for reaching out to us regarding the digital marketing strategies for our technology software products. We understand the importance of brand visibility and would be happy to discuss new methods to improve our online presence and expand our audience.\n\nWe are currently exploring various strategies to enhance our marketing efforts, including social media, content marketing, and search engine optimization. We would appreciate your input on how we can best implement these strategies to achieve our goals.\n\nPlease let us know if you have any specific questions or concerns regarding our current digital marketing plans. We are committed to providing you with the best possible solutions to help you achieve your business objectives.\n\nThank you for your time and consideration.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Company]  \n[Contact Information]",
+            "route": "docs",
+            "cls": "Intent: Question\nUrgency: Medium\nTopic: Digital Marketing\nSummary: The customer is requesting an update on digital marketing strategies to improve brand visibility and expand their audience."
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "email",
+        "temperature": 0.0,
+        "id": "email-7",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "reply": "Subject: Immediate Attention: Unauthorized Access to Healthcare Data\n\nDear [Customer's Name],\n\nI hope this message finds you well. I am writing to address your recent concern regarding unauthorized attempts to access your medical information. We take the security of your personal and sensitive data very seriously.\n\nWe have detected unauthorized attempts to access your medical records. This is a serious matter, and we are taking immediate action to investigate and resolve the issue. Our team is working diligently to ensure that all necessary steps are taken to secure your information and prevent any further unauthorized access.\n\nPlease rest assured that we are taking all necessary steps to protect your privacy and security. We will provide you with regular updates on the progress of our investigation and any additional steps we may need to take to address this concern.\n\nIf you have any questions or concerns, please do not hesitate to contact us. We are here to assist you and ensure that your medical information is protected.\n\nThank you for your understanding and cooperation.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Contact Information]",
+            "route": "draft",
+            "cls": "intent: security concern\nurgency: high\ntopic: data breach\nsummary: Unauthorized attempts to access medical information."
+          },
+          "ours": {
+            "reply": "Subject: Immediate Attention: Unauthorized Access to Healthcare Data\n\nDear [Customer's Name],\n\nI hope this message finds you well. I am writing to address your recent concern regarding unauthorized attempts to access your medical information. We take the security of your personal and sensitive data very seriously.\n\nWe have detected unauthorized attempts to access your medical records. This is a serious matter, and we are taking immediate action to investigate and resolve the issue. Our team is working diligently to ensure that all necessary steps are taken to secure your information and prevent any further unauthorized access.\n\nPlease rest assured that we are taking all necessary steps to protect your privacy and security. We will provide you with regular updates on the progress of our investigation and any additional steps we may need to take to address this concern.\n\nIf you have any questions or concerns, please do not hesitate to contact us. We are here to assist you and ensure that your medical information is protected.\n\nThank you for your understanding and cooperation.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Contact Information]",
+            "route": "draft",
+            "cls": "intent: security concern\nurgency: high\ntopic: data breach\nsummary: Unauthorized attempts to access medical information."
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "email",
+        "temperature": 0.0,
+        "id": "email-7-whitespace-boundary",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "reply": "Subject: Immediate Attention to Healthcare Data Breach\n\nDear [Customer's Name],\n\nI hope this message finds you well. I am writing to address your recent concern regarding an unauthorized attempt to access your medical information. We take this matter very seriously and are committed to ensuring the security and privacy of your personal data.\n\nWe have detected an unauthorized attempt to access your medical records. We are currently investigating the incident and will provide you with a detailed report as soon as possible. Our team is working diligently to prevent similar incidents from occurring in the future.\n\nIn the meantime, please contact our security team at [Security Contact Information] to discuss the situation further. They will provide you with the necessary steps to take to protect your information and ensure that your medical records are secure.\n\nWe appreciate your patience and understanding during this time. If you have any questions or concerns, please do not hesitate to reach out to us.\n\nThank you for your trust in us.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Contact Information]  \n[Company Name]",
+            "route": "draft",
+            "cls": "intent: security concern\nurgency: high\ntopic: data breach\nsummary: Unauthorized access attempts to medical information."
+          },
+          "ours": {
+            "reply": "Subject: Immediate Attention to Healthcare Data Breach\n\nDear [Customer's Name],\n\nI hope this message finds you well. I am writing to address your recent concern regarding an unauthorized attempt to access your medical information. We take this matter very seriously and are committed to ensuring the security and privacy of your personal data.\n\nWe have detected an unauthorized attempt to access your medical records. We are currently investigating the incident and will provide you with a detailed report as soon as possible. Our team is working diligently to prevent similar incidents from occurring in the future.\n\nIn the meantime, please contact our security team at [Security Contact Information] to discuss the situation further. They will provide you with the necessary steps to take to protect your information and ensure that your medical records are secure.\n\nWe appreciate your patience and understanding during this time. If you have any questions or concerns, please do not hesitate to reach out to us.\n\nThank you for your trust in us.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Your Contact Information]  \n[Company Name]",
+            "route": "draft",
+            "cls": "intent: security concern\nurgency: high\ntopic: data breach\nsummary: Unauthorized access attempts to medical information."
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "email",
+        "temperature": 0.0,
+        "id": "email-82",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "reply": "Dear [Customer Support],\n\nI hope this message finds you well. I am writing to urgently request the enhancement of our security protocols to strengthen data protection across our hospital's medical systems. As the healthcare sector is a primary target for cyberattacks, it is crucial to adopt proactive measures to safeguard sensitive patient information and prevent potential breaches.\n\nPlease implement the following security measures:\n\n1. **Multi-factor authentication for all users**: This will add an extra layer of security to ensure that only authorized individuals can access sensitive data.\n2. **Regular software updates and patching**: Keeping all software up-to-date will help prevent vulnerabilities that could be exploited by attackers.\n3. **Encryption of sensitive data**: Encrypting data both at rest and in transit will protect it from unauthorized access.\n\nAdditionally, please implement the following features:\n\n- **Incident response planning**: Develop a comprehensive plan to respond to any security incidents, including a clear chain of command and procedures for handling breaches.\n- **Security audits**: Conduct regular security audits to identify and mitigate any vulnerabilities in our systems.\n\nThank you for understanding the importance of these security enhancements. Kindly review the requested measures, including multi-factor authentication, routine software updates, data encryption, incident response planning, and security audits. Please provide a timeline for implementation and any additional recommendations.\n\nIf needed, I am available for a call at [tel_num] to discuss further. Please let us know a suitable time to schedule a call and outline the next steps.\n\nBest regards,\n\n[Your Name]",
+            "route": "docs",
+            "cls": "intent: Feature\nurgency: High\ntopic: Security Protocols\nsummary: Urgent request for enhanced security protocols to protect sensitive patient information."
+          },
+          "ours": {
+            "reply": "Dear [Customer Support],\n\nI hope this message finds you well. I am writing to urgently request the enhancement of our security protocols to strengthen data protection across our hospital's medical systems. As the healthcare sector is a primary target for cyberattacks, it is crucial to adopt proactive measures to safeguard sensitive patient information and prevent potential breaches.\n\nPlease implement the following security measures:\n\n1. **Multi-factor authentication for all users**: This will add an extra layer of security to ensure that only authorized individuals can access sensitive data.\n2. **Regular software updates and patching**: Keeping all software up-to-date will help prevent vulnerabilities that could be exploited by attackers.\n3. **Encryption of sensitive data**: Encrypting data both at rest and in transit will protect it from unauthorized access.\n\nAdditionally, please implement the following features:\n\n- **Incident response planning**: Develop a comprehensive plan to respond to any security incidents, including a clear chain of command and procedures for handling breaches.\n- **Security audits**: Conduct regular security audits to identify and mitigate any vulnerabilities in our systems.\n\nThank you for understanding the importance of these security enhancements. Kindly review the requested measures, including multi-factor authentication, routine software updates, data encryption, incident response planning, and security audits. Please provide a timeline for implementation and any additional recommendations.\n\nIf needed, I am available for a call at [tel_num] to discuss further. Please let us know a suitable time to schedule a call and outline the next steps.\n\nBest regards,\n\n[Your Name]",
+            "route": "docs",
+            "cls": "intent: Feature\nurgency: High\ntopic: Security Protocols\nsummary: Urgent request for enhanced security protocols to protect sensitive patient information."
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "email",
+        "temperature": 0.8,
+        "id": "email-1",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "reply": "Subject: Urgent Update on Digital Marketing Strategies\n\nDear [Customer's Name],\n\nI hope this email finds you well. I wanted to reach out urgently to discuss our digital marketing strategies, as we need a boost in brand visibility for our technology software products.\n\nI would like to explore new methods to improve our online presence and expand our audience. This includes social media, content marketing, and search engine optimization. I look forward to hearing from you to discuss these strategies and see how we can enhance our marketing efforts.\n\nI apologize for any inconvenience caused by the delay in our communication. Please let me know if you have any questions or need further information.\n\nThank you for your understanding.\n\nBest regards,\n\n[Your Name]",
+            "route": "docs",
+            "cls": "intent: Feature\nurgency: High\ntopic: Digital marketing\nsummary: Customer requests an update on digital marketing strategies to improve brand visibility and expand online audience."
+          },
+          "ours": {
+            "reply": "Subject: Urgent Update on Digital Marketing Strategies\n\nDear [Customer's Name],\n\nI hope this email finds you well. I wanted to reach out urgently to discuss our digital marketing strategies, as we need a boost in brand visibility for our technology software products.\n\nI would like to explore new methods to improve our online presence and expand our audience. This includes social media, content marketing, and search engine optimization. I look forward to hearing from you to discuss these strategies and see how we can enhance our marketing efforts.\n\nI apologize for any inconvenience caused by the delay in our communication. Please let me know if you have any questions or need further information.\n\nThank you for your understanding.\n\nBest regards,\n\n[Your Name]",
+            "route": "docs",
+            "cls": "intent: Feature\nurgency: High\ntopic: Digital marketing\nsummary: Customer requests an update on digital marketing strategies to improve brand visibility and expand online audience."
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "email",
+        "temperature": 0.8,
+        "id": "email-7",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "reply": "Subject: Urgent: Healthcare Data Breach Concern\n\nDear [Customer's Name],\n\nWe hope this email finds you well. I am writing to address the concerns you have raised regarding a potential data breach affecting our healthcare services. We take the security of our customers' information very seriously and have acted promptly to investigate this incident.\n\nA bug ticket has been created as part of our internal process to document the issue and escalate it to the appropriate teams for further action. This ticket, identified as BUG-12345, has been filed to track the progress and resolution of this matter.\n\nOur team is currently reviewing the relevant documentation and is working on a detailed response that will be sent to you shortly. In the meantime, I would like to assure you that our top priority is to ensure the security and confidentiality of your healthcare data.\n\nIf you have any further questions or concerns, please do not hesitate to reach out to our support team. We are committed to keeping your personal information safe and will continue to monitor this situation closely.\n\nThank you for bringing this to our attention. We appreciate your trust in our services.\n\nBest regards,\n[Your Name]  \n[Your Position]  \n[Company Name]  \n[Contact Information]",
+            "route": "bug",
+            "cls": "intent: Bug\nurgency: High\ntopic: Healthcare Data Breach\nsummary: Unauthorized access to medical information is reported."
+          },
+          "ours": {
+            "reply": "Subject: Urgent: Healthcare Data Breach Concern\n\nDear [Customer's Name],\n\nWe hope this email finds you well. I am writing to address the concerns you have raised regarding a potential data breach affecting our healthcare services. We take the security of our customers' information very seriously and have acted promptly to investigate this incident.\n\nA bug ticket has been created as part of our internal process to document the issue and escalate it to the appropriate teams for further action. This ticket, identified as BUG-12345, has been filed to track the progress and resolution of this matter.\n\nOur team is currently reviewing the relevant documentation and is working on a detailed response that will be sent to you shortly. In the meantime, I would like to assure you that our top priority is to ensure the security and confidentiality of your healthcare data.\n\nIf you have any further questions or concerns, please do not hesitate to reach out to our support team. We are committed to keeping your personal information safe and will continue to monitor this situation closely.\n\nThank you for bringing this to our attention. We appreciate your trust in our services.\n\nBest regards,\n[Your Name]  \n[Your Position]  \n[Company Name]  \n[Contact Information]",
+            "route": "bug",
+            "cls": "intent: Bug\nurgency: High\ntopic: Healthcare Data Breach\nsummary: Unauthorized access to medical information is reported."
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "email",
+        "temperature": 0.8,
+        "id": "email-7-whitespace-boundary",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "reply": "Subject: Urgent: Security Alert - Medical Information Breach\n\nDear [Customer's Name],\n\nI am writing to express our deep concern regarding an unauthorized access attempt to our medical information. We are in constant contact with law enforcement and healthcare professionals to address this matter and ensure the safety of all affected individuals.\n\nWe appreciate your prompt attention to this matter and will take immediate steps to mitigate any potential harm. Please rest assured that we are working closely with local authorities and healthcare providers to resolve this issue and prevent any further unauthorized access.\n\nIf you have any additional questions or concerns, please do not hesitate to contact us at [contact information].\n\nThank you for your attention to this matter.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Company Name]",
+            "route": "draft",
+            "cls": "intent: security\nurgency: high\ntopic: data breach\nsummary: Unauthorised access attempted to healthcare data."
+          },
+          "ours": {
+            "reply": "Subject: Urgent: Security Alert - Medical Information Breach\n\nDear [Customer's Name],\n\nI am writing to express our deep concern regarding an unauthorized access attempt to our medical information. We are in constant contact with law enforcement and healthcare professionals to address this matter and ensure the safety of all affected individuals.\n\nWe appreciate your prompt attention to this matter and will take immediate steps to mitigate any potential harm. Please rest assured that we are working closely with local authorities and healthcare providers to resolve this issue and prevent any further unauthorized access.\n\nIf you have any additional questions or concerns, please do not hesitate to contact us at [contact information].\n\nThank you for your attention to this matter.\n\nBest regards,\n\n[Your Name]  \n[Your Position]  \n[Company Name]",
+            "route": "draft",
+            "cls": "intent: security\nurgency: high\ntopic: data breach\nsummary: Unauthorised access attempted to healthcare data."
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "email",
+        "temperature": 0.8,
+        "id": "email-82",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "reply": "Dear [Customer Support],\n\nI hope this message finds you well. I am writing to urgently request the immediate enhancement of our security protocols to strengthen data protection across our hospital's medical systems. As the healthcare sector is a primary target for cyberattacks, it is crucial to adopt proactive measures to safeguard sensitive patient information and prevent potential breaches.\n\nPlease implement the following security measures:\n\n1. **Multi-Factor Authentication for All Users**: Ensure that all user accounts, including patient and staff, have multi-factor authentication enabled. This will add an additional layer of security and prevent unauthorized access.\n\n2. **Regular Software Updates and Patches**: Implement a routine schedule for updating all software and applying patches. This will ensure that any vulnerabilities are promptly addressed and reduces the risk of cyber attacks.\n\n3. **Encryption of Sensitive Data**: Encrypt all sensitive data both at rest and in transit. This will protect data from unauthorized access and ensure that it remains confidential.\n\n4. **Incident Response Plan**: Develop a comprehensive incident response plan to quickly address any security breaches. This plan should include procedures for identifying, containing, eradicating, and reporting incidents.\n\n5. **Security Audits**: Conduct regular security audits to ensure compliance with industry standards and to identify any potential vulnerabilities.\n\nThank you for understanding the importance of these security enhancements. Kindly review the requested measures, including multi-factor authentication, routine software updates, data encryption, incident response planning, and security audits. Please provide a timeline for implementation and any additional recommendations.\n\nIf needed, I am available for a call at [tel_num] to discuss further. Please let us",
+            "route": "docs",
+            "cls": "intent: Feature\nurgency: High\ntopic: Security Protocols\nsummary: Urgent request for security enhancements across hospital's medical systems to protect sensitive patient information from cyberattacks."
+          },
+          "ours": {
+            "reply": "Dear [Customer Support],\n\nI hope this message finds you well. I am writing to urgently request the immediate enhancement of our security protocols to strengthen data protection across our hospital's medical systems. As the healthcare sector is a primary target for cyberattacks, it is crucial to adopt proactive measures to safeguard sensitive patient information and prevent potential breaches.\n\nPlease implement the following security measures:\n\n1. **Multi-Factor Authentication for All Users**: Ensure that all user accounts, including patient and staff, have multi-factor authentication enabled. This will add an additional layer of security and prevent unauthorized access.\n\n2. **Regular Software Updates and Patches**: Implement a routine schedule for updating all software and applying patches. This will ensure that any vulnerabilities are promptly addressed and reduces the risk of cyber attacks.\n\n3. **Encryption of Sensitive Data**: Encrypt all sensitive data both at rest and in transit. This will protect data from unauthorized access and ensure that it remains confidential.\n\n4. **Incident Response Plan**: Develop a comprehensive incident response plan to quickly address any security breaches. This plan should include procedures for identifying, containing, eradicating, and reporting incidents.\n\n5. **Security Audits**: Conduct regular security audits to ensure compliance with industry standards and to identify any potential vulnerabilities.\n\nThank you for understanding the importance of these security enhancements. Kindly review the requested measures, including multi-factor authentication, routine software updates, data encryption, incident response planning, and security audits. Please provide a timeline for implementation and any additional recommendations.\n\nIf needed, I am available for a call at [tel_num] to discuss further. Please let us",
+            "route": "docs",
+            "cls": "intent: Feature\nurgency: High\ntopic: Security Protocols\nsummary: Urgent request for security enhancements across hospital's medical systems to protect sensitive patient information from cyberattacks."
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "switch",
+        "temperature": 0.0,
+        "id": "switch-1",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "response": "Your order is being mailed, please wait patiently.",
+            "intention": "order_search",
+            "llm_result": "order_search"
+          },
+          "ours": {
+            "response": "Your order is being mailed, please wait patiently.",
+            "intention": "order_search",
+            "llm_result": "order_search"
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "switch",
+        "temperature": 0.0,
+        "id": "switch-148",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "response": "Your order is being mailed, please wait patiently.",
+            "intention": "order_search",
+            "llm_result": "order_search"
+          },
+          "ours": {
+            "response": "Your order is being mailed, please wait patiently.",
+            "intention": "order_search",
+            "llm_result": "order_search"
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "switch",
+        "temperature": 0.0,
+        "id": "switch-25",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "response": "This product is produced by Microsoft.",
+            "intention": "product_info",
+            "llm_result": "product_info"
+          },
+          "ours": {
+            "response": "This product is produced by Microsoft.",
+            "intention": "product_info",
+            "llm_result": "product_info"
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "switch",
+        "temperature": 0.0,
+        "id": "switch-25-whitespace-boundary",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "response": "This product is produced by Microsoft.",
+            "intention": "product_info",
+            "llm_result": "product_info"
+          },
+          "ours": {
+            "response": "This product is produced by Microsoft.",
+            "intention": "product_info",
+            "llm_result": "product_info"
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "switch",
+        "temperature": 0.8,
+        "id": "switch-1",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "response": "Your order is being mailed, please wait patiently.",
+            "intention": "order_search",
+            "llm_result": "order_search"
+          },
+          "ours": {
+            "response": "Your order is being mailed, please wait patiently.",
+            "intention": "order_search",
+            "llm_result": "order_search"
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "switch",
+        "temperature": 0.8,
+        "id": "switch-148",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "response": "Your order is being mailed, please wait patiently.",
+            "intention": "order_search",
+            "llm_result": "order_search"
+          },
+          "ours": {
+            "response": "Your order is being mailed, please wait patiently.",
+            "intention": "order_search",
+            "llm_result": "order_search"
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "switch",
+        "temperature": 0.8,
+        "id": "switch-25",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "response": "This product is produced by Microsoft.",
+            "intention": "product_info",
+            "llm_result": "product_info"
+          },
+          "ours": {
+            "response": "This product is produced by Microsoft.",
+            "intention": "product_info",
+            "llm_result": "product_info"
+          }
+        }
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "switch",
+        "temperature": 0.8,
+        "id": "switch-25-whitespace-boundary",
+        "completed": true,
+        "saved_store_equal": true,
+        "all_store_equal": true,
+        "shaped_trace_matches": true,
+        "branches": {
+          "orig": {
+            "response": "This product is produced by Microsoft.",
+            "intention": "product_info",
+            "llm_result": "product_info"
+          },
+          "ours": {
+            "response": "This product is produced by Microsoft.",
+            "intention": "product_info",
+            "llm_result": "product_info"
+          }
+        }
+      }
+    ],
+    "historical_greedy_comparisons": [
+      {
+        "family": "llama1b",
+        "workflow": "crag",
+        "id": "crag-10",
+        "fields": [
+          "answer",
+          "search"
+        ],
+        "equal": true,
+        "limitation": "Different frontend/version/selection seeds; descriptive divergence, not a matched-kernel equivalence theorem."
+      },
+      {
+        "family": "llama1b",
+        "workflow": "crag",
+        "id": "crag-133",
+        "fields": [
+          "answer",
+          "search"
+        ],
+        "equal": true,
+        "limitation": "Different frontend/version/selection seeds; descriptive divergence, not a matched-kernel equivalence theorem."
+      },
+      {
+        "family": "llama1b",
+        "workflow": "crag",
+        "id": "crag-39",
+        "fields": [
+          "answer",
+          "search"
+        ],
+        "equal": true,
+        "limitation": "Different frontend/version/selection seeds; descriptive divergence, not a matched-kernel equivalence theorem."
+      },
+      {
+        "family": "llama1b",
+        "workflow": "email",
+        "id": "email-2",
+        "fields": [
+          "cls",
+          "reply",
+          "route"
+        ],
+        "equal": false,
+        "limitation": "Different frontend/version/selection seeds; descriptive divergence, not a matched-kernel equivalence theorem."
+      },
+      {
+        "family": "llama1b",
+        "workflow": "email",
+        "id": "email-7",
+        "fields": [
+          "cls",
+          "reply",
+          "route"
+        ],
+        "equal": false,
+        "limitation": "Different frontend/version/selection seeds; descriptive divergence, not a matched-kernel equivalence theorem."
+      },
+      {
+        "family": "llama1b",
+        "workflow": "email",
+        "id": "email-82",
+        "fields": [
+          "cls",
+          "reply",
+          "route"
+        ],
+        "equal": false,
+        "limitation": "Different frontend/version/selection seeds; descriptive divergence, not a matched-kernel equivalence theorem."
+      },
+      {
+        "family": "llama1b",
+        "workflow": "switch",
+        "id": "switch-148",
+        "fields": [
+          "intention",
+          "llm_result",
+          "response"
+        ],
+        "equal": false,
+        "limitation": "Different frontend/version/selection seeds; descriptive divergence, not a matched-kernel equivalence theorem."
+      },
+      {
+        "family": "llama1b",
+        "workflow": "switch",
+        "id": "switch-16",
+        "fields": [
+          "intention",
+          "llm_result",
+          "response"
+        ],
+        "equal": false,
+        "limitation": "Different frontend/version/selection seeds; descriptive divergence, not a matched-kernel equivalence theorem."
+      },
+      {
+        "family": "llama1b",
+        "workflow": "switch",
+        "id": "switch-25",
+        "fields": [
+          "intention",
+          "llm_result",
+          "response"
+        ],
+        "equal": false,
+        "limitation": "Different frontend/version/selection seeds; descriptive divergence, not a matched-kernel equivalence theorem."
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "crag",
+        "id": "crag-0",
+        "fields": [
+          "answer",
+          "search"
+        ],
+        "equal": true,
+        "limitation": "Different frontend/version/selection seeds; descriptive divergence, not a matched-kernel equivalence theorem."
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "crag",
+        "id": "crag-133",
+        "fields": [
+          "answer",
+          "search"
+        ],
+        "equal": true,
+        "limitation": "Different frontend/version/selection seeds; descriptive divergence, not a matched-kernel equivalence theorem."
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "crag",
+        "id": "crag-39",
+        "fields": [
+          "answer",
+          "search"
+        ],
+        "equal": true,
+        "limitation": "Different frontend/version/selection seeds; descriptive divergence, not a matched-kernel equivalence theorem."
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "email",
+        "id": "email-1",
+        "fields": [
+          "cls",
+          "reply",
+          "route"
+        ],
+        "equal": true,
+        "limitation": "Different frontend/version/selection seeds; descriptive divergence, not a matched-kernel equivalence theorem."
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "email",
+        "id": "email-7",
+        "fields": [
+          "cls",
+          "reply",
+          "route"
+        ],
+        "equal": true,
+        "limitation": "Different frontend/version/selection seeds; descriptive divergence, not a matched-kernel equivalence theorem."
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "email",
+        "id": "email-82",
+        "fields": [
+          "cls",
+          "reply",
+          "route"
+        ],
+        "equal": true,
+        "limitation": "Different frontend/version/selection seeds; descriptive divergence, not a matched-kernel equivalence theorem."
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "switch",
+        "id": "switch-1",
+        "fields": [
+          "intention",
+          "llm_result",
+          "response"
+        ],
+        "equal": true,
+        "limitation": "Different frontend/version/selection seeds; descriptive divergence, not a matched-kernel equivalence theorem."
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "switch",
+        "id": "switch-148",
+        "fields": [
+          "intention",
+          "llm_result",
+          "response"
+        ],
+        "equal": true,
+        "limitation": "Different frontend/version/selection seeds; descriptive divergence, not a matched-kernel equivalence theorem."
+      },
+      {
+        "family": "qwen1.5b",
+        "workflow": "switch",
+        "id": "switch-25",
+        "fields": [
+          "intention",
+          "llm_result",
+          "response"
+        ],
+        "equal": true,
+        "limitation": "Different frontend/version/selection seeds; descriptive divergence, not a matched-kernel equivalence theorem."
+      }
+    ]
+  },
+  "transparency_matrix": [
+    {
+      "family": "llama1b",
+      "stop_variant": "declared",
+      "temperature": 0.0,
+      "attempted": 24,
+      "completed": 24,
+      "equal": 24,
+      "conformant": 24,
+      "stop_observed": 16
+    },
+    {
+      "family": "llama1b",
+      "stop_variant": "declared",
+      "temperature": 0.8,
+      "attempted": 24,
+      "completed": 24,
+      "equal": 24,
+      "conformant": 24,
+      "stop_observed": 14
+    },
+    {
+      "family": "llama1b",
+      "stop_variant": "extra-stop-OK",
+      "temperature": 0.0,
+      "attempted": 24,
+      "completed": 24,
+      "equal": 24,
+      "conformant": 24,
+      "stop_observed": 16
+    },
+    {
+      "family": "llama1b",
+      "stop_variant": "extra-stop-OK",
+      "temperature": 0.8,
+      "attempted": 24,
+      "completed": 24,
+      "equal": 24,
+      "conformant": 24,
+      "stop_observed": 14
+    },
+    {
+      "family": "qwen1.5b",
+      "stop_variant": "declared",
+      "temperature": 0.0,
+      "attempted": 24,
+      "completed": 24,
+      "equal": 24,
+      "conformant": 24,
+      "stop_observed": 16
+    },
+    {
+      "family": "qwen1.5b",
+      "stop_variant": "declared",
+      "temperature": 0.8,
+      "attempted": 24,
+      "completed": 24,
+      "equal": 24,
+      "conformant": 24,
+      "stop_observed": 16
+    },
+    {
+      "family": "qwen1.5b",
+      "stop_variant": "extra-stop-OK",
+      "temperature": 0.0,
+      "attempted": 24,
+      "completed": 24,
+      "equal": 24,
+      "conformant": 24,
+      "stop_observed": 16
+    },
+    {
+      "family": "qwen1.5b",
+      "stop_variant": "extra-stop-OK",
+      "temperature": 0.8,
+      "attempted": 24,
+      "completed": 24,
+      "equal": 24,
+      "conformant": 24,
+      "stop_observed": 16
+    }
+  ],
+  "failed_workflow_attempts": [],
+  "transparency_mismatches": [],
+  "baselines": [
+    {
+      "family": "llama1b",
+      "condition": "orig",
+      "status": "completed",
+      "weighted_logical_usage": 326,
+      "saved_store_equal": true,
+      "events": 3,
+      "model_calls": 1
+    },
+    {
+      "family": "llama1b",
+      "condition": "ours",
+      "status": "completed",
+      "weighted_logical_usage": 713,
+      "saved_store_equal": true,
+      "events": 3,
+      "model_calls": 1
+    },
+    {
+      "family": "llama1b",
+      "condition": "all_branches",
+      "status": "completed",
+      "weighted_logical_usage": 713,
+      "saved_store_equal": true,
+      "events": 6,
+      "model_calls": 1
+    },
+    {
+      "family": "llama1b",
+      "condition": "uniform",
+      "status": "completed",
+      "weighted_logical_usage": 713,
+      "saved_store_equal": true,
+      "events": 3,
+      "model_calls": 1
+    },
+    {
+      "family": "llama1b",
+      "condition": "random_padding",
+      "status": "completed",
+      "weighted_logical_usage": 357,
+      "saved_store_equal": true,
+      "events": 3,
+      "model_calls": 1
+    },
+    {
+      "family": "llama1b",
+      "condition": "normalize-permitted-report-projection-only",
+      "status": "no-extra-execution",
+      "weighted_logical_usage": 326,
+      "saved_store_equal": true,
+      "events": 1,
+      "model_calls": 1,
+      "limitation": "Changes the reporting contract; not faithful logical usage and not a server observer defense."
+    },
+    {
+      "family": "qwen1.5b",
+      "condition": "orig",
+      "status": "completed",
+      "weighted_logical_usage": 120,
+      "saved_store_equal": true,
+      "events": 3,
+      "model_calls": 1
+    },
+    {
+      "family": "qwen1.5b",
+      "condition": "ours",
+      "status": "completed",
+      "weighted_logical_usage": 688,
+      "saved_store_equal": true,
+      "events": 3,
+      "model_calls": 1
+    },
+    {
+      "family": "qwen1.5b",
+      "condition": "all_branches",
+      "status": "completed",
+      "weighted_logical_usage": 688,
+      "saved_store_equal": true,
+      "events": 6,
+      "model_calls": 1
+    },
+    {
+      "family": "qwen1.5b",
+      "condition": "uniform",
+      "status": "completed",
+      "weighted_logical_usage": 688,
+      "saved_store_equal": true,
+      "events": 3,
+      "model_calls": 1
+    },
+    {
+      "family": "qwen1.5b",
+      "condition": "random_padding",
+      "status": "completed",
+      "weighted_logical_usage": 151,
+      "saved_store_equal": true,
+      "events": 3,
+      "model_calls": 1
+    },
+    {
+      "family": "qwen1.5b",
+      "condition": "normalize-permitted-report-projection-only",
+      "status": "no-extra-execution",
+      "weighted_logical_usage": 120,
+      "saved_store_equal": true,
+      "events": 1,
+      "model_calls": 1,
+      "limitation": "Changes the reporting contract; not faithful logical usage and not a server observer defense."
+    }
+  ],
+  "local_observer": {
+    "calls_checked": 646,
+    "natural_stop_count_differences": 224,
+    "errors": [],
+    "negative_count_control_detected": true,
+    "scope": "Trusted local eval/generate instrumentation; no gateway, invoice, timing or network attestation."
+  }
+}

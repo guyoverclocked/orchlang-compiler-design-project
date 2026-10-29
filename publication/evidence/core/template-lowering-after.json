@@ -1,0 +1,52 @@
+{
+  "source": "workflow W { input q: text secret max_tokens 20; model m = \"llama1b\"; prompt p(x) = user \"{x}\"; let r = call p(q) using m max_tokens 5; output r; }",
+  "cases": [
+    {
+      "value": "x",
+      "equal": true,
+      "actual": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nx<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+      "expected": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nx<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+    },
+    {
+      "value": "  x  ",
+      "equal": true,
+      "actual": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nx<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+      "expected": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nx<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+    },
+    {
+      "value": "\n\tx\u00a0",
+      "equal": true,
+      "actual": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nx<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n",
+      "expected": "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nx<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+    }
+  ],
+  "core": [
+    "call",
+    1,
+    1,
+    "llama1b",
+    5,
+    [
+      "app",
+      [
+        "lit",
+        "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+      ],
+      [
+        "app",
+        [
+          "trim",
+          [
+            "var",
+            0
+          ]
+        ],
+        [
+          "lit",
+          "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+        ]
+      ]
+    ],
+    null
+  ]
+}

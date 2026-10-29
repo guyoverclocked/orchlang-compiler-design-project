@@ -1,0 +1,237 @@
+{
+  "payload": {
+    "program": [
+      "seq",
+      [
+        "call",
+        1,
+        1,
+        "llama1b",
+        96,
+        [
+          "app",
+          [
+            "lit",
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+          ],
+          [
+            "app",
+            [
+              "trim",
+              [
+                "app",
+                [
+                  "lit",
+                  "Write a short joke about "
+                ],
+                [
+                  "var",
+                  0
+                ]
+              ]
+            ],
+            [
+              "lit",
+              "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+            ]
+          ]
+        ],
+        [
+          354,
+          96
+        ]
+      ],
+      [
+        "seq",
+        [
+          "tool",
+          2,
+          "contains_any",
+          [
+            "app",
+            [
+              "escape",
+              [
+                "var",
+                1
+              ]
+            ],
+            [
+              "app",
+              [
+                "lit",
+                "\u001f"
+              ],
+              [
+                "escape",
+                [
+                  "lit",
+                  "?!"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "ite",
+          [
+            "eq",
+            2,
+            "yes"
+          ],
+          [
+            "seq",
+            [
+              "tool",
+              3,
+              "copy",
+              [
+                "escape",
+                [
+                  "var",
+                  1
+                ]
+              ]
+            ],
+            [
+              "seq",
+              [
+                "dummy",
+                "llama1b",
+                12564,
+                128
+              ],
+              [
+                "dummy",
+                "llama1b",
+                16654,
+                128
+              ]
+            ]
+          ],
+          [
+            "seq",
+            [
+              "dummyTool",
+              "copy"
+            ],
+            [
+              "seq",
+              [
+                "call",
+                2,
+                4,
+                "llama1b",
+                128,
+                [
+                  "app",
+                  [
+                    "lit",
+                    "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+                  ],
+                  [
+                    "app",
+                    [
+                      "trim",
+                      [
+                        "app",
+                        [
+                          "lit",
+                          "Make this joke funnier by adding wordplay: "
+                        ],
+                        [
+                          "var",
+                          1
+                        ]
+                      ]
+                    ],
+                    [
+                      "lit",
+                      "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                    ]
+                  ]
+                ],
+                [
+                  12564,
+                  128
+                ]
+              ],
+              [
+                "call",
+                3,
+                3,
+                "llama1b",
+                128,
+                [
+                  "app",
+                  [
+                    "lit",
+                    "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+                  ],
+                  [
+                    "app",
+                    [
+                      "trim",
+                      [
+                        "app",
+                        [
+                          "lit",
+                          "Add a surprising twist to this joke: "
+                        ],
+                        [
+                          "var",
+                          4
+                        ]
+                      ]
+                    ],
+                    [
+                      "lit",
+                      "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                    ]
+                  ]
+                ],
+                [
+                  16654,
+                  128
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ],
+    "bounds": [
+      96,
+      12288,
+      4,
+      16384,
+      16384
+    ],
+    "tools": [
+      [
+        "contains_any",
+        4
+      ],
+      [
+        "copy",
+        384
+      ]
+    ],
+    "dummy_tokens": [
+      [
+        "llama1b",
+        1
+      ]
+    ],
+    "response_bytes_per_token": 128,
+    "context": 21504,
+    "alpha": 1,
+    "delta": 0
+  },
+  "verdict": {
+    "unit": "UTF-8 bytes",
+    "native_adapter_verified": false,
+    "has_fixed_shape": true,
+    "accepted": true
+  }
+}

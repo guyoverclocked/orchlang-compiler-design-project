@@ -1,0 +1,793 @@
+{
+  "workflow": "Routing",
+  "source": "workflows/routing.orch",
+  "source_lines": 19,
+  "slots": {
+    "user_input": 0,
+    "raw": 1,
+    "decision": 2,
+    "answer": 3
+  },
+  "high": [
+    "user_input",
+    "raw",
+    "decision",
+    "answer"
+  ],
+  "findings": [
+    {
+      "kind": "secret-dependent-size",
+      "line": 12,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-branch",
+      "line": 15,
+      "detail": "branch on secret decision selects arms with different usage"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 15,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 17,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 19,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    }
+  ],
+  "calls": 4,
+  "original_lean": {
+    "static_shape": null,
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+  },
+  "strategies": {
+    "ours": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            514,
+            4
+          ],
+          [
+            "tool",
+            "label_in"
+          ],
+          [
+            "llm",
+            "llama1b",
+            423,
+            192
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        2,
+        937,
+        196
+      ],
+      "shape_seconds": 0.00010509999992791563
+    },
+    "naive": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            514,
+            4
+          ],
+          [
+            "tool",
+            "label_in"
+          ],
+          [
+            "llm",
+            "llama1b",
+            423,
+            192
+          ],
+          [
+            "llm",
+            "llama1b",
+            420,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            416,
+            128
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        4,
+        1773,
+        420
+      ],
+      "shape_seconds": 4.8299989430233836e-05
+    },
+    "uniform": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            514,
+            192
+          ],
+          [
+            "tool",
+            "label_in"
+          ],
+          [
+            "llm",
+            "llama1b",
+            514,
+            192
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        2,
+        1028,
+        384
+      ],
+      "shape_seconds": 5.729999975301325e-05
+    },
+    "padall": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            514,
+            4
+          ],
+          [
+            "tool",
+            "label_in"
+          ],
+          [
+            "llm",
+            "llama1b",
+            423,
+            192
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        2,
+        937,
+        196
+      ],
+      "shape_seconds": 4.300000728107989e-05
+    }
+  },
+  "frontend_seconds": 0.604704600002151,
+  "lean_seconds_batch": 2.6080808999977307,
+  "pads": {
+    "1": [
+      514,
+      4
+    ],
+    "2": [
+      423,
+      192
+    ],
+    "3": [
+      423,
+      192
+    ],
+    "4": [
+      423,
+      192
+    ]
+  },
+  "caps": {
+    "1": 4,
+    "2": 192,
+    "3": 96,
+    "4": 128
+  },
+  "site_lines": {
+    "1": 12,
+    "2": 15,
+    "3": 17,
+    "4": 19
+  },
+  "source_binding": {
+    "schema": "orchlang-source-binding-v1",
+    "source_sha256": "ab96109a7f976f6603b03285d3f93b4eb2a7b3619e32aecf7f51ed4a7591f064",
+    "original": [
+      "seq",
+      [
+        "call",
+        1,
+        1,
+        "llama1b",
+        4,
+        [
+          "app",
+          [
+            "lit",
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n"
+          ],
+          [
+            "app",
+            [
+              "trim",
+              [
+                "lit",
+                "Route the input to story, joke, or poem based on the user's request.\nRespond with exactly one word: poem, story, or joke."
+              ]
+            ],
+            [
+              "app",
+              [
+                "lit",
+                "<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+              ],
+              [
+                "app",
+                [
+                  "trim",
+                  [
+                    "var",
+                    0
+                  ]
+                ],
+                [
+                  "lit",
+                  "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                ]
+              ]
+            ]
+          ]
+        ],
+        null
+      ],
+      [
+        "seq",
+        [
+          "tool",
+          2,
+          "label_in",
+          [
+            "app",
+            [
+              "escape",
+              [
+                "var",
+                1
+              ]
+            ],
+            [
+              "app",
+              [
+                "lit",
+                "\u001f"
+              ],
+              [
+                "escape",
+                [
+                  "lit",
+                  "story,joke,poem"
+                ]
+              ]
+            ]
+          ]
+        ],
+        [
+          "ite",
+          [
+            "eq",
+            2,
+            "story"
+          ],
+          [
+            "call",
+            2,
+            3,
+            "llama1b",
+            192,
+            [
+              "app",
+              [
+                "lit",
+                "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n"
+              ],
+              [
+                "app",
+                [
+                  "trim",
+                  [
+                    "lit",
+                    "You are an expert storyteller."
+                  ]
+                ],
+                [
+                  "app",
+                  [
+                    "lit",
+                    "<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+                  ],
+                  [
+                    "app",
+                    [
+                      "trim",
+                      [
+                        "var",
+                        0
+                      ]
+                    ],
+                    [
+                      "lit",
+                      "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            null
+          ],
+          [
+            "ite",
+            [
+              "eq",
+              2,
+              "joke"
+            ],
+            [
+              "call",
+              3,
+              3,
+              "llama1b",
+              96,
+              [
+                "app",
+                [
+                  "lit",
+                  "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n"
+                ],
+                [
+                  "app",
+                  [
+                    "trim",
+                    [
+                      "lit",
+                      "You are an expert comedian."
+                    ]
+                  ],
+                  [
+                    "app",
+                    [
+                      "lit",
+                      "<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+                    ],
+                    [
+                      "app",
+                      [
+                        "trim",
+                        [
+                          "var",
+                          0
+                        ]
+                      ],
+                      [
+                        "lit",
+                        "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              null
+            ],
+            [
+              "call",
+              4,
+              3,
+              "llama1b",
+              128,
+              [
+                "app",
+                [
+                  "lit",
+                  "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n"
+                ],
+                [
+                  "app",
+                  [
+                    "trim",
+                    [
+                      "lit",
+                      "You are an expert poet."
+                    ]
+                  ],
+                  [
+                    "app",
+                    [
+                      "lit",
+                      "<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+                    ],
+                    [
+                      "app",
+                      [
+                        "trim",
+                        [
+                          "var",
+                          0
+                        ]
+                      ],
+                      [
+                        "lit",
+                        "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              null
+            ]
+          ]
+        ]
+      ]
+    ],
+    "secret_inputs": [
+      0
+    ],
+    "high": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "slots": {
+      "user_input": 0,
+      "raw": 1,
+      "decision": 2,
+      "answer": 3
+    },
+    "trust": "Python source reader/lowering and serialization; Lean checks the shaped core",
+    "binding_sha256": "e96f6c1a60137d47b8ea3d7bf308bcccde5e6c5bbe4f42164ec5d4747e8954bd"
+  },
+  "request_targets": "compositional UTF-8-byte envelope checked by Lean; explicit bounded-value interface",
+  "byte_contract": {
+    "schema": "orchlang-byte-value-contract-v1",
+    "input_bytes": {
+      "0": 160
+    },
+    "value_bounds": {
+      "0": 160,
+      "1": 512,
+      "3": 24576,
+      "2": 8
+    },
+    "tool_bytes": {
+      "label_in": 8
+    },
+    "response_bytes_per_token": 128,
+    "tokenizer_alpha": 1,
+    "tokenizer_delta": 0,
+    "context": 21504,
+    "dummy_request": ".",
+    "overflow_policy": "reject-input-before-dispatch; clip-results-at-declared-byte-interface"
+  },
+  "static_admission_certificate": {
+    "payload": {
+      "program": [
+        "seq",
+        [
+          "call",
+          1,
+          1,
+          "llama1b",
+          4,
+          [
+            "app",
+            [
+              "lit",
+              "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n"
+            ],
+            [
+              "app",
+              [
+                "trim",
+                [
+                  "lit",
+                  "Route the input to story, joke, or poem based on the user's request.\nRespond with exactly one word: poem, story, or joke."
+                ]
+              ],
+              [
+                "app",
+                [
+                  "lit",
+                  "<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+                ],
+                [
+                  "app",
+                  [
+                    "trim",
+                    [
+                      "var",
+                      0
+                    ]
+                  ],
+                  [
+                    "lit",
+                    "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            514,
+            4
+          ]
+        ],
+        [
+          "seq",
+          [
+            "tool",
+            2,
+            "label_in",
+            [
+              "app",
+              [
+                "escape",
+                [
+                  "var",
+                  1
+                ]
+              ],
+              [
+                "app",
+                [
+                  "lit",
+                  "\u001f"
+                ],
+                [
+                  "escape",
+                  [
+                    "lit",
+                    "story,joke,poem"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "ite",
+            [
+              "eq",
+              2,
+              "story"
+            ],
+            [
+              "call",
+              2,
+              3,
+              "llama1b",
+              192,
+              [
+                "app",
+                [
+                  "lit",
+                  "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n"
+                ],
+                [
+                  "app",
+                  [
+                    "trim",
+                    [
+                      "lit",
+                      "You are an expert storyteller."
+                    ]
+                  ],
+                  [
+                    "app",
+                    [
+                      "lit",
+                      "<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+                    ],
+                    [
+                      "app",
+                      [
+                        "trim",
+                        [
+                          "var",
+                          0
+                        ]
+                      ],
+                      [
+                        "lit",
+                        "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              [
+                423,
+                192
+              ]
+            ],
+            [
+              "ite",
+              [
+                "eq",
+                2,
+                "joke"
+              ],
+              [
+                "call",
+                3,
+                3,
+                "llama1b",
+                96,
+                [
+                  "app",
+                  [
+                    "lit",
+                    "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n"
+                  ],
+                  [
+                    "app",
+                    [
+                      "trim",
+                      [
+                        "lit",
+                        "You are an expert comedian."
+                      ]
+                    ],
+                    [
+                      "app",
+                      [
+                        "lit",
+                        "<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+                      ],
+                      [
+                        "app",
+                        [
+                          "trim",
+                          [
+                            "var",
+                            0
+                          ]
+                        ],
+                        [
+                          "lit",
+                          "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                        ]
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  423,
+                  192
+                ]
+              ],
+              [
+                "call",
+                4,
+                3,
+                "llama1b",
+                128,
+                [
+                  "app",
+                  [
+                    "lit",
+                    "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n"
+                  ],
+                  [
+                    "app",
+                    [
+                      "trim",
+                      [
+                        "lit",
+                        "You are an expert poet."
+                      ]
+                    ],
+                    [
+                      "app",
+                      [
+                        "lit",
+                        "<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+                      ],
+                      [
+                        "app",
+                        [
+                          "trim",
+                          [
+                            "var",
+                            0
+                          ]
+                        ],
+                        [
+                          "lit",
+                          "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                        ]
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  423,
+                  192
+                ]
+              ]
+            ]
+          ]
+        ]
+      ],
+      "bounds": [
+        160,
+        512,
+        8,
+        24576
+      ],
+      "tools": [
+        [
+          "label_in",
+          8
+        ]
+      ],
+      "dummy_tokens": [
+        [
+          "llama1b",
+          1
+        ]
+      ],
+      "response_bytes_per_token": 128,
+      "context": 21504,
+      "alpha": 1,
+      "delta": 0
+    },
+    "verdict": {
+      "unit": "UTF-8 bytes",
+      "native_adapter_verified": false,
+      "has_fixed_shape": true,
+      "accepted": true
+    }
+  }
+}

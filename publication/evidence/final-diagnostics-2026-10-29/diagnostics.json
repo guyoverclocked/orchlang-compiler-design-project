@@ -1,0 +1,6006 @@
+{
+  "schema": "orchlang-final-diagnostics-v1",
+  "implementation": {
+    "orchlang/__main__.py": "f5da4cf72658fd4d603fd64344edf56bcf5af642f8694c8542d1c9bdd914f346",
+    "orchlang/assurance.py": "29f77717ec99007c9b4cfca023168c9ad4faf3e4d63e8a6ffbacc292218820a7",
+    "orchlang/compiler.py": "6f45610f86feba2f8045111e814a4930d4486ea5a7838cf6b000f00de91f6ecd",
+    "orchlang/core.py": "54f8eb20921c63ccd7bc265f0a6e9373d9d2180d8c88d4f21169e865aec60ba8",
+    "orchlang/ledger.py": "04187531d1b9f102f9772f44988380b43b316d69a333eacde9e4b5cdc0a203a9",
+    "orchlang/models.py": "9dda6afbdfbc29e777992ea869c7a7fcbe876ebf539244600ccdcebda81c203c",
+    "orchlang/runtime.py": "2406bfb6595ccec37d70436a2ba8bb417f1648d0d7b3296496fe0d337c2e8518",
+    "orchlang/syntax.py": "03e5c6ed652c7fbf3ba2fa1c00dcf453a391cfa8484b0956943845469c10bfd3",
+    "orchlang/tools.py": "e378ead75b39f530084e72201b128be669e8281ba515f0b160e44a4fc47f5804",
+    "orchlang/validate.py": "48dfa77bd11bb2b1baaaa60bce3f96cbeb7af212bdd1e950d4b32c4a549c5433",
+    "proof/ShapeCore.lean": "c118a53d032fb6d0ca80ea2e4971f187beb76201317ac354853bcb216cc7322a",
+    "experiments/run_workflow.py": "1f2c60ed243711e099a7623371511dff36bf231ba3554846ff9111c04afd89c3"
+  },
+  "weights": [
+    0.25,
+    1,
+    2,
+    4,
+    8,
+    16
+  ],
+  "sensitivity": [
+    {
+      "workflow": "switch",
+      "replication": false,
+      "output_weight": 0.25,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          201,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "cost": 233.0,
+      "all_branches_cost": 233.0,
+      "source_binding": "5e8f68407a836b20c8e041b1d9b3b51c059f3bf895f38fc53d39dd4bf80e1d0e"
+    },
+    {
+      "workflow": "switch",
+      "replication": false,
+      "output_weight": 1,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          201,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "cost": 329,
+      "all_branches_cost": 329,
+      "source_binding": "5e8f68407a836b20c8e041b1d9b3b51c059f3bf895f38fc53d39dd4bf80e1d0e"
+    },
+    {
+      "workflow": "switch",
+      "replication": false,
+      "output_weight": 2,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          201,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "cost": 457,
+      "all_branches_cost": 457,
+      "source_binding": "5e8f68407a836b20c8e041b1d9b3b51c059f3bf895f38fc53d39dd4bf80e1d0e"
+    },
+    {
+      "workflow": "switch",
+      "replication": false,
+      "output_weight": 4,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          201,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "cost": 713,
+      "all_branches_cost": 713,
+      "source_binding": "5e8f68407a836b20c8e041b1d9b3b51c059f3bf895f38fc53d39dd4bf80e1d0e"
+    },
+    {
+      "workflow": "switch",
+      "replication": false,
+      "output_weight": 8,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          201,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "cost": 1225,
+      "all_branches_cost": 1225,
+      "source_binding": "5e8f68407a836b20c8e041b1d9b3b51c059f3bf895f38fc53d39dd4bf80e1d0e"
+    },
+    {
+      "workflow": "switch",
+      "replication": false,
+      "output_weight": 16,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          201,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "cost": 2249,
+      "all_branches_cost": 2249,
+      "source_binding": "5e8f68407a836b20c8e041b1d9b3b51c059f3bf895f38fc53d39dd4bf80e1d0e"
+    },
+    {
+      "workflow": "routing",
+      "replication": false,
+      "output_weight": 0.25,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          115,
+          4
+        ],
+        [
+          "tool",
+          "label_in"
+        ],
+        [
+          "llm",
+          "llama1b",
+          92,
+          192
+        ]
+      ],
+      "cost": 256.0,
+      "all_branches_cost": 494.0,
+      "source_binding": "e96f6c1a60137d47b8ea3d7bf308bcccde5e6c5bbe4f42164ec5d4747e8954bd"
+    },
+    {
+      "workflow": "routing",
+      "replication": false,
+      "output_weight": 1,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          115,
+          4
+        ],
+        [
+          "tool",
+          "label_in"
+        ],
+        [
+          "llm",
+          "llama1b",
+          92,
+          192
+        ]
+      ],
+      "cost": 403,
+      "all_branches_cost": 809,
+      "source_binding": "e96f6c1a60137d47b8ea3d7bf308bcccde5e6c5bbe4f42164ec5d4747e8954bd"
+    },
+    {
+      "workflow": "routing",
+      "replication": false,
+      "output_weight": 2,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          115,
+          4
+        ],
+        [
+          "tool",
+          "label_in"
+        ],
+        [
+          "llm",
+          "llama1b",
+          92,
+          192
+        ]
+      ],
+      "cost": 599,
+      "all_branches_cost": 1229,
+      "source_binding": "e96f6c1a60137d47b8ea3d7bf308bcccde5e6c5bbe4f42164ec5d4747e8954bd"
+    },
+    {
+      "workflow": "routing",
+      "replication": false,
+      "output_weight": 4,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          115,
+          4
+        ],
+        [
+          "tool",
+          "label_in"
+        ],
+        [
+          "llm",
+          "llama1b",
+          92,
+          192
+        ]
+      ],
+      "cost": 991,
+      "all_branches_cost": 2069,
+      "source_binding": "e96f6c1a60137d47b8ea3d7bf308bcccde5e6c5bbe4f42164ec5d4747e8954bd"
+    },
+    {
+      "workflow": "routing",
+      "replication": false,
+      "output_weight": 8,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          115,
+          4
+        ],
+        [
+          "tool",
+          "label_in"
+        ],
+        [
+          "llm",
+          "llama1b",
+          92,
+          192
+        ]
+      ],
+      "cost": 1775,
+      "all_branches_cost": 3749,
+      "source_binding": "e96f6c1a60137d47b8ea3d7bf308bcccde5e6c5bbe4f42164ec5d4747e8954bd"
+    },
+    {
+      "workflow": "routing",
+      "replication": false,
+      "output_weight": 16,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          115,
+          4
+        ],
+        [
+          "tool",
+          "label_in"
+        ],
+        [
+          "llm",
+          "llama1b",
+          92,
+          192
+        ]
+      ],
+      "cost": 3343,
+      "all_branches_cost": 7109,
+      "source_binding": "e96f6c1a60137d47b8ea3d7bf308bcccde5e6c5bbe4f42164ec5d4747e8954bd"
+    },
+    {
+      "workflow": "chaining",
+      "replication": false,
+      "output_weight": 0.25,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          74,
+          96
+        ],
+        [
+          "tool",
+          "contains_any"
+        ],
+        [
+          "tool",
+          "copy"
+        ],
+        [
+          "llm",
+          "llama1b",
+          151,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          181,
+          128
+        ]
+      ],
+      "cost": 494.0,
+      "all_branches_cost": 494.0,
+      "source_binding": "3ff7f5203ca39246eaf2b895f154a021cb0cbfca8790b86f3c7e5c8a17480ae9"
+    },
+    {
+      "workflow": "chaining",
+      "replication": false,
+      "output_weight": 1,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          74,
+          96
+        ],
+        [
+          "tool",
+          "contains_any"
+        ],
+        [
+          "tool",
+          "copy"
+        ],
+        [
+          "llm",
+          "llama1b",
+          151,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          181,
+          128
+        ]
+      ],
+      "cost": 758,
+      "all_branches_cost": 758,
+      "source_binding": "3ff7f5203ca39246eaf2b895f154a021cb0cbfca8790b86f3c7e5c8a17480ae9"
+    },
+    {
+      "workflow": "chaining",
+      "replication": false,
+      "output_weight": 2,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          74,
+          96
+        ],
+        [
+          "tool",
+          "contains_any"
+        ],
+        [
+          "tool",
+          "copy"
+        ],
+        [
+          "llm",
+          "llama1b",
+          151,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          181,
+          128
+        ]
+      ],
+      "cost": 1110,
+      "all_branches_cost": 1110,
+      "source_binding": "3ff7f5203ca39246eaf2b895f154a021cb0cbfca8790b86f3c7e5c8a17480ae9"
+    },
+    {
+      "workflow": "chaining",
+      "replication": false,
+      "output_weight": 4,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          74,
+          96
+        ],
+        [
+          "tool",
+          "contains_any"
+        ],
+        [
+          "tool",
+          "copy"
+        ],
+        [
+          "llm",
+          "llama1b",
+          151,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          181,
+          128
+        ]
+      ],
+      "cost": 1814,
+      "all_branches_cost": 1814,
+      "source_binding": "3ff7f5203ca39246eaf2b895f154a021cb0cbfca8790b86f3c7e5c8a17480ae9"
+    },
+    {
+      "workflow": "chaining",
+      "replication": false,
+      "output_weight": 8,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          74,
+          96
+        ],
+        [
+          "tool",
+          "contains_any"
+        ],
+        [
+          "tool",
+          "copy"
+        ],
+        [
+          "llm",
+          "llama1b",
+          151,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          181,
+          128
+        ]
+      ],
+      "cost": 3222,
+      "all_branches_cost": 3222,
+      "source_binding": "3ff7f5203ca39246eaf2b895f154a021cb0cbfca8790b86f3c7e5c8a17480ae9"
+    },
+    {
+      "workflow": "chaining",
+      "replication": false,
+      "output_weight": 16,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          74,
+          96
+        ],
+        [
+          "tool",
+          "contains_any"
+        ],
+        [
+          "tool",
+          "copy"
+        ],
+        [
+          "llm",
+          "llama1b",
+          151,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          181,
+          128
+        ]
+      ],
+      "cost": 6038,
+      "all_branches_cost": 6038,
+      "source_binding": "3ff7f5203ca39246eaf2b895f154a021cb0cbfca8790b86f3c7e5c8a17480ae9"
+    },
+    {
+      "workflow": "evaluator",
+      "replication": false,
+      "output_weight": 0.25,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          131,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          191,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ],
+        [
+          "llm",
+          "llama1b",
+          131,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          191,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ],
+        [
+          "llm",
+          "llama1b",
+          131,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          191,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ]
+      ],
+      "cost": 1086.0,
+      "all_branches_cost": 1377.0,
+      "source_binding": "381ff2747bc384d70e011e4600775706e3be06608ca68d2753b47cc0adba61ec"
+    },
+    {
+      "workflow": "evaluator",
+      "replication": false,
+      "output_weight": 1,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          131,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          191,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ],
+        [
+          "llm",
+          "llama1b",
+          131,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          191,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ],
+        [
+          "llm",
+          "llama1b",
+          131,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          191,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ]
+      ],
+      "cost": 1446,
+      "all_branches_cost": 1953,
+      "source_binding": "381ff2747bc384d70e011e4600775706e3be06608ca68d2753b47cc0adba61ec"
+    },
+    {
+      "workflow": "evaluator",
+      "replication": false,
+      "output_weight": 2,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          131,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          191,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ],
+        [
+          "llm",
+          "llama1b",
+          131,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          191,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ],
+        [
+          "llm",
+          "llama1b",
+          131,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          191,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ]
+      ],
+      "cost": 1926,
+      "all_branches_cost": 2721,
+      "source_binding": "381ff2747bc384d70e011e4600775706e3be06608ca68d2753b47cc0adba61ec"
+    },
+    {
+      "workflow": "evaluator",
+      "replication": false,
+      "output_weight": 4,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          131,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          191,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ],
+        [
+          "llm",
+          "llama1b",
+          131,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          191,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ],
+        [
+          "llm",
+          "llama1b",
+          131,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          191,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ]
+      ],
+      "cost": 2886,
+      "all_branches_cost": 4257,
+      "source_binding": "381ff2747bc384d70e011e4600775706e3be06608ca68d2753b47cc0adba61ec"
+    },
+    {
+      "workflow": "evaluator",
+      "replication": false,
+      "output_weight": 8,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          131,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          191,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ],
+        [
+          "llm",
+          "llama1b",
+          131,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          191,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ],
+        [
+          "llm",
+          "llama1b",
+          131,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          191,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ]
+      ],
+      "cost": 4806,
+      "all_branches_cost": 7329,
+      "source_binding": "381ff2747bc384d70e011e4600775706e3be06608ca68d2753b47cc0adba61ec"
+    },
+    {
+      "workflow": "evaluator",
+      "replication": false,
+      "output_weight": 16,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          131,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          191,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ],
+        [
+          "llm",
+          "llama1b",
+          131,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          191,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ],
+        [
+          "llm",
+          "llama1b",
+          131,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          191,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ]
+      ],
+      "cost": 8646,
+      "all_branches_cost": 13473,
+      "source_binding": "381ff2747bc384d70e011e4600775706e3be06608ca68d2753b47cc0adba61ec"
+    },
+    {
+      "workflow": "email",
+      "replication": false,
+      "output_weight": 0.25,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          425,
+          80
+        ],
+        [
+          "tool",
+          "email_route"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          588,
+          320
+        ]
+      ],
+      "cost": 1113.0,
+      "all_branches_cost": 1113.0,
+      "source_binding": "1998b1d0c88f3bcd38fabd9615b0730bb68831a9e04fbacd3ce08725a362d1a7"
+    },
+    {
+      "workflow": "email",
+      "replication": false,
+      "output_weight": 1,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          425,
+          80
+        ],
+        [
+          "tool",
+          "email_route"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          588,
+          320
+        ]
+      ],
+      "cost": 1413,
+      "all_branches_cost": 1413,
+      "source_binding": "1998b1d0c88f3bcd38fabd9615b0730bb68831a9e04fbacd3ce08725a362d1a7"
+    },
+    {
+      "workflow": "email",
+      "replication": false,
+      "output_weight": 2,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          425,
+          80
+        ],
+        [
+          "tool",
+          "email_route"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          588,
+          320
+        ]
+      ],
+      "cost": 1813,
+      "all_branches_cost": 1813,
+      "source_binding": "1998b1d0c88f3bcd38fabd9615b0730bb68831a9e04fbacd3ce08725a362d1a7"
+    },
+    {
+      "workflow": "email",
+      "replication": false,
+      "output_weight": 4,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          425,
+          80
+        ],
+        [
+          "tool",
+          "email_route"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          588,
+          320
+        ]
+      ],
+      "cost": 2613,
+      "all_branches_cost": 2613,
+      "source_binding": "1998b1d0c88f3bcd38fabd9615b0730bb68831a9e04fbacd3ce08725a362d1a7"
+    },
+    {
+      "workflow": "email",
+      "replication": false,
+      "output_weight": 8,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          425,
+          80
+        ],
+        [
+          "tool",
+          "email_route"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          588,
+          320
+        ]
+      ],
+      "cost": 4213,
+      "all_branches_cost": 4213,
+      "source_binding": "1998b1d0c88f3bcd38fabd9615b0730bb68831a9e04fbacd3ce08725a362d1a7"
+    },
+    {
+      "workflow": "email",
+      "replication": false,
+      "output_weight": 16,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          425,
+          80
+        ],
+        [
+          "tool",
+          "email_route"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          588,
+          320
+        ]
+      ],
+      "cost": 7413,
+      "all_branches_cost": 7413,
+      "source_binding": "1998b1d0c88f3bcd38fabd9615b0730bb68831a9e04fbacd3ce08725a362d1a7"
+    },
+    {
+      "workflow": "orchestrator",
+      "replication": false,
+      "output_weight": 0.25,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          108,
+          160
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ]
+      ],
+      "cost": 792.0,
+      "all_branches_cost": 792.0,
+      "source_binding": "55daf5d6f52611a02128c2113783150015ff66f584c451e2d5595012828269a3"
+    },
+    {
+      "workflow": "orchestrator",
+      "replication": false,
+      "output_weight": 1,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          108,
+          160
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ]
+      ],
+      "cost": 1296,
+      "all_branches_cost": 1296,
+      "source_binding": "55daf5d6f52611a02128c2113783150015ff66f584c451e2d5595012828269a3"
+    },
+    {
+      "workflow": "orchestrator",
+      "replication": false,
+      "output_weight": 2,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          108,
+          160
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ]
+      ],
+      "cost": 1968,
+      "all_branches_cost": 1968,
+      "source_binding": "55daf5d6f52611a02128c2113783150015ff66f584c451e2d5595012828269a3"
+    },
+    {
+      "workflow": "orchestrator",
+      "replication": false,
+      "output_weight": 4,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          108,
+          160
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ]
+      ],
+      "cost": 3312,
+      "all_branches_cost": 3312,
+      "source_binding": "55daf5d6f52611a02128c2113783150015ff66f584c451e2d5595012828269a3"
+    },
+    {
+      "workflow": "orchestrator",
+      "replication": false,
+      "output_weight": 8,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          108,
+          160
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ]
+      ],
+      "cost": 6000,
+      "all_branches_cost": 6000,
+      "source_binding": "55daf5d6f52611a02128c2113783150015ff66f584c451e2d5595012828269a3"
+    },
+    {
+      "workflow": "orchestrator",
+      "replication": false,
+      "output_weight": 16,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          108,
+          160
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          129,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ]
+      ],
+      "cost": 11376,
+      "all_branches_cost": 11376,
+      "source_binding": "55daf5d6f52611a02128c2113783150015ff66f584c451e2d5595012828269a3"
+    },
+    {
+      "workflow": "calculator",
+      "replication": false,
+      "output_weight": 0.25,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ]
+      ],
+      "cost": 4320.0,
+      "all_branches_cost": 4320.0,
+      "source_binding": "1b1bead751dd09609870d970574b5609a293b0a190fbe164317193fe8fd13c46"
+    },
+    {
+      "workflow": "calculator",
+      "replication": false,
+      "output_weight": 1,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ]
+      ],
+      "cost": 4536,
+      "all_branches_cost": 4536,
+      "source_binding": "1b1bead751dd09609870d970574b5609a293b0a190fbe164317193fe8fd13c46"
+    },
+    {
+      "workflow": "calculator",
+      "replication": false,
+      "output_weight": 2,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ]
+      ],
+      "cost": 4824,
+      "all_branches_cost": 4824,
+      "source_binding": "1b1bead751dd09609870d970574b5609a293b0a190fbe164317193fe8fd13c46"
+    },
+    {
+      "workflow": "calculator",
+      "replication": false,
+      "output_weight": 4,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ]
+      ],
+      "cost": 5400,
+      "all_branches_cost": 5400,
+      "source_binding": "1b1bead751dd09609870d970574b5609a293b0a190fbe164317193fe8fd13c46"
+    },
+    {
+      "workflow": "calculator",
+      "replication": false,
+      "output_weight": 8,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ]
+      ],
+      "cost": 6552,
+      "all_branches_cost": 6552,
+      "source_binding": "1b1bead751dd09609870d970574b5609a293b0a190fbe164317193fe8fd13c46"
+    },
+    {
+      "workflow": "calculator",
+      "replication": false,
+      "output_weight": 16,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          708,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ]
+      ],
+      "cost": 8856,
+      "all_branches_cost": 8856,
+      "source_binding": "1b1bead751dd09609870d970574b5609a293b0a190fbe164317193fe8fd13c46"
+    },
+    {
+      "workflow": "crag",
+      "replication": false,
+      "output_weight": 0.25,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "any_no"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "join_docs"
+        ],
+        [
+          "llm",
+          "llama1b",
+          1773,
+          128
+        ]
+      ],
+      "cost": 3921.0,
+      "all_branches_cost": 3921.0,
+      "source_binding": "e9596a8209ace3911ea861b995fa96cd42d9870523bc9e8b3066348338baf93c"
+    },
+    {
+      "workflow": "crag",
+      "replication": false,
+      "output_weight": 1,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "any_no"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "join_docs"
+        ],
+        [
+          "llm",
+          "llama1b",
+          1773,
+          128
+        ]
+      ],
+      "cost": 4065,
+      "all_branches_cost": 4065,
+      "source_binding": "e9596a8209ace3911ea861b995fa96cd42d9870523bc9e8b3066348338baf93c"
+    },
+    {
+      "workflow": "crag",
+      "replication": false,
+      "output_weight": 2,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "any_no"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "join_docs"
+        ],
+        [
+          "llm",
+          "llama1b",
+          1773,
+          128
+        ]
+      ],
+      "cost": 4257,
+      "all_branches_cost": 4257,
+      "source_binding": "e9596a8209ace3911ea861b995fa96cd42d9870523bc9e8b3066348338baf93c"
+    },
+    {
+      "workflow": "crag",
+      "replication": false,
+      "output_weight": 4,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "any_no"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "join_docs"
+        ],
+        [
+          "llm",
+          "llama1b",
+          1773,
+          128
+        ]
+      ],
+      "cost": 4641,
+      "all_branches_cost": 4641,
+      "source_binding": "e9596a8209ace3911ea861b995fa96cd42d9870523bc9e8b3066348338baf93c"
+    },
+    {
+      "workflow": "crag",
+      "replication": false,
+      "output_weight": 8,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "any_no"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "join_docs"
+        ],
+        [
+          "llm",
+          "llama1b",
+          1773,
+          128
+        ]
+      ],
+      "cost": 5409,
+      "all_branches_cost": 5409,
+      "source_binding": "e9596a8209ace3911ea861b995fa96cd42d9870523bc9e8b3066348338baf93c"
+    },
+    {
+      "workflow": "crag",
+      "replication": false,
+      "output_weight": 16,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          525,
+          16
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "any_no"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "join_docs"
+        ],
+        [
+          "llm",
+          "llama1b",
+          1773,
+          128
+        ]
+      ],
+      "cost": 6945,
+      "all_branches_cost": 6945,
+      "source_binding": "e9596a8209ace3911ea861b995fa96cd42d9870523bc9e8b3066348338baf93c"
+    },
+    {
+      "workflow": "adaptive",
+      "replication": false,
+      "output_weight": 0.25,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          207,
+          3
+        ],
+        [
+          "tool",
+          "route_source"
+        ],
+        [
+          "tool",
+          "qcopy"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "nonempty"
+        ],
+        [
+          "llm",
+          "llama3b",
+          151,
+          48
+        ],
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "nonempty"
+        ],
+        [
+          "llm",
+          "llama3b",
+          151,
+          48
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama3b",
+          1075,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          1172,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama1b",
+          282,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama3b",
+          1075,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          1172,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama1b",
+          282,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ]
+      ],
+      "cost": 9128.75,
+      "all_branches_cost": 9128.75,
+      "source_binding": "a7ea942e84fad6a9bfb9e3d8c41f66d8f3b50bab156566f531f265aeeccc0747"
+    },
+    {
+      "workflow": "adaptive",
+      "replication": false,
+      "output_weight": 1,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          207,
+          3
+        ],
+        [
+          "tool",
+          "route_source"
+        ],
+        [
+          "tool",
+          "qcopy"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "nonempty"
+        ],
+        [
+          "llm",
+          "llama3b",
+          151,
+          48
+        ],
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "nonempty"
+        ],
+        [
+          "llm",
+          "llama3b",
+          151,
+          48
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama3b",
+          1075,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          1172,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama1b",
+          282,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama3b",
+          1075,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          1172,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama1b",
+          282,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ]
+      ],
+      "cost": 9422,
+      "all_branches_cost": 9422,
+      "source_binding": "a7ea942e84fad6a9bfb9e3d8c41f66d8f3b50bab156566f531f265aeeccc0747"
+    },
+    {
+      "workflow": "adaptive",
+      "replication": false,
+      "output_weight": 2,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          207,
+          3
+        ],
+        [
+          "tool",
+          "route_source"
+        ],
+        [
+          "tool",
+          "qcopy"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "nonempty"
+        ],
+        [
+          "llm",
+          "llama3b",
+          151,
+          48
+        ],
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "nonempty"
+        ],
+        [
+          "llm",
+          "llama3b",
+          151,
+          48
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama3b",
+          1075,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          1172,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama1b",
+          282,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama3b",
+          1075,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          1172,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama1b",
+          282,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ]
+      ],
+      "cost": 9813,
+      "all_branches_cost": 9813,
+      "source_binding": "a7ea942e84fad6a9bfb9e3d8c41f66d8f3b50bab156566f531f265aeeccc0747"
+    },
+    {
+      "workflow": "adaptive",
+      "replication": false,
+      "output_weight": 4,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          207,
+          3
+        ],
+        [
+          "tool",
+          "route_source"
+        ],
+        [
+          "tool",
+          "qcopy"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "nonempty"
+        ],
+        [
+          "llm",
+          "llama3b",
+          151,
+          48
+        ],
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "nonempty"
+        ],
+        [
+          "llm",
+          "llama3b",
+          151,
+          48
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama3b",
+          1075,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          1172,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama1b",
+          282,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama3b",
+          1075,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          1172,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama1b",
+          282,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ]
+      ],
+      "cost": 10595,
+      "all_branches_cost": 10595,
+      "source_binding": "a7ea942e84fad6a9bfb9e3d8c41f66d8f3b50bab156566f531f265aeeccc0747"
+    },
+    {
+      "workflow": "adaptive",
+      "replication": false,
+      "output_weight": 8,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          207,
+          3
+        ],
+        [
+          "tool",
+          "route_source"
+        ],
+        [
+          "tool",
+          "qcopy"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "nonempty"
+        ],
+        [
+          "llm",
+          "llama3b",
+          151,
+          48
+        ],
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "nonempty"
+        ],
+        [
+          "llm",
+          "llama3b",
+          151,
+          48
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama3b",
+          1075,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          1172,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama1b",
+          282,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama3b",
+          1075,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          1172,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama1b",
+          282,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ]
+      ],
+      "cost": 12159,
+      "all_branches_cost": 12159,
+      "source_binding": "a7ea942e84fad6a9bfb9e3d8c41f66d8f3b50bab156566f531f265aeeccc0747"
+    },
+    {
+      "workflow": "adaptive",
+      "replication": false,
+      "output_weight": 16,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          207,
+          3
+        ],
+        [
+          "tool",
+          "route_source"
+        ],
+        [
+          "tool",
+          "qcopy"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "nonempty"
+        ],
+        [
+          "llm",
+          "llama3b",
+          151,
+          48
+        ],
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          433,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "nonempty"
+        ],
+        [
+          "llm",
+          "llama3b",
+          151,
+          48
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama3b",
+          1075,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          1172,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama1b",
+          282,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama3b",
+          1075,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          1172,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama1b",
+          282,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ]
+      ],
+      "cost": 15287,
+      "all_branches_cost": 15287,
+      "source_binding": "a7ea942e84fad6a9bfb9e3d8c41f66d8f3b50bab156566f531f265aeeccc0747"
+    },
+    {
+      "workflow": "switch",
+      "replication": true,
+      "output_weight": 0.25,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          176,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "cost": 208.0,
+      "all_branches_cost": 208.0,
+      "source_binding": "d00ad9d9bd1557a78bcc670488df14ab869d513a56dde466df286211e3c35edd"
+    },
+    {
+      "workflow": "switch",
+      "replication": true,
+      "output_weight": 1,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          176,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "cost": 304,
+      "all_branches_cost": 304,
+      "source_binding": "d00ad9d9bd1557a78bcc670488df14ab869d513a56dde466df286211e3c35edd"
+    },
+    {
+      "workflow": "switch",
+      "replication": true,
+      "output_weight": 2,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          176,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "cost": 432,
+      "all_branches_cost": 432,
+      "source_binding": "d00ad9d9bd1557a78bcc670488df14ab869d513a56dde466df286211e3c35edd"
+    },
+    {
+      "workflow": "switch",
+      "replication": true,
+      "output_weight": 4,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          176,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "cost": 688,
+      "all_branches_cost": 688,
+      "source_binding": "d00ad9d9bd1557a78bcc670488df14ab869d513a56dde466df286211e3c35edd"
+    },
+    {
+      "workflow": "switch",
+      "replication": true,
+      "output_weight": 8,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          176,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "cost": 1200,
+      "all_branches_cost": 1200,
+      "source_binding": "d00ad9d9bd1557a78bcc670488df14ab869d513a56dde466df286211e3c35edd"
+    },
+    {
+      "workflow": "switch",
+      "replication": true,
+      "output_weight": 16,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          176,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ],
+      "cost": 2224,
+      "all_branches_cost": 2224,
+      "source_binding": "d00ad9d9bd1557a78bcc670488df14ab869d513a56dde466df286211e3c35edd"
+    },
+    {
+      "workflow": "email",
+      "replication": true,
+      "output_weight": 0.25,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          416,
+          80
+        ],
+        [
+          "tool",
+          "email_route"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          579,
+          320
+        ]
+      ],
+      "cost": 1095.0,
+      "all_branches_cost": 1095.0,
+      "source_binding": "0de88154facfe4a06ec4b90f862d0fc669775d373345a7b515a5b74fdfb08b5d"
+    },
+    {
+      "workflow": "email",
+      "replication": true,
+      "output_weight": 1,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          416,
+          80
+        ],
+        [
+          "tool",
+          "email_route"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          579,
+          320
+        ]
+      ],
+      "cost": 1395,
+      "all_branches_cost": 1395,
+      "source_binding": "0de88154facfe4a06ec4b90f862d0fc669775d373345a7b515a5b74fdfb08b5d"
+    },
+    {
+      "workflow": "email",
+      "replication": true,
+      "output_weight": 2,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          416,
+          80
+        ],
+        [
+          "tool",
+          "email_route"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          579,
+          320
+        ]
+      ],
+      "cost": 1795,
+      "all_branches_cost": 1795,
+      "source_binding": "0de88154facfe4a06ec4b90f862d0fc669775d373345a7b515a5b74fdfb08b5d"
+    },
+    {
+      "workflow": "email",
+      "replication": true,
+      "output_weight": 4,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          416,
+          80
+        ],
+        [
+          "tool",
+          "email_route"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          579,
+          320
+        ]
+      ],
+      "cost": 2595,
+      "all_branches_cost": 2595,
+      "source_binding": "0de88154facfe4a06ec4b90f862d0fc669775d373345a7b515a5b74fdfb08b5d"
+    },
+    {
+      "workflow": "email",
+      "replication": true,
+      "output_weight": 8,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          416,
+          80
+        ],
+        [
+          "tool",
+          "email_route"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          579,
+          320
+        ]
+      ],
+      "cost": 4195,
+      "all_branches_cost": 4195,
+      "source_binding": "0de88154facfe4a06ec4b90f862d0fc669775d373345a7b515a5b74fdfb08b5d"
+    },
+    {
+      "workflow": "email",
+      "replication": true,
+      "output_weight": 16,
+      "accepted": true,
+      "shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          416,
+          80
+        ],
+        [
+          "tool",
+          "email_route"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          579,
+          320
+        ]
+      ],
+      "cost": 7395,
+      "all_branches_cost": 7395,
+      "source_binding": "0de88154facfe4a06ec4b90f862d0fc669775d373345a7b515a5b74fdfb08b5d"
+    },
+    {
+      "workflow": "crag",
+      "replication": true,
+      "output_weight": 0.25,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "any_no"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "join_docs"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          1765,
+          128
+        ]
+      ],
+      "cost": 3881.0,
+      "all_branches_cost": 3881.0,
+      "source_binding": "e07780b526ebd9269e37405b96d8705b5b12168934429f891511440a9b1e7a79"
+    },
+    {
+      "workflow": "crag",
+      "replication": true,
+      "output_weight": 1,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "any_no"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "join_docs"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          1765,
+          128
+        ]
+      ],
+      "cost": 4025,
+      "all_branches_cost": 4025,
+      "source_binding": "e07780b526ebd9269e37405b96d8705b5b12168934429f891511440a9b1e7a79"
+    },
+    {
+      "workflow": "crag",
+      "replication": true,
+      "output_weight": 2,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "any_no"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "join_docs"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          1765,
+          128
+        ]
+      ],
+      "cost": 4217,
+      "all_branches_cost": 4217,
+      "source_binding": "e07780b526ebd9269e37405b96d8705b5b12168934429f891511440a9b1e7a79"
+    },
+    {
+      "workflow": "crag",
+      "replication": true,
+      "output_weight": 4,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "any_no"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "join_docs"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          1765,
+          128
+        ]
+      ],
+      "cost": 4601,
+      "all_branches_cost": 4601,
+      "source_binding": "e07780b526ebd9269e37405b96d8705b5b12168934429f891511440a9b1e7a79"
+    },
+    {
+      "workflow": "crag",
+      "replication": true,
+      "output_weight": 8,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "any_no"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "join_docs"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          1765,
+          128
+        ]
+      ],
+      "cost": 5369,
+      "all_branches_cost": 5369,
+      "source_binding": "e07780b526ebd9269e37405b96d8705b5b12168934429f891511440a9b1e7a79"
+    },
+    {
+      "workflow": "crag",
+      "replication": true,
+      "output_weight": 16,
+      "accepted": true,
+      "shape": [
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          517,
+          16
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "any_no"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "join_docs"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          1765,
+          128
+        ]
+      ],
+      "cost": 6905,
+      "all_branches_cost": 6905,
+      "source_binding": "e07780b526ebd9269e37405b96d8705b5b12168934429f891511440a9b1e7a79"
+    }
+  ],
+  "qwen_crag": {
+    "graded_documents": 600,
+    "parsed_json": 600,
+    "scores": {
+      "0": 484,
+      "yes": 5,
+      "1": 34,
+      "no": 77
+    },
+    "reached_cap": 0,
+    "route_counts": {
+      "yes": 150
+    }
+  },
+  "interpretation": "Recorded score vocabulary and cap diagnostic; no causal ablation or retuned primary data."
+}

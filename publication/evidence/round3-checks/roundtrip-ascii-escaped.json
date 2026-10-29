@@ -1,0 +1,33 @@
+{
+  "schema": "orchlang-serializer-roundtrip-v1",
+  "programs": 3036,
+  "generated_programs": 1000,
+  "workflow_sources": 12,
+  "returned": 3036,
+  "exact_roundtrips": 2517,
+  "mismatches": [
+    "generated-5-original",
+    "generated-5-ours",
+    "generated-5-padall",
+    "generated-8-original",
+    "generated-8-ours",
+    "generated-8-padall",
+    "generated-14-original",
+    "generated-14-ours",
+    "generated-14-padall",
+    "generated-16-original",
+    "generated-16-ours",
+    "generated-16-padall",
+    "generated-36-original",
+    "generated-36-ours",
+    "generated-36-padall",
+    "generated-54-original",
+    "generated-54-ours",
+    "generated-54-padall",
+    "generated-55-original",
+    "generated-55-ours"
+  ],
+  "all_equal": false,
+  "ascii_escaped": true,
+  "scope": "Python stmt_json -> Lean decodeStmt -> Lean encodeStmt -> JSON equality"
+}

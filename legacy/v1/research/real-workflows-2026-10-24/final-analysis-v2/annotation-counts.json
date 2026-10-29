@@ -1,0 +1,114 @@
+{
+  "policy": "Nonempty source lines include comments. Upstream snippets exclude visualization and invocation; shared notebook setup imports are supplied by the framework driver. PF source includes YAML/prompts/tools, excludes tests. Host case LOC are AST branch spans; shared drivers/adapters are reported separately. LOC is descriptive, not a time/effort or maintainability study.",
+  "annotation_scope": "Source input/model annotations use the compiler's abstract contract. Actual Qwen token admission is a separate runtime guard on the complete constructed request; annotations do not become a tokenizer theorem.",
+  "shared_port_function_nonempty_lines": 49,
+  "shared_driver_nonempty_lines": 167,
+  "shared_kernel_interpreter_nonempty_lines": 96,
+  "rows": [
+    {
+      "id": "lg-chain-graph",
+      "translation": "hybrid-host-composition",
+      "original_nonempty_source_lines": 42,
+      "original_count_files": [
+        "lg-chain-graph.execute.py"
+      ],
+      "port_kernel_files": [
+        "first.orch",
+        "refine.orch"
+      ],
+      "port_kernel_nonempty_lines": 16,
+      "port_kernel_bytes": 891,
+      "source_input_annotations": 2,
+      "source_model_cap_annotations": 2,
+      "host_case_nonempty_lines": 13
+    },
+    {
+      "id": "lg-chain-functional",
+      "translation": "hybrid-host-composition",
+      "original_nonempty_source_lines": 30,
+      "original_count_files": [
+        "lg-chain-functional.execute.py"
+      ],
+      "port_kernel_files": [
+        "first.orch",
+        "refine.orch"
+      ],
+      "port_kernel_nonempty_lines": 16,
+      "port_kernel_bytes": 891,
+      "source_input_annotations": 2,
+      "source_model_cap_annotations": 2,
+      "host_case_nonempty_lines": 13
+    },
+    {
+      "id": "lg-parallel-graph",
+      "translation": "hybrid-host-composition",
+      "original_nonempty_source_lines": 43,
+      "original_count_files": [
+        "lg-parallel-graph.execute.py"
+      ],
+      "port_kernel_files": [
+        "joke.orch",
+        "story.orch",
+        "poem.orch"
+      ],
+      "port_kernel_nonempty_lines": 21,
+      "port_kernel_bytes": 1010,
+      "source_input_annotations": 3,
+      "source_model_cap_annotations": 3,
+      "host_case_nonempty_lines": 9
+    },
+    {
+      "id": "lg-routing-graph",
+      "translation": "hybrid-host-composition",
+      "original_nonempty_source_lines": 71,
+      "original_count_files": [
+        "lg-routing-graph.execute.py"
+      ],
+      "port_kernel_files": [
+        "route.orch",
+        "respond.orch"
+      ],
+      "port_kernel_nonempty_lines": 14,
+      "port_kernel_bytes": 782,
+      "source_input_annotations": 2,
+      "source_model_cap_annotations": 2,
+      "host_case_nonempty_lines": 14
+    },
+    {
+      "id": "pf-basic",
+      "translation": "direct-call-kernel",
+      "original_nonempty_source_lines": 106,
+      "original_count_files": [
+        "examples/flows/standard/basic/flow.dag.yaml",
+        "examples/flows/standard/basic/hello.jinja2",
+        "examples/flows/standard/basic/hello.py"
+      ],
+      "port_kernel_files": [
+        "basic.orch"
+      ],
+      "port_kernel_nonempty_lines": 7,
+      "port_kernel_bytes": 337,
+      "source_input_annotations": 1,
+      "source_model_cap_annotations": 1,
+      "host_case_nonempty_lines": 2
+    },
+    {
+      "id": "pf-ner",
+      "translation": "hybrid-host-composition",
+      "original_nonempty_source_lines": 56,
+      "original_count_files": [
+        "examples/flows/standard/named-entity-recognition/NER_LLM.jinja2",
+        "examples/flows/standard/named-entity-recognition/cleansing.py",
+        "examples/flows/standard/named-entity-recognition/flow.dag.yaml"
+      ],
+      "port_kernel_files": [
+        "ner.orch"
+      ],
+      "port_kernel_nonempty_lines": 8,
+      "port_kernel_bytes": 781,
+      "source_input_annotations": 2,
+      "source_model_cap_annotations": 1,
+      "host_case_nonempty_lines": 5
+    }
+  ]
+}

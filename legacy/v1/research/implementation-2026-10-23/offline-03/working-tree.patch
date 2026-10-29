@@ -1,0 +1,1218 @@
+diff --git a/.gitignore b/.gitignore
+index d903f0c..09a3200 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -16,3 +16,10 @@
+ # package.json is tracked so `npm install` alone is enough.
+ node_modules/
+ package-lock.json
++
++# Python caches and local proof build products (proof sources remain tracked).
++__pycache__/
++*.pyc
++/proof/.lake/
++*.olean
++*.ilean
+diff --git a/README.md b/README.md
+index d623dba..99bf224 100644
+--- a/README.md
++++ b/README.md
+@@ -1,6 +1,15 @@
+ # OrchLang
+ 
+-**A small programming language, and a compiler that checks your AI workflow for three kinds of mistake before it runs — including one that almost nothing else catches: your bill leaking a secret.**
++**A C++17 prototype for bounded workflow resource analysis and declared information-flow policies.**
++
++> Publication work is in progress. The [23 October audit](research/2026-10-23/README.md)
++> reproduced an accepted counterexample despite 95 passing tests. Current repairs
++> distinguish resolved contracts and request content. The mock uses synthetic
++> length units; it provides no deployed-provider privacy guarantee. Start with
++> [the controlling master plan](docs/PUBLICATION_MASTER_PLAN.md),
++> [current semantics and proof scope](docs/SEMANTICS.md), and
++> [fresh reproduction instructions](docs/REPRODUCIBILITY.md).
++> Historical benchmark counts and examples below are not final publication data.
+ 
+ Nambi Rajan M · 24BAI0072 · Compiler Design Laboratory
+ 
+@@ -407,20 +416,24 @@ Being precise about this is part of the work.
+ - **Combining data-flow analysis with cost analysis is not new.** Ngo et al.
+   (IEEE S&P 2017) formalised resource-aware noninterference; RelCost (POPL 2017)
+   gives relational cost bounds for exactly this kind of side channel. What's
+-  specific here is the *opaque stochastic call*, where you can't compare numbers
+-  because you don't have any.
++  being investigated here is an auditable specialization with explicit model,
++  request and observer assumptions. Stochastic calls can have numeric cap and
++  expected-cost specifications; the old impossibility argument is withdrawn.
+ - **Leaking through token counts isn't a new discovery** — it's established for
+   single model calls by prior attack research. This project is about
+   workflow-level billing, which is adjacent.
+-- **The relational guarantee is relative to a coupling**: it says the secret
+-  doesn't change the bill *given the model behaved the same way*.
++- **A relational probability claim requires a valid kernel coupling** with the
++  actual marginals. Equal request lengths or common seeds do not supply one.
++  Current proof and implementation coverage differ; see `docs/SEMANTICS.md`.
+ - **`declassify` and `endorse` are trusted.** The compiler records every one with
+   its written reason; it doesn't check that the reason is true.
+ - **Token bounds aren't portable between tokenizers.** One model's output cap is
+   reused as another's input bound. This is the clearest remaining gap.
+-- **The proofs are on paper, not machine-checked**, and the C++ isn't verified
+-  against them. The experiments are evidence, not proof.
+-- **The certificate is a report, not a proof** — there's no independent checker yet.
++- **Small feasibility cores have Lean proofs; the C++ is not verified against
++  them.** The full-language relational theorem remains open. Tests are evidence,
++  not a proof of universal correctness.
++- **The C++ certificate is an analysis report.** A typed Lean-core checker theorem
++  does not validate these JSON reports or their source lowering.
+ - **The benchmark is generated and the security labels are mine.**
+ 
+ ---
+diff --git a/bench/evaluate.py b/bench/evaluate.py
+index 1e8fdc8..7f45d8d 100644
+--- a/bench/evaluate.py
++++ b/bench/evaluate.py
+@@ -1,5 +1,10 @@
+ #!/usr/bin/env python3
+-"""Evaluate OrchLang's certified bounds, its relational rule, and its flow policy.
++"""Historical mock development harness; not a final publication experiment.
++
++Same-seed comparisons test this mock only, not equality of real call-kernel
++distributions. Both baseline rules below are deliberately unsound negative
++controls. Use scripts/offline_check.py and structural_baseline.py for current
++development validation; do not overwrite historical results to hide failures.
+ 
+ This harness is deliberately strict, because an earlier version of it was not.
+ It used to skip any file that failed to certify, count any nonzero exit code as
+@@ -41,6 +46,7 @@ import io
+ import itertools
+ import json
+ import os
++import re
+ import subprocess
+ import sys
+ import time
+@@ -148,8 +154,9 @@ def flat_baseline(document):
+ def control_flow_baseline(document):
+     """Take the larger branch arm, but charge a retry body only once.
+ 
+-    A strictly better rule than the flat sum, and still unsound, which is the
+-    point: branch-awareness alone does not rescue it.
++    Historical unsound negative control. This is not a competent structural
++    resource analyzer and must not establish comparative superiority. See
++    structural_baseline.py for a max/sum/multiply implementation.
+     """
+     code, out, err = run(['ir-json', document])
+     if code != 0:
+@@ -304,6 +311,8 @@ def evaluate_relational():
+                 continue
+ 
+             assignments = secret_assignments(path)
++            with open(path, encoding='utf-8') as source_file:
++                declared_inputs = set(re.findall(r'\binput\s+(\w+)\s*:', source_file.read()))
+             if not assignments:
+                 fail('no secrets to vary in %s' % name)
+                 continue
+@@ -314,7 +323,7 @@ def evaluate_relational():
+             for seed in range(1, PAIRED_SEEDS + 1):
+                 observations = {}
+                 for assignment in assignments:
+-                    pins = dict(public_pins)
++                    pins = {key: value for key, value in public_pins.items() if key in declared_inputs}
+                     pins.update(assignment)
+                     observation = execute(path, seed, pins)
+                     if observation is None:
+diff --git a/docs/AGENT_BRIEF.md b/docs/AGENT_BRIEF.md
+index 9f502b2..9129e88 100644
+--- a/docs/AGENT_BRIEF.md
++++ b/docs/AGENT_BRIEF.md
+@@ -1,5 +1,7 @@
+ # OrchLang — Agent Handoff and Research Brief
+ 
++> **Superseded research guidance (23 October 2026):** Read [AGENT_START_HERE.md](AGENT_START_HERE.md) and [PUBLICATION_MASTER_PLAN.md](PUBLICATION_MASTER_PLAN.md) first. A fresh counterexample invalidates the “correct-but-narrow” characterization below. The newer plan also corrects the proposed AARA impossibility argument and updates prior art, hardware, budget, and publication gates. This file is retained as historical context.
++
+ **Written:** 24 September 2026
+ **Repository:** `github.com/guyoverclocked/orchlang-compiler-design-project`, branch `main` at `0d8c0f0`
+ **Target venue:** *Science of Computer Programming* (Elsevier)
+diff --git a/docs/PAPER.md b/docs/PAPER.md
+index 941dca8..467dee2 100644
+--- a/docs/PAPER.md
++++ b/docs/PAPER.md
+@@ -1,5 +1,13 @@
+ # Beyond Equal Caps: Relational Token-Cost Contracts for LLM Workflows
+ 
++> **Withdrawn historical draft, 23 October 2026. Do not submit or cite its
++> theorem/novelty claims as established.** The reproduced shadowed-contract
++> counterexample refutes the implemented acceptance claim. The blanket claim
++> that stochastic calls prevent numeric potentials/specifications is withdrawn.
++> Its historical baseline comparisons use broken negative controls. See
++> `PUBLICATION_MASTER_PLAN.md`, `SEMANTICS.md`, `research/claims.csv` and the
++> current `SOFTWARE_PAPER.md` working draft for actual evidence and open gates.
++
+ **Nambi Rajan M** (24BAI0072)
+ Vellore Institute of Technology
+ 
+diff --git a/docs/SUBMISSION_PLAN.md b/docs/SUBMISSION_PLAN.md
+index 1aebb10..89f6c80 100644
+--- a/docs/SUBMISSION_PLAN.md
++++ b/docs/SUBMISSION_PLAN.md
+@@ -1,5 +1,10 @@
+ # Publication strategy
+ 
++> Historical strategy, superseded by `PUBLICATION_MASTER_PLAN.md` on 23 October
++> 2026. Correctness, novelty and coupling claims below are not current evidence.
++> The author subsequently supplied a one-week deadline; the working route is a
++> scoped software/reproducibility candidate, subject to actual review gates.
++
+ Where this work can realistically be published, what each venue needs, and what
+ to do first. Written after the external audit in
+ `docs/RESEARCH_AUDIT_2026-09-17.md` and the corrections that followed it, so the
+diff --git a/include/cost_analyzer.hpp b/include/cost_analyzer.hpp
+index 5568627..86bca1d 100644
+--- a/include/cost_analyzer.hpp
++++ b/include/cost_analyzer.hpp
+@@ -13,8 +13,9 @@
+ //               relative to the declared characters-per-token assumption, which
+ //               is recorded alongside it.
+ //
+-// Keeping the halves apart is the point: a reader can see exactly how much of
+-// the certified number rests on an assumption and how much does not.
++// Both halves are conditional contracts: output caps must cover every billed
++// attempt, while input units here are synthetic mock lengths. Neither field
++// establishes deployed-provider accounting or tokenizer conformance.
+ 
+ #include "ast.hpp"
+ #include "diagnostic.hpp"
+diff --git a/include/interpreter.hpp b/include/interpreter.hpp
+index b5ee680..c0d4eb6 100644
+--- a/include/interpreter.hpp
++++ b/include/interpreter.hpp
+@@ -17,6 +17,7 @@
+ #include "ast.hpp"
+ #include "diagnostic.hpp"
+ #include "semantic_analyzer.hpp"
++#include "token_cost.hpp"
+ 
+ #include <cstdint>
+ #include <cstddef>
+@@ -74,7 +75,7 @@ struct WorkflowRun {
+     // The observation the relational analysis is stated against.
+     std::map<std::string, ModelBilling> billing;
+ 
+-    std::size_t totalTokens() const { return inputTokens + outputTokens; }
++    std::size_t totalTokens() const { return addTokens(inputTokens, outputTokens); }
+ };
+ 
+ // True when two executions are indistinguishable to someone reading the bill.
+diff --git a/include/relational.hpp b/include/relational.hpp
+index b63fd3b..c8538db 100644
+--- a/include/relational.hpp
++++ b/include/relational.hpp
+@@ -20,12 +20,13 @@
+ //
+ // WHAT REPLACES IT
+ //
+-// Costs here cannot be compared numerically at all, because a model call's
+-// output length is chosen by the provider, not by the program.  So instead of
+-// comparing numbers we compare *structure*: each arm is abstracted to a billing
+-// signature recording, in order, which model is called and a symbolic term for
+-// how large its input is.  Two arms are indistinguishable to someone reading the
+-// bill when their signatures are identical.
++// Numeric cap specifications are possible for stochastic calls. Equality of
++// caps or lengths, however, does not establish equality of request-dependent
++// kernels. The conservative signature compares resolved semantic contracts,
++// request construction (including content and ordered arguments), and sizes.
++// Distributional reasoning additionally assumes identical stateless kernels
++// for identical serialized requests and equal retry policies. This analyzer is
++// not a proof of adapter conformance or of those external assumptions.
+ //
+ // The symbolic terms refer only to things that provably agree across the two
+ // executions being compared: constants, variables bound outside the branch
+@@ -82,6 +83,8 @@ struct SignatureNode {
+     // Call
+     std::string model;
+     SizeTerm inputSize;
++    std::string requestTemplate;
++    std::vector<std::string> requestArguments;
+ 
+     // Retry
+     std::size_t repeatBound{0};
+diff --git a/include/semantic_analyzer.hpp b/include/semantic_analyzer.hpp
+index 49374c5..ee8504d 100644
+--- a/include/semantic_analyzer.hpp
++++ b/include/semantic_analyzer.hpp
+@@ -12,14 +12,11 @@
+ 
+ namespace orchlang {
+ 
+-// How many source characters the analysis assumes fit in one token.
+-//
+-// The input-token half of a cost bound is only as sound as this assumption, so
+-// it is an explicit, recorded parameter rather than a hidden constant.  A value
+-// of 1 is unconditionally sound for any tokenizer that never emits more than
+-// one token per character; larger values trade that unconditional soundness for
+-// a tighter, assumption-relative bound.  The default follows the widely used
+-// four-characters-per-token rule for English prose.
++// Historical option name. std::string::size measures UTF-8 bytes, not Unicode
++// characters or model tokens. The mock defines literal/template length as
++// ceil(bytes/divisor), then adds bounded argument lengths. This is a synthetic
++// resource unit, not tokenization of a fully serialized deployed request.
++// Real tokenizers need separate exact serialization/tokenizer contracts.
+ inline constexpr std::size_t defaultCharsPerToken() { return 4; }
+ 
+ struct AnalysisOptions {
+@@ -51,6 +48,9 @@ struct ArgumentFact {
+     bool isLiteral{false};
+     bool isSecret{false};
+     std::size_t literalTokens{0};
++    std::size_t bindingId{0};
++    std::string literalText;
++    std::string type;
+ };
+ 
+ // What one 'call' site contributes to a cost bound.  Recorded while the
+@@ -58,6 +58,10 @@ struct ArgumentFact {
+ struct CallSiteFacts {
+     std::string promptName;
+     std::string modelName;
++    std::size_t modelBindingId{0};
++    std::size_t promptBindingId{0};
++    std::string modelContract;
++    std::string requestTemplate;
+     // Output tokens the provider itself caps.  This half of the bound holds
+     // without any tokenizer assumption.
+     std::size_t modelMaxTokens{0};
+@@ -95,6 +99,10 @@ struct SemanticResult {
+     // relational analysis needs this one: a public guard inside a secret arm
+     // still sends both compared executions down the same path.
+     std::map<const IfStmt*, Label> guardOwnLabels;
++    std::map<const IfStmt*, std::size_t> guardBindings;
++    std::map<const Stmt*, std::size_t> declarationBindings;
++    std::map<const ReclassifyStmt*, std::size_t> reclassificationSources;
++    std::map<const Stmt*, std::size_t> statementScopes;
+     AnalysisOptions options;
+ 
+     bool success() const { return !diagnostics.hasErrors(); }
+diff --git a/include/symbol_table.hpp b/include/symbol_table.hpp
+index 13e1443..49ce9b9 100644
+--- a/include/symbol_table.hpp
++++ b/include/symbol_table.hpp
+@@ -23,6 +23,11 @@ struct ModelMetadata {
+     double unitPrice{0.0};
+ };
+ 
++// Versioned, length-prefixed canonical structure, not a declaration name/hash.
++// Describes only the current abstract/mock contract. It supplies no missing
++// provider/tokenizer/serializer assurances for a deployed service.
++std::string canonicalModelContract(const ModelMetadata& model);
++
+ struct PromptParameterInfo {
+     std::string name;
+     Type type;
+@@ -34,6 +39,7 @@ struct PromptSignature {
+     // Static token cost of the template itself, excluding the substituted
+     // arguments.  Derived once at declaration and reused at every call site.
+     std::size_t templateTokens{0};
++    std::string templateText;
+ };
+ 
+ struct ToolSignature {
+@@ -56,6 +62,7 @@ struct Symbol {
+     // bound, or a model or tool name, has no bound at all.
+     bool tokenBoundKnown{false};
+     std::size_t tokenBound{0};
++    std::size_t bindingId{0};
+ };
+ 
+ struct Scope {
+@@ -75,6 +82,7 @@ public:
+ 
+ private:
+     std::vector<Scope> scopes_;
++    std::size_t nextBindingId_{1};
+ };
+ 
+ std::string formatSymbolTable(const SymbolTable& table);
+diff --git a/src/certificate.cpp b/src/certificate.cpp
+index 4fa47e1..5f31b55 100644
+--- a/src/certificate.cpp
++++ b/src/certificate.cpp
+@@ -1,4 +1,5 @@
+ #include "certificate.hpp"
++#include "json_text.hpp"
+ 
+ #include <iomanip>
+ #include <map>
+@@ -11,18 +12,7 @@ namespace orchlang {
+ namespace {
+ 
+ std::string escape(const std::string& text) {
+-    std::ostringstream out;
+-    for (const char character : text) {
+-        switch (character) {
+-            case '\\': out << "\\\\"; break;
+-            case '"': out << "\\\""; break;
+-            case '\n': out << "\\n"; break;
+-            case '\r': out << "\\r"; break;
+-            case '\t': out << "\\t"; break;
+-            default: out << character; break;
+-        }
+-    }
+-    return out.str();
++    return escapeJsonText(text);
+ }
+ 
+ std::string quoted(const std::string& text) { return "\"" + escape(text) + "\""; }
+@@ -87,11 +77,17 @@ std::string printCertificate(const Program& program, const SemanticResult& seman
+     out << "{\n";
+     out << "  \"format\": \"orchlang-safety-certificate\",\n";
+     out << "  \"version\": 1,\n";
++    out << "  \"evidence_kind\": \"analysis-report-not-independently-verified\",\n";
++    out << "  \"observer\": \"aggregate-abstract-contract-usage\",\n";
++    out << "  \"resource_unit\": \"mock-length-v1\",\n";
+     out << "  \"assumptions\": {\n";
+     out << "    \"chars_per_token\": " << semantic.options.charsPerToken << ",\n";
+-    out << "    \"note\": \"The guaranteed component needs no tokenization assumption; the "
+-           "estimated component is sound only if the deployed tokenizer emits at most one token "
+-           "per chars_per_token characters.\"\n";
++    out << "    \"note\": \"Output bounds assume every attempt honors the declared cap. "
++           "Input estimates count UTF-8 bytes using a synthetic chars_per_token divisor; "
++           "they are not provider-token bounds.\",\n";
++    out << "    \"relational\": \"Equal request construction and abstract model contracts; "
++           "identical stateless request-dependent kernels and identical retry/failure policies "
++           "are external assumptions. No provider conformance or full implementation proof.\"\n";
+     out << "  },\n";
+     out << "  \"workflows\": [\n";
+ 
+diff --git a/src/interpreter.cpp b/src/interpreter.cpp
+index 2b184d3..bf7141f 100644
+--- a/src/interpreter.cpp
++++ b/src/interpreter.cpp
+@@ -3,6 +3,7 @@
+ #include "token_cost.hpp"
+ 
+ #include <map>
++#include <limits>
+ #include <sstream>
+ #include <string>
+ #include <vector>
+@@ -31,6 +32,9 @@ public:
+         if (high <= low) {
+             return low;
+         }
++        if (low == 0 && high == std::numeric_limits<std::size_t>::max()) {
++            return static_cast<std::size_t>(next());
++        }
+         return low + static_cast<std::size_t>(next() % (high - low + 1));
+     }
+ 
+@@ -49,6 +53,7 @@ struct Value {
+ 
+ struct ModelInfo {
+     std::size_t maxTokens{0};
++    std::string contract;
+ };
+ 
+ struct PromptInfo {
+@@ -91,8 +96,8 @@ private:
+ class Machine {
+ public:
+     Machine(const SemanticResult& semantic, const RunOptions& options, Random& random,
+-            WorkflowRun& run)
+-        : semantic_(semantic), options_(options), random_(random), run_(run) {}
++            WorkflowRun& run, DiagnosticBag& diagnostics)
++        : semantic_(semantic), options_(options), random_(random), run_(run), diagnostics_(diagnostics) {}
+ 
+     void block(const Block& statements);
+     void enter() {
+@@ -123,6 +128,7 @@ private:
+     const RunOptions& options_;
+     Random& random_;
+     WorkflowRun& run_;
++    DiagnosticBag& diagnostics_;
+ 
+     Environment<Value> values_;
+     Environment<ModelInfo> models_;
+@@ -143,6 +149,14 @@ void Machine::statement(const Stmt& node) {
+             // An input honours its declared bound, which is the contract the
+             // estimated half of the cost bound is stated against.
+             const std::size_t bound = input.hasTokenBound ? input.tokenBound : 0;
++            if (options_.pinnedFlags.count(input.name) && input.type.kind != TypeKind::Boolean) {
++                diagnostics_.error("R003", node.location, "boolean pin resolves to a non-boolean input");
++                break;
++            }
++            if (pinnedLength(input.name, 0) > bound) {
++                diagnostics_.error("R002", node.location, "pinned input length exceeds its declared mock bound");
++                break;
++            }
+             const std::size_t sampled = random_.between(0, bound);
+             const bool sampledFlag = random_.percent() < 50;
+             values_.define(input.name, {pinnedLength(input.name, sampled),
+@@ -152,6 +166,14 @@ void Machine::statement(const Stmt& node) {
+         case StmtKind::Secret: {
+             const auto& secret = static_cast<const SecretDecl&>(node);
+             const std::size_t bound = secret.hasTokenBound ? secret.tokenBound : 0;
++            if (options_.pinnedFlags.count(secret.name) && secret.type.kind != TypeKind::Boolean) {
++                diagnostics_.error("R003", node.location, "boolean pin resolves to a non-boolean secret");
++                break;
++            }
++            if (pinnedLength(secret.name, 0) > bound) {
++                diagnostics_.error("R002", node.location, "pinned secret length exceeds its declared mock bound");
++                break;
++            }
+             const bool sampledFlag = random_.percent() < 50;
+             values_.define(secret.name, {pinnedLength(secret.name, bound),
+                                         pinnedFlag(secret.name, sampledFlag)});
+@@ -159,7 +181,8 @@ void Machine::statement(const Stmt& node) {
+         }
+         case StmtKind::Model: {
+             const auto& model = static_cast<const ModelDecl&>(node);
+-            models_.define(model.name, {model.maxTokens});
++            models_.define(model.name, {model.maxTokens, canonicalModelContract({model.provider,
++                model.modelName, model.maxTokens, model.hasUnitPrice, model.unitPrice})});
+             break;
+         }
+         case StmtKind::Prompt: {
+@@ -205,7 +228,7 @@ void Machine::statement(const Stmt& node) {
+             ++run_.calls;
+             run_.trace.push_back({let.name, let.call->promptName, let.call->modelName, inputTokens,
+                                   outputTokens});
+-            ModelBilling& billing = run_.billing[let.call->modelName];
++            ModelBilling& billing = run_.billing[model->contract];
+             billing.inputTokens = addTokens(billing.inputTokens, inputTokens);
+             billing.outputTokens = addTokens(billing.outputTokens, outputTokens);
+             ++billing.calls;
+@@ -250,6 +273,9 @@ void Machine::statement(const Stmt& node) {
+                     ScopedBlock frame(*this);
+                     block(retry.body);
+                 }
++                if (diagnostics_.hasErrors()) {
++                    break;
++                }
+                 if (random_.percent() >= options_.retryFailurePercent) {
+                     break;
+                 }
+@@ -277,6 +303,9 @@ void Machine::statement(const Stmt& node) {
+ 
+ void Machine::block(const Block& statements) {
+     for (const auto& node : statements) {
++        if (diagnostics_.hasErrors()) {
++            break;
++        }
+         if (node) {
+             statement(*node);
+         }
+@@ -291,6 +320,34 @@ RunResult Interpreter::run(const Program& program, const SemanticResult& semanti
+         result.diagnostics.error("R001", {}, "running requires a well-typed program");
+         return result;
+     }
++    if (options_.retryFailurePercent > 100) {
++        result.diagnostics.error("R004", {}, "retry failure percentage must be in [0,100]");
++        return result;
++    }
++    const auto knownPin = [&](const std::string& name, bool flag) {
++        for (const auto& scope : semantic.symbols.scopes()) {
++            const auto found = scope.symbols.find(name);
++            if (found != scope.symbols.end() &&
++                (found->second.kind == SymbolKind::Input || found->second.kind == SymbolKind::Secret) &&
++                (!flag || found->second.type.kind == TypeKind::Boolean)) {
++                return true;
++            }
++        }
++        return false;
++    };
++    for (const auto& entry : options_.pinnedLengths) {
++        if (!knownPin(entry.first, false)) {
++            result.diagnostics.error("R003", {}, "pin must name a declared input or secret: " + entry.first);
++        }
++    }
++    for (const auto& entry : options_.pinnedFlags) {
++        if (!knownPin(entry.first, true)) {
++            result.diagnostics.error("R003", {}, "boolean pin must name a boolean input or secret: " + entry.first);
++        }
++    }
++    if (result.diagnostics.hasErrors()) {
++        return result;
++    }
+ 
+     for (const auto& workflowPointer : program.workflows) {
+         if (!workflowPointer) {
+@@ -303,7 +360,7 @@ RunResult Interpreter::run(const Program& program, const SemanticResult& semanti
+         // Seeding per workflow keeps each workflow's execution reproducible on
+         // its own, independent of how many workflows precede it in the file.
+         Random random(options_.seed * 0x2545F4914F6CDD1DULL + workflow.name.size());
+-        Machine machine(semantic, options_, random, run);
++        Machine machine(semantic, options_, random, run, result.diagnostics);
+         machine.enter();
+         machine.block(workflow.statements);
+         machine.leave();
+diff --git a/src/ir.cpp b/src/ir.cpp
+index dc79d6b..f98603f 100644
+--- a/src/ir.cpp
++++ b/src/ir.cpp
+@@ -1,4 +1,5 @@
+ #include "ir.hpp"
++#include "json_text.hpp"
+ 
+ #include "token_cost.hpp"
+ 
+@@ -38,18 +39,7 @@ void addDependency(std::vector<int>& dependencies, int identifier) {
+ }
+ 
+ std::string jsonEscape(const std::string& text) {
+-    std::ostringstream out;
+-    for (const char character : text) {
+-        switch (character) {
+-            case '\\': out << "\\\\"; break;
+-            case '"': out << "\\\""; break;
+-            case '\n': out << "\\n"; break;
+-            case '\r': out << "\\r"; break;
+-            case '\t': out << "\\t"; break;
+-            default: out << character; break;
+-        }
+-    }
+-    return out.str();
++    return escapeJsonText(text);
+ }
+ 
+ // A stack of name-to-node maps mirroring the block structure of the source, so
+@@ -201,6 +191,10 @@ void Lowerer::lowerStatement(const Stmt& statement, const std::string& region,
+                 node.attributes.push_back({"model", let.call->modelName});
+                 const auto site = semantic_.callSites.find(let.call.get());
+                 if (site != semantic_.callSites.end()) {
++                    node.attributes.push_back({"model_binding", std::to_string(site->second.modelBindingId)});
++                    node.attributes.push_back({"prompt_binding", std::to_string(site->second.promptBindingId)});
++                    node.attributes.push_back({"model_contract", site->second.modelContract});
++                    node.attributes.push_back({"resource_unit", "mock-length-v1"});
+                     node.attributes.push_back({"out_tokens", std::to_string(site->second.modelMaxTokens)});
+                     node.attributes.push_back(
+                         {"in_tokens", std::to_string(addTokens(site->second.promptTemplateTokens,
+@@ -268,12 +262,13 @@ void Lowerer::lowerStatement(const Stmt& statement, const std::string& region,
+             node.attributes.push_back({"has_else", branch.hasElse ? "true" : "false"});
+             workflow_.nodes.push_back(node);
+ 
+-            const std::string base = region + "/then@" + std::to_string(branch.location.line);
++            const std::string marker = std::to_string(branch.location.line) + "#" + std::to_string(node.id);
++            const std::string base = region + "/then@" + marker;
+             values_.push();
+             lowerBlock(branch.thenBranch, base, repeatFactor);
+             values_.pop();
+             if (branch.hasElse) {
+-                const std::string elseRegion = region + "/else@" + std::to_string(branch.location.line);
++                const std::string elseRegion = region + "/else@" + marker;
+                 values_.push();
+                 lowerBlock(branch.elseBranch, elseRegion, repeatFactor);
+                 values_.pop();
+@@ -288,7 +283,8 @@ void Lowerer::lowerStatement(const Stmt& statement, const std::string& region,
+             node.attributes.push_back({"bound", std::to_string(retry.bound)});
+             workflow_.nodes.push_back(node);
+ 
+-            const std::string body = region + "/retry@" + std::to_string(retry.location.line);
++            const std::string body = region + "/retry@" + std::to_string(retry.location.line) +
++                                     "#" + std::to_string(node.id);
+             values_.push();
+             lowerBlock(retry.body, body, multiplyTokens(repeatFactor, retry.bound));
+             values_.pop();
+@@ -320,6 +316,10 @@ void Lowerer::lowerBlock(const Block& statements, const std::string& region,
+                          std::size_t repeatFactor) {
+     for (const auto& statement : statements) {
+         if (statement) {
++            const auto resolvedScope = semantic_.statementScopes.find(statement.get());
++            if (resolvedScope != semantic_.statementScopes.end()) {
++                scope = resolvedScope->second;
++            }
+             lowerStatement(*statement, region, repeatFactor);
+         }
+     }
+diff --git a/src/main.cpp b/src/main.cpp
+index 693bbae..a040357 100644
+--- a/src/main.cpp
++++ b/src/main.cpp
+@@ -11,6 +11,7 @@
+ #include "symbol_table.hpp"
+ 
+ #include <cstdlib>
++#include <charconv>
+ #include <fstream>
+ #include <iostream>
+ #include <sstream>
+@@ -35,7 +36,7 @@ void printUsage(std::ostream& out) {
+         << "       orchc <source.orch>\n"
+         << "Options: --chars-per-token <n>   tokenization assumption for input tokens (default "
+         << defaultCharsPerToken() << ";\n"
+-        << "                                 1 is unconditionally sound, larger is tighter)\n"
++        << "                                 synthetic UTF-8 byte estimate, not provider tokenization)\n"
+         << "         --seed <n>            seed for the offline mock runtime used by 'run'\n"
+         << "         --retry-failure <p>   percentage chance one retry attempt fails (default 50)\n"
+         << "         --pin <name>=<n>      pin an input or secret's token length for 'run'\n"
+@@ -84,8 +85,11 @@ bool collectArguments(int argc, char* argv[], Invocation& invocation) {
+             if (index + 1 >= argc) {
+                 return false;
+             }
+-            const long value = std::strtol(argv[++index], nullptr, 10);
+-            if (value < 1) {
++            const std::string text = argv[++index];
++            std::size_t value = 0;
++            const auto parsed = std::from_chars(text.data(), text.data() + text.size(), value);
++            if (parsed.ec != std::errc{} || parsed.ptr != text.data() + text.size() ||
++                text.empty() || value < 1) {
+                 return false;
+             }
+             invocation.options.charsPerToken = static_cast<std::size_t>(value);
+@@ -95,7 +99,11 @@ bool collectArguments(int argc, char* argv[], Invocation& invocation) {
+             if (index + 1 >= argc) {
+                 return false;
+             }
+-            invocation.run.seed = std::strtoull(argv[++index], nullptr, 10);
++            const std::string text = argv[++index];
++            const auto parsed = std::from_chars(text.data(), text.data() + text.size(), invocation.run.seed);
++            if (parsed.ec != std::errc{} || parsed.ptr != text.data() + text.size() || text.empty()) {
++                return false;
++            }
+             continue;
+         }
+         if (argument == "--pin") {
+@@ -110,11 +118,18 @@ bool collectArguments(int argc, char* argv[], Invocation& invocation) {
+             }
+             const std::string name = spec.substr(0, split);
+             const std::string value = spec.substr(split + 1);
++            if (name.empty() || value.empty()) {
++                return false;
++            }
+             if (value == "true" || value == "false") {
+                 invocation.run.pinnedFlags[name] = value == "true";
+             } else {
+-                invocation.run.pinnedLengths[name] =
+-                    static_cast<std::size_t>(std::strtoull(value.c_str(), nullptr, 10));
++                std::size_t length = 0;
++                const auto parsed = std::from_chars(value.data(), value.data() + value.size(), length);
++                if (parsed.ec != std::errc{} || parsed.ptr != value.data() + value.size()) {
++                    return false;
++                }
++                invocation.run.pinnedLengths[name] = length;
+             }
+             continue;
+         }
+@@ -122,8 +137,11 @@ bool collectArguments(int argc, char* argv[], Invocation& invocation) {
+             if (index + 1 >= argc) {
+                 return false;
+             }
+-            const long value = std::strtol(argv[++index], nullptr, 10);
+-            if (value < 0 || value > 100) {
++            const std::string text = argv[++index];
++            unsigned value = 0;
++            const auto parsed = std::from_chars(text.data(), text.data() + text.size(), value);
++            if (parsed.ec != std::errc{} || parsed.ptr != text.data() + text.size() ||
++                text.empty() || value > 100) {
+                 return false;
+             }
+             invocation.run.retryFailurePercent = static_cast<unsigned>(value);
+diff --git a/src/relational.cpp b/src/relational.cpp
+index 1bd856f..b951d29 100644
+--- a/src/relational.cpp
++++ b/src/relational.cpp
+@@ -1,4 +1,5 @@
+ #include "relational.hpp"
++#include "token_cost.hpp"
+ 
+ #include <algorithm>
+ #include <sstream>
+@@ -31,7 +32,9 @@ bool SignatureNode::operator==(const SignatureNode& other) const {
+     }
+     switch (kind) {
+         case SignatureNodeKind::Call:
+-            return model == other.model && inputSize == other.inputSize;
++            return model == other.model && inputSize == other.inputSize &&
++                   requestTemplate == other.requestTemplate &&
++                   requestArguments == other.requestArguments;
+         case SignatureNodeKind::Retry:
+             return repeatBound == other.repeatBound;
+         case SignatureNodeKind::Branch:
+@@ -60,7 +63,12 @@ void renderNode(std::ostringstream& out, const SignatureNode& node, int depth) {
+     const std::string pad(static_cast<std::size_t>(depth) * 2, ' ');
+     switch (node.kind) {
+         case SignatureNodeKind::Call:
+-            out << pad << "bill(" << node.model << ", in=" << node.inputSize.text() << ")\n";
++            out << pad << "bill(" << node.model << ", in=" << node.inputSize.text()
++                << ", request=" << node.requestTemplate;
++            for (const auto& argument : node.requestArguments) {
++                out << "; " << argument;
++            }
++            out << ")\n";
+             break;
+         case SignatureNodeKind::Retry:
+             out << pad << "retry " << node.repeatBound << " {\n";
+@@ -116,11 +124,13 @@ private:
+ 
+     const SemanticResult& semantic_;
+     SignatureResult& result_;
+-    std::vector<std::pair<std::string, std::size_t>> localCalls_;
++    std::vector<std::pair<std::size_t, std::size_t>> localCalls_;
+     std::size_t callIndex_{0};
+ };
+ 
+ Signature SignatureBuilder::build(const Block& block) {
++    // Lexical block bindings must never escape into siblings or the join.
++    const auto savedCalls = localCalls_;
+     Signature signature;
+     for (const auto& statement : block) {
+         if (!statement) {
+@@ -141,7 +151,8 @@ Signature SignatureBuilder::build(const Block& block) {
+ 
+                 SignatureNode node;
+                 node.kind = SignatureNodeKind::Call;
+-                node.model = site.modelName;
++                node.model = site.modelContract;
++                node.requestTemplate = site.requestTemplate;
+                 node.location = statement->location;
+                 node.inputSize.constant = site.promptTemplateTokens;
+ 
+@@ -153,7 +164,10 @@ Signature SignatureBuilder::build(const Block& block) {
+                         continue;
+                     }
+                     if (argument.isLiteral) {
+-                        node.inputSize.constant += argument.literalTokens;
++                        node.inputSize.constant = addTokens(node.inputSize.constant,
++                                                            argument.literalTokens);
++                        node.requestArguments.push_back("literal:" + argument.type + ":" +
++                            std::to_string(argument.literalText.size()) + ":" + argument.literalText);
+                         continue;
+                     }
+                     // A result produced earlier inside this region is fixed by
+@@ -161,20 +175,29 @@ Signature SignatureBuilder::build(const Block& block) {
+                     // else was bound outside and is fixed by hypothesis.
+                     bool local = false;
+                     for (const auto& entry : localCalls_) {
+-                        if (entry.first == argument.name) {
++                        if (entry.first == argument.bindingId) {
+                             node.inputSize.priorResults.push_back(entry.second);
++                            node.requestArguments.push_back("call:" + argument.type + ":" +
++                                                            std::to_string(entry.second));
+                             local = true;
+                             break;
+                         }
+                     }
+                     if (!local) {
+-                        node.inputSize.outer.push_back(argument.name);
++                        const std::string binding = std::to_string(argument.bindingId);
++                        node.inputSize.outer.push_back(binding);
++                        node.requestArguments.push_back("binding:" + argument.type + ":" + binding);
+                     }
+                 }
+                 std::sort(node.inputSize.outer.begin(), node.inputSize.outer.end());
+                 std::sort(node.inputSize.priorResults.begin(), node.inputSize.priorResults.end());
+ 
+-                localCalls_.push_back({let.name, callIndex_});
++                const auto binding = semantic_.declarationBindings.find(&let);
++                if (binding == semantic_.declarationBindings.end()) {
++                    undefine("unresolved call result binding", statement->location);
++                } else {
++                    localCalls_.push_back({binding->second, callIndex_});
++                }
+                 ++callIndex_;
+                 signature.push_back(std::move(node));
+                 break;
+@@ -195,9 +218,15 @@ Signature SignatureBuilder::build(const Block& block) {
+                 const bool secretGuard = guard != semantic_.guardOwnLabels.end() &&
+                                          guard->second.isSecret();
+ 
++                // Sibling paths start from the same call position. Reserve the
++                // larger suffix for later calls; no branch-local binding escapes.
++                const auto startIndex = callIndex_;
+                 Signature thenSignature = build(branch.thenBranch);
++                const auto thenIndex = callIndex_;
++                callIndex_ = startIndex;
+                 Signature elseSignature =
+                     branch.hasElse ? build(branch.elseBranch) : Signature{};
++                callIndex_ = std::max(thenIndex, callIndex_);
+ 
+                 if (secretGuard) {
+                     // A nested secret branch must already have been discharged
+@@ -218,6 +247,13 @@ Signature SignatureBuilder::build(const Block& block) {
+                 SignatureNode node;
+                 node.kind = SignatureNodeKind::Branch;
+                 node.guard = conditionToString(branch.condition);
++                const auto resolved = semantic_.guardBindings.find(&branch);
++                if (resolved == semantic_.guardBindings.end()) {
++                    undefine("unresolved public guard", statement->location);
++                } else {
++                    // Guard spelling alone conflates shadowed input bindings.
++                    node.guard += "@binding:" + std::to_string(resolved->second);
++                }
+                 node.location = statement->location;
+                 node.children.push_back(std::move(thenSignature));
+                 node.children.push_back(std::move(elseSignature));
+@@ -228,9 +264,12 @@ Signature SignatureBuilder::build(const Block& block) {
+                 // Relabelling copies a value, so the new name denotes the same
+                 // quantity.  Inherit the source's position if it had one.
+                 const auto& reclassify = static_cast<const ReclassifyStmt&>(*statement);
++                const auto source = semantic_.reclassificationSources.find(&reclassify);
++                const auto target = semantic_.declarationBindings.find(&reclassify);
+                 for (const auto& entry : localCalls_) {
+-                    if (entry.first == reclassify.sourceName) {
+-                        localCalls_.push_back({reclassify.name, entry.second});
++                    if (source != semantic_.reclassificationSources.end() &&
++                        target != semantic_.declarationBindings.end() && entry.first == source->second) {
++                        localCalls_.push_back({target->second, entry.second});
+                         break;
+                     }
+                 }
+@@ -248,6 +287,7 @@ Signature SignatureBuilder::build(const Block& block) {
+                 break;
+         }
+     }
++    localCalls_ = savedCalls;
+     return signature;
+ }
+ 
+@@ -323,8 +363,8 @@ void Checker::block(const Block& statements) {
+             obligation.detail = detail.str();
+ 
+             std::ostringstream message;
+-            message << "this branch is guarded by a secret and its two arms bill differently, so "
+-                       "the bill reveals the secret; then-arm bills ["
++            message << "this branch is guarded by a secret and equal resource observations "
++                       "cannot be certified: resolved contracts, requests, or control differ; then-arm ["
+                     << signatureText(thenSide.signature) << "] and else-arm bills ["
+                     << signatureText(elseSide.signature) << "]";
+             std::string text = message.str();
+@@ -357,7 +397,12 @@ std::string signatureText(const Signature& signature) {
+         first = false;
+         switch (node.kind) {
+             case SignatureNodeKind::Call:
+-                out << node.model << "(in=" << node.inputSize.text() << ")";
++                out << node.model << "(in=" << node.inputSize.text()
++                    << ", request=" << node.requestTemplate;
++                for (const auto& argument : node.requestArguments) {
++                    out << "; " << argument;
++                }
++                out << ")";
+                 break;
+             case SignatureNodeKind::Retry:
+                 out << "retry " << node.repeatBound << "{"
+diff --git a/src/semantic_analyzer.cpp b/src/semantic_analyzer.cpp
+index 28f8061..435c5ae 100644
+--- a/src/semantic_analyzer.cpp
++++ b/src/semantic_analyzer.cpp
+@@ -15,7 +15,7 @@ namespace orchlang {
+ 
+ std::size_t estimateTextTokens(const std::string& text, std::size_t charsPerToken) {
+     const std::size_t divisor = charsPerToken == 0 ? 1 : charsPerToken;
+-    return (text.size() + divisor - 1) / divisor;
++    return text.size() / divisor + (text.size() % divisor != 0 ? 1 : 0);
+ }
+ 
+ namespace {
+@@ -217,6 +217,7 @@ void Analyzer::declarePrompt(const PromptDecl& prompt, const Context& context) {
+         signature.parameters.push_back({parameter.name, parameter.type});
+     }
+     signature.templateTokens = estimateTextTokens(prompt.templateText, options_.charsPerToken);
++    signature.templateText = prompt.templateText;
+ 
+     Symbol symbol{prompt.name,  SymbolKind::Prompt, prompt.returnType, "", prompt.location, std::nullopt,
+                   signature,    std::nullopt,       publicTrusted()};
+@@ -310,6 +311,15 @@ ValueFacts Analyzer::inspectCall(const CallExpr& call, const Context& context) {
+     site.modelName = call.modelName;
+     if (prompt && prompt->prompt) {
+         site.promptTemplateTokens = prompt->prompt->templateTokens;
++        site.promptBindingId = prompt->bindingId;
++        // Include parameter names/types: a template's substitution map is part
++        // of the request contract, even if the raw template bytes agree.
++        site.requestTemplate = std::to_string(prompt->prompt->templateText.size()) + ":" +
++                               prompt->prompt->templateText;
++        for (const auto& parameter : prompt->prompt->parameters) {
++            site.requestTemplate += ":" + std::to_string(parameter.name.size()) + ":" +
++                                    parameter.name + ":" + typeName(parameter.type);
++        }
+     }
+     for (std::size_t index = 0; index < arguments.size(); ++index) {
+         const ValueFacts& argument = arguments[index];
+@@ -321,12 +331,17 @@ ValueFacts Analyzer::inspectCall(const CallExpr& call, const Context& context) {
+ 
+         ArgumentFact fact;
+         fact.isSecret = argument.label.isSecret();
++        fact.type = typeName(argument.type);
+         if (index < call.arguments.size() && call.arguments[index]) {
+             const Expr& expression = *call.arguments[index];
+             if (expression.kind() == ExprKind::Identifier) {
+                 fact.name = static_cast<const IdentifierExpr&>(expression).name;
++                if (const Symbol* resolved = result_.symbols.lookup(context.scope, fact.name)) {
++                    fact.bindingId = resolved->bindingId;
++                }
+             } else {
+                 fact.isLiteral = true;
++                fact.literalText = substitutedText(expression);
+                 fact.literalTokens =
+                     estimateTextTokens(substitutedText(expression), options_.charsPerToken);
+             }
+@@ -350,6 +365,8 @@ ValueFacts Analyzer::inspectCall(const CallExpr& call, const Context& context) {
+         facts.tokenBoundKnown = true;
+         facts.tokenBound = model->model->maxTokens;
+         site.modelMaxTokens = model->model->maxTokens;
++        site.modelBindingId = model->bindingId;
++        site.modelContract = canonicalModelContract(*model->model);
+         site.hasUnitPrice = model->model->hasUnitPrice;
+         site.unitPrice = model->model->unitPrice;
+     }
+@@ -372,6 +389,9 @@ void Analyzer::analyzeLet(const LetStmt& let, const Context& context) {
+     symbol.tokenBoundKnown = facts.tokenBoundKnown;
+     symbol.tokenBound = facts.tokenBound;
+     insertSymbol(context.scope, std::move(symbol));
++    if (const Symbol* resolved = result_.symbols.lookupLocal(context.scope, let.name)) {
++        result_.declarationBindings[&let] = resolved->bindingId;
++    }
+ }
+ 
+ void Analyzer::analyzeRequire(const RequireStmt& requirement, const Context& context) {
+@@ -494,6 +514,7 @@ void Analyzer::analyzeIf(const IfStmt& branch, const Context& context) {
+                                   "use of undeclared identifier '" + branch.condition.subjectName + "'");
+     } else {
+         guardLabel = subject->label;
++        result_.guardBindings[&branch] = subject->bindingId;
+         if (branch.condition.kind == ConditionKind::Flag && subject->type.kind != TypeKind::Boolean &&
+             subject->type.kind != TypeKind::Unknown) {
+             result_.diagnostics.error("E211", branch.condition.location,
+@@ -544,6 +565,7 @@ void Analyzer::analyzeReclassify(const ReclassifyStmt& reclassify, const Context
+     }
+ 
+     const Label from = subject->label;
++    result_.reclassificationSources[&reclassify] = subject->bindingId;
+     Label to = from;
+     if (reclassify.endorsement) {
+         to.integrity = Integrity::Trusted;
+@@ -574,6 +596,10 @@ void Analyzer::analyzeReclassify(const ReclassifyStmt& reclassify, const Context
+     symbol.tokenBound = subject->tokenBound;
+     insertSymbol(context.scope, std::move(symbol));
+ 
++    if (const Symbol* resolved = result_.symbols.lookupLocal(context.scope, reclassify.name)) {
++        result_.declarationBindings[&reclassify] = resolved->bindingId;
++    }
++
+     result_.reclassifications.push_back({context.workflow, reclassify.sourceName, reclassify.name,
+                                          reclassify.endorsement, from, to, reclassify.reason,
+                                          reclassify.location});
+@@ -593,6 +619,7 @@ void Analyzer::analyzeOutput(const OutputStmt& output, const Context& context) {
+ }
+ 
+ void Analyzer::analyzeStatement(const Stmt& statement, const Context& context) {
++    result_.statementScopes[&statement] = context.scope;
+     switch (statement.kind()) {
+         case StmtKind::Input:
+             declareInput(static_cast<const InputDecl&>(statement), context);
+diff --git a/src/symbol_table.cpp b/src/symbol_table.cpp
+index 545f189..712571b 100644
+--- a/src/symbol_table.cpp
++++ b/src/symbol_table.cpp
+@@ -1,11 +1,25 @@
+ #include "symbol_table.hpp"
+ 
+ #include <sstream>
++#include <iomanip>
++#include <locale>
+ #include <stdexcept>
+ #include <utility>
+ 
+ namespace orchlang {
+ 
++std::string canonicalModelContract(const ModelMetadata& model) {
++    std::ostringstream out;
++    out.imbue(std::locale::classic());
++    out << "orch-abstract-model-v1:" << model.provider.size() << ':' << model.provider
++        << ':' << model.modelName.size() << ':' << model.modelName
++        << ":cap=" << model.maxTokens << ":price=" << model.hasUnitPrice;
++    if (model.hasUnitPrice) {
++        out << ':' << std::hexfloat << model.unitPrice;
++    }
++    return out.str();
++}
++
+ std::string symbolKindName(SymbolKind kind) {
+     switch (kind) {
+         case SymbolKind::Input: return "input";
+@@ -42,6 +56,7 @@ bool SymbolTable::insert(std::size_t scopeIndex, Symbol symbol, const Symbol** e
+         }
+         return false;
+     }
++    symbol.bindingId = nextBindingId_++;
+     target.symbols.emplace(symbol.name, std::move(symbol));
+     if (existing) {
+         *existing = nullptr;
+diff --git a/tests/tests.cpp b/tests/tests.cpp
+index d03a851..1f02d87 100644
+--- a/tests/tests.cpp
++++ b/tests/tests.cpp
+@@ -1,4 +1,5 @@
+ #include "ast.hpp"
++#include "json_text.hpp"
+ #include "certificate.hpp"
+ #include "cost_analyzer.hpp"
+ #include "interpreter.hpp"
+@@ -659,6 +660,152 @@ void testSecretDependentCostIsRejected() {
+             "arms that call different models bill differently under a secret guard");
+ }
+ 
++std::string pairedContractProgram(const std::string& leftModel, const std::string& rightModel,
++                                  const std::string& leftCall = "call p(x) using m",
++                                  const std::string& rightCall = "call p(x) using m") {
++    return "workflow Contract budget 100000 { secret s: boolean max_tokens 1; "
++           "input x: text max_tokens 10; input y: text max_tokens 10; "
++           "prompt p(t: text) -> text = \"{t}\"; if s { " + leftModel +
++           " let a: text = " + leftCall + "; } else { " + rightModel +
++           " let b: text = " + rightCall + "; } output x; }";
++}
++
++void testShadowedContractsRejected() {
++    for (const std::string other : {
++             "model m = mock(\"large\") max_tokens 1000;",
++             "model m = mock(\"small\") max_tokens 2;"}) {
++        const auto p = compileSource(pairedContractProgram(
++            "model m = mock(\"small\") max_tokens 1;", other));
++        require(hasCode(p, "E236"), "resolved provider/revision/cap mismatch must be rejected");
++    }
++    require(canonicalModelContract({"provider-a", "same", 1, false, 0}) !=
++            canonicalModelContract({"provider-b", "same", 1, false, 0}),
++            "canonical structures distinguish providers; source grammar currently supports only mock");
++}
++
++void testEquivalentModelAliasesAccepted() {
++    auto p = compileSource(pairedContractProgram("model left = mock(\"same\") max_tokens 10;",
++        "model right = mock(\"same\") max_tokens 10;", "call p(x) using left", "call p(x) using right"));
++    requireSemanticallyValid(p);
++    require(p.relational->success(), "equivalent contracts need not share declaration names");
++    const auto& sites = p.semantic->callSites;
++    require(sites.size() == 2, "two resolved sites");
++    const auto& a = sites.begin()->second;
++    const auto& b = std::next(sites.begin())->second;
++    require(a.modelBindingId != b.modelBindingId, "distinct lexical binding identities");
++    require(a.modelContract == b.modelContract, "equal semantic contract structures");
++    RunOptions l; l.seed = 1; l.pinnedFlags["s"] = true;
++    RunOptions r = l; r.pinnedFlags["s"] = false;
++    require(sameBilling(Interpreter(l).run(p.parsed.program, *p.semantic).workflows.front(),
++                        Interpreter(r).run(p.parsed.program, *p.semantic).workflows.front()),
++            "billing observer uses semantic contracts, not alias spelling");
++}
++
++void testEqualLengthDifferentRequestsRejected() {
++    auto p = compileSource(pairedContractProgram("model m = mock(\"m\") max_tokens 10;",
++        "model m = mock(\"m\") max_tokens 10;", "call p(\"yes\") using m", "call p(\"no!\") using m"));
++    require(hasCode(p, "E236"), "equal-length request text does not identify a kernel");
++}
++
++void testShadowedPromptsRejected() {
++    auto p = compileSource(pairedContractProgram(
++        "model m = mock(\"m\") max_tokens 10; prompt q(t: text) -> text = \"YES {t}\";",
++        "model m = mock(\"m\") max_tokens 10; prompt q(t: text) -> text = \"NO! {t}\";",
++        "call q(x) using m", "call q(x) using m"));
++    require(hasCode(p, "E236"), "same-size shadowed template content must remain distinct");
++}
++
++void testOrderedRequestArgumentsRejected() {
++    const auto p = compileSource(R"(workflow C budget 1000 {
++      secret s: boolean max_tokens 1; input x: text max_tokens 10; input y: text max_tokens 10;
++      model m = mock("m") max_tokens 10; prompt p(a: text, b: text) -> text = "{a}{b}";
++      if s { let a: text = call p(x,y) using m; } else { let b: text = call p(y,x) using m; }
++      output x; })");
++    require(hasCode(p, "E236"), "request argument order must not be sorted away");
++}
++
++void testBranchLocalInputsNotAssumedEqual() {
++    const auto p = compileSource(pairedContractProgram(
++        "model m = mock(\"m\") max_tokens 10; input z: text max_tokens 10;",
++        "model m = mock(\"m\") max_tokens 10; input z: text max_tokens 10;",
++        "call p(z) using m", "call p(z) using m"));
++    require(hasCode(p, "E236"), "separate local inputs are not a shared outer value");
++}
++
++void testNestedSecretSignaturesUseSiblingState() {
++    const auto p = compileSource(R"(workflow C budget 1000 {
++      secret s: boolean max_tokens 1; secret t: boolean max_tokens 1;
++      input x: text max_tokens 10; model m = mock("m") max_tokens 10;
++      prompt p(a: text) -> text = "{a}";
++      if s { if t { let a: text = call p(x) using m; } else { let b: text = call p(x) using m; } }
++      else { let c: text = call p(x) using m; }
++      output x; })");
++    requireSemanticallyValid(p);
++    require(p.relational->success(), "matching nested secret arms compose without sibling state leakage");
++}
++
++void testTokenizerEstimateExtremeDivisor() {
++    require(estimateTextTokens("a", saturatedTokens()) == 1,
++            "ceil division must not overflow with a maximum divisor");
++    require(estimateTextTokens("", saturatedTokens()) == 0, "empty text costs zero synthetic units");
++}
++
++void testIrRetainsResolvedLabelsAndDistinctSameLineRegions() {
++    auto p = compileSource(R"(workflow C budget 1000 {
++      secret s: boolean max_tokens 1; input x: text max_tokens 10;
++      model m = mock("m") max_tokens 10; prompt p(t: text) -> text = "{t}";
++      if s { let a: text = call p(x) using m; } else { let b: text = call p(x) using m; }
++      if s { let c: text = call p(x) using m; } else { let d: text = call p(x) using m; } if s { let e: text = call p(x) using m; } else { let f: text = call p(x) using m; }
++      output x; })");
++    requireSemanticallyValid(p);
++    const auto ir = IRLowerer().lower(p.parsed.program, *p.semantic);
++    require(ir.success(), "lowering succeeds");
++    std::vector<std::string> regions;
++    for (const auto& node : ir.program.workflows.front().nodes) {
++        if (node.kind == IRNodeKind::Call) {
++            require(node.label.isSecret(), "branch-local result must retain its pc confidentiality");
++            regions.push_back(node.region);
++        }
++    }
++    require(regions.size() == 6, "six calls present");
++    for (std::size_t i = 0; i < regions.size(); ++i) {
++        for (std::size_t j = i + 1; j < regions.size(); ++j) {
++            require(regions[i] != regions[j], "sibling branches on same source line have unique regions");
++        }
++    }
++}
++
++void testRuntimeRejectsInvalidPinsAndPolicy() {
++    auto p = compileSource(R"(workflow C budget 100 {
++      input x: text max_tokens 2; secret s: boolean max_tokens 1; output x; })");
++    requireSemanticallyValid(p);
++    RunOptions options;
++    options.pinnedLengths["x"] = 3;
++    require(hasCode(Interpreter(options).run(p.parsed.program, *p.semantic).diagnostics, "R002"),
++            "out-of-contract pinned lengths must not masquerade as admitted runs");
++    options = {};
++    options.pinnedFlags["typo"] = true;
++    require(hasCode(Interpreter(options).run(p.parsed.program, *p.semantic).diagnostics, "R003"),
++            "misspelled secret pins must not silently create equal paired runs");
++    options = {};
++    options.pinnedFlags["x"] = true;
++    require(hasCode(Interpreter(options).run(p.parsed.program, *p.semantic).diagnostics, "R003"),
++            "boolean pins must have boolean declarations");
++    options = {};
++    options.retryFailurePercent = 101;
++    require(hasCode(Interpreter(options).run(p.parsed.program, *p.semantic).diagnostics, "R004"),
++            "public runtime API must also validate retry policies");
++}
++
++void testJsonControlBytesAndUtf8() {
++    const std::string control = std::string(1, '\0') + std::string(1, '\x01') + "\n\t\"\\";
++    require(escapeJsonText(control) == "\\u0000\\u0001\\n\\t\\\"\\\\",
++            "reports must encode every JSON control byte");
++    const std::string utf8 = "\xc3\xa9";
++    require(escapeJsonText(utf8) == utf8, "valid UTF-8 bytes must survive JSON escaping");
++    require(estimateTextTokens(utf8, 1) == 2, "synthetic input estimator counts bytes, not codepoints");
++}
++
+ // The counterexample that falsified the previous rule.  Both arms bound at the
+ // same number, so comparing upper bounds accepted it; the arms read different
+ // variables, so the bill really does move with the secret.
+@@ -1354,6 +1501,17 @@ int main() {
+         {"parser unexpected statement", testParserUnexpectedStatement},
+         {"AST printer", testAstPrinter},
+         {"secret-dependent cost is rejected", testSecretDependentCostIsRejected},
++        {"shadowed model contracts rejected", testShadowedContractsRejected},
++        {"equivalent model aliases accepted", testEquivalentModelAliasesAccepted},
++        {"equal length different requests rejected", testEqualLengthDifferentRequestsRejected},
++        {"shadowed prompt content rejected", testShadowedPromptsRejected},
++        {"ordered request arguments preserved", testOrderedRequestArgumentsRejected},
++        {"branch local inputs not assumed equal", testBranchLocalInputsNotAssumedEqual},
++        {"nested signatures isolate siblings", testNestedSecretSignaturesUseSiblingState},
++        {"token estimate extreme divisor", testTokenizerEstimateExtremeDivisor},
++        {"IR resolved labels and same line regions", testIrRetainsResolvedLabelsAndDistinctSameLineRegions},
++        {"runtime validates pins and retry policy", testRuntimeRejectsInvalidPinsAndPolicy},
++        {"JSON control bytes and UTF8 units", testJsonControlBytesAndUtf8},
+         {"equal bounds with different arguments rejected", testEqualBoundsWithDifferentArgumentsIsRejected},
+         {"extra call in one arm rejected", testExtraCallInOneArmIsRejected},
+         {"differing retry bounds rejected", testDifferingRetryBoundsAreRejected},

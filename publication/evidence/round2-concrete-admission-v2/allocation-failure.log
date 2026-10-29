@@ -1,0 +1,34 @@
+load_backend: loaded RPC backend from C:\Users\nambi\Documents\Compiler Project\audit-2026-10-24\native-pinned-round2\ggml-rpc.dll
+ggml_vulkan: Found 1 Vulkan devices:
+ggml_vulkan: 0 = NVIDIA GeForce RTX 5050 Laptop GPU (NVIDIA) | uma: 0 | fp16: 1 | bf16: 1 | fp4: 0 | warp size: 32 | shared memory: 49152 | int dot: 1 | matrix cores: NV_coopmat2
+load_backend: loaded Vulkan backend from C:\Users\nambi\Documents\Compiler Project\audit-2026-10-24\native-pinned-round2\ggml-vulkan.dll
+load_backend: loaded CPU backend from C:\Users\nambi\Documents\Compiler Project\audit-2026-10-24\native-pinned-round2\ggml-cpu-alderlake.dll
+llama_context: n_ctx_seq (512) > n_ctx_train (0) -- possible training context overflow
+EXECUTED main switch [{'id': 'switch-25', 'completed': True, 'full_store_equal': True, 'saved_equal': True, 'shape_equal': True}, {'id': 'switch-148', 'completed': True, 'full_store_equal': True, 'saved_equal': True, 'shape_equal': True}]
+EXECUTED main routing [{'id': 'route-131', 'completed': True, 'full_store_equal': True, 'saved_equal': True, 'shape_equal': True}, {'id': 'route-13', 'completed': True, 'full_store_equal': True, 'saved_equal': True, 'shape_equal': True}]
+EXECUTED main chaining [{'id': 'chaining-127', 'completed': True, 'full_store_equal': True, 'saved_equal': True, 'shape_equal': True}, {'id': 'chaining-149', 'completed': True, 'full_store_equal': True, 'saved_equal': True, 'shape_equal': True}]
+EXECUTED main evaluator [{'id': 'evaluator-16', 'completed': True, 'full_store_equal': True, 'saved_equal': True, 'shape_equal': True}, {'id': 'evaluator-91', 'completed': True, 'full_store_equal': True, 'saved_equal': True, 'shape_equal': True}]
+EXECUTED main email [{'id': 'email-119', 'completed': True, 'full_store_equal': True, 'saved_equal': True, 'shape_equal': True}, {'id': 'email-82', 'completed': True, 'full_store_equal': True, 'saved_equal': True, 'shape_equal': True}]
+EXECUTED main orchestrator [{'id': 'orchestrator-44', 'completed': True, 'full_store_equal': True, 'saved_equal': True, 'shape_equal': True}, {'id': 'orchestrator-11', 'completed': True, 'full_store_equal': True, 'saved_equal': True, 'shape_equal': True}]
+EXECUTED main calculator [{'id': 'calc-38', 'completed': True, 'full_store_equal': True, 'saved_equal': True, 'shape_equal': True}, {'id': 'calc-32', 'completed': True, 'full_store_equal': True, 'saved_equal': True, 'shape_equal': True}]
+EXECUTED main crag [{'id': 'crag-39', 'completed': True, 'full_store_equal': True, 'saved_equal': True, 'shape_equal': True}, {'id': 'crag-133', 'completed': True, 'full_store_equal': True, 'saved_equal': True, 'shape_equal': True}]
+llama_context: n_ctx_seq (512) > n_ctx_train (0) -- possible training context overflow
+ggml_vulkan: Device memory allocation of size 1073741824 failed.
+ggml_vulkan: vk::Device::allocateMemory: ErrorOutOfDeviceMemory
+Traceback (most recent call last):
+  File "C:\Users\nambi\Documents\Compiler Project\audit-2026-10-24\unified-publication\experiments\concrete_admission.py", line 162, in <module>
+    else: execute(args,profiles)
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nambi\Documents\Compiler Project\audit-2026-10-24\unified-publication\experiments\concrete_admission.py", line 101, in execute
+    backends={key:InstrumentedBackend(profiles[key],n_ctx=32768,n_threads=4,temperature=0) for key in used}
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nambi\Documents\Compiler Project\audit-2026-10-24\unified-publication\experiments\referee_revision.py", line 56, in __init__
+    super().__init__(*args, **kwargs)
+  File "C:\Users\nambi\Documents\Compiler Project\audit-2026-10-24\unified-publication\orchlang\runtime.py", line 131, in __init__
+    self.m = Llama(model_path=profile.gguf, n_ctx=n_ctx, n_threads=n_threads, verbose=False, seed=0,
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\nambi\Documents\Compiler Project\audit-2026-10-24\analysis-venv\Lib\site-packages\llama_cpp\llama.py", line 415, in __init__
+    internals.LlamaContext(
+  File "C:\Users\nambi\Documents\Compiler Project\audit-2026-10-24\analysis-venv\Lib\site-packages\llama_cpp\_internals.py", line 266, in __init__
+    raise ValueError("Failed to create llama_context")
+ValueError: Failed to create llama_context

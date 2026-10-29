@@ -1,0 +1,5 @@
+// Valid: long identifiers remain a normal identifier token and preserve locations.
+workflow LongIdentifierWorkflow budget 0 {
+  input exceptionally_descriptive_compiler_design_identifier_2026: text;
+  output exceptionally_descriptive_compiler_design_identifier_2026;
+}

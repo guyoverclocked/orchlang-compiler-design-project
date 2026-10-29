@@ -1,0 +1,53 @@
+{
+  "schema": "orchlang-final-manuscript-qa-v1",
+  "protected_content": {
+    "paper\\main.tex": {
+      "numbers_equal": true,
+      "citations_equal": true,
+      "equations_equal": true
+    },
+    "paper\\sections\\core-semantics.tex": {
+      "numbers_equal": true,
+      "citations_equal": true,
+      "equations_equal": true
+    },
+    "paper\\sections\\core-syntax.tex": {
+      "numbers_equal": true,
+      "citations_equal": true,
+      "equations_equal": true
+    },
+    "paper\\sections\\core-validation.tex": {
+      "numbers_equal": true,
+      "citations_equal": true,
+      "equations_equal": true
+    },
+    "paper\\refs.bib": {
+      "numbers_equal": true,
+      "citations_equal": true,
+      "equations_equal": true
+    }
+  },
+  "original_citations_preserved": true,
+  "bibliography_keys_unique": true,
+  "undefined_references": false,
+  "overfull_boxes": false,
+  "pages": 32,
+  "pdf_sha256": "97c3e2b7192c3863b375174fc2d42e068291a1fe7caaddd437798dd77f9f1128",
+  "figure_pages": {
+    "8": [
+      "Complete core grammar"
+    ],
+    "10": [
+      "Operational semantics"
+    ],
+    "12": [
+      "Label propagation"
+    ],
+    "25": [
+      "Uniform final-release validation"
+    ]
+  },
+  "contact_sheets": [],
+  "visual_review": "passed",
+  "visual_review_scope": "All 32 rendered pages checked in contact sheets; formal rules and final-release table inspected at page resolution; workflow listing kept on one page."
+}

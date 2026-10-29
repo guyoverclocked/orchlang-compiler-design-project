@@ -1,0 +1,25 @@
+{
+  "schema": "orchlang-byte-value-contract-v1",
+  "input_bytes": {
+    "0": 640
+  },
+  "value_bounds": {
+    "0": 640,
+    "3": 6144,
+    "1": 1600,
+    "2": 4,
+    "4": 48
+  },
+  "tool_bytes": {
+    "calculator": 48,
+    "history": 1600,
+    "final_seen": 4,
+    "const": 2
+  },
+  "response_bytes_per_token": 128,
+  "tokenizer_alpha": 1,
+  "tokenizer_delta": 0,
+  "context": 21504,
+  "dummy_request": ".",
+  "overflow_policy": "reject-input-before-dispatch; clip-results-at-declared-byte-interface"
+}

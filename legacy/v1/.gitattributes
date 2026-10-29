@@ -1,0 +1,28 @@
+* text=auto eol=lf
+# Raw observations and historical audits retain their original bytes.
+research/** -text
+research/** -whitespace
+audit/** -text
+bench/raw/** -text
+bench/results/** -text
+# Frozen corpus/protocol hashes bind exact bytes across platform checkouts.
+bench/corpus/faithful-local-*/** -text -whitespace
+bench/protocols/real-workflows*.json -text -whitespace
+bench/protocols/exact-accounting*.json -text -whitespace
+bench/exact/** -text -whitespace
+docs/manuscript/evidence/** -text -whitespace
+*.pdf -text
+*.png -text
+*.bundle -text
+
+# Source releases contain the research artifact; course submissions and agent
+# handoffs remain recoverable in Git history and the working checkout.
+submission export-ignore
+submission/** export-ignore
+docs/AGENT_BRIEF.md export-ignore
+docs/AGENT_START_HERE.md export-ignore
+docs/HISTORICAL_README.md export-ignore
+DEVELOPMENT_LOG.md export-ignore
+package.json export-ignore
+publication export-ignore
+publication/** export-ignore

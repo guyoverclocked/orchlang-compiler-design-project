@@ -1,0 +1,311 @@
+{
+  "schema_version": 1,
+  "cases": [
+    {
+      "id": "lg-chain-graph",
+      "source": {
+        "repo": "langchain-ai/docs",
+        "revision": "ecda7f522a6ffd5faaabb843b581fe57cd5eb782",
+        "path": "src/oss/langgraph/workflows-agents.mdx",
+        "sha256": "b73108b17c4bea2c03fb2737abba3767c5ce6d14e04c1d241f47ffd8a3961be0",
+        "bytes": 61811,
+        "url": "https://github.com/langchain-ai/docs/blob/ecda7f522a6ffd5faaabb843b581fe57cd5eb782/src/oss/langgraph/workflows-agents.mdx"
+      },
+      "snippet": "lg-chain-graph.upstream.py",
+      "snippet_sha256": "f792aeef0199aeec1d9b08cb5c91f9bfb2785f4d96416ce40742ba3886ae9e4c",
+      "executable": "lg-chain-graph.execute.py",
+      "executable_sha256": "ea9e1e9156d0d650b2e8737e79e623ce9309de671c7023ee8ced5bedffadd0b7",
+      "max_calls": 3,
+      "translation": "hybrid-host-composition",
+      "whole_source_faithful": false,
+      "original_framework": "langgraph",
+      "unique_pattern": "Prompt chaining",
+      "original_nonempty_lines": 42
+    },
+    {
+      "id": "lg-chain-functional",
+      "source": {
+        "repo": "langchain-ai/docs",
+        "revision": "ecda7f522a6ffd5faaabb843b581fe57cd5eb782",
+        "path": "src/oss/langgraph/workflows-agents.mdx",
+        "sha256": "b73108b17c4bea2c03fb2737abba3767c5ce6d14e04c1d241f47ffd8a3961be0",
+        "bytes": 61811,
+        "url": "https://github.com/langchain-ai/docs/blob/ecda7f522a6ffd5faaabb843b581fe57cd5eb782/src/oss/langgraph/workflows-agents.mdx"
+      },
+      "snippet": "lg-chain-functional.upstream.py",
+      "snippet_sha256": "e88eb28789ea0e3b9928e6eb946262a3fd04576695c8fb4039612ab3f43d50af",
+      "executable": "lg-chain-functional.execute.py",
+      "executable_sha256": "afd4c579496fc857e504b3c813b82d1e8fab3c7f1325ba95b230856344383c5f",
+      "max_calls": 3,
+      "translation": "hybrid-host-composition",
+      "whole_source_faithful": false,
+      "original_framework": "langgraph",
+      "unique_pattern": "Prompt chaining",
+      "original_nonempty_lines": 30
+    },
+    {
+      "id": "lg-parallel-graph",
+      "source": {
+        "repo": "langchain-ai/docs",
+        "revision": "ecda7f522a6ffd5faaabb843b581fe57cd5eb782",
+        "path": "src/oss/langgraph/workflows-agents.mdx",
+        "sha256": "b73108b17c4bea2c03fb2737abba3767c5ce6d14e04c1d241f47ffd8a3961be0",
+        "bytes": 61811,
+        "url": "https://github.com/langchain-ai/docs/blob/ecda7f522a6ffd5faaabb843b581fe57cd5eb782/src/oss/langgraph/workflows-agents.mdx"
+      },
+      "snippet": "lg-parallel-graph.upstream.py",
+      "snippet_sha256": "ae455c78b24c1c89994bb78cae2959861ffc98939f40a7d5b5f7dade7e1b93c5",
+      "executable": "lg-parallel-graph.execute.py",
+      "executable_sha256": "673c083b7707e1768a5b8bd66825aa1229cbe97d7caccd8f31bae04421be004e",
+      "max_calls": 3,
+      "translation": "hybrid-host-composition",
+      "whole_source_faithful": false,
+      "original_framework": "langgraph",
+      "unique_pattern": "Parallelization",
+      "original_nonempty_lines": 43
+    },
+    {
+      "id": "lg-routing-graph",
+      "source": {
+        "repo": "langchain-ai/docs",
+        "revision": "ecda7f522a6ffd5faaabb843b581fe57cd5eb782",
+        "path": "src/oss/langgraph/workflows-agents.mdx",
+        "sha256": "b73108b17c4bea2c03fb2737abba3767c5ce6d14e04c1d241f47ffd8a3961be0",
+        "bytes": 61811,
+        "url": "https://github.com/langchain-ai/docs/blob/ecda7f522a6ffd5faaabb843b581fe57cd5eb782/src/oss/langgraph/workflows-agents.mdx"
+      },
+      "snippet": "lg-routing-graph.upstream.py",
+      "snippet_sha256": "060e827d127eb47f30bcb022b47d6fc7190990a6b735a6224280bd725c89d4f7",
+      "executable": "lg-routing-graph.execute.py",
+      "executable_sha256": "8ccf6c8019f66a81a6cbcc206678b1f1ebd3f670524ab9b3a41351f60163d2a2",
+      "max_calls": 2,
+      "translation": "hybrid-host-composition",
+      "whole_source_faithful": false,
+      "original_framework": "langgraph",
+      "unique_pattern": "Routing",
+      "original_nonempty_lines": 71
+    },
+    {
+      "id": "pf-basic",
+      "source": {
+        "repo": "microsoft/promptflow",
+        "revision": "33a68c9d3cf349d7fdfad1f41969af27543c0406",
+        "path": "examples/flows/standard/basic/flow.dag.yaml",
+        "sha256": "c75bc0d6d387047fee38d898f37f879ac37987a71105dde287a4c4d76e9c6da0",
+        "bytes": 569,
+        "url": "https://github.com/microsoft/promptflow/blob/33a68c9d3cf349d7fdfad1f41969af27543c0406/examples/flows/standard/basic/flow.dag.yaml"
+      },
+      "source_files": [
+        {
+          "repo": "microsoft/promptflow",
+          "revision": "33a68c9d3cf349d7fdfad1f41969af27543c0406",
+          "path": "examples/flows/standard/basic/README.md",
+          "sha256": "77e803b9202650b3fa4e03ac569f169f668a3de122faa6a001ac221e5e44d998",
+          "bytes": 4537,
+          "url": "https://github.com/microsoft/promptflow/blob/33a68c9d3cf349d7fdfad1f41969af27543c0406/examples/flows/standard/basic/README.md"
+        },
+        {
+          "repo": "microsoft/promptflow",
+          "revision": "33a68c9d3cf349d7fdfad1f41969af27543c0406",
+          "path": "examples/flows/standard/basic/flow.dag.yaml",
+          "sha256": "c75bc0d6d387047fee38d898f37f879ac37987a71105dde287a4c4d76e9c6da0",
+          "bytes": 569,
+          "url": "https://github.com/microsoft/promptflow/blob/33a68c9d3cf349d7fdfad1f41969af27543c0406/examples/flows/standard/basic/flow.dag.yaml"
+        },
+        {
+          "repo": "microsoft/promptflow",
+          "revision": "33a68c9d3cf349d7fdfad1f41969af27543c0406",
+          "path": "examples/flows/standard/basic/hello.jinja2",
+          "sha256": "050a41bcfb9388c05c9543f73b0d12a00e52f73f3b9980cf5c09bcce7d39b332",
+          "bytes": 123,
+          "url": "https://github.com/microsoft/promptflow/blob/33a68c9d3cf349d7fdfad1f41969af27543c0406/examples/flows/standard/basic/hello.jinja2"
+        },
+        {
+          "repo": "microsoft/promptflow",
+          "revision": "33a68c9d3cf349d7fdfad1f41969af27543c0406",
+          "path": "examples/flows/standard/basic/hello.py",
+          "sha256": "e282899d4b6fabf142ac93668e93cb7715e688d29302b4c9fad2089f6b3348f7",
+          "bytes": 2925,
+          "url": "https://github.com/microsoft/promptflow/blob/33a68c9d3cf349d7fdfad1f41969af27543c0406/examples/flows/standard/basic/hello.py"
+        }
+      ],
+      "max_calls": 1,
+      "original_framework": "promptflow",
+      "translation": "direct-call-kernel",
+      "whole_source_faithful": true,
+      "unique_pattern": "basic",
+      "original_nonempty_lines": 106
+    },
+    {
+      "id": "pf-ner",
+      "source": {
+        "repo": "microsoft/promptflow",
+        "revision": "33a68c9d3cf349d7fdfad1f41969af27543c0406",
+        "path": "examples/flows/standard/named-entity-recognition/flow.dag.yaml",
+        "sha256": "be97ed451f983516acca8a6b0a7b087a3d87f14d6492d7e9feb055ee313e5c9e",
+        "bytes": 969,
+        "url": "https://github.com/microsoft/promptflow/blob/33a68c9d3cf349d7fdfad1f41969af27543c0406/examples/flows/standard/named-entity-recognition/flow.dag.yaml"
+      },
+      "source_files": [
+        {
+          "repo": "microsoft/promptflow",
+          "revision": "33a68c9d3cf349d7fdfad1f41969af27543c0406",
+          "path": "examples/flows/standard/named-entity-recognition/NER_LLM.jinja2",
+          "sha256": "f2f38d3958aabfdaa9ddea7fa26b50f306c10ebaab368c5b54461ba06b364965",
+          "bytes": 368,
+          "url": "https://github.com/microsoft/promptflow/blob/33a68c9d3cf349d7fdfad1f41969af27543c0406/examples/flows/standard/named-entity-recognition/NER_LLM.jinja2"
+        },
+        {
+          "repo": "microsoft/promptflow",
+          "revision": "33a68c9d3cf349d7fdfad1f41969af27543c0406",
+          "path": "examples/flows/standard/named-entity-recognition/README.md",
+          "sha256": "b01c5739a7fdc51e2532577b667d8f90ca4a720b96df635ddd97b86957d0cfcd",
+          "bytes": 2394,
+          "url": "https://github.com/microsoft/promptflow/blob/33a68c9d3cf349d7fdfad1f41969af27543c0406/examples/flows/standard/named-entity-recognition/README.md"
+        },
+        {
+          "repo": "microsoft/promptflow",
+          "revision": "33a68c9d3cf349d7fdfad1f41969af27543c0406",
+          "path": "examples/flows/standard/named-entity-recognition/cleansing.py",
+          "sha256": "0432480e7529c6073b78d8a5986dfaa0a095a12365f416f2a8faa470aed01c5b",
+          "bytes": 352,
+          "url": "https://github.com/microsoft/promptflow/blob/33a68c9d3cf349d7fdfad1f41969af27543c0406/examples/flows/standard/named-entity-recognition/cleansing.py"
+        },
+        {
+          "repo": "microsoft/promptflow",
+          "revision": "33a68c9d3cf349d7fdfad1f41969af27543c0406",
+          "path": "examples/flows/standard/named-entity-recognition/cleansing_test.py",
+          "sha256": "80af40dc62cf5f81126a475b58680316e4525bb24e680821cd9cca829820e89c",
+          "bytes": 556,
+          "url": "https://github.com/microsoft/promptflow/blob/33a68c9d3cf349d7fdfad1f41969af27543c0406/examples/flows/standard/named-entity-recognition/cleansing_test.py"
+        },
+        {
+          "repo": "microsoft/promptflow",
+          "revision": "33a68c9d3cf349d7fdfad1f41969af27543c0406",
+          "path": "examples/flows/standard/named-entity-recognition/eval_test.py",
+          "sha256": "b392d86394b33a14ffe786b653f1b2b0d1d44d843c16afe5adaafe7cea79aa5b",
+          "bytes": 3786,
+          "url": "https://github.com/microsoft/promptflow/blob/33a68c9d3cf349d7fdfad1f41969af27543c0406/examples/flows/standard/named-entity-recognition/eval_test.py"
+        },
+        {
+          "repo": "microsoft/promptflow",
+          "revision": "33a68c9d3cf349d7fdfad1f41969af27543c0406",
+          "path": "examples/flows/standard/named-entity-recognition/flow.dag.yaml",
+          "sha256": "be97ed451f983516acca8a6b0a7b087a3d87f14d6492d7e9feb055ee313e5c9e",
+          "bytes": 969,
+          "url": "https://github.com/microsoft/promptflow/blob/33a68c9d3cf349d7fdfad1f41969af27543c0406/examples/flows/standard/named-entity-recognition/flow.dag.yaml"
+        }
+      ],
+      "max_calls": 1,
+      "original_framework": "promptflow",
+      "translation": "hybrid-host-composition",
+      "whole_source_faithful": false,
+      "unique_pattern": "named-entity-recognition",
+      "original_nonempty_lines": 162
+    }
+  ],
+  "kernels": [
+    {
+      "name": "first",
+      "file": "first.orch",
+      "sha256": "5d1d1e1ca527727dbcf371b4167dd4e7fecc4330191ea7f16caa255ef681dca4",
+      "nonempty_lines": 7,
+      "input_bound_annotations": 1,
+      "model_cap_annotations": 1
+    },
+    {
+      "name": "improve",
+      "file": "improve.orch",
+      "sha256": "89ee24e23b27e5db99a512f07d5782e54de9844dba21b594bf0ee3a037f3d15a",
+      "nonempty_lines": 7,
+      "input_bound_annotations": 1,
+      "model_cap_annotations": 1
+    },
+    {
+      "name": "polish",
+      "file": "polish.orch",
+      "sha256": "8ee03d0c8219fc1e3367e86b5d6e2a1779f53e3aae3b5b74359c50d568c7f940",
+      "nonempty_lines": 7,
+      "input_bound_annotations": 1,
+      "model_cap_annotations": 1
+    },
+    {
+      "name": "joke",
+      "file": "joke.orch",
+      "sha256": "ec2e89fdfab7807e162f5c2240355d4d8cc5265ca67cfb1dc079bb0c712bc142",
+      "nonempty_lines": 7,
+      "input_bound_annotations": 1,
+      "model_cap_annotations": 1
+    },
+    {
+      "name": "story",
+      "file": "story.orch",
+      "sha256": "0917a669c756031c1fa6125c0be3fbbac2f08510cfdbb54db71a778ecf43e753",
+      "nonempty_lines": 7,
+      "input_bound_annotations": 1,
+      "model_cap_annotations": 1
+    },
+    {
+      "name": "poem",
+      "file": "poem.orch",
+      "sha256": "4be95e0974467ea965baee41d309c2e5dd61bdc13b2b786649539f5bfd054090",
+      "nonempty_lines": 7,
+      "input_bound_annotations": 1,
+      "model_cap_annotations": 1
+    },
+    {
+      "name": "route",
+      "file": "route.orch",
+      "sha256": "cd283b024006bb7b542933f669a67dd768959d149683a824e41d5f6934b71660",
+      "nonempty_lines": 7,
+      "input_bound_annotations": 2,
+      "model_cap_annotations": 1
+    },
+    {
+      "name": "respond",
+      "file": "respond.orch",
+      "sha256": "a3d4102af711272f3c3476a36a25c0398281c2f52bbd897130c98dc719d440f3",
+      "nonempty_lines": 7,
+      "input_bound_annotations": 1,
+      "model_cap_annotations": 1
+    },
+    {
+      "name": "basic",
+      "file": "basic.orch",
+      "sha256": "07b84d7ee7c928c7d187a9cf455699ae6b3fd315a23b5b944f72ed98412d8711",
+      "nonempty_lines": 7,
+      "input_bound_annotations": 1,
+      "model_cap_annotations": 1
+    },
+    {
+      "name": "ner",
+      "file": "ner.orch",
+      "sha256": "6a4555a33bd0667e4d221f9ec3dc541374ab299e797240d7613e13b22c52cf80",
+      "nonempty_lines": 8,
+      "input_bound_annotations": 2,
+      "model_cap_annotations": 1
+    },
+    {
+      "name": "refine",
+      "file": "refine.orch",
+      "sha256": "3de8a85fbac3c69293360ee9f06f411c16f3b853f835aee5b64d3db05237a16d",
+      "nonempty_lines": 9,
+      "input_bound_annotations": 1,
+      "model_cap_annotations": 1
+    }
+  ],
+  "denominator": 6,
+  "unique_upstream_patterns": 5,
+  "direct_translations": 1,
+  "hybrid_compositions": 5,
+  "note": "Both upstream Python prompt-chaining APIs are retained separately: their punctuation gates differ.",
+  "unsupported_full_translation_features": [
+    "response text predicates",
+    "structured JSON guards",
+    "branch joins",
+    "parallel scheduling",
+    "list-valued outputs",
+    "pure aggregation/postprocessing"
+  ],
+  "host_operations": "Explicit in runtime/workflow_originals.py; never claimed to be OrchLang or proved."
+}

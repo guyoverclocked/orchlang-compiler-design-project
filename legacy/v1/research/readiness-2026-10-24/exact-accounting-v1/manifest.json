@@ -1,0 +1,43 @@
+{
+  "status": "completed",
+  "timestamp_utc": "2026-10-23T21:27:34.481473+00:00",
+  "source_commit": "460bf3a453879618a86916ca6540bbf6b4f0e21c",
+  "dirty_tree": true,
+  "files": {
+    "runtime/token_accounting.py": "e70e2116be71d776991ee309608f9f33e8f082c3ac881abb402985aa1bcd90cb",
+    "runtime/replay_adapter.py": "b028a75278956cbc63d5f2c2612e75a3b6b82a94477706abd0cf522b3c5f30d4",
+    "runtime/finite_reference.py": "2f4b859f604f2ddeb46853cbbcf1ce15b5c3b394f64a3830f0d14c6b656747a6",
+    "scripts/exact_tokenizer.py": "25d167f65dca0d1a5141107defbc628010e0bd7fc4045475d52ae2967fb3fccc",
+    "scripts/exact_tokenizer_probe.py": "97cffdac713cb51233ea9c533bda7a1005f578e070f7b0e95cb9845bcaa57d99",
+    "tests/test_token_accounting.py": "04a8e1a48eecf8cf25a26910a45a92d07c8d4c3b8dfed9c3c705a053370b267a"
+  },
+  "protocol_sha256": "8a931cec7f6b4f14c4c65fa62f014c887a13f39fe3e3f075db42473659b0ea85",
+  "family_protocol_sha256": "de1e9bd63b07a617bba5aa7c0006cd119f3ef00443be11aec8b132399309df89",
+  "tokenizer_artifacts": [
+    {
+      "id": "gpt2-bpe",
+      "repo": "openai-community/gpt2",
+      "revision": "607a30d783dfa663caf39e06633721c8d4cfcd7e",
+      "license": "mit",
+      "file": "gpt2-bpe.json",
+      "sha256": "8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6",
+      "bytes": 1355256,
+      "url": "https://huggingface.co/openai-community/gpt2/resolve/607a30d783dfa663caf39e06633721c8d4cfcd7e/tokenizer.json"
+    },
+    {
+      "id": "bert-wordpiece",
+      "repo": "google-bert/bert-base-uncased",
+      "revision": "86b5e0934494bd15c9632b12f734a8a67f723594",
+      "license": "apache-2.0",
+      "file": "bert-wordpiece.json",
+      "sha256": "ce64fce797c24f68df90b40a3f74f579b336a493db14bd583fd520ea0d8c9a98",
+      "bytes": 466062,
+      "url": "https://huggingface.co/google-bert/bert-base-uncased/resolve/86b5e0934494bd15c9632b12f734a8a67f723594/tokenizer.json"
+    }
+  ],
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26300-SP0",
+  "protocol_status": "development-protocol-after-preliminary-boundary-exploration-not-preregistered",
+  "spent_usd": "0.00",
+  "model_inference": false
+}

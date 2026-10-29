@@ -1,0 +1,170 @@
+{
+  "schema": "orchlang-proof-receipt-v1",
+  "lean": "Lean (version 4.19.0, x86_64-w64-windows-gnu, commit 6caaee842e94, Release)",
+  "files": [
+    {
+      "file": "proof/ShapeCore.lean",
+      "exit": 0,
+      "lines": 1186,
+      "theorems": 31,
+      "sha256": "c0870ab038253e192b083f3d98f3ef49726e7bc7ae6af0bfe728124221344ea7"
+    },
+    {
+      "file": "proof/AdmissionDomain.lean",
+      "exit": 0,
+      "lines": 391,
+      "theorems": 13,
+      "sha256": "048a147dd2d27a81445f02472493520196521d12b531ce9b0298b8bc9a9f77c0"
+    },
+    {
+      "file": "proof/Utf8Envelope.lean",
+      "exit": 0,
+      "lines": 106,
+      "theorems": 12,
+      "sha256": "8f88f6e4a155af8a42163f348df0ecca2917f493149f6c2693ba22cb973f29dc"
+    },
+    {
+      "file": "proof/RestrictedDomain.lean",
+      "exit": 0,
+      "lines": 474,
+      "theorems": 18,
+      "sha256": "6a738bfb913e3dcde5f4f12783ca7450a48597dfb00c440be333bc89ec2a0e69"
+    },
+    {
+      "file": "proof/VocabularyEnvelope.lean",
+      "exit": 0,
+      "lines": 53,
+      "theorems": 4,
+      "sha256": "785a0cd8fb9424a126695bb01e7e2c99943befa09e73cd362732be9db770b98a"
+    },
+    {
+      "file": "proof/StaticAdmissionChecks.lean",
+      "exit": 0,
+      "lines": 48,
+      "theorems": 0,
+      "sha256": "2ed70e0847b60a97abc5add31ae356fb7e74dad4e5cc2de9251de6bd03d7da7a"
+    },
+    {
+      "file": "proof/StaticAdmissionCLI.lean",
+      "exit": 0,
+      "lines": 54,
+      "theorems": 0,
+      "sha256": "0b9660bc7926845b70dd018c11dd4a28f60ec3d9d21dd513ca2db0498dc9ac53"
+    }
+  ],
+  "declarations": {
+    "OrchLang.Shape.noninterference": [
+      "propext",
+      "Quot.sound"
+    ],
+    "OrchLang.Shape.distribution_noninterference": [
+      "propext",
+      "Quot.sound"
+    ],
+    "OrchLang.Shape.erase_correct": [
+      "propext"
+    ],
+    "OrchLang.Shape.validate_sound": [
+      "propext",
+      "Quot.sound"
+    ],
+    "OrchLang.Shape.validateProgram_sound": [
+      "propext",
+      "Quot.sound"
+    ],
+    "OrchLang.Shape.secret_inputs_sound": [
+      "propext",
+      "Quot.sound"
+    ],
+    "OrchLang.Shape.shape_usage_exact": [
+      "propext"
+    ],
+    "OrchLang.Shape.shape_budget_sound": [
+      "propext"
+    ],
+    "OrchLang.Shape.static_certificate_implies_RunsIn": [
+      "propext",
+      "Quot.sound"
+    ],
+    "OrchLang.Shape.static_certificate_domain": [
+      "propext",
+      "Quot.sound"
+    ],
+    "OrchLang.Shape.shape_exec_on": [
+      "propext"
+    ],
+    "OrchLang.Shape.admitted_noninterference": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "OrchLang.Shape.certified_domain_noninterference": [
+      "propext",
+      "Classical.choice",
+      "Quot.sound"
+    ],
+    "OrchLang.Shape.utf8_envelope_sound": [
+      "propext",
+      "Quot.sound"
+    ],
+    "OrchLang.Shape.noninterference_on": [
+      "propext",
+      "Quot.sound"
+    ],
+    "OrchLang.Shape.trace_noninterference_on": [
+      "propext",
+      "Quot.sound"
+    ],
+    "OrchLang.Shape.erase_correct_on": [
+      "propext"
+    ],
+    "OrchLang.Shape.shape_budget_sound_on": [
+      "propext"
+    ],
+    "OrchLang.Shape.certified_noninterference": [
+      "propext",
+      "Quot.sound"
+    ],
+    "OrchLang.Shape.certified_secret_inputs_sound": [
+      "propext",
+      "Quot.sound"
+    ],
+    "OrchLang.Shape.certified_preservation": [
+      "propext",
+      "Quot.sound"
+    ],
+    "OrchLang.Shape.certified_budget_sound": [
+      "propext",
+      "Quot.sound"
+    ],
+    "OrchLang.Shape.certified_shape_exact": [
+      "propext",
+      "Quot.sound"
+    ],
+    "OrchLang.Shape.padWorld_conformsOn": [
+      "propext",
+      "Quot.sound"
+    ],
+    "OrchLang.Shape.padWorld_transparentOn": [
+      "propext"
+    ],
+    "OrchLang.Shape.padWorld_not_globally_conforming": [
+      "propext"
+    ],
+    "OrchLang.Shape.piece_lengths_budget": [
+      "propext"
+    ],
+    "OrchLang.Shape.response_piece_budget": [
+      "propext"
+    ],
+    "OrchLang.Shape.tokenizer_alpha_one": [
+      "propext",
+      "Quot.sound"
+    ]
+  },
+  "total_lines": 2312,
+  "total_theorems": 78,
+  "sorry_free": true,
+  "failures": [],
+  "passed": true
+}

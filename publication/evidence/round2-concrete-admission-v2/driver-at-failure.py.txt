@@ -1,0 +1,162 @@
+"""Instantiate the Lean admission checker on actual workflow candidates.
+
+The adapter enforces explicit input/tool byte buffers. Model response envelopes
+use the exhaustively measured maximum native piece length. It is a separately
+declared interface, not a relabeling of the unmodified primary benchmark.
+"""
+import argparse
+import gc
+import json
+import os
+from pathlib import Path
+import sys
+
+ROOT=Path(__file__).resolve().parents[1]
+sys.path.insert(0,str(ROOT))
+from orchlang import assurance as A, admission as B, models as M, core as C, runtime as R, tools as T
+from experiments.final_release import KEEP, PLAN, rows
+from experiments.referee_revision import InstrumentedBackend
+
+
+def dump(path,value):
+    path.write_text(json.dumps(value,indent=2,ensure_ascii=False)+'\n',encoding='utf-8')
+
+
+def prepare(args, profiles, vocabulary):
+    args.output.mkdir(parents=True,exist_ok=False)
+    receipts=[]
+    for name,replication in PLAN:
+        group='qwen' if replication else 'main'
+        directory=args.output/group/name
+        directory.mkdir(parents=True)
+        source=ROOT/(f'workflows/replication/{name}_qwen.orch' if replication else f'workflows/{name}.orch')
+        program,binding=A.source_binding(source.read_bytes(),profiles)
+        used={call.model for call in C.calls(program.body)}
+        maximum=max(vocabulary['models'][key]['maximum_piece_bytes'] for key in used)
+        tokenizers={key:M.tokenizer_for(profiles[key].gguf) for key in used}
+        for key in used:
+            assert vocabulary['models'][key]['gguf_sha256']==A.sha256(profiles[key].gguf)
+        contract=B.byte_contract(program,response_bytes_per_token=maximum,context=32768)
+        candidate=B.certified_shaper(program,profiles,tokenizers,contract)
+        _,bound,verdict=A.validate_candidates(source.read_bytes(),profiles,{'ours':candidate})
+        assert binding==bound and verdict['ours']['accepted']
+        certificate=B.check_certificate(candidate,contract,tokenizers)
+        assert certificate['verdict']['accepted'] and certificate['verdict']['has_fixed_shape']
+        data=rows(ROOT/f'experiments/data/{name}.jsonl')
+        if name=='adaptive': data=data[:60]
+        eligible=[row for row in data if all(len(value.encode('utf-8'))<=contract['input_bytes'][program.slots[key]]
+                                            for key,value in row['inputs'].items())]
+        rejected=[row['id'] for row in data if row not in eligible]
+        order=sorted(eligible,key=lambda row:(sum(len(v.encode('utf-8')) for v in row['inputs'].values()),row['id']))
+        selected=[order[0],order[-1]]
+        declared={model.key for model in program.workflow.models}
+        artifact=dict(schema='orchlang-validation-artifact-v1',source_binding=binding,
+                      model_contracts=A.model_contracts({key:profiles[key] for key in declared}),
+                      candidates={'ours':C.stmt_json(candidate)})
+        dump(directory/'validation-artifact.json',artifact)
+        dump(directory/'certificate.json',certificate)
+        dump(directory/'byte-contract.json',contract)
+        dump(directory/'selected-inputs.json',selected)
+        receipt=dict(workflow=name,group=group,source=str(source.relative_to(ROOT)),
+                     source_sha256=A.sha256(source),source_binding_sha256=binding['binding_sha256'],
+                     core_accepted=True,static_admission_accepted=True,context=32768,
+                     maximum_response_piece_bytes=maximum,dataset_inputs=len(data),
+                     guard_admitted=len(eligible),guard_rejected_ids=rejected,
+                     planned_pairs=len(selected),shape=C.shape(candidate))
+        receipts.append(receipt)
+        print('CERTIFIED',group,name,'guard',len(eligible),'/',len(data),flush=True)
+    dump(args.output/'protocol.json',dict(schema='orchlang-concrete-admission-v1',workflows=receipts,
+         vocabulary_receipt_sha256=A.sha256(args.vocabulary),
+         implementation=A.implementation_hashes(ROOT),driver_sha256=A.sha256(__file__),
+         response_bytes='max native token-piece length times visible token cap',
+         tools='explicit UTF-8 byte buffers, four times declared tool-token annotation',
+         inputs='entry byte guard, four times declared input-token annotation',
+         native_tokenizer_algorithm_verified=False))
+
+
+def execute(args,profiles):
+    protocol=json.loads((args.output/'protocol.json').read_text(encoding='utf-8'))
+    if protocol['implementation']!=A.implementation_hashes(ROOT):
+        raise ValueError('implementation changed after certificate preparation')
+    with (args.output/'execution-protocol.json').open('x',encoding='utf-8') as stream:
+        json.dump(dict(driver_sha256=A.sha256(__file__),
+                       prepared_protocol_sha256=A.sha256(args.output/'protocol.json'),
+                       implementation=A.implementation_hashes(ROOT)),stream,indent=2)
+        stream.write('\n')
+    results=[]
+    for item in protocol['workflows']:
+        directory=args.output/item['group']/item['workflow']
+        if (directory/'results.json').exists():
+            raise ValueError('execution evidence is immutable; choose a fresh cohort')
+        contract=json.loads((directory/'byte-contract.json').read_text())
+        for key in ('value_bounds','input_bytes'):
+            contract[key]={int(k):v for k,v in contract[key].items()}
+        source=ROOT/item['source']
+        assert A.sha256(source)==item['source_sha256']
+        program,_=A.source_binding(source.read_bytes(),profiles)
+        tokenizers={call.model:M.tokenizer_for(profiles[call.model].gguf) for call in C.calls(program.body)}
+        candidate=B.certified_shaper(program,profiles,tokenizers,contract)
+        assert [list(e) for e in C.shape(candidate)]==item['shape']
+        used=sorted(tokenizers)
+        backends={key:InstrumentedBackend(profiles[key],n_ctx=32768,n_threads=4,temperature=0) for key in used}
+        tools=dict(T.BASE)
+        name=item['workflow']
+        if name in ('crag','adaptive'):
+            tools['retrieve']=T.Retriever([p['text'] for p in rows(ROOT/f'experiments/data/{name}_corpus.jsonl')],k=4)
+            tools['web_search']=T.Retriever([p['text'] for p in rows(ROOT/f'experiments/data/{name}_web.jsonl')],k=3)
+        runtime=B.ByteBoundedRuntime(backends,tools,{t.name:t.max_tokens for t in program.workflow.tools},byte_contract=contract)
+        selected=json.loads((directory/'selected-inputs.json').read_text(encoding='utf-8'))
+        attempts=[]
+        for index,row in enumerate(selected):
+            for condition,body in (('orig',program.body),('ours',candidate)):
+                for backend in backends.values(): backend.calls.clear()
+                try:
+                    result=runtime.run(body,{program.slots[k]:v for k,v in row['inputs'].items()},index)
+                    attempt=dict(id=row['id'],condition=condition,status='completed',store=result.store,
+                                 saved={key:result.store.get(program.slots[key],'') for key in KEEP[name].split(',')},
+                                 trace=[list(event) for event in result.observed()],usage=result.usage,byte_clips=runtime.byte_clips,
+                                 execution_events=[event.audit for event in result.trace if event.kind=='llm'],
+                                 local_observations=[dict(model=key,**call) for key,backend in backends.items() for call in backend.calls])
+                except Exception as error:
+                    attempt=dict(id=row['id'],condition=condition,status='failed',error=repr(error),
+                                 prefix=[event.observed() for event in runtime.trace])
+                attempts.append(attempt)
+                dump(directory/'attempts.json',attempts)
+        pairs=[]
+        for index in range(len(selected)):
+            original,shaped=attempts[2*index:2*index+2]
+            complete=original['status']==shaped['status']=='completed'
+            pairs.append(dict(id=original['id'],completed=complete,
+                              full_store_equal=complete and original['store']==shaped['store'],
+                              saved_equal=complete and original['saved']==shaped['saved'],
+                              shape_equal=complete and shaped['trace']==item['shape']))
+        slot=next(iter(contract['input_bytes']))
+        try:
+            runtime.run(candidate,{slot:'x'*(contract['input_bytes'][slot]+1)},0)
+        except R.ContractViolation:
+            negative=dict(refused_before_dispatch=not runtime.trace,usage=runtime.ledger.snapshot())
+        else:
+            raise AssertionError('entry guard accepted an oversized byte buffer')
+        result=dict(workflow=name,group=item['group'],pairs=pairs,negative_guard=negative,
+                    byte_clip_events=sum(len(r.get('byte_clips',[])) for r in attempts))
+        dump(directory/'results.json',result)
+        results.append(result)
+        dump(args.output/'progress.json',results)
+        print('EXECUTED',item['group'],name,pairs,flush=True)
+        del runtime,backends
+        gc.collect()
+    dump(args.output/'execution-finished.json',dict(results=results))
+
+
+if __name__=='__main__':
+    ap=argparse.ArgumentParser(description=__doc__)
+    ap.add_argument('mode',choices=('prepare','execute'))
+    ap.add_argument('--models',type=Path,required=True)
+    ap.add_argument('--vocabulary',type=Path)
+    ap.add_argument('--output',type=Path,required=True)
+    args=ap.parse_args()
+    args.output=args.output.resolve()
+    profiles=M.load_profiles(str(args.models.resolve()))
+    if args.mode=='prepare':
+        prepare(args,profiles,json.loads(args.vocabulary.read_text(encoding='utf-8')))
+    else: execute(args,profiles)

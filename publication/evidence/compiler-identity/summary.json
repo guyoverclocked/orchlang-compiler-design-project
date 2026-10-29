@@ -1,0 +1,29 @@
+{
+  "status": "verified",
+  "old_implementation": "6a24fe8",
+  "current_compiler": "5b44617ec5fd7a120af2bfc2c38584700f7c99bd",
+  "scope": "identical bound source, model contracts and all four candidate core programs for three Qwen adaptations; no inference relabeling or physical-runtime equivalence theorem",
+  "workflows": {
+    "switch": {
+      "source_binding_equal": true,
+      "model_contracts_equal": true,
+      "all_candidates_equal": true,
+      "canonical_sha256_old": "263cc054c0269de02c5af551a906a12f800ec57c6a72dc6bfa5a762a1640952e",
+      "canonical_sha256_current": "263cc054c0269de02c5af551a906a12f800ec57c6a72dc6bfa5a762a1640952e"
+    },
+    "email": {
+      "source_binding_equal": true,
+      "model_contracts_equal": true,
+      "all_candidates_equal": true,
+      "canonical_sha256_old": "d42c3ad5e15c98e069697cd24333fe4290b1009b95672bb121c7cb5d52b83a87",
+      "canonical_sha256_current": "d42c3ad5e15c98e069697cd24333fe4290b1009b95672bb121c7cb5d52b83a87"
+    },
+    "crag": {
+      "source_binding_equal": true,
+      "model_contracts_equal": true,
+      "all_candidates_equal": true,
+      "canonical_sha256_old": "129459df193cc771b53926f1061dcde9399ceac4e50431fb376e0efa91c55a15",
+      "canonical_sha256_current": "129459df193cc771b53926f1061dcde9399ceac4e50431fb376e0efa91c55a15"
+    }
+  }
+}

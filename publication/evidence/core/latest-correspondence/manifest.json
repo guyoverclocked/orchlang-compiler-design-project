@@ -1,0 +1,64 @@
+{
+  "status": "completed",
+  "programs": 150,
+  "seed": 271828,
+  "targeted_programs": 1,
+  "targeted_contexts": 32,
+  "execution_contexts": 6320,
+  "validator_checks": 604,
+  "lean_seconds": 11.423858900001505,
+  "comparisons": [
+    "Lean exec",
+    "independent JSON interpreter",
+    "production Runtime"
+  ],
+  "source_before": {
+    "orchlang/__main__.py": "f5da4cf72658fd4d603fd64344edf56bcf5af642f8694c8542d1c9bdd914f346",
+    "orchlang/assurance.py": "29f77717ec99007c9b4cfca023168c9ad4faf3e4d63e8a6ffbacc292218820a7",
+    "orchlang/compiler.py": "6f45610f86feba2f8045111e814a4930d4486ea5a7838cf6b000f00de91f6ecd",
+    "orchlang/core.py": "54f8eb20921c63ccd7bc265f0a6e9373d9d2180d8c88d4f21169e865aec60ba8",
+    "orchlang/ledger.py": "04187531d1b9f102f9772f44988380b43b316d69a333eacde9e4b5cdc0a203a9",
+    "orchlang/models.py": "9dda6afbdfbc29e777992ea869c7a7fcbe876ebf539244600ccdcebda81c203c",
+    "orchlang/runtime.py": "9515f462f8f079cacfe6d80df8450a8c2e71161ea87ffb8053c3a52831273383",
+    "orchlang/syntax.py": "03e5c6ed652c7fbf3ba2fa1c00dcf453a391cfa8484b0956943845469c10bfd3",
+    "orchlang/tools.py": "e378ead75b39f530084e72201b128be669e8281ba515f0b160e44a4fc47f5804",
+    "orchlang/validate.py": "48dfa77bd11bb2b1baaaa60bce3f96cbeb7af212bdd1e950d4b32c4a549c5433",
+    "proof/ShapeCore.lean": "c118a53d032fb6d0ca80ea2e4971f187beb76201317ac354853bcb216cc7322a",
+    "reference/shape.py": "cda7589482f7805c4afe2a06d23781f1a6cd539882ced55f252c9ede9d7a5165",
+    "experiments/differential.py": "48d28ec2dec5dc6e68623860d9d7e2a757522797babd1d04cd33de3bce70e507",
+    "experiments/correspondence.py": "be510236fac4c37b41f8c6f12198a4b2a5a61c3b188a6dd00a73c15b24ec9877"
+  },
+  "source_after": {
+    "orchlang/__main__.py": "f5da4cf72658fd4d603fd64344edf56bcf5af642f8694c8542d1c9bdd914f346",
+    "orchlang/assurance.py": "29f77717ec99007c9b4cfca023168c9ad4faf3e4d63e8a6ffbacc292218820a7",
+    "orchlang/compiler.py": "6f45610f86feba2f8045111e814a4930d4486ea5a7838cf6b000f00de91f6ecd",
+    "orchlang/core.py": "54f8eb20921c63ccd7bc265f0a6e9373d9d2180d8c88d4f21169e865aec60ba8",
+    "orchlang/ledger.py": "04187531d1b9f102f9772f44988380b43b316d69a333eacde9e4b5cdc0a203a9",
+    "orchlang/models.py": "9dda6afbdfbc29e777992ea869c7a7fcbe876ebf539244600ccdcebda81c203c",
+    "orchlang/runtime.py": "9515f462f8f079cacfe6d80df8450a8c2e71161ea87ffb8053c3a52831273383",
+    "orchlang/syntax.py": "03e5c6ed652c7fbf3ba2fa1c00dcf453a391cfa8484b0956943845469c10bfd3",
+    "orchlang/tools.py": "e378ead75b39f530084e72201b128be669e8281ba515f0b160e44a4fc47f5804",
+    "orchlang/validate.py": "48dfa77bd11bb2b1baaaa60bce3f96cbeb7af212bdd1e950d4b32c4a549c5433",
+    "proof/ShapeCore.lean": "c118a53d032fb6d0ca80ea2e4971f187beb76201317ac354853bcb216cc7322a",
+    "reference/shape.py": "cda7589482f7805c4afe2a06d23781f1a6cd539882ced55f252c9ede9d7a5165",
+    "experiments/differential.py": "48d28ec2dec5dc6e68623860d9d7e2a757522797babd1d04cd33de3bce70e507",
+    "experiments/correspondence.py": "be510236fac4c37b41f8c6f12198a4b2a5a61c3b188a6dd00a73c15b24ec9877"
+  },
+  "unit": "character counts in a finite deterministic audit world; no provider tokens",
+  "files": {
+    "proof\\ShapeCore.lean": "c118a53d032fb6d0ca80ea2e4971f187beb76201317ac354853bcb216cc7322a",
+    "reference\\shape.py": "cda7589482f7805c4afe2a06d23781f1a6cd539882ced55f252c9ede9d7a5165",
+    "orchlang\\runtime.py": "9515f462f8f079cacfe6d80df8450a8c2e71161ea87ffb8053c3a52831273383",
+    "experiments\\correspondence.py": "be510236fac4c37b41f8c6f12198a4b2a5a61c3b188a6dd00a73c15b24ec9877"
+  },
+  "command": [
+    "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\tools\\lean-4.19.0-windows\\bin\\lean.exe",
+    "--run",
+    "C:\\Users\\nambi\\Documents\\Compiler Project\\audit-2026-10-24\\unified-publication\\proof\\ShapeCore.lean",
+    "execute",
+    "C:\\Users\\nambi\\Documents\\Compiler Project\\audit-2026-10-24\\unified-publication\\publication\\evidence\\core\\latest-correspondence\\lean-input.json"
+  ],
+  "command_exit": 0,
+  "failures": [],
+  "spent_api_usd": "0.00"
+}

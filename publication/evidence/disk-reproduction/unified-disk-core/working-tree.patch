@@ -1,0 +1,2376 @@
+diff --git a/.github/workflows/ci.yml b/.github/workflows/ci.yml
+index 87db063..837a9bc 100644
+--- a/.github/workflows/ci.yml
++++ b/.github/workflows/ci.yml
+@@ -12,7 +12,7 @@ jobs:
+           python-version: "3.12"
+       - name: Install Python dependencies
+         run: |
+-          pip install numpy scikit-learn jinja2
++          pip install -r requirements-analysis.lock
+       - name: Install Lean 4.19.0
+         run: |
+           curl -sSfL https://github.com/leanprover/lean4/releases/download/v4.19.0/lean-4.19.0-linux.tar.zst -o lean.tar.zst
+@@ -26,6 +26,8 @@ jobs:
+         run: python -m unittest discover -s tests -v
+       - name: Differential test (compiler, runtime and Lean validator)
+         run: LEAN=lean python experiments/differential.py --programs 300 --runs 2 --output diff.json
+-      - name: Legacy prototype
++      - name: Three-way operational correspondence
++        run: LEAN=lean python experiments/correspondence.py --programs 40 --output correspondence
++      - name: Retained disk scientific implementation and proofs
+         working-directory: legacy/v1
+-        run: make check
++        run: python scripts/offline_check.py --cxx g++ --lean lean --output /tmp/disk-check
+diff --git a/experiments/aggregate.py b/experiments/aggregate.py
+index 0e93c54..7bf3d2a 100644
+--- a/experiments/aggregate.py
++++ b/experiments/aggregate.py
+@@ -105,7 +105,7 @@ def analyze_workflow(run_dir, data_dir, wf, seed=0, perm=0):
+         "noforce": [A.derive_noforce(r) for r in S],
+         "randpad": [A.derive_randpad(r, mean_in, mean_out, max(1.0, oc[:, 0].mean()), rng) for r in O],
+     }
+-    models = sorted({e[1] for trs in conds.values() for tr in trs for e in tr if e[0] == "llm"})
++    models = sorted({e[0]+":"+e[1] for trs in conds.values() for tr in trs for e in tr})
+     max_calls = max(len(A.observed(tr)) for trs in conds.values() for tr in trs)
+     targets = {"decision": {"orig": [decision(r, wf) for r in O], "ours": [decision(r, wf) for r in S]},
+                "label": {"orig": [r["label"] for r in O], "ours": [r["label"] for r in S]}}
+diff --git a/experiments/analyze.py b/experiments/analyze.py
+index cd6e1a0..46277b2 100644
+--- a/experiments/analyze.py
++++ b/experiments/analyze.py
+@@ -47,6 +47,8 @@ def observed(trace, use_latency=False):
+     for kind, name, i, o, lat, dummy, site, nat in trace:
+         if kind == "llm":
+             out.append(("llm", name, i, o) + ((lat,) if use_latency else ()))
++        else:
++            out.append(("tool", name, 0, 0) + ((lat,) if use_latency else ()))
+     return out
+ 
+ 
+@@ -56,6 +58,8 @@ def derive_padonly(rec, pads):
+         if kind == "llm":
+             t, n = pads.get(str(site)) or (i, o)
+             tr.append([kind, name, t, n, lat, dummy, site, nat])
++        else:
++            tr.append([kind, name, i, o, lat, dummy, site, nat])
+     return tr
+ 
+ 
+@@ -64,6 +68,8 @@ def derive_noforce(rec):
+     for kind, name, i, o, lat, dummy, site, nat in rec["trace"]:
+         if kind == "llm":
+             tr.append([kind, name, i, min(nat, o), lat, dummy, site, nat])
++        else:
++            tr.append([kind, name, i, o, lat, dummy, site, nat])
+     return tr
+ 
+ 
+@@ -74,16 +80,18 @@ def derive_randpad(rec, mean_in, mean_out, n_calls, rng):
+             ai = rng.randint(0, max(0, int(round(2 * mean_in / max(1, n_calls)))))
+             ao = rng.randint(0, max(0, int(round(2 * mean_out / max(1, n_calls)))))
+             tr.append([kind, name, i + ai, o + ao, lat, dummy, site, nat])
++        else:
++            tr.append([kind, name, i, o, lat, dummy, site, nat])
+     return tr
+ 
+ 
+ def features(obs, max_calls, models):
+-    """Fixed-length vector: count, per-position (model id, in, out), totals."""
+-    v = [len(obs), sum(e[2] for e in obs), sum(e[3] for e in obs)]
++    """Full observer: event count, model/tool identity, per-position usage, totals."""
++    v = [len(obs), sum(e[0]=="llm" for e in obs), sum(e[2] for e in obs), sum(e[3] for e in obs)]
+     for k in range(max_calls):
+         if k < len(obs):
+             e = obs[k]
+-            v += [models.index(e[1]) + 1, e[2], e[3]] + ([e[4]] if len(e) > 4 else [])
++            v += [models.index(e[0]+":"+e[1]) + 1, e[2], e[3]] + ([e[4]] if len(e) > 4 else [])
+         else:
+             v += [0, -1, -1] + ([-1] if obs and len(obs[0]) > 4 else [])
+     if obs and len(obs[0]) > 4:
+@@ -194,7 +202,7 @@ def analyze(run_dir, scorer=None, decision=None, perm_rounds=0, seed=0):
+         "noforce": [derive_noforce(r) for r in ours_l],
+         "randpad": [derive_randpad(r, mean_in, mean_out, max(1, oc["calls"]), rng) for r in orig_l],
+     }
+-    models = sorted({e[1] for trs in conds.values() for tr in trs for e in tr if e[0] == "llm"})
++    models = sorted({e[0]+":"+e[1] for trs in conds.values() for tr in trs for e in tr})
+     max_calls = max(len(observed(tr)) for trs in conds.values() for tr in trs)
+     targets = {"label": [r["label"] for r in orig_l]}
+     if decision:
+@@ -209,7 +217,8 @@ def analyze(run_dir, scorer=None, decision=None, perm_rounds=0, seed=0):
+             for tname, y in targets.items():
+                 a = attack(X, y, seed)
+                 a["mi_bits"] = mutual_information(y, [tuple(tuple(e[:4]) for e in o) for o in obs])
+-                a["perm_p"] = permutation_p(np.asarray(X, float), np.asarray(y), a["accuracy"], perm_rounds, seed)
++                observed_bal = attack(X,y,seed,trees=50)["balanced"] if perm_rounds else None
++                a["perm_p"] = permutation_p(np.asarray(X, float), np.asarray(y), observed_bal, perm_rounds, seed)
+                 res[tname] = a
+             out["leakage"][key] = res
+     out["costs"] = {"orig": oc, "ours": sc}
+diff --git a/experiments/run_workflow.py b/experiments/run_workflow.py
+index 0669289..671e9e1 100644
+--- a/experiments/run_workflow.py
++++ b/experiments/run_workflow.py
+@@ -16,10 +16,15 @@ import json
+ import os
+ import sys
+ import time
++import hashlib
++import platform
++import importlib.metadata
++import subprocess
++from pathlib import Path
+ 
+ sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+ 
+-from orchlang import compiler as K, core as C, models as M, runtime as R, syntax, tools as T, validate  # noqa: E402
++from orchlang import assurance as A, compiler as K, core as C, models as M, runtime as R, syntax, tools as T, validate  # noqa: E402
+ 
+ STRATEGIES = ["ours", "naive", "uniform", "padall"]
+ 
+@@ -31,8 +36,9 @@ def load_jsonl(path):
+ 
+ def compile_all(src_path, profiles):
+     t0 = time.perf_counter()
+-    wf = syntax.parse(open(src_path, encoding="utf-8").read())
+-    prog = K.lower(wf, profiles)
++    source = open(src_path, "rb").read()
++    prog, binding = A.source_binding(source, profiles)
++    wf = prog.workflow
+     used = {c.model for c in C.calls(prog.body)}
+     toks = {k: M.tokenizer_for(profiles[k].gguf) for k in used}
+     findings = K.detect(prog)
+@@ -43,9 +49,11 @@ def compile_all(src_path, profiles):
+         shaped[s] = K.Shaper(prog, profiles, toks, s).run()
+         t_shape[s] = time.perf_counter() - t1
+     high = prog.high_vars()
+-    payloads = [validate.payload(high, prog.body, prog.body, prog.secret_inputs())] + [validate.payload(high, prog.body, shaped[s], prog.secret_inputs()) for s in STRATEGIES]
+     t2 = time.perf_counter()
+-    verdicts = validate.lean_validate_batch(payloads)
++    _, checked_binding, checked = A.validate_candidates(source, profiles, {"original":prog.body, **shaped})
++    if binding != checked_binding:
++        raise ValueError("source binding changed during validation")
++    verdicts = [checked["original"], *[checked[s] for s in STRATEGIES]]
+     t_lean = time.perf_counter() - t2
+     info = {
+         "workflow": wf.name, "source": src_path,
+@@ -60,6 +68,8 @@ def compile_all(src_path, profiles):
+         "pads": {str(c.site): c.pad for c in C.calls(shaped["ours"])},
+         "caps": {str(c.site): c.max_tokens for c in C.calls(prog.body)},
+         "site_lines": {str(k): v for k, v in prog.site_lines.items()},
++        "source_binding": binding,
++        "request_targets": "heuristic execution envelopes; complete requests are admitted exactly before dispatch",
+     }
+     return wf, prog, shaped, info
+ 
+@@ -78,10 +88,43 @@ def main():
+     ap.add_argument("--web", default=None, help="JSONL passages for tool web_search (top 3)")
+     ap.add_argument("--keep", default="", help="comma-separated variables to store")
+     ap.add_argument("--compile-only", action="store_true")
++    ap.add_argument("--budgets",help="JSON per-model input/output/call limits, enforced before each dispatch")
+     args = ap.parse_args()
+     os.makedirs(args.out, exist_ok=True)
+     profiles = M.load_profiles(args.models)
++    data = load_jsonl(args.data)
++    if args.limit:
++        data = data[: args.limit]
++    if len({r["id"] for r in data}) != len(data):
++        raise ValueError("duplicate dataset IDs")
++    declared_models = {m.key for m in syntax.parse(open(args.workflow, encoding="utf-8").read()).models}
++    root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
++    manifest = dict(schema="orchlang-execution-custody-v1", source_sha256=A.sha256(args.workflow),
++                    data_sha256=A.sha256(args.data), selected_ids=[r["id"] for r in data],
++                    model_contracts=A.model_contracts({k:profiles[k] for k in declared_models}),
++                    implementation_sha256=A.implementation_hashes(root),
++                    python=sys.version, platform=platform.platform(),
++                    dependencies={name:importlib.metadata.version(name) for name in ("llama-cpp-python",)},
++                    temperature=args.temperature, threads=args.threads,
++                    gpu_layers=os.environ.get("ORCHLANG_GPU_LAYERS","0"),
++                    batch=int(os.environ.get("ORCHLANG_BATCH","128")),
++                    kept_variables=args.keep, conditions=args.conditions.split(","),
++                    corpus_sha256=A.sha256(args.corpus) if args.corpus else None,
++                    web_sha256=A.sha256(args.web) if args.web else None,
++                    spent_api_usd="0.00", observer="ordered-logical-model-usage-and-tool-names")
++    budgets=json.loads(Path(args.budgets).read_text(encoding="utf-8")) if args.budgets else None
++    manifest["budgets"]=budgets
++    manifest["git_commit"] = subprocess.check_output(["git","rev-parse","HEAD"],cwd=root,text=True).strip()
++    manifest["git_dirty"] = bool(subprocess.check_output(["git","status","--porcelain"],cwd=root,text=True).strip())
++    backend_dir = os.environ.get("ORCHLANG_GGML_BACKENDS")
++    manifest["backend_libraries"] = ({p.name:A.sha256(p) for p in sorted(Path(backend_dir).glob("*.dll"))}
++                                     if backend_dir else {"source":"pinned llama-cpp-python wheel"})
++    A.open_run(args.out, manifest)
+     wf, prog, shaped, info = compile_all(args.workflow, profiles)
++    artifact=dict(schema='orchlang-validation-artifact-v1',source_binding=info['source_binding'],
++                  model_contracts=manifest['model_contracts'],
++                  candidates={name:C.stmt_json(body) for name,body in shaped.items()})
++    Path(args.out,'validation-artifact.json').write_text(json.dumps(artifact,indent=2)+'\n',encoding='utf-8')
+     with open(os.path.join(args.out, "compile.json"), "w", encoding="utf-8") as f:
+         json.dump(info, f, indent=2)
+     print(json.dumps({k: info[k] for k in ("workflow", "calls", "high")}), flush=True)
+@@ -98,26 +141,34 @@ def main():
+     used = sorted({c.model for c in C.calls(prog.body)})
+     backends = {k: R.LlamaBackend(profiles[k], n_ctx=4096, n_threads=args.threads, temperature=args.temperature)
+                 for k in used}
+-    rt = R.Runtime(backends, tools, caps)
+-    data = load_jsonl(args.data)
+-    if args.limit:
+-        data = data[: args.limit]
++    rt = R.Runtime(backends, tools, caps, budgets=budgets)
+     keep = [v for v in args.keep.split(",") if v] or [wf.output]
+     keep_slots = {v: prog.slots[v] for v in keep}
+     progs = {"orig": prog.body, **shaped}
+     for cond in args.conditions.split(","):
+         path = os.path.join(args.out, f"{cond}.jsonl")
+-        done = {r["id"] for r in load_jsonl(path)} if os.path.exists(path) else set()
++        done = A.checked_record_ids(path,{r["id"] for r in data})
+         with open(path, "a", encoding="utf-8") as f:
+             for k, item in enumerate(data):
+                 if item["id"] in done:
+                     continue
+                 store = {prog.slots[n]: v for n, v in item["inputs"].items()}
+                 t0 = time.perf_counter()
+-                r = rt.run(progs[cond], store, run_seed=k)
++                try:
++                    r = rt.run(progs[cond], store, run_seed=k)
++                except Exception as error:
++                    failure = dict(id=item["id"],condition=cond,error=repr(error),
++                                   dispatched=getattr(error,"dispatched",None),
++                                   usage_complete=getattr(error,"usage_complete",False),
++                                   status="failed-not-a-completed-execution")
++                    with open(os.path.join(args.out,"failures.jsonl"),"a",encoding="utf-8") as log:
++                        log.write(json.dumps(failure)+"\n")
++                    raise
+                 rec = {"id": item["id"], "label": item.get("label"), "wall": time.perf_counter() - t0,
+                        "store": {n: r.store.get(x, "") for n, x in keep_slots.items()},
+-                       "truncations": r.truncations,
++                       "truncations": r.truncations, "usage":r.usage,
++                       "source_binding_sha256":info["source_binding"]["binding_sha256"],
++                       "execution_events": [e.audit for e in r.trace if e.kind=="llm"],
+                        "trace": [[e.kind, e.name, e.input_tokens, e.output_tokens, round(e.latency, 4),
+                                   e.dummy, e.site, e.natural] for e in r.trace]}
+                 f.write(json.dumps(rec) + "\n")
+diff --git a/legacy/v1/README.md b/legacy/v1/README.md
+index 4589ec0..8fe4967 100644
+--- a/legacy/v1/README.md
++++ b/legacy/v1/README.md
+@@ -1,167 +1,83 @@
+-> **Legacy prototype (v1).** This directory preserves the first OrchLang prototype: a
+-> C++17 compiler with a relational billing-signature checker, finite certificate cores
+-> in Lean, and the evidence campaigns of September–October 2026. It is superseded by
+-> the constant-shape compiler, proofs and evaluation at the repository root and is kept
+-> for provenance only. Paths in this README and in its evidence records are relative to
+-> `legacy/v1/`; build with `make check` from this directory.
+-
+ # OrchLang
+ 
+-A C++17 prototype and reproducible audit artifact for bounded workflow resource
+-analysis, declared information-flow policies and independently checked closed-
+-request and response-dependent certificates.
+-
+-The original checker passed 95 tests but accepted a secret branch that consumed
+-2 versus 987 mock units at seed 1. That witness is preserved. The repaired
+-checker distinguishes resolved bindings, semantic contracts and request content.
+-The current paper is a scoped software contribution; general cloud privacy and
+-full-language verification are not established.
+-
+-- **[Complete project explanation and publication status](docs/PUBLICATION_STATUS.md)**
+-- [Paper PDF, tested-source bundles and provenance](publication/README.md)
+-- [Current manuscript and scope](docs/SOFTWARE_PAPER.md)
+-- [Semantics, assumptions and trusted boundaries](docs/SEMANTICS.md)
+-- [Reproduction commands](docs/REPRODUCIBILITY.md)
+-- [Independent certificate path and replay](docs/CERTIFICATES.md)
+-- [Response-dependent dataflow certificates](docs/DATAFLOW_CERTIFICATES.md)
+-- [Clean-snapshot results](research/validated-2026-10-23/README.md)
+-- [Fresh GitHub-package validation](research/github-validation-2026-10-24/README.md)
++OrchLang audits bounded language-model workflows using explicit resource,
++request and execution contracts.
++
++The current scientific revision adds mechanically proved semantic rewrites,
++an aggregate observer for independent calls, exact pinned-tokenizer accounting,
++and original-framework comparisons against a local Qwen model.
++
++- [Scientific revision and review-response map](docs/REVISION_STATUS.md)
++- [Scientific revision PDF](publication/OrchLang-scientific-revision-2026-10-24.pdf)
++- [Current manuscript source](docs/manuscript/main.tex)
++- [Verified ordered and aggregate decisions](docs/VERIFIED_PRECISION.md)
++- [Exact tokenizer accounting](docs/EXACT_ACCOUNTING.md)
++- [Original-framework and local-model experiments](docs/REAL_WORKFLOWS.md)
++- [Reproduction instructions](docs/REPRODUCIBILITY.md)
+ - [Claim-to-evidence ledger](research/claims.csv)
+-- [Journal comparison and submission constraints](research/venue-search-2026-10-24.md)
+-- [Controlling publication plan](docs/PUBLICATION_MASTER_PLAN.md)
+-
+-## What the software does
+-
+-The frontend parses bounded workflows, checks declarations/types and declared
+-confidentiality/integrity policies, derives synthetic resource bounds and emits
+-structural IR. Sequential costs add, branches take componentwise maxima and
+-bounded retries multiply the body bound. A separate relational analysis compares
+-request construction and abstract contracts across secret branches. Rejection
+-means this analysis cannot certify its required relation, not proof that every
+-such workflow leaks.
+-
+-```orch
+-workflow Triage budget 2500 {
+-    input ticket: text max_tokens 400;
+-    model m = mock("local-small") max_tokens 600;
+-    prompt classify(t: text) -> text = "Classify: {t}";
+-    let category: text = call classify(ticket) using m;
+-    output category;
+-}
+-```
+-
+-`mock(...)` names an abstract mock contract. It does not load that model or
+-contact a service. C++ execution samples synthetic lengths rather than generating
+-text. Input accounting uses a byte/divisor estimate plus declared argument bounds
+-in `mock-length-v1` units. Output bounds assume the declared cap is honored.
+-Neither component is a provider-token theorem. Exact tokenizer probes retain
+-counterexamples to treating the estimate as such a theorem.
+-
+-## Build and check
+-
+-Requirements: a usable C++17 compiler, Python 3.10+ standard library, and optionally
+-Lean 4.19.0 for proof/certificate checks. The C++ core has no third-party library
+-or network dependency. Optional download scripts fetch pinned public research
+-artifacts outside the repository. GPU hardware and API keys are unnecessary.
+-
+-```text
+-python -m unittest discover -s tests -p "test_*.py" -v
+-python scripts/offline_check.py --cxx /absolute/path/to/g++ --lean /absolute/path/to/lean --output /new/run/directory
+-```
+-
+-Output directories must be new. The full check builds fresh test/CLI executables,
+-records commands, exits, compiler flags, source hashes and dirty state, checks
+-all three Lean files, then exercises diagnostics, examples and mock resource bounds.
+-Use an absolute compiler path when the default PATH toolchain is outdated.
+-Windows commands and toolchain provenance are in the reproduction manual.
+-Lean proofs require only the pinned distribution's standard library.
+-
+-## Compiler commands
+-
+-| Command | Output |
+-|---|---|
+-| `orchc check file.orch` | Lexical, syntax, type, policy, cost and relational diagnostics |
+-| `orchc tokens file.orch` | Tokens and locations |
+-| `orchc ast file.orch` | Parsed tree |
+-| `orchc symbols file.orch` | Resolved declarations |
+-| `orchc cost file.orch` | Structural synthetic resource derivation |
+-| `orchc ir-json file.orch` | JSON structural IR |
+-| `orchc certify file.orch` | Explicitly labelled analysis report, not an independently checked proof |
+-| `orchc run file.orch --seed 1` | Offline length-only mock execution |
+-
+-`--pin name=value` fixes a declared runtime input; invalid names/types or lengths
+-beyond a declaration are errors. `--chars-per-token` configures the synthetic
+-byte divisor and never certifies a real tokenizer bound. Consult
+-[LANGUAGE_SPEC.md](docs/LANGUAGE_SPEC.md) for full syntax and supported options.
+-
+-## Independently checked closed requests
+-
+-`scripts/closed_certificate.py` reparses a restricted source fragment without
+-calling the C++ analyzer. It constructs full requests, binds source bytes/core
+-to an untrusted plan and invokes the executable Lean JSON checker. Supported
+-source includes secret Boolean guards, lexical models, text prompts and literal
+-arguments/outputs. Inputs, downstream responses, source retries, tools and
+-reclassification fail closed. The reader/serialization/hash binding are trusted
+-Python; their correctness is not mechanized. This path does not check the C++
+-mock budget as a byte-token budget.
+-
+-```text
+-python scripts/closed_certificate.py issue examples/valid/closed_certificate.orch /new/certificate.json --lean /absolute/path/to/lean
+-python scripts/closed_certificate.py check examples/valid/closed_certificate.orch /new/certificate.json --lean /absolute/path/to/lean
+-```
+-
+-The Lean result concerns equal weighted traces for shared, stateless,
+-request-indexed kernels in the closed core. Probability interpretation requires
+-normalized nonnegative finite tables. It covers bounded early-stop retry with
+-billed failures, but source retry is excluded because the C++ mock uses a
+-different failure rule. Independent text reference/replay executors expose this
+-difference rather than silently equating their semantics.
+-
+-The additional [text-dataflow path](docs/DATAFLOW_CERTIFICATES.md) admits shared
+-public text/Boolean inputs and actual response bindings used in later requests.
+-Its Lean theorem covers state-transformer semantics under stateless kernels and
+-secret Boolean control. Source retry, secret text, tools and reclassification
+-remain unsupported; outputs must be root literals. The trusted Python source
+-reader is not a verified parser. This judgment does not override the C++ PC-label
+-policy or certify its source budget. Use the separate example/CLI:
+-
+-```text
+-python scripts/dataflow_certificate.py issue examples/certificates/dataflow_certificate.orch /new/dataflow-certificate.json --lean /absolute/path/to/lean
+-python scripts/dataflow_certificate.py check examples/certificates/dataflow_certificate.orch /new/dataflow-certificate.json --lean /absolute/path/to/lean
+-```
+-
+-## Evidence and limitations
+-
+-Current clean local validation passes 106 C++ tests and 47 Python tests; three Lean files
+-compile without admitted proofs. Development enumeration checks 576 programs,
+-accepts 24 and finds no accepted counterexample under the supplied kernels.
+-There is no observed precision advantage over conventional trace identity.
+-Four injected semantic faults are detected. The separate certificate campaign
+-records 624 checks; replay/reference agree on 12 cases and 48 weighted paths.
+-
+-The new dataflow campaign covers 256 pipeline programs and 3,072 contexts. Lean,
+-reference and replay execution agree throughout; 16 are accepted with no
+-supplied-kernel counterexamples. Eight core boundary cases cover 23 weighted
+-paths. Failed campaign attempts and their operational/source-generator repairs
+-are retained. The C++ checker accepts eight cases under a distinct confidentiality
+-policy; these counts establish no precision ranking. Full data:
+-[24 October evidence](research/validated-2026-10-24/README.md).
+-
+-The amended external protocol evaluates 11 authored cost projections from a
+-21-candidate census, with 220 mock runs and no componentwise bound violations.
+-They are not original application executions or faithful functional translations.
+-Compiler and competent structural bounds agree. Full raw observations,
+-protocol amendments, hashes, scope and derived tables are retained. No model
+-inference or paid API was used; spend and reservations remain USD 0 of a USD 5 cap.
+-
+-Independent human reproduction, final author verification/declarations and
+-public archival release are still required before submission. No acceptance
+-prediction, production adoption, full source theorem or provider privacy is
+-claimed. [Historical README](docs/HISTORICAL_README.md) and older benchmark
+-outputs are retained as historical records and are superseded by the current
+-claim ledger.
++- [Current research decisions](research/revision-2026-10-24/DECISIONS.md)
++
++## What the software checks
++
++| Path | Question | Evidence boundary |
++|---|---|---|
++| C++ frontend | Are declarations, policy checks and structural resource bounds valid? | Tested C++ implementation; synthetic mock unit |
++| Ordered Lean decision | Are full request/response-dependent resource traces invariant under secret Boolean changes? | Restricted core, shared public inputs and stateless kernels |
++| Aggregate Lean decision | Can two independent closed calls be exchanged without changing per-contract resource totals? | Aggregate observer, independent kernels, exactly two calls |
++| Exact accounting | What do complete requests cost under a pinned tokenizer and output-cap contract? | Trusted Python tokenizer/source reader; explicit units |
++| Local deployment | Do upstream engines and executable call kernels preserve requests and behavior on selected inputs? | Actual CPU inference, explicit host composition, retained failures |
++
++The ordinary C++ check remains the product's combined source-policy judgment.
++Resource-only Lean acceptance does not waive a confidentiality diagnostic.
++The historical certify command produces an analysis report. Saved plans are
++diagnostic outputs of recomputed normalization; the main formal interface
++requires no certificate.
++
++## Build and use
++
++The core requires C++17 and Python 3.10+. Formal decisions require Lean 4.19.0.
++Core validation needs no model, GPU, network or API key.
++
++    python -m unittest discover -s tests -p "test_*.py" -v
++    python scripts/offline_check.py --cxx /absolute/path/to/g++ --lean /absolute/path/to/lean --output /new/run
++
++Examples of the verified decisions:
++
++    python scripts/dataflow_certificate.py decide examples/certificates/dataflow_certificate.orch --lean /absolute/path/to/lean
++    python scripts/decide_aggregate.py examples/certificates/aggregate_document_checks.orch --lean /absolute/path/to/lean
++
++The optional exact tier pins Tokenizers 0.21.4 and artifact SHA-256 values.
++It encodes full constructed requests. The docs include a direct .orch command,
++dynamic finite execution, byte-contract assumptions and runtime-only admission.
++
++The optional local-model study pins upstream revisions, framework dependencies,
++a Qwen tokenizer, an Ollama model manifest and an explicit serializer.
++Its corpus distinguishes direct source translation from host compositions.
++Independent generations and captured-response replay are separate endpoints.
++
++## Evidence
++
++The new ordered source grammar accepts 64 of 80 cases, versus eight under
++syntactic normalization. The core-expression grammar accepts 64 of 72, versus
++eight. The aggregate grammar accepts 28 of 256, versus 16 under the ordered
++baseline; all twelve gains intentionally differ in ordered observations.
++These are constructed development grammars, not application-frequency estimates.
++
++Exact accounting retains 5,344 text-policy observations, 8,996 concatenation
++observations and 128 supported finite execution paths. Tokenization is not
++additive: the pinned GPT-2 policy counts hello and world as two tokens
++separately, but helloworld as three. The source analysis exposes its conditional
++output-cap assumption instead of relabeling mock bounds as provider tokens.
++
++Historical raw results and failures remain available. New experiments use
++separate immutable directories. Ubuntu/Windows CI is configured; executed
++local Windows and Ubuntu/WSL2 checks are distinguished from remote CI status.
++
++Source exports exclude class submissions, agent handoffs and old packages;
++those files remain recoverable locally and in Git history. Credentials,
++private papers, model weights and compiled executables are excluded.
+ 
+ ## License
+ 
+-Project software: [MIT](LICENSE), selected by the owner. Optional dependency,
+-upstream projection and Elsevier template notices: [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md).
++Software: [MIT](LICENSE).
++Template and upstream materials: [third-party notices](THIRD_PARTY_NOTICES.md).
+diff --git a/legacy/v1/THIRD_PARTY_NOTICES.md b/legacy/v1/THIRD_PARTY_NOTICES.md
+index 3c39309..a833a1b 100644
+--- a/legacy/v1/THIRD_PARTY_NOTICES.md
++++ b/legacy/v1/THIRD_PARTY_NOTICES.md
+@@ -24,11 +24,22 @@ The supplied Compiler Design planning document was read as background for the pr
+ 
+ ## External workflow projections
+ 
++The scientific revision also includes pinned LangChain documentation snippets
++and adaptations in the faithful-local-v1 and faithful-local-v2 corpus directories.
++Their upstream revisions and hashes are recorded in the manifests. The MIT
++notices below apply to these adapted portions as well. A small pinned Prompt
++Flow/LangChain source subset with its upstream licenses is also included under
++research/real-workflows-2026-10-24/upstream for reproduction. Qwen2.5-3B-Instruct artifacts
++and Ollama are separately licensed local dependencies; no weights are included
++in the source export.
++
+ `bench/corpus/external-v1` contains authored cost projections of the pinned
+ Microsoft Prompt Flow examples and LangChain documentation workflow patterns.
+ They are not executions, faithful functional translations or provider results.
+ Exact source revisions, files, hashes, exclusions and changes are in its manifest.
+-Upstream source files and private paper PDFs are not redistributed here.
++Private paper PDFs and model weights are not redistributed here. The original
++projection-only corpus does not include upstream source; the later faithful
++execution study includes the separately identified, licensed source subset.
+ 
+ Upstream notices for any adapted portions:
+ 
+diff --git a/legacy/v1/docs/AUTHOR_REVIEW.md b/legacy/v1/docs/AUTHOR_REVIEW.md
+index 4658b37..20f18ae 100644
+--- a/legacy/v1/docs/AUTHOR_REVIEW.md
++++ b/legacy/v1/docs/AUTHOR_REVIEW.md
+@@ -1,3 +1,6 @@
++> Historical status for the earlier review snapshot. The current scientific
++> revision and evidence are described in [REVISION_STATUS.md](REVISION_STATUS.md).
++
+ # Concrete author review packet
+ 
+ Current deliverable: official-template software-paper draft in
+diff --git a/legacy/v1/docs/DATAFLOW_CERTIFICATES.md b/legacy/v1/docs/DATAFLOW_CERTIFICATES.md
+index e99bcd4..270f7af 100644
+--- a/legacy/v1/docs/DATAFLOW_CERTIFICATES.md
++++ b/legacy/v1/docs/DATAFLOW_CERTIFICATES.md
+@@ -1,4 +1,4 @@
+-# Text-dataflow certificates: response contents matter
++# Verified text-dataflow decision procedure
+ 
+ This additional path supports root public text/Boolean inputs, secret Boolean
+ guards, lexical mock contracts/prompts and text-valued call bindings. A response
+@@ -10,12 +10,16 @@ closed, so the resource projection cannot silently hide an explicit output chann
+ ```text
+ python scripts/dataflow_certificate.py issue examples/certificates/dataflow_certificate.orch /new/certificate.json --lean /absolute/path/to/lean
+ python scripts/dataflow_certificate.py check examples/certificates/dataflow_certificate.orch /new/certificate.json --lean /absolute/path/to/lean
++python scripts/dataflow_certificate.py decide examples/certificates/dataflow_certificate.orch --lean /absolute/path/to/lean
+ ```
+ 
+ Issuance refuses to overwrite a file. The output parent must already exist.
+ The same bytes and independently reconstructed core must match when checking.
+-An untrusted plan is decoded and checked in Lean; it is never executed as Lean
+-source. The Python reader/slot allocation/serialization/hash binding are trusted.
++A saved plan is decoded and compared with recomputed normalization in Lean; it
++is diagnostic output, not a proof-carrying witness or a complexity advantage.
++The primary `decide` command invokes `checkProgram` directly and needs no saved
++plan. `decoded_decision_sound` proves its guarantee. The Python reader/slot
++allocation/serialization/hash binding are trusted.
+ No verified source parser or full C++ implementation theorem is claimed.
+ 
+ ## Guarantee and scope
+@@ -27,8 +31,14 @@ byte counts and failure status. Sequence uses the returned store for the next
+ call. Public Booleans have the same values in the compared executions. Secret
+ Booleans can affect control only; secret text inputs are outside the fragment.
+ 
+-The normalizer removes a secret branch only when its arms have the same
+-normalized plan, including response-slot dependencies. Source-local names are
++The normalizer rewrites text using append associativity, empty-string identities
++and adjacent literal folding. It removes sequence units and collapses public
++branches whose normalized arms agree. It then removes a secret branch when both
++arms have the same normalized plan, including response-slot dependencies. All
++these rules preserve complete store and ordered-trace semantics. The source
++reader already folded adjacent template literals before this extension, so
++request-expression gains are measured at core level separately from source gains.
++Source-local names are
+ aligned positionally across sibling blocks, with fresh slots after a join.
+ Lexical lookup prevents branch locals escaping or overwriting an outer binding.
+ Raw core stores retain unreachable branch-local slots; these slots have no
+diff --git a/legacy/v1/docs/PUBLICATION_STATUS.md b/legacy/v1/docs/PUBLICATION_STATUS.md
+index 6fa3c35..755d4fd 100644
+--- a/legacy/v1/docs/PUBLICATION_STATUS.md
++++ b/legacy/v1/docs/PUBLICATION_STATUS.md
+@@ -1,3 +1,6 @@
++> Historical status for the earlier review snapshot. The current scientific
++> revision and evidence are described in [REVISION_STATUS.md](REVISION_STATUS.md).
++
+ # OrchLang: complete explanation and publication status
+ 
+ Status date: 24 October 2026. This document describes implemented work and
+diff --git a/legacy/v1/docs/REPRODUCIBILITY.md b/legacy/v1/docs/REPRODUCIBILITY.md
+index 7ccb226..2f826aa 100644
+--- a/legacy/v1/docs/REPRODUCIBILITY.md
++++ b/legacy/v1/docs/REPRODUCIBILITY.md
+@@ -1,3 +1,8 @@
++> Current revision: see [REVISION_STATUS.md](REVISION_STATUS.md),
++> [VERIFIED_PRECISION.md](VERIFIED_PRECISION.md),
++> [EXACT_ACCOUNTING.md](EXACT_ACCOUNTING.md), and
++> [REAL_WORKFLOWS.md](REAL_WORKFLOWS.md) for added commands and evidence.
++
+ # CPU reproduction and scoped publication evidence
+ 
+ For the complete explanation and documentation map, start with
+@@ -43,11 +48,12 @@ compiler path. No silent fallback to an old executable is allowed.
+ python scripts/offline_check.py --cxx /absolute/path/to/g++ --lean /absolute/path/to/lean --output research/local-new-run
+ ```
+ 
+-On the author's Windows machine, from the repository root in PowerShell:
++On Windows, set task-specific paths to your installed C++17 and Lean
++4.19.0 executables, then invoke the runner from the repository root:
+ 
+-```powershell
+-python scripts/offline_check.py --cxx 'C:\Users\nambi\AppData\Local\Microsoft\WinGet\Packages\BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe\mingw64\bin\g++.exe' --lean 'C:\Users\nambi\Documents\OrchLang Publication Work\tools\lean-4.19.0-windows\bin\lean.exe' --output research/local-new-run
+-```
++    $env:ORCHLANG_CXX = 'C:/path/to/g++.exe'
++    $env:ORCHLANG_LEAN = 'C:/path/to/lean.exe'
++    python scripts/offline_check.py --cxx $env:ORCHLANG_CXX --lean $env:ORCHLANG_LEAN --output /new/run
+ 
+ The run records source commit, dirty state, tracked patch, hashes of relevant
+ source/input files (including untracked implementation files), compiler flags,
+diff --git a/legacy/v1/docs/SEMANTICS.md b/legacy/v1/docs/SEMANTICS.md
+index b203500..64b50a1 100644
+--- a/legacy/v1/docs/SEMANTICS.md
++++ b/legacy/v1/docs/SEMANTICS.md
+@@ -1,3 +1,8 @@
++> The current revision adds the ordered/aggregate decisions in
++> [VERIFIED_PRECISION.md](VERIFIED_PRECISION.md), exact complete-request
++> accounting in [EXACT_ACCOUNTING.md](EXACT_ACCOUNTING.md), and separately
++> scoped deployment execution in [REAL_WORKFLOWS.md](REAL_WORKFLOWS.md).
++
+ # Candidate semantics and implemented scope
+ 
+ Status: 23 October 2026, implementer-reviewed scope. The author waived waiting
+diff --git a/legacy/v1/docs/SOFTWARE_PAPER.md b/legacy/v1/docs/SOFTWARE_PAPER.md
+index cece172..8fe8f73 100644
+--- a/legacy/v1/docs/SOFTWARE_PAPER.md
++++ b/legacy/v1/docs/SOFTWARE_PAPER.md
+@@ -1,3 +1,6 @@
++> Historical status for the earlier review snapshot. The current scientific
++> revision and evidence are described in [REVISION_STATUS.md](REVISION_STATUS.md).
++
+ # Current paper: software and reproducibility route
+ 
+ The current manuscript is [manuscript/main.tex](manuscript/main.tex), prepared
+diff --git a/legacy/v1/docs/manuscript/README.md b/legacy/v1/docs/manuscript/README.md
+index f5369ff..4cf40aa 100644
+--- a/legacy/v1/docs/manuscript/README.md
++++ b/legacy/v1/docs/manuscript/README.md
+@@ -1,35 +1,32 @@
+-# Manuscript source and evidence
++# Manuscript and generated evidence
+ 
+-`main.tex` follows the official SCP Original Software Publication LaTeX template,
+-with mandatory metadata descriptions and main sections retained. Metadata column
+-widths fit the class margins; body font/spacing/margins were not compressed.
+-The PDF is an author-review draft, not an approved/submitted paper. Its public
+-archival link, competing interests and author approval remain unresolved.
++Compile main.tex, which inputs scientific-revision.tex. The project uses
++Elsevier elsarticle with the original preprint font, margins and spacing.
++References are in references.tex and additional-references.tex.
+ 
+-Compile twice with a normal LaTeX distribution containing `elsarticle`, `amsmath`,
+-`amssymb` and `hyperref`:
++    python scripts/build_manuscript.py --output /new/build
+ 
+-```text
+-pdflatex -interaction=nonstopmode -halt-on-error main.tex
+-pdflatex -interaction=nonstopmode -halt-on-error main.tex
+-```
++The current scientific article is supported by these retained records:
+ 
+-`evidence/metrics.tex` and `external.tex` are exact copies of files generated by
+-`scripts/report_publication.py`; their machine-readable source is
+-`research/validated-2026-10-23/tables/summary.json`. Regenerate to a NEW directory
+-and compare bytes before replacing manuscript evidence. Keep all files in this
+-project when making the LaTeX source archive. Highlights are editable text;
+-each of the four lines is at most 85 characters. The project compiles offline
+-with the system MiKTeX. The Codex preview compiler was unavailable on this
+-Windows host because it could not enforce split writable roots.
++- Ordered precision and aggregate/joint-result campaigns under
++  research/revision-2026-10-24.
++- Exact accounting under research/readiness-2026-10-24/exact-accounting-v4.
++- Actual model execution v4, captured-response conformance, repeatability
++  controls and final-analysis-v2 under research/real-workflows-2026-10-24.
++- Clean Windows and Linux checkouts and Linux ASan/UBSan validation.
+ 
+-LPPL applies to the Elsevier template derivative; see THIRD_PARTY_NOTICES.
+-No faculty endorsement or completed author review has been asserted.
++The current evidence/revision.tex, precision.tex and workflow-results.tex are
++byte-identical copies generated by scripts/report_revision.py into
++research/revision-2026-10-24/tables-v2. annotations.tex is generated by
++scripts/real_workflow_evidence.py and matches final-analysis-v2/annotation-counts.tex.
++Legacy metrics.tex retains historical numbers but omits its unused older
++Python-test macro. Historical dataflow macros retain their original provenance.
+ 
+-The 24 October revision includes the text-dataflow core and its three-way
+-execution campaign. `evidence/dataflow-metrics.tex` is an exact copy of
+-research/validated-2026-10-24/tables-v2/dataflow-metrics.tex, generated by
+-scripts/report_dataflow.py. The earlier tables/ directory preserves an initial
+-TeX macro-naming error; its numbers are unchanged, and that file is not input
+-to the manuscript. The current PDF has nine pages including front matter,
+-metadata, tables/figure and references; body spacing/font/margins are unchanged.
++The metadata identifies a local supervisor-review package. The author has
++explicitly prohibited pushing until asked. No author consent, public archive,
++journal submission or publication acceptance is inferred from validation.
++
++The source includes the complete bibliography and evidence files. The build
++script compiles twice and records source hashes, exits, unresolved references
++and overfull boxes. Final PDF rendering and visual inspection are recorded
++with the review package.
+diff --git a/legacy/v1/docs/manuscript/evidence/metrics.tex b/legacy/v1/docs/manuscript/evidence/metrics.tex
+index dc32d4e..76db7ae 100644
+--- a/legacy/v1/docs/manuscript/evidence/metrics.tex
++++ b/legacy/v1/docs/manuscript/evidence/metrics.tex
+@@ -1,5 +1,4 @@
+ \newcommand{\evCppTests}{106}
+-\newcommand{\evPythonTests}{31}
+ \newcommand{\evCostWorkflows}{23}
+ \newcommand{\evCostRuns}{115}
+ \newcommand{\evGenerated}{576}
+diff --git a/legacy/v1/docs/manuscript/highlights.txt b/legacy/v1/docs/manuscript/highlights.txt
+index 9a81d31..ce85dd4 100644
+--- a/legacy/v1/docs/manuscript/highlights.txt
++++ b/legacy/v1/docs/manuscript/highlights.txt
+@@ -1,4 +1,4 @@
+-OrchLang repairs contract and request identity errors in workflow analysis.
+-Lean checks closed and response-dependent plans under explicit kernel assumptions.
+-Finite replay retains failed attempts and separates usage units explicitly.
+-Reproduction records conservative precision and external projection limitations.
++Verified normalization admits semantic rewrites beyond syntactic workflow identity.
++Aggregate checking permits independent calls while retaining private results.
++Pinned tokenizers count complete requests and expose nonadditive token counts.
++Local-model studies separate direct ports, host composition and replay.
+diff --git a/legacy/v1/docs/manuscript/main.tex b/legacy/v1/docs/manuscript/main.tex
+index a0336a7..e3e5bc0 100644
+--- a/legacy/v1/docs/manuscript/main.tex
++++ b/legacy/v1/docs/manuscript/main.tex
+@@ -1,339 +1,2 @@
+-%% Based on the official SCP Original Software Publication template.
+-%% Copyright 2007, 2008, 2009 Elsevier Ltd.
+-%% This template derivative may be distributed under the LaTeX Project Public
+-%% License version 1.2 or later. See http://www.latex-project.org/lppl.txt .
+-%% The software and original prose have separate licensing; see repository notices.
+-\documentclass[preprint,12pt,a4paper]{elsarticle}
+-\usepackage{amssymb}
+-\usepackage{amsmath}
+-\usepackage{hyperref}
+-\hypersetup{hidelinks,pdftitle={OrchLang: Auditing Resource Contracts for Bounded LLM Workflows}}
+-\journal{Science of Computer Programming}
+-\input{evidence/metrics.tex}
+-\input{evidence/dataflow-metrics.tex}
+-\begin{document}
+-\begin{frontmatter}
+-\title{OrchLang: Auditing Resource Contracts for Bounded LLM Workflows\tnoteref{draft}}
+-\tnotetext[draft]{Author-review draft, 24 October 2026. Public archival release and final author declarations are pending. Not submitted.}
+-\author[ci]{Nambi Rajan M}
+-\ead{nambirajan.m2024@vitstudent.ac.in}
+-\author[analytics]{Ranjithkumar S\corref{cor}}
+-\ead{ranjithkumar.s@vit.ac.in}
+-\cortext[cor]{Corresponding author.}
+-\address[ci]{Department of Computational Intelligence, SCOPE, Vellore Institute of Technology, India}
+-\address[analytics]{Department of Analytics, SCOPE, Vellore Institute of Technology, India}
+-\begin{abstract}
+-OrchLang is an experimental compiler and audit artifact for bounded workflows using language models. It separates synthetic resource bounds, request equality and execution assumptions. An audit found an accepted workflow whose secret branches consumed 2 and 987 mock units. The repaired implementation distinguishes bindings from semantic contracts and retains request content. Separate readers reconstruct closed and response-dependent fragments for Lean checking. A text-valued core covers downstream requests under shared public inputs, secret Boolean control and stateless kernels. Reproduction includes 576 closed-request programs, 256 pipelines with 3,072 execution contexts, tokenizer probes and 11 documented external cost projections. These support scoped engineering claims, not provider privacy or a new general cost logic.
+-\end{abstract}
+-\begin{keyword}
+-resource analysis \sep information flow \sep workflow languages \sep certificate checking \sep reproducibility
+-\end{keyword}
+-\end{frontmatter}
+-\clearpage
+-
+-\section*{Metadata}
+-\begin{table}[!ht]
+-\small
+-% Description labels follow the official template; widths fit the class margins.
+-\begin{tabular}{|l|p{.38\linewidth}|p{.47\linewidth}|}
+-\hline
+-\textbf{Nr.} & \textbf{Code metadata description} & \textbf{Please fill in this column} \\
+-\hline
+-C1 & Current code version & Publication audit candidate; current core \texttt{00420ef}; earlier results \texttt{6f325be} and \texttt{7a0095d}. Full hashes in manifests. \\
+-\hline
+-C2 & Permanent link to code/repository used for this code version & \href{https://github.com/guyoverclocked/orchlang-compiler-design-project}{Project repository}. Tested revision supplied locally; archival release pending. \\
+-\hline
+-C3 & Permanent link to Reproducible Capsule & Not yet deposited. Local source bundles and raw records supplied with draft. \\
+-\hline
+-C4 & Legal Code License & MIT (software); LPPL for Elsevier template derivative. Third-party notices included. \\
+-\hline
+-C5 & Code versioning system used & Git \\
+-\hline
+-C6 & Software code languages, tools, and services used & C++17, Python, Lean 4.19.0; optional Tokenizers 0.21.4. No inference service. \\
+-\hline
+-C7 & Compilation requirements, operating environments and dependencies & CPU, C++17 compiler, Python 3.10+. Tested: GCC 16.1, Python 3.14.3, Windows 11. Tokenizer probe: Python 3.12.14. \\
+-\hline
+-C8 & If available, link to developer documentation/manual & Repository README and included \texttt{docs/REPRODUCIBILITY.md}, \texttt{SEMANTICS.md}, \texttt{CERTIFICATES.md}. \\
+-\hline
+-C9 & Support email for questions & \texttt{ranjithkumar.s@vit.ac.in} \\
+-\hline
+-\end{tabular}
+-\caption{Code metadata. Public deposition remains a release requirement.}
+-\end{table}
+-
+-\section{Motivation and significance}
+-A resource bound limits consumption; it need not make consumption independent
+-of a secret. A proof about a request kernel also requires an adapter that
+-serializes that request and accounts for billed failures. OrchLang provides a
+-small executable setting for inspecting and falsifying such assumptions.
+-
+-The original checker at commit \texttt{a49fcdb} accepted a secret conditional
+-whose branches declared models named \texttt{m} with output caps 1 and 1000.
+-It equated their signatures by name. With seed 1 and identical public pins,
+-the branches consumed 2 and 987 synthetic units. All 95 original tests passed.
+-This refutes the original acceptance guarantee, although the unary bound of
+-1001 covers both observations. The artifact retains the witness and raw logs.
+-
+-Resource-aware noninterference already combines information flow and cost
+-analysis~\cite{ngo}. RelCost reasons about relative costs~\cite{relcost}, and
+-probabilistic AARA derives expected-cost bounds~\cite{wang}. Randomness does
+-not preclude numeric specifications. eRHL supplies a richer relational
+-probabilistic logic~\cite{erhl}. Hard-KLAIM proves typed trace safety under
+-interface assumptions~\cite{hard}; PC2 checks constraints before operations
+-and identifies conditions for real-world correspondence~\cite{pc2}. Loom's
+-author-hosted report addresses structural LLM workflow cost bounds~\cite{loom};
+-its peer-review status and artifact results are not established here.
+-OrchLang claims no expressiveness or priority separation. Its software
+-contribution is an inspectable specialization with counterexamples, repaired
+-identity tracking, a separate certificate path and reproducible validation.
+-
+-\section{Software description}
+-\subsection{Architecture and functionality}
+-The C++ frontend supports bounded inputs, prompts, lexical models, conditionals,
+-bounded retries, outputs and tool sinks. Analyses track confidentiality,
+-integrity and synthetic resource bounds. Resolved binding identities prevent
+-shadowing errors. Canonical abstract contracts admit equivalent aliases while
+-distinguishing caps and model revisions. Relational signatures retain template
+-text, ordered typed arguments, literal content and resolved public guards.
+-A secret branch is conservatively rejected when its request relation cannot
+-be certified.
+-
+-Commands \texttt{check}, \texttt{ir-json}, \texttt{certify} and \texttt{run}
+-produce diagnostics, structural IR, an analysis report and length-only mock
+-execution. Despite its historical name, \texttt{certify} emits an explicitly
+-labelled report. It is not independently checked proof evidence. Numeric
+-parsing rejects malformed pins and overflow; runtime pins must respect declared
+-bounds. Arithmetic uses safe division and saturation, with saturated static
+-totals rejected.
+-
+-\begin{figure}[!ht]
+-\centering
+-\fbox{\begin{minipage}{.92\linewidth}
+-Source $\longrightarrow$ C++ analysis/report and length-only mock.\\[3pt]
+-Same source, restricted fragments $\longrightarrow$ independent Python readers
+-and digest binding $\longrightarrow$ JSON cores and untrusted plans
+-$\longrightarrow$ Lean decoder/checker.\\[3pt]
+-Hand-authored text core $\longrightarrow$ finite reference interpreter
+-$\longleftrightarrow$ separate finite-table replay executor.\\[3pt]
+-Trusted boundaries: source reader/serialization, JSON library, primitive
+-contracts, tokenizer library and execution platform.
+-\end{minipage}}
+-\caption{Separate evidence paths. C++ acceptance is not a premise of the Lean
+-theorem; no verified translation covers all source features.}
+-\end{figure}
+-
+-Separate certificate paths independently reparse source, reconstruct request
+-expressions and check source digest/core agreement before invoking Lean on an
+-untrusted plan. The original path admits closed requests. The new dataflow path
+-also admits shared public text/Boolean inputs and response bindings used by
+-later requests. Source-local names are aligned to lexical slots. Secret text,
+-source retries, tools and reclassification fail closed. Dataflow outputs must
+-be root literal statements. The Python readers and slot allocation are trusted,
+-not mechanically verified. Neither path checks the C++ mock budget as a
+-tokenizer budget.
+-
+-\subsection{Formal guarantees and assumptions}
+-The unary Lean core bounds scalar cost for calls, sequence, branch maxima and
+-up-to-$n$ repetition, assuming primitive call bounds. The closed relational core
+-uses a shared stateless kernel indexed by contract and complete request. The
+-dataflow core additionally evaluates literal, slot and append expressions in a
+-text store. A call binds actual response text; subsequent requests use that
+-store. Its kernel $K(c,r)$ returns text, status and weight. Events record contract,
+-UTF-8 input/output byte counts and failure status. Sequence composes stores,
+-concatenates traces and multiplies weights. Lexical bounded retry restarts from
+-the outer store, retains failures and stops after an attempt with no failed
+-call. Errors are status values; the body completes before retry decides. This
+-is not an SDK exception semantics or the C++ mock's independent failure sample.
+-
+-Normalization removes a secret branch only when its arms have exactly the
+-same plan. Lean's \texttt{normalize\_correct} proves
+-\[
+- N(P)=\operatorname{some}(Q)\ \Longrightarrow\
+- \mathcal{D}_{K,l,h}(P)=\mathcal{D}^{\mathrm{plan}}_{K,l}(Q)
+- \quad\text{for every Boolean store }h.
+-\]
+-Here $l$ is a shared public Boolean store. In the dataflow core the equality is
+-between complete text-state transformers, for every shared initial text store.
+-Thus secret Boolean stores yield equal weighted observations even when later
+-requests depend on earlier response contents. A deterministic observer preserves
+-equality. The result is algebraic; probability interpretation additionally
+-requires normalized nonnegative finite kernels. Runtime checks validate the
+-supplied tables, not a provider's compliance.
+-
+-The executable decoder/checker has the theorem
+-\path{decoded_certificate_sound} for successfully decoded core values.
+-Lean 4.19.0 checks all three files without admitted lemmas or custom axioms;
+-reported axioms are \texttt{propext} and \texttt{Quot.sound}. Complete source
+-correspondence, secret text inputs and stateful providers remain outside the proof.
+-Hash binding detects source changes; it authenticates neither authorship nor
+-the reader's correctness.
+-
+-\section{Illustrative examples}
+-Requests \texttt{yes} and \texttt{no!} have the same byte length. A valid finite
+-kernel may return one byte for the former and 100 for the latter. Input-length
+-equality cannot justify equal output distributions; a common random-length
+-tape would alter a marginal. The repaired checker retains content and rejects
+-this example. Equivalent model aliases with equal constructed requests are
+-accepted in \texttt{examples/valid/closed\_certificate.orch}. The certificate
+-manual provides executable issuance/checking commands.
+-
+-A downstream witness returns \texttt{aa} or \texttt{bb} with equal probability.
+-Their lengths agree, but requests \texttt{Next:aa} and \texttt{Next:bb} produce
+-one and three output bytes. Replacing the response-dependent request with the
+-constant \texttt{Next:aa} changes its distribution. The dataflow checker rejects
+-that substitution and admits two matched pipelines with renamed local bindings.
+-Its source example is in \path{examples/certificates/dataflow_certificate.orch}.
+-
+-Ordered observations contain billed events. Aggregate observations sum usage,
+-calls and failures by contract and unit. Reversing different calls can preserve
+-the aggregate but change the ordered trace. Timing, provider-visible contents
+-and tool effects are excluded. Equal bills do not authorize secret disclosure.
+-For a call succeeding with probability $1/2$, two-attempt retry yields success
+-with weight $1/2$, failure then success with weight $1/4$, and two failures with
+-weight $1/4$. Failed attempts remain billed. Lean guards and replay observations
+-check this example.
+-
+-\section{Impact and evaluation}
+-OrchLang supports reproducible investigation of contract omissions. Evidence
+-is engineering validation on a developer machine; independent human reproduction,
+-production use and external adoption are not established. Clean local snapshots,
+-source hashes, commands, raw observations and derived tables accompany the
+-draft. CPU checks use GCC 16.1, C++17, warnings enabled and optimization level 2.
+-No GPU, model inference or paid API was used. All counts below are generated
+-from retained records by \path{scripts/report_publication.py} and
+-\path{scripts/report_dataflow.py}.
+-
+-The current suite passes \evDataflowCppTests{} C++ and \evDataflowPythonTests{} Python tests.
+-Four compiled semantic mutants are detected: name conflation, request-content
+-erasure, missing retry multiplication and unbilled failure. A structural
+-baseline using maximum, sum and retry multiplication agrees on \evCostWorkflows{} existing
+-cost workflows and \evCostRuns{} mock runs. It shares frontend primitive facts,
+-which it cannot independently validate. Historical baselines omitting retries
+-are retained only as broken negative controls.
+-
+-Exhaustive development enumeration combines 24 arm variants into
+-\evGenerated{} programs, with four call-count structures. The compiler accepts
+-\evAccepted{}, with \evAcceptedFiniteCounterexamples{} counterexamples under
+-the supplied finite kernels. Decisions match conventional trace identity
+-exactly. Sixteen rejected programs are equivalent under those particular
+-kernels; they are not universally safe. No precision advantage is established.
+-The separate source reader and Lean path perform \evLeanChecks{} checks, issue
+-\evCertificates{} certificates and reject \evSourceTampers{} source changes,
+-24 altered plans and four malformed batches. Reference and replay observations
+-agree on \evReplayCases{} cases comprising \evReplayPaths{} weighted paths.
+-Enumeration is not a universal soundness proof.
+-
+-The new development grammar covers \evDataflowSourcePrograms{} source programs
+-with one two-call-per-arm pipeline shape and a public optional tail. Three text
+-inputs, two public flags and two secret values give
+-\evDataflowExecutionContexts{} contexts. The independently constructed expected
+-cores match the source reader throughout. Python and Lean normalization agree;
+-Lean execution matches reference event distributions and replay request/event
+-distributions in every context. The normalizer admits \evDataflowAccepted{}
+-programs, with \evDataflowAcceptedFiniteCounterexamples{} supplied-kernel
+-counterexamples. Eight additional core cases, comprising
+-\evDataflowBoundaryPaths{} paths, cover UTF-8, nested/zero retry and the downstream
+-witness. Tests reject \evDataflowSourceTampersRejected{} changed sources,
+-\evDataflowAlteredPlansRejected{} wrong plans and
+-\evDataflowInvalidEvaluatorInputsRejected{} invalid evaluator inputs.
+-
+-The C++ checker accepts \evDataflowCppAccepted{} of those source cases and emits
+-E230 in \evDataflowCppSecretArgumentCases{}: its PC label marks branch-local responses
+-secret. The dataflow resource judgment does not override that confidentiality
+-policy; the counts are not a precision ranking. Initial campaign attempts failed
+-on a transport-size guard and unused prompt parameters. Batching and zero-argument
+-fixed prompts repaired them without changing expected requests/cores or kernels.
+-Failed records and amendments are retained. This is development validation,
+-not held-out evaluation or a new general logic.
+-
+-Tokenizer development probes use pinned GPT-2 BPE and BERT WordPiece files with
+-Tokenizers 0.21.4. Of \evTokenizerEncodings{} fixed encodings,
+-\evUnderestimates{} exceed the estimate $\lceil b/4\rceil$ for $b$ UTF-8 bytes;
+-\evNonadditive{} of \evConcatenations{} concatenations differ from summed
+-component counts. All token IDs and special-token options are retained. These
+-cases refute a general tokenizer-bound interpretation, not estimate a failure
+-rate. The C++ unit is explicitly \texttt{mock-length-v1}.
+-
+-An external census considers 15 Prompt Flow examples and six LangGraph tutorial
+-patterns at pinned revisions~\cite{promptflow,langgraph}. Eleven authored cost
+-projections are included; ten exclusions have recorded reasons. Three basic
+-configurations share a call structure. One helper named \texttt{llm\_result}
+-returns a fixed string upstream and contributes zero model calls. Projections
+-introduce bounded inputs/caps, abstract guards, summarize prompts and may
+-serialize concurrency or omit aggregation. They preserve only documented cost
+-shape: zero original applications or faithful end-to-end translations were
+-executed. The corpus has no secret branches and supplies no relational
+-precision evidence.
+-
+-\begin{table}[!ht]
+-\centering\small
+-\input{evidence/external.tex}
+-\caption{External cost projections in synthetic mock units. Compiler and
+-structural bounds agree throughout. Changes/exclusions are in the manifest.}
+-\label{tab:external}
+-\end{table}
+-
+-The protocol fixes seeds 1--20 and bound/call-count endpoints. Its initial run
+-failed on a reserved identifier in one projection; this was corrected and an
+-amendment frozen before the complete rerun. Partial-record persistence was also
+-repaired. The failure record is retained; this is not untouched preregistration.
+-The amended run completes \evExternalRuns{} mock executions with
+-\evExternalBoundViolations{} componentwise violations and
+-\evExternalBaselineDisagreements{} baseline disagreements
+-(Table~\ref{tab:external}). Repeated seeds are not independent application
+-samples. No significance, throughput or provider-conformance claim follows.
+-
+-\section{Conclusions}
+-Confusing names or lengths with semantic requests can produce false resource
+-certifications despite passing tests. OrchLang makes this failure reproducible
+-and supplies repaired analysis, separate source-bound plans, scoped Lean results
+-and replay checks. Evidence supports synthetic bounds and text-dataflow equality
+-under explicit contracts. General source verification, stateful providers and
+-inference adapters remain open. Measuring annotation effort and retained
+-functional behavior in independently adapted workflows is a next evaluation;
+-the current projections do not answer that question.
+-
+-\section*{Data, software and research-assistance statements}
+-Source, raw records, protocols, claim ledger, reproduction instructions and
+-tested-source bundles accompany the draft. Private library PDFs, credentials
+-and model weights are excluded. A public versioned archive remains required
+-before submission. The author reports no funding. Competing-interest
+-declarations and both authors' final approval await confirmation.
+-
+-OpenAI Codex assisted code, proofs, literature retrieval, scripts and writing.
+-Its research-method role included constructing
+-and testing the artifact. Both authors must verify the code, citations, proofs,
+-results and text before submission; completed human review is not asserted.
+-
+-\begin{thebibliography}{10}
+-\bibitem{ngo} V. C. Ngo, M. Dehesa-Azuara, M. Fredrikson, J. Hoffmann,
+-Verifying and Synthesizing Constant-Resource Implementations with Types,
+-IEEE Symposium on Security and Privacy (2017).
+-\url{https://www.ieee-security.org/TC/SP2017/papers/408.pdf}.
+-\bibitem{relcost} E. \c{C}i\c{c}ek, G. Barthe, M. Gaboardi, D. Garg, J. Hoffmann,
+-Relational Cost Analysis, POPL (2017). \url{https://doi.org/10.1145/3009837.3009858}.
+-\bibitem{wang} D. Wang, D. M. Kahn, J. Hoffmann, Raising Expectations:
+-Automating Expected Cost Analysis with Types, Proc. ACM Program. Lang. 4,
+-ICFP, Article 110 (2020). \url{https://doi.org/10.1145/3408992}.
+-\bibitem{erhl} M. Avanzini, G. Barthe, D. Davoli, B. Gr\'egoire,
+-A quantitative probabilistic relational Hoare logic, arXiv:2407.17127v2 (2025).
+-\url{https://arxiv.org/abs/2407.17127v2}.
+-\bibitem{hard} M. Aldinucci, A. Bracciali, I. Colonnelli, D. Medi\'c,
+-A. Mulone, L. Roversi, M. E. Santimaria, Hard-KLAIM: Hardening MCP-Enabled
+-Agentic Workflows with a Locality-Aware Type-and-Effect System for Trace Safety,
+-Journal of Logical and Algebraic Methods in Programming, pre-proof (2026).
+-\url{https://doi.org/10.1016/j.jlamp.2026.101191}.
+-\bibitem{pc2} C. Ciliberto, A. Rudi, E. Tassi, Proof-Carrying Contracts:
+-Commitments AI Agents Cannot Break, arXiv:2610.28484v1 (2026).
+-\url{https://arxiv.org/abs/2610.28484v1}.
+-\bibitem{loom} K. Dickerson, Statically Bounding Resource Accumulation in LLM
+-Agent Workflows: The Cost Case, author-hosted report, 18 May 2026.
+-\url{https://loom.technology/research/bounded-llm-cost/}.
+-\bibitem{promptflow} Microsoft, Prompt Flow, standard examples, revision
+-\nolinkurl{33a68c9d3cf349d7fdfad1f41969af27543c0406}, accessed 23 October 2026.
+-\url{https://github.com/microsoft/promptflow}.
+-\bibitem{langgraph} LangChain, LangGraph workflows and agents documentation,
+-revision \nolinkurl{ecda7f522a6ffd5faaabb843b581fe57cd5eb782}, accessed 23 October 2026.
+-\url{https://github.com/langchain-ai/docs}.
+-\end{thebibliography}
+-\end{document}
++% Root document for the current scientific revision.
++\input{scientific-revision.tex}
+diff --git a/legacy/v1/proof/DataflowCore.lean b/legacy/v1/proof/DataflowCore.lean
+index 487fb6f..9ba0a2a 100644
+--- a/legacy/v1/proof/DataflowCore.lean
++++ b/legacy/v1/proof/DataflowCore.lean
+@@ -21,6 +21,43 @@ def text (env : Store) : Text → String
+   | .var slot => env slot
+   | .append a b => text env a ++ text env b
+ 
++-- Canonicalize the free string monoid without assuming anything about variables.
++-- Calls still require equal full serialized requests, contracts and response slots.
++def appendText : Text → Text → Text
++  | .append a b, c => appendText a (appendText b c)
++  | .literal s, c =>
++      if s = "" then c else
++      match c with
++      | .literal t => .literal (s ++ t)
++      | .append (.literal t) d => .append (.literal (s ++ t)) d
++      | _ => .append (.literal s) c
++  | .var i, c => if c = .literal "" then .var i else .append (.var i) c
++
++theorem appendText_correct (env : Store) (a b : Text) :
++    text env (appendText a b) = text env a ++ text env b := by
++  induction a generalizing b with
++  | append a c iha ihc => simp [appendText, text, iha, ihc, String.append_assoc]
++  | var i => by_cases h : b = .literal "" <;> simp [appendText, h, text]
++  | literal s =>
++      by_cases h : s = ""
++      · simp [appendText, h, text]
++      · cases b with
++        | literal t => simp [appendText, h, text]
++        | var i => simp [appendText, h, text]
++        | append b c => cases b <;> simp [appendText, h, text, String.append_assoc]
++
++def normalizeText : Text → Text
++  | .literal s => .literal s
++  | .var i => .var i
++  | .append a b => appendText (normalizeText a) (normalizeText b)
++
++theorem normalizeText_correct (env : Store) (request : Text) :
++    text env (normalizeText request) = text env request := by
++  induction request with
++  | literal s => rfl
++  | var i => rfl
++  | append a b iha ihb => simp [normalizeText, appendText_correct, text, iha, ihb]
++
+ structure Event where
+   contract : String
+   input : Nat
+@@ -59,6 +96,37 @@ def join (x y : Execution) : Execution :=
+ def compose (a b : Semantics) : Semantics := fun env =>
+   (a env).flatMap fun x => (b x.store).map (join x)
+ 
++theorem rat_one_mul (a : Rat) : (1 : Rat) * a = a := by
++  have hn : (1 : Rat).num = 1 := rfl
++  have hd : (1 : Rat).den = 1 := rfl
++  change Std.Internal.Rat.mul 1 a = a
++  cases a
++  simp [Std.Internal.Rat.mul, hn, hd]
++
++theorem rat_mul_one (a : Rat) : a * (1 : Rat) = a := by
++  have hn : (1 : Rat).num = 1 := rfl
++  have hd : (1 : Rat).den = 1 := rfl
++  change Std.Internal.Rat.mul a 1 = a
++  cases a
++  simp [Std.Internal.Rat.mul, hn, hd]
++
++theorem compose_unit_left (a : Semantics) : compose unit a = a := by
++  funext env
++  simp only [compose, unit, List.flatMap_singleton]
++  apply List.map_id''
++  intro x
++  cases x
++  simp [join, rat_one_mul]
++
++theorem compose_unit_right (a : Semantics) : compose a unit = a := by
++  funext env
++  simp [compose, unit, join, rat_mul_one]
++
++#print axioms rat_one_mul
++#print axioms rat_mul_one
++#print axioms compose_unit_left
++#print axioms compose_unit_right
++
+ -- Retry bodies are lexical: their local bindings do not escape an attempt.
+ -- All events, including billed failures, survive. Stop iff no call failed.
+ def retry : Nat → Semantics → Semantics
+@@ -100,17 +168,45 @@ def denote (kernel : Kernel) (public secret : Nat → Bool) : Program → Semant
+   | .secretBranch g a b => if secret g then denote kernel public secret a else denote kernel public secret b
+   | .retry n body => retry n (denote kernel public secret body)
+ 
++def sequencePlan (a b : Plan) : Plan :=
++  match a, b with
++  | .skip, _ => b
++  | _, .skip => a
++  | _, _ => .seq a b
++
++theorem sequencePlan_correct (kernel : Kernel) (public : Nat → Bool) (a b : Plan) :
++    denotePlan kernel public (sequencePlan a b) =
++      compose (denotePlan kernel public a) (denotePlan kernel public b) := by
++  cases a <;> cases b <;>
++    simp [sequencePlan, denotePlan, compose_unit_left, compose_unit_right]
++
++def publicPlan (guard : Nat) (a b : Plan) : Plan :=
++  if a = b then a else .publicBranch guard a b
++
++theorem publicPlan_correct (kernel : Kernel) (public : Nat → Bool)
++    (guard : Nat) (a b : Plan) :
++    denotePlan kernel public (publicPlan guard a b) =
++      (if public guard then denotePlan kernel public a else denotePlan kernel public b) := by
++  by_cases h : a = b
++  · simp [publicPlan, h]
++  · simp [publicPlan, h, denotePlan]
++
++theorem call_normalizeText (kernel : Kernel) (slot : Nat) (contract : String) (request : Text) :
++    call kernel slot contract (normalizeText request) = call kernel slot contract request := by
++  funext env
++  simp [call, normalizeText_correct]
++
+ def normalize : Program → Option Plan
+   | .skip => some .skip
+-  | .call slot contract request => some (.call slot contract request)
++  | .call slot contract request => some (.call slot contract (normalizeText request))
+   | .seq a b => do
+       let a' ← normalize a
+       let b' ← normalize b
+-      pure (.seq a' b')
++      pure (sequencePlan a' b')
+   | .publicBranch g a b => do
+       let a' ← normalize a
+       let b' ← normalize b
+-      pure (.publicBranch g a' b')
++      pure (publicPlan g a' b')
+   | .secretBranch _ a b => do
+       let a' ← normalize a
+       let b' ← normalize b
+@@ -124,7 +220,10 @@ theorem normalize_correct (program : Program) (kernel : Kernel) (public secret :
+       denote kernel public secret program = denotePlan kernel public plan := by
+   induction program with
+   | skip => intro plan h; cases h; rfl
+-  | call slot contract request => intro plan h; cases h; rfl
++  | call slot contract request =>
++      intro plan h
++      cases h
++      exact (call_normalizeText kernel slot contract request).symm
+   | seq a b iha ihb =>
+       intro plan h
+       cases ha : normalize a with
+@@ -135,7 +234,7 @@ theorem normalize_correct (program : Program) (kernel : Kernel) (public secret :
+           | some pb =>
+               simp [normalize, ha, hb] at h
+               cases h
+-              simp [denote, denotePlan, iha pa ha, ihb pb hb]
++              simp [denote, sequencePlan_correct, iha pa ha, ihb pb hb]
+   | publicBranch g a b iha ihb =>
+       intro plan h
+       cases ha : normalize a with
+@@ -146,7 +245,7 @@ theorem normalize_correct (program : Program) (kernel : Kernel) (public secret :
+           | some pb =>
+               simp [normalize, ha, hb] at h
+               cases h
+-              simp [denote, denotePlan, iha pa ha, ihb pb hb]
++              simp [denote, publicPlan_correct, iha pa ha, ihb pb hb]
+   | secretBranch g a b iha ihb =>
+       intro plan h
+       cases ha : normalize a with
+@@ -173,6 +272,10 @@ theorem normalize_correct (program : Program) (kernel : Kernel) (public secret :
+ def checkCertificate (program : Program) (plan : Plan) : Bool :=
+   decide (normalize program = some plan)
+ 
++-- Primary interface: a verified (incomplete) decision procedure. A saved plan is
++-- only a diagnostic result: checking it recomputes normalize, not a cheaper proof.
++def checkProgram (program : Program) : Bool := (normalize program).isSome
++
+ theorem relational_sound (program : Program) (plan : Plan)
+     (checked : checkCertificate program plan = true) (kernel : Kernel)
+     (public left right : Nat → Bool) :
+@@ -181,6 +284,15 @@ theorem relational_sound (program : Program) (plan : Plan)
+   exact (normalize_correct program kernel public left plan accepted).trans
+     (normalize_correct program kernel public right plan accepted).symm
+ 
++theorem checkProgram_sound (program : Program) (checked : checkProgram program = true)
++    (kernel : Kernel) (public left right : Nat → Bool) :
++    denote kernel public left program = denote kernel public right program := by
++  cases h : normalize program with
++  | none => simp [checkProgram, h] at checked
++  | some plan =>
++      exact (normalize_correct program kernel public left plan h).trans
++        (normalize_correct program kernel public right plan h).symm
++
+ theorem observer_projection (program : Program) (plan : Plan)
+     (checked : checkCertificate program plan = true) (kernel : Kernel)
+     (public left right : Nat → Bool) (env : Store) {α : Type}
+@@ -199,8 +311,26 @@ private def pipelinePlan : Plan :=
+   (.seq (.call 0 "c" (.literal "yes")) (.call 1 "c" (.literal "next:x")))) pipelinePlan)
+ #guard text (fun _ => "é") (.append (.literal "next:") (.var 0)) = "next:é"
+ 
++-- Strict gains over comparing raw request/plan trees, under the same kernels.
++private def expandedRequest : Text :=
++  .append (.append (.literal "Ne") (.literal "xt:")) (.append (.var 0) (.literal ""))
++#guard expandedRequest != .append (.literal "Next:") (.var 0)
++#guard normalizeText expandedRequest = .append (.literal "Next:") (.var 0)
++#guard checkCertificate (.secretBranch 0
++    (.call 1 "c" expandedRequest)
++    (.call 1 "c" (.append (.literal "Next:") (.var 0))))
++  (.call 1 "c" (.append (.literal "Next:") (.var 0)))
++#guard checkCertificate (.secretBranch 0
++    (.seq .skip (.publicBranch 0 pipeline pipeline)) pipeline) pipelinePlan
++
++#print axioms appendText_correct
++#print axioms normalizeText_correct
++#print axioms sequencePlan_correct
++#print axioms publicPlan_correct
++
+ #print axioms normalize_correct
+ #print axioms relational_sound
++#print axioms checkProgram_sound
+ #print axioms observer_projection
+ end OrchLang.Dataflow
+ 
+@@ -266,6 +396,19 @@ def checkDecoded (pj cj : Json) : Except String Bool :=
+   | .error e, _ => .error e
+   | _, .error e => .error e
+ 
++def decideDecoded (pj : Json) : Except String Bool :=
++  match decodeProgram 256 pj with
++  | .ok program => .ok (checkProgram program)
++  | .error e => .error e
++
++theorem decoded_decision_sound (pj : Json) (program : Program)
++    (hp : decodeProgram 256 pj = .ok program)
++    (checked : decideDecoded pj = .ok true) (kernel : Kernel)
++    (public left right : Nat → Bool) :
++    denote kernel public left program = denote kernel public right program := by
++  apply checkProgram_sound program
++  simpa [decideDecoded, hp] using checked
++
+ theorem decoded_certificate_sound (pj cj : Json) (program : Program) (plan : Plan)
+     (hp : decodeProgram 256 pj = .ok program) (hc : decodePlan cj = .ok plan)
+     (checked : checkDecoded pj cj = .ok true) (kernel : Kernel)
+@@ -275,6 +418,7 @@ theorem decoded_certificate_sound (pj cj : Json) (program : Program) (plan : Pla
+   simpa [checkDecoded, hp, hc] using checked
+ 
+ #print axioms decoded_certificate_sound
++#print axioms decoded_decision_sound
+ 
+ private structure TableEntry where
+   contract : String
+@@ -353,15 +497,26 @@ def checkBatch (j : Json) : Except String Json := do
+     let evaluations ← (← (← row.getObjVal? "execute").getArr?).mapM (executeJson program)
+     pure (Json.mkObj [("checked", Json.bool checked), ("executions", Json.arr evaluations)])
+   pure (Json.arr result)
++
++def decideBatch (j : Json) : Except String Json := do
++  let cases ← j.getArr?
++  let result ← cases.mapM fun row => do
++    let programJson ← row.getObjVal? "program"
++    let checked ← decideDecoded programJson
++    let program ← decodeProgram 256 programJson
++    let evaluations ← (← (← row.getObjVal? "execute").getArr?).mapM (executeJson program)
++    pure (Json.mkObj [("checked", Json.bool checked), ("executions", Json.arr evaluations)])
++  pure (Json.arr result)
+ end OrchLang.Dataflow
+ 
+ def main (args : List String) : IO UInt32 := do
+   match args with
+-  | [path] =>
++  | [path] | ["decide", path] =>
+       let contents ← IO.FS.readFile path
+       if contents.utf8ByteSize > 16000000 then
+         (← IO.getStderr).putStrLn "batch byte limit"; return 2
+-      match Lean.Json.parse contents >>= OrchLang.Dataflow.checkBatch with
++      let checker := if args.length = 2 then OrchLang.Dataflow.decideBatch else OrchLang.Dataflow.checkBatch
++      match Lean.Json.parse contents >>= checker with
+       | .ok result => IO.println result.compress; pure 0
+       | .error error => (← IO.getStderr).putStrLn error; pure 2
+   | _ => (← IO.getStderr).putStrLn "usage: lean --run proof/DataflowCore.lean BATCH.json"; pure 2
+diff --git a/legacy/v1/proof/README.md b/legacy/v1/proof/README.md
+index f890a2d..2bfd701 100644
+--- a/legacy/v1/proof/README.md
++++ b/legacy/v1/proof/README.md
+@@ -8,15 +8,18 @@ lemmas are needed to check these files. They are separate small models; consult
+ lean proof/BoundedCore.lean
+ lean proof/FiniteRelational.lean
+ lean proof/DataflowCore.lean
++lean proof/AggregateReordering.lean
+ ```
+ 
+-`#print axioms` reports standard Lean `propext` and `Quot.sound` where used;
+-it must not report `sorryAx`. The checker guards include a valid identical-request
++`#print axioms` reports standard Lean `propext`, `Quot.sound` and, in the
++dataflow unit/arithmetic lemmas, `Classical.choice` where used. These are logical
++dependencies, not a measure of implementation security. It must not report
++`sorryAx`. The checker guards include a valid identical-request
+ plan, an invalid equal-length/different-content plan, and a wrong-plan certificate.
+ 
+-On the author's Windows machine the isolated executable is
+-`C:/Users/nambi/Documents/OrchLang Publication Work/tools/lean-4.19.0-windows/bin/lean.exe`.
+-It was downloaded from the official leanprover/lean4 v4.19.0 GitHub release.
++Use the `lean` executable from an isolated Lean 4.19.0 installation, or replace
++`lean` in these commands with its absolute path. The historical Windows tool
++archive was downloaded from the official leanprover/lean4 v4.19.0 GitHub release.
+ Archive SHA256: `2c197a74b6d9c4d46363e34e06591165ed848237ba66de849f8b8d5539eb3895`.
+ The release API provided no publisher digest, so this is a locally measured
+ provenance checksum, not an independent signature verification.
+@@ -59,3 +62,49 @@ keys, missing positive-probability requests and operational limits. These are
+ runtime checks, not a kernel-validity theorem. Error status is a returned value,
+ not an exception that aborts a body. The source reader remains trusted Python.
+ Full commands and boundaries: docs/DATAFLOW_CERTIFICATES.md.
++
++The primary interface is now a verified decision procedure: `checkProgram`
++computes whether normalization succeeds, and `decoded_decision_sound` proves
++the resulting relational guarantee for decoded programs. The executable accepts
++`lean --run proof/DataflowCore.lean decide batch.json` with cases containing only
++`program` and `execute`. The legacy saved-plan check recomputes normalization;
++its plan is diagnostic output, not a proof-carrying witness or an efficiency gain.
++
++New rewrites preserve complete state-transformer semantics: string-append
++associativity, empty-string identities, adjacent literal folding, sequence units,
++and elimination of public branches with equal normalized arms. The source reader
++already folded adjacent template literals, so request-rewrite precision gains
++are reported separately at core level. No observable call reordering occurs in
++this ordered-trace procedure.
++
++## Separate aggregate-only decision
++
++`AggregateReordering.lean` supports exactly two independent closed calls in each
++arm of one secret branch. It accepts equal action sequences and their reversal.
++An action includes the full contract and serialized request. Its observer records
++input bytes, output bytes, calls and failures for every contract; it discards
++call order. This judgment does not override C++ IFC rejection.
++
++`samples_comm` proves permutation of weighted aggregate outcomes after swapping
++the calls. `mass_perm` and `independent_calls_aggregate` prove equality of the
++exact histogram numerator for every Boolean predicate on the full observation,
++and equality of the common probability denominator. This is a distributional
++result modulo enumeration order, not equality of ordered traces. Each finite
++kernel uses natural numerators and a common denominator; normalized rational
++rows have this representation. The executable checks positive denominators and
++unit row mass. The algebraic theorem itself does not require valid probabilities.
++
++`decision_sound` and `decoded_decision_sound` cover the separate executable.
++`scripts/decide_aggregate.py` binds it to a restricted, trusted Python source
++reader. Response-dependent requests, secret text, mutable state, timing, retry,
++tools, and branch/nonliteral outputs are rejected. Literal source outputs occur
++only at workflow root. Budgets and provider conformance remain separate.
++
++The additional `independent_calls_private_results` theorem strengthens the
++aggregate result to the joint distribution of usage and a multiset of complete
++responses/statuses indexed by full action. Duplicate draws retain multiplicity.
++`decoded_private_results_sound` connects the same decision to this richer
++observation. The separate `private` executable mode and optional
++`--finite-kernels`/`--private-results` CLI arguments export enumerated finite
++outcomes to a trusted caller; they do not introduce public source output or
++model generation. The original aggregate JSON interface is unchanged.
+diff --git a/legacy/v1/research/claims.csv b/legacy/v1/research/claims.csv
+index de2ba93..9c4aac0 100644
+--- a/legacy/v1/research/claims.csv
++++ b/legacy/v1/research/claims.csv
+@@ -1,27 +1,38 @@
+ claim_id,exact_statement,status,evidence,assumptions,remaining_obligations
+-C001,"Fresh original build passes 95 tests",observed,research/implementation-2026-10-23/baseline-tests.txt,"GCC 16.1 C++17 Windows",none
+-C002,"Original acceptance implies resource independence",refuted,research/implementation-2026-10-23/baseline-shadow-true.txt;research/implementation-2026-10-23/baseline-shadow-false.txt,"seed 1; pinned secret; same public input",withdraw historical guarantee
+-C003,"Stochastic model calls preclude numeric resource specifications",withdrawn,research/literature.md,"caps and suitable probability assumptions are available",none
+-C004,"The repaired checker rejects the recorded shadowing and unequal-content witnesses and admits equivalent aliases",observed,tests/tests.cpp;research/validated-2026-10-23/clean-cpu-v3/commands.json,"restricted source language; not a provider guarantee",no full C++ soundness proof
+-C005,"All C++ accepted programs have equal observation distributions",not_established,docs/SEMANTICS.md,"valid primitive kernels; correct lowering; related external state; specified observer",full implementation correspondence remains outside proof
+-C006,"Lean acceptance implies equality of decoded closed-core weighted traces for every secret Boolean store",proved_scoped,proof/FiniteRelational.lean;research/validated-2026-10-23/clean-cpu-v3/commands.json,"shared stateless kernel; closed requests; probability interpretation also needs normalized nonnegative tables",does not prove source reader or C++ implementation
+-C007,"Historical benchmark counts establish competitive precision",withdrawn,bench/results/evaluation.txt,"development mocks; broken retry baseline",credible baselines; external corpus; frozen protocol
+-C008,"Real provider resource privacy has been validated",not_established,docs/PUBLICATION_MASTER_PLAN.md,"no paid runs performed",offline gates; faculty; cost manifest; conditional adapter evidence
+-C009,"SCP submission package is ready",false,docs/VENUE_CHECKLIST.md,"author-review manuscript and local artifact prepared; no submission performed",public archive; final author approval/declarations; independent human reproduction/review not achieved
+-C010,"Fresh clean snapshot passes 106 C++ tests",observed,research/validated-2026-10-23/clean-cpu-v3/commands.json,"GCC 16.1 C++17 Windows 11",no cross-platform execution claim
+-C011,"Fresh clean snapshot passes 31 Python tests",observed,research/validated-2026-10-23/clean-cpu-v3/commands.json,"Python 3.14.3; finite reference/replay/source reader/structural baseline",tests are not implementation proofs
+-C012,"Competent structural bounds agree on 23 existing workflows; 115 mock executions remain within component bounds",observed,research/validated-2026-10-23/clean-cpu-v3/results.json,"shared frontend IR primitive facts; five seeds per workflow",developer corpus; no precision superiority
+-C013,"576 generated programs yield 24 accepts and zero supplied-kernel accepted counterexamples; zero trace-identity disagreements and 16 finite-equivalent rejections",observed,research/validated-2026-10-23/generated-v3/programs.json,"four call-count structures; fixed finite kernels; exhaustive bounded grammar",not held out; no universal theorem or precision advantage
+-C014,"Four compiled semantic mutants are detected by behavioral test failures",observed,research/validated-2026-10-23/mutations-v3/mutations.json,"deliberately injected faults; compiler success required",not a comprehensive mutation score
+-C015,"13 of 24 fixed exact encodings exceed ceil UTF8 bytes divided by four; 6 of 10 concatenations are nonadditive",observed,research/validated-2026-10-23/tokenizers-v3/tokens.json;research/validated-2026-10-23/tokenizers-v3/concatenations.json,"pinned GPT2 BPE/BERT WordPiece; tokenizers 0.21.4",no population error rate or inference/provider claim
+-C016,"11 authored external cost projections complete 220 mock runs without bound violations or structural disagreements",observed,research/validated-2026-10-23/external-v4/results.json;research/protocol-amendments.md,"21 candidates; 10 exclusions; amended frozen protocol; synthetic units",zero original application executions and zero faithful functional translations
+-C017,"Separate source gate and Lean path perform 624 checks; issue 24 certificates; reject 48 source modifications and 24 altered plans plus four malformed batches",observed,research/validated-2026-10-23/certificates-v3/manifest.json,"trusted independent source reader and serialization; closed requests; source hashes not signatures",no full-language source proof or C++ budget certificate
+-C018,"Independent finite replay/reference observations agree on 12 cases comprising 48 weighted paths",observed,research/validated-2026-10-23/replay-v3/observations.json,"two synthetic units; retry bounds 0/1/2; two public guard values",finite table conformance only; not local inference or provider validation
+-C019,"Closed-core retry retains failures and stops at a no-failure attempt while preserving normalization correctness",proved_scoped,proof/FiniteRelational.lean,"closed stateless body kernel; every failed attempt billed",source retry rejected because C++ mock interpretation differs
+-C020,"Source-to-proof boundary is completely verified",not_established,docs/CERTIFICATES.md,"separate reader reconstructs restricted source and binds bytes",Python reader/JSON library/hash binding trusted; no mechanized source semantics
+-C021,"Paid API spending remains zero",observed,research/validated-2026-10-23/tables/summary.json,"no restricted key requested; no inference API enabled",USD5 cap unchanged; future live testing requires separate priced protocol
+-C022,"Text-dataflow normalization preserves complete state-transformer semantics and thus observation equality for every secret Boolean store",proved_scoped,proof/DataflowCore.lean;research/validated-2026-10-24/dataflow-cpu-v5/commands.json,"shared initial public text/Boolean values; shared stateless request-indexed finite kernels; normalized nonnegative kernels for probability interpretation",trusted source reader; no secret text inputs or provider correspondence
+-C023,"256 two-call pipeline programs and 3072 execution contexts have zero source/core and three-way execution disagreements; 16 accepted with zero supplied-kernel counterexamples",observed,research/validated-2026-10-24/dataflow-v5/manifest.json;research/validated-2026-10-24/dataflow-v5/lean-output.json,"development grammar with one pipeline shape and public tail; amended protocol; actual response strings and billed statuses",not held out; no universal provider validation or new-logic claim
+-C024,"Eight typed-core boundaries comprising 23 weighted paths agree; 32 modified sources and 16 altered plans plus eight invalid evaluator inputs are rejected",observed,research/validated-2026-10-24/dataflow-v5/boundaries.json;research/validated-2026-10-24/dataflow-v5/negative-evaluator-inputs.json,"finite exact kernels; core retries separate from source; literal root outputs only",source-to-core parser/slot proof remains open
+-C025,"Current clean snapshot passes 106 C++ tests and 47 Python tests and checks three Lean proof files",observed,research/validated-2026-10-24/dataflow-cpu-v5/commands.json,"GCC 16.1; Python 3.14.3; Lean 4.19.0; Windows 11",same-machine local reproduction rather than independent human review
+-C026,"C++ accepts 8 pipeline cases and emits E230 in 192; the dataflow core accepts 16 under a distinct resource-distribution judgment",observed,research/validated-2026-10-24/dataflow-v5/programs.json,"C++ PC-label policy differs from the narrower secret-Boolean dataflow model",no precision ranking or implicit declassification follows
++C001,Fresh original build passes 95 tests,observed,research/implementation-2026-10-23/baseline-tests.txt,GCC 16.1 C++17 Windows,none
++C002,Original acceptance implies resource independence,refuted,research/implementation-2026-10-23/baseline-shadow-true.txt;research/implementation-2026-10-23/baseline-shadow-false.txt,seed 1; pinned secret; same public input,withdraw historical guarantee
++C003,Stochastic model calls preclude numeric resource specifications,withdrawn,research/literature.md,caps and suitable probability assumptions are available,none
++C004,The repaired checker rejects the recorded shadowing and unequal-content witnesses and admits equivalent aliases,observed,tests/tests.cpp;research/validated-2026-10-23/clean-cpu-v3/commands.json,restricted source language; not a provider guarantee,no full C++ soundness proof
++C005,All C++ accepted programs have equal observation distributions,not_established,docs/SEMANTICS.md,valid primitive kernels; correct lowering; related external state; specified observer,full implementation correspondence remains outside proof
++C006,Lean acceptance implies equality of decoded closed-core weighted traces for every secret Boolean store,proved_scoped,proof/FiniteRelational.lean;research/validated-2026-10-23/clean-cpu-v3/commands.json,shared stateless kernel; closed requests; probability interpretation also needs normalized nonnegative tables,does not prove source reader or C++ implementation
++C007,Historical benchmark counts establish competitive precision,withdrawn,bench/results/evaluation.txt,development mocks; broken retry baseline,credible baselines; external corpus; frozen protocol
++C008,Real provider resource privacy has been validated,not_established,docs/PUBLICATION_MASTER_PLAN.md,no paid runs performed,offline gates; faculty; cost manifest; conditional adapter evidence
++C009,SCP submission package is ready,false,docs/VENUE_CHECKLIST.md,author-review manuscript and local artifact prepared; no submission performed,public archive; final author approval/declarations; independent human reproduction/review not achieved
++C010,Fresh clean snapshot passes 106 C++ tests,observed,research/validated-2026-10-23/clean-cpu-v3/commands.json,GCC 16.1 C++17 Windows 11,no cross-platform execution claim
++C011,Fresh clean snapshot passes 31 Python tests,observed,research/validated-2026-10-23/clean-cpu-v3/commands.json,Python 3.14.3; finite reference/replay/source reader/structural baseline,tests are not implementation proofs
++C012,Competent structural bounds agree on 23 existing workflows; 115 mock executions remain within component bounds,observed,research/validated-2026-10-23/clean-cpu-v3/results.json,shared frontend IR primitive facts; five seeds per workflow,developer corpus; no precision superiority
++C013,576 generated programs yield 24 accepts and zero supplied-kernel accepted counterexamples; zero trace-identity disagreements and 16 finite-equivalent rejections,observed,research/validated-2026-10-23/generated-v3/programs.json,four call-count structures; fixed finite kernels; exhaustive bounded grammar,not held out; no universal theorem or precision advantage
++C014,Four compiled semantic mutants are detected by behavioral test failures,observed,research/validated-2026-10-23/mutations-v3/mutations.json,deliberately injected faults; compiler success required,not a comprehensive mutation score
++C015,13 of 24 fixed exact encodings exceed ceil UTF8 bytes divided by four; 6 of 10 concatenations are nonadditive,observed,research/validated-2026-10-23/tokenizers-v3/tokens.json;research/validated-2026-10-23/tokenizers-v3/concatenations.json,pinned GPT2 BPE/BERT WordPiece; tokenizers 0.21.4,no population error rate or inference/provider claim
++C016,11 authored external cost projections complete 220 mock runs without bound violations or structural disagreements,observed,research/validated-2026-10-23/external-v4/results.json;research/protocol-amendments.md,21 candidates; 10 exclusions; amended frozen protocol; synthetic units,zero original application executions and zero faithful functional translations
++C017,Separate source gate and Lean path perform 624 checks; issue 24 certificates; reject 48 source modifications and 24 altered plans plus four malformed batches,observed,research/validated-2026-10-23/certificates-v3/manifest.json,trusted independent source reader and serialization; closed requests; source hashes not signatures,no full-language source proof or C++ budget certificate
++C018,Independent finite replay/reference observations agree on 12 cases comprising 48 weighted paths,observed,research/validated-2026-10-23/replay-v3/observations.json,two synthetic units; retry bounds 0/1/2; two public guard values,finite table conformance only; not local inference or provider validation
++C019,Closed-core retry retains failures and stops at a no-failure attempt while preserving normalization correctness,proved_scoped,proof/FiniteRelational.lean,closed stateless body kernel; every failed attempt billed,source retry rejected because C++ mock interpretation differs
++C020,Source-to-proof boundary is completely verified,not_established,docs/CERTIFICATES.md,separate reader reconstructs restricted source and binds bytes,Python reader/JSON library/hash binding trusted; no mechanized source semantics
++C021,Paid API spending remains zero,observed,research/validated-2026-10-23/tables/summary.json,no paid provider inference; local CPU generation is now recorded separately,USD5 cap unchanged; future live testing requires separate priced protocol
++C022,Text-dataflow normalization preserves complete state-transformer semantics and thus observation equality for every secret Boolean store,proved_scoped,proof/DataflowCore.lean;research/validated-2026-10-24/dataflow-cpu-v5/commands.json,shared initial public text/Boolean values; shared stateless request-indexed finite kernels; normalized nonnegative kernels for probability interpretation,trusted source reader; no secret text inputs or provider correspondence
++C023,256 two-call pipeline programs and 3072 execution contexts have zero source/core and three-way execution disagreements; 16 accepted with zero supplied-kernel counterexamples,observed,research/validated-2026-10-24/dataflow-v5/manifest.json;research/validated-2026-10-24/dataflow-v5/lean-output.json,development grammar with one pipeline shape and public tail; amended protocol; actual response strings and billed statuses,not held out; no universal provider validation or new-logic claim
++C024,Eight typed-core boundaries comprising 23 weighted paths agree; 32 modified sources and 16 altered plans plus eight invalid evaluator inputs are rejected,observed,research/validated-2026-10-24/dataflow-v5/boundaries.json;research/validated-2026-10-24/dataflow-v5/negative-evaluator-inputs.json,finite exact kernels; core retries separate from source; literal root outputs only,source-to-core parser/slot proof remains open
++C025,Earlier 24 October clean snapshot passes 106 C++ and 47 Python tests and checks three Lean proof files,observed,research/validated-2026-10-24/dataflow-cpu-v5/commands.json,GCC 16.1; Python 3.14.3; Lean 4.19.0; Windows 11,same-machine local reproduction rather than independent human review
++C026,C++ accepts 8 pipeline cases and emits E230 in 192; the dataflow core accepts 16 under a distinct resource-distribution judgment,observed,research/validated-2026-10-24/dataflow-v5/programs.json,C++ PC-label policy differs from the narrower secret-Boolean dataflow model,no precision ranking or implicit declassification follows
++C027,Proved ordered normalization accepts 64 of 80 source and 64 of 72 core development cases versus eight in each previous baseline,proved_and_observed_scoped,proof/DataflowCore.lean;research/revision-2026-10-24/dataflow-precision-v2/manifest.json,shared public text and Boolean inputs; stateless complete-request kernels; constructed grammar,no typical-workload or general-logic superiority claim
++C028,The primary formal interface is a plan-free verified decision procedure; saved plans are recomputed diagnostic results,implemented_and_proved_scoped,scripts/dataflow_certificate.py;proof/DataflowCore.lean,trusted restricted source reader; decoded core theorem,no search/check efficiency or proof-carrying witness claim
++C029,Aggregate commutation preserves joint usage and full-action-indexed response/status multisets for two independent closed calls,proved_scoped,proof/AggregateReordering.lean;research/revision-2026-10-24/aggregate-private-results-v1/manifest.json,finite normalized rational kernels; independent stateless sampling; aggregate observer,source branch results do not escape; no timing or public-output privacy
++C030,Exact pinned-tokenizer accounting supports closed source analysis and 40 finite static configurations with 128 paths and zero bound violations,observed_scoped,docs/EXACT_ACCOUNTING.md;research/readiness-2026-10-24/exact-accounting-v4/summary.json,Tokenizers0.21.4; exact artifact hashes; explicit specials; enforced byte contracts for audited dynamic GPT2 rule,trusted Python/library implementation; no C++ or provider refinement theorem
++C031,Separately encoded pieces can understate complete request token counts: plain GPT2 hello plus world gives two separately and three joined,observed,research/readiness-2026-10-24/exact-accounting-v4/concatenations.json,pinned plain GPT2 policy; no truncation or padding,counterexample not population failure-rate estimate
++C032,Six source variants from five upstream patterns complete 24 original/port pairs and 88 actual local generations; 22 pairs match independently,observed_scoped,research/real-workflows-2026-10-24/v4/summary.json,one direct port and five explicit hybrid host compositions; pinned Qwen CPU adapter; two inputs and two caps; amended development protocol,no whole-source translation of all variants; no provider privacy or deterministic-generation guarantee
++C033,Captured-response port conformance passes 24 comparisons matching 44 full requests with zero new generations,observed_scoped,research/real-workflows-2026-10-24/conformance-v4/conformance.json,same captured actual original outcomes; strict order except independent parallel calls,not independent inference or all-input equivalence
++C034,Post-hoc identical-request control has one response disagreement in eight pairs with sixteen actual generations,observed,research/real-workflows-2026-10-24/repeatability-v1/manifest.json,selected from earlier observed differences; fixed protocol before control outcomes,cause undetermined; no population inference
++C035,NER and routing each pass four of eight execution-level exact checks; 44 of 88 generations reach their cap,observed,research/real-workflows-2026-10-24/final-analysis-v2/analysis.json,authored exact targets; original and port arms; open-ended quality unscored,conformance is distinct from task success
++C036,Clean Windows and Ubuntu/WSL2 checkouts of implementation18d0d826 pass106C++ tests and allfourLean files; Windows82Python tests pass with pinned tokenizer dependencies,observed_clean,research/revision-2026-10-24/clean-windows-v1/manifest.json;research/revision-2026-10-24/clean-linux-v1/manifest.json,GCC16.1Windows;GCC13.3Ubuntu24.04WSL2;Lean4.19; Linux skips11optional tokenizer tests,same physical machine and automated validation; not independent human reproduction
++C037,Fresh Linux ASan/UBSan test and CLI checks complete44commands with no failures,observed,research/revision-2026-10-24/linux-sanitizers-v1/manifest.json,GCC13.3;address and undefined-behavior sanitizers;C++sources unchanged from cleanfreeze,coverage limited to executed tests/examples
+diff --git a/legacy/v1/research/literature.md b/legacy/v1/research/literature.md
+index b656d88..f16d760 100644
+--- a/legacy/v1/research/literature.md
++++ b/legacy/v1/research/literature.md
+@@ -15,7 +15,7 @@ This is a focused comparison, not a systematic review or priority claim.
+ | [Monadic refinements, POPL 2018](https://www.radicek.com/papers/popl18.pdf) | Primary URL failed | Access/rule comparison unresolved. Do not assert absence of a feature. |
+ | [SCP scope](https://shop.elsevier.com/journals/science-of-computer-programming/0167-6423), [EAPLS software call](https://eapls.org/news/issues/open-call-for-software-submissions-science-of-computer-programming-software-track-xjw27/) | Primary scope and editor call accessible | Original Software Publication is a plausible route for useful, documented, reproducible software. Novelty, quality and accessibility still matter. Current author-guide/template verification remains open. |
+ 
+-Hard-KLAIM private copy: `C:/Users/nambi/Documents/OrchLang Publication Work/private-literature/HARD-KLAIM.pdf`.
++Hard-KLAIM private copy: an author-provided private copy stored outside the source export.
+ SHA256: `29eecd214dc0fc1f3257c97f5117fb1dc28ade451f43ac3ace57d5f4c82d0cbd`.
+ Do not commit the PDF or extracted full text. Cover metadata has an apparent
+ 2025 citation-template inconsistency; DOI, acceptance date and publisher record
+diff --git a/legacy/v1/runtime/dataflow_gate.py b/legacy/v1/runtime/dataflow_gate.py
+index 7e3159c..32da804 100644
+--- a/legacy/v1/runtime/dataflow_gate.py
++++ b/legacy/v1/runtime/dataflow_gate.py
+@@ -12,18 +12,73 @@ from .finite_reference import Unsupported, canonical
+ from .source_gate import Reader, sequence, sha
+ 
+ 
+-def normalize(program):
++def syntactic_normalize(program):
++    """Historical baseline: exact request trees and exact public/sequence shape."""
+     kind = program[0]
+     if kind in {'skip', 'call'}:
+         return program
+     if kind == 'seq':
+-        a, b = normalize(program[1]), normalize(program[2])
++        a, b = syntactic_normalize(program[1]), syntactic_normalize(program[2])
+         return None if a is None or b is None else ['seq', a, b]
+     if kind in {'public', 'secret'}:
+-        a, b = normalize(program[2]), normalize(program[3])
++        a, b = syntactic_normalize(program[2]), syntactic_normalize(program[3])
+         if a is None or b is None:
+             return None
+         return ['public', program[1], a, b] if kind == 'public' else (a if a == b else None)
++    if kind == 'retry':
++        body = syntactic_normalize(program[2])
++        return None if body is None else ['retry', program[1], body]
++    raise Unsupported('unknown dataflow constructor')
++
++
++def append_text(a, b):
++    """Executable mirror of Lean appendText; never identifies different slots."""
++    if a[0] == 'append':
++        return append_text(a[1], append_text(a[2], b))
++    if a[0] == 'literal':
++        if a[1] == '':
++            return b
++        if b[0] == 'literal':
++            return ['literal', a[1] + b[1]]
++        if b[0] == 'append' and b[1][0] == 'literal':
++            return ['append', ['literal', a[1] + b[1][1]], b[2]]
++        return ['append', a, b]
++    if a[0] == 'var':
++        return a if b == ['literal', ''] else ['append', a, b]
++    raise Unsupported('unknown dataflow text constructor')
++
++
++def normalize_text(term):
++    if term[0] in {'literal', 'var'}:
++        return term
++    if term[0] == 'append':
++        return append_text(normalize_text(term[1]), normalize_text(term[2]))
++    raise Unsupported('unknown dataflow text constructor')
++
++
++def normalize(program):
++    """Verified rewrites preserve complete text-store/ordered-trace semantics.
++
++    This decision procedure recomputes its result; a serialized plan is an audit
++    output, not a proof-carrying witness or a search/check complexity advantage.
++    """
++    kind = program[0]
++    if kind == 'skip':
++        return program
++    if kind == 'call':
++        return ['call', program[1], program[2], normalize_text(program[3])]
++    if kind == 'seq':
++        a, b = normalize(program[1]), normalize(program[2])
++        if a is None or b is None:
++            return None
++        return b if a == ['skip'] else a if b == ['skip'] else ['seq', a, b]
++    if kind in {'public', 'secret'}:
++        a, b = normalize(program[2]), normalize(program[3])
++        if a is None or b is None:
++            return None
++        if a == b:
++            return a
++        return ['public', program[1], a, b] if kind == 'public' else None
+     if kind == 'retry':
+         body = normalize(program[2])
+         return None if body is None else ['retry', program[1], body]
+diff --git a/legacy/v1/scripts/dataflow_certificate.py b/legacy/v1/scripts/dataflow_certificate.py
+index 605f56d..4c1c51a 100644
+--- a/legacy/v1/scripts/dataflow_certificate.py
++++ b/legacy/v1/scripts/dataflow_certificate.py
+@@ -1,4 +1,4 @@
+-"""Issue/check source-bound text-dataflow certificates with Lean 4.19.0."""
++"""Run the verified dataflow decision procedure (legacy saved-plan support)."""
+ import argparse
+ import json
+ from pathlib import Path
+@@ -9,10 +9,10 @@ import time
+ 
+ ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT))
+-from runtime.dataflow_gate import issue, bind_certificate
++from runtime.dataflow_gate import issue, bind_certificate, read_source
+ 
+ 
+-def run_checker(lean, cases, directory, record_prefix=None):
++def run_checker(lean, cases, directory, record_prefix=None, decision=False):
+     result, logs, commands = [], [], []
+     version=subprocess.run([str(lean),'--version'],capture_output=True,text=True,timeout=30)
+     if version.returncode or 'version 4.19.0,' not in version.stdout:
+@@ -22,7 +22,10 @@ def run_checker(lean, cases, directory, record_prefix=None):
+             chunk=cases[start:start+16]
+             batch = Path(temp)/f'batch-{start//16:03d}.json'
+             batch.write_text(json.dumps(chunk, ensure_ascii=False),encoding='utf-8',newline='\n')
+-            argv=[str(lean),'--run',str(ROOT/'proof/DataflowCore.lean'),str(batch)]
++            argv=[str(lean),'--run',str(ROOT/'proof/DataflowCore.lean')]
++            if decision:
++                argv.append('decide')
++            argv.append(str(batch))
+             started=time.perf_counter()
+             process = subprocess.run(argv,cwd=ROOT,capture_output=True,text=True,encoding='utf-8',timeout=180)
+             commands.append(dict(argv=argv,case_offset=start,cases=len(chunk),exit=process.returncode,
+@@ -43,12 +46,26 @@ def run_checker(lean, cases, directory, record_prefix=None):
+ 
+ def main():
+     p=argparse.ArgumentParser(description=__doc__)
+-    p.add_argument('mode',choices=['issue','check'])
++    p.add_argument('mode',choices=['decide','issue','check'])
+     p.add_argument('source',type=Path)
+-    p.add_argument('certificate',type=Path)
++    p.add_argument('certificate',type=Path,nargs='?')
+     p.add_argument('--lean',required=True,type=Path)
+     args=p.parse_args()
+     data=args.source.read_bytes()
++    if args.mode=='decide':
++        if args.certificate is not None:
++            p.error('decide takes a source and --lean, without a saved plan')
++        source=read_source(data)
++        with tempfile.TemporaryDirectory(prefix='dataflow-decision-') as temp:
++            results,_=run_checker(args.lean.resolve(),[dict(program=source['program'],execute=[])],temp,decision=True)
++        accepted=results[0]['checked']
++        print(json.dumps(dict(status='accepted' if accepted else 'rejected',
++                              source_sha256=source['source_sha256'],
++                              judgment='shared-public text-dataflow resource-distribution independence',
++                              trusted_boundary='Python source reader; not C++ IFC or source budget')))
++        return int(not accepted)
++    if args.certificate is None:
++        p.error('legacy issue/check requires a saved-plan path')
+     certificate=issue(data) if args.mode=='issue' else json.loads(args.certificate.read_text(encoding='utf-8'))
+     case=bind_certificate(data,certificate)
+     results,_=run_checker(args.lean.resolve(),[case],args.certificate.resolve().parent)
+@@ -59,8 +76,9 @@ def main():
+             json.dump(certificate,stream,indent=2,ensure_ascii=False)
+             stream.write('\n')
+     print(json.dumps(dict(status='checked',source_sha256=certificate['source_sha256'],
++                         method='verified decision procedure; saved plan is diagnostic output',
+                          scope='text-dataflow; shared public inputs; trusted source reader; no budget/provider guarantee')))
+ 
+ 
+ if __name__=='__main__':
+-    main()
++    raise SystemExit(main())
+diff --git a/legacy/v1/scripts/report_publication.py b/legacy/v1/scripts/report_publication.py
+index 77f1e07..290028f 100644
+--- a/legacy/v1/scripts/report_publication.py
++++ b/legacy/v1/scripts/report_publication.py
+@@ -63,7 +63,9 @@ def main():
+     tex += '\\hline\n\\end{tabular}\n'
+     (args.output/'external.md').write_text(table,encoding='utf-8',newline='\n')
+     (args.output/'external.tex').write_text(tex,encoding='utf-8',newline='\n')
+-    (args.output/'metrics.tex').write_text(''.join('\\newcommand{\\ev'+''.join(x.title() for x in k.split('_'))+'}{'+str(v)+'}\n' for k,v in metrics.items()),encoding='utf-8',newline='\n')
++    # Keep the historical Python count in JSON, but do not emit its unused TeX
++    # macro: the current suite count comes from the current validation campaign.
++    (args.output/'metrics.tex').write_text(''.join('\\newcommand{\\ev'+''.join(x.title() for x in k.split('_'))+'}{'+str(v)+'}\n' for k,v in metrics.items() if k != 'python_tests'),encoding='utf-8',newline='\n')
+     print(json.dumps(metrics,indent=2))
+ 
+ 
+diff --git a/legacy/v1/tests/test_dataflow_gate.py b/legacy/v1/tests/test_dataflow_gate.py
+index 0a005a8..a5abc36 100644
+--- a/legacy/v1/tests/test_dataflow_gate.py
++++ b/legacy/v1/tests/test_dataflow_gate.py
+@@ -3,13 +3,46 @@ from pathlib import Path
+ import unittest
+ sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+ from runtime.finite_reference import Unsupported
+-from runtime.dataflow_gate import read_source, issue, bind_certificate, template_expression, reference_program
++from runtime.dataflow_gate import (read_source, issue, bind_certificate, template_expression,
++                                   reference_program, normalize_text, normalize, syntactic_normalize)
+ 
+ ROOT=Path(__file__).resolve().parents[1]
+ EXAMPLE=ROOT/'examples/certificates/dataflow_certificate.orch'
+ 
+ 
+ class DataflowTests(unittest.TestCase):
++    def test_monoid_request_rewrites_preserve_slot_order(self):
++        term=['append',['append',['literal','Ne'],['literal','xt:']],
++              ['append',['var',2],['literal','']]]
++        self.assertEqual(normalize_text(term),['append',['literal','Next:'],['var',2]])
++        self.assertNotEqual(normalize_text(['append',['var',2],['var',3]]),
++                            normalize_text(['append',['var',3],['var',2]]))
++
++    def test_semantically_equal_requests_gain_over_raw_tree_baseline(self):
++        a=['call',1,'c',['append',['literal','A'],['append',['var',0],['literal','']]]]
++        b=['call',1,'c',['append',['literal','A'],['var',0]]]
++        program=['secret',0,a,b]
++        self.assertIsNone(syntactic_normalize(program))
++        self.assertEqual(normalize(program),b)
++
++    def test_public_branch_and_sequence_units_gain_over_shape_baseline(self):
++        call=['call',1,'c',['var',0]]
++        program=['secret',0,['seq',['skip'],['public',0,call,call]],call]
++        self.assertIsNone(syntactic_normalize(program))
++        self.assertEqual(normalize(program),call)
++
++    def test_observable_call_order_and_response_slot_still_distinct(self):
++        a=['call',1,'c',['literal','A']]
++        b=['call',2,'c',['literal','B']]
++        self.assertIsNone(normalize(['secret',0,['seq',a,b],['seq',b,a]]))
++        self.assertIsNone(normalize(['secret',0,a,['call',2,'c',['literal','A']]]))
++
++    def test_unequal_public_branches_and_requests_are_retained(self):
++        a=['call',1,'c',['literal','yes']]
++        b=['call',1,'c',['literal','no!']]
++        self.assertEqual(normalize(['public',0,a,b]),['public',0,a,b])
++        self.assertIsNone(normalize(['secret',0,a,b]))
++
+     def test_alpha_renamed_pipeline(self):
+         parsed=read_source(EXAMPLE.read_bytes())
+         cert=issue(EXAMPLE.read_bytes())
+diff --git a/orchlang/compiler.py b/orchlang/compiler.py
+index 118acc9..7f43fff 100644
+--- a/orchlang/compiler.py
++++ b/orchlang/compiler.py
+@@ -113,7 +113,8 @@ class Lowerer:
+             self.site += 1
+             self.site_lines[self.site] = s.line
+             self.site_caps[self.site] = s.max_tokens
+-            return C.Call(self.site, x, self.models[s.model].key, req, None, s.max_tokens)
++            key=self.models[s.model].key
++            return C.Call(self.site, x, self.profiles[key].key, req, None, s.max_tokens)
+         if isinstance(s, S.ToolCall):
+             if s.tool not in self.tools:
+                 raise S.OrchError("E242", f"unknown tool {s.tool}", s.line)
+@@ -123,7 +124,7 @@ class Lowerer:
+             for i, a in enumerate(s.args):
+                 if i:
+                     parts.append(C.ELit(SEP))
+-                parts.append(self.arg_expr(a, s.line))
++                parts.append(C.EEscape(self.arg_expr(a, s.line)))
+             arg = C.concat(parts)
+             return C.Tool(self.slot(s.target, s.line, define=True), s.tool, arg)
+         if isinstance(s, S.Const):
+@@ -209,8 +210,13 @@ def var_bounds(prog: Program, lw: Lowerer) -> Dict[int, int]:
+ 
+ 
+ def input_bound(call: C.Call, bounds: Dict[int, int], profile: Profile, tok) -> int:
+-    """Static bound on the padded request size, including the padding message
+-    wrapper; the runtime truncates and pads every request to exactly this."""
++    """Choose a request execution target, including the padding envelope.
++
++    Piecewise token counts plus boundary slack are a sizing heuristic, not a
++    universally sound tokenizer bound. The runtime admits the complete request
++    against this target and refuses overflow. Exact static contracts for a
++    supported fragment are available in the retained v1 accounting component.
++    """
+     total = 0
+     parts = C.pieces(call.req)
+     for p in parts:
+diff --git a/orchlang/core.py b/orchlang/core.py
+index 2518fc1..3e0b016 100644
+--- a/orchlang/core.py
++++ b/orchlang/core.py
+@@ -34,7 +34,16 @@ class EApp:
+     b: "Expr"
+ 
+ 
+-Expr = Union[ELit, EVar, EApp]
++@dataclass(frozen=True)
++class EEscape:
++    value: "Expr"
++
++
++Expr = Union[ELit, EVar, EApp, EEscape]
++
++
++def escape_tool_arg(value: str) -> str:
++    return value.replace("\\", "\\\\").replace("\x1f", "\\s")
+ 
+ 
+ def concat(parts: List[Expr]) -> Expr:
+@@ -66,6 +75,8 @@ def eval_expr(store, e: Expr) -> str:
+         return e.value
+     if isinstance(e, EVar):
+         return store.get(e.x, "")
++    if isinstance(e, EEscape):
++        return escape_tool_arg(eval_expr(store, e.value))
+     return eval_expr(store, e.a) + eval_expr(store, e.b)
+ 
+ 
+@@ -74,6 +85,8 @@ def expr_label(gamma, e: Expr) -> str:
+         return LOW
+     if isinstance(e, EVar):
+         return gamma.get(e.x, LOW)
++    if isinstance(e, EEscape):
++        return expr_label(gamma, e.value)
+     return join(expr_label(gamma, e.a), expr_label(gamma, e.b))
+ 
+ 
+@@ -236,6 +249,8 @@ def expr_json(e: Expr):
+         return ["lit", e.value]
+     if isinstance(e, EVar):
+         return ["var", e.x]
++    if isinstance(e, EEscape):
++        return ["escape", expr_json(e.value)]
+     return ["app", expr_json(e.a), expr_json(e.b)]
+ 
+ 
+diff --git a/orchlang/models.py b/orchlang/models.py
+index 2b4726b..c521d27 100644
+--- a/orchlang/models.py
++++ b/orchlang/models.py
+@@ -8,11 +8,38 @@ from __future__ import annotations
+ 
+ import json
+ import os
++import ctypes
+ from dataclasses import dataclass, field
+ from functools import lru_cache
+ from typing import Dict, List, Optional, Tuple
+ 
+ PLACEHOLDER = "\x00{}\x00"
++_backend_handles = []
++_backends_loaded = False
++
++
++def initialize_backends():
++    """Optional explicitly pinned ggml backend directory for local GPU serving.
++
++    LLAMA_CPP_LIB_PATH must be set before importing llama_cpp. The execution
++    manifest records all backend library hashes; default wheel use is unchanged.
++    """
++    global _backends_loaded
++    directory = os.environ.get("ORCHLANG_GGML_BACKENDS")
++    if not directory or _backends_loaded:
++        return
++    from pathlib import Path
++    base = Path(directory).resolve()
++    if not base.is_dir():
++        raise ValueError("declared backend directory is absent")
++    if os.name == "nt":
++        _backend_handles.append(os.add_dll_directory(str(base)))
++    library = base / ("ggml.dll" if os.name == "nt" else "libggml.so")
++    handle = ctypes.CDLL(str(library))
++    handle.ggml_backend_load_all_from_path.argtypes = [ctypes.c_char_p]
++    handle.ggml_backend_load_all_from_path(str(base).encode("utf-8"))
++    _backend_handles.append(handle)
++    _backends_loaded = True
+ 
+ 
+ @dataclass
+@@ -81,6 +108,7 @@ class Profile:
+     pad_position: str = "end"    # in-band only: "end" or "after_first"
+     stop: List[str] = field(default_factory=list)
+     bos: str = ""
++    sha256: Optional[str] = None
+ 
+     @property
+     def tmpl(self) -> Template:
+@@ -92,6 +120,7 @@ class Tokenizer:
+ 
+     def __init__(self, gguf: str):
+         from llama_cpp import Llama
++        initialize_backends()
+         self._m = Llama(model_path=gguf, vocab_only=True, verbose=False)
+ 
+     def encode(self, text: str) -> List[int]:
+@@ -134,7 +163,21 @@ def load_profiles(path: Optional[str] = None) -> Dict[str, Profile]:
+             gguf = os.path.join(base, gguf)
+         out[key] = Profile(key=key, gguf=gguf, template=cfg["template"],
+                            filler=cfg.get("filler", " ."), stop=cfg.get("stop", []),
+-                           pad_mode=cfg.get("pad_mode", "isolated"), pad_position=cfg.get("pad_position", "end"))
++                           pad_mode=cfg.get("pad_mode", "isolated"), pad_position=cfg.get("pad_position", "end"),
++                           sha256=cfg.get("sha256"))
++    # Resolve aliases by complete declared semantic contract, not spelling.
++    # Unpinned profiles remain distinct; file hashes are checked by the custody
++    # boundary before an experimental run. Different templates/stops/padding
++    # policies never merge merely because the weights match.
++    identities = {}
++    for key in sorted(out):
++        profile=out[key]
++        if not profile.sha256:
++            continue
++        identity=(profile.sha256,profile.template,profile.filler,profile.pad_mode,
++                  profile.pad_position,tuple(profile.stop),profile.bos)
++        owner=identities.setdefault(identity,key)
++        profile.key=owner
+     return out
+ 
+ 
+diff --git a/orchlang/runtime.py b/orchlang/runtime.py
+index 5c5bf09..ec3ed5f 100644
+--- a/orchlang/runtime.py
++++ b/orchlang/runtime.py
+@@ -8,6 +8,7 @@ which is what a content-redacting observer sees.
+ from __future__ import annotations
+ 
+ import hashlib
++import os
+ import random
+ import re
+ import time
+@@ -15,11 +16,40 @@ from dataclasses import dataclass, field
+ from typing import Callable, Dict, List, Optional, Tuple
+ 
+ from . import core as C
+-from .models import Profile
++from .models import Profile, initialize_backends
++from .ledger import UsageLedger, AdmissionRefused
+ 
+ SEP = "\x1f"
+ 
+ 
++def tool_arguments(value):
++    result = []
++    for field in value.split(SEP):
++        out, index = [], 0
++        while index < len(field):
++            char = field[index]
++            if char == "\\" and index + 1 < len(field) and field[index + 1] in ("\\", "s"):
++                index += 1
++                char = SEP if field[index] == "s" else "\\"
++            out.append(char)
++            index += 1
++        result.append("".join(out))
++    return result
++
++
++class ContractViolation(RuntimeError):
++    """The execution cannot establish its declared accounting contract.
++
++    Post-dispatch failures do not imply zero consumed resources, and detecting a
++    failure cannot retract observations already visible outside the trusted host.
++    """
++
++    def __init__(self, message, *, dispatched=False):
++        super().__init__(message)
++        self.dispatched = dispatched
++        self.usage_complete = not dispatched
++
++
+ @dataclass
+ class Record:
+     kind: str           # "llm" | "tool"
+@@ -30,6 +60,7 @@ class Record:
+     dummy: bool = False  # hidden from the observer; kept only for analysis
+     site: int = 0        # call site (0 for dummies/tools); analysis only
+     natural: int = 0     # tokens before the first stop token; analysis only
++    audit: Dict = field(default_factory=dict)  # private evidence, never observer features
+ 
+     def observed(self):
+         if self.kind == "llm":
+@@ -43,6 +74,7 @@ class RunResult:
+     trace: List[Record]
+     truncations: int = 0
+     pad_errors: int = 0
++    usage: Dict = field(default_factory=dict)
+ 
+     def observed(self) -> List[Tuple]:
+         return [r.observed() for r in self.trace]
+@@ -77,9 +109,12 @@ class Backend:
+ class LlamaBackend(Backend):
+     def __init__(self, profile: Profile, n_ctx: int = 4096, n_threads: int = 4, temperature: float = 0.0):
+         from llama_cpp import Llama
++        initialize_backends()
+         self.profile = profile
+         self.temperature = temperature
+-        self.m = Llama(model_path=profile.gguf, n_ctx=n_ctx, n_threads=n_threads, verbose=False, seed=0)
++        self.m = Llama(model_path=profile.gguf, n_ctx=n_ctx, n_threads=n_threads, verbose=False, seed=0,
++                       n_batch=int(os.environ.get("ORCHLANG_BATCH", "128")), n_ubatch=128,
++                       n_gpu_layers=int(os.environ.get("ORCHLANG_GPU_LAYERS", "0")))
+         self.stop_ids = {self.m.token_eos()}
+         for s in profile.stop:
+             ids = self.m.tokenize(s.encode(), add_bos=False, special=True)
+@@ -195,19 +230,26 @@ class Padder:
+     special tokens, so counts are additive across the padding turn.
+     Returns (text, isolated_pad_tokens, truncated)."""
+ 
+-    def __init__(self, backend: Backend):
++    def __init__(self, backend: Backend, overflow="reject"):
+         self.b = backend
+         self.t = backend.profile.tmpl
+         self.unit = backend.profile.filler
+         self.mode = getattr(backend.profile, "pad_mode", "isolated")
+         self.position = getattr(backend.profile, "pad_position", "end")
++        if overflow not in ("reject", "truncate"):
++            raise ValueError("overflow must be reject or explicit legacy truncate")
++        self.overflow = overflow
+         self.close = self.t.turn.split("{content}")[1]
+ 
+     def pad(self, request: str, target: int) -> Tuple[str, int, bool]:
++        if type(target) is not int or target < 0:
++            raise ContractViolation("padding target must be a nonnegative integer")
+         gen = self.t.generation
+         assert request.endswith(gen), "request must end with the generation header"
+         head = request[: -len(gen)]
+         truncated = False
++        if self.b.count(request) > target and self.overflow == "reject":
++            raise ContractViolation("complete request exceeds its declared padding target")
+         if self.mode == "isolated":
+             while self.b.count(head + gen) > target:
+                 truncated = True
+@@ -225,6 +267,8 @@ class Padder:
+             return h[:i] + pad + h[i:] + gen
+ 
+         while self.b.count(build(head, 0)) > target:
++            if self.overflow == "reject":
++                raise ContractViolation("in-band request and padding envelope exceed target")
+             truncated = True
+             head = self._shorten(head)
+         k = target - self.b.count(build(head, 0))
+@@ -260,9 +304,11 @@ class Padder:
+ class Runtime:
+     def __init__(self, backends: Dict[str, Backend], tools: Dict[str, Callable[..., str]],
+                  tool_caps: Dict[str, int], dummy_request: Optional[Callable[[str], str]] = None,
+-                 random_pad: int = 0):
++                 random_pad: int = 0, overflow="reject", input_contracts=None, budgets=None):
+         self.backends = backends
+-        self.padders = {k: Padder(b) for k, b in backends.items()}
++        self.padders = {k: Padder(b, overflow=overflow) for k, b in backends.items()}
++        self.input_contracts = input_contracts or {}
++        self.budgets = budgets or {}
+         self.tools = dict(tools)
+         self.tools.setdefault("const", lambda v: v)
+         self.tool_caps = tool_caps
+@@ -271,6 +317,23 @@ class Runtime:
+         self.random_pad = random_pad
+ 
+     def run(self, prog: C.Stmt, store: Dict[int, str], run_seed: int = 0) -> RunResult:
++        self.ledger=UsageLedger(self.budgets)
++        try:
++            self.ledger.admit_shape(C.shape(prog))
++        except AdmissionRefused as error:
++            raise ContractViolation(str(error)) from error
++        # This admission occurs before the first dispatch. Token caps are checked
++        # in every explicitly named model unit, never transferred between units.
++        for slot, units in self.input_contracts.items():
++            value = store.get(slot, "")
++            if not isinstance(value, str):
++                raise ContractViolation("input values must be text")
++            value.encode("utf-8", errors="strict")
++            for model, cap in units.items():
++                if type(cap) is not int or cap < 0 or model not in self.backends:
++                    raise ContractViolation("invalid input token contract")
++                if self.backends[model].count(value) > cap:
++                    raise ContractViolation("input exceeds its declared model-specific token cap")
+         self.store = dict(store)
+         self.count: Dict[int, int] = {}
+         self.trace: List[Record] = []
+@@ -278,16 +341,46 @@ class Runtime:
+         self.seed = run_seed
+         self.rng = random.Random(run_seed * 7919 + 17)
+         self.exec(prog)
+-        return RunResult(self.store, self.trace, self.truncations)
++        return RunResult(self.store, self.trace, self.truncations, usage=self.ledger.snapshot())
+ 
+     def _llm(self, model: str, prompt: str, n: int, seed: int, forced: bool, dummy=False, cap=None,
+              site=0, pad_tokens=0) -> str:
+         b = self.backends[model]
++        if type(n) is not int or n < 0 or type(pad_tokens) is not int or pad_tokens < 0:
++            raise ContractViolation("invalid generation or isolated-padding cap")
++        if cap is not None and (type(cap) is not int or not 0 <= cap <= n):
++            raise ContractViolation("visible output cap exceeds forced generation contract")
++        expected_input = b.count(prompt) + pad_tokens
++        try:
++            attempt=self.ledger.reserve(model,expected_input,n)
++        except AdmissionRefused as error:
++            raise ContractViolation(str(error)) from error
+         t0 = time.perf_counter()
+-        ids, visible, ptoks = b.generate(prompt, n, seed, forced, cap, pad_tokens)
++        try:
++            ids, visible, ptoks = b.generate(prompt, n, seed, forced, cap, pad_tokens)
++        except Exception as error:
++            raise ContractViolation("backend dispatch failed; actual usage is unknown", dispatched=True) from error
+         dt = time.perf_counter() - t0
++        if type(ptoks) is not int or ptoks != expected_input:
++            raise ContractViolation("backend input count disagrees with complete request", dispatched=True)
++        if not isinstance(ids, list) or any(type(i) is not int or i < 0 for i in ids):
++            raise ContractViolation("backend returned invalid generated token IDs", dispatched=True)
++        if (forced and len(ids) != n) or (not forced and len(ids) > n):
++            raise ContractViolation("backend generated-output count violates its contract", dispatched=True)
++        if not isinstance(visible, str):
++            raise ContractViolation("backend returned non-text visible output", dispatched=True)
++        try:
++            visible.encode("utf-8", errors="strict")
++        except UnicodeError as error:
++            raise ContractViolation("backend returned invalid Unicode", dispatched=True) from error
++        self.ledger.confirm(attempt,ptoks,len(ids))
+         self.trace.append(Record("llm", model, ptoks, len(ids), dt, dummy, site,
+-                                 getattr(b, "last_natural", len(ids))))
++                                 getattr(b, "last_natural", len(ids)),
++                                 dict(request=prompt, request_sha256=hashlib.sha256(prompt.encode("utf-8")).hexdigest(),
++                                      request_token_ids=b.encode(prompt), generated_token_ids=ids,
++                                      visible_response=visible, isolated_pad_tokens=pad_tokens,
++                                      forced=forced, generation_cap=n, visible_cap=cap, seed=seed,
++                                      accounting="generated token IDs plus explicit logical isolated prefill")))
+         return visible
+ 
+     def exec(self, s: C.Stmt) -> None:
+@@ -301,9 +394,10 @@ class Runtime:
+             seed = cell_seed(self.seed, s.site, k)
+             req = C.eval_expr(self.store, s.req)
+             if s.pad is None:
++                iso=0
+                 if self.random_pad:
+-                    req = self._random_pad(s.model, req)
+-                self.store[s.x] = self._llm(s.model, req, s.max_tokens, seed, False, site=s.site)
++                    req,iso = self._random_pad(s.model, req)
++                self.store[s.x] = self._llm(s.model, req, s.max_tokens, seed, False, site=s.site,pad_tokens=iso)
+             else:
+                 t, n = s.pad
+                 padded, iso, trunc = self.padders[s.model].pad(req, t)
+@@ -318,7 +412,7 @@ class Runtime:
+         if isinstance(s, C.Tool):
+             arg = C.eval_expr(self.store, s.arg)
+             t0 = time.perf_counter()
+-            val = self.tools[s.name](*arg.split(SEP))
++            val = self.tools[s.name](*([arg] if s.name=="const" else tool_arguments(arg)))
+             cap = self.tool_caps.get(s.name)
+             if cap is not None:
+                 any_b = next(iter(self.backends.values()))
+@@ -352,4 +446,4 @@ class Runtime:
+         extra = self.rng.randint(0, self.random_pad)
+         text, iso, _ = p.pad(req, self.backends[model].count(p.t.pad_open + p.t.pad_close) + extra
+                              + self.backends[model].count(req))
+-        return text
++        return text,iso
+diff --git a/orchlang/validate.py b/orchlang/validate.py
+index 931c472..745160a 100644
+--- a/orchlang/validate.py
++++ b/orchlang/validate.py
+@@ -13,7 +13,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
+ CHECKER = os.path.join(os.path.dirname(HERE), "proof", "ShapeCore.lean")
+ 
+ 
+-def payload(high: List[int], original: C.Stmt, padded: C.Stmt, secrets: List[int] = ()) -> Dict:
++def payload(high: List[int], original: C.Stmt, padded: C.Stmt, secrets: List[int]) -> Dict:
+     """`secrets` are the declared secret input variables; the validator also checks
+     that each is labelled high (theorem secret_inputs_sound)."""
+     return {"high": high, "original": C.stmt_json(original), "padded": C.stmt_json(padded),
+@@ -33,5 +33,5 @@ def lean_validate_batch(items: List[Dict], lean: str = None) -> List[Dict]:
+         return json.loads(p.stdout.strip().splitlines()[-1])
+ 
+ 
+-def lean_validate(high, original, padded, lean=None) -> Dict:
+-    return lean_validate_batch([payload(high, original, padded)], lean)[0]
++def lean_validate(high, original, padded, secrets, lean=None) -> Dict:
++    return lean_validate_batch([payload(high, original, padded, secrets)], lean)[0]
+diff --git a/proof/ShapeCore.lean b/proof/ShapeCore.lean
+index b13425d..b78df89 100644
+--- a/proof/ShapeCore.lean
++++ b/proof/ShapeCore.lean
+@@ -43,6 +43,7 @@ inductive Expr where
+   | lit (value : String)
+   | var (x : Var)
+   | app (a b : Expr)
++  | escape (value : Expr)
+ deriving DecidableEq, Repr
+ 
+ inductive Guard where
+@@ -95,6 +96,7 @@ def evalE (σ : Store) : Expr → String
+   | .lit s => s
+   | .var x => σ x
+   | .app a b => evalE σ a ++ evalE σ b
++  | .escape e => ((evalE σ e).replace "\\" "\\\\").replace (String.mk [Char.ofNat 31]) "\\s"
+ 
+ def holds (σ : Store) : Guard → Bool
+   | .eq x s => σ x == s
+@@ -179,6 +181,7 @@ def labelE (Γ : Ctx) : Expr → Label
+   | .lit _ => .low
+   | .var x => Γ x
+   | .app a b => (labelE Γ a).join (labelE Γ b)
++  | .escape e => labelE Γ e
+ 
+ /-- The padding discipline checked on compiler output. -/
+ def wt (Γ : Ctx) : Label → Stmt → Bool
+@@ -227,6 +230,9 @@ theorem evalE_low (Γ : Ctx) (σ τ : Store) (h : lowEq Γ σ τ) :
+       intro hl
+       have := (join_low_iff _ _).mp hl
+       simp [evalE, iha this.1, ihb this.2]
++  | escape e ih =>
++      intro hl
++      simp [evalE, ih hl]
+ 
+ theorem holds_low (Γ : Ctx) (σ τ : Store) (h : lowEq Γ σ τ) (g : Guard)
+     (hg : Γ (guardVar g) = .low) : holds σ g = holds τ g := by
+@@ -344,6 +350,37 @@ theorem shape_exec (w : World) (hw : w.Conforms) (ω : Nat → Nat → Nat) :
+               · exact ih x hb
+               · intro s; simp [ghost, ghost_map w hw]
+ 
++/-! ### Contract-indexed accounting of a complete shape
++
++No token counts from different model contracts are added together. This is a
++logical usage theorem, not a currency, latency or provider billing theorem. A
++checked whole-workflow shape permits admission before any secret is evaluated.
++The dynamic reservation ledger additionally detects unsupported executions. -/
++
++def usage (model : String) : List Event → Nat × Nat × Nat
++  | [] => (0, 0, 0)
++  | .tool _ :: tail => usage model tail
++  | .llm m i o :: tail =>
++      let (ti, to, tc) := usage model tail
++      if m = model then (i + ti, o + to, 1 + tc) else (ti, to, tc)
++
++def Within (actual limit : Nat × Nat × Nat) : Prop :=
++  actual.1 ≤ limit.1 ∧ actual.2.1 ≤ limit.2.1 ∧ actual.2.2 ≤ limit.2.2
++
++theorem shape_usage_exact (w : World) (hw : w.Conforms) (ω : Nat → Nat → Nat)
++    (p : Stmt) (sh : List Event) (hs : shape p = some sh) (σ : Store) (m : String) :
++    usage m (exec w ω p ⟨σ, fun _ => 0, []⟩).trace = usage m sh := by
++  rw [shape_exec w hw ω p sh hs]
++  rfl
++
++theorem shape_budget_sound (w : World) (hw : w.Conforms) (ω : Nat → Nat → Nat)
++    (p : Stmt) (sh : List Event) (hs : shape p = some sh) (σ : Store)
++    (budget : String → Nat × Nat × Nat) (hb : ∀ m, Within (usage m sh) (budget m)) :
++    ∀ m, Within (usage m (exec w ω p ⟨σ, fun _ => 0, []⟩).trace) (budget m) := by
++  intro m
++  rw [shape_usage_exact w hw ω p sh hs]
++  exact hb m
++
+ /-! ### Confinement: high-context statements write no low variable and read
+     no low randomness cell -/
+ 
+@@ -911,6 +948,8 @@ private def shaped : Stmt :=
+ #print axioms validate_sound
+ #print axioms validateProgram_sound
+ #print axioms secret_inputs_sound
++#print axioms shape_usage_exact
++#print axioms shape_budget_sound
+ 
+ end OrchLang.Shape
+ 
+@@ -930,6 +969,7 @@ def decodeExpr : Nat → Json → Except String Expr
+       | "lit" => let _ ← arity j 2; pure (.lit (← a[1]!.getStr?))
+       | "var" => let _ ← arity j 2; pure (.var (← a[1]!.getNat?))
+       | "app" => let _ ← arity j 3; pure (.app (← decodeExpr n a[1]!) (← decodeExpr n a[2]!))
++      | "escape" => let _ ← arity j 2; pure (.escape (← decodeExpr n a[1]!))
+       | k => throw s!"unknown expression {k}"
+ 
+ def decodeGuard (j : Json) : Except String Guard := do
+@@ -980,9 +1020,7 @@ def checkJson (j : Json) : Except String Json := do
+   let Γ : Ctx := fun x => if high.contains x then .high else .low
+   let orig ← decodeStmt 4096 (← j.getObjVal? "original")
+   let padded ← decodeStmt 4096 (← j.getObjVal? "padded")
+-  let secrets ← match j.getObjVal? "secret_inputs" with
+-    | .ok v => decodeCtx v
+-    | .error _ => pure []
++  let secrets ← decodeCtx (← j.getObjVal? "secret_inputs")
+   let secretsHigh := secrets.all high.contains
+   let erased := clean (erase padded) == clean (erase orig)
+   let typed := wt Γ .low padded
+@@ -999,8 +1037,71 @@ def checkJson (j : Json) : Except String Json := do
+     ("static_shape", shapeJson)])
+ end OrchLang.Shape
+ 
++namespace OrchLang.Shape
++open Lean
++
++/- An explicit deterministic finite-table world used only for independent
++   execution comparisons. These operations instantiate exec, not the theorem's
++   provider hypothesis. No deployment or tokenizer theorem follows from them. -/
++private def auditNat (s key : String) (fallback : Nat) : Nat :=
++  match Json.parse s with
++  | .ok j => (j.getObjValAs? Nat key).toOption.getD fallback
++  | .error _ => fallback
++
++private def auditText (s key : String) : String :=
++  match Json.parse s with
++  | .ok j => (j.getObjValAs? String key).toOption.getD s
++  | .error _ => s
++
++private def auditLookup (rows : List (String × String × String)) (model request : String) : String :=
++  match rows.find? (fun r => r.1 == model && r.2.1 == request) with
++  | some r => r.2.2
++  | none => "missing"
++
++private def auditWorld (rows : List (String × String × String)) : World :=
++  { tok := fun _ r => auditNat r "__input_tokens" r.length
++    gen := fun m r k _ => (auditLookup rows m r).take k
++    forced := fun m r _ n =>
++      (Json.mkObj [("__output_tokens",toJson n),
++        ("__visible",toJson ((auditLookup rows m (auditText r "__request")).take n))]).compress
++    view := fun _ k r => (auditText r "__visible").take k
++    padReq := fun _ t r => (Json.mkObj [("__input_tokens",toJson t),("__request",toJson r)]).compress
++    outTok := fun _ r => auditNat r "__output_tokens" r.length
++    toolFn := fun t r => if t == "upper" then r.toUpper.take 6 else if t == "first" then r.take 1 else r
++    dummyReq := "<user></>\n<a>" }
++
++private def eventJson : Event → Json
++  | .llm m i o => toJson ([toJson "llm",toJson m,toJson i,toJson o] : List Json)
++  | .tool t => toJson ([toJson "tool",toJson t] : List Json)
++
++def executeAuditJson (j : Json) : Except String Json := do
++  let program ← decodeStmt 4096 (← j.getObjVal? "program")
++  let slots ← (← (← j.getObjVal? "store").getArr?).toList.mapM fun row => do
++    let a ← arity row 2
++    pure ((← a[0]!.getNat?), (← a[1]!.getStr?))
++  let rows ← (← (← j.getObjVal? "kernels").getArr?).toList.mapM fun row => do
++    let a ← arity row 3
++    pure ((← a[0]!.getStr?), (← a[1]!.getStr?), (← a[2]!.getStr?))
++  let limit ← (← j.getObjVal? "store_limit").getNat?
++  if limit > 64 then throw "store projection limit"
++  let σ : Store := fun x => (slots.find? (fun p => p.1 == x)).map Prod.snd |>.getD ""
++  let state := exec (auditWorld rows) (fun _ _ => 0) program ⟨σ,fun _ => 0,[]⟩
++  pure (Json.mkObj [("trace",toJson (state.trace.map eventJson)),
++    ("store",toJson ((List.range limit).map fun x => toJson ([toJson x,toJson (state.store x)] : List Json)))])
++
++end OrchLang.Shape
++
+ def main (args : List String) : IO UInt32 := do
+   match args with
++  | ["execute",path] =>
++      let contents ← IO.FS.readFile path
++      let result := do
++        let j ← Lean.Json.parse contents
++        let items ← j.getArr?
++        pure (Lean.Json.arr (← items.mapM OrchLang.Shape.executeAuditJson))
++      match result with
++      | .ok output => IO.println output.compress; pure 0
++      | .error error => (← IO.getStderr).putStrLn error; pure 2
+   | [path] =>
+       let contents ← IO.FS.readFile path
+       let run (j : Lean.Json) : Except String Lean.Json :=
+diff --git a/tests/test_orchlang.py b/tests/test_orchlang.py
+index 57907f9..e594c0f 100644
+--- a/tests/test_orchlang.py
++++ b/tests/test_orchlang.py
+@@ -130,12 +130,12 @@ class Runtime(unittest.TestCase):
+     def test_padder_exact(self):
+         from dataclasses import replace
+         req = PROFILES["m"].tmpl.render([("user", "x" * 30)])
+-        inband = R.Padder(R.MockBackend(replace(PROFILES["m"], pad_mode="inband")))
++        inband = R.Padder(R.MockBackend(replace(PROFILES["m"], pad_mode="inband")), overflow="truncate")
+         for target in [20, 25, 40, 80]:
+             out, iso, trunc = inband.pad(req, target)
+             self.assertEqual((len(out), iso), (target, 0))
+             self.assertEqual(trunc, len(req) + 10 > target)
+-        isolated = R.Padder(R.MockBackend(PROFILES["m"]))
++        isolated = R.Padder(R.MockBackend(PROFILES["m"]), overflow="truncate")
+         for target in [20, 25, 40, 80]:
+             out, iso, trunc = isolated.pad(req, target)
+             self.assertEqual(len(out) + iso, target)
+@@ -187,7 +187,7 @@ class RealTemplates(unittest.TestCase):
+             req = prof.tmpl.render([("system", "Classify."), ("user", "Café résumé 你好 " * 20)])
+             for mode in ("inband", "isolated"):
+                 B.profile = replace(prof, pad_mode=mode)
+-                pad = R.Padder(B())
++                pad = R.Padder(B(), overflow="truncate")
+                 for target in [60, 100, 150, 400]:
+                     out, iso, _ = pad.pad(req, target)
+                     self.assertEqual(tok.count(out) + iso, target, (key, mode, target))

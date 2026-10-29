@@ -1,0 +1,1394 @@
+[
+  {
+    "id": "lg-chain-functional-cap24-input1-event1",
+    "repetition": 0,
+    "arms": {
+      "original_a": {
+        "status": "ok",
+        "response": "Why did the compiler cry? It got a compile-entine! Now that's a sour sweet day!",
+        "trace": [
+          {
+            "attempt": 1,
+            "messages": null,
+            "completion_prompt": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!<|im_end|>\n<|im_start|>assistant\n",
+            "rendered_request": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!<|im_end|>\n<|im_start|>assistant\n",
+            "request_token_ids": [
+              151644,
+              872,
+              198,
+              8078,
+              419,
+              21646,
+              2464,
+              88983,
+              553,
+              7842,
+              3409,
+              1363,
+              25,
+              8429,
+              1521,
+              279,
+              19415,
+              15729,
+              30,
+              1084,
+              2684,
+              264,
+              19192,
+              12,
+              26872,
+              0,
+              151645,
+              198,
+              151644,
+              77091,
+              198
+            ],
+            "tokenizer_input_tokens": 31,
+            "input_cap": 512,
+            "output_cap": 24,
+            "schema": null,
+            "http_body": {
+              "model": "qwen2.5:3b",
+              "prompt": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!<|im_end|>\n<|im_start|>assistant\n",
+              "raw": true,
+              "stream": false,
+              "keep_alive": "30m",
+              "options": {
+                "num_predict": 24,
+                "num_ctx": 4096,
+                "temperature": 0,
+                "seed": 1,
+                "num_gpu": 0,
+                "num_thread": 4,
+                "repeat_penalty": 1.0
+              }
+            },
+            "status": "ok",
+            "response": "Why did the compiler cry? It got a compile-entine! Now that's a sour sweet day!",
+            "server_input_tokens": 31,
+            "generated_tokens": 22,
+            "response_reencoded_tokens": 21,
+            "done_reason": "stop",
+            "server_metadata": {
+              "model": "qwen2.5:3b",
+              "created_at": "2026-10-23T22:55:44.7524583Z",
+              "done": true,
+              "done_reason": "stop",
+              "total_duration": 1250870600,
+              "load_duration": 2687500,
+              "prompt_eval_count": 31,
+              "prompt_eval_duration": 73094000,
+              "eval_count": 22,
+              "eval_duration": 1171933000
+            },
+            "elapsed_seconds": 1.2520408000018506
+          }
+        ],
+        "usage": {
+          "calls": 1,
+          "usage_complete": true,
+          "usage_unconfirmed_attempts": 0,
+          "input": 31,
+          "output": 22,
+          "recorded_input": 31,
+          "recorded_output": 22,
+          "runtime_bound": 536,
+          "max_call_bound": 1,
+          "guard": "fully rendered exact input admission + output cap + maximum calls",
+          "whole_source_static_token_bound": false
+        }
+      },
+      "original_b": {
+        "status": "ok",
+        "response": "Why did the compiler cry? It got a compile-entine! Now that's a sour sweet day!",
+        "trace": [
+          {
+            "attempt": 1,
+            "messages": null,
+            "completion_prompt": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!<|im_end|>\n<|im_start|>assistant\n",
+            "rendered_request": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!<|im_end|>\n<|im_start|>assistant\n",
+            "request_token_ids": [
+              151644,
+              872,
+              198,
+              8078,
+              419,
+              21646,
+              2464,
+              88983,
+              553,
+              7842,
+              3409,
+              1363,
+              25,
+              8429,
+              1521,
+              279,
+              19415,
+              15729,
+              30,
+              1084,
+              2684,
+              264,
+              19192,
+              12,
+              26872,
+              0,
+              151645,
+              198,
+              151644,
+              77091,
+              198
+            ],
+            "tokenizer_input_tokens": 31,
+            "input_cap": 512,
+            "output_cap": 24,
+            "schema": null,
+            "http_body": {
+              "model": "qwen2.5:3b",
+              "prompt": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!<|im_end|>\n<|im_start|>assistant\n",
+              "raw": true,
+              "stream": false,
+              "keep_alive": "30m",
+              "options": {
+                "num_predict": 24,
+                "num_ctx": 4096,
+                "temperature": 0,
+                "seed": 1,
+                "num_gpu": 0,
+                "num_thread": 4,
+                "repeat_penalty": 1.0
+              }
+            },
+            "status": "ok",
+            "response": "Why did the compiler cry? It got a compile-entine! Now that's a sour sweet day!",
+            "server_input_tokens": 31,
+            "generated_tokens": 22,
+            "response_reencoded_tokens": 21,
+            "done_reason": "stop",
+            "server_metadata": {
+              "model": "qwen2.5:3b",
+              "created_at": "2026-10-23T22:55:46.0020695Z",
+              "done": true,
+              "done_reason": "stop",
+              "total_duration": 1232491200,
+              "load_duration": 1115600,
+              "prompt_eval_count": 31,
+              "prompt_eval_duration": 58781000,
+              "eval_count": 22,
+              "eval_duration": 1171100000
+            },
+            "elapsed_seconds": 1.2493009999998321
+          }
+        ],
+        "usage": {
+          "calls": 1,
+          "usage_complete": true,
+          "usage_unconfirmed_attempts": 0,
+          "input": 31,
+          "output": 22,
+          "recorded_input": 31,
+          "recorded_output": 22,
+          "runtime_bound": 536,
+          "max_call_bound": 1,
+          "guard": "fully rendered exact input admission + output cap + maximum calls",
+          "whole_source_static_token_bound": false
+        }
+      }
+    },
+    "exact_response_equal": true
+  },
+  {
+    "id": "lg-chain-functional-cap24-input1-event1",
+    "repetition": 1,
+    "arms": {
+      "original_a": {
+        "status": "ok",
+        "response": "Why did the compiler cry? It got a compile-entine! Now that's a sour sweet day!",
+        "trace": [
+          {
+            "attempt": 1,
+            "messages": null,
+            "completion_prompt": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!<|im_end|>\n<|im_start|>assistant\n",
+            "rendered_request": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!<|im_end|>\n<|im_start|>assistant\n",
+            "request_token_ids": [
+              151644,
+              872,
+              198,
+              8078,
+              419,
+              21646,
+              2464,
+              88983,
+              553,
+              7842,
+              3409,
+              1363,
+              25,
+              8429,
+              1521,
+              279,
+              19415,
+              15729,
+              30,
+              1084,
+              2684,
+              264,
+              19192,
+              12,
+              26872,
+              0,
+              151645,
+              198,
+              151644,
+              77091,
+              198
+            ],
+            "tokenizer_input_tokens": 31,
+            "input_cap": 512,
+            "output_cap": 24,
+            "schema": null,
+            "http_body": {
+              "model": "qwen2.5:3b",
+              "prompt": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!<|im_end|>\n<|im_start|>assistant\n",
+              "raw": true,
+              "stream": false,
+              "keep_alive": "30m",
+              "options": {
+                "num_predict": 24,
+                "num_ctx": 4096,
+                "temperature": 0,
+                "seed": 1,
+                "num_gpu": 0,
+                "num_thread": 4,
+                "repeat_penalty": 1.0
+              }
+            },
+            "status": "ok",
+            "response": "Why did the compiler cry? It got a compile-entine! Now that's a sour sweet day!",
+            "server_input_tokens": 31,
+            "generated_tokens": 22,
+            "response_reencoded_tokens": 21,
+            "done_reason": "stop",
+            "server_metadata": {
+              "model": "qwen2.5:3b",
+              "created_at": "2026-10-23T22:55:47.2450397Z",
+              "done": true,
+              "done_reason": "stop",
+              "total_duration": 1241362800,
+              "load_duration": 1081600,
+              "prompt_eval_count": 31,
+              "prompt_eval_duration": 56262000,
+              "eval_count": 22,
+              "eval_duration": 1182710000
+            },
+            "elapsed_seconds": 1.2423814000030688
+          }
+        ],
+        "usage": {
+          "calls": 1,
+          "usage_complete": true,
+          "usage_unconfirmed_attempts": 0,
+          "input": 31,
+          "output": 22,
+          "recorded_input": 31,
+          "recorded_output": 22,
+          "runtime_bound": 536,
+          "max_call_bound": 1,
+          "guard": "fully rendered exact input admission + output cap + maximum calls",
+          "whole_source_static_token_bound": false
+        }
+      },
+      "original_b": {
+        "status": "ok",
+        "response": "Why did the compiler cry? It got a compile-entine! Now that's a sour sweet day!",
+        "trace": [
+          {
+            "attempt": 1,
+            "messages": null,
+            "completion_prompt": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!<|im_end|>\n<|im_start|>assistant\n",
+            "rendered_request": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!<|im_end|>\n<|im_start|>assistant\n",
+            "request_token_ids": [
+              151644,
+              872,
+              198,
+              8078,
+              419,
+              21646,
+              2464,
+              88983,
+              553,
+              7842,
+              3409,
+              1363,
+              25,
+              8429,
+              1521,
+              279,
+              19415,
+              15729,
+              30,
+              1084,
+              2684,
+              264,
+              19192,
+              12,
+              26872,
+              0,
+              151645,
+              198,
+              151644,
+              77091,
+              198
+            ],
+            "tokenizer_input_tokens": 31,
+            "input_cap": 512,
+            "output_cap": 24,
+            "schema": null,
+            "http_body": {
+              "model": "qwen2.5:3b",
+              "prompt": "<|im_start|>user\nMake this joke funnier by adding wordplay: Why did the compiler cry? It got a compile-entine!<|im_end|>\n<|im_start|>assistant\n",
+              "raw": true,
+              "stream": false,
+              "keep_alive": "30m",
+              "options": {
+                "num_predict": 24,
+                "num_ctx": 4096,
+                "temperature": 0,
+                "seed": 1,
+                "num_gpu": 0,
+                "num_thread": 4,
+                "repeat_penalty": 1.0
+              }
+            },
+            "status": "ok",
+            "response": "Why did the compiler cry? It got a compile-entine! Now that's a sour sweet day!",
+            "server_input_tokens": 31,
+            "generated_tokens": 22,
+            "response_reencoded_tokens": 21,
+            "done_reason": "stop",
+            "server_metadata": {
+              "model": "qwen2.5:3b",
+              "created_at": "2026-10-23T22:55:48.5226849Z",
+              "done": true,
+              "done_reason": "stop",
+              "total_duration": 1276424900,
+              "load_duration": 1074700,
+              "prompt_eval_count": 31,
+              "prompt_eval_duration": 57614000,
+              "eval_count": 22,
+              "eval_duration": 1217145000
+            },
+            "elapsed_seconds": 1.2781598000001395
+          }
+        ],
+        "usage": {
+          "calls": 1,
+          "usage_complete": true,
+          "usage_unconfirmed_attempts": 0,
+          "input": 31,
+          "output": 22,
+          "recorded_input": 31,
+          "recorded_output": 22,
+          "runtime_bound": 536,
+          "max_call_bound": 1,
+          "guard": "fully rendered exact input admission + output cap + maximum calls",
+          "whole_source_static_token_bound": false
+        }
+      }
+    },
+    "exact_response_equal": true
+  },
+  {
+    "id": "lg-parallel-graph-cap24-input0-event1",
+    "repetition": 0,
+    "arms": {
+      "original_a": {
+        "status": "ok",
+        "response": "In the heart of a bustling city, there lived a small, cozy apartment building. Among its residents was an elderly couple",
+        "trace": [
+          {
+            "attempt": 1,
+            "messages": null,
+            "completion_prompt": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+            "rendered_request": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+            "request_token_ids": [
+              151644,
+              872,
+              198,
+              7985,
+              264,
+              3364,
+              911,
+              19423,
+              151645,
+              198,
+              151644,
+              77091,
+              198
+            ],
+            "tokenizer_input_tokens": 13,
+            "input_cap": 512,
+            "output_cap": 24,
+            "schema": null,
+            "http_body": {
+              "model": "qwen2.5:3b",
+              "prompt": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+              "raw": true,
+              "stream": false,
+              "keep_alive": "30m",
+              "options": {
+                "num_predict": 24,
+                "num_ctx": 4096,
+                "temperature": 0,
+                "seed": 1,
+                "num_gpu": 0,
+                "num_thread": 4,
+                "repeat_penalty": 1.0
+              }
+            },
+            "status": "ok",
+            "response": "In the heart of a bustling city, there lived a small, cozy apartment building. Among its residents was an elderly couple",
+            "server_input_tokens": 13,
+            "generated_tokens": 24,
+            "response_reencoded_tokens": 24,
+            "done_reason": "length",
+            "server_metadata": {
+              "model": "qwen2.5:3b",
+              "created_at": "2026-10-23T22:55:49.9837558Z",
+              "done": true,
+              "done_reason": "length",
+              "total_duration": 1458568800,
+              "load_duration": 516600,
+              "prompt_eval_count": 13,
+              "prompt_eval_duration": 132811000,
+              "eval_count": 24,
+              "eval_duration": 1323204000
+            },
+            "elapsed_seconds": 1.4602163000017754
+          }
+        ],
+        "usage": {
+          "calls": 1,
+          "usage_complete": true,
+          "usage_unconfirmed_attempts": 0,
+          "input": 13,
+          "output": 24,
+          "recorded_input": 13,
+          "recorded_output": 24,
+          "runtime_bound": 536,
+          "max_call_bound": 1,
+          "guard": "fully rendered exact input admission + output cap + maximum calls",
+          "whole_source_static_token_bound": false
+        }
+      },
+      "original_b": {
+        "status": "ok",
+        "response": "In the heart of a bustling city, there lived a small, cozy apartment building. Among its residents was an elderly couple",
+        "trace": [
+          {
+            "attempt": 1,
+            "messages": null,
+            "completion_prompt": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+            "rendered_request": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+            "request_token_ids": [
+              151644,
+              872,
+              198,
+              7985,
+              264,
+              3364,
+              911,
+              19423,
+              151645,
+              198,
+              151644,
+              77091,
+              198
+            ],
+            "tokenizer_input_tokens": 13,
+            "input_cap": 512,
+            "output_cap": 24,
+            "schema": null,
+            "http_body": {
+              "model": "qwen2.5:3b",
+              "prompt": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+              "raw": true,
+              "stream": false,
+              "keep_alive": "30m",
+              "options": {
+                "num_predict": 24,
+                "num_ctx": 4096,
+                "temperature": 0,
+                "seed": 1,
+                "num_gpu": 0,
+                "num_thread": 4,
+                "repeat_penalty": 1.0
+              }
+            },
+            "status": "ok",
+            "response": "In the heart of a bustling city, there lived a small, cozy apartment building. Among its residents was an elderly couple",
+            "server_input_tokens": 13,
+            "generated_tokens": 24,
+            "response_reencoded_tokens": 24,
+            "done_reason": "length",
+            "server_metadata": {
+              "model": "qwen2.5:3b",
+              "created_at": "2026-10-23T22:55:51.3409582Z",
+              "done": true,
+              "done_reason": "length",
+              "total_duration": 1342078600,
+              "load_duration": 1147200,
+              "prompt_eval_count": 13,
+              "prompt_eval_duration": 57431000,
+              "eval_count": 24,
+              "eval_duration": 1281851000
+            },
+            "elapsed_seconds": 1.3568188999997801
+          }
+        ],
+        "usage": {
+          "calls": 1,
+          "usage_complete": true,
+          "usage_unconfirmed_attempts": 0,
+          "input": 13,
+          "output": 24,
+          "recorded_input": 13,
+          "recorded_output": 24,
+          "runtime_bound": 536,
+          "max_call_bound": 1,
+          "guard": "fully rendered exact input admission + output cap + maximum calls",
+          "whole_source_static_token_bound": false
+        }
+      }
+    },
+    "exact_response_equal": true
+  },
+  {
+    "id": "lg-parallel-graph-cap24-input0-event1",
+    "repetition": 1,
+    "arms": {
+      "original_a": {
+        "status": "ok",
+        "response": "In the heart of a bustling city, there lived a small, cozy apartment building. Among its residents was an elderly couple",
+        "trace": [
+          {
+            "attempt": 1,
+            "messages": null,
+            "completion_prompt": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+            "rendered_request": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+            "request_token_ids": [
+              151644,
+              872,
+              198,
+              7985,
+              264,
+              3364,
+              911,
+              19423,
+              151645,
+              198,
+              151644,
+              77091,
+              198
+            ],
+            "tokenizer_input_tokens": 13,
+            "input_cap": 512,
+            "output_cap": 24,
+            "schema": null,
+            "http_body": {
+              "model": "qwen2.5:3b",
+              "prompt": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+              "raw": true,
+              "stream": false,
+              "keep_alive": "30m",
+              "options": {
+                "num_predict": 24,
+                "num_ctx": 4096,
+                "temperature": 0,
+                "seed": 1,
+                "num_gpu": 0,
+                "num_thread": 4,
+                "repeat_penalty": 1.0
+              }
+            },
+            "status": "ok",
+            "response": "In the heart of a bustling city, there lived a small, cozy apartment building. Among its residents was an elderly couple",
+            "server_input_tokens": 13,
+            "generated_tokens": 24,
+            "response_reencoded_tokens": 24,
+            "done_reason": "length",
+            "server_metadata": {
+              "model": "qwen2.5:3b",
+              "created_at": "2026-10-23T22:55:52.7011605Z",
+              "done": true,
+              "done_reason": "length",
+              "total_duration": 1338595200,
+              "load_duration": 1351000,
+              "prompt_eval_count": 13,
+              "prompt_eval_duration": 57022000,
+              "eval_count": 24,
+              "eval_duration": 1278543000
+            },
+            "elapsed_seconds": 1.3587913000010303
+          }
+        ],
+        "usage": {
+          "calls": 1,
+          "usage_complete": true,
+          "usage_unconfirmed_attempts": 0,
+          "input": 13,
+          "output": 24,
+          "recorded_input": 13,
+          "recorded_output": 24,
+          "runtime_bound": 536,
+          "max_call_bound": 1,
+          "guard": "fully rendered exact input admission + output cap + maximum calls",
+          "whole_source_static_token_bound": false
+        }
+      },
+      "original_b": {
+        "status": "ok",
+        "response": "In the heart of a bustling city, there lived a small, cozy apartment building. Among its residents was an elderly couple",
+        "trace": [
+          {
+            "attempt": 1,
+            "messages": null,
+            "completion_prompt": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+            "rendered_request": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+            "request_token_ids": [
+              151644,
+              872,
+              198,
+              7985,
+              264,
+              3364,
+              911,
+              19423,
+              151645,
+              198,
+              151644,
+              77091,
+              198
+            ],
+            "tokenizer_input_tokens": 13,
+            "input_cap": 512,
+            "output_cap": 24,
+            "schema": null,
+            "http_body": {
+              "model": "qwen2.5:3b",
+              "prompt": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+              "raw": true,
+              "stream": false,
+              "keep_alive": "30m",
+              "options": {
+                "num_predict": 24,
+                "num_ctx": 4096,
+                "temperature": 0,
+                "seed": 1,
+                "num_gpu": 0,
+                "num_thread": 4,
+                "repeat_penalty": 1.0
+              }
+            },
+            "status": "ok",
+            "response": "In the heart of a bustling city, there lived a small, cozy apartment building. Among its residents was an elderly couple",
+            "server_input_tokens": 13,
+            "generated_tokens": 24,
+            "response_reencoded_tokens": 24,
+            "done_reason": "length",
+            "server_metadata": {
+              "model": "qwen2.5:3b",
+              "created_at": "2026-10-23T22:55:54.1011473Z",
+              "done": true,
+              "done_reason": "length",
+              "total_duration": 1385771500,
+              "load_duration": 2043100,
+              "prompt_eval_count": 13,
+              "prompt_eval_duration": 56305000,
+              "eval_count": 24,
+              "eval_duration": 1326411000
+            },
+            "elapsed_seconds": 1.400122700000793
+          }
+        ],
+        "usage": {
+          "calls": 1,
+          "usage_complete": true,
+          "usage_unconfirmed_attempts": 0,
+          "input": 13,
+          "output": 24,
+          "recorded_input": 13,
+          "recorded_output": 24,
+          "runtime_bound": 536,
+          "max_call_bound": 1,
+          "guard": "fully rendered exact input admission + output cap + maximum calls",
+          "whole_source_static_token_bound": false
+        }
+      }
+    },
+    "exact_response_equal": true
+  },
+  {
+    "id": "lg-parallel-graph-cap24-input0-event2",
+    "repetition": 0,
+    "arms": {
+      "original_a": {
+        "status": "ok",
+        "response": "In the quiet of the night, a cat doth play,\nA shadow on the floor, a silent sway.\nWith",
+        "trace": [
+          {
+            "attempt": 1,
+            "messages": null,
+            "completion_prompt": "<|im_start|>user\nWrite a poem about cats<|im_end|>\n<|im_start|>assistant\n",
+            "rendered_request": "<|im_start|>user\nWrite a poem about cats<|im_end|>\n<|im_start|>assistant\n",
+            "request_token_ids": [
+              151644,
+              872,
+              198,
+              7985,
+              264,
+              32794,
+              911,
+              19423,
+              151645,
+              198,
+              151644,
+              77091,
+              198
+            ],
+            "tokenizer_input_tokens": 13,
+            "input_cap": 512,
+            "output_cap": 24,
+            "schema": null,
+            "http_body": {
+              "model": "qwen2.5:3b",
+              "prompt": "<|im_start|>user\nWrite a poem about cats<|im_end|>\n<|im_start|>assistant\n",
+              "raw": true,
+              "stream": false,
+              "keep_alive": "30m",
+              "options": {
+                "num_predict": 24,
+                "num_ctx": 4096,
+                "temperature": 0,
+                "seed": 1,
+                "num_gpu": 0,
+                "num_thread": 4,
+                "repeat_penalty": 1.0
+              }
+            },
+            "status": "ok",
+            "response": "In the quiet of the night, a cat doth play,\nA shadow on the floor, a silent sway.\nWith",
+            "server_input_tokens": 13,
+            "generated_tokens": 24,
+            "response_reencoded_tokens": 24,
+            "done_reason": "length",
+            "server_metadata": {
+              "model": "qwen2.5:3b",
+              "created_at": "2026-10-23T22:55:55.6004681Z",
+              "done": true,
+              "done_reason": "length",
+              "total_duration": 1476490000,
+              "load_duration": 1836100,
+              "prompt_eval_count": 13,
+              "prompt_eval_duration": 111164000,
+              "eval_count": 24,
+              "eval_duration": 1362159000
+            },
+            "elapsed_seconds": 1.4983768000020063
+          }
+        ],
+        "usage": {
+          "calls": 1,
+          "usage_complete": true,
+          "usage_unconfirmed_attempts": 0,
+          "input": 13,
+          "output": 24,
+          "recorded_input": 13,
+          "recorded_output": 24,
+          "runtime_bound": 536,
+          "max_call_bound": 1,
+          "guard": "fully rendered exact input admission + output cap + maximum calls",
+          "whole_source_static_token_bound": false
+        }
+      },
+      "original_b": {
+        "status": "ok",
+        "response": "In the quiet of the night, a cat doth sit,\nWith eyes like stars, and fur as soft as light",
+        "trace": [
+          {
+            "attempt": 1,
+            "messages": null,
+            "completion_prompt": "<|im_start|>user\nWrite a poem about cats<|im_end|>\n<|im_start|>assistant\n",
+            "rendered_request": "<|im_start|>user\nWrite a poem about cats<|im_end|>\n<|im_start|>assistant\n",
+            "request_token_ids": [
+              151644,
+              872,
+              198,
+              7985,
+              264,
+              32794,
+              911,
+              19423,
+              151645,
+              198,
+              151644,
+              77091,
+              198
+            ],
+            "tokenizer_input_tokens": 13,
+            "input_cap": 512,
+            "output_cap": 24,
+            "schema": null,
+            "http_body": {
+              "model": "qwen2.5:3b",
+              "prompt": "<|im_start|>user\nWrite a poem about cats<|im_end|>\n<|im_start|>assistant\n",
+              "raw": true,
+              "stream": false,
+              "keep_alive": "30m",
+              "options": {
+                "num_predict": 24,
+                "num_ctx": 4096,
+                "temperature": 0,
+                "seed": 1,
+                "num_gpu": 0,
+                "num_thread": 4,
+                "repeat_penalty": 1.0
+              }
+            },
+            "status": "ok",
+            "response": "In the quiet of the night, a cat doth sit,\nWith eyes like stars, and fur as soft as light",
+            "server_input_tokens": 13,
+            "generated_tokens": 24,
+            "response_reencoded_tokens": 24,
+            "done_reason": "length",
+            "server_metadata": {
+              "model": "qwen2.5:3b",
+              "created_at": "2026-10-23T22:55:57.1083356Z",
+              "done": true,
+              "done_reason": "length",
+              "total_duration": 1485156900,
+              "load_duration": 1537900,
+              "prompt_eval_count": 13,
+              "prompt_eval_duration": 59525000,
+              "eval_count": 24,
+              "eval_duration": 1422983000
+            },
+            "elapsed_seconds": 1.5079068999984884
+          }
+        ],
+        "usage": {
+          "calls": 1,
+          "usage_complete": true,
+          "usage_unconfirmed_attempts": 0,
+          "input": 13,
+          "output": 24,
+          "recorded_input": 13,
+          "recorded_output": 24,
+          "runtime_bound": 536,
+          "max_call_bound": 1,
+          "guard": "fully rendered exact input admission + output cap + maximum calls",
+          "whole_source_static_token_bound": false
+        }
+      }
+    },
+    "exact_response_equal": false
+  },
+  {
+    "id": "lg-parallel-graph-cap24-input0-event2",
+    "repetition": 1,
+    "arms": {
+      "original_a": {
+        "status": "ok",
+        "response": "In the quiet of the night, a cat doth sit,\nWith eyes like stars, and fur as soft as light",
+        "trace": [
+          {
+            "attempt": 1,
+            "messages": null,
+            "completion_prompt": "<|im_start|>user\nWrite a poem about cats<|im_end|>\n<|im_start|>assistant\n",
+            "rendered_request": "<|im_start|>user\nWrite a poem about cats<|im_end|>\n<|im_start|>assistant\n",
+            "request_token_ids": [
+              151644,
+              872,
+              198,
+              7985,
+              264,
+              32794,
+              911,
+              19423,
+              151645,
+              198,
+              151644,
+              77091,
+              198
+            ],
+            "tokenizer_input_tokens": 13,
+            "input_cap": 512,
+            "output_cap": 24,
+            "schema": null,
+            "http_body": {
+              "model": "qwen2.5:3b",
+              "prompt": "<|im_start|>user\nWrite a poem about cats<|im_end|>\n<|im_start|>assistant\n",
+              "raw": true,
+              "stream": false,
+              "keep_alive": "30m",
+              "options": {
+                "num_predict": 24,
+                "num_ctx": 4096,
+                "temperature": 0,
+                "seed": 1,
+                "num_gpu": 0,
+                "num_thread": 4,
+                "repeat_penalty": 1.0
+              }
+            },
+            "status": "ok",
+            "response": "In the quiet of the night, a cat doth sit,\nWith eyes like stars, and fur as soft as light",
+            "server_input_tokens": 13,
+            "generated_tokens": 24,
+            "response_reencoded_tokens": 24,
+            "done_reason": "length",
+            "server_metadata": {
+              "model": "qwen2.5:3b",
+              "created_at": "2026-10-23T22:55:58.4984235Z",
+              "done": true,
+              "done_reason": "length",
+              "total_duration": 1388103100,
+              "load_duration": 1031900,
+              "prompt_eval_count": 13,
+              "prompt_eval_duration": 59380000,
+              "eval_count": 24,
+              "eval_duration": 1326291000
+            },
+            "elapsed_seconds": 1.3890022999985376
+          }
+        ],
+        "usage": {
+          "calls": 1,
+          "usage_complete": true,
+          "usage_unconfirmed_attempts": 0,
+          "input": 13,
+          "output": 24,
+          "recorded_input": 13,
+          "recorded_output": 24,
+          "runtime_bound": 536,
+          "max_call_bound": 1,
+          "guard": "fully rendered exact input admission + output cap + maximum calls",
+          "whole_source_static_token_bound": false
+        }
+      },
+      "original_b": {
+        "status": "ok",
+        "response": "In the quiet of the night, a cat doth sit,\nWith eyes like stars, and fur as soft as light",
+        "trace": [
+          {
+            "attempt": 1,
+            "messages": null,
+            "completion_prompt": "<|im_start|>user\nWrite a poem about cats<|im_end|>\n<|im_start|>assistant\n",
+            "rendered_request": "<|im_start|>user\nWrite a poem about cats<|im_end|>\n<|im_start|>assistant\n",
+            "request_token_ids": [
+              151644,
+              872,
+              198,
+              7985,
+              264,
+              32794,
+              911,
+              19423,
+              151645,
+              198,
+              151644,
+              77091,
+              198
+            ],
+            "tokenizer_input_tokens": 13,
+            "input_cap": 512,
+            "output_cap": 24,
+            "schema": null,
+            "http_body": {
+              "model": "qwen2.5:3b",
+              "prompt": "<|im_start|>user\nWrite a poem about cats<|im_end|>\n<|im_start|>assistant\n",
+              "raw": true,
+              "stream": false,
+              "keep_alive": "30m",
+              "options": {
+                "num_predict": 24,
+                "num_ctx": 4096,
+                "temperature": 0,
+                "seed": 1,
+                "num_gpu": 0,
+                "num_thread": 4,
+                "repeat_penalty": 1.0
+              }
+            },
+            "status": "ok",
+            "response": "In the quiet of the night, a cat doth sit,\nWith eyes like stars, and fur as soft as light",
+            "server_input_tokens": 13,
+            "generated_tokens": 24,
+            "response_reencoded_tokens": 24,
+            "done_reason": "length",
+            "server_metadata": {
+              "model": "qwen2.5:3b",
+              "created_at": "2026-10-23T22:55:59.8717742Z",
+              "done": true,
+              "done_reason": "length",
+              "total_duration": 1352442500,
+              "load_duration": 1251100,
+              "prompt_eval_count": 13,
+              "prompt_eval_duration": 62969000,
+              "eval_count": 24,
+              "eval_duration": 1287152000
+            },
+            "elapsed_seconds": 1.3734231000016734
+          }
+        ],
+        "usage": {
+          "calls": 1,
+          "usage_complete": true,
+          "usage_unconfirmed_attempts": 0,
+          "input": 13,
+          "output": 24,
+          "recorded_input": 13,
+          "recorded_output": 24,
+          "runtime_bound": 536,
+          "max_call_bound": 1,
+          "guard": "fully rendered exact input admission + output cap + maximum calls",
+          "whole_source_static_token_bound": false
+        }
+      }
+    },
+    "exact_response_equal": true
+  },
+  {
+    "id": "lg-parallel-graph-cap64-input0-event1",
+    "repetition": 0,
+    "arms": {
+      "original_a": {
+        "status": "ok",
+        "response": "In the heart of a bustling city, there lived a small, cozy apartment building. Among its residents was an elderly couple, Mr. and Mrs. Thompson, who had lived there for over two decades. Their apartment was on the second floor, and they had a small balcony where they loved to sit and watch the world",
+        "trace": [
+          {
+            "attempt": 1,
+            "messages": null,
+            "completion_prompt": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+            "rendered_request": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+            "request_token_ids": [
+              151644,
+              872,
+              198,
+              7985,
+              264,
+              3364,
+              911,
+              19423,
+              151645,
+              198,
+              151644,
+              77091,
+              198
+            ],
+            "tokenizer_input_tokens": 13,
+            "input_cap": 512,
+            "output_cap": 64,
+            "schema": null,
+            "http_body": {
+              "model": "qwen2.5:3b",
+              "prompt": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+              "raw": true,
+              "stream": false,
+              "keep_alive": "30m",
+              "options": {
+                "num_predict": 64,
+                "num_ctx": 4096,
+                "temperature": 0,
+                "seed": 1,
+                "num_gpu": 0,
+                "num_thread": 4,
+                "repeat_penalty": 1.0
+              }
+            },
+            "status": "ok",
+            "response": "In the heart of a bustling city, there lived a small, cozy apartment building. Among its residents was an elderly couple, Mr. and Mrs. Thompson, who had lived there for over two decades. Their apartment was on the second floor, and they had a small balcony where they loved to sit and watch the world",
+            "server_input_tokens": 13,
+            "generated_tokens": 64,
+            "response_reencoded_tokens": 64,
+            "done_reason": "length",
+            "server_metadata": {
+              "model": "qwen2.5:3b",
+              "created_at": "2026-10-23T22:56:03.52125Z",
+              "done": true,
+              "done_reason": "length",
+              "total_duration": 3633509500,
+              "load_duration": 1507900,
+              "prompt_eval_count": 13,
+              "prompt_eval_duration": 55771000,
+              "eval_count": 64,
+              "eval_duration": 3574850000
+            },
+            "elapsed_seconds": 3.647939499998756
+          }
+        ],
+        "usage": {
+          "calls": 1,
+          "usage_complete": true,
+          "usage_unconfirmed_attempts": 0,
+          "input": 13,
+          "output": 64,
+          "recorded_input": 13,
+          "recorded_output": 64,
+          "runtime_bound": 576,
+          "max_call_bound": 1,
+          "guard": "fully rendered exact input admission + output cap + maximum calls",
+          "whole_source_static_token_bound": false
+        }
+      },
+      "original_b": {
+        "status": "ok",
+        "response": "In the heart of a bustling city, there lived a small, cozy apartment building. Among its residents was an elderly couple, Mr. and Mrs. Thompson, who had lived there for over two decades. Their apartment was on the second floor, and they had a small balcony where they loved to sit and watch the world",
+        "trace": [
+          {
+            "attempt": 1,
+            "messages": null,
+            "completion_prompt": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+            "rendered_request": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+            "request_token_ids": [
+              151644,
+              872,
+              198,
+              7985,
+              264,
+              3364,
+              911,
+              19423,
+              151645,
+              198,
+              151644,
+              77091,
+              198
+            ],
+            "tokenizer_input_tokens": 13,
+            "input_cap": 512,
+            "output_cap": 64,
+            "schema": null,
+            "http_body": {
+              "model": "qwen2.5:3b",
+              "prompt": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+              "raw": true,
+              "stream": false,
+              "keep_alive": "30m",
+              "options": {
+                "num_predict": 64,
+                "num_ctx": 4096,
+                "temperature": 0,
+                "seed": 1,
+                "num_gpu": 0,
+                "num_thread": 4,
+                "repeat_penalty": 1.0
+              }
+            },
+            "status": "ok",
+            "response": "In the heart of a bustling city, there lived a small, cozy apartment building. Among its residents was an elderly couple, Mr. and Mrs. Thompson, who had lived there for over two decades. Their apartment was on the second floor, and they had a small balcony where they loved to sit and watch the world",
+            "server_input_tokens": 13,
+            "generated_tokens": 64,
+            "response_reencoded_tokens": 64,
+            "done_reason": "length",
+            "server_metadata": {
+              "model": "qwen2.5:3b",
+              "created_at": "2026-10-23T22:56:07.3424599Z",
+              "done": true,
+              "done_reason": "length",
+              "total_duration": 3798490000,
+              "load_duration": 1322500,
+              "prompt_eval_count": 13,
+              "prompt_eval_duration": 59319000,
+              "eval_count": 64,
+              "eval_duration": 3735876000
+            },
+            "elapsed_seconds": 3.821253299996897
+          }
+        ],
+        "usage": {
+          "calls": 1,
+          "usage_complete": true,
+          "usage_unconfirmed_attempts": 0,
+          "input": 13,
+          "output": 64,
+          "recorded_input": 13,
+          "recorded_output": 64,
+          "runtime_bound": 576,
+          "max_call_bound": 1,
+          "guard": "fully rendered exact input admission + output cap + maximum calls",
+          "whole_source_static_token_bound": false
+        }
+      }
+    },
+    "exact_response_equal": true
+  },
+  {
+    "id": "lg-parallel-graph-cap64-input0-event1",
+    "repetition": 1,
+    "arms": {
+      "original_a": {
+        "status": "ok",
+        "response": "In the heart of a bustling city, there lived a small, cozy apartment building. Among its residents was an elderly couple, Mr. and Mrs. Thompson, who had lived there for over two decades. Their apartment was on the second floor, and they had a small balcony where they loved to sit and watch the world",
+        "trace": [
+          {
+            "attempt": 1,
+            "messages": null,
+            "completion_prompt": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+            "rendered_request": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+            "request_token_ids": [
+              151644,
+              872,
+              198,
+              7985,
+              264,
+              3364,
+              911,
+              19423,
+              151645,
+              198,
+              151644,
+              77091,
+              198
+            ],
+            "tokenizer_input_tokens": 13,
+            "input_cap": 512,
+            "output_cap": 64,
+            "schema": null,
+            "http_body": {
+              "model": "qwen2.5:3b",
+              "prompt": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+              "raw": true,
+              "stream": false,
+              "keep_alive": "30m",
+              "options": {
+                "num_predict": 64,
+                "num_ctx": 4096,
+                "temperature": 0,
+                "seed": 1,
+                "num_gpu": 0,
+                "num_thread": 4,
+                "repeat_penalty": 1.0
+              }
+            },
+            "status": "ok",
+            "response": "In the heart of a bustling city, there lived a small, cozy apartment building. Among its residents was an elderly couple, Mr. and Mrs. Thompson, who had lived there for over two decades. Their apartment was on the second floor, and they had a small balcony where they loved to sit and watch the world",
+            "server_input_tokens": 13,
+            "generated_tokens": 64,
+            "response_reencoded_tokens": 64,
+            "done_reason": "length",
+            "server_metadata": {
+              "model": "qwen2.5:3b",
+              "created_at": "2026-10-23T22:56:11.2176693Z",
+              "done": true,
+              "done_reason": "length",
+              "total_duration": 3872946300,
+              "load_duration": 2063700,
+              "prompt_eval_count": 13,
+              "prompt_eval_duration": 65291000,
+              "eval_count": 64,
+              "eval_duration": 3804618000
+            },
+            "elapsed_seconds": 3.87419520000185
+          }
+        ],
+        "usage": {
+          "calls": 1,
+          "usage_complete": true,
+          "usage_unconfirmed_attempts": 0,
+          "input": 13,
+          "output": 64,
+          "recorded_input": 13,
+          "recorded_output": 64,
+          "runtime_bound": 576,
+          "max_call_bound": 1,
+          "guard": "fully rendered exact input admission + output cap + maximum calls",
+          "whole_source_static_token_bound": false
+        }
+      },
+      "original_b": {
+        "status": "ok",
+        "response": "In the heart of a bustling city, there lived a small, cozy apartment building. Among its residents was an elderly couple, Mr. and Mrs. Thompson, who had lived there for over two decades. Their apartment was on the second floor, and they had a small balcony where they loved to sit and watch the world",
+        "trace": [
+          {
+            "attempt": 1,
+            "messages": null,
+            "completion_prompt": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+            "rendered_request": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+            "request_token_ids": [
+              151644,
+              872,
+              198,
+              7985,
+              264,
+              3364,
+              911,
+              19423,
+              151645,
+              198,
+              151644,
+              77091,
+              198
+            ],
+            "tokenizer_input_tokens": 13,
+            "input_cap": 512,
+            "output_cap": 64,
+            "schema": null,
+            "http_body": {
+              "model": "qwen2.5:3b",
+              "prompt": "<|im_start|>user\nWrite a story about cats<|im_end|>\n<|im_start|>assistant\n",
+              "raw": true,
+              "stream": false,
+              "keep_alive": "30m",
+              "options": {
+                "num_predict": 64,
+                "num_ctx": 4096,
+                "temperature": 0,
+                "seed": 1,
+                "num_gpu": 0,
+                "num_thread": 4,
+                "repeat_penalty": 1.0
+              }
+            },
+            "status": "ok",
+            "response": "In the heart of a bustling city, there lived a small, cozy apartment building. Among its residents was an elderly couple, Mr. and Mrs. Thompson, who had lived there for over two decades. Their apartment was on the second floor, and they had a small balcony where they loved to sit and watch the world",
+            "server_input_tokens": 13,
+            "generated_tokens": 64,
+            "response_reencoded_tokens": 64,
+            "done_reason": "length",
+            "server_metadata": {
+              "model": "qwen2.5:3b",
+              "created_at": "2026-10-23T22:56:15.0788615Z",
+              "done": true,
+              "done_reason": "length",
+              "total_duration": 3847647600,
+              "load_duration": 4973300,
+              "prompt_eval_count": 13,
+              "prompt_eval_duration": 61085000,
+              "eval_count": 64,
+              "eval_duration": 3780133000
+            },
+            "elapsed_seconds": 3.8608423999976367
+          }
+        ],
+        "usage": {
+          "calls": 1,
+          "usage_complete": true,
+          "usage_unconfirmed_attempts": 0,
+          "input": 13,
+          "output": 64,
+          "recorded_input": 13,
+          "recorded_output": 64,
+          "runtime_bound": 576,
+          "max_call_bound": 1,
+          "guard": "fully rendered exact input admission + output cap + maximum calls",
+          "whole_source_static_token_bound": false
+        }
+      }
+    },
+    "exact_response_equal": true
+  }
+]

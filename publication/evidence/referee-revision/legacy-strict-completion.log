@@ -1,0 +1,12 @@
+{
+  "definitions": {
+    "pair": "one completed original and one completed shaped execution with the same dataset ID",
+    "observer": "ordered (llm, contract, input, output) and (tool, name); excludes private audit fields and latency",
+    "weighted_cost": "logical input + 4 * generated output; no currency or measured provider invoice",
+    "fresh_subset": "first three retained dataset IDs per historically completed workflow; conformance only, no power claim"
+  },
+  "completion_failures_or_pending": [],
+  "completed_main_pairs": 1172,
+  "completed_replication_pairs": 512,
+  "fresh_conformance_pairs": 21
+}

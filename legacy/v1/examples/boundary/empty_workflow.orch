@@ -1,0 +1,3 @@
+// Expected: E270 because a syntactically valid workflow must still declare one output.
+workflow EmptyWorkflow budget 0 {
+}

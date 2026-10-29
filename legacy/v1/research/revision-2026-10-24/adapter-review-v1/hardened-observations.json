@@ -1,0 +1,90 @@
+{
+  "timestamp_utc": "2026-10-23T22:55:25.417723+00:00",
+  "source_sha256": "2f1e2a45899564a0a06ca212d58b66215aaafdc72fc3c6d4a9a7c35228e61b4b",
+  "rows": [
+    {
+      "upstream_cap": null,
+      "status": "returned",
+      "error": null,
+      "dispatched": 1,
+      "num_predict": 64
+    },
+    {
+      "upstream_cap": 0,
+      "status": "rejected",
+      "error": "ValueError('upstream output cap must be None or a positive integer')",
+      "dispatched": 0,
+      "num_predict": null
+    },
+    {
+      "upstream_cap": -1,
+      "status": "rejected",
+      "error": "ValueError('upstream output cap must be None or a positive integer')",
+      "dispatched": 0,
+      "num_predict": null
+    },
+    {
+      "upstream_cap": 0.5,
+      "status": "rejected",
+      "error": "ValueError('upstream output cap must be None or a positive integer')",
+      "dispatched": 0,
+      "num_predict": null
+    },
+    {
+      "upstream_cap": false,
+      "status": "rejected",
+      "error": "ValueError('upstream output cap must be None or a positive integer')",
+      "dispatched": 0,
+      "num_predict": null
+    }
+  ],
+  "transport_failure_trace": [
+    {
+      "attempt": 1,
+      "messages": null,
+      "completion_prompt": "one",
+      "rendered_request": "one",
+      "request_token_ids": [
+        1
+      ],
+      "tokenizer_input_tokens": 1,
+      "input_cap": 512,
+      "output_cap": 64,
+      "schema": null,
+      "http_body": {
+        "model": "stub-no-model",
+        "prompt": "one",
+        "raw": true,
+        "stream": false,
+        "keep_alive": "30m",
+        "options": {
+          "num_predict": 64,
+          "num_ctx": 4096,
+          "temperature": 0,
+          "seed": 1,
+          "num_gpu": 0,
+          "num_thread": 4,
+          "repeat_penalty": 1.0
+        }
+      },
+      "status": "error",
+      "error": "OSError('deliberate no-inference transport failure')",
+      "elapsed_seconds": 1.7000020307023078e-06
+    }
+  ],
+  "transport_failure_totals": {
+    "calls": 1,
+    "usage_complete": false,
+    "usage_unconfirmed_attempts": 1,
+    "input": null,
+    "output": null,
+    "recorded_input": 0,
+    "recorded_output": 0,
+    "runtime_bound": 576,
+    "max_call_bound": 1,
+    "guard": "fully rendered exact input admission + output cap + maximum calls",
+    "whole_source_static_token_bound": false
+  },
+  "model_inference": false,
+  "scope": "stub transport confirms pre-dispatch validation and missing-usage behavior only"
+}

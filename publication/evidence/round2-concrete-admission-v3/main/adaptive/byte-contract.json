@@ -1,0 +1,50 @@
+{
+  "schema": "orchlang-byte-value-contract-v1",
+  "input_bytes": {
+    "0": 192
+  },
+  "value_bounds": {
+    "0": 192,
+    "1": 384,
+    "11": 384,
+    "12": 384,
+    "13": 384,
+    "14": 384,
+    "3": 6144,
+    "20": 16384,
+    "21": 384,
+    "23": 384,
+    "2": 8,
+    "4": 3680,
+    "5": 4,
+    "6": 3680,
+    "7": 920,
+    "8": 920,
+    "9": 920,
+    "10": 920,
+    "15": 4,
+    "16": 4,
+    "17": 4,
+    "18": 4,
+    "19": 4,
+    "22": 4
+  },
+  "tool_bytes": {
+    "route_source": 8,
+    "retrieve": 3680,
+    "web_search": 2760,
+    "doc": 920,
+    "yes_no": 4,
+    "keep_relevant": 3680,
+    "nonempty": 4,
+    "copy": 2760,
+    "qcopy": 192,
+    "const": 3
+  },
+  "response_bytes_per_token": 128,
+  "tokenizer_alpha": 1,
+  "tokenizer_delta": 0,
+  "context": 21504,
+  "dummy_request": ".",
+  "overflow_policy": "reject-input-before-dispatch; clip-results-at-declared-byte-interface"
+}

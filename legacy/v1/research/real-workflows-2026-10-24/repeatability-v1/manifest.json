@@ -1,0 +1,41 @@
+{
+  "protocol_sha256": "20b94b43ab8efd5afb594b9cfd146f458f0f44e73691959bdca94f3f59c2ce44",
+  "generated_utc": "2026-10-23T22:56:15.081005+00:00",
+  "model": {
+    "model": "qwen2.5:3b",
+    "model_manifest_sha256": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+    "tokenizer_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+    "tokenizers_version": "0.21.4",
+    "serializer": "explicit-qwen-chatml-v1",
+    "serializer_sha256": "612dc565a06f109e80ab462611b1d3c29a8678694b39173d39d953d90bd4de6b",
+    "ollama_version": {
+      "version": "0.32.15"
+    },
+    "model_details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen2",
+      "families": [
+        "qwen2"
+      ],
+      "parameter_size": "3.1B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 32768,
+      "embedding_length": 2048
+    },
+    "device": "CPU",
+    "truncation": "forbidden; compare entire input count to server",
+    "special_tokens": "tokenizer.json; add_special_tokens=False",
+    "hidden_system_prompt": false,
+    "implicit_conversation_state": false,
+    "retries": 0,
+    "threads": 4
+  },
+  "summary": {
+    "pairs": 8,
+    "exact_response_equal": 7,
+    "response_disagreements": 1,
+    "actual_generation_calls": 16,
+    "replay_calls": 0
+  }
+}

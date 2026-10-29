@@ -1,0 +1,294 @@
+[
+  {
+    "policy": "gpt2-bpe/plain",
+    "source": "bench/exact/closed-source.orch",
+    "result": {
+      "format": "orchlang-exact-source-accounting-v1",
+      "workflow": "ExactClosedSource",
+      "source_sha256": "612d9dde4a718cef402e528b81d6b40e2f8b4fe9bf412a0f35adc303c0796f88",
+      "tokenizer": {
+        "identity": "hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:0/raw-text-v1",
+        "sha256": "8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6",
+        "tokenizers_version": "0.21.4",
+        "add_special_tokens": false,
+        "truncation": false,
+        "padding": false,
+        "serialization": "raw-utf8-v1"
+      },
+      "accounting_mode": "closed-source-conditional-static-bound",
+      "static_bound": {
+        "input_tokens": 3,
+        "output_tokens": 8,
+        "total_tokens": 11,
+        "calls": 1
+      },
+      "source_declared_budget": 11,
+      "within_budget": true,
+      "calls": [
+        {
+          "source_contract": {
+            "accounting": "all-attempts-input-and-output",
+            "cap": 8,
+            "error_policy": "status-in-outcome",
+            "provider": "finite-replay",
+            "revision": "exact-source-example-v1",
+            "sampling": "explicit-table",
+            "serializer": "raw-utf8-v1",
+            "state": "stateless",
+            "tokenizer": "utf8-bytes-v1"
+          },
+          "request": "helloworld",
+          "input_ids": [
+            12758,
+            322,
+            1764
+          ],
+          "exact_input_tokens": 3,
+          "declared_output_cap": 8
+        },
+        {
+          "source_contract": {
+            "accounting": "all-attempts-input-and-output",
+            "cap": 8,
+            "error_policy": "status-in-outcome",
+            "provider": "finite-replay",
+            "revision": "exact-source-example-v1",
+            "sampling": "explicit-table",
+            "serializer": "raw-utf8-v1",
+            "state": "stateless",
+            "tokenizer": "utf8-bytes-v1"
+          },
+          "request": "helloworld",
+          "input_ids": [
+            12758,
+            322,
+            1764
+          ],
+          "exact_input_tokens": 3,
+          "declared_output_cap": 8
+        }
+      ],
+      "output_cap_assumption": "every attempt is capped in the selected tokenizer policy; not established by analysis",
+      "scope": "trusted-source-reader-and-Python-accounting; no primitive execution or Lean/C++ cost correspondence"
+    }
+  },
+  {
+    "policy": "gpt2-bpe/special",
+    "source": "bench/exact/closed-source.orch",
+    "result": {
+      "format": "orchlang-exact-source-accounting-v1",
+      "workflow": "ExactClosedSource",
+      "source_sha256": "612d9dde4a718cef402e528b81d6b40e2f8b4fe9bf412a0f35adc303c0796f88",
+      "tokenizer": {
+        "identity": "hf-tokenizers/0.21.4/sha256:8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6/specials:1/raw-text-v1",
+        "sha256": "8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6",
+        "tokenizers_version": "0.21.4",
+        "add_special_tokens": true,
+        "truncation": false,
+        "padding": false,
+        "serialization": "raw-utf8-v1"
+      },
+      "accounting_mode": "closed-source-conditional-static-bound",
+      "static_bound": {
+        "input_tokens": 3,
+        "output_tokens": 8,
+        "total_tokens": 11,
+        "calls": 1
+      },
+      "source_declared_budget": 11,
+      "within_budget": true,
+      "calls": [
+        {
+          "source_contract": {
+            "accounting": "all-attempts-input-and-output",
+            "cap": 8,
+            "error_policy": "status-in-outcome",
+            "provider": "finite-replay",
+            "revision": "exact-source-example-v1",
+            "sampling": "explicit-table",
+            "serializer": "raw-utf8-v1",
+            "state": "stateless",
+            "tokenizer": "utf8-bytes-v1"
+          },
+          "request": "helloworld",
+          "input_ids": [
+            12758,
+            322,
+            1764
+          ],
+          "exact_input_tokens": 3,
+          "declared_output_cap": 8
+        },
+        {
+          "source_contract": {
+            "accounting": "all-attempts-input-and-output",
+            "cap": 8,
+            "error_policy": "status-in-outcome",
+            "provider": "finite-replay",
+            "revision": "exact-source-example-v1",
+            "sampling": "explicit-table",
+            "serializer": "raw-utf8-v1",
+            "state": "stateless",
+            "tokenizer": "utf8-bytes-v1"
+          },
+          "request": "helloworld",
+          "input_ids": [
+            12758,
+            322,
+            1764
+          ],
+          "exact_input_tokens": 3,
+          "declared_output_cap": 8
+        }
+      ],
+      "output_cap_assumption": "every attempt is capped in the selected tokenizer policy; not established by analysis",
+      "scope": "trusted-source-reader-and-Python-accounting; no primitive execution or Lean/C++ cost correspondence"
+    }
+  },
+  {
+    "policy": "bert-wordpiece/plain",
+    "source": "bench/exact/closed-source.orch",
+    "result": {
+      "format": "orchlang-exact-source-accounting-v1",
+      "workflow": "ExactClosedSource",
+      "source_sha256": "612d9dde4a718cef402e528b81d6b40e2f8b4fe9bf412a0f35adc303c0796f88",
+      "tokenizer": {
+        "identity": "hf-tokenizers/0.21.4/sha256:ce64fce797c24f68df90b40a3f74f579b336a493db14bd583fd520ea0d8c9a98/specials:0/raw-text-v1",
+        "sha256": "ce64fce797c24f68df90b40a3f74f579b336a493db14bd583fd520ea0d8c9a98",
+        "tokenizers_version": "0.21.4",
+        "add_special_tokens": false,
+        "truncation": false,
+        "padding": false,
+        "serialization": "raw-utf8-v1"
+      },
+      "accounting_mode": "closed-source-conditional-static-bound",
+      "static_bound": {
+        "input_tokens": 2,
+        "output_tokens": 8,
+        "total_tokens": 10,
+        "calls": 1
+      },
+      "source_declared_budget": 11,
+      "within_budget": true,
+      "calls": [
+        {
+          "source_contract": {
+            "accounting": "all-attempts-input-and-output",
+            "cap": 8,
+            "error_policy": "status-in-outcome",
+            "provider": "finite-replay",
+            "revision": "exact-source-example-v1",
+            "sampling": "explicit-table",
+            "serializer": "raw-utf8-v1",
+            "state": "stateless",
+            "tokenizer": "utf8-bytes-v1"
+          },
+          "request": "helloworld",
+          "input_ids": [
+            7592,
+            11108
+          ],
+          "exact_input_tokens": 2,
+          "declared_output_cap": 8
+        },
+        {
+          "source_contract": {
+            "accounting": "all-attempts-input-and-output",
+            "cap": 8,
+            "error_policy": "status-in-outcome",
+            "provider": "finite-replay",
+            "revision": "exact-source-example-v1",
+            "sampling": "explicit-table",
+            "serializer": "raw-utf8-v1",
+            "state": "stateless",
+            "tokenizer": "utf8-bytes-v1"
+          },
+          "request": "helloworld",
+          "input_ids": [
+            7592,
+            11108
+          ],
+          "exact_input_tokens": 2,
+          "declared_output_cap": 8
+        }
+      ],
+      "output_cap_assumption": "every attempt is capped in the selected tokenizer policy; not established by analysis",
+      "scope": "trusted-source-reader-and-Python-accounting; no primitive execution or Lean/C++ cost correspondence"
+    }
+  },
+  {
+    "policy": "bert-wordpiece/special",
+    "source": "bench/exact/closed-source.orch",
+    "result": {
+      "format": "orchlang-exact-source-accounting-v1",
+      "workflow": "ExactClosedSource",
+      "source_sha256": "612d9dde4a718cef402e528b81d6b40e2f8b4fe9bf412a0f35adc303c0796f88",
+      "tokenizer": {
+        "identity": "hf-tokenizers/0.21.4/sha256:ce64fce797c24f68df90b40a3f74f579b336a493db14bd583fd520ea0d8c9a98/specials:1/raw-text-v1",
+        "sha256": "ce64fce797c24f68df90b40a3f74f579b336a493db14bd583fd520ea0d8c9a98",
+        "tokenizers_version": "0.21.4",
+        "add_special_tokens": true,
+        "truncation": false,
+        "padding": false,
+        "serialization": "raw-utf8-v1"
+      },
+      "accounting_mode": "closed-source-conditional-static-bound",
+      "static_bound": {
+        "input_tokens": 4,
+        "output_tokens": 8,
+        "total_tokens": 12,
+        "calls": 1
+      },
+      "source_declared_budget": 11,
+      "within_budget": false,
+      "calls": [
+        {
+          "source_contract": {
+            "accounting": "all-attempts-input-and-output",
+            "cap": 8,
+            "error_policy": "status-in-outcome",
+            "provider": "finite-replay",
+            "revision": "exact-source-example-v1",
+            "sampling": "explicit-table",
+            "serializer": "raw-utf8-v1",
+            "state": "stateless",
+            "tokenizer": "utf8-bytes-v1"
+          },
+          "request": "helloworld",
+          "input_ids": [
+            101,
+            7592,
+            11108,
+            102
+          ],
+          "exact_input_tokens": 4,
+          "declared_output_cap": 8
+        },
+        {
+          "source_contract": {
+            "accounting": "all-attempts-input-and-output",
+            "cap": 8,
+            "error_policy": "status-in-outcome",
+            "provider": "finite-replay",
+            "revision": "exact-source-example-v1",
+            "sampling": "explicit-table",
+            "serializer": "raw-utf8-v1",
+            "state": "stateless",
+            "tokenizer": "utf8-bytes-v1"
+          },
+          "request": "helloworld",
+          "input_ids": [
+            101,
+            7592,
+            11108,
+            102
+          ],
+          "exact_input_tokens": 4,
+          "declared_output_cap": 8
+        }
+      ],
+      "output_cap_assumption": "every attempt is capped in the selected tokenizer policy; not established by analysis",
+      "scope": "trusted-source-reader-and-Python-accounting; no primitive execution or Lean/C++ cost correspondence"
+    }
+  }
+]

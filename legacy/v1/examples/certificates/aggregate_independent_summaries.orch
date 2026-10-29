@@ -1,0 +1,14 @@
+// Closed documents, separate calls and no returned text in the public output.
+workflow IndependentSummaries budget 10000 {
+    secret schedule: boolean max_tokens 1;
+    model summarizer = mock("summarizer-v1") max_tokens 64;
+    prompt summarize(t: text) -> text = "Summarize: {t}";
+    if schedule {
+        let a: text = call summarize("Document A: rainfall increased in April.") using summarizer;
+        let b: text = call summarize("Document B: the river gauge was repaired.") using summarizer;
+    } else {
+        let b: text = call summarize("Document B: the river gauge was repaired.") using summarizer;
+        let a: text = call summarize("Document A: rainfall increased in April.") using summarizer;
+    }
+    output "summary calls complete";
+}

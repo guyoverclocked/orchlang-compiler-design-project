@@ -1,0 +1,77 @@
+{
+  "workers": [
+    {
+      "workflow": "switch",
+      "group": "main",
+      "expected": 210,
+      "exit": 0
+    },
+    {
+      "workflow": "routing",
+      "group": "main",
+      "expected": 150,
+      "exit": 0
+    },
+    {
+      "workflow": "chaining",
+      "group": "main",
+      "expected": 150,
+      "exit": 0
+    },
+    {
+      "workflow": "evaluator",
+      "group": "main",
+      "expected": 100,
+      "exit": 0
+    },
+    {
+      "workflow": "email",
+      "group": "main",
+      "expected": 152,
+      "exit": 0
+    },
+    {
+      "workflow": "orchestrator",
+      "group": "main",
+      "expected": 100,
+      "exit": 0
+    },
+    {
+      "workflow": "calculator",
+      "group": "main",
+      "expected": 100,
+      "exit": 0
+    },
+    {
+      "workflow": "crag",
+      "group": "main",
+      "expected": 150,
+      "exit": 0
+    },
+    {
+      "workflow": "adaptive",
+      "group": "main",
+      "expected": 60,
+      "exit": 0
+    },
+    {
+      "workflow": "switch",
+      "group": "replication",
+      "expected": 210,
+      "exit": 0
+    },
+    {
+      "workflow": "email",
+      "group": "replication",
+      "expected": 152,
+      "exit": 0
+    },
+    {
+      "workflow": "crag",
+      "group": "replication",
+      "expected": 150,
+      "exit": 0
+    }
+  ],
+  "expected_pairs": 1684
+}

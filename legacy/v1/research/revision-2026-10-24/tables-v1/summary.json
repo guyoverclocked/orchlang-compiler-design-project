@@ -1,0 +1,154 @@
+{
+  "metrics": {
+    "CppTests": 106,
+    "PythonTests": 82,
+    "ProofFiles": 4,
+    "PrecisionSourceCases": 80,
+    "PrecisionSourceAccepted": 64,
+    "PrecisionSourceBaseline": 8,
+    "PrecisionCoreCases": 72,
+    "PrecisionCoreAccepted": 64,
+    "PrecisionCoreBaseline": 8,
+    "PrecisionContexts": 3648,
+    "AggregateCases": 256,
+    "AggregateAccepted": 28,
+    "AggregateBaseline": 16,
+    "AggregateGains": 12,
+    "AggregateContexts": 512,
+    "AggregatePaths": 2048,
+    "TokenizerTexts": 5344,
+    "TokenizerConcats": 8996,
+    "ExactSupported": 40,
+    "ExactPaths": 128,
+    "ExactViolations": 0
+  },
+  "workflows": {
+    "comparison_rows": 24,
+    "original_framework_executions": 24,
+    "port_executions": 24,
+    "corpus_workflows": 6,
+    "distinct_upstream_patterns": 5,
+    "direct_source_translation_workflows": 1,
+    "hybrid_host_composition_workflows": 5,
+    "direct_translation_comparisons": 4,
+    "hybrid_comparisons": 20,
+    "outputs_equal": 22,
+    "full_request_response_multisets_equal": 22,
+    "actual_generation_calls": 88,
+    "original_actual_generation_calls": 44,
+    "port_actual_generation_calls": 44,
+    "replay_generation_calls": 0,
+    "infrastructure_or_differential_failures": 2,
+    "runtime_bound_violations": 0,
+    "source_scope": "Runtime deployment experiment; one direct port plus five explicit hybrid host compositions; no all-input functional equivalence proof or production static tokenizer theorem."
+  },
+  "workflow_table": [
+    {
+      "id": "lg-chain-graph",
+      "pairs": 4,
+      "equal": 4,
+      "peak_tokens": 41,
+      "minimum_bound": 1608,
+      "maximum_bound": 1728,
+      "translation": "hybrid-host-composition"
+    },
+    {
+      "id": "lg-chain-functional",
+      "pairs": 4,
+      "equal": 4,
+      "peak_tokens": 187,
+      "minimum_bound": 1608,
+      "maximum_bound": 1728,
+      "translation": "hybrid-host-composition"
+    },
+    {
+      "id": "lg-parallel-graph",
+      "pairs": 4,
+      "equal": 4,
+      "peak_tokens": 200,
+      "minimum_bound": 1608,
+      "maximum_bound": 1728,
+      "translation": "hybrid-host-composition"
+    },
+    {
+      "id": "lg-routing-graph",
+      "pairs": 4,
+      "equal": 4,
+      "peak_tokens": 125,
+      "minimum_bound": 1072,
+      "maximum_bound": 1152,
+      "translation": "hybrid-host-composition"
+    },
+    {
+      "id": "pf-basic",
+      "pairs": 4,
+      "equal": 2,
+      "peak_tokens": 75,
+      "minimum_bound": 536,
+      "maximum_bound": 576,
+      "translation": "direct-call-kernel"
+    },
+    {
+      "id": "pf-ner",
+      "pairs": 4,
+      "equal": 4,
+      "peak_tokens": 127,
+      "minimum_bound": 536,
+      "maximum_bound": 576,
+      "translation": "hybrid-host-composition"
+    }
+  ],
+  "completed_executions": 48,
+  "failed_executions": 0,
+  "tokenizer_server_mismatches": 0,
+  "replay": {
+    "comparisons": 24,
+    "passed": 24,
+    "unsupported_source_failed": 0,
+    "actual_generation_calls": 0,
+    "replay_calls": 44,
+    "exact_request_matches": 44,
+    "statement": "Conformance under common captured actual model outcomes. Zero new model generations; not independent-generation equivalence or all-input proof."
+  },
+  "repeatability": {
+    "pairs": 8,
+    "exact_response_equal": 7,
+    "response_disagreements": 1,
+    "actual_generation_calls": 16,
+    "replay_calls": 0
+  },
+  "evidence": {
+    "precision": {
+      "path": "C:\\Users\\nambi\\Documents\\Compiler Project\\orchlang-compiler-design-project\\research\\revision-2026-10-24\\dataflow-precision-v2\\manifest.json",
+      "sha256": "6a87b7a222221120f84f17cbc80ea6e8aa7af426cb85ee7f669413d060017869"
+    },
+    "aggregate": {
+      "path": "C:\\Users\\nambi\\Documents\\Compiler Project\\orchlang-compiler-design-project\\research\\revision-2026-10-24\\aggregate-reordering-v1\\manifest.json",
+      "sha256": "87dcd79a543b39bf4af3a9938a57a4d2148d1fd46099bd4c6e5be22f77fa7b58"
+    },
+    "exact": {
+      "path": "C:\\Users\\nambi\\Documents\\Compiler Project\\orchlang-compiler-design-project\\research\\readiness-2026-10-24\\exact-accounting-v4\\summary.json",
+      "sha256": "eff507f80e501c0f5678f8200ef29a01e6ceb4dffb1a5d33fce9d81cb355acb4"
+    },
+    "windows": {
+      "path": "research\\revision-2026-10-24\\clean-windows-v1\\manifest.json",
+      "sha256": "f3159003eeda2f3ecae60053a808d37640ac5b7849015fbbe9eb3dcd3f5b9937"
+    },
+    "linux": {
+      "path": "research\\revision-2026-10-24\\clean-linux-v1\\manifest.json",
+      "sha256": "2c44b72a13cc1ddd3456a31af782c3974a0b804f015a8ecd0d15cf835953b044"
+    },
+    "workflows": {
+      "path": "research\\real-workflows-2026-10-24\\v4\\manifest.json",
+      "sha256": "7e08e9ac464365f11994e609cfacd8335469fc332c846d346a31327bca9eaa20"
+    },
+    "replay": {
+      "path": "research\\real-workflows-2026-10-24\\conformance-v4\\conformance.json",
+      "sha256": "d9234f080be9c54f13060323038778a93d1ad457cfd313643ad472a19211f72c"
+    },
+    "repeatability": {
+      "path": "research\\real-workflows-2026-10-24\\repeatability-v1\\manifest.json",
+      "sha256": "e09c0ebfaea3ee95bdeb7a71ba8130904a32bd50f99b45e3a4c38fcc3e0ad175"
+    }
+  }
+}

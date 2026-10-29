@@ -1,0 +1,535 @@
+{
+  "workflow": "ConditionalSwitch",
+  "source": "workflows/switch.orch",
+  "source_lines": 18,
+  "slots": {
+    "query": 0,
+    "llm_result": 1,
+    "intention": 2,
+    "response": 3
+  },
+  "high": [
+    "query",
+    "llm_result",
+    "intention",
+    "response"
+  ],
+  "findings": [
+    {
+      "kind": "secret-dependent-size",
+      "line": 10,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    }
+  ],
+  "calls": 1,
+  "original_lean": {
+    "static_shape": null,
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+  },
+  "strategies": {
+    "ours": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            953,
+            128
+          ],
+          [
+            "tool",
+            "class_check"
+          ],
+          [
+            "tool",
+            "const"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        1,
+        953,
+        128
+      ],
+      "shape_seconds": 9.879999561235309e-05
+    },
+    "naive": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            953,
+            128
+          ],
+          [
+            "tool",
+            "class_check"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        1,
+        953,
+        128
+      ],
+      "shape_seconds": 4.430000262800604e-05
+    },
+    "uniform": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            953,
+            128
+          ],
+          [
+            "tool",
+            "class_check"
+          ],
+          [
+            "tool",
+            "const"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        1,
+        953,
+        128
+      ],
+      "shape_seconds": 4.529999569058418e-05
+    },
+    "padall": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            953,
+            128
+          ],
+          [
+            "tool",
+            "class_check"
+          ],
+          [
+            "tool",
+            "const"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        1,
+        953,
+        128
+      ],
+      "shape_seconds": 3.54999938281253e-05
+    }
+  },
+  "frontend_seconds": 0.663949900001171,
+  "lean_seconds_batch": 14.507348800005275,
+  "pads": {
+    "1": [
+      953,
+      128
+    ]
+  },
+  "caps": {
+    "1": 128
+  },
+  "site_lines": {
+    "1": 10
+  },
+  "source_binding": {
+    "schema": "orchlang-source-binding-v1",
+    "source_sha256": "400493d816644e4081c3c34139d96c7ce691da1b5c0eff33ee38a529f5cb5ca8",
+    "original": [
+      "seq",
+      [
+        "call",
+        1,
+        1,
+        "llama1b",
+        128,
+        [
+          "app",
+          [
+            "lit",
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n"
+          ],
+          [
+            "app",
+            [
+              "trim",
+              [
+                "lit",
+                "There is a search bar in the mall APP and users can enter any query in the search bar.\n\nThe user may want to search for orders, view product information, or seek recommended products.\n\nTherefore, please classify user intentions into the following three types according to the query: product_recommendation, order_search, product_info\n\nPlease note that only the above three situations can be returned, and try not to include other return values."
+              ]
+            ],
+            [
+              "app",
+              [
+                "lit",
+                "<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+              ],
+              [
+                "app",
+                [
+                  "trim",
+                  [
+                    "app",
+                    [
+                      "lit",
+                      "The user's query is "
+                    ],
+                    [
+                      "var",
+                      0
+                    ]
+                  ]
+                ],
+                [
+                  "lit",
+                  "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                ]
+              ]
+            ]
+          ]
+        ],
+        null
+      ],
+      [
+        "seq",
+        [
+          "tool",
+          2,
+          "class_check",
+          [
+            "escape",
+            [
+              "var",
+              1
+            ]
+          ]
+        ],
+        [
+          "ite",
+          [
+            "eq",
+            2,
+            "order_search"
+          ],
+          [
+            "tool",
+            3,
+            "const",
+            [
+              "lit",
+              "Your order is being mailed, please wait patiently."
+            ]
+          ],
+          [
+            "ite",
+            [
+              "eq",
+              2,
+              "product_info"
+            ],
+            [
+              "tool",
+              3,
+              "const",
+              [
+                "lit",
+                "This product is produced by Microsoft."
+              ]
+            ],
+            [
+              "ite",
+              [
+                "eq",
+                2,
+                "product_recommendation"
+              ],
+              [
+                "tool",
+                3,
+                "const",
+                [
+                  "lit",
+                  "I recommend promptflow to you, which can solve your problem very well."
+                ]
+              ],
+              [
+                "tool",
+                3,
+                "const",
+                [
+                  "lit",
+                  "Sorry, no results matching your search were found."
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ],
+    "secret_inputs": [
+      0
+    ],
+    "high": [
+      0,
+      1,
+      2,
+      3
+    ],
+    "slots": {
+      "query": 0,
+      "llm_result": 1,
+      "intention": 2,
+      "response": 3
+    },
+    "trust": "Python source reader/lowering and serialization; Lean checks the shaped core",
+    "binding_sha256": "5e8f68407a836b20c8e041b1d9b3b51c059f3bf895f38fc53d39dd4bf80e1d0e"
+  },
+  "request_targets": "compositional UTF-8-byte envelope checked by Lean; explicit bounded-value interface",
+  "byte_contract": {
+    "schema": "orchlang-byte-value-contract-v1",
+    "input_bytes": {
+      "0": 256
+    },
+    "value_bounds": {
+      "0": 256,
+      "1": 16384,
+      "2": 16,
+      "3": 70
+    },
+    "tool_bytes": {
+      "class_check": 16,
+      "const": 70
+    },
+    "response_bytes_per_token": 128,
+    "tokenizer_alpha": 1,
+    "tokenizer_delta": 0,
+    "context": 21504,
+    "dummy_request": ".",
+    "overflow_policy": "reject-input-before-dispatch; clip-results-at-declared-byte-interface"
+  },
+  "static_admission_certificate": {
+    "payload": {
+      "program": [
+        "seq",
+        [
+          "call",
+          1,
+          1,
+          "llama1b",
+          128,
+          [
+            "app",
+            [
+              "lit",
+              "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n"
+            ],
+            [
+              "app",
+              [
+                "trim",
+                [
+                  "lit",
+                  "There is a search bar in the mall APP and users can enter any query in the search bar.\n\nThe user may want to search for orders, view product information, or seek recommended products.\n\nTherefore, please classify user intentions into the following three types according to the query: product_recommendation, order_search, product_info\n\nPlease note that only the above three situations can be returned, and try not to include other return values."
+                ]
+              ],
+              [
+                "app",
+                [
+                  "lit",
+                  "<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+                ],
+                [
+                  "app",
+                  [
+                    "trim",
+                    [
+                      "app",
+                      [
+                        "lit",
+                        "The user's query is "
+                      ],
+                      [
+                        "var",
+                        0
+                      ]
+                    ]
+                  ],
+                  [
+                    "lit",
+                    "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            953,
+            128
+          ]
+        ],
+        [
+          "seq",
+          [
+            "tool",
+            2,
+            "class_check",
+            [
+              "escape",
+              [
+                "var",
+                1
+              ]
+            ]
+          ],
+          [
+            "ite",
+            [
+              "eq",
+              2,
+              "order_search"
+            ],
+            [
+              "tool",
+              3,
+              "const",
+              [
+                "lit",
+                "Your order is being mailed, please wait patiently."
+              ]
+            ],
+            [
+              "ite",
+              [
+                "eq",
+                2,
+                "product_info"
+              ],
+              [
+                "tool",
+                3,
+                "const",
+                [
+                  "lit",
+                  "This product is produced by Microsoft."
+                ]
+              ],
+              [
+                "ite",
+                [
+                  "eq",
+                  2,
+                  "product_recommendation"
+                ],
+                [
+                  "tool",
+                  3,
+                  "const",
+                  [
+                    "lit",
+                    "I recommend promptflow to you, which can solve your problem very well."
+                  ]
+                ],
+                [
+                  "tool",
+                  3,
+                  "const",
+                  [
+                    "lit",
+                    "Sorry, no results matching your search were found."
+                  ]
+                ]
+              ]
+            ]
+          ]
+        ]
+      ],
+      "bounds": [
+        256,
+        16384,
+        16,
+        70
+      ],
+      "tools": [
+        [
+          "class_check",
+          16
+        ],
+        [
+          "const",
+          70
+        ]
+      ],
+      "dummy_tokens": [
+        [
+          "llama1b",
+          1
+        ]
+      ],
+      "response_bytes_per_token": 128,
+      "context": 21504,
+      "alpha": 1,
+      "delta": 0
+    },
+    "verdict": {
+      "unit": "UTF-8 bytes",
+      "native_adapter_verified": false,
+      "has_fixed_shape": true,
+      "accepted": true
+    }
+  }
+}

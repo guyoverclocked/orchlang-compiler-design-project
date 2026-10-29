@@ -1,0 +1,7 @@
+workflow Story budget 100000 {
+  input topic: text max_tokens 512;
+  model local = mock("deployment-override-qwen2.5-3b") max_tokens 64;
+  prompt request(topic: text) -> text = "<|im_start|>user\nWrite a story about {topic}<|im_end|>\n<|im_start|>assistant\n";
+  let response: text = call request(topic) using local;
+  output response;
+}

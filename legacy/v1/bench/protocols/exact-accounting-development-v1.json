@@ -1,0 +1,24 @@
+{
+  "schema_version": "1",
+  "status": "development-protocol-after-preliminary-boundary-exploration-not-preregistered",
+  "date": "2026-10-24",
+  "question": "Can a pinned, complete-request tokenizer remove synthetic units while preserving explicitly scoped dynamic and bounded-retry accounting?",
+  "tokenizers_version": "0.21.4",
+  "tokenizer_manifest_protocol": "bench/protocols/tokenizers-development-v1.json",
+  "tokenizer_sha256": {
+    "gpt2-bpe": "8414cab924d8b9b33013f0d221c5862f365ee9be39c5c2bfae8a5a9e970478a6",
+    "bert-wordpiece": "ce64fce797c24f68df90b40a3f74f579b336a493db14bd583fd520ea0d8c9a98"
+  },
+  "seed": 20261024,
+  "special_tokens": [false, true],
+  "scalar_ranges_inclusive": [[0,767],[8192,8303],[19968,20095],[65024,65039],[127462,127487],[128512,128591]],
+  "random_unicode_cases": 256,
+  "random_ascii_concat_cases": 1024,
+  "random_unicode_lengths": [0,1,2,3,8,16,64,256],
+  "concatenation_fragments": ["","a","b","c","d","ab","bc","cd","abc","bcd","x","y","z","ing","tion","hello","world"," ",".","!","the","re","un","able","qz","zq","he","llo","é","é","你好","🙂","\r\n","<|endoftext|>","[CLS]"],
+  "endpoints": ["exact complete-text IDs/counts", "plain/special policy differences", "UTF-8-bound violations for audited GPT2 plain tokenizer", "concat under/over/equal relative to sum of individually encoded pieces", "full finite-program path usage vs structural bound", "runtime rejection of exceeded input, output, byte and reservation contracts"],
+  "programs": ["literal-concat", "unicode-literal-chain", "public-branch-maximum", "bounded-failure-retry", "dynamic-input", "response-dependent-chain", "repeated-dynamic-variable", "dynamic-branch-retry"],
+  "source_files": ["bench/exact/closed-source.orch"],
+  "interpretation": "Boundary stress and finite execution conformance only; no external workflow, model quality, end-to-end source theorem or provider billing claim. Dynamic static bounds require separately enforced bytes, and are enabled only for the pinned plain GPT2 artifact.",
+  "budget_usd_cap": "0.00"
+}

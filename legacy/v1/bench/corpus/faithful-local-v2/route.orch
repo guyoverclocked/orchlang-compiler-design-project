@@ -1,0 +1,7 @@
+workflow Route budget 100000 {
+  input request: text max_tokens 512;
+  model local = mock("deployment-override-qwen2.5-3b") max_tokens 64;
+  prompt renderedPrompt(request: text) -> text = "<|im_start|>system\nRoute the input to story, joke, or poem based on the user's request.<|im_end|>\n<|im_start|>user\n{request}<|im_end|>\n<|im_start|>assistant\n";
+  let response: text = call renderedPrompt(request) using local;
+  output response;
+}

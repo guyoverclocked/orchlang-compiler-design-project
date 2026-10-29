@@ -1,0 +1,981 @@
+{
+  "workflow": "EvaluatorOptimizer",
+  "source": "workflows/evaluator.orch",
+  "source_lines": 22,
+  "slots": {
+    "topic": 0,
+    "feedback": 1,
+    "stop": 2,
+    "joke": 3,
+    "ev": 4
+  },
+  "high": [
+    "topic",
+    "feedback",
+    "stop",
+    "joke",
+    "ev"
+  ],
+  "findings": [
+    {
+      "kind": "secret-dependent-loop",
+      "line": 15,
+      "detail": "iteration count depends on secret stop"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 15,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 17,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 19,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    }
+  ],
+  "calls": 3,
+  "original_lean": {
+    "static_shape": null,
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+  },
+  "strategies": {
+    "ours": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            577,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            12707,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            577,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            12707,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            577,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            12707,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        6,
+        39852,
+        480
+      ],
+      "shape_seconds": 9.820000559557229e-05
+    },
+    "naive": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            348,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            577,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            12707,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            348,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            577,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            12707,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            348,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            577,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            12707,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        9,
+        40896,
+        768
+      ],
+      "shape_seconds": 4.389999958220869e-05
+    },
+    "uniform": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            12707,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            12707,
+            96
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            12707,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            12707,
+            96
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            12707,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            12707,
+            96
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        6,
+        76242,
+        576
+      ],
+      "shape_seconds": 5.3099996875971556e-05
+    },
+    "padall": {
+      "lean": {
+        "static_shape": [
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "llama1b",
+            577,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            12707,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            577,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            12707,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ],
+          [
+            "llm",
+            "llama1b",
+            577,
+            96
+          ],
+          [
+            "llm",
+            "llama1b",
+            12707,
+            64
+          ],
+          [
+            "tool",
+            "eval_stop"
+          ],
+          [
+            "tool",
+            "after"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        6,
+        39852,
+        480
+      ],
+      "shape_seconds": 3.860000288113952e-05
+    }
+  },
+  "frontend_seconds": 0.6126475000055507,
+  "lean_seconds_batch": 2.6846621000004234,
+  "pads": {
+    "1": [
+      577,
+      96
+    ],
+    "2": [
+      577,
+      96
+    ],
+    "3": [
+      12707,
+      64
+    ]
+  },
+  "caps": {
+    "1": 96,
+    "2": 96,
+    "3": 64
+  },
+  "site_lines": {
+    "1": 15,
+    "2": 17,
+    "3": 19
+  },
+  "source_binding": {
+    "schema": "orchlang-source-binding-v1",
+    "source_sha256": "c8c1b3522d0f20645ccf22b36e62db840184c3469a3a926171d714ad9fc0321f",
+    "original": [
+      "seq",
+      [
+        "tool",
+        1,
+        "const",
+        [
+          "lit",
+          ""
+        ]
+      ],
+      [
+        "seq",
+        [
+          "tool",
+          2,
+          "const",
+          [
+            "lit",
+            "go"
+          ]
+        ],
+        [
+          "loop",
+          3,
+          [
+            "eq",
+            2,
+            "stop"
+          ],
+          [
+            "seq",
+            [
+              "ite",
+              [
+                "eq",
+                1,
+                ""
+              ],
+              [
+                "call",
+                1,
+                3,
+                "llama1b",
+                96,
+                [
+                  "app",
+                  [
+                    "lit",
+                    "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+                  ],
+                  [
+                    "app",
+                    [
+                      "trim",
+                      [
+                        "app",
+                        [
+                          "lit",
+                          "Write a joke about "
+                        ],
+                        [
+                          "var",
+                          0
+                        ]
+                      ]
+                    ],
+                    [
+                      "lit",
+                      "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                    ]
+                  ]
+                ],
+                null
+              ],
+              [
+                "call",
+                2,
+                3,
+                "llama1b",
+                96,
+                [
+                  "app",
+                  [
+                    "lit",
+                    "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+                  ],
+                  [
+                    "app",
+                    [
+                      "trim",
+                      [
+                        "app",
+                        [
+                          "lit",
+                          "Write a joke about "
+                        ],
+                        [
+                          "app",
+                          [
+                            "var",
+                            0
+                          ],
+                          [
+                            "app",
+                            [
+                              "lit",
+                              " but take into account the feedback: "
+                            ],
+                            [
+                              "var",
+                              1
+                            ]
+                          ]
+                        ]
+                      ]
+                    ],
+                    [
+                      "lit",
+                      "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                    ]
+                  ]
+                ],
+                null
+              ]
+            ],
+            [
+              "seq",
+              [
+                "call",
+                3,
+                4,
+                "llama1b",
+                64,
+                [
+                  "app",
+                  [
+                    "lit",
+                    "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+                  ],
+                  [
+                    "app",
+                    [
+                      "trim",
+                      [
+                        "app",
+                        [
+                          "lit",
+                          "Grade the joke "
+                        ],
+                        [
+                          "app",
+                          [
+                            "var",
+                            3
+                          ],
+                          [
+                            "lit",
+                            "\n\nRespond in exactly two lines:\ngrade: <funny|not funny> (Decide if the joke is funny or not.)\nfeedback: <If the joke is not funny, provide feedback on how to improve it.>"
+                          ]
+                        ]
+                      ]
+                    ],
+                    [
+                      "lit",
+                      "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                    ]
+                  ]
+                ],
+                null
+              ],
+              [
+                "seq",
+                [
+                  "tool",
+                  2,
+                  "eval_stop",
+                  [
+                    "escape",
+                    [
+                      "var",
+                      4
+                    ]
+                  ]
+                ],
+                [
+                  "tool",
+                  1,
+                  "after",
+                  [
+                    "app",
+                    [
+                      "escape",
+                      [
+                        "var",
+                        4
+                      ]
+                    ],
+                    [
+                      "app",
+                      [
+                        "lit",
+                        "\u001f"
+                      ],
+                      [
+                        "escape",
+                        [
+                          "lit",
+                          "feedback:"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          false
+        ]
+      ]
+    ],
+    "secret_inputs": [
+      0
+    ],
+    "high": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "slots": {
+      "topic": 0,
+      "feedback": 1,
+      "stop": 2,
+      "joke": 3,
+      "ev": 4
+    },
+    "trust": "Python source reader/lowering and serialization; Lean checks the shaped core",
+    "binding_sha256": "381ff2747bc384d70e011e4600775706e3be06608ca68d2753b47cc0adba61ec"
+  },
+  "request_targets": "compositional UTF-8-byte envelope checked by Lean; explicit bounded-value interface",
+  "byte_contract": {
+    "schema": "orchlang-byte-value-contract-v1",
+    "input_bytes": {
+      "0": 96
+    },
+    "value_bounds": {
+      "0": 96,
+      "3": 12288,
+      "4": 8192,
+      "1": 192,
+      "2": 4
+    },
+    "tool_bytes": {
+      "after": 192,
+      "eval_stop": 4,
+      "const": 2
+    },
+    "response_bytes_per_token": 128,
+    "tokenizer_alpha": 1,
+    "tokenizer_delta": 0,
+    "context": 21504,
+    "dummy_request": ".",
+    "overflow_policy": "reject-input-before-dispatch; clip-results-at-declared-byte-interface"
+  },
+  "static_admission_certificate": {
+    "payload": {
+      "program": [
+        "seq",
+        [
+          "tool",
+          1,
+          "const",
+          [
+            "lit",
+            ""
+          ]
+        ],
+        [
+          "seq",
+          [
+            "tool",
+            2,
+            "const",
+            [
+              "lit",
+              "go"
+            ]
+          ],
+          [
+            "loop",
+            3,
+            [
+              "eq",
+              2,
+              "stop"
+            ],
+            [
+              "seq",
+              [
+                "ite",
+                [
+                  "eq",
+                  1,
+                  ""
+                ],
+                [
+                  "call",
+                  1,
+                  3,
+                  "llama1b",
+                  96,
+                  [
+                    "app",
+                    [
+                      "lit",
+                      "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+                    ],
+                    [
+                      "app",
+                      [
+                        "trim",
+                        [
+                          "app",
+                          [
+                            "lit",
+                            "Write a joke about "
+                          ],
+                          [
+                            "var",
+                            0
+                          ]
+                        ]
+                      ],
+                      [
+                        "lit",
+                        "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                      ]
+                    ]
+                  ],
+                  [
+                    577,
+                    96
+                  ]
+                ],
+                [
+                  "call",
+                  2,
+                  3,
+                  "llama1b",
+                  96,
+                  [
+                    "app",
+                    [
+                      "lit",
+                      "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+                    ],
+                    [
+                      "app",
+                      [
+                        "trim",
+                        [
+                          "app",
+                          [
+                            "lit",
+                            "Write a joke about "
+                          ],
+                          [
+                            "app",
+                            [
+                              "var",
+                              0
+                            ],
+                            [
+                              "app",
+                              [
+                                "lit",
+                                " but take into account the feedback: "
+                              ],
+                              [
+                                "var",
+                                1
+                              ]
+                            ]
+                          ]
+                        ]
+                      ],
+                      [
+                        "lit",
+                        "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                      ]
+                    ]
+                  ],
+                  [
+                    577,
+                    96
+                  ]
+                ]
+              ],
+              [
+                "seq",
+                [
+                  "call",
+                  3,
+                  4,
+                  "llama1b",
+                  64,
+                  [
+                    "app",
+                    [
+                      "lit",
+                      "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+                    ],
+                    [
+                      "app",
+                      [
+                        "trim",
+                        [
+                          "app",
+                          [
+                            "lit",
+                            "Grade the joke "
+                          ],
+                          [
+                            "app",
+                            [
+                              "var",
+                              3
+                            ],
+                            [
+                              "lit",
+                              "\n\nRespond in exactly two lines:\ngrade: <funny|not funny> (Decide if the joke is funny or not.)\nfeedback: <If the joke is not funny, provide feedback on how to improve it.>"
+                            ]
+                          ]
+                        ]
+                      ],
+                      [
+                        "lit",
+                        "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                      ]
+                    ]
+                  ],
+                  [
+                    12707,
+                    64
+                  ]
+                ],
+                [
+                  "seq",
+                  [
+                    "tool",
+                    2,
+                    "eval_stop",
+                    [
+                      "escape",
+                      [
+                        "var",
+                        4
+                      ]
+                    ]
+                  ],
+                  [
+                    "tool",
+                    1,
+                    "after",
+                    [
+                      "app",
+                      [
+                        "escape",
+                        [
+                          "var",
+                          4
+                        ]
+                      ],
+                      [
+                        "app",
+                        [
+                          "lit",
+                          "\u001f"
+                        ],
+                        [
+                          "escape",
+                          [
+                            "lit",
+                            "feedback:"
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            true
+          ]
+        ]
+      ],
+      "bounds": [
+        96,
+        192,
+        4,
+        12288,
+        8192
+      ],
+      "tools": [
+        [
+          "after",
+          192
+        ],
+        [
+          "const",
+          2
+        ],
+        [
+          "eval_stop",
+          4
+        ]
+      ],
+      "dummy_tokens": [
+        [
+          "llama1b",
+          1
+        ]
+      ],
+      "response_bytes_per_token": 128,
+      "context": 21504,
+      "alpha": 1,
+      "delta": 0
+    },
+    "verdict": {
+      "unit": "UTF-8 bytes",
+      "native_adapter_verified": false,
+      "has_fixed_shape": true,
+      "accepted": true
+    }
+  }
+}

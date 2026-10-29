@@ -1,0 +1,431 @@
+{
+  "runs": {
+    "switch": {
+      "expected": 210,
+      "original": 210,
+      "shaped": 210,
+      "paired": 210,
+      "original_duplicates": 0,
+      "shaped_duplicates": 0,
+      "unpaired_original": [],
+      "unpaired_shaped": [],
+      "output_store_equal": 210,
+      "full_trace_distinct": 1,
+      "conformant": 210,
+      "truncations": 0,
+      "llm_events_original": 210,
+      "llm_events_shaped": 210,
+      "mean_original_usage": {
+        "calls": 1,
+        "input": 139.07142857142858,
+        "output": 78.03333333333333,
+        "price": 451.2047619047619
+      },
+      "mean_shaped_usage": {
+        "calls": 1,
+        "input": 198,
+        "output": 128,
+        "price": 710
+      },
+      "weighted_overhead": 1.5735649530885565
+    },
+    "routing": {
+      "expected": 150,
+      "original": 150,
+      "shaped": 150,
+      "paired": 150,
+      "original_duplicates": 0,
+      "shaped_duplicates": 0,
+      "unpaired_original": [],
+      "unpaired_shaped": [],
+      "output_store_equal": 150,
+      "full_trace_distinct": 1,
+      "conformant": 150,
+      "truncations": 0,
+      "llm_events_original": 300,
+      "llm_events_shaped": 300,
+      "mean_original_usage": {
+        "calls": 2,
+        "input": 128.4,
+        "output": 102.83333333333333,
+        "price": 539.7333333333333
+      },
+      "mean_shaped_usage": {
+        "calls": 2,
+        "input": 203,
+        "output": 196,
+        "price": 987
+      },
+      "weighted_overhead": 1.8286808300395256
+    },
+    "chaining": {
+      "expected": 150,
+      "original": 150,
+      "shaped": 150,
+      "paired": 150,
+      "original_duplicates": 0,
+      "shaped_duplicates": 0,
+      "unpaired_original": [],
+      "unpaired_shaped": [],
+      "output_store_equal": 150,
+      "full_trace_distinct": 1,
+      "conformant": 150,
+      "truncations": 0,
+      "llm_events_original": 214,
+      "llm_events_shaped": 450,
+      "mean_original_usage": {
+        "calls": 1.4266666666666667,
+        "input": 95.34666666666666,
+        "output": 73.39333333333333,
+        "price": 388.92
+      },
+      "mean_shaped_usage": {
+        "calls": 3,
+        "input": 403,
+        "output": 352,
+        "price": 1811
+      },
+      "weighted_overhead": 4.6564846240872155
+    },
+    "evaluator": {
+      "expected": 100,
+      "original": 100,
+      "shaped": 100,
+      "paired": 100,
+      "original_duplicates": 0,
+      "shaped_duplicates": 0,
+      "unpaired_original": [],
+      "unpaired_shaped": [],
+      "output_store_equal": 100,
+      "full_trace_distinct": 1,
+      "conformant": 100,
+      "truncations": 0,
+      "llm_events_original": 392,
+      "llm_events_shaped": 600,
+      "mean_original_usage": {
+        "calls": 3.92,
+        "input": 425.7,
+        "output": 243.61,
+        "price": 1400.14
+      },
+      "mean_shaped_usage": {
+        "calls": 6,
+        "input": 957,
+        "output": 480,
+        "price": 2877
+      },
+      "weighted_overhead": 2.0547945205479454
+    },
+    "email": {
+      "expected": 152,
+      "original": 152,
+      "shaped": 152,
+      "paired": 152,
+      "original_duplicates": 0,
+      "shaped_duplicates": 0,
+      "unpaired_original": [],
+      "unpaired_shaped": [],
+      "output_store_equal": 152,
+      "full_trace_distinct": 1,
+      "conformant": 152,
+      "truncations": 0,
+      "llm_events_original": 298,
+      "llm_events_shaped": 304,
+      "mean_original_usage": {
+        "calls": 1.9605263157894737,
+        "input": 333.625,
+        "output": 304.2105263157895,
+        "price": 1550.467105263158
+      },
+      "mean_shaped_usage": {
+        "calls": 2,
+        "input": 1003,
+        "output": 400,
+        "price": 2603
+      },
+      "weighted_overhead": 1.678848903768389
+    },
+    "orchestrator": {
+      "expected": 100,
+      "original": 100,
+      "shaped": 100,
+      "paired": 100,
+      "original_duplicates": 0,
+      "shaped_duplicates": 0,
+      "unpaired_original": [],
+      "unpaired_shaped": [],
+      "output_store_equal": 100,
+      "full_trace_distinct": 1,
+      "conformant": 100,
+      "truncations": 0,
+      "llm_events_original": 488,
+      "llm_events_shaped": 500,
+      "mean_original_usage": {
+        "calls": 4.88,
+        "input": 368.77,
+        "output": 638.77,
+        "price": 2923.85
+      },
+      "mean_shaped_usage": {
+        "calls": 5,
+        "input": 609,
+        "output": 672,
+        "price": 3297
+      },
+      "weighted_overhead": 1.1276228260683687
+    },
+    "calculator": {
+      "expected": 100,
+      "original": 100,
+      "shaped": 100,
+      "paired": 100,
+      "original_duplicates": 0,
+      "shaped_duplicates": 0,
+      "unpaired_original": [],
+      "unpaired_shaped": [],
+      "output_store_equal": 100,
+      "full_trace_distinct": 1,
+      "conformant": 100,
+      "truncations": 0,
+      "llm_events_original": 126,
+      "llm_events_shaped": 600,
+      "mean_original_usage": {
+        "calls": 1.26,
+        "input": 271.39,
+        "output": 25.26,
+        "price": 372.43
+      },
+      "mean_shaped_usage": {
+        "calls": 6,
+        "input": 4236,
+        "output": 288,
+        "price": 5388
+      },
+      "weighted_overhead": 14.467148188921408
+    },
+    "crag": {
+      "expected": 150,
+      "original": 0,
+      "shaped": 0,
+      "paired": 0,
+      "original_duplicates": 0,
+      "shaped_duplicates": 0,
+      "unpaired_original": [],
+      "unpaired_shaped": []
+    },
+    "adaptive": {
+      "expected": 60,
+      "original": 0,
+      "shaped": 0,
+      "paired": 0,
+      "original_duplicates": 0,
+      "shaped_duplicates": 0,
+      "unpaired_original": [],
+      "unpaired_shaped": []
+    }
+  },
+  "runs-inband-preliminary": {
+    "switch": {
+      "expected": 210,
+      "original": 210,
+      "shaped": 210,
+      "paired": 210,
+      "original_duplicates": 0,
+      "shaped_duplicates": 0,
+      "unpaired_original": [],
+      "unpaired_shaped": [],
+      "output_store_equal": 3,
+      "full_trace_distinct": 1,
+      "conformant": 210,
+      "truncations": 0,
+      "llm_events_original": 210,
+      "llm_events_shaped": 210,
+      "mean_original_usage": {
+        "calls": 1,
+        "input": 139.07142857142858,
+        "output": 78.03333333333333,
+        "price": 451.2047619047619
+      },
+      "mean_shaped_usage": {
+        "calls": 1,
+        "input": 198,
+        "output": 128,
+        "price": 710
+      },
+      "weighted_overhead": 1.5735649530885565
+    },
+    "routing": {
+      "expected": 150,
+      "original": 150,
+      "shaped": 150,
+      "paired": 150,
+      "original_duplicates": 0,
+      "shaped_duplicates": 0,
+      "unpaired_original": [],
+      "unpaired_shaped": [],
+      "output_store_equal": 0,
+      "full_trace_distinct": 1,
+      "conformant": 150,
+      "truncations": 0,
+      "llm_events_original": 300,
+      "llm_events_shaped": 300,
+      "mean_original_usage": {
+        "calls": 2,
+        "input": 128.4,
+        "output": 102.83333333333333,
+        "price": 539.7333333333333
+      },
+      "mean_shaped_usage": {
+        "calls": 2,
+        "input": 203,
+        "output": 196,
+        "price": 987
+      },
+      "weighted_overhead": 1.8286808300395256
+    },
+    "chaining": {
+      "expected": 150,
+      "original": 150,
+      "shaped": 150,
+      "paired": 150,
+      "original_duplicates": 0,
+      "shaped_duplicates": 0,
+      "unpaired_original": [],
+      "unpaired_shaped": [],
+      "output_store_equal": 31,
+      "full_trace_distinct": 1,
+      "conformant": 150,
+      "truncations": 0,
+      "llm_events_original": 214,
+      "llm_events_shaped": 450,
+      "mean_original_usage": {
+        "calls": 1.4266666666666667,
+        "input": 95.34666666666666,
+        "output": 73.39333333333333,
+        "price": 388.92
+      },
+      "mean_shaped_usage": {
+        "calls": 3,
+        "input": 403,
+        "output": 352,
+        "price": 1811
+      },
+      "weighted_overhead": 4.6564846240872155
+    },
+    "evaluator": {
+      "expected": 100,
+      "original": 0,
+      "shaped": 0,
+      "paired": 0,
+      "original_duplicates": 0,
+      "shaped_duplicates": 0,
+      "unpaired_original": [],
+      "unpaired_shaped": []
+    },
+    "email": {
+      "expected": 152,
+      "original": 0,
+      "shaped": 0,
+      "paired": 0,
+      "original_duplicates": 0,
+      "shaped_duplicates": 0,
+      "unpaired_original": [],
+      "unpaired_shaped": []
+    },
+    "orchestrator": {
+      "expected": 100,
+      "original": 0,
+      "shaped": 0,
+      "paired": 0,
+      "original_duplicates": 0,
+      "shaped_duplicates": 0,
+      "unpaired_original": [],
+      "unpaired_shaped": []
+    },
+    "calculator": {
+      "expected": 100,
+      "original": 0,
+      "shaped": 0,
+      "paired": 0,
+      "original_duplicates": 0,
+      "shaped_duplicates": 0,
+      "unpaired_original": [],
+      "unpaired_shaped": []
+    },
+    "crag": {
+      "expected": 150,
+      "original": 0,
+      "shaped": 0,
+      "paired": 0,
+      "original_duplicates": 0,
+      "shaped_duplicates": 0,
+      "unpaired_original": [],
+      "unpaired_shaped": []
+    },
+    "adaptive": {
+      "expected": 60,
+      "original": 0,
+      "shaped": 0,
+      "paired": 0,
+      "original_duplicates": 0,
+      "shaped_duplicates": 0,
+      "unpaired_original": [],
+      "unpaired_shaped": []
+    }
+  },
+  "main_totals": {
+    "expected": 1172,
+    "original": 962,
+    "shaped": 962,
+    "paired": 962,
+    "output_store_equal": 962,
+    "truncations": 0,
+    "llm_events_original": 2028,
+    "llm_events_shaped": 2964
+  },
+  "replication_expected_pairs": 512,
+  "replication_present": false,
+  "generated_table_workflows": [
+    "switch"
+  ],
+  "generated_table_counts": {
+    "switch": 210
+  },
+  "recorded_mutation_totals": {
+    "mutants": 210,
+    "rejected": 192,
+    "accepted": 18,
+    "oracle_leak": 103,
+    "leak_accepted": 0
+  },
+  "transparency": {
+    "transparency-isolated.json": {
+      "0.0": {
+        "cases": 60,
+        "visible_equal": 60,
+        "exact_input": 60,
+        "exact_output": 60
+      },
+      "0.8": {
+        "cases": 60,
+        "visible_equal": 60,
+        "exact_input": 60,
+        "exact_output": 60
+      }
+    },
+    "transparency-inband.json": {
+      "0.0": {
+        "cases": 60,
+        "visible_equal": 60,
+        "exact_input": 60,
+        "exact_output": 60
+      },
+      "0.8": {
+        "cases": 60,
+        "visible_equal": 60,
+        "exact_input": 60,
+        "exact_output": 60
+      }
+    }
+  }
+}

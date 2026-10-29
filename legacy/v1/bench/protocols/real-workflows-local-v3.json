@@ -1,0 +1,91 @@
+{
+  "schema_version": 1,
+  "status": "amended-development-protocol-frozen-before-v3-run",
+  "frozen_at_utc": "2026-10-23T22:46:52.539952+00:00",
+  "development_disclosure": "Versions 1 and 2 were observed and retained. V1 exposed a leftover display call; V2 completed all model calls but incorrectly compared Prompt Flow Status.Completed to a string and reported eight completed engine runs as failures. V3 repairs only that status comparison. No prompts, input selection, caps, source kernels, graph predicates or endpoint criteria are changed. This is an amended development experiment, not untouched preregistration.",
+  "corpus": "bench/corpus/faithful-local-v2/manifest.json",
+  "corpus_sha256": "68fb30369f01489c262237a6d9a1e4c68de854e49e7583e1d3603e0a59d5c097",
+  "output_caps": [
+    24,
+    64
+  ],
+  "input_cap": 512,
+  "seeds": [
+    1
+  ],
+  "repeats": 1,
+  "inputs": {
+    "lg-chain-graph": [
+      {
+        "topic": "cats"
+      },
+      {
+        "topic": "compiler errors"
+      }
+    ],
+    "lg-chain-functional": [
+      {
+        "topic": "cats"
+      },
+      {
+        "topic": "compiler errors"
+      }
+    ],
+    "lg-parallel-graph": [
+      {
+        "topic": "cats"
+      },
+      {
+        "topic": "compiler errors"
+      }
+    ],
+    "lg-routing-graph": [
+      {
+        "input": "Write me a joke about cats"
+      },
+      {
+        "input": "Write a short poem about compilers"
+      }
+    ],
+    "pf-basic": [
+      {
+        "text": "Python"
+      },
+      {
+        "text": "JavaScript"
+      }
+    ],
+    "pf-ner": [
+      {
+        "entity_type": "job title",
+        "text": "Maxime is a data scientist at Auto Dataset, and his wife is a finance manager in the same company."
+      },
+      {
+        "entity_type": "phone number",
+        "text": "The phone number (321) 654-0987 is no longer in service"
+      }
+    ]
+  },
+  "primary_endpoints": [
+    "exact final-output equality",
+    "exact full request/response multiset equality",
+    "actual node/branch agreement",
+    "runtime admission bound violations"
+  ],
+  "comparison": "Two actual generations per matched invocation, original then port; no replay or memoization. Independent stateless temperature-zero calls; parallel call order ignored, dependencies retained.",
+  "amendments": "Before any workflow comparison outcome, added a two-call Refine kernel to exercise response binding inside independent OrchLang interpretation. Endpoints, workloads, inputs, caps and seeds unchanged; initial protocol/corpus retained in research/real-workflows-2026-10-24. Before any workflow comparison generation, production compiler checks found duplicate input/prompt name request in route/respond kernels. Renamed only those prompt identifiers to renderedPrompt; source prompts, calls, endpoints, caps and inputs unchanged. Initial full run retained in external real-workflows-local-v1. Repaired missing promptflow-tools dependency and removed only routing visualization display before invocation. Actual graph, prompts, predicates and host port unchanged. Prior independent-generation text disagreements retained; no claim of guaranteed deterministic Ollama inference. V3 compares the framework status to its Status.Completed enum; all earlier original/port outcomes and raw traces remain retained.",
+  "budget": "maximum admitted calls * (full request input ceiling + generated output cap); dynamic deployment guard, not production compiler or Lean static theorem",
+  "model": {
+    "name": "qwen2.5:3b",
+    "manifest_sha256": "357c53fb659c5076de1d65ccb0b397446227b71a42be9d1603d46168015c9e4b",
+    "gguf_sha256": "5ee4f07cdb9beadbbb293e85803c569b01bd37ed059d2715faa7bb405f31caa6",
+    "tokenizer_repo": "Qwen/Qwen2.5-3B-Instruct",
+    "tokenizer_revision": "aa8e72537993ba99e69dfaafa59ed015b17504d1",
+    "tokenizer_sha256": "c0382117ea329cdf097041132f6d735924b697924d6f6fc3945713e96ce87539",
+    "tokenizers_version": "0.21.4",
+    "temperature": 0,
+    "device": "CPU"
+  },
+  "quality": "Report bounded-model task failures separately. Trace equality establishes adapter fidelity on these inputs, not task quality or all-input equivalence.",
+  "cost_usd": "0.00"
+}

@@ -1,0 +1,31 @@
+{
+  "workflow": "adaptive",
+  "group": "main",
+  "pairs": [
+    {
+      "id": "adaptive-28",
+      "completed": true,
+      "full_store_equal": true,
+      "saved_equal": true,
+      "shape_equal": true
+    },
+    {
+      "id": "adaptive-33",
+      "completed": true,
+      "full_store_equal": true,
+      "saved_equal": true,
+      "shape_equal": true
+    }
+  ],
+  "negative_guard": {
+    "refused_before_dispatch": true,
+    "usage": {
+      "confirmed": {},
+      "usage_complete": true,
+      "unconfirmed": [],
+      "unit": "model-contract-indexed logical input/output token counts and call counts",
+      "limits": {}
+    }
+  },
+  "byte_clip_events": 8
+}

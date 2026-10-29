@@ -1,0 +1,17 @@
+// A retrieved web page is untrusted, so the model answer derived from it is
+// untrusted too.  The answer may be returned to the caller, but it may only
+// drive an external effect after an explicit, justified endorsement.
+workflow ResearchDigest budget 2400 {
+  input query: text max_tokens 100;
+  input web_page: text untrusted max_tokens 600;
+  model reader = mock("offline-reader") max_tokens 500;
+  tool publish(body: text);
+
+  prompt digest(page: text) -> text = "Summarise the retrieved page: {page}";
+
+  let digest_text: text = call digest(web_page) using reader;
+  endorse(digest_text) as vetted: text because "passed the offline schema and length validator";
+  emit publish(vetted);
+
+  output query;
+}

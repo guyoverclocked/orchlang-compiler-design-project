@@ -1,0 +1,3771 @@
+diff --git a/.gitattributes b/.gitattributes
+index 57fc1b1..168a38a 100644
+--- a/.gitattributes
++++ b/.gitattributes
+@@ -7,3 +7,15 @@ bench/results/** -text
+ *.pdf -text
+ *.png -text
+ *.bundle -text
++
++# Source releases contain the research artifact; course submissions and agent
++# handoffs remain recoverable in Git history and the working checkout.
++submission export-ignore
++submission/** export-ignore
++docs/AGENT_BRIEF.md export-ignore
++docs/AGENT_START_HERE.md export-ignore
++docs/HISTORICAL_README.md export-ignore
++DEVELOPMENT_LOG.md export-ignore
++package.json export-ignore
++publication export-ignore
++publication/** export-ignore
+diff --git a/audit/2026-09-17/benchmark/cost.json b/audit/2026-09-17/benchmark/cost.json
+index 493562f..e5eceb7 100644
+--- a/audit/2026-09-17/benchmark/cost.json
++++ b/audit/2026-09-17/benchmark/cost.json
+@@ -1,301 +1,301 @@
+-[
+-  {
+-    "workflow": "branch_1",
+-    "certified": 1006,
+-    "guaranteed": 750,
+-    "estimated": 256,
+-    "flat": 1284,
+-    "peak_actual": 508,
+-    "mean_actual": 283.0,
+-    "slack_vs_peak": 1.98,
+-    "certified_violations": 0,
+-    "flat_violations": 0,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "branch_2",
+-    "certified": 1734,
+-    "guaranteed": 1350,
+-    "estimated": 384,
+-    "flat": 2290,
+-    "peak_actual": 764,
+-    "mean_actual": 426.2,
+-    "slack_vs_peak": 2.27,
+-    "certified_violations": 0,
+-    "flat_violations": 0,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "branch_3",
+-    "certified": 2462,
+-    "guaranteed": 1950,
+-    "estimated": 512,
+-    "flat": 3296,
+-    "peak_actual": 1011,
+-    "mean_actual": 569.6,
+-    "slack_vs_peak": 2.44,
+-    "certified_violations": 0,
+-    "flat_violations": 0,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "branch_4",
+-    "certified": 3190,
+-    "guaranteed": 2550,
+-    "estimated": 640,
+-    "flat": 4302,
+-    "peak_actual": 1187,
+-    "mean_actual": 711.3,
+-    "slack_vs_peak": 2.69,
+-    "certified_violations": 0,
+-    "flat_violations": 0,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "branch_in_retry",
+-    "certified": 2462,
+-    "guaranteed": 1950,
+-    "estimated": 512,
+-    "flat": 1284,
+-    "peak_actual": 817,
+-    "mean_actual": 395.2,
+-    "slack_vs_peak": 3.01,
+-    "certified_violations": 0,
+-    "flat_violations": 0,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "branch_nested",
+-    "certified": 1734,
+-    "guaranteed": 1350,
+-    "estimated": 384,
+-    "flat": 3746,
+-    "peak_actual": 686,
+-    "mean_actual": 421.3,
+-    "slack_vs_peak": 2.53,
+-    "certified_violations": 0,
+-    "flat_violations": 0,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "chain_1",
+-    "certified": 278,
+-    "guaranteed": 150,
+-    "estimated": 128,
+-    "flat": 278,
+-    "peak_actual": 273,
+-    "mean_actual": 147.9,
+-    "slack_vs_peak": 1.02,
+-    "certified_violations": 0,
+-    "flat_violations": 0,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "chain_2",
+-    "certified": 586,
+-    "guaranteed": 300,
+-    "estimated": 286,
+-    "flat": 586,
+-    "peak_actual": 539,
+-    "mean_actual": 306.9,
+-    "slack_vs_peak": 1.09,
+-    "certified_violations": 0,
+-    "flat_violations": 0,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "chain_3",
+-    "certified": 894,
+-    "guaranteed": 450,
+-    "estimated": 444,
+-    "flat": 894,
+-    "peak_actual": 812,
+-    "mean_actual": 461.1,
+-    "slack_vs_peak": 1.1,
+-    "certified_violations": 0,
+-    "flat_violations": 0,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "chain_4",
+-    "certified": 1202,
+-    "guaranteed": 600,
+-    "estimated": 602,
+-    "flat": 1202,
+-    "peak_actual": 1085,
+-    "mean_actual": 617.7,
+-    "slack_vs_peak": 1.11,
+-    "certified_violations": 0,
+-    "flat_violations": 0,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "chain_5",
+-    "certified": 1510,
+-    "guaranteed": 750,
+-    "estimated": 760,
+-    "flat": 1510,
+-    "peak_actual": 1288,
+-    "mean_actual": 775.3,
+-    "slack_vs_peak": 1.17,
+-    "certified_violations": 0,
+-    "flat_violations": 0,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "retry_2",
+-    "certified": 556,
+-    "guaranteed": 300,
+-    "estimated": 256,
+-    "flat": 278,
+-    "peak_actual": 542,
+-    "mean_actual": 210.8,
+-    "slack_vs_peak": 1.03,
+-    "certified_violations": 0,
+-    "flat_violations": 43,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "retry_3",
+-    "certified": 834,
+-    "guaranteed": 450,
+-    "estimated": 384,
+-    "flat": 278,
+-    "peak_actual": 693,
+-    "mean_actual": 241.1,
+-    "slack_vs_peak": 1.2,
+-    "certified_violations": 0,
+-    "flat_violations": 59,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "retry_4",
+-    "certified": 1112,
+-    "guaranteed": 600,
+-    "estimated": 512,
+-    "flat": 278,
+-    "peak_actual": 875,
+-    "mean_actual": 257.2,
+-    "slack_vs_peak": 1.27,
+-    "certified_violations": 0,
+-    "flat_violations": 63,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "retry_5",
+-    "certified": 1390,
+-    "guaranteed": 750,
+-    "estimated": 640,
+-    "flat": 278,
+-    "peak_actual": 1144,
+-    "mean_actual": 264.6,
+-    "slack_vs_peak": 1.22,
+-    "certified_violations": 0,
+-    "flat_violations": 63,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "retry_6",
+-    "certified": 1668,
+-    "guaranteed": 900,
+-    "estimated": 768,
+-    "flat": 278,
+-    "peak_actual": 1144,
+-    "mean_actual": 266.1,
+-    "slack_vs_peak": 1.46,
+-    "certified_violations": 0,
+-    "flat_violations": 63,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "retry_in_branch",
+-    "certified": 1112,
+-    "guaranteed": 600,
+-    "estimated": 512,
+-    "flat": 1284,
+-    "peak_actual": 817,
+-    "mean_actual": 395.2,
+-    "slack_vs_peak": 1.36,
+-    "certified_violations": 0,
+-    "flat_violations": 0,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "retry_nested_2x2",
+-    "certified": 1112,
+-    "guaranteed": 600,
+-    "estimated": 512,
+-    "flat": 278,
+-    "peak_actual": 901,
+-    "mean_actual": 322.8,
+-    "slack_vs_peak": 1.23,
+-    "certified_violations": 0,
+-    "flat_violations": 102,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "retry_nested_2x3",
+-    "certified": 1668,
+-    "guaranteed": 900,
+-    "estimated": 768,
+-    "flat": 278,
+-    "peak_actual": 1298,
+-    "mean_actual": 381.8,
+-    "slack_vs_peak": 1.29,
+-    "certified_violations": 0,
+-    "flat_violations": 111,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "retry_nested_3x3",
+-    "certified": 2502,
+-    "guaranteed": 1350,
+-    "estimated": 1152,
+-    "flat": 278,
+-    "peak_actual": 1363,
+-    "mean_actual": 441.5,
+-    "slack_vs_peak": 1.84,
+-    "certified_violations": 0,
+-    "flat_violations": 117,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "wide_input_200",
+-    "certified": 666,
+-    "guaranteed": 300,
+-    "estimated": 366,
+-    "flat": 666,
+-    "peak_actual": 600,
+-    "mean_actual": 327.1,
+-    "slack_vs_peak": 1.11,
+-    "certified_violations": 0,
+-    "flat_violations": 0,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "wide_input_2000",
+-    "certified": 2466,
+-    "guaranteed": 300,
+-    "estimated": 2166,
+-    "flat": 2466,
+-    "peak_actual": 2339,
+-    "mean_actual": 1265.2,
+-    "slack_vs_peak": 1.05,
+-    "certified_violations": 0,
+-    "flat_violations": 0,
+-    "runs": 200
+-  },
+-  {
+-    "workflow": "wide_input_800",
+-    "certified": 1266,
+-    "guaranteed": 300,
+-    "estimated": 966,
+-    "flat": 1266,
+-    "peak_actual": 1158,
+-    "mean_actual": 637.7,
+-    "slack_vs_peak": 1.09,
+-    "certified_violations": 0,
+-    "flat_violations": 0,
+-    "runs": 200
+-  }
++[
++  {
++    "workflow": "branch_1",
++    "certified": 1006,
++    "guaranteed": 750,
++    "estimated": 256,
++    "flat": 1284,
++    "peak_actual": 508,
++    "mean_actual": 283.0,
++    "slack_vs_peak": 1.98,
++    "certified_violations": 0,
++    "flat_violations": 0,
++    "runs": 200
++  },
++  {
++    "workflow": "branch_2",
++    "certified": 1734,
++    "guaranteed": 1350,
++    "estimated": 384,
++    "flat": 2290,
++    "peak_actual": 764,
++    "mean_actual": 426.2,
++    "slack_vs_peak": 2.27,
++    "certified_violations": 0,
++    "flat_violations": 0,
++    "runs": 200
++  },
++  {
++    "workflow": "branch_3",
++    "certified": 2462,
++    "guaranteed": 1950,
++    "estimated": 512,
++    "flat": 3296,
++    "peak_actual": 1011,
++    "mean_actual": 569.6,
++    "slack_vs_peak": 2.44,
++    "certified_violations": 0,
++    "flat_violations": 0,
++    "runs": 200
++  },
++  {
++    "workflow": "branch_4",
++    "certified": 3190,
++    "guaranteed": 2550,
++    "estimated": 640,
++    "flat": 4302,
++    "peak_actual": 1187,
++    "mean_actual": 711.3,
++    "slack_vs_peak": 2.69,
++    "certified_violations": 0,
++    "flat_violations": 0,
++    "runs": 200
++  },
++  {
++    "workflow": "branch_in_retry",
++    "certified": 2462,
++    "guaranteed": 1950,
++    "estimated": 512,
++    "flat": 1284,
++    "peak_actual": 817,
++    "mean_actual": 395.2,
++    "slack_vs_peak": 3.01,
++    "certified_violations": 0,
++    "flat_violations": 0,
++    "runs": 200
++  },
++  {
++    "workflow": "branch_nested",
++    "certified": 1734,
++    "guaranteed": 1350,
++    "estimated": 384,
++    "flat": 3746,
++    "peak_actual": 686,
++    "mean_actual": 421.3,
++    "slack_vs_peak": 2.53,
++    "certified_violations": 0,
++    "flat_violations": 0,
++    "runs": 200
++  },
++  {
++    "workflow": "chain_1",
++    "certified": 278,
++    "guaranteed": 150,
++    "estimated": 128,
++    "flat": 278,
++    "peak_actual": 273,
++    "mean_actual": 147.9,
++    "slack_vs_peak": 1.02,
++    "certified_violations": 0,
++    "flat_violations": 0,
++    "runs": 200
++  },
++  {
++    "workflow": "chain_2",
++    "certified": 586,
++    "guaranteed": 300,
++    "estimated": 286,
++    "flat": 586,
++    "peak_actual": 539,
++    "mean_actual": 306.9,
++    "slack_vs_peak": 1.09,
++    "certified_violations": 0,
++    "flat_violations": 0,
++    "runs": 200
++  },
++  {
++    "workflow": "chain_3",
++    "certified": 894,
++    "guaranteed": 450,
++    "estimated": 444,
++    "flat": 894,
++    "peak_actual": 812,
++    "mean_actual": 461.1,
++    "slack_vs_peak": 1.1,
++    "certified_violations": 0,
++    "flat_violations": 0,
++    "runs": 200
++  },
++  {
++    "workflow": "chain_4",
++    "certified": 1202,
++    "guaranteed": 600,
++    "estimated": 602,
++    "flat": 1202,
++    "peak_actual": 1085,
++    "mean_actual": 617.7,
++    "slack_vs_peak": 1.11,
++    "certified_violations": 0,
++    "flat_violations": 0,
++    "runs": 200
++  },
++  {
++    "workflow": "chain_5",
++    "certified": 1510,
++    "guaranteed": 750,
++    "estimated": 760,
++    "flat": 1510,
++    "peak_actual": 1288,
++    "mean_actual": 775.3,
++    "slack_vs_peak": 1.17,
++    "certified_violations": 0,
++    "flat_violations": 0,
++    "runs": 200
++  },
++  {
++    "workflow": "retry_2",
++    "certified": 556,
++    "guaranteed": 300,
++    "estimated": 256,
++    "flat": 278,
++    "peak_actual": 542,
++    "mean_actual": 210.8,
++    "slack_vs_peak": 1.03,
++    "certified_violations": 0,
++    "flat_violations": 43,
++    "runs": 200
++  },
++  {
++    "workflow": "retry_3",
++    "certified": 834,
++    "guaranteed": 450,
++    "estimated": 384,
++    "flat": 278,
++    "peak_actual": 693,
++    "mean_actual": 241.1,
++    "slack_vs_peak": 1.2,
++    "certified_violations": 0,
++    "flat_violations": 59,
++    "runs": 200
++  },
++  {
++    "workflow": "retry_4",
++    "certified": 1112,
++    "guaranteed": 600,
++    "estimated": 512,
++    "flat": 278,
++    "peak_actual": 875,
++    "mean_actual": 257.2,
++    "slack_vs_peak": 1.27,
++    "certified_violations": 0,
++    "flat_violations": 63,
++    "runs": 200
++  },
++  {
++    "workflow": "retry_5",
++    "certified": 1390,
++    "guaranteed": 750,
++    "estimated": 640,
++    "flat": 278,
++    "peak_actual": 1144,
++    "mean_actual": 264.6,
++    "slack_vs_peak": 1.22,
++    "certified_violations": 0,
++    "flat_violations": 63,
++    "runs": 200
++  },
++  {
++    "workflow": "retry_6",
++    "certified": 1668,
++    "guaranteed": 900,
++    "estimated": 768,
++    "flat": 278,
++    "peak_actual": 1144,
++    "mean_actual": 266.1,
++    "slack_vs_peak": 1.46,
++    "certified_violations": 0,
++    "flat_violations": 63,
++    "runs": 200
++  },
++  {
++    "workflow": "retry_in_branch",
++    "certified": 1112,
++    "guaranteed": 600,
++    "estimated": 512,
++    "flat": 1284,
++    "peak_actual": 817,
++    "mean_actual": 395.2,
++    "slack_vs_peak": 1.36,
++    "certified_violations": 0,
++    "flat_violations": 0,
++    "runs": 200
++  },
++  {
++    "workflow": "retry_nested_2x2",
++    "certified": 1112,
++    "guaranteed": 600,
++    "estimated": 512,
++    "flat": 278,
++    "peak_actual": 901,
++    "mean_actual": 322.8,
++    "slack_vs_peak": 1.23,
++    "certified_violations": 0,
++    "flat_violations": 102,
++    "runs": 200
++  },
++  {
++    "workflow": "retry_nested_2x3",
++    "certified": 1668,
++    "guaranteed": 900,
++    "estimated": 768,
++    "flat": 278,
++    "peak_actual": 1298,
++    "mean_actual": 381.8,
++    "slack_vs_peak": 1.29,
++    "certified_violations": 0,
++    "flat_violations": 111,
++    "runs": 200
++  },
++  {
++    "workflow": "retry_nested_3x3",
++    "certified": 2502,
++    "guaranteed": 1350,
++    "estimated": 1152,
++    "flat": 278,
++    "peak_actual": 1363,
++    "mean_actual": 441.5,
++    "slack_vs_peak": 1.84,
++    "certified_violations": 0,
++    "flat_violations": 117,
++    "runs": 200
++  },
++  {
++    "workflow": "wide_input_200",
++    "certified": 666,
++    "guaranteed": 300,
++    "estimated": 366,
++    "flat": 666,
++    "peak_actual": 600,
++    "mean_actual": 327.1,
++    "slack_vs_peak": 1.11,
++    "certified_violations": 0,
++    "flat_violations": 0,
++    "runs": 200
++  },
++  {
++    "workflow": "wide_input_2000",
++    "certified": 2466,
++    "guaranteed": 300,
++    "estimated": 2166,
++    "flat": 2466,
++    "peak_actual": 2339,
++    "mean_actual": 1265.2,
++    "slack_vs_peak": 1.05,
++    "certified_violations": 0,
++    "flat_violations": 0,
++    "runs": 200
++  },
++  {
++    "workflow": "wide_input_800",
++    "certified": 1266,
++    "guaranteed": 300,
++    "estimated": 966,
++    "flat": 1266,
++    "peak_actual": 1158,
++    "mean_actual": 637.7,
++    "slack_vs_peak": 1.09,
++    "certified_violations": 0,
++    "flat_violations": 0,
++    "runs": 200
++  }
+ ]
+\ No newline at end of file
+diff --git a/audit/2026-09-17/benchmark/evaluation.txt b/audit/2026-09-17/benchmark/evaluation.txt
+index ea793ae..69d2447 100644
+--- a/audit/2026-09-17/benchmark/evaluation.txt
++++ b/audit/2026-09-17/benchmark/evaluation.txt
+@@ -1,78 +1,78 @@
+-OrchLang evaluation
+-===================
+-
+-RQ1/RQ2/RQ3  certified bound vs observed execution (23 workflows, 4600 runs)
+-
+-workflow          certified  guaranteed  estimated  flat  peak_actual  mean_actual  slack_vs_peak  certified_violations  flat_violations
+-----------------  ---------  ----------  ---------  ----  -----------  -----------  -------------  --------------------  ---------------
+-branch_1          1006       750         256        1284  508          283.0        1.98           0                     0              
+-branch_2          1734       1350        384        2290  764          426.2        2.27           0                     0              
+-branch_3          2462       1950        512        3296  1011         569.6        2.44           0                     0              
+-branch_4          3190       2550        640        4302  1187         711.3        2.69           0                     0              
+-branch_in_retry   2462       1950        512        1284  817          395.2        3.01           0                     0              
+-branch_nested     1734       1350        384        3746  686          421.3        2.53           0                     0              
+-chain_1           278        150         128        278   273          147.9        1.02           0                     0              
+-chain_2           586        300         286        586   539          306.9        1.09           0                     0              
+-chain_3           894        450         444        894   812          461.1        1.1            0                     0              
+-chain_4           1202       600         602        1202  1085         617.7        1.11           0                     0              
+-chain_5           1510       750         760        1510  1288         775.3        1.17           0                     0              
+-retry_2           556        300         256        278   542          210.8        1.03           0                     43             
+-retry_3           834        450         384        278   693          241.1        1.2            0                     59             
+-retry_4           1112       600         512        278   875          257.2        1.27           0                     63             
+-retry_5           1390       750         640        278   1144         264.6        1.22           0                     63             
+-retry_6           1668       900         768        278   1144         266.1        1.46           0                     63             
+-retry_in_branch   1112       600         512        1284  817          395.2        1.36           0                     0              
+-retry_nested_2x2  1112       600         512        278   901          322.8        1.23           0                     102            
+-retry_nested_2x3  1668       900         768        278   1298         381.8        1.29           0                     111            
+-retry_nested_3x3  2502       1350        1152       278   1363         441.5        1.84           0                     117            
+-wide_input_200    666        300         366        666   600          327.1        1.11           0                     0              
+-wide_input_2000   2466       300         2166       2466  2339         1265.2       1.05           0                     0              
+-wide_input_800    1266       300         966        1266  1158         637.7        1.09           0                     0              
+-
+-  certified bound exceeded : 0 of 4600 runs
+-  flat bound exceeded      : 621 of 4600 runs (13.5%)
+-  workflows where the flat bound is unsound: 8 of 23
+-    retry_2, retry_3, retry_4, retry_5, retry_6, retry_nested_2x2, retry_nested_2x3, retry_nested_3x3
+-  slack vs peak observed: median 1.23x, min 1.02x, max 3.01x
+-
+-RQ4  information-flow analysis on the paired security suite
+-
+-workflow                     expected  verdict  codes    
+----------------------------  --------  -------  ---------
+-InjectionInBranch            reject    reject   E233 E235
+-InjectionInRetry             reject    reject   E233     
+-InjectionToSink              reject    reject   E233     
+-InjectionTransitive          reject    reject   E233     
+-MixedTrustToSink             reject    reject   E233     
+-SecretAsOutput               reject    reject   E231     
+-SecretCostChannel            reject    reject   E236     
+-SecretGuardedEffect          reject    reject   E234     
+-SecretGuardedLaundered       reject    reject   E234 W236
+-SecretToPrompt               reject    reject   E230 E231
+-SecretToSink                 reject    reject   E232     
+-UntrustedGuardedEffect       reject    reject   E235     
+-UntrustedToSinkNoEndorse     reject    reject   E233     
+-BalancedCostArms             accept    accept            
+-EffectOutsideSecretBranch    accept    accept            
+-InjectionEndorsed            accept    accept            
+-InjectionInBranchEndorsed    accept    accept            
+-InjectionInRetryEndorsed     accept    accept            
+-InjectionTransitiveEndorsed  accept    accept            
+-SecretAsOutputDeclassified   accept    accept            
+-SecretToPromptDeclassified   accept    accept            
+-SecretToSinkDeclassified     accept    accept            
+-TrustedGuardedEffect         accept    accept            
+-TrustedOnlyToSink            accept    accept            
+-UnguardedEffect              accept    accept            
+-UntrustedToOutputOnly        accept    accept            
+-
+-  unsafe rejected (true positive) : 13
+-  unsafe accepted (false negative): 0
+-  safe accepted   (true negative) : 13
+-  safe rejected   (false positive): 0
+-  recall    1.000
+-  precision 1.000
+-
+-Analysis cost
+-
+-  36 workflows certified in 0.31 s (8.7 ms each, including process startup)
++OrchLang evaluation
++===================
++
++RQ1/RQ2/RQ3  certified bound vs observed execution (23 workflows, 4600 runs)
++
++workflow          certified  guaranteed  estimated  flat  peak_actual  mean_actual  slack_vs_peak  certified_violations  flat_violations
++----------------  ---------  ----------  ---------  ----  -----------  -----------  -------------  --------------------  ---------------
++branch_1          1006       750         256        1284  508          283.0        1.98           0                     0              
++branch_2          1734       1350        384        2290  764          426.2        2.27           0                     0              
++branch_3          2462       1950        512        3296  1011         569.6        2.44           0                     0              
++branch_4          3190       2550        640        4302  1187         711.3        2.69           0                     0              
++branch_in_retry   2462       1950        512        1284  817          395.2        3.01           0                     0              
++branch_nested     1734       1350        384        3746  686          421.3        2.53           0                     0              
++chain_1           278        150         128        278   273          147.9        1.02           0                     0              
++chain_2           586        300         286        586   539          306.9        1.09           0                     0              
++chain_3           894        450         444        894   812          461.1        1.1            0                     0              
++chain_4           1202       600         602        1202  1085         617.7        1.11           0                     0              
++chain_5           1510       750         760        1510  1288         775.3        1.17           0                     0              
++retry_2           556        300         256        278   542          210.8        1.03           0                     43             
++retry_3           834        450         384        278   693          241.1        1.2            0                     59             
++retry_4           1112       600         512        278   875          257.2        1.27           0                     63             
++retry_5           1390       750         640        278   1144         264.6        1.22           0                     63             
++retry_6           1668       900         768        278   1144         266.1        1.46           0                     63             
++retry_in_branch   1112       600         512        1284  817          395.2        1.36           0                     0              
++retry_nested_2x2  1112       600         512        278   901          322.8        1.23           0                     102            
++retry_nested_2x3  1668       900         768        278   1298         381.8        1.29           0                     111            
++retry_nested_3x3  2502       1350        1152       278   1363         441.5        1.84           0                     117            
++wide_input_200    666        300         366        666   600          327.1        1.11           0                     0              
++wide_input_2000   2466       300         2166       2466  2339         1265.2       1.05           0                     0              
++wide_input_800    1266       300         966        1266  1158         637.7        1.09           0                     0              
++
++  certified bound exceeded : 0 of 4600 runs
++  flat bound exceeded      : 621 of 4600 runs (13.5%)
++  workflows where the flat bound is unsound: 8 of 23
++    retry_2, retry_3, retry_4, retry_5, retry_6, retry_nested_2x2, retry_nested_2x3, retry_nested_3x3
++  slack vs peak observed: median 1.23x, min 1.02x, max 3.01x
++
++RQ4  information-flow analysis on the paired security suite
++
++workflow                     expected  verdict  codes    
++---------------------------  --------  -------  ---------
++InjectionInBranch            reject    reject   E233 E235
++InjectionInRetry             reject    reject   E233     
++InjectionToSink              reject    reject   E233     
++InjectionTransitive          reject    reject   E233     
++MixedTrustToSink             reject    reject   E233     
++SecretAsOutput               reject    reject   E231     
++SecretCostChannel            reject    reject   E236     
++SecretGuardedEffect          reject    reject   E234     
++SecretGuardedLaundered       reject    reject   E234 W236
++SecretToPrompt               reject    reject   E230 E231
++SecretToSink                 reject    reject   E232     
++UntrustedGuardedEffect       reject    reject   E235     
++UntrustedToSinkNoEndorse     reject    reject   E233     
++BalancedCostArms             accept    accept            
++EffectOutsideSecretBranch    accept    accept            
++InjectionEndorsed            accept    accept            
++InjectionInBranchEndorsed    accept    accept            
++InjectionInRetryEndorsed     accept    accept            
++InjectionTransitiveEndorsed  accept    accept            
++SecretAsOutputDeclassified   accept    accept            
++SecretToPromptDeclassified   accept    accept            
++SecretToSinkDeclassified     accept    accept            
++TrustedGuardedEffect         accept    accept            
++TrustedOnlyToSink            accept    accept            
++UnguardedEffect              accept    accept            
++UntrustedToOutputOnly        accept    accept            
++
++  unsafe rejected (true positive) : 13
++  unsafe accepted (false negative): 0
++  safe accepted   (true negative) : 13
++  safe rejected   (false positive): 0
++  recall    1.000
++  precision 1.000
++
++Analysis cost
++
++  36 workflows certified in 0.31 s (8.7 ms each, including process startup)
+diff --git a/audit/2026-09-17/benchmark/security.json b/audit/2026-09-17/benchmark/security.json
+index 69d1692..6a33e20 100644
+--- a/audit/2026-09-17/benchmark/security.json
++++ b/audit/2026-09-17/benchmark/security.json
+@@ -1,158 +1,158 @@
+-[
+-  {
+-    "workflow": "InjectionInBranch",
+-    "expected": "reject",
+-    "verdict": "reject",
+-    "codes": "E233 E235"
+-  },
+-  {
+-    "workflow": "InjectionInRetry",
+-    "expected": "reject",
+-    "verdict": "reject",
+-    "codes": "E233"
+-  },
+-  {
+-    "workflow": "InjectionToSink",
+-    "expected": "reject",
+-    "verdict": "reject",
+-    "codes": "E233"
+-  },
+-  {
+-    "workflow": "InjectionTransitive",
+-    "expected": "reject",
+-    "verdict": "reject",
+-    "codes": "E233"
+-  },
+-  {
+-    "workflow": "MixedTrustToSink",
+-    "expected": "reject",
+-    "verdict": "reject",
+-    "codes": "E233"
+-  },
+-  {
+-    "workflow": "SecretAsOutput",
+-    "expected": "reject",
+-    "verdict": "reject",
+-    "codes": "E231"
+-  },
+-  {
+-    "workflow": "SecretCostChannel",
+-    "expected": "reject",
+-    "verdict": "reject",
+-    "codes": "E236"
+-  },
+-  {
+-    "workflow": "SecretGuardedEffect",
+-    "expected": "reject",
+-    "verdict": "reject",
+-    "codes": "E234"
+-  },
+-  {
+-    "workflow": "SecretGuardedLaundered",
+-    "expected": "reject",
+-    "verdict": "reject",
+-    "codes": "E234 W236"
+-  },
+-  {
+-    "workflow": "SecretToPrompt",
+-    "expected": "reject",
+-    "verdict": "reject",
+-    "codes": "E230 E231"
+-  },
+-  {
+-    "workflow": "SecretToSink",
+-    "expected": "reject",
+-    "verdict": "reject",
+-    "codes": "E232"
+-  },
+-  {
+-    "workflow": "UntrustedGuardedEffect",
+-    "expected": "reject",
+-    "verdict": "reject",
+-    "codes": "E235"
+-  },
+-  {
+-    "workflow": "UntrustedToSinkNoEndorse",
+-    "expected": "reject",
+-    "verdict": "reject",
+-    "codes": "E233"
+-  },
+-  {
+-    "workflow": "BalancedCostArms",
+-    "expected": "accept",
+-    "verdict": "accept",
+-    "codes": ""
+-  },
+-  {
+-    "workflow": "EffectOutsideSecretBranch",
+-    "expected": "accept",
+-    "verdict": "accept",
+-    "codes": ""
+-  },
+-  {
+-    "workflow": "InjectionEndorsed",
+-    "expected": "accept",
+-    "verdict": "accept",
+-    "codes": ""
+-  },
+-  {
+-    "workflow": "InjectionInBranchEndorsed",
+-    "expected": "accept",
+-    "verdict": "accept",
+-    "codes": ""
+-  },
+-  {
+-    "workflow": "InjectionInRetryEndorsed",
+-    "expected": "accept",
+-    "verdict": "accept",
+-    "codes": ""
+-  },
+-  {
+-    "workflow": "InjectionTransitiveEndorsed",
+-    "expected": "accept",
+-    "verdict": "accept",
+-    "codes": ""
+-  },
+-  {
+-    "workflow": "SecretAsOutputDeclassified",
+-    "expected": "accept",
+-    "verdict": "accept",
+-    "codes": ""
+-  },
+-  {
+-    "workflow": "SecretToPromptDeclassified",
+-    "expected": "accept",
+-    "verdict": "accept",
+-    "codes": ""
+-  },
+-  {
+-    "workflow": "SecretToSinkDeclassified",
+-    "expected": "accept",
+-    "verdict": "accept",
+-    "codes": ""
+-  },
+-  {
+-    "workflow": "TrustedGuardedEffect",
+-    "expected": "accept",
+-    "verdict": "accept",
+-    "codes": ""
+-  },
+-  {
+-    "workflow": "TrustedOnlyToSink",
+-    "expected": "accept",
+-    "verdict": "accept",
+-    "codes": ""
+-  },
+-  {
+-    "workflow": "UnguardedEffect",
+-    "expected": "accept",
+-    "verdict": "accept",
+-    "codes": ""
+-  },
+-  {
+-    "workflow": "UntrustedToOutputOnly",
+-    "expected": "accept",
+-    "verdict": "accept",
+-    "codes": ""
+-  }
++[
++  {
++    "workflow": "InjectionInBranch",
++    "expected": "reject",
++    "verdict": "reject",
++    "codes": "E233 E235"
++  },
++  {
++    "workflow": "InjectionInRetry",
++    "expected": "reject",
++    "verdict": "reject",
++    "codes": "E233"
++  },
++  {
++    "workflow": "InjectionToSink",
++    "expected": "reject",
++    "verdict": "reject",
++    "codes": "E233"
++  },
++  {
++    "workflow": "InjectionTransitive",
++    "expected": "reject",
++    "verdict": "reject",
++    "codes": "E233"
++  },
++  {
++    "workflow": "MixedTrustToSink",
++    "expected": "reject",
++    "verdict": "reject",
++    "codes": "E233"
++  },
++  {
++    "workflow": "SecretAsOutput",
++    "expected": "reject",
++    "verdict": "reject",
++    "codes": "E231"
++  },
++  {
++    "workflow": "SecretCostChannel",
++    "expected": "reject",
++    "verdict": "reject",
++    "codes": "E236"
++  },
++  {
++    "workflow": "SecretGuardedEffect",
++    "expected": "reject",
++    "verdict": "reject",
++    "codes": "E234"
++  },
++  {
++    "workflow": "SecretGuardedLaundered",
++    "expected": "reject",
++    "verdict": "reject",
++    "codes": "E234 W236"
++  },
++  {
++    "workflow": "SecretToPrompt",
++    "expected": "reject",
++    "verdict": "reject",
++    "codes": "E230 E231"
++  },
++  {
++    "workflow": "SecretToSink",
++    "expected": "reject",
++    "verdict": "reject",
++    "codes": "E232"
++  },
++  {
++    "workflow": "UntrustedGuardedEffect",
++    "expected": "reject",
++    "verdict": "reject",
++    "codes": "E235"
++  },
++  {
++    "workflow": "UntrustedToSinkNoEndorse",
++    "expected": "reject",
++    "verdict": "reject",
++    "codes": "E233"
++  },
++  {
++    "workflow": "BalancedCostArms",
++    "expected": "accept",
++    "verdict": "accept",
++    "codes": ""
++  },
++  {
++    "workflow": "EffectOutsideSecretBranch",
++    "expected": "accept",
++    "verdict": "accept",
++    "codes": ""
++  },
++  {
++    "workflow": "InjectionEndorsed",
++    "expected": "accept",
++    "verdict": "accept",
++    "codes": ""
++  },
++  {
++    "workflow": "InjectionInBranchEndorsed",
++    "expected": "accept",
++    "verdict": "accept",
++    "codes": ""
++  },
++  {
++    "workflow": "InjectionInRetryEndorsed",
++    "expected": "accept",
++    "verdict": "accept",
++    "codes": ""
++  },
++  {
++    "workflow": "InjectionTransitiveEndorsed",
++    "expected": "accept",
++    "verdict": "accept",
++    "codes": ""
++  },
++  {
++    "workflow": "SecretAsOutputDeclassified",
++    "expected": "accept",
++    "verdict": "accept",
++    "codes": ""
++  },
++  {
++    "workflow": "SecretToPromptDeclassified",
++    "expected": "accept",
++    "verdict": "accept",
++    "codes": ""
++  },
++  {
++    "workflow": "SecretToSinkDeclassified",
++    "expected": "accept",
++    "verdict": "accept",
++    "codes": ""
++  },
++  {
++    "workflow": "TrustedGuardedEffect",
++    "expected": "accept",
++    "verdict": "accept",
++    "codes": ""
++  },
++  {
++    "workflow": "TrustedOnlyToSink",
++    "expected": "accept",
++    "verdict": "accept",
++    "codes": ""
++  },
++  {
++    "workflow": "UnguardedEffect",
++    "expected": "accept",
++    "verdict": "accept",
++    "codes": ""
++  },
++  {
++    "workflow": "UntrustedToOutputOnly",
++    "expected": "accept",
++    "verdict": "accept",
++    "codes": ""
++  }
+ ]
+\ No newline at end of file
+diff --git a/audit/2026-09-17/boolean.orch b/audit/2026-09-17/boolean.orch
+index c8d50bc..79b3d02 100644
+--- a/audit/2026-09-17/boolean.orch
++++ b/audit/2026-09-17/boolean.orch
+@@ -1,6 +1,6 @@
+-workflow Boolean budget 100 {
+- model m = mock("m") max_tokens 1;
+- prompt p(x: boolean) -> text = "{x}";
+- let y: text = call p(false) using m;
+- output y;
+-}
++workflow Boolean budget 100 {
++ model m = mock("m") max_tokens 1;
++ prompt p(x: boolean) -> text = "{x}";
++ let y: text = call p(false) using m;
++ output y;
++}
+diff --git a/audit/2026-09-17/build-manifest.txt b/audit/2026-09-17/build-manifest.txt
+index c0a5cd9..337adc0 100644
+--- a/audit/2026-09-17/build-manifest.txt
++++ b/audit/2026-09-17/build-manifest.txt
+@@ -1,13 +1,13 @@
+-Audit date: 2026-09-17
+-Branch: v2-static-certification
+-Commit: fd9d8bc61fe4ac88c0dfcd7c8caf9b4887e0ce29
+-Base: main (077dd06)
+-Compiler: g++ 16.1.0 MinGW-W64 x86_64-ucrt-posix-seh, Brecht Sanders r4
+-Flags: -std=c++17 -Wall -Wextra -pedantic -O2 -Iinclude
+-Fresh audit/orchc.exe SHA256:
+-794C153E6B9781EF814CAFDA6EBF35B39773A80440103CCF4122FD6CB61DE419
+-Fresh executables are ignored by the repository's *.exe rule.
+-Compiler source was not modified during this audit.
+-The initial full harness output is reproduction.txt.
+-The corrected component-aware audit probe output is probes.txt and findings.json.
+-Paired input-injection methodology is documented in paired.cpp and the report.
++Audit date: 2026-09-17
++Branch: v2-static-certification
++Commit: fd9d8bc61fe4ac88c0dfcd7c8caf9b4887e0ce29
++Base: main (077dd06)
++Compiler: g++ 16.1.0 MinGW-W64 x86_64-ucrt-posix-seh, Brecht Sanders r4
++Flags: -std=c++17 -Wall -Wextra -pedantic -O2 -Iinclude
++Fresh audit/orchc.exe SHA256:
++794C153E6B9781EF814CAFDA6EBF35B39773A80440103CCF4122FD6CB61DE419
++Fresh executables are ignored by the repository's *.exe rule.
++Compiler source was not modified during this audit.
++The initial full harness output is reproduction.txt.
++The corrected component-aware audit probe output is probes.txt and findings.json.
++Paired input-injection methodology is documented in paired.cpp and the report.
+diff --git a/audit/2026-09-17/build.ps1 b/audit/2026-09-17/build.ps1
+index 48a2035..2e5b14d 100644
+--- a/audit/2026-09-17/build.ps1
++++ b/audit/2026-09-17/build.ps1
+@@ -1,16 +1,16 @@
+-$ErrorActionPreference = 'Stop'
+-Push-Location (Join-Path $PSScriptRoot '../..')
+-try {
+-    $auditToolchain = Join-Path $env:LOCALAPPDATA 'Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin'
+-    $env:PATH = "$auditToolchain;$env:PATH"
+-    $auditSources = Get-ChildItem src/*.cpp | Where-Object Name -ne 'main.cpp' | ForEach-Object FullName
+-    foreach ($target in @(@('src/main.cpp','orchc'), @('tests/tests.cpp','orchlang_tests'), @('audit/2026-09-17/paired.cpp','paired'))) {
+-        & "$auditToolchain/g++.exe" -std=c++17 -Wall -Wextra -pedantic -O2 -Iinclude @auditSources $target[0] -o "audit/2026-09-17/$($target[1]).exe"
+-        if ($LASTEXITCODE -ne 0) { throw "Build failed: $($target[1])" }
+-    }
+-    & ./audit/2026-09-17/orchlang_tests.exe | Tee-Object audit/2026-09-17/tests.txt
+-    python audit/2026-09-17/reproduce.py > audit/2026-09-17/reproduction.txt
+-    & ./audit/2026-09-17/paired.exe audit/2026-09-17/equal_bounds.orch | Tee-Object audit/2026-09-17/paired.txt
+-} finally {
+-    Pop-Location
+-}
++$ErrorActionPreference = 'Stop'
++Push-Location (Join-Path $PSScriptRoot '../..')
++try {
++    $auditToolchain = Join-Path $env:LOCALAPPDATA 'Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin'
++    $env:PATH = "$auditToolchain;$env:PATH"
++    $auditSources = Get-ChildItem src/*.cpp | Where-Object Name -ne 'main.cpp' | ForEach-Object FullName
++    foreach ($target in @(@('src/main.cpp','orchc'), @('tests/tests.cpp','orchlang_tests'), @('audit/2026-09-17/paired.cpp','paired'))) {
++        & "$auditToolchain/g++.exe" -std=c++17 -Wall -Wextra -pedantic -O2 -Iinclude @auditSources $target[0] -o "audit/2026-09-17/$($target[1]).exe"
++        if ($LASTEXITCODE -ne 0) { throw "Build failed: $($target[1])" }
++    }
++    & ./audit/2026-09-17/orchlang_tests.exe | Tee-Object audit/2026-09-17/tests.txt
++    python audit/2026-09-17/reproduce.py > audit/2026-09-17/reproduction.txt
++    & ./audit/2026-09-17/paired.exe audit/2026-09-17/equal_bounds.orch | Tee-Object audit/2026-09-17/paired.txt
++} finally {
++    Pop-Location
++}
+diff --git a/audit/2026-09-17/certificates.txt b/audit/2026-09-17/certificates.txt
+index 5857a58..f0d10a2 100644
+--- a/audit/2026-09-17/certificates.txt
++++ b/audit/2026-09-17/certificates.txt
+@@ -1 +1 @@
+-Valid example certificates parsed: 8
++Valid example certificates parsed: 8
+diff --git a/audit/2026-09-17/equal_bounds.orch b/audit/2026-09-17/equal_bounds.orch
+index 8f15e2a..e8618d7 100644
+--- a/audit/2026-09-17/equal_bounds.orch
++++ b/audit/2026-09-17/equal_bounds.orch
+@@ -1,13 +1,13 @@
+-workflow EqualBounds budget 1000 {
+- secret s: text max_tokens 1;
+- input x: text max_tokens 100;
+- input y: text max_tokens 100;
+- model m = mock("m") max_tokens 10;
+- prompt p(t: text) -> text = "{t}";
+- if tokens(s) == 0 {
+-   let a: text = call p(x) using m;
+- } else {
+-   let b: text = call p(y) using m;
+- }
+- output "done";
+-}
++workflow EqualBounds budget 1000 {
++ secret s: text max_tokens 1;
++ input x: text max_tokens 100;
++ input y: text max_tokens 100;
++ model m = mock("m") max_tokens 10;
++ prompt p(t: text) -> text = "{t}";
++ if tokens(s) == 0 {
++   let a: text = call p(x) using m;
++ } else {
++   let b: text = call p(y) using m;
++ }
++ output "done";
++}
+diff --git a/audit/2026-09-17/findings.json b/audit/2026-09-17/findings.json
+index 5c76d48..d64c9c8 100644
+--- a/audit/2026-09-17/findings.json
++++ b/audit/2026-09-17/findings.json
+@@ -1,284 +1,284 @@
+-[
+-  {
+-    "case": "literal",
+-    "certify_exit": 0,
+-    "errors": "",
+-    "bound": {
+-      "guaranteed_tokens": 1,
+-      "estimated_tokens": 1,
+-      "total_tokens": 2,
+-      "within_budget": true,
+-      "defined": true,
+-      "cost": 0.0,
+-      "cost_complete": false
+-    },
+-    "first_violation": {
+-      "seed": 1,
+-      "trace": "Literal:\n  calls          1\n  actual tokens  3  (input 2 + output 1)\n    y = p via m  in 2 out 1\n"
+-    }
+-  },
+-  {
+-    "case": "boolean",
+-    "certify_exit": 0,
+-    "errors": "",
+-    "bound": {
+-      "guaranteed_tokens": 1,
+-      "estimated_tokens": 2,
+-      "total_tokens": 3,
+-      "within_budget": true,
+-      "defined": true,
+-      "cost": 0.0,
+-      "cost_complete": false
+-    },
+-    "first_violation": {
+-      "seed": 1,
+-      "trace": "Boolean:\n  calls          1\n  actual tokens  4  (input 3 + output 1)\n    y = p via m  in 3 out 1\n"
+-    }
+-  },
+-  {
+-    "case": "split",
+-    "certify_exit": 0,
+-    "errors": "",
+-    "bound": {
+-      "guaranteed_tokens": 1,
+-      "estimated_tokens": 201,
+-      "total_tokens": 202,
+-      "within_budget": true,
+-      "defined": true,
+-      "cost": 0.0,
+-      "cost_complete": false
+-    },
+-    "first_violation": {
+-      "seed": 2,
+-      "trace": "Split:\n  calls          1\n  actual tokens  21  (input 1 + output 20)\n    b = p via large  in 1 out 20\n"
+-    }
+-  },
+-  {
+-    "case": "shadow",
+-    "certify_exit": 0,
+-    "errors": "",
+-    "bound": {
+-      "guaranteed_tokens": 1,
+-      "estimated_tokens": 1,
+-      "total_tokens": 2,
+-      "within_budget": true,
+-      "defined": true,
+-      "cost": 0.0,
+-      "cost_complete": false
+-    },
+-    "first_violation": {
+-      "seed": 3,
+-      "trace": "Shadow:\n  calls          1\n  actual tokens  348  (input 1 + output 347)\n    y = p via m  in 1 out 347\n"
+-    }
+-  },
+-  {
+-    "case": "equal_bounds",
+-    "certify_exit": 0,
+-    "errors": "",
+-    "bound": {
+-      "guaranteed_tokens": 10,
+-      "estimated_tokens": 101,
+-      "total_tokens": 111,
+-      "within_budget": true,
+-      "defined": true,
+-      "cost": 0.0,
+-      "cost_complete": false
+-    }
+-  },
+-  {
+-    "example_checks": [
+-      {
+-        "file": "examples\\valid\\balanced_cost_arms.orch",
+-        "expected_accept": true,
+-        "exit": 0,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\valid\\bounded_retry.orch",
+-        "expected_accept": true,
+-        "exit": 0,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\valid\\branching_cost.orch",
+-        "expected_accept": true,
+-        "exit": 0,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\valid\\declassified_secret.orch",
+-        "expected_accept": true,
+-        "exit": 0,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\valid\\summarization.orch",
+-        "expected_accept": true,
+-        "exit": 0,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\valid\\support_triage.orch",
+-        "expected_accept": true,
+-        "exit": 0,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\valid\\two_step_workflow.orch",
+-        "expected_accept": true,
+-        "exit": 0,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\valid\\untrusted_endorsed.orch",
+-        "expected_accept": true,
+-        "exit": 0,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\boundary\\zero_budget.orch",
+-        "expected_accept": true,
+-        "exit": 0,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\boundary\\long_identifier.orch",
+-        "expected_accept": true,
+-        "exit": 0,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\boundary\\retry_one.orch",
+-        "expected_accept": true,
+-        "exit": 0,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\boundary\\empty_branch.orch",
+-        "expected_accept": true,
+-        "exit": 0,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\budget_exceeded.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\cost_channel.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\duplicate_symbols.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\implicit_flow.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\lexical_errors.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\multiple_errors.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\paper_motivating.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\placeholder_errors.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\require_undecidable.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\require_violated.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\retry_budget.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\secret_exposure.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\secret_sink.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\syntax_errors.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\type_mismatch.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\unbounded_input.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\unknown_names.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\unknown_tool.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\invalid\\untrusted_sink.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      },
+-      {
+-        "file": "examples\\boundary\\empty_workflow.orch",
+-        "expected_accept": false,
+-        "exit": 1,
+-        "match": true
+-      }
+-    ]
+-  }
++[
++  {
++    "case": "literal",
++    "certify_exit": 0,
++    "errors": "",
++    "bound": {
++      "guaranteed_tokens": 1,
++      "estimated_tokens": 1,
++      "total_tokens": 2,
++      "within_budget": true,
++      "defined": true,
++      "cost": 0.0,
++      "cost_complete": false
++    },
++    "first_violation": {
++      "seed": 1,
++      "trace": "Literal:\n  calls          1\n  actual tokens  3  (input 2 + output 1)\n    y = p via m  in 2 out 1\n"
++    }
++  },
++  {
++    "case": "boolean",
++    "certify_exit": 0,
++    "errors": "",
++    "bound": {
++      "guaranteed_tokens": 1,
++      "estimated_tokens": 2,
++      "total_tokens": 3,
++      "within_budget": true,
++      "defined": true,
++      "cost": 0.0,
++      "cost_complete": false
++    },
++    "first_violation": {
++      "seed": 1,
++      "trace": "Boolean:\n  calls          1\n  actual tokens  4  (input 3 + output 1)\n    y = p via m  in 3 out 1\n"
++    }
++  },
++  {
++    "case": "split",
++    "certify_exit": 0,
++    "errors": "",
++    "bound": {
++      "guaranteed_tokens": 1,
++      "estimated_tokens": 201,
++      "total_tokens": 202,
++      "within_budget": true,
++      "defined": true,
++      "cost": 0.0,
++      "cost_complete": false
++    },
++    "first_violation": {
++      "seed": 2,
++      "trace": "Split:\n  calls          1\n  actual tokens  21  (input 1 + output 20)\n    b = p via large  in 1 out 20\n"
++    }
++  },
++  {
++    "case": "shadow",
++    "certify_exit": 0,
++    "errors": "",
++    "bound": {
++      "guaranteed_tokens": 1,
++      "estimated_tokens": 1,
++      "total_tokens": 2,
++      "within_budget": true,
++      "defined": true,
++      "cost": 0.0,
++      "cost_complete": false
++    },
++    "first_violation": {
++      "seed": 3,
++      "trace": "Shadow:\n  calls          1\n  actual tokens  348  (input 1 + output 347)\n    y = p via m  in 1 out 347\n"
++    }
++  },
++  {
++    "case": "equal_bounds",
++    "certify_exit": 0,
++    "errors": "",
++    "bound": {
++      "guaranteed_tokens": 10,
++      "estimated_tokens": 101,
++      "total_tokens": 111,
++      "within_budget": true,
++      "defined": true,
++      "cost": 0.0,
++      "cost_complete": false
++    }
++  },
++  {
++    "example_checks": [
++      {
++        "file": "examples\\valid\\balanced_cost_arms.orch",
++        "expected_accept": true,
++        "exit": 0,
++        "match": true
++      },
++      {
++        "file": "examples\\valid\\bounded_retry.orch",
++        "expected_accept": true,
++        "exit": 0,
++        "match": true
++      },
++      {
++        "file": "examples\\valid\\branching_cost.orch",
++        "expected_accept": true,
++        "exit": 0,
++        "match": true
++      },
++      {
++        "file": "examples\\valid\\declassified_secret.orch",
++        "expected_accept": true,
++        "exit": 0,
++        "match": true
++      },
++      {
++        "file": "examples\\valid\\summarization.orch",
++        "expected_accept": true,
++        "exit": 0,
++        "match": true
++      },
++      {
++        "file": "examples\\valid\\support_triage.orch",
++        "expected_accept": true,
++        "exit": 0,
++        "match": true
++      },
++      {
++        "file": "examples\\valid\\two_step_workflow.orch",
++        "expected_accept": true,
++        "exit": 0,
++        "match": true
++      },
++      {
++        "file": "examples\\valid\\untrusted_endorsed.orch",
++        "expected_accept": true,
++        "exit": 0,
++        "match": true
++      },
++      {
++        "file": "examples\\boundary\\zero_budget.orch",
++        "expected_accept": true,
++        "exit": 0,
++        "match": true
++      },
++      {
++        "file": "examples\\boundary\\long_identifier.orch",
++        "expected_accept": true,
++        "exit": 0,
++        "match": true
++      },
++      {
++        "file": "examples\\boundary\\retry_one.orch",
++        "expected_accept": true,
++        "exit": 0,
++        "match": true
++      },
++      {
++        "file": "examples\\boundary\\empty_branch.orch",
++        "expected_accept": true,
++        "exit": 0,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\budget_exceeded.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\cost_channel.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\duplicate_symbols.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\implicit_flow.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\lexical_errors.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\multiple_errors.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\paper_motivating.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\placeholder_errors.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\require_undecidable.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\require_violated.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\retry_budget.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\secret_exposure.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\secret_sink.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\syntax_errors.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\type_mismatch.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\unbounded_input.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\unknown_names.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\unknown_tool.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\invalid\\untrusted_sink.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      },
++      {
++        "file": "examples\\boundary\\empty_workflow.orch",
++        "expected_accept": false,
++        "exit": 1,
++        "match": true
++      }
++    ]
++  }
+ ]
+\ No newline at end of file
+diff --git a/audit/2026-09-17/literal.orch b/audit/2026-09-17/literal.orch
+index 923f3ac..99121b3 100644
+--- a/audit/2026-09-17/literal.orch
++++ b/audit/2026-09-17/literal.orch
+@@ -1,6 +1,6 @@
+-workflow Literal budget 100 {
+- model m = mock("m") max_tokens 1;
+- prompt p(x: text) -> text = "{x}";
+- let y: text = call p("") using m;
+- output y;
+-}
++workflow Literal budget 100 {
++ model m = mock("m") max_tokens 1;
++ prompt p(x: text) -> text = "{x}";
++ let y: text = call p("") using m;
++ output y;
++}
+diff --git a/audit/2026-09-17/paired.cpp b/audit/2026-09-17/paired.cpp
+index 4b652bf..b964615 100644
+--- a/audit/2026-09-17/paired.cpp
++++ b/audit/2026-09-17/paired.cpp
+@@ -1,39 +1,39 @@
+-#include "lexer.hpp"
+-#include "parser.hpp"
+-#include "semantic_analyzer.hpp"
+-#include "cost_analyzer.hpp"
+-#include "interpreter.hpp"
+-#include <fstream>
+-#include <iostream>
+-#include <iterator>
+-using namespace orchlang;
+-int main(int argc, char** argv) {
+-    if (argc != 2) return 2;
+-    std::ifstream input(argv[1]);
+-    std::string text((std::istreambuf_iterator<char>(input)), {});
+-    auto lex = Lexer(text, argv[1]).scan();
+-    auto parsed = Parser(lex.tokens).parse();
+-    auto semantic = SemanticAnalyzer().analyze(parsed.program);
+-    auto cost = CostAnalyzer().analyze(parsed.program, semantic);
+-    if (lex.diagnostics.hasErrors() || parsed.diagnostics.hasErrors() || !semantic.success() || !cost.success()) return 3;
+-    auto& secret = static_cast<SecretDecl&>(*parsed.program.workflows[0]->statements[0]);
+-    // Audit-only input injection: the mock has no store-input API and initializes
+-    // secret token counts from the declaration. Analyze ONCE with bound 1, then
+-    // set its initializer to 0 and 1 (both within that original bound).
+-    // No analyzer or interpreter implementation is changed. RNG consumption is
+-    // identical: Secret consumes one flag draw for either token count.
+-    RunOptions options;
+-    options.seed = 1;
+-    secret.tokenBound = 0;
+-    auto left = Interpreter(options).run(parsed.program, semantic);
+-    secret.tokenBound = 1;
+-    auto right = Interpreter(options).run(parsed.program, semantic);
+-    std::cout << "Analyzed original bound: " << cost.workflows[0].bound.total() << "\n";
+-    std::cout << "Secret token count 0:\n" << printRun(left);
+-    std::cout << "Secret token count 1:\n" << printRun(right);
+-    const auto& a = left.workflows[0];
+-    const auto& b = right.workflows[0];
+-    bool witness = a.totalTokens() != b.totalTokens() && a.outputTokens == b.outputTokens;
+-    std::cout << "Same model output count, unequal total: " << (witness ? "YES" : "NO") << "\n";
+-    return witness ? 0 : 1;
+-}
++#include "lexer.hpp"
++#include "parser.hpp"
++#include "semantic_analyzer.hpp"
++#include "cost_analyzer.hpp"
++#include "interpreter.hpp"
++#include <fstream>
++#include <iostream>
++#include <iterator>
++using namespace orchlang;
++int main(int argc, char** argv) {
++    if (argc != 2) return 2;
++    std::ifstream input(argv[1]);
++    std::string text((std::istreambuf_iterator<char>(input)), {});
++    auto lex = Lexer(text, argv[1]).scan();
++    auto parsed = Parser(lex.tokens).parse();
++    auto semantic = SemanticAnalyzer().analyze(parsed.program);
++    auto cost = CostAnalyzer().analyze(parsed.program, semantic);
++    if (lex.diagnostics.hasErrors() || parsed.diagnostics.hasErrors() || !semantic.success() || !cost.success()) return 3;
++    auto& secret = static_cast<SecretDecl&>(*parsed.program.workflows[0]->statements[0]);
++    // Audit-only input injection: the mock has no store-input API and initializes
++    // secret token counts from the declaration. Analyze ONCE with bound 1, then
++    // set its initializer to 0 and 1 (both within that original bound).
++    // No analyzer or interpreter implementation is changed. RNG consumption is
++    // identical: Secret consumes one flag draw for either token count.
++    RunOptions options;
++    options.seed = 1;
++    secret.tokenBound = 0;
++    auto left = Interpreter(options).run(parsed.program, semantic);
++    secret.tokenBound = 1;
++    auto right = Interpreter(options).run(parsed.program, semantic);
++    std::cout << "Analyzed original bound: " << cost.workflows[0].bound.total() << "\n";
++    std::cout << "Secret token count 0:\n" << printRun(left);
++    std::cout << "Secret token count 1:\n" << printRun(right);
++    const auto& a = left.workflows[0];
++    const auto& b = right.workflows[0];
++    bool witness = a.totalTokens() != b.totalTokens() && a.outputTokens == b.outputTokens;
++    std::cout << "Same model output count, unequal total: " << (witness ? "YES" : "NO") << "\n";
++    return witness ? 0 : 1;
++}
+diff --git a/audit/2026-09-17/paired.txt b/audit/2026-09-17/paired.txt
+index 7ebd8fc..a1d5297 100644
+--- a/audit/2026-09-17/paired.txt
++++ b/audit/2026-09-17/paired.txt
+@@ -1,12 +1,12 @@
+-Analyzed original bound: 111
+-Secret token count 0:
+-EqualBounds:
+-  calls          1
+-  actual tokens  15  (input 15 + output 0)
+-    a = p via m  in 15 out 0
+-Secret token count 1:
+-EqualBounds:
+-  calls          1
+-  actual tokens  53  (input 53 + output 0)
+-    b = p via m  in 53 out 0
+-Same model output count, unequal total: YES
++Analyzed original bound: 111
++Secret token count 0:
++EqualBounds:
++  calls          1
++  actual tokens  15  (input 15 + output 0)
++    a = p via m  in 15 out 0
++Secret token count 1:
++EqualBounds:
++  calls          1
++  actual tokens  53  (input 53 + output 0)
++    b = p via m  in 53 out 0
++Same model output count, unequal total: YES
+diff --git a/audit/2026-09-17/probes.txt b/audit/2026-09-17/probes.txt
+index ae3927e..433d5a4 100644
+--- a/audit/2026-09-17/probes.txt
++++ b/audit/2026-09-17/probes.txt
+@@ -1,89 +1,89 @@
+-[
+-  {
+-    "case": "literal",
+-    "certify_exit": 0,
+-    "errors": "",
+-    "bound": {
+-      "guaranteed_tokens": 1,
+-      "estimated_tokens": 1,
+-      "total_tokens": 2,
+-      "within_budget": true,
+-      "defined": true,
+-      "cost": 0.0,
+-      "cost_complete": false
+-    },
+-    "first_violation": {
+-      "seed": 1,
+-      "trace": "Literal:\n  calls          1\n  actual tokens  3  (input 2 + output 1)\n    y = p via m  in 2 out 1\n"
+-    }
+-  },
+-  {
+-    "case": "boolean",
+-    "certify_exit": 0,
+-    "errors": "",
+-    "bound": {
+-      "guaranteed_tokens": 1,
+-      "estimated_tokens": 2,
+-      "total_tokens": 3,
+-      "within_budget": true,
+-      "defined": true,
+-      "cost": 0.0,
+-      "cost_complete": false
+-    },
+-    "first_violation": {
+-      "seed": 1,
+-      "trace": "Boolean:\n  calls          1\n  actual tokens  4  (input 3 + output 1)\n    y = p via m  in 3 out 1\n"
+-    }
+-  },
+-  {
+-    "case": "split",
+-    "certify_exit": 0,
+-    "errors": "",
+-    "bound": {
+-      "guaranteed_tokens": 1,
+-      "estimated_tokens": 201,
+-      "total_tokens": 202,
+-      "within_budget": true,
+-      "defined": true,
+-      "cost": 0.0,
+-      "cost_complete": false
+-    },
+-    "first_violation": {
+-      "seed": 2,
+-      "trace": "Split:\n  calls          1\n  actual tokens  21  (input 1 + output 20)\n    b = p via large  in 1 out 20\n"
+-    }
+-  },
+-  {
+-    "case": "shadow",
+-    "certify_exit": 0,
+-    "errors": "",
+-    "bound": {
+-      "guaranteed_tokens": 1,
+-      "estimated_tokens": 1,
+-      "total_tokens": 2,
+-      "within_budget": true,
+-      "defined": true,
+-      "cost": 0.0,
+-      "cost_complete": false
+-    },
+-    "first_violation": {
+-      "seed": 3,
+-      "trace": "Shadow:\n  calls          1\n  actual tokens  348  (input 1 + output 347)\n    y = p via m  in 1 out 347\n"
+-    }
+-  },
+-  {
+-    "case": "equal_bounds",
+-    "certify_exit": 0,
+-    "errors": "",
+-    "bound": {
+-      "guaranteed_tokens": 10,
+-      "estimated_tokens": 101,
+-      "total_tokens": 111,
+-      "within_budget": true,
+-      "defined": true,
+-      "cost": 0.0,
+-      "cost_complete": false
+-    }
+-  }
+-]
+-Example checks: 32 passed: 32
++[
++  {
++    "case": "literal",
++    "certify_exit": 0,
++    "errors": "",
++    "bound": {
++      "guaranteed_tokens": 1,
++      "estimated_tokens": 1,
++      "total_tokens": 2,
++      "within_budget": true,
++      "defined": true,
++      "cost": 0.0,
++      "cost_complete": false
++    },
++    "first_violation": {
++      "seed": 1,
++      "trace": "Literal:\n  calls          1\n  actual tokens  3  (input 2 + output 1)\n    y = p via m  in 2 out 1\n"
++    }
++  },
++  {
++    "case": "boolean",
++    "certify_exit": 0,
++    "errors": "",
++    "bound": {
++      "guaranteed_tokens": 1,
++      "estimated_tokens": 2,
++      "total_tokens": 3,
++      "within_budget": true,
++      "defined": true,
++      "cost": 0.0,
++      "cost_complete": false
++    },
++    "first_violation": {
++      "seed": 1,
++      "trace": "Boolean:\n  calls          1\n  actual tokens  4  (input 3 + output 1)\n    y = p via m  in 3 out 1\n"
++    }
++  },
++  {
++    "case": "split",
++    "certify_exit": 0,
++    "errors": "",
++    "bound": {
++      "guaranteed_tokens": 1,
++      "estimated_tokens": 201,
++      "total_tokens": 202,
++      "within_budget": true,
++      "defined": true,
++      "cost": 0.0,
++      "cost_complete": false
++    },
++    "first_violation": {
++      "seed": 2,
++      "trace": "Split:\n  calls          1\n  actual tokens  21  (input 1 + output 20)\n    b = p via large  in 1 out 20\n"
++    }
++  },
++  {
++    "case": "shadow",
++    "certify_exit": 0,
++    "errors": "",
++    "bound": {
++      "guaranteed_tokens": 1,
++      "estimated_tokens": 1,
++      "total_tokens": 2,
++      "within_budget": true,
++      "defined": true,
++      "cost": 0.0,
++      "cost_complete": false
++    },
++    "first_violation": {
++      "seed": 3,
++      "trace": "Shadow:\n  calls          1\n  actual tokens  348  (input 1 + output 347)\n    y = p via m  in 1 out 347\n"
++    }
++  },
++  {
++    "case": "equal_bounds",
++    "certify_exit": 0,
++    "errors": "",
++    "bound": {
++      "guaranteed_tokens": 10,
++      "estimated_tokens": 101,
++      "total_tokens": 111,
++      "within_budget": true,
++      "defined": true,
++      "cost": 0.0,
++      "cost_complete": false
++    }
++  }
++]
++Example checks: 32 passed: 32
+diff --git a/audit/2026-09-17/reproduce.py b/audit/2026-09-17/reproduce.py
+index 91740e9..fd9bc73 100644
+--- a/audit/2026-09-17/reproduce.py
++++ b/audit/2026-09-17/reproduce.py
+@@ -1,120 +1,120 @@
+-"""Audit-only probes. Run from any directory; uses the fresh audit executable.
+-Does not change compiler source or the checked-in benchmark results.
+-"""
+-import importlib.util
+-import json
+-import os
+-import re
+-from pathlib import Path
+-import subprocess
+-import sys
+-sys.dont_write_bytecode = True
+-
+-HERE = Path(__file__).resolve().parent
+-ROOT = HERE.parents[1]
+-TC = Path(os.environ['LOCALAPPDATA']) / 'Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin'
+-os.environ['PATH'] = str(TC) + os.pathsep + os.environ['PATH']
+-EXE = HERE / 'orchc.exe'
+-cases = {
+-'literal': '''workflow Literal budget 100 {
+- model m = mock("m") max_tokens 1;
+- prompt p(x: text) -> text = "{x}";
+- let y: text = call p("") using m;
+- output y;
+-}''',
+-'boolean': '''workflow Boolean budget 100 {
+- model m = mock("m") max_tokens 1;
+- prompt p(x: boolean) -> text = "{x}";
+- let y: text = call p(false) using m;
+- output y;
+-}''',
+-'split': '''workflow Split budget 1000 {
+- input flag: boolean max_tokens 1;
+- input wide: text max_tokens 200;
+- input narrow: text max_tokens 0;
+- model small = mock("small") max_tokens 1;
+- model large = mock("large") max_tokens 100;
+- prompt p(x: text) -> text = "{x}";
+- if flag {
+-   let a: text = call p(wide) using small;
+- } else {
+-   let b: text = call p(narrow) using large;
+- }
+- output narrow;
+-}''',
+-'shadow': '''workflow Shadow budget 10000 {
+- input flag: boolean max_tokens 1;
+- input src: text max_tokens 0;
+- model m = mock("outer") max_tokens 1;
+- prompt p(x: text) -> text = "{x}";
+- if flag {
+-   model m = mock("inner") max_tokens 1000;
+- }
+- let y: text = call p(src) using m;
+- output y;
+-}''',
+-'equal_bounds': '''workflow EqualBounds budget 1000 {
+- secret s: text max_tokens 1;
+- input x: text max_tokens 100;
+- input y: text max_tokens 100;
+- model m = mock("m") max_tokens 10;
+- prompt p(t: text) -> text = "{t}";
+- if tokens(s) == 0 {
+-   let a: text = call p(x) using m;
+- } else {
+-   let b: text = call p(y) using m;
+- }
+- output "done";
+-}'''
+-}
+-
+-def run(*args):
+-    p = subprocess.run([str(EXE), *map(str,args)], capture_output=True, text=True)
+-    return p.returncode, p.stdout, p.stderr
+-
+-report = []
+-for name, source in cases.items():
+-    path = HERE / (name + '.orch')
+-    path.write_text(source+'\n', encoding='utf-8')
+-    code,out,err = run('certify', path)
+-    row = {'case':name, 'certify_exit':code, 'errors':err}
+-    if not code:
+-        bound = json.loads(out)['workflows'][0]['bound']
+-        row['bound'] = bound
+-        for seed in range(1,101):
+-            rc, trace, error = run('run',path,'--seed',seed)
+-            assert rc == 0, error
+-            counts = {}
+-            match = re.search(r'actual tokens\s+(\d+)\s+\(input (\d+) \+ output (\d+)\)', trace)
+-            if match:
+-                counts = {'actual':int(match[1]), 'output':int(match[3])}
+-            for line in trace.splitlines():
+-                fields = line.split()
+-                if len(fields)>2 and fields[:2] in [['actual','tokens'],['output','tokens']]:
+-                    counts[fields[0]] = int(fields[2])
+-            if counts.get('actual',0)>bound['total_tokens'] or counts.get('output',0)>bound['guaranteed_tokens']:
+-                row['first_violation'] = {'seed':seed, 'trace':trace}
+-                break
+-    report.append(row)
+-
+-# Run the existing harness against our fresh build into an audit-only directory.
+-spec = importlib.util.spec_from_file_location('evaluation',ROOT/'bench/evaluate.py')
+-evaluation = importlib.util.module_from_spec(spec)
+-spec.loader.exec_module(evaluation)
+-evaluation.ORCHC = str(EXE)
+-evaluation.RESULTS = str(HERE/'benchmark')
+-if '--skip-benchmark' not in sys.argv:
+-    evaluation.main()
+-
+-examples = []
+-valid = list((ROOT/'examples/valid').glob('*.orch'))
+-valid += [ROOT/'examples/boundary'/n for n in ['zero_budget.orch','long_identifier.orch','retry_one.orch','empty_branch.orch']]
+-invalid = list((ROOT/'examples/invalid').glob('*.orch')) + [ROOT/'examples/boundary/empty_workflow.orch']
+-for expected,paths in [(True,valid),(False,invalid)]:
+-    for path in paths:
+-        code,out,err=run('check',path)
+-        examples.append({'file':str(path.relative_to(ROOT)), 'expected_accept':expected, 'exit':code, 'match':(code==0)==expected})
+-report.append({'example_checks':examples})
+-(HERE/'findings.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
+-print(json.dumps(report[:-1],indent=2))
+-print('Example checks:',len(examples),'passed:',sum(r['match'] for r in examples))
++"""Audit-only probes. Run from any directory; uses the fresh audit executable.
++Does not change compiler source or the checked-in benchmark results.
++"""
++import importlib.util
++import json
++import os
++import re
++from pathlib import Path
++import subprocess
++import sys
++sys.dont_write_bytecode = True
++
++HERE = Path(__file__).resolve().parent
++ROOT = HERE.parents[1]
++TC = Path(os.environ['LOCALAPPDATA']) / 'Microsoft/WinGet/Packages/BrechtSanders.WinLibs.POSIX.UCRT_Microsoft.Winget.Source_8wekyb3d8bbwe/mingw64/bin'
++os.environ['PATH'] = str(TC) + os.pathsep + os.environ['PATH']
++EXE = HERE / 'orchc.exe'
++cases = {
++'literal': '''workflow Literal budget 100 {
++ model m = mock("m") max_tokens 1;
++ prompt p(x: text) -> text = "{x}";
++ let y: text = call p("") using m;
++ output y;
++}''',
++'boolean': '''workflow Boolean budget 100 {
++ model m = mock("m") max_tokens 1;
++ prompt p(x: boolean) -> text = "{x}";
++ let y: text = call p(false) using m;
++ output y;
++}''',
++'split': '''workflow Split budget 1000 {
++ input flag: boolean max_tokens 1;
++ input wide: text max_tokens 200;
++ input narrow: text max_tokens 0;
++ model small = mock("small") max_tokens 1;
++ model large = mock("large") max_tokens 100;
++ prompt p(x: text) -> text = "{x}";
++ if flag {
++   let a: text = call p(wide) using small;
++ } else {
++   let b: text = call p(narrow) using large;
++ }
++ output narrow;
++}''',
++'shadow': '''workflow Shadow budget 10000 {
++ input flag: boolean max_tokens 1;
++ input src: text max_tokens 0;
++ model m = mock("outer") max_tokens 1;
++ prompt p(x: text) -> text = "{x}";
++ if flag {
++   model m = mock("inner") max_tokens 1000;
++ }
++ let y: text = call p(src) using m;
++ output y;
++}''',
++'equal_bounds': '''workflow EqualBounds budget 1000 {
++ secret s: text max_tokens 1;
++ input x: text max_tokens 100;
++ input y: text max_tokens 100;
++ model m = mock("m") max_tokens 10;
++ prompt p(t: text) -> text = "{t}";
++ if tokens(s) == 0 {
++   let a: text = call p(x) using m;
++ } else {
++   let b: text = call p(y) using m;
++ }
++ output "done";
++}'''
++}
++
++def run(*args):
++    p = subprocess.run([str(EXE), *map(str,args)], capture_output=True, text=True)
++    return p.returncode, p.stdout, p.stderr
++
++report = []
++for name, source in cases.items():
++    path = HERE / (name + '.orch')
++    path.write_text(source+'\n', encoding='utf-8')
++    code,out,err = run('certify', path)
++    row = {'case':name, 'certify_exit':code, 'errors':err}
++    if not code:
++        bound = json.loads(out)['workflows'][0]['bound']
++        row['bound'] = bound
++        for seed in range(1,101):
++            rc, trace, error = run('run',path,'--seed',seed)
++            assert rc == 0, error
++            counts = {}
++            match = re.search(r'actual tokens\s+(\d+)\s+\(input (\d+) \+ output (\d+)\)', trace)
++            if match:
++                counts = {'actual':int(match[1]), 'output':int(match[3])}
++            for line in trace.splitlines():
++                fields = line.split()
++                if len(fields)>2 and fields[:2] in [['actual','tokens'],['output','tokens']]:
++                    counts[fields[0]] = int(fields[2])
++            if counts.get('actual',0)>bound['total_tokens'] or counts.get('output',0)>bound['guaranteed_tokens']:
++                row['first_violation'] = {'seed':seed, 'trace':trace}
++                break
++    report.append(row)
++
++# Run the existing harness against our fresh build into an audit-only directory.
++spec = importlib.util.spec_from_file_location('evaluation',ROOT/'bench/evaluate.py')
++evaluation = importlib.util.module_from_spec(spec)
++spec.loader.exec_module(evaluation)
++evaluation.ORCHC = str(EXE)
++evaluation.RESULTS = str(HERE/'benchmark')
++if '--skip-benchmark' not in sys.argv:
++    evaluation.main()
++
++examples = []
++valid = list((ROOT/'examples/valid').glob('*.orch'))
++valid += [ROOT/'examples/boundary'/n for n in ['zero_budget.orch','long_identifier.orch','retry_one.orch','empty_branch.orch']]
++invalid = list((ROOT/'examples/invalid').glob('*.orch')) + [ROOT/'examples/boundary/empty_workflow.orch']
++for expected,paths in [(True,valid),(False,invalid)]:
++    for path in paths:
++        code,out,err=run('check',path)
++        examples.append({'file':str(path.relative_to(ROOT)), 'expected_accept':expected, 'exit':code, 'match':(code==0)==expected})
++report.append({'example_checks':examples})
++(HERE/'findings.json').write_text(json.dumps(report,indent=2),encoding='utf-8')
++print(json.dumps(report[:-1],indent=2))
++print('Example checks:',len(examples),'passed:',sum(r['match'] for r in examples))
+diff --git a/audit/2026-09-17/reproduction.txt b/audit/2026-09-17/reproduction.txt
+index b1dec98..3436699 100644
+--- a/audit/2026-09-17/reproduction.txt
++++ b/audit/2026-09-17/reproduction.txt
+@@ -1,168 +1,168 @@
+-RQ1-RQ3: executing the cost suite under 200 seeds each ...
+-RQ4: checking the paired security suite ...
+-timing ...
+-
+-OrchLang evaluation
+-===================
+-
+-RQ1/RQ2/RQ3  certified bound vs observed execution (23 workflows, 4600 runs)
+-
+-workflow          certified  guaranteed  estimated  flat  peak_actual  mean_actual  slack_vs_peak  certified_violations  flat_violations
+-----------------  ---------  ----------  ---------  ----  -----------  -----------  -------------  --------------------  ---------------
+-branch_1          1006       750         256        1284  508          283.0        1.98           0                     0              
+-branch_2          1734       1350        384        2290  764          426.2        2.27           0                     0              
+-branch_3          2462       1950        512        3296  1011         569.6        2.44           0                     0              
+-branch_4          3190       2550        640        4302  1187         711.3        2.69           0                     0              
+-branch_in_retry   2462       1950        512        1284  817          395.2        3.01           0                     0              
+-branch_nested     1734       1350        384        3746  686          421.3        2.53           0                     0              
+-chain_1           278        150         128        278   273          147.9        1.02           0                     0              
+-chain_2           586        300         286        586   539          306.9        1.09           0                     0              
+-chain_3           894        450         444        894   812          461.1        1.1            0                     0              
+-chain_4           1202       600         602        1202  1085         617.7        1.11           0                     0              
+-chain_5           1510       750         760        1510  1288         775.3        1.17           0                     0              
+-retry_2           556        300         256        278   542          210.8        1.03           0                     43             
+-retry_3           834        450         384        278   693          241.1        1.2            0                     59             
+-retry_4           1112       600         512        278   875          257.2        1.27           0                     63             
+-retry_5           1390       750         640        278   1144         264.6        1.22           0                     63             
+-retry_6           1668       900         768        278   1144         266.1        1.46           0                     63             
+-retry_in_branch   1112       600         512        1284  817          395.2        1.36           0                     0              
+-retry_nested_2x2  1112       600         512        278   901          322.8        1.23           0                     102            
+-retry_nested_2x3  1668       900         768        278   1298         381.8        1.29           0                     111            
+-retry_nested_3x3  2502       1350        1152       278   1363         441.5        1.84           0                     117            
+-wide_input_200    666        300         366        666   600          327.1        1.11           0                     0              
+-wide_input_2000   2466       300         2166       2466  2339         1265.2       1.05           0                     0              
+-wide_input_800    1266       300         966        1266  1158         637.7        1.09           0                     0              
+-
+-  certified bound exceeded : 0 of 4600 runs
+-  flat bound exceeded      : 621 of 4600 runs (13.5%)
+-  workflows where the flat bound is unsound: 8 of 23
+-    retry_2, retry_3, retry_4, retry_5, retry_6, retry_nested_2x2, retry_nested_2x3, retry_nested_3x3
+-  slack vs peak observed: median 1.23x, min 1.02x, max 3.01x
+-
+-RQ4  information-flow analysis on the paired security suite
+-
+-workflow                     expected  verdict  codes    
+----------------------------  --------  -------  ---------
+-InjectionInBranch            reject    reject   E233 E235
+-InjectionInRetry             reject    reject   E233     
+-InjectionToSink              reject    reject   E233     
+-InjectionTransitive          reject    reject   E233     
+-MixedTrustToSink             reject    reject   E233     
+-SecretAsOutput               reject    reject   E231     
+-SecretCostChannel            reject    reject   E236     
+-SecretGuardedEffect          reject    reject   E234     
+-SecretGuardedLaundered       reject    reject   E234 W236
+-SecretToPrompt               reject    reject   E230 E231
+-SecretToSink                 reject    reject   E232     
+-UntrustedGuardedEffect       reject    reject   E235     
+-UntrustedToSinkNoEndorse     reject    reject   E233     
+-BalancedCostArms             accept    accept            
+-EffectOutsideSecretBranch    accept    accept            
+-InjectionEndorsed            accept    accept            
+-InjectionInBranchEndorsed    accept    accept            
+-InjectionInRetryEndorsed     accept    accept            
+-InjectionTransitiveEndorsed  accept    accept            
+-SecretAsOutputDeclassified   accept    accept            
+-SecretToPromptDeclassified   accept    accept            
+-SecretToSinkDeclassified     accept    accept            
+-TrustedGuardedEffect         accept    accept            
+-TrustedOnlyToSink            accept    accept            
+-UnguardedEffect              accept    accept            
+-UntrustedToOutputOnly        accept    accept            
+-
+-  unsafe rejected (true positive) : 13
+-  unsafe accepted (false negative): 0
+-  safe accepted   (true negative) : 13
+-  safe rejected   (false positive): 0
+-  recall    1.000
+-  precision 1.000
+-
+-Analysis cost
+-
+-  36 workflows certified in 0.31 s (8.7 ms each, including process startup)
+-
+-[
+-  {
+-    "case": "literal",
+-    "certify_exit": 0,
+-    "errors": "",
+-    "bound": {
+-      "guaranteed_tokens": 1,
+-      "estimated_tokens": 1,
+-      "total_tokens": 2,
+-      "within_budget": true,
+-      "defined": true,
+-      "cost": 0.0,
+-      "cost_complete": false
+-    },
+-    "first_violation": {
+-      "seed": 1,
+-      "trace": "Literal:\n  calls          1\n  actual tokens  3  (input 2 + output 1)\n    y = p via m  in 2 out 1\n"
+-    }
+-  },
+-  {
+-    "case": "boolean",
+-    "certify_exit": 0,
+-    "errors": "",
+-    "bound": {
+-      "guaranteed_tokens": 1,
+-      "estimated_tokens": 2,
+-      "total_tokens": 3,
+-      "within_budget": true,
+-      "defined": true,
+-      "cost": 0.0,
+-      "cost_complete": false
+-    },
+-    "first_violation": {
+-      "seed": 1,
+-      "trace": "Boolean:\n  calls          1\n  actual tokens  4  (input 3 + output 1)\n    y = p via m  in 3 out 1\n"
+-    }
+-  },
+-  {
+-    "case": "split",
+-    "certify_exit": 0,
+-    "errors": "",
+-    "bound": {
+-      "guaranteed_tokens": 1,
+-      "estimated_tokens": 201,
+-      "total_tokens": 202,
+-      "within_budget": true,
+-      "defined": true,
+-      "cost": 0.0,
+-      "cost_complete": false
+-    }
+-  },
+-  {
+-    "case": "shadow",
+-    "certify_exit": 0,
+-    "errors": "",
+-    "bound": {
+-      "guaranteed_tokens": 1,
+-      "estimated_tokens": 1,
+-      "total_tokens": 2,
+-      "within_budget": true,
+-      "defined": true,
+-      "cost": 0.0,
+-      "cost_complete": false
+-    },
+-    "first_violation": {
+-      "seed": 3,
+-      "trace": "Shadow:\n  calls          1\n  actual tokens  348  (input 1 + output 347)\n    y = p via m  in 1 out 347\n"
+-    }
+-  },
+-  {
+-    "case": "equal_bounds",
+-    "certify_exit": 0,
+-    "errors": "",
+-    "bound": {
+-      "guaranteed_tokens": 10,
+-      "estimated_tokens": 101,
+-      "total_tokens": 111,
+-      "within_budget": true,
+-      "defined": true,
+-      "cost": 0.0,
+-      "cost_complete": false
+-    }
+-  }
+-]
+-Example checks: 32 passed: 32
++RQ1-RQ3: executing the cost suite under 200 seeds each ...
++RQ4: checking the paired security suite ...
++timing ...
++
++OrchLang evaluation
++===================
++
++RQ1/RQ2/RQ3  certified bound vs observed execution (23 workflows, 4600 runs)
++
++workflow          certified  guaranteed  estimated  flat  peak_actual  mean_actual  slack_vs_peak  certified_violations  flat_violations
++----------------  ---------  ----------  ---------  ----  -----------  -----------  -------------  --------------------  ---------------
++branch_1          1006       750         256        1284  508          283.0        1.98           0                     0              
++branch_2          1734       1350        384        2290  764          426.2        2.27           0                     0              
++branch_3          2462       1950        512        3296  1011         569.6        2.44           0                     0              
++branch_4          3190       2550        640        4302  1187         711.3        2.69           0                     0              
++branch_in_retry   2462       1950        512        1284  817          395.2        3.01           0                     0              
++branch_nested     1734       1350        384        3746  686          421.3        2.53           0                     0              
++chain_1           278        150         128        278   273          147.9        1.02           0                     0              
++chain_2           586        300         286        586   539          306.9        1.09           0                     0              
++chain_3           894        450         444        894   812          461.1        1.1            0                     0              
++chain_4           1202       600         602        1202  1085         617.7        1.11           0                     0              
++chain_5           1510       750         760        1510  1288         775.3        1.17           0                     0              
++retry_2           556        300         256        278   542          210.8        1.03           0                     43             
++retry_3           834        450         384        278   693          241.1        1.2            0                     59             
++retry_4           1112       600         512        278   875          257.2        1.27           0                     63             
++retry_5           1390       750         640        278   1144         264.6        1.22           0                     63             
++retry_6           1668       900         768        278   1144         266.1        1.46           0                     63             
++retry_in_branch   1112       600         512        1284  817          395.2        1.36           0                     0              
++retry_nested_2x2  1112       600         512        278   901          322.8        1.23           0                     102            
++retry_nested_2x3  1668       900         768        278   1298         381.8        1.29           0                     111            
++retry_nested_3x3  2502       1350        1152       278   1363         441.5        1.84           0                     117            
++wide_input_200    666        300         366        666   600          327.1        1.11           0                     0              
++wide_input_2000   2466       300         2166       2466  2339         1265.2       1.05           0                     0              
++wide_input_800    1266       300         966        1266  1158         637.7        1.09           0                     0              
++
++  certified bound exceeded : 0 of 4600 runs
++  flat bound exceeded      : 621 of 4600 runs (13.5%)
++  workflows where the flat bound is unsound: 8 of 23
++    retry_2, retry_3, retry_4, retry_5, retry_6, retry_nested_2x2, retry_nested_2x3, retry_nested_3x3
++  slack vs peak observed: median 1.23x, min 1.02x, max 3.01x
++
++RQ4  information-flow analysis on the paired security suite
++
++workflow                     expected  verdict  codes    
++---------------------------  --------  -------  ---------
++InjectionInBranch            reject    reject   E233 E235
++InjectionInRetry             reject    reject   E233     
++InjectionToSink              reject    reject   E233     
++InjectionTransitive          reject    reject   E233     
++MixedTrustToSink             reject    reject   E233     
++SecretAsOutput               reject    reject   E231     
++SecretCostChannel            reject    reject   E236     
++SecretGuardedEffect          reject    reject   E234     
++SecretGuardedLaundered       reject    reject   E234 W236
++SecretToPrompt               reject    reject   E230 E231
++SecretToSink                 reject    reject   E232     
++UntrustedGuardedEffect       reject    reject   E235     
++UntrustedToSinkNoEndorse     reject    reject   E233     
++BalancedCostArms             accept    accept            
++EffectOutsideSecretBranch    accept    accept            
++InjectionEndorsed            accept    accept            
++InjectionInBranchEndorsed    accept    accept            
++InjectionInRetryEndorsed     accept    accept            
++InjectionTransitiveEndorsed  accept    accept            
++SecretAsOutputDeclassified   accept    accept            
++SecretToPromptDeclassified   accept    accept            
++SecretToSinkDeclassified     accept    accept            
++TrustedGuardedEffect         accept    accept            
++TrustedOnlyToSink            accept    accept            
++UnguardedEffect              accept    accept            
++UntrustedToOutputOnly        accept    accept            
++
++  unsafe rejected (true positive) : 13
++  unsafe accepted (false negative): 0
++  safe accepted   (true negative) : 13
++  safe rejected   (false positive): 0
++  recall    1.000
++  precision 1.000
++
++Analysis cost
++
++  36 workflows certified in 0.31 s (8.7 ms each, including process startup)
++
++[
++  {
++    "case": "literal",
++    "certify_exit": 0,
++    "errors": "",
++    "bound": {
++      "guaranteed_tokens": 1,
++      "estimated_tokens": 1,
++      "total_tokens": 2,
++      "within_budget": true,
++      "defined": true,
++      "cost": 0.0,
++      "cost_complete": false
++    },
++    "first_violation": {
++      "seed": 1,
++      "trace": "Literal:\n  calls          1\n  actual tokens  3  (input 2 + output 1)\n    y = p via m  in 2 out 1\n"
++    }
++  },
++  {
++    "case": "boolean",
++    "certify_exit": 0,
++    "errors": "",
++    "bound": {
++      "guaranteed_tokens": 1,
++      "estimated_tokens": 2,
++      "total_tokens": 3,
++      "within_budget": true,
++      "defined": true,
++      "cost": 0.0,
++      "cost_complete": false
++    },
++    "first_violation": {
++      "seed": 1,
++      "trace": "Boolean:\n  calls          1\n  actual tokens  4  (input 3 + output 1)\n    y = p via m  in 3 out 1\n"
++    }
++  },
++  {
++    "case": "split",
++    "certify_exit": 0,
++    "errors": "",
++    "bound": {
++      "guaranteed_tokens": 1,
++      "estimated_tokens": 201,
++      "total_tokens": 202,
++      "within_budget": true,
++      "defined": true,
++      "cost": 0.0,
++      "cost_complete": false
++    }
++  },
++  {
++    "case": "shadow",
++    "certify_exit": 0,
++    "errors": "",
++    "bound": {
++      "guaranteed_tokens": 1,
++      "estimated_tokens": 1,
++      "total_tokens": 2,
++      "within_budget": true,
++      "defined": true,
++      "cost": 0.0,
++      "cost_complete": false
++    },
++    "first_violation": {
++      "seed": 3,
++      "trace": "Shadow:\n  calls          1\n  actual tokens  348  (input 1 + output 347)\n    y = p via m  in 1 out 347\n"
++    }
++  },
++  {
++    "case": "equal_bounds",
++    "certify_exit": 0,
++    "errors": "",
++    "bound": {
++      "guaranteed_tokens": 10,
++      "estimated_tokens": 101,
++      "total_tokens": 111,
++      "within_budget": true,
++      "defined": true,
++      "cost": 0.0,
++      "cost_complete": false
++    }
++  }
++]
++Example checks: 32 passed: 32
+diff --git a/audit/2026-09-17/shadow.orch b/audit/2026-09-17/shadow.orch
+index cbc69a9..6fc07ea 100644
+--- a/audit/2026-09-17/shadow.orch
++++ b/audit/2026-09-17/shadow.orch
+@@ -1,11 +1,11 @@
+-workflow Shadow budget 10000 {
+- input flag: boolean max_tokens 1;
+- input src: text max_tokens 0;
+- model m = mock("outer") max_tokens 1;
+- prompt p(x: text) -> text = "{x}";
+- if flag {
+-   model m = mock("inner") max_tokens 1000;
+- }
+- let y: text = call p(src) using m;
+- output y;
+-}
++workflow Shadow budget 10000 {
++ input flag: boolean max_tokens 1;
++ input src: text max_tokens 0;
++ model m = mock("outer") max_tokens 1;
++ prompt p(x: text) -> text = "{x}";
++ if flag {
++   model m = mock("inner") max_tokens 1000;
++ }
++ let y: text = call p(src) using m;
++ output y;
++}
+diff --git a/audit/2026-09-17/split.orch b/audit/2026-09-17/split.orch
+index b5658d2..b2e3ce9 100644
+--- a/audit/2026-09-17/split.orch
++++ b/audit/2026-09-17/split.orch
+@@ -1,14 +1,14 @@
+-workflow Split budget 1000 {
+- input flag: boolean max_tokens 1;
+- input wide: text max_tokens 200;
+- input narrow: text max_tokens 0;
+- model small = mock("small") max_tokens 1;
+- model large = mock("large") max_tokens 100;
+- prompt p(x: text) -> text = "{x}";
+- if flag {
+-   let a: text = call p(wide) using small;
+- } else {
+-   let b: text = call p(narrow) using large;
+- }
+- output narrow;
+-}
++workflow Split budget 1000 {
++ input flag: boolean max_tokens 1;
++ input wide: text max_tokens 200;
++ input narrow: text max_tokens 0;
++ model small = mock("small") max_tokens 1;
++ model large = mock("large") max_tokens 100;
++ prompt p(x: text) -> text = "{x}";
++ if flag {
++   let a: text = call p(wide) using small;
++ } else {
++   let b: text = call p(narrow) using large;
++ }
++ output narrow;
++}
+diff --git a/audit/2026-09-17/tests.txt b/audit/2026-09-17/tests.txt
+index 9c19dc0..f4a3946 100644
+--- a/audit/2026-09-17/tests.txt
++++ b/audit/2026-09-17/tests.txt
+@@ -1,84 +1,84 @@
+-PASS lexer keyword and location
+-PASS lexer comment and identifier
+-PASS lexer string escapes
+-PASS lexer decimal and boolean
+-PASS lexer bad character
+-PASS lexer unterminated string
+-PASS lexer lone bang
+-PASS parser full statement forms
+-PASS parser call structure
+-PASS parser empty workflow
+-PASS parser missing semicolon
+-PASS parser multiple error recovery
+-PASS parser missing closing brace
+-PASS parser empty input
+-PASS parser long identifier
+-PASS parser integer overflow
+-PASS parser invalid call argument
+-PASS parser unexpected statement
+-PASS AST printer
+-PASS secret-dependent cost is rejected
+-PASS balanced arms under secret accepted
+-PASS public guard with unequal arms fine
+-PASS untrusted guard on unequal arms warns
+-PASS run is deterministic for a seed
+-PASS run stays within certified bound
+-PASS run respects declared retry bound
+-PASS run takes exactly one branch arm
+-PASS run refuses ill-typed program
+-PASS parser parses branch
+-PASS cost branch takes maximum
+-PASS cost retry multiplies
+-PASS cost retry overrun caught
+-PASS cost separates guaranteed from estimated
+-PASS cost assumption moves only estimated half
+-PASS empty branch arm costs nothing
+-PASS require violation reported
+-PASS require satisfied by bound
+-PASS require on unbounded subject
+-PASS require lower bound undecidable
+-PASS unbounded input reaching prompt rejected
+-PASS label lattice join and order
+-PASS untrusted input taints model output
+-PASS untrusted value cannot reach sink
+-PASS secret cannot reach sink
+-PASS secret guarded effect is implicit flow
+-PASS untrusted guarded effect rejected
+-PASS declassification clears confidentiality
+-PASS reclassification recorded with justification
+-PASS empty justification rejected
+-PASS pc label survives declassification
+-PASS unknown tool reported
+-PASS tool arity and types checked
+-PASS clean sink accepted
+-PASS branch binding does not escape
+-PASS certificate records bound and labels
+-PASS IR carries regions and repeat factors
+-PASS saturating arithmetic never wraps
+-PASS symbol table lookup
+-PASS semantic valid program
+-PASS semantic duplicate symbols
+-PASS semantic undeclared identifier
+-PASS semantic type mismatch
+-PASS semantic unknown prompt
+-PASS semantic prompt arity
+-PASS semantic prompt argument type
+-PASS semantic placeholder unknown
+-PASS semantic placeholder missing
+-PASS semantic placeholder duplicate
+-PASS semantic unknown model
+-PASS semantic secret prompt exposure
+-PASS semantic secret output exposure
+-PASS semantic budget exceeded
+-PASS semantic missing output
+-PASS semantic multiple outputs
+-PASS semantic multiple diagnostics
+-PASS semantic declaration before use
+-PASS semantic unknown requirement subject
+-PASS semantic zero budget
+-PASS output literal expression
+-PASS IR valid lowering
+-PASS IR refuses invalid program
+-PASS IR dependency cycle detector
+-PASS IR JSON export
+-Passed 83/83 tests.
++PASS lexer keyword and location
++PASS lexer comment and identifier
++PASS lexer string escapes
++PASS lexer decimal and boolean
++PASS lexer bad character
++PASS lexer unterminated string
++PASS lexer lone bang
++PASS parser full statement forms
++PASS parser call structure
++PASS parser empty workflow
++PASS parser missing semicolon
++PASS parser multiple error recovery
++PASS parser missing closing brace
++PASS parser empty input
++PASS parser long identifier
++PASS parser integer overflow
++PASS parser invalid call argument
++PASS parser unexpected statement
++PASS AST printer
++PASS secret-dependent cost is rejected
++PASS balanced arms under secret accepted
++PASS public guard with unequal arms fine
++PASS untrusted guard on unequal arms warns
++PASS run is deterministic for a seed
++PASS run stays within certified bound
++PASS run respects declared retry bound
++PASS run takes exactly one branch arm
++PASS run refuses ill-typed program
++PASS parser parses branch
++PASS cost branch takes maximum
++PASS cost retry multiplies
++PASS cost retry overrun caught
++PASS cost separates guaranteed from estimated
++PASS cost assumption moves only estimated half
++PASS empty branch arm costs nothing
++PASS require violation reported
++PASS require satisfied by bound
++PASS require on unbounded subject
++PASS require lower bound undecidable
++PASS unbounded input reaching prompt rejected
++PASS label lattice join and order
++PASS untrusted input taints model output
++PASS untrusted value cannot reach sink
++PASS secret cannot reach sink
++PASS secret guarded effect is implicit flow
++PASS untrusted guarded effect rejected
++PASS declassification clears confidentiality
++PASS reclassification recorded with justification
++PASS empty justification rejected
++PASS pc label survives declassification
++PASS unknown tool reported
++PASS tool arity and types checked
++PASS clean sink accepted
++PASS branch binding does not escape
++PASS certificate records bound and labels
++PASS IR carries regions and repeat factors
++PASS saturating arithmetic never wraps
++PASS symbol table lookup
++PASS semantic valid program
++PASS semantic duplicate symbols
++PASS semantic undeclared identifier
++PASS semantic type mismatch
++PASS semantic unknown prompt
++PASS semantic prompt arity
++PASS semantic prompt argument type
++PASS semantic placeholder unknown
++PASS semantic placeholder missing
++PASS semantic placeholder duplicate
++PASS semantic unknown model
++PASS semantic secret prompt exposure
++PASS semantic secret output exposure
++PASS semantic budget exceeded
++PASS semantic missing output
++PASS semantic multiple outputs
++PASS semantic multiple diagnostics
++PASS semantic declaration before use
++PASS semantic unknown requirement subject
++PASS semantic zero budget
++PASS output literal expression
++PASS IR valid lowering
++PASS IR refuses invalid program
++PASS IR dependency cycle detector
++PASS IR JSON export
++Passed 83/83 tests.
+diff --git a/bench/results/evaluation.txt b/bench/results/evaluation.txt
+index 464520f..a49617c 100644
+--- a/bench/results/evaluation.txt
++++ b/bench/results/evaluation.txt
+@@ -1,108 +1,108 @@
+-OrchLang evaluation
+-===================
+-
+-E1-E3  certified bound versus observed execution
+-       (23 workflows, 4600 executions; "paths" counts distinct model-sets
+-        observed, so 1 means a branch arm never ran)
+-
+-workflow          certified  out<=  in<=  flat  cfa   peak  slack  paths  cert_viol  comp_viol  flat_viol  cfa_viol
+-----------------  ---------  -----  ----  ----  ----  ----  -----  -----  ---------  ---------  ---------  --------
+-branch_1          1006       750    256   1284  1006  935   1.08   2      0          0          0          0       
+-branch_2          1734       1350   384   2290  1734  1558  1.11   2      0          0          0          0       
+-branch_3          2462       1950   512   3296  2462  2229  1.1    2      0          0          0          0       
+-branch_4          3190       2550   640   4302  3190  2905  1.1    2      0          0          0          0       
+-branch_in_retry   2462       1950   512   1284  1006  2005  1.23   2      0          0          15         23      
+-branch_nested     1734       1350   384   3746  2462  1445  1.2    2      0          0          0          0       
+-chain_1           278        150    128   278   278   273   1.02   1      0          0          0          0       
+-chain_2           586        300    286   586   586   539   1.09   1      0          0          0          0       
+-chain_3           894        450    444   894   894   812   1.1    1      0          0          0          0       
+-chain_4           1202       600    602   1202  1202  1085  1.11   1      0          0          0          0       
+-chain_5           1510       750    760   1510  1510  1288  1.17   1      0          0          0          0       
+-retry_2           556        300    256   278   278   542   1.03   1      0          0          43         43      
+-retry_3           834        450    384   278   278   693   1.2    1      0          0          59         59      
+-retry_4           1112       600    512   278   278   875   1.27   1      0          0          63         63      
+-retry_5           1390       750    640   278   278   1144  1.22   1      0          0          63         63      
+-retry_6           1668       900    768   278   278   1144  1.46   1      0          0          63         63      
+-retry_in_branch   1112       750    512   1284  1284  947   1.17   2      0          0          0          0       
+-retry_nested_2x2  1112       600    512   278   278   901   1.23   1      0          0          102        102     
+-retry_nested_2x3  1668       900    768   278   278   1298  1.29   1      0          0          111        111     
+-retry_nested_3x3  2502       1350   1152  278   278   1363  1.84   1      0          0          117        117     
+-wide_input_200    666        300    366   666   666   600   1.11   1      0          0          0          0       
+-wide_input_2000   2466       300    2166  2466  2466  2339  1.05   1      0          0          0          0       
+-wide_input_800    1266       300    966   1266  1266  1158  1.09   1      0          0          0          0       
+-
+-  certified total exceeded        : 0 of 4600
+-  certified output component      : 0 of 4600
+-  certified input component       : 0 of 4600
+-  flat per-call sum exceeded      : 636 of 4600 (13.8%)
+-  control-flow-aware rule exceeded: 644 of 4600 (14.0%)
+-  slack vs peak observed          : median 1.11x, range 1.02-1.84x
+-  branch workflows with a dead arm: 0
+-
+-E4-E5  relational obligation: does the secret move the bill?
+-
+-workflow                   expected  verdict  comparisons  bills_differ  witness                                         
+--------------------------  --------  -------  -----------  ------------  ------------------------------------------------
+-EmptyBothArms              accept    accept   425          0                                                             
+-MatchingInnerPublicGuard   accept    accept   425          0                                                             
+-SameCallBothArms           accept    accept   425          0                                                             
+-SameLiteral                accept    accept   425          0                                                             
+-SameModelBothArms          accept    accept   425          0                                                             
+-SameRetryBound             accept    accept   425          0                                                             
+-TwoCallsBothArms           accept    accept   425          0                                                             
+-CallInOneArmOnly           reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
+-DifferentArgument          reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
+-DifferentInnerPublicGuard  reject    reject   425          126           {"flag": "false", "s": "0"} vs {"flag": "true", 
+-DifferentLiteralLength     reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
+-DifferentModel             reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
+-DifferentRetryBound        reject    reject   425          81            {"flag": "false", "s": "0"} vs {"flag": "true", 
+-ExtraCall                  reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
+-
+-  accepted workflows: 2975 paired comparisons, 0 showed a different bill
+-  rejected workflows: 7 had a concrete leaking witness, 0 had none
+-
+-E6  flow policy conformance on the paired security suite
+-
+-workflow                     expected  verdict  codes    
+----------------------------  --------  -------  ---------
+-InjectionInBranch            reject    reject   E233 E235
+-InjectionInRetry             reject    reject   E233     
+-InjectionToSink              reject    reject   E233     
+-InjectionTransitive          reject    reject   E233     
+-MixedTrustToSink             reject    reject   E233     
+-SecretAsOutput               reject    reject   E231     
+-SecretCostChannel            reject    reject   E236     
+-SecretGuardedEffect          reject    reject   E234     
+-SecretGuardedLaundered       reject    reject   E234 W236
+-SecretToPrompt               reject    reject   E230 E231
+-SecretToSink                 reject    reject   E232     
+-UntrustedGuardedEffect       reject    reject   E235     
+-UntrustedToSinkNoEndorse     reject    reject   E233     
+-BalancedCostArms             accept    accept            
+-EffectOutsideSecretBranch    accept    accept            
+-InjectionEndorsed            accept    accept            
+-InjectionInBranchEndorsed    accept    accept            
+-InjectionInRetryEndorsed     accept    accept            
+-InjectionTransitiveEndorsed  accept    accept            
+-SecretAsOutputDeclassified   accept    accept            
+-SecretToPromptDeclassified   accept    accept            
+-SecretToSinkDeclassified     accept    accept            
+-TrustedGuardedEffect         accept    accept            
+-TrustedOnlyToSink            accept    accept            
+-UnguardedEffect              accept    accept            
+-UntrustedToOutputOnly        accept    accept            
+-
+-  unsafe rejected for a flow reason : 13
+-  unsafe accepted or wrong reason   : 0
+-  safe accepted                     : 13
+-  safe rejected                     : 0
+-
+-  This measures conformance to the declared policy, not robustness to
+-  adversarial text: the safe variants differ from the unsafe ones by a
+-  trusted endorsement or declassification, which the compiler records
+-  rather than verifies.
+-
+-Analysis cost
+-
+-  36 workflows certified in 0.42 s (11.5 ms each, including process startup;
+-  this is not an isolated measurement of analyser time)
++OrchLang evaluation
++===================
++
++E1-E3  certified bound versus observed execution
++       (23 workflows, 4600 executions; "paths" counts distinct model-sets
++        observed, so 1 means a branch arm never ran)
++
++workflow          certified  out<=  in<=  flat  cfa   peak  slack  paths  cert_viol  comp_viol  flat_viol  cfa_viol
++----------------  ---------  -----  ----  ----  ----  ----  -----  -----  ---------  ---------  ---------  --------
++branch_1          1006       750    256   1284  1006  935   1.08   2      0          0          0          0       
++branch_2          1734       1350   384   2290  1734  1558  1.11   2      0          0          0          0       
++branch_3          2462       1950   512   3296  2462  2229  1.1    2      0          0          0          0       
++branch_4          3190       2550   640   4302  3190  2905  1.1    2      0          0          0          0       
++branch_in_retry   2462       1950   512   1284  1006  2005  1.23   2      0          0          15         23      
++branch_nested     1734       1350   384   3746  2462  1445  1.2    2      0          0          0          0       
++chain_1           278        150    128   278   278   273   1.02   1      0          0          0          0       
++chain_2           586        300    286   586   586   539   1.09   1      0          0          0          0       
++chain_3           894        450    444   894   894   812   1.1    1      0          0          0          0       
++chain_4           1202       600    602   1202  1202  1085  1.11   1      0          0          0          0       
++chain_5           1510       750    760   1510  1510  1288  1.17   1      0          0          0          0       
++retry_2           556        300    256   278   278   542   1.03   1      0          0          43         43      
++retry_3           834        450    384   278   278   693   1.2    1      0          0          59         59      
++retry_4           1112       600    512   278   278   875   1.27   1      0          0          63         63      
++retry_5           1390       750    640   278   278   1144  1.22   1      0          0          63         63      
++retry_6           1668       900    768   278   278   1144  1.46   1      0          0          63         63      
++retry_in_branch   1112       750    512   1284  1284  947   1.17   2      0          0          0          0       
++retry_nested_2x2  1112       600    512   278   278   901   1.23   1      0          0          102        102     
++retry_nested_2x3  1668       900    768   278   278   1298  1.29   1      0          0          111        111     
++retry_nested_3x3  2502       1350   1152  278   278   1363  1.84   1      0          0          117        117     
++wide_input_200    666        300    366   666   666   600   1.11   1      0          0          0          0       
++wide_input_2000   2466       300    2166  2466  2466  2339  1.05   1      0          0          0          0       
++wide_input_800    1266       300    966   1266  1266  1158  1.09   1      0          0          0          0       
++
++  certified total exceeded        : 0 of 4600
++  certified output component      : 0 of 4600
++  certified input component       : 0 of 4600
++  flat per-call sum exceeded      : 636 of 4600 (13.8%)
++  control-flow-aware rule exceeded: 644 of 4600 (14.0%)
++  slack vs peak observed          : median 1.11x, range 1.02-1.84x
++  branch workflows with a dead arm: 0
++
++E4-E5  relational obligation: does the secret move the bill?
++
++workflow                   expected  verdict  comparisons  bills_differ  witness                                         
++-------------------------  --------  -------  -----------  ------------  ------------------------------------------------
++EmptyBothArms              accept    accept   425          0                                                             
++MatchingInnerPublicGuard   accept    accept   425          0                                                             
++SameCallBothArms           accept    accept   425          0                                                             
++SameLiteral                accept    accept   425          0                                                             
++SameModelBothArms          accept    accept   425          0                                                             
++SameRetryBound             accept    accept   425          0                                                             
++TwoCallsBothArms           accept    accept   425          0                                                             
++CallInOneArmOnly           reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
++DifferentArgument          reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
++DifferentInnerPublicGuard  reject    reject   425          126           {"flag": "false", "s": "0"} vs {"flag": "true", 
++DifferentLiteralLength     reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
++DifferentModel             reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
++DifferentRetryBound        reject    reject   425          81            {"flag": "false", "s": "0"} vs {"flag": "true", 
++ExtraCall                  reject    reject   425          225           {"flag": "false", "s": "0"} vs {"flag": "true", 
++
++  accepted workflows: 2975 paired comparisons, 0 showed a different bill
++  rejected workflows: 7 had a concrete leaking witness, 0 had none
++
++E6  flow policy conformance on the paired security suite
++
++workflow                     expected  verdict  codes    
++---------------------------  --------  -------  ---------
++InjectionInBranch            reject    reject   E233 E235
++InjectionInRetry             reject    reject   E233     
++InjectionToSink              reject    reject   E233     
++InjectionTransitive          reject    reject   E233     
++MixedTrustToSink             reject    reject   E233     
++SecretAsOutput               reject    reject   E231     
++SecretCostChannel            reject    reject   E236     
++SecretGuardedEffect          reject    reject   E234     
++SecretGuardedLaundered       reject    reject   E234 W236
++SecretToPrompt               reject    reject   E230 E231
++SecretToSink                 reject    reject   E232     
++UntrustedGuardedEffect       reject    reject   E235     
++UntrustedToSinkNoEndorse     reject    reject   E233     
++BalancedCostArms             accept    accept            
++EffectOutsideSecretBranch    accept    accept            
++InjectionEndorsed            accept    accept            
++InjectionInBranchEndorsed    accept    accept            
++InjectionInRetryEndorsed     accept    accept            
++InjectionTransitiveEndorsed  accept    accept            
++SecretAsOutputDeclassified   accept    accept            
++SecretToPromptDeclassified   accept    accept            
++SecretToSinkDeclassified     accept    accept            
++TrustedGuardedEffect         accept    accept            
++TrustedOnlyToSink            accept    accept            
++UnguardedEffect              accept    accept            
++UntrustedToOutputOnly        accept    accept            
++
++  unsafe rejected for a flow reason : 13
++  unsafe accepted or wrong reason   : 0
++  safe accepted                     : 13
++  safe rejected                     : 0
++
++  This measures conformance to the declared policy, not robustness to
++  adversarial text: the safe variants differ from the unsafe ones by a
++  trusted endorsement or declassification, which the compiler records
++  rather than verifies.
++
++Analysis cost
++
++  36 workflows certified in 0.42 s (11.5 ms each, including process startup;
++  this is not an isolated measurement of analyser time)
+diff --git a/docs/DATAFLOW_CERTIFICATES.md b/docs/DATAFLOW_CERTIFICATES.md
+index e99bcd4..270f7af 100644
+--- a/docs/DATAFLOW_CERTIFICATES.md
++++ b/docs/DATAFLOW_CERTIFICATES.md
+@@ -1,4 +1,4 @@
+-# Text-dataflow certificates: response contents matter
++# Verified text-dataflow decision procedure
+ 
+ This additional path supports root public text/Boolean inputs, secret Boolean
+ guards, lexical mock contracts/prompts and text-valued call bindings. A response
+@@ -10,12 +10,16 @@ closed, so the resource projection cannot silently hide an explicit output chann
+ ```text
+ python scripts/dataflow_certificate.py issue examples/certificates/dataflow_certificate.orch /new/certificate.json --lean /absolute/path/to/lean
+ python scripts/dataflow_certificate.py check examples/certificates/dataflow_certificate.orch /new/certificate.json --lean /absolute/path/to/lean
++python scripts/dataflow_certificate.py decide examples/certificates/dataflow_certificate.orch --lean /absolute/path/to/lean
+ ```
+ 
+ Issuance refuses to overwrite a file. The output parent must already exist.
+ The same bytes and independently reconstructed core must match when checking.
+-An untrusted plan is decoded and checked in Lean; it is never executed as Lean
+-source. The Python reader/slot allocation/serialization/hash binding are trusted.
++A saved plan is decoded and compared with recomputed normalization in Lean; it
++is diagnostic output, not a proof-carrying witness or a complexity advantage.
++The primary `decide` command invokes `checkProgram` directly and needs no saved
++plan. `decoded_decision_sound` proves its guarantee. The Python reader/slot
++allocation/serialization/hash binding are trusted.
+ No verified source parser or full C++ implementation theorem is claimed.
+ 
+ ## Guarantee and scope
+@@ -27,8 +31,14 @@ byte counts and failure status. Sequence uses the returned store for the next
+ call. Public Booleans have the same values in the compared executions. Secret
+ Booleans can affect control only; secret text inputs are outside the fragment.
+ 
+-The normalizer removes a secret branch only when its arms have the same
+-normalized plan, including response-slot dependencies. Source-local names are
++The normalizer rewrites text using append associativity, empty-string identities
++and adjacent literal folding. It removes sequence units and collapses public
++branches whose normalized arms agree. It then removes a secret branch when both
++arms have the same normalized plan, including response-slot dependencies. All
++these rules preserve complete store and ordered-trace semantics. The source
++reader already folded adjacent template literals before this extension, so
++request-expression gains are measured at core level separately from source gains.
++Source-local names are
+ aligned positionally across sibling blocks, with fresh slots after a join.
+ Lexical lookup prevents branch locals escaping or overwriting an outer binding.
+ Raw core stores retain unreachable branch-local slots; these slots have no
+diff --git a/proof/DataflowCore.lean b/proof/DataflowCore.lean
+index 487fb6f..9ba0a2a 100644
+--- a/proof/DataflowCore.lean
++++ b/proof/DataflowCore.lean
+@@ -21,6 +21,43 @@ def text (env : Store) : Text → String
+   | .var slot => env slot
+   | .append a b => text env a ++ text env b
+ 
++-- Canonicalize the free string monoid without assuming anything about variables.
++-- Calls still require equal full serialized requests, contracts and response slots.
++def appendText : Text → Text → Text
++  | .append a b, c => appendText a (appendText b c)
++  | .literal s, c =>
++      if s = "" then c else
++      match c with
++      | .literal t => .literal (s ++ t)
++      | .append (.literal t) d => .append (.literal (s ++ t)) d
++      | _ => .append (.literal s) c
++  | .var i, c => if c = .literal "" then .var i else .append (.var i) c
++
++theorem appendText_correct (env : Store) (a b : Text) :
++    text env (appendText a b) = text env a ++ text env b := by
++  induction a generalizing b with
++  | append a c iha ihc => simp [appendText, text, iha, ihc, String.append_assoc]
++  | var i => by_cases h : b = .literal "" <;> simp [appendText, h, text]
++  | literal s =>
++      by_cases h : s = ""
++      · simp [appendText, h, text]
++      · cases b with
++        | literal t => simp [appendText, h, text]
++        | var i => simp [appendText, h, text]
++        | append b c => cases b <;> simp [appendText, h, text, String.append_assoc]
++
++def normalizeText : Text → Text
++  | .literal s => .literal s
++  | .var i => .var i
++  | .append a b => appendText (normalizeText a) (normalizeText b)
++
++theorem normalizeText_correct (env : Store) (request : Text) :
++    text env (normalizeText request) = text env request := by
++  induction request with
++  | literal s => rfl
++  | var i => rfl
++  | append a b iha ihb => simp [normalizeText, appendText_correct, text, iha, ihb]
++
+ structure Event where
+   contract : String
+   input : Nat
+@@ -59,6 +96,37 @@ def join (x y : Execution) : Execution :=
+ def compose (a b : Semantics) : Semantics := fun env =>
+   (a env).flatMap fun x => (b x.store).map (join x)
+ 
++theorem rat_one_mul (a : Rat) : (1 : Rat) * a = a := by
++  have hn : (1 : Rat).num = 1 := rfl
++  have hd : (1 : Rat).den = 1 := rfl
++  change Std.Internal.Rat.mul 1 a = a
++  cases a
++  simp [Std.Internal.Rat.mul, hn, hd]
++
++theorem rat_mul_one (a : Rat) : a * (1 : Rat) = a := by
++  have hn : (1 : Rat).num = 1 := rfl
++  have hd : (1 : Rat).den = 1 := rfl
++  change Std.Internal.Rat.mul a 1 = a
++  cases a
++  simp [Std.Internal.Rat.mul, hn, hd]
++
++theorem compose_unit_left (a : Semantics) : compose unit a = a := by
++  funext env
++  simp only [compose, unit, List.flatMap_singleton]
++  apply List.map_id''
++  intro x
++  cases x
++  simp [join, rat_one_mul]
++
++theorem compose_unit_right (a : Semantics) : compose a unit = a := by
++  funext env
++  simp [compose, unit, join, rat_mul_one]
++
++#print axioms rat_one_mul
++#print axioms rat_mul_one
++#print axioms compose_unit_left
++#print axioms compose_unit_right
++
+ -- Retry bodies are lexical: their local bindings do not escape an attempt.
+ -- All events, including billed failures, survive. Stop iff no call failed.
+ def retry : Nat → Semantics → Semantics
+@@ -100,17 +168,45 @@ def denote (kernel : Kernel) (public secret : Nat → Bool) : Program → Semant
+   | .secretBranch g a b => if secret g then denote kernel public secret a else denote kernel public secret b
+   | .retry n body => retry n (denote kernel public secret body)
+ 
++def sequencePlan (a b : Plan) : Plan :=
++  match a, b with
++  | .skip, _ => b
++  | _, .skip => a
++  | _, _ => .seq a b
++
++theorem sequencePlan_correct (kernel : Kernel) (public : Nat → Bool) (a b : Plan) :
++    denotePlan kernel public (sequencePlan a b) =
++      compose (denotePlan kernel public a) (denotePlan kernel public b) := by
++  cases a <;> cases b <;>
++    simp [sequencePlan, denotePlan, compose_unit_left, compose_unit_right]
++
++def publicPlan (guard : Nat) (a b : Plan) : Plan :=
++  if a = b then a else .publicBranch guard a b
++
++theorem publicPlan_correct (kernel : Kernel) (public : Nat → Bool)
++    (guard : Nat) (a b : Plan) :
++    denotePlan kernel public (publicPlan guard a b) =
++      (if public guard then denotePlan kernel public a else denotePlan kernel public b) := by
++  by_cases h : a = b
++  · simp [publicPlan, h]
++  · simp [publicPlan, h, denotePlan]
++
++theorem call_normalizeText (kernel : Kernel) (slot : Nat) (contract : String) (request : Text) :
++    call kernel slot contract (normalizeText request) = call kernel slot contract request := by
++  funext env
++  simp [call, normalizeText_correct]
++
+ def normalize : Program → Option Plan
+   | .skip => some .skip
+-  | .call slot contract request => some (.call slot contract request)
++  | .call slot contract request => some (.call slot contract (normalizeText request))
+   | .seq a b => do
+       let a' ← normalize a
+       let b' ← normalize b
+-      pure (.seq a' b')
++      pure (sequencePlan a' b')
+   | .publicBranch g a b => do
+       let a' ← normalize a
+       let b' ← normalize b
+-      pure (.publicBranch g a' b')
++      pure (publicPlan g a' b')
+   | .secretBranch _ a b => do
+       let a' ← normalize a
+       let b' ← normalize b
+@@ -124,7 +220,10 @@ theorem normalize_correct (program : Program) (kernel : Kernel) (public secret :
+       denote kernel public secret program = denotePlan kernel public plan := by
+   induction program with
+   | skip => intro plan h; cases h; rfl
+-  | call slot contract request => intro plan h; cases h; rfl
++  | call slot contract request =>
++      intro plan h
++      cases h
++      exact (call_normalizeText kernel slot contract request).symm
+   | seq a b iha ihb =>
+       intro plan h
+       cases ha : normalize a with
+@@ -135,7 +234,7 @@ theorem normalize_correct (program : Program) (kernel : Kernel) (public secret :
+           | some pb =>
+               simp [normalize, ha, hb] at h
+               cases h
+-              simp [denote, denotePlan, iha pa ha, ihb pb hb]
++              simp [denote, sequencePlan_correct, iha pa ha, ihb pb hb]
+   | publicBranch g a b iha ihb =>
+       intro plan h
+       cases ha : normalize a with
+@@ -146,7 +245,7 @@ theorem normalize_correct (program : Program) (kernel : Kernel) (public secret :
+           | some pb =>
+               simp [normalize, ha, hb] at h
+               cases h
+-              simp [denote, denotePlan, iha pa ha, ihb pb hb]
++              simp [denote, publicPlan_correct, iha pa ha, ihb pb hb]
+   | secretBranch g a b iha ihb =>
+       intro plan h
+       cases ha : normalize a with
+@@ -173,6 +272,10 @@ theorem normalize_correct (program : Program) (kernel : Kernel) (public secret :
+ def checkCertificate (program : Program) (plan : Plan) : Bool :=
+   decide (normalize program = some plan)
+ 
++-- Primary interface: a verified (incomplete) decision procedure. A saved plan is
++-- only a diagnostic result: checking it recomputes normalize, not a cheaper proof.
++def checkProgram (program : Program) : Bool := (normalize program).isSome
++
+ theorem relational_sound (program : Program) (plan : Plan)
+     (checked : checkCertificate program plan = true) (kernel : Kernel)
+     (public left right : Nat → Bool) :
+@@ -181,6 +284,15 @@ theorem relational_sound (program : Program) (plan : Plan)
+   exact (normalize_correct program kernel public left plan accepted).trans
+     (normalize_correct program kernel public right plan accepted).symm
+ 
++theorem checkProgram_sound (program : Program) (checked : checkProgram program = true)
++    (kernel : Kernel) (public left right : Nat → Bool) :
++    denote kernel public left program = denote kernel public right program := by
++  cases h : normalize program with
++  | none => simp [checkProgram, h] at checked
++  | some plan =>
++      exact (normalize_correct program kernel public left plan h).trans
++        (normalize_correct program kernel public right plan h).symm
++
+ theorem observer_projection (program : Program) (plan : Plan)
+     (checked : checkCertificate program plan = true) (kernel : Kernel)
+     (public left right : Nat → Bool) (env : Store) {α : Type}
+@@ -199,8 +311,26 @@ private def pipelinePlan : Plan :=
+   (.seq (.call 0 "c" (.literal "yes")) (.call 1 "c" (.literal "next:x")))) pipelinePlan)
+ #guard text (fun _ => "é") (.append (.literal "next:") (.var 0)) = "next:é"
+ 
++-- Strict gains over comparing raw request/plan trees, under the same kernels.
++private def expandedRequest : Text :=
++  .append (.append (.literal "Ne") (.literal "xt:")) (.append (.var 0) (.literal ""))
++#guard expandedRequest != .append (.literal "Next:") (.var 0)
++#guard normalizeText expandedRequest = .append (.literal "Next:") (.var 0)
++#guard checkCertificate (.secretBranch 0
++    (.call 1 "c" expandedRequest)
++    (.call 1 "c" (.append (.literal "Next:") (.var 0))))
++  (.call 1 "c" (.append (.literal "Next:") (.var 0)))
++#guard checkCertificate (.secretBranch 0
++    (.seq .skip (.publicBranch 0 pipeline pipeline)) pipeline) pipelinePlan
++
++#print axioms appendText_correct
++#print axioms normalizeText_correct
++#print axioms sequencePlan_correct
++#print axioms publicPlan_correct
++
+ #print axioms normalize_correct
+ #print axioms relational_sound
++#print axioms checkProgram_sound
+ #print axioms observer_projection
+ end OrchLang.Dataflow
+ 
+@@ -266,6 +396,19 @@ def checkDecoded (pj cj : Json) : Except String Bool :=
+   | .error e, _ => .error e
+   | _, .error e => .error e
+ 
++def decideDecoded (pj : Json) : Except String Bool :=
++  match decodeProgram 256 pj with
++  | .ok program => .ok (checkProgram program)
++  | .error e => .error e
++
++theorem decoded_decision_sound (pj : Json) (program : Program)
++    (hp : decodeProgram 256 pj = .ok program)
++    (checked : decideDecoded pj = .ok true) (kernel : Kernel)
++    (public left right : Nat → Bool) :
++    denote kernel public left program = denote kernel public right program := by
++  apply checkProgram_sound program
++  simpa [decideDecoded, hp] using checked
++
+ theorem decoded_certificate_sound (pj cj : Json) (program : Program) (plan : Plan)
+     (hp : decodeProgram 256 pj = .ok program) (hc : decodePlan cj = .ok plan)
+     (checked : checkDecoded pj cj = .ok true) (kernel : Kernel)
+@@ -275,6 +418,7 @@ theorem decoded_certificate_sound (pj cj : Json) (program : Program) (plan : Pla
+   simpa [checkDecoded, hp, hc] using checked
+ 
+ #print axioms decoded_certificate_sound
++#print axioms decoded_decision_sound
+ 
+ private structure TableEntry where
+   contract : String
+@@ -353,15 +497,26 @@ def checkBatch (j : Json) : Except String Json := do
+     let evaluations ← (← (← row.getObjVal? "execute").getArr?).mapM (executeJson program)
+     pure (Json.mkObj [("checked", Json.bool checked), ("executions", Json.arr evaluations)])
+   pure (Json.arr result)
++
++def decideBatch (j : Json) : Except String Json := do
++  let cases ← j.getArr?
++  let result ← cases.mapM fun row => do
++    let programJson ← row.getObjVal? "program"
++    let checked ← decideDecoded programJson
++    let program ← decodeProgram 256 programJson
++    let evaluations ← (← (← row.getObjVal? "execute").getArr?).mapM (executeJson program)
++    pure (Json.mkObj [("checked", Json.bool checked), ("executions", Json.arr evaluations)])
++  pure (Json.arr result)
+ end OrchLang.Dataflow
+ 
+ def main (args : List String) : IO UInt32 := do
+   match args with
+-  | [path] =>
++  | [path] | ["decide", path] =>
+       let contents ← IO.FS.readFile path
+       if contents.utf8ByteSize > 16000000 then
+         (← IO.getStderr).putStrLn "batch byte limit"; return 2
+-      match Lean.Json.parse contents >>= OrchLang.Dataflow.checkBatch with
++      let checker := if args.length = 2 then OrchLang.Dataflow.decideBatch else OrchLang.Dataflow.checkBatch
++      match Lean.Json.parse contents >>= checker with
+       | .ok result => IO.println result.compress; pure 0
+       | .error error => (← IO.getStderr).putStrLn error; pure 2
+   | _ => (← IO.getStderr).putStrLn "usage: lean --run proof/DataflowCore.lean BATCH.json"; pure 2
+diff --git a/proof/README.md b/proof/README.md
+index f890a2d..de3a286 100644
+--- a/proof/README.md
++++ b/proof/README.md
+@@ -8,15 +8,18 @@ lemmas are needed to check these files. They are separate small models; consult
+ lean proof/BoundedCore.lean
+ lean proof/FiniteRelational.lean
+ lean proof/DataflowCore.lean
++lean proof/AggregateReordering.lean
+ ```
+ 
+-`#print axioms` reports standard Lean `propext` and `Quot.sound` where used;
+-it must not report `sorryAx`. The checker guards include a valid identical-request
++`#print axioms` reports standard Lean `propext`, `Quot.sound` and, in the
++dataflow unit/arithmetic lemmas, `Classical.choice` where used. These are logical
++dependencies, not a measure of implementation security. It must not report
++`sorryAx`. The checker guards include a valid identical-request
+ plan, an invalid equal-length/different-content plan, and a wrong-plan certificate.
+ 
+-On the author's Windows machine the isolated executable is
+-`C:/Users/nambi/Documents/OrchLang Publication Work/tools/lean-4.19.0-windows/bin/lean.exe`.
+-It was downloaded from the official leanprover/lean4 v4.19.0 GitHub release.
++Use the `lean` executable from an isolated Lean 4.19.0 installation, or replace
++`lean` in these commands with its absolute path. The historical Windows tool
++archive was downloaded from the official leanprover/lean4 v4.19.0 GitHub release.
+ Archive SHA256: `2c197a74b6d9c4d46363e34e06591165ed848237ba66de849f8b8d5539eb3895`.
+ The release API provided no publisher digest, so this is a locally measured
+ provenance checksum, not an independent signature verification.
+@@ -59,3 +62,40 @@ keys, missing positive-probability requests and operational limits. These are
+ runtime checks, not a kernel-validity theorem. Error status is a returned value,
+ not an exception that aborts a body. The source reader remains trusted Python.
+ Full commands and boundaries: docs/DATAFLOW_CERTIFICATES.md.
++
++The primary interface is now a verified decision procedure: `checkProgram`
++computes whether normalization succeeds, and `decoded_decision_sound` proves
++the resulting relational guarantee for decoded programs. The executable accepts
++`lean --run proof/DataflowCore.lean decide batch.json` with cases containing only
++`program` and `execute`. The legacy saved-plan check recomputes normalization;
++its plan is diagnostic output, not a proof-carrying witness or an efficiency gain.
++
++New rewrites preserve complete state-transformer semantics: string-append
++associativity, empty-string identities, adjacent literal folding, sequence units,
++and elimination of public branches with equal normalized arms. The source reader
++already folded adjacent template literals, so request-rewrite precision gains
++are reported separately at core level. No observable call reordering occurs in
++this ordered-trace procedure.
++
++## Separate aggregate-only decision
++
++`AggregateReordering.lean` supports exactly two independent closed calls in each
++arm of one secret branch. It accepts equal action sequences and their reversal.
++An action includes the full contract and serialized request. Its observer records
++input bytes, output bytes, calls and failures for every contract; it discards
++call order. This judgment does not override C++ IFC rejection.
++
++`samples_comm` proves permutation of weighted aggregate outcomes after swapping
++the calls. `mass_perm` and `independent_calls_aggregate` prove equality of the
++exact histogram numerator for every Boolean predicate on the full observation,
++and equality of the common probability denominator. This is a distributional
++result modulo enumeration order, not equality of ordered traces. Each finite
++kernel uses natural numerators and a common denominator; normalized rational
++rows have this representation. The executable checks positive denominators and
++unit row mass. The algebraic theorem itself does not require valid probabilities.
++
++`decision_sound` and `decoded_decision_sound` cover the separate executable.
++`scripts/decide_aggregate.py` binds it to a restricted, trusted Python source
++reader. Response-dependent requests, secret text, mutable state, timing, retry,
++tools, and branch/nonliteral outputs are rejected. Literal source outputs occur
++only at workflow root. Budgets and provider conformance remain separate.
+diff --git a/runtime/dataflow_gate.py b/runtime/dataflow_gate.py
+index 7e3159c..32da804 100644
+--- a/runtime/dataflow_gate.py
++++ b/runtime/dataflow_gate.py
+@@ -12,18 +12,73 @@ from .finite_reference import Unsupported, canonical
+ from .source_gate import Reader, sequence, sha
+ 
+ 
+-def normalize(program):
++def syntactic_normalize(program):
++    """Historical baseline: exact request trees and exact public/sequence shape."""
+     kind = program[0]
+     if kind in {'skip', 'call'}:
+         return program
+     if kind == 'seq':
+-        a, b = normalize(program[1]), normalize(program[2])
++        a, b = syntactic_normalize(program[1]), syntactic_normalize(program[2])
+         return None if a is None or b is None else ['seq', a, b]
+     if kind in {'public', 'secret'}:
+-        a, b = normalize(program[2]), normalize(program[3])
++        a, b = syntactic_normalize(program[2]), syntactic_normalize(program[3])
+         if a is None or b is None:
+             return None
+         return ['public', program[1], a, b] if kind == 'public' else (a if a == b else None)
++    if kind == 'retry':
++        body = syntactic_normalize(program[2])
++        return None if body is None else ['retry', program[1], body]
++    raise Unsupported('unknown dataflow constructor')
++
++
++def append_text(a, b):
++    """Executable mirror of Lean appendText; never identifies different slots."""
++    if a[0] == 'append':
++        return append_text(a[1], append_text(a[2], b))
++    if a[0] == 'literal':
++        if a[1] == '':
++            return b
++        if b[0] == 'literal':
++            return ['literal', a[1] + b[1]]
++        if b[0] == 'append' and b[1][0] == 'literal':
++            return ['append', ['literal', a[1] + b[1][1]], b[2]]
++        return ['append', a, b]
++    if a[0] == 'var':
++        return a if b == ['literal', ''] else ['append', a, b]
++    raise Unsupported('unknown dataflow text constructor')
++
++
++def normalize_text(term):
++    if term[0] in {'literal', 'var'}:
++        return term
++    if term[0] == 'append':
++        return append_text(normalize_text(term[1]), normalize_text(term[2]))
++    raise Unsupported('unknown dataflow text constructor')
++
++
++def normalize(program):
++    """Verified rewrites preserve complete text-store/ordered-trace semantics.
++
++    This decision procedure recomputes its result; a serialized plan is an audit
++    output, not a proof-carrying witness or a search/check complexity advantage.
++    """
++    kind = program[0]
++    if kind == 'skip':
++        return program
++    if kind == 'call':
++        return ['call', program[1], program[2], normalize_text(program[3])]
++    if kind == 'seq':
++        a, b = normalize(program[1]), normalize(program[2])
++        if a is None or b is None:
++            return None
++        return b if a == ['skip'] else a if b == ['skip'] else ['seq', a, b]
++    if kind in {'public', 'secret'}:
++        a, b = normalize(program[2]), normalize(program[3])
++        if a is None or b is None:
++            return None
++        if a == b:
++            return a
++        return ['public', program[1], a, b] if kind == 'public' else None
+     if kind == 'retry':
+         body = normalize(program[2])
+         return None if body is None else ['retry', program[1], body]
+diff --git a/scripts/dataflow_certificate.py b/scripts/dataflow_certificate.py
+index 605f56d..4c1c51a 100644
+--- a/scripts/dataflow_certificate.py
++++ b/scripts/dataflow_certificate.py
+@@ -1,4 +1,4 @@
+-"""Issue/check source-bound text-dataflow certificates with Lean 4.19.0."""
++"""Run the verified dataflow decision procedure (legacy saved-plan support)."""
+ import argparse
+ import json
+ from pathlib import Path
+@@ -9,10 +9,10 @@ import time
+ 
+ ROOT = Path(__file__).resolve().parents[1]
+ sys.path.insert(0, str(ROOT))
+-from runtime.dataflow_gate import issue, bind_certificate
++from runtime.dataflow_gate import issue, bind_certificate, read_source
+ 
+ 
+-def run_checker(lean, cases, directory, record_prefix=None):
++def run_checker(lean, cases, directory, record_prefix=None, decision=False):
+     result, logs, commands = [], [], []
+     version=subprocess.run([str(lean),'--version'],capture_output=True,text=True,timeout=30)
+     if version.returncode or 'version 4.19.0,' not in version.stdout:
+@@ -22,7 +22,10 @@ def run_checker(lean, cases, directory, record_prefix=None):
+             chunk=cases[start:start+16]
+             batch = Path(temp)/f'batch-{start//16:03d}.json'
+             batch.write_text(json.dumps(chunk, ensure_ascii=False),encoding='utf-8',newline='\n')
+-            argv=[str(lean),'--run',str(ROOT/'proof/DataflowCore.lean'),str(batch)]
++            argv=[str(lean),'--run',str(ROOT/'proof/DataflowCore.lean')]
++            if decision:
++                argv.append('decide')
++            argv.append(str(batch))
+             started=time.perf_counter()
+             process = subprocess.run(argv,cwd=ROOT,capture_output=True,text=True,encoding='utf-8',timeout=180)
+             commands.append(dict(argv=argv,case_offset=start,cases=len(chunk),exit=process.returncode,
+@@ -43,12 +46,26 @@ def run_checker(lean, cases, directory, record_prefix=None):
+ 
+ def main():
+     p=argparse.ArgumentParser(description=__doc__)
+-    p.add_argument('mode',choices=['issue','check'])
++    p.add_argument('mode',choices=['decide','issue','check'])
+     p.add_argument('source',type=Path)
+-    p.add_argument('certificate',type=Path)
++    p.add_argument('certificate',type=Path,nargs='?')
+     p.add_argument('--lean',required=True,type=Path)
+     args=p.parse_args()
+     data=args.source.read_bytes()
++    if args.mode=='decide':
++        if args.certificate is not None:
++            p.error('decide takes a source and --lean, without a saved plan')
++        source=read_source(data)
++        with tempfile.TemporaryDirectory(prefix='dataflow-decision-') as temp:
++            results,_=run_checker(args.lean.resolve(),[dict(program=source['program'],execute=[])],temp,decision=True)
++        accepted=results[0]['checked']
++        print(json.dumps(dict(status='accepted' if accepted else 'rejected',
++                              source_sha256=source['source_sha256'],
++                              judgment='shared-public text-dataflow resource-distribution independence',
++                              trusted_boundary='Python source reader; not C++ IFC or source budget')))
++        return int(not accepted)
++    if args.certificate is None:
++        p.error('legacy issue/check requires a saved-plan path')
+     certificate=issue(data) if args.mode=='issue' else json.loads(args.certificate.read_text(encoding='utf-8'))
+     case=bind_certificate(data,certificate)
+     results,_=run_checker(args.lean.resolve(),[case],args.certificate.resolve().parent)
+@@ -59,8 +76,9 @@ def main():
+             json.dump(certificate,stream,indent=2,ensure_ascii=False)
+             stream.write('\n')
+     print(json.dumps(dict(status='checked',source_sha256=certificate['source_sha256'],
++                         method='verified decision procedure; saved plan is diagnostic output',
+                          scope='text-dataflow; shared public inputs; trusted source reader; no budget/provider guarantee')))
+ 
+ 
+ if __name__=='__main__':
+-    main()
++    raise SystemExit(main())
+diff --git a/scripts/report_publication.py b/scripts/report_publication.py
+index 77f1e07..290028f 100644
+--- a/scripts/report_publication.py
++++ b/scripts/report_publication.py
+@@ -63,7 +63,9 @@ def main():
+     tex += '\\hline\n\\end{tabular}\n'
+     (args.output/'external.md').write_text(table,encoding='utf-8',newline='\n')
+     (args.output/'external.tex').write_text(tex,encoding='utf-8',newline='\n')
+-    (args.output/'metrics.tex').write_text(''.join('\\newcommand{\\ev'+''.join(x.title() for x in k.split('_'))+'}{'+str(v)+'}\n' for k,v in metrics.items()),encoding='utf-8',newline='\n')
++    # Keep the historical Python count in JSON, but do not emit its unused TeX
++    # macro: the current suite count comes from the current validation campaign.
++    (args.output/'metrics.tex').write_text(''.join('\\newcommand{\\ev'+''.join(x.title() for x in k.split('_'))+'}{'+str(v)+'}\n' for k,v in metrics.items() if k != 'python_tests'),encoding='utf-8',newline='\n')
+     print(json.dumps(metrics,indent=2))
+ 
+ 
+diff --git a/tests/test_dataflow_gate.py b/tests/test_dataflow_gate.py
+index 0a005a8..a5abc36 100644
+--- a/tests/test_dataflow_gate.py
++++ b/tests/test_dataflow_gate.py
+@@ -3,13 +3,46 @@ from pathlib import Path
+ import unittest
+ sys.path.insert(0,str(Path(__file__).resolve().parents[1]))
+ from runtime.finite_reference import Unsupported
+-from runtime.dataflow_gate import read_source, issue, bind_certificate, template_expression, reference_program
++from runtime.dataflow_gate import (read_source, issue, bind_certificate, template_expression,
++                                   reference_program, normalize_text, normalize, syntactic_normalize)
+ 
+ ROOT=Path(__file__).resolve().parents[1]
+ EXAMPLE=ROOT/'examples/certificates/dataflow_certificate.orch'
+ 
+ 
+ class DataflowTests(unittest.TestCase):
++    def test_monoid_request_rewrites_preserve_slot_order(self):
++        term=['append',['append',['literal','Ne'],['literal','xt:']],
++              ['append',['var',2],['literal','']]]
++        self.assertEqual(normalize_text(term),['append',['literal','Next:'],['var',2]])
++        self.assertNotEqual(normalize_text(['append',['var',2],['var',3]]),
++                            normalize_text(['append',['var',3],['var',2]]))
++
++    def test_semantically_equal_requests_gain_over_raw_tree_baseline(self):
++        a=['call',1,'c',['append',['literal','A'],['append',['var',0],['literal','']]]]
++        b=['call',1,'c',['append',['literal','A'],['var',0]]]
++        program=['secret',0,a,b]
++        self.assertIsNone(syntactic_normalize(program))
++        self.assertEqual(normalize(program),b)
++
++    def test_public_branch_and_sequence_units_gain_over_shape_baseline(self):
++        call=['call',1,'c',['var',0]]
++        program=['secret',0,['seq',['skip'],['public',0,call,call]],call]
++        self.assertIsNone(syntactic_normalize(program))
++        self.assertEqual(normalize(program),call)
++
++    def test_observable_call_order_and_response_slot_still_distinct(self):
++        a=['call',1,'c',['literal','A']]
++        b=['call',2,'c',['literal','B']]
++        self.assertIsNone(normalize(['secret',0,['seq',a,b],['seq',b,a]]))
++        self.assertIsNone(normalize(['secret',0,a,['call',2,'c',['literal','A']]]))
++
++    def test_unequal_public_branches_and_requests_are_retained(self):
++        a=['call',1,'c',['literal','yes']]
++        b=['call',1,'c',['literal','no!']]
++        self.assertEqual(normalize(['public',0,a,b]),['public',0,a,b])
++        self.assertIsNone(normalize(['secret',0,a,b]))
++
+     def test_alpha_renamed_pipeline(self):
+         parsed=read_source(EXAMPLE.read_bytes())
+         cert=issue(EXAMPLE.read_bytes())

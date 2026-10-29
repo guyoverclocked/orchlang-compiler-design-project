@@ -1,0 +1,189 @@
+{
+  "workflow": "TemplateBoundary",
+  "source": "workflows\\assurance\\template_boundary.orch",
+  "source_lines": 7,
+  "slots": {
+    "q": 0,
+    "answer": 1
+  },
+  "high": [
+    "q",
+    "answer"
+  ],
+  "findings": [
+    {
+      "kind": "secret-dependent-size",
+      "line": 6,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    }
+  ],
+  "calls": 1,
+  "original_lean": {
+    "static_shape": null,
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+  },
+  "strategies": {
+    "ours": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            107,
+            8
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        1,
+        107,
+        8
+      ],
+      "shape_seconds": 0.0004833999992115423
+    },
+    "naive": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            107,
+            8
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        1,
+        107,
+        8
+      ],
+      "shape_seconds": 0.0002241000038338825
+    },
+    "uniform": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            107,
+            8
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        1,
+        107,
+        8
+      ],
+      "shape_seconds": 0.000182100004167296
+    },
+    "padall": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            107,
+            8
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        1,
+        107,
+        8
+      ],
+      "shape_seconds": 0.00017049998859874904
+    }
+  },
+  "frontend_seconds": 1.5173909000004642,
+  "lean_seconds_batch": 14.092209599999478,
+  "pads": {
+    "1": [
+      107,
+      8
+    ]
+  },
+  "caps": {
+    "1": 8
+  },
+  "site_lines": {
+    "1": 6
+  },
+  "source_binding": {
+    "schema": "orchlang-source-binding-v1",
+    "source_sha256": "723f4351a45d04a1671a6a58894eaf92fe325044a44dc0158942d126cd9bc9e2",
+    "original": [
+      "call",
+      1,
+      1,
+      "llama1b",
+      8,
+      [
+        "app",
+        [
+          "lit",
+          "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\n<|eot_id|><|start_header_id|>user<|end_header_id|>\n\n"
+        ],
+        [
+          "app",
+          [
+            "trim",
+            [
+              "var",
+              0
+            ]
+          ],
+          [
+            "lit",
+            "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+          ]
+        ]
+      ],
+      null
+    ],
+    "secret_inputs": [
+      0
+    ],
+    "high": [
+      0,
+      1
+    ],
+    "slots": {
+      "q": 0,
+      "answer": 1
+    },
+    "trust": "Python source reader/lowering and serialization; Lean checks the shaped core",
+    "binding_sha256": "99f4666f95fb484b307f0994e5afbcb9e656622d0625315fee664dbb1c184ffb"
+  },
+  "request_targets": "heuristic execution envelopes; complete requests are admitted exactly before dispatch"
+}

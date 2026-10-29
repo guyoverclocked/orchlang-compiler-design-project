@@ -1,0 +1,21 @@
+The amended experiment compares 24 original/port pairs (48 completed executions; 0 failed), with 88 actual generations and no replay in either arm. Final outputs and complete request/response multisets agree in 22 and 22 pairs. There are 0 recorded deployment-bound violations and 0 tokenizer/server input-count mismatches. The six source variants represent five upstream patterns: one direct call-kernel port and five explicit host compositions. Table~\ref{tab:local} reports observed costs and conservative bounds.
+
+Captured-response replay passes 24/24 comparisons and matches 44 complete requests with zero new generations. This tests port conformance under common actual outcomes. A post-hoc repeatability control uses 16 actual generations in 8 identical-request pairs. Responses differ in 1 of the 8 pairs. Earlier independent-generation differences remain retained, so a matching rerun is not a seeded-determinism guarantee.
+
+\begin{table}[!ht]
+\centering\small
+\begin{tabular}{lrrrr}
+\hline
+Source variant & Pairs & Equal & Peak tokens & Bound range \\
+\hline
+Chain graph & 4 & 4 & 41 & 1608--1728 \\
+Chain functional & 4 & 4 & 187 & 1608--1728 \\
+Parallel & 4 & 4 & 200 & 1608--1728 \\
+Routing & 4 & 4 & 125 & 1072--1152 \\
+Basic (direct) & 4 & 2 & 75 & 536--576 \\
+NER (hybrid) & 4 & 4 & 127 & 536--576 \\
+\hline
+\end{tabular}
+\caption{Actual local generation: peak input-plus-generated-output usage across both arms and caps, versus guarded deployment bounds.}
+\label{tab:local}
+\end{table}

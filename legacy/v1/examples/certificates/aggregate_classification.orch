@@ -1,0 +1,16 @@
+// Two independent labels; the account observer sees totals by contract.
+workflow IndependentLabels budget 10000 {
+    secret priority: boolean max_tokens 1;
+    model sentiment = mock("sentiment-v1") max_tokens 16;
+    model topic = mock("topic-v1") max_tokens 16;
+    prompt sentiment_label() -> text = "Label sentiment: The delivery arrived on time.";
+    prompt topic_label() -> text = "Label topic: The delivery arrived on time.";
+    if priority {
+        let a: text = call sentiment_label() using sentiment;
+        let b: text = call topic_label() using topic;
+    } else {
+        let b: text = call topic_label() using topic;
+        let a: text = call sentiment_label() using sentiment;
+    }
+    output "classification calls complete";
+}

@@ -1,0 +1,132 @@
+{
+  "schema": "orchlang-two-route-summary-v1",
+  "executions": 20,
+  "results": [
+    {
+      "family": "llama1b",
+      "condition": "aligned",
+      "attempted": 2,
+      "completed": 2,
+      "distinct_traces": 1,
+      "mean_usage": 147.0,
+      "mean_calls": 1.0,
+      "saved_equal": 2
+    },
+    {
+      "family": "llama1b",
+      "condition": "all_branches",
+      "attempted": 2,
+      "completed": 2,
+      "distinct_traces": 1,
+      "mean_usage": 246.0,
+      "mean_calls": 2.0,
+      "saved_equal": 2
+    },
+    {
+      "family": "llama1b",
+      "condition": "orig",
+      "attempted": 2,
+      "completed": 2,
+      "distinct_traces": 2,
+      "mean_usage": 84.0,
+      "mean_calls": 1.0,
+      "saved_equal": 2
+    },
+    {
+      "family": "llama1b",
+      "condition": "random_padding",
+      "attempted": 2,
+      "completed": 2,
+      "distinct_traces": 2,
+      "mean_usage": 118.0,
+      "mean_calls": 1.0,
+      "saved_equal": 2
+    },
+    {
+      "family": "llama1b",
+      "condition": "uniform",
+      "attempted": 2,
+      "completed": 2,
+      "distinct_traces": 1,
+      "mean_usage": 147.0,
+      "mean_calls": 1.0,
+      "saved_equal": 2
+    },
+    {
+      "family": "qwen1.5b",
+      "condition": "aligned",
+      "attempted": 2,
+      "completed": 2,
+      "distinct_traces": 1,
+      "mean_usage": 140.0,
+      "mean_calls": 1.0,
+      "saved_equal": 2
+    },
+    {
+      "family": "qwen1.5b",
+      "condition": "all_branches",
+      "attempted": 2,
+      "completed": 2,
+      "distinct_traces": 1,
+      "mean_usage": 232.0,
+      "mean_calls": 2.0,
+      "saved_equal": 2
+    },
+    {
+      "family": "qwen1.5b",
+      "condition": "orig",
+      "attempted": 2,
+      "completed": 2,
+      "distinct_traces": 2,
+      "mean_usage": 78.0,
+      "mean_calls": 1.0,
+      "saved_equal": 2
+    },
+    {
+      "family": "qwen1.5b",
+      "condition": "random_padding",
+      "attempted": 2,
+      "completed": 2,
+      "distinct_traces": 2,
+      "mean_usage": 112.0,
+      "mean_calls": 1.0,
+      "saved_equal": 2
+    },
+    {
+      "family": "qwen1.5b",
+      "condition": "uniform",
+      "attempted": 2,
+      "completed": 2,
+      "distinct_traces": 1,
+      "mean_usage": 140.0,
+      "mean_calls": 1.0,
+      "saved_equal": 2
+    },
+    {
+      "family": "llama1b",
+      "condition": "normalize-report-projection-only",
+      "attempted": 2,
+      "completed": 2,
+      "distinct_traces": 1,
+      "mean_usage": 84.0,
+      "mean_calls": 1.0,
+      "saved_equal": 2,
+      "limitation": "Free report rewriting, not faithful usage; no extra execution."
+    },
+    {
+      "family": "qwen1.5b",
+      "condition": "normalize-report-projection-only",
+      "attempted": 2,
+      "completed": 2,
+      "distinct_traces": 1,
+      "mean_usage": 78.0,
+      "mean_calls": 1.0,
+      "saved_equal": 2,
+      "limitation": "Free report rewriting, not faithful usage; no extra execution."
+    }
+  ],
+  "audit_errors": [],
+  "local_calls": 24,
+  "failed_attempts": [],
+  "scope": "Authored microbenchmark; two secret values per family. No population/random-padding distribution claim."
+}

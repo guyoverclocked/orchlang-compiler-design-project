@@ -1,0 +1,66 @@
+{
+  "status": "completed",
+  "programs": 150,
+  "seed": 271828,
+  "targeted_programs": 1,
+  "targeted_contexts": 32,
+  "execution_contexts": 6320,
+  "validator_checks": 604,
+  "lean_seconds": 3.391039099995396,
+  "comparisons": [
+    "Lean exec",
+    "independent JSON interpreter",
+    "production Runtime"
+  ],
+  "source_before": {
+    "orchlang/__main__.py": "f5da4cf72658fd4d603fd64344edf56bcf5af642f8694c8542d1c9bdd914f346",
+    "orchlang/admission.py": "3f84d9ff75ba715bb52eddc3fdf16ec6514df7cca0f229423aa5e646556074e3",
+    "orchlang/assurance.py": "88cfbab17db9f490194bcb8fc09834a922cba3751fdc53d8bf7bab45b70f6012",
+    "orchlang/compiler.py": "6f45610f86feba2f8045111e814a4930d4486ea5a7838cf6b000f00de91f6ecd",
+    "orchlang/core.py": "54f8eb20921c63ccd7bc265f0a6e9373d9d2180d8c88d4f21169e865aec60ba8",
+    "orchlang/ledger.py": "04187531d1b9f102f9772f44988380b43b316d69a333eacde9e4b5cdc0a203a9",
+    "orchlang/models.py": "2fe051adf91da1acd56bd3d71c6cfc9ba05faf381a0deb36db9bf7d9ef9f42b4",
+    "orchlang/runtime.py": "cab8f5c4bdbecd6f8973d54b997860b9e6f01db6bbff9047fb67684fec0e879e",
+    "orchlang/syntax.py": "03e5c6ed652c7fbf3ba2fa1c00dcf453a391cfa8484b0956943845469c10bfd3",
+    "orchlang/tools.py": "e378ead75b39f530084e72201b128be669e8281ba515f0b160e44a4fc47f5804",
+    "orchlang/validate.py": "54f491ec3e6ecd80152f72fbcdc393b95b8f7cb23984158592893a9150db2b03",
+    "proof/ShapeCore.lean": "c0870ab038253e192b083f3d98f3ef49726e7bc7ae6af0bfe728124221344ea7",
+    "reference/shape.py": "cda7589482f7805c4afe2a06d23781f1a6cd539882ced55f252c9ede9d7a5165",
+    "experiments/differential.py": "48d28ec2dec5dc6e68623860d9d7e2a757522797babd1d04cd33de3bce70e507",
+    "experiments/correspondence.py": "be510236fac4c37b41f8c6f12198a4b2a5a61c3b188a6dd00a73c15b24ec9877"
+  },
+  "source_after": {
+    "orchlang/__main__.py": "f5da4cf72658fd4d603fd64344edf56bcf5af642f8694c8542d1c9bdd914f346",
+    "orchlang/admission.py": "3f84d9ff75ba715bb52eddc3fdf16ec6514df7cca0f229423aa5e646556074e3",
+    "orchlang/assurance.py": "88cfbab17db9f490194bcb8fc09834a922cba3751fdc53d8bf7bab45b70f6012",
+    "orchlang/compiler.py": "6f45610f86feba2f8045111e814a4930d4486ea5a7838cf6b000f00de91f6ecd",
+    "orchlang/core.py": "54f8eb20921c63ccd7bc265f0a6e9373d9d2180d8c88d4f21169e865aec60ba8",
+    "orchlang/ledger.py": "04187531d1b9f102f9772f44988380b43b316d69a333eacde9e4b5cdc0a203a9",
+    "orchlang/models.py": "2fe051adf91da1acd56bd3d71c6cfc9ba05faf381a0deb36db9bf7d9ef9f42b4",
+    "orchlang/runtime.py": "cab8f5c4bdbecd6f8973d54b997860b9e6f01db6bbff9047fb67684fec0e879e",
+    "orchlang/syntax.py": "03e5c6ed652c7fbf3ba2fa1c00dcf453a391cfa8484b0956943845469c10bfd3",
+    "orchlang/tools.py": "e378ead75b39f530084e72201b128be669e8281ba515f0b160e44a4fc47f5804",
+    "orchlang/validate.py": "54f491ec3e6ecd80152f72fbcdc393b95b8f7cb23984158592893a9150db2b03",
+    "proof/ShapeCore.lean": "c0870ab038253e192b083f3d98f3ef49726e7bc7ae6af0bfe728124221344ea7",
+    "reference/shape.py": "cda7589482f7805c4afe2a06d23781f1a6cd539882ced55f252c9ede9d7a5165",
+    "experiments/differential.py": "48d28ec2dec5dc6e68623860d9d7e2a757522797babd1d04cd33de3bce70e507",
+    "experiments/correspondence.py": "be510236fac4c37b41f8c6f12198a4b2a5a61c3b188a6dd00a73c15b24ec9877"
+  },
+  "unit": "character counts in a finite deterministic audit world; no provider tokens",
+  "files": {
+    "proof\\ShapeCore.lean": "c0870ab038253e192b083f3d98f3ef49726e7bc7ae6af0bfe728124221344ea7",
+    "reference\\shape.py": "cda7589482f7805c4afe2a06d23781f1a6cd539882ced55f252c9ede9d7a5165",
+    "orchlang\\runtime.py": "cab8f5c4bdbecd6f8973d54b997860b9e6f01db6bbff9047fb67684fec0e879e",
+    "experiments\\correspondence.py": "be510236fac4c37b41f8c6f12198a4b2a5a61c3b188a6dd00a73c15b24ec9877"
+  },
+  "command": [
+    "C:/Users/nambi/Documents/OrchLang Publication Work/tools/lean-4.19.0-windows/bin/lean.exe",
+    "--run",
+    "C:\\Users\\nambi\\Documents\\Compiler Project\\orchlang-round3\\proof\\ShapeCore.lean",
+    "execute",
+    "C:\\Users\\nambi\\Documents\\Compiler Project\\orchlang-round3\\build-r3\\ev\\correspondence\\lean-input.json"
+  ],
+  "command_exit": 0,
+  "failures": [],
+  "spent_api_usd": "0.00"
+}

@@ -1,0 +1,42 @@
+// Replication variant: identical to ../crag.orch except for the model (Qwen 2.5 1.5B Instruct).
+// Port of LangGraph corrective RAG, local variant (langchain-ai/langgraph@eb066bd,
+// examples/rag/langgraph_crag_local.ipynb: grader raw lines 219-257, generator
+// 275-303, grade_documents 414-446, decide_to_generate 474-488). The vector store
+// and Tavily become BM25 retrievers over indexed and held-out SQuAD paragraphs.
+workflow CorrectiveRAG {
+  input question: text secret max_tokens 48;
+  model llm = "qwen1.5b";
+  model grader = "qwen-categorical";
+  tool retrieve(q) max_tokens 920;
+  tool web_search(q) max_tokens 690;
+  tool doc(d, i) max_tokens 230;
+  tool json_yes(x) max_tokens 1;
+  tool keep_relevant(d0, k0, d1, k1, d2, k2, d3, k3) max_tokens 920;
+  tool any_no(a, b, c, d) max_tokens 1;
+  tool join_docs(a, b) max_tokens 1610;
+  prompt grader(question, documents) = user "Decide whether the FACT contains information that helps answer the QUESTION. Return exactly {\"score\":\"yes\"} or {\"score\":\"no\"}. Do not explain.\nQUESTION: {question}\nFACT: {documents}";
+  prompt generate(question, documents) = user "You are an assistant for question-answering tasks. \n    \n    Use the following documents to answer the question. \n    \n    If you don't know the answer, just say that you don't know. \n    \n    Use three sentences maximum and keep the answer concise:\n    Question: {question} \n    Documents: {documents} \n    Answer: \n    ";
+  let docs = tool retrieve(question);
+  let d0 = tool doc(docs, "0");
+  let d1 = tool doc(docs, "1");
+  let d2 = tool doc(docs, "2");
+  let d3 = tool doc(docs, "3");
+  let g0 = call grader(question, d0) using grader max_tokens 16;
+  let g1 = call grader(question, d1) using grader max_tokens 16;
+  let g2 = call grader(question, d2) using grader max_tokens 16;
+  let g3 = call grader(question, d3) using grader max_tokens 16;
+  let k0 = tool json_yes(g0);
+  let k1 = tool json_yes(g1);
+  let k2 = tool json_yes(g2);
+  let k3 = tool json_yes(g3);
+  let kept = tool keep_relevant(d0, k0, d1, k1, d2, k2, d3, k3);
+  let search = tool any_no(k0, k1, k2, k3);
+  if search == "yes" {
+    let web = tool web_search(question);
+    let context = tool join_docs(kept, web);
+  } else {
+    let context = tool join_docs(kept, "");
+  }
+  let answer = call generate(question, context) using llm max_tokens 128;
+  output answer;
+}

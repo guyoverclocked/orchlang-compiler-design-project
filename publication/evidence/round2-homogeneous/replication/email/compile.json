@@ -1,0 +1,581 @@
+{
+  "workflow": "EmailSupport",
+  "source": "workflows/replication/email_qwen.orch",
+  "source_lines": 25,
+  "slots": {
+    "email_content": 0,
+    "cls": 1,
+    "route": 2,
+    "intent": 3,
+    "urgency": 4,
+    "reply": 5,
+    "context": 6
+  },
+  "high": [
+    "email_content",
+    "cls",
+    "route",
+    "intent",
+    "urgency",
+    "reply",
+    "context"
+  ],
+  "findings": [
+    {
+      "kind": "secret-dependent-size",
+      "line": 13,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-branch",
+      "line": 27,
+      "detail": "branch on secret route selects arms with different usage"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 27,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    }
+  ],
+  "calls": 2,
+  "original_lean": {
+    "static_shape": null,
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+  },
+  "strategies": {
+    "ours": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "qwen1.5b",
+            416,
+            80
+          ],
+          [
+            "tool",
+            "email_route"
+          ],
+          [
+            "tool",
+            "field"
+          ],
+          [
+            "tool",
+            "field"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "qwen1.5b",
+            579,
+            320
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        2,
+        995,
+        400
+      ],
+      "shape_seconds": 0.0009341999975731596
+    },
+    "naive": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "qwen1.5b",
+            416,
+            80
+          ],
+          [
+            "tool",
+            "email_route"
+          ],
+          [
+            "tool",
+            "field"
+          ],
+          [
+            "tool",
+            "field"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "qwen1.5b",
+            579,
+            320
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        2,
+        995,
+        400
+      ],
+      "shape_seconds": 0.0004995999915990978
+    },
+    "uniform": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "qwen1.5b",
+            579,
+            320
+          ],
+          [
+            "tool",
+            "email_route"
+          ],
+          [
+            "tool",
+            "field"
+          ],
+          [
+            "tool",
+            "field"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "qwen1.5b",
+            579,
+            320
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        2,
+        1158,
+        640
+      ],
+      "shape_seconds": 0.0005203000036999583
+    },
+    "padall": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "qwen1.5b",
+            416,
+            80
+          ],
+          [
+            "tool",
+            "email_route"
+          ],
+          [
+            "tool",
+            "field"
+          ],
+          [
+            "tool",
+            "field"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "llm",
+            "qwen1.5b",
+            579,
+            320
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        2,
+        995,
+        400
+      ],
+      "shape_seconds": 0.0005018999945605174
+    }
+  },
+  "frontend_seconds": 0.5317748999950709,
+  "lean_seconds_batch": 3.0464623000007123,
+  "pads": {
+    "1": [
+      416,
+      80
+    ],
+    "2": [
+      579,
+      320
+    ]
+  },
+  "caps": {
+    "1": 80,
+    "2": 320
+  },
+  "site_lines": {
+    "1": 13,
+    "2": 27
+  },
+  "source_binding": {
+    "schema": "orchlang-source-binding-v1",
+    "source_sha256": "9066200895f183b5c0a39a407304ce5e19d3e053e42b590cbf5cfd556dc0852c",
+    "original": [
+      "seq",
+      [
+        "call",
+        1,
+        1,
+        "qwen1.5b",
+        80,
+        [
+          "app",
+          [
+            "lit",
+            "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\n\n        Analyze this customer email and classify it:\n\n        Email: "
+          ],
+          [
+            "app",
+            [
+              "var",
+              0
+            ],
+            [
+              "lit",
+              "\n        From: customer@example.com\n\n        Provide classification including intent, urgency, topic, and summary.\n        \nRespond in exactly four lines:\nintent: <question|bug|billing|feature|complex>\nurgency: <low|medium|high|critical>\ntopic: <few words>\nsummary: <one sentence><|im_end|>\n<|im_start|>assistant\n"
+            ]
+          ]
+        ],
+        null
+      ],
+      [
+        "seq",
+        [
+          "tool",
+          2,
+          "email_route",
+          [
+            "escape",
+            [
+              "var",
+              1
+            ]
+          ]
+        ],
+        [
+          "seq",
+          [
+            "tool",
+            3,
+            "field",
+            [
+              "app",
+              [
+                "escape",
+                [
+                  "var",
+                  1
+                ]
+              ],
+              [
+                "app",
+                [
+                  "lit",
+                  "\u001f"
+                ],
+                [
+                  "app",
+                  [
+                    "escape",
+                    [
+                      "lit",
+                      "intent"
+                    ]
+                  ],
+                  [
+                    "app",
+                    [
+                      "lit",
+                      "\u001f"
+                    ],
+                    [
+                      "escape",
+                      [
+                        "lit",
+                        "unknown"
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ]
+          ],
+          [
+            "seq",
+            [
+              "tool",
+              4,
+              "field",
+              [
+                "app",
+                [
+                  "escape",
+                  [
+                    "var",
+                    1
+                  ]
+                ],
+                [
+                  "app",
+                  [
+                    "lit",
+                    "\u001f"
+                  ],
+                  [
+                    "app",
+                    [
+                      "escape",
+                      [
+                        "lit",
+                        "urgency"
+                      ]
+                    ],
+                    [
+                      "app",
+                      [
+                        "lit",
+                        "\u001f"
+                      ],
+                      [
+                        "escape",
+                        [
+                          "lit",
+                          "medium"
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "ite",
+              [
+                "eq",
+                2,
+                "review"
+              ],
+              [
+                "tool",
+                5,
+                "const",
+                [
+                  "lit",
+                  "Escalated to human review."
+                ]
+              ],
+              [
+                "seq",
+                [
+                  "ite",
+                  [
+                    "eq",
+                    2,
+                    "docs"
+                  ],
+                  [
+                    "tool",
+                    6,
+                    "const",
+                    [
+                      "lit",
+                      "Relevant documentation:\n- Reset password via Settings > Security > Change Password\n- Password must be at least 12 characters\n- Include uppercase, lowercase, numbers, and symbols"
+                    ]
+                  ],
+                  [
+                    "ite",
+                    [
+                      "eq",
+                      2,
+                      "bug"
+                    ],
+                    [
+                      "tool",
+                      6,
+                      "const",
+                      [
+                        "lit",
+                        "Relevant documentation:\n- Bug ticket BUG-12345 created"
+                      ]
+                    ],
+                    [
+                      "tool",
+                      6,
+                      "const",
+                      [
+                        "lit",
+                        ""
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "call",
+                  2,
+                  5,
+                  "qwen1.5b",
+                  320,
+                  [
+                    "app",
+                    [
+                      "lit",
+                      "<|im_start|>system\nYou are Qwen, created by Alibaba Cloud. You are a helpful assistant.<|im_end|>\n<|im_start|>user\n\n        Draft a response to this customer email:\n        "
+                    ],
+                    [
+                      "app",
+                      [
+                        "var",
+                        0
+                      ],
+                      [
+                        "app",
+                        [
+                          "lit",
+                          "\n\n        Email intent: "
+                        ],
+                        [
+                          "app",
+                          [
+                            "var",
+                            3
+                          ],
+                          [
+                            "app",
+                            [
+                              "lit",
+                              "\n        Urgency level: "
+                            ],
+                            [
+                              "app",
+                              [
+                                "var",
+                                4
+                              ],
+                              [
+                                "app",
+                                [
+                                  "lit",
+                                  "\n\n        "
+                                ],
+                                [
+                                  "app",
+                                  [
+                                    "var",
+                                    6
+                                  ],
+                                  [
+                                    "lit",
+                                    "\n\n        Guidelines:\n        - Be professional and helpful\n        - Address their specific concern\n        - Use the provided documentation when relevant\n        <|im_end|>\n<|im_start|>assistant\n"
+                                  ]
+                                ]
+                              ]
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ],
+                  null
+                ]
+              ]
+            ]
+          ]
+        ]
+      ]
+    ],
+    "secret_inputs": [
+      0
+    ],
+    "high": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+    ],
+    "slots": {
+      "email_content": 0,
+      "cls": 1,
+      "route": 2,
+      "intent": 3,
+      "urgency": 4,
+      "reply": 5,
+      "context": 6
+    },
+    "trust": "Python source reader/lowering and serialization; Lean checks the shaped core",
+    "binding_sha256": "0de88154facfe4a06ec4b90f862d0fc669775d373345a7b515a5b74fdfb08b5d"
+  },
+  "request_targets": "heuristic execution envelopes; complete requests are admitted exactly before dispatch"
+}

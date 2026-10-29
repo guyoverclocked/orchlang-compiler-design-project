@@ -1,0 +1,13 @@
+// Expected: E264 because a lower-bound requirement cannot be discharged from an
+// upper bound, and E263 because a model name carries no token bound at all.
+workflow UndecidableRequirement budget 2000 {
+  input ticket: text max_tokens 100;
+  model fast = mock("local-small") max_tokens 600;
+
+  prompt classify(message: text) -> text = "Classify: {message}";
+
+  let category: text = call classify(ticket) using fast;
+  require tokens(category) > 5;
+  require tokens(fast) <= 10;
+  output category;
+}

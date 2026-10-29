@@ -1,0 +1,20 @@
+{
+  "comparison_rows": 24,
+  "original_framework_executions": 24,
+  "port_executions": 24,
+  "corpus_workflows": 6,
+  "distinct_upstream_patterns": 5,
+  "direct_source_translation_workflows": 1,
+  "hybrid_host_composition_workflows": 5,
+  "direct_translation_comparisons": 4,
+  "hybrid_comparisons": 20,
+  "outputs_equal": 16,
+  "full_request_response_multisets_equal": 16,
+  "actual_generation_calls": 88,
+  "original_actual_generation_calls": 44,
+  "port_actual_generation_calls": 44,
+  "replay_generation_calls": 0,
+  "infrastructure_or_differential_failures": 16,
+  "runtime_bound_violations": 0,
+  "source_scope": "Runtime deployment experiment; one direct port plus five explicit hybrid host compositions; no all-input functional equivalence proof or production static tokenizer theorem."
+}

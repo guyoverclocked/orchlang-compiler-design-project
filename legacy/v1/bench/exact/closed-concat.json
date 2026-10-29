@@ -1,0 +1,10 @@
+{
+  "format": "orchlang-exact-replay-v1",
+  "models": {"m": {"revision": "example-v1", "max_tokens": 8}},
+  "program": [
+    {"kind": "call", "model": "m", "bind": "response", "request": {"concat": ["hello", "world"]}}
+  ],
+  "kernels": {"m": {"*": [
+    {"text": "ok", "p": "1", "status": "ok"}
+  ]}}
+}

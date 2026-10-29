@@ -1,0 +1,1008 @@
+{
+  "workflow": "OrchestratorWorker",
+  "source": "workflows/orchestrator.orch",
+  "source_lines": 26,
+  "slots": {
+    "topic": 0,
+    "plan": 1,
+    "i": 2,
+    "report": 3,
+    "more": 4,
+    "row": 5,
+    "name": 6,
+    "desc": 7,
+    "sec": 8
+  },
+  "high": [
+    "topic",
+    "plan",
+    "i",
+    "report",
+    "more",
+    "row",
+    "name",
+    "desc",
+    "sec"
+  ],
+  "findings": [
+    {
+      "kind": "secret-dependent-size",
+      "line": 15,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    },
+    {
+      "kind": "secret-dependent-loop",
+      "line": 23,
+      "detail": "iteration count depends on secret more"
+    },
+    {
+      "kind": "secret-dependent-size",
+      "line": 23,
+      "detail": "request contains secret-derived text; input and output token counts may vary"
+    }
+  ],
+  "calls": 2,
+  "original_lean": {
+    "static_shape": null,
+    "secrets_high": true,
+    "randomness_sites": true,
+    "padding_discipline": false,
+    "erasure_matches": true,
+    "caps": true,
+    "accepted": false
+  },
+  "strategies": {
+    "ours": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            105,
+            160
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        5,
+        609,
+        672
+      ],
+      "shape_seconds": 0.001065099990228191
+    },
+    "naive": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            105,
+            160
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        5,
+        609,
+        672
+      ],
+      "shape_seconds": 0.0013805000053253025
+    },
+    "uniform": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            126,
+            160
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            160
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            160
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            160
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            160
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        5,
+        630,
+        800
+      ],
+      "shape_seconds": 0.0007296000112546608
+    },
+    "padall": {
+      "lean": {
+        "static_shape": [
+          [
+            "llm",
+            "llama1b",
+            105,
+            160
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "const"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ],
+          [
+            "tool",
+            "line"
+          ],
+          [
+            "tool",
+            "section_name"
+          ],
+          [
+            "tool",
+            "section_desc"
+          ],
+          [
+            "llm",
+            "llama1b",
+            126,
+            128
+          ],
+          [
+            "tool",
+            "join_sections"
+          ],
+          [
+            "tool",
+            "inc"
+          ],
+          [
+            "tool",
+            "has_line"
+          ]
+        ],
+        "secrets_high": true,
+        "randomness_sites": true,
+        "padding_discipline": true,
+        "erasure_matches": true,
+        "caps": true,
+        "accepted": true
+      },
+      "static_cost": [
+        5,
+        609,
+        672
+      ],
+      "shape_seconds": 0.000622600011411123
+    }
+  },
+  "frontend_seconds": 1.4774215999932494,
+  "lean_seconds_batch": 15.797632999994676,
+  "pads": {
+    "1": [
+      105,
+      160
+    ],
+    "2": [
+      126,
+      128
+    ]
+  },
+  "caps": {
+    "1": 160,
+    "2": 128
+  },
+  "site_lines": {
+    "1": 15,
+    "2": 23
+  },
+  "source_binding": {
+    "schema": "orchlang-source-binding-v1",
+    "source_sha256": "a99eab3fdcaf2d499d67f756a3720c280f6ad6cc4332753f046dc64508ec7ccc",
+    "original": [
+      "seq",
+      [
+        "call",
+        1,
+        1,
+        "llama1b",
+        160,
+        [
+          "app",
+          [
+            "lit",
+            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\nGenerate a plan for the report.\nReturn one section per line in the form: <name> :: <description><|eot_id|><|start_header_id|>user<|end_header_id|>\n\nHere is the report topic: "
+          ],
+          [
+            "app",
+            [
+              "var",
+              0
+            ],
+            [
+              "lit",
+              "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+            ]
+          ]
+        ],
+        null
+      ],
+      [
+        "seq",
+        [
+          "tool",
+          2,
+          "const",
+          [
+            "lit",
+            "0"
+          ]
+        ],
+        [
+          "seq",
+          [
+            "tool",
+            3,
+            "const",
+            [
+              "lit",
+              ""
+            ]
+          ],
+          [
+            "seq",
+            [
+              "tool",
+              4,
+              "has_line",
+              [
+                "app",
+                [
+                  "escape",
+                  [
+                    "var",
+                    1
+                  ]
+                ],
+                [
+                  "app",
+                  [
+                    "lit",
+                    "\u001f"
+                  ],
+                  [
+                    "escape",
+                    [
+                      "var",
+                      2
+                    ]
+                  ]
+                ]
+              ]
+            ],
+            [
+              "loop",
+              4,
+              [
+                "eq",
+                4,
+                "no"
+              ],
+              [
+                "seq",
+                [
+                  "tool",
+                  5,
+                  "line",
+                  [
+                    "app",
+                    [
+                      "escape",
+                      [
+                        "var",
+                        1
+                      ]
+                    ],
+                    [
+                      "app",
+                      [
+                        "lit",
+                        "\u001f"
+                      ],
+                      [
+                        "escape",
+                        [
+                          "var",
+                          2
+                        ]
+                      ]
+                    ]
+                  ]
+                ],
+                [
+                  "seq",
+                  [
+                    "tool",
+                    6,
+                    "section_name",
+                    [
+                      "escape",
+                      [
+                        "var",
+                        5
+                      ]
+                    ]
+                  ],
+                  [
+                    "seq",
+                    [
+                      "tool",
+                      7,
+                      "section_desc",
+                      [
+                        "escape",
+                        [
+                          "var",
+                          5
+                        ]
+                      ]
+                    ],
+                    [
+                      "seq",
+                      [
+                        "call",
+                        2,
+                        8,
+                        "llama1b",
+                        128,
+                        [
+                          "app",
+                          [
+                            "lit",
+                            "<|begin_of_text|><|start_header_id|>system<|end_header_id|>\n\nCutting Knowledge Date: December 2023\nToday Date: 26 Jul 2024\n\nWrite a report section following the provided name and description. Include no preamble for each section. Use markdown formatting.<|eot_id|><|start_header_id|>user<|end_header_id|>\n\nHere is the section name: "
+                          ],
+                          [
+                            "app",
+                            [
+                              "var",
+                              6
+                            ],
+                            [
+                              "app",
+                              [
+                                "lit",
+                                " and description: "
+                              ],
+                              [
+                                "app",
+                                [
+                                  "var",
+                                  7
+                                ],
+                                [
+                                  "lit",
+                                  "<|eot_id|><|start_header_id|>assistant<|end_header_id|>\n\n"
+                                ]
+                              ]
+                            ]
+                          ]
+                        ],
+                        null
+                      ],
+                      [
+                        "seq",
+                        [
+                          "tool",
+                          3,
+                          "join_sections",
+                          [
+                            "app",
+                            [
+                              "escape",
+                              [
+                                "var",
+                                3
+                              ]
+                            ],
+                            [
+                              "app",
+                              [
+                                "lit",
+                                "\u001f"
+                              ],
+                              [
+                                "escape",
+                                [
+                                  "var",
+                                  8
+                                ]
+                              ]
+                            ]
+                          ]
+                        ],
+                        [
+                          "seq",
+                          [
+                            "tool",
+                            2,
+                            "inc",
+                            [
+                              "escape",
+                              [
+                                "var",
+                                2
+                              ]
+                            ]
+                          ],
+                          [
+                            "tool",
+                            4,
+                            "has_line",
+                            [
+                              "app",
+                              [
+                                "escape",
+                                [
+                                  "var",
+                                  1
+                                ]
+                              ],
+                              [
+                                "app",
+                                [
+                                  "lit",
+                                  "\u001f"
+                                ],
+                                [
+                                  "escape",
+                                  [
+                                    "var",
+                                    2
+                                  ]
+                                ]
+                              ]
+                            ]
+                          ]
+                        ]
+                      ]
+                    ]
+                  ]
+                ]
+              ],
+              false
+            ]
+          ]
+        ]
+      ]
+    ],
+    "secret_inputs": [
+      0
+    ],
+    "high": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8
+    ],
+    "slots": {
+      "topic": 0,
+      "plan": 1,
+      "i": 2,
+      "report": 3,
+      "more": 4,
+      "row": 5,
+      "name": 6,
+      "desc": 7,
+      "sec": 8
+    },
+    "trust": "Python source reader/lowering and serialization; Lean checks the shaped core",
+    "binding_sha256": "f07493be100eb8aff2202991a356c0e04b1e938f8a27936b545e3867209c383f"
+  },
+  "request_targets": "heuristic execution envelopes; complete requests are admitted exactly before dispatch"
+}

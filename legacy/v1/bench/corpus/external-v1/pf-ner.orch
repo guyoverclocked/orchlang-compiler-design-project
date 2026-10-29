@@ -1,0 +1,8 @@
+workflow PFNER budget 100000 {
+  input document: text max_tokens 512;
+  input entity_type: text max_tokens 16;
+  model m = mock("pf-ner") max_tokens 64;
+  prompt p(t: text, e: text) -> text = "Extract {e} from {t}";
+  let entities: text = call p(document, entity_type) using m;
+  output entities;
+}

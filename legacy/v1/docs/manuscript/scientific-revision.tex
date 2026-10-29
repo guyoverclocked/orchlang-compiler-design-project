@@ -1,0 +1,431 @@
+%% Elsevier elsarticle template derivative; LPPL 1.2 or later.
+%% Copyright 2007, 2008, 2009 Elsevier Ltd.
+%% Template derivative distributable under LPPL version 1.2 or later.
+%% Software and original prose have separate licenses; see repository notices.
+\documentclass[preprint,12pt,a4paper]{elsarticle}
+\usepackage{amssymb}
+\usepackage{amsmath}
+\usepackage{array}
+\usepackage{hyperref}
+\hypersetup{hidelinks,pdftitle={OrchLang: Contract-Aware Resource Auditing for Bounded LLM Workflows}}
+\journal{Science of Computer Programming}
+\input{evidence/metrics.tex}
+\input{evidence/dataflow-metrics.tex}
+\input{evidence/revision.tex}
+\begin{document}
+\begin{frontmatter}
+\title{OrchLang: Contract-Aware Resource Auditing for Bounded LLM Workflows}
+\author[ci]{Nambi Rajan M}
+\ead{nambirajan.m2024@vitstudent.ac.in}
+\author[analytics]{Ranjithkumar S\corref{cor}}
+\ead{ranjithkumar.s@vit.ac.in}
+\cortext[cor]{Corresponding author.}
+\address[ci]{Department of Computational Intelligence, SCOPE, Vellore Institute of Technology, India}
+\address[analytics]{Department of Analytics, SCOPE, Vellore Institute of Technology, India}
+\begin{abstract}
+A bound on a language-model workflow's resource use does not establish that its
+resource observations are independent of a secret. OrchLang provides separate
+analyses for these obligations, with resolved contracts, complete request
+expressions and executable Lean decision procedures. Proved request and
+control-flow simplifications admit \revPrecisionSourceAccepted{} of
+\revPrecisionSourceCases{} constructed source cases, compared with
+\revPrecisionSourceBaseline{} for syntactic normalization. A separate aggregate
+judgment admits permutations of two independent closed calls. Exact pinned
+tokenizers expose a concatenation underbound and support complete-request
+accounting. Evaluation retains the original 576-program and 256-pipeline
+campaigns, new precision tests, and original-framework/local-model comparisons
+of six workflow variants. These distinguish one direct source port from five
+compositions retaining host-language control. The artifact connects conditional
+core guarantees to inspectable source and execution contracts and retains the
+generation and integration mismatches encountered.
+\end{abstract}
+\begin{keyword}
+resource analysis \sep information flow \sep workflow languages \sep
+verified decision procedures \sep reproducibility
+\end{keyword}
+\end{frontmatter}
+\clearpage
+
+\section*{Metadata}
+\begin{table}[!ht]
+\small
+\begin{tabular}{|l|>{\raggedright\arraybackslash}p{.37\linewidth}|>{\raggedright\arraybackslash}p{.48\linewidth}|}
+\hline
+\textbf{Nr.} & \textbf{Code metadata description} & \textbf{Description} \\
+\hline
+C1 & Current code version & Scientific revision, 24 October 2026. The review package records the exact Git revision and source-file hashes. \\
+\hline
+C2 & Permanent link to code/repository used for this code version & \href{https://github.com/guyoverclocked/orchlang-compiler-design-project}{Project repository}; public release metadata for this local revision is pending. \\
+\hline
+C3 & Permanent link to Reproducible Capsule & Local source, evidence and manuscript archives for supervisor review; archival deposition pending. \\
+\hline
+C4 & Legal Code License & MIT software; LPPL template derivative; upstream notices retained. \\
+\hline
+C5 & Code versioning system used & Git \\
+\hline
+C6 & Software code languages, tools, and services used & C++17, Python, Lean 4.19.0; optional Tokenizers 0.21.4, LangGraph, Prompt Flow and local Ollama/Qwen. \\
+\hline
+C7 & Compilation requirements, operating environments and dependencies & CPU; C++17 and Python 3.10+. Recorded validation: Windows 11/GCC 16.1 and Ubuntu 24.04 under WSL2/GCC 13.3. Optional versions are pinned. \\
+\hline
+C8 & If available, link to developer documentation/manual & Repository README; \path{docs/REPRODUCIBILITY.md}, \path{docs/EXACT_ACCOUNTING.md}, and \path{docs/REAL_WORKFLOWS.md}. \\
+\hline
+C9 & Support email for questions & \texttt{ranjithkumar.s@vit.ac.in} \\
+\hline
+\end{tabular}
+\caption{Review-package metadata. Submission administration is separate from the scientific evaluation.}
+\end{table}
+
+\section{Motivation and significance}
+Consider a multi-tenant support service that uses a private customer attribute
+to select an escalation workflow. A tenant-facing accounting service or
+operations contractor sees per-model input usage, output usage and call counts,
+but cannot read the attribute. Avoiding explicit disclosure in prompts does not
+prevent the selected model or number of calls from revealing the branch. A
+developer needs two answers: whether consumption is bounded, and whether the
+specified resource observation changes with that secret.
+
+Published attacks establish that encrypted language-model traffic can reveal
+information through metadata. Weiss et al.\ study token-length sequences;
+Whisper Leak studies packet sizes and timing~\cite{weiss,whisper}.
+The accounting observer above is a deployment scenario, not an empirical
+finding that these attacks use invoices. Our formal observation records
+resource events; it excludes timing and network packets.
+
+OrchLang is a small language and auditing artifact for bounded workflows.
+Its central design choice is to retain complete constructed requests and
+semantic contracts. Equal input lengths or maximum costs do not imply equal
+response distributions. Later requests must retain the actual response strings
+on which they depend.
+
+The software provides (i) a bounded compiler with resolved contracts and
+requests and diagnostic counterexamples; (ii) executable Lean decisions with
+proved normalization and an aggregate-only commutation rule; (iii) pinned
+complete-request accounting with explicit compositional assumptions; and
+(iv) reproducible precision, accounting and original-framework execution
+studies. These specialize established techniques to inspectable workflows.
+
+\subsection{Relation to prior work}
+Resource-aware noninterference combines information flow and resource typing;
+RelCost bounds relative costs; probabilistic AARA supports expected costs;
+and eRHL reasons about probabilistic program
+relations~\cite{ngo,relcost,wang,erhl}. Stochastic calls therefore do not preclude
+numeric specifications. Typed Resources supplies machine-checked scalar/vector
+bounds for language-model workflows, while Costwright analyzes existing
+framework code and provider-specific caps~\cite{typedresources,costwright}.
+Token Budgets studies production overruns and affine budget
+ownership~\cite{tokenbudgets}. OrchLang addresses a separate practical judgment:
+invariance of resource observations when a secret changes, under declared
+request-kernel assumptions.
+
+CaMeL separates trusted control from untrusted data and tracks capabilities;
+FIDES develops confidentiality/integrity policies for agent
+planners~\cite{camel,fides}. CaMeL explicitly discusses side channels.
+Hard-KLAIM proves typed trace safety at a declared interface; PC2 checks
+obligations before operations and identifies model/world correspondence
+conditions~\cite{hard,pc2}. OrchLang's contribution is a restricted executable
+analysis, rather than a new general logic or an expressiveness separation.
+
+Loom derives structural resource bounds and reports live-model
+measurements~\cite{loom}. We compare with a competent sum/max/retry-multiply
+baseline and add actual local generation. A source audit and two retained
+probes of Costwright 0.2.15 did not reproduce OrchLang's historical identity
+error; no external vulnerability finding is claimed.
+
+\section{Software description}
+\subsection{Architecture and judgments}
+The C++ frontend supports bounded inputs, prompts, lexical models, conditionals,
+bounded retries, outputs and tool sinks. It checks types, declared
+confidentiality/integrity policies, structural resource bounds and relational
+signatures. Sequential costs add, alternative bounds take maxima, and bounded
+repetition multiplies a body bound. Resolved bindings distinguish shadowed
+declarations. Canonical abstract contracts permit equivalent aliases while
+retaining model revisions and caps.
+
+A historical failure illustrates why identities matter. The base revision
+\texttt{a49fcdb} contains an earlier checker that conflated models named
+\texttt{m} despite different caps. An accepted secret branch consumed 2 versus
+987 synthetic units at seed 1 while all 95 original tests passed. The unary
+bound covered both executions; the relational claim failed. The repaired
+checker rejects this witness. It motivates the bug class rather than serving
+as the paper's principal contribution.
+
+\begin{figure}[!ht]
+\centering
+\fbox{\begin{minipage}{.92\linewidth}
+Source $\longrightarrow$ C++ policy/resource diagnostics and structural IR.\\[3pt]
+Restricted source $\longrightarrow$ trusted Python reader
+$\longrightarrow$ decoded Lean core $\longrightarrow$ verified resource decision.\\[3pt]
+Complete requests $\longrightarrow$ pinned tokenizer
+$\longrightarrow$ finite accounting or local-model admission.\\[3pt]
+Pinned upstream workflows $\longleftrightarrow$ executable OrchLang kernels
+and explicit host composition $\longrightarrow$ retained traces.
+\end{minipage}}
+\caption{Separate evidence paths. Source readers and execution adapters are
+tested implementations, not mechanically verified C++ translations.}
+\end{figure}
+
+The ordinary \texttt{orchc check} judgment remains the conjunction of the C++
+checks. Separate dataflow and aggregate commands answer explicitly named
+resource questions. They do not waive confidentiality errors or authorize
+disclosure. The historical \texttt{certify} command emits an analysis report.
+Saved JSON plans are diagnostic records: checking them recomputes normalization.
+The primary formal interface is a \emph{verified decision procedure}, without
+a search-versus-check complexity claim.
+
+Independent readers reconstruct closed and response-dependent source fragments.
+The dataflow reader admits shared public text/Boolean inputs, secret Boolean
+guards and actual response bindings, with lexical names aligned to slots.
+Secret text, source retry, tools and reclassification are rejected; outputs
+must be root literals. A separate deployment interpreter executes sequential
+call kernels with real responses and dynamic text output. Its scope differs
+from the proved relational fragment.
+
+\subsection{Ordered resource decision}
+Let $K(c,r)$ be a shared stateless finite kernel indexed by semantic contract
+$c$ and complete request $r$. Outcomes contain response text, failure status
+and weight. Calls update response slots; sequence composes stores and retains
+billed event traces. Events record contract, UTF-8 input/output bytes and
+failure status. Core retry restores the outer store between attempts, bills
+failures and stops after an attempt without a failed call.
+
+For public Boolean store $l$, secret Boolean store $h$ and text store $\sigma$,
+Lean proves
+\[
+ N(P)=\operatorname{some}(Q)
+ \ \Longrightarrow\
+ \mathcal{D}_{K,l,h}(P,\sigma)
+ =\mathcal{D}^{\mathrm{plan}}_{K,l}(Q,\sigma).
+\]
+This equality concerns complete weighted text-state transformations.
+Accepted programs therefore have equal observations for any two secret
+Boolean stores with shared public values. Probability interpretation
+additionally requires normalized nonnegative finite kernels.
+
+The new normalizer proves append associativity, empty-string identities,
+adjacent-literal folding, sequence-unit elimination, and collapse of public
+branches whose normalized arms agree. Secret arms can consequently be
+accepted when their original syntax differs. Request rewrites preserve the
+fully constructed string. The source reader already folds some template
+literals, so source-level and core-expression gains are measured separately.
+
+\subsection{Aggregate resource decision}
+An aggregate observer sums input bytes, output bytes, calls and failures by
+contract. Exactly two independent closed calls $A$ and $B$ can be exchanged
+under this observer even though their ordered traces differ. Requests must be
+closed, kernels stateless, and outcomes sampled independently. This rule
+excludes response-dependent calls, output contents, retries and timing.
+
+The separate Lean development uses natural outcome weights and a positive
+common denominator per action. Finite nonnegative rational kernels admit such
+a representation. For every Boolean predicate $T$ of the full aggregate
+observation, it establishes
+\[
+ \Pr[T(\operatorname{obs}(A;B))]
+ =\Pr[T(\operatorname{obs}(B;A))].
+\]
+The mechanized theorem equates histogram numerators and product denominators.
+A finite-list permutation proof justifies transposing the Cartesian outcome
+enumeration. The decoded decision checks that both secret arms contain the
+same two full actions, possibly exchanged. It has a separate command and
+observer; the ordered judgment remains unchanged.
+
+An additional theorem preserves the joint distribution of usage and a
+full-action-indexed multiset of actual response text/status pairs. A separate
+finite execution mode can therefore retain results for a trusted host.
+Source branch bindings still cannot escape their lexical branch; this is
+not an end-to-end application or public-output confidentiality theorem.
+
+\subsection{Exact tokenizer accounting}
+The exact CLI takes a tokenizer JSON, its SHA-256 digest, a pinned library
+version and an explicit special-token policy. It encodes complete requests
+with padding and truncation disabled. Closed-source mode computes exact
+inputs and conditional output-cap bounds directly from supported
+\texttt{.orch} files. A declared mock model remains an abstract source contract.
+
+Adding counts of prompt pieces is unsafe. Under the pinned plain GPT-2 policy,
+\[
+ t(\texttt{hello})+t(\texttt{world})=2
+ <t(\texttt{helloworld})=3.
+\]
+Plain BERT has an analogous example with \texttt{a} and \texttt{world}.
+Dynamic static bounds instead use separately enforced UTF-8 byte contracts
+under the audited plain GPT-2 byte-BPE policy. Each initial symbol consumes a
+byte, and merges cannot increase their number; thus
+$t(s)\leq|\operatorname{UTF8}(s)|$ for that pinned configuration.
+This implementation argument is separate from the Lean theorem.
+BERT has no asserted byte rule: normalization can remove arbitrarily many
+control bytes, so output token caps alone cannot bound response bytes.
+
+The finite executor checks exact output caps and required byte caps for every
+table outcome, accounts for billed failures and bounds retry. Runtime-only
+mode reserves the complete request count plus output cap before dispatch
+and can refuse a later request. C++ mock measurements retain their original
+synthetic unit.
+
+\section{Illustrative examples}
+The permanent negative case uses \texttt{yes} and \texttt{no!}, which have equal
+byte length but can induce one versus 100 output bytes under a valid kernel.
+A downstream witness returns \texttt{aa} or \texttt{bb}; subsequent
+\texttt{Next:aa} and \texttt{Next:bb} requests have different output
+distributions. The dataflow decision retains this dependency and rejects
+replacing it with a fixed request.
+
+A positive source case makes the same call in both alternatives of a public
+conditional inside one secret arm. The other secret arm calls directly.
+Proved public-branch collapse admits these different syntax trees.
+For the aggregate decision, one arm performs two independent closed document
+checks and the other exchanges them. Aggregate acceptance preserves totals;
+the ordered decision rejects the schedule difference. A response dependency
+removes the commutation justification. Three executable source illustrations
+accompany the aggregate checker.
+
+\section{Impact and evaluation}
+The evaluation asks whether the software gains precision under its specified
+observers, accounts for concrete tokenizer behavior, and preserves behavior in
+the source fragments it can express. New raw data are retained separately from
+historical campaigns. Protocols, source hashes, commands, failed attempts,
+dependency/model identities and generated tables accompany the artifact.
+Precision sets are constructed stress tests, not samples of production
+prevalence.
+
+\subsection{Implementation and regression evidence}
+Current validation runs \revCppTests{} C++ tests and \revPythonTests{} Python
+tests; optional dependency skips are explicitly counted in the records.
+All \revProofFiles{} Lean files compile under 4.19.0 without admitted lemmas
+or project-specific axioms. The updated dataflow proof additionally uses
+standard \texttt{Classical.choice}; the inventory retains
+\texttt{propext} and \texttt{Quot.sound}. Cross-platform checks and sanitizer
+commands are retained. Ubuntu and Windows CI configuration is included.
+
+The closed-request rerun covers 576 programs and accepts 24.
+No accepted case has a counterexample under the supplied kernels.
+
+The original pipeline campaign covers 256 programs. It retains 16 accepts
+across 3,072 contexts, with agreement between Lean,
+the reference executor and replay. C++ accepts eight. The eight additional
+resource-only accepts have IDs 0, 34, 68, 102, 136, 170, 204 and 238.
+Each feeds a branch-local response into a later prompt; C++ conservatively
+assigns the secret PC label and emits E230 in both arms. The supplement
+tabulates every source and diagnostic. Resource equality does not override
+this confidentiality policy.
+
+Four historical compiled semantic mutants are detected. A competent structural
+baseline agrees on 23 existing workflows and 115 mock executions. The earlier
+11 cost projections and 220 mock runs remain historical shape checks and are
+not counted as faithful application translations.
+
+\subsection{Precision beyond syntactic identity}
+\begin{table}[!ht]
+\centering\small
+\input{evidence/precision.tex}
+\caption{Constructed precision cases. The aggregate row changes the observer;
+it does not preserve ordered traces.}
+\label{tab:precision}
+\end{table}
+The ordered source campaign accepts \revPrecisionSourceAccepted{} of
+\revPrecisionSourceCases{} cases versus \revPrecisionSourceBaseline{} for the
+previous syntactic procedure. The separate core-expression campaign accepts
+\revPrecisionCoreAccepted{} of \revPrecisionCoreCases{} versus
+\revPrecisionCoreBaseline{}. Together they cover \revPrecisionContexts{}
+exact execution contexts with zero accepted supplied-kernel counterexamples.
+Separating negatives retain changed requests, contracts and dependencies.
+The aggregate campaign accepts \revAggregateAccepted{} of
+\revAggregateCases{} versus \revAggregateBaseline{} for ordered identity.
+All \revAggregateGains{} gains have different ordered distributions under the
+supplied kernels, as expected. Its \revAggregateContexts{} contexts and
+\revAggregatePaths{} weighted paths have no accepted aggregate counterexample.
+These counts establish implemented differences within disclosed grammars,
+not typical application gains or superiority over general relational logics.
+
+\subsection{Pinned-tokenizer evidence}
+The corpus contains \revTokenizerTexts{} text-policy and
+\revTokenizerConcats{} concatenation-policy observations. Among 2,249 pairs
+per plain policy, joined counts exceed component sums in 36 GPT-2 and 75 BERT
+cases. Targeted counterexamples refute additivity rather than estimate an error
+rate. Of 64 finite program/policy/guard configurations,
+\revExactSupported{} have supported static bounds; 24 correctly lack a
+required dynamic byte rule. The \revExactPaths{} supported enumerated paths
+have \revExactViolations{} bound violations. Four closed-source observations
+and two CLI checks exercise actual \texttt{.orch} input.
+
+\subsection{Original-framework and local-model execution}
+\input{evidence/workflow-results.tex}
+
+The deployment adapter explicitly serializes requests, hashes its tokenizer
+and pins the cached \texttt{qwen2.5:3b} manifest. It requests CPU generation
+with temperature zero and one seed. Complete input counts are compared with
+server prompt counts; output usage measures generated tokens rather than
+re-encoding decoded text. Input ceilings, output caps, context limits and
+maximum calls govern admission. This bound is a deployment contract, not an
+exact-token interpretation of the C++ byte/divisor estimate.
+
+The corpus retains upstream prompts, response dependencies, predicates,
+routing and postprocessing. One direct source port is distinguished from five
+compositions retaining host predicates, structured routing, scheduling or list
+processing. Source annotation and host-glue counts are reported; no
+retrospective human adaptation-time estimate is invented. Original engines
+and ports share the deployment contract. Independent generation,
+captured-response replay, repeatability controls and task quality are
+reported as distinct endpoints.
+
+Both scored tasks expose model failures: NER splits the phone number into
+three entities, and routing selects a joke for the poem request. Each task
+passes four of eight execution-level exact checks across both arms. Agreement
+between implementations therefore does not imply task success. Open-ended
+generation is unscored; 44 of the 88 generations reach their output cap.
+
+\begin{table}[!ht]
+\centering\small
+\input{evidence/annotations.tex}
+\caption{Descriptive nonempty source lines (including comments), executable
+kernel lines, source input/cap annotations, and host case lines. Shared drivers
+and the kernel interpreter are counted separately in the supplement. These
+counts do not measure human adaptation time or code reduction.}
+\label{tab:annotations}
+\end{table}
+
+\subsection{Threats to validity}
+Python readers, JSON handling, tokenizer libraries, execution adapters and the
+platform remain trusted. Lean proves decoded-core transformations, not C++
+soundness, reader correctness or provider conformance. Probability
+interpretation requires valid finite kernels; the relation assumes stateless
+request-indexed behavior. Local caching and repeatability are examined
+empirically rather than assumed to satisfy that theorem.
+
+Precision grammars intentionally contain the supported equivalences.
+Finite checks cannot replace soundness proofs or establish completeness.
+The local corpus contains five distinct tutorial patterns, two selected inputs
+per variant, one seed and one model. Hybrid compositions expose source support
+gaps and are not whole-program translations. Resource compliance, trace
+conformance and task quality answer different questions. Admission can refuse
+a request before completion; failures require an explicit accounting contract.
+The final local run follows disclosed infrastructure and translation repairs;
+it is an amended development study, not untouched preregistration.
+Timing, network metadata, secret text, mutable providers and production
+deployment remain outside the demonstrated guarantee.
+
+\section{Conclusions}
+OrchLang makes resource contracts inspectable where source structure,
+constructed requests, kernels and execution meet. Its verified decisions
+admit specified semantic rewrites and independent-call aggregate permutations
+beyond syntactic identity. Complete-request tokenization removes an unsafe
+additive abstraction. Original-framework runs and separately labeled replay
+checks expose both execution support and remaining host/model assumptions.
+The artifact supplies executable decisions and counterexamples for developers
+auditing these bounded workflow obligations.
+
+\section*{Data, software and research-assistance statements}
+The local review package includes source, protocols, raw data, proofs, claim
+ledger and table scripts. Credentials, weights and private literature are
+excluded. Public archival metadata and final author declarations remain
+separate administrative steps. No paid inference API was used; API expenditure
+is USD 0.
+
+OpenAI Codex assisted implementation, proofs, experiments, literature retrieval
+and writing. Git history also records earlier Anthropic Claude assistance
+under the attribution \texttt{Claude Opus 5}. These systems are research tools,
+not authors. Automated checks do not constitute completed human verification
+or final author approval.
+
+\input{references.tex}
+\end{document}

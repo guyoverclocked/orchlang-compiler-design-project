@@ -1,0 +1,17 @@
+{
+  "argv": [
+    "C:\\Python314\\python.exe",
+    "C:\\Users\\nambi\\Documents\\Compiler Project\\orchlang-compiler-design-project\\scripts\\decide_aggregate.py",
+    "C:\\Users\\nambi\\Documents\\Compiler Project\\orchlang-compiler-design-project\\research\\revision-2026-10-24\\aggregate-reordering-v1\\sources\\case-000.orch",
+    "--lean",
+    "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\tools\\lean-4.19.0-windows\\bin\\lean.exe",
+    "--finite-kernels",
+    "C:\\Users\\nambi\\Documents\\Compiler Project\\orchlang-compiler-design-project\\research\\revision-2026-10-24\\aggregate-private-results-v1\\cli-kernels.json",
+    "--private-results",
+    "C:\\Users\\nambi\\Documents\\Compiler Project\\orchlang-compiler-design-project\\research\\revision-2026-10-24\\aggregate-private-results-v1\\cli-private-archive.json"
+  ],
+  "exit": 0,
+  "stdout": "{\"status\": \"accepted\", \"source_sha256\": \"a5aa66f4726e8b566db4b8e97392af9ef0a0c9a1dac8891029f66b44c92bcdf9\", \"judgment\": \"per-contract UTF-8 input/output totals, call counts and failures\", \"assumptions\": \"independent stateless full-action kernels; closed requests\", \"trusted_boundary\": \"Python source reader; not ordered trace, content IFC or budget\"}\n",
+  "stderr": "",
+  "archive_sha256": "605d05bb4a7602bcf7905dd99ea463e68ba45d38c8929fbffd71b23da11fcebe"
+}

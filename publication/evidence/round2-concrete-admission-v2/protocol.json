@@ -1,0 +1,1095 @@
+{
+  "schema": "orchlang-concrete-admission-v1",
+  "workflows": [
+    {
+      "workflow": "switch",
+      "group": "main",
+      "source": "workflows\\switch.orch",
+      "source_sha256": "400493d816644e4081c3c34139d96c7ce691da1b5c0eff33ee38a529f5cb5ca8",
+      "source_binding_sha256": "5e8f68407a836b20c8e041b1d9b3b51c059f3bf895f38fc53d39dd4bf80e1d0e",
+      "core_accepted": true,
+      "static_admission_accepted": true,
+      "context": 32768,
+      "maximum_response_piece_bytes": 128,
+      "dataset_inputs": 210,
+      "guard_admitted": 210,
+      "guard_rejected_ids": [],
+      "planned_pairs": 2,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          953,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ]
+    },
+    {
+      "workflow": "routing",
+      "group": "main",
+      "source": "workflows\\routing.orch",
+      "source_sha256": "ab96109a7f976f6603b03285d3f93b4eb2a7b3619e32aecf7f51ed4a7591f064",
+      "source_binding_sha256": "e96f6c1a60137d47b8ea3d7bf308bcccde5e6c5bbe4f42164ec5d4747e8954bd",
+      "core_accepted": true,
+      "static_admission_accepted": true,
+      "context": 32768,
+      "maximum_response_piece_bytes": 128,
+      "dataset_inputs": 150,
+      "guard_admitted": 150,
+      "guard_rejected_ids": [],
+      "planned_pairs": 2,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          514,
+          4
+        ],
+        [
+          "tool",
+          "label_in"
+        ],
+        [
+          "llm",
+          "llama1b",
+          423,
+          192
+        ]
+      ]
+    },
+    {
+      "workflow": "chaining",
+      "group": "main",
+      "source": "workflows\\chaining.orch",
+      "source_sha256": "16733d31405f6d6f59308ba242af3ae6aed17b6159b31c6b95a36b7e55885201",
+      "source_binding_sha256": "3ff7f5203ca39246eaf2b895f154a021cb0cbfca8790b86f3c7e5c8a17480ae9",
+      "core_accepted": true,
+      "static_admission_accepted": true,
+      "context": 32768,
+      "maximum_response_piece_bytes": 128,
+      "dataset_inputs": 150,
+      "guard_admitted": 150,
+      "guard_rejected_ids": [],
+      "planned_pairs": 2,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          354,
+          96
+        ],
+        [
+          "tool",
+          "contains_any"
+        ],
+        [
+          "tool",
+          "copy"
+        ],
+        [
+          "llm",
+          "llama1b",
+          12564,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          16654,
+          128
+        ]
+      ]
+    },
+    {
+      "workflow": "evaluator",
+      "group": "main",
+      "source": "workflows\\evaluator.orch",
+      "source_sha256": "c8c1b3522d0f20645ccf22b36e62db840184c3469a3a926171d714ad9fc0321f",
+      "source_binding_sha256": "381ff2747bc384d70e011e4600775706e3be06608ca68d2753b47cc0adba61ec",
+      "core_accepted": true,
+      "static_admission_accepted": true,
+      "context": 32768,
+      "maximum_response_piece_bytes": 128,
+      "dataset_inputs": 100,
+      "guard_admitted": 100,
+      "guard_rejected_ids": [],
+      "planned_pairs": 2,
+      "shape": [
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          577,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          12707,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ],
+        [
+          "llm",
+          "llama1b",
+          577,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          12707,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ],
+        [
+          "llm",
+          "llama1b",
+          577,
+          96
+        ],
+        [
+          "llm",
+          "llama1b",
+          12707,
+          64
+        ],
+        [
+          "tool",
+          "eval_stop"
+        ],
+        [
+          "tool",
+          "after"
+        ]
+      ]
+    },
+    {
+      "workflow": "email",
+      "group": "main",
+      "source": "workflows\\email.orch",
+      "source_sha256": "88b769e1a49e34372f8eb1bbaf105591b3acc0ad8bd1b31b557b8b519252b58f",
+      "source_binding_sha256": "1998b1d0c88f3bcd38fabd9615b0730bb68831a9e04fbacd3ce08725a362d1a7",
+      "core_accepted": true,
+      "static_admission_accepted": true,
+      "context": 32768,
+      "maximum_response_piece_bytes": 128,
+      "dataset_inputs": 152,
+      "guard_admitted": 152,
+      "guard_rejected_ids": [],
+      "planned_pairs": 2,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          1783,
+          80
+        ],
+        [
+          "tool",
+          "email_route"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          1914,
+          320
+        ]
+      ]
+    },
+    {
+      "workflow": "orchestrator",
+      "group": "main",
+      "source": "workflows\\orchestrator.orch",
+      "source_sha256": "a99eab3fdcaf2d499d67f756a3720c280f6ad6cc4332753f046dc64508ec7ccc",
+      "source_binding_sha256": "55daf5d6f52611a02128c2113783150015ff66f584c451e2d5595012828269a3",
+      "core_accepted": true,
+      "static_admission_accepted": true,
+      "context": 32768,
+      "maximum_response_piece_bytes": 128,
+      "dataset_inputs": 100,
+      "guard_admitted": 100,
+      "guard_rejected_ids": [],
+      "planned_pairs": 2,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          483,
+          160
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          599,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          599,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          599,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ],
+        [
+          "tool",
+          "line"
+        ],
+        [
+          "tool",
+          "section_name"
+        ],
+        [
+          "tool",
+          "section_desc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          599,
+          128
+        ],
+        [
+          "tool",
+          "join_sections"
+        ],
+        [
+          "tool",
+          "inc"
+        ],
+        [
+          "tool",
+          "has_line"
+        ]
+      ]
+    },
+    {
+      "workflow": "calculator",
+      "group": "main",
+      "source": "workflows\\calculator.orch",
+      "source_sha256": "f443546bc2395ed5aa79941e102a1c5fa2356a1b5e206f00e4a9781ceb1916e0",
+      "source_binding_sha256": "1b1bead751dd09609870d970574b5609a293b0a190fbe164317193fe8fd13c46",
+      "core_accepted": true,
+      "static_admission_accepted": true,
+      "context": 32768,
+      "maximum_response_piece_bytes": 128,
+      "dataset_inputs": 100,
+      "guard_admitted": 98,
+      "guard_rejected_ids": [
+        "calc-42",
+        "calc-92"
+      ],
+      "planned_pairs": 2,
+      "shape": [
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama1b",
+          2813,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          2813,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          2813,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          2813,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          2813,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ],
+        [
+          "llm",
+          "llama1b",
+          2813,
+          48
+        ],
+        [
+          "tool",
+          "final_seen"
+        ],
+        [
+          "tool",
+          "calculator"
+        ],
+        [
+          "tool",
+          "history"
+        ]
+      ]
+    },
+    {
+      "workflow": "crag",
+      "group": "main",
+      "source": "workflows\\crag.orch",
+      "source_sha256": "1e033e4f3c0614568fcc0c08d477aa67e36930b058420affa2ecb11591b0a85d",
+      "source_binding_sha256": "e9596a8209ace3911ea861b995fa96cd42d9870523bc9e8b3066348338baf93c",
+      "core_accepted": true,
+      "static_admission_accepted": true,
+      "context": 32768,
+      "maximum_response_piece_bytes": 128,
+      "dataset_inputs": 150,
+      "guard_admitted": 150,
+      "guard_rejected_ids": [],
+      "planned_pairs": 2,
+      "shape": [
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          2183,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          2183,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          2183,
+          16
+        ],
+        [
+          "llm",
+          "llama1b",
+          2183,
+          16
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "any_no"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "join_docs"
+        ],
+        [
+          "llm",
+          "llama1b",
+          7165,
+          128
+        ]
+      ]
+    },
+    {
+      "workflow": "adaptive",
+      "group": "main",
+      "source": "workflows\\adaptive.orch",
+      "source_sha256": "a248b454dc085c6c89363a25f444f2d4dbeb70f95b500fe0735d52449f8da542",
+      "source_binding_sha256": "a7ea942e84fad6a9bfb9e3d8c41f66d8f3b50bab156566f531f265aeeccc0747",
+      "core_accepted": true,
+      "static_admission_accepted": true,
+      "context": 32768,
+      "maximum_response_piece_bytes": 128,
+      "dataset_inputs": 60,
+      "guard_admitted": 60,
+      "guard_rejected_ids": [],
+      "planned_pairs": 2,
+      "shape": [
+        [
+          "llm",
+          "llama1b",
+          990,
+          3
+        ],
+        [
+          "tool",
+          "route_source"
+        ],
+        [
+          "tool",
+          "qcopy"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          7779,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          7779,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          7779,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          7779,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "nonempty"
+        ],
+        [
+          "llm",
+          "llama3b",
+          6657,
+          48
+        ],
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "llama1b",
+          7779,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          7779,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          7779,
+          3
+        ],
+        [
+          "llm",
+          "llama1b",
+          7779,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "nonempty"
+        ],
+        [
+          "llm",
+          "llama3b",
+          6657,
+          48
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "llama3b",
+          10325,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          20603,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama1b",
+          17058,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama3b",
+          10325,
+          128
+        ],
+        [
+          "llm",
+          "llama1b",
+          20603,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ],
+        [
+          "llm",
+          "llama1b",
+          17058,
+          3
+        ],
+        [
+          "tool",
+          "yes_no"
+        ]
+      ]
+    },
+    {
+      "workflow": "switch",
+      "group": "qwen",
+      "source": "workflows\\replication\\switch_qwen.orch",
+      "source_sha256": "4ba32452cf21320ed39a0d23014db1948fb13b96616a3fbe18379e7e2f8e0ac7",
+      "source_binding_sha256": "d00ad9d9bd1557a78bcc670488df14ab869d513a56dde466df286211e3c35edd",
+      "core_accepted": true,
+      "static_admission_accepted": true,
+      "context": 32768,
+      "maximum_response_piece_bytes": 128,
+      "dataset_inputs": 210,
+      "guard_admitted": 210,
+      "guard_rejected_ids": [],
+      "planned_pairs": 2,
+      "shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          800,
+          128
+        ],
+        [
+          "tool",
+          "class_check"
+        ],
+        [
+          "tool",
+          "const"
+        ]
+      ]
+    },
+    {
+      "workflow": "email",
+      "group": "qwen",
+      "source": "workflows\\replication\\email_qwen.orch",
+      "source_sha256": "9066200895f183b5c0a39a407304ce5e19d3e053e42b590cbf5cfd556dc0852c",
+      "source_binding_sha256": "0de88154facfe4a06ec4b90f862d0fc669775d373345a7b515a5b74fdfb08b5d",
+      "core_accepted": true,
+      "static_admission_accepted": true,
+      "context": 32768,
+      "maximum_response_piece_bytes": 128,
+      "dataset_inputs": 152,
+      "guard_admitted": 152,
+      "guard_rejected_ids": [],
+      "planned_pairs": 2,
+      "shape": [
+        [
+          "llm",
+          "qwen1.5b",
+          1698,
+          80
+        ],
+        [
+          "tool",
+          "email_route"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "field"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "tool",
+          "const"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          1829,
+          320
+        ]
+      ]
+    },
+    {
+      "workflow": "crag",
+      "group": "qwen",
+      "source": "workflows\\replication\\crag_qwen.orch",
+      "source_sha256": "c10554eef049453e40b42b2664b33a538c028df914bcb80f9aaf04d810b6561a",
+      "source_binding_sha256": "e07780b526ebd9269e37405b96d8705b5b12168934429f891511440a9b1e7a79",
+      "core_accepted": true,
+      "static_admission_accepted": true,
+      "context": 32768,
+      "maximum_response_piece_bytes": 128,
+      "dataset_inputs": 150,
+      "guard_admitted": 150,
+      "guard_rejected_ids": [],
+      "planned_pairs": 2,
+      "shape": [
+        [
+          "tool",
+          "retrieve"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "tool",
+          "doc"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          2098,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          2098,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          2098,
+          16
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          2098,
+          16
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "json_yes"
+        ],
+        [
+          "tool",
+          "keep_relevant"
+        ],
+        [
+          "tool",
+          "any_no"
+        ],
+        [
+          "tool",
+          "web_search"
+        ],
+        [
+          "tool",
+          "join_docs"
+        ],
+        [
+          "llm",
+          "qwen1.5b",
+          7080,
+          128
+        ]
+      ]
+    }
+  ],
+  "vocabulary_receipt_sha256": "c73bba2fdd5c784902063eecc7012004ad17fe28c1ed2d4b6b7772fb9e76981a",
+  "implementation": {
+    "orchlang/__main__.py": "f5da4cf72658fd4d603fd64344edf56bcf5af642f8694c8542d1c9bdd914f346",
+    "orchlang/admission.py": "6de42a4384ab940b56695c1cc4471ae9c8e272ecffb3a7a6ae1d183a52bccfb0",
+    "orchlang/assurance.py": "88cfbab17db9f490194bcb8fc09834a922cba3751fdc53d8bf7bab45b70f6012",
+    "orchlang/compiler.py": "6f45610f86feba2f8045111e814a4930d4486ea5a7838cf6b000f00de91f6ecd",
+    "orchlang/core.py": "54f8eb20921c63ccd7bc265f0a6e9373d9d2180d8c88d4f21169e865aec60ba8",
+    "orchlang/ledger.py": "04187531d1b9f102f9772f44988380b43b316d69a333eacde9e4b5cdc0a203a9",
+    "orchlang/models.py": "2fe051adf91da1acd56bd3d71c6cfc9ba05faf381a0deb36db9bf7d9ef9f42b4",
+    "orchlang/runtime.py": "cab8f5c4bdbecd6f8973d54b997860b9e6f01db6bbff9047fb67684fec0e879e",
+    "orchlang/syntax.py": "03e5c6ed652c7fbf3ba2fa1c00dcf453a391cfa8484b0956943845469c10bfd3",
+    "orchlang/tools.py": "e378ead75b39f530084e72201b128be669e8281ba515f0b160e44a4fc47f5804",
+    "orchlang/validate.py": "48dfa77bd11bb2b1baaaa60bce3f96cbeb7af212bdd1e950d4b32c4a549c5433",
+    "proof/ShapeCore.lean": "c118a53d032fb6d0ca80ea2e4971f187beb76201317ac354853bcb216cc7322a",
+    "experiments/run_workflow.py": "161975c620e371391a89c330766d1fb5041de5002862fa1e6cbf5efc6cd9fd5c"
+  },
+  "driver_sha256": "c89c2ffe6859b53bb96db25c78420bfa37c1c0a8f3ffad87891f2ccf6c928dac",
+  "response_bytes": "max native token-piece length times visible token cap",
+  "tools": "explicit UTF-8 byte buffers, four times declared tool-token annotation",
+  "inputs": "entry byte guard, four times declared input-token annotation",
+  "native_tokenizer_algorithm_verified": false
+}

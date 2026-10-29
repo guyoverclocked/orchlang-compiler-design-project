@@ -1,0 +1,475 @@
+{
+ "workflows": {
+  "crag": {
+   "workflow": "crag",
+   "n": 150,
+   "findings": 6,
+   "sites": 5,
+   "source_lines": 36,
+   "lean_seconds": 2.5437522000138415,
+   "frontend_seconds": 0.4061567000026116,
+   "shape_seconds": 0.0012652999866986647,
+   "conformant_runs": 150,
+   "static_shape_defined": true,
+   "truncations": 0,
+   "orig_cost": {
+    "calls": 5.0,
+    "input": 2291.266666666667,
+    "output": 90.51333333333334,
+    "price": 2653.32,
+    "calls_min": 5.0,
+    "calls_max": 5.0
+   },
+   "ours_cost": {
+    "calls": 5.0,
+    "input": 3857.0,
+    "output": 192.0,
+    "price": 4625.0
+   },
+   "static": {
+    "ours": {
+     "calls": 5,
+     "input": 3857,
+     "output": 192,
+     "price": 4625.0
+    },
+    "naive": {
+     "calls": 5,
+     "input": 3857,
+     "output": 192,
+     "price": 4625.0
+    },
+    "uniform": {
+     "calls": 5,
+     "input": 8845,
+     "output": 640,
+     "price": 11405.0
+    },
+    "padall": {
+     "calls": 5,
+     "input": 3857,
+     "output": 192,
+     "price": 4625.0
+    }
+   },
+   "latency": {
+    "orig_mean": 18.214248666666666,
+    "orig_sd": 6.222373782276735,
+    "ours_mean": 42.534937333333325,
+    "ours_sd": 4.292803990051983,
+    "orig_cv": 0.34162121623298736,
+    "ours_cv": 0.10092418748405782
+   },
+   "leak": {
+    "orig": {
+     "distinct": 150,
+     "decision": {
+      "accuracy": 0.9933333333333333,
+      "balanced": 0.5,
+      "majority": 0.9933333333333333,
+      "chance_balanced": 0.5,
+      "n": 150,
+      "mi_pred_bits": 0.0,
+      "mi_bits": 0.06258694363976325,
+      "classes": 2
+     },
+     "label": {
+      "accuracy": 0.44,
+      "balanced": 0.44,
+      "majority": 0.5,
+      "chance_balanced": 0.5,
+      "n": 150,
+      "mi_pred_bits": 0.005610995278999997,
+      "mi_bits": 1.0048089834696299,
+      "classes": 2
+     }
+    },
+    "orig+lat": {
+     "distinct": 150,
+     "decision": {
+      "accuracy": 0.9933333333333333,
+      "balanced": 0.5,
+      "majority": 0.9933333333333333,
+      "chance_balanced": 0.5,
+      "n": 150,
+      "mi_pred_bits": 0.0,
+      "mi_bits": 0.06258694363976325,
+      "classes": 2
+     },
+     "label": {
+      "accuracy": 0.42,
+      "balanced": 0.42000000000000004,
+      "majority": 0.5,
+      "chance_balanced": 0.5,
+      "n": 150,
+      "mi_pred_bits": 0.013767494687209725,
+      "mi_bits": 1.0048089834696299,
+      "classes": 2
+     }
+    },
+    "ours": {
+     "distinct": 1,
+     "decision": {
+      "accuracy": 0.9933333333333333,
+      "balanced": 0.5,
+      "majority": 0.9933333333333333,
+      "chance_balanced": 0.5,
+      "n": 150,
+      "mi_pred_bits": 0.0,
+      "mi_bits": 0.0,
+      "classes": 2
+     },
+     "label": {
+      "accuracy": 0.5,
+      "balanced": 0.5,
+      "majority": 0.5,
+      "chance_balanced": 0.5,
+      "n": 150,
+      "mi_pred_bits": 0.0,
+      "mi_bits": 0.0,
+      "classes": 2
+     }
+    },
+    "ours+lat": {
+     "distinct": 1,
+     "decision": {
+      "accuracy": 0.9933333333333333,
+      "balanced": 0.5,
+      "majority": 0.9933333333333333,
+      "chance_balanced": 0.5,
+      "n": 150,
+      "mi_pred_bits": 0.0,
+      "mi_bits": 0.0,
+      "classes": 2
+     },
+     "label": {
+      "accuracy": 0.5066666666666667,
+      "balanced": 0.5066666666666667,
+      "majority": 0.5,
+      "chance_balanced": 0.5,
+      "n": 150,
+      "mi_pred_bits": 0.0,
+      "mi_bits": 0.0,
+      "classes": 2
+     }
+    },
+    "padonly": {
+     "distinct": 2,
+     "decision": {
+      "accuracy": 0.9933333333333333,
+      "balanced": 0.5,
+      "majority": 0.9933333333333333,
+      "chance_balanced": 0.5,
+      "n": 150,
+      "mi_pred_bits": 0.0,
+      "mi_bits": 0.06258694363976365,
+      "classes": 2
+     },
+     "label": {
+      "accuracy": 0.5,
+      "balanced": 0.5,
+      "majority": 0.5,
+      "chance_balanced": 0.5,
+      "n": 150,
+      "mi_pred_bits": 0.0,
+      "mi_bits": 0.006698941965808558,
+      "classes": 2
+     }
+    },
+    "noforce": {
+     "distinct": 114,
+     "decision": {
+      "accuracy": 0.9933333333333333,
+      "balanced": 0.5,
+      "majority": 0.9933333333333333,
+      "chance_balanced": 0.5,
+      "n": 150,
+      "mi_pred_bits": 0.0,
+      "mi_bits": 0.06258694363976325,
+      "classes": 2
+     },
+     "label": {
+      "accuracy": 0.49333333333333335,
+      "balanced": 0.49333333333333335,
+      "majority": 0.5,
+      "chance_balanced": 0.5,
+      "n": 150,
+      "mi_pred_bits": 0.0,
+      "mi_bits": 0.7081627618393496,
+      "classes": 2
+     }
+    },
+    "randpad": {
+     "distinct": 150,
+     "decision": {
+      "accuracy": 0.9933333333333333,
+      "balanced": 0.5,
+      "majority": 0.9933333333333333,
+      "chance_balanced": 0.5,
+      "n": 150,
+      "mi_pred_bits": 0.0,
+      "mi_bits": 0.06258694363976325,
+      "classes": 2
+     },
+     "label": {
+      "accuracy": 0.49333333333333335,
+      "balanced": 0.49333333333333335,
+      "majority": 0.5,
+      "chance_balanced": 0.5,
+      "n": 150,
+      "mi_pred_bits": 0.0,
+      "mi_bits": 1.0048089834696299,
+      "classes": 2
+     }
+    }
+   },
+   "function": {
+    "decision_agreement": 1.0,
+    "output_equal": 1.0,
+    "orig_acc": 0.2866666666666667,
+    "ours_acc": 0.2866666666666667,
+    "mcnemar": {
+     "orig_only": 0,
+     "ours_only": 0,
+     "p": 1.0
+    }
+   }
+  },
+  "adaptive": {
+   "workflow": "adaptive",
+   "n": 60,
+   "findings": 12,
+   "sites": 9,
+   "source_lines": 61,
+   "lean_seconds": 11.061263000010513,
+   "frontend_seconds": 2.0048672999982955,
+   "shape_seconds": 0.005248800007393584,
+   "conformant_runs": 60,
+   "static_shape_defined": true,
+   "truncations": 0,
+   "orig_cost": {
+    "calls": 11.416666666666666,
+    "input": 4027.8166666666666,
+    "output": 121.86666666666666,
+    "price": 4515.283333333334,
+    "calls_min": 8.0,
+    "calls_max": 17.0
+   },
+   "ours_cost": {
+    "calls": 17.0,
+    "input": 8981.0,
+    "output": 391.0,
+    "price": 10545.0
+   },
+   "static": {
+    "ours": {
+     "calls": 17,
+     "input": 8981,
+     "output": 391,
+     "price": 10545.0
+    },
+    "naive": {
+     "calls": 17,
+     "input": 8981,
+     "output": 391,
+     "price": 10545.0
+    },
+    "uniform": {
+     "calls": 17,
+     "input": 19489,
+     "output": 551,
+     "price": 21693.0
+    },
+    "padall": {
+     "calls": 17,
+     "input": 8981,
+     "output": 391,
+     "price": 10545.0
+    }
+   },
+   "latency": {
+    "orig_mean": 59.053718333333336,
+    "orig_sd": 18.029125535639007,
+    "ours_mean": 165.11231333333328,
+    "ours_sd": 13.186346044924228,
+    "orig_cv": 0.30530042890563125,
+    "ours_cv": 0.07986288713854593
+   },
+   "leak": {
+    "orig": {
+     "distinct": 60,
+     "decision": {
+      "accuracy": 0.9666666666666667,
+      "balanced": 0.7142857142857143,
+      "majority": 0.4,
+      "chance_balanced": 0.14285714285714285,
+      "n": 60,
+      "mi_pred_bits": 2.0486927542198985,
+      "mi_bits": 2.249181500568734,
+      "classes": 7
+     },
+     "label": {
+      "accuracy": 0.3333333333333333,
+      "balanced": 0.3376488095238095,
+      "majority": 0.26666666666666666,
+      "chance_balanced": 0.25,
+      "n": 60,
+      "mi_pred_bits": 0.07423435015289037,
+      "mi_bits": 2.0344631920130434,
+      "classes": 4
+     }
+    },
+    "orig+lat": {
+     "distinct": 60,
+     "decision": {
+      "accuracy": 0.9666666666666667,
+      "balanced": 0.7142857142857143,
+      "majority": 0.4,
+      "chance_balanced": 0.14285714285714285,
+      "n": 60,
+      "mi_pred_bits": 2.0486927542198985,
+      "mi_bits": 2.249181500568734,
+      "classes": 7
+     },
+     "label": {
+      "accuracy": 0.3,
+      "balanced": 0.3074404761904762,
+      "majority": 0.26666666666666666,
+      "chance_balanced": 0.25,
+      "n": 60,
+      "mi_pred_bits": 0.11325264920249412,
+      "mi_bits": 2.0344631920130434,
+      "classes": 4
+     }
+    },
+    "ours": {
+     "distinct": 1,
+     "decision": {
+      "accuracy": 0.13333333333333333,
+      "balanced": 0.14285714285714285,
+      "majority": 0.4,
+      "chance_balanced": 0.14285714285714285,
+      "n": 60,
+      "mi_pred_bits": 0.0,
+      "mi_bits": 0.0,
+      "classes": 7
+     },
+     "label": {
+      "accuracy": 0.23333333333333334,
+      "balanced": 0.25,
+      "majority": 0.26666666666666666,
+      "chance_balanced": 0.25,
+      "n": 60,
+      "mi_pred_bits": 0.0,
+      "mi_bits": 0.0,
+      "classes": 4
+     }
+    },
+    "ours+lat": {
+     "distinct": 1,
+     "decision": {
+      "accuracy": 0.7333333333333333,
+      "balanced": 0.40441176470588236,
+      "majority": 0.4,
+      "chance_balanced": 0.14285714285714285,
+      "n": 60,
+      "mi_pred_bits": 1.2971872128727373,
+      "mi_bits": 0.0,
+      "classes": 7
+     },
+     "label": {
+      "accuracy": 0.18333333333333332,
+      "balanced": 0.1861607142857143,
+      "majority": 0.26666666666666666,
+      "chance_balanced": 0.25,
+      "n": 60,
+      "mi_pred_bits": 0.1544761281028575,
+      "mi_bits": 0.0,
+      "classes": 4
+     }
+    },
+    "padonly": {
+     "distinct": 7,
+     "decision": {
+      "accuracy": 0.9666666666666667,
+      "balanced": 0.7142857142857143,
+      "majority": 0.4,
+      "chance_balanced": 0.14285714285714285,
+      "n": 60,
+      "mi_pred_bits": 2.0486927542198985,
+      "mi_bits": 2.2491815005687346,
+      "classes": 7
+     },
+     "label": {
+      "accuracy": 0.2833333333333333,
+      "balanced": 0.2876488095238095,
+      "majority": 0.26666666666666666,
+      "chance_balanced": 0.25,
+      "n": 60,
+      "mi_pred_bits": 0.05456749516918924,
+      "mi_bits": 0.15339009089580902,
+      "classes": 4
+     }
+    },
+    "noforce": {
+     "distinct": 55,
+     "decision": {
+      "accuracy": 0.9333333333333333,
+      "balanced": 0.619047619047619,
+      "majority": 0.4,
+      "chance_balanced": 0.14285714285714285,
+      "n": 60,
+      "mi_pred_bits": 1.9365919289905151,
+      "mi_bits": 2.249181500568735,
+      "classes": 7
+     },
+     "label": {
+      "accuracy": 0.3,
+      "balanced": 0.3055059523809524,
+      "majority": 0.26666666666666666,
+      "chance_balanced": 0.25,
+      "n": 60,
+      "mi_pred_bits": 0.10547273316834405,
+      "mi_bits": 1.8983958159908179,
+      "classes": 4
+     }
+    },
+    "randpad": {
+     "distinct": 60,
+     "decision": {
+      "accuracy": 0.9666666666666667,
+      "balanced": 0.7142857142857143,
+      "majority": 0.4,
+      "chance_balanced": 0.14285714285714285,
+      "n": 60,
+      "mi_pred_bits": 2.0486927542198985,
+      "mi_bits": 2.249181500568734,
+      "classes": 7
+     },
+     "label": {
+      "accuracy": 0.3333333333333333,
+      "balanced": 0.3331845238095238,
+      "majority": 0.26666666666666666,
+      "chance_balanced": 0.25,
+      "n": 60,
+      "mi_pred_bits": 0.0,
+      "mi_bits": 2.0344631920130434,
+      "classes": 4
+     }
+    }
+   },
+   "function": {
+    "decision_agreement": 1.0,
+    "output_equal": 1.0,
+    "orig_acc": 0.5166666666666667,
+    "ours_acc": 0.5166666666666667,
+    "mcnemar": {
+     "orig_only": 0,
+     "ours_only": 0,
+     "p": 1.0
+    }
+   }
+  }
+ },
+ "extra": {}
+}

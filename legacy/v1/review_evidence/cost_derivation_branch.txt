@@ -1,0 +1,10 @@
+TieredTriage:
+  token bound   1639 / budget 2000
+  components    output <= 1020, input <= 620 @ 4 chars/token  (sum 1640 exceeds the total bound; the two maxima fall on different branches)
+  labels        0 secret, 0 untrusted
+  derivation for TieredTriage:
+      call  severity = triage via small [out<=120, in<=8+300]  => 428 tokens
+      branch  tokens(severity) <= 120  => 0 tokens
+        call  reply = acknowledge via small [out<=120, in<=12+300]  => 432 tokens
+        call  reply = escalate via large [out<=900, in<=11+300]  => 1211 tokens
+      branch-max  max(then=432, else=1211)  => 1211 tokens

@@ -1,0 +1,8 @@
+'OrchLang.Shape.noninterference' depends on axioms: [propext, Quot.sound]
+'OrchLang.Shape.distribution_noninterference' depends on axioms: [propext, Quot.sound]
+'OrchLang.Shape.erase_correct' depends on axioms: [propext]
+'OrchLang.Shape.validate_sound' depends on axioms: [propext, Quot.sound]
+'OrchLang.Shape.validateProgram_sound' depends on axioms: [propext, Quot.sound]
+'OrchLang.Shape.secret_inputs_sound' depends on axioms: [propext, Quot.sound]
+'OrchLang.Shape.shape_usage_exact' depends on axioms: [propext]
+'OrchLang.Shape.shape_budget_sound' depends on axioms: [propext]

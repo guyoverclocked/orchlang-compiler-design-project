@@ -1,0 +1,283 @@
+{
+  "source": "workflow Boundary {\ninput q: text secret max_tokens 4;\nmodel m = \"m\";\nprompt p(x) = user \"{x}\";\nlet r = call p(q) using m max_tokens 12;\noutput r;\n}",
+  "payloads": [
+    {
+      "high": [
+        0,
+        1
+      ],
+      "original": [
+        "call",
+        1,
+        1,
+        "m",
+        12,
+        [
+          "app",
+          [
+            "lit",
+            "<user>"
+          ],
+          [
+            "app",
+            [
+              "var",
+              0
+            ],
+            [
+              "lit",
+              "</>\n<a>"
+            ]
+          ]
+        ],
+        null
+      ],
+      "padded": [
+        "call",
+        1,
+        1,
+        "m",
+        12,
+        [
+          "app",
+          [
+            "lit",
+            "<user>"
+          ],
+          [
+            "app",
+            [
+              "var",
+              0
+            ],
+            [
+              "lit",
+              "</>\n<a>"
+            ]
+          ]
+        ],
+        [
+          29,
+          12
+        ]
+      ],
+      "secret_inputs": [
+        0
+      ]
+    },
+    {
+      "high": [],
+      "original": [
+        "call",
+        1,
+        1,
+        "m",
+        12,
+        [
+          "app",
+          [
+            "lit",
+            "<user>"
+          ],
+          [
+            "app",
+            [
+              "var",
+              0
+            ],
+            [
+              "lit",
+              "</>\n<a>"
+            ]
+          ]
+        ],
+        null
+      ],
+      "padded": [
+        "call",
+        1,
+        1,
+        "m",
+        12,
+        [
+          "app",
+          [
+            "lit",
+            "<user>"
+          ],
+          [
+            "app",
+            [
+              "var",
+              0
+            ],
+            [
+              "lit",
+              "</>\n<a>"
+            ]
+          ]
+        ],
+        null
+      ],
+      "secret_inputs": [
+        0
+      ]
+    },
+    {
+      "high": [],
+      "original": [
+        "call",
+        1,
+        1,
+        "m",
+        12,
+        [
+          "app",
+          [
+            "lit",
+            "<user>"
+          ],
+          [
+            "app",
+            [
+              "var",
+              0
+            ],
+            [
+              "lit",
+              "</>\n<a>"
+            ]
+          ]
+        ],
+        null
+      ],
+      "padded": [
+        "call",
+        1,
+        1,
+        "m",
+        12,
+        [
+          "app",
+          [
+            "lit",
+            "<user>"
+          ],
+          [
+            "app",
+            [
+              "var",
+              0
+            ],
+            [
+              "lit",
+              "</>\n<a>"
+            ]
+          ]
+        ],
+        null
+      ],
+      "secret_inputs": []
+    }
+  ],
+  "lean_verdicts": [
+    {
+      "static_shape": [
+        [
+          "llm",
+          "m",
+          29,
+          12
+        ]
+      ],
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    },
+    {
+      "static_shape": null,
+      "secrets_high": false,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": false
+    },
+    {
+      "static_shape": null,
+      "secrets_high": true,
+      "randomness_sites": true,
+      "padding_discipline": true,
+      "erasure_matches": true,
+      "caps": true,
+      "accepted": true
+    }
+  ],
+  "source_binding": {
+    "correct_metadata_accepts_shaped": true,
+    "forgotten_label_with_independent_secret_list_rejected": true,
+    "forgotten_label_and_secret_list_accepts_unpadded": true,
+    "accepted_unpadded_traces": [
+      [
+        [
+          "llm",
+          "m",
+          14,
+          8
+        ]
+      ],
+      [
+        [
+          "llm",
+          "m",
+          17,
+          6
+        ]
+      ]
+    ],
+    "traces_differ": true,
+    "interpretation": "The JSON-supplied original and secret list remain trusted source bindings; this does not refute the conditional Lean theorem."
+  },
+  "runtime_conformance": {
+    "lean_accepted": true,
+    "observed_traces": [
+      [
+        [
+          "llm",
+          "m",
+          29,
+          1
+        ]
+      ],
+      [
+        [
+          "llm",
+          "m",
+          29,
+          2
+        ]
+      ]
+    ],
+    "traces_differ": true,
+    "runtime_rejected": false,
+    "interpretation": "A deliberately nonconforming backend is accepted by Runtime without output-length validation. This contradicts the runtime-checking prose, not World.Conforms => noninterference."
+  },
+  "overbound_input": {
+    "declared_max_tokens": 4,
+    "supplied_char_tokens": 1900,
+    "truncations": 1,
+    "outputs_equal": false,
+    "runtime_rejected": false,
+    "interpretation": "Inputs exceeding annotations can be silently truncated; functional preservation requires an enforced admissible-input domain."
+  },
+  "cross_tokenizer_bound": {
+    "bert_output_tokens": 1,
+    "gpt_request_tokens": 259,
+    "computed_target": 18,
+    "underestimates": true,
+    "interpretation": "Scalar variable caps cannot be transferred between tokenizer units; runtime truncation can maintain shape while changing requests."
+  }
+}

@@ -1,0 +1,189 @@
+{
+  "input_sha256": "c6bd89d3d5de9488aad2b4dad2b08e1abf86aad6d1f5961da5b4e37208523f53",
+  "cases": [
+    {
+      "id": 0,
+      "left": [
+        "A",
+        4,
+        "public-input",
+        "response"
+      ],
+      "right": [
+        "A",
+        4,
+        "public-input",
+        "response"
+      ],
+      "source": "workflow Flow budget 10000 { input x:text max_tokens 64; input flag:boolean max_tokens 1; secret s:boolean max_tokens 1; model t=mock(\"tail\") max_tokens 4; prompt tail(t:text)->text=\"Tail:{t}\"; if s {model left = mock(\"A\") max_tokens 4; prompt start_left(t:text)->text=\"Seed:{t}\"; prompt next_left(t:text)->text=\"Next:{t}\"; let first_left:text=call start_left(x) using left; let second_left:text=call next_left(first_left) using left;} else {model right = mock(\"A\") max_tokens 4; prompt start_right(t:text)->text=\"Seed:{t}\"; prompt next_right(t:text)->text=\"Next:{t}\"; let first_right:text=call start_right(x) using right; let second_right:text=call next_right(first_right) using right;} if flag { let z:text=call tail(x) using t; } else {} output \"done\"; }\n",
+      "cpp_diagnostics": [
+        "E230",
+        "E230"
+      ],
+      "cpp_stderr": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\dataflow-source-uaqzyxfe\\case.orch:1:412: error [E230] secret value cannot be passed to prompt 'next_left'; use 'declassify' with a written justification if this is intended\nC:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\dataflow-source-uaqzyxfe\\case.orch:1:662: error [E230] secret value cannot be passed to prompt 'next_right'; use 'declassify' with a written justification if this is intended\n",
+      "lean_accepted": true,
+      "interpretation": "C++ PC taints response; downstream prompt violates IFC E230. Lean checks matched resource distributions under secret-Boolean/shared-kernel model."
+    },
+    {
+      "id": 34,
+      "left": [
+        "A",
+        4,
+        "fixed",
+        "response"
+      ],
+      "right": [
+        "A",
+        4,
+        "fixed",
+        "response"
+      ],
+      "source": "workflow Flow budget 10000 { input x:text max_tokens 64; input flag:boolean max_tokens 1; secret s:boolean max_tokens 1; model t=mock(\"tail\") max_tokens 4; prompt tail(t:text)->text=\"Tail:{t}\"; if s {model left = mock(\"A\") max_tokens 4; prompt start_left()->text=\"Seed:fixed\"; prompt next_left(t:text)->text=\"Next:{t}\"; let first_left:text=call start_left() using left; let second_left:text=call next_left(first_left) using left;} else {model right = mock(\"A\") max_tokens 4; prompt start_right()->text=\"Seed:fixed\"; prompt next_right(t:text)->text=\"Next:{t}\"; let first_right:text=call start_right() using right; let second_right:text=call next_right(first_right) using right;} if flag { let z:text=call tail(x) using t; } else {} output \"done\"; }\n",
+      "cpp_diagnostics": [
+        "E230",
+        "E230"
+      ],
+      "cpp_stderr": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\dataflow-source-uaqzyxfe\\case.orch:1:407: error [E230] secret value cannot be passed to prompt 'next_left'; use 'declassify' with a written justification if this is intended\nC:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\dataflow-source-uaqzyxfe\\case.orch:1:652: error [E230] secret value cannot be passed to prompt 'next_right'; use 'declassify' with a written justification if this is intended\n",
+      "lean_accepted": true,
+      "interpretation": "C++ PC taints response; downstream prompt violates IFC E230. Lean checks matched resource distributions under secret-Boolean/shared-kernel model."
+    },
+    {
+      "id": 68,
+      "left": [
+        "A",
+        8,
+        "public-input",
+        "response"
+      ],
+      "right": [
+        "A",
+        8,
+        "public-input",
+        "response"
+      ],
+      "source": "workflow Flow budget 10000 { input x:text max_tokens 64; input flag:boolean max_tokens 1; secret s:boolean max_tokens 1; model t=mock(\"tail\") max_tokens 4; prompt tail(t:text)->text=\"Tail:{t}\"; if s {model left = mock(\"A\") max_tokens 8; prompt start_left(t:text)->text=\"Seed:{t}\"; prompt next_left(t:text)->text=\"Next:{t}\"; let first_left:text=call start_left(x) using left; let second_left:text=call next_left(first_left) using left;} else {model right = mock(\"A\") max_tokens 8; prompt start_right(t:text)->text=\"Seed:{t}\"; prompt next_right(t:text)->text=\"Next:{t}\"; let first_right:text=call start_right(x) using right; let second_right:text=call next_right(first_right) using right;} if flag { let z:text=call tail(x) using t; } else {} output \"done\"; }\n",
+      "cpp_diagnostics": [
+        "E230",
+        "E230"
+      ],
+      "cpp_stderr": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\dataflow-source-uaqzyxfe\\case.orch:1:412: error [E230] secret value cannot be passed to prompt 'next_left'; use 'declassify' with a written justification if this is intended\nC:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\dataflow-source-uaqzyxfe\\case.orch:1:662: error [E230] secret value cannot be passed to prompt 'next_right'; use 'declassify' with a written justification if this is intended\n",
+      "lean_accepted": true,
+      "interpretation": "C++ PC taints response; downstream prompt violates IFC E230. Lean checks matched resource distributions under secret-Boolean/shared-kernel model."
+    },
+    {
+      "id": 102,
+      "left": [
+        "A",
+        8,
+        "fixed",
+        "response"
+      ],
+      "right": [
+        "A",
+        8,
+        "fixed",
+        "response"
+      ],
+      "source": "workflow Flow budget 10000 { input x:text max_tokens 64; input flag:boolean max_tokens 1; secret s:boolean max_tokens 1; model t=mock(\"tail\") max_tokens 4; prompt tail(t:text)->text=\"Tail:{t}\"; if s {model left = mock(\"A\") max_tokens 8; prompt start_left()->text=\"Seed:fixed\"; prompt next_left(t:text)->text=\"Next:{t}\"; let first_left:text=call start_left() using left; let second_left:text=call next_left(first_left) using left;} else {model right = mock(\"A\") max_tokens 8; prompt start_right()->text=\"Seed:fixed\"; prompt next_right(t:text)->text=\"Next:{t}\"; let first_right:text=call start_right() using right; let second_right:text=call next_right(first_right) using right;} if flag { let z:text=call tail(x) using t; } else {} output \"done\"; }\n",
+      "cpp_diagnostics": [
+        "E230",
+        "E230"
+      ],
+      "cpp_stderr": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\dataflow-source-uaqzyxfe\\case.orch:1:407: error [E230] secret value cannot be passed to prompt 'next_left'; use 'declassify' with a written justification if this is intended\nC:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\dataflow-source-uaqzyxfe\\case.orch:1:652: error [E230] secret value cannot be passed to prompt 'next_right'; use 'declassify' with a written justification if this is intended\n",
+      "lean_accepted": true,
+      "interpretation": "C++ PC taints response; downstream prompt violates IFC E230. Lean checks matched resource distributions under secret-Boolean/shared-kernel model."
+    },
+    {
+      "id": 136,
+      "left": [
+        "B",
+        4,
+        "public-input",
+        "response"
+      ],
+      "right": [
+        "B",
+        4,
+        "public-input",
+        "response"
+      ],
+      "source": "workflow Flow budget 10000 { input x:text max_tokens 64; input flag:boolean max_tokens 1; secret s:boolean max_tokens 1; model t=mock(\"tail\") max_tokens 4; prompt tail(t:text)->text=\"Tail:{t}\"; if s {model left = mock(\"B\") max_tokens 4; prompt start_left(t:text)->text=\"Seed:{t}\"; prompt next_left(t:text)->text=\"Next:{t}\"; let first_left:text=call start_left(x) using left; let second_left:text=call next_left(first_left) using left;} else {model right = mock(\"B\") max_tokens 4; prompt start_right(t:text)->text=\"Seed:{t}\"; prompt next_right(t:text)->text=\"Next:{t}\"; let first_right:text=call start_right(x) using right; let second_right:text=call next_right(first_right) using right;} if flag { let z:text=call tail(x) using t; } else {} output \"done\"; }\n",
+      "cpp_diagnostics": [
+        "E230",
+        "E230"
+      ],
+      "cpp_stderr": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\dataflow-source-uaqzyxfe\\case.orch:1:412: error [E230] secret value cannot be passed to prompt 'next_left'; use 'declassify' with a written justification if this is intended\nC:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\dataflow-source-uaqzyxfe\\case.orch:1:662: error [E230] secret value cannot be passed to prompt 'next_right'; use 'declassify' with a written justification if this is intended\n",
+      "lean_accepted": true,
+      "interpretation": "C++ PC taints response; downstream prompt violates IFC E230. Lean checks matched resource distributions under secret-Boolean/shared-kernel model."
+    },
+    {
+      "id": 170,
+      "left": [
+        "B",
+        4,
+        "fixed",
+        "response"
+      ],
+      "right": [
+        "B",
+        4,
+        "fixed",
+        "response"
+      ],
+      "source": "workflow Flow budget 10000 { input x:text max_tokens 64; input flag:boolean max_tokens 1; secret s:boolean max_tokens 1; model t=mock(\"tail\") max_tokens 4; prompt tail(t:text)->text=\"Tail:{t}\"; if s {model left = mock(\"B\") max_tokens 4; prompt start_left()->text=\"Seed:fixed\"; prompt next_left(t:text)->text=\"Next:{t}\"; let first_left:text=call start_left() using left; let second_left:text=call next_left(first_left) using left;} else {model right = mock(\"B\") max_tokens 4; prompt start_right()->text=\"Seed:fixed\"; prompt next_right(t:text)->text=\"Next:{t}\"; let first_right:text=call start_right() using right; let second_right:text=call next_right(first_right) using right;} if flag { let z:text=call tail(x) using t; } else {} output \"done\"; }\n",
+      "cpp_diagnostics": [
+        "E230",
+        "E230"
+      ],
+      "cpp_stderr": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\dataflow-source-uaqzyxfe\\case.orch:1:407: error [E230] secret value cannot be passed to prompt 'next_left'; use 'declassify' with a written justification if this is intended\nC:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\dataflow-source-uaqzyxfe\\case.orch:1:652: error [E230] secret value cannot be passed to prompt 'next_right'; use 'declassify' with a written justification if this is intended\n",
+      "lean_accepted": true,
+      "interpretation": "C++ PC taints response; downstream prompt violates IFC E230. Lean checks matched resource distributions under secret-Boolean/shared-kernel model."
+    },
+    {
+      "id": 204,
+      "left": [
+        "B",
+        8,
+        "public-input",
+        "response"
+      ],
+      "right": [
+        "B",
+        8,
+        "public-input",
+        "response"
+      ],
+      "source": "workflow Flow budget 10000 { input x:text max_tokens 64; input flag:boolean max_tokens 1; secret s:boolean max_tokens 1; model t=mock(\"tail\") max_tokens 4; prompt tail(t:text)->text=\"Tail:{t}\"; if s {model left = mock(\"B\") max_tokens 8; prompt start_left(t:text)->text=\"Seed:{t}\"; prompt next_left(t:text)->text=\"Next:{t}\"; let first_left:text=call start_left(x) using left; let second_left:text=call next_left(first_left) using left;} else {model right = mock(\"B\") max_tokens 8; prompt start_right(t:text)->text=\"Seed:{t}\"; prompt next_right(t:text)->text=\"Next:{t}\"; let first_right:text=call start_right(x) using right; let second_right:text=call next_right(first_right) using right;} if flag { let z:text=call tail(x) using t; } else {} output \"done\"; }\n",
+      "cpp_diagnostics": [
+        "E230",
+        "E230"
+      ],
+      "cpp_stderr": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\dataflow-source-uaqzyxfe\\case.orch:1:412: error [E230] secret value cannot be passed to prompt 'next_left'; use 'declassify' with a written justification if this is intended\nC:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\dataflow-source-uaqzyxfe\\case.orch:1:662: error [E230] secret value cannot be passed to prompt 'next_right'; use 'declassify' with a written justification if this is intended\n",
+      "lean_accepted": true,
+      "interpretation": "C++ PC taints response; downstream prompt violates IFC E230. Lean checks matched resource distributions under secret-Boolean/shared-kernel model."
+    },
+    {
+      "id": 238,
+      "left": [
+        "B",
+        8,
+        "fixed",
+        "response"
+      ],
+      "right": [
+        "B",
+        8,
+        "fixed",
+        "response"
+      ],
+      "source": "workflow Flow budget 10000 { input x:text max_tokens 64; input flag:boolean max_tokens 1; secret s:boolean max_tokens 1; model t=mock(\"tail\") max_tokens 4; prompt tail(t:text)->text=\"Tail:{t}\"; if s {model left = mock(\"B\") max_tokens 8; prompt start_left()->text=\"Seed:fixed\"; prompt next_left(t:text)->text=\"Next:{t}\"; let first_left:text=call start_left() using left; let second_left:text=call next_left(first_left) using left;} else {model right = mock(\"B\") max_tokens 8; prompt start_right()->text=\"Seed:fixed\"; prompt next_right(t:text)->text=\"Next:{t}\"; let first_right:text=call start_right() using right; let second_right:text=call next_right(first_right) using right;} if flag { let z:text=call tail(x) using t; } else {} output \"done\"; }\n",
+      "cpp_diagnostics": [
+        "E230",
+        "E230"
+      ],
+      "cpp_stderr": "C:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\dataflow-source-uaqzyxfe\\case.orch:1:407: error [E230] secret value cannot be passed to prompt 'next_left'; use 'declassify' with a written justification if this is intended\nC:\\Users\\nambi\\Documents\\OrchLang Publication Work\\runs\\dataflow-v5\\dataflow-source-uaqzyxfe\\case.orch:1:652: error [E230] secret value cannot be passed to prompt 'next_right'; use 'declassify' with a written justification if this is intended\n",
+      "lean_accepted": true,
+      "interpretation": "C++ PC taints response; downstream prompt violates IFC E230. Lean checks matched resource distributions under secret-Boolean/shared-kernel model."
+    }
+  ]
+}

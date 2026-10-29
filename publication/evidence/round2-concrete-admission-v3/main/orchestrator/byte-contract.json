@@ -1,0 +1,32 @@
+{
+  "schema": "orchlang-byte-value-contract-v1",
+  "input_bytes": {
+    "0": 128
+  },
+  "value_bounds": {
+    "0": 128,
+    "1": 20480,
+    "8": 16384,
+    "2": 4,
+    "3": 2400,
+    "4": 4,
+    "5": 160,
+    "6": 64,
+    "7": 128
+  },
+  "tool_bytes": {
+    "has_line": 4,
+    "line": 160,
+    "section_name": 64,
+    "section_desc": 128,
+    "join_sections": 2400,
+    "inc": 4,
+    "const": 1
+  },
+  "response_bytes_per_token": 128,
+  "tokenizer_alpha": 1,
+  "tokenizer_delta": 0,
+  "context": 21504,
+  "dummy_request": ".",
+  "overflow_policy": "reject-input-before-dispatch; clip-results-at-declared-byte-interface"
+}

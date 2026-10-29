@@ -1,0 +1,12 @@
+Analyzed original bound: 111
+Secret token count 0:
+EqualBounds:
+  calls          1
+  actual tokens  15  (input 15 + output 0)
+    a = p via m  in 15 out 0
+Secret token count 1:
+EqualBounds:
+  calls          1
+  actual tokens  53  (input 53 + output 0)
+    b = p via m  in 53 out 0
+Same model output count, unequal total: YES

@@ -1,0 +1,24 @@
+{
+  "purpose": "authored development grammar, not external workflow execution",
+  "action_contracts": [
+    "A",
+    "B"
+  ],
+  "requests": [
+    "yes",
+    "no!"
+  ],
+  "calls_per_arm": 2,
+  "expected_source_cases": 256,
+  "expected_accepts": 28,
+  "expected_ordered_accepts": 16,
+  "kernel_denominators": [
+    2,
+    3,
+    4,
+    5
+  ],
+  "outcomes_per_action": 2,
+  "observer": "per-contract UTF-8 input/output totals, calls, failures",
+  "assumptions": "independent stateless full-action kernels; exact rational finite rows"
+}
